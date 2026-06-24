@@ -1,0 +1,37 @@
+{
+  "name": "nextjs-banner",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": "22.x"
+  },
+  "scripts": {
+    "dev": "next dev -p 3008",
+    "predev": "npm run gen:locales",
+    "build": "next build",
+    "prebuild": "npm run gen:locales",
+    "start": "next start",
+    "lint": "eslint",
+    "gen:locales": "node scripts/generate-locales.mjs",
+    "config:push": "npx @optimizely/cms-cli config push optimizely.config.mjs"
+  },
+  "dependencies": {
+    "@optimizely/cms-cli": "^2.0.0",
+    "@optimizely/cms-sdk": "^2.0.0",
+    "@tailwindcss/typography": "^0.5.20",
+    "lucide-react": "^1.18.0",
+    "next": "16.2.9",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.9",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
