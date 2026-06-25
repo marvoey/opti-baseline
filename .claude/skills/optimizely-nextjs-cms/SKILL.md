@@ -147,6 +147,22 @@ export default withAppContext(Page);
 CMS-side: add Hostname `http://localhost:3000`; Live Preview → Use Preview Tokens →
 preview URL `http://localhost:3000/preview`. `PreviewParams` = `{ preview_token, key, ctx, ver, loc }`.
 
+**Do NOT branch on content kind in the preview (or catch-all) page.** `OptimizelyComponent`
+already dispatches to the right renderer (ExperiencePage / Page / shared block) via the
+registry, by content type. Heuristics like `ctx === 'experience'` or
+`key.includes('contentassets/')` to pick a render shell are fragile (they drift out of
+sync with the CMS and duplicate the dispatch) — render a single `<OptimizelyComponent>`
+and trust it. Shared-block preview rendering is handled by CMS-side preview configuration,
+not by special-casing the route.
+
+**Site chrome lives in the route's layout, not the page body.** The catch-all gets
+`SiteChrome` from `app/[locale]/layout.tsx`. `/preview` sits OUTSIDE `[locale]` (it's
+driven by preview searchParams, not a locale path segment, and is excluded from
+`proxy.ts`), so it can't inherit that layout — give it its own `app/preview/layout.tsx`
+that wraps `SiteChrome`. Keeps the two routes structurally parallel (chrome in layout,
+content in page) so editor preview matches the published page. If a third chromed route
+appears, extract a shared layout rather than copy a third time.
+
 ## 4. On-page editing overlays (`pa`)
 
 `getPreviewUtils(content).pa(x)` emits `data-epi-*` ONLY when `content.__context.edit`
