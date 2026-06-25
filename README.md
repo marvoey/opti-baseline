@@ -15,6 +15,9 @@ few minutes, and build a bespoke prospect demo on top.
 - **Live preview / on-page editing** at `/preview` (`app/preview/page.tsx`).
 - **Minimal content model**: a fixed-layout `Page`, a Visual Builder
   `ExperiencePage`, and two generic blocks — `Hero` and `RichText`.
+- **Optional Web Experimentation**: loads the Optimizely Web snippet when
+  `NEXT_PUBLIC_OPTIMIZELY_WEB_SNIPPET_ID` is set (`OptimizelyActivation`);
+  skipped entirely when it's blank.
 - **Demo niceties**: a one-file theme/rebrand layer, branded 404 / error /
   loading screens, fail-fast env validation, and per-page `<title>`.
 
@@ -36,8 +39,11 @@ few minutes, and build a bespoke prospect demo on top.
 ## Adding a content type / block
 
 1. Create `cms/<Name>.tsx` exporting a `contentType()` definition and a default
-   React component.
-2. Register it in `cms/registry.ts` (content-type registry + component resolver).
+   React component (plus a display template, if the type needs one).
+2. Register it in `cms/registry.ts`: add the `contentType()` to
+   `initContentTypeRegistry`, map the key → component in
+   `initReactComponentRegistry`, and add any display template to
+   `initDisplayTemplateRegistry`.
 3. `npm run config:push`.
 
 ## Notes

@@ -13,10 +13,8 @@ type Props = {
 /**
  * CMS live-preview / on-page-editing route. The CMS opens this URL with preview
  * params (preview_token, key, ctx, ver, loc).
- *
- * No kind-based branching: OptimizelyComponent dispatches to the right renderer
- * (ExperiencePage / Page / shared block) by content type, exactly as the catch-all
- * does. Site chrome comes from app/preview/layout (mirroring how the catch-all gets
+ * 
+ * Site chrome comes from app/preview/layout (mirroring how the catch-all gets
  * it from app/[locale]/layout).
  *
  * Uses PreviewComponent from /react/client (the docs' NextPreviewComponent lives

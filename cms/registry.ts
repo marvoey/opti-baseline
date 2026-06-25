@@ -35,13 +35,20 @@ config({
   graphUrl: env.OPTIMIZELY_GRAPH_GATEWAY,
 });
 
-initContentTypeRegistry([
+/**
+ * The content types this app defines and pushes to the CMS. Exported so other
+ * surfaces (e.g. the /admin inspector) can read the same source of truth that's
+ * registered with the SDK below.
+ */
+export const registeredContentTypes = [
   ExperiencePageContentType,
   PageContentType,
   // Blocks
   HeroContentType,
   RichTextContentType,
-]);
+];
+
+initContentTypeRegistry(registeredContentTypes);
 
 initDisplayTemplateRegistry([]);
 
