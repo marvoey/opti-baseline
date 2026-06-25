@@ -9,8 +9,9 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-akkurat);
+  --font-serif: var(--font-publico);
+  --font-mono: var(--font-akkurat);
 
   /*
    * ┌──────────────────────────────────────────────────────────────────────┐
@@ -20,24 +21,28 @@
    * │  these ~11 hex values. Set blue-950 = your darkest brand colour and    │
    * │  blue-800 = your primary; the rest are tints/shades between.           │
    * └──────────────────────────────────────────────────────────────────────┘
-   * Neutral default palette (a generic blue) — replace with the demo brand.
+   * CIBC Mellon teal ramp — primary teal #00485e, dark #003342.
    */
-  --color-blue-950: #0b1f33; /* darkest — footer / hero background */
-  --color-blue-900: #14365a;
-  --color-blue-800: #1d5b9c; /* primary — buttons / links */
-  --color-blue-700: #2470bd;
-  --color-blue-600: #2e86d6; /* accent fill */
-  --color-blue-500: #4499e0;
-  --color-blue-400: #6fb3ea; /* light accent */
-  --color-blue-300: #9bccf1;
-  --color-blue-200: #c4e1f7;
-  --color-blue-100: #e1f0fc;
-  --color-blue-50: #f0f8fe; /* light wash */
+  --color-blue-950: #002733; /* darkest — footer / hero background */
+  --color-blue-900: #003342; /* teal-dark — header bg */
+  --color-blue-800: #00485e; /* primary teal — links */
+  --color-blue-700: #00596f;
+  --color-blue-600: #006280; /* teal-mid */
+  --color-blue-500: #0f7d8c;
+  --color-blue-400: #1c919b; /* teal-light */
+  --color-blue-300: #4fb0ad;
+  --color-blue-200: #6fc8b9; /* mint */
+  --color-blue-100: #c9e6df;
+  --color-blue-50: #eef6f3; /* light wash */
 
-  /* Named brand tokens for direct use in custom components. */
-  --color-brand: #1d5b9c;
-  --color-brand-dark: #0b1f33;
-  --color-brand-accent: #6fb3ea;
+  /* Named brand + gold accent tokens for direct use in custom components. */
+  --color-brand: #00485e;
+  --color-brand-dark: #003342;
+  --color-brand-accent: #a29060;
+  --color-gold: #a29060;
+  --color-gold-dark: #8e7228;
+  --color-gold-bright: #f4bd0c;
+  --color-stone: #f4f2ec;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -50,5 +55,12 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+}
+
+/* Headings use the display serif (Source Serif 4) site-wide. */
+h1,
+h2,
+h3 {
+  font-family: var(--font-serif);
 }

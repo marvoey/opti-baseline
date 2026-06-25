@@ -20,7 +20,7 @@ export const dynamic = 'force-dynamic';
  * (fetched via the Content Management API). Types are grouped into tabs by base
  * type and listed in a compact table; click a row for the full property
  * breakdown (/admin/[key]). Types this codebase registers with the SDK
- * (cms/registry.ts) are flagged "In codebase".
+ * (cms/registry.ts) are flagged "Code + CMS".
  */
 type Props = { searchParams: Promise<{ type?: string }> };
 

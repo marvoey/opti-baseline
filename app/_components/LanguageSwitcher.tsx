@@ -50,7 +50,7 @@ export default function LanguageSwitcher() {
         aria-haspopup="listbox"
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
-        className="flex items-center gap-1 text-blue-800 hover:underline"
+        className="flex items-center gap-1 text-white/80 hover:text-white"
       >
         <Globe size={14} />
         <span>{current.displayName}</span>

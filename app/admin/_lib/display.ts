@@ -53,7 +53,7 @@ export function describeType(prop: CmsContentTypeProperty): string {
  * Where a content type lives: registered with the SDK in this codebase, present
  * in the CMS, or both. A type can be registered in code but not yet pushed to
  * the CMS ("Code only"), present in the CMS but not modelled in code ("CMS
- * only"), or both ("In codebase").
+ * only"), or both ("Code + CMS").
  */
 export type TypeStatus = { registered: boolean; inCms: boolean };
 
@@ -66,7 +66,7 @@ export function statusBadge({ registered, inCms }: TypeStatus): {
     return { label: 'Code only', className: 'bg-amber-50 text-amber-700' };
   }
   if (registered) {
-    return { label: 'In codebase', className: 'bg-indigo-50 text-indigo-700' };
+    return { label: 'Code + CMS', className: 'bg-indigo-50 text-indigo-700' };
   }
   return { label: 'CMS only', className: 'bg-slate-100 text-slate-500' };
 }

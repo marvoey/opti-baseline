@@ -3,7 +3,7 @@ import { Search, User, Menu } from 'lucide-react';
 import { siteConfig } from '@/lib/siteConfig';
 
 const MainNav = () => (
-  <header className="sticky top-0 z-50 bg-white shadow-sm border-b border-slate-100">
+  <header className="sticky top-0 z-50 bg-blue-900 shadow-sm">
     <div className="container mx-auto px-4 flex justify-between items-center h-20">
       {/* Brand Logo */}
       <div className="navbar-brand branding flex items-center" data-cms-field="brand_logo">
@@ -14,12 +14,12 @@ const MainNav = () => (
       </div>
 
       {/* Desktop Links */}
-      <nav className="hidden lg:flex gap-8 font-semibold text-slate-700">
+      <nav className="hidden lg:flex gap-8 font-semibold text-white/80">
         {siteConfig.mainNavLinks.map((link) => (
           <Link
             key={link.label}
             href={link.href}
-            className="hover:text-blue-800 flex items-center gap-1 transition-colors"
+            className="hover:text-white flex items-center gap-1 transition-colors"
           >
             {link.label}
           </Link>
@@ -30,18 +30,18 @@ const MainNav = () => (
       <div className="utility-container flex items-center gap-3">
         <Link
           href={siteConfig.primaryCta.href}
-          className="hidden sm:inline-flex items-center px-5 py-2 bg-blue-800 text-white font-bold rounded-full hover:bg-blue-900 transition-colors"
+          className="hidden sm:inline-flex items-center px-5 py-2 bg-gold text-blue-950 font-bold rounded-full hover:bg-gold-dark transition-colors"
         >
           {siteConfig.primaryCta.label}
         </Link>
-        <button className="hidden md:flex items-center gap-2 px-4 py-2 text-slate-700 font-semibold hover:bg-slate-50 rounded-lg transition-colors">
+        <button className="hidden md:flex items-center gap-2 px-4 py-2 text-white/80 font-semibold hover:bg-white/10 rounded-lg transition-colors">
           <Search size={20} />
         </button>
-        <button className="flex items-center gap-2 px-4 py-2 border-2 border-blue-800 text-blue-800 font-bold rounded-full hover:bg-blue-50 transition-all">
+        <button className="flex items-center gap-2 px-4 py-2 border-2 border-white/40 text-white font-bold rounded-full hover:bg-white/10 transition-all">
           <User size={18} />
           <span className="hidden sm:inline">{siteConfig.accountLabel}</span>
         </button>
-        <button className="lg:hidden p-2 text-slate-700">
+        <button className="lg:hidden p-2 text-white">
           <Menu size={24} />
         </button>
       </div>

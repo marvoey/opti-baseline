@@ -1,18 +1,23 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Source_Serif_4, Inter } from "next/font/google";
 import Script from "next/script";
 import OptimizelyActivation from "./_components/OptimizelyActivation";
 import { siteConfig } from "@/lib/siteConfig";
 import "./globals.css";
 import "@/cms/registry";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Publico Banner (CIBC Mellon's display serif) is a licensed face; Source Serif 4
+// is the closest free substitute for the high-contrast institutional headings.
+const publico = Source_Serif_4({
+  variable: "--font-publico",
   subsets: ["latin"],
+  weight: ["400", "600", "700"],
+  style: ["normal", "italic"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+// Akkurat Pro (the brand body face) → Inter as the closest grotesque substitute.
+const akkurat = Inter({
+  variable: "--font-akkurat",
   subsets: ["latin"],
 });
   
@@ -34,7 +39,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${publico.variable} ${akkurat.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         {children}

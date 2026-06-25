@@ -12,30 +12,31 @@ export type FooterColumn = { heading: string; links: NavLink[] };
 
 export const siteConfig = {
   /** Used for the document <title> fallback and the logo alt text. */
-  name: 'Demo Site',
+  name: 'CIBC Mellon',
   /** Default browser-tab title (per-page titles override via CMS MetaTitle). */
-  title: 'Demo Site',
+  title: 'CIBC Mellon | Institutional Asset Servicing',
   /** Default meta description. */
-  description: 'A reference Optimizely CMS + Next.js demo site.',
+  description:
+    "CIBC Mellon — the operational infrastructure for Canada's institutional investment industry.",
 
   /** Header logo (place the asset in /public). */
   logoSrc: '/logo.svg',
-  logoAlt: 'Demo Site',
+  logoAlt: 'CIBC Mellon',
 
   /** Top utility bar. */
   topNavLinks: [
-    { label: 'For Business', href: '#' },
-    { label: 'For Partners', href: '#' },
-    { label: 'Support', href: '#' },
+    { label: 'Client Access', href: '#' },
+    { label: 'Insights', href: '#' },
+    { label: 'Contact', href: '#' },
   ] satisfies NavLink[],
-  phone: '1-800-000-0000',
+  phone: '1-800-387-0825',
 
   /** Primary header navigation. */
   mainNavLinks: [
-    { label: 'Products', href: '#' },
     { label: 'Solutions', href: '#' },
-    { label: 'Resources', href: '/services' },
-    { label: 'About', href: '/locations' },
+    { label: 'Client Access', href: '#' },
+    { label: 'Straight Talk', href: '/services' },
+    { label: 'Market Bulletins', href: '/locations' },
   ] satisfies NavLink[],
   /** Header call-to-action button. */
   primaryCta: { label: 'Get Started', href: '#' } satisfies NavLink,
@@ -44,26 +45,26 @@ export const siteConfig = {
 
   /** Footer. */
   footerTagline:
-    'A reference base for building Optimizely CMS demos on Next.js. Replace this copy in lib/siteConfig.ts.',
+    'The operational infrastructure for Canada’s institutional investment industry — asset servicing, settlement and analytics at scale.',
   footerColumns: [
     {
-      heading: 'Product',
+      heading: 'Solutions',
       links: [
-        { label: 'Overview', href: '#' },
-        { label: 'Features', href: '#' },
-        { label: 'Pricing', href: '#' },
+        { label: 'Asset Servicing', href: '#' },
+        { label: 'Settlement', href: '#' },
+        { label: 'Analytics', href: '#' },
       ],
     },
     {
       heading: 'Resources',
       links: [
-        { label: 'Docs', href: '#' },
-        { label: 'Blog', href: '#' },
+        { label: 'Straight Talk', href: '#' },
+        { label: 'Market Bulletins', href: '#' },
         { label: 'Careers', href: '#' },
       ],
     },
   ] satisfies FooterColumn[],
-  footerLegal: `© ${'2026'} Demo Site. All rights reserved.`,
+  footerLegal: `© ${'2026'} CIBC Mellon. A global leader in asset servicing infrastructure.`,
   footerLegalLinks: [
     { label: 'Privacy', href: '#' },
     { label: 'Terms', href: '#' },

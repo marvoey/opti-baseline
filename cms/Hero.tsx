@@ -164,7 +164,7 @@ export default function Hero({ content }: Props) {
           {content.SuperHeader ? (
             <span
               {...pa('SuperHeader')}
-              className={`mb-4 inline-block rounded px-3 py-1 text-xs font-bold uppercase tracking-widest ${contrast ? 'bg-blue-800 text-white' : 'bg-blue-400 text-blue-950'}`}
+              className={`mb-4 inline-block rounded px-3 py-1 text-xs font-bold uppercase tracking-widest ${contrast ? 'bg-blue-800 text-white' : 'bg-gold/15 text-gold'}`}
             >
               {content.SuperHeader}
             </span>
@@ -186,7 +186,7 @@ export default function Hero({ content }: Props) {
                 {...pa('PrimaryCTA')}
                 href={primaryHref}
                 target={edit ? undefined : content.PrimaryCTA?.target ?? undefined}
-                className="rounded-full bg-blue-600 px-7 py-3.5 text-lg font-bold text-white shadow-lg transition-all hover:bg-blue-500"
+                className="rounded-full bg-gold px-7 py-3.5 text-lg font-bold text-blue-950 shadow-lg transition-all hover:bg-gold-dark"
               >
                 {primaryLabel}
               </a>

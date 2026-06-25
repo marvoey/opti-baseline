@@ -2,17 +2,15 @@ import SiteChrome from '../_components/SiteChrome';
 
 /**
  * Shell for CMS-delivered pages (the `[[...slug]]` catch-all experience route).
- * Wraps the page body with the shared site chrome (header + footer). Chrome data
- * is locale-aware, so the route's `locale` segment is passed to SiteChrome. The
- * same SiteChrome is used by /preview so the editor matches.
+ * Wraps the page body with the shared site chrome (header + footer). The chrome
+ * itself is static (driven by lib/siteConfig); the LanguageSwitcher derives the
+ * active locale from the URL, so no locale prop is needed here. The same
+ * SiteChrome is used by /preview so the editor matches.
  */
-export default async function LocaleLayout({
+export default function LocaleLayout({
   children,
-  params,
 }: {
   children: React.ReactNode;
-  params: Promise<{ locale: string }>;
 }) {
-  const { locale } = await params;
-  return <SiteChrome locale={locale}>{children}</SiteChrome>;
+  return <SiteChrome>{children}</SiteChrome>;
 }
