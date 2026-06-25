@@ -31,7 +31,7 @@ few minutes, and build a bespoke prospect demo on top.
 4. **Generate locales** — `npm run gen:locales` (reads enabled locales from the CMS).
 5. **Push content types** — `npm run config:push` (pushes Page, ExperiencePage,
    Hero, RichText to the CMS).
-6. **Run** — `npm run dev` (http://localhost:3008).
+6. **Run** — `npm run dev` (http://localhost:3009; set `PORT` in `.env` to change it).
 
 ## Adding a content type / block
 
