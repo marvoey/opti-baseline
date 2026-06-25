@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import { ChevronLeft } from 'lucide-react';
 import { registeredContentTypes } from '@/cms/registry';
 import { fetchCmsContentType, type CmsContentType } from '@/lib/cms/contentTypes';
-import { baseTypeLabel, describeType } from '../_lib/display';
+import { baseTypeLabel, describeType, statusBadge } from '../_lib/display';
 
 export const dynamic = 'force-dynamic';
 
@@ -27,9 +27,22 @@ export default async function ContentTypeDetailPage({ params }: Props) {
   const key = decodeURIComponent((await params).key);
   const result = await fetchCmsContentType(key);
 
-  if (!result.ok && result.reason === 'not-found') notFound();
+  // The codebase's own definition (if this type is registered with the SDK).
+  const registeredDef = registeredContentTypes.find(
+    (ct) => (ct as { key: string }).key === key,
+  ) as CmsContentType | undefined;
 
-  const registered = registeredContentTypes.some((ct) => (ct as { key: string }).key === key);
+  // Prefer the CMS as the source of truth; otherwise fall back to the code
+  // definition so types registered-but-not-pushed ("Code only") still render.
+  const view = result.ok
+    ? { ct: result.contentType, inCms: true }
+    : registeredDef
+      ? { ct: registeredDef, inCms: false }
+      : null;
+
+  // Nothing to show: a genuinely unknown key 404s; a CMS error (creds/down) for
+  // a key we also don't have in code surfaces the error.
+  if (!view && !result.ok && result.reason === 'not-found') notFound();
 
   return (
     <main className="mx-auto w-full max-w-3xl px-6 py-12">
@@ -41,47 +54,50 @@ export default async function ContentTypeDetailPage({ params }: Props) {
         All content types
       </Link>
 
-      {result.ok ? (
-        <ContentTypeDetail ct={result.contentType} registered={registered} />
+      {view ? (
+        <ContentTypeDetail ct={view.ct} registered={!!registeredDef} inCms={view.inCms} />
       ) : (
         <div
           className={`rounded-2xl border p-6 ${
-            result.reason === 'missing-credentials'
+            !result.ok && result.reason === 'missing-credentials'
               ? 'border-amber-200 bg-amber-50 text-amber-800'
               : 'border-red-200 bg-red-50 text-red-800'
           }`}
         >
           <p className="font-medium">
-            {result.reason === 'missing-credentials'
+            {!result.ok && result.reason === 'missing-credentials'
               ? 'CMS credentials not configured'
               : 'Could not load this content type'}
           </p>
-          <p className="mt-1 text-sm">{result.message}</p>
+          <p className="mt-1 text-sm">{!result.ok ? result.message : ''}</p>
         </div>
       )}
     </main>
   );
 }
 
-function ContentTypeDetail({ ct, registered }: { ct: CmsContentType; registered: boolean }) {
+function ContentTypeDetail({
+  ct,
+  registered,
+  inCms,
+}: {
+  ct: CmsContentType;
+  registered: boolean;
+  inCms: boolean;
+}) {
   const properties = Object.entries(ct.properties ?? {}).sort(
     ([, a], [, b]) => (a.sortOrder ?? 0) - (b.sortOrder ?? 0),
   );
   const mayContain = ct.mayContainTypes ?? [];
+  const badge = statusBadge({ registered, inCms });
 
   return (
     <article>
       <div className="flex flex-wrap items-center gap-2">
         <h1 className="text-2xl font-semibold tracking-tight text-slate-900">{ct.displayName}</h1>
-        {registered ? (
-          <span className="rounded-full bg-indigo-50 px-2.5 py-0.5 text-xs font-medium text-indigo-700">
-            In codebase
-          </span>
-        ) : (
-          <span className="rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-medium text-slate-500">
-            CMS only
-          </span>
-        )}
+        <span className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${badge.className}`}>
+          {badge.label}
+        </span>
         {ct.source && (
           <span className="rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-medium text-slate-500">
             {ct.source}

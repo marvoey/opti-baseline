@@ -49,6 +49,28 @@ export function describeType(prop: CmsContentTypeProperty): string {
   return prop.type;
 }
 
+/**
+ * Where a content type lives: registered with the SDK in this codebase, present
+ * in the CMS, or both. A type can be registered in code but not yet pushed to
+ * the CMS ("Code only"), present in the CMS but not modelled in code ("CMS
+ * only"), or both ("In codebase").
+ */
+export type TypeStatus = { registered: boolean; inCms: boolean };
+
+/** Badge label + Tailwind color classes for a content type's status. */
+export function statusBadge({ registered, inCms }: TypeStatus): {
+  label: string;
+  className: string;
+} {
+  if (registered && !inCms) {
+    return { label: 'Code only', className: 'bg-amber-50 text-amber-700' };
+  }
+  if (registered) {
+    return { label: 'In codebase', className: 'bg-indigo-50 text-indigo-700' };
+  }
+  return { label: 'CMS only', className: 'bg-slate-100 text-slate-500' };
+}
+
 /** Order base-type groups by BASE_TYPE_ORDER, then any unknown ones alphabetically. */
 export function orderBaseTypes(present: Iterable<string>): string[] {
   const set = new Set(present);

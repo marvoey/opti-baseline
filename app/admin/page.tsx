@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { registeredContentTypes } from '@/cms/registry';
-import { fetchCmsContentTypes } from '@/lib/cms/contentTypes';
+import { fetchCmsContentTypes, type CmsContentType } from '@/lib/cms/contentTypes';
 import { baseTypeLabel, orderBaseTypes } from './_lib/display';
 import ContentTypeExplorer, {
   type ExplorerGroup,
@@ -64,7 +64,7 @@ export default async function AdminPage({ searchParams }: Props) {
 
   // Group into base-type buckets and shape into the explorer's serializable payload.
   const byBaseType = new Map<string, ExplorerType[]>();
-  for (const ct of contentTypes) {
+  const pushToGroup = (ct: CmsContentType, inCms: boolean) => {
     const baseType = ct.baseType ?? 'other';
     const list = byBaseType.get(baseType) ?? [];
     list.push({
@@ -72,9 +72,18 @@ export default async function AdminPage({ searchParams }: Props) {
       displayName: ct.displayName,
       description: ct.description,
       registered: registeredKeys.has(ct.key),
+      inCms,
       source: ct.source,
     });
     byBaseType.set(baseType, list);
+  };
+
+  for (const ct of contentTypes) pushToGroup(ct, true);
+
+  // Also surface types registered in code but not (yet) present in the CMS, so
+  // every modelled type is visible — flagged "Code only" in their base-type tab.
+  for (const ct of registeredContentTypes as unknown as CmsContentType[]) {
+    if (!cmsKeys.has(ct.key)) pushToGroup(ct, false);
   }
 
   const groups: ExplorerGroup[] = orderBaseTypes(byBaseType.keys()).map((baseType) => ({

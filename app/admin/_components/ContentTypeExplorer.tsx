@@ -3,12 +3,15 @@
 import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import { Search } from 'lucide-react';
+import { statusBadge } from '../_lib/display';
 
 export type ExplorerType = {
   key: string;
   displayName: string;
   description?: string;
   registered: boolean;
+  /** Whether the type exists in the CMS (false ⇒ registered in code only). */
+  inCms: boolean;
   source?: string;
 };
 
@@ -17,6 +20,9 @@ export type ExplorerGroup = {
   label: string;
   types: ExplorerType[];
 };
+
+/** Filter bucket for types with no `source` (CMS user-defined and code-only). */
+const SOURCE_NONE = '(none)';
 
 /**
  * Client-side explorer for the /admin overview. All content types are fetched
@@ -37,26 +43,61 @@ export default function ContentTypeExplorer({
 }) {
   const [active, setActive] = useState(initialBaseType);
   const [query, setQuery] = useState('');
+  // Selected source filters. Empty ⇒ no filtering (show all sources).
+  const [selectedSources, setSelectedSources] = useState<Set<string>>(new Set());
 
   function selectTab(baseType: string) {
     setActive(baseType);
     setQuery('');
+    setSelectedSources(new Set());
     const url = new URL(window.location.href);
     url.searchParams.set('type', baseType);
     window.history.replaceState(null, '', url);
   }
 
+  function toggleSource(source: string) {
+    setSelectedSources((prev) => {
+      const next = new Set(prev);
+      if (next.has(source)) next.delete(source);
+      else next.add(source);
+      return next;
+    });
+  }
+
   const activeGroup = groups.find((g) => g.baseType === active) ?? groups[0];
+
+  // Distinct sources within the active tab, with counts (sourceless types — CMS
+  // user-defined and code-only — bucket under SOURCE_NONE).
+  const sourceOptions = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const t of activeGroup?.types ?? []) {
+      const s = t.source ?? SOURCE_NONE;
+      counts.set(s, (counts.get(s) ?? 0) + 1);
+    }
+    return [...counts.entries()]
+      .sort(([a], [b]) =>
+        a === SOURCE_NONE ? 1 : b === SOURCE_NONE ? -1 : a.localeCompare(b),
+      )
+      .map(([source, count]) => ({ source, count }));
+  }, [activeGroup]);
 
   const visible = useMemo(() => {
     if (!activeGroup) return [];
     const q = query.trim().toLowerCase();
-    if (!q) return activeGroup.types;
-    return activeGroup.types.filter(
-      (t) =>
-        t.displayName.toLowerCase().includes(q) || t.key.toLowerCase().includes(q),
-    );
-  }, [activeGroup, query]);
+    return activeGroup.types.filter((t) => {
+      if (
+        q &&
+        !t.displayName.toLowerCase().includes(q) &&
+        !t.key.toLowerCase().includes(q)
+      ) {
+        return false;
+      }
+      if (selectedSources.size && !selectedSources.has(t.source ?? SOURCE_NONE)) {
+        return false;
+      }
+      return true;
+    });
+  }, [activeGroup, query, selectedSources]);
 
   if (!activeGroup) return null;
 
@@ -103,6 +144,30 @@ export default function ContentTypeExplorer({
         />
       </div>
 
+      {/* Source filter — checkboxes; none checked ⇒ all sources shown. */}
+      {sourceOptions.length > 1 && (
+        <div className="mb-4 flex flex-wrap items-center gap-x-4 gap-y-2">
+          <span className="text-xs font-medium uppercase tracking-wider text-slate-400">
+            Source
+          </span>
+          {sourceOptions.map(({ source, count }) => (
+            <label
+              key={source}
+              className="flex cursor-pointer items-center gap-1.5 text-sm text-slate-600"
+            >
+              <input
+                type="checkbox"
+                checked={selectedSources.has(source)}
+                onChange={() => toggleSource(source)}
+                className="rounded border-slate-300 text-slate-900 focus:ring-slate-400"
+              />
+              <span>{source}</span>
+              <span className="text-xs text-slate-400">{count}</span>
+            </label>
+          ))}
+        </div>
+      )}
+
       {/* Compact table */}
       <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
         <div className="grid grid-cols-[1.2fr_1fr_auto] gap-4 border-b border-slate-200 bg-slate-50 px-4 py-2.5 text-xs font-medium uppercase tracking-wider text-slate-400 sm:grid-cols-[1.2fr_1fr_2fr_auto]">
@@ -114,7 +179,7 @@ export default function ContentTypeExplorer({
 
         {visible.length === 0 ? (
           <p className="px-4 py-8 text-center text-sm text-slate-400">
-            No content types match “{query}”.
+            No content types match the current filters.
           </p>
         ) : (
           visible.map((t) => (
@@ -134,15 +199,16 @@ export default function ContentTypeExplorer({
                     {t.source}
                   </span>
                 )}
-                {t.registered ? (
-                  <span className="rounded-full bg-indigo-50 px-2 py-0.5 text-xs font-medium text-indigo-700">
-                    In codebase
-                  </span>
-                ) : (
-                  <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-medium text-slate-500">
-                    CMS only
-                  </span>
-                )}
+                {(() => {
+                  const badge = statusBadge(t);
+                  return (
+                    <span
+                      className={`rounded-full px-2 py-0.5 text-xs font-medium ${badge.className}`}
+                    >
+                      {badge.label}
+                    </span>
+                  );
+                })()}
               </span>
             </Link>
           ))
