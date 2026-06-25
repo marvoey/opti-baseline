@@ -3,6 +3,7 @@ import { OptimizelyComponent, getPreviewUtils } from '@optimizely/cms-sdk/react/
 
 import { HeroContentType } from './Hero';
 import { RichTextContentType } from './RichText';
+import { CibcSiteSettingsContentType } from './CibcSiteSettings';
 
 /**
  * Page — a fixed-layout Page (`_page`). The body is a `Content` area: an ordered
@@ -29,7 +30,7 @@ export const PageContentType = contentType({
       isLocalized: true,
       items: {
         type: 'content',
-        allowedTypes: [HeroContentType, RichTextContentType],
+        allowedTypes: [HeroContentType, RichTextContentType, CibcSiteSettingsContentType],
         restrictedTypes: [],
       },
     },

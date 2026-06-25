@@ -8,8 +8,16 @@ import { requireEnv } from '@/lib/env';
 
 import ExperiencePage, { ExperiencePageContentType } from './ExperiencePage';
 import Page, { PageContentType } from './Page';
+import CibcSiteSettings, { CibcSiteSettingsContentType } from './CibcSiteSettings';
 import Hero, { HeroContentType } from './Hero';
 import RichText, { RichTextContentType } from './RichText';
+import {
+  FooterColumnContentType,
+  NavChildLinkContentType,
+  NavFeaturedCardContentType,
+  NavMenuItemContentType,
+  NavVisibilityRuleContentType,
+} from './navigation';
 
 /**
  * Single configuration + registration point for the Optimizely SDK.
@@ -43,9 +51,16 @@ config({
 export const registeredContentTypes = [
   ExperiencePageContentType,
   PageContentType,
+  CibcSiteSettingsContentType,
   // Blocks
   HeroContentType,
   RichTextContentType,
+  // Navigation / chrome blocks (embedded into CibcSiteSettings)
+  NavFeaturedCardContentType,
+  NavVisibilityRuleContentType,
+  NavChildLinkContentType,
+  NavMenuItemContentType,
+  FooterColumnContentType,
 ];
 
 initContentTypeRegistry(registeredContentTypes);
@@ -56,6 +71,7 @@ initReactComponentRegistry({
   resolver: {
     ExperiencePage,
     Page,
+    CibcSiteSettings,
     // Blocks (resolver key === content-type key)
     HeroBlock: Hero,
     RichTextBlock: RichText,

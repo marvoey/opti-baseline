@@ -12,7 +12,7 @@ export const ExperiencePageContentType = contentType({
   baseType: '_experience',
   displayName: 'Experience Page (v1)',
   description: 'A routable page composed visually in the Visual Builder.',
-  mayContainTypes: ['ExperiencePage', 'Page'],
+  mayContainTypes: ['ExperiencePage', 'Page', 'CibcSiteSettings'],
   properties: {},
 });
 

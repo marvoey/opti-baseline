@@ -11,6 +11,11 @@ export default buildConfig({
   components: ['./cms/**/*.tsx'],
   // Declare custom property groups here as content types are added.
   // Use a negative sortOrder to float a group above the built-in/system groups
-  // (Settings, SEO, Categories, …), which sit at 0–60. None needed for the base.
-  propertyGroups: [],
+  // (Settings, SEO, Categories, …), which sit at 0–60.
+  propertyGroups: [
+    // Site Settings chrome groups (see cms/CibcSiteSettings.tsx).
+    { key: 'Branding', displayName: 'Branding', sortOrder: -30 },
+    { key: 'Navigation', displayName: 'Navigation', sortOrder: -20 },
+    { key: 'Footer', displayName: 'Footer', sortOrder: -10 },
+  ],
 });
