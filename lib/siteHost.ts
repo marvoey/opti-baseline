@@ -6,15 +6,12 @@ import { headers } from 'next/headers';
  * base, so multiple sites can share a path like "/" — passing the right host
  * disambiguates them.
  *
- * Prefer a pinned env (`OPTIMIZELY_SITE_BASE_URL`), which MUST equal the site's
- * configured CMS hostname; otherwise derive from the request. Shared by the
- * content route and the site chrome so page content and global navigation always
- * resolve to the SAME site.
+ * Derived from the incoming request so the app always scopes to the host it's
+ * actually being served on (e.g. http://localhost:3010 in dev, the real domain
+ * in prod). Shared by the content route and the site chrome so page content and
+ * global navigation always resolve to the SAME site.
  */
 export async function siteOrigin(): Promise<string | undefined> {
-  const pinned = process.env.OPTIMIZELY_SITE_BASE_URL?.replace(/\/$/, '');
-  if (pinned) return pinned;
-
   const h = await headers();
   const host = h.get('host');
   if (!host) return undefined;

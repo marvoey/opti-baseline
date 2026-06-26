@@ -11,7 +11,10 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-akkurat);
   --font-serif: var(--font-publico);
-  --font-mono: var(--font-akkurat);
+  /* Real monospace stack: Tailwind Preflight applies this to <code>/<pre> and
+     it backs the `font-mono` utility (code chips, the styleguide code blocks). */
+  --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas,
+    "Liberation Mono", "Courier New", monospace;
 
   /*
    * ┌──────────────────────────────────────────────────────────────────────┐
@@ -43,6 +46,24 @@
   --color-gold-dark: #8e7228;
   --color-gold-bright: #f4bd0c;
   --color-stone: #f4f2ec;
+
+  /*
+   * Explicit CIBC Mellon palette — used by the ported cms/Cibc* block
+   * components (Hero, AlertFeed, AssetGrid, OnboardingJourney, Regulatory
+   * Directive). Mirrors the source brand system so those components render
+   * verbatim; the blue-* ramp above still drives the site chrome.
+   */
+  --color-cibc-teal: #00485e;
+  --color-cibc-teal-dark: #003342;
+  --color-cibc-teal-mid: #006280;
+  --color-cibc-teal-light: #1c919b;
+  --color-cibc-mint: #6fc8b9;
+  --color-cibc-gold: #a29060;
+  --color-cibc-gold-bright: #f4bd0c;
+  --color-cibc-gold-dark: #8e7228;
+  --color-cibc-rust: #9c3828;
+  --color-cibc-ink: #4b4b4b;
+  --color-cibc-stone: #f4f2ec;
 }
 
 @media (prefers-color-scheme: dark) {

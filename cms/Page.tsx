@@ -3,6 +3,11 @@ import { OptimizelyComponent, getPreviewUtils } from '@optimizely/cms-sdk/react/
 
 import { HeroContentType } from './Hero';
 import { RichTextContentType } from './RichText';
+import { CibcHeroContentType } from './CibcHero';
+import { CibcAlertFeedContentType } from './CibcAlertFeed';
+import { CibcAssetGridContentType } from './CibcAssetGrid';
+import { CibcOnboardingJourneyContentType } from './CibcOnboardingJourney';
+import { CibcRegulatoryDirectiveContentType } from './CibcRegulatoryDirective';
 
 /**
  * Page — a fixed-layout Page (`_page`). The body is a `Content` area: an ordered
@@ -12,7 +17,7 @@ import { RichTextContentType } from './RichText';
 export const PageContentType = contentType({
   key: 'Page',
   baseType: '_page',
-  displayName: 'Page',
+  displayName: 'Page (v1)',
   description: 'A page built from an ordered list of content blocks.',
   mayContainTypes: ['ExperiencePage', 'Page'],
   properties: {
@@ -29,7 +34,15 @@ export const PageContentType = contentType({
       isLocalized: true,
       items: {
         type: 'content',
-        allowedTypes: [HeroContentType, RichTextContentType],
+        allowedTypes: [
+          HeroContentType,
+          RichTextContentType,
+          CibcHeroContentType,
+          CibcAlertFeedContentType,
+          CibcAssetGridContentType,
+          CibcOnboardingJourneyContentType,
+          CibcRegulatoryDirectiveContentType,
+        ],
         restrictedTypes: [],
       },
     },

@@ -10,6 +10,18 @@ import ExperiencePage, { ExperiencePageContentType } from './ExperiencePage';
 import Page, { PageContentType } from './Page';
 import Hero, { HeroContentType } from './Hero';
 import RichText, { RichTextContentType } from './RichText';
+import CibcHero, { CibcHeroContentType, CibcHeroDisplayTemplate } from './CibcHero';
+import CibcAlertFeed, { CibcAlertContentType, CibcAlertFeedContentType } from './CibcAlertFeed';
+import CibcAssetGrid, {
+  CibcAssetCardContentType,
+  CibcAssetGridContentType,
+  CibcAssetGridDisplayTemplate,
+} from './CibcAssetGrid';
+import CibcOnboardingJourney, {
+  CibcMilestoneContentType,
+  CibcOnboardingJourneyContentType,
+} from './CibcOnboardingJourney';
+import CibcRegulatoryDirective, { CibcRegulatoryDirectiveContentType } from './CibcRegulatoryDirective';
 
 /**
  * Single configuration + registration point for the Optimizely SDK.
@@ -46,11 +58,21 @@ export const registeredContentTypes = [
   // Blocks
   HeroContentType,
   RichTextContentType,
+  // CIBC leaf items (held inline by their parent section block).
+  CibcAlertContentType,
+  CibcAssetCardContentType,
+  CibcMilestoneContentType,
+  // CIBC section blocks.
+  CibcHeroContentType,
+  CibcAlertFeedContentType,
+  CibcAssetGridContentType,
+  CibcOnboardingJourneyContentType,
+  CibcRegulatoryDirectiveContentType,
 ];
 
 initContentTypeRegistry(registeredContentTypes);
 
-initDisplayTemplateRegistry([]);
+initDisplayTemplateRegistry([CibcHeroDisplayTemplate, CibcAssetGridDisplayTemplate]);
 
 initReactComponentRegistry({
   resolver: {
@@ -59,5 +81,12 @@ initReactComponentRegistry({
     // Blocks (resolver key === content-type key)
     HeroBlock: Hero,
     RichTextBlock: RichText,
+    // CIBC section blocks. Leaf items (CibcAlert, CibcAssetCard, CibcMilestone)
+    // are rendered inline by their parent block, so they need no entry here.
+    CibcHero,
+    CibcAlertFeed,
+    CibcAssetGrid,
+    CibcOnboardingJourney,
+    CibcRegulatoryDirective,
   },
 });
