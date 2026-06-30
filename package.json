@@ -14,7 +14,8 @@
     "lint": "eslint",
     "gen:locales": "node scripts/generate-locales.mjs",
     "config:push": "npx @optimizely/cms-cli config push optimizely.config.mjs",
-    "schema:pull": "node scripts/fetch-openapi.mjs"
+    "schema:pull": "node scripts/fetch-openapi.mjs",
+    "seed:hero": "node scripts/seed-atomic-hero.mjs"
   },
   "dependencies": {
     "@optimizely/cms-cli": "^2.0.0",

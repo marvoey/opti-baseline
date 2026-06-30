@@ -23,6 +23,15 @@ import CibcOnboardingJourney, {
 } from './CibcOnboardingJourney';
 import CibcRegulatoryDirective, { CibcRegulatoryDirectiveContentType } from './CibcRegulatoryDirective';
 
+// V1 atomic design system — primitives composed in the Visual Builder grid.
+import V1Text, { V1TextContentType, V1TextDefault } from './V1Text';
+import V1Button, { V1ButtonContentType, V1ButtonDefault } from './V1Button';
+import V1Image, { V1ImageContentType, V1ImageDefault } from './V1Image';
+import V1Icon, { V1IconContentType, V1IconDefault } from './V1Icon';
+import V1Divider, { V1DividerContentType, V1DividerDefault } from './V1Divider';
+import V1Section, { V1SectionContentType, V1SectionDefault } from './V1Section';
+import { V1RowDefault, V1ColumnDefault } from './gridContainers';
+
 /**
  * Single configuration + registration point for the Optimizely SDK.
  * Imported for side effects by app/layout.tsx.
@@ -68,11 +77,31 @@ export const registeredContentTypes = [
   CibcAssetGridContentType,
   CibcOnboardingJourneyContentType,
   CibcRegulatoryDirectiveContentType,
+  // V1 atomic design system: composition shell + atoms.
+  V1SectionContentType,
+  V1TextContentType,
+  V1ButtonContentType,
+  V1ImageContentType,
+  V1IconContentType,
+  V1DividerContentType,
 ];
 
 initContentTypeRegistry(registeredContentTypes);
 
-initDisplayTemplateRegistry([CibcHeroDisplayTemplate, CibcAssetGridDisplayTemplate]);
+initDisplayTemplateRegistry([
+  CibcHeroDisplayTemplate,
+  CibcAssetGridDisplayTemplate,
+  // V1 atomic design system. Row/Column target structural nodeTypes; the rest
+  // target their content type.
+  V1SectionDefault,
+  V1RowDefault,
+  V1ColumnDefault,
+  V1TextDefault,
+  V1ButtonDefault,
+  V1ImageDefault,
+  V1IconDefault,
+  V1DividerDefault,
+]);
 
 initReactComponentRegistry({
   resolver: {
@@ -88,5 +117,13 @@ initReactComponentRegistry({
     CibcAssetGrid,
     CibcOnboardingJourney,
     CibcRegulatoryDirective,
+    // V1 atomic design system. V1Row/V1Column are NOT here — they're passed
+    // directly to OptimizelyGridSection by V1Section, not resolved by key.
+    V1Section,
+    V1Text,
+    V1Button,
+    V1Image,
+    V1Icon,
+    V1Divider,
   },
 });
