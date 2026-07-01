@@ -24,46 +24,48 @@
    * │  these ~11 hex values. Set blue-950 = your darkest brand colour and    │
    * │  blue-800 = your primary; the rest are tints/shades between.           │
    * └──────────────────────────────────────────────────────────────────────┘
-   * CIBC Mellon teal ramp — primary teal #00485e, dark #003342.
+   * Capital One palette — core navy #004977, core red #d03027. The blue-*
+   * ramp is a navy scale (site chrome / links); the gold/accent tokens map to
+   * the Capital One red used for primary CTAs.
    */
-  --color-blue-950: #002733; /* darkest — footer / hero background */
-  --color-blue-900: #003342; /* teal-dark — header bg */
-  --color-blue-800: #00485e; /* primary teal — links */
-  --color-blue-700: #00596f;
-  --color-blue-600: #006280; /* teal-mid */
-  --color-blue-500: #0f7d8c;
-  --color-blue-400: #1c919b; /* teal-light */
-  --color-blue-300: #4fb0ad;
-  --color-blue-200: #6fc8b9; /* mint */
-  --color-blue-100: #c9e6df;
-  --color-blue-50: #eef6f3; /* light wash */
+  --color-blue-950: #001b2e; /* darkest navy — footer / hero background */
+  --color-blue-900: #002b45; /* navy — header bg */
+  --color-blue-800: #004977; /* Capital One core navy — links / primary */
+  --color-blue-700: #015586;
+  --color-blue-600: #0a6ba0; /* navy-mid */
+  --color-blue-500: #1a82bd;
+  --color-blue-400: #3d9bd1; /* navy-light */
+  --color-blue-300: #6fb6de;
+  --color-blue-200: #9fd0eb; /* pale blue */
+  --color-blue-100: #cde7f5;
+  --color-blue-50: #eaf4fb; /* light wash */
 
-  /* Named brand + gold accent tokens for direct use in custom components. */
-  --color-brand: #00485e;
-  --color-brand-dark: #003342;
-  --color-brand-accent: #a29060;
-  --color-gold: #a29060;
-  --color-gold-dark: #8e7228;
-  --color-gold-bright: #f4bd0c;
-  --color-stone: #f4f2ec;
+  /* Named brand + accent (Capital One red) tokens for direct use in components. */
+  --color-brand: #004977;
+  --color-brand-dark: #002b45;
+  --color-brand-accent: #d03027;
+  --color-gold: #d03027; /* accent → Capital One red (primary CTAs) */
+  --color-gold-dark: #a81e1a; /* darker red — hover */
+  --color-gold-bright: #e8402f; /* brighter red — hover on dark */
+  --color-stone: #f1f4f7; /* cool light wash */
 
   /*
-   * Explicit CIBC Mellon palette — used by the ported cms/Cibc* block
-   * components (Hero, AlertFeed, AssetGrid, OnboardingJourney, Regulatory
-   * Directive). Mirrors the source brand system so those components render
-   * verbatim; the blue-* ramp above still drives the site chrome.
+   * Explicit palette used by the ported cms/Cibc* block components (Hero,
+   * AlertFeed, AssetGrid, OnboardingJourney, Regulatory Directive). The token
+   * NAMES are kept for stability, but values now map to the Capital One navy +
+   * red system, so those components reskin without any edits.
    */
-  --color-cibc-teal: #00485e;
-  --color-cibc-teal-dark: #003342;
-  --color-cibc-teal-mid: #006280;
-  --color-cibc-teal-light: #1c919b;
-  --color-cibc-mint: #6fc8b9;
-  --color-cibc-gold: #a29060;
-  --color-cibc-gold-bright: #f4bd0c;
-  --color-cibc-gold-dark: #8e7228;
-  --color-cibc-rust: #9c3828;
-  --color-cibc-ink: #4b4b4b;
-  --color-cibc-stone: #f4f2ec;
+  --color-cibc-teal: #004977; /* → navy */
+  --color-cibc-teal-dark: #002b45;
+  --color-cibc-teal-mid: #0a6ba0;
+  --color-cibc-teal-light: #3d9bd1;
+  --color-cibc-mint: #9fd0eb; /* → pale blue */
+  --color-cibc-gold: #d03027; /* → red */
+  --color-cibc-gold-bright: #e8402f;
+  --color-cibc-gold-dark: #a81e1a;
+  --color-cibc-rust: #9c1f1a; /* deep red */
+  --color-cibc-ink: #33383d; /* dark slate — body text */
+  --color-cibc-stone: #f1f4f7; /* cool light */
 }
 
 @media (prefers-color-scheme: dark) {

@@ -75,7 +75,7 @@ export function PropertyTable({
                     {n ? (
                       <span
                         className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[11px] font-bold transition ${
-                          isActive ? 'bg-cibc-gold text-cibc-teal-dark' : 'bg-cibc-teal text-white'
+                          isActive ? 'bg-cibc-gold text-white' : 'bg-cibc-teal text-white'
                         }`}
                         title="Mapped to the preview above"
                       >

@@ -60,7 +60,7 @@ type Variant = 'primary' | 'secondary' | 'ghost';
 type Size = 'sm' | 'md' | 'lg';
 
 const VARIANT: Record<Variant, string> = {
-  primary: 'bg-cibc-gold text-cibc-teal-dark font-bold shadow-lg hover:bg-cibc-gold-bright transition-all',
+  primary: 'bg-cibc-gold text-white font-bold shadow-lg hover:bg-cibc-gold-bright transition-all',
   secondary:
     'border border-cibc-teal/30 text-cibc-teal font-bold hover:bg-cibc-teal/5 transition-all',
   ghost: 'text-cibc-teal font-bold hover:text-cibc-teal-dark transition-all',

@@ -30,7 +30,7 @@ const MainNav = () => (
       <div className="utility-container flex items-center gap-3">
         <Link
           href={siteConfig.primaryCta.href}
-          className="hidden sm:inline-flex items-center px-5 py-2 bg-gold text-blue-950 font-bold rounded-full hover:bg-gold-dark transition-colors"
+          className="hidden sm:inline-flex items-center px-5 py-2 bg-gold text-white font-bold rounded-full hover:bg-gold-dark transition-colors"
         >
           {siteConfig.primaryCta.label}
         </Link>

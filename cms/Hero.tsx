@@ -186,7 +186,7 @@ export default function Hero({ content }: Props) {
                 {...pa('PrimaryCTA')}
                 href={primaryHref}
                 target={edit ? undefined : content.PrimaryCTA?.target ?? undefined}
-                className="rounded-full bg-gold px-7 py-3.5 text-lg font-bold text-blue-950 shadow-lg transition-all hover:bg-gold-dark"
+                className="rounded-full bg-gold px-7 py-3.5 text-lg font-bold text-white shadow-lg transition-all hover:bg-gold-dark"
               >
                 {primaryLabel}
               </a>

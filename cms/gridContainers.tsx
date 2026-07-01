@@ -1,6 +1,15 @@
 import { displayTemplate } from '@optimizely/cms-sdk';
 import { getPreviewUtils } from '@optimizely/cms-sdk/react/server';
 import type { StructureContainerProps } from '@optimizely/cms-sdk/react/server';
+import {
+  BOX_UTILITIES,
+  CONTAINER_BOX_UTILITIES,
+  CONTAINER_UTILITIES,
+  ITEM_UTILITIES,
+  buildSettings,
+  resolveClasses,
+  type UtilityGroup,
+} from './layout/catalog';
 
 /**
  * Row / Column render containers for the V1 grid (passed to
@@ -8,31 +17,53 @@ import type { StructureContainerProps } from '@optimizely/cms-sdk/react/server';
  * they're structure-node renderers — so they are registered only via their
  * `nodeType` display templates, not in the React component resolver.
  *
- * Each container applies `pa(node)` so the row/column is selectable in the
- * editor, and reads layout knobs from `displaySettings` (the SDK resolves a
- * node's chosen template settings into a flat `Record<string, string|boolean>`).
+ * Row is a PURE CONTAINER: it only arranges its children, so it exposes the
+ * Flexbox/Grid CONTAINER utilities (direction, wrap, justify, gap, grid tracks…)
+ * plus the container-relevant Layout props (position, overflow, z-index…). It
+ * deliberately omits item utilities — a row is not sized as a child.
+ *
+ * Column is a container AND a leaf/item: it arranges its own children, sits as
+ * an ITEM of the Row (span, order, self-alignment…), and holds content, so it
+ * additionally gets the full Layout box group (aspect, object-fit…).
+ *
+ * `resolveClasses` only emits a class when a value is chosen or defaulted, so an
+ * unconfigured row/column stays clean.
  */
 
-const GAP: Record<string, string> = { sm: 'gap-3', md: 'gap-6', lg: 'gap-10' };
-const ALIGN: Record<string, string> = {
-  start: 'items-start',
-  center: 'items-center',
-  end: 'items-end',
+const ROW_GROUPS: UtilityGroup[] = [
+  { label: 'Layout', utilities: CONTAINER_UTILITIES },
+  { label: 'Position', utilities: CONTAINER_BOX_UTILITIES },
+];
+// Mobile-first, sensible baseline for a horizontal row of columns.
+const ROW_DEFAULTS: Record<string, string> = {
+  display: 'flex',
+  direction: 'row',
+  wrap: 'wrap',
+  justify: 'start',
+  alignItems: 'stretch',
+  gap: 'md',
 };
-const JUSTIFY: Record<string, string> = {
-  start: 'justify-start',
-  center: 'justify-center',
-  end: 'justify-end',
-  between: 'justify-between',
+
+const COLUMN_GROUPS: UtilityGroup[] = [
+  { label: 'Layout', utilities: CONTAINER_UTILITIES },
+  { label: 'Placement', utilities: ITEM_UTILITIES },
+  { label: 'Box', utilities: BOX_UTILITIES },
+];
+// A column stacks its own children vertically and, mobile-first, is full width
+// until `md` where its chosen `span` (md:basis-*) applies.
+const COLUMN_DEFAULTS: Record<string, string> = {
+  display: 'flex',
+  direction: 'col',
+  gap: 'md',
+  alignItems: 'start',
+  span: 'full',
 };
 
 export function V1Row({ node, children, displaySettings }: StructureContainerProps) {
   const { pa } = getPreviewUtils(node);
-  const gap = GAP[String(displaySettings?.gap ?? 'md')] ?? GAP.md;
-  const align = ALIGN[String(displaySettings?.align ?? 'start')] ?? ALIGN.start;
-  const justify = JUSTIFY[String(displaySettings?.justify ?? 'start')] ?? JUSTIFY.start;
+  const className = resolveClasses(ROW_GROUPS, displaySettings, ROW_DEFAULTS);
   return (
-    <div {...pa(node)} className={`flex flex-col md:flex-row ${gap} ${align} ${justify}`}>
+    <div {...pa(node)} className={className}>
       {children}
     </div>
   );
@@ -40,10 +71,11 @@ export function V1Row({ node, children, displaySettings }: StructureContainerPro
 
 export function V1Column({ node, children, displaySettings }: StructureContainerProps) {
   const { pa } = getPreviewUtils(node);
-  const gap = GAP[String(displaySettings?.gap ?? 'md')] ?? GAP.md;
-  const align = ALIGN[String(displaySettings?.align ?? 'start')] ?? ALIGN.start;
+  // Constant mobile-first base: full width until `md`, then the `span` utility's
+  // `md:basis-*` narrows it; `min-w-0` guards against flex overflow.
+  const className = `basis-full min-w-0 ${resolveClasses(COLUMN_GROUPS, displaySettings, COLUMN_DEFAULTS)}`;
   return (
-    <div {...pa(node)} className={`flex flex-1 flex-col ${gap} ${align}`}>
+    <div {...pa(node)} className={className}>
       {children}
     </div>
   );
@@ -54,39 +86,7 @@ export const V1RowDefault = displayTemplate({
   isDefault: true,
   displayName: 'V1: Row',
   nodeType: 'row',
-  settings: {
-    gap: {
-      editor: 'select',
-      displayName: 'Gap',
-      sortOrder: 0,
-      choices: {
-        sm: { displayName: 'Small', sortOrder: 1 },
-        md: { displayName: 'Medium', sortOrder: 2 },
-        lg: { displayName: 'Large', sortOrder: 3 },
-      },
-    },
-    align: {
-      editor: 'select',
-      displayName: 'Vertical align',
-      sortOrder: 1,
-      choices: {
-        start: { displayName: 'Top', sortOrder: 1 },
-        center: { displayName: 'Center', sortOrder: 2 },
-        end: { displayName: 'Bottom', sortOrder: 3 },
-      },
-    },
-    justify: {
-      editor: 'select',
-      displayName: 'Horizontal distribution',
-      sortOrder: 2,
-      choices: {
-        start: { displayName: 'Start', sortOrder: 1 },
-        center: { displayName: 'Center', sortOrder: 2 },
-        end: { displayName: 'End', sortOrder: 3 },
-        between: { displayName: 'Space between', sortOrder: 4 },
-      },
-    },
-  },
+  settings: buildSettings(ROW_GROUPS),
 });
 
 export const V1ColumnDefault = displayTemplate({
@@ -94,26 +94,5 @@ export const V1ColumnDefault = displayTemplate({
   isDefault: true,
   displayName: 'V1: Column',
   nodeType: 'column',
-  settings: {
-    gap: {
-      editor: 'select',
-      displayName: 'Gap',
-      sortOrder: 0,
-      choices: {
-        sm: { displayName: 'Small', sortOrder: 1 },
-        md: { displayName: 'Medium', sortOrder: 2 },
-        lg: { displayName: 'Large', sortOrder: 3 },
-      },
-    },
-    align: {
-      editor: 'select',
-      displayName: 'Align items',
-      sortOrder: 1,
-      choices: {
-        start: { displayName: 'Start', sortOrder: 1 },
-        center: { displayName: 'Center', sortOrder: 2 },
-        end: { displayName: 'End', sortOrder: 3 },
-      },
-    },
-  },
+  settings: buildSettings(COLUMN_GROUPS),
 });

@@ -87,7 +87,7 @@ export default function CibcHero({ content, displaySettings }: Props) {
               <a
                 {...pa('PrimaryCta')}
                 href={ctaHref(primary)}
-                className="bg-cibc-gold text-cibc-teal-dark px-6 py-3 rounded-lg font-bold flex items-center gap-2 hover:bg-cibc-gold-bright transition-all shadow-lg"
+                className="bg-cibc-gold text-white px-6 py-3 rounded-lg font-bold flex items-center gap-2 hover:bg-cibc-gold-bright transition-all shadow-lg"
               >
                 {primary.text ?? 'Learn more'} <ChevronRight size={18} />
               </a>

@@ -138,7 +138,7 @@ export function PropertyMap({
                 style={{ top: m.top, left: m.left }}
                 className={`pointer-events-auto absolute flex h-5 w-5 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full text-[11px] font-bold shadow ring-2 ring-white transition ${
                   active === m.key
-                    ? 'z-10 scale-125 bg-cibc-gold text-cibc-teal-dark'
+                    ? 'z-10 scale-125 bg-cibc-gold text-white'
                     : 'bg-cibc-teal text-white'
                 }`}
               >

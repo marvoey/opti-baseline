@@ -85,7 +85,7 @@ type Props = {
 export default function V1Section({ content, displaySettings }: Props) {
   const { pa } = getPreviewUtils(content);
 
-  const theme = (displaySettings?.theme ?? 'dark') as Theme;
+  const theme = (displaySettings?.theme ?? 'plain') as Theme;
   const padding = (displaySettings?.padding ?? 'lg') as Padding;
   const decoration = displaySettings?.decoration ?? 'none';
   // Checkbox settings arrive as boolean from the SDK, but seeded/raw data may
