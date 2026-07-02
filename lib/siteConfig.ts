@@ -12,62 +12,64 @@ export type FooterColumn = { heading: string; links: NavLink[] };
 
 export const siteConfig = {
   /** Used for the document <title> fallback and the logo alt text. */
-  name: 'CIBC Mellon',
+  name: 'Capital One',
   /** Default browser-tab title (per-page titles override via CMS MetaTitle). */
-  title: 'CIBC Mellon | Institutional Asset Servicing',
+  title: 'Capital One | Banking, Credit Cards & Loans',
   /** Default meta description. */
   description:
-    "CIBC Mellon — the operational infrastructure for Canada's institutional investment industry.",
+    'Capital One Financial — credit cards, checking accounts, savings accounts, and auto loans for individuals and businesses.',
 
   /** Header logo (place the asset in /public). */
   logoSrc: '/logo.svg',
-  logoAlt: 'CIBC Mellon',
+  logoAlt: 'Capital One',
 
   /** Top utility bar. */
   topNavLinks: [
-    { label: 'Client Access', href: '#' },
-    { label: 'Insights', href: '#' },
-    { label: 'Contact', href: '#' },
+    { label: 'About Capital One', href: '#' },
+    { label: 'Investor Relations', href: '#' },
+    { label: 'Security Center', href: '#' },
   ] satisfies NavLink[],
-  phone: '1-800-387-0825',
+  phone: '1-877-383-4802',
 
   /** Primary header navigation. */
   mainNavLinks: [
-    { label: 'Solutions', href: '#' },
-    { label: 'Client Access', href: '#' },
-    { label: 'Straight Talk', href: '/services' },
-    { label: 'Market Bulletins', href: '/locations' },
+    { label: 'Credit Cards', href: '#' },
+    { label: 'Banking', href: '#' },
+    { label: 'Auto Loans', href: '#' },
+    { label: 'Business', href: '#' },
   ] satisfies NavLink[],
   /** Header call-to-action button. */
-  primaryCta: { label: 'Get Started', href: '#' } satisfies NavLink,
+  primaryCta: { label: 'Sign In', href: '#' } satisfies NavLink,
   /** Account / login button label. */
-  accountLabel: 'Sign In',
+  accountLabel: 'My Account',
 
   /** Footer. */
   footerTagline:
-    'The operational infrastructure for Canada’s institutional investment industry — asset servicing, settlement and analytics at scale.',
+    'Banking products built for real life — find the right card, account, or loan and manage everything in one place.',
   footerColumns: [
     {
-      heading: 'Solutions',
+      heading: 'Products',
       links: [
-        { label: 'Asset Servicing', href: '#' },
-        { label: 'Settlement', href: '#' },
-        { label: 'Analytics', href: '#' },
+        { label: 'Credit Cards', href: '#' },
+        { label: 'Checking Accounts', href: '#' },
+        { label: 'Savings Accounts', href: '#' },
+        { label: 'Auto Loans', href: '#' },
       ],
     },
     {
       heading: 'Resources',
       links: [
-        { label: 'Straight Talk', href: '#' },
-        { label: 'Market Bulletins', href: '#' },
+        { label: 'Financial Education', href: '#' },
+        { label: 'Security Center', href: '#' },
         { label: 'Careers', href: '#' },
       ],
     },
   ] satisfies FooterColumn[],
-  footerLegal: `© ${'2026'} CIBC Mellon. A global leader in asset servicing infrastructure.`,
+  footerLegal: `© ${'2026'} Capital One. All rights reserved.`,
   footerLegalLinks: [
     { label: 'Privacy', href: '#' },
     { label: 'Terms', href: '#' },
+    { label: 'Accessibility', href: '#' },
   ] satisfies NavLink[],
 } as const;
 

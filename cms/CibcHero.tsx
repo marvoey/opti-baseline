@@ -4,8 +4,8 @@ import { ChevronRight, BarChart3 } from 'lucide-react';
 import { ctaHref, type OptiLink } from './shared';
 
 /**
- * CIBC: Hero — the page's high-impact opener. Eyebrow label, serif headline,
- * supporting subtext and up to two CTAs over the brand teal gradient.
+ * Capital One: Hero — the page's high-impact opener. Eyebrow label, serif headline,
+ * supporting subtext and up to two CTAs over the brand navy gradient.
  *
  * Co-locates the content type, its default display template, and the React
  * component (mirrors the nextjs-banner cms/* convention).
@@ -13,7 +13,7 @@ import { ctaHref, type OptiLink } from './shared';
 export const CibcHeroContentType = contentType({
   key: 'CibcHero',
   baseType: '_component',
-  displayName: 'CIBC: Hero',
+  displayName: 'Capital One: Hero',
   description: 'High-impact hero with eyebrow, headline, subtext and up to two CTAs.',
   compositionBehaviors: ['sectionEnabled'],
   properties: {
@@ -28,7 +28,7 @@ export const CibcHeroContentType = contentType({
 export const CibcHeroDisplayTemplate = displayTemplate({
   key: 'CibcHeroDefault',
   isDefault: true,
-  displayName: 'CIBC: Hero',
+  displayName: 'Capital One: Hero',
   contentType: 'CibcHero',
   settings: {
     theme: {
@@ -36,7 +36,7 @@ export const CibcHeroDisplayTemplate = displayTemplate({
       displayName: 'Theme',
       sortOrder: 0,
       choices: {
-        dark: { displayName: 'Teal (dark)', sortOrder: 1 },
+        dark: { displayName: 'Navy (dark)', sortOrder: 1 },
         light: { displayName: 'Stone (light)', sortOrder: 2 },
       },
     },

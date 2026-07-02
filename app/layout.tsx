@@ -6,8 +6,7 @@ import { siteConfig } from "@/lib/siteConfig";
 import "./globals.css";
 import "@/cms/registry";
 
-// Publico Banner (CIBC Mellon's display serif) is a licensed face; Source Serif 4
-// is the closest free substitute for the high-contrast institutional headings.
+// Capital One's display serif → Source Serif 4 as the closest free substitute.
 const publico = Source_Serif_4({
   variable: "--font-publico",
   subsets: ["latin"],

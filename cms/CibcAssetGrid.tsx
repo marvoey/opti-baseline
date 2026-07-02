@@ -4,15 +4,15 @@ import { Download, Plus } from 'lucide-react';
 import { Badge } from '@/app/_components/Badge';
 
 /**
- * CIBC: Asset Intelligence Grid — the "dark data extraction" panel. A heading +
- * a grid of AI-tagged private-asset cards (leaf `CibcAssetCard`), with an
- * optional dashed "upload" tile. Card count per row is a display-template choice.
+ * Capital One: Document Library — AI-tagged banking documents panel. A heading +
+ * a grid of document cards (leaf `CibcAssetCard`), with an optional dashed
+ * "upload" tile. Card count per row is a display-template choice.
  */
 export const CibcAssetCardContentType = contentType({
   key: 'CibcAssetCard',
   baseType: '_component',
-  displayName: 'CIBC: Asset Intelligence Card',
-  description: 'A single AI-tagged private asset (name, class, metadata chips, link).',
+  displayName: 'Capital One: Document Card',
+  description: 'A single AI-tagged banking document (name, type, metadata chips, link).',
   compositionBehaviors: ['elementEnabled'],
   properties: {
     AssetName: { type: 'string', displayName: 'Asset Name', description: 'File or document name.', isLocalized: true, sortOrder: 10 },
@@ -33,8 +33,8 @@ export const CibcAssetCardContentType = contentType({
 export const CibcAssetGridContentType = contentType({
   key: 'CibcAssetGrid',
   baseType: '_component',
-  displayName: 'CIBC: Asset Intelligence Grid',
-  description: 'A heading plus a grid of AI-tagged asset cards.',
+  displayName: 'Capital One: Document Library',
+  description: 'A heading plus a grid of AI-tagged document cards.',
   compositionBehaviors: ['sectionEnabled'],
   properties: {
     Heading: { type: 'string', displayName: 'Heading', description: 'Grid heading, e.g. "Asset Intelligence (AI-Tagged)".', isLocalized: true, sortOrder: 10 },
@@ -53,7 +53,7 @@ export const CibcAssetGridContentType = contentType({
 export const CibcAssetGridDisplayTemplate = displayTemplate({
   key: 'CibcAssetGridDefault',
   isDefault: true,
-  displayName: 'CIBC: Asset Grid',
+  displayName: 'Capital One: Document Grid',
   contentType: 'CibcAssetGrid',
   settings: {
     columns: {

@@ -3,14 +3,14 @@ import { getPreviewUtils } from '@optimizely/cms-sdk/react/server';
 import { Globe } from 'lucide-react';
 
 /**
- * CIBC: Onboarding Journey — the institutional onboarding stepper (the GenUI
- * "onboarding" output, now editor-managed). A title + segment over a row of
- * milestone cards (leaf `CibcMilestone`), each with a status-driven progress bar.
+ * Capital One: Onboarding Journey — the account opening stepper (editor-managed).
+ * A title + segment over a row of milestone cards (leaf `CibcMilestone`), each
+ * with a status-driven progress bar.
  */
 export const CibcMilestoneContentType = contentType({
   key: 'CibcMilestone',
   baseType: '_component',
-  displayName: 'CIBC: Onboarding Milestone',
+  displayName: 'Capital One: Onboarding Milestone',
   description: 'A single onboarding step (number, title, status).',
   compositionBehaviors: ['elementEnabled'],
   properties: {
@@ -34,8 +34,8 @@ export const CibcMilestoneContentType = contentType({
 export const CibcOnboardingJourneyContentType = contentType({
   key: 'CibcOnboardingJourney',
   baseType: '_component',
-  displayName: 'CIBC: Onboarding Journey',
-  description: 'An onboarding dashboard: title, segment and an ordered set of milestones.',
+  displayName: 'Capital One: Onboarding Journey',
+  description: 'An account opening dashboard: title, segment and an ordered set of milestones.',
   compositionBehaviors: ['sectionEnabled'],
   properties: {
     Title: { type: 'string', displayName: 'Title', description: 'Journey title.', isLocalized: true, sortOrder: 10 },

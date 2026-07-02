@@ -4,15 +4,15 @@ import { ShieldCheck } from 'lucide-react';
 import { ctaHref, type OptiLink } from './shared';
 
 /**
- * CIBC: Regulatory Directive — the GenUI "regulatory" output as an editor block.
+ * Capital One: Compliance Notice — a regulatory/compliance callout block.
  * A left-accent callout with heading, rich-text body and up to two CTAs; the
  * accent colour follows the Severity choice.
  */
 export const CibcRegulatoryDirectiveContentType = contentType({
   key: 'CibcRegulatoryDirective',
   baseType: '_component',
-  displayName: 'CIBC: Regulatory Directive',
-  description: 'A regulatory filing directive callout with body copy and actions.',
+  displayName: 'Capital One: Compliance Notice',
+  description: 'A compliance or regulatory notice callout with body copy and actions.',
   compositionBehaviors: ['sectionEnabled'],
   properties: {
     Heading: { type: 'string', displayName: 'Heading', description: 'Directive heading.', isLocalized: true, sortOrder: 10 },

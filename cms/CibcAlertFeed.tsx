@@ -3,16 +3,16 @@ import { getPreviewUtils } from '@optimizely/cms-sdk/react/server';
 import { Clock } from 'lucide-react';
 
 /**
- * CIBC: Operational Alert Feed — the "T+1 velocity" panel. A heading + live-feed
- * label over a list of alert rows. Each alert is the leaf `CibcAlert` component,
- * held inline as a `component` array (rendered here directly, not via the
- * registry — mirrors nextjs-banner's ConditionGrid/QuickCareCards co-location).
+ * Capital One: Account Alert Feed — real-time account notification panel. A heading
+ * + live-feed label over a list of alert rows. Each alert is the leaf `CibcAlert`
+ * component, held inline as a `component` array (rendered here directly, not via
+ * the registry — mirrors nextjs-banner's ConditionGrid/QuickCareCards co-location).
  */
 export const CibcAlertContentType = contentType({
   key: 'CibcAlert',
   baseType: '_component',
-  displayName: 'CIBC: Operational Alert',
-  description: 'A single operational alert row (severity, title, summary, timestamp).',
+  displayName: 'Capital One: Account Alert',
+  description: 'A single account alert row (severity, title, summary, timestamp).',
   compositionBehaviors: ['elementEnabled'],
   properties: {
     Severity: {
@@ -36,8 +36,8 @@ export const CibcAlertContentType = contentType({
 export const CibcAlertFeedContentType = contentType({
   key: 'CibcAlertFeed',
   baseType: '_component',
-  displayName: 'CIBC: Operational Alert Feed',
-  description: 'A heading plus an ordered list of operational alerts.',
+  displayName: 'Capital One: Account Alert Feed',
+  description: 'A heading plus an ordered list of account alerts.',
   compositionBehaviors: ['sectionEnabled'],
   properties: {
     Heading: { type: 'string', displayName: 'Heading', description: 'Feed heading, e.g. "Operational Alerts".', isLocalized: true, sortOrder: 10 },

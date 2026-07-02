@@ -112,12 +112,12 @@ const dt = (def: unknown) => def as unknown as DisplayTemplateDef;
 
 const heroContent = {
   BlockWidth: 'full',
-  SuperHeader: 'Private Banking',
-  MainTitle: 'Intelligence for institutional capital',
+  SuperHeader: 'Digital Banking',
+  MainTitle: 'Banking built around you',
   SubTitle:
-    'Bring AI-assisted insight to every mandate — from onboarding to regulatory filing — on one secure platform.',
-  PrimaryCTA: { text: 'Book a demo', title: null, target: null, url: { default: '#' } },
-  SecondaryCTA: { text: 'Talk to sales', title: null, target: null, url: { default: '#' } },
+    'Open an account, apply for a card, or manage your money — all in one place with industry-leading security.',
+  PrimaryCTA: { text: 'Get Started', title: null, target: null, url: { default: '#' } },
+  SecondaryCTA: { text: 'Compare Cards', title: null, target: null, url: { default: '#' } },
   ContrastMode: false,
 };
 
@@ -127,21 +127,21 @@ const richTextContent = {
     json: {
       type: 'richText',
       children: [
-        { type: 'heading-two', children: [{ text: 'Why institutions choose us' }] },
+        { type: 'heading-two', children: [{ text: 'Why millions choose Capital One' }] },
         {
           type: 'paragraph',
           children: [
-            { text: 'Our platform pairs ' },
-            { text: 'institutional-grade security', bold: true },
-            { text: ' with AI-assisted workflows so your teams move faster with less risk.' },
+            { text: 'Our platform combines ' },
+            { text: 'award-winning security', bold: true },
+            { text: ' with an intuitive digital experience so you can bank confidently from anywhere.' },
           ],
         },
         {
           type: 'bulleted-list',
           children: [
-            { type: 'list-item', children: [{ text: 'Automated asset tagging and extraction' }] },
-            { type: 'list-item', children: [{ text: 'Real-time operational alerting' }] },
-            { type: 'list-item', children: [{ text: 'Guided regulatory onboarding' }] },
+            { type: 'list-item', children: [{ text: 'No hidden fees on checking accounts' }] },
+            { type: 'list-item', children: [{ text: 'Real-time fraud alerts and card controls' }] },
+            { type: 'list-item', children: [{ text: 'AI-powered spending insights' }] },
           ],
         },
       ],
@@ -149,87 +149,89 @@ const richTextContent = {
   },
 };
 
-const cibcHeroContent = {
-  Eyebrow: 'Asset Intelligence',
-  Headline: 'See the whole picture of your private markets',
+const capitalOneHeroContent = {
+  Eyebrow: 'Digital Banking',
+  Headline: 'Banking that puts you first',
   Subtext:
-    'Surface insight across funds, mandates and counterparties — with AI extraction built for the back office.',
-  PrimaryCta: { text: 'Explore the platform', title: null, target: null, url: { default: '#' } },
-  SecondaryCta: { text: 'Read the brief', title: null, target: null, url: { default: '#' } },
+    'Manage your accounts, track spending, and grow your savings — with AI-powered insights built for real life.',
+  PrimaryCta: { text: 'Open an Account', title: null, target: null, url: { default: '#' } },
+  SecondaryCta: { text: 'See All Products', title: null, target: null, url: { default: '#' } },
 };
 
-const cibcAlertFeedContent = {
-  Heading: 'Operational Alerts',
-  FeedLabel: 'Live Feed',
+const capitalOneAlertFeedContent = {
+  Heading: 'Account Alerts',
+  FeedLabel: 'Real-time',
   Alerts: [
     {
       Severity: 'URGENT',
-      Title: 'Settlement break detected — Fund VII',
-      Summary: 'A T+1 settlement mismatch was flagged on a private credit position. Review required.',
+      Title: 'Unusual activity detected — Quicksilver Card',
+      Summary:
+        'A purchase in an unfamiliar location was flagged. We have temporarily paused your card pending your review.',
       Timestamp: '2 mins ago',
     },
     {
       Severity: 'MARKET',
-      Title: 'FX exposure threshold approached',
-      Summary: 'CAD/USD exposure is within 3% of the mandate ceiling for the institutional book.',
-      Timestamp: '18 mins ago',
+      Title: 'Payment due in 3 days — Venture X',
+      Summary: 'Your minimum payment of $45.00 is due Friday. Enable autopay to avoid late fees.',
+      Timestamp: '1 hour ago',
     },
     {
       Severity: 'HOLIDAY',
-      Title: 'Reduced settlement window Friday',
-      Summary: 'A market holiday shortens the settlement window; expect delayed confirmations.',
-      Timestamp: '1 hour ago',
+      Title: 'Rate change effective next month',
+      Summary:
+        'Your Venture X variable APR will update to 19.49% starting August 1, 2026. No action required.',
+      Timestamp: '3 hours ago',
     },
   ],
 };
 
-const cibcAssetGridContent = {
-  Heading: 'Asset Intelligence (AI-Tagged)',
+const capitalOneDocumentLibraryContent = {
+  Heading: 'Document Library (AI-Tagged)',
   AllowUpload: true,
   Assets: [
     {
-      AssetName: 'Fund_VII_LPA_Executed.pdf',
-      AssetClass: 'Private Equity',
-      Metadata: ['Vintage 2024', 'Buyout', 'Tier-1 LP'],
+      AssetName: 'Venture_X_Cardholder_Agreement.pdf',
+      AssetClass: 'Credit Card',
+      Metadata: ['Rewards', 'Travel', 'No Foreign Fees'],
       ExtractedBy: 'Opal',
       FileLink: { text: null, title: null, target: null, url: { default: '#' } },
     },
     {
-      AssetName: 'Tower_District_Appraisal.xlsx',
-      AssetClass: 'Real Estate',
-      Metadata: ['Core+', 'Toronto', 'Q2 valuation'],
+      AssetName: 'Capital_One_360_Account_Terms.pdf',
+      AssetClass: 'Checking Account',
+      Metadata: ['No Monthly Fee', 'FDIC Insured', 'Mobile Deposit'],
       ExtractedBy: 'Opal',
       FileLink: { text: null, title: null, target: null, url: { default: '#' } },
     },
     {
-      AssetName: 'Infra_Debt_Term_Sheet.pdf',
-      AssetClass: 'Private Credit',
-      Metadata: ['Senior', 'Floating', 'Investment grade'],
+      AssetName: 'Auto_Loan_Pre_Approval_2026.pdf',
+      AssetClass: 'Auto Financing',
+      Metadata: ['Pre-Qualified', '$35,000', '60 Months'],
       ExtractedBy: 'Opal',
       FileLink: { text: null, title: null, target: null, url: { default: '#' } },
     },
   ],
 };
 
-const cibcOnboardingContent = {
-  Title: 'Institutional Onboarding',
-  Segment: 'Pension & Sovereign Wealth',
+const capitalOneOnboardingContent = {
+  Title: 'Account Opening',
+  Segment: 'Personal Banking',
   Milestones: [
-    { Step: '01', Title: 'KYC & Entity', Status: 'COMPLETE' },
-    { Step: '02', Title: 'Mandate Setup', Status: 'COMPLETE' },
-    { Step: '03', Title: 'Funding', Status: 'IN PROGRESS' },
-    { Step: '04', Title: 'Go Live', Status: 'PENDING' },
+    { Step: '01', Title: 'Identity Verification', Status: 'COMPLETE' },
+    { Step: '02', Title: 'Account Selection', Status: 'COMPLETE' },
+    { Step: '03', Title: 'Initial Deposit', Status: 'IN PROGRESS' },
+    { Step: '04', Title: 'Card Activation', Status: 'PENDING' },
   ],
 };
 
-const cibcRegulatoryContent = {
-  Heading: 'Regulatory Directive — OSFI B-20 Update',
+const capitalOneComplianceContent = {
+  Heading: 'CFPB Rule Update — Late Fee Cap',
   Body: {
-    html: '<p>New stress-testing guidance takes effect next quarter. Affected mandates must refile risk attestations through the compliance desk before the deadline.</p>',
+    html: '<p>New CFPB regulations limit credit card late fees effective Q3 2026. Review updated fee schedules and required customer notification timelines.</p>',
   },
   Severity: 'critical',
-  PrimaryCta: { text: 'Download Guidance PDF', title: null, target: null, url: { default: '#' } },
-  SecondaryCta: { text: 'Contact Compliance Desk', title: null, target: null, url: { default: '#' } },
+  PrimaryCta: { text: 'Download Updated Terms', title: null, target: null, url: { default: '#' } },
+  SecondaryCta: { text: 'Contact Compliance', title: null, target: null, url: { default: '#' } },
 };
 
 // ---------------------------------------------------------------------------
@@ -258,16 +260,16 @@ export const SHOWCASE: ShowcaseBlock[] = [
     render: (v) => <RichText content={v.content as ContentOf<typeof RichText>} />,
   },
   {
-    slug: 'cibc-hero',
-    name: 'CIBC: Hero',
+    slug: 'capital-one-hero',
+    name: 'Capital One: Hero',
     summary:
       'Branded hero with eyebrow, serif headline, subtext and up to two CTAs. Theme is a display-template choice.',
     contentType: ct(CibcHeroContentType),
     sourceFile: 'cms/CibcHero.tsx',
     displayTemplates: [dt(CibcHeroDisplayTemplate)],
     variants: [
-      { label: 'Theme: Teal (dark)', content: cibcHeroContent, displaySettings: { theme: 'dark' } },
-      { label: 'Theme: Stone (light)', content: cibcHeroContent, displaySettings: { theme: 'light' } },
+      { label: 'Theme: Navy (dark)', content: capitalOneHeroContent, displaySettings: { theme: 'dark' } },
+      { label: 'Theme: Stone (light)', content: capitalOneHeroContent, displaySettings: { theme: 'light' } },
     ],
     render: (v) => (
       <CibcHero
@@ -277,30 +279,30 @@ export const SHOWCASE: ShowcaseBlock[] = [
     ),
   },
   {
-    slug: 'cibc-alert-feed',
-    name: 'CIBC: Operational Alert Feed',
+    slug: 'capital-one-alert-feed',
+    name: 'Capital One: Account Alert Feed',
     summary:
-      'A heading plus an ordered list of operational alert rows (severity, title, summary, timestamp).',
+      'A heading plus an ordered list of account alert rows (severity, title, summary, timestamp).',
     contentType: ct(CibcAlertFeedContentType),
     sourceFile: 'cms/CibcAlertFeed.tsx',
     itemTypes: [ct(CibcAlertContentType)],
-    variants: [{ content: cibcAlertFeedContent }],
+    variants: [{ content: capitalOneAlertFeedContent }],
     render: (v) => <CibcAlertFeed content={v.content as ContentOf<typeof CibcAlertFeed>} />,
   },
   {
-    slug: 'cibc-asset-grid',
-    name: 'CIBC: Asset Intelligence Grid',
+    slug: 'capital-one-document-library',
+    name: 'Capital One: Document Library',
     summary:
-      'A heading plus a grid of AI-tagged asset cards. Column count is a display-template choice.',
+      'A heading plus a grid of AI-tagged document cards. Column count is a display-template choice.',
     contentType: ct(CibcAssetGridContentType),
     sourceFile: 'cms/CibcAssetGrid.tsx',
     itemTypes: [ct(CibcAssetCardContentType)],
     displayTemplates: [dt(CibcAssetGridDisplayTemplate)],
     variants: [
-      { label: 'Columns: Two', content: cibcAssetGridContent, displaySettings: { columns: 'two' } },
+      { label: 'Columns: Two', content: capitalOneDocumentLibraryContent, displaySettings: { columns: 'two' } },
       {
         label: 'Columns: Three',
-        content: cibcAssetGridContent,
+        content: capitalOneDocumentLibraryContent,
         displaySettings: { columns: 'three' },
       },
     ],
@@ -312,25 +314,25 @@ export const SHOWCASE: ShowcaseBlock[] = [
     ),
   },
   {
-    slug: 'cibc-onboarding-journey',
-    name: 'CIBC: Onboarding Journey',
+    slug: 'capital-one-onboarding-journey',
+    name: 'Capital One: Onboarding Journey',
     summary:
-      'An onboarding dashboard: title, segment and an ordered set of milestone cards with status-driven progress bars.',
+      'An account opening dashboard: title, segment and an ordered set of milestone cards with status-driven progress bars.',
     contentType: ct(CibcOnboardingJourneyContentType),
     sourceFile: 'cms/CibcOnboardingJourney.tsx',
     itemTypes: [ct(CibcMilestoneContentType)],
-    variants: [{ content: cibcOnboardingContent }],
+    variants: [{ content: capitalOneOnboardingContent }],
     render: (v) => (
       <CibcOnboardingJourney content={v.content as ContentOf<typeof CibcOnboardingJourney>} />
     ),
   },
   {
-    slug: 'cibc-regulatory-directive',
-    name: 'CIBC: Regulatory Directive',
+    slug: 'capital-one-compliance-notice',
+    name: 'Capital One: Compliance Notice',
     summary: 'A left-accent callout with heading, rich-text body and up to two CTAs.',
     contentType: ct(CibcRegulatoryDirectiveContentType),
     sourceFile: 'cms/CibcRegulatoryDirective.tsx',
-    variants: [{ content: cibcRegulatoryContent }],
+    variants: [{ content: capitalOneComplianceContent }],
     render: (v) => (
       <CibcRegulatoryDirective content={v.content as ContentOf<typeof CibcRegulatoryDirective>} />
     ),
