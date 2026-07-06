@@ -2,7 +2,6 @@ import { getClient, type PreviewParams } from '@optimizely/cms-sdk';
 import { OptimizelyComponent, withAppContext } from '@optimizely/cms-sdk/react/server';
 import { PreviewComponent } from '@optimizely/cms-sdk/react/client';
 import Script from 'next/script';
-import { OpenInTabButton } from './OpenInTabButton';
 
 // Preview is always per-request (preview tokens, draft versions) — never cached.
 export const dynamic = 'force-dynamic';
@@ -35,7 +34,6 @@ async function Page({ searchParams }: Props) {
       <Script src={injectorSrc} strategy="afterInteractive" />
       <PreviewComponent />
       <OptimizelyComponent content={content} />
-      <OpenInTabButton />
     </>
   );
 }

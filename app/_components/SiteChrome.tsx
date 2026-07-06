@@ -1,6 +1,7 @@
 import TopNav from './TopNav';
 import MainNav from './MainNav';
 import Footer from './Footer';
+import { OpenInTabButton } from './OpenInTabButton';
 
 /**
  * Shared static site chrome — header (TopNav + MainNav) and Footer — wrapped
@@ -16,6 +17,9 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
       <MainNav />
       <div className="flex-1">{children}</div>
       <Footer />
+      {/* Floating dev shortcut — appears on both the published catch-all and the
+          /preview experience, since both render through SiteChrome. */}
+      <OpenInTabButton />
     </>
   );
 }

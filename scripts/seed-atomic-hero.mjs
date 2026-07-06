@@ -1,18 +1,33 @@
-// Seeds a sample "atomic hero" Experience built entirely from the V1 design
-// system (V1Section → row → column → V1Text/V1Button atoms), then publishes it.
+// Seeds an ExperiencePage that recreates cms/CibcHero.tsx entirely from the V1
+// atomic design system (V1Section → row → column → V1Text / V1Button), then
+// publishes it. Proves the bespoke CibcHero content type can be composed from
+// generic atoms + display templates instead of a monolithic block:
 //
-// Proves the atoms can recreate cms/CibcHero.tsx in high fidelity via
-// composition + display templates instead of a monolithic content type.
+//   CibcHero field/style        →  atomic equivalent
+//   ─────────────────────────      ─────────────────────────────────────────
+//   navy gradient + chart motif →  V1Section { theme: dark, decoration: chart }
+//   Eyebrow (gold pill)         →  V1Text    { variant: eyebrow }
+//   Headline (serif H1)         →  V1Text    { variant: display, tone: default }
+//   Subtext                     →  V1Text    { variant: body,    tone: onDark }
+//   Primary / Secondary CTA     →  V1Button  { variant: primary | secondary }
 //
 // Auth + endpoints mirror the cms-cli REST client: OAuth client-credentials →
 // `POST {gateway}/oauth/token`, then the CMS content API. Node shapes were
 // derived from a real composition in this instance (component nodes carry
 // `displaySettings: { displayTemplate, settings }` and
 // `component: { contentType, properties: { Field: { value } } }`; link values
-// serialize as `{ url, text, title }`).
+// serialize as `{ url, text, title }`). Structure follows the Visual Builder
+// model: experience → section → row → column → component.
+//
+// The `settings` keys must match the display-template definitions in cms/:
+//   V1SectionDefault → theme | decoration | padding | contentWidth | rounded
+//   V1RowDefault     → columnLayout | verticalAlignment | columnGap | …
+//   V1ColumnDefault  → columnSpan | selfAlignment | contentGap | contentAlignment
+//   V1TextDefault    → variant | tone | align
+//   V1ButtonDefault  → variant | size
 //
 // Usage:
-//   node scripts/seed-atomic-hero.mjs [--container <key>] [--key <key>]
+//   node scripts/seed-atomic-hero.mjs [--container <key>] [--key <key>] [--route <seg>]
 //   npm run seed:hero
 //
 // Container defaults to the same parent as the existing demo experience; override
@@ -50,7 +65,7 @@ function arg(name, fallback) {
 }
 const CONTAINER = arg('container', process.env.OPTIMIZELY_SEED_CONTAINER || '43f936c99b234ea397b261c538ad07c9');
 const KEY = arg('key', 'a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1');
-const ROUTE = arg('route', 'v1-atomic-hero');
+const ROUTE = arg('route', 'cibc-hero-atomic');
 
 // --- REST helpers -----------------------------------------------------------
 async function getToken() {
@@ -90,6 +105,7 @@ async function api(token, method, path, body) {
 }
 
 // --- composition builders ---------------------------------------------------
+// A V1Text element (component node), styled by the V1TextDefault template.
 const text = (displayName, settings, value) => ({
   id: randomUUID(),
   displayName,
@@ -98,6 +114,7 @@ const text = (displayName, settings, value) => ({
   component: { contentType: 'V1Text', properties: { Text: { value } } },
 });
 
+// A V1Button element, styled by the V1ButtonDefault template.
 const button = (displayName, settings, link) => ({
   id: randomUUID(),
   displayName,
@@ -106,69 +123,70 @@ const button = (displayName, settings, link) => ({
   component: { contentType: 'V1Button', properties: { Link: { value: link } } },
 });
 
+// A structural column (holds components), styled by V1ColumnDefault.
+const column = (displayName, settings, nodes) => ({
+  id: randomUUID(),
+  displayName,
+  nodeType: 'column',
+  layoutType: 'grid',
+  displaySettings: { displayTemplate: 'V1ColumnDefault', settings },
+  nodes,
+});
+
+// A structural row (holds columns), styled by V1RowDefault.
+const row = (displayName, settings, nodes) => ({
+  id: randomUUID(),
+  displayName,
+  nodeType: 'row',
+  layoutType: 'grid',
+  displaySettings: { displayTemplate: 'V1RowDefault', settings },
+  nodes,
+});
+
 function buildComposition() {
-  const column = {
-    id: randomUUID(),
-    displayName: 'Column',
-    nodeType: 'column',
-    layoutType: 'grid',
-    displaySettings: { displayTemplate: 'V1ColumnDefault', settings: { gap: 'md', align: 'start' } },
-    nodes: [
-      text('Eyebrow', { variant: 'eyebrow', tone: 'gold', align: 'left' }, 'Institutional banking'),
-      text('Headline', { variant: 'display', tone: 'default', align: 'left' }, 'Confident financial futures, engineered.'),
-      text('Subtext', { variant: 'body', tone: 'onDark', align: 'left' }, 'We help institutions safeguard and grow assets with the precision and trust CIBC Mellon is known for.'),
-      // CTAs live in their own row so they sit side-by-side.
-    ],
-  };
+  // Copy block: eyebrow + serif headline + subtext, stacked in one full-width
+  // column. Headline stays `default` tone (inherits the section's white text);
+  // subtext uses `onDark` (white/70) to match CibcHero's muted subtext.
+  const copyColumn = column('Copy', { columnSpan: 'full', contentGap: 'normal', contentAlignment: 'start' }, [
+    text('Eyebrow', { variant: 'eyebrow', align: 'left' }, 'Digital Banking'),
+    text('Headline', { variant: 'display', tone: 'default', align: 'left' }, 'Banking that puts you first'),
+    text(
+      'Subtext',
+      { variant: 'body', tone: 'onDark', align: 'left' },
+      'Manage your accounts, track spending and grow your savings — with AI-powered insights built for real life.',
+    ),
+  ]);
 
-  const ctaRow = {
-    id: randomUUID(),
-    displayName: 'CTA Row',
-    nodeType: 'row',
-    layoutType: 'grid',
-    displaySettings: { displayTemplate: 'V1RowDefault', settings: { gap: 'md', align: 'center', justify: 'start' } },
-    nodes: [
-      {
-        id: randomUUID(),
-        displayName: 'CTA Column',
-        nodeType: 'column',
-        layoutType: 'grid',
-        displaySettings: { displayTemplate: 'V1ColumnDefault', settings: { gap: 'md', align: 'start' } },
-        nodes: [
-          button('Primary CTA', { variant: 'primary', size: 'lg' }, { url: 'https://www.cibcmellon.com/', text: 'Open an account', title: 'Open an account' }),
-        ],
-      },
-      {
-        id: randomUUID(),
-        displayName: 'CTA Column 2',
-        nodeType: 'column',
-        layoutType: 'grid',
-        displaySettings: { displayTemplate: 'V1ColumnDefault', settings: { gap: 'md', align: 'start' } },
-        nodes: [
-          button('Secondary CTA', { variant: 'secondary', size: 'lg' }, { url: 'https://www.cibcmellon.com/en/about-us.html', text: 'Learn more', title: 'Learn more' }),
-        ],
-      },
-    ],
-  };
+  const contentRow = row('Content Row', { columnGap: 'normal', verticalAlignment: 'top' }, [copyColumn]);
 
-  const contentRow = {
-    id: randomUUID(),
-    displayName: 'Content Row',
-    nodeType: 'row',
-    layoutType: 'grid',
-    displaySettings: { displayTemplate: 'V1RowDefault', settings: { gap: 'md', align: 'start', justify: 'start' } },
-    nodes: [column],
-  };
+  // CTA block: two buttons side by side (a column each, in one row).
+  const ctaRow = row('CTA Row', { columnGap: 'normal', verticalAlignment: 'center' }, [
+    column('Primary CTA', { columnSpan: 'auto', contentAlignment: 'start' }, [
+      button('Primary CTA', { variant: 'primary', size: 'lg' }, {
+        url: 'https://www.capitalone.com/',
+        text: 'Open an Account',
+        title: 'Open an Account',
+      }),
+    ]),
+    column('Secondary CTA', { columnSpan: 'auto', contentAlignment: 'start' }, [
+      button('Secondary CTA', { variant: 'secondary', size: 'lg' }, {
+        url: 'https://www.capitalone.com/',
+        text: 'See All Products',
+        title: 'See All Products',
+      }),
+    ]),
+  ]);
 
+  // The section shell reproduces CibcHero's navy gradient + corner chart motif.
+  // Composition settings serialize as strings (checkbox → "true"/"false").
   const section = {
     id: randomUUID(),
-    displayName: 'V1 Hero Section',
+    displayName: 'Hero Section',
     nodeType: 'section',
     layoutType: 'grid',
     displaySettings: {
       displayTemplate: 'V1SectionDefault',
-      // Composition settings are serialized as strings (checkbox → "true"/"false").
-      settings: { theme: 'dark', decoration: 'chart', padding: 'lg', rounded: 'true' },
+      settings: { theme: 'dark', decoration: 'chart', padding: 'lg', contentWidth: 'lg', rounded: 'true' },
     },
     component: { contentType: 'V1Section' },
     nodes: [contentRow, ctaRow],
@@ -176,7 +194,7 @@ function buildComposition() {
 
   return {
     id: randomUUID(),
-    displayName: 'V1 Atomic Hero',
+    displayName: 'CibcHero (Atomic Recreation)',
     nodeType: 'experience',
     layoutType: 'outline',
     nodes: [section],
@@ -193,7 +211,7 @@ async function main() {
   const composition = buildComposition();
   const version = {
     locale: LOCALE,
-    displayName: 'V1 Atomic Hero',
+    displayName: 'CibcHero (Atomic Recreation)',
     routeSegment: ROUTE,
     composition,
   };
