@@ -30,7 +30,7 @@ import V1Image, { V1ImageContentType, V1ImageDefault } from './V1Image';
 import V1Icon, { V1IconContentType, V1IconDefault } from './V1Icon';
 import V1Divider, { V1DividerContentType, V1DividerDefault } from './V1Divider';
 import V1Section, { V1SectionContentType, V1SectionDefault } from './V1Section';
-import { V1RowDefault, V1ColumnDefault } from './gridContainers';
+import { V1RowDefault, V1ColumnDefault } from './flexContainers';
 
 /**
  * Single configuration + registration point for the Optimizely SDK.

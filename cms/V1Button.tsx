@@ -2,6 +2,7 @@ import { contentType, displayTemplate, type ContentProps } from '@optimizely/cms
 import { getPreviewUtils } from '@optimizely/cms-sdk/react/server';
 import { ChevronRight } from 'lucide-react';
 import { ctaHref, type OptiLink } from './shared';
+import { faker } from '@faker-js/faker';
 
 /**
  * V1: Button — the atomic call-to-action primitive. A single `Link` whose look
@@ -86,7 +87,7 @@ export default function V1Button({ content, displaySettings }: Props) {
   const size = (displaySettings?.size ?? 'md') as Size;
 
   const link = content.Link as OptiLink;
-  const label = link?.text || link?.title || 'Learn more';
+  const label = link?.text || link?.title || faker.lorem.words(2);
   // Suppress the href in the editor so clicks select the block instead of navigating.
   const href = edit ? undefined : ctaHref(link);
   const className = ['inline-flex items-center gap-2', VARIANT[variant], SIZE[size]].join(' ');

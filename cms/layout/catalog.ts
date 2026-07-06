@@ -239,6 +239,26 @@ export const BOX_UTILITIES: Utility[] = [
       ['auto', 'columns-auto', 'Auto'],
     ]),
   },
+  {
+    key: 'padding',
+    displayName: 'Inner padding',
+    choices: choices([
+      ['none', 'p-0', 'None'],
+      ['sm',   'p-4', 'Small  (16px)'],
+      ['md',   'p-6', 'Medium (24px)'],
+      ['lg',   'p-8', 'Large  (32px)'],
+    ]),
+  },
+  {
+    key: 'background',
+    displayName: 'Background',
+    choices: choices([
+      ['none',  '',                        'None'],
+      ['white', 'bg-white',                'White'],
+      ['stone', 'bg-cibc-stone',           'Stone'],
+      ['brand', 'bg-cibc-teal text-white', 'Brand (navy)'],
+    ]),
+  },
 ];
 
 /**
@@ -316,7 +336,7 @@ export const CONTAINER_UTILITIES: Utility[] = [
   },
   {
     key: 'justifyItems',
-    displayName: 'Item horizontal align (grid)',
+    displayName: 'Item horizontal align (grid only)',
     choices: choices([
       ['start', 'justify-items-start', 'Start'],
       ['end', 'justify-items-end', 'End'],
@@ -353,7 +373,7 @@ export const CONTAINER_UTILITIES: Utility[] = [
   },
   {
     key: 'placeContent',
-    displayName: 'Place content (grid shortcut)',
+    displayName: 'Place content (grid only)',
     choices: choices([
       ['start', 'place-content-start', 'Start'],
       ['end', 'place-content-end', 'End'],
@@ -366,7 +386,7 @@ export const CONTAINER_UTILITIES: Utility[] = [
   },
   {
     key: 'placeItems',
-    displayName: 'Place items (grid shortcut)',
+    displayName: 'Place items (grid only)',
     choices: choices([
       ['start', 'place-items-start', 'Start'],
       ['end', 'place-items-end', 'End'],
@@ -379,38 +399,38 @@ export const CONTAINER_UTILITIES: Utility[] = [
     key: 'gap',
     displayName: 'Space between items',
     choices: choices([
-      ['none', 'gap-0', 'None'],
-      ['sm', 'gap-3', 'Small'],
-      ['md', 'gap-6', 'Medium'],
-      ['lg', 'gap-10', 'Large'],
-      ['xl', 'gap-16', 'Extra large'],
+      ['none', 'gap-0',  'None'],
+      ['sm',   'gap-3',  'Small  (12px)'],
+      ['md',   'gap-6',  'Medium (24px)'],
+      ['lg',   'gap-10', 'Large  (40px)'],
+      ['xl',   'gap-16', 'XL     (64px)'],
     ]),
   },
   {
     key: 'gapX',
     displayName: 'Horizontal space between items',
     choices: choices([
-      ['none', 'gap-x-0', 'None'],
-      ['sm', 'gap-x-3', 'Small'],
-      ['md', 'gap-x-6', 'Medium'],
-      ['lg', 'gap-x-10', 'Large'],
-      ['xl', 'gap-x-16', 'Extra large'],
+      ['none', 'gap-x-0',  'None'],
+      ['sm',   'gap-x-3',  'Small  (12px)'],
+      ['md',   'gap-x-6',  'Medium (24px)'],
+      ['lg',   'gap-x-10', 'Large  (40px)'],
+      ['xl',   'gap-x-16', 'XL     (64px)'],
     ]),
   },
   {
     key: 'gapY',
     displayName: 'Vertical space between items',
     choices: choices([
-      ['none', 'gap-y-0', 'None'],
-      ['sm', 'gap-y-3', 'Small'],
-      ['md', 'gap-y-6', 'Medium'],
-      ['lg', 'gap-y-10', 'Large'],
-      ['xl', 'gap-y-16', 'Extra large'],
+      ['none', 'gap-y-0',  'None'],
+      ['sm',   'gap-y-3',  'Small  (12px)'],
+      ['md',   'gap-y-6',  'Medium (24px)'],
+      ['lg',   'gap-y-10', 'Large  (40px)'],
+      ['xl',   'gap-y-16', 'XL     (64px)'],
     ]),
   },
   {
     key: 'gridCols',
-    displayName: 'Number of columns (grid)',
+    displayName: 'Number of columns (grid only)',
     choices: choices([
       ['none', 'grid-cols-none', 'None'],
       ['1', 'grid-cols-1', '1'],
@@ -430,7 +450,7 @@ export const CONTAINER_UTILITIES: Utility[] = [
   },
   {
     key: 'gridRows',
-    displayName: 'Number of rows (grid)',
+    displayName: 'Number of rows (grid only)',
     choices: choices([
       ['none', 'grid-rows-none', 'None'],
       ['1', 'grid-rows-1', '1'],
@@ -444,7 +464,7 @@ export const CONTAINER_UTILITIES: Utility[] = [
   },
   {
     key: 'autoFlow',
-    displayName: 'Auto-placement flow (grid)',
+    displayName: 'Auto-placement flow (grid only)',
     choices: choices([
       ['row', 'grid-flow-row', 'Row'],
       ['col', 'grid-flow-col', 'Column'],
@@ -455,7 +475,7 @@ export const CONTAINER_UTILITIES: Utility[] = [
   },
   {
     key: 'autoCols',
-    displayName: 'Auto column size (grid)',
+    displayName: 'Auto column size (grid only)',
     choices: choices([
       ['auto', 'auto-cols-auto', 'Auto'],
       ['min', 'auto-cols-min', 'Fit content (min)'],
@@ -465,7 +485,7 @@ export const CONTAINER_UTILITIES: Utility[] = [
   },
   {
     key: 'autoRows',
-    displayName: 'Auto row size (grid)',
+    displayName: 'Auto row size (grid only)',
     choices: choices([
       ['auto', 'auto-rows-auto', 'Auto'],
       ['min', 'auto-rows-min', 'Fit content (min)'],
@@ -533,16 +553,17 @@ export const ITEM_UTILITIES: Utility[] = [
     key: 'span',
     displayName: 'Width',
     choices: choices([
-      ['full', 'md:basis-full', 'Full width'],
-      ['twoThird', 'md:basis-2/3', 'Two-thirds'],
-      ['half', 'md:basis-1/2', 'Half'],
-      ['third', 'md:basis-1/3', 'One-third'],
-      ['quarter', 'md:basis-1/4', 'Quarter'],
+      ['full',         'md:basis-full', 'Full width'],
+      ['threeQuarter', 'md:basis-3/4',  'Three-quarters'],
+      ['twoThird',     'md:basis-2/3',  'Two-thirds'],
+      ['half',         'md:basis-1/2',  'Half'],
+      ['third',        'md:basis-1/3',  'One-third'],
+      ['quarter',      'md:basis-1/4',  'Quarter'],
     ]),
   },
   {
     key: 'colSpan',
-    displayName: 'Columns to span (grid)',
+    displayName: 'Columns to span (grid only)',
     choices: choices([
       ['1', 'col-span-1', '1'],
       ['2', 'col-span-2', '2'],
@@ -562,7 +583,7 @@ export const ITEM_UTILITIES: Utility[] = [
   },
   {
     key: 'colStart',
-    displayName: 'Start at column (grid)',
+    displayName: 'Start at column (grid only)',
     choices: choices([
       ['1', 'col-start-1', '1'],
       ['2', 'col-start-2', '2'],
@@ -582,7 +603,7 @@ export const ITEM_UTILITIES: Utility[] = [
   },
   {
     key: 'colEnd',
-    displayName: 'End at column (grid)',
+    displayName: 'End at column (grid only)',
     choices: choices([
       ['1', 'col-end-1', '1'],
       ['2', 'col-end-2', '2'],
@@ -602,7 +623,7 @@ export const ITEM_UTILITIES: Utility[] = [
   },
   {
     key: 'rowSpan',
-    displayName: 'Rows to span (grid)',
+    displayName: 'Rows to span (grid only)',
     choices: choices([
       ['1', 'row-span-1', '1'],
       ['2', 'row-span-2', '2'],
@@ -616,7 +637,7 @@ export const ITEM_UTILITIES: Utility[] = [
   },
   {
     key: 'rowStart',
-    displayName: 'Start at row (grid)',
+    displayName: 'Start at row (grid only)',
     choices: choices([
       ['1', 'row-start-1', '1'],
       ['2', 'row-start-2', '2'],
@@ -630,7 +651,7 @@ export const ITEM_UTILITIES: Utility[] = [
   },
   {
     key: 'rowEnd',
-    displayName: 'End at row (grid)',
+    displayName: 'End at row (grid only)',
     choices: choices([
       ['1', 'row-end-1', '1'],
       ['2', 'row-end-2', '2'],
@@ -644,7 +665,7 @@ export const ITEM_UTILITIES: Utility[] = [
   },
   {
     key: 'justifySelf',
-    displayName: 'Own horizontal align (grid)',
+    displayName: 'Own horizontal align (grid only)',
     choices: choices([
       ['auto', 'justify-self-auto', 'Auto'],
       ['start', 'justify-self-start', 'Start'],
@@ -667,7 +688,7 @@ export const ITEM_UTILITIES: Utility[] = [
   },
   {
     key: 'placeSelf',
-    displayName: 'Own placement (grid shortcut)',
+    displayName: 'Own placement (grid only)',
     choices: choices([
       ['auto', 'place-self-auto', 'Auto'],
       ['start', 'place-self-start', 'Start'],
@@ -685,20 +706,30 @@ export const ITEM_UTILITIES: Utility[] = [
  * sections, so this pseudo-grouping is the closest available. `sortOrder` is
  * assigned from group + array order; `startOrder` lets a component prepend its
  * own bespoke settings first.
+ *
+ * Every select setting gets a leading `_` choice ("—") as its first option.
+ * The CMS initialises each setting to the first choice when a template is first
+ * applied; without this sentinel it would pick the first *real* choice and emit
+ * that class on every element even though the author never touched the setting.
+ * `resolveClasses` treats `_` as "not set" and falls back to component defaults.
  */
 export function buildSettings(groups: UtilityGroup[], startOrder = 0): Settings {
   const settings: Settings = {};
   let order = startOrder;
   for (const { label, utilities } of groups) {
     for (const util of utilities) {
+      const editor = util.editor ?? 'select';
       let choiceOrder = 1;
       const builtChoices: SettingDef['choices'] = {};
+      if (editor === 'select') {
+        builtChoices['unset'] = { displayName: '—', sortOrder: 0 };
+      }
       for (const [choiceKey, choice] of Object.entries(util.choices)) {
         builtChoices[choiceKey] = { displayName: choice.displayName, sortOrder: choiceOrder++ };
       }
       settings[util.key] = {
         displayName: label ? `${label} · ${util.displayName}` : util.displayName,
-        editor: util.editor ?? 'select',
+        editor,
         sortOrder: order++,
         choices: builtChoices,
       };
@@ -712,6 +743,10 @@ export function buildSettings(groups: UtilityGroup[], startOrder = 0): Settings 
  * value is `displaySettings[key]` (falling back to `defaults[key]`); when that
  * value maps to a known choice, its literal class is emitted. Unset utilities
  * contribute nothing, so an unconfigured element stays clean.
+ *
+ * `_` is treated as "not set" — the CMS initialises selects to this sentinel so
+ * that a freshly-applied template emits only the component's hardcoded defaults,
+ * not every first choice in the catalog.
  */
 export function resolveClasses(
   groups: UtilityGroup[],
@@ -722,9 +757,10 @@ export function resolveClasses(
   for (const { utilities } of groups) {
     for (const util of utilities) {
       const raw = ds?.[util.key];
-      const value = raw === undefined || raw === '' ? defaults[util.key] : String(raw);
+      // '_' is the "not set" sentinel; treat it the same as undefined.
+      const value = (raw === undefined || raw === '' || raw === 'unset') ? defaults[util.key] : String(raw);
       const choice = value ? util.choices[value] : undefined;
-      if (choice) out.push(choice.class);
+      if (choice?.class) out.push(choice.class);
     }
   }
   return out.join(' ');

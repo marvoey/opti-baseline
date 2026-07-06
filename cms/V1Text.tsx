@@ -1,5 +1,6 @@
 import { contentType, displayTemplate, type ContentProps } from '@optimizely/cms-sdk';
 import { getPreviewUtils } from '@optimizely/cms-sdk/react/server';
+import { faker } from '@faker-js/faker';
 
 /**
  * V1: Text — the atomic text primitive of the design system. A single `Text`
@@ -40,11 +41,11 @@ export const V1TextDefault = displayTemplate({
       displayName: 'Variant',
       sortOrder: 0,
       choices: {
-        eyebrow: { displayName: 'Eyebrow (pill)', sortOrder: 1 },
+        eyebrow: { displayName: 'Eyebrow (pill)', sortOrder: 5 },
         display: { displayName: 'Display (H1)', sortOrder: 2 },
         heading: { displayName: 'Heading (H2)', sortOrder: 3 },
         title: { displayName: 'Title (H3)', sortOrder: 4 },
-        body: { displayName: 'Body', sortOrder: 5 },
+        body: { displayName: 'Body', sortOrder: 1 },
         caption: { displayName: 'Caption', sortOrder: 6 },
       },
     },
@@ -105,6 +106,17 @@ const ALIGN: Record<Align, string> = {
   right: 'text-right',
 };
 
+const PLACEHOLDER_FN: Record<Variant, () => string> = {
+  eyebrow:  () => faker.lorem.words(2),
+  display:  () => faker.lorem.words(5),
+  heading:  () => faker.lorem.words(4),
+  title:    () => faker.lorem.words(3),
+  body:     () => faker.lorem.sentence(),
+  caption:  () => faker.lorem.words(4),
+};
+
+const placeholder = (variant: Variant) => PLACEHOLDER_FN[variant]?.() ?? faker.lorem.words(4);
+
 type Props = {
   content: ContentProps<typeof V1TextContentType>;
   displaySettings?: ContentProps<typeof V1TextDefault>;
@@ -126,7 +138,7 @@ export default function V1Text({ content, displaySettings }: Props) {
 
   return (
     <Tag {...pa(block)} className={className}>
-      <span {...pa('Text')}>{content.Text}</span>
+      <span {...pa('Text')}>{content.Text || placeholder(variant)}</span>
     </Tag>
   );
 }
