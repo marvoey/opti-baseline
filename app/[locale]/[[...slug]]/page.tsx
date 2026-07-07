@@ -31,15 +31,20 @@ const loadContent = cache(async (locale: string, slug: string[]) => {
   // Scope to this site's hostname so a shared root path ("/") resolves to THIS
   // site's page rather than another site indexed at the same path.
   const host = await siteOrigin();
-  let content = await client.getContentByPath(path, { host });
+  let content;
+  try {
+    content = await client.getContentByPath(path, { host });
 
-  if (!content?.[0]) {
-    // Default locale: content under the site start page is indexed clean
-    // ("/vb-demo/"), but content elsewhere keeps the locale prefix
-    // ("/en/vb-demo/") — try the prefixed form before giving up.
-    // Non-default locale: fall back to the default-locale version when this page
-    // hasn't been translated/published yet (so it renders instead of 404ing).
-    content = await client.getContentByPath(isDefault ? prefixedPath : cleanPath, { host });
+    if (!content?.[0]) {
+      // Default locale: content under the site start page is indexed clean
+      // ("/vb-demo/"), but content elsewhere keeps the locale prefix
+      // ("/en/vb-demo/") — try the prefixed form before giving up.
+      // Non-default locale: fall back to the default-locale version when this page
+      // hasn't been translated/published yet (so it renders instead of 404ing).
+      content = await client.getContentByPath(isDefault ? prefixedPath : cleanPath, { host });
+    }
+  } catch {
+    return undefined;
   }
   return content?.[0];
 });
