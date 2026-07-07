@@ -3,41 +3,45 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #1a1a1a;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-roboto);
   --font-mono: var(--font-geist-mono);
 
   /*
    * ┌──────────────────────────────────────────────────────────────────────┐
-   * │  REBRAND HERE.  This is the whole colour theme for the site.           │
-   * │  The Tailwind `blue-*` scale is remapped, so chrome and blocks that    │
-   * │  use `bg-blue-950`, `text-blue-800`, etc. all reskin when you edit     │
-   * │  these ~11 hex values. Set blue-950 = your darkest brand colour and    │
-   * │  blue-800 = your primary; the rest are tints/shades between.           │
+   * │  REBRAND HERE.  This is the whole colour theme for the site.          │
+   * │  The Tailwind `blue-*` scale is remapped to the Progressive brand.    │
+   * │  blue-800 = primary nav/buttons; blue-950 = footer/dark sections.     │
    * └──────────────────────────────────────────────────────────────────────┘
-   * Neutral default palette (a generic blue) — replace with the demo brand.
+   * Progressive Insurance palette
    */
-  --color-blue-950: #0b1f33; /* darkest — footer / hero background */
-  --color-blue-900: #14365a;
-  --color-blue-800: #1d5b9c; /* primary — buttons / links */
-  --color-blue-700: #2470bd;
-  --color-blue-600: #2e86d6; /* accent fill */
-  --color-blue-500: #4499e0;
-  --color-blue-400: #6fb3ea; /* light accent */
-  --color-blue-300: #9bccf1;
-  --color-blue-200: #c4e1f7;
-  --color-blue-100: #e1f0fc;
-  --color-blue-50: #f0f8fe; /* light wash */
+  --color-blue-950: #001a6e; /* darkest — footer / hero background */
+  --color-blue-900: #002e7a;
+  --color-blue-800: #0077b3; /* primary — Progressive brand blue, nav bar, buttons */
+  --color-blue-700: #0068a0;
+  --color-blue-600: #0090cc; /* links / secondary interactive */
+  --color-blue-500: #1aa8db;
+  --color-blue-400: #4dc0e8; /* light accent */
+  --color-blue-300: #80d4f1;
+  --color-blue-200: #b3e5f7;
+  --color-blue-100: #e0f4fb;
+  --color-blue-50:  #f0fafd; /* light wash */
 
-  /* Named brand tokens for direct use in custom components. */
-  --color-brand: #1d5b9c;
-  --color-brand-dark: #0b1f33;
-  --color-brand-accent: #6fb3ea;
+  /* Progressive green — savings badges and discount callouts */
+  --color-green-700: #007a3d;
+  --color-green-600: #009644;
+  --color-green-500: #00a651;
+  --color-green-100: #e6f9ef;
+
+  /* Named brand tokens */
+  --color-brand:        #0077b3;
+  --color-brand-dark:   #001a6e;
+  --color-brand-accent: #00a651; /* Progressive savings green */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -50,5 +54,4 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }

@@ -11,62 +11,64 @@ type NavLink = { label: string; href: string };
 type FooterColumn = { heading: string; links: NavLink[] };
 
 export const siteConfig = {
-  /** Used for the document <title> fallback and the logo alt text. */
-  name: 'Demo Site',
-  /** Default browser-tab title (per-page titles override via CMS MetaTitle). */
-  title: 'Demo Site',
-  /** Default meta description. */
-  description: 'A reference Optimizely CMS + Next.js demo site.',
+  name: 'Progressive',
+  title: 'Car Insurance | Progressive',
+  description: 'Get a free car insurance quote and join over 37 million drivers who trust Progressive.',
 
-  /** Header logo (place the asset in /public). */
   logoSrc: '/logo.svg',
-  logoAlt: 'Demo Site',
+  logoAlt: 'Progressive Insurance',
 
-  /** Top utility bar. */
   topNavLinks: [
-    { label: 'For Business', href: '#' },
-    { label: 'For Partners', href: '#' },
-    { label: 'Support', href: '#' },
+    { label: 'Claims', href: '#' },
+    { label: 'Resources & tools', href: '#' },
+    { label: 'About us', href: '#' },
   ] satisfies NavLink[],
-  phone: '1-800-000-0000',
+  phone: '1-855-347-3749',
 
-  /** Primary header navigation. */
   mainNavLinks: [
-    { label: 'Products', href: '#' },
-    { label: 'Solutions', href: '#' },
-    { label: 'Resources', href: '/services' },
-    { label: 'About', href: '/locations' },
+    { label: 'Insurance & more', href: '#' },
+    { label: 'Claims', href: '#' },
+    { label: 'Resources & tools', href: '#' },
+    { label: 'About us', href: '#' },
   ] satisfies NavLink[],
-  /** Header call-to-action button. */
-  primaryCta: { label: 'Get Started', href: '#' } satisfies NavLink,
-  /** Account / login button label. */
-  accountLabel: 'Sign In',
+  primaryCta: { label: 'Get a quote', href: '/demo' } satisfies NavLink,
+  accountLabel: 'Log In',
 
-  /** Footer. */
-  footerTagline:
-    'A reference base for building Optimizely CMS demos on Next.js. Replace this copy in lib/siteConfig.ts.',
+  footerTagline: 'Protecting what matters most to you since 1937. The nation\'s largest car insurance provider.',
   footerColumns: [
     {
-      heading: 'Product',
+      heading: 'Products',
       links: [
-        { label: 'Overview', href: '#' },
-        { label: 'Features', href: '#' },
-        { label: 'Pricing', href: '#' },
+        { label: 'Car insurance', href: '#' },
+        { label: 'Home insurance', href: '#' },
+        { label: 'Renters insurance', href: '#' },
+        { label: 'Motorcycle insurance', href: '#' },
+        { label: 'Boat insurance', href: '#' },
       ],
     },
     {
-      heading: 'Resources',
+      heading: 'Claims',
       links: [
-        { label: 'Docs', href: '#' },
-        { label: 'Blog', href: '#' },
+        { label: 'File a claim', href: '#' },
+        { label: 'Track a claim', href: '#' },
+        { label: 'Roadside assistance', href: '#' },
+        { label: 'Glass repair', href: '#' },
+      ],
+    },
+    {
+      heading: 'Company',
+      links: [
+        { label: 'About Progressive', href: '#' },
+        { label: 'Investor relations', href: '#' },
         { label: 'Careers', href: '#' },
+        { label: 'Newsroom', href: '#' },
       ],
     },
   ] satisfies FooterColumn[],
-  footerLegal: `© ${'2026'} Demo Site. All rights reserved.`,
+  footerLegal: `© ${'2026'} Progressive Casualty Insurance Company. All rights reserved.`,
   footerLegalLinks: [
-    { label: 'Privacy', href: '#' },
-    { label: 'Terms', href: '#' },
+    { label: 'Privacy Policy', href: '#' },
+    { label: 'Terms of Use', href: '#' },
+    { label: 'Accessibility', href: '#' },
   ] satisfies NavLink[],
 } as const;
-
