@@ -5,7 +5,6 @@
 import { LOCALES, DEFAULT_LOCALE, type Locale } from './locales.generated';
 
 export { LOCALES, DEFAULT_LOCALE };
-export type { Locale };
 
 /** Route segments of all non-default locales (e.g. ["fr", "sv", "ko", ...]). */
 export const LOCALE_SEGMENTS: string[] = LOCALES.map((l) => l.routeSegment).filter(Boolean);

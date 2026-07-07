@@ -13,7 +13,7 @@ const REQUIRED = ['OPTIMIZELY_GRAPH_SINGLE_KEY'] as const;
 
 type RequiredKey = (typeof REQUIRED)[number];
 
-export type Env = {
+type Env = {
   OPTIMIZELY_GRAPH_SINGLE_KEY: string;
   /** Optional — the SDK defaults to https://cg.optimizely.com/content/v2. */
   OPTIMIZELY_GRAPH_GATEWAY: string | undefined;
