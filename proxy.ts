@@ -31,6 +31,11 @@ export function proxy(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
   const seg = firstSegment(pathname);
 
+  // Root → redirect to the demo page.
+  if (pathname === '/') {
+    return NextResponse.redirect(new URL('/demo', request.url));
+  }
+
   // Default-locale prefix is visible → redirect to the clean path (canonical/SEO).
   //   /en/vb-demo → /vb-demo
   if (seg === DEFAULT_LOCALE) {
