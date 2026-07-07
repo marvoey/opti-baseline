@@ -22,7 +22,25 @@ type Props = {
  */
 async function Page({ searchParams }: Props) {
   const params = (await searchParams) as unknown as PreviewParams;
-  const content = await getClient().getPreviewContent(params);
+  let content;
+  try {
+    content = await getClient().getPreviewContent(params);
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    return (
+      <div className="flex min-h-screen items-center justify-center p-8 text-center">
+        <div>
+          <p className="text-lg font-semibold text-red-600">Preview unavailable</p>
+          <p className="mt-2 max-w-md text-sm text-gray-500">
+            The Graph schema is out of sync. Run{' '}
+            <code className="rounded bg-gray-100 px-1 py-0.5 font-mono">npm run config:push</code>{' '}
+            then reload.
+          </p>
+          <p className="mt-3 font-mono text-xs text-gray-400">{message}</p>
+        </div>
+      </div>
+    );
+  }
 
   const injectorSrc = new URL(
     '/util/javascript/communicationinjector.js',
