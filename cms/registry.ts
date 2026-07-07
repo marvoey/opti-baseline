@@ -9,6 +9,11 @@ import { requireEnv } from '@/lib/env';
 import ExperiencePage, { ExperiencePageContentType } from './ExperiencePage';
 import Page, { PageContentType } from './Page';
 import RichText, { RichTextContentType } from './RichText';
+import MediaBlock, { MediaBlockContentType } from './MediaBlock';
+import ActionBlock, { ActionBlockContentType } from './ActionBlock';
+import { NavigationNodeContentType } from './NavigationNode';
+import WayfindingBlock, { WayfindingBlockContentType } from './WayfindingBlock';
+import CardBlock, { CardBlockContentType } from './CardBlock';
 
 /**
  * Single configuration + registration point for the Optimizely SDK.
@@ -44,6 +49,11 @@ export const registeredContentTypes = [
   PageContentType,
   // Blocks
   RichTextContentType,
+  MediaBlockContentType,
+  ActionBlockContentType,
+  NavigationNodeContentType,
+  WayfindingBlockContentType,
+  CardBlockContentType,
 ];
 
 initContentTypeRegistry(registeredContentTypes);
@@ -55,6 +65,10 @@ initReactComponentRegistry({
     ExperiencePage,
     Page,
     // Blocks (resolver key === content-type key)
-    RichTextBlock: RichText,
+    ProseBlock: RichText,
+    MediaBlock,
+    ActionBlock,
+    WayfindingBlock,
+    CardBlock,
   },
 });

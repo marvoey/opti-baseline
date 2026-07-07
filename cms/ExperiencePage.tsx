@@ -10,7 +10,7 @@ import { ComponentWrapper } from './wrappers';
 export const ExperiencePageContentType = contentType({
   key: 'ExperiencePage',
   baseType: '_experience',
-  displayName: 'Experience Page (v1)',
+  displayName: 'v2: Experience Page',
   description: 'A routable page composed visually in the Visual Builder.',
   mayContainTypes: ['ExperiencePage', 'Page'],
   properties: {},

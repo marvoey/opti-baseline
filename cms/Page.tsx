@@ -2,6 +2,10 @@ import { contentType, type ContentProps } from '@optimizely/cms-sdk';
 import { OptimizelyComponent, getPreviewUtils } from '@optimizely/cms-sdk/react/server';
 
 import { RichTextContentType } from './RichText';
+import { MediaBlockContentType } from './MediaBlock';
+import { ActionBlockContentType } from './ActionBlock';
+import { WayfindingBlockContentType } from './WayfindingBlock';
+import { CardBlockContentType } from './CardBlock';
 
 /**
  * Page — a fixed-layout Page (`_page`). The body is a `Content` area: an ordered
@@ -11,7 +15,7 @@ import { RichTextContentType } from './RichText';
 export const PageContentType = contentType({
   key: 'Page',
   baseType: '_page',
-  displayName: 'Page',
+  displayName: 'v2: Page',
   description: 'A page built from an ordered list of content blocks.',
   mayContainTypes: ['ExperiencePage', 'Page'],
   properties: {
@@ -28,7 +32,13 @@ export const PageContentType = contentType({
       isLocalized: true,
       items: {
         type: 'content',
-        allowedTypes: [RichTextContentType],
+        allowedTypes: [
+          RichTextContentType,
+          MediaBlockContentType,
+          ActionBlockContentType,
+          WayfindingBlockContentType,
+          CardBlockContentType,
+        ],
         restrictedTypes: [],
       },
     },
