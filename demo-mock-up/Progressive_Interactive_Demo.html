@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progressive & Optimizely Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        progBlue: '#007BC7',
+                        progDarkBlue: '#004A8F',
+                        progAccent: '#F3F4F6',
+                        optiRed: '#E1261C'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .fade-in { animation: fadeIn 0.4s ease-out forwards; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .typing-dot {
+            width: 6px;
+            height: 6px;
+            background-color: #9CA3AF;
+            border-radius: 50%;
+            display: inline-block;
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800 h-screen flex flex-col overflow-hidden font-sans">
+
+    <!-- Top Navigation -->
+    <header class="bg-white border-b border-gray-200 h-16 flex items-center justify-between px-6 shrink-0 z-10 relative shadow-sm">
+        <div class="flex items-center gap-4">
+            <!-- Simulated Logo -->
+            <div class="text-progBlue font-bold text-2xl tracking-tight italic">PROGRESSIVE</div>
+            <span class="text-gray-400 font-light text-xl">|</span>
+            <span class="text-gray-600 font-medium" id="app-title">Consultant Workspace</span>
+        </div>
+        <div class="flex items-center gap-4">
+            <button id="toggle-view-btn" onclick="toggleView()" class="bg-gray-800 hover:bg-gray-700 text-white text-sm font-semibold py-2 px-4 rounded transition hidden shadow">
+                Switch to CMS View
+            </button>
+            <div class="w-8 h-8 rounded-full bg-progBlue text-white flex items-center justify-center font-bold text-sm">
+                SO
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 flex overflow-hidden relative">
+        
+        <!-- ========================================== -->
+        <!-- VIEW 1: CONTACT CENTER (FRONT-END MAGIC) -->
+        <!-- ========================================== -->
+        <div id="contact-center-view" class="flex w-full h-full">
+            <!-- Customer Context Sidebar -->
+            <div class="w-1/3 bg-white border-r border-gray-200 p-6 flex flex-col">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-lg font-bold text-gray-800">Active Call</h2>
+                    <span class="bg-red-100 text-red-700 text-xs font-bold px-2 py-1 rounded animate-pulse">03:42</span>
+                </div>
+                
+                <div class="bg-progAccent rounded-lg p-4 mb-6">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center text-gray-600 font-bold">JD</div>
+                        <div>
+                            <h3 class="font-bold text-gray-900">John Doe</h3>
+                            <p class="text-sm text-gray-500">Orlando, Florida</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 space-y-2">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-500">Products</span>
+                            <span class="font-semibold text-gray-800">Home & Auto Bundle</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-500">Policy Tier</span>
+                            <span class="font-semibold text-gray-800">Platinum</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-500">Status</span>
+                            <span class="font-semibold text-green-600">Active</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-sm font-bold text-gray-500 uppercase tracking-wider mb-3">Call Intent Prediction</h3>
+                    <div class="bg-blue-50 border border-blue-100 rounded p-3 text-sm text-progDarkBlue">
+                        <strong>Weather Event:</strong> Recent severe hail storms reported in customer's zip code. Likely filing a claim or inquiring about coverage.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Opal Copilot Area -->
+            <div class="w-2/3 bg-gray-50 flex flex-col">
+                <div class="p-4 border-b border-gray-200 bg-white flex items-center gap-2 shadow-sm z-10">
+                    <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    <h2 class="font-bold text-gray-800">Opal Knowledge Assistant</h2>
+                </div>
+                
+                <div id="chat-container" class="flex-1 overflow-y-auto p-6 space-y-6 pb-12">
+                    <!-- Initial Welcome Message -->
+                    <div class="flex gap-4">
+                        <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center shrink-0">
+                            <svg class="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                        <div class="bg-white border border-gray-200 rounded-lg p-4 shadow-sm max-w-2xl">
+                            <p class="text-gray-700">Hi Sarah, I see you're speaking with John Doe in Florida. How can I assist you with his bundled policy today?</p>
+                            
+                            <div id="suggested-prompts" class="mt-4 space-y-2">
+                                <button onclick="triggerScenario()" class="w-full text-left bg-gray-50 hover:bg-progBlue hover:text-white border border-gray-200 transition-colors p-3 rounded text-sm text-gray-700 flex justify-between items-center group shadow-sm">
+                                    <span>"Does his auto or home policy cover hail damage to his car parked in the driveway, and what is the FL deductible?"</span>
+                                    <svg class="w-4 h-4 opacity-0 group-hover:opacity-100" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chat Input -->
+                <div class="p-4 bg-white border-t border-gray-200 shrink-0">
+                    <div class="relative">
+                        <input type="text" id="chat-input" placeholder="Select a prompt above to start..." class="w-full pl-4 pr-12 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-progBlue focus:border-transparent transition-all" disabled>
+                        <button id="send-btn" class="absolute right-3 top-3 text-gray-400 hover:text-progBlue transition-colors" disabled>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- VIEW 2: OPTIMIZELY CMS (BACK-END GOVERNANCE) -->
+        <!-- ========================================== -->
+        <div id="cms-view" class="hidden w-full h-full bg-white flex">
+            <!-- Sidebar -->
+            <div class="w-64 bg-gray-900 text-gray-300 flex flex-col shrink-0">
+                <div class="p-4 border-b border-gray-800">
+                    <div class="font-bold text-white mb-1">Optimizely CMS SaaS</div>
+                    <div class="text-xs text-gray-500">Commercial Lines Workspace</div>
+                </div>
+                <div class="p-4 flex-1 overflow-y-auto">
+                    <div class="text-xs font-bold uppercase tracking-wider text-gray-600 mb-3">Content Tree</div>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-center gap-2 text-white bg-gray-800 p-2 rounded">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                            Auto Coverages
+                        </li>
+                        <li class="pl-6 flex flex-col gap-2 mt-1">
+                            <div class="flex items-center gap-2 text-gray-400 hover:text-white cursor-pointer">Collision</div>
+                            <div class="flex items-center gap-2 text-progBlue font-bold cursor-pointer">
+                                Comprehensive (Hail)
+                            </div>
+                            <div class="flex items-center gap-2 text-gray-400 hover:text-white cursor-pointer">Liability</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Main Editor -->
+            <div class="flex-1 flex flex-col overflow-hidden bg-gray-50">
+                <!-- Toolbar -->
+                <div class="h-14 bg-white border-b border-gray-200 flex items-center justify-between px-6 shrink-0">
+                    <div class="flex items-center gap-4">
+                        <h2 class="font-bold text-lg text-gray-800">Comprehensive Coverage - Hail</h2>
+                        <span class="bg-green-100 text-green-800 text-xs font-bold px-2 py-1 rounded">Published</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="text-sm text-gray-600 flex items-center gap-2">
+                            <span class="font-medium">Variation:</span>
+                            <select class="border border-gray-300 rounded px-2 py-1 bg-white focus:outline-none focus:ring-1 focus:ring-progBlue">
+                                <option>Generic (Master)</option>
+                                <option selected>Florida</option>
+                                <option>Texas</option>
+                            </select>
+                        </div>
+                        <button class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-1.5 rounded text-sm font-medium transition">Edit</button>
+                    </div>
+                </div>
+
+                <!-- Editor Surface -->
+                <div class="flex-1 overflow-y-auto p-8">
+                    <div class="max-w-3xl mx-auto space-y-6">
+                        <!-- AI Info Box -->
+                        <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6 flex gap-3">
+                            <svg class="w-6 h-6 text-progBlue shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <div>
+                                <h4 class="font-bold text-progBlue text-sm">AI Readiness Check</h4>
+                                <p class="text-sm text-gray-600 mt-1">This structured content is optimized for Opal RAG. Tagging and variation logic are passing validation.</p>
+                            </div>
+                        </div>
+
+                        <!-- Structured Fields -->
+                        <div class="bg-white border border-gray-200 rounded-lg shadow-sm">
+                            <div class="p-4 border-b border-gray-100 bg-gray-50 flex justify-between items-center rounded-t-lg">
+                                <h3 class="font-semibold text-gray-700">Metadata & Tags</h3>
+                                <span class="text-xs text-gray-400">Inherited from Master</span>
+                            </div>
+                            <div class="p-4 flex gap-2">
+                                <span class="bg-gray-100 border border-gray-200 text-gray-600 text-xs px-2 py-1 rounded">LOB: Auto</span>
+                                <span class="bg-gray-100 border border-gray-200 text-gray-600 text-xs px-2 py-1 rounded">Peril: Weather/Hail</span>
+                                <span class="bg-gray-100 border border-gray-200 text-gray-600 text-xs px-2 py-1 rounded">Platform: All</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-white border border-gray-200 rounded-lg shadow-sm">
+                            <div class="p-4 border-b border-gray-100 bg-gray-50 flex justify-between items-center rounded-t-lg">
+                                <h3 class="font-semibold text-gray-700">Definition</h3>
+                                <span class="text-xs text-gray-400">Inherited from Master</span>
+                            </div>
+                            <div class="p-4">
+                                <p class="text-gray-700 text-sm">Hail damage to an insured vehicle is covered under the Comprehensive portion of the auto policy, regardless of where the vehicle is parked (including home driveways).</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white border-2 border-progBlue rounded-lg shadow-sm relative">
+                            <div class="absolute -top-3 left-4 bg-progBlue text-white text-xs font-bold px-2 py-1 rounded">Local Override Applied</div>
+                            <div class="p-4 border-b border-gray-100 bg-blue-50 flex justify-between items-center rounded-t-lg pt-6">
+                                <h3 class="font-semibold text-gray-900">Deductible Limit (Florida)</h3>
+                                <span class="text-xs text-progBlue font-medium">Overriding Master</span>
+                            </div>
+                            <div class="p-4">
+                                <p class="text-gray-700 text-sm font-medium">As per FL Statute 627.706:</p>
+                                <p class="text-gray-900 mt-2">Deductibles for hail damage on comprehensive claims are fixed at <span class="bg-yellow-100 font-bold px-1">$500 minimum</span> unless a specific <span class="border-b-2 border-dashed border-progBlue">glass-only breakage</span> occurs.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        const chatContainer = document.getElementById('chat-container');
+        const suggestedPrompts = document.getElementById('suggested-prompts');
+        const toggleBtn = document.getElementById('toggle-view-btn');
+        const chatInput = document.getElementById('chat-input');
+        const sendBtn = document.getElementById('send-btn');
+        let currentView = 'contact-center';
+
+        function simulateTyping(text, callback) {
+            chatInput.disabled = false;
+            chatInput.placeholder = "";
+            chatInput.classList.remove('bg-gray-50');
+            chatInput.classList.add('bg-white', 'shadow-inner', 'text-progDarkBlue', 'font-medium');
+            
+            let i = 0;
+            let speed = 35; // typing speed (ms per char)
+            
+            function typeChar() {
+                if (i < text.length) {
+                    chatInput.value += text.charAt(i);
+                    i++;
+                    setTimeout(typeChar, speed);
+                } else {
+                    setTimeout(() => {
+                        chatInput.value = '';
+                        chatInput.disabled = true;
+                        chatInput.classList.remove('text-progDarkBlue', 'font-medium');
+                        chatInput.placeholder = "Opal is working...";
+                        callback();
+                    }, 500); // brief pause before simulating submit
+                }
+            }
+            typeChar();
+        }
+
+        function triggerScenario() {
+            // Hide suggested prompts
+            suggestedPrompts.style.display = 'none';
+
+            // 1. Add User Message
+            const userMsg = document.createElement('div');
+            userMsg.className = 'flex gap-4 flex-row-reverse fade-in';
+            userMsg.innerHTML = `
+                <div class="w-8 h-8 rounded-full bg-gray-800 text-white flex items-center justify-center shrink-0 text-sm font-bold">SO</div>
+                <div class="bg-progBlue text-white rounded-lg p-4 shadow-sm max-w-2xl">
+                    <p>Does his auto or home policy cover hail damage to his car parked in the driveway, and what is the FL deductible?</p>
+                </div>
+            `;
+            chatContainer.appendChild(userMsg);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+
+            // 2. Add Typing Indicator
+            setTimeout(() => {
+                const typingMsg = document.createElement('div');
+                typingMsg.id = 'typing-indicator';
+                typingMsg.className = 'flex gap-4 fade-in';
+                typingMsg.innerHTML = `
+                    <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center shrink-0">
+                        <svg class="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <div class="bg-white border border-gray-200 rounded-lg p-4 shadow-sm flex items-center gap-1">
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                    </div>
+                `;
+                chatContainer.appendChild(typingMsg);
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+
+                // 3. Show Final Answer
+                setTimeout(() => {
+                    document.getElementById('typing-indicator').remove();
+                    
+                    const answerMsg = document.createElement('div');
+                    answerMsg.className = 'flex gap-4 fade-in';
+                    answerMsg.innerHTML = `
+                        <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center shrink-0">
+                            <svg class="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                        <div class="bg-white border border-gray-200 rounded-lg p-5 shadow-sm max-w-2xl">
+                            <h4 class="font-bold text-gray-900 mb-2">Coverage Found: Auto Policy</h4>
+                            <p class="text-gray-700 text-sm mb-4">Hail damage to an insured vehicle is covered under the <strong>Comprehensive portion of the auto policy</strong>, regardless of where the vehicle is parked (including home driveways). It is not covered by the Homeowners policy.</p>
+                            
+                            <h4 class="font-bold text-gray-900 mb-2 mt-4">Florida Deductible</h4>
+                            <p class="text-gray-700 text-sm mb-4">Because the customer is in Florida, the statutory deductible for hail damage on comprehensive claims is a <strong>$500 minimum</strong> unless a specific glass-only breakage occurs.</p>
+                            
+                            <!-- Citations -->
+                            <div class="mt-4 pt-4 border-t border-gray-100">
+                                <p class="text-xs text-gray-500 uppercase tracking-wider font-bold mb-2">Sources</p>
+                                <div class="flex gap-2">
+                                    <span class="inline-flex items-center gap-1 bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded cursor-pointer hover:bg-gray-200 transition border border-gray-200">
+                                        <svg class="w-3 h-3 text-progBlue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                        Auto Comprehensive (FL Override)
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    chatContainer.appendChild(answerMsg);
+                    chatContainer.scrollTop = chatContainer.scrollHeight;
+
+                    // Reveal the magic "Switch to CMS" button so they can see it early
+                    setTimeout(() => {
+                        toggleBtn.classList.remove('hidden');
+                        toggleBtn.classList.add('fade-in');
+                    }, 500);
+
+                    // Auto-simulate typing the follow-up question after a short delay
+                    setTimeout(() => {
+                        simulateTyping("What if the windshield was completely shattered?", () => {
+                            triggerFollowUp("What if the windshield was completely shattered?");
+                        });
+                    }, 2500);
+
+                }, 1500);
+            }, 400);
+        }
+
+        function triggerFollowUp(questionText) {
+            // 1. Add User Message
+            const userMsg = document.createElement('div');
+            userMsg.className = 'flex gap-4 flex-row-reverse fade-in';
+            userMsg.innerHTML = `
+                <div class="w-8 h-8 rounded-full bg-gray-800 text-white flex items-center justify-center shrink-0 text-sm font-bold">SO</div>
+                <div class="bg-progBlue text-white rounded-lg p-4 shadow-sm max-w-2xl">
+                    <p>${questionText}</p>
+                </div>
+            `;
+            chatContainer.appendChild(userMsg);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+
+            // 2. Typing Indicator
+            setTimeout(() => {
+                const typingMsg = document.createElement('div');
+                typingMsg.id = 'typing-indicator-2';
+                typingMsg.className = 'flex gap-4 fade-in';
+                typingMsg.innerHTML = `
+                    <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center shrink-0">
+                        <svg class="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <div class="bg-white border border-gray-200 rounded-lg p-4 shadow-sm flex items-center gap-1">
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                    </div>
+                `;
+                chatContainer.appendChild(typingMsg);
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+
+                // 3. Show Final Answer
+                setTimeout(() => {
+                    document.getElementById('typing-indicator-2').remove();
+                    
+                    const answerMsg = document.createElement('div');
+                    answerMsg.className = 'flex gap-4 fade-in';
+                    answerMsg.innerHTML = `
+                        <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center shrink-0">
+                            <svg class="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                        <div class="bg-white border border-gray-200 rounded-lg p-5 shadow-sm max-w-2xl border-l-4 border-l-progBlue">
+                            <h4 class="font-bold text-gray-900 mb-2">Florida Windshield Exception Applied</h4>
+                            <p class="text-gray-700 text-sm mb-4">Good catch. If the windshield was damaged by the hail, the customer does <strong>not</strong> pay the $500 deductible for the glass repair/replacement.</p>
+                            <p class="text-gray-700 text-sm mb-4">Under <strong>Florida Statute 627.7288</strong>, deductibles do not apply to windshield damage for policies providing comprehensive coverage.</p>
+                            
+                            <div class="mt-4 pt-4 border-t border-gray-100">
+                                <p class="text-xs text-gray-500 uppercase tracking-wider font-bold mb-3">Suggested Next Action</p>
+                                <button id="start-claim-btn" onclick="startClaimWorkflow()" class="bg-progBlue text-white text-xs font-bold px-4 py-2 rounded hover:bg-progDarkBlue transition shadow-sm flex items-center gap-2">
+                                    Start Glass Claim Workflow
+                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    chatContainer.appendChild(answerMsg);
+                    chatContainer.scrollTop = chatContainer.scrollHeight;
+
+                }, 1800);
+            }, 400);
+        }
+
+        // Action when user clicks "Start Glass Claim Workflow"
+        function startClaimWorkflow() {
+            const btn = document.getElementById('start-claim-btn');
+            btn.innerHTML = 'Initiating...';
+            btn.disabled = true;
+            btn.classList.add('opacity-50');
+
+            // Add Typing Indicator
+            const typingMsg = document.createElement('div');
+            typingMsg.id = 'typing-indicator-3';
+            typingMsg.className = 'flex gap-4 fade-in mt-4';
+            typingMsg.innerHTML = `
+                <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center shrink-0">
+                    <svg class="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-4 shadow-sm flex items-center gap-1">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                </div>
+            `;
+            chatContainer.appendChild(typingMsg);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+
+            setTimeout(() => {
+                document.getElementById('typing-indicator-3').remove();
+
+                const formMsg = document.createElement('div');
+                formMsg.className = 'flex gap-4 fade-in';
+                formMsg.innerHTML = `
+                    <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center shrink-0">
+                        <svg class="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <div class="bg-white border border-gray-200 rounded-lg p-5 shadow-sm max-w-2xl w-full">
+                        <div class="flex items-center justify-between mb-4">
+                            <h4 class="font-bold text-gray-900 flex items-center gap-2">
+                                <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                Claim Drafted Successfully
+                            </h4>
+                            <span class="bg-blue-100 text-blue-800 text-xs font-bold px-2 py-1 rounded">FNOL-84729</span>
+                        </div>
+                        
+                        <p class="text-sm text-gray-600 mb-4">I've extracted the customer's policy details and the zero-deductible override. Please confirm before dispatching to our glass network partner.</p>
+
+                        <div class="bg-gray-50 p-4 rounded border border-gray-200 mb-5 text-sm space-y-3">
+                            <div class="flex justify-between border-b border-gray-200 pb-2">
+                                <span class="text-gray-500">Customer:</span> 
+                                <span class="font-medium text-gray-900">John Doe (Orlando, FL)</span>
+                            </div>
+                            <div class="flex justify-between border-b border-gray-200 pb-2">
+                                <span class="text-gray-500">Policy:</span> 
+                                <span class="font-medium text-gray-900">Auto - Platinum Bundle</span>
+                            </div>
+                            <div class="flex justify-between border-b border-gray-200 pb-2">
+                                <span class="text-gray-500">Incident type:</span> 
+                                <span class="font-medium text-gray-900">Comprehensive (Hail)</span>
+                            </div>
+                            <div class="flex justify-between border-b border-gray-200 pb-2">
+                                <span class="text-gray-500">Damage:</span> 
+                                <span class="font-medium text-gray-900">Windshield Shattered</span>
+                            </div>
+                            <div class="flex justify-between pt-1">
+                                <span class="text-gray-500 font-medium">Applied Deductible:</span> 
+                                <span class="font-bold text-green-600 bg-green-100 px-2 py-0.5 rounded">$0.00 (FL Stat 627.7288)</span>
+                            </div>
+                        </div>
+                        <button id="dispatch-btn" onclick="dispatchVendor()" class="w-full bg-green-600 text-white font-bold py-2.5 rounded hover:bg-green-700 transition flex items-center justify-center gap-2">
+                            Confirm & Dispatch Safelite
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"></path></svg>
+                        </button>
+                    </div>
+                `;
+                chatContainer.appendChild(formMsg);
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }, 1200);
+        }
+
+        // Action when user clicks "Confirm & Dispatch Safelite"
+        function dispatchVendor() {
+            const btn = document.getElementById('dispatch-btn');
+            btn.innerHTML = 'Dispatching Network Partner...';
+            btn.disabled = true;
+            btn.classList.add('opacity-50');
+
+            setTimeout(() => {
+                btn.innerHTML = '✔ Safelite Dispatched - SMS sent to Customer';
+                btn.classList.remove('bg-green-600', 'hover:bg-green-700', 'opacity-50');
+                btn.classList.add('bg-green-50', 'text-green-800', 'border', 'border-green-200', 'cursor-default');
+            }, 1000);
+        }
+
+        function toggleView() {
+            const ccView = document.getElementById('contact-center-view');
+            const cmsView = document.getElementById('cms-view');
+            const appTitle = document.getElementById('app-title');
+
+            if (currentView === 'contact-center') {
+                // Switch to CMS
+                ccView.classList.add('hidden');
+                cmsView.classList.remove('hidden');
+                toggleBtn.innerText = 'Back to Contact Center';
+                toggleBtn.classList.replace('bg-gray-800', 'bg-progBlue');
+                appTitle.innerText = 'Knowledge Ops';
+                currentView = 'cms';
+            } else {
+                // Switch to CC
+                cmsView.classList.add('hidden');
+                ccView.classList.remove('hidden');
+                toggleBtn.innerText = 'Switch to CMS View';
+                toggleBtn.classList.replace('bg-progBlue', 'bg-gray-800');
+                appTitle.innerText = 'Consultant Workspace';
+                currentView = 'contact-center';
+            }
+        }
+    </script>
+</body>
+</html>
