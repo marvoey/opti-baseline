@@ -5,7 +5,7 @@ import type { CmsContentTypeProperty } from '@/lib/cms/contentTypes';
  * pages. Pure (no JSX) so this stays a .ts module.
  */
 
-export const BASE_TYPE_ORDER = [
+const BASE_TYPE_ORDER = [
   '_experience',
   '_page',
   '_section',
@@ -55,7 +55,7 @@ export function describeType(prop: CmsContentTypeProperty): string {
  * the CMS ("Code only"), present in the CMS but not modelled in code ("CMS
  * only"), or both ("In codebase").
  */
-export type TypeStatus = { registered: boolean; inCms: boolean };
+type TypeStatus = { registered: boolean; inCms: boolean };
 
 /** Badge label + Tailwind color classes for a content type's status. */
 export function statusBadge({ registered, inCms }: TypeStatus): {

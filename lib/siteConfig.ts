@@ -7,8 +7,8 @@
  * the hex values in app/globals.css. No component edits required.
  */
 
-export type NavLink = { label: string; href: string };
-export type FooterColumn = { heading: string; links: NavLink[] };
+type NavLink = { label: string; href: string };
+type FooterColumn = { heading: string; links: NavLink[] };
 
 export const siteConfig = {
   /** Used for the document <title> fallback and the logo alt text. */
@@ -70,4 +70,3 @@ export const siteConfig = {
   ] satisfies NavLink[],
 } as const;
 
-export type SiteConfig = typeof siteConfig;

@@ -19,7 +19,7 @@ export function findLocale(key: string): Locale | undefined {
  * URL segment for a locale key. Empty string for the default locale (clean URLs)
  * or unknown keys.
  */
-export function localeSegment(key: string): string {
+function localeSegment(key: string): string {
   return findLocale(key)?.routeSegment ?? '';
 }
 

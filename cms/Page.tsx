@@ -1,7 +1,6 @@
 import { contentType, type ContentProps } from '@optimizely/cms-sdk';
 import { OptimizelyComponent, getPreviewUtils } from '@optimizely/cms-sdk/react/server';
 
-import { HeroContentType } from './Hero';
 import { RichTextContentType } from './RichText';
 
 /**
@@ -29,7 +28,7 @@ export const PageContentType = contentType({
       isLocalized: true,
       items: {
         type: 'content',
-        allowedTypes: [HeroContentType, RichTextContentType],
+        allowedTypes: [RichTextContentType],
         restrictedTypes: [],
       },
     },

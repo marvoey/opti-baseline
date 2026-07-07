@@ -40,11 +40,11 @@ export type CmsContentType = {
   properties?: Record<string, CmsContentTypeProperty>;
 };
 
-export type FetchContentTypesResult =
+type FetchContentTypesResult =
   | { ok: true; contentTypes: CmsContentType[] }
   | { ok: false; reason: 'missing-credentials' | 'error'; message: string };
 
-export type FetchContentTypeResult =
+type FetchContentTypeResult =
   | { ok: true; contentType: CmsContentType }
   | {
       ok: false;

@@ -8,7 +8,6 @@ import { requireEnv } from '@/lib/env';
 
 import ExperiencePage, { ExperiencePageContentType } from './ExperiencePage';
 import Page, { PageContentType } from './Page';
-import Hero, { HeroContentType } from './Hero';
 import RichText, { RichTextContentType } from './RichText';
 
 /**
@@ -44,7 +43,6 @@ export const registeredContentTypes = [
   ExperiencePageContentType,
   PageContentType,
   // Blocks
-  HeroContentType,
   RichTextContentType,
 ];
 
@@ -57,7 +55,6 @@ initReactComponentRegistry({
     ExperiencePage,
     Page,
     // Blocks (resolver key === content-type key)
-    HeroBlock: Hero,
     RichTextBlock: RichText,
   },
 });
