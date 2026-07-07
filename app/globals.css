@@ -56,6 +56,14 @@ body {
   color: var(--foreground);
 }
 
+.highlight-active {
+  background-color: #FEF08A;
+  border-color: #EAB308 !important;
+  box-shadow: 0 0 0 2px rgba(234, 179, 8, 0.2);
+  color: #1F2937;
+  border-radius: 0.25rem;
+}
+
 .fade-in {
   animation: fadeIn 0.4s ease-out forwards;
 }

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
 
 const LightningIcon = ({ className }: { className?: string }) => (
   <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -25,7 +26,6 @@ const TypingDots = () => (
 type ClaimPhase = 'idle' | 'typing' | 'drafted' | 'dispatching' | 'dispatched';
 
 export default function ProgressiveInteractiveDemoPage() {
-  const [view, setView] = useState<'contact-center' | 'cms'>('contact-center');
   const [step, setStep] = useState(0);
   const [showToggleBtn, setShowToggleBtn] = useState(false);
   const [inputValue, setInputValue] = useState('');
@@ -93,8 +93,6 @@ export default function ProgressiveInteractiveDemoPage() {
     }
   }, [claimPhase]);
 
-  const toggleView = () => setView(v => (v === 'contact-center' ? 'cms' : 'contact-center'));
-
   const dispatchVendor = () => {
     setClaimPhase('dispatching');
     setTimeout(() => setClaimPhase('dispatched'), 1000);
@@ -108,22 +106,16 @@ export default function ProgressiveInteractiveDemoPage() {
         <div className="flex items-center gap-4">
           <div className="text-[#007BC7] font-bold text-2xl tracking-tight italic">PROGRESSIVE</div>
           <span className="text-gray-400 font-light text-xl">|</span>
-          <span className="text-gray-600 font-medium">
-            {view === 'contact-center' ? 'Consultant Workspace' : 'Knowledge Ops'}
-          </span>
+          <span className="text-gray-600 font-medium">Consultant Workspace</span>
         </div>
         <div className="flex items-center gap-4">
           {showToggleBtn && (
-            <button
-              onClick={toggleView}
-              className={`fade-in text-white text-sm font-semibold py-2 px-4 rounded transition shadow ${
-                view === 'contact-center'
-                  ? 'bg-gray-800 hover:bg-gray-700'
-                  : 'bg-[#007BC7] hover:bg-[#004A8F]'
-              }`}
+            <Link
+              href="/demo/cms"
+              className="fade-in bg-gray-800 hover:bg-gray-700 text-white text-sm font-semibold py-2 px-4 rounded transition shadow"
             >
-              {view === 'contact-center' ? 'Switch to CMS View' : 'Back to Contact Center'}
-            </button>
+              Switch to CMS View
+            </Link>
           )}
           <div className="w-8 h-8 rounded-full bg-[#007BC7] text-white flex items-center justify-center font-bold text-sm">
             SO
@@ -134,8 +126,7 @@ export default function ProgressiveInteractiveDemoPage() {
       {/* Main Content */}
       <main className="flex-1 flex overflow-hidden relative">
 
-        {/* VIEW 1: CONTACT CENTER */}
-        <div className={`${view === 'contact-center' ? 'flex' : 'hidden'} w-full h-full`}>
+        <div className="flex w-full h-full">
 
           {/* Customer Context Sidebar */}
           <div className="w-1/3 bg-white border-r border-gray-200 p-6 flex flex-col">
@@ -404,119 +395,6 @@ export default function ProgressiveInteractiveDemoPage() {
           </div>
         </div>
 
-        {/* VIEW 2: OPTIMIZELY CMS */}
-        <div className={`${view === 'cms' ? 'flex' : 'hidden'} w-full h-full bg-white`}>
-
-          {/* Sidebar */}
-          <div className="w-64 bg-gray-900 text-gray-300 flex flex-col shrink-0">
-            <div className="p-4 border-b border-gray-800">
-              <div className="font-bold text-white mb-1">Optimizely CMS SaaS</div>
-              <div className="text-xs text-gray-500">Commercial Lines Workspace</div>
-            </div>
-            <div className="p-4 flex-1 overflow-y-auto">
-              <div className="text-xs font-bold uppercase tracking-wider text-gray-600 mb-3">Content Tree</div>
-              <ul className="space-y-2 text-sm">
-                <li className="flex items-center gap-2 text-white bg-gray-800 p-2 rounded">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  </svg>
-                  Auto Coverages
-                </li>
-                <li className="pl-6 flex flex-col gap-2 mt-1">
-                  <div className="flex items-center gap-2 text-gray-400 hover:text-white cursor-pointer">Collision</div>
-                  <div className="flex items-center gap-2 text-[#007BC7] font-bold cursor-pointer">Comprehensive (Hail)</div>
-                  <div className="flex items-center gap-2 text-gray-400 hover:text-white cursor-pointer">Liability</div>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Main Editor */}
-          <div className="flex-1 flex flex-col overflow-hidden bg-gray-50">
-            {/* Toolbar */}
-            <div className="h-14 bg-white border-b border-gray-200 flex items-center justify-between px-6 shrink-0">
-              <div className="flex items-center gap-4">
-                <h2 className="font-bold text-lg text-gray-800">Comprehensive Coverage - Hail</h2>
-                <span className="bg-green-100 text-green-800 text-xs font-bold px-2 py-1 rounded">Published</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className="text-sm text-gray-600 flex items-center gap-2">
-                  <span className="font-medium">Variation:</span>
-                  <select
-                    defaultValue="Florida"
-                    className="border border-gray-300 rounded px-2 py-1 bg-white focus:outline-none focus:ring-1 focus:ring-[#007BC7]"
-                  >
-                    <option>Generic (Master)</option>
-                    <option>Florida</option>
-                    <option>Texas</option>
-                  </select>
-                </div>
-                <button className="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-1.5 rounded text-sm font-medium transition">Edit</button>
-              </div>
-            </div>
-
-            {/* Editor Surface */}
-            <div className="flex-1 overflow-y-auto p-8">
-              <div className="max-w-3xl mx-auto space-y-6">
-
-                {/* AI Info Box */}
-                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6 flex gap-3">
-                  <svg className="w-6 h-6 text-[#007BC7] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <div>
-                    <h4 className="font-bold text-[#007BC7] text-sm">AI Readiness Check</h4>
-                    <p className="text-sm text-gray-600 mt-1">This structured content is optimized for Opal RAG. Tagging and variation logic are passing validation.</p>
-                  </div>
-                </div>
-
-                {/* Metadata & Tags */}
-                <div className="bg-white border border-gray-200 rounded-lg shadow-sm">
-                  <div className="p-4 border-b border-gray-100 bg-gray-50 flex justify-between items-center rounded-t-lg">
-                    <h3 className="font-semibold text-gray-700">Metadata & Tags</h3>
-                    <span className="text-xs text-gray-400">Inherited from Master</span>
-                  </div>
-                  <div className="p-4 flex gap-2">
-                    <span className="bg-gray-100 border border-gray-200 text-gray-600 text-xs px-2 py-1 rounded">LOB: Auto</span>
-                    <span className="bg-gray-100 border border-gray-200 text-gray-600 text-xs px-2 py-1 rounded">Peril: Weather/Hail</span>
-                    <span className="bg-gray-100 border border-gray-200 text-gray-600 text-xs px-2 py-1 rounded">Platform: All</span>
-                  </div>
-                </div>
-
-                {/* Definition */}
-                <div className="bg-white border border-gray-200 rounded-lg shadow-sm">
-                  <div className="p-4 border-b border-gray-100 bg-gray-50 flex justify-between items-center rounded-t-lg">
-                    <h3 className="font-semibold text-gray-700">Definition</h3>
-                    <span className="text-xs text-gray-400">Inherited from Master</span>
-                  </div>
-                  <div className="p-4">
-                    <p className="text-gray-700 text-sm">Hail damage to an insured vehicle is covered under the Comprehensive portion of the auto policy, regardless of where the vehicle is parked (including home driveways).</p>
-                  </div>
-                </div>
-
-                {/* Florida Override */}
-                <div className="bg-white border-2 border-[#007BC7] rounded-lg shadow-sm relative">
-                  <div className="absolute -top-3 left-4 bg-[#007BC7] text-white text-xs font-bold px-2 py-1 rounded">Local Override Applied</div>
-                  <div className="p-4 border-b border-gray-100 bg-blue-50 flex justify-between items-center rounded-t-lg pt-6">
-                    <h3 className="font-semibold text-gray-900">Deductible Limit (Florida)</h3>
-                    <span className="text-xs text-[#007BC7] font-medium">Overriding Master</span>
-                  </div>
-                  <div className="p-4">
-                    <p className="text-gray-700 text-sm font-medium">As per FL Statute 627.706:</p>
-                    <p className="text-gray-900 mt-2">
-                      Deductibles for hail damage on comprehensive claims are fixed at{' '}
-                      <span className="bg-yellow-100 font-bold px-1">$500 minimum</span>{' '}
-                      unless a specific{' '}
-                      <span className="border-b-2 border-dashed border-[#007BC7]">glass-only breakage</span>{' '}
-                      occurs.
-                    </p>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </div>
-        </div>
 
       </main>
     </div>
