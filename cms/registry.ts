@@ -30,6 +30,9 @@ import V1Image, { V1ImageContentType, V1ImageDefault } from './V1Image';
 import V1Icon, { V1IconContentType, V1IconDefault } from './V1Icon';
 import V1Divider, { V1DividerContentType, V1DividerDefault } from './V1Divider';
 import V1Section, { V1SectionContentType, V1SectionDefault } from './V1Section';
+import V1MockSection, { V1MockSectionContentType, V1MockSectionDefault } from './V1MockSection';
+import { landingSectionTemplates } from './LandingSectionTemplates';
+import { defaultSectionTemplates } from './DefaultSectionTemplates';
 import { V1RowDefault, V1ColumnDefault } from './flexContainers';
 
 /**
@@ -79,6 +82,7 @@ export const registeredContentTypes = [
   CibcRegulatoryDirectiveContentType,
   // V1 atomic design system: composition shell + atoms.
   V1SectionContentType,
+  V1MockSectionContentType,
   V1TextContentType,
   V1ButtonContentType,
   V1ImageContentType,
@@ -88,12 +92,19 @@ export const registeredContentTypes = [
 
 initContentTypeRegistry(registeredContentTypes);
 
-initDisplayTemplateRegistry([
+/**
+ * The display templates this app defines and pushes to the CMS. Exported so
+ * other surfaces (e.g. the /admin/display-templates inspector) can read the same
+ * source of truth that's registered with the SDK below — mirrors
+ * `registeredContentTypes`.
+ */
+export const registeredDisplayTemplates = [
   CibcHeroDisplayTemplate,
   CibcAssetGridDisplayTemplate,
   // V1 atomic design system. Row/Column target structural nodeTypes; the rest
   // target their content type.
   V1SectionDefault,
+  V1MockSectionDefault,
   V1RowDefault,
   V1ColumnDefault,
   V1TextDefault,
@@ -101,7 +112,15 @@ initDisplayTemplateRegistry([
   V1ImageDefault,
   V1IconDefault,
   V1DividerDefault,
-]);
+  // "Landing Section" — one per targeted content type (all _section types except
+  // V1Section), a code-managed alternative to the base-type OT_LandingSection.
+  ...landingSectionTemplates,
+  // "Section Default" — same per-type scoping, code-managed version of the
+  // base-type DefaultSection.
+  ...defaultSectionTemplates,
+];
+
+initDisplayTemplateRegistry(registeredDisplayTemplates);
 
 initReactComponentRegistry({
   resolver: {
@@ -120,6 +139,7 @@ initReactComponentRegistry({
     // V1 atomic design system. V1Row/V1Column are NOT here — they're passed
     // directly to OptimizelyGridSection by V1Section, not resolved by key.
     V1Section,
+    V1MockSection,
     V1Text,
     V1Button,
     V1Image,

@@ -1,0 +1,74 @@
+{
+  "key": "DefaultGrid",
+  "displayName": "[DO NOT EXPORT]Default",
+  "baseType": "_section",
+  "isDefault": false,
+  "created": "2025-09-19T13:26:33.8654158+00:00",
+  "createdBy": "2393db80deff4343918f0d37e8ad7118",
+  "lastModified": "2025-10-29T13:32:09.5845901+00:00",
+  "lastModifiedBy": "2393db80deff4343918f0d37e8ad7118",
+  "settings": {
+    "gridWidth": {
+      "displayName": "Width",
+      "sortOrder": 10,
+      "choices": {
+        "default": {
+          "displayName": "Default",
+          "sortOrder": 10
+        },
+        "full": {
+          "displayName": "Full width",
+          "sortOrder": 20
+        },
+        "wide": {
+          "displayName": "Wide",
+          "sortOrder": 30
+        },
+        "narrow": {
+          "displayName": "Narrow",
+          "sortOrder": 40
+        }
+      }
+    },
+    "vSpacing": {
+      "displayName": "Vertical spacing",
+      "sortOrder": 20,
+      "choices": {
+        "default": {
+          "displayName": "Default",
+          "sortOrder": 10
+        },
+        "small": {
+          "displayName": "Small",
+          "sortOrder": 20
+        },
+        "large": {
+          "displayName": "Large",
+          "sortOrder": 30
+        }
+      }
+    },
+    "sectionColor": {
+      "displayName": "Color",
+      "sortOrder": 30,
+      "choices": {
+        "default": {
+          "displayName": "Default",
+          "sortOrder": 10
+        },
+        "gray": {
+          "displayName": "Gray",
+          "sortOrder": 20
+        },
+        "black": {
+          "displayName": "Black",
+          "sortOrder": 30
+        },
+        "blue": {
+          "displayName": "Blue",
+          "sortOrder": 40
+        }
+      }
+    }
+  }
+}

@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
+import { ChevronRight } from 'lucide-react';
 import { registeredContentTypes } from '@/cms/registry';
 import { fetchCmsContentTypes, type CmsContentType } from '@/lib/cms/contentTypes';
 import { baseTypeLabel, orderBaseTypes } from './_lib/display';
@@ -133,7 +135,16 @@ export default async function AdminPage({ searchParams }: Props) {
 function PageHeader({ subtitle }: { subtitle: React.ReactNode }) {
   return (
     <header className="mb-10 border-b border-slate-200 pb-6">
-      <h1 className="text-3xl font-semibold tracking-tight text-slate-900">Content Types</h1>
+      <div className="flex items-start justify-between gap-4">
+        <h1 className="text-3xl font-semibold tracking-tight text-slate-900">Content Types</h1>
+        <Link
+          href="/admin/display-templates"
+          className="inline-flex shrink-0 items-center gap-1 text-sm text-slate-500 transition-colors hover:text-slate-900"
+        >
+          Display Templates
+          <ChevronRight size={16} />
+        </Link>
+      </div>
       <p className="mt-2 text-slate-600">{subtitle}</p>
     </header>
   );

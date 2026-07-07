@@ -1,0 +1,106 @@
+{
+  "key": "DefaultSection",
+  "displayName": "Section Default",
+  "baseType": "_section",
+  "isDefault": true,
+  "created": "2025-09-17T16:18:39.8851565+00:00",
+  "createdBy": "marvin.oey@optimizely.com",
+  "lastModified": "2025-10-29T13:32:09.7859972+00:00",
+  "lastModifiedBy": "2393db80deff4343918f0d37e8ad7118",
+  "settings": {
+    "gridWidth": {
+      "displayName": "Width",
+      "sortOrder": 10,
+      "choices": {
+        "default": {
+          "displayName": "Default",
+          "sortOrder": 10
+        },
+        "full": {
+          "displayName": "Full width",
+          "sortOrder": 20
+        },
+        "wide": {
+          "displayName": "Wide",
+          "sortOrder": 30
+        },
+        "narrow": {
+          "displayName": "Narrow",
+          "sortOrder": 40
+        }
+      }
+    },
+    "vSpacing": {
+      "displayName": "Vertical spacing",
+      "sortOrder": 20,
+      "choices": {
+        "default": {
+          "displayName": "Default",
+          "sortOrder": 10
+        },
+        "small": {
+          "displayName": "Small",
+          "sortOrder": 20
+        },
+        "large": {
+          "displayName": "Large",
+          "sortOrder": 30
+        }
+      }
+    },
+    "sectionColor": {
+      "displayName": "Color",
+      "sortOrder": 30,
+      "choices": {
+        "transparent": {
+          "displayName": "Transparent",
+          "sortOrder": 5
+        },
+        "base_100": {
+          "displayName": "Base 100",
+          "sortOrder": 10
+        },
+        "base_200": {
+          "displayName": "Base 200",
+          "sortOrder": 20
+        },
+        "base_300": {
+          "displayName": "Base 300",
+          "sortOrder": 30
+        },
+        "primary": {
+          "displayName": "Primary",
+          "sortOrder": 40
+        },
+        "secondary": {
+          "displayName": "Secondary",
+          "sortOrder": 50
+        },
+        "accent": {
+          "displayName": "Accent",
+          "sortOrder": 60
+        },
+        "neutral": {
+          "displayName": "Neutral",
+          "sortOrder": 70
+        },
+        "info": {
+          "displayName": "Info",
+          "sortOrder": 80
+        },
+        "success": {
+          "displayName": "Success",
+          "sortOrder": 90
+        },
+        "warning": {
+          "displayName": "Warning",
+          "sortOrder": 100
+        },
+        "error": {
+          "displayName": "Error",
+          "sortOrder": 110
+        }
+      }
+    }
+  }
+}
