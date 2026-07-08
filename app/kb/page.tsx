@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import FilterForm from './_components/FilterForm';
+import AnimatedSearchBar from './_components/AnimatedSearchBar';
 import {
   Search, FileText, ChevronLeft, FileDown, Clock, AlertTriangle,
   Car, Truck, Home, Heart, Anchor, Zap, Phone, Mail, Users,
@@ -781,7 +782,7 @@ function HomeView() {
       </div>
       <h1 className="text-3xl font-light text-slate-800 mb-2">Enterprise Knowledge Portal</h1>
       <p className="text-slate-500 mb-8">Search policies, guidelines, and internal memos</p>
-      <SearchBar query="" />
+      <AnimatedSearchBar />
       <div className="mt-12 flex gap-8 text-sm text-blue-600 underline">
         <Link href="/kb?browse=lob">Browse by Line of Business</Link>
         <Link href="/kb?browse=recent">View Recent Updates</Link>

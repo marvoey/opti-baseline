@@ -13,7 +13,8 @@
     "start": "node scripts/run-next.mjs start",
     "lint": "eslint",
     "gen:locales": "node scripts/generate-locales.mjs",
-    "config:push": "npx @optimizely/cms-cli config push optimizely.config.mjs"
+    "config:push": "npx @optimizely/cms-cli config push optimizely.config.mjs",
+    "screenshot": "node scripts/screenshot.mjs"
   },
   "dependencies": {
     "@optimizely/cms-cli": "^2.0.0",
@@ -32,6 +33,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.9",
+    "puppeteer-core": "^25.3.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   },

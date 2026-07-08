@@ -1,57 +1,45 @@
-# Progressive Insurance: Revised Demo Flows (Agentic CMS & Generative UI)
+# Progressive Insurance: Intent-Driven Knowledge Demo Flow
 
 ## 🎯 The Core Reframe
-**"You're not buying a content management system. You're buying seconds — and accuracy — back for every consultant interaction you have."**
+**"We are moving from a 'Search and Read' document repository to 'Intent-Driven Layout Assembly'."**
 
-In alignment with our recent pivot, these demo flows move away from traditional CMS authoring and "Experimentation" and focus entirely on **AI-integrated content assembly** and **Intelligent Enablement Portals**. We are showcasing an *Agentic CMS* that operates on specific intents (Ingest, Assemble, Variant, Retrieve, Simulate) to power a Progressive-audience Generative UI. 
+This demo flow is explicitly structured to contrast the painful "Now" (navigating static documents) with the dynamic "Future" (multi-intent Generative UI powered by an Agentic CMS). 
 
-*(Note: Per current POC guidelines, the "Govern/Review" intent is intentionally excluded from these flows to focus on assembly and front-end generation).*
-
----
-
-## 🎬 Demo 1: The Consultant Flow (Intelligent Enablement Portal)
-*Focus: Generative UI, Opal API Integration, Speed to Resolution (Retrieve/Simulate Intents)*
-
-**The Scenario:** Sarah (Consultant) is on a live call with a Florida customer asking a complex question about commercial auto hail damage. She is using Progressive's existing intranet portal, which is now powered headlessly by the Opal API.
-
-### Act 1: Intent - Contextual Retrieval & Generative UI
-* **The Action:** Sarah types a natural language query into her portal: *"What is the commercial auto hail deductible for a vehicle parked at home in Florida?"*
-* **The Result:** Instead of a list of PDF links, the Opal API instantly returns a **Generative UI component**. It renders a clean, structured mini-dashboard showing the exact Florida deductible, the specific limits, and immediate next steps for the claim.
-* **The Talk Track:** Sarah isn't reading a 10-page document. The Agentic CMS retrieved the exact atomic content blocks (deductible, limits) and the Generative UI assembled them into a context-aware answer. We just saved 4 minutes of handle time.
-
-### Act 2: Intent - Multi-Intent Simulation & Comparison
-* **The Action:** The customer asks, *"What if my business was registered in Georgia?"* Sarah updates her query to compare Florida and Georgia.
-* **The Result:** The Generative UI instantly pivots, presenting a side-by-side comparison matrix of Florida vs. Georgia hail rules. 
-* **The Talk Track:** Because Optimizely stores this as structured variation data (not flat text), the AI can mathematically compare and render it. This eliminates the compliance risk of Sarah accidentally reading the wrong state's policy.
-
-### Act 3: Intent - Source Verification
-* **The Action:** Sarah clicks the "View Source" citation on the Georgia limit.
-* **The Result:** She is deep-linked to the exact block of the canonical Georgia policy.
-* **The Talk Track:** Trust is paramount. The Generative UI isn't hallucinating; it is strictly assembling approved, structured content from the Agentic CMS.
+*(Note: Per current POC guidelines, the "Govern/Review" intent is intentionally excluded to focus entirely on the contrast between static retrieval and dynamic assembly).*
 
 ---
 
-## 🎬 Demo 2: The Authoring Flow (Agentic Content Assembly)
-*Focus: AI-Integrated Content Assembly, Architecture Previewer, Matrix Scaling (Ingest, Assemble, Variant Intents)*
+## 🎬 Act 1: The Pain of the "Now" (The Traditional KB)
+*Focus: Setting the trap. Proving that searching for documents puts the burden of assembly on the consultant.*
 
-**The Scenario:** Marcus (Knowledge Manager) needs to digitize a new Commercial Hail Addendum and scale it across multiple states. He doesn't format text; he commands the Agentic CMS.
+* **The Setup:** We start in the `Traditional_KB_Simulator`. Sarah, a Progressive consultant, is on a live call with a customer. The customer wants to know the commercial auto hail deductible for Florida, and what it would be if they moved their business to Georgia.
+* **The Action (Search):** Sarah types the query into the standard enterprise search bar.
+* **The Result (Blue Links):** The system returns a list of confusingly named PDFs and Word documents. 
+* **The Action (Read):** Sarah clicks the Florida Addendum. She is presented with a 14-page legal PDF.
+* **The Talk Track (The Rational Drowning):** *"Look at this experience. The customer is on hold. Sarah has to hit Ctrl+F, scroll to Section 4, read dense legal text to find the $1,000 limit, and hold that number in her head. Then, she has to hit 'Back', find the Georgia document, and do it again. She is mentally assembling a comparison matrix under pressure. This causes burnout, spikes handle time, and introduces massive compliance risk."*
 
-### Act 1: Intent - Agentic Ingestion 
-* **The Action:** Marcus drags a legacy 15-page PDF into the Opal workspace. He prompts: *"Extract the core coverage limits, exclusions, and definitions from this document and map them to our Commercial Policy structure."*
-* **The Result:** The Agentic CMS parses the document and automatically populates the atomic content fields (Limit = $500, Peril = Hail, LOB = Commercial).
-* **The Talk Track:** Marcus isn't copying and pasting. The AI is doing the heavy lifting of turning unstructured legacy blobs into structured, AI-ready data. This is the migration accelerator.
+---
 
-### Act 2: Intent - AI-Integrated Content Assembly
-* **The Action:** Marcus needs to add standard legal language. He prompts Opal: *"Assemble this new policy by attaching the standard 2026 Commercial Legal Disclaimer."*
-* **The Result:** Opal dynamically links the reusable disclaimer block to the new policy.
-* **The Talk Track:** Content reuse ensures compliance. If Legal updates the disclaimer, it cascades automatically. The AI acts as an assembly engine, ensuring no required pieces are missed.
+## 🎬 Act 2: The Solution (Intelligent Enablement Portal)
+*Focus: Multi-Intent Generative UI, Speed to Resolution, Citation/Trust*
 
-### Act 3: Intent - Matrix Scaling (State Variations)
-* **The Action:** Marcus prompts Opal: *"Generate state variations for Florida and Georgia based on the standard policy, but update Florida's deductible to $1000 and Georgia's to $750."*
-* **The Result:** The CMS automatically spins up the localized variants, inheriting the master content but overriding only the specified fields.
-* **The Talk Track:** Managing 50 state variations is no longer a manual nightmare. The Agentic CMS scales the matrix instantly.
+* **The Setup:** We immediately switch to the new Intelligent Enablement Portal (powered headlessly by Optimizely's Agentic CMS).
+* **The Action (Retrieve Intent):** Sarah types her exact query: *"What is the commercial auto hail deductible for Florida?"*
+* **The Result (Dynamic Layout):** The UI does NOT return a PDF. It instantly assembles a clean, structured mini-dashboard showing the exact $1,000 Florida deductible, pulling from atomic data blocks. 
+* **The Action (Compare Intent):** Sarah types: *"Compare that to Georgia."*
+* **The Result (Layout Shift):** The Generative UI dynamically reframes itself, assembling a side-by-side comparison matrix of Florida vs. Georgia.
+* **The Talk Track:** *"Notice the difference. We didn't give Sarah a document to read. The system understood her intent and dynamically assembled the exact UI layout she needed to resolve the call. No Ctrl+F. No mental math. And because every data point has a 'View Source' citation deep-linking to the exact approved policy block, she can trust it 100%."*
 
-### Act 4: Intent - Architecture Previewer (Simulation)
-* **The Action:** Before stepping away, Marcus opens the **Architecture Previewer**. He types the same query Sarah will use: *"Florida hail deductible."*
-* **The Result:** He sees the exact Generative UI component that Sarah will see in the contact center.
-* **The Talk Track:** Marcus isn't just previewing a webpage; he's simulating the AI output. He can guarantee that the intelligence he just built will render perfectly for the front-line consultant.
+---
+
+## 🎬 Act 3: The Engine (Agentic Content Assembly)
+*Focus: Proving this isn't magic. It requires Marcus (Knowledge Manager) using an Agentic CMS to structure the data.*
+
+* **The Setup:** How does the Generative UI know the exact limits without hallucinating? We go behind the scenes to Optimizely CMS to see Marcus, the Knowledge Manager.
+* **The Action (Ingest Intent):** Marcus drags a legacy 15-page PDF into the Opal workspace. He prompts: *"Ingest this policy. Extract the core coverage limits, exclusions, and deductibles and map them to our structured fields."*
+* **The Result:** The Agentic CMS strips away the "document" formatting and locks the data into pre-approved, atomic fields (Limit = $500, Peril = Hail).
+* **The Talk Track:** *"This is the foundational difference. You can't put a Generative UI over a folder of PDFs. Marcus is using the Agentic CMS to turn unstructured legacy blobs into strict, compliant, atomic data."*
+
+* **The Action (Variant Assembly Intent):** Marcus prompts Opal: *"Generate state variations for Florida and Georgia based on the standard policy, but update Florida's deductible to $1000 and Georgia's to $750."*
+* **The Result:** The CMS scales the matrix instantly, linking reusable legal disclaimers so nothing is out of compliance.
+* **The Talk Track:** *"Because Marcus assembled this as atomic, tagged data variations rather than static pages, the API can query it mathematically. That is what allows the Generative UI in Act 2 to build a perfect comparison matrix on the fly."*
