@@ -40,7 +40,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         {children}
-        {process.env.NODE_ENV !== 'production' && <DevQuickLinks />}
+        <DevQuickLinks />
         {/*
           Optimizely Web Experimentation snippet, loaded via next/script.
 

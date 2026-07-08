@@ -53,29 +53,29 @@ const DOCS = [
   },
 ];
 
-// Extended results shown in the search results page.
-// doc ref points to one of the 4 real DOCS for click-through.
+// Extended results — each has normalized keys for server-side filtering.
+// docRef → one of the 4 real DOCS for click-through into the document viewer.
 const ALL_RESULTS = [
-  { title: 'CommAuto_092_A_v8_FINAL.pdf',                                   date: 'Oct 12, 2025', type: 'PDF',   pages: '142 pp', dept: 'Underwriting',        status: 'active',     lob: 'Commercial Auto',  docRef: '1', excerpt: '…applicable to all states unless otherwise noted in state-specific addendums. For hail and windstorm deductibles, refer to Section 4B, subsection ii…' },
-  { title: 'CommAuto_MasterPolicy_v7_FINAL_USE_THIS_2024.pdf',              date: 'Feb 03, 2024', type: 'PDF',   pages: '138 pp', dept: 'Underwriting',        status: 'superseded', lob: 'Commercial Auto',  docRef: '1', excerpt: '…superseded by v8 as of October 2025. Do not use for new policy quotes. Retained for historical reference only. See CommAuto_092_A_v8…' },
-  { title: 'CommAuto_MasterPolicy_v7_REVISED_MAY2024_DO_NOT_USE.pdf',       date: 'May 15, 2024', type: 'PDF',   pages: '139 pp', dept: 'Underwriting',        status: 'superseded', lob: 'Commercial Auto',  docRef: '1', excerpt: '…interim revision to v7. Note: this version contains an error in Section 4B (hail deductible table for SE states). Superseded. Use v8 final…' },
-  { title: 'CommAuto_092_A_v8_TRACKED_CHANGES_FOR_REVIEW.docx',             date: 'Sep 28, 2025', type: 'Word',  pages: '142 pp', dept: 'Legal',               status: 'draft',      lob: 'Commercial Auto',  docRef: '1', excerpt: '…tracked-changes working document used during legal review cycle prior to v8 ratification. Not for distribution. Final version supersedes this…' },
-  { title: 'FL_State_Exceptions_Commercial_Auto_2024.docx',                 date: 'Jan 04, 2024', type: 'Word',  pages: '14 pp',  dept: 'Underwriting / FL',   status: 'active',     lob: 'Commercial Auto',  docRef: '2', excerpt: '…Florida regulations require specific disclosures for comprehensive coverage including hail. The deductible for Florida commercial auto policies is…' },
-  { title: 'FL_State_Exceptions_Commercial_Auto_2024_REVISED_v2.docx',      date: 'Mar 22, 2024', type: 'Word',  pages: '15 pp',  dept: 'Underwriting / FL',   status: 'superseded', lob: 'Commercial Auto',  docRef: '2', excerpt: '…revised to reflect OIR bulletin 2024-03. Superseded by Jan 2024 original after rollback. Do not distribute. Contact FL underwriting desk…' },
-  { title: 'FL_CommAuto_Exceptions_2023_v3_FINAL.docx',                     date: 'Dec 01, 2023', type: 'Word',  pages: '13 pp',  dept: 'Underwriting / FL',   status: 'superseded', lob: 'Commercial Auto',  docRef: '2', excerpt: '…2023 Florida exceptions, superseded by the January 2024 update. Retained for audit trail purposes. Section 3 (hail) deductible values are no longer current…' },
-  { title: 'Copy_of_FL_Exceptions_2022_OLD_ARCHIVE.docx',                   date: 'Nov 14, 2022', type: 'Word',  pages: '11 pp',  dept: 'Unknown',             status: 'archived',   lob: 'Commercial Auto',  docRef: '2', excerpt: '…2022 Florida exception document. Hail deductible values in this document are incorrect per Q4 2023 memo. Do not use. See current state addendum…' },
-  { title: 'FL_Hail_Deductible_OIR_Bulletin_2024_03.pdf',                   date: 'Mar 08, 2024', type: 'PDF',   pages: '4 pp',   dept: 'Legal & Compliance',  status: 'active',     lob: 'Commercial Auto',  docRef: '2', excerpt: '…Office of Insurance Regulation bulletin regarding mandatory minimum hail deductibles for commercial auto policies effective April 1, 2024…' },
-  { title: 'GA_State_Exceptions_Commercial_Auto_2025.pdf',                  date: 'Mar 15, 2025', type: 'PDF',   pages: '18 pp',  dept: 'Underwriting / GA',   status: 'active',     lob: 'Commercial Auto',  docRef: '3', excerpt: '…Georgia state limits for commercial auto physical damage. Hail deductibles are outlined in the attached matrix. See page 8 for current values…' },
-  { title: 'GA_Addendum_CommAuto_2024_v2_SUPERSEDED.pdf',                   date: 'Apr 12, 2024', type: 'PDF',   pages: '16 pp',  dept: 'Underwriting / GA',   status: 'superseded', lob: 'Commercial Auto',  docRef: '3', excerpt: '…superseded March 2025. Georgia hail deductible updated from $500 to $750 in the current version. This document reflects the old $500 limit…' },
-  { title: 'GA_Addendum_CommAuto_2024_v1_DRAFT.pdf',                        date: 'Jan 08, 2024', type: 'PDF',   pages: '14 pp',  dept: 'Underwriting / GA',   status: 'archived',   lob: 'Commercial Auto',  docRef: '3', excerpt: '…draft version, never ratified. Values in this document were not approved by the GA Commissioner of Insurance. See 2025 final addendum…' },
-  { title: 'INTERNAL_MEMO_Hail_Deductible_Changes_Southeast.msg',           date: 'Aug 22, 2023', type: 'Email', pages: '2 pp',   dept: 'Product',             status: 'active',     lob: 'Commercial Auto',  docRef: '4', excerpt: '…as of Q4 2023, adjusting baseline hail deductibles for FL, GA, and AL. Do not use the old 2022 guidelines. See attached matrix for new values…' },
-  { title: 'FWD_RE_RE_Hail_Deductible_Southeast_Discussion_Aug2023.msg',    date: 'Aug 23, 2023', type: 'Email', pages: '6 pp',   dept: 'Product',             status: 'archived',   lob: 'Commercial Auto',  docRef: '4', excerpt: '…forwarded thread re: SE deductible changes. Contains earlier draft values that were not ratified. Final values in the Aug 22 memo supersede this thread…' },
-  { title: 'HAIL_DEDUCTIBLE_MATRIX_SE_States_2023_Q4_v2.xlsx',              date: 'Nov 01, 2023', type: 'Excel', pages: '1 tab',  dept: 'Product',             status: 'active',     lob: 'Commercial Auto',  docRef: '1', excerpt: '…state-by-state deductible matrix for FL, GA, AL, MS, SC, TN. Values effective Q4 2023. Tab 2 contains pre-2023 historical values for reference…' },
-  { title: 'HAIL_DEDUCTIBLE_MATRIX_SE_States_2023_Q4_v1_DRAFT.xlsx',        date: 'Oct 15, 2023', type: 'Excel', pages: '1 tab',  dept: 'Product',             status: 'archived',   lob: 'Commercial Auto',  docRef: '1', excerpt: '…draft matrix, some values were revised before ratification. v2 is the approved version. FL deductible shown here ($750) was revised upward to $1,000…' },
-  { title: 'State_Exception_Summary_ALL_STATES_CommAuto_2024.xlsx',          date: 'Feb 28, 2024', type: 'Excel', pages: '4 tabs', dept: 'Underwriting',        status: 'active',     lob: 'Commercial Auto',  docRef: '1', excerpt: '…consolidated exception summary across all 50 states plus DC. Hail and windstorm deductibles are on Tab 3 (Physical Damage Exceptions). Last updated Feb 2024…' },
-  { title: 'CommAuto_Hail_Guidelines_Pre2022_ARCHIVED.pdf',                  date: 'Dec 15, 2021', type: 'PDF',   pages: '9 pp',   dept: 'Underwriting',        status: 'archived',   lob: 'Commercial Auto',  docRef: '1', excerpt: '…pre-2022 hail guidelines, archived. Values are no longer valid per Q4 2023 deductible adjustment memo. Retained for historical audit purposes only…' },
-  { title: 'Commercial_Auto_Overview_Training_Deck_2024.pptx',              date: 'Jan 15, 2024', type: 'PPT',   pages: '42 sl',  dept: 'Training',            status: 'active',     lob: 'Commercial Auto',  docRef: '1', excerpt: '…agent training overview for Commercial Auto LOB. Slide 18 covers physical damage deductibles. Note: deductible values on slide 18 reflect pre-Q4 2023 figures…' },
-  { title: 'Legal_Disclaimer_Commercial_2024_REPLACED_BY_2026_VERSION.pdf', date: 'Jan 02, 2024', type: 'PDF',   pages: '3 pp',   dept: 'Legal & Compliance',  status: 'superseded', lob: 'Commercial Auto',  docRef: '1', excerpt: '…2024 commercial legal disclaimer. Replaced by mandatory 2026 disclaimer effective May 2025. Do not attach to new policies. Retained for auditing purposes only…' },
+  { title: 'CommAuto_092_A_v8_FINAL.pdf',                                   date: 'Oct 12, 2025', type: 'PDF',   typeKey: 'pdf',   pages: '142 pp', dept: 'Underwriting',       deptKey: 'underwriting', status: 'active',     stateKey: 'national',  yearKey: '2025',  lob: 'Commercial Auto', docRef: '1', excerpt: '…applicable to all states unless otherwise noted in state-specific addendums. For hail and windstorm deductibles, refer to Section 4B, subsection ii…' },
+  { title: 'CommAuto_MasterPolicy_v7_FINAL_USE_THIS_2024.pdf',              date: 'Feb 03, 2024', type: 'PDF',   typeKey: 'pdf',   pages: '138 pp', dept: 'Underwriting',       deptKey: 'underwriting', status: 'superseded', stateKey: 'national',  yearKey: '2024',  lob: 'Commercial Auto', docRef: '1', excerpt: '…superseded by v8 as of October 2025. Do not use for new policy quotes. Retained for historical reference only. See CommAuto_092_A_v8…' },
+  { title: 'CommAuto_MasterPolicy_v7_REVISED_MAY2024_DO_NOT_USE.pdf',       date: 'May 15, 2024', type: 'PDF',   typeKey: 'pdf',   pages: '139 pp', dept: 'Underwriting',       deptKey: 'underwriting', status: 'superseded', stateKey: 'national',  yearKey: '2024',  lob: 'Commercial Auto', docRef: '1', excerpt: '…interim revision to v7. Note: this version contains an error in Section 4B (hail deductible table for SE states). Superseded. Use v8 final…' },
+  { title: 'CommAuto_092_A_v8_TRACKED_CHANGES_FOR_REVIEW.docx',             date: 'Sep 28, 2025', type: 'Word',  typeKey: 'word',  pages: '142 pp', dept: 'Legal & Compliance', deptKey: 'legal',        status: 'draft',      stateKey: 'national',  yearKey: '2025',  lob: 'Commercial Auto', docRef: '1', excerpt: '…tracked-changes working document used during legal review cycle prior to v8 ratification. Not for distribution. Final version supersedes this…' },
+  { title: 'FL_State_Exceptions_Commercial_Auto_2024.docx',                 date: 'Jan 04, 2024', type: 'Word',  typeKey: 'word',  pages: '14 pp',  dept: 'Underwriting',       deptKey: 'underwriting', status: 'active',     stateKey: 'fl',        yearKey: '2024',  lob: 'Commercial Auto', docRef: '2', excerpt: '…Florida regulations require specific disclosures for comprehensive coverage including hail. The deductible for Florida commercial auto policies is…' },
+  { title: 'FL_State_Exceptions_Commercial_Auto_2024_REVISED_v2.docx',      date: 'Mar 22, 2024', type: 'Word',  typeKey: 'word',  pages: '15 pp',  dept: 'Underwriting',       deptKey: 'underwriting', status: 'superseded', stateKey: 'fl',        yearKey: '2024',  lob: 'Commercial Auto', docRef: '2', excerpt: '…revised to reflect OIR bulletin 2024-03. Superseded by Jan 2024 original after rollback. Do not distribute. Contact FL underwriting desk…' },
+  { title: 'FL_CommAuto_Exceptions_2023_v3_FINAL.docx',                     date: 'Dec 01, 2023', type: 'Word',  typeKey: 'word',  pages: '13 pp',  dept: 'Underwriting',       deptKey: 'underwriting', status: 'superseded', stateKey: 'fl',        yearKey: '2023',  lob: 'Commercial Auto', docRef: '2', excerpt: '…2023 Florida exceptions, superseded by the January 2024 update. Retained for audit trail purposes. Section 3 (hail) deductible values are no longer current…' },
+  { title: 'Copy_of_FL_Exceptions_2022_OLD_ARCHIVE.docx',                   date: 'Nov 14, 2022', type: 'Word',  typeKey: 'word',  pages: '11 pp',  dept: 'Unknown',            deptKey: 'unknown',      status: 'archived',   stateKey: 'fl',        yearKey: 'older', lob: 'Commercial Auto', docRef: '2', excerpt: '…2022 Florida exception document. Hail deductible values in this document are incorrect per Q4 2023 memo. Do not use. See current state addendum…' },
+  { title: 'FL_Hail_Deductible_OIR_Bulletin_2024_03.pdf',                   date: 'Mar 08, 2024', type: 'PDF',   typeKey: 'pdf',   pages: '4 pp',   dept: 'Legal & Compliance', deptKey: 'legal',        status: 'active',     stateKey: 'fl',        yearKey: '2024',  lob: 'Commercial Auto', docRef: '2', excerpt: '…Office of Insurance Regulation bulletin regarding mandatory minimum hail deductibles for commercial auto policies effective April 1, 2024…' },
+  { title: 'GA_State_Exceptions_Commercial_Auto_2025.pdf',                  date: 'Mar 15, 2025', type: 'PDF',   typeKey: 'pdf',   pages: '18 pp',  dept: 'Underwriting',       deptKey: 'underwriting', status: 'active',     stateKey: 'ga',        yearKey: '2025',  lob: 'Commercial Auto', docRef: '3', excerpt: '…Georgia state limits for commercial auto physical damage. Hail deductibles are outlined in the attached matrix. See page 8 for current values…' },
+  { title: 'GA_Addendum_CommAuto_2024_v2_SUPERSEDED.pdf',                   date: 'Apr 12, 2024', type: 'PDF',   typeKey: 'pdf',   pages: '16 pp',  dept: 'Underwriting',       deptKey: 'underwriting', status: 'superseded', stateKey: 'ga',        yearKey: '2024',  lob: 'Commercial Auto', docRef: '3', excerpt: '…superseded March 2025. Georgia hail deductible updated from $500 to $750 in the current version. This document reflects the old $500 limit…' },
+  { title: 'GA_Addendum_CommAuto_2024_v1_DRAFT.pdf',                        date: 'Jan 08, 2024', type: 'PDF',   typeKey: 'pdf',   pages: '14 pp',  dept: 'Underwriting',       deptKey: 'underwriting', status: 'archived',   stateKey: 'ga',        yearKey: '2024',  lob: 'Commercial Auto', docRef: '3', excerpt: '…draft version, never ratified. Values in this document were not approved by the GA Commissioner of Insurance. See 2025 final addendum…' },
+  { title: 'INTERNAL_MEMO_Hail_Deductible_Changes_Southeast.msg',           date: 'Aug 22, 2023', type: 'Email', typeKey: 'email', pages: '2 pp',   dept: 'Product',            deptKey: 'product',      status: 'active',     stateKey: 'southeast', yearKey: '2023',  lob: 'Commercial Auto', docRef: '4', excerpt: '…as of Q4 2023, adjusting baseline hail deductibles for FL, GA, and AL. Do not use the old 2022 guidelines. See attached matrix for new values…' },
+  { title: 'FWD_RE_RE_Hail_Deductible_Southeast_Discussion_Aug2023.msg',    date: 'Aug 23, 2023', type: 'Email', typeKey: 'email', pages: '6 pp',   dept: 'Product',            deptKey: 'product',      status: 'archived',   stateKey: 'southeast', yearKey: '2023',  lob: 'Commercial Auto', docRef: '4', excerpt: '…forwarded thread re: SE deductible changes. Contains earlier draft values that were not ratified. Final values in the Aug 22 memo supersede this thread…' },
+  { title: 'HAIL_DEDUCTIBLE_MATRIX_SE_States_2023_Q4_v2.xlsx',              date: 'Nov 01, 2023', type: 'Excel', typeKey: 'excel', pages: '1 tab',  dept: 'Product',            deptKey: 'product',      status: 'active',     stateKey: 'southeast', yearKey: '2023',  lob: 'Commercial Auto', docRef: '1', excerpt: '…state-by-state deductible matrix for FL, GA, AL, MS, SC, TN. Values effective Q4 2023. Tab 2 contains pre-2023 historical values for reference…' },
+  { title: 'HAIL_DEDUCTIBLE_MATRIX_SE_States_2023_Q4_v1_DRAFT.xlsx',        date: 'Oct 15, 2023', type: 'Excel', typeKey: 'excel', pages: '1 tab',  dept: 'Product',            deptKey: 'product',      status: 'archived',   stateKey: 'southeast', yearKey: '2023',  lob: 'Commercial Auto', docRef: '1', excerpt: '…draft matrix, some values were revised before ratification. v2 is the approved version. FL deductible shown here ($750) was revised upward to $1,000…' },
+  { title: 'State_Exception_Summary_ALL_STATES_CommAuto_2024.xlsx',          date: 'Feb 28, 2024', type: 'Excel', typeKey: 'excel', pages: '4 tabs', dept: 'Underwriting',       deptKey: 'underwriting', status: 'active',     stateKey: 'national',  yearKey: '2024',  lob: 'Commercial Auto', docRef: '1', excerpt: '…consolidated exception summary across all 50 states plus DC. Hail and windstorm deductibles are on Tab 3 (Physical Damage Exceptions). Last updated Feb 2024…' },
+  { title: 'CommAuto_Hail_Guidelines_Pre2022_ARCHIVED.pdf',                  date: 'Dec 15, 2021', type: 'PDF',   typeKey: 'pdf',   pages: '9 pp',   dept: 'Underwriting',       deptKey: 'underwriting', status: 'archived',   stateKey: 'national',  yearKey: 'older', lob: 'Commercial Auto', docRef: '1', excerpt: '…pre-2022 hail guidelines, archived. Values are no longer valid per Q4 2023 deductible adjustment memo. Retained for historical audit purposes only…' },
+  { title: 'Commercial_Auto_Overview_Training_Deck_2024.pptx',              date: 'Jan 15, 2024', type: 'PPT',   typeKey: 'ppt',   pages: '42 sl',  dept: 'Training',           deptKey: 'training',     status: 'active',     stateKey: 'national',  yearKey: '2024',  lob: 'Commercial Auto', docRef: '1', excerpt: '…agent training overview for Commercial Auto LOB. Slide 18 covers physical damage deductibles. Note: deductible values on slide 18 reflect pre-Q4 2023 figures…' },
+  { title: 'Legal_Disclaimer_Commercial_2024_REPLACED_BY_2026_VERSION.pdf', date: 'Jan 02, 2024', type: 'PDF',   typeKey: 'pdf',   pages: '3 pp',   dept: 'Legal & Compliance', deptKey: 'legal',        status: 'superseded', stateKey: 'national',  yearKey: '2024',  lob: 'Commercial Auto', docRef: '1', excerpt: '…2024 commercial legal disclaimer. Replaced by mandatory 2026 disclaimer effective May 2025. Do not attach to new policies. Retained for auditing purposes only…' },
 ];
 
 const STATUS_STYLES: Record<string, { bg: string; text: string; label: string }> = {
@@ -92,41 +92,50 @@ const FILE_COLORS: Record<string, string> = {
 
 const SIDEBAR_FACETS = [
   {
-    label: 'Document Type',
+    label: 'Document Type', paramKey: 'ftype',
     options: [
-      { label: 'PDF', count: 9 }, { label: 'Word Doc', count: 5 },
-      { label: 'Excel / Spreadsheet', count: 3 }, { label: 'Email / .msg Archive', count: 2 },
-      { label: 'PowerPoint', count: 1 },
+      { label: 'PDF',                  value: 'pdf'   },
+      { label: 'Word Doc',             value: 'word'  },
+      { label: 'Excel / Spreadsheet',  value: 'excel' },
+      { label: 'Email / .msg Archive', value: 'email' },
+      { label: 'PowerPoint',           value: 'ppt'   },
     ],
   },
   {
-    label: 'Status',
+    label: 'Status', paramKey: 'fstatus',
     options: [
-      { label: 'Active', count: 7 }, { label: 'Superseded', count: 7 },
-      { label: 'Archived', count: 5 }, { label: 'Draft', count: 1 },
+      { label: 'Active',     value: 'active'     },
+      { label: 'Superseded', value: 'superseded' },
+      { label: 'Archived',   value: 'archived'   },
+      { label: 'Draft',      value: 'draft'       },
     ],
   },
   {
-    label: 'State / Region',
+    label: 'State / Region', paramKey: 'fstate',
     options: [
-      { label: 'National / All States', count: 7 }, { label: 'Florida (FL)', count: 5 },
-      { label: 'Georgia (GA)', count: 4 }, { label: 'Southeast Multi-State', count: 3 },
-      { label: 'Alabama (AL)', count: 1 },
+      { label: 'National / All States',  value: 'national'  },
+      { label: 'Florida (FL)',            value: 'fl'        },
+      { label: 'Georgia (GA)',            value: 'ga'        },
+      { label: 'Southeast Multi-State',   value: 'southeast' },
     ],
   },
   {
-    label: 'Year Modified',
+    label: 'Year Modified', paramKey: 'fyear',
     options: [
-      { label: '2025–2026', count: 3 }, { label: '2024', count: 9 },
-      { label: '2023', count: 6 }, { label: '2022 or earlier', count: 2 },
+      { label: '2025–2026',     value: '2025'  },
+      { label: '2024',          value: '2024'  },
+      { label: '2023',          value: '2023'  },
+      { label: '2022 or earlier', value: 'older' },
     ],
   },
   {
-    label: 'Owning Department',
+    label: 'Owning Department', paramKey: 'fdept',
     options: [
-      { label: 'Underwriting', count: 7 }, { label: 'Legal & Compliance', count: 3 },
-      { label: 'Product', count: 4 }, { label: 'Training', count: 1 },
-      { label: 'Unknown', count: 1 },
+      { label: 'Underwriting',      value: 'underwriting' },
+      { label: 'Legal & Compliance', value: 'legal'        },
+      { label: 'Product',           value: 'product'      },
+      { label: 'Training',          value: 'training'     },
+      { label: 'Unknown',           value: 'unknown'      },
     ],
   },
 ];
@@ -780,39 +789,94 @@ function HomeView() {
   );
 }
 
-function FacetSection({ label, options }: { label: string; options: { label: string; count: number }[] }) {
+type ActiveFilters = { ftype: string[]; fstatus: string[]; fstate: string[]; fyear: string[]; fdept: string[] };
+
+function filterResults(filters: ActiveFilters) {
+  return ALL_RESULTS.filter(r => {
+    if (filters.ftype.length   && !filters.ftype.includes(r.typeKey))    return false;
+    if (filters.fstatus.length && !filters.fstatus.includes(r.status))   return false;
+    if (filters.fstate.length  && !filters.fstate.includes(r.stateKey))  return false;
+    if (filters.fyear.length   && !filters.fyear.includes(r.yearKey))    return false;
+    if (filters.fdept.length   && !filters.fdept.includes(r.deptKey))    return false;
+    return true;
+  });
+}
+
+function optionCount(facetKey: keyof ActiveFilters, value: string, filters: ActiveFilters) {
+  // Count using all OTHER active filters so numbers reflect current narrowing
+  const others = { ...filters, [facetKey]: [] };
+  return filterResults(others).filter(r => {
+    const map: Record<keyof ActiveFilters, string> = {
+      ftype: r.typeKey, fstatus: r.status, fstate: r.stateKey, fyear: r.yearKey, fdept: r.deptKey,
+    };
+    return map[facetKey] === value;
+  }).length;
+}
+
+function FacetSection({
+  label, paramKey, options, active, query, filters,
+}: {
+  label: string;
+  paramKey: keyof ActiveFilters;
+  options: { label: string; value: string }[];
+  active: string[];
+  query: string;
+  filters: ActiveFilters;
+}) {
   return (
     <div className="border-b border-slate-100 pb-4">
-      <button className="flex items-center justify-between w-full text-xs font-bold text-slate-700 uppercase tracking-wide mb-3">
+      <p className="flex items-center justify-between text-xs font-bold text-slate-700 uppercase tracking-wide mb-3">
         {label}
         <ChevronDown size={13} className="text-slate-400" />
-      </button>
+      </p>
       <div className="space-y-2">
-        {options.map(o => (
-          <label key={o.label} className="flex items-center gap-2.5 cursor-pointer group">
-            <input type="checkbox" className="w-3.5 h-3.5 rounded border-slate-300 text-blue-600 cursor-pointer" />
-            <span className="text-xs text-slate-600 group-hover:text-slate-900 flex-1">{o.label}</span>
-            <span className="text-xs text-slate-400">({o.count})</span>
-          </label>
-        ))}
+        {options.map(o => {
+          const count = optionCount(paramKey, o.value, filters);
+          const checked = active.includes(o.value);
+          return (
+            <label key={o.value} className={`flex items-center gap-2.5 cursor-pointer group ${count === 0 && !checked ? 'opacity-40' : ''}`}>
+              <input
+                type="checkbox"
+                name={paramKey}
+                value={o.value}
+                defaultChecked={checked}
+                disabled={count === 0 && !checked}
+                className="w-3.5 h-3.5 rounded border-slate-300 text-blue-600 cursor-pointer"
+              />
+              <span className="text-xs text-slate-600 group-hover:text-slate-900 flex-1">{o.label}</span>
+              <span className="text-xs text-slate-400">({count})</span>
+            </label>
+          );
+        })}
       </div>
     </div>
   );
 }
 
-function ResultsView({ query }: { query: string }) {
+function ResultsView({ query, filters }: { query: string; filters: ActiveFilters }) {
+  const results = filterResults(filters);
+  const hasFilters = Object.values(filters).some(f => f.length > 0);
+  const clearHref = `/kb?q=${encodeURIComponent(query)}`;
+
   return (
     <div className="min-h-screen bg-white">
       <BrowseHeader
         crumb={`Search: "${query}"`}
-        subtitle={`1,248 documents matched your query across all lines of business.`}
+        subtitle={`${hasFilters ? results.length + ' filtered' : '1,248'} documents matched your query across all lines of business.`}
       />
 
       {/* Sort / count bar */}
       <div className="border-b border-slate-100 bg-slate-50 px-8 py-2.5 flex items-center justify-between text-xs text-slate-500">
         <span>
-          Showing <strong className="text-slate-700">1–20</strong> of <strong className="text-slate-700">1,248</strong> results
-          {' '}— did you mean: <Link href={`/kb?q=${encodeURIComponent(query + ' deductible')}`} className="text-blue-500 hover:underline">{query} deductible</Link>?
+          Showing{' '}
+          <strong className="text-slate-700">1–{results.length}</strong> of{' '}
+          <strong className="text-slate-700">{hasFilters ? results.length : 1248}</strong> results
+          {!hasFilters && <>
+            {' '}— did you mean:{' '}
+            <Link href={`/kb?q=${encodeURIComponent(query + ' deductible')}`} className="text-blue-500 hover:underline">
+              {query} deductible
+            </Link>?
+          </>}
         </span>
         <div className="flex items-center gap-4">
           <span className="text-slate-400">Sort by:</span>
@@ -823,9 +887,9 @@ function ResultsView({ query }: { query: string }) {
             <option>File Name A–Z</option>
             <option>File Size</option>
           </select>
-          <button className="flex items-center gap-1 text-slate-400 hover:text-slate-600">
+          <span className="flex items-center gap-1 text-slate-400">
             <Table2 size={14} /> List
-          </button>
+          </span>
         </div>
       </div>
 
@@ -833,64 +897,93 @@ function ResultsView({ query }: { query: string }) {
 
         {/* ── Sidebar ── */}
         <aside className="w-64 shrink-0 border-r border-slate-100 px-5 py-6 space-y-5">
-          <div className="flex items-center gap-2 text-xs font-bold text-slate-600 uppercase tracking-wide mb-1">
-            <SlidersHorizontal size={13} /> Filter Results
+          <div className="flex items-center justify-between mb-1">
+            <span className="flex items-center gap-2 text-xs font-bold text-slate-600 uppercase tracking-wide">
+              <SlidersHorizontal size={13} /> Filter Results
+            </span>
+            {hasFilters && (
+              <Link href={clearHref} className="text-xs text-blue-500 hover:underline">
+                Clear all
+              </Link>
+            )}
           </div>
-          {SIDEBAR_FACETS.map(f => <FacetSection key={f.label} label={f.label} options={f.options} />)}
-          <button className="w-full text-xs text-blue-500 hover:underline text-left pt-1">
-            Clear all filters
-          </button>
+          <FilterForm>
+            <input type="hidden" name="q" value={query} />
+            {SIDEBAR_FACETS.map(f => (
+              <FacetSection
+                key={f.label}
+                label={f.label}
+                paramKey={f.paramKey as keyof ActiveFilters}
+                options={f.options}
+                active={filters[f.paramKey as keyof ActiveFilters]}
+                query={query}
+                filters={filters}
+              />
+            ))}
+          </FilterForm>
         </aside>
 
         {/* ── Results ── */}
         <main className="flex-1 px-8 py-6">
-          <div className="space-y-0 divide-y divide-slate-100">
-            {ALL_RESULTS.map((r, i) => {
-              const st = STATUS_STYLES[r.status];
-              const fc = FILE_COLORS[r.type] ?? 'text-slate-500';
-              return (
-                <div key={i} className="py-4 group">
-                  <div className="flex items-start gap-3">
-                    <FileText size={15} className={`${fc} shrink-0 mt-0.5`} />
-                    <div className="flex-1 min-w-0">
-                      <Link
-                        href={`/kb?q=${encodeURIComponent(query)}&doc=${r.docRef}`}
-                        className="text-sm font-semibold text-blue-600 hover:underline break-all leading-snug"
-                      >
-                        {r.title}
-                      </Link>
-                      <div className="flex flex-wrap items-center gap-3 mt-1 mb-1.5 text-xs text-slate-400">
-                        <span className={`px-1.5 py-0.5 rounded text-xs font-semibold ${st.bg} ${st.text}`}>{st.label}</span>
-                        <span>{r.type} · {r.pages}</span>
-                        <span className="flex items-center gap-1"><Clock size={11} /> {r.date}</span>
-                        <span>{r.dept}</span>
-                        <span className="bg-slate-100 text-slate-500 px-1.5 py-0.5 rounded">{r.lob}</span>
+          {results.length === 0 ? (
+            <div className="text-center py-16 text-slate-400">
+              <FileText size={40} className="mx-auto mb-3 opacity-30" />
+              <p className="font-semibold text-slate-600">No documents match the selected filters.</p>
+              <p className="text-sm mt-1">Try removing a filter or{' '}
+                <Link href={clearHref} className="text-blue-500 hover:underline">clearing all filters</Link>.
+              </p>
+            </div>
+          ) : (
+            <div className="divide-y divide-slate-100">
+              {results.map((r, i) => {
+                const st = STATUS_STYLES[r.status];
+                const fc = FILE_COLORS[r.type] ?? 'text-slate-500';
+                return (
+                  <div key={i} className="py-4">
+                    <div className="flex items-start gap-3">
+                      <FileText size={15} className={`${fc} shrink-0 mt-0.5`} />
+                      <div className="flex-1 min-w-0">
+                        <Link
+                          href={`/kb?q=${encodeURIComponent(query)}&doc=${r.docRef}`}
+                          className="text-sm font-semibold text-blue-600 hover:underline break-all leading-snug"
+                        >
+                          {r.title}
+                        </Link>
+                        <div className="flex flex-wrap items-center gap-3 mt-1 mb-1.5 text-xs text-slate-400">
+                          <span className={`px-1.5 py-0.5 rounded text-xs font-semibold ${st.bg} ${st.text}`}>{st.label}</span>
+                          <span>{r.type} · {r.pages}</span>
+                          <span className="flex items-center gap-1"><Clock size={11} /> {r.date}</span>
+                          <span>{r.dept}</span>
+                          <span className="bg-slate-100 text-slate-500 px-1.5 py-0.5 rounded">{r.lob}</span>
+                        </div>
+                        <p className="text-xs text-slate-500 leading-relaxed">{r.excerpt}</p>
                       </div>
-                      <p className="text-xs text-slate-500 leading-relaxed">{r.excerpt}</p>
                     </div>
                   </div>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Pagination */}
-          <div className="mt-8 pt-6 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-            <span>Page 1 of 63</span>
-            <div className="flex gap-1">
-              {[1,2,3,'…',62,63].map((p, i) => (
-                <button
-                  key={i}
-                  className={`w-7 h-7 rounded text-xs font-medium ${
-                    p === 1 ? 'bg-blue-600 text-white' : 'border border-slate-200 hover:border-blue-400 text-slate-600'
-                  }`}
-                >
-                  {p}
-                </button>
-              ))}
+                );
+              })}
             </div>
-            <span>Showing 20 of 1,248 documents</span>
-          </div>
+          )}
+
+          {/* Pagination — only shown when unfiltered */}
+          {!hasFilters && (
+            <div className="mt-8 pt-6 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+              <span>Page 1 of 63</span>
+              <div className="flex gap-1">
+                {([1,2,3,'…',62,63] as (number|string)[]).map((p, i) => (
+                  <button
+                    key={i}
+                    className={`w-7 h-7 rounded text-xs font-medium ${
+                      p === 1 ? 'bg-blue-600 text-white' : 'border border-slate-200 hover:border-blue-400 text-slate-600'
+                    }`}
+                  >
+                    {p}
+                  </button>
+                ))}
+              </div>
+              <span>Showing 20 of 1,248 documents</span>
+            </div>
+          )}
         </main>
       </div>
     </div>
@@ -955,7 +1048,8 @@ function DocumentView({ doc, query }: { doc: (typeof DOCS)[number]; query: strin
 // ── Page ──────────────────────────────────────────────────────────────────────
 
 export default async function KbPage({ searchParams }: Props) {
-  const { q, doc: docId, browse } = await searchParams;
+  const sp = await searchParams;
+  const { q, doc: docId, browse } = sp;
 
   if (browse === 'lob') return <LobView />;
   if (browse === 'recent') return <RecentView />;
@@ -970,11 +1064,16 @@ export default async function KbPage({ searchParams }: Props) {
     );
   }
 
-  if (q) return (
-    <div className="w-full font-sans border rounded-xl overflow-hidden shadow-2xl">
-      <ResultsView query={q} />
-    </div>
-  );
+  if (q) {
+    const filters: ActiveFilters = {
+      ftype:   toArr(sp.ftype),
+      fstatus: toArr(sp.fstatus),
+      fstate:  toArr(sp.fstate),
+      fyear:   toArr(sp.fyear),
+      fdept:   toArr(sp.fdept),
+    };
+    return <ResultsView query={q} filters={filters} />;
+  }
 
   return (
     <div className="w-full font-sans border rounded-xl overflow-hidden shadow-2xl">
