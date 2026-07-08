@@ -272,7 +272,8 @@ export default function DemoV2Page() {
       {/* Header */}
       <header className="bg-white border-b border-gray-200 px-6 py-4 flex justify-between items-center shadow-sm z-10 shrink-0">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-[#007bc4] rounded flex items-center justify-center text-white font-bold text-xl">P</div>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/logo.svg" alt="Progressive Insurance" className="h-8 w-auto object-contain" />
           <h1 className="text-xl font-bold text-gray-800">Intelligent Enablement Portal</h1>
           <span className="bg-blue-100 text-[#007bc4] text-xs font-semibold px-2 py-1 rounded-full">Live Progressive.com Simulation</span>
         </div>

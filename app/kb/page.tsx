@@ -414,8 +414,10 @@ const AGENT_RESOURCES = [
 
 function ProgressiveLogo() {
   return (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img src="/logo.svg" alt="Progressive Insurance" className="h-full w-auto object-contain" />
+    <Link href="/kb">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/logo.svg" alt="Progressive Insurance" className="h-full w-auto object-contain" />
+    </Link>
   );
 }
 
@@ -814,13 +816,12 @@ function optionCount(facetKey: keyof ActiveFilters, value: string, filters: Acti
 }
 
 function FacetSection({
-  label, paramKey, options, active, query, filters,
+  label, paramKey, options, active, filters,
 }: {
   label: string;
   paramKey: keyof ActiveFilters;
   options: { label: string; value: string }[];
   active: string[];
-  query: string;
   filters: ActiveFilters;
 }) {
   return (
@@ -916,7 +917,6 @@ function ResultsView({ query, filters }: { query: string; filters: ActiveFilters
                 paramKey={f.paramKey as keyof ActiveFilters}
                 options={f.options}
                 active={filters[f.paramKey as keyof ActiveFilters]}
-                query={query}
                 filters={filters}
               />
             ))}
