@@ -59,5 +59,5 @@ export const config = {
   // Run on everything EXCEPT API, Next internals, the preview/admin routes, and
   // any path containing a dot (static assets like /logo.svg). The preview and
   // admin routes live outside [locale] and must not be rewritten into a locale.
-  matcher: ['/((?!api|_next/static|_next/image|preview|admin|demo|favicon.ico|.*\\..*).*)'],
+  matcher: ['/((?!api|_next/static|_next/image|preview|admin|demo-v2(?:/|$)|demo(?:/|$)|favicon.ico|.*\\..*).*)'],
 };

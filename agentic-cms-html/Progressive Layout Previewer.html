@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Progressive Agentic CMS: Intent to Layout Previewer</title>
+    <title>Progressive Agentic CMS: Architecture Previewer</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -30,6 +30,11 @@
             background-size: 10px 10px;
             background-position: 0 0, 5px 5px;
         }
+        /* Custom scrollbar for better look */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
     </style>
 </head>
 <body class="bg-gray-100 h-screen flex flex-col font-sans text-gray-800 overflow-hidden">
@@ -41,61 +46,69 @@
             <h1 class="text-xl font-bold text-gray-800">Agentic CMS Architecture Previewer</h1>
         </div>
         <div class="text-sm text-gray-500 font-medium bg-gray-100 px-3 py-1 rounded-full">
-            Intent-to-Layout Blueprint mapping
+            Intent-to-Layout & Building Blocks
         </div>
     </header>
 
     <div class="flex flex-1 overflow-hidden">
         
-        <!-- Left Sidebar: Intents -->
+        <!-- Left Sidebar: Selection -->
         <div class="w-1/4 bg-white border-r border-gray-200 p-6 overflow-y-auto z-10 shadow-[4px_0_15px_-3px_rgba(0,0,0,0.05)]">
-            <h2 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4">1. Select AI Intent Trigger</h2>
-            <p class="text-sm text-gray-600 mb-6">In an Agentic CMS, the AI reads the user's intent to determine which layout blueprint to pull from the system.</p>
             
-            <div class="space-y-3" id="intentList">
-                <!-- Buttons injected by JS -->
+            <div class="mb-8">
+                <h2 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4 flex items-center">
+                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    1. AI Intent Triggers
+                </h2>
+                <p class="text-xs text-gray-500 mb-4">Select an intent to see how the AI assembles a layout blueprint.</p>
+                <div class="space-y-3" id="intentList"></div>
             </div>
+
+            <div>
+                <h2 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4 flex items-center">
+                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path></svg>
+                    2. Base Building Blocks
+                </h2>
+                <p class="text-xs text-gray-500 mb-4">The core primitives the AI uses to fill the layout slots.</p>
+                <div class="space-y-3" id="blockListNav"></div>
+            </div>
+
         </div>
 
         <!-- Main Content: Visualization -->
         <div class="w-2/4 bg-gray-50 flex flex-col relative border-r border-gray-200">
-            <div class="p-6 border-b border-gray-200 bg-white">
-                <h2 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">2. Assembled Blueprint</h2>
-                <h3 id="layoutTitle" class="text-xl font-bold text-progblue">Select an Intent</h3>
+            <div class="p-6 border-b border-gray-200 bg-white flex items-center justify-between">
+                <div>
+                    <h2 id="viewCategory" class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Visualization</h2>
+                    <h3 id="layoutTitle" class="text-xl font-bold text-progblue">Select an item</h3>
+                </div>
             </div>
             
             <div class="flex-1 p-8 overflow-y-auto flex items-center justify-center bg-gray-50" id="visualizationArea">
-                <!-- Wireframe visualization injected by JS -->
                 <div class="text-gray-400 flex flex-col items-center">
-                    <svg class="w-12 h-12 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path></svg>
-                    <p>Awaiting intent selection...</p>
+                    <svg class="w-12 h-12 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"></path></svg>
+                    <p>Awaiting selection...</p>
                 </div>
             </div>
         </div>
 
-        <!-- Right Sidebar: Rationale & Components -->
+        <!-- Right Sidebar: Rationale -->
         <div class="w-1/4 bg-white p-6 overflow-y-auto">
-            <h2 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4">3. The "Why" (Agentic Rationale)</h2>
+            <h2 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4">The "Why" (Agentic Logic)</h2>
             
             <div id="rationaleArea" class="hidden fade-in space-y-6">
-                
                 <div>
                     <h3 class="text-sm font-bold text-gray-800 mb-2 border-b pb-1">Progressive Context</h3>
                     <p id="progContext" class="text-sm text-gray-600 leading-relaxed"></p>
                 </div>
-
                 <div>
-                    <h3 class="text-sm font-bold text-gray-800 mb-2 border-b pb-1">Agentic Assembly Logic</h3>
+                    <h3 id="logicHeader" class="text-sm font-bold text-gray-800 mb-2 border-b pb-1">Agentic Assembly Logic</h3>
                     <p id="agenticLogic" class="text-sm text-gray-600 leading-relaxed"></p>
                 </div>
-
                 <div>
-                    <h3 class="text-sm font-bold text-gray-800 mb-3 border-b pb-1">Fetched Content Blocks</h3>
-                    <ul id="blockList" class="space-y-3">
-                        <!-- Blocks injected by JS -->
-                    </ul>
+                    <h3 id="componentsHeader" class="text-sm font-bold text-gray-800 mb-3 border-b pb-1">Fetched Content Blocks</h3>
+                    <ul id="blockList" class="space-y-3"></ul>
                 </div>
-
             </div>
         </div>
 
@@ -265,39 +278,169 @@
             }
         ];
 
+        const blockData = [
+            {
+                id: 'block-prose',
+                title: 'Prose / Typography',
+                description: 'Headlines, body copy, and rich text elements.',
+                exampleQuery: 'Metadata: { "type": "rich-text", "tone": "informative" }',
+                layoutTitle: 'Component: Prose Block',
+                progContext: 'Consultants need clear, readable guidelines. Text must be broken up with appropriate semantic headers to be scannable during a live call.',
+                agenticLogic: 'The AI uses this primitive to inject narrative or extracted answers. It automatically applies formatting rules (like bolding key terms) based on the context metadata without requiring human styling.',
+                blocks: [
+                    { name: 'Semantic Header', desc: 'H1/H2/H3 for document structure' },
+                    { name: 'Paragraph', desc: 'Standard readable body text' },
+                    { name: 'List/Bullets', desc: 'Quick-scan structured items' }
+                ],
+                wireframeHTML: `
+                    <div class="w-full max-w-lg bg-white border border-gray-200 rounded-lg shadow-sm p-8 fade-in flex flex-col space-y-4">
+                        <div class="h-6 bg-gray-800 rounded w-3/4 mb-2"></div>
+                        <div class="h-3 bg-gray-300 rounded w-full"></div>
+                        <div class="h-3 bg-gray-300 rounded w-full"></div>
+                        <div class="h-3 bg-gray-300 rounded w-5/6"></div>
+                        <div class="h-4 bg-gray-600 rounded w-1/2 mt-6 mb-2"></div>
+                        <div class="h-3 bg-gray-300 rounded w-full"></div>
+                        <div class="h-3 bg-gray-300 rounded w-4/5"></div>
+                    </div>
+                `
+            },
+            {
+                id: 'block-action',
+                title: 'Action / Interactive',
+                description: 'Buttons, inputs, and form fields.',
+                exampleQuery: 'Metadata: { "type": "action", "action_id": "email-policy" }',
+                layoutTitle: 'Component: Action Block',
+                progContext: 'Consultants need to trigger workflows (like emailing a policy to a customer or submitting a claim draft) directly from the knowledge portal without switching tools.',
+                agenticLogic: 'The AI provisions action blocks when the workflow requires human input or a transactional step. These blocks are strictly governed by RBAC (Role-Based Access Control) to prevent unauthorized actions.',
+                blocks: [
+                    { name: 'Primary Button', desc: 'Main call-to-action (e.g., "Submit Claim")' },
+                    { name: 'Input Field', desc: 'Data capture with strict validation' }
+                ],
+                wireframeHTML: `
+                    <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm p-8 fade-in flex flex-col space-y-6 items-center">
+                        <div class="w-full border-2 border-gray-200 border-dashed rounded p-3 flex justify-start items-center">
+                            <div class="w-4 h-4 bg-gray-300 rounded-sm mr-2"></div>
+                            <div class="h-3 bg-gray-300 w-1/3 rounded"></div>
+                        </div>
+                        <div class="w-full border border-gray-300 rounded p-3 flex justify-start text-gray-400 text-sm">
+                            Enter customer email...
+                        </div>
+                        <div class="w-full h-12 bg-progblue rounded shadow flex items-center justify-center">
+                            <div class="h-3 bg-white w-1/4 rounded"></div>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                id: 'block-card',
+                title: 'Card / Item Container',
+                description: 'Standardized container for singular entities.',
+                exampleQuery: 'Metadata: { "type": "card", "entity": "policy_update" }',
+                layoutTitle: 'Component: Card Block',
+                progContext: 'When searching for policies or viewing a dashboard, consultants need consistent, bite-sized summaries to quickly decide if they should click for more details.',
+                agenticLogic: 'The AI uses the Card Block in Grid Layouts. It automatically maps the entity\'s metadata (Title, Active Date, State Tags) into the card\'s predefined slots, ensuring visual consistency across all search results.',
+                blocks: [
+                    { name: 'Card Header', desc: 'Entity title and status indicators' },
+                    { name: 'Metadata Tags', desc: 'State, Role, and Category pills' },
+                    { name: 'Snippet', desc: 'Auto-summarized description text' }
+                ],
+                wireframeHTML: `
+                    <div class="w-full max-w-xs bg-white border border-gray-200 rounded-xl shadow-md p-5 fade-in flex flex-col space-y-4">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-10 h-10 bg-gray-200 rounded-lg"></div>
+                            <div class="flex-1 space-y-2">
+                                <div class="h-3 bg-gray-800 rounded w-3/4"></div>
+                                <div class="h-2 bg-gray-400 rounded w-1/2"></div>
+                            </div>
+                        </div>
+                        <div class="flex space-x-2">
+                            <div class="h-4 w-12 bg-blue-100 rounded-full"></div>
+                            <div class="h-4 w-16 bg-green-100 rounded-full"></div>
+                        </div>
+                        <div class="space-y-2 pt-2 border-t border-gray-100">
+                            <div class="h-2 bg-gray-300 rounded w-full"></div>
+                            <div class="h-2 bg-gray-300 rounded w-5/6"></div>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                id: 'block-compliance',
+                title: 'Global Compliance',
+                description: 'Reusable, legally mandated text snippets.',
+                exampleQuery: 'Metadata: { "type": "legal", "jurisdiction": "OH", "locked": true }',
+                layoutTitle: 'Component: Compliance Block',
+                progContext: 'Progressive faces massive liability if an agent quotes an outdated policy or fails to read a state-mandated disclaimer.',
+                agenticLogic: 'The AI cannot edit this block. It acts as a strict dependency injected into the layout based on the context (e.g., if State = OH, inject ORC 3937 disclaimer). Changes to this block instantly propagate to all generated UIs.',
+                blocks: [
+                    { name: 'Legal Text', desc: 'Locked, pre-approved disclaimer string' },
+                    { name: 'Audit Trail', desc: 'Metadata showing when Legal approved it' }
+                ],
+                wireframeHTML: `
+                    <div class="w-full max-w-md bg-yellow-50 border border-yellow-300 rounded-lg shadow-sm p-6 fade-in flex flex-col space-y-4 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-1.5 h-full bg-yellow-400"></div>
+                        <div class="flex items-center space-x-2 mb-2">
+                            <div class="w-5 h-5 rounded-full bg-yellow-400 flex items-center justify-center">
+                                <svg class="w-3 h-3 text-yellow-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                            </div>
+                            <div class="h-3 bg-yellow-700 rounded w-1/3"></div>
+                        </div>
+                        <div class="h-2 bg-yellow-800 opacity-60 rounded w-full"></div>
+                        <div class="h-2 bg-yellow-800 opacity-60 rounded w-full"></div>
+                        <div class="h-2 bg-yellow-800 opacity-60 rounded w-5/6"></div>
+                        <div class="mt-4 pt-4 border-t border-yellow-200 flex justify-between">
+                            <div class="h-2 bg-yellow-600 opacity-40 rounded w-1/4"></div>
+                            <div class="h-2 bg-yellow-600 opacity-40 rounded w-1/4"></div>
+                        </div>
+                    </div>
+                `
+            }
+        ];
+
         let currentActiveId = null;
 
         function init() {
-            const list = document.getElementById('intentList');
-            
+            const intentList = document.getElementById('intentList');
             intentData.forEach(intent => {
-                const btn = document.createElement('button');
-                btn.id = `btn-${intent.id}`;
-                btn.className = 'w-full text-left p-4 rounded-lg border-2 border-transparent bg-gray-50 hover:bg-gray-100 transition-all group';
-                btn.onclick = () => selectIntent(intent.id);
-                
-                btn.innerHTML = `
-                    <div class="flex justify-between items-start mb-1">
-                        <h3 class="font-bold text-gray-800 group-hover:text-progblue transition-colors">${intent.title}</h3>
-                    </div>
-                    <p class="text-xs text-gray-500 mb-2">${intent.description}</p>
-                    <div class="bg-white border border-gray-200 rounded p-2 text-[10px] text-gray-600 italic">
-                        ${intent.exampleQuery}
-                    </div>
-                `;
-                list.appendChild(btn);
+                intentList.appendChild(createNavButton(intent, 'intent'));
+            });
+
+            const blockListNav = document.getElementById('blockListNav');
+            blockData.forEach(block => {
+                blockListNav.appendChild(createNavButton(block, 'block'));
             });
         }
 
-        function selectIntent(id) {
-            const data = intentData.find(i => i.id === id);
+        function createNavButton(data, type) {
+            const btn = document.createElement('button');
+            btn.id = `btn-${data.id}`;
+            btn.className = 'w-full text-left p-4 rounded-lg border-2 border-transparent bg-gray-50 hover:bg-gray-100 transition-all group';
+            btn.onclick = () => selectItem(data.id, type);
+            
+            btn.innerHTML = `
+                <div class="flex justify-between items-start mb-1">
+                    <h3 class="font-bold text-gray-800 group-hover:text-progblue transition-colors">${data.title}</h3>
+                </div>
+                <p class="text-xs text-gray-500 mb-2">${data.description}</p>
+                <div class="bg-white border border-gray-200 rounded p-2 text-[10px] text-gray-600 italic truncate">
+                    ${data.exampleQuery}
+                </div>
+            `;
+            return btn;
+        }
+
+        function selectItem(id, type) {
+            const dataArray = type === 'intent' ? intentData : blockData;
+            const data = dataArray.find(i => i.id === id);
             if (!data) return;
 
             // Update UI State for buttons
             if (currentActiveId) {
                 const oldBtn = document.getElementById(`btn-${currentActiveId}`);
-                oldBtn.classList.remove('border-progblue', 'bg-proglite');
-                oldBtn.classList.add('border-transparent', 'bg-gray-50');
+                if (oldBtn) {
+                    oldBtn.classList.remove('border-progblue', 'bg-proglite');
+                    oldBtn.classList.add('border-transparent', 'bg-gray-50');
+                }
             }
             
             const newBtn = document.getElementById(`btn-${id}`);
@@ -306,9 +449,9 @@
             currentActiveId = id;
 
             // Update Main View
+            document.getElementById('viewCategory').innerText = type === 'intent' ? '2. Assembled Blueprint' : '2. Component Wireframe';
             document.getElementById('layoutTitle').innerText = data.layoutTitle;
-            const vizArea = document.getElementById('visualizationArea');
-            vizArea.innerHTML = data.wireframeHTML;
+            document.getElementById('visualizationArea').innerHTML = data.wireframeHTML;
 
             // Update Rationale Area
             const rationaleArea = document.getElementById('rationaleArea');
@@ -320,7 +463,9 @@
             rationaleArea.classList.add('fade-in');
 
             document.getElementById('progContext').innerHTML = `<strong>Pain Point:</strong> ${data.progContext}`;
+            document.getElementById('logicHeader').innerText = type === 'intent' ? 'Agentic Assembly Logic' : 'Component Behavior Logic';
             document.getElementById('agenticLogic').innerHTML = data.agenticLogic;
+            document.getElementById('componentsHeader').innerText = type === 'intent' ? 'Fetched Content Blocks' : 'Block Elements';
             
             const blockList = document.getElementById('blockList');
             blockList.innerHTML = '';

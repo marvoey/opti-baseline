@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progressive Generative UI: Live Simulation Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        progblue: '#007bc4',
+                        proglite: '#e6f2f9',
+                        proggreen: '#00a900',
+                        darkblue: '#005b94'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .fade-in { animation: fadeIn 0.5s ease-out forwards; }
+        .slide-in-right { animation: slideInRight 0.4s ease-out forwards; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="bg-gray-50 flex flex-col h-screen overflow-hidden font-sans text-gray-800">
+
+    <!-- Top Navigation -->
+    <header class="bg-white border-b border-gray-200 px-6 py-4 flex justify-between items-center shadow-sm z-10 flex-shrink-0">
+        <div class="flex items-center space-x-3">
+            <div class="w-8 h-8 bg-progblue rounded flex items-center justify-center text-white font-bold text-xl">P</div>
+            <h1 class="text-xl font-bold text-gray-800">Intelligent Enablement Portal</h1>
+            <span class="bg-blue-100 text-progblue text-xs font-semibold px-2 py-1 rounded-full">Live Progressive.com Simulation</span>
+        </div>
+        <div class="flex items-center space-x-4 text-sm" id="userProfile">
+            <div class="text-right">
+                <p class="font-bold text-gray-700" id="userName">Alex</p>
+                <p class="text-gray-500 text-xs" id="userRole">Consultant • Columbus CC</p>
+            </div>
+            <div class="w-10 h-10 bg-gray-200 rounded-full border-2 border-progblue overflow-hidden flex items-center justify-center text-gray-400">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
+            </div>
+        </div>
+    </header>
+
+    <!-- Tab Bar -->
+    <nav class="bg-white border-b border-gray-200 px-6 flex space-x-8 overflow-x-auto shadow-sm z-10 flex-shrink-0">
+        <button onclick="runScenario('live_discounts')" id="tab-live_discounts" class="tab-btn py-3 text-sm font-bold text-progblue border-b-2 border-progblue transition-colors outline-none whitespace-nowrap">
+            Intent 1: Consult (Live Data)
+        </button>
+        <button onclick="runScenario('resolve')" id="tab-resolve" class="tab-btn py-3 text-sm font-bold text-gray-500 border-b-2 border-transparent hover:text-progblue transition-colors outline-none whitespace-nowrap">
+            Intent 2: Resolve / Support
+        </button>
+        <button onclick="runScenario('simulate')" id="tab-simulate" class="tab-btn py-3 text-sm font-bold text-gray-500 border-b-2 border-transparent hover:text-progblue transition-colors outline-none whitespace-nowrap">
+            Intent 3: Simulate / Transact
+        </button>
+    </nav>
+
+    <!-- Main Workspace -->
+    <div class="flex flex-1 overflow-hidden">
+        
+        <!-- Left Panel: Chat History (Now full width of left panel) -->
+        <div class="w-1/3 bg-white border-r border-gray-200 flex flex-col shadow-lg z-10 flex-shrink-0">
+            <div class="p-4 border-b border-gray-100 bg-gray-50 flex items-center justify-between">
+                <h2 class="text-xs font-bold text-gray-400 uppercase tracking-wider">Assistant Chat</h2>
+                <div class="w-2 h-2 bg-proggreen rounded-full animate-pulse"></div>
+            </div>
+            <div class="flex-1 overflow-y-auto p-6 space-y-6" id="chatHistory">
+                <div class="flex space-x-3">
+                    <div class="w-8 h-8 bg-progblue rounded-full flex-shrink-0 flex items-center justify-center text-white">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <div>
+                        <div class="bg-gray-100 rounded-lg p-3 text-sm text-gray-800">
+                            I am connected to the live Progressive Auto Insurance knowledge base. Select a scenario tab above to begin a simulated live interaction.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Panel: Generative UI Assembly Engine -->
+        <div class="w-2/3 bg-gray-100 flex flex-col relative">
+            
+            <!-- Default State -->
+            <div id="emptyState" class="absolute inset-0 flex flex-col items-center justify-center text-gray-400 z-0">
+                <svg class="w-16 h-16 mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                <p class="font-medium">Awaiting Scenario Execution...</p>
+            </div>
+
+            <!-- Assembly Engine Visualization -->
+            <div id="assemblyEngine" class="hidden p-6 border-b border-gray-200 bg-white shadow-sm z-10">
+                <h3 class="text-xs font-bold text-gray-400 uppercase mb-4 tracking-wider flex items-center">
+                    <svg class="w-4 h-4 mr-1 text-progblue animate-spin-slow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    Optimizely Content Assembly
+                </h3>
+                <div class="flex justify-between items-center space-x-2">
+                    <div id="step1" class="flex-1 bg-gray-100 rounded p-2 text-center transition-colors">
+                        <p class="text-[10px] font-bold text-gray-500 uppercase">1. Intent</p>
+                        <p id="txt-intent" class="text-xs font-semibold text-gray-800 opacity-0"></p>
+                    </div>
+                    <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    <div id="step2" class="flex-1 bg-gray-100 rounded p-2 text-center transition-colors">
+                        <p class="text-[10px] font-bold text-gray-500 uppercase">2. Layout Blueprint</p>
+                        <p id="txt-layout" class="text-xs font-semibold text-gray-800 opacity-0"></p>
+                    </div>
+                    <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    <div id="step3" class="flex-1 bg-gray-100 rounded p-2 text-center transition-colors">
+                        <p class="text-[10px] font-bold text-gray-500 uppercase">3. Content Fetch</p>
+                        <p id="txt-blocks" class="text-xs font-semibold text-gray-800 opacity-0"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Generated UI Container -->
+            <div id="uiContainer" class="flex-1 overflow-y-auto p-8 relative z-0">
+                <!-- Injected via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- UI Templates -->
+    <template id="tpl-live_discounts">
+        <div class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden slide-in-right flex flex-col h-[600px]">
+            <div class="bg-progblue text-white p-5 flex justify-between items-start flex-shrink-0">
+                <div>
+                    <h2 class="text-2xl font-bold">Auto Coverage & Discounts Playbook</h2>
+                    <p class="text-blue-100 text-sm mt-1">Sourced from Progressive.com / Auto</p>
+                </div>
+                <div class="bg-blue-800 text-xs px-3 py-1 rounded-full font-semibold">Live Data Mode</div>
+            </div>
+            
+            <div class="flex flex-1 overflow-hidden">
+                <!-- Left: Savings Toolkit -->
+                <div class="w-1/2 p-6 overflow-y-auto border-r border-gray-100 bg-gray-50">
+                    <h3 class="text-sm font-bold text-gray-400 uppercase tracking-wider mb-4 border-b border-gray-200 pb-2">Savings & Discount Toolkit</h3>
+                    
+                    <div class="space-y-4">
+                        <!-- Bundle & Save -->
+                        <div class="bg-white border border-gray-200 rounded p-4 shadow-sm hover:border-progblue cursor-pointer transition">
+                            <div class="flex items-center mb-2">
+                                <svg class="w-5 h-5 text-proggreen mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                                <h4 class="font-bold text-gray-800">Bundle & Save</h4>
+                            </div>
+                            <p class="text-sm text-gray-600">New customers who bundle Home and Auto policies save an average of <strong>$1,086</strong>.</p>
+                            <p class="text-xs text-gray-400 mt-2 italic">Script: "Do you own your home or rent? We can combine those to drop this premium."</p>
+                        </div>
+
+                        <!-- Snapshot -->
+                        <div class="bg-white border border-gray-200 rounded p-4 shadow-sm hover:border-progblue cursor-pointer transition">
+                            <div class="flex items-center mb-2">
+                                <svg class="w-5 h-5 text-progblue mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                <h4 class="font-bold text-gray-800">Snapshot® Program</h4>
+                            </div>
+                            <p class="text-sm text-gray-600">Customers who drive safe save an average of <strong>$328 annually</strong>.</p>
+                            <p class="text-xs text-gray-400 mt-2 italic">Note: Not available in CA or from all agents.</p>
+                        </div>
+
+                        <!-- Name Your Price -->
+                        <div class="bg-white border border-gray-200 rounded p-4 shadow-sm hover:border-progblue cursor-pointer transition">
+                            <div class="flex items-center mb-2">
+                                <svg class="w-5 h-5 text-purple-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+                                <h4 class="font-bold text-gray-800">Name Your Price® Tool</h4>
+                            </div>
+                            <p class="text-sm text-gray-600">Allows you to input the customer's budget to see which coverages fit their price range.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Coverage Guidance -->
+                <div class="w-1/2 p-6 overflow-y-auto bg-white">
+                    <h3 class="text-sm font-bold text-gray-400 uppercase tracking-wider mb-4 border-b border-gray-200 pb-2">Coverage Options to Review</h3>
+                    
+                    <div class="space-y-5">
+                        <div>
+                            <h4 class="text-sm font-bold text-gray-800">Comprehensive & Collision</h4>
+                            <p class="text-sm text-gray-600 mt-1">Recommended for new/high-value vehicles. Ask the customer if they have an active auto loan (required by lenders).</p>
+                        </div>
+                        
+                        <div>
+                            <h4 class="text-sm font-bold text-gray-800 text-progblue">Progressive Vehicle Protection (Exclusive)</h4>
+                            <p class="text-sm text-gray-600 mt-1">Available exclusively for vehicles between 2 and 8 years old. Covers major system repairs after warranty expires.</p>
+                            <p class="text-xs font-bold text-proggreen mt-1">UPSELL OPPORTUNITY</p>
+                        </div>
+
+                        <div>
+                            <h4 class="text-sm font-bold text-gray-800">Loan/Lease Payoff</h4>
+                            <p class="text-sm text-gray-600 mt-1">Helps pay the difference between vehicle value and what is owed if totaled. Highly recommended if the car was recently purchased.</p>
+                        </div>
+
+                        <div class="mt-6 p-4 bg-gray-50 border border-gray-200 rounded text-center">
+                            <button class="px-6 py-2 bg-progblue text-white rounded font-bold text-sm hover:bg-darkblue transition shadow w-full">Launch AutoQuote Explorer®</button>
+                            <p class="text-xs text-gray-400 mt-2">Required: ZIP, VIN, Driver's License</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="tpl-resolve">
+        <div class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden slide-in-right">
+            <div class="bg-progblue text-white p-5 flex justify-between items-start">
+                <div>
+                    <h2 class="text-2xl font-bold">Ohio Roadside Assistance</h2>
+                    <p class="text-blue-100 text-sm mt-1">Out-of-State Transition Guidelines</p>
+                </div>
+            </div>
+            <div class="flex flex-col md:flex-row p-6 gap-6">
+                <div class="flex-1">
+                    <h3 class="text-lg font-bold text-gray-800 border-b border-gray-200 pb-2 mb-4">Coverage Summary</h3>
+                    <ul class="space-y-3 text-sm text-gray-700">
+                        <li class="flex items-start"><svg class="w-5 h-5 text-proggreen mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Standard Ohio limits apply (up to 15 miles).</span></li>
+                    </ul>
+                </div>
+                <div class="w-full md:w-1/3 space-y-4">
+                    <div class="bg-gray-50 border border-gray-200 rounded p-4">
+                        <div class="flex items-center text-gray-500 mb-2">
+                            <span class="text-xs font-bold uppercase tracking-wider">Required Disclaimer</span>
+                        </div>
+                        <p class="text-xs text-gray-600 leading-relaxed italic">"Per ORC 3937, roadside assistance limits are subject to local facility availability."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="tpl-simulate">
+        <div class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden slide-in-right flex h-[500px]">
+            <!-- Action Block (Form) -->
+            <div class="w-1/2 p-8 border-r border-gray-200 flex flex-col">
+                <h2 class="text-xl font-bold text-gray-800 mb-6 flex items-center">
+                    <svg class="w-5 h-5 mr-2 text-progblue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    File Commercial Glass Claim
+                </h2>
+                <div class="space-y-5 flex-1">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-600 uppercase mb-1">Policy Number</label>
+                        <input type="text" class="w-full border border-gray-300 rounded p-2 text-sm focus:border-progblue focus:ring-1 focus:ring-progblue outline-none" value="COM-882-91A">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-600 uppercase mb-1">Date of Loss</label>
+                        <input type="date" class="w-full border border-gray-300 rounded p-2 text-sm focus:border-progblue focus:ring-1 focus:ring-progblue outline-none">
+                    </div>
+                    <div class="p-3 border-2 border-progblue rounded bg-blue-50 relative">
+                        <div class="absolute -left-2 top-3 w-4 h-4 bg-progblue rounded-full flex items-center justify-center text-white"><svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></div>
+                        <label class="block text-xs font-bold text-progblue uppercase mb-1">Glass Type Damaged</label>
+                        <select class="w-full border border-progblue rounded p-2 text-sm focus:outline-none">
+                            <option>Windshield (Front)</option>
+                            <option>Side Window</option>
+                            <option>Rear Glass</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="w-full bg-progblue hover:bg-darkblue text-white font-bold py-3 px-4 rounded transition-colors text-sm mt-4">Generate Claim Draft</button>
+            </div>
+            
+            <!-- Dynamic Prose Block (Contextual Help) -->
+            <div class="w-1/2 bg-gray-50 p-8 flex flex-col">
+                <div class="flex items-center space-x-2 mb-4 pb-4 border-b border-gray-200">
+                    <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <h3 class="text-sm font-bold text-gray-600 uppercase">Contextual Guidance</h3>
+                </div>
+                <div class="bg-white border border-blue-200 shadow-sm rounded-lg p-5">
+                    <h4 class="font-bold text-progblue mb-2">Windshield Claims & ADAS</h4>
+                    <p class="text-sm text-gray-700 mb-3">Because the user selected "Windshield", verify if the commercial vehicle is equipped with Advanced Driver Assistance Systems (ADAS).</p>
+                    <div class="bg-gray-100 p-3 rounded text-sm text-gray-600 border border-gray-200">
+                        <strong>Script:</strong> "Does your vehicle have lane departure warnings, automatic braking, or rain-sensing wipers?"
+                    </div>
+                    <p class="text-xs text-red-500 font-bold mt-3 uppercase tracking-wide">If Yes: Recalibration approval required.</p>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <script>
+        // State tracking
+        let currentTabId = null;
+
+        const scenarios = {
+            live_discounts: {
+                intent: 'Consultation / Upsell',
+                layout: 'Dashboard (Side-by-Side)',
+                blocks: 'Live Progressive.com Data (Snapshot, Bundle, Vehicle Protection)',
+                query: "What coverage options and discounts can I offer a customer to lower their auto premium?",
+                reply: "I've pulled the active auto insurance discounts and coverage options directly from the Progressive.com catalog. I've highlighted the Bundle & Save and Snapshot programs as your best levers to lower their premium.",
+                role: "Consultant",
+                color: "progblue",
+                tpl: "tpl-live_discounts"
+            },
+            resolve: {
+                intent: 'Resolve / Support',
+                layout: 'Split Layout (60/40)',
+                blocks: 'Prose Extract + Compliance Disclaimer',
+                query: "What roadside assistance applies to an Ohio auto policy transition?",
+                reply: "I've assembled the active Ohio transition rules and mandatory disclaimers.",
+                role: "Consultant",
+                color: "progblue", // standard color for consultant
+                tpl: "tpl-resolve"
+            },
+            simulate: {
+                intent: 'Simulate / Transact',
+                layout: 'Side-by-Side (Interactive Form)',
+                blocks: 'Action Form + Dynamic Context Help',
+                query: "Guide me through filing a Commercial Auto glass claim.",
+                reply: "I've generated the Glass Claim workflow. Contextual guidance will automatically update as you fill out the form.",
+                role: "Consultant",
+                color: "progblue",
+                tpl: "tpl-simulate"
+            }
+        };
+
+        async function runScenario(scenarioId) {
+            // Prevent double click on same tab
+            if(currentTabId === scenarioId) return;
+            currentTabId = scenarioId;
+
+            const data = scenarios[scenarioId];
+            const chatHistory = document.getElementById('chatHistory');
+            const emptyState = document.getElementById('emptyState');
+            const assemblyEngine = document.getElementById('assemblyEngine');
+            const uiContainer = document.getElementById('uiContainer');
+            
+            // Tab Styling Updates
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('border-progblue', 'text-progblue');
+                btn.classList.add('border-transparent', 'text-gray-500');
+            });
+            const activeTab = document.getElementById('tab-' + scenarioId);
+            activeTab.classList.remove('border-transparent', 'text-gray-500');
+            activeTab.classList.add('border-progblue', 'text-progblue');
+
+            // Set persona context
+            document.getElementById('userName').innerText = 'Alex';
+            document.getElementById('userRole').innerText = 'Consultant • Columbus CC';
+
+            // Reset UI and Chat
+            uiContainer.innerHTML = '';
+            chatHistory.innerHTML = `
+                <div class="flex space-x-3 fade-in">
+                    <div class="w-8 h-8 bg-gray-300 rounded-full flex-shrink-0 flex items-center justify-center text-gray-600">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <div>
+                        <div class="bg-gray-100 rounded-lg p-3 text-sm text-gray-500 italic">
+                            Scenario initialized. Awaiting input.
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            let userBgClass = `bg-${data.color}`;
+            let userBorderClass = `border-${data.color}`;
+            if(data.color === 'progblue') { userBgClass = 'bg-progblue'; userBorderClass = 'border-progblue'; }
+
+            // 1. Add User Query to Chat
+            setTimeout(() => {
+                const userMsg = document.createElement('div');
+                userMsg.className = 'flex space-x-3 flex-row-reverse space-x-reverse fade-in';
+                userMsg.innerHTML = `
+                    <div class="w-8 h-8 bg-gray-200 rounded-full border-2 ${userBorderClass} flex-shrink-0"></div>
+                    <div class="max-w-[80%]">
+                        <div class="${userBgClass} text-white rounded-lg p-3 text-sm shadow">
+                            ${data.query}
+                        </div>
+                    </div>
+                `;
+                chatHistory.appendChild(userMsg);
+                chatHistory.scrollTop = chatHistory.scrollHeight;
+            }, 300);
+
+            // Hide empty state, show engine, reset text
+            emptyState.classList.add('hidden');
+            assemblyEngine.classList.remove('hidden');
+            ['intent', 'layout', 'blocks'].forEach(step => {
+                const el = document.getElementById(`txt-${step}`);
+                el.classList.remove('fade-in', 'opacity-100');
+                el.classList.add('opacity-0', 'text-gray-800');
+                document.getElementById(`step${['intent','layout','blocks'].indexOf(step)+1}`).className = "flex-1 bg-gray-100 rounded p-2 text-center transition-colors";
+            });
+
+            const activateStep = (stepName, text, delay) => {
+                return new Promise(resolve => {
+                    setTimeout(() => {
+                        const idx = ['intent','layout','blocks'].indexOf(stepName) + 1;
+                        const box = document.getElementById(`step${idx}`);
+                        const textEl = document.getElementById(`txt-${stepName}`);
+                        box.classList.remove('bg-gray-100');
+                        box.classList.add('bg-blue-50', 'border', 'border-blue-200', 'shadow-sm');
+                        textEl.innerText = text;
+                        textEl.classList.remove('opacity-0');
+                        textEl.classList.add('fade-in', 'opacity-100');
+                        resolve();
+                    }, delay);
+                });
+            };
+
+            await activateStep('intent', data.intent, 900); // 300 for message + 600
+            await activateStep('layout', data.layout, 500);
+            await activateStep('blocks', data.blocks, 500);
+
+            // 2. Show Generated UI
+            setTimeout(() => {
+                const tpl = document.getElementById(data.tpl);
+                const clone = tpl.content.cloneNode(true);
+                uiContainer.appendChild(clone);
+                
+                const sysMsg = document.createElement('div');
+                sysMsg.className = 'flex space-x-3 fade-in mt-4';
+                sysMsg.innerHTML = `
+                    <div class="w-8 h-8 bg-gray-800 rounded-full flex-shrink-0 flex items-center justify-center text-white">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <div class="max-w-[80%]\">
+                        <div class="bg-gray-100 border border-gray-200 rounded-lg p-3 text-sm text-gray-800 shadow-sm">
+                            ${data.reply}
+                        </div>
+                    </div>
+                `;
+                chatHistory.appendChild(sysMsg);
+                chatHistory.scrollTop = chatHistory.scrollHeight;
+            }, 600);
+        }
+
+        // Initialize the first tab on load
+        window.onload = () => {
+            runScenario('live_discounts');
+        };
+    </script>
+</body>
+</html>
