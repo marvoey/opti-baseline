@@ -87,24 +87,24 @@ const SLIDES: Slide[] = [
   {
     kind: 'act-intro', num: 3,
     badge: 'Act 3 — The Engine',
-    title: 'Agentic Content Assembly',
+    title: 'Authoring Tagged Copy, Not Pages',
     subtitle: 'Behind the scenes in Optimizely CMS',
     persona: { name: 'Marcus', role: 'Knowledge Manager' },
-    description: 'How does the Generative UI know the exact limits without hallucinating? We go behind the scenes to Optimizely CMS to see Marcus — the person who makes Act 2 possible.',
+    description: 'How does the Generative UI know the exact limits without hallucinating? We go behind the scenes to Optimizely CMS to see Marcus, the Knowledge Manager. He just received a regulatory bulletin: Florida and Georgia are changing their Commercial Hail deductibles for 2026.',
   },
   {
     kind: 'act', num: 3, scene: 1,
-    intent: 'Ingest Intent',
-    action: 'Marcus drags a legacy 15-page PDF into the Opal workspace. He prompts: "Ingest this policy. Extract the core coverage limits, exclusions, and deductibles and map them to our structured fields."',
-    result: 'The Agentic CMS strips away the document formatting and locks the data into pre-approved, atomic fields: Limit = $500, Peril = Hail, LOB = Commercial.',
-    talk: '"You can\'t put a Generative UI over a folder of PDFs. Marcus is turning unstructured legacy blobs into strict, compliant, atomic data. This is the foundational difference — and the migration accelerator."',
+    intent: 'Authoring Atomic Copy',
+    action: 'In a traditional CMS, Marcus would open a blank page and type a 10-page document. Instead, Marcus creates a specific, atomic content block — a "Coverage Limit." He inputs only the new rule copy: "Mandatory baseline deductible of $1,000 applies to all commercial auto policies for hail."',
+    result: 'Marcus applies strict taxonomy tags to the block: LOB: Commercial Auto · State: Florida · Peril: Hail. These tags are not just metadata — they are the boundaries that tell the AI exactly when and where this copy is allowed to be used.',
+    talk: '"This is the fundamental shift. Marcus is not writing a page. He is managing copy. In a traditional knowledge base, tags help the search bar find a PDF. In an Agentic CMS, the tags ARE the logic — the strict guardrails that eliminate hallucination."',
   },
   {
     kind: 'act', num: 3, scene: 2,
     intent: 'Variant Assembly Intent',
-    action: 'Marcus prompts Opal: "Generate state variations for Florida and Georgia based on the standard policy, but update Florida\'s deductible to $1,000 and Georgia\'s to $750."',
-    result: 'The CMS scales the matrix instantly — Florida: $1,000; Georgia: $750 — linking reusable legal disclaimers automatically so nothing is out of compliance.',
-    talk: '"Because Marcus assembled this as atomic, tagged data variations rather than static pages, the API can query it mathematically. That is what allows the Generative UI in Act 2 to build a perfect comparison matrix on the fly."',
+    action: 'Marcus needs to apply this to Georgia, but with a different limit. He asks Opal: "Generate a state variant of this block for Georgia, but change the deductible to $750."',
+    result: 'Opal instantly creates the tagged Georgia variant. Marcus did not have to duplicate a 10-page document just to change one number.',
+    talk: '"Because Marcus authors properly tagged copy instead of static pages, he eliminates conflicting truths. This is exactly why Sarah\'s interface in Act 2 worked — the system used her intent to query these exact tags, pulling the $1,000 Florida block and the $750 Georgia block, and assembling them perfectly on screen."',
   },
 
   // ─ 12 ─ Closing
