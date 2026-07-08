@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import FilterForm from './_components/FilterForm';
 import {
   Search, FileText, ChevronLeft, FileDown, Clock, AlertTriangle,
   Car, Truck, Home, Heart, Anchor, Zap, Phone, Mail, Users,
@@ -7,7 +8,17 @@ import {
   SlidersHorizontal, ChevronDown, Table2,
 } from 'lucide-react';
 
-type Props = { searchParams: Promise<{ q?: string; doc?: string; browse?: string }> };
+type SP = {
+  q?: string; doc?: string; browse?: string;
+  ftype?: string | string[]; fstatus?: string | string[];
+  fstate?: string | string[]; fyear?: string | string[]; fdept?: string | string[];
+};
+type Props = { searchParams: Promise<SP> };
+
+function toArr(v: string | string[] | undefined): string[] {
+  if (!v) return [];
+  return Array.isArray(v) ? v : [v];
+}
 
 // ── Static data ───────────────────────────────────────────────────────────────
 
