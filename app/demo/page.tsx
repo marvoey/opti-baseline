@@ -32,6 +32,8 @@ export default function ProgressiveInteractiveDemoPage() {
   const [inputDisabled, setInputDisabled] = useState(true);
   const [inputPlaceholder, setInputPlaceholder] = useState('Select a prompt above to start...');
   const [claimPhase, setClaimPhase] = useState<ClaimPhase>('idle');
+  // 0=hidden 1=step1(auto) 2=step2+paused 3=step3+paused 4=step4+done 5=dismissed
+  const [backstagePhase, setBackstagePhase] = useState(0);
   const chatRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -48,7 +50,7 @@ export default function ProgressiveInteractiveDemoPage() {
     if (step === 1) {
       timers.push(setTimeout(() => setStep(2), 400));
     } else if (step === 2) {
-      timers.push(setTimeout(() => setStep(3), 1500));
+      // Advancement to step 3 is gated by the user clicking through the backstage panel
     } else if (step === 3) {
       timers.push(setTimeout(() => setShowToggleBtn(true), 500));
       timers.push(setTimeout(() => setStep(4), 2500));
@@ -92,6 +94,33 @@ export default function ProgressiveInteractiveDemoPage() {
       return () => clearTimeout(t);
     }
   }, [claimPhase]);
+
+  // Phase 1 auto-advances to phase 2 (paused)
+  // Phase 3 auto-advances to phase 4
+  // Phase 4 auto-advances to phase 5 (new final step, then unblocks Opal)
+  useEffect(() => {
+    if (backstagePhase === 1) {
+      const t = setTimeout(() => setBackstagePhase(2), 900);
+      return () => clearTimeout(t);
+    }
+    if (backstagePhase === 3) {
+      const t = setTimeout(() => setBackstagePhase(4), 1000);
+      return () => clearTimeout(t);
+    }
+    if (backstagePhase === 4) {
+      const t = setTimeout(() => setBackstagePhase(5), 1200);
+      return () => clearTimeout(t);
+    }
+  }, [backstagePhase]);
+
+  // When the user has clicked through both pauses (phase 4 or 5) and the chat
+  // is still showing the typing indicator (step 2), reveal the Opal answer
+  useEffect(() => {
+    if (backstagePhase >= 5 && step === 2) {
+      const t = setTimeout(() => setStep(3), 2000);
+      return () => clearTimeout(t);
+    }
+  }, [backstagePhase, step]);
 
   const dispatchVendor = () => {
     setClaimPhase('dispatching');
@@ -169,6 +198,105 @@ export default function ProgressiveInteractiveDemoPage() {
 
           {/* Opal Copilot Area */}
           <div className="w-2/3 bg-gray-50 flex flex-col">
+
+            {/* Behind-the-scenes architecture pop-up — fixed to far left so it never overlaps the assistant */}
+            {backstagePhase >= 1 && backstagePhase <= 5 && (
+              <div className="fixed top-20 left-4 z-50 slide-in-right" style={{ width: 340 }}>
+                <div className="bg-gray-900 rounded-xl shadow-2xl border border-gray-700 overflow-hidden">
+                  <div className="flex items-center justify-between px-4 py-3 bg-gray-800 border-b border-gray-700">
+                    <div className="flex items-center gap-2">
+                      <svg className="w-4 h-4 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      </svg>
+                      <span className="text-white font-bold text-sm">Behind the Scenes</span>
+                    </div>
+                    <button
+                      onClick={() => setBackstagePhase(6)}
+                      className="text-gray-400 hover:text-white text-lg leading-none"
+                    >×</button>
+                  </div>
+
+                  <div className="p-4 space-y-3 font-mono text-xs">
+                    {/* Step 1 — always visible once open */}
+                    <div className="fade-in flex gap-3">
+                      <span className="text-[#007BC7] shrink-0 mt-0.5">→</span>
+                      <div>
+                        <div className="text-[#7DD3FC] font-bold">POST /api/opal/v1/trigger</div>
+                        <div className="text-gray-400 mt-0.5">Question + CRM context (State=FL, Policy=Auto-Platinum) sent to Opal Webhook</div>
+                      </div>
+                    </div>
+
+                    {/* Step 2 — appears after 900ms, then pauses */}
+                    {backstagePhase >= 2 && (
+                      <div className="fade-in flex gap-3">
+                        <span className="text-purple-400 shrink-0 mt-0.5">→</span>
+                        <div>
+                          <div className="text-purple-300 font-bold">Opal Workflow Agent: trigger received</div>
+                          <div className="text-gray-400 mt-0.5">Webhook listener fires. Agent formulates GraphQL query for FL hail coverage rules in Optimizely Graph</div>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Step 3 — revealed after first Continue */}
+                    {backstagePhase >= 3 && (
+                      <div className="fade-in flex gap-3">
+                        <span className="text-green-400 shrink-0 mt-0.5">→</span>
+                        <div>
+                          <div className="text-green-300 font-bold">Optimizely Graph: query complete</div>
+                          <div className="text-gray-400 mt-0.5">Returns Florida variation — $500 deductible rule + windshield statute exception</div>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Step 4 — push_to_crm_ui tool */}
+                    {backstagePhase >= 4 && (
+                      <div className="fade-in flex gap-3">
+                        <span className="text-yellow-400 shrink-0 mt-0.5">→</span>
+                        <div>
+                          <div className="text-yellow-300 font-bold">push_to_crm_ui tool executed</div>
+                          <div className="text-gray-400 mt-0.5">Opal invokes the custom tool with the structured answer and citations</div>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Step 5 — response delivered to UI */}
+                    {backstagePhase >= 5 && (
+                      <div className="fade-in flex gap-3">
+                        <span className="text-[#007BC7] shrink-0 mt-0.5">→</span>
+                        <div>
+                          <div className="text-[#7DD3FC] font-bold">Response delivered to CRM UI</div>
+                          <div className="text-gray-400 mt-0.5">The tool POSTs the answer back to the Next.js API — your interface renders it in real time</div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="px-4 pb-4 flex items-center justify-between border-t border-gray-800 pt-3">
+                    <Link href="/demo/webhook" className="text-[#007BC7] text-xs hover:underline font-mono">
+                      View full architecture →
+                    </Link>
+                    {/* Continue button while paused; Got it when done */}
+                    {backstagePhase === 2 && (
+                      <button
+                        onClick={() => setBackstagePhase(3)}
+                        className="bg-[#007BC7] hover:bg-[#004A8F] text-white text-xs px-3 py-1.5 rounded transition font-semibold"
+                      >
+                        Continue →
+                      </button>
+                    )}
+                    {backstagePhase === 5 && (
+                      <button
+                        onClick={() => setBackstagePhase(6)}
+                        className="bg-gray-700 hover:bg-gray-600 text-white text-xs px-3 py-1.5 rounded transition"
+                      >
+                        Got it
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
+
             <div className="p-4 border-b border-gray-200 bg-white flex items-center gap-2 shadow-sm z-10">
               <LightningIcon className="w-5 h-5 text-purple-600" />
               <h2 className="font-bold text-gray-800">Opal Knowledge Assistant</h2>
@@ -185,7 +313,7 @@ export default function ProgressiveInteractiveDemoPage() {
                   {step === 0 && (
                     <div className="mt-4 space-y-2">
                       <button
-                        onClick={() => setStep(1)}
+                        onClick={() => { setStep(1); setBackstagePhase(1); }}
                         className="w-full text-left bg-gray-50 hover:bg-[#007BC7] hover:text-white border border-gray-200 transition-colors p-3 rounded text-sm text-gray-700 flex justify-between items-center group shadow-sm"
                       >
                         <span>&ldquo;Does his auto or home policy cover hail damage to his car parked in the driveway, and what is the FL deductible?&rdquo;</span>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opal Webhook & Tool Architecture Flow</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        progBlue: '#007BC7',
+                        optiPurple: '#5B21B6',
+                        terminalBg: '#0F172A',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .node { transition: all 0.3s ease; border: 2px solid transparent; }
+        .node.active { 
+            border-color: #007BC7; 
+            box-shadow: 0 0 15px rgba(0, 123, 199, 0.4); 
+            transform: scale(1.02);
+        }
+        .node.active-opal {
+            border-color: #8B5CF6;
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.4);
+            transform: scale(1.02);
+        }
+        .line { transition: all 0.3s ease; stroke: #E5E7EB; stroke-width: 3; stroke-dasharray: 5,5; }
+        .line.active { stroke: #007BC7; stroke-dasharray: none; animation: dash 1s linear infinite; }
+        .line.active-opal { stroke: #8B5CF6; stroke-dasharray: none; animation: dash 1s linear infinite; }
+        @keyframes dash {
+            to { stroke-dashoffset: -20; }
+        }
+        .json-key { color: #7DD3FC; }
+        .json-string { color: #A7F3D0; }
+        .json-number { color: #FDBA74; }
+        .fade-in { animation: fadeIn 0.3s ease forwards; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800 h-screen flex flex-col font-sans overflow-hidden">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200 h-16 flex items-center justify-between px-6 shrink-0 shadow-sm z-10">
+        <div class="flex items-center gap-4">
+            <div class="text-progBlue font-bold text-xl tracking-tight">ARCHITECTURE VISUALIZER</div>
+            <span class="text-gray-400 font-light text-xl">|</span>
+            <span class="text-gray-600 font-medium">Asynchronous Webhook & Tool Flow</span>
+        </div>
+        <button id="run-btn" onclick="runSimulation()" class="bg-progBlue hover:bg-blue-700 text-white font-bold py-2 px-6 rounded shadow transition flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            Run Simulation
+        </button>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="flex-1 flex overflow-hidden w-full">
+        
+        <!-- LEFT: Diagram Area -->
+        <div class="w-3/5 bg-white p-8 relative flex flex-col items-center justify-center overflow-y-auto">
+            
+            <!-- Step Indicators -->
+            <div id="step-indicator" class="absolute top-6 left-6 text-xl font-bold text-gray-400">Step 0: Idle</div>
+
+            <!-- SVG Connecting Lines -->
+            <svg class="absolute inset-0 w-full h-full pointer-events-none z-0">
+                <!-- Frontend to Webhook -->
+                <path id="line-1" class="line" d="M 300 120 C 300 180, 300 200, 300 230" />
+                <!-- Webhook to CMS -->
+                <path id="line-2" class="line" d="M 300 310 C 300 350, 480 350, 480 390" />
+                <!-- Agent to LLM -->
+                <path id="line-3" class="line" d="M 300 310 C 300 350, 120 350, 120 390" />
+                <!-- CMS & LLM back to Tool -->
+                <path id="line-4" class="line" d="M 300 310 C 300 480, 300 500, 300 530" />
+                <!-- Tool to Frontend -->
+                <path id="line-5" class="line" d="M 220 570 C 50 570, 50 80, 220 80" />
+            </svg>
+
+            <!-- Node 1: Frontend -->
+            <div id="node-frontend" class="node bg-gray-50 border-gray-200 rounded-xl p-4 w-80 text-center z-10 shadow-sm mb-12">
+                <div class="bg-blue-100 text-blue-800 text-xs font-bold px-2 py-1 rounded inline-block mb-2">Next.js / CRM</div>
+                <h3 class="font-bold text-gray-800">Consultant UI</h3>
+                <p class="text-xs text-gray-500 mt-1">Sarah asks: "What is the FL hail deductible?"</p>
+            </div>
+
+            <!-- Node 2: Opal Webhook Trigger -->
+            <div id="node-webhook" class="node bg-purple-50 border-purple-200 rounded-xl p-4 w-80 text-center z-10 shadow-sm mb-12">
+                <div class="bg-purple-100 text-purple-800 text-xs font-bold px-2 py-1 rounded inline-block mb-2">Opal Workflow Agent</div>
+                <h3 class="font-bold text-gray-800">Webhook Trigger</h3>
+                <p class="text-xs text-gray-500 mt-1">Listens for POST request to start agent workflow</p>
+            </div>
+
+            <!-- Middle Row: Graph/CMS & Reasoning -->
+            <div class="flex gap-16 w-full justify-center z-10 mb-12">
+                <!-- Node 3: LLM -->
+                <div id="node-llm" class="node bg-purple-50 border-purple-200 rounded-xl p-4 w-64 text-center shadow-sm">
+                    <div class="bg-purple-100 text-purple-800 text-xs font-bold px-2 py-1 rounded inline-block mb-2">Opal Logic</div>
+                    <h3 class="font-bold text-gray-800">Agent Reasoning</h3>
+                    <p class="text-xs text-gray-500 mt-1">Plans execution & synthesizes response</p>
+                </div>
+
+                <!-- Node 4: CMS SaaS -->
+                <div id="node-cms" class="node bg-gray-900 border-gray-800 rounded-xl p-4 w-64 text-center shadow-sm">
+                    <div class="bg-green-100 text-green-800 text-xs font-bold px-2 py-1 rounded inline-block mb-2">Optimizely Graph</div>
+                    <h3 class="font-bold text-white">CMS SaaS Content</h3>
+                    <p class="text-xs text-gray-400 mt-1">Returns structured FL variation rules</p>
+                </div>
+            </div>
+
+            <!-- Node 5: Opal Output Tool -->
+            <div id="node-tool" class="node bg-purple-50 border-purple-200 rounded-xl p-4 w-80 text-center z-10 shadow-sm">
+                <div class="bg-purple-100 text-purple-800 text-xs font-bold px-2 py-1 rounded inline-block mb-2">Custom Tool</div>
+                <h3 class="font-bold text-gray-800">Push to CRM Frontend</h3>
+                <p class="text-xs text-gray-500 mt-1">Tool executes REST call back to Next.js API</p>
+            </div>
+
+        </div>
+
+        <!-- RIGHT: Terminal/Payload Area -->
+        <div class="w-2/5 bg-terminalBg text-gray-300 p-6 flex flex-col border-l border-gray-700 font-mono text-sm overflow-hidden shadow-inner">
+            <div class="flex items-center justify-between mb-4 border-b border-gray-700 pb-2 shrink-0">
+                <span class="font-bold text-white tracking-widest text-xs">API PAYLOAD INSPECTOR</span>
+                <div class="flex gap-1.5">
+                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                </div>
+            </div>
+            
+            <div id="terminal-content" class="flex-1 overflow-y-auto space-y-4 pb-10">
+                <div class="text-gray-500 italic">Waiting for simulation to start...</div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        const terminal = document.getElementById('terminal-content');
+        const stepText = document.getElementById('step-indicator');
+        let isRunning = false;
+
+        function logToTerminal(title, jsonStr, colorClass = "text-blue-400") {
+            const block = document.createElement('div');
+            block.className = "fade-in";
+            
+            // Basic syntax highlighting for the JSON
+            const formattedJson = jsonStr
+                .replace(/"([^"]+)":/g, '<span class="json-key">"$1":</span>')
+                .replace(/: "([^"]+)"/g, ': <span class="json-string">"$1"</span>')
+                .replace(/: ([0-9]+)/g, ': <span class="json-number">$1</span>');
+
+            block.innerHTML = `
+                <div class="${colorClass} font-bold mb-1">>> ${title}</div>
+                <div class="bg-black bg-opacity-30 p-3 rounded border border-gray-700">
+                    <pre class="whitespace-pre-wrap">${formattedJson}</pre>
+                </div>
+            `;
+            terminal.appendChild(block);
+            terminal.scrollTop = terminal.scrollHeight;
+        }
+
+        function resetState() {
+            document.querySelectorAll('.node').forEach(n => n.classList.remove('active', 'active-opal'));
+            document.querySelectorAll('.line').forEach(l => l.classList.remove('active', 'active-opal'));
+            terminal.innerHTML = '';
+        }
+
+        async function runSimulation() {
+            if (isRunning) return;
+            isRunning = true;
+            document.getElementById('run-btn').disabled = true;
+            document.getElementById('run-btn').classList.add('opacity-50');
+            resetState();
+
+            const nFront = document.getElementById('node-frontend');
+            const nWeb = document.getElementById('node-webhook');
+            const nLlm = document.getElementById('node-llm');
+            const nCms = document.getElementById('node-cms');
+            const nTool = document.getElementById('node-tool');
+            
+            const l1 = document.getElementById('line-1');
+            const l2 = document.getElementById('line-2');
+            const l3 = document.getElementById('line-3');
+            const l4 = document.getElementById('line-4');
+            const l5 = document.getElementById('line-5');
+
+            // --- STEP 1: Webhook Trigger ---
+            stepText.innerText = "Step 1: Frontend triggers Opal Webhook";
+            nFront.classList.add('active');
+            l1.classList.add('active');
+            setTimeout(() => nWeb.classList.add('active-opal'), 300);
+            
+            logToTerminal("POST /api/opal/v1/workflows/trigger", `{
+  "agent_id": "prog-insurance-ops-agent",
+  "payload": {
+    "user_prompt": "What is the FL hail deductible?",
+    "crm_context": {
+      "user": "SarahO",
+      "customer_state": "FL",
+      "active_policy": "Auto-Platinum"
+    },
+    "thread_id": "cx-99382"
+  }
+}`, "text-blue-400");
+
+            await sleep(3000);
+
+            // --- STEP 2: Graph Retrieval ---
+            stepText.innerText = "Step 2: Agent queries Optimizely Graph";
+            nFront.classList.remove('active');
+            l1.classList.remove('active');
+            l2.classList.add('active-opal');
+            l3.classList.add('active-opal');
+            nLlm.classList.add('active-opal');
+            setTimeout(() => nCms.classList.add('active'), 300);
+
+            logToTerminal("GRAPHQL QUERY: Optimizely Graph", `{
+  "query": "query GetPolicy { CoverageComponent(where: { state_applicability: { eq: \\"Florida\\" }, peril: { eq: \\"Hail\\" } }) { deductible_rules exceptions } }"
+}`, "text-purple-400");
+
+            await sleep(2000);
+
+            logToTerminal("GRAPHQL RESPONSE", `{
+  "data": {
+    "CoverageComponent": [
+      {
+        "deductible_rules": "$500 minimum",
+        "exceptions": "Statute 627.7288: Zero deductible for windshields."
+      }
+    ]
+  }
+}`, "text-green-400");
+
+            await sleep(2500);
+
+            // --- STEP 3: Output Tool ---
+            stepText.innerText = "Step 3: Agent invokes Custom API Tool";
+            l2.classList.remove('active-opal');
+            l3.classList.remove('active-opal');
+            nCms.classList.remove('active');
+            nLlm.classList.remove('active-opal');
+            
+            l4.classList.add('active-opal');
+            setTimeout(() => nTool.classList.add('active-opal'), 300);
+
+            logToTerminal("TOOL EXECUTION: push_to_crm_ui", `{
+  "tool_name": "push_to_crm_ui",
+  "parameters": {
+    "thread_id": "cx-99382",
+    "response_text": "Because the customer is in FL, the statutory deductible is $500. However, if the windshield is shattered, the deductible is waived.",
+    "citations": ["FL Statute 627.7288"],
+    "suggested_action": "start_glass_claim"
+  }
+}`, "text-purple-400");
+
+            await sleep(3500);
+
+            // --- STEP 4: Frontend Callback ---
+            stepText.innerText = "Step 4: Frontend receives async payload";
+            nWeb.classList.remove('active-opal');
+            l4.classList.remove('active-opal');
+            
+            l5.classList.add('active');
+            setTimeout(() => nFront.classList.add('active'), 300);
+
+            logToTerminal("FRONTEND EVENT: Render UI", `{
+  "status": "success",
+  "ui_state": "render_agent_response",
+  "render_workflow_button": true
+}`, "text-blue-400");
+
+            await sleep(2000);
+            stepText.innerText = "Simulation Complete";
+            isRunning = false;
+            document.getElementById('run-btn').disabled = false;
+            document.getElementById('run-btn').classList.remove('opacity-50');
+        }
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+    </script>
+</body>
+</html>

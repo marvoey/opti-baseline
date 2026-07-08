@@ -56,12 +56,40 @@ body {
   color: var(--foreground);
 }
 
+/* Webhook architecture diagram */
+.arch-node { transition: all 0.3s ease; border-width: 2px; border-style: solid; }
+.arch-node.active {
+  border-color: #007BC7;
+  box-shadow: 0 0 15px rgba(0, 123, 199, 0.4);
+  transform: scale(1.02);
+}
+.arch-node.active-opal {
+  border-color: #8B5CF6;
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.4);
+  transform: scale(1.02);
+}
+.arch-line { transition: all 0.3s ease; stroke: #E5E7EB; stroke-width: 3; stroke-dasharray: 5,5; fill: none; }
+.arch-line.active { stroke: #007BC7; stroke-dasharray: none; animation: lineDash 1s linear infinite; fill: none; }
+.arch-line.active-opal { stroke: #8B5CF6; stroke-dasharray: none; animation: lineDash 1s linear infinite; fill: none; }
+@keyframes lineDash { to { stroke-dashoffset: -20; } }
+.json-key { color: #7DD3FC; }
+.json-string { color: #A7F3D0; }
+.json-number { color: #FDBA74; }
+
 .highlight-active {
   background-color: #FEF08A;
   border-color: #EAB308 !important;
   box-shadow: 0 0 0 2px rgba(234, 179, 8, 0.2);
   color: #1F2937;
   border-radius: 0.25rem;
+}
+
+.slide-in-right {
+  animation: slideInRight 0.35s ease-out forwards;
+}
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(-16px); }
+  to   { opacity: 1; transform: translateX(0); }
 }
 
 .fade-in {
