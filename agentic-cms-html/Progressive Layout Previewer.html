@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progressive Agentic CMS: Intent to Layout Previewer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        progblue: '#007bc4',
+                        proglite: '#e6f2f9',
+                        proggreen: '#00a900',
+                        darkblue: '#005b94'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .fade-in { animation: fadeIn 0.4s ease-out forwards; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .wireframe-block {
+            background-image: linear-gradient(45deg, #f3f4f6 25%, transparent 25%, transparent 75%, #f3f4f6 75%, #f3f4f6), linear-gradient(45deg, #f3f4f6 25%, transparent 25%, transparent 75%, #f3f4f6 75%, #f3f4f6);
+            background-size: 10px 10px;
+            background-position: 0 0, 5px 5px;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 h-screen flex flex-col font-sans text-gray-800 overflow-hidden">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between shadow-sm z-10 flex-shrink-0">
+        <div class="flex items-center space-x-3">
+            <div class="w-8 h-8 bg-progblue rounded flex items-center justify-center text-white font-bold text-xl">P</div>
+            <h1 class="text-xl font-bold text-gray-800">Agentic CMS Architecture Previewer</h1>
+        </div>
+        <div class="text-sm text-gray-500 font-medium bg-gray-100 px-3 py-1 rounded-full">
+            Intent-to-Layout Blueprint mapping
+        </div>
+    </header>
+
+    <div class="flex flex-1 overflow-hidden">
+        
+        <!-- Left Sidebar: Intents -->
+        <div class="w-1/4 bg-white border-r border-gray-200 p-6 overflow-y-auto z-10 shadow-[4px_0_15px_-3px_rgba(0,0,0,0.05)]">
+            <h2 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4">1. Select AI Intent Trigger</h2>
+            <p class="text-sm text-gray-600 mb-6">In an Agentic CMS, the AI reads the user's intent to determine which layout blueprint to pull from the system.</p>
+            
+            <div class="space-y-3" id="intentList">
+                <!-- Buttons injected by JS -->
+            </div>
+        </div>
+
+        <!-- Main Content: Visualization -->
+        <div class="w-2/4 bg-gray-50 flex flex-col relative border-r border-gray-200">
+            <div class="p-6 border-b border-gray-200 bg-white">
+                <h2 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">2. Assembled Blueprint</h2>
+                <h3 id="layoutTitle" class="text-xl font-bold text-progblue">Select an Intent</h3>
+            </div>
+            
+            <div class="flex-1 p-8 overflow-y-auto flex items-center justify-center bg-gray-50" id="visualizationArea">
+                <!-- Wireframe visualization injected by JS -->
+                <div class="text-gray-400 flex flex-col items-center">
+                    <svg class="w-12 h-12 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path></svg>
+                    <p>Awaiting intent selection...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Sidebar: Rationale & Components -->
+        <div class="w-1/4 bg-white p-6 overflow-y-auto">
+            <h2 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4">3. The "Why" (Agentic Rationale)</h2>
+            
+            <div id="rationaleArea" class="hidden fade-in space-y-6">
+                
+                <div>
+                    <h3 class="text-sm font-bold text-gray-800 mb-2 border-b pb-1">Progressive Context</h3>
+                    <p id="progContext" class="text-sm text-gray-600 leading-relaxed"></p>
+                </div>
+
+                <div>
+                    <h3 class="text-sm font-bold text-gray-800 mb-2 border-b pb-1">Agentic Assembly Logic</h3>
+                    <p id="agenticLogic" class="text-sm text-gray-600 leading-relaxed"></p>
+                </div>
+
+                <div>
+                    <h3 class="text-sm font-bold text-gray-800 mb-3 border-b pb-1">Fetched Content Blocks</h3>
+                    <ul id="blockList" class="space-y-3">
+                        <!-- Blocks injected by JS -->
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const intentData = [
+            {
+                id: 'educate',
+                title: 'Educate / Enable',
+                description: 'User needs to learn a complex policy or SOP.',
+                exampleQuery: '"Show me the updated Florida Auto underwriting guidelines."',
+                layoutTitle: 'Sidebar / Asymmetrical (25/75)',
+                progContext: 'When a consultant needs to read through a dense, 10-page underwriting guideline, dumping text on a page makes it unreadable. They need to scan quickly.',
+                agenticLogic: 'The AI detects a "reading" intent. It fetches the Asymmetrical Layout blueprint. It forces a Navigation Block on the left (auto-generating a Table of Contents from H2 tags) and puts the Prose Blocks on the right so the consultant never loses their place.',
+                blocks: [
+                    { name: 'Navigation Block', desc: 'Auto-generated table of contents.' },
+                    { name: 'Prose Block', desc: 'Structured text with highlighted changes.' },
+                    { name: 'Media Block', desc: 'Embedded process diagrams or charts.' }
+                ],
+                wireframeHTML: `
+                    <div class="w-full max-w-2xl bg-white border border-gray-200 rounded-lg shadow-sm flex h-96 overflow-hidden fade-in">
+                        <!-- Left Sidebar -->
+                        <div class="w-1/4 bg-gray-100 border-r border-gray-200 p-4 flex flex-col space-y-3">
+                            <div class="h-4 bg-gray-300 rounded w-3/4 mb-2"></div>
+                            <div class="h-2 bg-progblue rounded w-full"></div>
+                            <div class="h-2 bg-gray-300 rounded w-5/6"></div>
+                            <div class="h-2 bg-gray-300 rounded w-4/6"></div>
+                            <div class="h-2 bg-gray-300 rounded w-full"></div>
+                        </div>
+                        <!-- Main Content -->
+                        <div class="w-3/4 p-6 flex flex-col space-y-4">
+                            <div class="h-8 bg-gray-200 rounded w-1/2 mb-4"></div>
+                            <div class="h-3 bg-gray-100 rounded w-full"></div>
+                            <div class="h-3 bg-gray-100 rounded w-full"></div>
+                            <div class="h-3 bg-gray-100 rounded w-5/6 mb-4"></div>
+                            
+                            <div class="flex-1 bg-blue-50 border border-blue-100 rounded flex items-center justify-center text-blue-300 text-xs font-bold uppercase wireframe-block">
+                                Embedded Media
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                id: 'resolve',
+                title: 'Resolve / Support',
+                description: 'User needs an immediate answer while customer is on hold.',
+                exampleQuery: '"What is the towing limit for an Ohio transition policy?"',
+                layoutTitle: 'Split Layout (60/40)',
+                progContext: 'A consultant has Maria on the phone. She is moving to OH. The consultant does not have time to read a full manual; they need the exact rule and the legal disclaimer to read aloud.',
+                agenticLogic: 'The AI detects an "immediate resolution" intent. It grabs a Split Layout. It extracts just the exact policy snippet for the main slot, and forces the mandatory Ohio Legal Disclaimer into the right slot to ensure compliance.',
+                blocks: [
+                    { name: 'Targeted Prose Block', desc: 'Extracted exact answer (Towing limits).' },
+                    { name: 'Compliance Block', desc: 'Pre-approved legal disclaimer (ORC 3937).' },
+                    { name: 'Action Block', desc: 'Button to email policy to customer.' }
+                ],
+                wireframeHTML: `
+                    <div class="w-full max-w-2xl bg-white border border-gray-200 rounded-lg shadow-sm flex flex-col h-96 overflow-hidden fade-in">
+                        <!-- Header -->
+                        <div class="h-16 bg-progblue px-4 flex items-center">
+                            <div class="h-4 bg-white/20 rounded w-1/3"></div>
+                        </div>
+                        <!-- Body -->
+                        <div class="flex flex-1 p-4 space-x-4">
+                            <!-- Left: Answer -->
+                            <div class="w-3/5 border border-gray-100 rounded p-4 flex flex-col space-y-3">
+                                <div class="h-4 bg-gray-300 rounded w-1/2 mb-2"></div>
+                                <div class="h-2 bg-proggreen rounded w-full"></div>
+                                <div class="h-2 bg-proggreen rounded w-5/6"></div>
+                                <div class="h-2 bg-proggreen rounded w-4/6"></div>
+                            </div>
+                            <!-- Right: Compliance & Action -->
+                            <div class="w-2/5 flex flex-col space-y-4">
+                                <div class="flex-1 bg-yellow-50 border border-yellow-200 rounded p-3">
+                                    <div class="h-2 bg-yellow-400 rounded w-1/2 mb-3"></div>
+                                    <div class="h-2 bg-yellow-200 rounded w-full mb-1"></div>
+                                    <div class="h-2 bg-yellow-200 rounded w-full mb-1"></div>
+                                    <div class="h-2 bg-yellow-200 rounded w-3/4"></div>
+                                </div>
+                                <div class="h-10 bg-progblue rounded w-full flex items-center justify-center text-white text-xs font-bold">
+                                    ACTION
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                id: 'simulate',
+                title: 'Simulate / Transact',
+                description: 'User needs to walk through a multi-step process.',
+                exampleQuery: '"Guide me through filing a Commercial Auto glass claim."',
+                layoutTitle: 'Side-by-Side (50/50 Interactive)',
+                progContext: 'Filing a commercial claim involves collecting strict data points. If the consultant gets confused about what a field means, they usually have to open another tab, losing their place in the form.',
+                agenticLogic: 'The AI detects a "transactional" intent. It uses a 50/50 layout. The left side is the Action Block (the form workflow). The right side is a dynamic Prose Block that automatically updates with contextual help based on which form field the user is focused on.',
+                blocks: [
+                    { name: 'Interactive Action Block', desc: 'The step-by-step form workflow.' },
+                    { name: 'Dynamic Prose Block', desc: 'Contextual help that changes per step.' },
+                    { name: 'Card Block', desc: 'Summary of collected data.' }
+                ],
+                wireframeHTML: `
+                    <div class="w-full max-w-2xl bg-white border border-gray-200 rounded-lg shadow-sm flex h-96 overflow-hidden fade-in">
+                        <!-- Left: Form -->
+                        <div class="w-1/2 p-6 flex flex-col space-y-5 border-r border-gray-100">
+                            <div class="h-5 bg-gray-300 rounded w-2/3 mb-2"></div>
+                            <div class="border border-gray-200 rounded p-2"><div class="h-2 bg-gray-200 w-1/4"></div></div>
+                            <div class="border border-gray-200 rounded p-2"><div class="h-2 bg-gray-200 w-1/3"></div></div>
+                            <div class="border border-blue-400 ring-2 ring-blue-100 rounded p-2"><div class="h-2 bg-blue-300 w-1/2"></div></div>
+                            <div class="mt-auto h-8 bg-progblue rounded w-full"></div>
+                        </div>
+                        <!-- Right: Context -->
+                        <div class="w-1/2 bg-proglite p-6 flex flex-col">
+                            <div class="flex items-center space-x-2 mb-4">
+                                <div class="w-4 h-4 rounded-full bg-progblue"></div>
+                                <div class="h-3 bg-progblue rounded w-1/2"></div>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="h-2 bg-blue-200 rounded w-full"></div>
+                                <div class="h-2 bg-blue-200 rounded w-full"></div>
+                                <div class="h-2 bg-blue-200 rounded w-4/5"></div>
+                                <div class="h-2 bg-blue-200 rounded w-5/6 mt-4"></div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                id: 'govern',
+                title: 'Govern / Review',
+                description: 'Compliance team reviewing drafted policy changes.',
+                exampleQuery: 'System Trigger: "Draft submitted for FL Homeowners policy."',
+                layoutTitle: 'Diff / Review Layout',
+                progContext: 'Legal and compliance teams don\'t care what the article looks like to the consultant. They only care about what changed, who changed it, and what the effective active date is.',
+                agenticLogic: 'The AI detects a "review" workflow intent. It bypasses consumer UI entirely and generates a Diff Layout. It highlights deletions in red, additions in green, and isolates the Active Date metadata field for sign-off.',
+                blocks: [
+                    { name: 'Diff Prose Block', desc: 'Highlights redlines (additions/deletions).' },
+                    { name: 'Metadata Block', desc: 'Shows State, Role access, and Active Date.' },
+                    { name: 'Approval Action Block', desc: 'Accept / Reject workflow buttons.' }
+                ],
+                wireframeHTML: `
+                    <div class="w-full max-w-2xl bg-white border border-gray-200 rounded-lg shadow-sm flex flex-col h-96 overflow-hidden fade-in">
+                        <!-- Metadata Header -->
+                        <div class="bg-gray-100 p-4 border-b border-gray-200 flex justify-between items-center">
+                            <div class="h-3 bg-gray-400 rounded w-1/3"></div>
+                            <div class="h-4 bg-yellow-300 rounded w-1/6"></div>
+                        </div>
+                        <!-- Body -->
+                        <div class="flex-1 p-6 space-y-4 overflow-y-auto">
+                            <div class="bg-red-50 border-l-4 border-red-400 p-3 line-through text-red-300 text-sm">
+                                <div class="h-2 bg-red-200 rounded w-full mb-1"></div>
+                                <div class="h-2 bg-red-200 rounded w-4/5"></div>
+                            </div>
+                            <div class="bg-green-50 border-l-4 border-green-400 p-3 text-green-700 text-sm">
+                                <div class="h-2 bg-green-300 rounded w-full mb-1"></div>
+                                <div class="h-2 bg-green-300 rounded w-11/12 mb-1"></div>
+                                <div class="h-2 bg-green-300 rounded w-4/5"></div>
+                            </div>
+                        </div>
+                        <!-- Footer Actions -->
+                        <div class="bg-gray-50 border-t border-gray-200 p-4 flex justify-end space-x-3">
+                            <div class="h-8 bg-gray-300 rounded w-24"></div>
+                            <div class="h-8 bg-proggreen rounded w-32"></div>
+                        </div>
+                    </div>
+                `
+            }
+        ];
+
+        let currentActiveId = null;
+
+        function init() {
+            const list = document.getElementById('intentList');
+            
+            intentData.forEach(intent => {
+                const btn = document.createElement('button');
+                btn.id = `btn-${intent.id}`;
+                btn.className = 'w-full text-left p-4 rounded-lg border-2 border-transparent bg-gray-50 hover:bg-gray-100 transition-all group';
+                btn.onclick = () => selectIntent(intent.id);
+                
+                btn.innerHTML = `
+                    <div class="flex justify-between items-start mb-1">
+                        <h3 class="font-bold text-gray-800 group-hover:text-progblue transition-colors">${intent.title}</h3>
+                    </div>
+                    <p class="text-xs text-gray-500 mb-2">${intent.description}</p>
+                    <div class="bg-white border border-gray-200 rounded p-2 text-[10px] text-gray-600 italic">
+                        ${intent.exampleQuery}
+                    </div>
+                `;
+                list.appendChild(btn);
+            });
+        }
+
+        function selectIntent(id) {
+            const data = intentData.find(i => i.id === id);
+            if (!data) return;
+
+            // Update UI State for buttons
+            if (currentActiveId) {
+                const oldBtn = document.getElementById(`btn-${currentActiveId}`);
+                oldBtn.classList.remove('border-progblue', 'bg-proglite');
+                oldBtn.classList.add('border-transparent', 'bg-gray-50');
+            }
+            
+            const newBtn = document.getElementById(`btn-${id}`);
+            newBtn.classList.remove('border-transparent', 'bg-gray-50');
+            newBtn.classList.add('border-progblue', 'bg-proglite');
+            currentActiveId = id;
+
+            // Update Main View
+            document.getElementById('layoutTitle').innerText = data.layoutTitle;
+            const vizArea = document.getElementById('visualizationArea');
+            vizArea.innerHTML = data.wireframeHTML;
+
+            // Update Rationale Area
+            const rationaleArea = document.getElementById('rationaleArea');
+            rationaleArea.classList.remove('hidden');
+            
+            // Force reflow to restart animation
+            rationaleArea.classList.remove('fade-in');
+            void rationaleArea.offsetWidth;
+            rationaleArea.classList.add('fade-in');
+
+            document.getElementById('progContext').innerHTML = `<strong>Pain Point:</strong> ${data.progContext}`;
+            document.getElementById('agenticLogic').innerHTML = data.agenticLogic;
+            
+            const blockList = document.getElementById('blockList');
+            blockList.innerHTML = '';
+            data.blocks.forEach(block => {
+                const li = document.createElement('li');
+                li.className = 'flex items-start bg-gray-50 p-2 rounded border border-gray-100';
+                li.innerHTML = `
+                    <div class="mt-0.5 mr-2 text-progblue">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold text-gray-800">${block.name}</p>
+                        <p class="text-[10px] text-gray-500 mt-0.5">${block.desc}</p>
+                    </div>
+                `;
+                blockList.appendChild(li);
+            });
+        }
+
+        // Initialize on load
+        window.onload = init;
+    </script>
+</body>
+</html>
