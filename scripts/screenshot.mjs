@@ -21,7 +21,7 @@ const slug = (parsed.pathname + parsed.search)
   .replace(/-+/g, '-')
   .replace(/^-|-$/g, '') || 'home';
 
-const outDir = join(dirname(__dirname), 'screenshots');
+const outDir = join(dirname(__dirname), 'public', 'screenshots');
 if (!existsSync(outDir)) mkdirSync(outDir, { recursive: true });
 const outPath = join(outDir, `${slug}.png`);
 

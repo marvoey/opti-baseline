@@ -434,7 +434,6 @@ function SearchBar({ query, compact = false }: { query: string; compact?: boolea
             ? 'w-full p-2 pl-10 rounded border border-slate-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500'
             : 'w-full p-4 pl-12 rounded-lg border border-slate-300 shadow-sm text-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
         }
-        placeholder="e.g., Commercial auto hail deductible Florida vs Georgia"
       />
       <Search
         className={compact ? 'absolute left-3 top-2.5 text-slate-400' : 'absolute left-4 top-4 text-slate-400'}
