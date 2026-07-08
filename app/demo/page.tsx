@@ -131,13 +131,13 @@ export default function ProgressiveInteractiveDemoPage() {
     <div className="bg-gray-100 text-gray-800 h-screen flex flex-col overflow-hidden font-sans">
 
       {/* Top Navigation */}
-      <header className="bg-white border-b border-gray-200 h-16 flex items-center justify-between px-6 shrink-0 z-10 relative shadow-sm">
-        <div className="flex items-center gap-4">
-          <div className="text-[#007BC7] font-bold text-2xl tracking-tight italic">PROGRESSIVE</div>
-          <span className="text-gray-400 font-light text-xl">|</span>
-          <span className="text-gray-600 font-medium">Consultant Workspace</span>
+      <header className="bg-white border-b border-gray-200 h-16 flex items-center justify-between px-4 md:px-6 shrink-0 z-10 relative shadow-sm gap-2">
+        <div className="flex items-center gap-2 md:gap-4 min-w-0">
+          <div className="text-[#007BC7] font-bold text-xl md:text-2xl tracking-tight italic shrink-0">PROGRESSIVE</div>
+          <span className="text-gray-400 font-light text-xl hidden sm:inline">|</span>
+          <span className="text-gray-600 font-medium text-sm md:text-base hidden sm:inline">Consultant Workspace</span>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 md:gap-4 shrink-0">
           {showToggleBtn && (
             <Link
               href="/demo/cms"
@@ -155,10 +155,10 @@ export default function ProgressiveInteractiveDemoPage() {
       {/* Main Content */}
       <main className="flex-1 flex overflow-hidden relative">
 
-        <div className="flex w-full h-full">
+        <div className="flex flex-col md:flex-row w-full h-full">
 
-          {/* Customer Context Sidebar */}
-          <div className="w-1/3 bg-white border-r border-gray-200 p-6 flex flex-col">
+          {/* Customer Context Sidebar — hidden on mobile */}
+          <div className="hidden md:flex md:w-1/3 bg-white border-r border-gray-200 p-6 flex-col">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-lg font-bold text-gray-800">Active Call</h2>
               <span className="bg-red-100 text-red-700 text-xs font-bold px-2 py-1 rounded animate-pulse">03:42</span>
@@ -197,11 +197,11 @@ export default function ProgressiveInteractiveDemoPage() {
           </div>
 
           {/* Opal Copilot Area */}
-          <div className="w-2/3 bg-gray-50 flex flex-col">
+          <div className="w-full md:w-2/3 bg-gray-50 flex flex-col">
 
             {/* Behind-the-scenes architecture pop-up — fixed to far left so it never overlaps the assistant */}
             {backstagePhase >= 1 && backstagePhase <= 5 && (
-              <div className="fixed top-20 left-4 z-50 slide-in-right" style={{ width: 340 }}>
+              <div className="fixed top-20 left-2 right-2 md:left-4 md:right-auto z-50 slide-in-right" style={{ maxWidth: 340 }}>
                 <div className="bg-gray-900 rounded-xl shadow-2xl border border-gray-700 overflow-hidden">
                   <div className="flex items-center justify-between px-4 py-3 bg-gray-800 border-b border-gray-700">
                     <div className="flex items-center gap-2">

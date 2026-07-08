@@ -50,16 +50,16 @@ const INIT_MSG: ChatMsg = {
 
 function LiveDiscountsUI() {
   return (
-    <div className="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden slide-in-right flex flex-col h-[600px]">
-      <div className="bg-[#007bc4] text-white p-5 flex justify-between items-start flex-shrink-0">
+    <div className="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden slide-in-right flex flex-col">
+      <div className="bg-[#007bc4] text-white p-4 md:p-5 flex justify-between items-start flex-shrink-0">
         <div>
           <h2 className="text-2xl font-bold">Auto Coverage &amp; Discounts Playbook</h2>
           <p className="text-blue-100 text-sm mt-1">Sourced from Progressive.com / Auto</p>
         </div>
         <span className="bg-blue-800 text-xs px-3 py-1 rounded-full font-semibold">Live Data Mode</span>
       </div>
-      <div className="flex flex-1 overflow-hidden">
-        <div className="w-1/2 p-6 overflow-y-auto border-r border-gray-100 bg-gray-50">
+      <div className="flex flex-col md:flex-row flex-1 overflow-hidden">
+        <div className="w-full md:w-1/2 p-4 md:p-6 overflow-y-auto border-b md:border-b-0 md:border-r border-gray-100 bg-gray-50">
           <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4 border-b border-gray-200 pb-2">Savings &amp; Discount Toolkit</h3>
           <div className="space-y-4">
             {[
@@ -97,7 +97,7 @@ function LiveDiscountsUI() {
           </div>
         </div>
 
-        <div className="w-1/2 p-6 overflow-y-auto bg-white">
+        <div className="w-full md:w-1/2 p-4 md:p-6 overflow-y-auto bg-white">
           <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4 border-b border-gray-200 pb-2">Coverage Options to Review</h3>
           <div className="space-y-5">
             <div>
@@ -156,8 +156,8 @@ function ResolveUI() {
 
 function SimulateUI() {
   return (
-    <div className="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden slide-in-right flex h-[500px]">
-      <div className="w-1/2 p-8 border-r border-gray-200 flex flex-col">
+    <div className="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden slide-in-right flex flex-col md:flex-row">
+      <div className="w-full md:w-1/2 p-6 md:p-8 border-b md:border-b-0 md:border-r border-gray-200 flex flex-col">
         <h2 className="text-xl font-bold text-gray-800 mb-6 flex items-center">
           <svg className="w-5 h-5 mr-2 text-[#007bc4]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -189,7 +189,7 @@ function SimulateUI() {
         </div>
         <button className="w-full bg-[#007bc4] hover:bg-[#005b94] text-white font-bold py-3 rounded transition-colors text-sm mt-4">Generate Claim Draft</button>
       </div>
-      <div className="w-1/2 bg-gray-50 p-8 flex flex-col">
+      <div className="w-full md:w-1/2 bg-gray-50 p-6 md:p-8 flex flex-col">
         <div className="flex items-center gap-2 mb-4 pb-4 border-b border-gray-200">
           <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -270,19 +270,19 @@ export default function DemoV2Page() {
     <div className="bg-gray-50 flex flex-col h-screen overflow-hidden font-sans text-gray-800">
 
       {/* Header */}
-      <header className="bg-white border-b border-gray-200 px-6 py-4 flex justify-between items-center shadow-sm z-10 shrink-0">
-        <div className="flex items-center gap-3">
+      <header className="bg-white border-b border-gray-200 px-4 md:px-6 py-3 md:py-4 flex justify-between items-center shadow-sm z-10 shrink-0 gap-3">
+        <div className="flex items-center gap-2 md:gap-3 min-w-0">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo.svg" alt="Progressive Insurance" className="h-8 w-auto object-contain" />
-          <h1 className="text-xl font-bold text-gray-800">Intelligent Enablement Portal</h1>
-          <span className="bg-blue-100 text-[#007bc4] text-xs font-semibold px-2 py-1 rounded-full">Live Progressive.com Simulation</span>
+          <img src="/logo.svg" alt="Progressive Insurance" className="h-7 md:h-8 w-auto object-contain shrink-0" />
+          <h1 className="text-base md:text-xl font-bold text-gray-800 hidden sm:block truncate">Intelligent Enablement Portal</h1>
+          <span className="bg-blue-100 text-[#007bc4] text-xs font-semibold px-2 py-1 rounded-full hidden md:inline shrink-0">Live Progressive.com Simulation</span>
         </div>
-        <div className="flex items-center gap-4 text-sm">
-          <div className="text-right">
+        <div className="flex items-center gap-2 md:gap-4 text-sm shrink-0">
+          <div className="text-right hidden sm:block">
             <p className="font-bold text-gray-700">Alex</p>
             <p className="text-gray-500 text-xs">Consultant • Columbus CC</p>
           </div>
-          <div className="w-10 h-10 bg-gray-200 rounded-full border-2 border-[#007bc4] overflow-hidden flex items-center justify-center text-gray-400">
+          <div className="w-9 h-9 md:w-10 md:h-10 bg-gray-200 rounded-full border-2 border-[#007bc4] overflow-hidden flex items-center justify-center text-gray-400">
             <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
             </svg>
@@ -308,10 +308,10 @@ export default function DemoV2Page() {
       </nav>
 
       {/* Workspace */}
-      <div className="flex flex-1 overflow-hidden">
+      <div className="flex flex-col md:flex-row flex-1 overflow-hidden">
 
         {/* Left: chat */}
-        <div className="w-1/3 bg-white border-r border-gray-200 flex flex-col shadow-lg z-10 flex-shrink-0">
+        <div className="w-full md:w-1/3 bg-white border-b md:border-b-0 md:border-r border-gray-200 flex flex-col shadow-lg z-10 shrink-0 max-h-52 md:max-h-none">
           <div className="p-4 border-b border-gray-100 bg-gray-50 flex items-center justify-between">
             <h2 className="text-xs font-bold text-gray-400 uppercase tracking-wider">Assistant Chat</h2>
             <div className="w-2 h-2 bg-[#00a900] rounded-full animate-pulse" />
@@ -349,7 +349,7 @@ export default function DemoV2Page() {
         </div>
 
         {/* Right: assembly engine + generated UI */}
-        <div className="w-2/3 bg-gray-100 flex flex-col relative">
+        <div className="w-full md:w-2/3 bg-gray-100 flex flex-col relative">
 
           {/* empty state */}
           {!engineVisible && (

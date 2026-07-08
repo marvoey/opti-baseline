@@ -225,7 +225,7 @@ function ActIntroSlide({ slide }: { slide: Extract<Slide, { kind: 'act-intro' }>
       </div>
 
       {/* Two-column body */}
-      <div style={{ flex: 1, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, minHeight: 0 }}>
+      <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 min-h-0 overflow-y-auto">
         {/* Left: overview */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
           <div>
@@ -305,7 +305,7 @@ function ActSlide({ slide }: { slide: Extract<Slide, { kind: 'act' }> }) {
     return (
       <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
         {header}
-        <div style={{ flex: 1, display: 'grid', gridTemplateColumns: '38% 1fr', gap: 20, minHeight: 0 }}>
+        <div className="flex-1 grid grid-cols-1 md:grid-cols-[38%_1fr] gap-5 min-h-0">
 
           {/* Left: Action + Talk Track */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10, minHeight: 0 }}>
@@ -523,7 +523,8 @@ export default function DemoFlowPage() {
 
       {/* Slide content */}
       <main
-        style={{ flex: 1, overflow: 'hidden', padding: '28px 48px 16px' }}
+        className="px-4 sm:px-8 md:px-12 pt-7 pb-4"
+        style={{ flex: 1, overflow: 'hidden' }}
         onClick={() => go(idx + 1)}
         title="Click to advance"
       >

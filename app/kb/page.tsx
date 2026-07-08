@@ -456,8 +456,8 @@ function SearchBar({ query, compact = false }: { query: string; compact?: boolea
 function BrowseHeader({ crumb, subtitle }: { crumb: string; subtitle: string }) {
   return (
     <div className="border-b border-slate-200 bg-slate-50">
-      <div className="max-w-6xl mx-auto px-8 pt-5 pb-4">
-        <div className="flex items-center gap-4 mb-4">
+      <div className="max-w-6xl mx-auto px-4 md:px-8 pt-5 pb-4">
+        <div className="flex flex-wrap items-center gap-3 md:gap-4 mb-4">
           <div className="h-7">
             <ProgressiveLogo />
           </div>
@@ -485,7 +485,7 @@ function LobView() {
         crumb="Browse by Line of Business"
         subtitle="Select a line of business to view policies, guidelines, and rate documents."
       />
-      <div className="max-w-6xl mx-auto px-8 py-8">
+      <div className="max-w-6xl mx-auto px-4 md:px-8 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
           {LOBS.map(lob => {
             const Icon = lob.icon;
@@ -566,7 +566,7 @@ function RecentView() {
         crumb="Recent Updates"
         subtitle="Policy changes, product launches, regulatory notices, and internal bulletins — newest first."
       />
-      <div className="max-w-4xl mx-auto px-8 py-8">
+      <div className="max-w-4xl mx-auto px-4 md:px-8 py-8">
 
         <div className="flex items-center gap-3 mb-6 text-lg font-semibold">
           <span className="text-slate-500 mr-1">Filter:</span>
@@ -651,7 +651,7 @@ function DirectoryView() {
         crumb="Agent Directory"
         subtitle="Internal support contacts, regional field offices, and agent tools. For external agent enquiries call 1-855-347-3939."
       />
-      <div className="max-w-6xl mx-auto px-8 py-8 space-y-10">
+      <div className="max-w-6xl mx-auto px-4 md:px-8 py-8 space-y-10">
 
         {/* Support Teams */}
         <section>
@@ -692,8 +692,8 @@ function DirectoryView() {
           <h2 className="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
             <MapPin size={16} className="text-blue-500" /> Regional Field Offices
           </h2>
-          <div className="overflow-hidden rounded-xl border border-slate-200">
-            <table className="w-full text-xl">
+          <div className="overflow-x-auto rounded-xl border border-slate-200">
+            <table className="w-full text-xl min-w-[640px]">
               <thead className="bg-slate-50 border-b border-slate-200">
                 <tr>
                   <th className="text-left px-5 py-3 text-lg font-semibold text-slate-500 uppercase tracking-wide">Region</th>
@@ -867,7 +867,7 @@ function ResultsView({ query, filters }: { query: string; filters: ActiveFilters
       />
 
       {/* Sort / count bar */}
-      <div className="border-b border-slate-100 bg-slate-50 px-8 py-2.5 flex items-center justify-between text-lg text-slate-500">
+      <div className="border-b border-slate-100 bg-slate-50 px-4 md:px-8 py-2.5 flex flex-wrap items-center justify-between gap-2 text-lg text-slate-500">
         <span>
           Showing{' '}
           <strong className="text-slate-700">1–{results.length}</strong> of{' '}
@@ -896,8 +896,8 @@ function ResultsView({ query, filters }: { query: string; filters: ActiveFilters
 
       <div className="flex max-w-7xl mx-auto">
 
-        {/* ── Sidebar ── */}
-        <aside className="w-64 shrink-0 border-r border-slate-100 px-5 py-6 space-y-5">
+        {/* ── Sidebar — hidden on mobile ── */}
+        <aside className="hidden lg:block w-64 shrink-0 border-r border-slate-100 px-5 py-6 space-y-5">
           <div className="flex items-center justify-between mb-1">
             <span className="flex items-center gap-2 text-lg font-bold text-slate-600 uppercase tracking-wide">
               <SlidersHorizontal size={13} /> Filter Results
@@ -924,7 +924,7 @@ function ResultsView({ query, filters }: { query: string; filters: ActiveFilters
         </aside>
 
         {/* ── Results ── */}
-        <main className="flex-1 px-8 py-6">
+        <main className="flex-1 px-4 md:px-8 py-6 min-w-0">
           {results.length === 0 ? (
             <div className="text-center py-16 text-slate-400">
               <FileText size={40} className="mx-auto mb-3 opacity-30" />
@@ -994,21 +994,21 @@ function DocumentView({ doc, query }: { doc: (typeof DOCS)[number]; query: strin
   const displayTitle = doc.title.replace(/_/g, ' ').replace('.pdf', '').replace('.docx', '');
   return (
     <div className="min-h-[600px] bg-slate-100 flex flex-col">
-      <div className="bg-slate-800 text-white p-3 flex justify-between items-center shadow-md z-10">
+      <div className="bg-slate-800 text-white p-3 flex justify-between items-center shadow-md z-10 gap-3 overflow-hidden">
         <Link
           href={`/kb?q=${encodeURIComponent(query)}`}
-          className="flex items-center gap-2 hover:bg-slate-700 px-3 py-1 rounded transition-colors"
+          className="flex items-center gap-2 hover:bg-slate-700 px-3 py-1 rounded transition-colors shrink-0"
         >
-          <ChevronLeft size={18} /> Back to Search Results
+          <ChevronLeft size={18} /> <span className="hidden sm:inline">Back to Search Results</span>
         </Link>
-        <span className="font-mono text-xl">{doc.title}</span>
+        <span className="font-mono text-sm md:text-xl truncate">{doc.title}</span>
         <div className="flex gap-4">
           <FileDown size={18} className="cursor-pointer hover:text-blue-300" />
         </div>
       </div>
 
-      <div className="flex-1 p-8 flex justify-center overflow-auto">
-        <div className="bg-white w-full max-w-3xl shadow-xl p-12 min-h-[800px]">
+      <div className="flex-1 p-4 md:p-8 flex justify-center overflow-auto">
+        <div className="bg-white w-full max-w-3xl shadow-xl p-6 md:p-12 min-h-[800px]">
           <div className="border-b-2 border-black pb-4 mb-8">
             <h1 className="text-4xl font-bold text-center uppercase tracking-widest">{displayTitle}</h1>
             <p className="text-center text-xl mt-2 font-bold">CONFIDENTIAL AND PROPRIETARY</p>
