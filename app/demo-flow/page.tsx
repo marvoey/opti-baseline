@@ -76,6 +76,7 @@ const SLIDES: Slide[] = [
   },
   {
     kind: 'act', num: 2, scene: 2,
+    image: '/screenshots/demo-v2-clicked.png',
     intent: 'Compare Intent',
     action: 'Sarah types: "Compare that to Georgia." She does not navigate away or open a new document.',
     result: 'The Generative UI dynamically reframes itself, assembling a side-by-side comparison matrix: Florida $1,000 vs. Georgia $750. Every data point has a "View Source" citation.',
@@ -124,7 +125,7 @@ function Badge({ children, color = G, bg = 'transparent', border = true }: { chi
       background: bg,
       border: border ? `1px solid ${color}` : 'none',
       color,
-      fontSize: 11,
+      fontSize: 17,
       fontWeight: 700,
       letterSpacing: 2.5,
       textTransform: 'uppercase' as const,
@@ -149,7 +150,7 @@ function CoverSlide() {
         <OptiMark size={150} />
       </div>
 
-      <div style={{ fontSize: 11, letterSpacing: 4, color: G, textTransform: 'uppercase', fontWeight: 700, marginBottom: 20 }}>
+      <div style={{ fontSize: 17, letterSpacing: 4, color: G, textTransform: 'uppercase', fontWeight: 700, marginBottom: 20 }}>
         Optimizely × Progressive Insurance
       </div>
 
@@ -161,12 +162,12 @@ function CoverSlide() {
         From <em style={{ color: ML }}>"Search and Read"</em> to <strong style={{ color: W }}>Intent-Driven Layout Assembly</strong> — powered headlessly by an Agentic CMS.
       </p>
 
-      <div style={{ display: 'flex', gap: 12, alignItems: 'center', padding: '8px 20px', border: `1px solid ${BR}`, borderRadius: 100, fontSize: 12, color: M }}>
+      <div style={{ display: 'flex', gap: 12, alignItems: 'center', padding: '8px 20px', border: `1px solid ${BR}`, borderRadius: 100, fontSize: 18, color: M }}>
         Press
-        <kbd style={{ background: S2, border: `1px solid ${BRL}`, borderRadius: 5, padding: '2px 8px', fontFamily: 'monospace', color: ML, fontSize: 11 }}>→</kbd>
+        <kbd style={{ background: S2, border: `1px solid ${BRL}`, borderRadius: 5, padding: '2px 8px', fontFamily: 'monospace', color: ML, fontSize: 17 }}>→</kbd>
         to advance
         <span style={{ color: BR }}>·</span>
-        <kbd style={{ background: S2, border: `1px solid ${BRL}`, borderRadius: 5, padding: '2px 8px', fontFamily: 'monospace', color: ML, fontSize: 11 }}>Space</kbd>
+        <kbd style={{ background: S2, border: `1px solid ${BRL}`, borderRadius: 5, padding: '2px 8px', fontFamily: 'monospace', color: ML, fontSize: 17 }}>Space</kbd>
         to continue
       </div>
     </div>
@@ -177,7 +178,7 @@ function ReframeSlide() {
   return (
     <div style={{ height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '0 80px', textAlign: 'center' }}>
       <div style={{ maxWidth: 860 }}>
-        <Badge>The Core Reframe</Badge>
+        <Badge>Reframe</Badge>
 
         <blockquote style={{ margin: '28px 0 24px', padding: 0, fontSize: 'clamp(20px, 3vw, 36px)', fontWeight: 700, color: W, lineHeight: 1.35, letterSpacing: '-0.3px', fontStyle: 'italic', borderLeft: 'none' }}>
           &ldquo;We are moving from a{' '}
@@ -186,7 +187,7 @@ function ReframeSlide() {
           <span style={{ color: G }}>&lsquo;Intent-Driven Layout Assembly&rsquo;.</span>&rdquo;
         </blockquote>
 
-        <p style={{ fontSize: 16, color: ML, lineHeight: 1.75, marginBottom: 28 }}>
+        <p style={{ fontSize: 24, color: ML, lineHeight: 1.6, marginBottom: 36 }}>
           This demo is structured to contrast the painful <strong style={{ color: W }}>Now</strong> — navigating static documents — with the dynamic <strong style={{ color: W }}>Future</strong> — multi-intent Generative UI powered by an Agentic CMS.
         </p>
 
@@ -198,13 +199,13 @@ function ReframeSlide() {
             { label: 'Act 3', name: 'The Engine', color: D3 },
           ].map(a => (
             <div key={a.label} style={{ background: S1, border: `1px solid ${BR}`, borderRadius: 10, padding: '10px 18px', textAlign: 'center', minWidth: 160 }}>
-              <p style={{ fontSize: 10, color: a.color, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', margin: '0 0 4px' }}>{a.label}</p>
-              <p style={{ fontSize: 14, color: W, fontWeight: 600, margin: 0 }}>{a.name}</p>
+              <p style={{ fontSize: 15, color: a.color, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', margin: '0 0 4px' }}>{a.label}</p>
+              <p style={{ fontSize: 21, color: W, fontWeight: 600, margin: 0 }}>{a.name}</p>
             </div>
           ))}
         </div>
 
-        <p style={{ fontSize: 12, color: M, marginTop: 20, fontStyle: 'italic' }}>
+        <p style={{ fontSize: 18, color: M, marginTop: 20, fontStyle: 'italic' }}>
           Note: The &ldquo;Govern/Review&rdquo; intent is intentionally excluded to focus on the contrast between static retrieval and dynamic assembly.
         </p>
       </div>
@@ -235,18 +236,18 @@ function ActIntroSlide({ slide }: { slide: Extract<Slide, { kind: 'act-intro' }>
           </div>
 
           <div>
-            <p style={{ fontSize: 10, color: M, letterSpacing: 2.5, textTransform: 'uppercase', fontWeight: 700, margin: '0 0 10px' }}>Active Intents</p>
+            <p style={{ fontSize: 15, color: M, letterSpacing: 2.5, textTransform: 'uppercase', fontWeight: 700, margin: '0 0 10px' }}>Active Intents</p>
             <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' as const }}>
               {slide.num === 1
                 ? ['Search', 'Read'].map(i => (
-                  <span key={i} style={{ background: PBGL, border: `1px solid ${PAIN}55`, color: PAIN, fontSize: 13, fontWeight: 700, padding: '5px 14px', borderRadius: 7, letterSpacing: 0.5 }}>{i}</span>
+                  <span key={i} style={{ background: PBGL, border: `1px solid ${PAIN}55`, color: PAIN, fontSize: 20, fontWeight: 700, padding: '5px 14px', borderRadius: 7, letterSpacing: 0.5 }}>{i}</span>
                 ))
                 : slide.num === 2
                 ? ['Retrieve', 'Compare'].map(i => (
-                  <span key={i} style={{ background: S2, border: `1px solid ${BRL}`, color: G, fontSize: 13, fontWeight: 700, padding: '5px 14px', borderRadius: 7, letterSpacing: 0.5 }}>{i}</span>
+                  <span key={i} style={{ background: S2, border: `1px solid ${BRL}`, color: G, fontSize: 20, fontWeight: 700, padding: '5px 14px', borderRadius: 7, letterSpacing: 0.5 }}>{i}</span>
                 ))
                 : ['Ingest', 'Variant Assembly'].map(i => (
-                  <span key={i} style={{ background: S2, border: `1px solid ${BRL}`, color: G, fontSize: 13, fontWeight: 700, padding: '5px 14px', borderRadius: 7, letterSpacing: 0.5 }}>{i}</span>
+                  <span key={i} style={{ background: S2, border: `1px solid ${BRL}`, color: G, fontSize: 20, fontWeight: 700, padding: '5px 14px', borderRadius: 7, letterSpacing: 0.5 }}>{i}</span>
                 ))
               }
             </div>
@@ -256,21 +257,21 @@ function ActIntroSlide({ slide }: { slide: Extract<Slide, { kind: 'act-intro' }>
         {/* Right: persona + scenario */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 14, minHeight: 0 }}>
           <div style={{ background: badgeBg, border: `1px solid ${BR}`, borderRadius: 12, padding: '16px 20px', flexShrink: 0 }}>
-            <p style={{ fontSize: 10, color: M, letterSpacing: 2.5, textTransform: 'uppercase', fontWeight: 700, margin: '0 0 12px' }}>The Persona</p>
+            <p style={{ fontSize: 15, color: M, letterSpacing: 2.5, textTransform: 'uppercase', fontWeight: 700, margin: '0 0 12px' }}>The Persona</p>
             <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
               <div style={{ width: 46, height: 46, borderRadius: '50%', background: S2, border: `2px solid ${accent}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18, fontWeight: 800, color: accent, flexShrink: 0 }}>
                 {slide.persona.name[0]}
               </div>
               <div>
                 <p style={{ fontWeight: 700, color: W, fontSize: 16, margin: '0 0 2px' }}>{slide.persona.name}</p>
-                <p style={{ color: ML, fontSize: 13, margin: 0 }}>{slide.persona.role}</p>
+                <p style={{ color: ML, fontSize: 20, margin: 0 }}>{slide.persona.role}</p>
               </div>
             </div>
           </div>
 
           <div style={{ background: badgeBg, border: `1px solid ${BR}`, borderRadius: 12, padding: '16px 20px', flex: 1, minHeight: 0, overflow: 'auto' }}>
-            <p style={{ fontSize: 10, color: M, letterSpacing: 2.5, textTransform: 'uppercase', fontWeight: 700, margin: '0 0 12px' }}>The Scenario</p>
-            <p style={{ fontSize: 14, color: ML, lineHeight: 1.75, margin: 0 }}>{slide.description}</p>
+            <p style={{ fontSize: 15, color: M, letterSpacing: 2.5, textTransform: 'uppercase', fontWeight: 700, margin: '0 0 12px' }}>The Scenario</p>
+            <p style={{ fontSize: 21, color: ML, lineHeight: 1.6, margin: 0 }}>{slide.description}</p>
           </div>
         </div>
       </div>
@@ -288,11 +289,11 @@ function ActSlide({ slide }: { slide: Extract<Slide, { kind: 'act' }> }) {
   const header = (
     <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 20, flexShrink: 0 }}>
       <Badge color={accent}>Act {slide.num} / Scene {slide.scene}</Badge>
-      <span style={{ fontSize: 14, fontWeight: 600, color: W }}>
+      <span style={{ fontSize: 21, fontWeight: 600, color: W }}>
         <span style={{ color: slide.pain ? PAIN : G }}>Intent:</span> {slide.intent}
       </span>
       {slide.pain && (
-        <span style={{ marginLeft: 'auto', fontSize: 11, color: PAIN, border: `1px solid ${PAIN}55`, borderRadius: 100, padding: '2px 10px', fontWeight: 700, letterSpacing: 1 }}>
+        <span style={{ marginLeft: 'auto', fontSize: 17, color: PAIN, border: `1px solid ${PAIN}55`, borderRadius: 100, padding: '2px 10px', fontWeight: 700, letterSpacing: 1 }}>
           ⚠ BEFORE
         </span>
       )}
@@ -316,8 +317,8 @@ function ActSlide({ slide }: { slide: Extract<Slide, { kind: 'act' }> }) {
                 </svg>
               </div>
               <div>
-                <p style={{ fontSize: 10, letterSpacing: 2.5, color: accent, textTransform: 'uppercase', fontWeight: 700, margin: '0 0 6px' }}>The Action</p>
-                <p style={{ fontSize: 14, color: ML, lineHeight: 1.65, margin: 0 }}>{slide.action}</p>
+                <p style={{ fontSize: 15, letterSpacing: 2.5, color: accent, textTransform: 'uppercase', fontWeight: 700, margin: '0 0 6px' }}>The Action</p>
+                <p style={{ fontSize: 21, color: ML, lineHeight: 1.55, margin: 0 }}>{slide.action}</p>
               </div>
             </div>
 
@@ -329,8 +330,8 @@ function ActSlide({ slide }: { slide: Extract<Slide, { kind: 'act' }> }) {
                 </svg>
               </div>
               <div>
-                <p style={{ fontSize: 10, letterSpacing: 2.5, color: ML, textTransform: 'uppercase', fontWeight: 700, margin: '0 0 6px' }}>The Talk Track</p>
-                <p style={{ fontSize: 14, color: ML, lineHeight: 1.65, fontStyle: 'italic', margin: 0 }}>{slide.talk}</p>
+                <p style={{ fontSize: 15, letterSpacing: 2.5, color: ML, textTransform: 'uppercase', fontWeight: 700, margin: '0 0 6px' }}>The Talk Track</p>
+                <p style={{ fontSize: 21, color: ML, lineHeight: 1.55, fontStyle: 'italic', margin: 0 }}>{slide.talk}</p>
               </div>
             </div>
           </div>
@@ -344,9 +345,6 @@ function ActSlide({ slide }: { slide: Extract<Slide, { kind: 'act' }> }) {
                 <div style={{ width: 12, height: 12, borderRadius: '50%', background: '#FFBD2E' }} />
                 <div style={{ width: 12, height: 12, borderRadius: '50%', background: '#28CA41' }} />
               </div>
-              <div style={{ flex: 1, background: '#2C2C2E', borderRadius: 6, padding: '4px 10px', fontSize: 11, color: '#999', fontFamily: 'monospace', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                localhost:3000/kb?q=Commercial+auto+hail+deductible+Florida+vs+Georgia
-              </div>
             </div>
             {/* Screenshot — natural width, clipped */}
             <div style={{ flex: 1, overflow: 'hidden', position: 'relative', background: '#f8fafc' }}>
@@ -354,7 +352,7 @@ function ActSlide({ slide }: { slide: Extract<Slide, { kind: 'act' }> }) {
               <img
                 src={slide.image}
                 alt="KB results showing confusing list of documents"
-                style={{ display: 'block', width: '1440px', maxWidth: 'none', height: 'auto' }}
+                style={{ display: 'block', width: slide.pain ? '1440px' : '100%', maxWidth: slide.pain ? 'none' : '100%', height: 'auto' }}
               />
             </div>
           </div>
@@ -378,8 +376,8 @@ function ActSlide({ slide }: { slide: Extract<Slide, { kind: 'act' }> }) {
             </svg>
           </div>
           <div>
-            <p style={{ fontSize: 10, letterSpacing: 2.5, color: accent, textTransform: 'uppercase', fontWeight: 700, margin: '0 0 6px' }}>The Action</p>
-            <p style={{ fontSize: 14, color: ML, lineHeight: 1.65, margin: 0 }}>{slide.action}</p>
+            <p style={{ fontSize: 15, letterSpacing: 2.5, color: accent, textTransform: 'uppercase', fontWeight: 700, margin: '0 0 6px' }}>The Action</p>
+            <p style={{ fontSize: 21, color: ML, lineHeight: 1.55, margin: 0 }}>{slide.action}</p>
           </div>
         </div>
 
@@ -397,8 +395,8 @@ function ActSlide({ slide }: { slide: Extract<Slide, { kind: 'act' }> }) {
             }
           </div>
           <div>
-            <p style={{ fontSize: 10, letterSpacing: 2.5, color: resultLabel, textTransform: 'uppercase', fontWeight: 700, margin: '0 0 6px' }}>The Result</p>
-            <p style={{ fontSize: 14, color: W, lineHeight: 1.65, margin: 0 }}>{slide.result}</p>
+            <p style={{ fontSize: 15, letterSpacing: 2.5, color: resultLabel, textTransform: 'uppercase', fontWeight: 700, margin: '0 0 6px' }}>The Result</p>
+            <p style={{ fontSize: 21, color: W, lineHeight: 1.55, margin: 0 }}>{slide.result}</p>
           </div>
         </div>
 
@@ -410,8 +408,8 @@ function ActSlide({ slide }: { slide: Extract<Slide, { kind: 'act' }> }) {
             </svg>
           </div>
           <div>
-            <p style={{ fontSize: 10, letterSpacing: 2.5, color: ML, textTransform: 'uppercase', fontWeight: 700, margin: '0 0 6px' }}>The Talk Track</p>
-            <p style={{ fontSize: 14, color: ML, lineHeight: 1.65, fontStyle: 'italic', margin: 0 }}>{slide.talk}</p>
+            <p style={{ fontSize: 15, letterSpacing: 2.5, color: ML, textTransform: 'uppercase', fontWeight: 700, margin: '0 0 6px' }}>The Talk Track</p>
+            <p style={{ fontSize: 21, color: ML, lineHeight: 1.55, fontStyle: 'italic', margin: 0 }}>{slide.talk}</p>
           </div>
         </div>
       </div>
@@ -439,13 +437,13 @@ function ClosingSlide() {
         <span style={{ color: G }}>an Agentic CMS that makes every consultant interaction faster, more accurate, and fully trusted.</span>
       </p>
 
-      <p style={{ fontSize: 14, color: M, maxWidth: 480, lineHeight: 1.75, margin: '0 0 32px', fontStyle: 'italic' }}>
+      <p style={{ fontSize: 21, color: M, maxWidth: 480, lineHeight: 1.6, margin: '0 0 32px', fontStyle: 'italic' }}>
         From <span style={{ color: PAIN }}>searching documents</span> → to <span style={{ color: D2 }}>assembling answers</span> → powered by <span style={{ color: D3 }}>structured content</span>.
       </p>
 
       <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' as const, justifyContent: 'center' }}>
         {intents.map(i => (
-          <span key={i} style={{ background: S1, border: `1px solid ${BRL}`, color: ML, fontSize: 13, fontWeight: 600, padding: '6px 18px', borderRadius: 8 }}>
+          <span key={i} style={{ background: S1, border: `1px solid ${BRL}`, color: ML, fontSize: 20, fontWeight: 600, padding: '6px 18px', borderRadius: 8 }}>
             {i}
           </span>
         ))}
@@ -515,12 +513,10 @@ export default function DemoFlowPage() {
       {/* Header */}
       <header style={{ padding: '10px 32px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: `1px solid ${BR}`, flexShrink: 0 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <OptiMark size={18} />
-          <span style={{ color: G, fontWeight: 700, fontSize: 14, letterSpacing: '-0.2px' }}>Optimizely</span>
-          <span style={{ color: M, fontSize: 13, margin: '0 2px' }}>×</span>
-          <span style={{ color: ML, fontSize: 13 }}>Progressive Insurance</span>
+          <OptiMark size={30} />
+          <span style={{ color: ML, fontSize: 20 }}>Progressive</span>
         </div>
-        <span style={{ color: M, fontSize: 12, fontVariantNumeric: 'tabular-nums' }}>
+        <span style={{ color: M, fontSize: 18, fontVariantNumeric: 'tabular-nums' }}>
           {idx + 1} / {total}
         </span>
       </header>
@@ -582,7 +578,7 @@ export default function DemoFlowPage() {
                 border: `1px solid ${disabled ? BR : BRL}`,
                 color: disabled ? M : W,
                 cursor: disabled ? 'not-allowed' : 'pointer',
-                fontSize: 15,
+                fontSize: 23,
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 transition: 'all 0.15s',
                 opacity: disabled ? 0.4 : 1,

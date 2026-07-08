@@ -432,7 +432,7 @@ function SearchBar({ query, compact = false }: { query: string; compact?: boolea
         className={
           compact
             ? 'w-full p-2 pl-10 rounded border border-slate-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500'
-            : 'w-full p-4 pl-12 rounded-lg border border-slate-300 shadow-sm text-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
+            : 'w-full p-4 pl-12 rounded-lg border border-slate-300 shadow-sm text-3xl focus:outline-none focus:ring-2 focus:ring-blue-500'
         }
       />
       <Search
@@ -465,12 +465,12 @@ function BrowseHeader({ crumb, subtitle }: { crumb: string; subtitle: string }) 
             <SearchBar query="" compact />
           </div>
         </div>
-        <div className="flex items-center gap-1.5 text-xs text-slate-500 mb-1">
+        <div className="flex items-center gap-1.5 text-lg text-slate-500 mb-1">
           <Link href="/kb" className="hover:text-blue-600 hover:underline">Knowledge Portal</Link>
           <ChevronRight size={12} />
           <span className="text-slate-700 font-medium">{crumb}</span>
         </div>
-        <p className="text-slate-500 text-sm">{subtitle}</p>
+        <p className="text-slate-500 text-xl">{subtitle}</p>
       </div>
     </div>
   );
@@ -505,14 +505,14 @@ function LobView() {
                   <ArrowRight size={16} className="text-slate-300 group-hover:text-blue-500 group-hover:translate-x-0.5 transition-all mt-1" />
                 </div>
 
-                <h2 className="text-base font-bold text-slate-800 mb-1">{lob.title}</h2>
-                <p className="text-sm text-slate-500 leading-relaxed mb-4">{lob.description}</p>
+                <h2 className="text-2xl font-bold text-slate-800 mb-1">{lob.title}</h2>
+                <p className="text-xl text-slate-500 leading-relaxed mb-4">{lob.description}</p>
 
                 <div className="flex flex-wrap gap-1.5 mb-4">
                   {lob.coverages.map(c => (
                     <span
                       key={c}
-                      className="text-xs px-2 py-0.5 rounded-full border font-medium"
+                      className="text-lg px-2 py-0.5 rounded-full border font-medium"
                       style={{ color: lob.accent, borderColor: lob.accent + '40', background: lob.bg }}
                     >
                       {c}
@@ -520,7 +520,7 @@ function LobView() {
                   ))}
                 </div>
 
-                <div className="flex items-center justify-between pt-3 border-t border-slate-100 text-xs text-slate-400">
+                <div className="flex items-center justify-between pt-3 border-t border-slate-100 text-lg text-slate-400">
                   <span className="flex items-center gap-1"><FileText size={12} /> {lob.docCount} documents</span>
                   <span className="flex items-center gap-1"><Clock size={12} /> Updated {lob.updated}</span>
                 </div>
@@ -531,16 +531,16 @@ function LobView() {
 
         <div className="mt-8 rounded-xl border border-slate-200 bg-slate-50 p-5 flex items-center justify-between">
           <div>
-            <p className="text-sm font-semibold text-slate-700">Can&rsquo;t find what you need?</p>
-            <p className="text-sm text-slate-500">Search across all 263 documents in the knowledge base.</p>
+            <p className="text-xl font-semibold text-slate-700">Can&rsquo;t find what you need?</p>
+            <p className="text-xl text-slate-500">Search across all 263 documents in the knowledge base.</p>
           </div>
           <form method="GET" action="/kb" className="flex gap-2">
             <input
               name="q"
               placeholder="Full-text search…"
-              className="border border-slate-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 w-56"
+              className="border border-slate-300 rounded px-3 py-1.5 text-xl focus:outline-none focus:ring-2 focus:ring-blue-500 w-56"
             />
-            <button type="submit" className="bg-blue-600 text-white text-sm px-4 py-1.5 rounded hover:bg-blue-700 transition-colors">
+            <button type="submit" className="bg-blue-600 text-white text-xl px-4 py-1.5 rounded hover:bg-blue-700 transition-colors">
               Search
             </button>
           </form>
@@ -568,7 +568,7 @@ function RecentView() {
       />
       <div className="max-w-4xl mx-auto px-8 py-8">
 
-        <div className="flex items-center gap-3 mb-6 text-xs font-semibold">
+        <div className="flex items-center gap-3 mb-6 text-lg font-semibold">
           <span className="text-slate-500 mr-1">Filter:</span>
           {['All', 'Action Required', 'Product', 'Policy Update', 'Regulatory', 'Compliance'].map((f, i) => (
             <span
@@ -595,27 +595,27 @@ function RecentView() {
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1">
                     <div className="flex flex-wrap items-center gap-2 mb-2">
-                      <span className="text-xs text-slate-400 font-medium flex items-center gap-1">
+                      <span className="text-lg text-slate-400 font-medium flex items-center gap-1">
                         <Clock size={12} /> {update.date}
                       </span>
                       <span
-                        className="text-xs font-bold px-2 py-0.5 rounded"
+                        className="text-lg font-bold px-2 py-0.5 rounded"
                         style={{ background: update.categoryColor + '18', color: update.categoryColor }}
                       >
                         {update.category.toUpperCase()}
                       </span>
-                      <span className={`text-xs font-bold px-2 py-0.5 rounded ${sev.bg} ${sev.text}`}>
+                      <span className={`text-lg font-bold px-2 py-0.5 rounded ${sev.bg} ${sev.text}`}>
                         {sev.label}
                       </span>
                     </div>
 
-                    <h3 className="text-sm font-bold text-slate-800 mb-1.5">{update.title}</h3>
-                    <p className="text-sm text-slate-600 leading-relaxed mb-3">{update.description}</p>
+                    <h3 className="text-xl font-bold text-slate-800 mb-1.5">{update.title}</h3>
+                    <p className="text-xl text-slate-600 leading-relaxed mb-3">{update.description}</p>
 
                     <div className="flex flex-wrap items-center gap-2">
-                      <span className="text-xs text-slate-400">Affects:</span>
+                      <span className="text-lg text-slate-400">Affects:</span>
                       {update.lobs.map(lob => (
-                        <span key={lob} className="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-medium">
+                        <span key={lob} className="text-lg bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-medium">
                           {lob}
                         </span>
                       ))}
@@ -624,7 +624,7 @@ function RecentView() {
 
                   <Link
                     href={`/kb?q=${encodeURIComponent(update.title)}`}
-                    className="shrink-0 text-xs text-blue-600 hover:underline flex items-center gap-1 mt-1 whitespace-nowrap"
+                    className="shrink-0 text-lg text-blue-600 hover:underline flex items-center gap-1 mt-1 whitespace-nowrap"
                   >
                     View docs <ArrowRight size={12} />
                   </Link>
@@ -634,7 +634,7 @@ function RecentView() {
           })}
         </div>
 
-        <p className="text-xs text-slate-400 text-center mt-8">
+        <p className="text-lg text-slate-400 text-center mt-8">
           Showing 10 most recent updates · <Link href="/kb?q=all+updates" className="text-blue-500 hover:underline">Search full archive</Link>
         </p>
       </div>
@@ -655,7 +655,7 @@ function DirectoryView() {
 
         {/* Support Teams */}
         <section>
-          <h2 className="text-base font-bold text-slate-800 mb-4 flex items-center gap-2">
+          <h2 className="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
             <Users size={16} className="text-blue-500" /> Internal Support Teams
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
@@ -667,10 +667,10 @@ function DirectoryView() {
                     <div className="w-9 h-9 rounded-lg bg-blue-50 flex items-center justify-center shrink-0">
                       <Icon size={18} className="text-blue-600" />
                     </div>
-                    <h3 className="text-sm font-bold text-slate-800 leading-snug">{t.team}</h3>
+                    <h3 className="text-xl font-bold text-slate-800 leading-snug">{t.team}</h3>
                   </div>
-                  <p className="text-xs text-slate-500 mb-3 leading-relaxed">{t.specialty}</p>
-                  <div className="space-y-1.5 text-xs">
+                  <p className="text-lg text-slate-500 mb-3 leading-relaxed">{t.specialty}</p>
+                  <div className="space-y-1.5 text-lg">
                     <a href={`tel:${t.phone.replace(/\D/g,'')}`} className="flex items-center gap-2 text-blue-600 hover:underline">
                       <Phone size={12} /> {t.phone}
                     </a>
@@ -689,31 +689,31 @@ function DirectoryView() {
 
         {/* Regional Offices */}
         <section>
-          <h2 className="text-base font-bold text-slate-800 mb-4 flex items-center gap-2">
+          <h2 className="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
             <MapPin size={16} className="text-blue-500" /> Regional Field Offices
           </h2>
           <div className="overflow-hidden rounded-xl border border-slate-200">
-            <table className="w-full text-sm">
+            <table className="w-full text-xl">
               <thead className="bg-slate-50 border-b border-slate-200">
                 <tr>
-                  <th className="text-left px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wide">Region</th>
-                  <th className="text-left px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wide">States Served</th>
-                  <th className="text-left px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wide">Office</th>
-                  <th className="text-left px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wide">Field Director</th>
-                  <th className="text-left px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wide">Direct Line</th>
+                  <th className="text-left px-5 py-3 text-lg font-semibold text-slate-500 uppercase tracking-wide">Region</th>
+                  <th className="text-left px-5 py-3 text-lg font-semibold text-slate-500 uppercase tracking-wide">States Served</th>
+                  <th className="text-left px-5 py-3 text-lg font-semibold text-slate-500 uppercase tracking-wide">Office</th>
+                  <th className="text-left px-5 py-3 text-lg font-semibold text-slate-500 uppercase tracking-wide">Field Director</th>
+                  <th className="text-left px-5 py-3 text-lg font-semibold text-slate-500 uppercase tracking-wide">Direct Line</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
                 {REGIONS.map(r => (
                   <tr key={r.region} className="hover:bg-slate-50 transition-colors">
                     <td className="px-5 py-3.5 font-semibold text-slate-800">{r.region}</td>
-                    <td className="px-5 py-3.5 text-slate-500 text-xs">{r.states}</td>
+                    <td className="px-5 py-3.5 text-slate-500 text-lg">{r.states}</td>
                     <td className="px-5 py-3.5 text-slate-600 flex items-center gap-1">
                       <Building2 size={13} className="text-slate-400 shrink-0" /> {r.office}
                     </td>
                     <td className="px-5 py-3.5 text-slate-600">{r.director}</td>
                     <td className="px-5 py-3.5">
-                      <a href={`tel:${r.phone.replace(/\D/g,'')}`} className="text-blue-600 hover:underline text-xs flex items-center gap-1">
+                      <a href={`tel:${r.phone.replace(/\D/g,'')}`} className="text-blue-600 hover:underline text-lg flex items-center gap-1">
                         <Phone size={12} /> {r.phone}
                       </a>
                     </td>
@@ -726,7 +726,7 @@ function DirectoryView() {
 
         {/* Agent Tools & Resources */}
         <section>
-          <h2 className="text-base font-bold text-slate-800 mb-4 flex items-center gap-2">
+          <h2 className="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
             <MonitorSmartphone size={16} className="text-blue-500" /> Agent Tools &amp; Resources
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
@@ -744,8 +744,8 @@ function DirectoryView() {
                     <Icon size={18} className="text-slate-400 group-hover:text-blue-500 transition-colors" />
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-slate-800 group-hover:text-blue-600 transition-colors">{r.label}</p>
-                    <p className="text-xs text-slate-500 mt-0.5">{r.description}</p>
+                    <p className="text-xl font-semibold text-slate-800 group-hover:text-blue-600 transition-colors">{r.label}</p>
+                    <p className="text-lg text-slate-500 mt-0.5">{r.description}</p>
                   </div>
                 </a>
               );
@@ -755,8 +755,8 @@ function DirectoryView() {
           <div className="mt-5 rounded-xl bg-blue-50 border border-blue-100 p-5 flex items-start gap-4">
             <BadgeCheck size={20} className="text-blue-600 shrink-0 mt-0.5" />
             <div>
-              <p className="text-sm font-bold text-blue-800">New to Progressive? Become an Appointed Agent</p>
-              <p className="text-sm text-blue-700 mt-0.5">
+              <p className="text-xl font-bold text-blue-800">New to Progressive? Become an Appointed Agent</p>
+              <p className="text-xl text-blue-700 mt-0.5">
                 Progressive is the #1 writer of auto insurance through independent agents. Over 40,000 agents nationwide.{' '}
                 <a href="https://aqn.foragentsonly.com" target="_blank" rel="noopener noreferrer" className="underline font-semibold hover:text-blue-900">
                   Apply for appointment →
@@ -779,10 +779,10 @@ function HomeView() {
       <div className="h-12 mb-8">
         <ProgressiveLogo />
       </div>
-      <h1 className="text-3xl font-light text-slate-800 mb-2">Enterprise Knowledge Portal</h1>
+      <h1 className="text-5xl font-light text-slate-800 mb-2">Enterprise Knowledge Portal</h1>
       <p className="text-slate-500 mb-8">Search policies, guidelines, and internal memos</p>
       <AnimatedSearchBar />
-      <div className="mt-12 flex gap-8 text-sm text-blue-600 underline">
+      <div className="mt-12 flex gap-8 text-xl text-blue-600 underline">
         <Link href="/kb?browse=lob">Browse by Line of Business</Link>
         <Link href="/kb?browse=recent">View Recent Updates</Link>
         <Link href="/kb?browse=directory">Agent Directory</Link>
@@ -826,7 +826,7 @@ function FacetSection({
 }) {
   return (
     <div className="border-b border-slate-100 pb-4">
-      <p className="flex items-center justify-between text-xs font-bold text-slate-700 uppercase tracking-wide mb-3">
+      <p className="flex items-center justify-between text-lg font-bold text-slate-700 uppercase tracking-wide mb-3">
         {label}
         <ChevronDown size={13} className="text-slate-400" />
       </p>
@@ -844,8 +844,8 @@ function FacetSection({
                 disabled={count === 0 && !checked}
                 className="w-3.5 h-3.5 rounded border-slate-300 text-blue-600 cursor-pointer"
               />
-              <span className="text-xs text-slate-600 group-hover:text-slate-900 flex-1">{o.label}</span>
-              <span className="text-xs text-slate-400">({count})</span>
+              <span className="text-lg text-slate-600 group-hover:text-slate-900 flex-1">{o.label}</span>
+              <span className="text-lg text-slate-400">({count})</span>
             </label>
           );
         })}
@@ -867,7 +867,7 @@ function ResultsView({ query, filters }: { query: string; filters: ActiveFilters
       />
 
       {/* Sort / count bar */}
-      <div className="border-b border-slate-100 bg-slate-50 px-8 py-2.5 flex items-center justify-between text-xs text-slate-500">
+      <div className="border-b border-slate-100 bg-slate-50 px-8 py-2.5 flex items-center justify-between text-lg text-slate-500">
         <span>
           Showing{' '}
           <strong className="text-slate-700">1–{results.length}</strong> of{' '}
@@ -881,7 +881,7 @@ function ResultsView({ query, filters }: { query: string; filters: ActiveFilters
         </span>
         <div className="flex items-center gap-4">
           <span className="text-slate-400">Sort by:</span>
-          <select className="border border-slate-200 rounded px-2 py-1 text-xs bg-white focus:outline-none focus:ring-1 focus:ring-blue-400">
+          <select className="border border-slate-200 rounded px-2 py-1 text-lg bg-white focus:outline-none focus:ring-1 focus:ring-blue-400">
             <option>Relevance</option>
             <option>Date Modified (Newest)</option>
             <option>Date Modified (Oldest)</option>
@@ -899,11 +899,11 @@ function ResultsView({ query, filters }: { query: string; filters: ActiveFilters
         {/* ── Sidebar ── */}
         <aside className="w-64 shrink-0 border-r border-slate-100 px-5 py-6 space-y-5">
           <div className="flex items-center justify-between mb-1">
-            <span className="flex items-center gap-2 text-xs font-bold text-slate-600 uppercase tracking-wide">
+            <span className="flex items-center gap-2 text-lg font-bold text-slate-600 uppercase tracking-wide">
               <SlidersHorizontal size={13} /> Filter Results
             </span>
             {hasFilters && (
-              <Link href={clearHref} className="text-xs text-blue-500 hover:underline">
+              <Link href={clearHref} className="text-lg text-blue-500 hover:underline">
                 Clear all
               </Link>
             )}
@@ -929,7 +929,7 @@ function ResultsView({ query, filters }: { query: string; filters: ActiveFilters
             <div className="text-center py-16 text-slate-400">
               <FileText size={40} className="mx-auto mb-3 opacity-30" />
               <p className="font-semibold text-slate-600">No documents match the selected filters.</p>
-              <p className="text-sm mt-1">Try removing a filter or{' '}
+              <p className="text-xl mt-1">Try removing a filter or{' '}
                 <Link href={clearHref} className="text-blue-500 hover:underline">clearing all filters</Link>.
               </p>
             </div>
@@ -945,18 +945,18 @@ function ResultsView({ query, filters }: { query: string; filters: ActiveFilters
                       <div className="flex-1 min-w-0">
                         <Link
                           href={`/kb?q=${encodeURIComponent(query)}&doc=${r.docRef}`}
-                          className="text-sm font-semibold text-blue-600 hover:underline break-all leading-snug"
+                          className="text-xl font-semibold text-blue-600 hover:underline break-all leading-snug"
                         >
                           {r.title}
                         </Link>
-                        <div className="flex flex-wrap items-center gap-3 mt-1 mb-1.5 text-xs text-slate-400">
-                          <span className={`px-1.5 py-0.5 rounded text-xs font-semibold ${st.bg} ${st.text}`}>{st.label}</span>
+                        <div className="flex flex-wrap items-center gap-3 mt-1 mb-1.5 text-lg text-slate-400">
+                          <span className={`px-1.5 py-0.5 rounded text-lg font-semibold ${st.bg} ${st.text}`}>{st.label}</span>
                           <span>{r.type} · {r.pages}</span>
                           <span className="flex items-center gap-1"><Clock size={11} /> {r.date}</span>
                           <span>{r.dept}</span>
                           <span className="bg-slate-100 text-slate-500 px-1.5 py-0.5 rounded">{r.lob}</span>
                         </div>
-                        <p className="text-xs text-slate-500 leading-relaxed">{r.excerpt}</p>
+                        <p className="text-lg text-slate-500 leading-relaxed">{r.excerpt}</p>
                       </div>
                     </div>
                   </div>
@@ -967,13 +967,13 @@ function ResultsView({ query, filters }: { query: string; filters: ActiveFilters
 
           {/* Pagination — only shown when unfiltered */}
           {!hasFilters && (
-            <div className="mt-8 pt-6 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+            <div className="mt-8 pt-6 border-t border-slate-100 flex items-center justify-between text-lg text-slate-500">
               <span>Page 1 of 63</span>
               <div className="flex gap-1">
                 {([1,2,3,'…',62,63] as (number|string)[]).map((p, i) => (
                   <button
                     key={i}
-                    className={`w-7 h-7 rounded text-xs font-medium ${
+                    className={`w-7 h-7 rounded text-lg font-medium ${
                       p === 1 ? 'bg-blue-600 text-white' : 'border border-slate-200 hover:border-blue-400 text-slate-600'
                     }`}
                   >
@@ -1001,7 +1001,7 @@ function DocumentView({ doc, query }: { doc: (typeof DOCS)[number]; query: strin
         >
           <ChevronLeft size={18} /> Back to Search Results
         </Link>
-        <span className="font-mono text-sm">{doc.title}</span>
+        <span className="font-mono text-xl">{doc.title}</span>
         <div className="flex gap-4">
           <FileDown size={18} className="cursor-pointer hover:text-blue-300" />
         </div>
@@ -1010,14 +1010,14 @@ function DocumentView({ doc, query }: { doc: (typeof DOCS)[number]; query: strin
       <div className="flex-1 p-8 flex justify-center overflow-auto">
         <div className="bg-white w-full max-w-3xl shadow-xl p-12 min-h-[800px]">
           <div className="border-b-2 border-black pb-4 mb-8">
-            <h1 className="text-2xl font-bold text-center uppercase tracking-widest">{displayTitle}</h1>
-            <p className="text-center text-sm mt-2 font-bold">CONFIDENTIAL AND PROPRIETARY</p>
+            <h1 className="text-4xl font-bold text-center uppercase tracking-widest">{displayTitle}</h1>
+            <p className="text-center text-xl mt-2 font-bold">CONFIDENTIAL AND PROPRIETARY</p>
           </div>
 
-          <div className="space-y-6 text-justify text-sm leading-loose">
+          <div className="space-y-6 text-justify text-xl leading-loose">
             <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-8 flex gap-3">
               <AlertTriangle className="text-yellow-600 shrink-0" />
-              <p className="text-xs text-yellow-800">
+              <p className="text-lg text-yellow-800">
                 You are viewing page 1. Use Ctrl+F to find specific terms within this 14-page document.
               </p>
             </div>

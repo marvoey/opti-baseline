@@ -43,7 +43,7 @@ export default function AnimatedSearchBar() {
           setValue(e.target.value);
         }}
         onFocus={startTyping}
-        className="w-full p-4 pl-12 rounded-lg border border-slate-300 shadow-sm text-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+        className="w-full p-4 pl-12 rounded-lg border border-slate-300 shadow-sm text-3xl focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
         placeholder="Click to search…"
         autoComplete="off"
         spellCheck={false}

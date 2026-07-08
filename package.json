@@ -14,7 +14,8 @@
     "lint": "eslint",
     "gen:locales": "node scripts/generate-locales.mjs",
     "config:push": "npx @optimizely/cms-cli config push optimizely.config.mjs",
-    "screenshot": "node scripts/screenshot.mjs"
+    "screenshot": "node scripts/screenshot.mjs",
+    "screenshot:click": "node scripts/screenshot-click.mjs"
   },
   "dependencies": {
     "@optimizely/cms-cli": "^2.0.0",
