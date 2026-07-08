@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Car Insurance | Progressive',
+  title: 'Progressive | Opti Demo',
   description: 'Get a free car insurance quote. Join over 37 million drivers who trust Progressive.',
+  icons: { icon: [{ url: 'https://images.contentstack.io/v3/assets/blt62d40591b3650da3/blt4a6e0a9548045e84/favicon.svg', type: 'image/svg+xml' }] },
 };
 
 function BlockTag({ label }: { label: string }) {
@@ -39,7 +40,7 @@ export default function DemoPage() {
         <div className="container mx-auto grid gap-12 px-4 py-20 lg:grid-cols-2 lg:items-center">
           <div>
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-blue-300">
-              Nation's #1 auto insurer
+              Nation&apos;s #1 auto insurer
             </p>
             <h1 className="mb-5 text-5xl font-bold leading-tight">
               Car Insurance

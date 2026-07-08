@@ -4,9 +4,13 @@ import { useState } from 'react';
 import Link from 'next/link';
 
 const LINKS = [
+  { label: 'Demo Flow', href: '/demo-flow' },
+  { label: 'KB', href: '/kb' },
   { label: 'Demo', href: '/demo' },
   { label: 'Demo V2', href: '/demo-v2' },
   { label: 'Demo Marketing', href: '/demo-marketing' },
+  { label: 'Rationale: Scope', href: '/rationale/scope' },
+  { label: 'Rationale: Approach', href: '/rationale/approach' },
 ];
 
 export default function DevQuickLinks() {
