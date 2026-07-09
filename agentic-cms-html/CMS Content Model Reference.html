@@ -1,0 +1,961 @@
+<title>CMS Content Model Reference — Progressive × Optimizely</title>
+<style>
+:root{
+  --bg:#EEF2F7;--surface:#FFF;--s2:#F5F8FC;--bdr:#D0DCE8;
+  --t1:#0B1C2E;--t2:#4E6070;--t3:#8A9EB0;
+  --acc:#007BC7;--acc-d:#D4EAFF;
+  --br:#0D1B28;--br-s:#142030;--br-b:#1E3348;--br-t1:#C0D4E8;--br-t2:#5A7890;--br-mo:#5BC8F5;
+  --lob-bg:#D4EAFF;--lob-fg:#004A8C;
+  --top-bg:#D4F0E4;--top-fg:#1A5E35;
+  --jur-bg:#EAE0F8;--jur-fg:#5C2D91;
+  --fc-bl:#007BC7;--fc-gr:#27AE60;--fc-am:#E67E22;--fc-pu:#9B59B6;--fc-re:#E74C3C;
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#08131E;--surface:#0E1E2C;--s2:#0B1822;--bdr:#1A2D40;
+  --t1:#D0E4F0;--t2:#6A86A0;--t3:#3A5468;--acc-d:#082848;
+  --lob-bg:#082848;--lob-fg:#7AC4F0;--top-bg:#082818;--top-fg:#5AB880;--jur-bg:#180828;--jur-fg:#B088E0;
+}}
+:root[data-theme="dark"]{
+  --bg:#08131E;--surface:#0E1E2C;--s2:#0B1822;--bdr:#1A2D40;
+  --t1:#D0E4F0;--t2:#6A86A0;--t3:#3A5468;--acc-d:#082848;
+  --lob-bg:#082848;--lob-fg:#7AC4F0;--top-bg:#082818;--top-fg:#5AB880;--jur-bg:#180828;--jur-fg:#B088E0;
+}
+:root[data-theme="light"]{
+  --bg:#EEF2F7;--surface:#FFF;--s2:#F5F8FC;--bdr:#D0DCE8;
+  --t1:#0B1C2E;--t2:#4E6070;--t3:#8A9EB0;--acc-d:#D4EAFF;
+  --lob-bg:#D4EAFF;--lob-fg:#004A8C;--top-bg:#D4F0E4;--top-fg:#1A5E35;--jur-bg:#EAE0F8;--jur-fg:#5C2D91;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--t1);font-family:system-ui,-apple-system,'Segoe UI',sans-serif;font-size:13px;line-height:1.55}
+/* header */
+.ph{background:var(--surface);border-bottom:1px solid var(--bdr);padding:12px 28px;display:flex;align-items:center;gap:10px}
+.ph-brand{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--acc)}
+.ph-sep{color:var(--bdr);font-size:16px}
+.ph-title{font-size:11px;font-weight:600;color:var(--t2);letter-spacing:.03em}
+/* nav */
+.sn{position:sticky;top:0;z-index:30;background:var(--surface);border-bottom:1px solid var(--bdr);padding:0 28px;display:flex;overflow-x:auto;scrollbar-width:none}
+.sn::-webkit-scrollbar{display:none}
+.sn a{flex-shrink:0;font-size:10px;font-weight:700;letter-spacing:.04em;color:var(--t3);padding:9px 10px;text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap;transition:color .12s,border-color .12s}
+.sn a:hover{color:var(--acc);border-color:var(--acc)}
+/* layout */
+.main{max-width:1140px;margin:0 auto;padding:32px 28px 72px}
+.sc{margin-bottom:0}
+.sc+.sc{border-top:1px solid var(--bdr);padding-top:40px;margin-top:40px}
+/* scenario header */
+.sh{display:flex;align-items:flex-start;gap:14px;margin-bottom:20px}
+.sn2{font-size:30px;font-weight:900;color:var(--bdr);line-height:1;flex-shrink:0;padding-top:3px;font-variant-numeric:tabular-nums}
+.st{font-size:17px;font-weight:700;margin-bottom:7px}
+.tags{display:flex;flex-wrap:wrap;gap:5px}
+.tag{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 7px;border-radius:3px}
+.tag.lob{background:var(--lob-bg);color:var(--lob-fg)}
+.tag.top{background:var(--top-bg);color:var(--top-fg)}
+.tag.jur{background:var(--jur-bg);color:var(--jur-fg)}
+/* exchange */
+.ex{margin-bottom:14px}
+.xl{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--t3);margin-bottom:6px}
+.xl.q2{color:var(--acc)}
+.xq{font-size:12px;font-style:italic;color:var(--t2);border-left:3px solid var(--bdr);padding:7px 12px;margin-bottom:11px;line-height:1.5}
+/* model split */
+.ms{display:grid;grid-template-columns:1fr 1fr;border-radius:8px;overflow:hidden;border:1px solid var(--bdr)}
+.mf{background:var(--surface);padding:16px;border-right:1px solid var(--bdr)}
+.mb{background:var(--br);padding:16px}
+.ml{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:11px;display:flex;align-items:center;gap:8px}
+.mf .ml{color:var(--t3)}
+.mb .ml{color:var(--br-t2)}
+.ml::after{content:'';flex:1;height:1px}
+.mf .ml::after{background:var(--bdr)}
+.mb .ml::after{background:var(--br-b)}
+/* response card */
+.rc{background:var(--s2);border:1px solid var(--bdr);border-radius:6px;padding:12px;font-size:12px}
+.rc.gap{border-left:3px solid var(--fc-re)}
+.rc.life{border-left:3px solid #16A085}
+.rc.rec{border-left:3px solid #2473AE}
+.rc.opp{border-left:3px solid var(--fc-gr)}
+.rc.proc{border-left:3px solid #D35400}
+.rc-oh{display:flex;align-items:center;gap:6px;padding-bottom:8px;margin-bottom:8px;border-bottom:1px solid var(--bdr)}
+.oi{width:18px;height:18px;border-radius:50%;background:#EDE9FF;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.oi svg{width:9px;height:9px}
+.on{font-size:10px;font-weight:700;color:var(--t1)}
+.rc h4{font-size:12px;font-weight:700;color:var(--t1);margin-bottom:3px;margin-top:8px}
+.rc h4:first-of-type{margin-top:0}
+.rc p{font-size:11px;color:var(--t2);margin-bottom:5px;line-height:1.5}
+.rc p strong{color:var(--t1);font-weight:600}
+.cr{display:flex;flex-wrap:wrap;gap:4px;margin:5px 0}
+.chip{font-size:10px;padding:2px 7px;border-radius:3px;border:1px solid var(--bdr);background:var(--surface);color:var(--t2)}
+.chip.g{background:#E8F8EE;border-color:#B0DFC0;color:#1A5E35}
+.chip.b{background:#FEF0EE;border-color:#F0B8B0;color:#8B1A10}
+.chip.i{background:var(--acc-d);border-color:#A0C8E8;color:#004A8C}
+/* sources */
+.rs{margin-top:8px;padding-top:8px;border-top:1px solid var(--bdr)}
+.rsl{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);margin-bottom:4px}
+.rsc{display:flex;flex-wrap:wrap;gap:4px}
+.sc2{font-size:10px;display:inline-flex;align-items:center;gap:4px;padding:2px 7px;border-radius:3px;border:1px solid var(--bdr);background:var(--surface);color:var(--t2)}
+.sd{width:5px;height:5px;border-radius:50%;background:var(--acc);flex-shrink:0}
+/* action btn */
+.ab{display:inline-flex;align-items:center;gap:5px;background:var(--acc);color:#fff;font-size:10px;font-weight:700;padding:5px 10px;border-radius:4px;margin-top:8px;cursor:default}
+.ab+.ab{margin-left:5px}
+/* limits table */
+.lt{width:100%;border-collapse:collapse;margin:5px 0;font-size:11px;font-variant-numeric:tabular-nums}
+.lt td{padding:4px 6px;border-bottom:1px solid var(--bdr);vertical-align:top}
+.lt td:first-child{color:var(--t3);white-space:nowrap}
+.lt td:last-child{font-weight:600;color:var(--t1);text-align:right}
+/* opportunity rows */
+.or{display:flex;flex-direction:column;gap:5px;margin:5px 0}
+.ori{display:flex;justify-content:space-between;align-items:center;padding:5px 8px;background:var(--surface);border:1px solid var(--bdr);border-radius:4px}
+.orn{font-size:11px;font-weight:600;color:var(--t1)}
+.ors{font-size:10px;font-weight:700;color:#27AE60}
+.ore{font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 5px;border-radius:3px;background:#FFF0E0;color:#C05000}
+/* split rows */
+.sr{display:flex;flex-direction:column;gap:4px;margin:5px 0}
+.sri{display:flex;align-items:flex-start;gap:7px;padding:6px 8px;border-radius:4px;font-size:11px}
+.sri.c{background:#EBF8F1}
+.sri.e{background:#FEF0EE}
+.sb{flex-shrink:0;font-size:9px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:2px 5px;border-radius:3px;margin-top:1px}
+.sri.c .sb{background:#D0F0E0;color:#1A5E35}
+.sri.e .sb{background:#FDDAD8;color:#8B1A10}
+.st2{color:var(--t2);line-height:1.4}
+/* checklist */
+.cl{list-style:none;margin:5px 0;display:flex;flex-direction:column;gap:3px}
+.cl li{font-size:11px;color:var(--t2);padding:3px 8px;background:var(--surface);border:1px solid var(--bdr);border-radius:3px;display:flex;align-items:center;gap:5px}
+.cl li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--acc);flex-shrink:0}
+/* brain */
+.ctb{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:3px;margin-bottom:10px;color:#fff}
+.fbs{display:flex;flex-direction:column;gap:5px}
+.fb{border-radius:4px;border:1px solid var(--br-b);padding:7px 9px 7px 11px;border-left-width:3px}
+.fb[data-fc=bl]{border-left-color:var(--fc-bl)}
+.fb[data-fc=gr]{border-left-color:var(--fc-gr)}
+.fb[data-fc=am]{border-left-color:var(--fc-am)}
+.fb[data-fc=pu]{border-left-color:var(--fc-pu)}
+.fb[data-fc=re]{border-left-color:var(--fc-re)}
+.fk{font-family:'Courier New',Consolas,monospace;font-size:10px;color:var(--br-mo);line-height:1.4;word-break:break-all}
+.fv{font-size:11px;color:var(--br-t1);margin-top:2px;line-height:1.4}
+.fn{font-size:10px;color:var(--br-t2);font-style:italic;margin-top:2px}
+.fbg{display:inline-block;font-size:8px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:1px 5px;border-radius:2px;margin-left:5px;vertical-align:middle}
+.fbg.ov{background:rgba(0,123,199,.2);color:var(--br-mo)}
+.fbg.ms{background:rgba(255,255,255,.08);color:var(--br-t2)}
+.bdv{display:flex;align-items:center;gap:8px;margin:8px 0;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--br-t2)}
+.bdv::before,.bdv::after{content:'';flex:1;height:1px;background:var(--br-b)}
+.bcrm{margin-top:8px;padding:6px 9px;background:rgba(0,123,199,.08);border:1px solid rgba(0,123,199,.18);border-radius:4px;font-size:10px;color:var(--br-t2);font-style:italic}
+.fdate{margin-top:8px;padding:5px 9px;border:1px solid var(--br-b);border-radius:4px;display:flex;justify-content:space-between;font-size:10px;color:var(--br-t2);opacity:.5;font-family:'Courier New',Consolas,monospace}
+@media(max-width:760px){
+  .ms{grid-template-columns:1fr}
+  .mf{border-right:none;border-bottom:1px solid var(--bdr)}
+  .main{padding:20px 16px 48px}
+}
+</style>
+
+<!-- PAGE HEADER -->
+<div class="ph">
+  <span class="ph-brand">Progressive × Optimizely</span>
+  <span class="ph-sep">|</span>
+  <span class="ph-title">CMS Content Model Reference — 10 Demo Scenarios</span>
+</div>
+
+<!-- STICKY NAV -->
+<nav class="sn">
+  <a href="#s1">01 Rental</a>
+  <a href="#s2">02 Storm</a>
+  <a href="#s3">03 Theft</a>
+  <a href="#s4">04 Roadside</a>
+  <a href="#s5">05 Snapshot</a>
+  <a href="#s6">06 Discounts</a>
+  <a href="#s7">07 Liability</a>
+  <a href="#s8">08 Water</a>
+  <a href="#s9">09 Umbrella</a>
+  <a href="#s10">10 College</a>
+</nav>
+
+<div class="main">
+
+<!-- ======================================================
+  S1: RENTAL REIMBURSEMENT
+====================================================== -->
+<section class="sc" id="s1">
+  <div class="sh">
+    <div class="sn2">01</div>
+    <div>
+      <div class="st">Rental Reimbursement</div>
+      <div class="tags">
+        <span class="tag lob">Personal Auto</span>
+        <span class="tag top">Coverage Options</span>
+        <span class="tag jur">FL</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="xl">Initial Question</div>
+    <div class="xq">"John's car is going into the shop for hail repairs — what does his Florida personal auto policy cover for a rental while it's out?"</div>
+    <div class="ms">
+      <div class="mf">
+        <div class="ml">Response — Opal Consultant UI</div>
+        <div class="rc">
+          <div class="rc-oh"><div class="oi"><svg fill="none" stroke="#7c3aed" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div><span class="on">Opal Knowledge Assistant</span></div>
+          <h4>Rental Reimbursement Confirmed — Platinum</h4>
+          <p>John's Platinum policy includes rental reimbursement at <strong>$50/day for up to 30 days</strong>. Standard tier is $30/day up to 21 days.</p>
+          <p>Preferred in-network vendors:</p>
+          <div class="cr"><span class="chip i">Enterprise</span><span class="chip i">Hertz</span><span class="chip i">National</span></div>
+          <span class="ab">Authorize Rental</span>
+          <div class="rs"><div class="rsl">Sources</div><div class="rsc"><span class="sc2"><span class="sd"></span>Auto Rental – Platinum Tier</span></div></div>
+        </div>
+      </div>
+      <div class="mb">
+        <div class="ml">Content Model — CMS SaaS</div>
+        <span class="ctb" style="background:#27AE60">BenefitComponent</span>
+        <div class="fbs">
+          <div class="fb" data-fc="bl"><div class="fk">taxonomy.lob / .topic</div><div class="fv">Personal Auto / Rental Reimbursement</div></div>
+          <div class="fb" data-fc="am"><div class="fk">limits.dailyMax</div><div class="fv">$50/day <span class="fbg ov">Platinum Override</span></div><div class="fn">Master (Standard): $30/day</div></div>
+          <div class="fb" data-fc="am"><div class="fk">limits.durationCap</div><div class="fv">30 days <span class="fbg ov">Platinum Override</span></div><div class="fn">Master (Standard): 21 days</div></div>
+          <div class="fb" data-fc="gr"><div class="fk">content.vendors[]</div><div class="fv">["Enterprise", "Hertz", "National"]</div></div>
+        </div>
+        <div class="fdate"><span>settings.activeDate</span><span>2026-07-01</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="xl q2">Follow-up Question</div>
+    <div class="xq">"Can we get the rental authorized today before the repair estimate comes in?"</div>
+    <div class="ms">
+      <div class="mf">
+        <div class="ml">Response — Opal Consultant UI</div>
+        <div class="rc proc">
+          <div class="rc-oh"><div class="oi"><svg fill="none" stroke="#7c3aed" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div><span class="on">Opal Knowledge Assistant</span></div>
+          <h4>Pre-Authorization Available</h4>
+          <p>Yes — rental can be pre-authorized for up to <strong>24 hours</strong> before the repair estimate is submitted. The shop must file the estimate within that window to maintain coverage continuity.</p>
+          <span class="ab">Start Pre-Auth</span>
+        </div>
+      </div>
+      <div class="mb">
+        <div class="ml">Content Model — CMS SaaS</div>
+        <span class="ctb" style="background:#27AE60">BenefitComponent</span>
+        <div class="fbs">
+          <div class="fb" data-fc="gr"><div class="fk">content.preAuthWindow</div><div class="fv">24-hour pre-authorization window</div></div>
+          <div class="fb" data-fc="pu"><div class="fk">content.shopRequirements</div><div class="fv">Rich Text: shop submits estimate within pre-auth window</div></div>
+          <div class="fb" data-fc="am"><div class="fk">actions[0]</div><div class="fv">"Start Pre-Auth"</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================
+  S2: STORM / TREE DAMAGE
+====================================================== -->
+<section class="sc" id="s2">
+  <div class="sh">
+    <div class="sn2">02</div>
+    <div>
+      <div class="st">Storm / Tree Damage</div>
+      <div class="tags">
+        <span class="tag lob">Homeowners</span>
+        <span class="tag top">Hail</span>
+        <span class="tag jur">FL</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="xl">Initial Question</div>
+    <div class="xq">"A neighbor's tree fell on John's fence during last night's hail storm in Orlando — does his Florida homeowners policy cover the fence damage and debris removal?"</div>
+    <div class="ms">
+      <div class="mf">
+        <div class="ml">Response — Opal Consultant UI</div>
+        <div class="rc">
+          <div class="rc-oh"><div class="oi"><svg fill="none" stroke="#7c3aed" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div><span class="on">Opal Knowledge Assistant</span></div>
+          <h4>Coverage Found: Homeowners — Other Structures</h4>
+          <p>The fence is covered under the <strong>Other Structures</strong> provision — up to 10% of the dwelling coverage limit (~$35,000 on this policy). Fault for the fallen tree does not affect eligibility.</p>
+          <h4>Debris Removal</h4>
+          <p>Debris removal is covered up to a <strong>$500 sub-limit</strong> per the FL Storm Endorsement. Costs above that are the insured's responsibility.</p>
+          <div class="rs"><div class="rsl">Sources</div><div class="rsc"><span class="sc2"><span class="sd"></span>HO Other Structures</span><span class="sc2"><span class="sd"></span>FL Storm Endorsement</span></div></div>
+        </div>
+      </div>
+      <div class="mb">
+        <div class="ml">Content Model — CMS SaaS</div>
+        <span class="ctb" style="background:#007BC7">CoverageComponent</span>
+        <div class="fbs">
+          <div class="fb" data-fc="bl"><div class="fk">taxonomy.lob / .topic / .jurisdiction</div><div class="fv">Homeowners / Hail + Wind / FL <span class="fbg ov">FL Override</span></div></div>
+          <div class="fb" data-fc="gr"><div class="fk">content.coreDefinition</div><div class="fv">Other Structures: up to 10% of Dwelling A limit</div><div class="fn">Inherited from Master</div></div>
+          <div class="fb" data-fc="am"><div class="fk">content.subLimits.debrisRemoval</div><div class="fv">$500 <span class="fbg ov">FL Override</span></div><div class="fn">Master: $1,000</div></div>
+          <div class="fb" data-fc="pu"><div class="fk">content.stateDisclosure</div><div class="fv">FL Storm Endorsement required for wind/hail claims</div></div>
+        </div>
+        <div class="fdate"><span>settings.activeDate</span><span>2026-07-01</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="xl q2">Follow-up Question</div>
+    <div class="xq">"The tree also landed on his car in the driveway — does that go on the same claim?"</div>
+    <div class="ms">
+      <div class="mf">
+        <div class="ml">Response — Opal Consultant UI</div>
+        <div class="rc gap">
+          <div class="rc-oh"><div class="oi"><svg fill="none" stroke="#7c3aed" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div><span class="on">Opal Knowledge Assistant</span></div>
+          <h4>Two Separate Claims Required</h4>
+          <div class="sr">
+            <div class="sri c"><span class="sb">Home</span><span class="st2">Fence + debris — Homeowners Other Structures ✓</span></div>
+            <div class="sri e"><span class="sb">Auto</span><span class="st2">Vehicle damage — separate Auto Comprehensive claim required</span></div>
+          </div>
+          <p>Vehicle damage from a fallen object is covered under the <strong>Comprehensive portion of the Auto policy</strong>, not Homeowners. Each claim carries its own deductible.</p>
+          <div class="rs"><div class="rsl">Sources</div><div class="rsc"><span class="sc2"><span class="sd"></span>HO Other Structures</span><span class="sc2"><span class="sd"></span>Auto Comprehensive (FL Override)</span></div></div>
+        </div>
+      </div>
+      <div class="mb">
+        <div class="ml">Content Model — CMS SaaS</div>
+        <div class="bdv">Multi-source Assembly</div>
+        <span class="ctb" style="background:#007BC7">CoverageComponent — Homeowners</span>
+        <div class="fbs">
+          <div class="fb" data-fc="re"><div class="fk">content.exclusion</div><div class="fv">Vehicle damage excluded from Other Structures coverage</div></div>
+        </div>
+        <div class="bdv">+</div>
+        <span class="ctb" style="background:#007BC7">CoverageComponent — Personal Auto</span>
+        <div class="fbs">
+          <div class="fb" data-fc="gr"><div class="fk">content.coreDefinition</div><div class="fv">Fallen object / tree: covered under Comprehensive</div></div>
+          <div class="fb" data-fc="am"><div class="fk">limits.deductible</div><div class="fv">Separate deductible — independent of HO claim</div></div>
+        </div>
+        <div class="bcrm">Assembly: two content items resolved from question context — separate FNOL numbers issued</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================
+  S3: PERSONAL PROPERTY THEFT
+====================================================== -->
+<section class="sc" id="s3">
+  <div class="sh">
+    <div class="sn2">03</div>
+    <div>
+      <div class="st">Personal Property Theft from Vehicle</div>
+      <div class="tags">
+        <span class="tag lob">Personal Auto</span>
+        <span class="tag lob">Homeowners</span>
+        <span class="tag top">Coverage Options</span>
+        <span class="tag jur">National</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="xl">Initial Question</div>
+    <div class="xq">"John's laptop and camera gear were stolen from his car in a parking garage — does his personal auto or homeowners policy cover the stolen items?"</div>
+    <div class="ms">
+      <div class="mf">
+        <div class="ml">Response — Opal Consultant UI</div>
+        <div class="rc gap">
+          <div class="rc-oh"><div class="oi"><svg fill="none" stroke="#7c3aed" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div><span class="on">Opal Knowledge Assistant</span></div>
+          <h4>Auto Policy: Not Covered</h4>
+          <p>Personal Auto policies do <strong>not cover personal property</strong> inside the vehicle — this is a standard exclusion across all auto products.</p>
+          <h4>Homeowners: Off-Premises Personal Property</h4>
+          <p>The stolen items are covered under the Homeowners <strong>off-premises personal property</strong> provision — up to <strong>10% of his personal property limit</strong> (~$8,500 on this policy).</p>
+          <p>Coverage is at <strong>Actual Cash Value (ACV)</strong> unless a Replacement Cost endorsement is active on this policy.</p>
+          <div class="rs"><div class="rsl">Sources</div><div class="rsc"><span class="sc2"><span class="sd"></span>Auto Personal Property Exclusion</span><span class="sc2"><span class="sd"></span>HO Off-Premises Rider</span></div></div>
+        </div>
+      </div>
+      <div class="mb">
+        <div class="ml">Content Model — CMS SaaS</div>
+        <div class="bdv">Multi-source Assembly</div>
+        <span class="ctb" style="background:#E74C3C">ExclusionComponent — Auto</span>
+        <div class="fbs">
+          <div class="fb" data-fc="bl"><div class="fk">taxonomy.lob / .topic</div><div class="fv">Personal Auto / Personal Property</div></div>
+          <div class="fb" data-fc="re"><div class="fk">content.exclusion</div><div class="fv">Personal property inside vehicle: excluded (all tiers)</div></div>
+          <div class="fb" data-fc="pu"><div class="fk">content.redirect</div><div class="fv">→ Homeowners off-premises personal property coverage</div></div>
+        </div>
+        <div class="bdv">+</div>
+        <span class="ctb" style="background:#007BC7">CoverageComponent — HO Off-Premises</span>
+        <div class="fbs">
+          <div class="fb" data-fc="am"><div class="fk">limits.offPremisesPct</div><div class="fv">10% of personal property coverage limit</div></div>
+          <div class="fb" data-fc="gr"><div class="fk">content.valuation</div><div class="fv">ACV unless Replacement Cost endorsement active</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="xl q2">Follow-up Question</div>
+    <div class="xq">"His camera kit is worth about $4,000 — is that within his standard limit or does he need a scheduled endorsement?"</div>
+    <div class="ms">
+      <div class="mf">
+        <div class="ml">Response — Opal Consultant UI</div>
+        <div class="rc">
+          <div class="rc-oh"><div class="oi"><svg fill="none" stroke="#7c3aed" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div><span class="on">Opal Knowledge Assistant</span></div>
+          <h4>Scheduled Personal Articles Recommended</h4>
+          <p>The standard off-premises limit (~$8,500) covers the value, but camera equipment is subject to <strong>depreciation under ACV</strong>. A Scheduled Personal Articles endorsement covers it at <strong>agreed value with no depreciation applied</strong>.</p>
+          <p>Requires an appraisal or original receipt for items over $1,000.</p>
+          <span class="ab">Get Scheduled Articles Quote</span>
+          <div class="rs"><div class="rsl">Sources</div><div class="rsc"><span class="sc2"><span class="sd"></span>Scheduled Personal Articles Endorsement</span></div></div>
+        </div>
+      </div>
+      <div class="mb">
+        <div class="ml">Content Model — CMS SaaS</div>
+        <span class="ctb" style="background:#27AE60">BenefitComponent — Scheduled Articles</span>
+        <div class="fbs">
+          <div class="fb" data-fc="gr"><div class="fk">limits.valuationMethod</div><div class="fv">Agreed Value — no depreciation applied at claim</div></div>
+          <div class="fb" data-fc="pu"><div class="fk">eligibility.requirements</div><div class="fv">Appraisal or receipt required for items &gt;$1,000</div></div>
+          <div class="fb" data-fc="am"><div class="fk">actions[0]</div><div class="fv">"Get Scheduled Articles Quote"</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================
+  S4: ROADSIDE ASSISTANCE
+====================================================== -->
+<section class="sc" id="s4">
+  <div class="sh">
+    <div class="sn2">04</div>
+    <div>
+      <div class="st">Roadside Assistance</div>
+      <div class="tags">
+        <span class="tag lob">Personal Auto</span>
+        <span class="tag top">Roadside Assistance</span>
+        <span class="tag jur">FL</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="xl">Initial Question</div>
+    <div class="xq">"John's car just broke down on I-4 in Florida — does his personal auto policy include roadside assistance and how does he request a tow?"</div>
+    <div class="ms">
+      <div class="mf">
+        <div class="ml">Response — Opal Consultant UI</div>
+        <div class="rc">
+          <div class="rc-oh"><div class="oi"><svg fill="none" stroke="#7c3aed" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div><span class="on">Opal Knowledge Assistant</span></div>
+          <h4>Roadside Assistance Confirmed — Platinum</h4>
+          <p>John's Platinum policy includes roadside assistance. Covered services:</p>
+          <div class="cr"><span class="chip i">Towing (up to $100)</span><span class="chip i">Lockout</span><span class="chip i">Fuel Delivery</span><span class="chip i">Battery Jump</span></div>
+          <p>Dispatch via <strong>1-800-776-2778</strong> or the Progressive app. If he pays out-of-pocket, he has <strong>72 hours</strong> to submit for reimbursement.</p>
+          <div class="rs"><div class="rsl">Sources</div><div class="rsc"><span class="sc2"><span class="sd"></span>Auto Roadside – Platinum Tier</span></div></div>
+        </div>
+      </div>
+      <div class="mb">
+        <div class="ml">Content Model — CMS SaaS</div>
+        <span class="ctb" style="background:#27AE60">BenefitComponent</span>
+        <div class="fbs">
+          <div class="fb" data-fc="bl"><div class="fk">taxonomy.lob / .topic / .tier</div><div class="fv">Personal Auto / Roadside Assistance / Platinum</div></div>
+          <div class="fb" data-fc="gr"><div class="fk">content.services[]</div><div class="fv">["Towing", "Lockout", "Fuel Delivery", "Battery Jump"] <span class="fbg ov">Platinum</span></div><div class="fn">Master (Standard): Towing only</div></div>
+          <div class="fb" data-fc="am"><div class="fk">limits.towingMax</div><div class="fv">$100 per incident <span class="fbg ov">Platinum Override</span></div><div class="fn">Master (Standard): $75</div></div>
+          <div class="fb" data-fc="pu"><div class="fk">content.dispatch</div><div class="fv">1-800-776-2778 / Progressive App</div></div>
+          <div class="fb" data-fc="pu"><div class="fk">content.reimbursementWindow</div><div class="fv">72 hours for out-of-pocket reimbursement</div></div>
+        </div>
+        <div class="fdate"><span>settings.activeDate</span><span>2026-07-01</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="xl q2">Follow-up Question</div>
+    <div class="xq">"The nearest network shop is 22 miles away — does the tow distance affect his coverage?"</div>
+    <div class="ms">
+      <div class="mf">
+        <div class="ml">Response — Opal Consultant UI</div>
+        <div class="rc">
+          <div class="rc-oh"><div class="oi"><svg fill="none" stroke="#7c3aed" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div><span class="on">Opal Knowledge Assistant</span></div>
+          <h4>Limit is Cost-Based, Not Distance-Based</h4>
+          <p>The $100 limit applies to the <strong>cost of the tow</strong>, not the distance. If the tow costs more than $100, John can pay the overage directly to the driver, or submit a reimbursement request within 72 hours with his receipt.</p>
+          <span class="ab">Submit Reimbursement</span>
+        </div>
+      </div>
+      <div class="mb">
+        <div class="ml">Content Model — CMS SaaS</div>
+        <span class="ctb" style="background:#27AE60">BenefitComponent</span>
+        <div class="fbs">
+          <div class="fb" data-fc="am"><div class="fk">content.overagePolicy</div><div class="fv">Customer responsible for tow cost above $100 limit</div></div>
+          <div class="fb" data-fc="pu"><div class="fk">content.reimbursementProcedure</div><div class="fv">Submit receipt within 72 hours — online or 1-800 channel</div></div>
+          <div class="fb" data-fc="gr"><div class="fk">actions[0]</div><div class="fv">"Submit Reimbursement"</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================
+  S5: SNAPSHOT TELEMATICS
+====================================================== -->
+<section class="sc" id="s5">
+  <div class="sh">
+    <div class="sn2">05</div>
+    <div>
+      <div class="st">Snapshot® Telematics</div>
+      <div class="tags">
+        <span class="tag lob">Personal Auto</span>
+        <span class="tag top">Tools</span>
+        <span class="tag jur">National</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="xl">Initial Question</div>
+    <div class="xq">"Are there any Progressive telematics tools that could lower John's personal auto premium based on his driving behavior?"</div>
+    <div class="ms">
+      <div class="mf">
+        <div class="ml">Response — Opal Consultant UI</div>
+        <div class="rc">
+          <div class="rc-oh"><div class="oi"><svg fill="none" stroke="#7c3aed" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div><span class="on">Opal Knowledge Assistant</span></div>
+          <h4>Snapshot® Telematics Program</h4>
+          <p>Snapshot® monitors driving behavior via a <strong>mobile app or plug-in device</strong> over a 6-month measurement period.</p>
+          <h4>Discount Structure</h4>
+          <table class="lt">
+            <tr><td>Enrollment discount</td><td>Up to 10% — applied immediately</td></tr>
+            <tr><td>Renewal discount</td><td>Up to 30% — behavior-based</td></tr>
+          </table>
+          <span class="ab">Enroll in Snapshot</span>
+          <div class="rs"><div class="rsl">Sources</div><div class="rsc"><span class="sc2"><span class="sd"></span>Snapshot Program – National</span></div></div>
+        </div>
+      </div>
+      <div class="mb">
+        <div class="ml">Content Model — CMS SaaS</div>
+        <span class="ctb" style="background:#9B59B6">ProgramComponent</span>
+        <div class="fbs">
+          <div class="fb" data-fc="bl"><div class="fk">taxonomy.lob / .topic</div><div class="fv">Personal Auto / Tools + Telematics</div></div>
+          <div class="fb" data-fc="gr"><div class="fk">program.name / .measurementPeriod</div><div class="fv">Snapshot® / 6 months (app or plug-in)</div></div>
+          <div class="fb" data-fc="am"><div class="fk">discounts.participation</div><div class="fv">Up to 10% — applied at enrollment</div></div>
+          <div class="fb" data-fc="am"><div class="fk">discounts.renewal</div><div class="fv">Up to 30% — behavior-based at renewal</div></div>
+          <div class="fb" data-fc="pu"><div class="fk">program.scoringFactors[]</div><div class="fv">["Hard Braking (−)", "Late Night (−)", "Low Mileage (+)", "Smooth Accel (+)"]</div></div>
+        </div>
+        <div class="fdate"><span>settings.activeDate</span><span>2026-07-01</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="xl q2">Follow-up Question</div>
+    <div class="xq">"He drives mostly on weekends and low mileage — will that help his Snapshot score?"</div>
+    <div class="ms">
+      <div class="mf">
+        <div class="ml">Response — Opal Consultant UI</div>
+        <div class="rc">
+          <div class="rc-oh"><div class="oi"><svg fill="none" stroke="#7c3aed" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div><span class="on">Opal Knowledge Assistant</span></div>
+          <h4>Favorable Profile for Snapshot</h4>
+          <p>Weekend and low-mileage driving are <strong>positive signals</strong> in the scoring model. The main risk factors to avoid are:</p>
+          <div class="cr"><span class="chip b">Hard Braking</span><span class="chip b">Midnight–4am Driving</span></div>
+          <p>Based on similar profiles, estimated renewal savings: <strong>15–22%</strong>.</p>
+          <div class="rs"><div class="rsl">Sources</div><div class="rsc"><span class="sc2"><span class="sd"></span>Snapshot Scoring Model – v4.2</span></div></div>
+        </div>
+      </div>
+      <div class="mb">
+        <div class="ml">Content Model — CMS SaaS</div>
+        <span class="ctb" style="background:#9B59B6">ProgramComponent</span>
+        <div class="fbs">
+          <div class="fb" data-fc="gr"><div class="fk">program.scoringFactors[mileage].signal</div><div class="fv">Low mileage / weekend driving: positive signal</div></div>
+          <div class="fb" data-fc="re"><div class="fk">program.scoringFactors[hardBraking].signal</div><div class="fv">Hard braking: primary negative factor</div></div>
+          <div class="fb" data-fc="re"><div class="fk">program.scoringFactors[timeOfDay].signal</div><div class="fv">Midnight–4am driving: negative factor</div></div>
+          <div class="fb" data-fc="am"><div class="fk">content.profileEstimate</div><div class="fv">15–22% savings for low-mileage weekend profiles</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================
+  S6: MISSING DISCOUNTS
+====================================================== -->
+<section class="sc" id="s6">
+  <div class="sh">
+    <div class="sn2">06</div>
+    <div>
+      <div class="st">Missing Discounts</div>
+      <div class="tags">
+        <span class="tag lob">Personal Auto</span>
+        <span class="tag lob">Homeowners</span>
+        <span class="tag top">Discounts</span>
+        <span class="tag jur">FL</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="xl">Initial Question</div>
+    <div class="xq">"What discounts is John currently missing out on for his Florida home and auto bundle?"</div>
+    <div class="ms">
+      <div class="mf">
+        <div class="ml">Response — Opal Consultant UI</div>
+        <div class="rc opp">
+          <div class="rc-oh"><div class="oi"><svg fill="none" stroke="#7c3aed" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div><span class="on">Opal Knowledge Assistant</span></div>
+          <h4>3 Unenrolled Discounts Found</h4>
+          <div class="or">
+            <div class="ori"><span class="orn">Snapshot® Telematics</span><span style="display:flex;gap:6px;align-items:center"><span class="ors">Up to 30%</span><span class="ore">Not enrolled</span></span></div>
+            <div class="ori"><span class="orn">Paperless Billing</span><span style="display:flex;gap:6px;align-items:center"><span class="ors">$5/month</span><span class="ore">Not enrolled</span></span></div>
+            <div class="ori"><span class="orn">Pay-in-Full</span><span style="display:flex;gap:6px;align-items:center"><span class="ors">Up to 8%</span><span class="ore">Not enrolled</span></span></div>
+          </div>
+          <div class="rs"><div class="rsl">Sources</div><div class="rsc"><span class="sc2"><span class="sd"></span>Discount Catalog – Auto</span><span class="sc2"><span class="sd"></span>Discount Catalog – HO</span></div></div>
+        </div>
+      </div>
+      <div class="mb">
+        <div class="ml">Content Model — CMS SaaS</div>
+        <span class="ctb" style="background:#E67E22">DiscountComponent × 3</span>
+        <div class="fbs">
+          <div class="fb" data-fc="gr"><div class="fk">discount[0].name / .savingsRange</div><div class="fv">Snapshot® Telematics / Up to 30%</div></div>
+          <div class="fb" data-fc="gr"><div class="fk">discount[1].name / .savingsAmount</div><div class="fv">Paperless Billing / $5/month</div></div>
+          <div class="fb" data-fc="gr"><div class="fk">discount[2].name / .savingsRange</div><div class="fv">Pay-in-Full / Up to 8% of premium</div></div>
+        </div>
+        <div class="bcrm">Assembly filter: enrolled = false AND eligible = true — enrollment status read from CRM, not stored in CMS</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="xl q2">Follow-up Question</div>
+    <div class="xq">"He wants to switch to paperless and pay in full right now — can we apply both on this call?"</div>
+    <div class="ms">
+      <div class="mf">
+        <div class="ml">Response — Opal Consultant UI</div>
+        <div class="rc proc">
+          <div class="rc-oh"><div class="oi"><svg fill="none" stroke="#7c3aed" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div><span class="on">Opal Knowledge Assistant</span></div>
+          <h4>Both Can Be Applied Today</h4>
+          <p>Both discounts can be applied immediately. They take effect at the <strong>next billing cycle</strong>.</p>
+          <p>Estimated updated premium: <strong>$218/mo → $201/mo</strong> (combined paperless + pay-in-full).</p>
+          <span class="ab">Apply Paperless</span><span class="ab">Apply Pay-in-Full</span>
+        </div>
+      </div>
+      <div class="mb">
+        <div class="ml">Content Model — CMS SaaS</div>
+        <span class="ctb" style="background:#E67E22">DiscountComponent</span>
+        <div class="fbs">
+          <div class="fb" data-fc="gr"><div class="fk">discount[1].enrollmentSteps</div><div class="fv">Rich Text: enroll via online account or agent-assisted</div></div>
+          <div class="fb" data-fc="gr"><div class="fk">discount[2].enrollmentSteps</div><div class="fv">Rich Text: process payment in full; discount auto-confirmed</div></div>
+          <div class="fb" data-fc="pu"><div class="fk">discount.timingNote</div><div class="fv">Both discounts effective at next billing cycle</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================
+  S7: LIABILITY AFTER ACCIDENT
+====================================================== -->
+<section class="sc" id="s7">
+  <div class="sh">
+    <div class="sn2">07</div>
+    <div>
+      <div class="st">Liability After Accident</div>
+      <div class="tags">
+        <span class="tag lob">Personal Auto</span>
+        <span class="tag top">Coverage Options</span>
+        <span class="tag jur">National</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="xl">Initial Question</div>
+    <div class="xq">"John was in a fender bender yesterday and the other driver is claiming a back injury — what are his personal auto liability limits and what should we advise him?"</div>
+    <div class="ms">
+      <div class="mf">
+        <div class="ml">Response — Opal Consultant UI</div>
+        <div class="rc">
+          <div class="rc-oh"><div class="oi"><svg fill="none" stroke="#7c3aed" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div><span class="on">Opal Knowledge Assistant</span></div>
+          <h4>Liability Coverage Summary — Platinum</h4>
+          <table class="lt">
+            <tr><td>Bodily Injury</td><td>$100,000 per person / $300,000 per accident</td></tr>
+            <tr><td>Property Damage</td><td>$100,000 per accident</td></tr>
+            <tr><td>Medical Payments</td><td>$5,000 per person</td></tr>
+          </table>
+          <h4>Consultant Guidance</h4>
+          <p>Advise John: do <strong>not</strong> admit fault, avoid discussing the incident outside official claims channels, document the scene with photos, and refer all correspondence to Progressive.</p>
+          <div class="rs"><div class="rsl">Sources</div><div class="rsc"><span class="sc2"><span class="sd"></span>Auto Liability – Platinum</span><span class="sc2"><span class="sd"></span>Consultant Guidance – Claims</span></div></div>
+        </div>
+      </div>
+      <div class="mb">
+        <div class="ml">Content Model — CMS SaaS</div>
+        <span class="ctb" style="background:#007BC7">CoverageComponent — Liability</span>
+        <div class="fbs">
+          <div class="fb" data-fc="bl"><div class="fk">taxonomy.lob / .topic</div><div class="fv">Personal Auto / Liability</div></div>
+          <div class="fb" data-fc="am"><div class="fk">limits.bodilyInjury</div><div class="fv">$100K per person / $300K per accident <span class="fbg ov">Platinum</span></div><div class="fn">Master (Standard): $50K / $100K</div></div>
+          <div class="fb" data-fc="am"><div class="fk">limits.propertyDamage / .medPay</div><div class="fv">$100,000 / $5,000 per person</div></div>
+          <div class="fb" data-fc="pu"><div class="fk">content.consultantGuidance</div><div class="fv">Rich Text: no admission of fault, documentation advice, referral to claims</div></div>
+        </div>
+        <div class="fdate"><span>settings.activeDate</span><span>2026-07-01</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="xl q2">Follow-up Question</div>
+    <div class="xq">"He hasn't filed a claim yet — how do we open one and what does he need to have ready?"</div>
+    <div class="ms">
+      <div class="mf">
+        <div class="ml">Response — Opal Consultant UI</div>
+        <div class="rc proc">
+          <div class="rc-oh"><div class="oi"><svg fill="none" stroke="#7c3aed" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div><span class="on">Opal Knowledge Assistant</span></div>
+          <h4>Liability Claim Intake</h4>
+          <p>To open a claim, gather:</p>
+          <ul class="cl">
+            <li>Police report or case number</li>
+            <li>Other driver's contact info + insurance</li>
+            <li>Photos of scene and both vehicles</li>
+            <li>Witness names and contact info (if available)</li>
+          </ul>
+          <p style="margin-top:6px">Initial contact from the Progressive claims team within <strong>24 hours</strong> of filing.</p>
+          <span class="ab">Open Liability Claim</span>
+        </div>
+      </div>
+      <div class="mb">
+        <div class="ml">Content Model — CMS SaaS</div>
+        <span class="ctb" style="background:#D35400">ProcedureComponent — Claims Intake</span>
+        <div class="fbs">
+          <div class="fb" data-fc="bl"><div class="fk">procedure.type</div><div class="fv">Liability Claim Intake</div></div>
+          <div class="fb" data-fc="gr"><div class="fk">procedure.requiredInfo[]</div><div class="fv">["Police report", "Other party contact + insurance", "Scene photos", "Witness info"]</div></div>
+          <div class="fb" data-fc="pu"><div class="fk">procedure.responseTimeline</div><div class="fv">Claims contact within 24 hours of filing</div></div>
+          <div class="fb" data-fc="am"><div class="fk">actions[0]</div><div class="fv">"Open Liability Claim"</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================
+  S8: WATER DAMAGE
+====================================================== -->
+<section class="sc" id="s8">
+  <div class="sh">
+    <div class="sn2">08</div>
+    <div>
+      <div class="st">Water Damage / Burst Pipe</div>
+      <div class="tags">
+        <span class="tag lob">Homeowners</span>
+        <span class="tag top">Coverage Options</span>
+        <span class="tag jur">FL</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="xl">Initial Question</div>
+    <div class="xq">"A pipe burst in John's Florida home and flooded the finished basement — does his homeowners policy cover the water damage to the structure and furniture?"</div>
+    <div class="ms">
+      <div class="mf">
+        <div class="ml">Response — Opal Consultant UI</div>
+        <div class="rc">
+          <div class="rc-oh"><div class="oi"><svg fill="none" stroke="#7c3aed" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div><span class="on">Opal Knowledge Assistant</span></div>
+          <div class="sr">
+            <div class="sri c"><span class="sb">Covered</span><span class="st2"><strong>Sudden &amp; accidental water damage</strong> — dwelling structure and personal property (contents up to $85,000 limit)</span></div>
+            <div class="sri e"><span class="sb">Excluded</span><span class="st2"><strong>Flood / surface water intrusion</strong> — requires a separate NFIP or private flood policy</span></div>
+          </div>
+          <p style="margin-top:6px;font-size:10px;color:var(--t3)">⚠ FL disclosure: sinkhole investigation may be triggered for claims involving the foundation.</p>
+          <span class="ab">Start Water Damage Claim</span>
+          <div class="rs"><div class="rsl">Sources</div><div class="rsc"><span class="sc2"><span class="sd"></span>HO Water Damage – FL</span><span class="sc2"><span class="sd"></span>Flood Exclusion</span></div></div>
+        </div>
+      </div>
+      <div class="mb">
+        <div class="ml">Content Model — CMS SaaS</div>
+        <div class="bdv">Multi-source Assembly</div>
+        <span class="ctb" style="background:#007BC7">CoverageComponent — HO Water</span>
+        <div class="fbs">
+          <div class="fb" data-fc="bl"><div class="fk">taxonomy.jurisdiction</div><div class="fv">FL <span class="fbg ov">FL Override</span></div></div>
+          <div class="fb" data-fc="gr"><div class="fk">content.coreDefinition</div><div class="fv">Sudden &amp; accidental water: covered (dwelling + contents)</div><div class="fn">Inherited from Master</div></div>
+          <div class="fb" data-fc="pu"><div class="fk">content.stateDisclosure</div><div class="fv">FL: sinkhole investigation may trigger for foundation claims <span class="fbg ov">FL Override</span></div></div>
+        </div>
+        <div class="bdv">+</div>
+        <span class="ctb" style="background:#E74C3C">ExclusionComponent — Flood</span>
+        <div class="fbs">
+          <div class="fb" data-fc="re"><div class="fk">content.exclusion</div><div class="fv">Flood / surface water intrusion: excluded (all tiers, all states)</div></div>
+          <div class="fb" data-fc="pu"><div class="fk">content.referral</div><div class="fv">NFIP or private flood endorsement</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="xl q2">Follow-up Question</div>
+    <div class="xq">"Should he also look at a separate flood policy given he's in Central Florida?"</div>
+    <div class="ms">
+      <div class="mf">
+        <div class="ml">Response — Opal Consultant UI</div>
+        <div class="rc rec">
+          <div class="rc-oh"><div class="oi"><svg fill="none" stroke="#7c3aed" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div><span class="on">Opal Knowledge Assistant</span></div>
+          <h4>Flood Insurance Advisory — Central FL</h4>
+          <p>His zip code falls in <strong>FEMA Zone X</strong> (moderate flood risk). Given recent Central Florida weather patterns, a flood policy is advisable.</p>
+          <h4>Options</h4>
+          <table class="lt">
+            <tr><td>NFIP (gov-backed)</td><td>~$900–$1,400/yr typical</td></tr>
+            <tr><td>Private flood</td><td>May offer higher limits + faster claims</td></tr>
+          </table>
+          <span class="ab">Start Flood Quote</span>
+          <div class="rs"><div class="rsl">Sources</div><div class="rsc"><span class="sc2"><span class="sd"></span>FEMA Zone Data</span><span class="sc2"><span class="sd"></span>Flood Product Guide</span></div></div>
+        </div>
+      </div>
+      <div class="mb">
+        <div class="ml">Content Model — CMS SaaS</div>
+        <span class="ctb" style="background:#2473AE">RecommendationComponent — Flood</span>
+        <div class="fbs">
+          <div class="fb" data-fc="gr"><div class="fk">content.riskContext</div><div class="fv">Central FL: elevated weather-related flood risk</div></div>
+          <div class="fb" data-fc="gr"><div class="fk">content.nfipVsPrivate</div><div class="fv">Rich Text: NFIP vs. private flood comparison</div></div>
+          <div class="fb" data-fc="am"><div class="fk">limits.nfipEstimatedRange</div><div class="fv">$900–$1,400/yr (Zone X, this property profile)</div></div>
+          <div class="fb" data-fc="pu"><div class="fk">actions[0]</div><div class="fv">"Start Flood Quote"</div></div>
+        </div>
+        <div class="bcrm">FEMA zone data injected from CRM zip code lookup — not stored in CMS</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================
+  S9: UMBRELLA UPSELL
+====================================================== -->
+<section class="sc" id="s9">
+  <div class="sh">
+    <div class="sn2">09</div>
+    <div>
+      <div class="st">Umbrella Coverage Upsell</div>
+      <div class="tags">
+        <span class="tag lob">Personal Auto</span>
+        <span class="tag lob">Homeowners</span>
+        <span class="tag top">Upsell</span>
+        <span class="tag jur">National</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="xl">Initial Question</div>
+    <div class="xq">"Given his Platinum home and auto bundle in Florida, does John have enough liability protection or should we recommend umbrella coverage?"</div>
+    <div class="ms">
+      <div class="mf">
+        <div class="ml">Response — Opal Consultant UI</div>
+        <div class="rc rec">
+          <div class="rc-oh"><div class="oi"><svg fill="none" stroke="#7c3aed" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div><span class="on">Opal Knowledge Assistant</span></div>
+          <h4>Umbrella Coverage Recommended</h4>
+          <p>John's combined auto liability cap is $300,000. For a Platinum homeowner, financial planners typically recommend coverage equal to net worth. A $1M umbrella fills the gap at approximately <strong>$19/month</strong>.</p>
+          <h4>What Umbrella Adds</h4>
+          <div class="cr"><span class="chip i">Excess Liability</span><span class="chip i">Personal Injury (libel/slander)</span><span class="chip i">Worldwide Coverage</span><span class="chip i">Rental Property Liability</span></div>
+          <span class="ab">Get Umbrella Quote</span>
+          <div class="rs"><div class="rsl">Sources</div><div class="rsc"><span class="sc2"><span class="sd"></span>Personal Umbrella – Upsell Guide</span></div></div>
+        </div>
+      </div>
+      <div class="mb">
+        <div class="ml">Content Model — CMS SaaS</div>
+        <span class="ctb" style="background:#2473AE">RecommendationComponent</span>
+        <div class="fbs">
+          <div class="fb" data-fc="bl"><div class="fk">taxonomy.lob / .topic</div><div class="fv">Personal Umbrella / Upsell + Cross-sell</div></div>
+          <div class="fb" data-fc="gr"><div class="fk">content.trigger</div><div class="fv">Auto BI limit &lt; $500K net worth threshold</div></div>
+          <div class="fb" data-fc="gr"><div class="fk">content.gapNarrative</div><div class="fv">Rich Text: current limits vs. recommended for asset profile</div></div>
+          <div class="fb" data-fc="pu"><div class="fk">content.coverageAdditions[]</div><div class="fv">["Excess Liability", "Personal Injury", "Worldwide", "Rental Property"]</div></div>
+          <div class="fb" data-fc="am"><div class="fk">limits.option1M</div><div class="fv">~$19/month for $1M umbrella</div></div>
+        </div>
+        <div class="bcrm">Net worth threshold check driven by CRM policy data — trigger logic, not stored in CMS</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="xl q2">Follow-up Question</div>
+    <div class="xq">"What exactly does umbrella cover that his current home and auto policies don't already handle?"</div>
+    <div class="ms">
+      <div class="mf">
+        <div class="ml">Response — Opal Consultant UI</div>
+        <div class="rc rec">
+          <div class="rc-oh"><div class="oi"><svg fill="none" stroke="#7c3aed" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div><span class="on">Opal Knowledge Assistant</span></div>
+          <h4>Gaps Umbrella Fills</h4>
+          <table class="lt">
+            <tr><td>Auto BI limit</td><td>$300K combined → +$1M umbrella</td></tr>
+            <tr><td>Home liability</td><td>$100K → +$1M umbrella</td></tr>
+            <tr><td>PD (auto)</td><td>$100K → +$1M umbrella</td></tr>
+          </table>
+          <h4>Unique Coverages Not in Base Policies</h4>
+          <div class="cr"><span class="chip i">Personal Injury (defamation, libel)</span><span class="chip i">Worldwide liability</span><span class="chip i">Rental property incidents</span></div>
+          <div class="rs"><div class="rsl">Sources</div><div class="rsc"><span class="sc2"><span class="sd"></span>Personal Umbrella – Coverage Detail</span></div></div>
+        </div>
+      </div>
+      <div class="mb">
+        <div class="ml">Content Model — CMS SaaS</div>
+        <span class="ctb" style="background:#2473AE">RecommendationComponent</span>
+        <div class="fbs">
+          <div class="fb" data-fc="gr"><div class="fk">content.gapDetail</div><div class="fv">Rich Text: how umbrella extends above auto + home limits</div></div>
+          <div class="fb" data-fc="pu"><div class="fk">content.uniqueCoverages[]</div><div class="fv">["Personal injury / libel / slander", "Worldwide liability", "Rental property incidents"]</div></div>
+          <div class="fb" data-fc="am"><div class="fk">content.comparison</div><div class="fv">Structured field: base policy caps vs. umbrella extension (table format)</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================
+  S10: COLLEGE STUDENT TRANSITION
+====================================================== -->
+<section class="sc" id="s10">
+  <div class="sh">
+    <div class="sn2">10</div>
+    <div>
+      <div class="st">College Student Transition</div>
+      <div class="tags">
+        <span class="tag lob">Personal Auto</span>
+        <span class="tag lob">Homeowners</span>
+        <span class="tag top">Transition Guidelines</span>
+        <span class="tag jur">FL → OH</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="xl">Initial Question</div>
+    <div class="xq">"John's daughter is moving to Ohio for college and taking the second car — what changes need to be made to his Florida auto and homeowners policies?"</div>
+    <div class="ms">
+      <div class="mf">
+        <div class="ml">Response — Opal Consultant UI</div>
+        <div class="rc life">
+          <div class="rc-oh"><div class="oi"><svg fill="none" stroke="#7c3aed" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div><span class="on">Opal Knowledge Assistant</span></div>
+          <h4>Life Event: Student Away — Changes Required</h4>
+          <h4>Auto Policy</h4>
+          <p>Garaging address must update to OH. As a <strong>full-time student</strong> (not a permanent state change), coverage continues — but the garaging state affects the premium. FL-titled vehicle: registration update may be required within 30 days of establishing OH residency.</p>
+          <h4>Homeowners Policy</h4>
+          <p>Dorm contents are covered under the <strong>off-premises personal property</strong> provision, up to 10% of the personal property limit (~$8,500). A Renters policy would provide broader coverage.</p>
+          <span class="ab">Update Garaging Address</span>
+          <div class="rs"><div class="rsl">Sources</div><div class="rsc"><span class="sc2"><span class="sd"></span>Auto Transition – Student Away</span><span class="sc2"><span class="sd"></span>HO Off-Premises</span><span class="sc2"><span class="sd"></span>FL → OH Jurisdiction Note</span></div></div>
+        </div>
+      </div>
+      <div class="mb">
+        <div class="ml">Content Model — CMS SaaS</div>
+        <span class="ctb" style="background:#16A085">LifeEventComponent</span>
+        <div class="fbs">
+          <div class="fb" data-fc="bl"><div class="fk">taxonomy.topic / .lifeEvent</div><div class="fv">Transition / Life Event — Student Away at College</div></div>
+          <div class="fb" data-fc="gr"><div class="fk">content.autoChanges</div><div class="fv">Update garaging to OH; FL registration note for FL-titled vehicles</div></div>
+          <div class="fb" data-fc="gr"><div class="fk">content.homeChanges</div><div class="fv">Dorm contents: off-premises personal property limit (10%)</div></div>
+          <div class="fb" data-fc="pu"><div class="fk">content.eligibility</div><div class="fv">Full-time student status required to maintain FL policy base</div></div>
+          <div class="fb" data-fc="am"><div class="fk">content.jurisdictionNote</div><div class="fv">FL → OH garaging: premium recalculation + registration within 30 days <span class="fbg ov">FL → OH</span></div></div>
+        </div>
+        <div class="fdate"><span>settings.activeDate</span><span>2026-07-01</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="xl q2">Follow-up Question</div>
+    <div class="xq">"She has a 3.8 GPA — does that qualify her for a discount on the policy?"</div>
+    <div class="ms">
+      <div class="mf">
+        <div class="ml">Response — Opal Consultant UI</div>
+        <div class="rc opp">
+          <div class="rc-oh"><div class="oi"><svg fill="none" stroke="#7c3aed" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div><span class="on">Opal Knowledge Assistant</span></div>
+          <h4>Good Student Discount — Eligible</h4>
+          <p>A 3.8 GPA exceeds the <strong>3.0 GPA minimum</strong> (or Honor Roll). The discount applies to her vehicle on the policy at next renewal.</p>
+          <h4>Documentation Required</h4>
+          <ul class="cl">
+            <li>Current transcript or school honor roll letter</li>
+            <li>Enrollment confirmation (full-time status)</li>
+          </ul>
+          <p style="margin-top:6px">Estimated savings: <strong>up to 8%</strong> on her vehicle's premium.</p>
+          <div class="rs"><div class="rsl">Sources</div><div class="rsc"><span class="sc2"><span class="sd"></span>Good Student Discount – National</span></div></div>
+        </div>
+      </div>
+      <div class="mb">
+        <div class="ml">Content Model — CMS SaaS</div>
+        <span class="ctb" style="background:#E67E22">DiscountComponent — Good Student</span>
+        <div class="fbs">
+          <div class="fb" data-fc="bl"><div class="fk">discount.name</div><div class="fv">Good Student Discount</div></div>
+          <div class="fb" data-fc="gr"><div class="fk">discount.gpaRequirement</div><div class="fv">3.0 GPA or Honor Roll certification</div></div>
+          <div class="fb" data-fc="pu"><div class="fk">discount.documentation[]</div><div class="fv">["Current transcript", "School honor roll letter", "Enrollment confirmation"]</div></div>
+          <div class="fb" data-fc="pu"><div class="fk">discount.timing</div><div class="fv">Applies to insured vehicle at next renewal</div></div>
+          <div class="fb" data-fc="am"><div class="fk">discount.savingsRange</div><div class="fv">Up to 8% on vehicle premium</div></div>
+        </div>
+        <div class="fdate"><span>settings.activeDate</span><span>2026-07-01</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div><!-- /main -->

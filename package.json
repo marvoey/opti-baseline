@@ -13,7 +13,8 @@
     "start": "node scripts/run-next.mjs start",
     "lint": "eslint",
     "gen:locales": "node scripts/generate-locales.mjs",
-    "config:push": "npx @optimizely/cms-cli config push optimizely.config.mjs",
+    "cms:push": "npx @optimizely/cms-cli config push optimizely.config.mjs",
+    "cms:push:prgv": "npx @optimizely/cms-cli config push optimizely.config.progressive.mjs",
     "screenshot": "node scripts/screenshot.mjs",
     "screenshot:click": "node scripts/screenshot-click.mjs"
   },

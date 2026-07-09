@@ -1,0 +1,473 @@
+{
+  "_meta": {
+    "description": "10 Progressive demo scenarios for the kb-workspace Opal Consultant UI. Each scenario drives a Q1 → Answer → Q2 → Answer flow. The `cmsFields` objects map directly to CMS content type properties defined in /cms/*.tsx.",
+    "contentTypes": [
+      "PrgvCoverageRule",
+      "PrgvExclusionRule",
+      "PrgvBenefit",
+      "PrgvDiscount",
+      "PrgvProgram",
+      "PrgvLifeEvent",
+      "PrgvRecommendation",
+      "PrgvProcedure"
+    ]
+  },
+  "scenarios": [
+    {
+      "id": "rental-reimbursement",
+      "title": "Rental Reimbursement",
+      "cardType": "benefit",
+      "taxonomy": {
+        "LineOfBusiness": "Personal Auto",
+        "Topic": "Coverage Options",
+        "Jurisdiction": "FL",
+        "PolicyTier": "Platinum"
+      },
+      "q1": "John's car is going into the shop for hail repairs — what does his Florida personal auto policy cover for a rental while it's out?",
+      "a1": {
+        "headline": "Rental Reimbursement: Active",
+        "summary": "Platinum tier rental reimbursement is included. Daily limit and max duration apply.",
+        "cmsContentType": "PrgvBenefit",
+        "cmsFields": {
+          "LineOfBusiness": "Personal Auto",
+          "Topic": "Coverage Options",
+          "Jurisdiction": "FL",
+          "PolicyTier": "Platinum",
+          "VariationLabel": "Platinum Rental Benefit",
+          "SourceLabel": "Auto Policy — Rental Reimbursement Endorsement",
+          "CoreDefinition": "<p>Rental reimbursement coverage pays for a temporary vehicle while your insured car is being repaired due to a covered comprehensive or collision loss.</p>",
+          "DeductibleRules": "<p>Rental benefit begins the day after the vehicle is dropped off for repairs. The standard deductible on the underlying claim still applies separately.</p>",
+          "BenefitDetails": "<ul><li>Daily limit: $50/day</li><li>Maximum duration: 30 days</li><li>Preferred network: Enterprise, Hertz</li></ul>",
+          "ActionLabel": "Authorize Rental"
+        }
+      },
+      "q2": "Can we get the rental authorized today before the repair estimate comes in?",
+      "a2": {
+        "headline": "Pre-Authorization Available",
+        "summary": "A 24-hour pre-authorization window is available before the repair estimate is submitted.",
+        "cmsContentType": "PrgvProcedure",
+        "cmsFields": {
+          "LineOfBusiness": "Personal Auto",
+          "Topic": "Coverage Options",
+          "Jurisdiction": "FL",
+          "VariationLabel": "Rental Pre-Auth",
+          "SourceLabel": "Claims Process Guide — Rental Pre-Authorization",
+          "CoreDefinition": "<p>Rental pre-authorization can be issued up to 24 hours before the repair facility submits an estimate. The shop must confirm vehicle drop-off before the rental clock starts.</p>",
+          "Steps": "<ol><li>Confirm vehicle drop-off date with repair facility</li><li>Request pre-authorization code from claims representative</li><li>Customer books rental at preferred network location</li></ol>",
+          "ActionLabel": "Start Pre-Auth"
+        }
+      }
+    },
+    {
+      "id": "storm-tree-damage",
+      "title": "Storm / Tree Damage",
+      "cardType": "coverage-split",
+      "taxonomy": {
+        "LineOfBusiness": "Homeowners",
+        "Topic": "Hail",
+        "Jurisdiction": "FL",
+        "PolicyTier": "Platinum"
+      },
+      "q1": "A neighbor's tree fell on John's fence during last night's hail storm in Orlando — does his Florida homeowners policy cover the fence damage and debris removal?",
+      "a1": {
+        "headline": "Coverage Found: Other Structures",
+        "summary": "Fence damage from storm falls under Other Structures coverage. Debris removal has a separate sub-limit.",
+        "cmsContentType": "PrgvCoverageRule",
+        "cmsFields": {
+          "LineOfBusiness": "Homeowners",
+          "Topic": "Hail",
+          "Jurisdiction": "FL",
+          "VariationLabel": "FL Storm Endorsement",
+          "SourceLabel": "Homeowners Policy — Other Structures + FL Storm Endorsement",
+          "CoreDefinition": "<p>Damage to fences, detached garages, and other structures caused by a windstorm or hail event is covered under the <strong>Other Structures</strong> portion of the homeowners policy at 10% of the dwelling coverage limit.</p>",
+          "DeductibleRules": "<p>The standard homeowners deductible applies. Florida policies with a separate wind/hail deductible will apply that amount instead of the all-peril deductible.</p>",
+          "Exceptions": "<p><strong>Debris Removal:</strong> Reasonable costs to remove the fallen tree are covered up to $500 per occurrence (or 5% of the dwelling limit, whichever is less), separate from the structural repair limit.</p>",
+          "StateDisclosure": "<p>FL: Hurricane deductible does not apply to this claim unless the storm was officially designated a named hurricane at time of loss.</p>"
+        }
+      },
+      "q2": "The tree also landed on his car in the driveway — is that the same claim or a separate one?",
+      "a2": {
+        "headline": "Separate Claim Required: Auto Comprehensive",
+        "summary": "Vehicle damage is NOT covered under Homeowners. Auto Comprehensive covers it — a separate claim and deductible apply.",
+        "cmsContentType": "PrgvExclusionRule",
+        "cmsFields": {
+          "LineOfBusiness": "Homeowners",
+          "Topic": "Hail",
+          "Jurisdiction": "FL",
+          "VariationLabel": "Cross-Product Gap",
+          "SourceLabel": "Homeowners Policy — Motor Vehicle Exclusion",
+          "CoreDefinition": "<p>Homeowners policies exclude coverage for damage to motor vehicles, even when parked on the insured premises and damaged by a covered peril.</p>",
+          "Exceptions": "<p>Vehicle damage from the same storm event must be filed as a separate comprehensive claim under the auto policy. A separate auto deductible applies.</p>",
+          "ActionLabel": "Open Auto Comprehensive Claim"
+        }
+      }
+    },
+    {
+      "id": "personal-property-theft",
+      "title": "Personal Property Theft from Vehicle",
+      "cardType": "coverage-gap",
+      "taxonomy": {
+        "LineOfBusiness": "Personal Auto + Homeowners",
+        "Topic": "Coverage Options",
+        "Jurisdiction": "National",
+        "PolicyTier": "Platinum"
+      },
+      "q1": "John's laptop and camera gear were stolen from his car in a parking garage — does his personal auto or homeowners policy cover the stolen items?",
+      "a1": {
+        "headline": "Auto: Not Covered — Home: Covered",
+        "summary": "Personal property stolen from a vehicle is excluded under auto. Homeowners off-premises personal property rider applies.",
+        "cmsContentType": "PrgvExclusionRule",
+        "cmsFields": {
+          "LineOfBusiness": "Personal Auto",
+          "Topic": "Coverage Options",
+          "Jurisdiction": "National",
+          "VariationLabel": "Personal Property Exclusion",
+          "SourceLabel": "Auto Policy — Personal Property Exclusion Clause",
+          "CoreDefinition": "<p>Personal auto policies do not cover personal belongings stolen from an insured vehicle. Items such as laptops, cameras, and clothing are excluded from auto comprehensive coverage.</p>",
+          "Exceptions": "<p>Coverage for stolen personal property from a vehicle falls under the <strong>Homeowners off-premises personal property</strong> coverage, typically at 10% of the personal property limit. Depreciation may apply.</p>",
+          "StateDisclosure": null
+        }
+      },
+      "q2": "His camera kit is worth about $4,000 — is that within the standard off-premises limit or does he need a scheduled endorsement?",
+      "a2": {
+        "headline": "Scheduled Endorsement Recommended",
+        "summary": "The standard off-premises cap may be insufficient. A Scheduled Personal Articles endorsement offers agreed-value coverage with no depreciation.",
+        "cmsContentType": "PrgvRecommendation",
+        "cmsFields": {
+          "LineOfBusiness": "Homeowners",
+          "Topic": "Coverage Options",
+          "Jurisdiction": "National",
+          "VariationLabel": "Scheduled Personal Articles",
+          "SourceLabel": "Homeowners Policy — Personal Property Coverage + SPA Endorsement",
+          "CoreDefinition": "<p>Standard off-premises personal property coverage is 10% of the total personal property limit. For a $200,000 personal property coverage, this cap is $20,000 — but individual high-value items may have sub-limits (e.g., cameras typically capped at $1,500 per item).</p>",
+          "RecommendationRationale": "<p>A <strong>Scheduled Personal Articles (SPA)</strong> endorsement covers items at agreed value with no depreciation and no deductible. Requires a recent appraisal or purchase receipt for items over $2,500.</p>",
+          "ActionLabel": "Get SPA Quote"
+        }
+      }
+    },
+    {
+      "id": "roadside-assistance",
+      "title": "Roadside Assistance",
+      "cardType": "benefit",
+      "taxonomy": {
+        "LineOfBusiness": "Personal Auto",
+        "Topic": "Roadside Assistance",
+        "Jurisdiction": "FL",
+        "PolicyTier": "Platinum"
+      },
+      "q1": "John's car just broke down on I-4 in Florida — does his personal auto policy include roadside assistance and how does he request a tow?",
+      "a1": {
+        "headline": "Roadside Assistance: Active",
+        "summary": "Platinum tier includes full roadside assistance. Towing, lockout, fuel delivery, and battery jump are covered.",
+        "cmsContentType": "PrgvBenefit",
+        "cmsFields": {
+          "LineOfBusiness": "Personal Auto",
+          "Topic": "Roadside Assistance",
+          "Jurisdiction": "FL",
+          "PolicyTier": "Platinum",
+          "VariationLabel": "Platinum Roadside Bundle",
+          "SourceLabel": "Auto Policy — Roadside Assistance Coverage",
+          "CoreDefinition": "<p>Roadside Assistance is included at no additional cost on Platinum tier policies. Coverage includes: towing (up to $100), lockout service, fuel delivery, battery jump-start, and flat tire change.</p>",
+          "DeductibleRules": "<p>No deductible applies to Roadside Assistance calls. Each service request is logged; more than 3 calls per policy period may result in surcharge review at renewal.</p>",
+          "ActionLabel": "Dispatch Roadside Service"
+        }
+      },
+      "q2": "The nearest network shop is 22 miles away — what happens if the tow goes over the coverage limit?",
+      "a2": {
+        "headline": "Tow Overage: Member Responsibility or Reimbursement",
+        "summary": "The $100 towing limit covers the first portion. Member pays the overage but can submit for reimbursement within 72 hours.",
+        "cmsContentType": "PrgvProcedure",
+        "cmsFields": {
+          "LineOfBusiness": "Personal Auto",
+          "Topic": "Roadside Assistance",
+          "Jurisdiction": "FL",
+          "VariationLabel": "Tow Overage",
+          "SourceLabel": "Roadside Assistance Program — Overage Policy",
+          "CoreDefinition": "<p>The $100 towing benefit applies toward the total tow cost. Any amount above $100 is the member's responsibility at the time of service.</p>",
+          "Exceptions": "<p>If the member paid the full tow cost out-of-pocket, a reimbursement of up to $100 can be requested within <strong>72 hours</strong> by submitting the receipt through the claims portal or calling the claims line.</p>",
+          "ActionLabel": "Submit Reimbursement Request"
+        }
+      }
+    },
+    {
+      "id": "snapshot-telematics",
+      "title": "Snapshot / Telematics",
+      "cardType": "program",
+      "taxonomy": {
+        "LineOfBusiness": "Personal Auto",
+        "Topic": "Tools",
+        "Jurisdiction": "National",
+        "PolicyTier": "Platinum"
+      },
+      "q1": "Are there any Progressive telematics tools that could lower John's personal auto premium based on his driving behavior?",
+      "a1": {
+        "headline": "Snapshot® Available",
+        "summary": "Snapshot® usage-based program offers an immediate participation discount plus a behavior-based renewal discount.",
+        "cmsContentType": "PrgvProgram",
+        "cmsFields": {
+          "LineOfBusiness": "Personal Auto",
+          "Topic": "Tools",
+          "Jurisdiction": "National",
+          "VariationLabel": "Snapshot® Telematics",
+          "SourceLabel": "Progressive Snapshot® Program Overview",
+          "CoreDefinition": "<p><strong>Snapshot®</strong> is Progressive's usage-based insurance program. A small plug-in device or mobile app tracks driving behaviors over 6 months. Participation earns an immediate discount at enrollment; driving behavior determines the renewal discount (or surcharge).</p>",
+          "ProgramDetails": "<ul><li>Immediate participation discount upon enrollment</li><li>Renewal discount based on: braking patterns, time of day, mileage</li><li>Average savings: $146/yr for good drivers</li></ul>",
+          "ActionLabel": "Enroll in Snapshot®"
+        }
+      },
+      "q2": "He drives mostly on weekends — will that help or hurt his Snapshot score?",
+      "a2": {
+        "headline": "Weekend Driving: Favorable Profile",
+        "summary": "Low mileage and weekend-dominant driving are positive scoring factors. Hard braking and late-night miles are the primary negatives.",
+        "cmsContentType": "PrgvProgram",
+        "cmsFields": {
+          "LineOfBusiness": "Personal Auto",
+          "Topic": "Tools",
+          "Jurisdiction": "National",
+          "VariationLabel": "Snapshot® Scoring Factors",
+          "SourceLabel": "Snapshot® Scoring Methodology",
+          "CoreDefinition": "<p>Snapshot® scoring rewards low-mileage, daytime driving. Weekend-only drivers typically score well because they avoid high-risk commute windows and accumulate fewer overall miles.</p>",
+          "Exceptions": "<p><strong>Factors that may hurt the score:</strong> hard braking events (most impactful), driving between midnight–4am, and rapid acceleration. A profile with primarily weekend, daytime, low-mileage driving avoids all three primary negatives.</p>"
+        }
+      }
+    },
+    {
+      "id": "missing-discounts",
+      "title": "Missing Discounts",
+      "cardType": "opportunity",
+      "taxonomy": {
+        "LineOfBusiness": "Personal Auto + Homeowners",
+        "Topic": "Discounts",
+        "Jurisdiction": "FL",
+        "PolicyTier": "Platinum"
+      },
+      "q1": "What discounts is John currently missing on his Florida home and auto bundle that he'd qualify for today?",
+      "a1": {
+        "headline": "3 Unenrolled Discounts Found",
+        "summary": "Three discounts are available but not currently applied: Snapshot®, paperless billing, and pay-in-full.",
+        "cmsContentType": "PrgvDiscount",
+        "cmsFields": {
+          "LineOfBusiness": "Personal Auto + Homeowners",
+          "Topic": "Discounts",
+          "Jurisdiction": "FL",
+          "PolicyTier": "Platinum",
+          "VariationLabel": "Opportunity Summary",
+          "SourceLabel": "Discount Eligibility Engine",
+          "CoreDefinition": "<p>Based on John's current policy profile, three discounts are eligible but not yet applied to his bundle.</p>",
+          "DiscountItems": [
+            {
+              "name": "Snapshot® Telematics",
+              "estimatedSavings": "$146/yr",
+              "requirement": "Enroll and complete 6-month monitoring period"
+            },
+            {
+              "name": "Paperless Billing",
+              "estimatedSavings": "$36/yr",
+              "requirement": "Switch to electronic statements and billing notices"
+            },
+            {
+              "name": "Pay-in-Full",
+              "estimatedSavings": "$64/yr",
+              "requirement": "Pay full policy term premium at renewal"
+            }
+          ],
+          "TotalEstimatedSavings": "$246/yr"
+        }
+      },
+      "q2": "He wants to switch to paperless and pay in full right now — can we apply both on this call?",
+      "a2": {
+        "headline": "Both Discounts Applied",
+        "summary": "Paperless billing and pay-in-full can both be applied immediately and take effect at the next billing cycle.",
+        "cmsContentType": "PrgvProcedure",
+        "cmsFields": {
+          "LineOfBusiness": "Personal Auto + Homeowners",
+          "Topic": "Discounts",
+          "Jurisdiction": "FL",
+          "VariationLabel": "Discount Application",
+          "SourceLabel": "Policy Servicing Guide — Discount Application",
+          "CoreDefinition": "<p>Both the paperless billing discount and pay-in-full discount can be applied during an active service call. Changes take effect at the next billing cycle or renewal date, whichever is sooner.</p>",
+          "Steps": "<ol><li>Confirm customer's email address for paperless enrollment</li><li>Process pay-in-full payment for remaining balance</li><li>Discounts will appear on the next policy document</li><li>Confirm updated projected premium with customer</li></ol>",
+          "ActionLabel": "Apply Changes"
+        }
+      }
+    },
+    {
+      "id": "liability-after-accident",
+      "title": "Liability After Accident",
+      "cardType": "coverage-summary",
+      "taxonomy": {
+        "LineOfBusiness": "Personal Auto",
+        "Topic": "Coverage Options",
+        "Jurisdiction": "National",
+        "PolicyTier": "Platinum"
+      },
+      "q1": "John was in a fender bender yesterday and the other driver is now claiming a back injury — what are his personal auto liability limits and what should we advise him?",
+      "a1": {
+        "headline": "Liability Coverage: Active",
+        "summary": "Bodily Injury and Property Damage limits confirmed. Consultant guidance issued for injury claim scenario.",
+        "cmsContentType": "PrgvCoverageRule",
+        "cmsFields": {
+          "LineOfBusiness": "Personal Auto",
+          "Topic": "Coverage Options",
+          "Jurisdiction": "National",
+          "PolicyTier": "Platinum",
+          "VariationLabel": "Liability Summary",
+          "SourceLabel": "Auto Policy — Liability Coverage Schedule",
+          "CoreDefinition": "<p>John's Platinum auto policy includes the following liability limits: <strong>Bodily Injury</strong> $100,000 per person / $300,000 per occurrence; <strong>Property Damage</strong> $100,000 per occurrence; <strong>Medical Payments</strong> $5,000 per person.</p>",
+          "DeductibleRules": "<p>No deductible applies to liability claims paid to third parties. The liability coverage protects John against damages he is legally obligated to pay.</p>",
+          "Exceptions": "<p><strong>Consultant guidance:</strong> Advise John not to admit fault or discuss the incident with the other party directly. Document all available evidence. A claims representative will be assigned within 24 hours of opening the claim.</p>"
+        }
+      },
+      "q2": "He hasn't filed a claim yet — how do we open one and what information does he need to have ready?",
+      "a2": {
+        "headline": "Claim Intake: Liability",
+        "summary": "Walk the consultant through the required information checklist and open the liability claim.",
+        "cmsContentType": "PrgvProcedure",
+        "cmsFields": {
+          "LineOfBusiness": "Personal Auto",
+          "Topic": "Coverage Options",
+          "Jurisdiction": "National",
+          "VariationLabel": "Liability Claim Intake",
+          "SourceLabel": "Claims Process Guide — Liability FNOL",
+          "CoreDefinition": "<p>To open a liability claim (FNOL), the following information must be collected before the claim can be routed to a claims representative.</p>",
+          "Steps": "<ol><li>Date, time, and location of the incident</li><li>Other driver's name, contact, and insurance information</li><li>Police report number (if applicable)</li><li>Photos of vehicle damage and scene</li><li>Names and contact info of any witnesses</li></ol>",
+          "Exceptions": "<p>If a bodily injury is being claimed, the file is automatically escalated to the Injury Claims team. Timeline: initial contact from claims representative within 24 hours.</p>",
+          "ActionLabel": "Open Liability Claim"
+        }
+      }
+    },
+    {
+      "id": "burst-pipe-water-damage",
+      "title": "Burst Pipe / Water Damage",
+      "cardType": "coverage-split",
+      "taxonomy": {
+        "LineOfBusiness": "Homeowners",
+        "Topic": "Coverage Options",
+        "Jurisdiction": "FL",
+        "PolicyTier": "Platinum"
+      },
+      "q1": "A pipe burst in John's Florida home and flooded the finished basement — does his homeowners policy cover the water damage to the structure and his furniture?",
+      "a1": {
+        "headline": "Covered: Sudden Water Damage / Excluded: Flood",
+        "summary": "Sudden and accidental water damage from a burst pipe is covered. Flood damage from external water is excluded and requires separate NFIP coverage.",
+        "cmsContentType": "PrgvCoverageRule",
+        "cmsFields": {
+          "LineOfBusiness": "Homeowners",
+          "Topic": "Coverage Options",
+          "Jurisdiction": "FL",
+          "VariationLabel": "Water Damage — Sudden & Accidental",
+          "SourceLabel": "Homeowners Policy — Water Damage Coverage + FL Endorsement",
+          "CoreDefinition": "<p>Sudden and accidental discharge of water from a burst pipe is covered under the dwelling and personal property portions of the homeowners policy. Damage to both the structure (finished basement walls, flooring) and furniture is eligible.</p>",
+          "DeductibleRules": "<p>The standard homeowners deductible applies. Florida policies may carry a separate wind/water endorsement — confirm which deductible applies based on the loss cause.</p>",
+          "Exceptions": "<p><strong>Flood Exclusion:</strong> Damage caused by surface water, storm surge, or water that enters from outside the structure is excluded. A separate National Flood Insurance Program (NFIP) policy or private flood policy is required for flood coverage.</p>",
+          "StateDisclosure": "<p>FL: Sinkhole activity is a separate disclosure. If the burst pipe was caused by or associated with ground movement, a sinkhole inspection may be required before the claim is processed.</p>"
+        }
+      },
+      "q2": "He wants to know if he should also look at a separate flood policy given he's in Central Florida.",
+      "a2": {
+        "headline": "Flood Coverage Advisory: Central Florida",
+        "summary": "NFIP and private flood options are available. His zip code's FEMA flood zone determines risk level and pricing.",
+        "cmsContentType": "PrgvRecommendation",
+        "cmsFields": {
+          "LineOfBusiness": "Homeowners",
+          "Topic": "Coverage Options",
+          "Jurisdiction": "FL",
+          "VariationLabel": "Flood Coverage Recommendation",
+          "SourceLabel": "Flood Insurance Program Guide",
+          "CoreDefinition": "<p>Central Florida (Orlando metro) includes a mix of FEMA flood zones ranging from low-risk (Zone X) to moderate-risk (Zone AE). Even Zone X properties can experience flooding from heavy rain events — NFIP data shows 25% of flood claims come from low-to-moderate risk areas.</p>",
+          "RecommendationRationale": "<p>Options available: <strong>NFIP</strong> (government-backed, up to $250,000 dwelling / $100,000 contents, typically 30-day waiting period); <strong>Private flood</strong> (higher limits, faster binding, broader coverage). Recommend confirming the property's FEMA flood zone before quoting.</p>",
+          "ActionLabel": "Start Flood Quote"
+        }
+      }
+    },
+    {
+      "id": "umbrella-upsell",
+      "title": "Umbrella Upsell",
+      "cardType": "recommendation",
+      "taxonomy": {
+        "LineOfBusiness": "Personal Auto + Homeowners",
+        "Topic": "Upsell",
+        "Jurisdiction": "National",
+        "PolicyTier": "Platinum"
+      },
+      "q1": "John has a Platinum home and auto bundle — does he have enough liability coverage or is he a good candidate for umbrella insurance?",
+      "a1": {
+        "headline": "Umbrella Coverage Recommended",
+        "summary": "Current liability limits may fall short of estimated asset exposure. A $1M umbrella policy fills the gap at low monthly cost.",
+        "cmsContentType": "PrgvRecommendation",
+        "cmsFields": {
+          "LineOfBusiness": "Personal Auto + Homeowners",
+          "Topic": "Upsell",
+          "Jurisdiction": "National",
+          "VariationLabel": "Personal Umbrella Recommendation",
+          "SourceLabel": "Umbrella Product Guide",
+          "CoreDefinition": "<p>John's current liability exposure: auto BI at $100K/$300K and homeowners liability at $300K. A serious auto accident with injuries or a premises liability suit could exceed these limits, leaving personal assets at risk.</p>",
+          "RecommendationRationale": "<p>A <strong>$1,000,000 personal umbrella policy</strong> provides excess liability above auto and home limits, plus coverage for personal injury (libel, slander), and worldwide incidents. Estimated cost: $15–$25/month for most profiles. Requires underlying auto and home to meet minimum liability thresholds (already met at Platinum).</p>",
+          "ActionLabel": "Get Umbrella Quote"
+        }
+      },
+      "q2": "What does umbrella actually cover that his home and auto policies don't already handle?",
+      "a2": {
+        "headline": "Umbrella Gap Explained",
+        "summary": "Umbrella extends liability beyond existing policy limits and covers scenarios that home and auto exclude outright.",
+        "cmsContentType": "PrgvRecommendation",
+        "cmsFields": {
+          "LineOfBusiness": "Personal Auto + Homeowners",
+          "Topic": "Upsell",
+          "Jurisdiction": "National",
+          "VariationLabel": "Umbrella vs. Base Coverage",
+          "SourceLabel": "Umbrella Coverage Comparison Guide",
+          "CoreDefinition": "<p>What umbrella adds beyond auto and home:</p><ul><li><strong>Excess liability</strong> — activates when auto or home liability limits are exhausted</li><li><strong>Personal injury</strong> — libel, slander, wrongful eviction (excluded by home/auto)</li><li><strong>Worldwide coverage</strong> — incidents outside the US not covered by domestic auto/home</li><li><strong>Rental property liability</strong> — if John ever rents out property</li></ul>",
+          "Exceptions": "<p>Umbrella does NOT cover: business activities, intentional acts, or vehicle damage (those stay with the underlying policies).</p>"
+        }
+      }
+    },
+    {
+      "id": "college-student-transition",
+      "title": "College Student Transition",
+      "cardType": "life-event",
+      "taxonomy": {
+        "LineOfBusiness": "Personal Auto + Homeowners",
+        "Topic": "Transition Guidelines",
+        "Jurisdiction": "FL to OH",
+        "PolicyTier": "Platinum"
+      },
+      "q1": "John's daughter is moving to Ohio for college and taking the second car — what changes need to be made to his Florida auto and homeowners policies?",
+      "a1": {
+        "headline": "Life Event: Dependent Going to College",
+        "summary": "Auto garaging address must update to Ohio. Homeowners off-premises covers dorm contents up to the policy cap.",
+        "cmsContentType": "PrgvLifeEvent",
+        "cmsFields": {
+          "LineOfBusiness": "Personal Auto + Homeowners",
+          "Topic": "Transition Guidelines",
+          "Jurisdiction": "FL to OH",
+          "PolicyTier": "Platinum",
+          "VariationLabel": "College Transition",
+          "SourceLabel": "Life Events Guide — Dependent College Enrollment",
+          "CoreDefinition": "<p>When a dependent moves to another state for college with an insured vehicle, two policy changes are typically required: (1) the vehicle's garaging address must update to the college state, and (2) premium and coverage terms may shift based on the new rating territory.</p>",
+          "DeductibleRules": "<p>Ohio rates may differ from Florida rates. The garaging update triggers a mid-term premium adjustment. No deductible change required unless the customer elects to update coverage.</p>",
+          "Exceptions": "<p><strong>Homeowners:</strong> The daughter's belongings in the dorm are covered under the off-premises personal property provision (typically 10% of personal property limit). Electronics may have a sub-limit — confirm if a SPA endorsement is needed for high-value items.</p><p><strong>Vehicle registration:</strong> Ohio requires vehicles principally garaged in-state to be registered in Ohio within 30 days.</p>",
+          "ActionLabel": "Update Garaging Address"
+        }
+      },
+      "q2": "She's a full-time student — does that qualify her for any discount back on John's policy?",
+      "a2": {
+        "headline": "Good Student Discount: Eligible",
+        "summary": "Full-time student with qualifying GPA is eligible for the Good Student Discount, applying at next renewal.",
+        "cmsContentType": "PrgvDiscount",
+        "cmsFields": {
+          "LineOfBusiness": "Personal Auto",
+          "Topic": "Discounts",
+          "Jurisdiction": "National",
+          "PolicyTier": "Platinum",
+          "VariationLabel": "Good Student Discount",
+          "SourceLabel": "Discount Eligibility Guide — Good Student",
+          "CoreDefinition": "<p>The Good Student Discount applies to drivers aged 16–25 who are enrolled full-time and maintain a GPA of 3.0 or higher (or equivalent class rank).</p>",
+          "DeductibleRules": null,
+          "Exceptions": "<p>Discount applies at the next renewal after eligibility documentation is submitted. Required documents: current official transcript or honor roll letter (must show GPA ≥ 3.0 or rank in top 20% of class). Discount typically ranges from 5–25% of the rated driver's portion of the premium.</p>",
+          "ActionLabel": "Submit Good Student Documentation"
+        }
+      }
+    }
+  ]
+}

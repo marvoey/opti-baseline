@@ -11,6 +11,8 @@ const LINKS = [
   { label: 'Demo Marketing', href: '/demo-marketing' },
   { label: 'Rationale: Scope', href: '/rationale/scope' },
   { label: 'Rationale: Approach', href: '/rationale/approach' },
+  { label: 'Component Library', href: '/component-library' },
+  { label: 'Render Preview', href: '/component-library/previews' },
 ];
 
 export default function DevQuickLinks() {
