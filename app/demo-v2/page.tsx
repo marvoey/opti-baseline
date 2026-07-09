@@ -225,7 +225,7 @@ export default function DemoV2Page() {
   const [uiVisible, setUiVisible]     = useState(false);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
   const chatRef = useRef<HTMLDivElement>(null);
-  let msgId = useRef(1);
+  const msgId = useRef(1);
 
   useEffect(() => {
     if (chatRef.current) chatRef.current.scrollTop = chatRef.current.scrollHeight;

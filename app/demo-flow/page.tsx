@@ -22,6 +22,9 @@ const PBGL = '#1A0C08'; // pain surface
 type Slide =
   | { kind: 'cover' }
   | { kind: 'reframe' }
+  | { kind: 'concept-intro'; headline: string; subhead: string; body: string; items: { label: string; desc: string }[]; accent: string }
+  | { kind: 'taxonomy' }
+  | { kind: 'scale-objection' }
   | { kind: 'act-intro'; num: 1 | 2 | 3; badge: string; title: string; subtitle: string; persona: { name: string; role: string }; description: string }
   | { kind: 'act'; num: 1 | 2 | 3; scene: number; intent: string; action: string; result: string; talk: string; pain?: boolean; image?: string }
   | { kind: 'closing' };
@@ -33,7 +36,32 @@ const SLIDES: Slide[] = [
   // ─ 2 ─ Reframe
   { kind: 'reframe' },
 
-  // ─ 3–5 ─ Act 1: The Pain of the "Now"
+  // ─ 3 ─ Concept: Tags as Labels vs Tags as Logic
+  {
+    kind: 'concept-intro',
+    headline: 'Tags as Labels vs. Tags as Logic',
+    subhead: 'The fundamental paradigm shift',
+    accent: G,
+    body: 'In every traditional CMS, tags help the search bar find a PDF. In an Agentic CMS, tags are the business rules that tell the AI exactly when and where a piece of copy is allowed to appear.',
+    items: [
+      {
+        label: 'The Old Way — Search Labels',
+        desc: 'A 50-page PDF gets tagged [Commercial] [Auto] [Florida]. The tag finds the document. The consultant still has to open it, read it, and manually extract the answer. The AI has no idea what is inside.',
+      },
+      {
+        label: 'The New Way — Atomic Logic',
+        desc: 'A single sentence — "Baseline deductible is $1,000" — is tagged [LOB: Commercial Auto] [State: FL] [Peril: Hail] [Type: Limit]. Those tags are a strict mathematical boundary. They tell the Generative UI exactly under what conditions this copy is allowed to render.',
+      },
+    ],
+  },
+
+  // ─ 4 ─ Concept: The Progressive Taxonomy
+  { kind: 'taxonomy' },
+
+  // ─ 5 ─ Concept: Scale Objection Pre-empt
+  { kind: 'scale-objection' },
+
+  // ─ 6–8 ─ Act 1: The Pain of the "Now" (scenes start at slide 7)
   {
     kind: 'act-intro', num: 1,
     badge: 'Act 1 — The Problem',
@@ -145,7 +173,7 @@ function actAccent(num: 1 | 2 | 3): string {
 
 function CoverSlide() {
   return (
-    <div style={{ height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '0 64px' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', padding: '32px 64px' }}>
       <div style={{ marginBottom: 0 }}>
         <OptiMark size={150} />
       </div>
@@ -176,7 +204,7 @@ function CoverSlide() {
 
 function ReframeSlide() {
   return (
-    <div style={{ height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '0 80px', textAlign: 'center' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '32px 80px', textAlign: 'center' }}>
       <div style={{ maxWidth: 860 }}>
         <Badge>Reframe</Badge>
 
@@ -217,15 +245,15 @@ function ActIntroSlide({ slide }: { slide: Extract<Slide, { kind: 'act-intro' }>
   const accent = actAccent(slide.num);
   const badgeBg = slide.num === 1 ? PBGL : S1;
   return (
-    <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
       {/* Section header */}
-      <div style={{ display: 'flex', alignItems: 'center', marginBottom: 28, flexShrink: 0 }}>
+      <div style={{ display: 'flex', alignItems: 'center', marginBottom: 28 }}>
         <Badge bg={accent} color={BG} border={false}>{slide.badge}</Badge>
         <div style={{ height: 1, flex: 1, background: BR, marginLeft: 12 }} />
       </div>
 
       {/* Two-column body */}
-      <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 min-h-0 overflow-y-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
         {/* Left: overview */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
           <div>
@@ -255,8 +283,8 @@ function ActIntroSlide({ slide }: { slide: Extract<Slide, { kind: 'act-intro' }>
         </div>
 
         {/* Right: persona + scenario */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 14, minHeight: 0 }}>
-          <div style={{ background: badgeBg, border: `1px solid ${BR}`, borderRadius: 12, padding: '16px 20px', flexShrink: 0 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+          <div style={{ background: badgeBg, border: `1px solid ${BR}`, borderRadius: 12, padding: '16px 20px' }}>
             <p style={{ fontSize: 15, color: M, letterSpacing: 2.5, textTransform: 'uppercase', fontWeight: 700, margin: '0 0 12px' }}>The Persona</p>
             <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
               <div style={{ width: 46, height: 46, borderRadius: '50%', background: S2, border: `2px solid ${accent}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18, fontWeight: 800, color: accent, flexShrink: 0 }}>
@@ -269,7 +297,7 @@ function ActIntroSlide({ slide }: { slide: Extract<Slide, { kind: 'act-intro' }>
             </div>
           </div>
 
-          <div style={{ background: badgeBg, border: `1px solid ${BR}`, borderRadius: 12, padding: '16px 20px', flex: 1, minHeight: 0, overflow: 'auto' }}>
+          <div style={{ background: badgeBg, border: `1px solid ${BR}`, borderRadius: 12, padding: '16px 20px' }}>
             <p style={{ fontSize: 15, color: M, letterSpacing: 2.5, textTransform: 'uppercase', fontWeight: 700, margin: '0 0 12px' }}>The Scenario</p>
             <p style={{ fontSize: 21, color: ML, lineHeight: 1.6, margin: 0 }}>{slide.description}</p>
           </div>
@@ -303,14 +331,14 @@ function ActSlide({ slide }: { slide: Extract<Slide, { kind: 'act' }> }) {
   // ── Layout: image present → left text column + right browser frame ──────────
   if (slide.image) {
     return (
-      <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
         {header}
-        <div className="flex-1 grid grid-cols-1 md:grid-cols-[38%_1fr] gap-5 min-h-0">
+        <div className="grid grid-cols-1 md:grid-cols-[38%_1fr] gap-5">
 
           {/* Left: Action + Talk Track */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 10, minHeight: 0 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
             {/* Action */}
-            <div style={{ flex: 1, background: cardBg, border: `1px solid ${BR}`, borderRadius: 12, padding: '14px 18px', display: 'flex', gap: 14, minHeight: 0, overflow: 'hidden' }}>
+            <div style={{ background: cardBg, border: `1px solid ${BR}`, borderRadius: 12, padding: '14px 18px', display: 'flex', gap: 14 }}>
               <div style={{ flexShrink: 0, width: 30, height: 30, borderRadius: 8, background: S2, border: `1px solid ${BRL}`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <svg width={14} height={14} viewBox="0 0 14 14" fill="none" aria-hidden>
                   <path d="M7 1L13 7L7 13M1 7H13" stroke={accent} strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" />
@@ -323,7 +351,7 @@ function ActSlide({ slide }: { slide: Extract<Slide, { kind: 'act' }> }) {
             </div>
 
             {/* Talk Track */}
-            <div style={{ flex: 1, background: S2, border: `1px solid ${BR}`, borderRadius: 12, padding: '14px 18px', display: 'flex', gap: 14, minHeight: 0, overflow: 'hidden' }}>
+            <div style={{ background: S2, border: `1px solid ${BR}`, borderRadius: 12, padding: '14px 18px', display: 'flex', gap: 14 }}>
               <div style={{ flexShrink: 0, width: 30, height: 30, borderRadius: 8, background: BG, border: `1px solid ${BR}`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <svg width={14} height={14} viewBox="0 0 14 14" fill="none" aria-hidden>
                   <path d="M13 2H1C0.45 2 0 2.45 0 3V9C0 9.55 0.45 10 1 10H4.5L7 13L9.5 10H13C13.55 10 14 9.55 14 9V3C14 2.45 13.55 2 13 2Z" stroke={ML} strokeWidth={1.1} />
@@ -337,7 +365,7 @@ function ActSlide({ slide }: { slide: Extract<Slide, { kind: 'act' }> }) {
           </div>
 
           {/* Right: browser chrome + screenshot at native width */}
-          <div style={{ display: 'flex', flexDirection: 'column', minHeight: 0, borderRadius: 12, overflow: 'hidden', border: `1px solid ${PAIN}44`, boxShadow: `0 0 0 1px ${PAIN}22, 0 8px 32px #00000066` }}>
+          <div style={{ display: 'flex', flexDirection: 'column', borderRadius: 12, overflow: 'hidden', border: `1px solid ${PAIN}44`, boxShadow: `0 0 0 1px ${PAIN}22, 0 8px 32px #00000066` }}>
             {/* Browser title bar */}
             <div style={{ background: '#1C1C1E', padding: '8px 12px', display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0, borderBottom: '1px solid #333' }}>
               <div style={{ display: 'flex', gap: 6 }}>
@@ -364,12 +392,12 @@ function ActSlide({ slide }: { slide: Extract<Slide, { kind: 'act' }> }) {
 
   // ── Layout: standard three-card stack ───────────────────────────────────────
   return (
-    <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
       {header}
 
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 10, minHeight: 0 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
         {/* Action */}
-        <div style={{ flex: 1, background: cardBg, border: `1px solid ${BR}`, borderRadius: 12, padding: '14px 18px', display: 'flex', gap: 14, minHeight: 0 }}>
+        <div style={{ background: cardBg, border: `1px solid ${BR}`, borderRadius: 12, padding: '14px 18px', display: 'flex', gap: 14 }}>
           <div style={{ flexShrink: 0, width: 30, height: 30, borderRadius: 8, background: S2, border: `1px solid ${BRL}`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <svg width={14} height={14} viewBox="0 0 14 14" fill="none" aria-hidden>
               <path d="M7 1L13 7L7 13M1 7H13" stroke={accent} strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" />
@@ -382,7 +410,7 @@ function ActSlide({ slide }: { slide: Extract<Slide, { kind: 'act' }> }) {
         </div>
 
         {/* Result */}
-        <div style={{ flex: 1, background: resultBg, border: `1px solid ${BRL}`, borderLeft: `3px solid ${resultBorder}`, borderRadius: 12, padding: '14px 18px', display: 'flex', gap: 14, minHeight: 0 }}>
+        <div style={{ background: resultBg, border: `1px solid ${BRL}`, borderLeft: `3px solid ${resultBorder}`, borderRadius: 12, padding: '14px 18px', display: 'flex', gap: 14 }}>
           <div style={{ flexShrink: 0, width: 30, height: 30, borderRadius: 8, background: S2, border: `1px solid ${BRL}`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             {slide.pain
               ? <svg width={14} height={14} viewBox="0 0 14 14" fill="none" aria-hidden>
@@ -401,7 +429,7 @@ function ActSlide({ slide }: { slide: Extract<Slide, { kind: 'act' }> }) {
         </div>
 
         {/* Talk Track */}
-        <div style={{ flex: 1, background: S2, border: `1px solid ${BR}`, borderRadius: 12, padding: '14px 18px', display: 'flex', gap: 14, minHeight: 0 }}>
+        <div style={{ background: S2, border: `1px solid ${BR}`, borderRadius: 12, padding: '14px 18px', display: 'flex', gap: 14 }}>
           <div style={{ flexShrink: 0, width: 30, height: 30, borderRadius: 8, background: BG, border: `1px solid ${BR}`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <svg width={14} height={14} viewBox="0 0 14 14" fill="none" aria-hidden>
               <path d="M13 2H1C0.45 2 0 2.45 0 3V9C0 9.55 0.45 10 1 10H4.5L7 13L9.5 10H13C13.55 10 14 9.55 14 9V3C14 2.45 13.55 2 13 2Z" stroke={ML} strokeWidth={1.1} />
@@ -420,7 +448,7 @@ function ActSlide({ slide }: { slide: Extract<Slide, { kind: 'act' }> }) {
 function ClosingSlide() {
   const intents = ['Ingest', 'Variant Assembly', 'Retrieve', 'Compare'];
   return (
-    <div style={{ height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '0 64px' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', padding: '32px 64px' }}>
       <div style={{ marginBottom: 28 }}>
         <svg width={72} height={72} viewBox="0 0 72 72" fill="none" aria-hidden>
           <circle cx={36} cy={36} r={33} stroke={G} strokeWidth={2} />
@@ -452,13 +480,148 @@ function ClosingSlide() {
   );
 }
 
+function ConceptIntroSlide({ slide }: { slide: Extract<Slide, { kind: 'concept-intro' }> }) {
+  return (
+    <div style={{ padding: '0 16px' }}>
+      <div style={{ maxWidth: 900, margin: '0 auto', width: '100%' }}>
+        <Badge>Key Concept</Badge>
+
+        <h2 style={{ fontSize: 'clamp(26px, 3.2vw, 46px)', fontWeight: 800, color: W, letterSpacing: '-0.5px', lineHeight: 1.1, margin: '20px 0 8px' }}>
+          {slide.headline}
+        </h2>
+        <p style={{ fontSize: 18, color: ML, margin: '0 0 32px' }}>{slide.subhead}</p>
+
+        <p style={{ fontSize: 21, color: ML, lineHeight: 1.7, margin: '0 0 32px', maxWidth: 780 }}>{slide.body}</p>
+
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+          {slide.items.map((item, i) => (
+            <div key={i} style={{ background: i === 0 ? PBGL : S1, border: `1px solid ${i === 0 ? PAIN + '44' : BRL}`, borderLeft: `3px solid ${i === 0 ? PAIN : G}`, borderRadius: 12, padding: '20px 22px' }}>
+              <p style={{ fontSize: 15, letterSpacing: 2, textTransform: 'uppercase' as const, fontWeight: 700, color: i === 0 ? PAIN : G, margin: '0 0 10px' }}>
+                {item.label}
+              </p>
+              <p style={{ fontSize: 20, color: i === 0 ? ML : W, lineHeight: 1.65, margin: 0 }}>{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const TAXONOMY_ROWS = [
+  { cat: 'LOB (Line of Business)', purpose: 'Defines the core product', examples: 'Personal Auto, Commercial Auto, Homeowners, Motorcycle' },
+  { cat: 'Jurisdiction (State)', purpose: 'Defines regulatory boundaries', examples: 'FL, GA, OH, National (Default)' },
+  { cat: 'Peril / Coverage', purpose: 'Defines the specific incident type', examples: 'Hail, Windstorm, Collision, Bodily Injury' },
+  { cat: 'Content Type', purpose: 'Defines what the block is', examples: 'Coverage Limit, Legal Disclaimer, Consultant Script, Procedure' },
+  { cat: 'Audience', purpose: 'Defines who is allowed to see it', examples: 'Frontline Consultant, Claims Adjuster, Underwriter' },
+  { cat: 'Time / Validity', purpose: 'Defines compliance windows', examples: 'Effective: 01-01-2026, Expires: 12-31-2026' },
+];
+
+function TaxonomySlide() {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
+      <div style={{ display: 'flex', alignItems: 'center', marginBottom: 22 }}>
+        <Badge color={D3}>Progressive Taxonomy</Badge>
+        <div style={{ height: 1, flex: 1, background: BR, marginLeft: 12 }} />
+      </div>
+
+      <div style={{ marginBottom: 18 }}>
+        <h2 style={{ fontSize: 'clamp(22px, 2.8vw, 38px)', fontWeight: 800, color: W, letterSpacing: '-0.3px', margin: '0 0 6px' }}>
+          The Multidimensional Tag System
+        </h2>
+        <p style={{ fontSize: 18, color: ML, margin: 0 }}>
+          For &ldquo;Tags as Logic&rdquo; to work, every content block needs to be positioned within this six-dimensional space. This is how the Generative UI knows exactly which copy to assemble — without guessing.
+        </p>
+      </div>
+
+      <div>
+        <table style={{ width: '100%', borderCollapse: 'collapse' as const }}>
+          <thead>
+            <tr>
+              {['Tag Category', 'Purpose', 'Progressive Examples'].map(h => (
+                <th key={h} style={{ textAlign: 'left' as const, padding: '8px 14px', fontSize: 13, letterSpacing: 2, textTransform: 'uppercase' as const, fontWeight: 700, color: M, borderBottom: `1px solid ${BR}` }}>
+                  {h}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {TAXONOMY_ROWS.map((row, i) => (
+              <tr key={i} style={{ borderBottom: `1px solid ${BR}`, background: i % 2 === 0 ? 'transparent' : S1 }}>
+                <td style={{ padding: '12px 14px', fontSize: 18, fontWeight: 700, color: D3 }}>{row.cat}</td>
+                <td style={{ padding: '12px 14px', fontSize: 18, color: ML }}>{row.purpose}</td>
+                <td style={{ padding: '12px 14px', fontSize: 17, color: W }}>
+                  {row.examples.split(', ').map(ex => (
+                    <span key={ex} style={{ display: 'inline-block', background: S2, border: `1px solid ${BRL}`, borderRadius: 5, padding: '1px 7px', marginRight: 5, marginBottom: 3, fontSize: 15, color: ML }}>
+                      {ex}
+                    </span>
+                  ))}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div style={{ marginTop: 16, padding: '12px 16px', background: S1, border: `1px solid ${BRL}`, borderLeft: `3px solid ${G}`, borderRadius: 10 }}>
+        <p style={{ fontSize: 18, color: W, margin: 0, lineHeight: 1.6 }}>
+          <strong style={{ color: G }}>The result:</strong> When Sarah asks about &ldquo;commercial auto hail in Florida,&rdquo; the AI doesn&rsquo;t search for a document — it executes a logic query across these exact dimensions and assembles the answer inline.
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function ScaleObjectionSlide() {
+  const steps = [
+    { num: '01', title: 'AI Auto-Classification', body: 'Marcus doesn\'t create 500 tags by hand. During migration, Opal ingests the legacy PDFs, extracts the limits, and auto-tags them. The AI does the heavy lifting — Marcus just approves the mapping.' },
+    { num: '02', title: 'Taxonomy Inheritance', body: 'Tags cascade from context. Drop a new block into the "Florida Commercial Auto" workspace and the system automatically inherits [State: FL] and [LOB: Commercial Auto]. No manual re-entry.' },
+    { num: '03', title: 'The ROI of Maintenance', body: 'The daily volume of maintenance actually decreases. One regulatory change no longer means opening, editing, and routing 50 different PDFs. Update one tagged atomic block — the entire ecosystem updates instantly.' },
+  ];
+  return (
+    <div style={{ padding: '0 16px' }}>
+      <div style={{ maxWidth: 900, margin: '0 auto', width: '100%' }}>
+        <Badge color={PAIN}>Pre-empting the Scale Objection</Badge>
+
+        <h2 style={{ fontSize: 'clamp(22px, 2.6vw, 38px)', fontWeight: 800, color: W, letterSpacing: '-0.5px', lineHeight: 1.1, margin: '14px 0 8px' }}>
+          &ldquo;Tagging every sentence sounds like a manual nightmare.&rdquo;
+        </h2>
+        <p style={{ fontSize: 18, color: ML, lineHeight: 1.6, margin: '0 0 16px', maxWidth: 780 }}>
+          You&rsquo;re right — <em>if humans had to do it</em>. We&rsquo;re not shifting effort to data entry. We&rsquo;re shifting it to <strong style={{ color: W }}>logic supervision</strong>.
+        </p>
+
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 12 }}>
+          {steps.map(s => (
+            <div key={s.num} style={{ background: S1, border: `1px solid ${BR}`, borderRadius: 12, padding: '16px 18px' }}>
+              <div style={{ width: 34, height: 34, borderRadius: 8, background: S2, border: `1px solid ${BRL}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14, fontWeight: 800, color: G, letterSpacing: 0.5, marginBottom: 10 }}>
+                {s.num}
+              </div>
+              <p style={{ fontSize: 16, fontWeight: 700, color: G, margin: '0 0 6px', letterSpacing: 0.3 }}>{s.title}</p>
+              <p style={{ fontSize: 18, color: ML, lineHeight: 1.55, margin: 0 }}>{s.body}</p>
+            </div>
+          ))}
+        </div>
+
+        <div style={{ marginTop: 12, padding: '10px 16px', background: PBGL, border: `1px solid ${PAIN}33`, borderLeft: `3px solid ${G}`, borderRadius: 10 }}>
+          <p style={{ fontSize: 18, color: W, margin: 0, lineHeight: 1.6, fontStyle: 'italic' }}>
+            The Agentic CMS handles the scale of the tagging — freeing the Knowledge Manager to focus on <strong style={{ color: G }}>accuracy, not administration</strong>.
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function SlideContent({ slide }: { slide: Slide }) {
   switch (slide.kind) {
-    case 'cover':      return <CoverSlide />;
-    case 'reframe':    return <ReframeSlide />;
-    case 'act-intro':  return <ActIntroSlide slide={slide} />;
-    case 'act':        return <ActSlide slide={slide} />;
-    case 'closing':    return <ClosingSlide />;
+    case 'cover':           return <CoverSlide />;
+    case 'reframe':         return <ReframeSlide />;
+    case 'concept-intro':   return <ConceptIntroSlide slide={slide} />;
+    case 'taxonomy':        return <TaxonomySlide />;
+    case 'scale-objection': return <ScaleObjectionSlide />;
+    case 'act-intro':       return <ActIntroSlide slide={slide} />;
+    case 'act':             return <ActSlide slide={slide} />;
+    case 'closing':         return <ClosingSlide />;
   }
 }
 
@@ -529,7 +692,6 @@ export default function DemoFlowPage() {
         title="Click to advance"
       >
         <div style={{
-          height: '100%',
           opacity: visible ? 1 : 0,
           transform: visible ? 'none' : 'translateY(6px)',
           transition: 'opacity 0.15s ease, transform 0.15s ease',
