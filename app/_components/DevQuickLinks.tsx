@@ -13,6 +13,7 @@ const LINKS = [
   { label: 'Rationale: Approach', href: '/rationale/approach' },
   { label: 'Component Library', href: '/component-library' },
   { label: 'Render Preview', href: '/component-library/previews' },
+  { label: 'Import Policies', href: '/admin/import-policies' },
 ];
 
 export default function DevQuickLinks() {
