@@ -53,7 +53,7 @@ export default function ProgressiveInteractiveDemoPage() {
       // Advancement to step 3 is gated by the user clicking through the backstage panel
     } else if (step === 3) {
       timers.push(setTimeout(() => setShowToggleBtn(true), 500));
-      timers.push(setTimeout(() => setStep(4), 2500));
+      // Advancement to step 4 is gated by the user clicking Continue
     } else if (step === 4) {
       const text = 'What if the windshield was completely shattered?';
       setInputDisabled(false);
@@ -368,6 +368,19 @@ export default function ProgressiveInteractiveDemoPage() {
                         </span>
                       </div>
                     </div>
+                    {step === 3 && (
+                      <div className="mt-4 pt-4 border-t border-gray-100 flex justify-end">
+                        <button
+                          onClick={() => setStep(4)}
+                          className="bg-[#007BC7] hover:bg-[#004A8F] text-white text-xs font-semibold px-4 py-2 rounded transition flex items-center gap-1.5"
+                        >
+                          Continue
+                          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </button>
+                      </div>
+                    )}
                   </div>
                 </div>
               )}

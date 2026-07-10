@@ -14,6 +14,12 @@ import ActionBlock, { ActionBlockContentType } from './ActionBlock';
 import { NavigationNodeContentType } from './NavigationNode';
 import WayfindingBlock, { WayfindingBlockContentType } from './WayfindingBlock';
 import CardBlock, { CardBlockContentType } from './CardBlock';
+import PrgvDemo, { PrgvDemoContentType } from './PrgvDemo';
+import PrgvDemov2, { PrgvDemov2ContentType } from './PrgvDemov2';
+import PrgvCorePrinciple, { PrgvCorePrincipleContentType } from './PrgvCorePrinciple';
+import PrgvJurisdictionalOverride, { PrgvJurisdictionalOverrideContentType } from './PrgvJurisdictionalOverride';
+import PrgvStatutoryDisclosure, { PrgvStatutoryDisclosureContentType } from './PrgvStatutoryDisclosure';
+import PrgvProceduralSafeguard, { PrgvProceduralSafeguardContentType } from './PrgvProceduralSafeguard';
 
 /**
  * Single configuration + registration point for the Optimizely SDK.
@@ -54,6 +60,14 @@ export const registeredContentTypes = [
   NavigationNodeContentType,
   WayfindingBlockContentType,
   CardBlockContentType,
+  // Progressive experience types
+  PrgvDemoContentType,
+  PrgvDemov2ContentType,
+  // Progressive Resolve intent — 4 atomic copy types
+  PrgvCorePrincipleContentType,
+  PrgvJurisdictionalOverrideContentType,
+  PrgvStatutoryDisclosureContentType,
+  PrgvProceduralSafeguardContentType,
 ];
 
 initContentTypeRegistry(registeredContentTypes);
@@ -70,5 +84,13 @@ initReactComponentRegistry({
     ActionBlock,
     WayfindingBlock,
     CardBlock,
+    // Progressive experience types
+    PrgvDemo,
+    PrgvDemov2,
+    // Progressive Resolve intent — 4 atomic copy types
+    PrgvCorePrinciple,
+    PrgvJurisdictionalOverride,
+    PrgvStatutoryDisclosure,
+    PrgvProceduralSafeguard,
   },
 });

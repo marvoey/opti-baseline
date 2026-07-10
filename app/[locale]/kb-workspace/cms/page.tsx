@@ -77,7 +77,7 @@ export default function ContentModelVisualizerPage() {
             Hover over elements to see the connection
           </div>
           <Link
-            href="/demo"
+            href="/kb-workspace"
             className="bg-[#007BC7] hover:bg-[#004A8F] text-white text-sm font-semibold py-2 px-4 rounded transition shadow"
           >
             Back to Contact Center
