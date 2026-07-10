@@ -1,22 +1,14 @@
 import Link from 'next/link';
-import { PrgvCoverageRuleContentType } from '@/cms/PrgvCoverageRule';
-import { PrgvExclusionRuleContentType } from '@/cms/PrgvExclusionRule';
-import { PrgvBenefitContentType } from '@/cms/PrgvBenefit';
-import { PrgvDiscountContentType } from '@/cms/PrgvDiscount';
-import { PrgvProgramContentType } from '@/cms/PrgvProgram';
-import { PrgvLifeEventContentType } from '@/cms/PrgvLifeEvent';
-import { PrgvRecommendationContentType } from '@/cms/PrgvRecommendation';
-import { PrgvProcedureContentType } from '@/cms/PrgvProcedure';
+import { PrgvCorePrincipleContentType } from '@/cms/PrgvCorePrinciple';
+import { PrgvJurisdictionalOverrideContentType } from '@/cms/PrgvJurisdictionalOverride';
+import { PrgvStatutoryDisclosureContentType } from '@/cms/PrgvStatutoryDisclosure';
+import { PrgvProceduralSafeguardContentType } from '@/cms/PrgvProceduralSafeguard';
 
 const CONTENT_TYPES = [
-  PrgvCoverageRuleContentType,
-  PrgvExclusionRuleContentType,
-  PrgvBenefitContentType,
-  PrgvDiscountContentType,
-  PrgvProgramContentType,
-  PrgvLifeEventContentType,
-  PrgvRecommendationContentType,
-  PrgvProcedureContentType,
+  PrgvCorePrincipleContentType,
+  PrgvJurisdictionalOverrideContentType,
+  PrgvStatutoryDisclosureContentType,
+  PrgvProceduralSafeguardContentType,
 ];
 
 const TYPE_COLORS: Record<string, string> = {
@@ -39,14 +31,10 @@ const TYPE_ICON: Record<string, string> = {
 
 // Section accent colors per content type key
 const ACCENT: Record<string, { border: string; header: string; badge: string }> = {
-  PrgvCoverageRule:    { border: 'border-t-[#007BC7]', header: 'from-[#007BC7] to-[#004A8F]', badge: 'bg-blue-100 text-[#004A8F]' },
-  PrgvExclusionRule:   { border: 'border-t-red-500',   header: 'from-red-600 to-red-800',      badge: 'bg-red-100 text-red-800' },
-  PrgvBenefit:         { border: 'border-t-emerald-500', header: 'from-emerald-600 to-emerald-800', badge: 'bg-emerald-100 text-emerald-800' },
-  PrgvDiscount:        { border: 'border-t-amber-500',  header: 'from-amber-600 to-amber-800',  badge: 'bg-amber-100 text-amber-800' },
-  PrgvProgram:         { border: 'border-t-violet-500', header: 'from-violet-600 to-violet-800', badge: 'bg-violet-100 text-violet-800' },
-  PrgvLifeEvent:       { border: 'border-t-teal-500',   header: 'from-teal-600 to-teal-800',    badge: 'bg-teal-100 text-teal-800' },
-  PrgvRecommendation:  { border: 'border-t-indigo-500', header: 'from-indigo-600 to-indigo-800', badge: 'bg-indigo-100 text-indigo-800' },
-  PrgvProcedure:       { border: 'border-t-slate-500',  header: 'from-slate-600 to-slate-800',  badge: 'bg-slate-100 text-slate-800' },
+  PrgvCorePrinciple:          { border: 'border-t-gray-500',    header: 'from-gray-600 to-gray-800',       badge: 'bg-gray-100 text-gray-700' },
+  PrgvJurisdictionalOverride: { border: 'border-t-[#007BC7]',   header: 'from-[#007BC7] to-[#004A8F]',    badge: 'bg-blue-100 text-[#004A8F]' },
+  PrgvStatutoryDisclosure:    { border: 'border-t-red-500',      header: 'from-red-600 to-red-800',         badge: 'bg-red-100 text-red-800' },
+  PrgvProceduralSafeguard:    { border: 'border-t-amber-500',    header: 'from-amber-600 to-amber-800',     badge: 'bg-amber-100 text-amber-800' },
 };
 
 type CmsProperty = {
@@ -85,7 +73,7 @@ function ContentTypeCard({ def }: { def: ContentTypeDef }) {
   );
 
   // Separate taxonomy (first 7 shared fields) from type-specific fields
-  const TAXONOMY_KEYS = new Set(['LineOfBusiness', 'Topic', 'Jurisdiction', 'PolicyTier', 'VariationLabel', 'SourceLabel', 'ActiveDate']);
+  const TAXONOMY_KEYS = new Set(['InternalName', 'LOB', 'Topic', 'Jurisdiction']);
   const taxonomyProps = props.filter(([k]) => TAXONOMY_KEYS.has(k));
   const specificProps = props.filter(([k]) => !TAXONOMY_KEYS.has(k));
 
