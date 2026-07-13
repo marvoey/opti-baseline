@@ -21,6 +21,7 @@ export const PrgvCorePrincipleContentType = contentType({
       displayName: "Line of Business",
       isRequired: true,
       sortOrder: 20,
+      indexingType: "queryable",
       format: "selectOne",
       enum: [
         { value: "Homeowners", displayName: "Homeowners" },
@@ -33,6 +34,7 @@ export const PrgvCorePrincipleContentType = contentType({
       displayName: "Topic / Peril",
       isRequired: true,
       sortOrder: 30,
+      indexingType: "queryable",
       format: "selectOne",
       enum: [
         { value: "Hail/Storm Damage", displayName: "Hail / Storm Damage" },

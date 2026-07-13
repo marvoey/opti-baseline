@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { twoPassResolve } from '../_lib/twoPassResolve';
 import KbWorkspaceShell from './_KbWorkspaceShell';
 

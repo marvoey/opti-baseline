@@ -1,0 +1,6122 @@
+[
+  {
+    "id": "AK-1",
+    "firstName": "Mohammad",
+    "lastName": "Crist",
+    "initials": "MC",
+    "city": "Wisozkhaven",
+    "state": "AK",
+    "stateName": "Alaska",
+    "phone": "(311) 454-2612",
+    "email": "mohammad.crist78@hotmail.com",
+    "policyNumber": "PGR-VA2BA4WX",
+    "lob": "Personal Auto",
+    "policyTier": "Bronze",
+    "status": "Active",
+    "vehicle": {
+      "year": 2013,
+      "make": "Polestar",
+      "model": "Expedition"
+    },
+    "callIntent": {
+      "topic": "Water Damage",
+      "text": "Recent heavy rainfall in customer's zip code. Likely inquiring about water or flood-related coverage."
+    }
+  },
+  {
+    "id": "AK-2",
+    "firstName": "Ana",
+    "lastName": "Olson",
+    "initials": "AO",
+    "city": "Ocieshire",
+    "state": "AK",
+    "stateName": "Alaska",
+    "phone": "(959) 210-3328",
+    "email": "ana.olson54@hotmail.com",
+    "policyNumber": "PGR-N4ZLC0OH",
+    "lob": "Personal Auto",
+    "policyTier": "Silver",
+    "status": "Lapsed",
+    "vehicle": {
+      "year": 2012,
+      "make": "Jaguar",
+      "model": "Accord"
+    },
+    "callIntent": {
+      "topic": "Roadside Assistance",
+      "text": "Vehicle breakdown flag on account. Customer may need roadside towing or lockout help."
+    }
+  },
+  {
+    "id": "AK-3",
+    "firstName": "Esta",
+    "lastName": "Hane",
+    "initials": "EH",
+    "city": "Lakeland",
+    "state": "AK",
+    "stateName": "Alaska",
+    "phone": "(277) 674-5401",
+    "email": "esta_hane@gmail.com",
+    "policyNumber": "PGR-UFPKE4H9",
+    "lob": "Commercial Auto",
+    "policyTier": "Bronze",
+    "status": "Pending",
+    "vehicle": {
+      "year": 2020,
+      "make": "Suzuki",
+      "model": "Prius"
+    },
+    "callIntent": {
+      "topic": "Roadside Assistance",
+      "text": "Vehicle breakdown flag on account. Customer may need roadside towing or lockout help."
+    }
+  },
+  {
+    "id": "AK-4",
+    "firstName": "Kaley",
+    "lastName": "Hamill",
+    "initials": "KH",
+    "city": "Adahmouth",
+    "state": "AK",
+    "stateName": "Alaska",
+    "phone": "(521) 493-5739",
+    "email": "kaley.hamill49@yahoo.com",
+    "policyNumber": "PGR-H2BV3HUE",
+    "lob": "Personal Auto",
+    "policyTier": "Platinum",
+    "status": "Active",
+    "vehicle": {
+      "year": 2024,
+      "make": "Ferrari",
+      "model": "Model 3"
+    },
+    "callIntent": {
+      "topic": "Glass Claim",
+      "text": "Recent windshield damage reported. Customer may be seeking glass repair/replacement guidance."
+    }
+  },
+  {
+    "id": "AK-5",
+    "firstName": "Oscar",
+    "lastName": "Nader",
+    "initials": "ON",
+    "city": "Fort Myers",
+    "state": "AK",
+    "stateName": "Alaska",
+    "phone": "(305) 705-2616",
+    "email": "oscar_nader13@hotmail.com",
+    "policyNumber": "PGR-7VSFEOYW",
+    "lob": "Homeowners",
+    "policyTier": "Platinum",
+    "status": "Active",
+    "vehicle": {
+      "year": 2023,
+      "make": "Tesla",
+      "model": "Land Cruiser"
+    },
+    "callIntent": {
+      "topic": "Liability",
+      "text": "Customer recently involved in a reported accident. Likely inquiring about liability coverage and claim next steps."
+    }
+  },
+  {
+    "id": "AL-1",
+    "firstName": "Myrtle",
+    "lastName": "Satterfield",
+    "initials": "MS",
+    "city": "Fort Boydchester",
+    "state": "AL",
+    "stateName": "Alabama",
+    "phone": "(215) 762-7237",
+    "email": "myrtle_satterfield@hotmail.com",
+    "policyNumber": "PGR-5MGFYOTD",
+    "lob": "Homeowners",
+    "policyTier": "Bronze",
+    "status": "Active",
+    "vehicle": {
+      "year": 2019,
+      "make": "Maruti",
+      "model": "CTS"
+    },
+    "callIntent": {
+      "topic": "Liability",
+      "text": "Customer recently involved in a reported accident. Likely inquiring about liability coverage and claim next steps."
+    }
+  },
+  {
+    "id": "AL-2",
+    "firstName": "Alexander",
+    "lastName": "Weimann",
+    "initials": "AW",
+    "city": "North Walter",
+    "state": "AL",
+    "stateName": "Alabama",
+    "phone": "(982) 583-1596",
+    "email": "alexander.weimann@hotmail.com",
+    "policyNumber": "PGR-8WSJHHMI",
+    "lob": "Commercial Auto",
+    "policyTier": "Bronze",
+    "status": "Pending",
+    "vehicle": {
+      "year": 2023,
+      "make": "Tesla",
+      "model": "Focus"
+    },
+    "callIntent": {
+      "topic": "Water Damage",
+      "text": "Recent heavy rainfall in customer's zip code. Likely inquiring about water or flood-related coverage."
+    }
+  },
+  {
+    "id": "AL-3",
+    "firstName": "Ludie",
+    "lastName": "Towne",
+    "initials": "LT",
+    "city": "New Lauraboro",
+    "state": "AL",
+    "stateName": "Alabama",
+    "phone": "(600) 831-5726",
+    "email": "ludie.towne@gmail.com",
+    "policyNumber": "PGR-DJYWKNGR",
+    "lob": "Homeowners",
+    "policyTier": "Platinum",
+    "status": "Active",
+    "vehicle": {
+      "year": 2024,
+      "make": "Subaru",
+      "model": "Model S"
+    },
+    "callIntent": {
+      "topic": "Hail/Storm Damage",
+      "text": "Severe weather event in customer's area. Likely calling about hail or storm damage claim."
+    }
+  },
+  {
+    "id": "AL-4",
+    "firstName": "Cecilia",
+    "lastName": "Rau",
+    "initials": "CR",
+    "city": "Renton",
+    "state": "AL",
+    "stateName": "Alabama",
+    "phone": "(664) 337-0100",
+    "email": "cecilia_rau47@yahoo.com",
+    "policyNumber": "PGR-UTAQOCD2",
+    "lob": "Homeowners",
+    "policyTier": "Gold",
+    "status": "Lapsed",
+    "vehicle": {
+      "year": 2018,
+      "make": "Suzuki",
+      "model": "Malibu"
+    },
+    "callIntent": {
+      "topic": "Glass Claim",
+      "text": "Recent windshield damage reported. Customer may be seeking glass repair/replacement guidance."
+    }
+  },
+  {
+    "id": "AL-5",
+    "firstName": "Marguerite",
+    "lastName": "Weimann",
+    "initials": "MW",
+    "city": "Weissnatbury",
+    "state": "AL",
+    "stateName": "Alabama",
+    "phone": "(991) 210-0603",
+    "email": "marguerite.weimann81@yahoo.com",
+    "policyNumber": "PGR-7HCSJNHB",
+    "lob": "Homeowners",
+    "policyTier": "Bronze",
+    "status": "Pending",
+    "vehicle": {
+      "year": 2024,
+      "make": "Lamborghini",
+      "model": "Durango"
+    },
+    "callIntent": {
+      "topic": "Hail/Storm Damage",
+      "text": "Severe weather event in customer's area. Likely calling about hail or storm damage claim."
+    }
+  },
+  {
+    "id": "AR-1",
+    "firstName": "Tom",
+    "lastName": "Rolfson",
+    "initials": "TR",
+    "city": "Lompoc",
+    "state": "AR",
+    "stateName": "Arkansas",
+    "phone": "(838) 509-0399",
+    "email": "tom_rolfson44@hotmail.com",
+    "policyNumber": "PGR-KFKNM5U3",
+    "lob": "Commercial Auto",
+    "policyTier": "Silver",
+    "status": "Active",
+    "vehicle": {
+      "year": 2023,
+      "make": "Jaguar",
+      "model": "Alpine"
+    },
+    "callIntent": {
+      "topic": "Liability",
+      "text": "Customer recently involved in a reported accident. Likely inquiring about liability coverage and claim next steps."
+    }
+  },
+  {
+    "id": "AR-2",
+    "firstName": "Leonora",
+    "lastName": "Prohaska",
+    "initials": "LP",
+    "city": "Yostbury",
+    "state": "AR",
+    "stateName": "Arkansas",
+    "phone": "(489) 973-0754",
+    "email": "leonora.prohaska49@yahoo.com",
+    "policyNumber": "PGR-T377EKAX",
+    "lob": "Personal Auto",
+    "policyTier": "Gold",
+    "status": "Active",
+    "vehicle": {
+      "year": 2023,
+      "make": "Dodge",
+      "model": "Wrangler"
+    },
+    "callIntent": {
+      "topic": "Rideshare Coverage",
+      "text": "TNC activity detected on policy. Customer may be asking about rideshare coverage gaps."
+    }
+  },
+  {
+    "id": "AR-3",
+    "firstName": "Aliya",
+    "lastName": "Zemlak",
+    "initials": "AZ",
+    "city": "Malden",
+    "state": "AR",
+    "stateName": "Arkansas",
+    "phone": "(764) 759-0298",
+    "email": "aliya_zemlak27@hotmail.com",
+    "policyNumber": "PGR-SLA4YZHX",
+    "lob": "Personal Auto",
+    "policyTier": "Gold",
+    "status": "Pending",
+    "vehicle": {
+      "year": 2020,
+      "make": "Chevrolet",
+      "model": "Taurus"
+    },
+    "callIntent": {
+      "topic": "Roadside Assistance",
+      "text": "Vehicle breakdown flag on account. Customer may need roadside towing or lockout help."
+    }
+  },
+  {
+    "id": "AR-4",
+    "firstName": "Millie",
+    "lastName": "Watsica",
+    "initials": "MW",
+    "city": "South Cadenstead",
+    "state": "AR",
+    "stateName": "Arkansas",
+    "phone": "(598) 844-2088",
+    "email": "millie_watsica@yahoo.com",
+    "policyNumber": "PGR-WQFR8XBE",
+    "lob": "Commercial Auto",
+    "policyTier": "Silver",
+    "status": "Lapsed",
+    "vehicle": {
+      "year": 2016,
+      "make": "Bugatti",
+      "model": "Model 3"
+    },
+    "callIntent": {
+      "topic": "Liability",
+      "text": "Customer recently involved in a reported accident. Likely inquiring about liability coverage and claim next steps."
+    }
+  },
+  {
+    "id": "AR-5",
+    "firstName": "Josue",
+    "lastName": "Macejkovic",
+    "initials": "JM",
+    "city": "North Maximeberg",
+    "state": "AR",
+    "stateName": "Arkansas",
+    "phone": "(303) 634-9357",
+    "email": "josue_macejkovic@hotmail.com",
+    "policyNumber": "PGR-9VUGSYUK",
+    "lob": "Commercial Auto",
+    "policyTier": "Silver",
+    "status": "Active",
+    "vehicle": {
+      "year": 2012,
+      "make": "Cadillac",
+      "model": "Alpine"
+    },
+    "callIntent": {
+      "topic": "Hail/Storm Damage",
+      "text": "Severe weather event in customer's area. Likely calling about hail or storm damage claim."
+    }
+  },
+  {
+    "id": "AZ-1",
+    "firstName": "Marguerite",
+    "lastName": "Treutel",
+    "initials": "MT",
+    "city": "East Elsaberg",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "phone": "(214) 335-6076",
+    "email": "marguerite_treutel92@gmail.com",
+    "policyNumber": "PGR-HNKBCMUC",
+    "lob": "Homeowners",
+    "policyTier": "Gold",
+    "status": "Active",
+    "vehicle": {
+      "year": 2021,
+      "make": "Audi",
+      "model": "Challenger"
+    },
+    "callIntent": {
+      "topic": "Rideshare Coverage",
+      "text": "TNC activity detected on policy. Customer may be asking about rideshare coverage gaps."
+    }
+  },
+  {
+    "id": "AZ-2",
+    "firstName": "Johathan",
+    "lastName": "King",
+    "initials": "JK",
+    "city": "South Debbie",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "phone": "(418) 667-4055",
+    "email": "johathan.king12@yahoo.com",
+    "policyNumber": "PGR-MEZMZBE6",
+    "lob": "Homeowners",
+    "policyTier": "Platinum",
+    "status": "Active",
+    "vehicle": {
+      "year": 2014,
+      "make": "Chrysler",
+      "model": "Civic"
+    },
+    "callIntent": {
+      "topic": "Glass Claim",
+      "text": "Recent windshield damage reported. Customer may be seeking glass repair/replacement guidance."
+    }
+  },
+  {
+    "id": "AZ-3",
+    "firstName": "Ardith",
+    "lastName": "Wunsch",
+    "initials": "AW",
+    "city": "Stillwater",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "phone": "(821) 795-5271",
+    "email": "ardith.wunsch50@gmail.com",
+    "policyNumber": "PGR-7BHA9TX3",
+    "lob": "Personal Auto",
+    "policyTier": "Gold",
+    "status": "Active",
+    "vehicle": {
+      "year": 2012,
+      "make": "Volvo",
+      "model": "Corvette"
+    },
+    "callIntent": {
+      "topic": "Hail/Storm Damage",
+      "text": "Severe weather event in customer's area. Likely calling about hail or storm damage claim."
+    }
+  },
+  {
+    "id": "AZ-4",
+    "firstName": "Miguel",
+    "lastName": "Kozey",
+    "initials": "MK",
+    "city": "Skokie",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "phone": "(917) 910-7581",
+    "email": "miguel.kozey16@yahoo.com",
+    "policyNumber": "PGR-OFWMSOOR",
+    "lob": "Homeowners",
+    "policyTier": "Gold",
+    "status": "Active",
+    "vehicle": {
+      "year": 2015,
+      "make": "Rivian",
+      "model": "Focus"
+    },
+    "callIntent": {
+      "topic": "Hail/Storm Damage",
+      "text": "Severe weather event in customer's area. Likely calling about hail or storm damage claim."
+    }
+  },
+  {
+    "id": "AZ-5",
+    "firstName": "Germaine",
+    "lastName": "Muller",
+    "initials": "GM",
+    "city": "Schimmelfurt",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "phone": "(687) 332-7057",
+    "email": "germaine.muller82@yahoo.com",
+    "policyNumber": "PGR-Q7ON9EII",
+    "lob": "Personal Auto",
+    "policyTier": "Silver",
+    "status": "Lapsed",
+    "vehicle": {
+      "year": 2019,
+      "make": "Ferrari",
+      "model": "Countach"
+    },
+    "callIntent": {
+      "topic": "Water Damage",
+      "text": "Recent heavy rainfall in customer's zip code. Likely inquiring about water or flood-related coverage."
+    }
+  },
+  {
+    "id": "CA-1",
+    "firstName": "Koby",
+    "lastName": "White",
+    "initials": "KW",
+    "city": "Shaneshire",
+    "state": "CA",
+    "stateName": "California",
+    "phone": "(669) 715-6479",
+    "email": "koby.white@yahoo.com",
+    "policyNumber": "PGR-Q7VRWAO3",
+    "lob": "Personal Auto",
+    "policyTier": "Gold",
+    "status": "Pending",
+    "vehicle": {
+      "year": 2012,
+      "make": "Hyundai",
+      "model": "El Camino"
+    },
+    "callIntent": {
+      "topic": "Roadside Assistance",
+      "text": "Vehicle breakdown flag on account. Customer may need roadside towing or lockout help."
+    }
+  },
+  {
+    "id": "CA-2",
+    "firstName": "Fabiola",
+    "lastName": "Klein",
+    "initials": "FK",
+    "city": "East Tabithabury",
+    "state": "CA",
+    "stateName": "California",
+    "phone": "(660) 719-1409",
+    "email": "fabiola_klein@hotmail.com",
+    "policyNumber": "PGR-DTCB2TZ4",
+    "lob": "Personal Auto",
+    "policyTier": "Bronze",
+    "status": "Active",
+    "vehicle": {
+      "year": 2018,
+      "make": "Land Rover",
+      "model": "Element"
+    },
+    "callIntent": {
+      "topic": "Hail/Storm Damage",
+      "text": "Severe weather event in customer's area. Likely calling about hail or storm damage claim."
+    }
+  },
+  {
+    "id": "CA-3",
+    "firstName": "Clinton",
+    "lastName": "Hintz",
+    "initials": "CH",
+    "city": "Monachester",
+    "state": "CA",
+    "stateName": "California",
+    "phone": "(222) 701-7162",
+    "email": "clinton.hintz@gmail.com",
+    "policyNumber": "PGR-POFCIT05",
+    "lob": "Personal Auto",
+    "policyTier": "Platinum",
+    "status": "Active",
+    "vehicle": {
+      "year": 2014,
+      "make": "Mini",
+      "model": "Escalade"
+    },
+    "callIntent": {
+      "topic": "Roadside Assistance",
+      "text": "Vehicle breakdown flag on account. Customer may need roadside towing or lockout help."
+    }
+  },
+  {
+    "id": "CA-4",
+    "firstName": "Everardo",
+    "lastName": "McLaughlin",
+    "initials": "EM",
+    "city": "Edmondshire",
+    "state": "CA",
+    "stateName": "California",
+    "phone": "(818) 587-4025",
+    "email": "everardo.mclaughlin@hotmail.com",
+    "policyNumber": "PGR-ZWAG1U7Z",
+    "lob": "Personal Auto",
+    "policyTier": "Gold",
+    "status": "Active",
+    "vehicle": {
+      "year": 2020,
+      "make": "Smart",
+      "model": "CX-9"
+    },
+    "callIntent": {
+      "topic": "Roadside Assistance",
+      "text": "Vehicle breakdown flag on account. Customer may need roadside towing or lockout help."
+    }
+  },
+  {
+    "id": "CA-5",
+    "firstName": "Stella",
+    "lastName": "Mills",
+    "initials": "SM",
+    "city": "Inglewood",
+    "state": "CA",
+    "stateName": "California",
+    "phone": "(550) 370-6232",
+    "email": "stella_mills@hotmail.com",
+    "policyNumber": "PGR-TFWJD1GA",
+    "lob": "Homeowners",
+    "policyTier": "Platinum",
+    "status": "Active",
+    "vehicle": {
+      "year": 2019,
+      "make": "Hyundai",
+      "model": "Mustang"
+    },
+    "callIntent": {
+      "topic": "Glass Claim",
+      "text": "Recent windshield damage reported. Customer may be seeking glass repair/replacement guidance."
+    }
+  },
+  {
+    "id": "CO-1",
+    "firstName": "Nadine",
+    "lastName": "Kerluke",
+    "initials": "NK",
+    "city": "McLaughlinbury",
+    "state": "CO",
+    "stateName": "Colorado",
+    "phone": "(291) 941-5878",
+    "email": "nadine_kerluke84@hotmail.com",
+    "policyNumber": "PGR-UDZW2HVB",
+    "lob": "Personal Auto",
+    "policyTier": "Silver",
+    "status": "Pending",
+    "vehicle": {
+      "year": 2012,
+      "make": "Polestar",
+      "model": "Civic"
+    },
+    "callIntent": {
+      "topic": "Rideshare Coverage",
+      "text": "TNC activity detected on policy. Customer may be asking about rideshare coverage gaps."
+    }
+  },
+  {
+    "id": "CO-2",
+    "firstName": "Tyrese",
+    "lastName": "Sporer",
+    "initials": "TS",
+    "city": "New Beckycester",
+    "state": "CO",
+    "stateName": "Colorado",
+    "phone": "(470) 457-3686",
+    "email": "tyrese.sporer87@gmail.com",
+    "policyNumber": "PGR-SWWNZLLO",
+    "lob": "Personal Auto",
+    "policyTier": "Gold",
+    "status": "Lapsed",
+    "vehicle": {
+      "year": 2023,
+      "make": "Volvo",
+      "model": "Mustang"
+    },
+    "callIntent": {
+      "topic": "Rideshare Coverage",
+      "text": "TNC activity detected on policy. Customer may be asking about rideshare coverage gaps."
+    }
+  },
+  {
+    "id": "CO-3",
+    "firstName": "Natasha",
+    "lastName": "Hermann",
+    "initials": "NH",
+    "city": "North Hillary",
+    "state": "CO",
+    "stateName": "Colorado",
+    "phone": "(562) 970-4894",
+    "email": "natasha.hermann99@hotmail.com",
+    "policyNumber": "PGR-WEBVEADB",
+    "lob": "Personal Auto",
+    "policyTier": "Bronze",
+    "status": "Active",
+    "vehicle": {
+      "year": 2012,
+      "make": "Volkswagen",
+      "model": "Spyder"
+    },
+    "callIntent": {
+      "topic": "Glass Claim",
+      "text": "Recent windshield damage reported. Customer may be seeking glass repair/replacement guidance."
+    }
+  },
+  {
+    "id": "CO-4",
+    "firstName": "Cecile",
+    "lastName": "Predovic",
+    "initials": "CP",
+    "city": "East King",
+    "state": "CO",
+    "stateName": "Colorado",
+    "phone": "(282) 389-8865",
+    "email": "cecile.predovic37@gmail.com",
+    "policyNumber": "PGR-IU5DG4QU",
+    "lob": "Personal Auto",
+    "policyTier": "Gold",
+    "status": "Active",
+    "vehicle": {
+      "year": 2022,
+      "make": "Jaguar",
+      "model": "Model 3"
+    },
+    "callIntent": {
+      "topic": "Rideshare Coverage",
+      "text": "TNC activity detected on policy. Customer may be asking about rideshare coverage gaps."
+    }
+  },
+  {
+    "id": "CO-5",
+    "firstName": "Sheldon",
+    "lastName": "Stark",
+    "initials": "SS",
+    "city": "Plano",
+    "state": "CO",
+    "stateName": "Colorado",
+    "phone": "(767) 388-0813",
+    "email": "sheldon.stark@yahoo.com",
+    "policyNumber": "PGR-V0HCYDGD",
+    "lob": "Commercial Auto",
+    "policyTier": "Silver",
+    "status": "Lapsed",
+    "vehicle": {
+      "year": 2013,
+      "make": "Rivian",
+      "model": "Golf"
+    },
+    "callIntent": {
+      "topic": "Rideshare Coverage",
+      "text": "TNC activity detected on policy. Customer may be asking about rideshare coverage gaps."
+    }
+  },
+  {
+    "id": "CT-1",
+    "firstName": "Mack",
+    "lastName": "Wehner",
+    "initials": "MW",
+    "city": "Lake Fabian",
+    "state": "CT",
+    "stateName": "Connecticut",
+    "phone": "(608) 997-1700",
+    "email": "mack.wehner@gmail.com",
+    "policyNumber": "PGR-RGZQRANH",
+    "lob": "Commercial Auto",
+    "policyTier": "Platinum",
+    "status": "Active",
+    "vehicle": {
+      "year": 2020,
+      "make": "Nissan",
+      "model": "Charger"
+    },
+    "callIntent": {
+      "topic": "Liability",
+      "text": "Customer recently involved in a reported accident. Likely inquiring about liability coverage and claim next steps."
+    }
+  },
+  {
+    "id": "CT-2",
+    "firstName": "Herman",
+    "lastName": "Nikolaus",
+    "initials": "HN",
+    "city": "Huntington",
+    "state": "CT",
+    "stateName": "Connecticut",
+    "phone": "(922) 263-8491",
+    "email": "herman_nikolaus@yahoo.com",
+    "policyNumber": "PGR-LC82VCNT",
+    "lob": "Homeowners",
+    "policyTier": "Platinum",
+    "status": "Active",
+    "vehicle": {
+      "year": 2020,
+      "make": "Land Rover",
+      "model": "CX-9"
+    },
+    "callIntent": {
+      "topic": "Glass Claim",
+      "text": "Recent windshield damage reported. Customer may be seeking glass repair/replacement guidance."
+    }
+  },
+  {
+    "id": "CT-3",
+    "firstName": "Lora",
+    "lastName": "Hagenes",
+    "initials": "LH",
+    "city": "South Eldorachester",
+    "state": "CT",
+    "stateName": "Connecticut",
+    "phone": "(870) 512-9146",
+    "email": "lora_hagenes0@yahoo.com",
+    "policyNumber": "PGR-W5L24O8Z",
+    "lob": "Homeowners",
+    "policyTier": "Silver",
+    "status": "Pending",
+    "vehicle": {
+      "year": 2014,
+      "make": "Chevrolet",
+      "model": "Accord"
+    },
+    "callIntent": {
+      "topic": "Liability",
+      "text": "Customer recently involved in a reported accident. Likely inquiring about liability coverage and claim next steps."
+    }
+  },
+  {
+    "id": "CT-4",
+    "firstName": "Alena",
+    "lastName": "Littel",
+    "initials": "AL",
+    "city": "Schultzton",
+    "state": "CT",
+    "stateName": "Connecticut",
+    "phone": "(958) 565-7002",
+    "email": "alena_littel@gmail.com",
+    "policyNumber": "PGR-KBMEUYIE",
+    "lob": "Commercial Auto",
+    "policyTier": "Bronze",
+    "status": "Pending",
+    "vehicle": {
+      "year": 2020,
+      "make": "Citroën",
+      "model": "Model 3"
+    },
+    "callIntent": {
+      "topic": "Water Damage",
+      "text": "Recent heavy rainfall in customer's zip code. Likely inquiring about water or flood-related coverage."
+    }
+  },
+  {
+    "id": "CT-5",
+    "firstName": "Edna",
+    "lastName": "Reinger",
+    "initials": "ER",
+    "city": "West Sergio",
+    "state": "CT",
+    "stateName": "Connecticut",
+    "phone": "(647) 589-4259",
+    "email": "edna_reinger@gmail.com",
+    "policyNumber": "PGR-8IUBEYBQ",
+    "lob": "Commercial Auto",
+    "policyTier": "Gold",
+    "status": "Active",
+    "vehicle": {
+      "year": 2023,
+      "make": "Land Rover",
+      "model": "Focus"
+    },
+    "callIntent": {
+      "topic": "Hail/Storm Damage",
+      "text": "Severe weather event in customer's area. Likely calling about hail or storm damage claim."
+    }
+  },
+  {
+    "id": "DC-1",
+    "firstName": "Carmella",
+    "lastName": "Gerlach-O'Reilly",
+    "initials": "CG",
+    "city": "Fort Barbaraville",
+    "state": "DC",
+    "stateName": "District of Columbia",
+    "phone": "(638) 526-7110",
+    "email": "carmella_gerlach-oreilly@yahoo.com",
+    "policyNumber": "PGR-NARC6G3W",
+    "lob": "Personal Auto",
+    "policyTier": "Bronze",
+    "status": "Active",
+    "vehicle": {
+      "year": 2013,
+      "make": "MG",
+      "model": "Volt"
+    },
+    "callIntent": {
+      "topic": "Rideshare Coverage",
+      "text": "TNC activity detected on policy. Customer may be asking about rideshare coverage gaps."
+    }
+  },
+  {
+    "id": "DC-2",
+    "firstName": "Angelica",
+    "lastName": "Wintheiser-Abshire",
+    "initials": "AW",
+    "city": "Kirkland",
+    "state": "DC",
+    "stateName": "District of Columbia",
+    "phone": "(646) 303-7269",
+    "email": "angelica_wintheiser-abshire@gmail.com",
+    "policyNumber": "PGR-AGPWGUCR",
+    "lob": "Commercial Auto",
+    "policyTier": "Silver",
+    "status": "Active",
+    "vehicle": {
+      "year": 2024,
+      "make": "Polestar",
+      "model": "Model 3"
+    },
+    "callIntent": {
+      "topic": "Roadside Assistance",
+      "text": "Vehicle breakdown flag on account. Customer may need roadside towing or lockout help."
+    }
+  },
+  {
+    "id": "DC-3",
+    "firstName": "Gonzalo",
+    "lastName": "Oberbrunner",
+    "initials": "GO",
+    "city": "Houston",
+    "state": "DC",
+    "stateName": "District of Columbia",
+    "phone": "(875) 784-3687",
+    "email": "gonzalo.oberbrunner81@yahoo.com",
+    "policyNumber": "PGR-X0KMOHOR",
+    "lob": "Commercial Auto",
+    "policyTier": "Platinum",
+    "status": "Active",
+    "vehicle": {
+      "year": 2014,
+      "make": "BYD",
+      "model": "Jetta"
+    },
+    "callIntent": {
+      "topic": "Liability",
+      "text": "Customer recently involved in a reported accident. Likely inquiring about liability coverage and claim next steps."
+    }
+  },
+  {
+    "id": "DC-4",
+    "firstName": "Jakob",
+    "lastName": "Leannon",
+    "initials": "JL",
+    "city": "South Kaden",
+    "state": "DC",
+    "stateName": "District of Columbia",
+    "phone": "(678) 790-1068",
+    "email": "jakob_leannon@gmail.com",
+    "policyNumber": "PGR-L6UFHJNX",
+    "lob": "Homeowners",
+    "policyTier": "Gold",
+    "status": "Lapsed",
+    "vehicle": {
+      "year": 2021,
+      "make": "Fiat",
+      "model": "Element"
+    },
+    "callIntent": {
+      "topic": "Liability",
+      "text": "Customer recently involved in a reported accident. Likely inquiring about liability coverage and claim next steps."
+    }
+  },
+  {
+    "id": "DC-5",
+    "firstName": "Melanie",
+    "lastName": "Quitzon",
+    "initials": "MQ",
+    "city": "Fort Katarina",
+    "state": "DC",
+    "stateName": "District of Columbia",
+    "phone": "(269) 688-2264",
+    "email": "melanie_quitzon35@yahoo.com",
+    "policyNumber": "PGR-MHPQF5CS",
+    "lob": "Personal Auto",
+    "policyTier": "Silver",
+    "status": "Active",
+    "vehicle": {
+      "year": 2021,
+      "make": "Suzuki",
+      "model": "Camaro"
+    },
+    "callIntent": {
+      "topic": "Roadside Assistance",
+      "text": "Vehicle breakdown flag on account. Customer may need roadside towing or lockout help."
+    }
+  },
+  {
+    "id": "DE-1",
+    "firstName": "Marguerite",
+    "lastName": "Feeney",
+    "initials": "MF",
+    "city": "Myronview",
+    "state": "DE",
+    "stateName": "Delaware",
+    "phone": "(576) 911-7520",
+    "email": "marguerite_feeney19@gmail.com",
+    "policyNumber": "PGR-EM4W4NEX",
+    "lob": "Homeowners",
+    "policyTier": "Bronze",
+    "status": "Lapsed",
+    "vehicle": {
+      "year": 2018,
+      "make": "Hyundai",
+      "model": "Corvette"
+    },
+    "callIntent": {
+      "topic": "Roadside Assistance",
+      "text": "Vehicle breakdown flag on account. Customer may need roadside towing or lockout help."
+    }
+  },
+  {
+    "id": "DE-2",
+    "firstName": "Madelyn",
+    "lastName": "Konopelski",
+    "initials": "MK",
+    "city": "Chico",
+    "state": "DE",
+    "stateName": "Delaware",
+    "phone": "(725) 247-3679",
+    "email": "madelyn.konopelski@gmail.com",
+    "policyNumber": "PGR-VXQWC5K7",
+    "lob": "Personal Auto",
+    "policyTier": "Bronze",
+    "status": "Lapsed",
+    "vehicle": {
+      "year": 2021,
+      "make": "Audi",
+      "model": "Colorado"
+    },
+    "callIntent": {
+      "topic": "Roadside Assistance",
+      "text": "Vehicle breakdown flag on account. Customer may need roadside towing or lockout help."
+    }
+  },
+  {
+    "id": "DE-3",
+    "firstName": "Bessie",
+    "lastName": "Haag",
+    "initials": "BH",
+    "city": "Kuphalworth",
+    "state": "DE",
+    "stateName": "Delaware",
+    "phone": "(829) 283-8887",
+    "email": "bessie.haag40@gmail.com",
+    "policyNumber": "PGR-HLYDO8RV",
+    "lob": "Homeowners",
+    "policyTier": "Gold",
+    "status": "Lapsed",
+    "vehicle": {
+      "year": 2021,
+      "make": "Chrysler",
+      "model": "Focus"
+    },
+    "callIntent": {
+      "topic": "Hail/Storm Damage",
+      "text": "Severe weather event in customer's area. Likely calling about hail or storm damage claim."
+    }
+  },
+  {
+    "id": "DE-4",
+    "firstName": "Hannah",
+    "lastName": "Collier",
+    "initials": "HC",
+    "city": "Johnson City",
+    "state": "DE",
+    "stateName": "Delaware",
+    "phone": "(454) 262-6610",
+    "email": "hannah.collier@yahoo.com",
+    "policyNumber": "PGR-3HYE87I6",
+    "lob": "Commercial Auto",
+    "policyTier": "Silver",
+    "status": "Active",
+    "vehicle": {
+      "year": 2018,
+      "make": "Volvo",
+      "model": "Prius"
+    },
+    "callIntent": {
+      "topic": "Roadside Assistance",
+      "text": "Vehicle breakdown flag on account. Customer may need roadside towing or lockout help."
+    }
+  },
+  {
+    "id": "DE-5",
+    "firstName": "Luis",
+    "lastName": "Christiansen",
+    "initials": "LC",
+    "city": "West Monroefort",
+    "state": "DE",
+    "stateName": "Delaware",
+    "phone": "(244) 227-1520",
+    "email": "luis_christiansen@gmail.com",
+    "policyNumber": "PGR-U6XSQ6U9",
+    "lob": "Commercial Auto",
+    "policyTier": "Gold",
+    "status": "Lapsed",
+    "vehicle": {
+      "year": 2018,
+      "make": "Jeep",
+      "model": "El Camino"
+    },
+    "callIntent": {
+      "topic": "Hail/Storm Damage",
+      "text": "Severe weather event in customer's area. Likely calling about hail or storm damage claim."
+    }
+  },
+  {
+    "id": "FL-1",
+    "firstName": "Sierra",
+    "lastName": "Halvorson",
+    "initials": "SH",
+    "city": "Port Jaiden",
+    "state": "FL",
+    "stateName": "Florida",
+    "phone": "(768) 760-5175",
+    "email": "sierra.halvorson@yahoo.com",
+    "policyNumber": "PGR-440XJLIL",
+    "lob": "Commercial Auto",
+    "policyTier": "Bronze",
+    "status": "Lapsed",
+    "vehicle": {
+      "year": 2014,
+      "make": "Chrysler",
+      "model": "ATS"
+    },
+    "callIntent": {
+      "topic": "Hail/Storm Damage",
+      "text": "Severe weather event in customer's area. Likely calling about hail or storm damage claim."
+    }
+  },
+  {
+    "id": "FL-2",
+    "firstName": "Devyn",
+    "lastName": "Wisoky",
+    "initials": "DW",
+    "city": "Cartwrightfurt",
+    "state": "FL",
+    "stateName": "Florida",
+    "phone": "(865) 297-2965",
+    "email": "devyn_wisoky65@yahoo.com",
+    "policyNumber": "PGR-KVDNQRCW",
+    "lob": "Personal Auto",
+    "policyTier": "Platinum",
+    "status": "Active",
+    "vehicle": {
+      "year": 2014,
+      "make": "Tata",
+      "model": "LeBaron"
+    },
+    "callIntent": {
+      "topic": "Rideshare Coverage",
+      "text": "TNC activity detected on policy. Customer may be asking about rideshare coverage gaps."
+    }
+  },
+  {
+    "id": "FL-3",
+    "firstName": "Ryann",
+    "lastName": "Fritsch",
+    "initials": "RF",
+    "city": "Rancho Santa Margarita",
+    "state": "FL",
+    "stateName": "Florida",
+    "phone": "(861) 699-0117",
+    "email": "ryann.fritsch@yahoo.com",
+    "policyNumber": "PGR-JXAVIZGS",
+    "lob": "Commercial Auto",
+    "policyTier": "Silver",
+    "status": "Lapsed",
+    "vehicle": {
+      "year": 2014,
+      "make": "MG",
+      "model": "1"
+    },
+    "callIntent": {
+      "topic": "Hail/Storm Damage",
+      "text": "Severe weather event in customer's area. Likely calling about hail or storm damage claim."
+    }
+  },
+  {
+    "id": "FL-4",
+    "firstName": "Zakary",
+    "lastName": "Schmidt",
+    "initials": "ZS",
+    "city": "Hermistonfield",
+    "state": "FL",
+    "stateName": "Florida",
+    "phone": "(607) 272-9331",
+    "email": "zakary_schmidt99@gmail.com",
+    "policyNumber": "PGR-RISAOPH0",
+    "lob": "Personal Auto",
+    "policyTier": "Silver",
+    "status": "Active",
+    "vehicle": {
+      "year": 2022,
+      "make": "Bentley",
+      "model": "Impala"
+    },
+    "callIntent": {
+      "topic": "Roadside Assistance",
+      "text": "Vehicle breakdown flag on account. Customer may need roadside towing or lockout help."
+    }
+  },
+  {
+    "id": "FL-5",
+    "firstName": "Angel",
+    "lastName": "Macejkovic",
+    "initials": "AM",
+    "city": "Eden Prairie",
+    "state": "FL",
+    "stateName": "Florida",
+    "phone": "(840) 237-7754",
+    "email": "angel.macejkovic43@gmail.com",
+    "policyNumber": "PGR-DBJZVDQD",
+    "lob": "Homeowners",
+    "policyTier": "Bronze",
+    "status": "Active",
+    "vehicle": {
+      "year": 2017,
+      "make": "Subaru",
+      "model": "El Camino"
+    },
+    "callIntent": {
+      "topic": "Rideshare Coverage",
+      "text": "TNC activity detected on policy. Customer may be asking about rideshare coverage gaps."
+    }
+  },
+  {
+    "id": "GA-1",
+    "firstName": "Cheyenne",
+    "lastName": "Balistreri",
+    "initials": "CB",
+    "city": "New Desmond",
+    "state": "GA",
+    "stateName": "Georgia",
+    "phone": "(588) 384-4107",
+    "email": "cheyenne.balistreri@hotmail.com",
+    "policyNumber": "PGR-9B8KEX43",
+    "lob": "Personal Auto",
+    "policyTier": "Gold",
+    "status": "Active",
+    "vehicle": {
+      "year": 2015,
+      "make": "Tesla",
+      "model": "Camry"
+    },
+    "callIntent": {
+      "topic": "Rideshare Coverage",
+      "text": "TNC activity detected on policy. Customer may be asking about rideshare coverage gaps."
+    }
+  },
+  {
+    "id": "GA-2",
+    "firstName": "Iva",
+    "lastName": "Kuhlman",
+    "initials": "IK",
+    "city": "Carmichael",
+    "state": "GA",
+    "stateName": "Georgia",
+    "phone": "(643) 906-9590",
+    "email": "iva.kuhlman@hotmail.com",
+    "policyNumber": "PGR-FECZSYBL",
+    "lob": "Personal Auto",
+    "policyTier": "Platinum",
+    "status": "Active",
+    "vehicle": {
+      "year": 2014,
+      "make": "Ferrari",
+      "model": "Sentra"
+    },
+    "callIntent": {
+      "topic": "Liability",
+      "text": "Customer recently involved in a reported accident. Likely inquiring about liability coverage and claim next steps."
+    }
+  },
+  {
+    "id": "GA-3",
+    "firstName": "Brett",
+    "lastName": "Bernhard",
+    "initials": "BB",
+    "city": "South Tonyahaven",
+    "state": "GA",
+    "stateName": "Georgia",
+    "phone": "(744) 750-5840",
+    "email": "brett.bernhard25@yahoo.com",
+    "policyNumber": "PGR-KKWCSSRE",
+    "lob": "Commercial Auto",
+    "policyTier": "Gold",
+    "status": "Pending",
+    "vehicle": {
+      "year": 2022,
+      "make": "Audi",
+      "model": "A4"
+    },
+    "callIntent": {
+      "topic": "Roadside Assistance",
+      "text": "Vehicle breakdown flag on account. Customer may need roadside towing or lockout help."
+    }
+  },
+  {
+    "id": "GA-4",
+    "firstName": "Kaleb",
+    "lastName": "O'Reilly",
+    "initials": "KO",
+    "city": "Lednerboro",
+    "state": "GA",
+    "stateName": "Georgia",
+    "phone": "(856) 839-5167",
+    "email": "kaleb_oreilly90@gmail.com",
+    "policyNumber": "PGR-Y8CBTE9R",
+    "lob": "Commercial Auto",
+    "policyTier": "Silver",
+    "status": "Active",
+    "vehicle": {
+      "year": 2023,
+      "make": "Skoda",
+      "model": "Focus"
+    },
+    "callIntent": {
+      "topic": "Hail/Storm Damage",
+      "text": "Severe weather event in customer's area. Likely calling about hail or storm damage claim."
+    }
+  },
+  {
+    "id": "GA-5",
+    "firstName": "Willard",
+    "lastName": "Cummerata",
+    "initials": "WC",
+    "city": "North Oliverside",
+    "state": "GA",
+    "stateName": "Georgia",
+    "phone": "(271) 885-7348",
+    "email": "willard.cummerata@hotmail.com",
+    "policyNumber": "PGR-KAIP6E8L",
+    "lob": "Commercial Auto",
+    "policyTier": "Gold",
+    "status": "Lapsed",
+    "vehicle": {
+      "year": 2020,
+      "make": "NIO",
+      "model": "Cruze"
+    },
+    "callIntent": {
+      "topic": "Hail/Storm Damage",
+      "text": "Severe weather event in customer's area. Likely calling about hail or storm damage claim."
+    }
+  },
+  {
+    "id": "HI-1",
+    "firstName": "Wilbur",
+    "lastName": "Padberg",
+    "initials": "WP",
+    "city": "East Rudolphboro",
+    "state": "HI",
+    "stateName": "Hawaii",
+    "phone": "(765) 420-3698",
+    "email": "wilbur_padberg66@yahoo.com",
+    "policyNumber": "PGR-UFY6RSRX",
+    "lob": "Personal Auto",
+    "policyTier": "Gold",
+    "status": "Pending",
+    "vehicle": {
+      "year": 2013,
+      "make": "Lamborghini",
+      "model": "911"
+    },
+    "callIntent": {
+      "topic": "Rideshare Coverage",
+      "text": "TNC activity detected on policy. Customer may be asking about rideshare coverage gaps."
+    }
+  },
+  {
+    "id": "HI-2",
+    "firstName": "Dusty",
+    "lastName": "Vandervort",
+    "initials": "DV",
+    "city": "Fort Rossboro",
+    "state": "HI",
+    "stateName": "Hawaii",
+    "phone": "(817) 602-0435",
+    "email": "dusty.vandervort74@gmail.com",
+    "policyNumber": "PGR-TQFATB4E",
+    "lob": "Commercial Auto",
+    "policyTier": "Bronze",
+    "status": "Active",
+    "vehicle": {
+      "year": 2019,
+      "make": "Volvo",
+      "model": "Sentra"
+    },
+    "callIntent": {
+      "topic": "Rideshare Coverage",
+      "text": "TNC activity detected on policy. Customer may be asking about rideshare coverage gaps."
+    }
+  },
+  {
+    "id": "HI-3",
+    "firstName": "Roy",
+    "lastName": "Botsford",
+    "initials": "RB",
+    "city": "Tacoma",
+    "state": "HI",
+    "stateName": "Hawaii",
+    "phone": "(654) 447-6846",
+    "email": "roy_botsford70@hotmail.com",
+    "policyNumber": "PGR-V6NUEWBK",
+    "lob": "Commercial Auto",
+    "policyTier": "Silver",
+    "status": "Lapsed",
+    "vehicle": {
+      "year": 2012,
+      "make": "Ferrari",
+      "model": "Cruze"
+    },
+    "callIntent": {
+      "topic": "Rideshare Coverage",
+      "text": "TNC activity detected on policy. Customer may be asking about rideshare coverage gaps."
+    }
+  },
+  {
+    "id": "HI-4",
+    "firstName": "Caroline",
+    "lastName": "Harris-Kub",
+    "initials": "CH",
+    "city": "East Adam",
+    "state": "HI",
+    "stateName": "Hawaii",
+    "phone": "(301) 485-5293",
+    "email": "caroline_harris-kub11@gmail.com",
+    "policyNumber": "PGR-VSUHZ8HO",
+    "lob": "Personal Auto",
+    "policyTier": "Gold",
+    "status": "Active",
+    "vehicle": {
+      "year": 2023,
+      "make": "Porsche",
+      "model": "Jetta"
+    },
+    "callIntent": {
+      "topic": "Roadside Assistance",
+      "text": "Vehicle breakdown flag on account. Customer may need roadside towing or lockout help."
+    }
+  },
+  {
+    "id": "HI-5",
+    "firstName": "Vena",
+    "lastName": "Nienow",
+    "initials": "VN",
+    "city": "New Georgeport",
+    "state": "HI",
+    "stateName": "Hawaii",
+    "phone": "(414) 800-3966",
+    "email": "vena_nienow@hotmail.com",
+    "policyNumber": "PGR-UBSI7T4X",
+    "lob": "Personal Auto",
+    "policyTier": "Platinum",
+    "status": "Active",
+    "vehicle": {
+      "year": 2017,
+      "make": "Ford",
+      "model": "Fiesta"
+    },
+    "callIntent": {
+      "topic": "Glass Claim",
+      "text": "Recent windshield damage reported. Customer may be seeking glass repair/replacement guidance."
+    }
+  },
+  {
+    "id": "IA-1",
+    "firstName": "Bryant",
+    "lastName": "Rempel",
+    "initials": "BR",
+    "city": "Gorczanyborough",
+    "state": "IA",
+    "stateName": "Iowa",
+    "phone": "(847) 889-4353",
+    "email": "bryant_rempel68@hotmail.com",
+    "policyNumber": "PGR-AQ8TL91E",
+    "lob": "Homeowners",
+    "policyTier": "Silver",
+    "status": "Active",
+    "vehicle": {
+      "year": 2012,
+      "make": "Lamborghini",
+      "model": "Colorado"
+    },
+    "callIntent": {
+      "topic": "Water Damage",
+      "text": "Recent heavy rainfall in customer's zip code. Likely inquiring about water or flood-related coverage."
+    }
+  },
+  {
+    "id": "IA-2",
+    "firstName": "Freddy",
+    "lastName": "Kling-Pfeffer",
+    "initials": "FK",
+    "city": "New Altontown",
+    "state": "IA",
+    "stateName": "Iowa",
+    "phone": "(510) 842-9193",
+    "email": "freddy_kling-pfeffer@yahoo.com",
+    "policyNumber": "PGR-HXONLX9Y",
+    "lob": "Personal Auto",
+    "policyTier": "Silver",
+    "status": "Lapsed",
+    "vehicle": {
+      "year": 2022,
+      "make": "Land Rover",
+      "model": "Colorado"
+    },
+    "callIntent": {
+      "topic": "Hail/Storm Damage",
+      "text": "Severe weather event in customer's area. Likely calling about hail or storm damage claim."
+    }
+  },
+  {
+    "id": "IA-3",
+    "firstName": "Annie",
+    "lastName": "Wisoky",
+    "initials": "AW",
+    "city": "Mamiemouth",
+    "state": "IA",
+    "stateName": "Iowa",
+    "phone": "(598) 656-2304",
+    "email": "annie.wisoky@hotmail.com",
+    "policyNumber": "PGR-IXR8N7NH",
+    "lob": "Homeowners",
+    "policyTier": "Bronze",
+    "status": "Pending",
+    "vehicle": {
+      "year": 2013,
+      "make": "MG",
+      "model": "XC90"
+    },
+    "callIntent": {
+      "topic": "Hail/Storm Damage",
+      "text": "Severe weather event in customer's area. Likely calling about hail or storm damage claim."
+    }
+  },
+  {
+    "id": "IA-4",
+    "firstName": "Krystel",
+    "lastName": "Doyle",
+    "initials": "KD",
+    "city": "Sheliaworth",
+    "state": "IA",
+    "stateName": "Iowa",
+    "phone": "(587) 692-1848",
+    "email": "krystel.doyle88@yahoo.com",
+    "policyNumber": "PGR-VCV1TGIG",
+    "lob": "Commercial Auto",
+    "policyTier": "Platinum",
+    "status": "Active",
+    "vehicle": {
+      "year": 2016,
+      "make": "Skoda",
+      "model": "Charger"
+    },
+    "callIntent": {
+      "topic": "Hail/Storm Damage",
+      "text": "Severe weather event in customer's area. Likely calling about hail or storm damage claim."
+    }
+  },
+  {
+    "id": "IA-5",
+    "firstName": "Addie",
+    "lastName": "Shields",
+    "initials": "AS",
+    "city": "Conroyfort",
+    "state": "IA",
+    "stateName": "Iowa",
+    "phone": "(867) 860-4044",
+    "email": "addie.shields@gmail.com",
+    "policyNumber": "PGR-W4XWI4VN",
+    "lob": "Personal Auto",
+    "policyTier": "Silver",
+    "status": "Active",
+    "vehicle": {
+      "year": 2012,
+      "make": "Kia",
+      "model": "Civic"
+    },
+    "callIntent": {
+      "topic": "Liability",
+      "text": "Customer recently involved in a reported accident. Likely inquiring about liability coverage and claim next steps."
+    }
+  },
+  {
+    "id": "ID-1",
+    "firstName": "Rebecca",
+    "lastName": "Ullrich",
+    "initials": "RU",
+    "city": "Lake Florencio",
+    "state": "ID",
+    "stateName": "Idaho",
+    "phone": "(718) 645-6062",
+    "email": "rebecca_ullrich@yahoo.com",
+    "policyNumber": "PGR-W8MGUH8D",
+    "lob": "Personal Auto",
+    "policyTier": "Platinum",
+    "status": "Lapsed",
+    "vehicle": {
+      "year": 2016,
+      "make": "Aston Martin",
+      "model": "Focus"
+    },
+    "callIntent": {
+      "topic": "Hail/Storm Damage",
+      "text": "Severe weather event in customer's area. Likely calling about hail or storm damage claim."
+    }
+  },
+  {
+    "id": "ID-2",
+    "firstName": "Miranda",
+    "lastName": "Abernathy",
+    "initials": "MA",
+    "city": "North Sadie",
+    "state": "ID",
+    "stateName": "Idaho",
+    "phone": "(478) 593-9064",
+    "email": "miranda_abernathy70@hotmail.com",
+    "policyNumber": "PGR-AIFXLWHI",
+    "lob": "Personal Auto",
+    "policyTier": "Platinum",
+    "status": "Lapsed",
+    "vehicle": {
+      "year": 2020,
+      "make": "BMW",
+      "model": "Cruze"
+    },
+    "callIntent": {
+      "topic": "Rideshare Coverage",
+      "text": "TNC activity detected on policy. Customer may be asking about rideshare coverage gaps."
+    }
+  },
+  {
+    "id": "ID-3",
+    "firstName": "Herman",
+    "lastName": "Hills",
+    "initials": "HH",
+    "city": "Starkberg",
+    "state": "ID",
+    "stateName": "Idaho",
+    "phone": "(748) 366-2167",
+    "email": "herman_hills@gmail.com",
+    "policyNumber": "PGR-CTHM36VG",
+    "lob": "Homeowners",
+    "policyTier": "Bronze",
+    "status": "Active",
+    "vehicle": {
+      "year": 2016,
+      "make": "Hyundai",
+      "model": "2"
+    },
+    "callIntent": {
+      "topic": "Liability",
+      "text": "Customer recently involved in a reported accident. Likely inquiring about liability coverage and claim next steps."
+    }
+  },
+  {
+    "id": "ID-4",
+    "firstName": "Kathleen",
+    "lastName": "Mertz",
+    "initials": "KM",
+    "city": "Macon-Bibb County",
+    "state": "ID",
+    "stateName": "Idaho",
+    "phone": "(737) 859-1078",
+    "email": "kathleen.mertz1@gmail.com",
+    "policyNumber": "PGR-LWLN0IEY",
+    "lob": "Personal Auto",
+    "policyTier": "Bronze",
+    "status": "Active",
+    "vehicle": {
+      "year": 2023,
+      "make": "Rolls Royce",
+      "model": "Mustang"
+    },
+    "callIntent": {
+      "topic": "Hail/Storm Damage",
+      "text": "Severe weather event in customer's area. Likely calling about hail or storm damage claim."
+    }
+  },
+  {
+    "id": "ID-5",
+    "firstName": "Esther",
+    "lastName": "Franecki",
+    "initials": "EF",
+    "city": "Tyreefield",
+    "state": "ID",
+    "stateName": "Idaho",
+    "phone": "(959) 232-1167",
+    "email": "esther.franecki@hotmail.com",
+    "policyNumber": "PGR-OFGLUITT",
+    "lob": "Homeowners",
+    "policyTier": "Silver",
+    "status": "Active",
+    "vehicle": {
+      "year": 2013,
+      "make": "Aston Martin",
+      "model": "Land Cruiser"
+    },
+    "callIntent": {
+      "topic": "Rideshare Coverage",
+      "text": "TNC activity detected on policy. Customer may be asking about rideshare coverage gaps."
+    }
+  },
+  {
+    "id": "IL-1",
+    "firstName": "Velma",
+    "lastName": "Kutch",
+    "initials": "VK",
+    "city": "Port Jennie",
+    "state": "IL",
+    "stateName": "Illinois",
+    "phone": "(214) 308-9782",
+    "email": "velma.kutch@yahoo.com",
+    "policyNumber": "PGR-IYZGRA4C",
+    "lob": "Commercial Auto",
+    "policyTier": "Bronze",
+    "status": "Active",
+    "vehicle": {
+      "year": 2022,
+      "make": "Tesla",
+      "model": "Volt"
+    },
+    "callIntent": {
+      "topic": "Liability",
+      "text": "Customer recently involved in a reported accident. Likely inquiring about liability coverage and claim next steps."
+    }
+  },
+  {
+    "id": "IL-2",
+    "firstName": "Wilbert",
+    "lastName": "Kreiger",
+    "initials": "WK",
+    "city": "Mannfort",
+    "state": "IL",
+    "stateName": "Illinois",
+    "phone": "(500) 492-6238",
+    "email": "wilbert.kreiger42@yahoo.com",
+    "policyNumber": "PGR-TF7HOVZ2",
+    "lob": "Commercial Auto",
+    "policyTier": "Bronze",
+    "status": "Active",
+    "vehicle": {
+      "year": 2017,
+      "make": "Rivian",
+      "model": "V90"
+    },
+    "callIntent": {
+      "topic": "Glass Claim",
+      "text": "Recent windshield damage reported. Customer may be seeking glass repair/replacement guidance."
+    }
+  },
+  {
+    "id": "IL-3",
+    "firstName": "Frank",
+    "lastName": "Maggio",
+    "initials": "FM",
+    "city": "East Jim",
+    "state": "IL",
+    "stateName": "Illinois",
+    "phone": "(300) 382-9545",
+    "email": "frank_maggio28@hotmail.com",
+    "policyNumber": "PGR-TWTQMTUC",
+    "lob": "Homeowners",
+    "policyTier": "Silver",
+    "status": "Active",
+    "vehicle": {
+      "year": 2016,
+      "make": "Suzuki",
+      "model": "CX-9"
+    },
+    "callIntent": {
+      "topic": "Roadside Assistance",
+      "text": "Vehicle breakdown flag on account. Customer may need roadside towing or lockout help."
+    }
+  },
+  {
+    "id": "IL-4",
+    "firstName": "Tiffany",
+    "lastName": "Schroeder",
+    "initials": "TS",
+    "city": "Corwinside",
+    "state": "IL",
+    "stateName": "Illinois",
+    "phone": "(624) 217-0450",
+    "email": "tiffany.schroeder30@yahoo.com",
+    "policyNumber": "PGR-E0JXDFJQ",
+    "lob": "Commercial Auto",
+    "policyTier": "Gold",
+    "status": "Active",
+    "vehicle": {
+      "year": 2016,
+      "make": "Porsche",
+      "model": "Ranchero"
+    },
+    "callIntent": {
+      "topic": "Glass Claim",
+      "text": "Recent windshield damage reported. Customer may be seeking glass repair/replacement guidance."
+    }
+  },
+  {
+    "id": "IL-5",
+    "firstName": "Stephanie",
+    "lastName": "Romaguera-Huel",
+    "initials": "SR",
+    "city": "New Raymondstead",
+    "state": "IL",
+    "stateName": "Illinois",
+    "phone": "(902) 627-7155",
+    "email": "stephanie_romaguera-huel@hotmail.com",
+    "policyNumber": "PGR-ISVHJRGO",
+    "lob": "Homeowners",
+    "policyTier": "Platinum",
+    "status": "Active",
+    "vehicle": {
+      "year": 2016,
+      "make": "Volkswagen",
+      "model": "Sentra"
+    },
+    "callIntent": {
+      "topic": "Roadside Assistance",
+      "text": "Vehicle breakdown flag on account. Customer may need roadside towing or lockout help."
+    }
+  },
+  {
+    "id": "IN-1",
+    "firstName": "Keegan",
+    "lastName": "Hoeger",
+    "initials": "KH",
+    "city": "Smithamtown",
+    "state": "IN",
+    "stateName": "Indiana",
+    "phone": "(794) 378-5905",
+    "email": "keegan_hoeger@yahoo.com",
+    "policyNumber": "PGR-YO8R9JHS",
+    "lob": "Personal Auto",
+    "policyTier": "Silver",
+    "status": "Lapsed",
+    "vehicle": {
+      "year": 2015,
+      "make": "NIO",
+      "model": "Grand Cherokee"
+    },
+    "callIntent": {
+      "topic": "Rideshare Coverage",
+      "text": "TNC activity detected on policy. Customer may be asking about rideshare coverage gaps."
+    }
+  },
+  {
+    "id": "IN-2",
+    "firstName": "Adella",
+    "lastName": "Lowe",
+    "initials": "AL",
+    "city": "New Hadley",
+    "state": "IN",
+    "stateName": "Indiana",
+    "phone": "(272) 563-0396",
+    "email": "adella_lowe19@yahoo.com",
+    "policyNumber": "PGR-K6HHQY4W",
+    "lob": "Personal Auto",
+    "policyTier": "Platinum",
+    "status": "Pending",
+    "vehicle": {
+      "year": 2013,
+      "make": "Kia",
+      "model": "Model Y"
+    },
+    "callIntent": {
+      "topic": "Glass Claim",
+      "text": "Recent windshield damage reported. Customer may be seeking glass repair/replacement guidance."
+    }
+  },
+  {
+    "id": "IN-3",
+    "firstName": "Felix",
+    "lastName": "DuBuque",
+    "initials": "FD",
+    "city": "Lake Ara",
+    "state": "IN",
+    "stateName": "Indiana",
+    "phone": "(292) 256-6209",
+    "email": "felix_dubuque@gmail.com",
+    "policyNumber": "PGR-JGBRW69W",
+    "lob": "Homeowners",
+    "policyTier": "Silver",
+    "status": "Pending",
+    "vehicle": {
+      "year": 2014,
+      "make": "Mini",
+      "model": "Model T"
+    },
+    "callIntent": {
+      "topic": "Glass Claim",
+      "text": "Recent windshield damage reported. Customer may be seeking glass repair/replacement guidance."
+    }
+  },
+  {
+    "id": "IN-4",
+    "firstName": "Albert",
+    "lastName": "Kirlin",
+    "initials": "AK",
+    "city": "Clifton",
+    "state": "IN",
+    "stateName": "Indiana",
+    "phone": "(791) 240-7942",
+    "email": "albert_kirlin@hotmail.com",
+    "policyNumber": "PGR-CDFI5CSJ",
+    "lob": "Commercial Auto",
+    "policyTier": "Platinum",
+    "status": "Active",
+    "vehicle": {
+      "year": 2014,
+      "make": "Fiat",
+      "model": "Camry"
+    },
+    "callIntent": {
+      "topic": "Hail/Storm Damage",
+      "text": "Severe weather event in customer's area. Likely calling about hail or storm damage claim."
+    }
+  },
+  {
+    "id": "IN-5",
+    "firstName": "Naomi",
+    "lastName": "Bode",
+    "initials": "NB",
+    "city": "Shoreline",
+    "state": "IN",
+    "stateName": "Indiana",
+    "phone": "(952) 677-5039",
+    "email": "naomi_bode26@hotmail.com",
+    "policyNumber": "PGR-TFMSDFHQ",
+    "lob": "Commercial Auto",
+    "policyTier": "Gold",
+    "status": "Lapsed",
+    "vehicle": {
+      "year": 2024,
+      "make": "BYD",
+      "model": "Ranchero"
+    },
+    "callIntent": {
+      "topic": "Water Damage",
+      "text": "Recent heavy rainfall in customer's zip code. Likely inquiring about water or flood-related coverage."
+    }
+  },
+  {
+    "id": "KS-1",
+    "firstName": "Alma",
+    "lastName": "Bednar",
+    "initials": "AB",
+    "city": "Port Destanyville",
+    "state": "KS",
+    "stateName": "Kansas",
+    "phone": "(301) 788-6123",
+    "email": "alma_bednar53@gmail.com",
+    "policyNumber": "PGR-LPMJUXKL",
+    "lob": "Homeowners",
+    "policyTier": "Silver",
+    "status": "Pending",
+    "vehicle": {
+      "year": 2023,
+      "make": "Bentley",
+      "model": "El Camino"
+    },
+    "callIntent": {
+      "topic": "Water Damage",
+      "text": "Recent heavy rainfall in customer's zip code. Likely inquiring about water or flood-related coverage."
+    }
+  },
+  {
+    "id": "KS-2",
+    "firstName": "Corey",
+    "lastName": "Smitham",
+    "initials": "CS",
+    "city": "Melvinberg",
+    "state": "KS",
+    "stateName": "Kansas",
+    "phone": "(721) 307-7510",
+    "email": "corey.smitham89@gmail.com",
+    "policyNumber": "PGR-L6DWBF3O",
+    "lob": "Commercial Auto",
+    "policyTier": "Platinum",
+    "status": "Active",
+    "vehicle": {
+      "year": 2024,
+      "make": "Mitsubishi",
+      "model": "Grand Caravan"
+    },
+    "callIntent": {
+      "topic": "Rideshare Coverage",
+      "text": "TNC activity detected on policy. Customer may be asking about rideshare coverage gaps."
+    }
+  },
+  {
+    "id": "KS-3",
+    "firstName": "Latoya",
+    "lastName": "Dach",
+    "initials": "LD",
+    "city": "Oak Park",
+    "state": "KS",
+    "stateName": "Kansas",
+    "phone": "(616) 231-6238",
+    "email": "latoya_dach41@gmail.com",
+    "policyNumber": "PGR-N4TYCGF0",
+    "lob": "Homeowners",
+    "policyTier": "Silver",
+    "status": "Active",
+    "vehicle": {
+      "year": 2022,
+      "make": "Smart",
+      "model": "Roadster"
+    },
+    "callIntent": {
+      "topic": "Hail/Storm Damage",
+      "text": "Severe weather event in customer's area. Likely calling about hail or storm damage claim."
+    }
+  },
+  {
+    "id": "KS-4",
+    "firstName": "Phyllis",
+    "lastName": "Steuber",
+    "initials": "PS",
+    "city": "South Coltonton",
+    "state": "KS",
+    "stateName": "Kansas",
+    "phone": "(935) 906-0384",
+    "email": "phyllis_steuber32@yahoo.com",
+    "policyNumber": "PGR-LN4MSIEH",
+    "lob": "Commercial Auto",
+    "policyTier": "Platinum",
+    "status": "Active",
+    "vehicle": {
+      "year": 2020,
+      "make": "Mahindra & Mahindra",
+      "model": "1"
+    },
+    "callIntent": {
+      "topic": "Hail/Storm Damage",
+      "text": "Severe weather event in customer's area. Likely calling about hail or storm damage claim."
+    }
+  },
+  {
+    "id": "KS-5",
+    "firstName": "Karson",
+    "lastName": "McDermott",
+    "initials": "KM",
+    "city": "Lynwood",
+    "state": "KS",
+    "stateName": "Kansas",
+    "phone": "(366) 711-8797",
+    "email": "karson_mcdermott@hotmail.com",
+    "policyNumber": "PGR-D9TIGCJE",
+    "lob": "Commercial Auto",
+    "policyTier": "Platinum",
+    "status": "Active",
+    "vehicle": {
+      "year": 2023,
+      "make": "Maruti",
+      "model": "CTS"
+    },
+    "callIntent": {
+      "topic": "Rideshare Coverage",
+      "text": "TNC activity detected on policy. Customer may be asking about rideshare coverage gaps."
+    }
+  },
+  {
+    "id": "KY-1",
+    "firstName": "Gerda",
+    "lastName": "Schinner",
+    "initials": "GS",
+    "city": "Fort Douglas",
+    "state": "KY",
+    "stateName": "Kentucky",
+    "phone": "(362) 626-8771",
+    "email": "gerda_schinner36@gmail.com",
+    "policyNumber": "PGR-1G2SFY2F",
+    "lob": "Personal Auto",
+    "policyTier": "Gold",
+    "status": "Pending",
+    "vehicle": {
+      "year": 2023,
+      "make": "Hyundai",
+      "model": "Taurus"
+    },
+    "callIntent": {
+      "topic": "Rideshare Coverage",
+      "text": "TNC activity detected on policy. Customer may be asking about rideshare coverage gaps."
+    }
+  },
+  {
+    "id": "KY-2",
+    "firstName": "Rollin",
+    "lastName": "Bergstrom",
+    "initials": "RB",
+    "city": "Lake Zoey",
+    "state": "KY",
+    "stateName": "Kentucky",
+    "phone": "(304) 303-7536",
+    "email": "rollin.bergstrom@gmail.com",
+    "policyNumber": "PGR-L2PCYCRA",
+    "lob": "Personal Auto",
+    "policyTier": "Silver",
+    "status": "Pending",
+    "vehicle": {
+      "year": 2021,
+      "make": "Land Rover",
+      "model": "Model T"
+    },
+    "callIntent": {
+      "topic": "Water Damage",
+      "text": "Recent heavy rainfall in customer's zip code. Likely inquiring about water or flood-related coverage."
+    }
+  },
+  {
+    "id": "KY-3",
+    "firstName": "Lucia",
+    "lastName": "Heaney",
+    "initials": "LH",
+    "city": "Wichita",
+    "state": "KY",
+    "stateName": "Kentucky",
+    "phone": "(787) 604-6639",
+    "email": "lucia_heaney@gmail.com",
+    "policyNumber": "PGR-EH9DBBHS",
+    "lob": "Homeowners",
+    "policyTier": "Silver",
+    "status": "Pending",
+    "vehicle": {
+      "year": 2014,
+      "make": "Aston Martin",
+      "model": "Mustang"
+    },
+    "callIntent": {
+      "topic": "Glass Claim",
+      "text": "Recent windshield damage reported. Customer may be seeking glass repair/replacement guidance."
+    }
+  },
+  {
+    "id": "KY-4",
+    "firstName": "Rico",
+    "lastName": "Leuschke-Kuhn",
+    "initials": "RL",
+    "city": "Kobystead",
+    "state": "KY",
+    "stateName": "Kentucky",
+    "phone": "(400) 506-8862",
+    "email": "rico_leuschke-kuhn@yahoo.com",
+    "policyNumber": "PGR-HNZ1TCYS",
+    "lob": "Homeowners",
+    "policyTier": "Bronze",
+    "status": "Active",
+    "vehicle": {
+      "year": 2016,
+      "make": "BYD",
+      "model": "XC90"
+    },
+    "callIntent": {
+      "topic": "Liability",
+      "text": "Customer recently involved in a reported accident. Likely inquiring about liability coverage and claim next steps."
+    }
+  },
+  {
+    "id": "KY-5",
+    "firstName": "Trisha",
+    "lastName": "Bernier",
+    "initials": "TB",
+    "city": "Christieville",
+    "state": "KY",
+    "stateName": "Kentucky",
+    "phone": "(979) 527-3221",
+    "email": "trisha.bernier67@gmail.com",
+    "policyNumber": "PGR-DO9LR95U",
+    "lob": "Personal Auto",
+    "policyTier": "Gold",
+    "status": "Active",
+    "vehicle": {
+      "year": 2022,
+      "make": "Cadillac",
+      "model": "Grand Cherokee"
+    },
+    "callIntent": {
+      "topic": "Glass Claim",
+      "text": "Recent windshield damage reported. Customer may be seeking glass repair/replacement guidance."
+    }
+  },
+  {
+    "id": "LA-1",
+    "firstName": "Luis",
+    "lastName": "Bode",
+    "initials": "LB",
+    "city": "Barnstable Town",
+    "state": "LA",
+    "stateName": "Louisiana",
+    "phone": "(547) 667-8358",
+    "email": "luis_bode37@yahoo.com",
+    "policyNumber": "PGR-UJUTPMRP",
+    "lob": "Homeowners",
+    "policyTier": "Gold",
+    "status": "Active",
+    "vehicle": {
+      "year": 2021,
+      "make": "Bugatti",
+      "model": "CTS"
+    },
+    "callIntent": {
+      "topic": "Glass Claim",
+      "text": "Recent windshield damage reported. Customer may be seeking glass repair/replacement guidance."
+    }
+  },
+  {
+    "id": "LA-2",
+    "firstName": "Kent",
+    "lastName": "Nolan",
+    "initials": "KN",
+    "city": "Lake Colleen",
+    "state": "LA",
+    "stateName": "Louisiana",
+    "phone": "(421) 829-9513",
+    "email": "kent.nolan@yahoo.com",
+    "policyNumber": "PGR-QNAFDDSF",
+    "lob": "Personal Auto",
+    "policyTier": "Gold",
+    "status": "Active",
+    "vehicle": {
+      "year": 2023,
+      "make": "Skoda",
+      "model": "Land Cruiser"
+    },
+    "callIntent": {
+      "topic": "Roadside Assistance",
+      "text": "Vehicle breakdown flag on account. Customer may need roadside towing or lockout help."
+    }
+  },
+  {
+    "id": "LA-3",
+    "firstName": "Isaac",
+    "lastName": "Kuhic",
+    "initials": "IK",
+    "city": "East Jameson",
+    "state": "LA",
+    "stateName": "Louisiana",
+    "phone": "(571) 545-9738",
+    "email": "isaac.kuhic20@gmail.com",
+    "policyNumber": "PGR-VCUVV32Y",
+    "lob": "Commercial Auto",
+    "policyTier": "Gold",
+    "status": "Pending",
+    "vehicle": {
+      "year": 2014,
+      "make": "Audi",
+      "model": "Expedition"
+    },
+    "callIntent": {
+      "topic": "Liability",
+      "text": "Customer recently involved in a reported accident. Likely inquiring about liability coverage and claim next steps."
+    }
+  },
+  {
+    "id": "LA-4",
+    "firstName": "Myra",
+    "lastName": "Goyette",
+    "initials": "MG",
+    "city": "Hesperia",
+    "state": "LA",
+    "stateName": "Louisiana",
+    "phone": "(817) 365-9300",
+    "email": "myra_goyette77@yahoo.com",
+    "policyNumber": "PGR-L1XFVGBG",
+    "lob": "Personal Auto",
+    "policyTier": "Gold",
+    "status": "Pending",
+    "vehicle": {
+      "year": 2024,
+      "make": "Tata",
+      "model": "Model Y"
+    },
+    "callIntent": {
+      "topic": "Hail/Storm Damage",
+      "text": "Severe weather event in customer's area. Likely calling about hail or storm damage claim."
+    }
+  },
+  {
+    "id": "LA-5",
+    "firstName": "Verna",
+    "lastName": "Quigley",
+    "initials": "VQ",
+    "city": "West Elaine",
+    "state": "LA",
+    "stateName": "Louisiana",
+    "phone": "(489) 339-0015",
+    "email": "verna_quigley@gmail.com",
+    "policyNumber": "PGR-FTFKKZUO",
+    "lob": "Homeowners",
+    "policyTier": "Bronze",
+    "status": "Active",
+    "vehicle": {
+      "year": 2012,
+      "make": "Citroën",
+      "model": "Malibu"
+    },
+    "callIntent": {
+      "topic": "Water Damage",
+      "text": "Recent heavy rainfall in customer's zip code. Likely inquiring about water or flood-related coverage."
+    }
+  },
+  {
+    "id": "MA-1",
+    "firstName": "Sonia",
+    "lastName": "Haley",
+    "initials": "SH",
+    "city": "East Rosieland",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "phone": "(752) 525-4115",
+    "email": "sonia.haley@yahoo.com",
+    "policyNumber": "PGR-VOZETOK0",
+    "lob": "Commercial Auto",
+    "policyTier": "Bronze",
+    "status": "Pending",
+    "vehicle": {
+      "year": 2013,
+      "make": "Mini",
+      "model": "Explorer"
+    },
+    "callIntent": {
+      "topic": "Glass Claim",
+      "text": "Recent windshield damage reported. Customer may be seeking glass repair/replacement guidance."
+    }
+  },
+  {
+    "id": "MA-2",
+    "firstName": "Creola",
+    "lastName": "Ritchie",
+    "initials": "CR",
+    "city": "Lillieboro",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "phone": "(989) 494-3006",
+    "email": "creola.ritchie61@hotmail.com",
+    "policyNumber": "PGR-ZMPOTLMN",
+    "lob": "Personal Auto",
+    "policyTier": "Gold",
+    "status": "Active",
+    "vehicle": {
+      "year": 2013,
+      "make": "MG",
+      "model": "F-150"
+    },
+    "callIntent": {
+      "topic": "Roadside Assistance",
+      "text": "Vehicle breakdown flag on account. Customer may need roadside towing or lockout help."
+    }
+  },
+  {
+    "id": "MA-3",
+    "firstName": "Geoffrey",
+    "lastName": "Hoppe",
+    "initials": "GH",
+    "city": "Bryan",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "phone": "(965) 244-1695",
+    "email": "geoffrey.hoppe41@yahoo.com",
+    "policyNumber": "PGR-BWF4LYOP",
+    "lob": "Homeowners",
+    "policyTier": "Bronze",
+    "status": "Lapsed",
+    "vehicle": {
+      "year": 2016,
+      "make": "Fiat",
+      "model": "Accord"
+    },
+    "callIntent": {
+      "topic": "Glass Claim",
+      "text": "Recent windshield damage reported. Customer may be seeking glass repair/replacement guidance."
+    }
+  },
+  {
+    "id": "MA-4",
+    "firstName": "May",
+    "lastName": "Huels",
+    "initials": "MH",
+    "city": "Aspen Hill",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "phone": "(518) 625-7928",
+    "email": "may_huels@yahoo.com",
+    "policyNumber": "PGR-OKWGQJP9",
+    "lob": "Personal Auto",
+    "policyTier": "Bronze",
+    "status": "Active",
+    "vehicle": {
+      "year": 2022,
+      "make": "Land Rover",
+      "model": "Durango"
+    },
+    "callIntent": {
+      "topic": "Liability",
+      "text": "Customer recently involved in a reported accident. Likely inquiring about liability coverage and claim next steps."
+    }
+  },
+  {
+    "id": "MA-5",
+    "firstName": "Ryan",
+    "lastName": "Hackett",
+    "initials": "RH",
+    "city": "West Vitaview",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "phone": "(736) 894-7290",
+    "email": "ryan_hackett68@hotmail.com",
+    "policyNumber": "PGR-WBCDJXP9",
+    "lob": "Homeowners",
+    "policyTier": "Platinum",
+    "status": "Active",
+    "vehicle": {
+      "year": 2021,
+      "make": "Tesla",
+      "model": "ATS"
+    },
+    "callIntent": {
+      "topic": "Glass Claim",
+      "text": "Recent windshield damage reported. Customer may be seeking glass repair/replacement guidance."
+    }
+  },
+  {
+    "id": "MD-1",
+    "firstName": "Alicia",
+    "lastName": "Cruickshank",
+    "initials": "AC",
+    "city": "Westminster",
+    "state": "MD",
+    "stateName": "Maryland",
+    "phone": "(328) 940-0530",
+    "email": "alicia.cruickshank78@hotmail.com",
+    "policyNumber": "PGR-2AOYXHHG",
+    "lob": "Personal Auto",
+    "policyTier": "Bronze",
+    "status": "Active",
+    "vehicle": {
+      "year": 2019,
+      "make": "BMW",
+      "model": "Escalade"
+    },
+    "callIntent": {
+      "topic": "Liability",
+      "text": "Customer recently involved in a reported accident. Likely inquiring about liability coverage and claim next steps."
+    }
+  },
+  {
+    "id": "MD-2",
+    "firstName": "Damian",
+    "lastName": "Waters",
+    "initials": "DW",
+    "city": "Port Norma",
+    "state": "MD",
+    "stateName": "Maryland",
+    "phone": "(244) 435-1587",
+    "email": "damian.waters26@gmail.com",
+    "policyNumber": "PGR-PG32OHBD",
+    "lob": "Personal Auto",
+    "policyTier": "Gold",
+    "status": "Pending",
+    "vehicle": {
+      "year": 2023,
+      "make": "Ford",
+      "model": "Camaro"
+    },
+    "callIntent": {
+      "topic": "Hail/Storm Damage",
+      "text": "Severe weather event in customer's area. Likely calling about hail or storm damage claim."
+    }
+  },
+  {
+    "id": "MD-3",
+    "firstName": "Maxine",
+    "lastName": "Senger",
+    "initials": "MS",
+    "city": "Goldnerton",
+    "state": "MD",
+    "stateName": "Maryland",
+    "phone": "(919) 976-5824",
+    "email": "maxine.senger42@hotmail.com",
+    "policyNumber": "PGR-YQCVGPYM",
+    "lob": "Homeowners",
+    "policyTier": "Platinum",
+    "status": "Pending",
+    "vehicle": {
+      "year": 2012,
+      "make": "Tata",
+      "model": "XTS"
+    },
+    "callIntent": {
+      "topic": "Liability",
+      "text": "Customer recently involved in a reported accident. Likely inquiring about liability coverage and claim next steps."
+    }
+  },
+  {
+    "id": "MD-4",
+    "firstName": "Pam",
+    "lastName": "Brakus",
+    "initials": "PB",
+    "city": "Padbergstead",
+    "state": "MD",
+    "stateName": "Maryland",
+    "phone": "(665) 527-2626",
+    "email": "pam.brakus5@yahoo.com",
+    "policyNumber": "PGR-BQ2JLTVK",
+    "lob": "Personal Auto",
+    "policyTier": "Gold",
+    "status": "Active",
+    "vehicle": {
+      "year": 2013,
+      "make": "Fiat",
+      "model": "2"
+    },
+    "callIntent": {
+      "topic": "Water Damage",
+      "text": "Recent heavy rainfall in customer's zip code. Likely inquiring about water or flood-related coverage."
+    }
+  },
+  {
+    "id": "MD-5",
+    "firstName": "Julio",
+    "lastName": "Olson",
+    "initials": "JO",
+    "city": "Monterey Park",
+    "state": "MD",
+    "stateName": "Maryland",
+    "phone": "(650) 263-9417",
+    "email": "julio_olson@gmail.com",
+    "policyNumber": "PGR-NFGWI0GD",
+    "lob": "Commercial Auto",
+    "policyTier": "Silver",
+    "status": "Lapsed",
+    "vehicle": {
+      "year": 2019,
+      "make": "Aston Martin",
+      "model": "Model X"
+    },
+    "callIntent": {
+      "topic": "Liability",
+      "text": "Customer recently involved in a reported accident. Likely inquiring about liability coverage and claim next steps."
+    }
+  },
+  {
+    "id": "ME-1",
+    "firstName": "Kaycee",
+    "lastName": "Botsford",
+    "initials": "KB",
+    "city": "Rempelfort",
+    "state": "ME",
+    "stateName": "Maine",
+    "phone": "(207) 420-5895",
+    "email": "kaycee.botsford54@hotmail.com",
+    "policyNumber": "PGR-BOE5J5AZ",
+    "lob": "Commercial Auto",
+    "policyTier": "Gold",
+    "status": "Active",
+    "vehicle": {
+      "year": 2023,
+      "make": "Volvo",
+      "model": "Grand Cherokee"
+    },
+    "callIntent": {
+      "topic": "Water Damage",
+      "text": "Recent heavy rainfall in customer's zip code. Likely inquiring about water or flood-related coverage."
+    }
+  },
+  {
+    "id": "ME-2",
+    "firstName": "Elbert",
+    "lastName": "Parker",
+    "initials": "EP",
+    "city": "Pouroscester",
+    "state": "ME",
+    "stateName": "Maine",
+    "phone": "(884) 761-0246",
+    "email": "elbert.parker@yahoo.com",
+    "policyNumber": "PGR-6TAX536A",
+    "lob": "Personal Auto",
+    "policyTier": "Silver",
+    "status": "Active",
+    "vehicle": {
+      "year": 2020,
+      "make": "Smart",
+      "model": "911"
+    },
+    "callIntent": {
+      "topic": "Liability",
+      "text": "Customer recently involved in a reported accident. Likely inquiring about liability coverage and claim next steps."
+    }
+  },
+  {
+    "id": "ME-3",
+    "firstName": "Demario",
+    "lastName": "Treutel",
+    "initials": "DT",
+    "city": "Konopelskiberg",
+    "state": "ME",
+    "stateName": "Maine",
+    "phone": "(753) 903-0773",
+    "email": "demario.treutel75@yahoo.com",
+    "policyNumber": "PGR-PVF7AYN3",
+    "lob": "Commercial Auto",
+    "policyTier": "Gold",
+    "status": "Active",
+    "vehicle": {
+      "year": 2014,
+      "make": "Nissan",
+      "model": "XTS"
+    },
+    "callIntent": {
+      "topic": "Roadside Assistance",
+      "text": "Vehicle breakdown flag on account. Customer may need roadside towing or lockout help."
+    }
+  },
+  {
+    "id": "ME-4",
+    "firstName": "Isabel",
+    "lastName": "Johns",
+    "initials": "IJ",
+    "city": "Rogershire",
+    "state": "ME",
+    "stateName": "Maine",
+    "phone": "(791) 565-4313",
+    "email": "isabel_johns20@gmail.com",
+    "policyNumber": "PGR-YASZLNX4",
+    "lob": "Homeowners",
+    "policyTier": "Silver",
+    "status": "Pending",
+    "vehicle": {
+      "year": 2017,
+      "make": "Ford",
+      "model": "Altima"
+    },
+    "callIntent": {
+      "topic": "Roadside Assistance",
+      "text": "Vehicle breakdown flag on account. Customer may need roadside towing or lockout help."
+    }
+  },
+  {
+    "id": "ME-5",
+    "firstName": "Louise",
+    "lastName": "Roob",
+    "initials": "LR",
+    "city": "South Onieboro",
+    "state": "ME",
+    "stateName": "Maine",
+    "phone": "(918) 917-0455",
+    "email": "louise_roob@yahoo.com",
+    "policyNumber": "PGR-W1Y5OH8R",
+    "lob": "Homeowners",
+    "policyTier": "Silver",
+    "status": "Active",
+    "vehicle": {
+      "year": 2012,
+      "make": "Mitsubishi",
+      "model": "Taurus"
+    },
+    "callIntent": {
+      "topic": "Rideshare Coverage",
+      "text": "TNC activity detected on policy. Customer may be asking about rideshare coverage gaps."
+    }
+  },
+  {
+    "id": "MI-1",
+    "firstName": "Jo",
+    "lastName": "Shanahan",
+    "initials": "JS",
+    "city": "Murrayfield",
+    "state": "MI",
+    "stateName": "Michigan",
+    "phone": "(649) 662-6510",
+    "email": "jo_shanahan52@hotmail.com",
+    "policyNumber": "PGR-F4RABCN3",
+    "lob": "Homeowners",
+    "policyTier": "Gold",
+    "status": "Active",
+    "vehicle": {
+      "year": 2018,
+      "make": "Jeep",
+      "model": "Roadster"
+    },
+    "callIntent": {
+      "topic": "Hail/Storm Damage",
+      "text": "Severe weather event in customer's area. Likely calling about hail or storm damage claim."
+    }
+  },
+  {
+    "id": "MI-2",
+    "firstName": "Antonia",
+    "lastName": "Mann",
+    "initials": "AM",
+    "city": "Aurora",
+    "state": "MI",
+    "stateName": "Michigan",
+    "phone": "(201) 660-9820",
+    "email": "antonia.mann@gmail.com",
+    "policyNumber": "PGR-FMZGW8NY",
+    "lob": "Commercial Auto",
+    "policyTier": "Platinum",
+    "status": "Active",
+    "vehicle": {
+      "year": 2020,
+      "make": "Nissan",
+      "model": "Element"
+    },
+    "callIntent": {
+      "topic": "Roadside Assistance",
+      "text": "Vehicle breakdown flag on account. Customer may need roadside towing or lockout help."
+    }
+  },
+  {
+    "id": "MI-3",
+    "firstName": "Alyssa",
+    "lastName": "Boyle",
+    "initials": "AB",
+    "city": "Ferryland",
+    "state": "MI",
+    "stateName": "Michigan",
+    "phone": "(376) 649-0237",
+    "email": "alyssa.boyle@yahoo.com",
+    "policyNumber": "PGR-DOPYBNKJ",
+    "lob": "Commercial Auto",
+    "policyTier": "Gold",
+    "status": "Active",
+    "vehicle": {
+      "year": 2022,
+      "make": "Skoda",
+      "model": "Sentra"
+    },
+    "callIntent": {
+      "topic": "Roadside Assistance",
+      "text": "Vehicle breakdown flag on account. Customer may need roadside towing or lockout help."
+    }
+  },
+  {
+    "id": "MI-4",
+    "firstName": "Brisa",
+    "lastName": "Jacobson",
+    "initials": "BJ",
+    "city": "Lake Charleneshire",
+    "state": "MI",
+    "stateName": "Michigan",
+    "phone": "(999) 336-4435",
+    "email": "brisa.jacobson@hotmail.com",
+    "policyNumber": "PGR-ZDK1LMYG",
+    "lob": "Homeowners",
+    "policyTier": "Silver",
+    "status": "Active",
+    "vehicle": {
+      "year": 2022,
+      "make": "Renault",
+      "model": "Jetta"
+    },
+    "callIntent": {
+      "topic": "Water Damage",
+      "text": "Recent heavy rainfall in customer's zip code. Likely inquiring about water or flood-related coverage."
+    }
+  },
+  {
+    "id": "MI-5",
+    "firstName": "Elaine",
+    "lastName": "Langworth",
+    "initials": "EL",
+    "city": "Akeemstead",
+    "state": "MI",
+    "stateName": "Michigan",
+    "phone": "(914) 265-4581",
+    "email": "elaine_langworth@gmail.com",
+    "policyNumber": "PGR-BOQKUZBG",
+    "lob": "Personal Auto",
+    "policyTier": "Platinum",
+    "status": "Active",
+    "vehicle": {
+      "year": 2015,
+      "make": "Mercedes Benz",
+      "model": "Impala"
+    },
+    "callIntent": {
+      "topic": "Liability",
+      "text": "Customer recently involved in a reported accident. Likely inquiring about liability coverage and claim next steps."
+    }
+  },
+  {
+    "id": "MN-1",
+    "firstName": "Ariane",
+    "lastName": "Leannon",
+    "initials": "AL",
+    "city": "Markchester",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "phone": "(890) 384-5669",
+    "email": "ariane_leannon@yahoo.com",
+    "policyNumber": "PGR-3ETFD8RV",
+    "lob": "Personal Auto",
+    "policyTier": "Silver",
+    "status": "Active",
+    "vehicle": {
+      "year": 2021,
+      "make": "Rivian",
+      "model": "Colorado"
+    },
+    "callIntent": {
+      "topic": "Glass Claim",
+      "text": "Recent windshield damage reported. Customer may be seeking glass repair/replacement guidance."
+    }
+  },
+  {
+    "id": "MN-2",
+    "firstName": "Viola",
+    "lastName": "Gutmann",
+    "initials": "VG",
+    "city": "Christiansenchester",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "phone": "(752) 634-6724",
+    "email": "viola.gutmann@gmail.com",
+    "policyNumber": "PGR-MKTQBXNL",
+    "lob": "Commercial Auto",
+    "policyTier": "Platinum",
+    "status": "Active",
+    "vehicle": {
+      "year": 2013,
+      "make": "Ferrari",
+      "model": "Corvette"
+    },
+    "callIntent": {
+      "topic": "Rideshare Coverage",
+      "text": "TNC activity detected on policy. Customer may be asking about rideshare coverage gaps."
+    }
+  },
+  {
+    "id": "MN-3",
+    "firstName": "Elliot",
+    "lastName": "Runolfsdottir",
+    "initials": "ER",
+    "city": "Petaluma",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "phone": "(456) 613-8819",
+    "email": "elliot_runolfsdottir@gmail.com",
+    "policyNumber": "PGR-WJR8HKGF",
+    "lob": "Personal Auto",
+    "policyTier": "Bronze",
+    "status": "Active",
+    "vehicle": {
+      "year": 2012,
+      "make": "Porsche",
+      "model": "F-150"
+    },
+    "callIntent": {
+      "topic": "Rideshare Coverage",
+      "text": "TNC activity detected on policy. Customer may be asking about rideshare coverage gaps."
+    }
+  },
+  {
+    "id": "MN-4",
+    "firstName": "Clark",
+    "lastName": "Dickens",
+    "initials": "CD",
+    "city": "Simoniscester",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "phone": "(286) 738-7148",
+    "email": "clark_dickens@gmail.com",
+    "policyNumber": "PGR-GFWIMO80",
+    "lob": "Commercial Auto",
+    "policyTier": "Silver",
+    "status": "Pending",
+    "vehicle": {
+      "year": 2016,
+      "make": "Jaguar",
+      "model": "Countach"
+    },
+    "callIntent": {
+      "topic": "Roadside Assistance",
+      "text": "Vehicle breakdown flag on account. Customer may need roadside towing or lockout help."
+    }
+  },
+  {
+    "id": "MN-5",
+    "firstName": "Sherman",
+    "lastName": "Conn",
+    "initials": "SC",
+    "city": "Lake Harryfield",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "phone": "(386) 542-7535",
+    "email": "sherman.conn92@yahoo.com",
+    "policyNumber": "PGR-3CPD0UQK",
+    "lob": "Commercial Auto",
+    "policyTier": "Platinum",
+    "status": "Active",
+    "vehicle": {
+      "year": 2012,
+      "make": "Renault",
+      "model": "V90"
+    },
+    "callIntent": {
+      "topic": "Glass Claim",
+      "text": "Recent windshield damage reported. Customer may be seeking glass repair/replacement guidance."
+    }
+  },
+  {
+    "id": "MO-1",
+    "firstName": "Kellie",
+    "lastName": "Mraz",
+    "initials": "KM",
+    "city": "Fort Constancetown",
+    "state": "MO",
+    "stateName": "Missouri",
+    "phone": "(583) 565-8807",
+    "email": "kellie_mraz@hotmail.com",
+    "policyNumber": "PGR-KFXZR6HL",
+    "lob": "Commercial Auto",
+    "policyTier": "Platinum",
+    "status": "Active",
+    "vehicle": {
+      "year": 2015,
+      "make": "Smart",
+      "model": "Countach"
+    },
+    "callIntent": {
+      "topic": "Liability",
+      "text": "Customer recently involved in a reported accident. Likely inquiring about liability coverage and claim next steps."
+    }
+  },
+  {
+    "id": "MO-2",
+    "firstName": "Elias",
+    "lastName": "Bernhard",
+    "initials": "EB",
+    "city": "South Summer",
+    "state": "MO",
+    "stateName": "Missouri",
+    "phone": "(531) 902-2317",
+    "email": "elias_bernhard12@gmail.com",
+    "policyNumber": "PGR-UBOX4XFR",
+    "lob": "Personal Auto",
+    "policyTier": "Platinum",
+    "status": "Pending",
+    "vehicle": {
+      "year": 2012,
+      "make": "Maserati",
+      "model": "Mustang"
+    },
+    "callIntent": {
+      "topic": "Roadside Assistance",
+      "text": "Vehicle breakdown flag on account. Customer may need roadside towing or lockout help."
+    }
+  },
+  {
+    "id": "MO-3",
+    "firstName": "Raphael",
+    "lastName": "Graham",
+    "initials": "RG",
+    "city": "New Casey",
+    "state": "MO",
+    "stateName": "Missouri",
+    "phone": "(457) 761-5034",
+    "email": "raphael.graham@gmail.com",
+    "policyNumber": "PGR-L2BOW8L6",
+    "lob": "Personal Auto",
+    "policyTier": "Bronze",
+    "status": "Active",
+    "vehicle": {
+      "year": 2022,
+      "make": "Jaguar",
+      "model": "Land Cruiser"
+    },
+    "callIntent": {
+      "topic": "Hail/Storm Damage",
+      "text": "Severe weather event in customer's area. Likely calling about hail or storm damage claim."
+    }
+  },
+  {
+    "id": "MO-4",
+    "firstName": "Theresa",
+    "lastName": "Muller",
+    "initials": "TM",
+    "city": "West Cesar",
+    "state": "MO",
+    "stateName": "Missouri",
+    "phone": "(683) 312-2666",
+    "email": "theresa_muller20@hotmail.com",
+    "policyNumber": "PGR-NB6SLG1G",
+    "lob": "Commercial Auto",
+    "policyTier": "Gold",
+    "status": "Active",
+    "vehicle": {
+      "year": 2019,
+      "make": "Ferrari",
+      "model": "El Camino"
+    },
+    "callIntent": {
+      "topic": "Liability",
+      "text": "Customer recently involved in a reported accident. Likely inquiring about liability coverage and claim next steps."
+    }
+  },
+  {
+    "id": "MO-5",
+    "firstName": "Ernestine",
+    "lastName": "Abshire",
+    "initials": "EA",
+    "city": "Fort Conor",
+    "state": "MO",
+    "stateName": "Missouri",
+    "phone": "(758) 651-1933",
+    "email": "ernestine.abshire@yahoo.com",
+    "policyNumber": "PGR-BS3FSEKU",
+    "lob": "Homeowners",
+    "policyTier": "Gold",
+    "status": "Active",
+    "vehicle": {
+      "year": 2024,
+      "make": "Land Rover",
+      "model": "Fiesta"
+    },
+    "callIntent": {
+      "topic": "Liability",
+      "text": "Customer recently involved in a reported accident. Likely inquiring about liability coverage and claim next steps."
+    }
+  },
+  {
+    "id": "MS-1",
+    "firstName": "Kennith",
+    "lastName": "Heaney",
+    "initials": "KH",
+    "city": "Port Murray",
+    "state": "MS",
+    "stateName": "Mississippi",
+    "phone": "(883) 246-4736",
+    "email": "kennith_heaney54@gmail.com",
+    "policyNumber": "PGR-IKTDXIXQ",
+    "lob": "Homeowners",
+    "policyTier": "Gold",
+    "status": "Pending",
+    "vehicle": {
+      "year": 2018,
+      "make": "Porsche",
+      "model": "Challenger"
+    },
+    "callIntent": {
+      "topic": "Water Damage",
+      "text": "Recent heavy rainfall in customer's zip code. Likely inquiring about water or flood-related coverage."
+    }
+  },
+  {
+    "id": "MS-2",
+    "firstName": "Darlene",
+    "lastName": "Wolff",
+    "initials": "DW",
+    "city": "Miami",
+    "state": "MS",
+    "stateName": "Mississippi",
+    "phone": "(376) 779-5360",
+    "email": "darlene.wolff@yahoo.com",
+    "policyNumber": "PGR-BOTQLR5M",
+    "lob": "Personal Auto",
+    "policyTier": "Bronze",
+    "status": "Active",
+    "vehicle": {
+      "year": 2017,
+      "make": "Chevrolet",
+      "model": "Model T"
+    },
+    "callIntent": {
+      "topic": "Roadside Assistance",
+      "text": "Vehicle breakdown flag on account. Customer may need roadside towing or lockout help."
+    }
+  },
+  {
+    "id": "MS-3",
+    "firstName": "Cleora",
+    "lastName": "Hand",
+    "initials": "CH",
+    "city": "Reichel-Wardstad",
+    "state": "MS",
+    "stateName": "Mississippi",
+    "phone": "(407) 235-5613",
+    "email": "cleora_hand@hotmail.com",
+    "policyNumber": "PGR-LABFCBUW",
+    "lob": "Homeowners",
+    "policyTier": "Gold",
+    "status": "Active",
+    "vehicle": {
+      "year": 2014,
+      "make": "Skoda",
+      "model": "CTS"
+    },
+    "callIntent": {
+      "topic": "Water Damage",
+      "text": "Recent heavy rainfall in customer's zip code. Likely inquiring about water or flood-related coverage."
+    }
+  },
+  {
+    "id": "MS-4",
+    "firstName": "Marsha",
+    "lastName": "MacGyver",
+    "initials": "MM",
+    "city": "Lodi",
+    "state": "MS",
+    "stateName": "Mississippi",
+    "phone": "(470) 539-0574",
+    "email": "marsha_macgyver@gmail.com",
+    "policyNumber": "PGR-ETQ46PEC",
+    "lob": "Homeowners",
+    "policyTier": "Silver",
+    "status": "Lapsed",
+    "vehicle": {
+      "year": 2012,
+      "make": "Mini",
+      "model": "Alpine"
+    },
+    "callIntent": {
+      "topic": "Water Damage",
+      "text": "Recent heavy rainfall in customer's zip code. Likely inquiring about water or flood-related coverage."
+    }
+  },
+  {
+    "id": "MS-5",
+    "firstName": "Roxanne",
+    "lastName": "Kessler",
+    "initials": "RK",
+    "city": "Loisstead",
+    "state": "MS",
+    "stateName": "Mississippi",
+    "phone": "(431) 407-9986",
+    "email": "roxanne.kessler63@yahoo.com",
+    "policyNumber": "PGR-TKHJV3UU",
+    "lob": "Commercial Auto",
+    "policyTier": "Silver",
+    "status": "Active",
+    "vehicle": {
+      "year": 2015,
+      "make": "Jaguar",
+      "model": "Sentra"
+    },
+    "callIntent": {
+      "topic": "Glass Claim",
+      "text": "Recent windshield damage reported. Customer may be seeking glass repair/replacement guidance."
+    }
+  },
+  {
+    "id": "MT-1",
+    "firstName": "Boyd",
+    "lastName": "Hodkiewicz-Mitchell",
+    "initials": "BH",
+    "city": "Montebello",
+    "state": "MT",
+    "stateName": "Montana",
+    "phone": "(357) 586-8613",
+    "email": "boyd_hodkiewicz-mitchell@gmail.com",
+    "policyNumber": "PGR-IBKTDC2K",
+    "lob": "Personal Auto",
+    "policyTier": "Gold",
+    "status": "Active",
+    "vehicle": {
+      "year": 2024,
+      "make": "Citroën",
+      "model": "Alpine"
+    },
+    "callIntent": {
+      "topic": "Rideshare Coverage",
+      "text": "TNC activity detected on policy. Customer may be asking about rideshare coverage gaps."
+    }
+  },
+  {
+    "id": "MT-2",
+    "firstName": "Hettie",
+    "lastName": "Barton",
+    "initials": "HB",
+    "city": "Blacksburg",
+    "state": "MT",
+    "stateName": "Montana",
+    "phone": "(693) 819-7963",
+    "email": "hettie.barton@yahoo.com",
+    "policyNumber": "PGR-LVCNJ3OH",
+    "lob": "Homeowners",
+    "policyTier": "Gold",
+    "status": "Pending",
+    "vehicle": {
+      "year": 2020,
+      "make": "Porsche",
+      "model": "XC90"
+    },
+    "callIntent": {
+      "topic": "Rideshare Coverage",
+      "text": "TNC activity detected on policy. Customer may be asking about rideshare coverage gaps."
+    }
+  },
+  {
+    "id": "MT-3",
+    "firstName": "Hudson",
+    "lastName": "White",
+    "initials": "HW",
+    "city": "Kilbackfort",
+    "state": "MT",
+    "stateName": "Montana",
+    "phone": "(302) 513-3058",
+    "email": "hudson_white66@gmail.com",
+    "policyNumber": "PGR-HPV0GF2M",
+    "lob": "Personal Auto",
+    "policyTier": "Bronze",
+    "status": "Active",
+    "vehicle": {
+      "year": 2018,
+      "make": "Tesla",
+      "model": "Model X"
+    },
+    "callIntent": {
+      "topic": "Glass Claim",
+      "text": "Recent windshield damage reported. Customer may be seeking glass repair/replacement guidance."
+    }
+  },
+  {
+    "id": "MT-4",
+    "firstName": "Sabryna",
+    "lastName": "Howe",
+    "initials": "SH",
+    "city": "Port Leahview",
+    "state": "MT",
+    "stateName": "Montana",
+    "phone": "(928) 609-5248",
+    "email": "sabryna.howe12@gmail.com",
+    "policyNumber": "PGR-MTEAKWLZ",
+    "lob": "Commercial Auto",
+    "policyTier": "Gold",
+    "status": "Active",
+    "vehicle": {
+      "year": 2023,
+      "make": "MG",
+      "model": "Model T"
+    },
+    "callIntent": {
+      "topic": "Rideshare Coverage",
+      "text": "TNC activity detected on policy. Customer may be asking about rideshare coverage gaps."
+    }
+  },
+  {
+    "id": "MT-5",
+    "firstName": "Bob",
+    "lastName": "Denesik",
+    "initials": "BD",
+    "city": "Moenview",
+    "state": "MT",
+    "stateName": "Montana",
+    "phone": "(270) 884-5438",
+    "email": "bob.denesik@yahoo.com",
+    "policyNumber": "PGR-XVSHX8ZH",
+    "lob": "Personal Auto",
+    "policyTier": "Gold",
+    "status": "Active",
+    "vehicle": {
+      "year": 2024,
+      "make": "BMW",
+      "model": "Grand Cherokee"
+    },
+    "callIntent": {
+      "topic": "Liability",
+      "text": "Customer recently involved in a reported accident. Likely inquiring about liability coverage and claim next steps."
+    }
+  },
+  {
+    "id": "NC-1",
+    "firstName": "Jessica",
+    "lastName": "Halvorson",
+    "initials": "JH",
+    "city": "Waltham",
+    "state": "NC",
+    "stateName": "North Carolina",
+    "phone": "(459) 289-0195",
+    "email": "jessica.halvorson@gmail.com",
+    "policyNumber": "PGR-JZHXXPAY",
+    "lob": "Personal Auto",
+    "policyTier": "Bronze",
+    "status": "Active",
+    "vehicle": {
+      "year": 2019,
+      "make": "Dodge",
+      "model": "Golf"
+    },
+    "callIntent": {
+      "topic": "Glass Claim",
+      "text": "Recent windshield damage reported. Customer may be seeking glass repair/replacement guidance."
+    }
+  },
+  {
+    "id": "NC-2",
+    "firstName": "Wilson",
+    "lastName": "Rutherford",
+    "initials": "WR",
+    "city": "South Rick",
+    "state": "NC",
+    "stateName": "North Carolina",
+    "phone": "(638) 325-2065",
+    "email": "wilson_rutherford@hotmail.com",
+    "policyNumber": "PGR-8ZRAIN5S",
+    "lob": "Personal Auto",
+    "policyTier": "Gold",
+    "status": "Pending",
+    "vehicle": {
+      "year": 2015,
+      "make": "Volkswagen",
+      "model": "Wrangler"
+    },
+    "callIntent": {
+      "topic": "Hail/Storm Damage",
+      "text": "Severe weather event in customer's area. Likely calling about hail or storm damage claim."
+    }
+  },
+  {
+    "id": "NC-3",
+    "firstName": "Stacey",
+    "lastName": "Hammes",
+    "initials": "SH",
+    "city": "Lake Holly",
+    "state": "NC",
+    "stateName": "North Carolina",
+    "phone": "(434) 413-9445",
+    "email": "stacey.hammes@yahoo.com",
+    "policyNumber": "PGR-B5F3AJDQ",
+    "lob": "Homeowners",
+    "policyTier": "Platinum",
+    "status": "Pending",
+    "vehicle": {
+      "year": 2017,
+      "make": "Dodge",
+      "model": "Altima"
+    },
+    "callIntent": {
+      "topic": "Rideshare Coverage",
+      "text": "TNC activity detected on policy. Customer may be asking about rideshare coverage gaps."
+    }
+  },
+  {
+    "id": "NC-4",
+    "firstName": "Craig",
+    "lastName": "Little",
+    "initials": "CL",
+    "city": "East Cullen",
+    "state": "NC",
+    "stateName": "North Carolina",
+    "phone": "(439) 982-0325",
+    "email": "craig_little84@yahoo.com",
+    "policyNumber": "PGR-GJ3H0PKG",
+    "lob": "Personal Auto",
+    "policyTier": "Bronze",
+    "status": "Active",
+    "vehicle": {
+      "year": 2022,
+      "make": "Ford",
+      "model": "Expedition"
+    },
+    "callIntent": {
+      "topic": "Glass Claim",
+      "text": "Recent windshield damage reported. Customer may be seeking glass repair/replacement guidance."
+    }
+  },
+  {
+    "id": "NC-5",
+    "firstName": "Yasmine",
+    "lastName": "Monahan",
+    "initials": "YM",
+    "city": "Krajcikborough",
+    "state": "NC",
+    "stateName": "North Carolina",
+    "phone": "(685) 750-2431",
+    "email": "yasmine.monahan25@hotmail.com",
+    "policyNumber": "PGR-8VRH6MOL",
+    "lob": "Commercial Auto",
+    "policyTier": "Platinum",
+    "status": "Lapsed",
+    "vehicle": {
+      "year": 2022,
+      "make": "Mini",
+      "model": "LeBaron"
+    },
+    "callIntent": {
+      "topic": "Liability",
+      "text": "Customer recently involved in a reported accident. Likely inquiring about liability coverage and claim next steps."
+    }
+  },
+  {
+    "id": "ND-1",
+    "firstName": "Ana",
+    "lastName": "Kerluke",
+    "initials": "AK",
+    "city": "Lake Bradfordville",
+    "state": "ND",
+    "stateName": "North Dakota",
+    "phone": "(954) 268-8601",
+    "email": "ana.kerluke13@gmail.com",
+    "policyNumber": "PGR-NWBPI6JH",
+    "lob": "Personal Auto",
+    "policyTier": "Silver",
+    "status": "Active",
+    "vehicle": {
+      "year": 2024,
+      "make": "Fiat",
+      "model": "Charger"
+    },
+    "callIntent": {
+      "topic": "Roadside Assistance",
+      "text": "Vehicle breakdown flag on account. Customer may need roadside towing or lockout help."
+    }
+  },
+  {
+    "id": "ND-2",
+    "firstName": "Nathan",
+    "lastName": "Wiza",
+    "initials": "NW",
+    "city": "Orland Park",
+    "state": "ND",
+    "stateName": "North Dakota",
+    "phone": "(716) 994-0387",
+    "email": "nathan.wiza42@hotmail.com",
+    "policyNumber": "PGR-VDJW4YMT",
+    "lob": "Commercial Auto",
+    "policyTier": "Gold",
+    "status": "Lapsed",
+    "vehicle": {
+      "year": 2020,
+      "make": "Porsche",
+      "model": "Charger"
+    },
+    "callIntent": {
+      "topic": "Liability",
+      "text": "Customer recently involved in a reported accident. Likely inquiring about liability coverage and claim next steps."
+    }
+  },
+  {
+    "id": "ND-3",
+    "firstName": "Marlene",
+    "lastName": "Strosin",
+    "initials": "MS",
+    "city": "Rasheedburgh",
+    "state": "ND",
+    "stateName": "North Dakota",
+    "phone": "(588) 351-1987",
+    "email": "marlene_strosin43@gmail.com",
+    "policyNumber": "PGR-X5KABBB3",
+    "lob": "Commercial Auto",
+    "policyTier": "Silver",
+    "status": "Pending",
+    "vehicle": {
+      "year": 2012,
+      "make": "BMW",
+      "model": "Grand Cherokee"
+    },
+    "callIntent": {
+      "topic": "Hail/Storm Damage",
+      "text": "Severe weather event in customer's area. Likely calling about hail or storm damage claim."
+    }
+  },
+  {
+    "id": "ND-4",
+    "firstName": "Floyd",
+    "lastName": "Balistreri",
+    "initials": "FB",
+    "city": "Constantinbury",
+    "state": "ND",
+    "stateName": "North Dakota",
+    "phone": "(316) 896-1185",
+    "email": "floyd_balistreri@hotmail.com",
+    "policyNumber": "PGR-3KQHDJX2",
+    "lob": "Commercial Auto",
+    "policyTier": "Silver",
+    "status": "Active",
+    "vehicle": {
+      "year": 2021,
+      "make": "Chrysler",
+      "model": "Camry"
+    },
+    "callIntent": {
+      "topic": "Roadside Assistance",
+      "text": "Vehicle breakdown flag on account. Customer may need roadside towing or lockout help."
+    }
+  },
+  {
+    "id": "ND-5",
+    "firstName": "Cortez",
+    "lastName": "Kutch",
+    "initials": "CK",
+    "city": "Paucekstead",
+    "state": "ND",
+    "stateName": "North Dakota",
+    "phone": "(834) 592-2352",
+    "email": "cortez.kutch89@yahoo.com",
+    "policyNumber": "PGR-EUAYSWFI",
+    "lob": "Commercial Auto",
+    "policyTier": "Platinum",
+    "status": "Active",
+    "vehicle": {
+      "year": 2013,
+      "make": "Cadillac",
+      "model": "Accord"
+    },
+    "callIntent": {
+      "topic": "Liability",
+      "text": "Customer recently involved in a reported accident. Likely inquiring about liability coverage and claim next steps."
+    }
+  },
+  {
+    "id": "NE-1",
+    "firstName": "Broderick",
+    "lastName": "Donnelly",
+    "initials": "BD",
+    "city": "Sheboygan",
+    "state": "NE",
+    "stateName": "Nebraska",
+    "phone": "(465) 766-2048",
+    "email": "broderick_donnelly99@hotmail.com",
+    "policyNumber": "PGR-GFYZGFN6",
+    "lob": "Personal Auto",
+    "policyTier": "Bronze",
+    "status": "Pending",
+    "vehicle": {
+      "year": 2016,
+      "make": "NIO",
+      "model": "Escalade"
+    },
+    "callIntent": {
+      "topic": "Glass Claim",
+      "text": "Recent windshield damage reported. Customer may be seeking glass repair/replacement guidance."
+    }
+  },
+  {
+    "id": "NE-2",
+    "firstName": "Opal",
+    "lastName": "Daniel",
+    "initials": "OD",
+    "city": "North Lisandro",
+    "state": "NE",
+    "stateName": "Nebraska",
+    "phone": "(727) 236-1826",
+    "email": "opal_daniel10@hotmail.com",
+    "policyNumber": "PGR-UGOZDGFX",
+    "lob": "Commercial Auto",
+    "policyTier": "Bronze",
+    "status": "Active",
+    "vehicle": {
+      "year": 2022,
+      "make": "Cadillac",
+      "model": "XC90"
+    },
+    "callIntent": {
+      "topic": "Rideshare Coverage",
+      "text": "TNC activity detected on policy. Customer may be asking about rideshare coverage gaps."
+    }
+  },
+  {
+    "id": "NE-3",
+    "firstName": "Eduardo",
+    "lastName": "Schultz",
+    "initials": "ES",
+    "city": "Fort Clarence",
+    "state": "NE",
+    "stateName": "Nebraska",
+    "phone": "(982) 201-5948",
+    "email": "eduardo_schultz73@hotmail.com",
+    "policyNumber": "PGR-MD4MXZTO",
+    "lob": "Homeowners",
+    "policyTier": "Gold",
+    "status": "Lapsed",
+    "vehicle": {
+      "year": 2019,
+      "make": "Tata",
+      "model": "Element"
+    },
+    "callIntent": {
+      "topic": "Liability",
+      "text": "Customer recently involved in a reported accident. Likely inquiring about liability coverage and claim next steps."
+    }
+  },
+  {
+    "id": "NE-4",
+    "firstName": "Heaven",
+    "lastName": "Armstrong",
+    "initials": "HA",
+    "city": "Lake Charlotte",
+    "state": "NE",
+    "stateName": "Nebraska",
+    "phone": "(988) 571-0054",
+    "email": "heaven.armstrong@hotmail.com",
+    "policyNumber": "PGR-RJEOADEC",
+    "lob": "Commercial Auto",
+    "policyTier": "Bronze",
+    "status": "Active",
+    "vehicle": {
+      "year": 2015,
+      "make": "Suzuki",
+      "model": "Model 3"
+    },
+    "callIntent": {
+      "topic": "Glass Claim",
+      "text": "Recent windshield damage reported. Customer may be seeking glass repair/replacement guidance."
+    }
+  },
+  {
+    "id": "NE-5",
+    "firstName": "Darla",
+    "lastName": "Ziemann",
+    "initials": "DZ",
+    "city": "Ivycester",
+    "state": "NE",
+    "stateName": "Nebraska",
+    "phone": "(641) 529-3956",
+    "email": "darla.ziemann37@hotmail.com",
+    "policyNumber": "PGR-CRMDAPVI",
+    "lob": "Homeowners",
+    "policyTier": "Gold",
+    "status": "Active",
+    "vehicle": {
+      "year": 2013,
+      "make": "Volvo",
+      "model": "Malibu"
+    },
+    "callIntent": {
+      "topic": "Hail/Storm Damage",
+      "text": "Severe weather event in customer's area. Likely calling about hail or storm damage claim."
+    }
+  },
+  {
+    "id": "NH-1",
+    "firstName": "Bartholome",
+    "lastName": "O'Conner",
+    "initials": "BO",
+    "city": "Trantowton",
+    "state": "NH",
+    "stateName": "New Hampshire",
+    "phone": "(429) 576-2224",
+    "email": "bartholome.oconner@gmail.com",
+    "policyNumber": "PGR-LK0GP99M",
+    "lob": "Personal Auto",
+    "policyTier": "Silver",
+    "status": "Active",
+    "vehicle": {
+      "year": 2020,
+      "make": "Honda",
+      "model": "Durango"
+    },
+    "callIntent": {
+      "topic": "Rideshare Coverage",
+      "text": "TNC activity detected on policy. Customer may be asking about rideshare coverage gaps."
+    }
+  },
+  {
+    "id": "NH-2",
+    "firstName": "Guadalupe",
+    "lastName": "Rutherford",
+    "initials": "GR",
+    "city": "Blaine",
+    "state": "NH",
+    "stateName": "New Hampshire",
+    "phone": "(987) 388-2901",
+    "email": "guadalupe_rutherford64@hotmail.com",
+    "policyNumber": "PGR-X280ZVFP",
+    "lob": "Homeowners",
+    "policyTier": "Platinum",
+    "status": "Active",
+    "vehicle": {
+      "year": 2017,
+      "make": "Maruti",
+      "model": "A8"
+    },
+    "callIntent": {
+      "topic": "Water Damage",
+      "text": "Recent heavy rainfall in customer's zip code. Likely inquiring about water or flood-related coverage."
+    }
+  },
+  {
+    "id": "NH-3",
+    "firstName": "Ramiro",
+    "lastName": "O'Conner",
+    "initials": "RO",
+    "city": "Leannon-Binsfurt",
+    "state": "NH",
+    "stateName": "New Hampshire",
+    "phone": "(488) 954-7155",
+    "email": "ramiro.oconner@gmail.com",
+    "policyNumber": "PGR-65GS7I6C",
+    "lob": "Personal Auto",
+    "policyTier": "Gold",
+    "status": "Lapsed",
+    "vehicle": {
+      "year": 2015,
+      "make": "Nissan",
+      "model": "Camry"
+    },
+    "callIntent": {
+      "topic": "Water Damage",
+      "text": "Recent heavy rainfall in customer's zip code. Likely inquiring about water or flood-related coverage."
+    }
+  },
+  {
+    "id": "NH-4",
+    "firstName": "Braeden",
+    "lastName": "Champlin",
+    "initials": "BC",
+    "city": "Lakinfield",
+    "state": "NH",
+    "stateName": "New Hampshire",
+    "phone": "(959) 638-4448",
+    "email": "braeden.champlin33@yahoo.com",
+    "policyNumber": "PGR-ZENUK6EW",
+    "lob": "Homeowners",
+    "policyTier": "Gold",
+    "status": "Active",
+    "vehicle": {
+      "year": 2017,
+      "make": "Honda",
+      "model": "911"
+    },
+    "callIntent": {
+      "topic": "Liability",
+      "text": "Customer recently involved in a reported accident. Likely inquiring about liability coverage and claim next steps."
+    }
+  },
+  {
+    "id": "NH-5",
+    "firstName": "Leah",
+    "lastName": "Wintheiser",
+    "initials": "LW",
+    "city": "South Nick",
+    "state": "NH",
+    "stateName": "New Hampshire",
+    "phone": "(247) 452-7081",
+    "email": "leah.wintheiser72@yahoo.com",
+    "policyNumber": "PGR-U7BU5CWY",
+    "lob": "Homeowners",
+    "policyTier": "Gold",
+    "status": "Pending",
+    "vehicle": {
+      "year": 2019,
+      "make": "Fiat",
+      "model": "Model T"
+    },
+    "callIntent": {
+      "topic": "Glass Claim",
+      "text": "Recent windshield damage reported. Customer may be seeking glass repair/replacement guidance."
+    }
+  },
+  {
+    "id": "NJ-1",
+    "firstName": "Devyn",
+    "lastName": "Bruen",
+    "initials": "DB",
+    "city": "San Jose",
+    "state": "NJ",
+    "stateName": "New Jersey",
+    "phone": "(631) 437-5001",
+    "email": "devyn_bruen@hotmail.com",
+    "policyNumber": "PGR-SM6SMAVU",
+    "lob": "Personal Auto",
+    "policyTier": "Silver",
+    "status": "Pending",
+    "vehicle": {
+      "year": 2019,
+      "make": "Mazda",
+      "model": "A4"
+    },
+    "callIntent": {
+      "topic": "Water Damage",
+      "text": "Recent heavy rainfall in customer's zip code. Likely inquiring about water or flood-related coverage."
+    }
+  },
+  {
+    "id": "NJ-2",
+    "firstName": "Amy",
+    "lastName": "Collins",
+    "initials": "AC",
+    "city": "East Kate",
+    "state": "NJ",
+    "stateName": "New Jersey",
+    "phone": "(590) 306-0855",
+    "email": "amy.collins19@hotmail.com",
+    "policyNumber": "PGR-AD7Y1NMI",
+    "lob": "Commercial Auto",
+    "policyTier": "Platinum",
+    "status": "Active",
+    "vehicle": {
+      "year": 2021,
+      "make": "Nissan",
+      "model": "Mustang"
+    },
+    "callIntent": {
+      "topic": "Liability",
+      "text": "Customer recently involved in a reported accident. Likely inquiring about liability coverage and claim next steps."
+    }
+  },
+  {
+    "id": "NJ-3",
+    "firstName": "Camryn",
+    "lastName": "Ebert",
+    "initials": "CE",
+    "city": "Aryannashire",
+    "state": "NJ",
+    "stateName": "New Jersey",
+    "phone": "(434) 241-4378",
+    "email": "camryn.ebert37@gmail.com",
+    "policyNumber": "PGR-NHBM6C7Z",
+    "lob": "Personal Auto",
+    "policyTier": "Bronze",
+    "status": "Active",
+    "vehicle": {
+      "year": 2019,
+      "make": "Tesla",
+      "model": "Grand Caravan"
+    },
+    "callIntent": {
+      "topic": "Rideshare Coverage",
+      "text": "TNC activity detected on policy. Customer may be asking about rideshare coverage gaps."
+    }
+  },
+  {
+    "id": "NJ-4",
+    "firstName": "Sadie",
+    "lastName": "Stroman",
+    "initials": "SS",
+    "city": "New Leaville",
+    "state": "NJ",
+    "stateName": "New Jersey",
+    "phone": "(870) 513-0456",
+    "email": "sadie_stroman21@hotmail.com",
+    "policyNumber": "PGR-Q9YQVY6I",
+    "lob": "Commercial Auto",
+    "policyTier": "Silver",
+    "status": "Active",
+    "vehicle": {
+      "year": 2024,
+      "make": "BYD",
+      "model": "Golf"
+    },
+    "callIntent": {
+      "topic": "Water Damage",
+      "text": "Recent heavy rainfall in customer's zip code. Likely inquiring about water or flood-related coverage."
+    }
+  },
+  {
+    "id": "NJ-5",
+    "firstName": "Deondre",
+    "lastName": "Dietrich",
+    "initials": "DD",
+    "city": "Markshaven",
+    "state": "NJ",
+    "stateName": "New Jersey",
+    "phone": "(594) 339-3883",
+    "email": "deondre_dietrich@gmail.com",
+    "policyNumber": "PGR-RUMNRNMW",
+    "lob": "Commercial Auto",
+    "policyTier": "Bronze",
+    "status": "Active",
+    "vehicle": {
+      "year": 2018,
+      "make": "Peugeot",
+      "model": "Charger"
+    },
+    "callIntent": {
+      "topic": "Roadside Assistance",
+      "text": "Vehicle breakdown flag on account. Customer may need roadside towing or lockout help."
+    }
+  },
+  {
+    "id": "NM-1",
+    "firstName": "Mikel",
+    "lastName": "Barrows",
+    "initials": "MB",
+    "city": "Cristinashire",
+    "state": "NM",
+    "stateName": "New Mexico",
+    "phone": "(540) 275-5271",
+    "email": "mikel.barrows28@gmail.com",
+    "policyNumber": "PGR-EEPP4GYA",
+    "lob": "Homeowners",
+    "policyTier": "Silver",
+    "status": "Active",
+    "vehicle": {
+      "year": 2018,
+      "make": "Audi",
+      "model": "Grand Cherokee"
+    },
+    "callIntent": {
+      "topic": "Roadside Assistance",
+      "text": "Vehicle breakdown flag on account. Customer may need roadside towing or lockout help."
+    }
+  },
+  {
+    "id": "NM-2",
+    "firstName": "Kallie",
+    "lastName": "Pacocha",
+    "initials": "KP",
+    "city": "South Fletcher",
+    "state": "NM",
+    "stateName": "New Mexico",
+    "phone": "(358) 739-9207",
+    "email": "kallie_pacocha@yahoo.com",
+    "policyNumber": "PGR-W1FSCYKH",
+    "lob": "Personal Auto",
+    "policyTier": "Silver",
+    "status": "Active",
+    "vehicle": {
+      "year": 2017,
+      "make": "Rivian",
+      "model": "Model S"
+    },
+    "callIntent": {
+      "topic": "Hail/Storm Damage",
+      "text": "Severe weather event in customer's area. Likely calling about hail or storm damage claim."
+    }
+  },
+  {
+    "id": "NM-3",
+    "firstName": "Jerome",
+    "lastName": "Stiedemann",
+    "initials": "JS",
+    "city": "Port Erwin",
+    "state": "NM",
+    "stateName": "New Mexico",
+    "phone": "(459) 238-3143",
+    "email": "jerome_stiedemann@yahoo.com",
+    "policyNumber": "PGR-S3GR9WLG",
+    "lob": "Commercial Auto",
+    "policyTier": "Silver",
+    "status": "Lapsed",
+    "vehicle": {
+      "year": 2024,
+      "make": "Tata",
+      "model": "Focus"
+    },
+    "callIntent": {
+      "topic": "Water Damage",
+      "text": "Recent heavy rainfall in customer's zip code. Likely inquiring about water or flood-related coverage."
+    }
+  },
+  {
+    "id": "NM-4",
+    "firstName": "Justin",
+    "lastName": "Lehner",
+    "initials": "JL",
+    "city": "Lindgrenworth",
+    "state": "NM",
+    "stateName": "New Mexico",
+    "phone": "(505) 894-3916",
+    "email": "justin.lehner34@hotmail.com",
+    "policyNumber": "PGR-GWGO3X4V",
+    "lob": "Personal Auto",
+    "policyTier": "Bronze",
+    "status": "Lapsed",
+    "vehicle": {
+      "year": 2022,
+      "make": "Nissan",
+      "model": "XC90"
+    },
+    "callIntent": {
+      "topic": "Liability",
+      "text": "Customer recently involved in a reported accident. Likely inquiring about liability coverage and claim next steps."
+    }
+  },
+  {
+    "id": "NM-5",
+    "firstName": "Jordyn",
+    "lastName": "Champlin",
+    "initials": "JC",
+    "city": "Kulasshire",
+    "state": "NM",
+    "stateName": "New Mexico",
+    "phone": "(547) 624-2913",
+    "email": "jordyn.champlin78@gmail.com",
+    "policyNumber": "PGR-4T05OLUQ",
+    "lob": "Homeowners",
+    "policyTier": "Silver",
+    "status": "Active",
+    "vehicle": {
+      "year": 2022,
+      "make": "Subaru",
+      "model": "PT Cruiser"
+    },
+    "callIntent": {
+      "topic": "Hail/Storm Damage",
+      "text": "Severe weather event in customer's area. Likely calling about hail or storm damage claim."
+    }
+  },
+  {
+    "id": "NV-1",
+    "firstName": "Ryan",
+    "lastName": "Crist-Fahey",
+    "initials": "RC",
+    "city": "North Rudolphbury",
+    "state": "NV",
+    "stateName": "Nevada",
+    "phone": "(859) 900-2684",
+    "email": "ryan.crist-fahey@hotmail.com",
+    "policyNumber": "PGR-GU5YV8RK",
+    "lob": "Personal Auto",
+    "policyTier": "Silver",
+    "status": "Active",
+    "vehicle": {
+      "year": 2012,
+      "make": "Rivian",
+      "model": "Model T"
+    },
+    "callIntent": {
+      "topic": "Rideshare Coverage",
+      "text": "TNC activity detected on policy. Customer may be asking about rideshare coverage gaps."
+    }
+  },
+  {
+    "id": "NV-2",
+    "firstName": "Olive",
+    "lastName": "Hane",
+    "initials": "OH",
+    "city": "West Geraldview",
+    "state": "NV",
+    "stateName": "Nevada",
+    "phone": "(600) 907-9235",
+    "email": "olive_hane73@yahoo.com",
+    "policyNumber": "PGR-FPT3BNSI",
+    "lob": "Personal Auto",
+    "policyTier": "Gold",
+    "status": "Pending",
+    "vehicle": {
+      "year": 2021,
+      "make": "Fiat",
+      "model": "Alpine"
+    },
+    "callIntent": {
+      "topic": "Roadside Assistance",
+      "text": "Vehicle breakdown flag on account. Customer may need roadside towing or lockout help."
+    }
+  },
+  {
+    "id": "NV-3",
+    "firstName": "Kirsten",
+    "lastName": "Hilll",
+    "initials": "KH",
+    "city": "East Elsehaven",
+    "state": "NV",
+    "stateName": "Nevada",
+    "phone": "(820) 271-3571",
+    "email": "kirsten.hilll@hotmail.com",
+    "policyNumber": "PGR-AOGYHP8F",
+    "lob": "Commercial Auto",
+    "policyTier": "Silver",
+    "status": "Lapsed",
+    "vehicle": {
+      "year": 2016,
+      "make": "Tesla",
+      "model": "Impala"
+    },
+    "callIntent": {
+      "topic": "Roadside Assistance",
+      "text": "Vehicle breakdown flag on account. Customer may need roadside towing or lockout help."
+    }
+  },
+  {
+    "id": "NV-4",
+    "firstName": "Olive",
+    "lastName": "Tremblay",
+    "initials": "OT",
+    "city": "Thornton",
+    "state": "NV",
+    "stateName": "Nevada",
+    "phone": "(780) 831-2423",
+    "email": "olive.tremblay57@gmail.com",
+    "policyNumber": "PGR-LKTKKK98",
+    "lob": "Personal Auto",
+    "policyTier": "Gold",
+    "status": "Pending",
+    "vehicle": {
+      "year": 2015,
+      "make": "BMW",
+      "model": "Alpine"
+    },
+    "callIntent": {
+      "topic": "Hail/Storm Damage",
+      "text": "Severe weather event in customer's area. Likely calling about hail or storm damage claim."
+    }
+  },
+  {
+    "id": "NV-5",
+    "firstName": "Demetrius",
+    "lastName": "O'Reilly",
+    "initials": "DO",
+    "city": "Lake Gladys",
+    "state": "NV",
+    "stateName": "Nevada",
+    "phone": "(607) 368-5763",
+    "email": "demetrius.oreilly@yahoo.com",
+    "policyNumber": "PGR-NISOVXFU",
+    "lob": "Personal Auto",
+    "policyTier": "Platinum",
+    "status": "Active",
+    "vehicle": {
+      "year": 2021,
+      "make": "Smart",
+      "model": "Sentra"
+    },
+    "callIntent": {
+      "topic": "Water Damage",
+      "text": "Recent heavy rainfall in customer's zip code. Likely inquiring about water or flood-related coverage."
+    }
+  },
+  {
+    "id": "NY-1",
+    "firstName": "Jessica",
+    "lastName": "Rutherford",
+    "initials": "JR",
+    "city": "Eugeneland",
+    "state": "NY",
+    "stateName": "New York",
+    "phone": "(984) 393-1590",
+    "email": "jessica_rutherford17@gmail.com",
+    "policyNumber": "PGR-ZRTZG4ZP",
+    "lob": "Personal Auto",
+    "policyTier": "Gold",
+    "status": "Active",
+    "vehicle": {
+      "year": 2015,
+      "make": "Bentley",
+      "model": "1"
+    },
+    "callIntent": {
+      "topic": "Rideshare Coverage",
+      "text": "TNC activity detected on policy. Customer may be asking about rideshare coverage gaps."
+    }
+  },
+  {
+    "id": "NY-2",
+    "firstName": "Keshaun",
+    "lastName": "Goyette",
+    "initials": "KG",
+    "city": "Port Daren",
+    "state": "NY",
+    "stateName": "New York",
+    "phone": "(931) 861-4274",
+    "email": "keshaun.goyette35@yahoo.com",
+    "policyNumber": "PGR-VJJSWNQY",
+    "lob": "Personal Auto",
+    "policyTier": "Bronze",
+    "status": "Active",
+    "vehicle": {
+      "year": 2017,
+      "make": "Honda",
+      "model": "F-150"
+    },
+    "callIntent": {
+      "topic": "Liability",
+      "text": "Customer recently involved in a reported accident. Likely inquiring about liability coverage and claim next steps."
+    }
+  },
+  {
+    "id": "NY-3",
+    "firstName": "Elyssa",
+    "lastName": "Beer",
+    "initials": "EB",
+    "city": "Mozellview",
+    "state": "NY",
+    "stateName": "New York",
+    "phone": "(437) 207-4129",
+    "email": "elyssa_beer@yahoo.com",
+    "policyNumber": "PGR-YXDOCDFP",
+    "lob": "Personal Auto",
+    "policyTier": "Bronze",
+    "status": "Active",
+    "vehicle": {
+      "year": 2018,
+      "make": "Toyota",
+      "model": "Taurus"
+    },
+    "callIntent": {
+      "topic": "Glass Claim",
+      "text": "Recent windshield damage reported. Customer may be seeking glass repair/replacement guidance."
+    }
+  },
+  {
+    "id": "NY-4",
+    "firstName": "Mable",
+    "lastName": "Volkman-Cummerata",
+    "initials": "MV",
+    "city": "College Station",
+    "state": "NY",
+    "stateName": "New York",
+    "phone": "(545) 229-9703",
+    "email": "mable.volkman-cummerata@hotmail.com",
+    "policyNumber": "PGR-4UX4XIOB",
+    "lob": "Personal Auto",
+    "policyTier": "Silver",
+    "status": "Pending",
+    "vehicle": {
+      "year": 2018,
+      "make": "BYD",
+      "model": "Land Cruiser"
+    },
+    "callIntent": {
+      "topic": "Liability",
+      "text": "Customer recently involved in a reported accident. Likely inquiring about liability coverage and claim next steps."
+    }
+  },
+  {
+    "id": "NY-5",
+    "firstName": "Hudson",
+    "lastName": "Runte",
+    "initials": "HR",
+    "city": "West Tracy",
+    "state": "NY",
+    "stateName": "New York",
+    "phone": "(331) 649-9348",
+    "email": "hudson.runte32@yahoo.com",
+    "policyNumber": "PGR-EC2DG3EN",
+    "lob": "Personal Auto",
+    "policyTier": "Bronze",
+    "status": "Active",
+    "vehicle": {
+      "year": 2017,
+      "make": "Volkswagen",
+      "model": "CX-9"
+    },
+    "callIntent": {
+      "topic": "Rideshare Coverage",
+      "text": "TNC activity detected on policy. Customer may be asking about rideshare coverage gaps."
+    }
+  },
+  {
+    "id": "OH-1",
+    "firstName": "Christine",
+    "lastName": "Morissette",
+    "initials": "CM",
+    "city": "East Alfonzoview",
+    "state": "OH",
+    "stateName": "Ohio",
+    "phone": "(766) 404-1943",
+    "email": "christine.morissette@yahoo.com",
+    "policyNumber": "PGR-RF2ZL8ES",
+    "lob": "Homeowners",
+    "policyTier": "Platinum",
+    "status": "Lapsed",
+    "vehicle": {
+      "year": 2018,
+      "make": "Land Rover",
+      "model": "1"
+    },
+    "callIntent": {
+      "topic": "Water Damage",
+      "text": "Recent heavy rainfall in customer's zip code. Likely inquiring about water or flood-related coverage."
+    }
+  },
+  {
+    "id": "OH-2",
+    "firstName": "Josh",
+    "lastName": "Will",
+    "initials": "JW",
+    "city": "Omaha",
+    "state": "OH",
+    "stateName": "Ohio",
+    "phone": "(418) 464-1604",
+    "email": "josh.will@hotmail.com",
+    "policyNumber": "PGR-L2CXVPQI",
+    "lob": "Homeowners",
+    "policyTier": "Gold",
+    "status": "Active",
+    "vehicle": {
+      "year": 2014,
+      "make": "Audi",
+      "model": "Volt"
+    },
+    "callIntent": {
+      "topic": "Hail/Storm Damage",
+      "text": "Severe weather event in customer's area. Likely calling about hail or storm damage claim."
+    }
+  },
+  {
+    "id": "OH-3",
+    "firstName": "Bernice",
+    "lastName": "Orn",
+    "initials": "BO",
+    "city": "Sipesfort",
+    "state": "OH",
+    "stateName": "Ohio",
+    "phone": "(435) 222-2821",
+    "email": "bernice_orn24@hotmail.com",
+    "policyNumber": "PGR-MKYOXNBU",
+    "lob": "Commercial Auto",
+    "policyTier": "Platinum",
+    "status": "Pending",
+    "vehicle": {
+      "year": 2016,
+      "make": "Chevrolet",
+      "model": "Model 3"
+    },
+    "callIntent": {
+      "topic": "Hail/Storm Damage",
+      "text": "Severe weather event in customer's area. Likely calling about hail or storm damage claim."
+    }
+  },
+  {
+    "id": "OH-4",
+    "firstName": "Kris",
+    "lastName": "Gleason",
+    "initials": "KG",
+    "city": "O'Connellville",
+    "state": "OH",
+    "stateName": "Ohio",
+    "phone": "(937) 224-8594",
+    "email": "kris.gleason80@hotmail.com",
+    "policyNumber": "PGR-TUWWFM8B",
+    "lob": "Homeowners",
+    "policyTier": "Platinum",
+    "status": "Active",
+    "vehicle": {
+      "year": 2014,
+      "make": "Chrysler",
+      "model": "Cruze"
+    },
+    "callIntent": {
+      "topic": "Roadside Assistance",
+      "text": "Vehicle breakdown flag on account. Customer may need roadside towing or lockout help."
+    }
+  },
+  {
+    "id": "OH-5",
+    "firstName": "Antonette",
+    "lastName": "Marvin",
+    "initials": "AM",
+    "city": "Kemmermouth",
+    "state": "OH",
+    "stateName": "Ohio",
+    "phone": "(706) 630-0961",
+    "email": "antonette_marvin83@hotmail.com",
+    "policyNumber": "PGR-ET0CXCG4",
+    "lob": "Homeowners",
+    "policyTier": "Platinum",
+    "status": "Active",
+    "vehicle": {
+      "year": 2023,
+      "make": "Lamborghini",
+      "model": "Model X"
+    },
+    "callIntent": {
+      "topic": "Roadside Assistance",
+      "text": "Vehicle breakdown flag on account. Customer may need roadside towing or lockout help."
+    }
+  },
+  {
+    "id": "OK-1",
+    "firstName": "Conrad",
+    "lastName": "Schneider",
+    "initials": "CS",
+    "city": "Jorgeside",
+    "state": "OK",
+    "stateName": "Oklahoma",
+    "phone": "(540) 439-2461",
+    "email": "conrad_schneider@hotmail.com",
+    "policyNumber": "PGR-F7W8MGVI",
+    "lob": "Personal Auto",
+    "policyTier": "Bronze",
+    "status": "Active",
+    "vehicle": {
+      "year": 2017,
+      "make": "NIO",
+      "model": "Mustang"
+    },
+    "callIntent": {
+      "topic": "Rideshare Coverage",
+      "text": "TNC activity detected on policy. Customer may be asking about rideshare coverage gaps."
+    }
+  },
+  {
+    "id": "OK-2",
+    "firstName": "Shyanne",
+    "lastName": "Leannon",
+    "initials": "SL",
+    "city": "Luthercester",
+    "state": "OK",
+    "stateName": "Oklahoma",
+    "phone": "(708) 522-4837",
+    "email": "shyanne.leannon@gmail.com",
+    "policyNumber": "PGR-DVEPMLEV",
+    "lob": "Homeowners",
+    "policyTier": "Silver",
+    "status": "Active",
+    "vehicle": {
+      "year": 2018,
+      "make": "Mitsubishi",
+      "model": "Grand Caravan"
+    },
+    "callIntent": {
+      "topic": "Glass Claim",
+      "text": "Recent windshield damage reported. Customer may be seeking glass repair/replacement guidance."
+    }
+  },
+  {
+    "id": "OK-3",
+    "firstName": "Cindy",
+    "lastName": "Cole",
+    "initials": "CC",
+    "city": "Guaynabo",
+    "state": "OK",
+    "stateName": "Oklahoma",
+    "phone": "(351) 912-4374",
+    "email": "cindy.cole50@gmail.com",
+    "policyNumber": "PGR-BZIWUWF8",
+    "lob": "Commercial Auto",
+    "policyTier": "Gold",
+    "status": "Pending",
+    "vehicle": {
+      "year": 2024,
+      "make": "Suzuki",
+      "model": "Accord"
+    },
+    "callIntent": {
+      "topic": "Water Damage",
+      "text": "Recent heavy rainfall in customer's zip code. Likely inquiring about water or flood-related coverage."
+    }
+  },
+  {
+    "id": "OK-4",
+    "firstName": "Adrian",
+    "lastName": "Little",
+    "initials": "AL",
+    "city": "Kerlukefield",
+    "state": "OK",
+    "stateName": "Oklahoma",
+    "phone": "(915) 406-8188",
+    "email": "adrian.little90@yahoo.com",
+    "policyNumber": "PGR-Y32IRFBF",
+    "lob": "Homeowners",
+    "policyTier": "Platinum",
+    "status": "Pending",
+    "vehicle": {
+      "year": 2013,
+      "make": "Citroën",
+      "model": "El Camino"
+    },
+    "callIntent": {
+      "topic": "Hail/Storm Damage",
+      "text": "Severe weather event in customer's area. Likely calling about hail or storm damage claim."
+    }
+  },
+  {
+    "id": "OK-5",
+    "firstName": "Faye",
+    "lastName": "Bailey",
+    "initials": "FB",
+    "city": "North Kenyatta",
+    "state": "OK",
+    "stateName": "Oklahoma",
+    "phone": "(216) 355-2987",
+    "email": "faye.bailey49@gmail.com",
+    "policyNumber": "PGR-Y9UMD8QH",
+    "lob": "Homeowners",
+    "policyTier": "Bronze",
+    "status": "Active",
+    "vehicle": {
+      "year": 2023,
+      "make": "Subaru",
+      "model": "Civic"
+    },
+    "callIntent": {
+      "topic": "Water Damage",
+      "text": "Recent heavy rainfall in customer's zip code. Likely inquiring about water or flood-related coverage."
+    }
+  },
+  {
+    "id": "OR-1",
+    "firstName": "Walter",
+    "lastName": "Hettinger",
+    "initials": "WH",
+    "city": "Lake Dejahstad",
+    "state": "OR",
+    "stateName": "Oregon",
+    "phone": "(570) 327-1528",
+    "email": "walter_hettinger35@yahoo.com",
+    "policyNumber": "PGR-3GEXWOHU",
+    "lob": "Personal Auto",
+    "policyTier": "Silver",
+    "status": "Active",
+    "vehicle": {
+      "year": 2017,
+      "make": "Mahindra & Mahindra",
+      "model": "Model T"
+    },
+    "callIntent": {
+      "topic": "Water Damage",
+      "text": "Recent heavy rainfall in customer's zip code. Likely inquiring about water or flood-related coverage."
+    }
+  },
+  {
+    "id": "OR-2",
+    "firstName": "Alvin",
+    "lastName": "Cummings",
+    "initials": "AC",
+    "city": "Colton",
+    "state": "OR",
+    "stateName": "Oregon",
+    "phone": "(974) 684-3451",
+    "email": "alvin_cummings63@yahoo.com",
+    "policyNumber": "PGR-B74WOA5Q",
+    "lob": "Commercial Auto",
+    "policyTier": "Platinum",
+    "status": "Pending",
+    "vehicle": {
+      "year": 2019,
+      "make": "Polestar",
+      "model": "Corvette"
+    },
+    "callIntent": {
+      "topic": "Water Damage",
+      "text": "Recent heavy rainfall in customer's zip code. Likely inquiring about water or flood-related coverage."
+    }
+  },
+  {
+    "id": "OR-3",
+    "firstName": "Edwina",
+    "lastName": "Bailey",
+    "initials": "EB",
+    "city": "North Mariela",
+    "state": "OR",
+    "stateName": "Oregon",
+    "phone": "(306) 643-2691",
+    "email": "edwina.bailey44@hotmail.com",
+    "policyNumber": "PGR-PUXIB5IC",
+    "lob": "Commercial Auto",
+    "policyTier": "Silver",
+    "status": "Active",
+    "vehicle": {
+      "year": 2017,
+      "make": "Mahindra & Mahindra",
+      "model": "Durango"
+    },
+    "callIntent": {
+      "topic": "Roadside Assistance",
+      "text": "Vehicle breakdown flag on account. Customer may need roadside towing or lockout help."
+    }
+  },
+  {
+    "id": "OR-4",
+    "firstName": "Martha",
+    "lastName": "Koelpin",
+    "initials": "MK",
+    "city": "Fort Elsieland",
+    "state": "OR",
+    "stateName": "Oregon",
+    "phone": "(701) 737-5261",
+    "email": "martha.koelpin@hotmail.com",
+    "policyNumber": "PGR-SZBPDFTM",
+    "lob": "Personal Auto",
+    "policyTier": "Bronze",
+    "status": "Active",
+    "vehicle": {
+      "year": 2016,
+      "make": "Kia",
+      "model": "Roadster"
+    },
+    "callIntent": {
+      "topic": "Glass Claim",
+      "text": "Recent windshield damage reported. Customer may be seeking glass repair/replacement guidance."
+    }
+  },
+  {
+    "id": "OR-5",
+    "firstName": "Estrella",
+    "lastName": "Strosin",
+    "initials": "ES",
+    "city": "Shaneport",
+    "state": "OR",
+    "stateName": "Oregon",
+    "phone": "(414) 546-4958",
+    "email": "estrella.strosin@gmail.com",
+    "policyNumber": "PGR-R44QDFXP",
+    "lob": "Homeowners",
+    "policyTier": "Platinum",
+    "status": "Active",
+    "vehicle": {
+      "year": 2019,
+      "make": "Vauxhall",
+      "model": "Element"
+    },
+    "callIntent": {
+      "topic": "Hail/Storm Damage",
+      "text": "Severe weather event in customer's area. Likely calling about hail or storm damage claim."
+    }
+  },
+  {
+    "id": "PA-1",
+    "firstName": "Torrey",
+    "lastName": "Bahringer-Bruen",
+    "initials": "TB",
+    "city": "East Fredrick",
+    "state": "PA",
+    "stateName": "Pennsylvania",
+    "phone": "(657) 465-5620",
+    "email": "torrey.bahringer-bruen@gmail.com",
+    "policyNumber": "PGR-HMLPOB3A",
+    "lob": "Homeowners",
+    "policyTier": "Bronze",
+    "status": "Active",
+    "vehicle": {
+      "year": 2012,
+      "make": "Rolls Royce",
+      "model": "Challenger"
+    },
+    "callIntent": {
+      "topic": "Rideshare Coverage",
+      "text": "TNC activity detected on policy. Customer may be asking about rideshare coverage gaps."
+    }
+  },
+  {
+    "id": "PA-2",
+    "firstName": "Tyson",
+    "lastName": "Kohler",
+    "initials": "TK",
+    "city": "New Montechester",
+    "state": "PA",
+    "stateName": "Pennsylvania",
+    "phone": "(275) 990-8035",
+    "email": "tyson_kohler0@gmail.com",
+    "policyNumber": "PGR-AIUHFO07",
+    "lob": "Homeowners",
+    "policyTier": "Silver",
+    "status": "Lapsed",
+    "vehicle": {
+      "year": 2017,
+      "make": "Renault",
+      "model": "Fortwo"
+    },
+    "callIntent": {
+      "topic": "Hail/Storm Damage",
+      "text": "Severe weather event in customer's area. Likely calling about hail or storm damage claim."
+    }
+  },
+  {
+    "id": "PA-3",
+    "firstName": "Sabrina",
+    "lastName": "Carroll",
+    "initials": "SC",
+    "city": "Fort Chadrickstead",
+    "state": "PA",
+    "stateName": "Pennsylvania",
+    "phone": "(936) 363-2319",
+    "email": "sabrina.carroll44@hotmail.com",
+    "policyNumber": "PGR-KYRRZ9GV",
+    "lob": "Commercial Auto",
+    "policyTier": "Silver",
+    "status": "Pending",
+    "vehicle": {
+      "year": 2017,
+      "make": "Tesla",
+      "model": "Murcielago"
+    },
+    "callIntent": {
+      "topic": "Glass Claim",
+      "text": "Recent windshield damage reported. Customer may be seeking glass repair/replacement guidance."
+    }
+  },
+  {
+    "id": "PA-4",
+    "firstName": "Era",
+    "lastName": "Baumbach",
+    "initials": "EB",
+    "city": "North Jessicaboro",
+    "state": "PA",
+    "stateName": "Pennsylvania",
+    "phone": "(365) 335-0108",
+    "email": "era_baumbach@yahoo.com",
+    "policyNumber": "PGR-TD2CMVMH",
+    "lob": "Personal Auto",
+    "policyTier": "Silver",
+    "status": "Lapsed",
+    "vehicle": {
+      "year": 2023,
+      "make": "Jaguar",
+      "model": "Mustang"
+    },
+    "callIntent": {
+      "topic": "Roadside Assistance",
+      "text": "Vehicle breakdown flag on account. Customer may need roadside towing or lockout help."
+    }
+  },
+  {
+    "id": "PA-5",
+    "firstName": "Justen",
+    "lastName": "Rohan",
+    "initials": "JR",
+    "city": "Fort Javonteland",
+    "state": "PA",
+    "stateName": "Pennsylvania",
+    "phone": "(873) 480-8259",
+    "email": "justen.rohan68@yahoo.com",
+    "policyNumber": "PGR-HZKDM31Y",
+    "lob": "Commercial Auto",
+    "policyTier": "Bronze",
+    "status": "Active",
+    "vehicle": {
+      "year": 2022,
+      "make": "Audi",
+      "model": "Durango"
+    },
+    "callIntent": {
+      "topic": "Liability",
+      "text": "Customer recently involved in a reported accident. Likely inquiring about liability coverage and claim next steps."
+    }
+  },
+  {
+    "id": "RI-1",
+    "firstName": "Barbara",
+    "lastName": "Walker",
+    "initials": "BW",
+    "city": "Peteside",
+    "state": "RI",
+    "stateName": "Rhode Island",
+    "phone": "(304) 955-1080",
+    "email": "barbara_walker@hotmail.com",
+    "policyNumber": "PGR-4BAJISBA",
+    "lob": "Homeowners",
+    "policyTier": "Silver",
+    "status": "Active",
+    "vehicle": {
+      "year": 2020,
+      "make": "Chevrolet",
+      "model": "Model S"
+    },
+    "callIntent": {
+      "topic": "Water Damage",
+      "text": "Recent heavy rainfall in customer's zip code. Likely inquiring about water or flood-related coverage."
+    }
+  },
+  {
+    "id": "RI-2",
+    "firstName": "Doreen",
+    "lastName": "Tillman",
+    "initials": "DT",
+    "city": "Ratkechester",
+    "state": "RI",
+    "stateName": "Rhode Island",
+    "phone": "(623) 275-7233",
+    "email": "doreen.tillman@gmail.com",
+    "policyNumber": "PGR-WS1S0WUL",
+    "lob": "Commercial Auto",
+    "policyTier": "Bronze",
+    "status": "Active",
+    "vehicle": {
+      "year": 2019,
+      "make": "Mazda",
+      "model": "Camaro"
+    },
+    "callIntent": {
+      "topic": "Glass Claim",
+      "text": "Recent windshield damage reported. Customer may be seeking glass repair/replacement guidance."
+    }
+  },
+  {
+    "id": "RI-3",
+    "firstName": "Minerva",
+    "lastName": "Cruickshank",
+    "initials": "MC",
+    "city": "North Brettland",
+    "state": "RI",
+    "stateName": "Rhode Island",
+    "phone": "(782) 220-1425",
+    "email": "minerva_cruickshank@gmail.com",
+    "policyNumber": "PGR-LNPJSRWK",
+    "lob": "Personal Auto",
+    "policyTier": "Silver",
+    "status": "Active",
+    "vehicle": {
+      "year": 2014,
+      "make": "Lamborghini",
+      "model": "CX-9"
+    },
+    "callIntent": {
+      "topic": "Glass Claim",
+      "text": "Recent windshield damage reported. Customer may be seeking glass repair/replacement guidance."
+    }
+  },
+  {
+    "id": "RI-4",
+    "firstName": "Irving",
+    "lastName": "Hoppe",
+    "initials": "IH",
+    "city": "Rosafurt",
+    "state": "RI",
+    "stateName": "Rhode Island",
+    "phone": "(841) 236-7244",
+    "email": "irving.hoppe13@hotmail.com",
+    "policyNumber": "PGR-3C0CJYCL",
+    "lob": "Commercial Auto",
+    "policyTier": "Gold",
+    "status": "Active",
+    "vehicle": {
+      "year": 2022,
+      "make": "Audi",
+      "model": "Volt"
+    },
+    "callIntent": {
+      "topic": "Roadside Assistance",
+      "text": "Vehicle breakdown flag on account. Customer may need roadside towing or lockout help."
+    }
+  },
+  {
+    "id": "RI-5",
+    "firstName": "Juan",
+    "lastName": "O'Conner",
+    "initials": "JO",
+    "city": "Ayanafield",
+    "state": "RI",
+    "stateName": "Rhode Island",
+    "phone": "(333) 515-8448",
+    "email": "juan.oconner@yahoo.com",
+    "policyNumber": "PGR-ZDGN2Z8N",
+    "lob": "Personal Auto",
+    "policyTier": "Gold",
+    "status": "Active",
+    "vehicle": {
+      "year": 2023,
+      "make": "Lamborghini",
+      "model": "Golf"
+    },
+    "callIntent": {
+      "topic": "Liability",
+      "text": "Customer recently involved in a reported accident. Likely inquiring about liability coverage and claim next steps."
+    }
+  },
+  {
+    "id": "SC-1",
+    "firstName": "Dora",
+    "lastName": "Bruen",
+    "initials": "DB",
+    "city": "Weimannburgh",
+    "state": "SC",
+    "stateName": "South Carolina",
+    "phone": "(887) 387-5321",
+    "email": "dora_bruen35@hotmail.com",
+    "policyNumber": "PGR-MDTAN8CJ",
+    "lob": "Homeowners",
+    "policyTier": "Bronze",
+    "status": "Active",
+    "vehicle": {
+      "year": 2024,
+      "make": "BMW",
+      "model": "Jetta"
+    },
+    "callIntent": {
+      "topic": "Roadside Assistance",
+      "text": "Vehicle breakdown flag on account. Customer may need roadside towing or lockout help."
+    }
+  },
+  {
+    "id": "SC-2",
+    "firstName": "Juston",
+    "lastName": "Corwin",
+    "initials": "JC",
+    "city": "East Alek",
+    "state": "SC",
+    "stateName": "South Carolina",
+    "phone": "(404) 996-1951",
+    "email": "juston_corwin@yahoo.com",
+    "policyNumber": "PGR-CDGDRMMS",
+    "lob": "Personal Auto",
+    "policyTier": "Bronze",
+    "status": "Pending",
+    "vehicle": {
+      "year": 2020,
+      "make": "Dodge",
+      "model": "Charger"
+    },
+    "callIntent": {
+      "topic": "Water Damage",
+      "text": "Recent heavy rainfall in customer's zip code. Likely inquiring about water or flood-related coverage."
+    }
+  },
+  {
+    "id": "SC-3",
+    "firstName": "Ellen",
+    "lastName": "Upton",
+    "initials": "EU",
+    "city": "Mantebury",
+    "state": "SC",
+    "stateName": "South Carolina",
+    "phone": "(826) 284-6267",
+    "email": "ellen_upton@hotmail.com",
+    "policyNumber": "PGR-UQNPEPPE",
+    "lob": "Personal Auto",
+    "policyTier": "Silver",
+    "status": "Pending",
+    "vehicle": {
+      "year": 2016,
+      "make": "Nissan",
+      "model": "Camry"
+    },
+    "callIntent": {
+      "topic": "Rideshare Coverage",
+      "text": "TNC activity detected on policy. Customer may be asking about rideshare coverage gaps."
+    }
+  },
+  {
+    "id": "SC-4",
+    "firstName": "Augustine",
+    "lastName": "Hegmann",
+    "initials": "AH",
+    "city": "North Boyd",
+    "state": "SC",
+    "stateName": "South Carolina",
+    "phone": "(708) 311-9683",
+    "email": "augustine.hegmann@hotmail.com",
+    "policyNumber": "PGR-DFWAX0TK",
+    "lob": "Commercial Auto",
+    "policyTier": "Gold",
+    "status": "Active",
+    "vehicle": {
+      "year": 2017,
+      "make": "Lamborghini",
+      "model": "Model X"
+    },
+    "callIntent": {
+      "topic": "Water Damage",
+      "text": "Recent heavy rainfall in customer's zip code. Likely inquiring about water or flood-related coverage."
+    }
+  },
+  {
+    "id": "SC-5",
+    "firstName": "Delpha",
+    "lastName": "Hills",
+    "initials": "DH",
+    "city": "East Madalynshire",
+    "state": "SC",
+    "stateName": "South Carolina",
+    "phone": "(708) 845-9590",
+    "email": "delpha.hills@gmail.com",
+    "policyNumber": "PGR-ZO2NBCUK",
+    "lob": "Homeowners",
+    "policyTier": "Bronze",
+    "status": "Active",
+    "vehicle": {
+      "year": 2015,
+      "make": "Volkswagen",
+      "model": "Malibu"
+    },
+    "callIntent": {
+      "topic": "Glass Claim",
+      "text": "Recent windshield damage reported. Customer may be seeking glass repair/replacement guidance."
+    }
+  },
+  {
+    "id": "SD-1",
+    "firstName": "Nancy",
+    "lastName": "Lehner",
+    "initials": "NL",
+    "city": "Lake Candaceshire",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "phone": "(827) 693-6039",
+    "email": "nancy.lehner@hotmail.com",
+    "policyNumber": "PGR-DNW1IVJF",
+    "lob": "Personal Auto",
+    "policyTier": "Silver",
+    "status": "Pending",
+    "vehicle": {
+      "year": 2013,
+      "make": "Vauxhall",
+      "model": "PT Cruiser"
+    },
+    "callIntent": {
+      "topic": "Roadside Assistance",
+      "text": "Vehicle breakdown flag on account. Customer may need roadside towing or lockout help."
+    }
+  },
+  {
+    "id": "SD-2",
+    "firstName": "Gerson",
+    "lastName": "Windler",
+    "initials": "GW",
+    "city": "Annachester",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "phone": "(518) 842-6227",
+    "email": "gerson.windler0@gmail.com",
+    "policyNumber": "PGR-4ZH9EWWM",
+    "lob": "Personal Auto",
+    "policyTier": "Bronze",
+    "status": "Active",
+    "vehicle": {
+      "year": 2016,
+      "make": "Citroën",
+      "model": "Durango"
+    },
+    "callIntent": {
+      "topic": "Hail/Storm Damage",
+      "text": "Severe weather event in customer's area. Likely calling about hail or storm damage claim."
+    }
+  },
+  {
+    "id": "SD-3",
+    "firstName": "Eino",
+    "lastName": "Dicki",
+    "initials": "ED",
+    "city": "Lake Annie",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "phone": "(411) 805-3553",
+    "email": "eino_dicki87@gmail.com",
+    "policyNumber": "PGR-6TLYM7AW",
+    "lob": "Homeowners",
+    "policyTier": "Platinum",
+    "status": "Active",
+    "vehicle": {
+      "year": 2022,
+      "make": "Mini",
+      "model": "ATS"
+    },
+    "callIntent": {
+      "topic": "Water Damage",
+      "text": "Recent heavy rainfall in customer's zip code. Likely inquiring about water or flood-related coverage."
+    }
+  },
+  {
+    "id": "SD-4",
+    "firstName": "Ottilie",
+    "lastName": "Quitzon",
+    "initials": "OQ",
+    "city": "Cristopherstead",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "phone": "(979) 906-4829",
+    "email": "ottilie_quitzon8@hotmail.com",
+    "policyNumber": "PGR-L1O0EMBH",
+    "lob": "Commercial Auto",
+    "policyTier": "Gold",
+    "status": "Active",
+    "vehicle": {
+      "year": 2012,
+      "make": "Mini",
+      "model": "Fortwo"
+    },
+    "callIntent": {
+      "topic": "Liability",
+      "text": "Customer recently involved in a reported accident. Likely inquiring about liability coverage and claim next steps."
+    }
+  },
+  {
+    "id": "SD-5",
+    "firstName": "Harry",
+    "lastName": "Harvey",
+    "initials": "HH",
+    "city": "New Alberto",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "phone": "(259) 701-7866",
+    "email": "harry_harvey78@gmail.com",
+    "policyNumber": "PGR-HD2CBKPV",
+    "lob": "Commercial Auto",
+    "policyTier": "Gold",
+    "status": "Active",
+    "vehicle": {
+      "year": 2012,
+      "make": "Mitsubishi",
+      "model": "El Camino"
+    },
+    "callIntent": {
+      "topic": "Water Damage",
+      "text": "Recent heavy rainfall in customer's zip code. Likely inquiring about water or flood-related coverage."
+    }
+  },
+  {
+    "id": "TN-1",
+    "firstName": "Myrtis",
+    "lastName": "Christiansen",
+    "initials": "MC",
+    "city": "Bradlyside",
+    "state": "TN",
+    "stateName": "Tennessee",
+    "phone": "(847) 684-7494",
+    "email": "myrtis_christiansen@hotmail.com",
+    "policyNumber": "PGR-BTYKO2TE",
+    "lob": "Commercial Auto",
+    "policyTier": "Bronze",
+    "status": "Active",
+    "vehicle": {
+      "year": 2023,
+      "make": "Mazda",
+      "model": "CTS"
+    },
+    "callIntent": {
+      "topic": "Glass Claim",
+      "text": "Recent windshield damage reported. Customer may be seeking glass repair/replacement guidance."
+    }
+  },
+  {
+    "id": "TN-2",
+    "firstName": "Kristine",
+    "lastName": "Schulist",
+    "initials": "KS",
+    "city": "Isidrofield",
+    "state": "TN",
+    "stateName": "Tennessee",
+    "phone": "(611) 537-5312",
+    "email": "kristine.schulist51@hotmail.com",
+    "policyNumber": "PGR-FQFUYKA5",
+    "lob": "Personal Auto",
+    "policyTier": "Silver",
+    "status": "Active",
+    "vehicle": {
+      "year": 2024,
+      "make": "Porsche",
+      "model": "PT Cruiser"
+    },
+    "callIntent": {
+      "topic": "Glass Claim",
+      "text": "Recent windshield damage reported. Customer may be seeking glass repair/replacement guidance."
+    }
+  },
+  {
+    "id": "TN-3",
+    "firstName": "Iva",
+    "lastName": "Kutch-Waters",
+    "initials": "IK",
+    "city": "Donnamouth",
+    "state": "TN",
+    "stateName": "Tennessee",
+    "phone": "(549) 441-0757",
+    "email": "iva_kutch-waters25@gmail.com",
+    "policyNumber": "PGR-08J7ZJ8C",
+    "lob": "Homeowners",
+    "policyTier": "Silver",
+    "status": "Active",
+    "vehicle": {
+      "year": 2023,
+      "make": "Volkswagen",
+      "model": "Camry"
+    },
+    "callIntent": {
+      "topic": "Roadside Assistance",
+      "text": "Vehicle breakdown flag on account. Customer may need roadside towing or lockout help."
+    }
+  },
+  {
+    "id": "TN-4",
+    "firstName": "Marguerite",
+    "lastName": "DuBuque",
+    "initials": "MD",
+    "city": "Lake Bernitafield",
+    "state": "TN",
+    "stateName": "Tennessee",
+    "phone": "(716) 591-6393",
+    "email": "marguerite_dubuque@yahoo.com",
+    "policyNumber": "PGR-ZFRWI0DH",
+    "lob": "Homeowners",
+    "policyTier": "Gold",
+    "status": "Active",
+    "vehicle": {
+      "year": 2023,
+      "make": "Porsche",
+      "model": "ATS"
+    },
+    "callIntent": {
+      "topic": "Hail/Storm Damage",
+      "text": "Severe weather event in customer's area. Likely calling about hail or storm damage claim."
+    }
+  },
+  {
+    "id": "TN-5",
+    "firstName": "Verdie",
+    "lastName": "Walter",
+    "initials": "VW",
+    "city": "Feeneyberg",
+    "state": "TN",
+    "stateName": "Tennessee",
+    "phone": "(814) 919-9513",
+    "email": "verdie.walter@hotmail.com",
+    "policyNumber": "PGR-9J0AUHBE",
+    "lob": "Commercial Auto",
+    "policyTier": "Silver",
+    "status": "Lapsed",
+    "vehicle": {
+      "year": 2016,
+      "make": "Ferrari",
+      "model": "Wrangler"
+    },
+    "callIntent": {
+      "topic": "Rideshare Coverage",
+      "text": "TNC activity detected on policy. Customer may be asking about rideshare coverage gaps."
+    }
+  },
+  {
+    "id": "TX-1",
+    "firstName": "Salvador",
+    "lastName": "Crona",
+    "initials": "SC",
+    "city": "South Lizethside",
+    "state": "TX",
+    "stateName": "Texas",
+    "phone": "(257) 631-8485",
+    "email": "salvador_crona65@yahoo.com",
+    "policyNumber": "PGR-VNNO5U5E",
+    "lob": "Homeowners",
+    "policyTier": "Gold",
+    "status": "Active",
+    "vehicle": {
+      "year": 2020,
+      "make": "BYD",
+      "model": "Impala"
+    },
+    "callIntent": {
+      "topic": "Roadside Assistance",
+      "text": "Vehicle breakdown flag on account. Customer may need roadside towing or lockout help."
+    }
+  },
+  {
+    "id": "TX-2",
+    "firstName": "Cassie",
+    "lastName": "Tillman",
+    "initials": "CT",
+    "city": "Titusville",
+    "state": "TX",
+    "stateName": "Texas",
+    "phone": "(523) 522-8061",
+    "email": "cassie.tillman@hotmail.com",
+    "policyNumber": "PGR-SDSTSLVF",
+    "lob": "Homeowners",
+    "policyTier": "Bronze",
+    "status": "Active",
+    "vehicle": {
+      "year": 2017,
+      "make": "Tesla",
+      "model": "Model Y"
+    },
+    "callIntent": {
+      "topic": "Roadside Assistance",
+      "text": "Vehicle breakdown flag on account. Customer may need roadside towing or lockout help."
+    }
+  },
+  {
+    "id": "TX-3",
+    "firstName": "Fernando",
+    "lastName": "Johnson",
+    "initials": "FJ",
+    "city": "South Delphafurt",
+    "state": "TX",
+    "stateName": "Texas",
+    "phone": "(949) 912-9900",
+    "email": "fernando_johnson@gmail.com",
+    "policyNumber": "PGR-Q1BHRHGF",
+    "lob": "Commercial Auto",
+    "policyTier": "Platinum",
+    "status": "Active",
+    "vehicle": {
+      "year": 2017,
+      "make": "Ford",
+      "model": "Prius"
+    },
+    "callIntent": {
+      "topic": "Water Damage",
+      "text": "Recent heavy rainfall in customer's zip code. Likely inquiring about water or flood-related coverage."
+    }
+  },
+  {
+    "id": "TX-4",
+    "firstName": "Lewis",
+    "lastName": "Kautzer",
+    "initials": "LK",
+    "city": "Bethanycester",
+    "state": "TX",
+    "stateName": "Texas",
+    "phone": "(314) 353-4521",
+    "email": "lewis.kautzer41@yahoo.com",
+    "policyNumber": "PGR-UYYHBFOW",
+    "lob": "Personal Auto",
+    "policyTier": "Platinum",
+    "status": "Active",
+    "vehicle": {
+      "year": 2014,
+      "make": "BMW",
+      "model": "Corvette"
+    },
+    "callIntent": {
+      "topic": "Glass Claim",
+      "text": "Recent windshield damage reported. Customer may be seeking glass repair/replacement guidance."
+    }
+  },
+  {
+    "id": "TX-5",
+    "firstName": "Kaden",
+    "lastName": "Schowalter",
+    "initials": "KS",
+    "city": "New Delores",
+    "state": "TX",
+    "stateName": "Texas",
+    "phone": "(346) 405-6954",
+    "email": "kaden_schowalter82@hotmail.com",
+    "policyNumber": "PGR-EGVKV4IN",
+    "lob": "Personal Auto",
+    "policyTier": "Gold",
+    "status": "Lapsed",
+    "vehicle": {
+      "year": 2017,
+      "make": "Tata",
+      "model": "Roadster"
+    },
+    "callIntent": {
+      "topic": "Roadside Assistance",
+      "text": "Vehicle breakdown flag on account. Customer may need roadside towing or lockout help."
+    }
+  },
+  {
+    "id": "UT-1",
+    "firstName": "Shania",
+    "lastName": "Romaguera",
+    "initials": "SR",
+    "city": "Raleigh",
+    "state": "UT",
+    "stateName": "Utah",
+    "phone": "(523) 417-2439",
+    "email": "shania.romaguera@hotmail.com",
+    "policyNumber": "PGR-BPQ3WV96",
+    "lob": "Personal Auto",
+    "policyTier": "Platinum",
+    "status": "Active",
+    "vehicle": {
+      "year": 2019,
+      "make": "Citroën",
+      "model": "Challenger"
+    },
+    "callIntent": {
+      "topic": "Hail/Storm Damage",
+      "text": "Severe weather event in customer's area. Likely calling about hail or storm damage claim."
+    }
+  },
+  {
+    "id": "UT-2",
+    "firstName": "Rowan",
+    "lastName": "Ebert",
+    "initials": "RE",
+    "city": "Cruickshankfield",
+    "state": "UT",
+    "stateName": "Utah",
+    "phone": "(813) 322-5491",
+    "email": "rowan.ebert77@yahoo.com",
+    "policyNumber": "PGR-8RJEZTUJ",
+    "lob": "Homeowners",
+    "policyTier": "Platinum",
+    "status": "Lapsed",
+    "vehicle": {
+      "year": 2023,
+      "make": "BMW",
+      "model": "Altima"
+    },
+    "callIntent": {
+      "topic": "Liability",
+      "text": "Customer recently involved in a reported accident. Likely inquiring about liability coverage and claim next steps."
+    }
+  },
+  {
+    "id": "UT-3",
+    "firstName": "Grady",
+    "lastName": "Cassin",
+    "initials": "GC",
+    "city": "South Rocio",
+    "state": "UT",
+    "stateName": "Utah",
+    "phone": "(570) 224-8367",
+    "email": "grady.cassin57@hotmail.com",
+    "policyNumber": "PGR-5Z74SIEK",
+    "lob": "Homeowners",
+    "policyTier": "Gold",
+    "status": "Active",
+    "vehicle": {
+      "year": 2016,
+      "make": "Lamborghini",
+      "model": "Model X"
+    },
+    "callIntent": {
+      "topic": "Rideshare Coverage",
+      "text": "TNC activity detected on policy. Customer may be asking about rideshare coverage gaps."
+    }
+  },
+  {
+    "id": "UT-4",
+    "firstName": "Alisa",
+    "lastName": "Waelchi",
+    "initials": "AW",
+    "city": "Denton",
+    "state": "UT",
+    "stateName": "Utah",
+    "phone": "(907) 964-0940",
+    "email": "alisa.waelchi12@yahoo.com",
+    "policyNumber": "PGR-3ZCVORC0",
+    "lob": "Personal Auto",
+    "policyTier": "Silver",
+    "status": "Active",
+    "vehicle": {
+      "year": 2019,
+      "make": "Nissan",
+      "model": "Cruze"
+    },
+    "callIntent": {
+      "topic": "Roadside Assistance",
+      "text": "Vehicle breakdown flag on account. Customer may need roadside towing or lockout help."
+    }
+  },
+  {
+    "id": "UT-5",
+    "firstName": "Max",
+    "lastName": "Bruen",
+    "initials": "MB",
+    "city": "East Allen",
+    "state": "UT",
+    "stateName": "Utah",
+    "phone": "(486) 763-0289",
+    "email": "max.bruen14@hotmail.com",
+    "policyNumber": "PGR-Z4WMUMKB",
+    "lob": "Personal Auto",
+    "policyTier": "Silver",
+    "status": "Lapsed",
+    "vehicle": {
+      "year": 2020,
+      "make": "Mercedes Benz",
+      "model": "XTS"
+    },
+    "callIntent": {
+      "topic": "Glass Claim",
+      "text": "Recent windshield damage reported. Customer may be seeking glass repair/replacement guidance."
+    }
+  },
+  {
+    "id": "VA-1",
+    "firstName": "Sasha",
+    "lastName": "Kub",
+    "initials": "SK",
+    "city": "Altonfurt",
+    "state": "VA",
+    "stateName": "Virginia",
+    "phone": "(815) 611-9321",
+    "email": "sasha_kub64@yahoo.com",
+    "policyNumber": "PGR-TOJSORVI",
+    "lob": "Homeowners",
+    "policyTier": "Bronze",
+    "status": "Lapsed",
+    "vehicle": {
+      "year": 2024,
+      "make": "Ferrari",
+      "model": "Grand Cherokee"
+    },
+    "callIntent": {
+      "topic": "Rideshare Coverage",
+      "text": "TNC activity detected on policy. Customer may be asking about rideshare coverage gaps."
+    }
+  },
+  {
+    "id": "VA-2",
+    "firstName": "Abigail",
+    "lastName": "Hand",
+    "initials": "AH",
+    "city": "Leannonport",
+    "state": "VA",
+    "stateName": "Virginia",
+    "phone": "(256) 675-0152",
+    "email": "abigail.hand55@gmail.com",
+    "policyNumber": "PGR-IDKKEDY0",
+    "lob": "Homeowners",
+    "policyTier": "Silver",
+    "status": "Active",
+    "vehicle": {
+      "year": 2024,
+      "make": "Smart",
+      "model": "Impala"
+    },
+    "callIntent": {
+      "topic": "Water Damage",
+      "text": "Recent heavy rainfall in customer's zip code. Likely inquiring about water or flood-related coverage."
+    }
+  },
+  {
+    "id": "VA-3",
+    "firstName": "Georgia",
+    "lastName": "Larkin",
+    "initials": "GL",
+    "city": "Fort Orlandoport",
+    "state": "VA",
+    "stateName": "Virginia",
+    "phone": "(733) 645-2300",
+    "email": "georgia.larkin@gmail.com",
+    "policyNumber": "PGR-2EGSUIWN",
+    "lob": "Personal Auto",
+    "policyTier": "Silver",
+    "status": "Active",
+    "vehicle": {
+      "year": 2024,
+      "make": "Land Rover",
+      "model": "Countach"
+    },
+    "callIntent": {
+      "topic": "Water Damage",
+      "text": "Recent heavy rainfall in customer's zip code. Likely inquiring about water or flood-related coverage."
+    }
+  },
+  {
+    "id": "VA-4",
+    "firstName": "Ruben",
+    "lastName": "Breitenberg",
+    "initials": "RB",
+    "city": "East Dereck",
+    "state": "VA",
+    "stateName": "Virginia",
+    "phone": "(503) 695-8503",
+    "email": "ruben_breitenberg85@hotmail.com",
+    "policyNumber": "PGR-DCVQMOVS",
+    "lob": "Commercial Auto",
+    "policyTier": "Gold",
+    "status": "Active",
+    "vehicle": {
+      "year": 2012,
+      "make": "Cadillac",
+      "model": "Spyder"
+    },
+    "callIntent": {
+      "topic": "Rideshare Coverage",
+      "text": "TNC activity detected on policy. Customer may be asking about rideshare coverage gaps."
+    }
+  },
+  {
+    "id": "VA-5",
+    "firstName": "Joey",
+    "lastName": "Sawayn",
+    "initials": "JS",
+    "city": "West Olive",
+    "state": "VA",
+    "stateName": "Virginia",
+    "phone": "(413) 926-4047",
+    "email": "joey_sawayn28@hotmail.com",
+    "policyNumber": "PGR-WNZNKI8I",
+    "lob": "Commercial Auto",
+    "policyTier": "Platinum",
+    "status": "Pending",
+    "vehicle": {
+      "year": 2014,
+      "make": "Porsche",
+      "model": "Volt"
+    },
+    "callIntent": {
+      "topic": "Rideshare Coverage",
+      "text": "TNC activity detected on policy. Customer may be asking about rideshare coverage gaps."
+    }
+  },
+  {
+    "id": "VT-1",
+    "firstName": "Israel",
+    "lastName": "Mitchell",
+    "initials": "IM",
+    "city": "Temple",
+    "state": "VT",
+    "stateName": "Vermont",
+    "phone": "(568) 594-6792",
+    "email": "israel_mitchell@yahoo.com",
+    "policyNumber": "PGR-YEKTCPCX",
+    "lob": "Commercial Auto",
+    "policyTier": "Silver",
+    "status": "Lapsed",
+    "vehicle": {
+      "year": 2017,
+      "make": "Jaguar",
+      "model": "Element"
+    },
+    "callIntent": {
+      "topic": "Water Damage",
+      "text": "Recent heavy rainfall in customer's zip code. Likely inquiring about water or flood-related coverage."
+    }
+  },
+  {
+    "id": "VT-2",
+    "firstName": "Lauren",
+    "lastName": "Kunze",
+    "initials": "LK",
+    "city": "New York",
+    "state": "VT",
+    "stateName": "Vermont",
+    "phone": "(749) 773-9881",
+    "email": "lauren.kunze@gmail.com",
+    "policyNumber": "PGR-14GCENY0",
+    "lob": "Personal Auto",
+    "policyTier": "Gold",
+    "status": "Active",
+    "vehicle": {
+      "year": 2013,
+      "make": "Peugeot",
+      "model": "Model T"
+    },
+    "callIntent": {
+      "topic": "Liability",
+      "text": "Customer recently involved in a reported accident. Likely inquiring about liability coverage and claim next steps."
+    }
+  },
+  {
+    "id": "VT-3",
+    "firstName": "Aaliyah",
+    "lastName": "Turner",
+    "initials": "AT",
+    "city": "South San Francisco",
+    "state": "VT",
+    "stateName": "Vermont",
+    "phone": "(279) 759-4549",
+    "email": "aaliyah_turner@gmail.com",
+    "policyNumber": "PGR-AUW3O1KX",
+    "lob": "Personal Auto",
+    "policyTier": "Bronze",
+    "status": "Pending",
+    "vehicle": {
+      "year": 2013,
+      "make": "Bentley",
+      "model": "Impala"
+    },
+    "callIntent": {
+      "topic": "Water Damage",
+      "text": "Recent heavy rainfall in customer's zip code. Likely inquiring about water or flood-related coverage."
+    }
+  },
+  {
+    "id": "VT-4",
+    "firstName": "Stuart",
+    "lastName": "Toy",
+    "initials": "ST",
+    "city": "Jacintocester",
+    "state": "VT",
+    "stateName": "Vermont",
+    "phone": "(401) 563-6674",
+    "email": "stuart.toy45@yahoo.com",
+    "policyNumber": "PGR-J2DFILKF",
+    "lob": "Homeowners",
+    "policyTier": "Platinum",
+    "status": "Lapsed",
+    "vehicle": {
+      "year": 2013,
+      "make": "MG",
+      "model": "Focus"
+    },
+    "callIntent": {
+      "topic": "Rideshare Coverage",
+      "text": "TNC activity detected on policy. Customer may be asking about rideshare coverage gaps."
+    }
+  },
+  {
+    "id": "VT-5",
+    "firstName": "Queen",
+    "lastName": "Goyette",
+    "initials": "QG",
+    "city": "New Oliver",
+    "state": "VT",
+    "stateName": "Vermont",
+    "phone": "(425) 204-9708",
+    "email": "queen_goyette82@yahoo.com",
+    "policyNumber": "PGR-DVYXZWTS",
+    "lob": "Personal Auto",
+    "policyTier": "Bronze",
+    "status": "Pending",
+    "vehicle": {
+      "year": 2013,
+      "make": "Fiat",
+      "model": "Fiesta"
+    },
+    "callIntent": {
+      "topic": "Glass Claim",
+      "text": "Recent windshield damage reported. Customer may be seeking glass repair/replacement guidance."
+    }
+  },
+  {
+    "id": "WA-1",
+    "firstName": "Pete",
+    "lastName": "Reynolds",
+    "initials": "PR",
+    "city": "West Karl",
+    "state": "WA",
+    "stateName": "Washington",
+    "phone": "(283) 772-8641",
+    "email": "pete_reynolds20@yahoo.com",
+    "policyNumber": "PGR-OHLRINDD",
+    "lob": "Personal Auto",
+    "policyTier": "Bronze",
+    "status": "Active",
+    "vehicle": {
+      "year": 2017,
+      "make": "Peugeot",
+      "model": "Golf"
+    },
+    "callIntent": {
+      "topic": "Hail/Storm Damage",
+      "text": "Severe weather event in customer's area. Likely calling about hail or storm damage claim."
+    }
+  },
+  {
+    "id": "WA-2",
+    "firstName": "Amina",
+    "lastName": "Stracke",
+    "initials": "AS",
+    "city": "West Benjaminfield",
+    "state": "WA",
+    "stateName": "Washington",
+    "phone": "(818) 758-4125",
+    "email": "amina_stracke@hotmail.com",
+    "policyNumber": "PGR-MB3S4FHP",
+    "lob": "Homeowners",
+    "policyTier": "Bronze",
+    "status": "Active",
+    "vehicle": {
+      "year": 2012,
+      "make": "Honda",
+      "model": "Grand Cherokee"
+    },
+    "callIntent": {
+      "topic": "Water Damage",
+      "text": "Recent heavy rainfall in customer's zip code. Likely inquiring about water or flood-related coverage."
+    }
+  },
+  {
+    "id": "WA-3",
+    "firstName": "Sherry",
+    "lastName": "Koepp",
+    "initials": "SK",
+    "city": "Dearborn Heights",
+    "state": "WA",
+    "stateName": "Washington",
+    "phone": "(730) 244-0625",
+    "email": "sherry.koepp40@gmail.com",
+    "policyNumber": "PGR-XCV9FK6T",
+    "lob": "Homeowners",
+    "policyTier": "Platinum",
+    "status": "Active",
+    "vehicle": {
+      "year": 2015,
+      "make": "Maserati",
+      "model": "Fortwo"
+    },
+    "callIntent": {
+      "topic": "Water Damage",
+      "text": "Recent heavy rainfall in customer's zip code. Likely inquiring about water or flood-related coverage."
+    }
+  },
+  {
+    "id": "WA-4",
+    "firstName": "Lance",
+    "lastName": "Sanford",
+    "initials": "LS",
+    "city": "Cicerocester",
+    "state": "WA",
+    "stateName": "Washington",
+    "phone": "(422) 720-7112",
+    "email": "lance.sanford@hotmail.com",
+    "policyNumber": "PGR-IKJRC9BR",
+    "lob": "Personal Auto",
+    "policyTier": "Gold",
+    "status": "Active",
+    "vehicle": {
+      "year": 2023,
+      "make": "Peugeot",
+      "model": "Countach"
+    },
+    "callIntent": {
+      "topic": "Water Damage",
+      "text": "Recent heavy rainfall in customer's zip code. Likely inquiring about water or flood-related coverage."
+    }
+  },
+  {
+    "id": "WA-5",
+    "firstName": "Pablo",
+    "lastName": "Wilkinson",
+    "initials": "PW",
+    "city": "Melodyside",
+    "state": "WA",
+    "stateName": "Washington",
+    "phone": "(398) 982-1126",
+    "email": "pablo_wilkinson62@yahoo.com",
+    "policyNumber": "PGR-B6MV2LBE",
+    "lob": "Commercial Auto",
+    "policyTier": "Gold",
+    "status": "Active",
+    "vehicle": {
+      "year": 2017,
+      "make": "Vauxhall",
+      "model": "CX-9"
+    },
+    "callIntent": {
+      "topic": "Water Damage",
+      "text": "Recent heavy rainfall in customer's zip code. Likely inquiring about water or flood-related coverage."
+    }
+  },
+  {
+    "id": "WI-1",
+    "firstName": "Kayden",
+    "lastName": "Kohler",
+    "initials": "KK",
+    "city": "East Barry",
+    "state": "WI",
+    "stateName": "Wisconsin",
+    "phone": "(761) 575-3369",
+    "email": "kayden.kohler@yahoo.com",
+    "policyNumber": "PGR-5ZW4VMQP",
+    "lob": "Personal Auto",
+    "policyTier": "Gold",
+    "status": "Lapsed",
+    "vehicle": {
+      "year": 2022,
+      "make": "Audi",
+      "model": "Impala"
+    },
+    "callIntent": {
+      "topic": "Roadside Assistance",
+      "text": "Vehicle breakdown flag on account. Customer may need roadside towing or lockout help."
+    }
+  },
+  {
+    "id": "WI-2",
+    "firstName": "Gina",
+    "lastName": "Breitenberg",
+    "initials": "GB",
+    "city": "Troycester",
+    "state": "WI",
+    "stateName": "Wisconsin",
+    "phone": "(768) 256-5806",
+    "email": "gina.breitenberg@hotmail.com",
+    "policyNumber": "PGR-TUPO633N",
+    "lob": "Personal Auto",
+    "policyTier": "Gold",
+    "status": "Lapsed",
+    "vehicle": {
+      "year": 2021,
+      "make": "BMW",
+      "model": "Camaro"
+    },
+    "callIntent": {
+      "topic": "Liability",
+      "text": "Customer recently involved in a reported accident. Likely inquiring about liability coverage and claim next steps."
+    }
+  },
+  {
+    "id": "WI-3",
+    "firstName": "Carrie",
+    "lastName": "Schneider",
+    "initials": "CS",
+    "city": "Port Paul",
+    "state": "WI",
+    "stateName": "Wisconsin",
+    "phone": "(523) 532-3071",
+    "email": "carrie_schneider@gmail.com",
+    "policyNumber": "PGR-UCJHFU6Y",
+    "lob": "Personal Auto",
+    "policyTier": "Bronze",
+    "status": "Lapsed",
+    "vehicle": {
+      "year": 2024,
+      "make": "Porsche",
+      "model": "CTS"
+    },
+    "callIntent": {
+      "topic": "Hail/Storm Damage",
+      "text": "Severe weather event in customer's area. Likely calling about hail or storm damage claim."
+    }
+  },
+  {
+    "id": "WI-4",
+    "firstName": "Ida",
+    "lastName": "Harris",
+    "initials": "IH",
+    "city": "South Aylachester",
+    "state": "WI",
+    "stateName": "Wisconsin",
+    "phone": "(419) 240-4531",
+    "email": "ida_harris@hotmail.com",
+    "policyNumber": "PGR-ACHAFDWY",
+    "lob": "Homeowners",
+    "policyTier": "Bronze",
+    "status": "Active",
+    "vehicle": {
+      "year": 2020,
+      "make": "Smart",
+      "model": "Grand Caravan"
+    },
+    "callIntent": {
+      "topic": "Water Damage",
+      "text": "Recent heavy rainfall in customer's zip code. Likely inquiring about water or flood-related coverage."
+    }
+  },
+  {
+    "id": "WI-5",
+    "firstName": "Angela",
+    "lastName": "Beahan",
+    "initials": "AB",
+    "city": "Howellville",
+    "state": "WI",
+    "stateName": "Wisconsin",
+    "phone": "(559) 253-5038",
+    "email": "angela.beahan28@hotmail.com",
+    "policyNumber": "PGR-NPXROQQY",
+    "lob": "Personal Auto",
+    "policyTier": "Platinum",
+    "status": "Lapsed",
+    "vehicle": {
+      "year": 2018,
+      "make": "Smart",
+      "model": "Mustang"
+    },
+    "callIntent": {
+      "topic": "Rideshare Coverage",
+      "text": "TNC activity detected on policy. Customer may be asking about rideshare coverage gaps."
+    }
+  },
+  {
+    "id": "WV-1",
+    "firstName": "Payton",
+    "lastName": "Abernathy",
+    "initials": "PA",
+    "city": "Deronburgh",
+    "state": "WV",
+    "stateName": "West Virginia",
+    "phone": "(542) 417-7477",
+    "email": "payton_abernathy82@gmail.com",
+    "policyNumber": "PGR-B78KTMKB",
+    "lob": "Homeowners",
+    "policyTier": "Silver",
+    "status": "Active",
+    "vehicle": {
+      "year": 2016,
+      "make": "NIO",
+      "model": "1"
+    },
+    "callIntent": {
+      "topic": "Hail/Storm Damage",
+      "text": "Severe weather event in customer's area. Likely calling about hail or storm damage claim."
+    }
+  },
+  {
+    "id": "WV-2",
+    "firstName": "Mariane",
+    "lastName": "Schiller",
+    "initials": "MS",
+    "city": "Gastonia",
+    "state": "WV",
+    "stateName": "West Virginia",
+    "phone": "(247) 322-9159",
+    "email": "mariane_schiller@gmail.com",
+    "policyNumber": "PGR-DDLZBLLA",
+    "lob": "Personal Auto",
+    "policyTier": "Gold",
+    "status": "Lapsed",
+    "vehicle": {
+      "year": 2018,
+      "make": "Mazda",
+      "model": "XTS"
+    },
+    "callIntent": {
+      "topic": "Liability",
+      "text": "Customer recently involved in a reported accident. Likely inquiring about liability coverage and claim next steps."
+    }
+  },
+  {
+    "id": "WV-3",
+    "firstName": "Frederik",
+    "lastName": "Wehner",
+    "initials": "FW",
+    "city": "East Dextermouth",
+    "state": "WV",
+    "stateName": "West Virginia",
+    "phone": "(225) 696-4972",
+    "email": "frederik_wehner@gmail.com",
+    "policyNumber": "PGR-JCZX7PFM",
+    "lob": "Homeowners",
+    "policyTier": "Bronze",
+    "status": "Lapsed",
+    "vehicle": {
+      "year": 2019,
+      "make": "MG",
+      "model": "Cruze"
+    },
+    "callIntent": {
+      "topic": "Rideshare Coverage",
+      "text": "TNC activity detected on policy. Customer may be asking about rideshare coverage gaps."
+    }
+  },
+  {
+    "id": "WV-4",
+    "firstName": "Nat",
+    "lastName": "Kunde",
+    "initials": "NK",
+    "city": "Hankside",
+    "state": "WV",
+    "stateName": "West Virginia",
+    "phone": "(391) 282-7889",
+    "email": "nat_kunde11@gmail.com",
+    "policyNumber": "PGR-QMAVEY3Z",
+    "lob": "Commercial Auto",
+    "policyTier": "Bronze",
+    "status": "Active",
+    "vehicle": {
+      "year": 2013,
+      "make": "Mercedes Benz",
+      "model": "Corvette"
+    },
+    "callIntent": {
+      "topic": "Hail/Storm Damage",
+      "text": "Severe weather event in customer's area. Likely calling about hail or storm damage claim."
+    }
+  },
+  {
+    "id": "WV-5",
+    "firstName": "Jovanny",
+    "lastName": "Pouros",
+    "initials": "JP",
+    "city": "Fort Kimberlyboro",
+    "state": "WV",
+    "stateName": "West Virginia",
+    "phone": "(350) 237-5453",
+    "email": "jovanny.pouros@yahoo.com",
+    "policyNumber": "PGR-NBII5OIJ",
+    "lob": "Personal Auto",
+    "policyTier": "Platinum",
+    "status": "Lapsed",
+    "vehicle": {
+      "year": 2020,
+      "make": "Subaru",
+      "model": "911"
+    },
+    "callIntent": {
+      "topic": "Hail/Storm Damage",
+      "text": "Severe weather event in customer's area. Likely calling about hail or storm damage claim."
+    }
+  },
+  {
+    "id": "WY-1",
+    "firstName": "Catherine",
+    "lastName": "Huel",
+    "initials": "CH",
+    "city": "North Audrastead",
+    "state": "WY",
+    "stateName": "Wyoming",
+    "phone": "(591) 304-2866",
+    "email": "catherine.huel@hotmail.com",
+    "policyNumber": "PGR-PTP6E0I6",
+    "lob": "Commercial Auto",
+    "policyTier": "Gold",
+    "status": "Lapsed",
+    "vehicle": {
+      "year": 2023,
+      "make": "Rivian",
+      "model": "Volt"
+    },
+    "callIntent": {
+      "topic": "Liability",
+      "text": "Customer recently involved in a reported accident. Likely inquiring about liability coverage and claim next steps."
+    }
+  },
+  {
+    "id": "WY-2",
+    "firstName": "Marta",
+    "lastName": "Harris",
+    "initials": "MH",
+    "city": "Gilesburgh",
+    "state": "WY",
+    "stateName": "Wyoming",
+    "phone": "(337) 862-5545",
+    "email": "marta_harris71@hotmail.com",
+    "policyNumber": "PGR-K84YX3RB",
+    "lob": "Personal Auto",
+    "policyTier": "Gold",
+    "status": "Pending",
+    "vehicle": {
+      "year": 2024,
+      "make": "NIO",
+      "model": "Cruze"
+    },
+    "callIntent": {
+      "topic": "Roadside Assistance",
+      "text": "Vehicle breakdown flag on account. Customer may need roadside towing or lockout help."
+    }
+  },
+  {
+    "id": "WY-3",
+    "firstName": "Terrance",
+    "lastName": "Hane",
+    "initials": "TH",
+    "city": "Kentwood",
+    "state": "WY",
+    "stateName": "Wyoming",
+    "phone": "(448) 288-9323",
+    "email": "terrance.hane60@gmail.com",
+    "policyNumber": "PGR-R1DLLSJV",
+    "lob": "Personal Auto",
+    "policyTier": "Gold",
+    "status": "Active",
+    "vehicle": {
+      "year": 2012,
+      "make": "Aston Martin",
+      "model": "Camry"
+    },
+    "callIntent": {
+      "topic": "Liability",
+      "text": "Customer recently involved in a reported accident. Likely inquiring about liability coverage and claim next steps."
+    }
+  },
+  {
+    "id": "WY-4",
+    "firstName": "Cindy",
+    "lastName": "Adams",
+    "initials": "CA",
+    "city": "The Hammocks",
+    "state": "WY",
+    "stateName": "Wyoming",
+    "phone": "(760) 988-6382",
+    "email": "cindy.adams92@hotmail.com",
+    "policyNumber": "PGR-DYLCE0KZ",
+    "lob": "Commercial Auto",
+    "policyTier": "Bronze",
+    "status": "Active",
+    "vehicle": {
+      "year": 2023,
+      "make": "Lamborghini",
+      "model": "Fortwo"
+    },
+    "callIntent": {
+      "topic": "Liability",
+      "text": "Customer recently involved in a reported accident. Likely inquiring about liability coverage and claim next steps."
+    }
+  },
+  {
+    "id": "WY-5",
+    "firstName": "Patti",
+    "lastName": "Gerlach",
+    "initials": "PG",
+    "city": "East Nathanael",
+    "state": "WY",
+    "stateName": "Wyoming",
+    "phone": "(689) 863-9224",
+    "email": "patti_gerlach@gmail.com",
+    "policyNumber": "PGR-EU1BIPKE",
+    "lob": "Personal Auto",
+    "policyTier": "Platinum",
+    "status": "Active",
+    "vehicle": {
+      "year": 2016,
+      "make": "Subaru",
+      "model": "Ranchero"
+    },
+    "callIntent": {
+      "topic": "Roadside Assistance",
+      "text": "Vehicle breakdown flag on account. Customer may need roadside towing or lockout help."
+    }
+  }
+]

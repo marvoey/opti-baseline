@@ -1,0 +1,284 @@
+[
+  {
+    "id": "q-ho-hail-01",
+    "question": "Does my homeowners policy cover hail damage to my roof?",
+    "lob": "Homeowners",
+    "topic": "Hail/Storm Damage"
+  },
+  {
+    "id": "q-ho-hail-02",
+    "question": "A hailstorm knocked out several windows in my house — is that covered?",
+    "lob": "Homeowners",
+    "topic": "Hail/Storm Damage"
+  },
+  {
+    "id": "q-ho-hail-03",
+    "question": "The storm last night tore off part of my siding. Will Progressive pay for repairs?",
+    "lob": "Homeowners",
+    "topic": "Hail/Storm Damage"
+  },
+  {
+    "id": "q-ho-hail-04",
+    "question": "A neighbor's tree fell on my fence during a windstorm. Who pays for that?",
+    "lob": "Homeowners",
+    "topic": "Hail/Storm Damage"
+  },
+  {
+    "id": "q-ho-hail-05",
+    "question": "My gutters are destroyed after the last hail event. Is that covered under my home policy?",
+    "lob": "Homeowners",
+    "topic": "Hail/Storm Damage"
+  },
+  {
+    "id": "q-ho-water-01",
+    "question": "A pipe burst in my basement and flooded the floor. Is that covered?",
+    "lob": "Homeowners",
+    "topic": "Water Damage"
+  },
+  {
+    "id": "q-ho-water-02",
+    "question": "My washing machine leaked and ruined the hardwood floors. Will my homeowners policy cover the repairs?",
+    "lob": "Homeowners",
+    "topic": "Water Damage"
+  },
+  {
+    "id": "q-ho-water-03",
+    "question": "There's a slow leak under my kitchen sink that's been there for months — is mold damage covered?",
+    "lob": "Homeowners",
+    "topic": "Water Damage"
+  },
+  {
+    "id": "q-ho-water-04",
+    "question": "My water heater failed and soaked the garage. How do I file a water damage claim?",
+    "lob": "Homeowners",
+    "topic": "Water Damage"
+  },
+  {
+    "id": "q-ho-water-05",
+    "question": "Does homeowners insurance cover flooding from a nearby river?",
+    "lob": "Homeowners",
+    "topic": "Water Damage"
+  },
+  {
+    "id": "q-ho-liab-01",
+    "question": "A delivery driver slipped on my icy porch and is threatening to sue me. Am I covered?",
+    "lob": "Homeowners",
+    "topic": "Liability"
+  },
+  {
+    "id": "q-ho-liab-02",
+    "question": "My dog bit a neighbor's child. Does my homeowners policy cover the medical bills?",
+    "lob": "Homeowners",
+    "topic": "Liability"
+  },
+  {
+    "id": "q-ho-liab-03",
+    "question": "Someone fell down my stairs at a party and is asking for compensation. What does my policy cover?",
+    "lob": "Homeowners",
+    "topic": "Liability"
+  },
+  {
+    "id": "q-ho-liab-04",
+    "question": "My kid accidentally broke a neighbor's car window with a baseball. Is that covered under liability?",
+    "lob": "Homeowners",
+    "topic": "Liability"
+  },
+  {
+    "id": "q-pa-hail-01",
+    "question": "My car was dented by hail in the parking lot. Am I covered?",
+    "lob": "Personal Auto",
+    "topic": "Hail/Storm Damage"
+  },
+  {
+    "id": "q-pa-hail-02",
+    "question": "A hailstorm cracked my windshield and dented the hood. Will comprehensive cover this?",
+    "lob": "Personal Auto",
+    "topic": "Hail/Storm Damage"
+  },
+  {
+    "id": "q-pa-hail-03",
+    "question": "My car was in my driveway during a storm and the roof is damaged. Does my auto policy cover that?",
+    "lob": "Personal Auto",
+    "topic": "Hail/Storm Damage"
+  },
+  {
+    "id": "q-pa-hail-04",
+    "question": "Does personal auto insurance cover storm damage even if the car wasn't being driven?",
+    "lob": "Personal Auto",
+    "topic": "Hail/Storm Damage"
+  },
+  {
+    "id": "q-pa-glass-01",
+    "question": "A rock hit my windshield on the highway and it's cracked. How do I file a glass claim?",
+    "lob": "Personal Auto",
+    "topic": "Glass Claim"
+  },
+  {
+    "id": "q-pa-glass-02",
+    "question": "Can I get my windshield repaired without paying a deductible?",
+    "lob": "Personal Auto",
+    "topic": "Glass Claim"
+  },
+  {
+    "id": "q-pa-glass-03",
+    "question": "My rear window was smashed in a break-in. Is that a glass claim or a comprehensive claim?",
+    "lob": "Personal Auto",
+    "topic": "Glass Claim"
+  },
+  {
+    "id": "q-pa-glass-04",
+    "question": "Do I need to go to a specific shop for a windshield replacement under my policy?",
+    "lob": "Personal Auto",
+    "topic": "Glass Claim"
+  },
+  {
+    "id": "q-pa-glass-05",
+    "question": "My side mirror glass cracked — is that covered as a glass claim?",
+    "lob": "Personal Auto",
+    "topic": "Glass Claim"
+  },
+  {
+    "id": "q-pa-road-01",
+    "question": "My car broke down on the interstate. Does my policy include roadside assistance?",
+    "lob": "Personal Auto",
+    "topic": "Roadside Assistance"
+  },
+  {
+    "id": "q-pa-road-02",
+    "question": "I locked my keys in my car. Can Progressive send someone to help?",
+    "lob": "Personal Auto",
+    "topic": "Roadside Assistance"
+  },
+  {
+    "id": "q-pa-road-03",
+    "question": "My tire went flat on the way to work. Is a tow truck covered?",
+    "lob": "Personal Auto",
+    "topic": "Roadside Assistance"
+  },
+  {
+    "id": "q-pa-road-04",
+    "question": "My battery died in a parking garage. Does roadside assistance cover a jump start?",
+    "lob": "Personal Auto",
+    "topic": "Roadside Assistance"
+  },
+  {
+    "id": "q-pa-road-05",
+    "question": "I ran out of gas on the highway. Will Progressive reimburse a fuel delivery?",
+    "lob": "Personal Auto",
+    "topic": "Roadside Assistance"
+  },
+  {
+    "id": "q-pa-ride-01",
+    "question": "I drive for Uber on weekends. Am I covered while I have a passenger in my car?",
+    "lob": "Personal Auto",
+    "topic": "Rideshare Coverage"
+  },
+  {
+    "id": "q-pa-ride-02",
+    "question": "I was in an accident while waiting for a Lyft ride request. Will my personal auto policy cover me?",
+    "lob": "Personal Auto",
+    "topic": "Rideshare Coverage"
+  },
+  {
+    "id": "q-pa-ride-03",
+    "question": "What gap does Progressive's rideshare endorsement fill that Uber's insurance doesn't?",
+    "lob": "Personal Auto",
+    "topic": "Rideshare Coverage"
+  },
+  {
+    "id": "q-pa-ride-04",
+    "question": "Does my policy cover me between rideshare trips when the app is on but I have no passenger?",
+    "lob": "Personal Auto",
+    "topic": "Rideshare Coverage"
+  },
+  {
+    "id": "q-pa-liab-01",
+    "question": "I rear-ended another car at a red light. What does my auto liability cover?",
+    "lob": "Personal Auto",
+    "topic": "Liability"
+  },
+  {
+    "id": "q-pa-liab-02",
+    "question": "The other driver is claiming injuries after an accident I caused. How does bodily injury liability work?",
+    "lob": "Personal Auto",
+    "topic": "Liability"
+  },
+  {
+    "id": "q-pa-liab-03",
+    "question": "I hit a parked car in a lot and left a note. What property damage liability pays for?",
+    "lob": "Personal Auto",
+    "topic": "Liability"
+  },
+  {
+    "id": "q-pa-liab-04",
+    "question": "My teenager caused an accident. Does my liability coverage extend to them?",
+    "lob": "Personal Auto",
+    "topic": "Liability"
+  },
+  {
+    "id": "q-ca-hail-01",
+    "question": "Our delivery truck was pelted by hail on a route. Is that covered under our commercial auto policy?",
+    "lob": "Commercial Auto",
+    "topic": "Hail/Storm Damage"
+  },
+  {
+    "id": "q-ca-hail-02",
+    "question": "Three vehicles in our company fleet were damaged in a storm overnight. How do we file?",
+    "lob": "Commercial Auto",
+    "topic": "Hail/Storm Damage"
+  },
+  {
+    "id": "q-ca-hail-03",
+    "question": "Does our commercial auto policy cover storm damage to vehicles parked at our warehouse?",
+    "lob": "Commercial Auto",
+    "topic": "Hail/Storm Damage"
+  },
+  {
+    "id": "q-ca-glass-01",
+    "question": "The windshield on one of our work vans cracked. How do we handle a glass claim for a commercial vehicle?",
+    "lob": "Commercial Auto",
+    "topic": "Glass Claim"
+  },
+  {
+    "id": "q-ca-glass-02",
+    "question": "We have a fleet of 10 trucks. Is glass damage covered for all of them under one commercial policy?",
+    "lob": "Commercial Auto",
+    "topic": "Glass Claim"
+  },
+  {
+    "id": "q-ca-road-01",
+    "question": "One of our drivers broke down in a company van on a job site. Do we have roadside coverage?",
+    "lob": "Commercial Auto",
+    "topic": "Roadside Assistance"
+  },
+  {
+    "id": "q-ca-road-02",
+    "question": "Our commercial policy — does it include towing for heavy-duty trucks?",
+    "lob": "Commercial Auto",
+    "topic": "Roadside Assistance"
+  },
+  {
+    "id": "q-ca-liab-01",
+    "question": "One of our drivers hit a cyclist while making a delivery. What does our commercial liability cover?",
+    "lob": "Commercial Auto",
+    "topic": "Liability"
+  },
+  {
+    "id": "q-ca-liab-02",
+    "question": "A company vehicle caused a multi-car accident. How does commercial auto liability respond?",
+    "lob": "Commercial Auto",
+    "topic": "Liability"
+  },
+  {
+    "id": "q-ca-liab-03",
+    "question": "An employee driving a leased company truck caused property damage. Who is liable — us or the leasing company?",
+    "lob": "Commercial Auto",
+    "topic": "Liability"
+  },
+  {
+    "id": "q-ca-water-01",
+    "question": "Our refrigerated truck had a seal failure and water got inside, damaging the cargo. Is that covered?",
+    "lob": "Commercial Auto",
+    "topic": "Water Damage"
+  }
+]

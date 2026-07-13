@@ -39,6 +39,7 @@ export default function KbWorkspaceShell({ resolvedContent }: { resolvedContent:
   const overrideHtml     = resolvedContent.override;
   const safeguardHtml    = resolvedContent.proceduralSafeguard;
   const disclosureHtml   = resolvedContent.disclosure;
+  const customer         = resolvedContent.customer;
 
   const scrollToBottom = () => {
     if (chatRef.current) chatRef.current.scrollTop = chatRef.current.scrollHeight;
@@ -116,31 +117,39 @@ export default function KbWorkspaceShell({ resolvedContent }: { resolvedContent:
             </div>
             <div className="bg-gray-100 rounded-lg p-4 mb-6">
               <div className="flex items-center gap-3 mb-2">
-                <div className="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center text-gray-600 font-bold">JD</div>
+                <div className="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center text-gray-600 font-bold">{customer.initials}</div>
                 <div>
-                  <h3 className="font-bold text-gray-900">John Doe</h3>
-                  <p className="text-sm text-gray-500">Orlando, {jurisdictionName}</p>
+                  <h3 className="font-bold text-gray-900">{customer.firstName} {customer.lastName}</h3>
+                  <p className="text-sm text-gray-500">{customer.city}, {jurisdictionName}</p>
                 </div>
               </div>
               <div className="mt-4 space-y-2">
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-500">Products</span>
-                  <span className="font-semibold text-gray-800">Personal Auto</span>
+                  <span className="font-semibold text-gray-800">{customer.lob}</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-500">Policy Tier</span>
-                  <span className="font-semibold text-gray-800">Platinum</span>
+                  <span className="font-semibold text-gray-800">{customer.policyTier}</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-500">Status</span>
-                  <span className="font-semibold text-green-600">Active</span>
+                  <span className={`font-semibold ${customer.status === 'Active' ? 'text-green-600' : customer.status === 'Lapsed' ? 'text-red-600' : 'text-yellow-600'}`}>{customer.status}</span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-500">Policy #</span>
+                  <span className="font-semibold text-gray-800 font-mono text-xs">{customer.policyNumber}</span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-500">Vehicle</span>
+                  <span className="font-semibold text-gray-800 text-xs">{customer.vehicle.year} {customer.vehicle.make}</span>
                 </div>
               </div>
             </div>
             <div>
               <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-3">Call Intent Prediction</h3>
               <div className="bg-blue-50 border border-blue-100 rounded p-3 text-sm text-[#004A8F]">
-                <strong>At-Fault Accident:</strong> Customer recently involved in a reported accident. Likely inquiring about liability coverage and claim next steps.
+                <strong>{customer.callIntent.topic}:</strong> {customer.callIntent.text}
               </div>
             </div>
           </div>
@@ -251,14 +260,14 @@ export default function KbWorkspaceShell({ resolvedContent }: { resolvedContent:
               <div className="flex gap-4">
                 <OpalAvatar />
                 <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm max-w-2xl">
-                  <p className="text-gray-700">Hi Sarah, I see you&apos;re speaking with John Doe in {jurisdictionName}. How can I assist you with his bundled policy today?</p>
+                  <p className="text-gray-700">Hi Sarah, I see you&apos;re speaking with {customer.firstName} {customer.lastName} in {jurisdictionName}. How can I assist you with their {customer.lob} policy today?</p>
                   {step === 0 && (
                     <div className="mt-4 space-y-2">
                       <button
                         onClick={() => { setStep(1); setBackstagePhase(1); }}
                         className="w-full text-left bg-gray-50 hover:bg-[#007BC7] hover:text-white border border-gray-200 transition-colors p-3 rounded text-sm text-gray-700 flex justify-between items-center group shadow-sm"
                       >
-                        <span>&ldquo;What does John&apos;s {jurisdictionName} auto policy cover for an at-fault accident, and what are his liability limits?&rdquo;</span>
+                        <span>&ldquo;What does {customer.firstName}&apos;s {jurisdictionName} {customer.lob.toLowerCase()} policy cover for an at-fault accident, and what are their liability limits?&rdquo;</span>
                         <svg className="w-4 h-4 opacity-0 group-hover:opacity-100 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                         </svg>
@@ -273,7 +282,7 @@ export default function KbWorkspaceShell({ resolvedContent }: { resolvedContent:
                 <div className="flex gap-4 flex-row-reverse fade-in">
                   <div className="w-8 h-8 rounded-full bg-gray-800 text-white flex items-center justify-center shrink-0 text-sm font-bold">SO</div>
                   <div className="bg-[#007BC7] text-white rounded-lg p-4 shadow-sm max-w-2xl">
-                    <p>What does John&apos;s {jurisdictionName} auto policy cover for an at-fault accident, and what are his liability limits?</p>
+                    <p>What does {customer.firstName}&apos;s {jurisdictionName} {customer.lob.toLowerCase()} policy cover for an at-fault accident, and what are their liability limits?</p>
                   </div>
                 </div>
               )}

@@ -1,0 +1,105 @@
+query FilteredBlocks($lob: String, $topic: String, $jurisdiction: String) {
+  PrgvCorePrinciple(
+    limit: 100
+    where: {
+      LOB: { eq: $lob }
+      Topic: { eq: $topic }
+    }
+  ) {
+    items {
+      ...PrgvCorePrincipleFields
+    }
+  }
+
+  PrgvJurisdictionalOverride(
+    limit: 100
+    where: {
+      LOB: { eq: $lob }
+      Topic: { eq: $topic }
+      Jurisdiction: { eq: $jurisdiction }
+    }
+  ) {
+    items {
+      ...PrgvJurisdictionalOverrideFields
+    }
+  }
+
+  PrgvProceduralSafeguard(
+    limit: 100
+    where: {
+      LOB: { eq: $lob }
+      Topic: { eq: $topic }
+      Jurisdiction: { eq: $jurisdiction }
+    }
+  ) {
+    items {
+      ...PrgvProceduralSafeguardFields
+    }
+  }
+
+  PrgvStatutoryDisclosure(
+    limit: 100
+    where: {
+      LOB: { eq: $lob }
+      Topic: { eq: $topic }
+      Jurisdiction: { eq: $jurisdiction }
+    }
+  ) {
+    items {
+      ...PrgvStatutoryDisclosureFields
+    }
+  }
+}
+
+# ─── Fragments ────────────────────────────────────────────────────────────────
+
+fragment KbMetadata on IContent {
+  _metadata {
+    key
+    types
+    displayName
+  }
+}
+
+fragment PrgvCorePrincipleFields on PrgvCorePrinciple {
+  ...KbMetadata
+  InternalName
+  LOB
+  Topic
+  RichTextValue {
+    json
+  }
+}
+
+fragment PrgvJurisdictionalOverrideFields on PrgvJurisdictionalOverride {
+  ...KbMetadata
+  InternalName
+  LOB
+  Topic
+  Jurisdiction
+  RichTextValue {
+    json
+  }
+}
+
+fragment PrgvProceduralSafeguardFields on PrgvProceduralSafeguard {
+  ...KbMetadata
+  InternalName
+  LOB
+  Topic
+  Jurisdiction
+  RichTextValue {
+    json
+  }
+}
+
+fragment PrgvStatutoryDisclosureFields on PrgvStatutoryDisclosure {
+  ...KbMetadata
+  InternalName
+  LOB
+  Topic
+  Jurisdiction
+  RichTextValue {
+    json
+  }
+}

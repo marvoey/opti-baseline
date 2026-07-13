@@ -1,4 +1,5 @@
 import rawData from '../_data/policies.json';
+import rawCustomers from '../_data/customers.json';
 
 const LOB   = 'Personal Auto';
 const TOPIC = 'Liability';
@@ -12,6 +13,24 @@ interface PolicyBlock {
   RichTextValue: string;
 }
 
+export type Customer = {
+  id: string;
+  firstName: string;
+  lastName: string;
+  initials: string;
+  city: string;
+  state: string;
+  stateName: string;
+  phone: string;
+  email: string;
+  policyNumber: string;
+  lob: string;
+  policyTier: string;
+  status: string;
+  vehicle: { year: number; make: string; model: string };
+  callIntent: { topic: string; text: string };
+};
+
 export type ResolvedContent = {
   lob: string;
   topic: string;
@@ -23,6 +42,7 @@ export type ResolvedContent = {
   overrideLabel: string;
   proceduralSafeguard: string | null;
   disclosure: string | null;
+  customer: Customer;
 };
 
 const STATE_NAMES: Record<string, string> = {
@@ -70,6 +90,10 @@ export function twoPassResolve(rawSlug: string | undefined): ResolvedContent {
 
   const pass: 1 | 2 = stateBlocks.some(b => b.CopyType === 'Jurisdictional Override') ? 1 : 2;
 
+  const stateCustomers = (rawCustomers as Customer[]).filter(c => c.state === code);
+  const pool = stateCustomers.length ? stateCustomers : (rawCustomers as Customer[]);
+  const customer = pool[Math.floor(Math.random() * pool.length)];
+
   return {
     lob: LOB,
     topic: TOPIC,
@@ -81,5 +105,6 @@ export function twoPassResolve(rawSlug: string | undefined): ResolvedContent {
     overrideLabel:      overrideBlock?.InternalName ?? `${code} - Hail Deductible`,
     proceduralSafeguard: safeguardBlock?.RichTextValue ?? null,
     disclosure:         disclosureBlock?.RichTextValue ?? null,
+    customer,
   };
 }

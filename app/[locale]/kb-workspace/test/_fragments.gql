@@ -1,0 +1,59 @@
+# Shared metadata selection
+fragment KbMetadata on IContent {
+  _metadata {
+    key
+    types
+    displayName
+  }
+}
+
+# Shared taxonomy fields (LOB + Topic, no Jurisdiction)
+fragment TaxonomyBase on IComponent {
+  LOB
+  Topic
+}
+
+# ─── Content Type Fragments ───────────────────────────────────────────────────
+
+fragment PrgvCorePrincipleFields on PrgvCorePrinciple {
+  ...KbMetadata
+  InternalName
+  LOB
+  Topic
+  RichTextValue {
+    json
+  }
+}
+
+fragment PrgvJurisdictionalOverrideFields on PrgvJurisdictionalOverride {
+  ...KbMetadata
+  InternalName
+  LOB
+  Topic
+  Jurisdiction
+  RichTextValue {
+    json
+  }
+}
+
+fragment PrgvProceduralSafeguardFields on PrgvProceduralSafeguard {
+  ...KbMetadata
+  InternalName
+  LOB
+  Topic
+  Jurisdiction
+  RichTextValue {
+    json
+  }
+}
+
+fragment PrgvStatutoryDisclosureFields on PrgvStatutoryDisclosure {
+  ...KbMetadata
+  InternalName
+  LOB
+  Topic
+  Jurisdiction
+  RichTextValue {
+    json
+  }
+}

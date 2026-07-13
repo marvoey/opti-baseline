@@ -20,6 +20,7 @@ export const PrgvStatutoryDisclosureContentType = contentType({
       displayName: 'Line of Business',
       isRequired: true,
       sortOrder: 20,
+      indexingType: 'queryable',
       format: 'selectOne',
       enum: [
         { value: 'Homeowners', displayName: 'Homeowners' },
@@ -32,6 +33,7 @@ export const PrgvStatutoryDisclosureContentType = contentType({
       displayName: 'Topic / Peril',
       isRequired: true,
       sortOrder: 30,
+      indexingType: 'queryable',
       format: 'selectOne',
       enum: [
         { value: 'Hail/Storm Damage', displayName: 'Hail / Storm Damage' },
@@ -48,6 +50,7 @@ export const PrgvStatutoryDisclosureContentType = contentType({
       description: '2-letter state code, e.g. "FL", "CA".',
       isRequired: true,
       sortOrder: 40,
+      indexingType: 'queryable',
       enum: [
         { value: 'National', displayName: 'National' },
         { value: 'AL', displayName: 'Alabama' },
