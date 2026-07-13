@@ -1,8 +1,8 @@
 import rawData from '../_data/policies.json';
 import rawCustomers from '../_data/customers.json';
 
-const LOB   = 'Personal Auto';
-const TOPIC = 'Liability';
+const DEFAULT_LOB   = 'Personal Auto';
+const DEFAULT_TOPIC = 'Liability';
 const DEFAULT_STATE = 'FL';
 
 interface PolicyBlock {
@@ -31,7 +31,7 @@ export type Customer = {
   callIntent: { topic: string; text: string };
 };
 
-export type ResolvedContent = {
+export type PolicyContent = {
   lob: string;
   topic: string;
   jurisdiction: string;
@@ -42,8 +42,9 @@ export type ResolvedContent = {
   overrideLabel: string;
   proceduralSafeguard: string | null;
   disclosure: string | null;
-  customer: Customer;
 };
+
+export type ResolvedContent = PolicyContent & { customer: Customer };
 
 const STATE_NAMES: Record<string, string> = {
   AL: 'Alabama', AK: 'Alaska', AZ: 'Arizona', AR: 'Arkansas',
@@ -61,20 +62,24 @@ const STATE_NAMES: Record<string, string> = {
   WV: 'West Virginia', WI: 'Wisconsin', WY: 'Wyoming',
 };
 
-export function twoPassResolve(rawSlug: string | undefined): ResolvedContent {
-  const raw  = rawSlug?.toUpperCase() ?? DEFAULT_STATE;
+export function resolveContent(
+  lob: string,
+  topic: string,
+  jurisdiction?: string,
+): PolicyContent {
+  const raw  = jurisdiction?.toUpperCase() ?? DEFAULT_STATE;
   const code = STATE_NAMES[raw] ? raw : DEFAULT_STATE;
 
   const allBlocks = rawData.blocks as unknown as PolicyBlock[];
 
   const stateBlocks = allBlocks.filter(b =>
-    b.Taxonomy.LOB === LOB &&
-    b.Taxonomy.Topic === TOPIC &&
+    b.Taxonomy.LOB === lob &&
+    b.Taxonomy.Topic === topic &&
     b.Taxonomy.Jurisdiction === code
   );
   const nationalBlocks = allBlocks.filter(b =>
-    b.Taxonomy.LOB === LOB &&
-    b.Taxonomy.Topic === TOPIC &&
+    b.Taxonomy.LOB === lob &&
+    b.Taxonomy.Topic === topic &&
     b.Taxonomy.Jurisdiction === 'National'
   );
 
@@ -83,28 +88,36 @@ export function twoPassResolve(rawSlug: string | undefined): ResolvedContent {
     nationalBlocks.find(b => b.CopyType === copyType) ??
     null;
 
-  const corePrincipleBlock  = nationalBlocks.find(b => b.CopyType === 'Core Principle') ?? null;
-  const overrideBlock       = find('Jurisdictional Override');
-  const safeguardBlock      = nationalBlocks.find(b => b.CopyType === 'Procedural Safeguard') ?? null;
-  const disclosureBlock     = find('Statutory Disclosure');
+  const corePrincipleBlock = nationalBlocks.find(b => b.CopyType === 'Core Principle') ?? null;
+  const overrideBlock      = find('Jurisdictional Override');
+  const safeguardBlock     = nationalBlocks.find(b => b.CopyType === 'Procedural Safeguard') ?? null;
+  const disclosureBlock    = find('Statutory Disclosure');
 
   const pass: 1 | 2 = stateBlocks.some(b => b.CopyType === 'Jurisdictional Override') ? 1 : 2;
+
+  return {
+    lob,
+    topic,
+    jurisdiction: code,
+    jurisdictionName: STATE_NAMES[code],
+    pass,
+    corePrinciple:       corePrincipleBlock?.RichTextValue ?? null,
+    override:            overrideBlock?.RichTextValue ?? null,
+    overrideLabel:       overrideBlock?.InternalName ?? `${code} - ${topic}`,
+    proceduralSafeguard: safeguardBlock?.RichTextValue ?? null,
+    disclosure:          disclosureBlock?.RichTextValue ?? null,
+  };
+}
+
+export function twoPassResolve(rawSlug: string | undefined): ResolvedContent {
+  const raw  = rawSlug?.toUpperCase() ?? DEFAULT_STATE;
+  const code = STATE_NAMES[raw] ? raw : DEFAULT_STATE;
+
+  const policy = resolveContent(DEFAULT_LOB, DEFAULT_TOPIC, code);
 
   const stateCustomers = (rawCustomers as Customer[]).filter(c => c.state === code);
   const pool = stateCustomers.length ? stateCustomers : (rawCustomers as Customer[]);
   const customer = pool[Math.floor(Math.random() * pool.length)];
 
-  return {
-    lob: LOB,
-    topic: TOPIC,
-    jurisdiction: code,
-    jurisdictionName: STATE_NAMES[code],
-    pass,
-    corePrinciple:      corePrincipleBlock?.RichTextValue ?? null,
-    override:           overrideBlock?.RichTextValue ?? null,
-    overrideLabel:      overrideBlock?.InternalName ?? `${code} - Hail Deductible`,
-    proceduralSafeguard: safeguardBlock?.RichTextValue ?? null,
-    disclosure:         disclosureBlock?.RichTextValue ?? null,
-    customer,
-  };
+  return { ...policy, customer };
 }

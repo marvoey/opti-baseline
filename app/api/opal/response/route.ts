@@ -42,7 +42,7 @@ export function GET() {
           controller.enqueue(encoder.encode('event: close\ndata: timeout\n\n'));
         } catch { /* ignore */ }
         close('timeout');
-      }, 60_000);
+      }, 3 * 60_000);
     },
     cancel() {
       closeStream('client-disconnect');
