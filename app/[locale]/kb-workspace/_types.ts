@@ -1,5 +1,15 @@
 import type { PolicyContent } from "./_lib/twoPassResolve";
 
+export type LogLevel = 'info' | 'success' | 'error' | 'warn';
+
+export type LogEntry = {
+  id: string;
+  ts: number;
+  level: LogLevel;
+  label: string;
+  detail?: string;
+};
+
 export type OpalPayload = {
   lob?: string;
   topic?: string;

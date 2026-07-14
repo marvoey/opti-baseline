@@ -1,14 +1,13 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import type { OpalPayload, PolicyContentWithDebug, Message } from "../_types";
+import { useState, useRef, useEffect, useCallback } from "react";
+import type { OpalPayload, PolicyContentWithDebug, Message, LogEntry, LogLevel } from "../_types";
 
 async function fetchPolicyContent(
   lob: string,
   topic: string,
   jurisdiction?: string,
 ): Promise<PolicyContentWithDebug | null> {
-  console.log('[fetchPolicyContent] lob:', lob, '| topic:', topic, '| jurisdiction:', jurisdiction);
   const params = new URLSearchParams({ lob, topic });
   if (jurisdiction) params.set("jurisdiction", jurisdiction);
   try {
@@ -22,9 +21,19 @@ async function fetchPolicyContent(
 
 export function useOpalChat() {
   const [messages, setMessages] = useState<Message[]>([]);
+  const [logs, setLogs] = useState<LogEntry[]>([]);
   const esRef = useRef<EventSource | null>(null);
 
   const isLoading = messages.some((m) => m.loading || m.contentLoading);
+
+  const addLog = useCallback((level: LogLevel, label: string, detail?: string) => {
+    setLogs((prev) => [
+      ...prev,
+      { id: crypto.randomUUID(), ts: Date.now(), level, label, detail },
+    ]);
+  }, []);
+
+  const clearLogs = useCallback(() => setLogs([]), []);
 
   useEffect(
     () => () => {
@@ -33,7 +42,7 @@ export function useOpalChat() {
     [],
   );
 
-  async function submit(question: string, knownLob?: string, knownTopic?: string) {
+  async function submit(question: string, knownLob?: string, knownTopic?: string, knownJurisdiction?: string) {
     const id = crypto.randomUUID();
 
     esRef.current?.close();
@@ -49,8 +58,11 @@ export function useOpalChat() {
       },
     ]);
 
+    addLog('info', 'Question submitted', question);
+
     const es = new EventSource("/api/opal/response");
     esRef.current = es;
+    addLog('info', 'SSE stream opened', 'GET /api/opal/response');
 
     function onPayload(rawPayload: unknown) {
       const payload =
@@ -60,7 +72,7 @@ export function useOpalChat() {
           ? (rawPayload as OpalPayload)
           : {};
 
-      console.log('[opal] raw payload from Opal:', JSON.stringify(payload, null, 2));
+      addLog('success', 'Opal payload received', JSON.stringify(payload));
 
       // Opal may send LOB/Topic (capitalised) or lob/topic (lowercase) — check both
       const lob   = (typeof payload.lob === 'string'   && payload.lob)
@@ -70,7 +82,12 @@ export function useOpalChat() {
                  || (typeof payload.Topic === 'string' && payload.Topic)
                  || knownTopic;
 
-      console.log('[opal] resolved lob:', lob, '| topic:', topic);
+      const jurisdiction = (typeof payload.jurisdiction === 'string' && payload.jurisdiction)
+                        || (typeof payload.Jurisdiction === 'string' && payload.Jurisdiction)
+                        || knownJurisdiction
+                        || undefined;
+
+      addLog('info', 'LOB / topic resolved', `lob=${lob ?? '—'} · topic=${topic ?? '—'} · jurisdiction=${jurisdiction ?? '—'}`);
 
       setMessages((prev) =>
         prev.map((m) =>
@@ -86,11 +103,14 @@ export function useOpalChat() {
       );
 
       if (lob && topic) {
-        fetchPolicyContent(
-          lob,
-          topic,
-          typeof payload.jurisdiction === 'string' ? payload.jurisdiction : undefined,
-        ).then((policyContent) => {
+        addLog('info', 'GET /api/kb-content', `lob=${lob} · topic=${topic}${jurisdiction ? ` · jurisdiction=${jurisdiction}` : ''}`);
+
+        fetchPolicyContent(lob, topic, jurisdiction).then((policyContent) => {
+          if (policyContent?._debug?.found) {
+            addLog('success', 'Policy content loaded', `${lob} · ${topic}`);
+          } else {
+            addLog('warn', 'No policy content found', `lob=${lob} · topic=${topic}`);
+          }
           setMessages((prev) =>
             prev.map((m) =>
               m.id === id ? { ...m, policyContent, contentLoading: false } : m,
@@ -107,6 +127,7 @@ export function useOpalChat() {
         onPayload(e.data);
       }
       es.close();
+      addLog('info', 'SSE stream closed', 'message received');
     };
 
     es.addEventListener("close", () => {
@@ -116,6 +137,7 @@ export function useOpalChat() {
         ),
       );
       es.close();
+      addLog('info', 'SSE stream closed', 'server sent close event');
     });
 
     es.onerror = () => {
@@ -127,27 +149,31 @@ export function useOpalChat() {
         ),
       );
       es.close();
+      addLog('error', 'SSE stream error', 'no response received from Opal');
     };
 
     try {
+      addLog('info', 'POST /api/opal/trigger', question);
       const res = await fetch("/api/opal/trigger", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ question }),
       });
       if (!res.ok) throw new Error(`Trigger failed (${res.status})`);
+      addLog('success', 'Trigger acknowledged', `status ${res.status}`);
     } catch (err) {
-      console.error('[opal] trigger error:', err);
+      const message = err instanceof Error ? err.message : 'Failed to send question to Opal.';
+      addLog('error', 'Trigger failed', message);
       esRef.current?.close();
       setMessages((prev) =>
         prev.map((m) =>
           m.id === id
-            ? { ...m, loading: false, contentLoading: false, error: err instanceof Error ? err.message : 'Failed to send question to Opal.' }
+            ? { ...m, loading: false, contentLoading: false, error: message }
             : m,
         ),
       );
     }
   }
 
-  return { messages, isLoading, submit };
+  return { messages, isLoading, submit, logs, clearLogs };
 }

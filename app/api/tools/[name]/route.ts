@@ -1,5 +1,10 @@
 import { NextRequest } from 'next/server';
-import { getTool } from '../../_tools/registry';
+import { getTool as getProdTool } from '../../_tools/registry';
+import { getTool as getDevTool } from '../../_tools/registry-dev';
+
+function getTool(name: string) {
+  return getProdTool(name) ?? getDevTool(name);
+}
 
 export const dynamic = 'force-dynamic';
 

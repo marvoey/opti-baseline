@@ -6,9 +6,10 @@ import { LightningIcon, OpalAvatar } from "../_components/OpalAvatar";
 import { PolicyCard } from "../_components/PolicyCard";
 import { NoContentCard } from "../_components/NoContentCard";
 import { Combobox } from "../_components/Combobox";
+import { DevPanel } from "../_components/DevPanel";
 
 export default function OpalPage() {
-  const { messages, isLoading, submit } = useOpalChat();
+  const { messages, isLoading, submit, logs, clearLogs } = useOpalChat();
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -16,7 +17,7 @@ export default function OpalPage() {
   }, [messages]);
 
   return (
-    <div className="bg-gray-50 min-h-screen flex flex-col font-sans">
+    <div className="bg-gray-50 h-screen flex flex-col font-sans overflow-hidden">
       <header className="bg-white border-b border-gray-200 h-14 flex items-center px-6 shrink-0 shadow-sm gap-3">
         <span className="text-[#007BC7] font-bold text-lg tracking-tight italic">
           PROGRESSIVE
@@ -28,8 +29,15 @@ export default function OpalPage() {
         </span>
       </header>
 
-      <main className="flex-1 flex flex-col items-center pt-8 px-4 pb-10">
-        <div className="w-full max-w-2xl flex flex-col gap-6">
+      <div className="flex-1 flex overflow-hidden">
+        {/* Dev console */}
+        <div className="w-80 shrink-0">
+          <DevPanel logs={logs} onClear={clearLogs} />
+        </div>
+
+        {/* Chat */}
+        <main className="flex-1 overflow-y-auto pt-8 px-4 pb-10">
+        <div className="w-full max-w-2xl mx-auto flex flex-col gap-6">
           {messages.map((msg) => (
             <div key={msg.id} className="flex flex-col gap-3">
               {/* User question */}
@@ -86,7 +94,8 @@ export default function OpalPage() {
 
           <div ref={bottomRef} />
         </div>
-      </main>
+        </main>
+      </div>
     </div>
   );
 }

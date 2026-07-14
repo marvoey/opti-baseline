@@ -18,9 +18,11 @@
     "cms:import:policies": "node scripts/import-policies.mjs",
     "cms:publish:policies": "node scripts/publish-policies.mjs",
     "screenshot": "node scripts/screenshot.mjs",
-    "screenshot:click": "node scripts/screenshot-click.mjs"
+    "screenshot:click": "node scripts/screenshot-click.mjs",
+    "ngrok": "sh scripts/ngrok.sh"
   },
   "dependencies": {
+    "@microlink/react-json-view": "^1.31.22",
     "@optimizely/cms-cli": "^2.0.0",
     "@optimizely/cms-sdk": "^2.0.0",
     "@tailwindcss/typography": "^0.5.20",
