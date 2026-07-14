@@ -3,29 +3,10 @@
 import { useState, useRef, useEffect } from "react";
 import questions from "../_data/_questions.json";
 import type { PolicyContent } from "../_lib/twoPassResolve";
+import { useOpalChat } from "../_hooks/useOpalChat";
+import type { OpalPayload, PolicyContentWithDebug } from "../_hooks/useOpalChat";
 
 type Question = { id: string; question: string; lob: string; topic: string };
-
-type OpalPayload = {
-  lob?: string;
-  topic?: string;
-  jurisdiction?: string;
-  [key: string]: unknown;
-};
-
-type PolicyContentWithDebug = PolicyContent & {
-  _debug?: Record<string, unknown>;
-};
-
-type Message = {
-  id: string;
-  question: string;
-  loading: boolean;
-  opalPayload: OpalPayload | null;
-  policyContent: PolicyContentWithDebug | null;
-  contentLoading: boolean;
-  error?: string;
-};
 
 const ALL_QUESTIONS: Question[] = questions as Question[];
 
@@ -145,7 +126,6 @@ function PolicyCard({ policy }: { policy: PolicyContent }) {
   );
 }
 
-// Shown when Opal responds but no matching policy block exists in the data
 function NoContentCard({
   payload,
   policyContent,
@@ -380,156 +360,13 @@ const OpalAvatar = () => (
   </div>
 );
 
-async function fetchPolicyContent(
-  lob: string,
-  topic: string,
-  jurisdiction?: string,
-): Promise<PolicyContentWithDebug | null> {
-  console.log('[fetchPolicyContent] lob:', lob, '| topic:', topic, '| jurisdiction:', jurisdiction);
-  const params = new URLSearchParams({ lob, topic });
-  if (jurisdiction) params.set("jurisdiction", jurisdiction);
-  try {
-    const res = await fetch(`/api/kb-content?${params}`);
-    if (!res.ok) return null;
-    return res.json();
-  } catch {
-    return null;
-  }
-}
-
 export default function OpalPage() {
-  const [messages, setMessages] = useState<Message[]>([]);
-  const esRef = useRef<EventSource | null>(null);
+  const { messages, isLoading, submit } = useOpalChat();
   const bottomRef = useRef<HTMLDivElement>(null);
-
-  const isLoading = messages.some((m) => m.loading || m.contentLoading);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
-
-  useEffect(
-    () => () => {
-      esRef.current?.close();
-    },
-    [],
-  );
-
-  async function handleSubmit(question: string, knownLob?: string, knownTopic?: string) {
-    const id = crypto.randomUUID();
-
-    esRef.current?.close();
-    setMessages((prev) => [
-      ...prev,
-      {
-        id,
-        question,
-        loading: true,
-        opalPayload: null,
-        policyContent: null,
-        contentLoading: false,
-      },
-    ]);
-
-    const es = new EventSource("/api/opal/response");
-    esRef.current = es;
-
-    function onPayload(rawPayload: unknown) {
-      const payload =
-        rawPayload &&
-        typeof rawPayload === "object" &&
-        !Array.isArray(rawPayload)
-          ? (rawPayload as OpalPayload)
-          : {};
-
-      console.log('[opal] raw payload from Opal:', JSON.stringify(payload, null, 2));
-
-      // Opal may send LOB/Topic (capitalised) or lob/topic (lowercase) — check both
-      const lob   = (typeof payload.lob === 'string'   && payload.lob)
-                 || (typeof payload.LOB === 'string'   && payload.LOB)
-                 || knownLob;
-      const topic = (typeof payload.topic === 'string' && payload.topic)
-                 || (typeof payload.Topic === 'string' && payload.Topic)
-                 || knownTopic;
-
-      console.log('[opal] resolved lob:', lob, '| topic:', topic);
-
-      setMessages((prev) =>
-        prev.map((m) =>
-          m.id === id
-            ? {
-                ...m,
-                loading: false,
-                opalPayload: payload,
-                contentLoading: !!(lob && topic),
-              }
-            : m,
-        ),
-      );
-
-      if (lob && topic) {
-        fetchPolicyContent(
-          lob,
-          topic,
-          typeof payload.jurisdiction === 'string' ? payload.jurisdiction : undefined,
-        ).then((policyContent) => {
-          setMessages((prev) =>
-            prev.map((m) =>
-              m.id === id ? { ...m, policyContent, contentLoading: false } : m,
-            ),
-          );
-        });
-      }
-    }
-
-    es.onmessage = (e) => {
-      try {
-        onPayload(JSON.parse(e.data));
-      } catch {
-        onPayload(e.data);
-      }
-      es.close();
-    };
-
-    es.addEventListener("close", () => {
-      setMessages((prev) =>
-        prev.map((m) =>
-          m.id === id ? { ...m, loading: false, contentLoading: false } : m,
-        ),
-      );
-      es.close();
-    });
-
-    es.onerror = () => {
-      setMessages((prev) =>
-        prev.map((m) =>
-          m.id === id
-            ? { ...m, loading: false, contentLoading: false, error: 'No response received from Opal.' }
-            : m,
-        ),
-      );
-      es.close();
-    };
-
-    try {
-      const res = await fetch("/api/opal/trigger", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ question }),
-      });
-      if (!res.ok) throw new Error(`Trigger failed (${res.status})`);
-    } catch (err) {
-      console.error('[opal] trigger error:', err);
-      esRef.current?.close();
-      setMessages((prev) =>
-        prev.map((m) =>
-          m.id === id
-            ? { ...m, loading: false, contentLoading: false, error: err instanceof Error ? err.message : 'Failed to send question to Opal.' }
-            : m,
-        ),
-      );
-    }
-  }
 
   return (
     <div className="bg-gray-50 min-h-screen flex flex-col font-sans">
@@ -573,7 +410,7 @@ export default function OpalPage() {
                   <div className="bg-white border border-red-200 rounded-2xl rounded-tl-sm px-4 py-3 shadow-sm text-sm text-red-600 flex items-center gap-3">
                     <span>{msg.error}</span>
                     <button
-                      onClick={() => handleSubmit(msg.question, undefined, undefined)}
+                      onClick={() => submit(msg.question)}
                       className="shrink-0 text-xs font-semibold text-[#007BC7] hover:underline"
                     >
                       Retry
@@ -598,7 +435,7 @@ export default function OpalPage() {
             </div>
           ))}
 
-          {!isLoading && <Combobox onSubmit={handleSubmit} />}
+          {!isLoading && <Combobox onSubmit={submit} />}
 
           <div ref={bottomRef} />
         </div>
