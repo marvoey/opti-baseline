@@ -1,4 +1,4 @@
-import type { OpalPayload, PolicyContentWithDebug } from "../_hooks/useOpalChat";
+import type { OpalPayload, PolicyContentWithDebug } from "../_types";
 
 export function NoContentCard({
   payload,
