@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { useOpalChat } from "../_hooks/useOpalChat";
 import { LightningIcon, OpalAvatar } from "../_components/OpalAvatar";
 import { PolicyCard } from "../_components/PolicyCard";
@@ -11,6 +11,7 @@ import { DevPanel } from "../_components/DevPanel";
 export default function OpalPage() {
   const { messages, isLoading, submit, logs, clearLogs } = useOpalChat();
   const bottomRef = useRef<HTMLDivElement>(null);
+  const [devPanelOpen, setDevPanelOpen] = useState(false);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -31,9 +32,25 @@ export default function OpalPage() {
 
       <div className="flex-1 flex overflow-hidden">
         {/* Dev console */}
-        <div className="w-80 shrink-0">
-          <DevPanel logs={logs} onClear={clearLogs} />
+        <div className={`shrink-0 flex overflow-hidden transition-all duration-200 ${devPanelOpen ? "w-80" : "w-0"}`}>
+          <div className="w-80 shrink-0">
+            <DevPanel logs={logs} onClear={clearLogs} />
+          </div>
         </div>
+
+        {/* Dev panel toggle tab */}
+        <button
+          onClick={() => setDevPanelOpen((o) => !o)}
+          className="shrink-0 flex items-center justify-center w-5 bg-gray-900 hover:bg-gray-700 border-r border-gray-700 transition-colors"
+          title={devPanelOpen ? "Hide dev console" : "Show dev console"}
+        >
+          <svg
+            className={`w-3 h-3 text-gray-400 transition-transform duration-200 ${devPanelOpen ? "" : "rotate-180"}`}
+            fill="none" stroke="currentColor" viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
 
         {/* Chat */}
         <main className="flex-1 overflow-y-auto pt-8 px-4 pb-10">
