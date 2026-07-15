@@ -4,6 +4,11 @@ const CMS_URL = (process.env.OPTIMIZELY_CMS_URL ?? '').replace(/\/$/, '');
 
 const nextConfig: NextConfig = {
   allowedDevOrigins: ['progressive.ngrok.app'],
+  images: {
+    remotePatterns: [
+      { protocol: 'https', hostname: '**.optimizely.com' },
+    ],
+  },
   async redirects() {
     return [
       {
