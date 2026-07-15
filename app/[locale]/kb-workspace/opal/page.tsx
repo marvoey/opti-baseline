@@ -75,7 +75,17 @@ export default function OpalPage() {
               ) : msg.opalPayload != null ? (
                 <div className="flex items-start gap-3">
                   <OpalAvatar />
-                  <div className="bg-white border border-gray-200 rounded-2xl rounded-tl-sm p-5 shadow-sm flex-1">
+                  <div className="bg-white border border-gray-200 rounded-2xl rounded-tl-sm p-5 shadow-sm flex-1 space-y-4">
+                    {msg.opalPayload.reasoning && (
+                      <div className="bg-purple-50 border border-purple-100 rounded-lg px-3 py-2">
+                        <p className="text-xs font-bold uppercase tracking-wider text-purple-500 mb-1">
+                          Opal Reasoning
+                        </p>
+                        <p className="text-sm text-purple-900 leading-relaxed">
+                          {msg.opalPayload.reasoning}
+                        </p>
+                      </div>
+                    )}
                     {msg.policyContent?._debug?.found ? (
                       <PolicyCard policy={msg.policyContent} />
                     ) : (

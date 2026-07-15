@@ -12,8 +12,12 @@ export type LogEntry = {
 
 export type OpalPayload = {
   lob?: string;
+  LOB?: string;
   topic?: string;
+  Topic?: string;
   jurisdiction?: string;
+  Jurisdiction?: string;
+  reasoning?: string;
   [key: string]: unknown;
 };
 

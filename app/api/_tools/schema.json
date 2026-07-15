@@ -1,0 +1,46 @@
+{
+  "type": "object",
+  "required": [
+    "reasoning",
+    "LOB",
+    "Topic",
+    "clientId",
+    "correlationId"
+  ],
+  "properties": {
+    "LOB": {
+      "enum": [
+        "Commercial Auto",
+        "Homeowners",
+        "Personal Auto"
+      ],
+      "type": "string"
+    },
+    "Topic": {
+      "enum": [
+        "Glass Claim",
+        "Hail/Storm Damage",
+        "Liability",
+        "Rideshare Coverage",
+        "Roadside Assistance",
+        "Water Damage"
+      ],
+      "type": "string"
+    },
+    "reasoning": {
+      "type": "string"
+    },
+    "Jurisdiction": {
+      "type": "string",
+      "description": "The legal or geographic jurisdiction. You MUST use the exact key 'Jurisdiction'. Do not output 'billing_jurisdiction'."
+    },
+    "clientId": {
+      "type": "string",
+      "description": "The SSE client ID received in the webhook request body — pass this value through unchanged."
+    },
+    "correlationId": {
+      "type": "string",
+      "description": "The correlation ID received in the webhook request body — pass this value through unchanged."
+    }
+  }
+}

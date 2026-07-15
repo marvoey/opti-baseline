@@ -22,7 +22,10 @@ async function fetchPolicyContent(
 export function useOpalChat() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [logs, setLogs] = useState<LogEntry[]>([]);
+
+  const clientIdRef = useRef(`client-${crypto.randomUUID()}`);
   const esRef = useRef<EventSource | null>(null);
+  const handlersRef = useRef(new Map<string, (payload: unknown) => void>());
 
   const isLoading = messages.some((m) => m.loading || m.contentLoading);
 
@@ -35,17 +38,52 @@ export function useOpalChat() {
 
   const clearLogs = useCallback(() => setLogs([]), []);
 
-  useEffect(
-    () => () => {
-      esRef.current?.close();
-    },
-    [],
-  );
+  useEffect(() => {
+    const es = new EventSource(`/api/opal/response?clientId=${clientIdRef.current}`);
+    esRef.current = es;
+    addLog('info', 'SSE stream opened', `clientId: ${clientIdRef.current}`);
+
+    es.onmessage = (e) => {
+      try {
+        const { correlationId, payload } = JSON.parse(e.data) as {
+          correlationId: string;
+          payload: unknown;
+        };
+        const pendingIds = [...handlersRef.current.keys()];
+        addLog('info', 'SSE message received', `correlationId: ${correlationId}`);
+        addLog('info', 'Pending handlers', pendingIds.join(', ') || '(none)');
+        const handler = handlersRef.current.get(correlationId);
+        if (handler) {
+          addLog('success', 'Handler matched', correlationId);
+          handler(payload);
+          handlersRef.current.delete(correlationId);
+        } else {
+          addLog('error', 'No handler matched', `received: ${correlationId}`);
+        }
+      } catch (err) {
+        addLog('error', 'SSE parse error', String(err));
+      }
+    };
+
+    es.addEventListener('timeout', () => {
+      addLog('warn', 'SSE timeout', 'browser will reconnect automatically');
+    });
+
+    es.onerror = () => {
+      addLog('error', 'SSE connection error', 'browser will attempt to reconnect');
+    };
+
+    return () => {
+      es.close();
+    };
+  // addLog is stable (useCallback with no deps) — safe to include
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   async function submit(question: string, knownLob?: string, knownTopic?: string, knownJurisdiction?: string) {
     const id = crypto.randomUUID();
+    const correlationId = `correlation-${crypto.randomUUID()}`;
 
-    esRef.current?.close();
     setMessages((prev) => [
       ...prev,
       {
@@ -59,10 +97,7 @@ export function useOpalChat() {
     ]);
 
     addLog('info', 'Question submitted', question);
-
-    const es = new EventSource("/api/opal/response");
-    esRef.current = es;
-    addLog('info', 'SSE stream opened', 'GET /api/opal/response');
+    addLog('info', 'Routing IDs', `clientId: ${clientIdRef.current} | correlationId: ${correlationId}`);
 
     function onPayload(rawPayload: unknown) {
       const payload =
@@ -74,7 +109,6 @@ export function useOpalChat() {
 
       addLog('success', 'Opal payload received', JSON.stringify(payload));
 
-      // Opal may send LOB/Topic (capitalised) or lob/topic (lowercase) — check both
       const lob   = (typeof payload.lob === 'string'   && payload.lob)
                  || (typeof payload.LOB === 'string'   && payload.LOB)
                  || knownLob;
@@ -120,51 +154,21 @@ export function useOpalChat() {
       }
     }
 
-    es.onmessage = (e) => {
-      try {
-        onPayload(JSON.parse(e.data));
-      } catch {
-        onPayload(e.data);
-      }
-      es.close();
-      addLog('info', 'SSE stream closed', 'message received');
-    };
-
-    es.addEventListener("close", () => {
-      setMessages((prev) =>
-        prev.map((m) =>
-          m.id === id ? { ...m, loading: false, contentLoading: false } : m,
-        ),
-      );
-      es.close();
-      addLog('info', 'SSE stream closed', 'server sent close event');
-    });
-
-    es.onerror = () => {
-      setMessages((prev) =>
-        prev.map((m) =>
-          m.id === id
-            ? { ...m, loading: false, contentLoading: false, error: 'No response received from Opal.' }
-            : m,
-        ),
-      );
-      es.close();
-      addLog('error', 'SSE stream error', 'no response received from Opal');
-    };
+    handlersRef.current.set(correlationId, onPayload);
 
     try {
       addLog('info', 'POST /api/opal/trigger', question);
       const res = await fetch("/api/opal/trigger", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ question }),
+        body: JSON.stringify({ question, clientId: clientIdRef.current, correlationId }),
       });
       if (!res.ok) throw new Error(`Trigger failed (${res.status})`);
       addLog('success', 'Trigger acknowledged', `status ${res.status}`);
     } catch (err) {
       const message = err instanceof Error ? err.message : 'Failed to send question to Opal.';
       addLog('error', 'Trigger failed', message);
-      esRef.current?.close();
+      handlersRef.current.delete(correlationId);
       setMessages((prev) =>
         prev.map((m) =>
           m.id === id
