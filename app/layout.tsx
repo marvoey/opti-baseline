@@ -19,8 +19,13 @@ const geistMono = Geist_Mono({
 });
   
 export const metadata: Metadata = {
+  metadataBase: new URL('https://progressive.ngrok.app'),
   title: siteConfig.title,
   description: siteConfig.description,
+  openGraph: {
+    description: siteConfig.description,
+    images: [{ url: '/Optimizely_Primary-Logo_Medium_Green_RGB.png' }],
+  },
 };
 
 // Optimizely Web Experimentation / Personalization project id. Public by design

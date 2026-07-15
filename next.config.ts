@@ -3,6 +3,7 @@ import type { NextConfig } from "next";
 const CMS_URL = (process.env.OPTIMIZELY_CMS_URL ?? '').replace(/\/$/, '');
 
 const nextConfig: NextConfig = {
+  allowedDevOrigins: ['progressive.ngrok.app'],
   async redirects() {
     return [
       {

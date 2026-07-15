@@ -37,7 +37,7 @@ export function GET(request: NextRequest) {
       const heartbeat = setInterval(() => {
         if (closed) return;
         try { controller.enqueue(encoder.encode(': ping\n\n')); } catch { close(); }
-      }, 25_000);
+      }, 15_000);
 
       unsubscribe = subscribe(clientId, (correlationId, payload) => {
         if (closed) return;

@@ -2,8 +2,11 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Progressive | Opti Demo',
-  description: 'Get a free car insurance quote. Join over 37 million drivers who trust Progressive.',
+  description: 'Meet Opal — Progressive\'s AI-powered Knowledge Assistant. Ask questions, find policy content, and get instant answers from the knowledge base.',
   icons: { icon: [{ url: 'https://images.contentstack.io/v3/assets/blt62d40591b3650da3/blt4a6e0a9548045e84/favicon.svg', type: 'image/svg+xml' }] },
+  openGraph: {
+    images: [{ url: '/Optimizely_Primary-Logo_Medium_Green_RGB.png' }],
+  },
 };
 
 function BlockTag({ label }: { label: string }) {
