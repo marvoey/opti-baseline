@@ -6,22 +6,10 @@ import {
 import { initReactComponentRegistry } from '@optimizely/cms-sdk/react/server';
 import { requireEnv } from '@/lib/env';
 
-import ExperiencePage, { ExperiencePageContentType } from './ExperiencePage';
+import BlankExperience, { BlankExperienceContentType } from './BlankExperience';
+import BlankSection from './BlankSection';
+import Paragraph from './Paragraph';
 import Page, { PageContentType } from './Page';
-import Hero, { HeroContentType } from './Hero';
-import RichText, { RichTextContentType } from './RichText';
-import CibcHero, { CibcHeroContentType, CibcHeroDisplayTemplate } from './CibcHero';
-import CibcAlertFeed, { CibcAlertContentType, CibcAlertFeedContentType } from './CibcAlertFeed';
-import CibcAssetGrid, {
-  CibcAssetCardContentType,
-  CibcAssetGridContentType,
-  CibcAssetGridDisplayTemplate,
-} from './CibcAssetGrid';
-import CibcOnboardingJourney, {
-  CibcMilestoneContentType,
-  CibcOnboardingJourneyContentType,
-} from './CibcOnboardingJourney';
-import CibcRegulatoryDirective, { CibcRegulatoryDirectiveContentType } from './CibcRegulatoryDirective';
 
 /**
  * Single configuration + registration point for the Optimizely SDK.
@@ -53,40 +41,19 @@ config({
  * registered with the SDK below.
  */
 export const registeredContentTypes = [
-  ExperiencePageContentType,
+  BlankExperienceContentType,
   PageContentType,
-  // Blocks
-  HeroContentType,
-  RichTextContentType,
-  // CIBC leaf items (held inline by their parent section block).
-  CibcAlertContentType,
-  CibcAssetCardContentType,
-  CibcMilestoneContentType,
-  // CIBC section blocks.
-  CibcHeroContentType,
-  CibcAlertFeedContentType,
-  CibcAssetGridContentType,
-  CibcOnboardingJourneyContentType,
-  CibcRegulatoryDirectiveContentType,
 ];
 
 initContentTypeRegistry(registeredContentTypes);
 
-initDisplayTemplateRegistry([CibcHeroDisplayTemplate, CibcAssetGridDisplayTemplate]);
+initDisplayTemplateRegistry([]);
 
 initReactComponentRegistry({
   resolver: {
-    ExperiencePage,
+    BlankExperience,
+    BlankSection,
+    Paragraph,
     Page,
-    // Blocks (resolver key === content-type key)
-    HeroBlock: Hero,
-    RichTextBlock: RichText,
-    // CIBC section blocks. Leaf items (CibcAlert, CibcAssetCard, CibcMilestone)
-    // are rendered inline by their parent block, so they need no entry here.
-    CibcHero,
-    CibcAlertFeed,
-    CibcAssetGrid,
-    CibcOnboardingJourney,
-    CibcRegulatoryDirective,
   },
 });
