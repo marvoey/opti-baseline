@@ -9,7 +9,6 @@ import { requireEnv } from '@/lib/env';
 import BlankExperience, { BlankExperienceContentType } from './BlankExperience';
 import BlankSection from './BlankSection';
 import Paragraph from './Paragraph';
-import Page, { PageContentType } from './Page';
 
 /**
  * Single configuration + registration point for the Optimizely SDK.
@@ -42,7 +41,6 @@ config({
  */
 export const registeredContentTypes = [
   BlankExperienceContentType,
-  PageContentType,
 ];
 
 initContentTypeRegistry(registeredContentTypes);
@@ -54,6 +52,5 @@ initReactComponentRegistry({
     BlankExperience,
     BlankSection,
     Paragraph,
-    Page,
   },
 });
