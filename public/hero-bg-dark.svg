@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 540" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <radialGradient id="d-glow1" cx="85%" cy="10%" r="55%" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#0f7d8c" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#002733" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="d-glow2" cx="10%" cy="90%" r="45%" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#00485e" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#002733" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Base -->
+  <rect width="1440" height="540" fill="#002733"/>
+
+  <!-- Radial glows -->
+  <rect width="1440" height="540" fill="url(#d-glow1)"/>
+  <rect width="1440" height="540" fill="url(#d-glow2)"/>
+
+  <!-- Concentric arcs anchored at top-right corner -->
+  <circle cx="1440" cy="0" r="280" fill="none" stroke="#006280" stroke-width="1.5" opacity="0.12"/>
+  <circle cx="1440" cy="0" r="420" fill="none" stroke="#006280" stroke-width="1"   opacity="0.09"/>
+  <circle cx="1440" cy="0" r="560" fill="none" stroke="#006280" stroke-width="1"   opacity="0.07"/>
+  <circle cx="1440" cy="0" r="700" fill="none" stroke="#00485e" stroke-width="0.5" opacity="0.06"/>
+
+  <!-- Diagonal construction lines (SW→NE) -->
+  <line x1="-200" y1="540" x2="700"  y2="-200" stroke="#003342" stroke-width="1"    opacity="0.30"/>
+  <line x1="-80"  y1="540" x2="820"  y2="-200" stroke="#003342" stroke-width="1"    opacity="0.22"/>
+  <line x1="40"   y1="540" x2="940"  y2="-200" stroke="#003342" stroke-width="0.75" opacity="0.16"/>
+  <line x1="160"  y1="540" x2="1060" y2="-200" stroke="#003342" stroke-width="0.75" opacity="0.12"/>
+  <line x1="280"  y1="540" x2="1180" y2="-200" stroke="#003342" stroke-width="0.5"  opacity="0.09"/>
+
+  <!-- Gold accent diagonals -->
+  <line x1="0" y1="480" x2="960"  y2="0" stroke="#a29060" stroke-width="1.5" opacity="0.30"/>
+  <line x1="0" y1="540" x2="1080" y2="0" stroke="#a29060" stroke-width="0.5" opacity="0.15"/>
+
+  <!-- Geometric accent — diamond bottom-left -->
+  <polygon points="80,420 130,370 180,420 130,470" fill="#006280" fill-opacity="0.20"/>
+  <polygon points="60,440 130,370 200,440 130,510" fill="none" stroke="#006280" stroke-width="1" opacity="0.20"/>
+</svg>

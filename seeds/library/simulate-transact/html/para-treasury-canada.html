@@ -1,0 +1,51 @@
+<h2>Treasury Portal Enrollment Process</h2>
+
+<p>Corporate treasury teams can access CIBC Mellon's institutional cash management portal for Canadian operations by completing a structured enrollment and configuration process. This workflow covers entity verification, account structure selection, authorized user provisioning, and technical integration — from initial setup through go-live testing.</p>
+
+<h3>Prerequisites</h3>
+
+<ul>
+  <li>Corporate entity registered in Canada or maintaining a Canadian branch with an active banking relationship</li>
+  <li>Board or treasury committee resolution authorizing CIBC Mellon as cash management provider</li>
+  <li>Authorized signatories identified and specimen signatures provided</li>
+  <li>Internal IT or treasury systems team available for API or file feed configuration</li>
+  <li>Existing account structure documentation (legal entities, subsidiaries, CAD and USD accounts) provided</li>
+</ul>
+
+<h3>Process Steps</h3>
+
+<ol>
+  <li><strong>Submit the Treasury Services Enrollment Form</strong> to your CIBC Mellon Relationship Manager, including entity list, account structure diagram, and preferred cash management objectives.</li>
+  <li><strong>Complete entity verification</strong> with CIBC Mellon's KYC/Onboarding team. Provide corporate registration certificates, authorized signatory lists, and LEI confirmation for each entity in scope.</li>
+  <li><strong>Select your account structure</strong>: Notional pooling consolidates balances across accounts for interest calculation without physical movement of funds; zero-balance sweeping physically concentrates cash into a master account on an intraday or end-of-day basis. Your CIBC Mellon Treasury Advisor will model both structures based on your cash flow patterns.</li>
+  <li><strong>Execute the Cash Management Master Agreement</strong> and applicable account-specific schedules. Each legal entity must execute its own authorization where required by corporate governance rules.</li>
+  <li><strong>Set up authorized users</strong> in the CIBC Mellon treasury portal. Define user roles (view-only, payment initiation, payment authorization, administration), assign approval hierarchies, and configure dual-control requirements for payment instructions above defined thresholds.</li>
+  <li><strong>Configure your API connection or SWIFT/file feed</strong> depending on your preferred integration method (see technical setup section below).</li>
+  <li><strong>Complete user acceptance testing (UAT)</strong> in the CIBC Mellon sandbox environment, covering payment initiation, balance reporting, file import/export, and notification workflows.</li>
+  <li><strong>Proceed to go-live</strong> after UAT sign-off. CIBC Mellon's Implementation team provides hypercare support for the first 30 days post-launch.</li>
+</ol>
+
+<h2>Account Structure and System Configuration</h2>
+
+<h3>Notional Pooling vs. Zero-Balance Sweeping</h3>
+
+<p>Notional pooling is well-suited for multi-entity corporate groups where legal or regulatory restrictions prevent intercompany fund transfers. Interest is calculated on the net pool position, with individual account balances remaining legally distinct. Zero-balance sweeping is preferred where treasury centralization and simplified intercompany accounting are priorities; it requires transfer pricing documentation for tax purposes in Canada.</p>
+
+<h3>API and File Feed Configuration</h3>
+
+<ul>
+  <li><strong>REST API:</strong> OAuth 2.0 authentication; supports real-time balance inquiries, payment initiation (CAD, USD, wire, EFT), and transaction history retrieval</li>
+  <li><strong>SWIFT connectivity:</strong> MT101, MT940/942, and camt.053 ISO 20022 message support; confirm your SWIFT BIC and service bureau arrangement</li>
+  <li><strong>File-based integration:</strong> CSV and BAI2 format for balance reporting; PAIN.001 for payment instruction files</li>
+  <li><strong>IP allowlisting and TLS certificate setup:</strong> Required for API connections; CIBC Mellon provides technical specifications and sandbox credentials</li>
+</ul>
+
+<h3>Go-Live Checklist</h3>
+
+<ul>
+  <li>UAT sign-off document completed and countersigned by CIBC Mellon Implementation Manager</li>
+  <li>All authorized users have completed portal training and 2FA enrollment</li>
+  <li>Payment thresholds and dual-control rules confirmed in production environment</li>
+  <li>First production balance report received and reconciled to internal records</li>
+  <li>Hypercare support contact details provided to treasury team</li>
+</ul>

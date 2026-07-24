@@ -13,8 +13,15 @@
     "start": "node scripts/run-next.mjs start",
     "lint": "eslint",
     "gen:locales": "node scripts/generate-locales.mjs",
-    "config:push": "npx @optimizely/cms-cli config push optimizely.config.mjs",
-    "schema:pull": "node scripts/fetch-openapi.mjs"
+    "cms:push": "npx @optimizely/cms-cli config push optimizely.config.mjs",
+    "cms:push:type": "node scripts/push-content-types.mjs",
+    "cms:check": "node scripts/check-content-types.mjs",
+    "schema:pull": "node scripts/fetch-openapi.mjs",
+    "seed:experience": "node scripts/seed-experience.mjs",
+    "seed:library:dr": "node scripts/seed-paragraphs.mjs seeds/library/discover-recommend/items.json",
+    "seed:heroes:dr": "node scripts/seed-heroes.mjs",
+    "seed:library:eg": "node scripts/seed-paragraphs.mjs seeds/library/educate-govern/items.json",
+    "seed:library:st": "node scripts/seed-paragraphs.mjs seeds/library/simulate-transact/items.json"
   },
   "dependencies": {
     "@optimizely/cms-cli": "^2.0.0",

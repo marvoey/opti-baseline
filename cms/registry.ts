@@ -8,7 +8,17 @@ import { requireEnv } from '@/lib/env';
 
 import BlankExperience, { BlankExperienceContentType } from './BlankExperience';
 import BlankSection from './BlankSection';
-import Paragraph from './Paragraph';
+import Paragraph, { ParagraphContentType, ParagraphDisplayTemplate } from './BasicBlocks/Paragraph';
+import CardBlock, { CardBlockContentType } from './BasicBlocks/CardBlock';
+import ActionBlock, { ActionBlockContentType } from './BasicBlocks/ActionBlock';
+import ComplianceBlock, { ComplianceBlockContentType } from './BasicBlocks/ComplianceBlock';
+import SidebarSection, { SidebarSectionContentType } from './SidebarSection';
+import SplitSection, { SplitSectionContentType } from './SplitSection';
+import HeroSection, { HeroSectionContentType } from './HeroSection';
+import FeedSection, { FeedSectionContentType } from './FeedSection';
+import ImageBlock, { ImageContentType, ImageDisplayTemplate } from './Image';
+import HeroBlock, { HeroBlockContentType, HeroBlockDisplayTemplate } from './BasicBlocks/HeroBlock';
+import { ColumnDisplayTemplate } from './ColumnTemplate';
 
 /**
  * Single configuration + registration point for the Optimizely SDK.
@@ -41,16 +51,35 @@ config({
  */
 export const registeredContentTypes = [
   BlankExperienceContentType,
+  ParagraphContentType,
+  CardBlockContentType,
+  ActionBlockContentType,
+  ComplianceBlockContentType,
+  SidebarSectionContentType,
+  SplitSectionContentType,
+  HeroSectionContentType,
+  FeedSectionContentType,
+  ImageContentType,
+  HeroBlockContentType,
 ];
 
 initContentTypeRegistry(registeredContentTypes);
 
-initDisplayTemplateRegistry([]);
+initDisplayTemplateRegistry([ParagraphDisplayTemplate, ImageDisplayTemplate, ColumnDisplayTemplate, HeroBlockDisplayTemplate]);
 
 initReactComponentRegistry({
   resolver: {
     BlankExperience,
     BlankSection,
     Paragraph,
+    CardBlock,
+    ActionBlock,
+    ComplianceBlock,
+    SidebarSection,
+    SplitSection,
+    HeroSection,
+    FeedSection,
+    Image: ImageBlock,
+    HeroBlockv2: HeroBlock,
   },
 });

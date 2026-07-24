@@ -1,0 +1,53 @@
+{
+  "displayName": "Layout: Hero",
+  "routeSegment": "layout-hero",
+  "locale": "en",
+  "composition": {
+    "nodeType": "experience",
+    "layoutType": "outline",
+    "nodes": [
+      {
+        "nodeType": "section",
+        "displayName": "Hero",
+        "layoutType": "grid",
+        "component": { "contentType": "HeroSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "displayName": "Hero Row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "displayName": "Hero Slot",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Announcement",
+                    "component": {
+                      "contentType": "Paragraph",
+                      "properties": {
+                        "Text": { "value": { "html": "<h1>Critical Announcement</h1><p>High-priority message for immediate attention.</p>" } }
+                      }
+                    }
+                  },
+                  {
+                    "nodeType": "component",
+                    "displayName": "Primary CTA",
+                    "component": {
+                      "contentType": "ActionBlock",
+                      "properties": {
+                        "Label":   { "value": "Take Action" },
+                        "Href":    { "value": "#" },
+                        "Variant": { "value": "primary" }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

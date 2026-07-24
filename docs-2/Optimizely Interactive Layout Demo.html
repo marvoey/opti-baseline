@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optimizely Agentic CMS - Layout Demonstrations</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              opti: {
+                lfgreen: '#ABFF44',
+                grass: '#7DDD3D',
+                darkfir: '#08251A',
+                neutral1: '#FFFFFF',
+                neutral2: '#EFF6E9',
+                neutral3: '#E4F0DA',
+                lightblue: '#91DBDA',
+                lightpink: '#FF99B6'
+              }
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              display: ['"Space Grotesk"', 'sans-serif'],
+            },
+            borderRadius: {
+              'opti': '32px',
+              'opti-sm': '24px'
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+        body {
+            background-color: #FAFAFA;
+            color: #08251A;
+        }
+        /* Custom scrollbar for inner areas */
+        .custom-scroll::-webkit-scrollbar {
+            width: 8px;
+        }
+        .custom-scroll::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background-color: #E4F0DA;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="antialiased font-sans h-screen flex flex-col overflow-hidden">
+
+    <!-- App Header -->
+    <header class="bg-opti-darkfir text-white px-8 py-5 flex items-center justify-between shrink-0 shadow-sm z-10 relative">
+        <div class="flex items-center gap-3">
+            <!-- Mock Logo -->
+            <div class="bg-opti-lfgreen text-opti-darkfir font-display font-bold w-10 h-10 rounded-xl flex items-center justify-center text-xl">
+                O
+            </div>
+            <h1 class="font-display text-2xl font-bold tracking-tight">Agentic CMS <span class="text-opti-lfgreen font-normal">Playground</span></h1>
+        </div>
+        <div class="bg-white/10 px-4 py-2 rounded-full text-sm font-medium text-opti-lightblue border border-white/20">
+            Interactive Layout Demonstrations
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <div class="flex flex-1 overflow-hidden bg-gray-50">
+        
+        <!-- Navigation Sidebar -->
+        <nav class="w-72 bg-white border-r border-gray-200 p-6 shrink-0 flex flex-col">
+            <h2 class="font-display text-sm uppercase tracking-widest text-gray-400 font-bold mb-6">Universal Layouts</h2>
+            <div class="space-y-2 flex-1" id="nav-buttons">
+                
+                <button onclick="switchLayout('sidebar-layout', this)" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-opti-sm text-left transition-colors bg-opti-neutral2 text-opti-darkfir font-bold border border-opti-neutral3">
+                    <svg class="w-5 h-5 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"></path></svg>
+                    Sidebar (25/75)
+                </button>
+
+                <button onclick="switchLayout('split-layout', this)" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-opti-sm text-left transition-colors text-gray-600 hover:bg-gray-50 border border-transparent">
+                    <svg class="w-5 h-5 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c-1.105 0-2 .895-2 2s.895 2 2 2 2-.895 2-2-.895-2-2-2zm12-3c-1.105 0-2 .895-2 2s.895 2 2 2 2-.895 2-2-.895-2-2-2zM9 10l12-3"></path></svg>
+                    Split (50/50)
+                </button>
+
+                <button onclick="switchLayout('grid-layout', this)" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-opti-sm text-left transition-colors text-gray-600 hover:bg-gray-50 border border-transparent">
+                    <svg class="w-5 h-5 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                    Grid / Masonry
+                </button>
+
+                <button onclick="switchLayout('hero-layout', this)" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-opti-sm text-left transition-colors text-gray-600 hover:bg-gray-50 border border-transparent">
+                    <svg class="w-5 h-5 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                    Hero / Feature
+                </button>
+
+                <button onclick="switchLayout('feed-layout', this)" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-opti-sm text-left transition-colors text-gray-600 hover:bg-gray-50 border border-transparent">
+                    <svg class="w-5 h-5 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path></svg>
+                    Sequential Feed
+                </button>
+            </div>
+            
+            <!-- Agentic Status -->
+            <div class="mt-auto bg-opti-darkfir rounded-opti-sm p-4 text-white">
+                <div class="flex items-center gap-2 mb-2">
+                    <div class="w-2 h-2 rounded-full bg-opti-lfgreen animate-pulse"></div>
+                    <span class="font-bold text-sm">Agent Engine Active</span>
+                </div>
+                <p class="text-xs text-gray-400 leading-tight">Listening for intent triggers to dynamically assemble layouts and fetch governed blocks.</p>
+            </div>
+        </nav>
+
+        <!-- Dynamic Content Stage -->
+        <main class="flex-1 relative overflow-hidden bg-[#FAFAFA] p-8">
+            
+            <!-- 1. SIDEBAR LAYOUT -->
+            <div id="sidebar-layout" class="layout-pane flex gap-6 absolute inset-8 transition-opacity duration-300">
+                <!-- Left 25% -->
+                <div class="w-1/4 flex flex-col gap-4">
+                    <div class="bg-white rounded-opti p-6 shadow-sm border border-gray-100 flex-1">
+                        <h3 class="font-display font-bold text-opti-darkfir mb-4">Table of Contents</h3>
+                        <ul class="space-y-3 text-sm text-gray-600 font-medium">
+                            <li class="text-opti-grass font-bold border-l-2 border-opti-lfgreen pl-3">1. Introduction</li>
+                            <li class="pl-3 hover:text-opti-darkfir cursor-pointer">2. Authentication</li>
+                            <li class="pl-3 hover:text-opti-darkfir cursor-pointer">3. Core Endpoints</li>
+                            <li class="pl-3 hover:text-opti-darkfir cursor-pointer">4. Rate Limits</li>
+                            <li class="pl-3 hover:text-opti-darkfir cursor-pointer">5. Troubleshooting</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Right 75% -->
+                <div class="w-3/4 bg-white rounded-opti p-10 shadow-sm border border-gray-100 overflow-y-auto custom-scroll flex flex-col">
+                    <!-- Prose Block -->
+                    <div class="mb-8">
+                        <span class="bg-opti-lightblue text-opti-darkfir text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide mb-4 inline-block">Intent: Educate / Enable</span>
+                        <h2 class="font-display text-4xl font-bold text-opti-darkfir mb-4">API Documentation: Authentication</h2>
+                        <p class="text-gray-700 leading-relaxed mb-4 text-lg">
+                            All requests to the platform API require bearer token authentication. You must include your secret API key in the <code>Authorization</code> header for every request.
+                        </p>
+                    </div>
+
+                    <!-- Code / Media Block -->
+                    <div class="bg-opti-darkfir rounded-opti-sm p-6 mb-8 text-white">
+                        <div class="flex justify-between items-center mb-4 border-b border-gray-700 pb-2">
+                            <span class="text-sm font-bold text-gray-300 font-display">Example Request</span>
+                            <button class="text-opti-lfgreen text-sm hover:underline">Copy Code</button>
+                        </div>
+                        <pre class="font-mono text-sm text-opti-lightblue leading-relaxed"><code>curl -X GET "https://api.platform.com/v1/users" \
+-H "Authorization: Bearer YOUR_API_KEY" \
+-H "Content-Type: application/json"</code></pre>
+                    </div>
+
+                    <!-- Action Block -->
+                    <div class="mt-auto pt-6 border-t border-gray-100 flex items-center justify-between">
+                        <p class="text-sm text-gray-500">Need an API key?</p>
+                        <button class="bg-opti-lfgreen text-opti-darkfir font-display font-bold px-6 py-3 rounded-full hover:bg-opti-grass transition-colors">
+                            Generate New Token
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. SPLIT LAYOUT -->
+            <div id="split-layout" class="layout-pane flex gap-6 absolute inset-8 opacity-0 pointer-events-none transition-opacity duration-300">
+                <!-- Left 50% -->
+                <div class="w-1/2 bg-white rounded-opti p-8 shadow-sm border border-gray-100 flex flex-col overflow-y-auto custom-scroll">
+                    <div class="mb-6">
+                        <span class="bg-opti-neutral3 text-opti-darkfir text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide mb-3 inline-block">Intent: Simulate / Transact</span>
+                        <h2 class="font-display text-3xl font-bold text-opti-darkfir">Patient Triage Intake</h2>
+                    </div>
+
+                    <!-- Action/Form Block -->
+                    <div class="flex-1 space-y-5">
+                        <div>
+                            <label class="block text-sm font-bold text-opti-darkfir mb-2">Patient ID</label>
+                            <input type="text" value="PT-883921" class="w-full bg-gray-50 border border-gray-200 rounded-opti-sm px-4 py-3 text-gray-800 focus:outline-none focus:border-opti-grass">
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-1/2">
+                                <label class="block text-sm font-bold text-opti-darkfir mb-2">Primary Symptom</label>
+                                <select class="w-full bg-gray-50 border border-opti-grass rounded-opti-sm px-4 py-3 text-opti-darkfir font-medium focus:outline-none">
+                                    <option>Severe Chest Pain</option>
+                                    <option>Shortness of Breath</option>
+                                    <option>Laceration</option>
+                                </select>
+                            </div>
+                            <div class="w-1/2">
+                                <label class="block text-sm font-bold text-opti-darkfir mb-2">Onset Time</label>
+                                <input type="time" value="14:30" class="w-full bg-gray-50 border border-gray-200 rounded-opti-sm px-4 py-3 text-gray-800 focus:outline-none">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-opti-darkfir mb-2">Medical History Notes</label>
+                            <textarea rows="3" class="w-full bg-gray-50 border border-gray-200 rounded-opti-sm px-4 py-3 text-gray-800 focus:outline-none">Patient has a history of hypertension. Age &gt; 50.</textarea>
+                        </div>
+                    </div>
+
+                    <!-- Action Button -->
+                    <button class="w-full mt-6 bg-opti-lfgreen text-opti-darkfir font-display font-bold px-6 py-4 rounded-full hover:bg-opti-grass transition-colors text-lg">
+                        Submit & Alert Ward
+                    </button>
+                </div>
+                
+                <!-- Right 50% -->
+                <div class="w-1/2 flex flex-col gap-6 overflow-y-auto custom-scroll">
+                    <!-- Dynamic Contextual Help (Prose Block) -->
+                    <div class="bg-opti-darkfir text-white rounded-opti p-8 shadow-sm flex flex-col justify-center">
+                        <div class="bg-opti-lightblue/20 text-opti-lightblue w-12 h-12 rounded-full flex items-center justify-center mb-6">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <h3 class="font-display font-bold text-3xl mb-4 text-opti-lfgreen">Clinical Protocol Alert</h3>
+                        <p class="text-lg leading-relaxed mb-4">
+                            Based on <strong>"Severe Chest Pain"</strong> and <strong>"Age &gt; 50"</strong> inputs:
+                        </p>
+                        <ul class="space-y-4">
+                            <li class="flex items-center gap-3 bg-white/10 p-4 rounded-opti-sm">
+                                <span class="bg-opti-lfgreen text-opti-darkfir rounded-full w-6 h-6 flex items-center justify-center font-bold">1</span>
+                                Immediate ECG required within 10 minutes of arrival.
+                            </li>
+                            <li class="flex items-center gap-3 bg-white/10 p-4 rounded-opti-sm">
+                                <span class="bg-opti-lfgreen text-opti-darkfir rounded-full w-6 h-6 flex items-center justify-center font-bold">2</span>
+                                Alert cardiac team on call immediately.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Global Compliance Block -->
+                    <div class="bg-white border-2 border-opti-lightpink rounded-opti p-6 flex gap-4 items-start">
+                        <div class="bg-opti-lightpink text-opti-darkfir rounded-full p-2 shrink-0">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                        </div>
+                        <div>
+                            <h4 class="font-display font-bold text-opti-darkfir text-lg mb-1">HIPAA Compliance Lock</h4>
+                            <p class="text-sm text-gray-600">Ensure patient terminal is locked if stepping away. Patient data is actively logged and audited.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. GRID / MASONRY LAYOUT -->
+            <div id="grid-layout" class="layout-pane flex flex-col absolute inset-8 opacity-0 pointer-events-none transition-opacity duration-300 overflow-y-auto custom-scroll pr-2">
+                
+                <div class="flex justify-between items-end mb-8 shrink-0">
+                    <div>
+                        <span class="bg-opti-neutral3 text-opti-darkfir text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide mb-3 inline-block">Intent: Discover / Recommend</span>
+                        <h2 class="font-display text-4xl font-bold text-opti-darkfir">Curated Portfolio Options</h2>
+                    </div>
+                    <!-- Action Block (Filter) -->
+                    <div class="flex items-center gap-3 bg-white p-2 rounded-full border border-gray-200 shadow-sm">
+                        <input type="text" placeholder="Search products..." class="bg-transparent border-none focus:outline-none px-4 text-sm w-48">
+                        <button class="bg-opti-darkfir text-white px-4 py-2 rounded-full text-sm font-bold hover:bg-black transition-colors">Search</button>
+                    </div>
+                </div>
+
+                <!-- Cards Grid -->
+                <div class="grid grid-cols-3 gap-6">
+                    <!-- Card 1 -->
+                    <div class="bg-white p-8 rounded-opti border border-gray-200 shadow-sm hover:-translate-y-1 transition-transform duration-200 flex flex-col h-[280px]">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="w-12 h-12 rounded-2xl bg-opti-neutral2 flex items-center justify-center text-opti-darkfir">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                            </div>
+                            <span class="bg-opti-lfgreen text-opti-darkfir text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wide">Recommended</span>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold text-opti-darkfir mb-2">High-Yield IRA</h3>
+                        <p class="text-sm text-gray-500 mb-auto line-clamp-2">Matches client's stated risk tolerance and time-to-retirement horizon.</p>
+                        <button class="w-full bg-opti-neutral2 text-opti-darkfir font-bold py-3 rounded-full hover:bg-opti-neutral3 transition-colors mt-4">
+                            Review Fact Sheet
+                        </button>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="bg-white p-8 rounded-opti border border-gray-200 shadow-sm hover:-translate-y-1 transition-transform duration-200 flex flex-col h-[280px]">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="w-12 h-12 rounded-2xl bg-opti-neutral2 flex items-center justify-center text-opti-darkfir">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                            </div>
+                            <span class="bg-gray-100 text-gray-600 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wide">Alternative</span>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold text-opti-darkfir mb-2">Balanced Annuity</h3>
+                        <p class="text-sm text-gray-500 mb-auto line-clamp-2">Consistent fixed income option. Good secondary proposal for conservative lean.</p>
+                        <button class="w-full bg-opti-neutral2 text-opti-darkfir font-bold py-3 rounded-full hover:bg-opti-neutral3 transition-colors mt-4">
+                            Review Fact Sheet
+                        </button>
+                    </div>
+
+                    <!-- Global Compliance in Grid -->
+                    <div class="bg-opti-darkfir p-8 rounded-opti shadow-sm flex flex-col h-[280px] text-white justify-center items-center text-center">
+                        <div class="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center text-opti-lfgreen mb-4">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                        </div>
+                        <h3 class="font-display text-xl font-bold mb-2 text-opti-lfgreen">Fiduciary Duty Lock</h3>
+                        <p class="text-sm text-gray-300 px-4">
+                            You must present the Prospectus document to the client before executing any transaction listed here.
+                        </p>
+                    </div>
+                    
+                    <!-- Empty state to show grid flow -->
+                    <div class="border-2 border-dashed border-gray-200 rounded-opti flex items-center justify-center h-[280px]">
+                        <p class="text-gray-400 font-medium">Dynamic Slot Available</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. HERO / FEATURE LAYOUT -->
+            <div id="hero-layout" class="layout-pane flex absolute inset-8 opacity-0 pointer-events-none transition-opacity duration-300">
+                <div class="w-full bg-opti-darkfir rounded-[48px] p-16 flex flex-col relative overflow-hidden shadow-2xl justify-center">
+                    
+                    <!-- Decorative background element -->
+                    <div class="absolute -right-20 -top-20 w-96 h-96 bg-opti-lfgreen/10 rounded-full blur-3xl"></div>
+                    <div class="absolute -left-20 -bottom-20 w-80 h-80 bg-opti-lightblue/10 rounded-full blur-3xl"></div>
+
+                    <div class="relative z-10 max-w-3xl">
+                        <div class="flex items-center gap-3 mb-6">
+                            <span class="animate-pulse bg-red-500 w-3 h-3 rounded-full block"></span>
+                            <span class="bg-white/10 text-white border border-white/20 text-sm font-bold px-4 py-1 rounded-full uppercase tracking-wide">Critical Alert • Intent: Inform / Direct</span>
+                        </div>
+                        
+                        <!-- Hero Prose -->
+                        <h2 class="font-display text-6xl md:text-7xl font-bold text-opti-lfgreen mb-6 leading-tight">
+                            Severe Weather <br>Operations Active
+                        </h2>
+                        <p class="text-xl text-gray-300 mb-10 leading-relaxed">
+                            A Level 4 winter storm is currently impacting the Northeastern seaboard. Fee-waiver rebooking policies are now in effect for all flights routing through JFK, EWR, and BOS.
+                        </p>
+                        
+                        <!-- Hero Action -->
+                        <div class="flex items-center gap-4">
+                            <button class="bg-opti-lfgreen text-opti-darkfir font-display font-bold px-10 py-5 rounded-full hover:bg-white transition-colors text-xl shadow-[0_0_20px_rgba(171,255,68,0.3)]">
+                                Enter Rebooking Portal
+                            </button>
+                            <button class="bg-transparent border border-white/30 text-white font-display font-bold px-8 py-5 rounded-full hover:bg-white/10 transition-colors text-lg">
+                                View Agent Guidelines
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. SEQUENTIAL FEED LAYOUT -->
+            <div id="feed-layout" class="layout-pane flex justify-center absolute inset-8 opacity-0 pointer-events-none transition-opacity duration-300 overflow-y-auto custom-scroll">
+                
+                <div class="w-full max-w-2xl pt-4 pb-12">
+                    <div class="mb-10 text-center">
+                        <span class="bg-opti-neutral3 text-opti-darkfir text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide mb-3 inline-block">Intent: Review / Track</span>
+                        <h2 class="font-display text-4xl font-bold text-opti-darkfir">Claim Timeline: CL-9002</h2>
+                    </div>
+
+                    <!-- Timeline Feed -->
+                    <div class="relative border-l-2 border-gray-200 ml-6 space-y-10">
+                        
+                        <!-- Timeline Item 1 -->
+                        <div class="relative pl-10">
+                            <!-- Dot -->
+                            <div class="absolute -left-[11px] top-4 w-5 h-5 rounded-full bg-white border-4 border-opti-lfgreen shadow-sm"></div>
+                            
+                            <!-- Card Block -->
+                            <div class="bg-white p-6 rounded-opti-sm shadow-sm border border-gray-100 relative">
+                                <div class="absolute top-6 right-6 text-xs font-bold text-gray-400">Just Now</div>
+                                <h4 class="font-display text-xl font-bold text-opti-darkfir mb-2">Claim Approved & Paid</h4>
+                                <p class="text-sm text-gray-600 mb-4">Payout of $1,250.00 has been routed to the primary account on file via ACH transfer.</p>
+                                <!-- Action Block -->
+                                <button class="bg-opti-neutral2 text-opti-darkfir font-bold px-4 py-2 rounded-full text-sm hover:bg-opti-neutral3 transition-colors">
+                                    View Receipt
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Timeline Item 2 -->
+                        <div class="relative pl-10">
+                            <div class="absolute -left-[11px] top-4 w-5 h-5 rounded-full bg-white border-4 border-gray-300"></div>
+                            
+                            <div class="bg-white p-6 rounded-opti-sm shadow-sm border border-gray-100 opacity-75">
+                                <div class="absolute top-6 right-6 text-xs font-bold text-gray-400">Yesterday, 14:30</div>
+                                <h4 class="font-display text-xl font-bold text-opti-darkfir mb-2">Adjuster Review Complete</h4>
+                                <p class="text-sm text-gray-600">Initial review of the submitted auto glass claim photos passed standard fraud detection protocols.</p>
+                            </div>
+                        </div>
+
+                        <!-- Timeline Item 3 -->
+                        <div class="relative pl-10">
+                            <div class="absolute -left-[11px] top-4 w-5 h-5 rounded-full bg-white border-4 border-gray-300"></div>
+                            
+                            <div class="bg-white p-6 rounded-opti-sm shadow-sm border border-gray-100 opacity-75">
+                                <div class="absolute top-6 right-6 text-xs font-bold text-gray-400">Oct 12, 09:15</div>
+                                <h4 class="font-display text-xl font-bold text-opti-darkfir mb-2">Claim Filed via Portal</h4>
+                                <p class="text-sm text-gray-600">Customer initiated a commercial auto glass claim. Selected "Windshield" damage.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Script to handle layout switching -->
+    <script>
+        function switchLayout(targetId, btnElement) {
+            // Hide all layout panes
+            const panes = document.querySelectorAll('.layout-pane');
+            panes.forEach(pane => {
+                pane.classList.add('opacity-0', 'pointer-events-none');
+                pane.classList.remove('opacity-100');
+                // Small delay to ensure transition completes before moving z-index
+                setTimeout(() => {
+                    if(pane.id !== targetId) pane.style.zIndex = "0";
+                }, 300);
+            });
+
+            // Reset all buttons styling
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-opti-neutral2', 'text-opti-darkfir', 'font-bold', 'border-opti-neutral3');
+                btn.classList.add('text-gray-600', 'border-transparent', 'hover:bg-gray-50');
+            });
+
+            // Show target layout
+            const target = document.getElementById(targetId);
+            target.style.zIndex = "10";
+            target.classList.remove('opacity-0', 'pointer-events-none');
+            target.classList.add('opacity-100');
+
+            // Update button styling
+            btnElement.classList.add('bg-opti-neutral2', 'text-opti-darkfir', 'font-bold', 'border-opti-neutral3');
+            btnElement.classList.remove('text-gray-600', 'border-transparent', 'hover:bg-gray-50');
+        }
+    </script>
+</body>
+</html>

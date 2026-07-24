@@ -1,0 +1,193 @@
+[
+  {
+    "contentType": "Paragraph",
+    "key": "eg-para-regulatory-canada",
+    "displayName": "Regulatory – Canada (Educate)",
+    "locale": "en",
+    "properties": {
+      "Text": { "$file": "seeds/library/educate-govern/html/para-regulatory-canada.html" },
+      "Intent": "educate_govern",
+      "Persona": "insurance_provider",
+      "Service": ["regulatory"],
+      "Geo": "canada"
+    }
+  },
+  {
+    "contentType": "Paragraph",
+    "key": "eg-para-fund-admin-europe",
+    "displayName": "Fund Administration – Europe (Educate)",
+    "locale": "en",
+    "properties": {
+      "Text": { "$file": "seeds/library/educate-govern/html/para-fund-admin-europe.html" },
+      "Intent": "educate_govern",
+      "Persona": "asset_manager",
+      "Service": ["fund_administration"],
+      "Geo": "europe"
+    }
+  },
+  {
+    "contentType": "Paragraph",
+    "key": "eg-para-securities-lending-us",
+    "displayName": "Securities Lending – United States (Educate)",
+    "locale": "en",
+    "properties": {
+      "Text": { "$file": "seeds/library/educate-govern/html/para-securities-lending-us.html" },
+      "Intent": "educate_govern",
+      "Persona": "asset_manager",
+      "Service": ["securities_lending"],
+      "Geo": "united_states"
+    }
+  },
+  {
+    "contentType": "Paragraph",
+    "key": "eg-para-tax-canada",
+    "displayName": "Tax – Canada (Educate)",
+    "locale": "en",
+    "properties": {
+      "Text": { "$file": "seeds/library/educate-govern/html/para-tax-canada.html" },
+      "Intent": "educate_govern",
+      "Persona": "foreign_institution",
+      "Service": ["tax"],
+      "Geo": "canada"
+    }
+  },
+  {
+    "contentType": "Paragraph",
+    "key": "eg-para-esg-canada",
+    "displayName": "ESG – Canada (Educate)",
+    "locale": "en",
+    "properties": {
+      "Text": { "$file": "seeds/library/educate-govern/html/para-esg-canada.html" },
+      "Intent": "educate_govern",
+      "Persona": "corporate_sponsor",
+      "Service": ["esg"],
+      "Geo": "canada"
+    }
+  },
+  {
+    "contentType": "Paragraph",
+    "key": "eg-para-digital-assets-canada",
+    "displayName": "Digital Assets – Canada (Educate)",
+    "locale": "en",
+    "properties": {
+      "Text": { "$file": "seeds/library/educate-govern/html/para-digital-assets-canada.html" },
+      "Intent": "educate_govern",
+      "Persona": "asset_manager",
+      "Service": ["digital_assets"],
+      "Geo": "canada"
+    }
+  },
+  {
+    "contentType": "Paragraph",
+    "key": "eg-para-fund-admin-canada",
+    "displayName": "Fund Administration – Canada (Educate)",
+    "locale": "en",
+    "properties": {
+      "Text": { "$file": "seeds/library/educate-govern/html/para-fund-admin-canada.html" },
+      "Intent": "educate_govern",
+      "Persona": "asset_manager",
+      "Service": ["fund_administration"],
+      "Geo": "canada"
+    }
+  },
+  {
+    "contentType": "Paragraph",
+    "key": "eg-para-alts-canada",
+    "displayName": "Alternative Investments – Canada (Educate)",
+    "locale": "en",
+    "properties": {
+      "Text": { "$file": "seeds/library/educate-govern/html/para-alts-canada.html" },
+      "Intent": "educate_govern",
+      "Persona": "asset_manager",
+      "Service": ["alternative_investments"],
+      "Geo": "canada"
+    }
+  },
+  {
+    "contentType": "Paragraph",
+    "key": "eg-para-fx-europe",
+    "displayName": "Foreign Exchange – Europe (Educate)",
+    "locale": "en",
+    "properties": {
+      "Text": { "$file": "seeds/library/educate-govern/html/para-fx-europe.html" },
+      "Intent": "educate_govern",
+      "Persona": "asset_manager",
+      "Service": ["foreign_exchange"],
+      "Geo": "europe"
+    }
+  },
+  {
+    "contentType": "Paragraph",
+    "key": "eg-para-recordkeeping-canada",
+    "displayName": "Recordkeeping – Canada (Educate)",
+    "locale": "en",
+    "properties": {
+      "Text": { "$file": "seeds/library/educate-govern/html/para-recordkeeping-canada.html" },
+      "Intent": "educate_govern",
+      "Persona": "pension_fund",
+      "Service": ["recordkeeping"],
+      "Geo": "canada"
+    }
+  },
+  {
+    "contentType": "Paragraph",
+    "key": "eg-para-custody-canada",
+    "displayName": "Global Custody – Canada (Educate)",
+    "locale": "en",
+    "properties": {
+      "Text": { "$file": "seeds/library/educate-govern/html/para-custody-canada.html" },
+      "Intent": "educate_govern",
+      "Persona": "foreign_institution",
+      "Service": ["global_custody"],
+      "Geo": "canada"
+    }
+  },
+  {
+    "contentType": "ComplianceBlock",
+    "key": "eg-compliance-canada",
+    "displayName": "Regulatory Disclaimer – Canada (Educate)",
+    "locale": "en",
+    "properties": {
+      "Jurisdiction": "Canada / OSFI",
+      "Body": { "$file": "seeds/library/educate-govern/html/compliance-canada.html" },
+      "Intent": "educate_govern",
+      "Geo": "canada"
+    }
+  },
+  {
+    "contentType": "ComplianceBlock",
+    "key": "eg-compliance-europe",
+    "displayName": "Regulatory Disclaimer – Europe (Educate)",
+    "locale": "en",
+    "properties": {
+      "Jurisdiction": "EU / MiFID II & UCITS",
+      "Body": { "$file": "seeds/library/educate-govern/html/compliance-europe.html" },
+      "Intent": "educate_govern",
+      "Geo": "europe"
+    }
+  },
+  {
+    "contentType": "ComplianceBlock",
+    "key": "eg-compliance-us",
+    "displayName": "Regulatory Disclaimer – United States (Educate)",
+    "locale": "en",
+    "properties": {
+      "Jurisdiction": "United States / SEC & ERISA",
+      "Body": { "$file": "seeds/library/educate-govern/html/compliance-us.html" },
+      "Intent": "educate_govern",
+      "Geo": "united_states"
+    }
+  },
+  {
+    "contentType": "ComplianceBlock",
+    "key": "eg-compliance-global",
+    "displayName": "Regulatory Disclaimer – Global (Educate)",
+    "locale": "en",
+    "properties": {
+      "Jurisdiction": "Global / Multi-Jurisdictional",
+      "Body": { "$file": "seeds/library/educate-govern/html/compliance-global.html" },
+      "Intent": "educate_govern",
+      "Geo": "global"
+    }
+  }
+]

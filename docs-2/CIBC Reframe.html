@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CIBC Mellon: Challenger Sale Reframe</title>
+    <!-- Font Awesome for Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        /* =============================================================================
+           OPTIMIZELY GLOBAL BRAND STYLESHEET
+           ============================================================================= */
+
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap');
+
+        /* ─── Brand Tokens ─────────────────────────────────────────────────────────── */
+        :root {
+          /* Primary palette */
+          --c-lfgreen:    #ABFF44;   /* LFGreen — signature vibrant green */
+          --c-grass:      #7DDD3D;   /* Grass */
+          --c-good-go:    #3AB533;   /* Good-to-go */
+          --c-white:      #FFFFFF;   /* Neutral 1 */
+          --c-neutral-3:  #E4F0DA;   /* Neutral 3 — primary backdrop */
+
+          /* Secondary palette */
+          --c-light-blue: #91DBDA;
+          --c-dark-fir:   #08251A;   /* Dark Fir — primary dark */
+
+          /* Tertiary palette */
+          --c-dark-blue:  #007B79;
+          --c-light-fir:  #197050;
+          --c-mid-fir:    #0D3A29;   /* Mid Fir — deep text */
+          --c-neutral-2:  #EFF6E9;
+          --c-neutral-4:  #D8E4CB;
+          --c-neutral-5:  #C3CEAF;
+          --c-neutral-6:  #A1AC8D;   /* muted / supporting text */
+
+          /* Typography */
+          --f-display: 'Space Grotesk', 'Helvetica Neue', system-ui, sans-serif;
+          --f-body:    'DM Sans',       'Helvetica Neue', system-ui, sans-serif;
+
+          /* Spacing scale */
+          --sp-1:  0.25rem;
+          --sp-2:  0.5rem;
+          --sp-3:  0.75rem;
+          --sp-4:  1rem;
+          --sp-5:  1.25rem;
+          --sp-6:  1.5rem;
+          --sp-8:  2rem;
+          --sp-10: 2.5rem;
+          --sp-12: 3rem;
+
+          /* Corner radius */
+          --r-xs:  8px;
+          --r-sm:  12px;
+          --r-md:  20px;
+          --r-lg:  32px;
+          --r-xl:  40px;
+          --r-pill: 9999px;
+
+          /* Elevation */
+          --shadow-sm: 0 2px 8px  rgba(8, 37, 26, 0.06);
+          --shadow-md: 0 4px 20px rgba(8, 37, 26, 0.10);
+          --shadow-lg: 0 8px 40px rgba(8, 37, 26, 0.16);
+        }
+
+        /* ─── Reset & Base ─────────────────────────────────────────────────────────── */
+        *, *::before, *::after {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+        }
+
+        html { font-size: 16px; }
+
+        body {
+          font-family: var(--f-body);
+          background-color: var(--c-neutral-3);
+          color: var(--c-dark-fir);
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          padding: var(--sp-4);
+          line-height: 1.6;
+        }
+
+        @media (min-width: 768px) {
+          body { padding: var(--sp-8); }
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+          font-family: var(--f-display);
+          font-weight: 700;
+          line-height: 1.15;
+        }
+
+        p { line-height: 1.65; }
+        a { color: inherit; text-decoration: none; }
+        img, svg { max-width: 100%; display: block; }
+        strong { font-weight: 700; }
+
+        /* ─── Page Layout ──────────────────────────────────────────────────────────── */
+        .page-wrapper {
+          max-width: 64rem;
+          margin: 0 auto;
+          display: flex;
+          flex-direction: column;
+          gap: var(--sp-8);
+        }
+
+        .grid-2 {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: var(--sp-6);
+        }
+
+        .grid-3 {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: var(--sp-4);
+        }
+
+        @media (min-width: 768px) {
+          .grid-2 { grid-template-columns: 1fr 1fr; }
+          .grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+        }
+
+        /* ─── Animations ───────────────────────────────────────────────────────────── */
+        .fade-in {
+          opacity: 0;
+          animation: fadeIn 0.7s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(16px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .delay-1 { animation-delay: 0.10s; }
+        .delay-2 { animation-delay: 0.20s; }
+        .delay-3 { animation-delay: 0.32s; }
+        .delay-4 { animation-delay: 0.44s; }
+        .delay-5 { animation-delay: 0.56s; }
+        .delay-6 { animation-delay: 0.68s; }
+
+        /* ─── Header Block ─────────────────────────────────────────────────────────── */
+        .opti-header {
+          background-color: var(--c-dark-fir);
+          border-radius: var(--r-lg);
+          padding: var(--sp-8);
+          overflow: hidden;
+          position: relative;
+        }
+
+        @media (min-width: 768px) {
+          .opti-header { padding: var(--sp-12); }
+        }
+
+        .opti-header__eyebrow {
+          font-family: var(--f-body);
+          font-size: 0.7rem;
+          font-weight: 700;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: var(--c-neutral-6);
+          margin-bottom: var(--sp-3);
+        }
+
+        .opti-header__title {
+          font-family: var(--f-display);
+          font-size: clamp(1.9rem, 5vw, 3.5rem);
+          font-weight: 700;
+          color: var(--c-lfgreen);
+          line-height: 1.1;
+          margin-bottom: var(--sp-4);
+        }
+
+        .opti-header__subtitle {
+          font-family: var(--f-body);
+          font-size: 1.05rem;
+          color: var(--c-neutral-5);
+          font-weight: 400;
+          max-width: 42rem;
+          line-height: 1.7;
+        }
+
+        /* ─── Card ─────────────────────────────────────────────────────────────────── */
+        .card {
+          background: var(--c-white);
+          border-radius: var(--r-lg);
+          padding: var(--sp-8);
+          border: 1px solid var(--c-neutral-4);
+          box-shadow: var(--shadow-sm);
+          transition: box-shadow 0.25s ease;
+        }
+
+        .card:hover { box-shadow: var(--shadow-md); }
+
+        .card--fir {
+          background: var(--c-dark-fir);
+          color: var(--c-white);
+          border-color: transparent;
+        }
+
+        .card--light {
+          background: var(--c-neutral-2);
+          border-color: var(--c-neutral-4);
+        }
+
+        .card--green {
+          background: var(--c-lfgreen);
+          color: var(--c-dark-fir);
+          border-color: transparent;
+        }
+
+        .card--accent-top { border-top: 4px solid var(--c-lfgreen); }
+        .card--accent-left { border-left: 4px solid var(--c-lfgreen); }
+
+        /* ─── Card Heading ──────────────────────────────────────────────────────────── */
+        .card-heading {
+          display: flex;
+          align-items: center;
+          gap: var(--sp-3);
+          font-family: var(--f-display);
+          font-size: 1.05rem;
+          font-weight: 700;
+          color: var(--c-dark-fir);
+          padding-bottom: var(--sp-3);
+          border-bottom: 1px solid var(--c-neutral-4);
+          margin-bottom: var(--sp-5);
+        }
+
+        .card-heading .icon-good { color: var(--c-good-go); }
+        .card-heading .icon-warn { color: #b94040; }
+
+        /* ─── Section Typography ────────────────────────────────────────────────────── */
+        .section-title {
+          font-family: var(--f-display);
+          font-size: 1.5rem;
+          font-weight: 700;
+          color: var(--c-dark-fir);
+          margin-bottom: var(--sp-6);
+        }
+
+        .section-title--center { text-align: center; }
+
+        .section-eyebrow {
+          font-family: var(--f-body);
+          font-size: 0.7rem;
+          font-weight: 700;
+          letter-spacing: 0.13em;
+          text-transform: uppercase;
+          color: var(--c-good-go);
+          margin-bottom: var(--sp-2);
+        }
+
+        /* ─── Callout / Dark Hero Block ─────────────────────────────────────────────── */
+        .callout {
+          background: var(--c-dark-fir);
+          border-radius: var(--r-lg);
+          padding: var(--sp-8);
+          text-align: center;
+          position: relative;
+          overflow: hidden;
+        }
+
+        @media (min-width: 768px) {
+          .callout { padding: var(--sp-12); }
+        }
+
+        .callout__eyebrow {
+          font-family: var(--f-body);
+          font-size: 0.7rem;
+          font-weight: 700;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: var(--c-neutral-6);
+          margin-bottom: var(--sp-6);
+        }
+
+        .callout__quote {
+          font-family: var(--f-display);
+          font-size: clamp(1.2rem, 2.8vw, 1.9rem);
+          font-weight: 600;
+          color: var(--c-lfgreen);
+          line-height: 1.45;
+          max-width: 52rem;
+          margin: 0 auto;
+        }
+
+        .callout__body {
+          font-size: 0.9rem;
+          color: var(--c-neutral-5);
+          line-height: 1.7;
+          margin: var(--sp-6) auto 0;
+          max-width: 42rem;
+        }
+
+        .callout__divider {
+          border: none;
+          border-top: 1px solid rgba(255, 255, 255, 0.1);
+          margin: var(--sp-6) auto;
+          max-width: 42rem;
+        }
+
+        /* ─── Insight / Blockquote ──────────────────────────────────────────────────── */
+        .insight {
+          background: var(--c-neutral-2);
+          border-left: 4px solid var(--c-lfgreen);
+          padding: var(--sp-4) var(--sp-5);
+          border-radius: 0 var(--r-sm) var(--r-sm) 0;
+          font-style: italic;
+          color: var(--c-mid-fir);
+          font-size: 0.95rem;
+          line-height: 1.7;
+        }
+
+        /* ─── Feature Cards ─────────────────────────────────────────────────────────── */
+        .feature-card {
+          background: var(--c-white);
+          border-radius: var(--r-md);
+          padding: var(--sp-5);
+          border: 1px solid var(--c-neutral-4);
+          display: flex;
+          align-items: flex-start;
+          gap: var(--sp-4);
+          transition: box-shadow 0.2s ease, transform 0.2s ease;
+        }
+
+        .feature-card:hover {
+          box-shadow: var(--shadow-md);
+          transform: translateY(-2px);
+        }
+
+        .feature-card__icon {
+          color: var(--c-good-go);
+          font-size: 1.2rem;
+          flex-shrink: 0;
+          margin-top: 0.1rem;
+        }
+
+        .feature-card__title {
+          font-family: var(--f-display);
+          font-size: 0.875rem;
+          font-weight: 700;
+          color: var(--c-dark-fir);
+          margin-bottom: var(--sp-1);
+        }
+
+        .feature-card__desc {
+          font-size: 0.8rem;
+          color: var(--c-neutral-6);
+          line-height: 1.55;
+        }
+
+        /* ─── Comparison Block ──────────────────────────────────────────────────────── */
+        .compare {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: var(--sp-4);
+        }
+
+        @media (min-width: 1024px) {
+          .compare { flex-direction: row; }
+        }
+
+        .compare__from {
+          flex: 1;
+          width: 100%;
+          background: var(--c-neutral-4);
+          border-radius: var(--r-md);
+          padding: var(--sp-6) var(--sp-8);
+          text-align: center;
+        }
+
+        .compare__from-label {
+          font-size: 0.68rem;
+          font-weight: 700;
+          letter-spacing: 0.13em;
+          text-transform: uppercase;
+          color: var(--c-neutral-6);
+          margin-bottom: var(--sp-3);
+        }
+
+        .compare__from-text {
+          font-style: italic;
+          font-size: 0.95rem;
+          color: var(--c-mid-fir);
+          line-height: 1.6;
+        }
+
+        .compare__arrow {
+          flex-shrink: 0;
+          font-size: 1.75rem;
+          color: var(--c-lfgreen);
+          transform: rotate(90deg);
+        }
+
+        @media (min-width: 1024px) {
+          .compare__arrow { transform: rotate(0deg); }
+        }
+
+        .compare__to {
+          flex: 1;
+          width: 100%;
+          background: var(--c-lfgreen);
+          border-radius: var(--r-md);
+          padding: var(--sp-6) var(--sp-8);
+          text-align: center;
+          color: var(--c-dark-fir);
+          position: relative;
+          transition: transform 0.25s ease;
+        }
+
+        .compare__to:hover { transform: translateY(-4px); }
+
+        .compare__to-label {
+          font-size: 0.68rem;
+          font-weight: 700;
+          letter-spacing: 0.13em;
+          text-transform: uppercase;
+          color: var(--c-mid-fir);
+          margin-bottom: var(--sp-3);
+        }
+
+        .compare__to-text {
+          font-weight: 600;
+          font-size: 0.95rem;
+          color: var(--c-dark-fir);
+          line-height: 1.6;
+        }
+
+        .compare__badge {
+          position: absolute;
+          top: -0.75rem;
+          right: -0.75rem;
+          background: var(--c-good-go);
+          color: var(--c-white);
+          width: 2rem;
+          height: 2rem;
+          border-radius: var(--r-pill);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 0.75rem;
+          box-shadow: var(--shadow-sm);
+        }
+
+        /* ─── List ──────────────────────────────────────────────────────────────────── */
+        .opti-list {
+          list-style: none;
+          display: flex;
+          flex-direction: column;
+          gap: var(--sp-3);
+        }
+
+        .opti-list li {
+          display: flex;
+          align-items: flex-start;
+          gap: var(--sp-3);
+          font-size: 0.9rem;
+          color: var(--c-mid-fir);
+          line-height: 1.55;
+        }
+
+        .opti-list li .icon {
+          flex-shrink: 0;
+          margin-top: 0.15rem;
+          font-size: 0.85rem;
+        }
+
+        /* ─── Value Prop Banner ─────────────────────────────────────────────────────── */
+        .value-banner {
+          background: var(--c-neutral-2);
+          border-radius: var(--r-lg);
+          padding: var(--sp-8);
+          text-align: center;
+          border: 1px solid var(--c-neutral-4);
+        }
+
+        .value-banner p {
+          font-size: 1.05rem;
+          color: var(--c-dark-fir);
+          max-width: 42rem;
+          margin: 0 auto;
+          line-height: 1.75;
+        }
+
+        /* ─── Divider ───────────────────────────────────────────────────────────────── */
+        .opti-divider {
+          border: none;
+          border-top: 1px solid var(--c-neutral-4);
+          margin: var(--sp-6) 0;
+        }
+
+        /* ─── Utility ────────────────────────────────────────────────────────── */
+        .u-lfgreen    { color: var(--c-lfgreen); }
+        .u-fir        { color: var(--c-dark-fir); }
+        .u-mid-fir    { color: var(--c-mid-fir); }
+        .u-neutral-5  { color: var(--c-neutral-5); }
+        .u-neutral-6  { color: var(--c-neutral-6); }
+        .u-white      { color: var(--c-white); }
+        .u-good-go    { color: var(--c-good-go); }
+
+        .u-display    { font-family: var(--f-display); }
+        .u-body       { font-family: var(--f-body); }
+        .u-bold       { font-weight: 700; }
+        .u-semibold   { font-weight: 600; }
+        .u-medium     { font-weight: 500; }
+        .u-italic     { font-style: italic; }
+        .u-uppercase  { text-transform: uppercase; }
+        .u-tracking   { letter-spacing: 0.1em; }
+        .u-center     { text-align: center; }
+
+        .u-text-xs    { font-size: 0.75rem; }
+        .u-text-sm    { font-size: 0.875rem; }
+        .u-text-base  { font-size: 1rem; }
+        .u-text-lg    { font-size: 1.125rem; }
+        .u-text-xl    { font-size: 1.25rem; }
+        .u-text-2xl   { font-size: 1.5rem; }
+
+        .u-mt-2  { margin-top: var(--sp-2); }
+        .u-mt-3  { margin-top: var(--sp-3); }
+        .u-mt-4  { margin-top: var(--sp-4); }
+        .u-mt-6  { margin-top: var(--sp-6); }
+        .u-mt-8  { margin-top: var(--sp-8); }
+        .u-mb-2  { margin-bottom: var(--sp-2); }
+        .u-mb-3  { margin-bottom: var(--sp-3); }
+        .u-mb-4  { margin-bottom: var(--sp-4); }
+        .u-mb-6  { margin-bottom: var(--sp-6); }
+        .u-mb-8  { margin-bottom: var(--sp-8); }
+        .u-mr-2  { margin-right: var(--sp-2); }
+        .u-mr-3  { margin-right: var(--sp-3); }
+        .u-mx-auto { margin-left: auto; margin-right: auto; }
+        .u-max-3xl { max-width: 48rem; }
+
+        .u-flex         { display: flex; }
+        .u-items-center { align-items: center; }
+        .u-items-start  { align-items: flex-start; }
+        .u-gap-3        { gap: var(--sp-3); }
+        .u-gap-4        { gap: var(--sp-4); }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        
+        <!-- Header -->
+        <header class="opti-header fade-in delay-1">
+            <div class="opti-header__eyebrow"><i class="fas fa-chart-line u-mr-2"></i> Challenger Reframe</div>
+            <h1 class="opti-header__title">CIBC Mellon</h1>
+            <p class="opti-header__subtitle">Shifting the narrative from a technical modernization project to solving a critical client-intent gap.</p>
+        </header>
+
+        <!-- The Reframe Grid -->
+        <section class="grid-2 fade-in delay-2">
+            <!-- Stated Requirements -->
+            <div class="card card--light card--accent-left">
+                <h2 class="card-heading">
+                    <i class="fas fa-exclamation-circle icon-warn"></i> The Stated Problem (Symptoms)
+                </h2>
+                <div class="insight u-mb-4">
+                    "We need better workflows, DAM, accessibility, analytics, governance, AI, and easier content management."
+                </div>
+                <p class="u-text-sm u-mid-fir">
+                    CIBC Mellon believes the central challenge is an outdated, hard-to-manage website. But a faster publishing process or new visual design doesn't solve the core issue—it just allows them to produce destination-based content more efficiently.
+                </p>
+            </div>
+
+            <!-- The Actual Problem -->
+            <div class="card card--accent-top">
+                <h2 class="card-heading">
+                    <i class="fas fa-bullseye u-good-go"></i> The Real Business Risk
+                </h2>
+                <p class="u-display u-bold u-text-lg u-fir u-mb-4">
+                    CIBC Mellon is delivering digital experiences around predefined destinations, while its audience expects to express a need and receive a relevant answer.
+                </p>
+                <p class="u-text-sm u-neutral-6">
+                    Visitors must currently understand CIBC Mellon’s complex organizational structure, choose service categories, interpret terminology, and assemble the answers themselves.
+                </p>
+            </div>
+        </section>
+
+        <!-- Commercial Insight -->
+        <section class="card fade-in delay-3">
+            <div class="section-eyebrow">Commercial Insight</div>
+            <p class="u-display u-text-xl u-bold u-fir u-mb-6 border-bottom" style="padding-bottom: 1rem; border-bottom: 1px solid var(--c-neutral-4);">
+                The risk is not that CIBC Mellon cannot publish content efficiently. The risk is that its most valuable expertise remains difficult for clients and prospects to access at the exact moment they need it.
+            </p>
+            
+            <div class="grid-2 u-mt-6">
+                <div>
+                    <h3 class="u-display u-bold u-text-base u-mb-3 u-flex u-items-center"><i class="fas fa-arrows-alt-h u-neutral-6 u-mr-2"></i> The Gap</h3>
+                    <div class="insight">
+                        The website is structured around <strong>what CIBC Mellon offers</strong>, while visitors arrive thinking about <strong>what they need to accomplish</strong>.
+                    </div>
+                </div>
+                <div>
+                    <h3 class="u-display u-bold u-text-base u-mb-3 u-flex u-items-center"><i class="fas fa-chart-pie u-neutral-6 u-mr-2"></i> The Cost of Inaction</h3>
+                    <ul class="opti-list">
+                        <li><i class="fas fa-times-circle icon-warn icon"></i> <span>Relevant services remain undiscovered.</span></li>
+                        <li><i class="fas fa-times-circle icon-warn icon"></i> <span>Thought leadership fails to influence decisions.</span></li>
+                        <li><i class="fas fa-times-circle icon-warn icon"></i> <span>Visitors leave without recognizing capabilities.</span></li>
+                        <li><i class="fas fa-times-circle icon-warn icon"></i> <span>Digital engagement yields activity without progression.</span></li>
+                        <li><i class="fas fa-times-circle icon-warn icon"></i> <span>Competitors appear easier to work with.</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Provocative Question -->
+        <section class="callout fade-in delay-4">
+            <div class="callout__eyebrow"><i class="fas fa-lightbulb u-lfgreen u-mr-2"></i> The Provocative Question</div>
+            <blockquote class="callout__quote">
+                "What happens if CIBC Mellon modernizes the platform, improves workflows, and migrates all of its content—but visitors still have to know where to look before they can find the right answer?"
+            </blockquote>
+            <hr class="callout__divider">
+            <p class="callout__body">
+                This separates the <strong class="u-white">technical modernization project</strong> from the true <strong class="u-white">business outcome</strong>.
+            </p>
+        </section>
+
+        <!-- The New Way -->
+        <section class="fade-in delay-5">
+            <h2 class="section-title section-title--center">The Opportunity: A Paradigm Shift</h2>
+            
+            <div class="compare u-mb-8">
+                <!-- Old Way -->
+                <div class="compare__from">
+                    <div class="compare__from-label">Destination-Driven</div>
+                    <div class="compare__from-text">“Here are our services. Navigate to the one you need.”</div>
+                </div>
+                
+                <!-- Arrow -->
+                <div class="compare__arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+                
+                <!-- New Way -->
+                <div class="compare__to">
+                    <div class="compare__badge"><i class="fas fa-check"></i></div>
+                    <div class="compare__to-label" style="color: var(--c-dark-fir);">Intent-Driven</div>
+                    <div class="compare__to-text">“Tell us what you are trying to accomplish, and we will assemble the relevant services, expertise, evidence, and next step.”</div>
+                </div>
+            </div>
+
+            <!-- Optimizely Value Prop -->
+            <div class="value-banner">
+                <p>
+                    <i class="fas fa-handshake u-good-go u-mr-2 u-text-xl"></i><br><br>
+                    <strong>Optimizely is not simply helping CIBC Mellon manage and publish content more efficiently.</strong> It is helping CIBC Mellon restructure and activate its institutional knowledge so that clients can access the right expertise based on their intent.
+                </p>
+            </div>
+        </section>
+
+        <!-- Core Message Footer -->
+        <section class="card card--fir fade-in delay-6">
+            <div class="section-eyebrow u-lfgreen u-mb-4" style="border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.75rem;">
+                <i class="fas fa-key u-mr-2"></i> Core Challenger Message
+            </div>
+            <p class="u-display u-text-xl" style="font-weight: 400; line-height: 1.6;">
+                CIBC Mellon does not primarily have a content-management problem. It has a <strong class="u-fir" style="background: var(--c-lfgreen); padding: 0 0.4rem; border-radius: 4px;">client-intent problem</strong>. Its expertise is organized and delivered according to the company’s internal structure rather than the immediate needs of institutional visitors. Unless that model changes, a new DXP risks becoming a more efficient way to operate the same experience.
+            </p>
+        </section>
+
+    </div>
+</body>
+</html>

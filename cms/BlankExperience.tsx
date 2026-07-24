@@ -7,6 +7,7 @@ export const BlankExperienceContentType = contentType({
   baseType: '_experience',
   displayName: 'Blank Experience',
   description: 'A blank routable experience composed visually in the Visual Builder.',
+  mayContainTypes: ['*'],
   properties: {},
 });
 

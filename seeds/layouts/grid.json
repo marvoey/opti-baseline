@@ -1,0 +1,76 @@
+{
+  "displayName": "Layout: Grid",
+  "routeSegment": "layout-grid",
+  "locale": "en",
+  "composition": {
+    "nodeType": "experience",
+    "layoutType": "outline",
+    "nodes": [
+      {
+        "nodeType": "section",
+        "displayName": "Card Grid",
+        "layoutType": "grid",
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "displayName": "Cards Row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "displayName": "Card 1",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Card: Option A",
+                    "component": {
+                      "contentType": "CardBlock",
+                      "properties": {
+                        "Title": { "value": "Option A" },
+                        "Body":  { "value": { "html": "<p>Description for option A.</p>" } }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "column",
+                "displayName": "Card 2",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Card: Option B",
+                    "component": {
+                      "contentType": "CardBlock",
+                      "properties": {
+                        "Title": { "value": "Option B" },
+                        "Body":  { "value": { "html": "<p>Description for option B.</p>" } }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "column",
+                "displayName": "Card 3",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Card: Option C",
+                    "component": {
+                      "contentType": "CardBlock",
+                      "properties": {
+                        "Title": { "value": "Option C" },
+                        "Body":  { "value": { "html": "<p>Description for option C.</p>" } }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

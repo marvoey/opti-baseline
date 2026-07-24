@@ -1,0 +1,59 @@
+{
+  "displayName": "Layout: Split",
+  "routeSegment": "layout-split",
+  "locale": "en",
+  "composition": {
+    "nodeType": "experience",
+    "layoutType": "outline",
+    "nodes": [
+      {
+        "nodeType": "section",
+        "displayName": "Split Layout",
+        "layoutType": "grid",
+        "component": { "contentType": "SplitSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "displayName": "Task Row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "displayName": "Primary (60%)",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Action",
+                    "component": {
+                      "contentType": "ActionBlock",
+                      "properties": {
+                        "Label":   { "value": "Confirm Action" },
+                        "Href":    { "value": "#" },
+                        "Variant": { "value": "primary" }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "column",
+                "displayName": "Contextual Help (40%)",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Guidance",
+                    "component": {
+                      "contentType": "Paragraph",
+                      "properties": {
+                        "Text": { "value": { "html": "<p>Contextual guidance appears here based on the active step.</p>" } }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

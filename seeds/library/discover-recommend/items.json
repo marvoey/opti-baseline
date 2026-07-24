@@ -1,0 +1,135 @@
+{
+  "container": { "$env": "FOLDER_DISCOVER_RECOMMEND_PROSE_BLOCKS" },
+  "items": [
+  {
+    "contentType": "Paragraph",
+    "key": "4d4a1f8e4b6e440194b459c91ac09886",
+    "displayName": "ESG Mutual Fund Administration – Canada",
+    "locale": "en",
+    "properties": {
+      "Text": { "$richTextFile": "seeds/library/discover-recommend/html/pack-01.html" },
+      "Intent": { "value": "discover_recommend" },
+      "Persona": { "value": "asset_manager" },
+      "Service": { "value": ["fund_administration", "esg"] },
+      "Geo": { "value": "canada" }
+    }
+  },
+  {
+    "contentType": "Paragraph",
+    "key": "c27b51e9f85347f4aa01074d468e4425",
+    "displayName": "UK Pension Fund FX Cash Drag – Europe",
+    "locale": "en",
+    "properties": {
+      "Text": { "$richTextFile": "seeds/library/discover-recommend/html/pack-02.html" },
+      "Intent": { "value": "discover_recommend" },
+      "Persona": { "value": "pension_fund" },
+      "Service": { "value": ["foreign_exchange"] },
+      "Geo": { "value": "europe" }
+    }
+  },
+  {
+    "contentType": "Paragraph",
+    "key": "0f23ca6cd8eb4a139e75947dfd3434a1",
+    "displayName": "US Corporate Treasury Entering Canada – United States",
+    "locale": "en",
+    "properties": {
+      "Text": { "$richTextFile": "seeds/library/discover-recommend/html/pack-03.html" },
+      "Intent": { "value": "discover_recommend" },
+      "Persona": { "value": "corporate_sponsor" },
+      "Service": { "value": ["treasury_services"] },
+      "Geo": { "value": "united_states" }
+    }
+  },
+  {
+    "contentType": "Paragraph",
+    "key": "387eeffefdd64629a5f08ffdae0f3b3b",
+    "displayName": "ETF Servicing – Canada",
+    "locale": "en",
+    "properties": {
+      "Text": { "$richTextFile": "seeds/library/discover-recommend/html/pack-04.html" },
+      "Intent": { "value": "discover_recommend" },
+      "Persona": { "value": "asset_manager" },
+      "Service": { "value": ["etf_services"] },
+      "Geo": { "value": "canada" }
+    }
+  },
+  {
+    "contentType": "Paragraph",
+    "key": "3f180683be6f45168ebf9ba5b091d154",
+    "displayName": "Alternative Investment Servicing – Global",
+    "locale": "en",
+    "properties": {
+      "Text": { "$richTextFile": "seeds/library/discover-recommend/html/pack-05.html" },
+      "Intent": { "value": "discover_recommend" },
+      "Persona": { "value": "asset_manager" },
+      "Service": { "value": ["alternative_investments"] },
+      "Geo": { "value": "global" }
+    }
+  },
+  {
+    "contentType": "Paragraph",
+    "key": "ef7f6d0c27e446efbe1ed9d58cf790a8",
+    "displayName": "Securities Lending Program Design – Canada",
+    "locale": "en",
+    "properties": {
+      "Text": { "$richTextFile": "seeds/library/discover-recommend/html/pack-06.html" },
+      "Intent": { "value": "discover_recommend" },
+      "Persona": { "value": "pension_fund" },
+      "Service": { "value": ["securities_lending"] },
+      "Geo": { "value": "canada" }
+    }
+  },
+  {
+    "contentType": "Paragraph",
+    "key": "ab230f04479d4b4f97c84cbb6ee04eef",
+    "displayName": "Global Custody Options – United States",
+    "locale": "en",
+    "properties": {
+      "Text": { "$richTextFile": "seeds/library/discover-recommend/html/pack-07.html" },
+      "Intent": { "value": "discover_recommend" },
+      "Persona": { "value": "insurance_provider" },
+      "Service": { "value": ["global_custody"] },
+      "Geo": { "value": "united_states" }
+    }
+  },
+  {
+    "contentType": "Paragraph",
+    "key": "d08d6bc103444a389bb02f14f80e39d4",
+    "displayName": "Cross-Border Fund Administration – Europe",
+    "locale": "en",
+    "properties": {
+      "Text": { "$richTextFile": "seeds/library/discover-recommend/html/pack-08.html" },
+      "Intent": { "value": "discover_recommend" },
+      "Persona": { "value": "asset_manager" },
+      "Service": { "value": ["fund_administration"] },
+      "Geo": { "value": "europe" }
+    }
+  },
+  {
+    "contentType": "Paragraph",
+    "key": "a36e2bc18f2648998f67cb2b27d8504e",
+    "displayName": "Canadian Sub-Custody for Foreign Institutions – Canada",
+    "locale": "en",
+    "properties": {
+      "Text": { "$richTextFile": "seeds/library/discover-recommend/html/pack-09.html" },
+      "Intent": { "value": "discover_recommend" },
+      "Persona": { "value": "foreign_institution" },
+      "Service": { "value": ["global_custody"] },
+      "Geo": { "value": "canada" }
+    }
+  },
+  {
+    "contentType": "Paragraph",
+    "key": "dac553bdf88b41ca9a345646320cdc82",
+    "displayName": "Recordkeeping Models for Multinational Sponsors – Global",
+    "locale": "en",
+    "properties": {
+      "Text": { "$richTextFile": "seeds/library/discover-recommend/html/pack-10.html" },
+      "Intent": { "value": "discover_recommend" },
+      "Persona": { "value": "corporate_sponsor" },
+      "Service": { "value": ["recordkeeping"] },
+      "Geo": { "value": "global" }
+    }
+  }
+  ]
+}

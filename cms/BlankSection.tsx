@@ -1,11 +1,11 @@
 import { OptimizelyGridSection, getPreviewUtils } from '@optimizely/cms-sdk/react/server';
-import type { ComponentContainerProps } from '@optimizely/cms-sdk/react/server';
+import type { StructureContainerProps } from '@optimizely/cms-sdk/react/server';
 
-function BlankRow({ children }: ComponentContainerProps) {
+function BlankRow({ children }: StructureContainerProps) {
   return <div className="flex flex-col gap-4 md:flex-row">{children}</div>;
 }
 
-function BlankColumn({ children }: ComponentContainerProps) {
+function BlankColumn({ children }: StructureContainerProps) {
   return <div className="flex-1">{children}</div>;
 }
 

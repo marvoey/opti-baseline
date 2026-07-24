@@ -1,0 +1,247 @@
+{
+  "displayName": "Stack 1: Strategic Expansion Briefing",
+  "routeSegment": "stack-strategic-briefing",
+  "locale": "en",
+  "composition": {
+    "nodeType": "experience",
+    "layoutType": "outline",
+    "nodes": [
+      {
+        "nodeType": "section",
+        "displayName": "Hero — Executive Summary",
+        "layoutType": "grid",
+        "component": { "contentType": "HeroSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "displayName": "Hero Row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "displayName": "Hero Slot",
+                "displaySettings": {
+                  "displayTemplate": "ColumnDefault",
+                  "settings": {
+                    "position": "relative"
+                  }
+                },
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Image",
+                    "displaySettings": {
+                      "displayTemplate": "DefaultImage",
+                      "settings": {
+                        "displayAs": "background",
+                        "overlay": "none"
+                      }
+                    },
+                    "component": {
+                      "contentType": "Image",
+                      "properties": {
+                        "AltText": { "value": "gardening" },
+                        "Image": { "value": "cms://content/DamImageSource/740c72b0687411f18b7e4ef65a1508fe" }
+                      }
+                    }
+                  },
+                  {
+                    "nodeType": "component",
+                    "displayName": "Executive Summary",
+                    "component": {
+                      "contentType": "Paragraph",
+                      "properties": {
+                        "Text": {
+                          "value": {
+                            "html": "<h1>Strategic Expansion Briefing: European Equities</h1><p>This briefing outlines the regulatory, operational, and product considerations for expanding client exposure to European equity markets. Review each section before scheduling a strategy session.</p><p>Prepared for institutional clients with active mandates in cross-border securities and alternative asset classes.</p>"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nodeType": "section",
+        "displayName": "Sidebar — Targeted Insight",
+        "layoutType": "grid",
+        "component": { "contentType": "SidebarSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "displayName": "Content Row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "displayName": "Contents (25%)",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Table of Contents",
+                    "component": {
+                      "contentType": "Paragraph",
+                      "properties": {
+                        "Text": {
+                          "value": {
+                            "html": "<h3>Contents</h3><ul><li>Regulatory Impact</li><li>Custody Requirements</li><li>FX Execution</li></ul>"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "column",
+                "displayName": "Main Content (75%)",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Targeted Insight",
+                    "component": {
+                      "contentType": "Paragraph",
+                      "properties": {
+                        "Text": {
+                          "value": {
+                            "html": "<h2>Extracted Insight: Regulatory Impact</h2><p>MiFID II reporting obligations apply to all transactions in European-listed equities, regardless of client domicile. Ensure your reporting infrastructure is certified for T+1 reconciliation before executing block trades.</p><p>Clients classified as Professional under EMIR must submit trade reports within the prescribed window. Failure to comply carries regulatory censure risk.</p>"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "nodeType": "component",
+                    "displayName": "Global Compliance Lock",
+                    "component": {
+                      "contentType": "ComplianceBlock",
+                      "properties": {
+                        "Jurisdiction": { "value": "EU / MiFID II" },
+                        "Body": {
+                          "value": {
+                            "html": "<p><strong>GLOBAL COMPLIANCE BLOCK (LOCKED)</strong> — This content has been reviewed and approved by the Compliance team. The AI assembly engine may not modify or replace this block. Any changes require a formal review cycle.</p>"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nodeType": "section",
+        "displayName": "Grid — Required Solutions",
+        "layoutType": "grid",
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "displayName": "Cards Row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "displayName": "Global Custody",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Card: Global Custody",
+                    "component": {
+                      "contentType": "CardBlock",
+                      "properties": {
+                        "Title": { "value": "Global Custody" },
+                        "Body": {
+                          "value": {
+                            "html": "<p>Multi-market settlement and safekeeping services for European-listed securities across 30+ markets.</p>"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "column",
+                "displayName": "Foreign Exchange",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Card: Foreign Exchange",
+                    "component": {
+                      "contentType": "CardBlock",
+                      "properties": {
+                        "Title": { "value": "Foreign Exchange" },
+                        "Body": {
+                          "value": {
+                            "html": "<p>Automated FX execution for cross-currency settlements, including EUR, GBP, CHF, and SEK pairs.</p>"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "column",
+                "displayName": "Securities Lending",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Card: Securities Lending",
+                    "component": {
+                      "contentType": "CardBlock",
+                      "properties": {
+                        "Title": { "value": "Securities Lending" },
+                        "Body": {
+                          "value": {
+                            "html": "<p>Generate incremental yield on European equity holdings via our fully-indemnified lending programme.</p>"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nodeType": "section",
+        "displayName": "Action — CTA",
+        "layoutType": "grid",
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "displayName": "CTA Row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "displayName": "CTA Slot",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Schedule Strategy Session",
+                    "component": {
+                      "contentType": "ActionBlock",
+                      "properties": {
+                        "Label": { "value": "Schedule Strategy Session" },
+                        "Href": { "value": "" },
+                        "Variant": { "value": "primary" }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

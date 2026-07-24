@@ -1,0 +1,160 @@
+{
+  "displayName": "Stack 2: Regulatory Impact Assembly",
+  "routeSegment": "stack-regulatory-impact",
+  "locale": "en",
+  "composition": {
+    "nodeType": "experience",
+    "layoutType": "outline",
+    "nodes": [
+      {
+        "nodeType": "section",
+        "displayName": "Split — Definition + Checklist",
+        "layoutType": "grid",
+        "component": { "contentType": "SplitSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "displayName": "Definition Row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "displayName": "Regulatory Definition (60%)",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Extracted Regulatory Definition",
+                    "component": {
+                      "contentType": "Paragraph",
+                      "properties": {
+                        "Text": {
+                          "value": {
+                            "html": "<h2>Extracted Regulatory Definition</h2><p>Under EMIR Refit, counterparties must report the details of any derivative contract they have concluded, modified, or terminated to a registered trade repository no later than the working day following the conclusion, modification, or termination of the contract.</p><p>Central clearing obligations apply to OTC derivatives meeting the criteria outlined in Commission Delegated Regulation (EU) 149/2013, including interest rate and credit default swap classes.</p><p>All reporting must use ISO 20022 XML schemas as specified by ESMA technical standards effective Q1 2024.</p>"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "column",
+                "displayName": "Operational Checklist (40%)",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Operational Impact Checklist",
+                    "component": {
+                      "contentType": "Paragraph",
+                      "properties": {
+                        "Text": {
+                          "value": {
+                            "html": "<h2>Operational Impact Checklist</h2><ul><li>Confirm trade repository registration is current and active</li><li>Validate XML schema compatibility with updated ISO 20022 fields</li><li>Review counterparty classification (FC vs NFC) for clearing threshold applicability</li></ul>"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nodeType": "section",
+        "displayName": "Feed — Implementation Timeline",
+        "layoutType": "grid",
+        "component": { "contentType": "FeedSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "displayName": "Q3 2026",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "displayName": "Milestone",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Q3 2026 Milestone",
+                    "component": {
+                      "contentType": "Paragraph",
+                      "properties": {
+                        "Text": {
+                          "value": {
+                            "html": "<p><strong>Q3 2026 — Schema Migration</strong></p><p>Complete migration of all trade reporting pipelines to ISO 20022 XML. Conduct parallel-run validation against legacy formats before cutover.</p>"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nodeType": "row",
+            "displayName": "Q4 2026",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "displayName": "Milestone",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Q4 2026 Milestone",
+                    "component": {
+                      "contentType": "Paragraph",
+                      "properties": {
+                        "Text": {
+                          "value": {
+                            "html": "<p><strong>Q4 2026 — Full Compliance Certification</strong></p><p>Submit certification evidence to primary regulator. Engage external auditor for EMIR Refit readiness attestation. Remediate any gaps identified during Q3 parallel run.</p>"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nodeType": "section",
+        "displayName": "Compliance — Legal Disclaimer",
+        "layoutType": "grid",
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "displayName": "Disclaimer Row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "displayName": "Disclaimer Slot",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Legal Disclaimer",
+                    "component": {
+                      "contentType": "ComplianceBlock",
+                      "properties": {
+                        "Jurisdiction": { "value": "Global" },
+                        "Body": {
+                          "value": {
+                            "html": "<p><strong>LEGAL DISCLAIMER</strong> — This document is for informational purposes only and does not constitute legal or regulatory advice. The information contained herein is based on publicly available regulatory guidance and internal interpretation as of the date of publication. Clients should seek independent legal counsel before taking action based on this content.</p>"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,153 @@
+{
+  "displayName": "Stack 3: Complex Onboarding Workflow",
+  "routeSegment": "stack-onboarding-workflow",
+  "locale": "en",
+  "composition": {
+    "nodeType": "experience",
+    "layoutType": "outline",
+    "nodes": [
+      {
+        "nodeType": "section",
+        "displayName": "Hero — Process Tracker",
+        "layoutType": "grid",
+        "component": { "contentType": "HeroSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "displayName": "Stepper Row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "displayName": "Stepper Slot",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Onboarding Steps",
+                    "component": {
+                      "contentType": "Paragraph",
+                      "properties": {
+                        "Text": {
+                          "value": {
+                            "html": "<p><strong>Fund Onboarding</strong></p><ol><li><strong>Step 1 (Active): Fund Details</strong> — Provide fund structure, domicile, and AUM estimate.</li><li>Step 2: Asset Classes — Specify target asset classes and investment mandate.</li><li>Step 3: Review RFP — Confirm details and submit the request for proposal.</li></ol>"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nodeType": "section",
+        "displayName": "Split — Intake Form + Context",
+        "layoutType": "grid",
+        "component": { "contentType": "SplitSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "displayName": "Form Row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "displayName": "Intake Form (60%)",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Continue to Next Step",
+                    "component": {
+                      "contentType": "ActionBlock",
+                      "properties": {
+                        "Label": { "value": "Continue to Next Step" },
+                        "Href": { "value": "#" },
+                        "Variant": { "value": "primary" }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "column",
+                "displayName": "AI Context Help (40%)",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Contextual Help",
+                    "component": {
+                      "contentType": "Paragraph",
+                      "properties": {
+                        "Text": {
+                          "value": {
+                            "html": "<h3>AI Context Active</h3><p>For Cayman-domiciled funds with AUM above $500M, a full AIFMD registration check is required before proceeding to the asset class step.</p><p>If you are onboarding a fund-of-funds structure, select 'Limited Partnership' under Fund Structure.</p><h4>Required Documentation</h4><ul><li>Offering Memorandum</li><li>List of Authorized Signers</li></ul>"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nodeType": "section",
+        "displayName": "Grid — Related Success Stories",
+        "layoutType": "grid",
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "displayName": "Cards Row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "displayName": "Case Study 1",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Card: Large Public Pension",
+                    "component": {
+                      "contentType": "CardBlock",
+                      "properties": {
+                        "Title": { "value": "Large Public Pension" },
+                        "Body": {
+                          "value": {
+                            "html": "<p>Onboarded $5B in alternatives seamlessly across 12 sub-funds using our streamlined RFP workflow. Full go-live achieved in under 60 days.</p>"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "column",
+                "displayName": "Case Study 2",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Card: Corporate Plan Sponsor",
+                    "component": {
+                      "contentType": "CardBlock",
+                      "properties": {
+                        "Title": { "value": "Corporate Plan Sponsor" },
+                        "Body": {
+                          "value": {
+                            "html": "<p>Transitioned recordkeeping for a $2.3B defined benefit plan within 90 days, with zero participant disruption during the conversion window.</p>"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

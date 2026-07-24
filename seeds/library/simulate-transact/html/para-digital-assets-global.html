@@ -1,0 +1,50 @@
+<h2>Digital Asset API Integration Setup</h2>
+
+<p>Asset managers seeking to incorporate digital asset holdings — including tokenized securities, stablecoins, and on-chain fund units — into their existing CIBC Mellon reporting framework can initiate API integration through the Digital Asset Services onboarding workflow. This process covers API key provisioning, blockchain network configuration, wallet enrollment, and reconciliation scheduling.</p>
+
+<h3>Prerequisites</h3>
+
+<ul>
+  <li>Existing CIBC Mellon client relationship with an active custody or fund administration agreement</li>
+  <li>Digital assets held in institutional-grade custodial wallets (not self-hosted wallets) or managed by a qualified digital asset custodian</li>
+  <li>Asset inventory available, specifying blockchain networks, token standards, and custodial wallet addresses</li>
+  <li>Internal technology team or systems integrator available to implement the API connection</li>
+  <li>Regulatory status of digital asset holdings confirmed by legal counsel (securities token vs. utility token classification in applicable jurisdiction)</li>
+</ul>
+
+<h3>Process Steps</h3>
+
+<ol>
+  <li><strong>Submit the Digital Asset Integration Request Form</strong> to your CIBC Mellon Digital Asset Services contact. Specify the blockchain networks, token types, and reporting outputs required.</li>
+  <li><strong>Receive API key provisioning</strong> through the CIBC Mellon developer portal. API keys are scoped to your organization and specific asset classes. Key rotation follows a 90-day cycle; automated rotation is available for production environments.</li>
+  <li><strong>Confirm supported blockchain networks and token standards.</strong> CIBC Mellon's platform currently supports EVM-compatible networks (Ethereum, Polygon, Avalanche), Solana, and permissioned enterprise networks (including R3 Corda and Hyperledger Fabric). Supported token standards include ERC-20, ERC-1155, and SPL. Requests for additional network support are submitted via a formal network onboarding request.</li>
+  <li><strong>Enroll custodial wallet addresses</strong> for each network in scope. Wallet address registration requires a signed attestation from your digital asset custodian confirming ownership of each address. Address enrollment is confirmed via a signed transaction or off-chain attestation per the platform's wallet verification protocol.</li>
+  <li><strong>Configure the real-time position feed.</strong> Agree on feed frequency (real-time via webhook, near-real-time at 15-minute polling, or end-of-day batch) and data schema (JSON/REST or FIX protocol for normalized position data). Token price feeds are sourced from approved data providers; configure your preferred price source hierarchy for valuation purposes.</li>
+  <li><strong>Schedule reconciliation reports</strong> to compare on-chain balances against CIBC Mellon's internal ledger. Reconciliation frequency options are daily, weekly, or intraday. Exceptions are flagged and routed to CIBC Mellon's Digital Asset Operations team for resolution.</li>
+  <li><strong>Complete sandbox testing</strong> using CIBC Mellon's test network environment. Validate position ingestion, price feed accuracy, reconciliation exception workflows, and report generation before enabling the production connection.</li>
+  <li><strong>Activate the production connection</strong> after successful sandbox sign-off. CIBC Mellon provides a technical implementation guide and dedicated support during the first 30 days.</li>
+</ol>
+
+<h2>Wallet Enrollment and Data Feed Configuration</h2>
+
+<h3>Wallet Address Enrollment</h3>
+
+<ul>
+  <li>Submit wallet addresses by blockchain network using the CIBC Mellon Wallet Registry form</li>
+  <li>Each address requires a custodian attestation confirming institutional ownership and control</li>
+  <li>Multi-signature wallet configurations must include the signing threshold and co-signatories list</li>
+  <li>Smart contract wallet addresses require ABI documentation for transaction decoding and event monitoring</li>
+</ul>
+
+<h3>Real-Time Position Feed Setup</h3>
+
+<p>CIBC Mellon's position feed aggregates on-chain data and normalizes it into your standard portfolio reporting schema. For tokenized securities, the feed maps on-chain token balances to ISIN or CUSIP equivalents where registry linkages exist. For non-standard token structures, a custom mapping table is configured during onboarding. All feed data is encrypted in transit using TLS 1.3 and at rest using AES-256.</p>
+
+<h3>Reconciliation Report Scheduling</h3>
+
+<ul>
+  <li>Daily reconciliation: End-of-day on-chain balance vs. CIBC Mellon ledger; delivered by 08:00 local time</li>
+  <li>Intraday reconciliation: Available for high-frequency DeFi or tokenized cash positions</li>
+  <li>Exception report: Delivered alongside reconciliation; lists unmatched positions, price feed gaps, and unrecognized transactions</li>
+  <li>Regulatory reporting outputs: Available for MiCA-compliant asset reporting (EU) and applicable SEC guidance on digital asset disclosures (US)</li>
+</ul>

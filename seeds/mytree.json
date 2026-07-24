@@ -1,0 +1,153 @@
+{
+  "displayName": "MyTree",
+  "routeSegment": "my-tree",
+  "locale": "en",
+  "composition": {
+    "nodeType": "experience",
+    "layoutType": "outline",
+    "nodes": [
+      {
+        "nodeType": "section",
+        "displayName": "Aurora Cascade",
+        "layoutType": "grid",
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "displayName": "Crimson Tide",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "displayName": "Flicker",
+                "nodes": [{ "nodeType": "component", "displayName": "Wisp", "component": { "contentType": "Paragraph", "properties": { "Text": { "value": { "html": "<p>Wisp</p>" } } } } }]
+              },
+              {
+                "nodeType": "column",
+                "displayName": "Blaze",
+                "nodes": [{ "nodeType": "component", "displayName": "Cinder", "component": { "contentType": "Paragraph", "properties": { "Text": { "value": { "html": "<p>Cinder</p>" } } } } }]
+              },
+              {
+                "nodeType": "column",
+                "displayName": "Ember",
+                "nodes": [{ "nodeType": "component", "displayName": "Scorch", "component": { "contentType": "Paragraph", "properties": { "Text": { "value": { "html": "<p>Scorch</p>" } } } } }]
+              }
+            ]
+          },
+          {
+            "nodeType": "row",
+            "displayName": "Silver Fox",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "displayName": "Frost",
+                "nodes": [{ "nodeType": "component", "displayName": "Sleet", "component": { "contentType": "Paragraph", "properties": { "Text": { "value": { "html": "<p>Sleet</p>" } } } } }]
+              },
+              {
+                "nodeType": "column",
+                "displayName": "Dusk",
+                "nodes": [{ "nodeType": "component", "displayName": "Gloom", "component": { "contentType": "Paragraph", "properties": { "Text": { "value": { "html": "<p>Gloom</p>" } } } } }]
+              },
+              {
+                "nodeType": "column",
+                "displayName": "Haze",
+                "nodes": [{ "nodeType": "component", "displayName": "Murk", "component": { "contentType": "Paragraph", "properties": { "Text": { "value": { "html": "<p>Murk</p>" } } } } }]
+              }
+            ]
+          },
+          {
+            "nodeType": "row",
+            "displayName": "Golden Path",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "displayName": "Glow",
+                "nodes": [{ "nodeType": "component", "displayName": "Shimmer", "component": { "contentType": "Paragraph", "properties": { "Text": { "value": { "html": "<p>Shimmer</p>" } } } } }]
+              },
+              {
+                "nodeType": "column",
+                "displayName": "Shade",
+                "nodes": [{ "nodeType": "component", "displayName": "Umbra", "component": { "contentType": "Paragraph", "properties": { "Text": { "value": { "html": "<p>Umbra</p>" } } } } }]
+              },
+              {
+                "nodeType": "column",
+                "displayName": "Gleam",
+                "nodes": [{ "nodeType": "component", "displayName": "Luster", "component": { "contentType": "Paragraph", "properties": { "Text": { "value": { "html": "<p>Luster</p>" } } } } }]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nodeType": "section",
+        "displayName": "Nebula Grid",
+        "layoutType": "grid",
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "displayName": "Cobalt Wave",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "displayName": "Ripple",
+                "nodes": [{ "nodeType": "component", "displayName": "Eddy", "component": { "contentType": "Paragraph", "properties": { "Text": { "value": { "html": "<p>Eddy</p>" } } } } }]
+              },
+              {
+                "nodeType": "column",
+                "displayName": "Surge",
+                "nodes": [{ "nodeType": "component", "displayName": "Torrent", "component": { "contentType": "Paragraph", "properties": { "Text": { "value": { "html": "<p>Torrent</p>" } } } } }]
+              },
+              {
+                "nodeType": "column",
+                "displayName": "Crest",
+                "nodes": [{ "nodeType": "component", "displayName": "Swell", "component": { "contentType": "Paragraph", "properties": { "Text": { "value": { "html": "<p>Swell</p>" } } } } }]
+              }
+            ]
+          },
+          {
+            "nodeType": "row",
+            "displayName": "Emerald Rush",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "displayName": "Spark",
+                "nodes": [{ "nodeType": "component", "displayName": "Zap", "component": { "contentType": "Paragraph", "properties": { "Text": { "value": { "html": "<p>Zap</p>" } } } } }]
+              },
+              {
+                "nodeType": "column",
+                "displayName": "Flash",
+                "nodes": [{ "nodeType": "component", "displayName": "Bolt", "component": { "contentType": "Paragraph", "properties": { "Text": { "value": { "html": "<p>Bolt</p>" } } } } }]
+              },
+              {
+                "nodeType": "column",
+                "displayName": "Flare",
+                "nodes": [{ "nodeType": "component", "displayName": "Burst", "component": { "contentType": "Paragraph", "properties": { "Text": { "value": { "html": "<p>Burst</p>" } } } } }]
+              }
+            ]
+          },
+          {
+            "nodeType": "row",
+            "displayName": "Phantom Drift",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "displayName": "Mist",
+                "nodes": [{ "nodeType": "component", "displayName": "Vapor", "component": { "contentType": "Paragraph", "properties": { "Text": { "value": { "html": "<p>Vapor</p>" } } } } }]
+              },
+              {
+                "nodeType": "column",
+                "displayName": "Veil",
+                "nodes": [{ "nodeType": "component", "displayName": "Shroud", "component": { "contentType": "Paragraph", "properties": { "Text": { "value": { "html": "<p>Shroud</p>" } } } } }]
+              },
+              {
+                "nodeType": "column",
+                "displayName": "Husk",
+                "nodes": [{ "nodeType": "component", "displayName": "Wraith", "component": { "contentType": "Paragraph", "properties": { "Text": { "value": { "html": "<p>Wraith</p>" } } } } }]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

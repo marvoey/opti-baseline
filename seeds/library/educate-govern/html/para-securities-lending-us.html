@@ -1,0 +1,58 @@
+<article class="regulatory-briefing" data-service="securities_lending" data-geo="united_states" data-persona="asset_manager">
+
+  <h2>US T+1 Settlement: Regulatory Background</h2>
+
+  <p>
+    The U.S. Securities and Exchange Commission (SEC) adopted its T+1 settlement cycle rule on February 15, 2023, with an effective date of May 28, 2024. The rule amends Rule 15c6-1(a) under the Securities Exchange Act of 1934, reducing the standard settlement cycle for most broker-dealer transactions in securities from two business days (T+2) to one business day (T+1). The mandate applies to equities, corporate and municipal bonds, and exchange-traded funds listed on U.S. national securities exchanges, among other securities. Exempted instruments include government securities, which already settled at T+1, and certain mutual fund transactions that continue to settle at T+3 per the Investment Company Act.
+  </p>
+
+  <p>
+    The SEC's rationale for the accelerated cycle centred on reducing systemic counterparty risk, limiting margin calls during periods of market volatility (drawing on lessons from the January 2021 meme-stock events), and aligning U.S. markets with evolving global settlement norms. Canada and Mexico adopted coordinated T+1 mandates effective the same date, creating a trilateral North American T+1 standard that facilitates cross-border equity transactions between these markets while placing new operational strain on participants with exposure to markets running on different settlement conventions.
+  </p>
+
+  <h3>Regulatory Amendments and Affiliated Rules</h3>
+  <p>
+    Alongside the T+1 settlement rule, the SEC adopted amendments to:
+  </p>
+  <ul>
+    <li>Rule 15c6-2, requiring same-day affirmation of allocations and confirmations between broker-dealers and investment advisers</li>
+    <li>Rule 204 of Regulation SHO, adjusting close-out requirements for fails to deliver to align with the shorter settlement window</li>
+    <li>DTCC's DTC Settlement Service rules, updated to reflect shortened processing windows for clearance and settlement</li>
+  </ul>
+
+  <h2>Impact on Securities Lending Operations</h2>
+
+  <h3>Recall Timelines</h3>
+  <p>
+    T+1 settlement compresses the operational window available to beneficial owners and lending agents to recall securities required for corporate actions, proxy voting, or sale settlement. Under T+2, a lender selling a security had two business days to recall and receive the security back from the borrower. Under T+1, this window is effectively eliminated for same-day trade decisions. Securities lending programs must now implement real-time or near-real-time trade capture and recall initiation processes, with automated recall triggers integrated with the lending agent's order management and settlement systems. Programs relying on end-of-day recall batches will routinely generate settlement fails under T+1.
+  </p>
+
+  <h3>FX Settlement Mismatches for Foreign Participants</h3>
+  <p>
+    Non-US asset managers and institutional investors face a structural FX settlement mismatch under T+1. A foreign investor selling a US equity receives USD proceeds on T+1 but cannot access the corresponding FX conversion until the FX market settles at T+2 (for standard spot FX). This creates a one-day funding gap that must be bridged through:
+  </p>
+  <ul>
+    <li>Pre-funding arrangements with custodians or prime brokers willing to advance USD against anticipated FX settlement</li>
+    <li>Increased use of T+1 FX products, including non-deliverable forwards and same-day FX settlement mechanisms</li>
+    <li>Adjustment of investment mandates and cash management policies to accommodate the new timing mismatch</li>
+  </ul>
+  <p>
+    Canadian institutional investors accessing U.S. markets through CIBC Mellon's global custody and securities lending infrastructure are particularly affected, given the frequency of USD/CAD cross-currency settlement pairs.
+  </p>
+
+  <h3>Collateral Substitution Windows</h3>
+  <p>
+    Securities lending programs utilising non-cash collateral face tighter collateral substitution windows under T+1. When a borrower needs to substitute pledged collateral — for example, to meet its own settlement obligations — the substitution must clear within a single business day. This requires:
+  </p>
+  <ul>
+    <li>Same-day acceptance or rejection of substitution requests by lending agents</li>
+    <li>Intraday collateral eligibility screening against approved collateral schedules</li>
+    <li>Automated mark-to-market and margin call workflows to prevent under-collateralisation during the substitution window</li>
+  </ul>
+
+  <h3>DTCC and Industry Solutions</h3>
+  <p>
+    The Depository Trust &amp; Clearing Corporation (DTCC) has introduced several operational enhancements to support T+1, including expanded CNS (Continuous Net Settlement) processing windows and enhanced same-day affirmation capabilities through its CTM (Central Trade Manager) platform. Industry bodies including SIFMA, ICI, and the Securities Finance Forum have published T+1 implementation guides covering securities lending-specific operational adjustments, which lending agents and beneficial owners should review alongside their own operational readiness assessments.
+  </p>
+
+</article>

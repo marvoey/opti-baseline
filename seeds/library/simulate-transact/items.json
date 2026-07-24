@@ -1,0 +1,193 @@
+[
+  {
+    "contentType": "Paragraph",
+    "key": "st-para-custody-canada",
+    "displayName": "Global Custody – Canada (Transact)",
+    "locale": "en",
+    "properties": {
+      "Text": { "$file": "seeds/library/simulate-transact/html/para-custody-canada.html" },
+      "Intent": "simulate_transact",
+      "Persona": "foreign_institution",
+      "Service": ["global_custody"],
+      "Geo": "canada"
+    }
+  },
+  {
+    "contentType": "Paragraph",
+    "key": "st-para-fx-europe",
+    "displayName": "Foreign Exchange – Europe (Transact)",
+    "locale": "en",
+    "properties": {
+      "Text": { "$file": "seeds/library/simulate-transact/html/para-fx-europe.html" },
+      "Intent": "simulate_transact",
+      "Persona": "corporate_sponsor",
+      "Service": ["foreign_exchange"],
+      "Geo": "europe"
+    }
+  },
+  {
+    "contentType": "Paragraph",
+    "key": "st-para-etf-canada",
+    "displayName": "ETF Services – Canada (Transact)",
+    "locale": "en",
+    "properties": {
+      "Text": { "$file": "seeds/library/simulate-transact/html/para-etf-canada.html" },
+      "Intent": "simulate_transact",
+      "Persona": "asset_manager",
+      "Service": ["etf_services"],
+      "Geo": "canada"
+    }
+  },
+  {
+    "contentType": "Paragraph",
+    "key": "st-para-fund-admin-canada",
+    "displayName": "Fund Administration – Canada (Transact)",
+    "locale": "en",
+    "properties": {
+      "Text": { "$file": "seeds/library/simulate-transact/html/para-fund-admin-canada.html" },
+      "Intent": "simulate_transact",
+      "Persona": "pension_fund",
+      "Service": ["fund_administration"],
+      "Geo": "canada"
+    }
+  },
+  {
+    "contentType": "Paragraph",
+    "key": "st-para-securities-lending-global",
+    "displayName": "Securities Lending – Global (Transact)",
+    "locale": "en",
+    "properties": {
+      "Text": { "$file": "seeds/library/simulate-transact/html/para-securities-lending-global.html" },
+      "Intent": "simulate_transact",
+      "Persona": "asset_manager",
+      "Service": ["securities_lending"],
+      "Geo": "global"
+    }
+  },
+  {
+    "contentType": "Paragraph",
+    "key": "st-para-treasury-canada",
+    "displayName": "Treasury Services – Canada (Transact)",
+    "locale": "en",
+    "properties": {
+      "Text": { "$file": "seeds/library/simulate-transact/html/para-treasury-canada.html" },
+      "Intent": "simulate_transact",
+      "Persona": "corporate_sponsor",
+      "Service": ["treasury_services"],
+      "Geo": "canada"
+    }
+  },
+  {
+    "contentType": "Paragraph",
+    "key": "st-para-onboarding-global",
+    "displayName": "Onboarding – Global (Transact)",
+    "locale": "en",
+    "properties": {
+      "Text": { "$file": "seeds/library/simulate-transact/html/para-onboarding-global.html" },
+      "Intent": "simulate_transact",
+      "Persona": "foreign_institution",
+      "Service": ["onboarding"],
+      "Geo": "global"
+    }
+  },
+  {
+    "contentType": "Paragraph",
+    "key": "st-para-alts-canada",
+    "displayName": "Alternative Investments – Canada (Transact)",
+    "locale": "en",
+    "properties": {
+      "Text": { "$file": "seeds/library/simulate-transact/html/para-alts-canada.html" },
+      "Intent": "simulate_transact",
+      "Persona": "asset_manager",
+      "Service": ["alternative_investments"],
+      "Geo": "canada"
+    }
+  },
+  {
+    "contentType": "Paragraph",
+    "key": "st-para-digital-assets-global",
+    "displayName": "Digital Assets – Global (Transact)",
+    "locale": "en",
+    "properties": {
+      "Text": { "$file": "seeds/library/simulate-transact/html/para-digital-assets-global.html" },
+      "Intent": "simulate_transact",
+      "Persona": "asset_manager",
+      "Service": ["digital_assets"],
+      "Geo": "global"
+    }
+  },
+  {
+    "contentType": "Paragraph",
+    "key": "st-para-recordkeeping-canada",
+    "displayName": "Recordkeeping – Canada (Transact)",
+    "locale": "en",
+    "properties": {
+      "Text": { "$file": "seeds/library/simulate-transact/html/para-recordkeeping-canada.html" },
+      "Intent": "simulate_transact",
+      "Persona": "pension_fund",
+      "Service": ["recordkeeping"],
+      "Geo": "canada"
+    }
+  },
+  {
+    "contentType": "Paragraph",
+    "key": "st-para-compliance-global",
+    "displayName": "Compliance – Global (Transact)",
+    "locale": "en",
+    "properties": {
+      "Text": { "$file": "seeds/library/simulate-transact/html/para-compliance-global.html" },
+      "Intent": "simulate_transact",
+      "Persona": "foreign_institution",
+      "Service": ["compliance"],
+      "Geo": "global"
+    }
+  },
+  {
+    "contentType": "ComplianceBlock",
+    "key": "st-compliance-canada",
+    "displayName": "Action Disclaimer – Canada (Transact)",
+    "locale": "en",
+    "properties": {
+      "Jurisdiction": "Canada / OSFI",
+      "Body": { "$file": "seeds/library/simulate-transact/html/compliance-canada.html" },
+      "Intent": "simulate_transact",
+      "Geo": "canada"
+    }
+  },
+  {
+    "contentType": "ComplianceBlock",
+    "key": "st-compliance-europe",
+    "displayName": "Action Disclaimer – Europe (Transact)",
+    "locale": "en",
+    "properties": {
+      "Jurisdiction": "EU / MiFID II & UCITS",
+      "Body": { "$file": "seeds/library/simulate-transact/html/compliance-europe.html" },
+      "Intent": "simulate_transact",
+      "Geo": "europe"
+    }
+  },
+  {
+    "contentType": "ComplianceBlock",
+    "key": "st-compliance-us",
+    "displayName": "Action Disclaimer – United States (Transact)",
+    "locale": "en",
+    "properties": {
+      "Jurisdiction": "United States / SEC & ERISA",
+      "Body": { "$file": "seeds/library/simulate-transact/html/compliance-us.html" },
+      "Intent": "simulate_transact",
+      "Geo": "united_states"
+    }
+  },
+  {
+    "contentType": "ComplianceBlock",
+    "key": "st-compliance-global",
+    "displayName": "Action Disclaimer – Global (Transact)",
+    "locale": "en",
+    "properties": {
+      "Jurisdiction": "Global / Multi-Jurisdictional",
+      "Body": { "$file": "seeds/library/simulate-transact/html/compliance-global.html" },
+      "Intent": "simulate_transact",
+      "Geo": "global"
+    }
+  }
+]

@@ -1,0 +1,52 @@
+{
+  "displayName": "CIBC (:3014)2",
+  "routeSegment": "cibc-3014-copy-2",
+  "locale": "en",
+  "composition": {
+    "nodeType": "experience",
+    "layoutType": "outline",
+    "nodes": [
+      {
+        "nodeType": "section",
+        "displayName": "New Blank Section",
+        "layoutType": "grid",
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "displayName": "Marvin",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "displayName": "This is a new label for a column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Paragraph",
+                    "component": {
+                      "contentType": "Paragraph",
+                      "properties": {
+                        "Text": { "value": { "html": "<p>This is a test by Marvin.</p>" } }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nodeType": "row",
+            "displayName": "Daevin",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "displayName": "Column",
+                "nodes": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

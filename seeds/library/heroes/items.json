@@ -1,0 +1,49 @@
+{
+  "container": { "$env": "FOLDER_DISCOVER_RECOMMEND_HERO_BLOCKS" },
+  "items": [
+    {
+      "contentType": "HeroBlockv2",
+      "key": "cda73eb8aa254eb99e08336e162729d6",
+      "displayName": "Canadian Institutional Markets",
+      "locale": "en",
+      "properties": {
+        "Body": { "value": { "html": "<h1>Invested in Canada</h1><p>As Canada&#8217;s leader in asset servicing, CIBC Mellon is built from the ground up to serve the investment needs of Canadian institutional investors and international institutional investors into Canada. Jointly owned by BNY and CIBC, the firm administers more than C$3.6 trillion in assets while connecting clients to a global network spanning 100+ markets. Three decades in, CIBC Mellon remains wholly invested in Canada.</p>" } },
+        "Intent": { "value": "discover_recommend" },
+        "Geo": { "value": "canada" }
+      }
+    },
+    {
+      "contentType": "HeroBlockv2",
+      "key": "194135eb8ace408cbff03d5b5cde7186",
+      "displayName": "European Institutional Solutions",
+      "locale": "en",
+      "properties": {
+        "Body": { "value": { "html": "<h1>Your Gateway to Canadian Markets</h1><p>European institutional investors allocating to Canadian markets can access dedicated, on-the-ground asset servicing expertise through CIBC Mellon, Canada&#8217;s leader in institutional investment servicing. Backed by the global network of BNY &#8212; spanning more than 100 markets and US$62.6 trillion in assets under custody and administration &#8212; CIBC Mellon bridges European institutional requirements with Canada&#8217;s regulatory and market realities.</p>" } },
+        "Intent": { "value": "discover_recommend" },
+        "Geo": { "value": "europe" }
+      }
+    },
+    {
+      "contentType": "HeroBlockv2",
+      "key": "9716b25a13d1470d868077a203f6bb5c",
+      "displayName": "US Institutional Solutions",
+      "locale": "en",
+      "properties": {
+        "Body": { "value": { "html": "<h1>Your Canadian Market Partner</h1><p>US-based institutional investors with Canadian market mandates benefit from CIBC Mellon&#8217;s singular focus on Canadian asset servicing, combined with the operational familiarity of the BNY network. As a 50-50 joint venture between BNY and CIBC, CIBC Mellon translates domestic US investment servicing expectations into the distinct regulatory and market conventions of the Canadian environment.</p>" } },
+        "Intent": { "value": "discover_recommend" },
+        "Geo": { "value": "united_states" }
+      }
+    },
+    {
+      "contentType": "HeroBlockv2",
+      "key": "5c1838eeabd8474abe464de3e7e0ae9d",
+      "displayName": "Global Institutional Solutions",
+      "locale": "en",
+      "properties": {
+        "Body": { "value": { "html": "<h1>Global Reach, Canadian Expertise</h1><p>For global financial institutions whose clients invest in Canada, CIBC Mellon provides the dedicated local expertise that generalist global custodians cannot replicate, underpinned by BNY&#8217;s worldwide infrastructure across more than 100 markets. Purpose-built to handle cross-border complexity, CIBC Mellon combines CIBC&#8217;s Canadian market depth with BNY&#8217;s global reach &#8212; giving international institutions a single, accountable Canadian partner without sacrificing global connectivity.</p>" } },
+        "Intent": { "value": "discover_recommend" },
+        "Geo": { "value": "global" }
+      }
+    }
+  ]
+}
