@@ -107,15 +107,15 @@ export default function CardBlock({ content }: Props) {
   return (
     <div
       {...pa(content.__composition)}
-      className="rounded-lg border border-neutral-200 bg-white p-5 shadow-sm dark:border-neutral-700 dark:bg-neutral-900"
+      className="rounded border border-neutral-200 bg-white px-5 py-4 dark:border-neutral-700 dark:bg-neutral-900"
     >
       {content.Title && (
-        <h3 {...pa("Title")} className="mb-2 text-lg font-semibold">
+        <h3 {...pa("Title")} className="mb-2 font-semibold text-blue-800 dark:text-blue-300">
           {content.Title}
         </h3>
       )}
       {content.Body && (
-        <div {...pa("Body")} className="prose prose-sm">
+        <div {...pa("Body")} className="prose prose-sm text-neutral-600 dark:text-neutral-400">
           <RichTextRenderer content={content.Body?.json} />
         </div>
       )}

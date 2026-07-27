@@ -20,6 +20,7 @@
     "seed:experience": "node scripts/seed-experience.mjs",
     "seed:library:dr": "node scripts/seed-paragraphs.mjs seeds/library/discover-recommend/items.json",
     "seed:heroes:dr": "node scripts/seed-heroes.mjs",
+    "seed:cards:dr": "node scripts/seed-paragraphs.mjs seeds/library/discover-recommend/cards/items.json",
     "seed:library:eg": "node scripts/seed-paragraphs.mjs seeds/library/educate-govern/items.json",
     "seed:library:st": "node scripts/seed-paragraphs.mjs seeds/library/simulate-transact/items.json"
   },
