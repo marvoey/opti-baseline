@@ -82,7 +82,7 @@ export default function HeroSection({ content, displaySettings }: Props) {
   const paragraphData = findComponent(nodes, 'Paragraph');
   const imageData     = findComponent(nodes, 'Image');
 
-  const themeKey = (displaySettings?.theme as Theme) ?? 'default';
+  const themeKey = (displaySettings?.theme as unknown as Theme) ?? 'default';
   const { overlay, prose, text } = THEME[themeKey] ?? THEME.default;
 
   if (!paragraphData) {
