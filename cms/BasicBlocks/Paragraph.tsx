@@ -177,9 +177,9 @@ export default function Paragraph({ content, displaySettings }: Props) {
     const ids = headings.map(h => h.id);
     const elements = {
       'heading-one': ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) =>
-        <h1 id={ids[headingCount++]} {...props}>{children}</h1>,
+        <h1 id={ids[headingCount++]} {...props} className="scroll-mt-24">{children}</h1>,
       'heading-two': ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) =>
-        <h2 id={ids[headingCount++]} {...props}>{children}</h2>,
+        <h2 id={ids[headingCount++]} {...props} className="scroll-mt-24">{children}</h2>,
     };
 
     return (
