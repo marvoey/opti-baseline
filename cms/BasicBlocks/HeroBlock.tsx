@@ -135,7 +135,7 @@ type Props = {
 
 export default function HeroBlock({ content, displaySettings }: Props) {
   const { pa, src } = getPreviewUtils(content);
-  const themeKey = (displaySettings?.theme as Theme) ?? "default";
+  const themeKey = (displaySettings?.theme as unknown as Theme) ?? "default";
   const theme = THEME[themeKey] ?? THEME.default;
   const bgSrc = content.BackgroundImage ? src(content.BackgroundImage) : undefined;
 
