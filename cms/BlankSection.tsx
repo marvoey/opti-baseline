@@ -88,18 +88,20 @@ export default function BlankSection({
   ].filter(Boolean).join(' ') : '';
 
   return (
-    <section {...pa(content)} className={spacing || undefined}>
-      {emptyReason ? (
-        <p className="text-muted-foreground py-8 text-center text-sm italic">
-          {EMPTY_MESSAGES[emptyReason]}
-        </p>
-      ) : (
-        <OptimizelyGridSection
-          nodes={content.nodes}
-          row={BlankRow}
-          column={BlankColumn}
-        />
-      )}
+    <section {...pa(content)} className={['py-4', spacing].filter(Boolean).join(' ')}>
+      <div className="container mx-auto px-4">
+        {emptyReason ? (
+          <p className="text-muted-foreground py-8 text-center text-sm italic">
+            {EMPTY_MESSAGES[emptyReason]}
+          </p>
+        ) : (
+          <OptimizelyGridSection
+            nodes={content.nodes}
+            row={BlankRow}
+            column={BlankColumn}
+          />
+        )}
+      </div>
     </section>
   );
 }

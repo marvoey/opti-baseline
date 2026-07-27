@@ -203,7 +203,7 @@ if (!seed.displayName || !seed.composition) {
   process.exit(1);
 }
 
-try {
+async function main() {
   const cred = readCredentials();
   const base = apiBase();
 
@@ -253,16 +253,13 @@ try {
         process.exit(0);
       }
 
-      const name = await prompt('Enter a name for the URL: ');
-      if (!name) {
-        console.error('No name provided. Aborted.');
+      const slug = await prompt('Enter a URL slug: ');
+      if (!slug) {
+        console.error('No slug provided. Aborted.');
         process.exit(1);
       }
 
-      const colonIdx = seed.displayName.indexOf(': ');
-      const prefix = colonIdx !== -1 ? seed.displayName.slice(0, colonIdx + 2) : '';
-      seed.displayName = prefix + name;
-      routeSegment = toSlug(name);
+      routeSegment = toSlug(slug);
       console.log(`Retrying with display name "${seed.displayName}" and URL "/${routeSegment}"…`);
       continue;
     }
@@ -273,7 +270,9 @@ try {
     console.log(`  URL:     /${routeSegment}`);
     break;
   }
-} catch (err) {
+}
+
+main().catch((err) => {
   console.error(`\nFailed: ${err.message}`);
   process.exit(1);
-}
+});
