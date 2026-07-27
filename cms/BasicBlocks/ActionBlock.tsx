@@ -86,7 +86,10 @@ export const ActionBlockContentType = contentType({
 });
 
 type Props = {
-  content: ContentProps<typeof ActionBlockContentType>;
+  content: ContentProps<typeof ActionBlockContentType> & {
+    Variant?: string | null;
+    Href?: { default?: string } | null;
+  };
 };
 
 const VARIANT_CLASSES: Record<string, string> = {

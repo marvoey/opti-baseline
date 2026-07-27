@@ -97,7 +97,9 @@ export const ComplianceBlockContentType = contentType({
 });
 
 type Props = {
-  content: ContentProps<typeof ComplianceBlockContentType>;
+  content: ContentProps<typeof ComplianceBlockContentType> & {
+    Jurisdiction?: string | null;
+  };
 };
 
 export default function ComplianceBlock({ content }: Props) {
