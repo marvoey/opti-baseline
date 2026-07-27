@@ -10,6 +10,12 @@
         "nodeType": "section",
         "displayName": "Hero — Executive Summary",
         "layoutType": "grid",
+        "displaySettings": {
+          "displayTemplate": "HeroSectionDefault",
+          "settings": {
+            "theme": "default"
+          }
+        },
         "component": { "contentType": "HeroSection" },
         "nodes": [
           {
@@ -19,27 +25,14 @@
               {
                 "nodeType": "column",
                 "displayName": "Hero Slot",
-                "displaySettings": {
-                  "displayTemplate": "ColumnDefault",
-                  "settings": {
-                    "position": "relative"
-                  }
-                },
                 "nodes": [
                   {
                     "nodeType": "component",
                     "displayName": "Image",
-                    "displaySettings": {
-                      "displayTemplate": "DefaultImage",
-                      "settings": {
-                        "displayAs": "background",
-                        "overlay": "none"
-                      }
-                    },
                     "component": {
                       "contentType": "Image",
                       "properties": {
-                        "AltText": { "value": "gardening" },
+                        "AltText": { "value": "European equities hero" },
                         "Image": { "value": "cms://content/DamImageSource/740c72b0687411f18b7e4ef65a1508fe" }
                       }
                     }

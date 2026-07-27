@@ -123,6 +123,14 @@ export const ParagraphDisplayTemplate = displayTemplate({
   },
 });
 
+export const ParagraphSimpleDisplayTemplate = displayTemplate({
+  key: 'ParagraphSimple',
+  isDefault: false,
+  displayName: 'Paragraph — Simple',
+  contentType: 'Paragraph',
+  settings: {},
+});
+
 const HEADING_TYPES = new Set(['heading-one', 'heading-two']);
 
 function toId(text: string, index: number) {
@@ -159,7 +167,9 @@ type Props = {
 
 export default function Paragraph({ content, displaySettings }: Props) {
   const { pa } = getPreviewUtils(content);
-  const showToc = displaySettings?.hideToc !== true;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const isSimple = (content.__composition as any)?.displayTemplateKey === 'ParagraphSimple';
+  const showToc = !isSimple && displaySettings?.hideToc !== true;
   const headings = showToc ? extractHeadings(content.Text?.json as RichTextJson) : [];
 
   if (showToc && headings.length > 0) {

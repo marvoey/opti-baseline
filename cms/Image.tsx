@@ -48,10 +48,6 @@ export const ImageDisplayTemplate = displayTemplate({
   },
 });
 
-const OVERLAY_CLASS: Record<string, string> = {
-  light: 'absolute inset-0 bg-white/50',
-  dark:  'absolute inset-0 bg-black/50',
-};
 
 type Props = {
   content: ContentProps<typeof ImageContentType>;
@@ -62,7 +58,6 @@ export default function Image({ content, displaySettings }: Props) {
   const { pa, src } = getPreviewUtils(content);
   const block = content.__composition;
   const isBackground = displaySettings?.displayAs === 'background';
-  const overlayClass = OVERLAY_CLASS[(displaySettings?.overlay as string) ?? ''];
 
   if (isBackground) {
     return (
@@ -73,7 +68,6 @@ export default function Image({ content, displaySettings }: Props) {
           {...pa('Image')}
           className="h-full w-full object-cover"
         />
-        {overlayClass && <div className={overlayClass} aria-hidden="true" />}
       </figure>
     );
   }

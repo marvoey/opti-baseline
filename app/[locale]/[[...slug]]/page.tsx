@@ -62,7 +62,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
  */
 async function Page({ params }: Props) {
   const { locale, slug = [] } = await params;
+  console.log('1. URL params — locale tells us which language to serve, slug is the URL path segments that become the Graph lookup path:', { locale, slug });
   const content = await loadContent(locale, slug);
+  console.log('2. __typename — this is the CMS content type key; OptimizelyComponent uses this to find the matching React component in the registry:', content?.__typename);
+  console.log('3. _metadata — CMS-supplied metadata: _metadata.types is the full type hierarchy OptimizelyComponent walks to find a registered component, url is what the CMS indexed this content at:', JSON.stringify(content?._metadata, null, 2));
   if (!content) notFound();
 
   return <OptimizelyComponent content={content} />;

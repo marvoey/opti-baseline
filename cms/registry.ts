@@ -7,14 +7,14 @@ import { initReactComponentRegistry } from '@optimizely/cms-sdk/react/server';
 import { requireEnv } from '@/lib/env';
 
 import BlankExperience, { BlankExperienceContentType } from './BlankExperience';
-import BlankSection from './BlankSection';
-import Paragraph, { ParagraphContentType, ParagraphDisplayTemplate } from './BasicBlocks/Paragraph';
+import BlankSection, { BlankSectionCustomDisplayTemplate } from './BlankSection';
+import Paragraph, { ParagraphContentType, ParagraphDisplayTemplate, ParagraphSimpleDisplayTemplate } from './BasicBlocks/Paragraph';
 import CardBlock, { CardBlockContentType } from './BasicBlocks/CardBlock';
 import ActionBlock, { ActionBlockContentType } from './BasicBlocks/ActionBlock';
 import ComplianceBlock, { ComplianceBlockContentType } from './BasicBlocks/ComplianceBlock';
 import SidebarSection, { SidebarSectionContentType } from './SidebarSection';
 import SplitSection, { SplitSectionContentType } from './SplitSection';
-import HeroSection, { HeroSectionContentType } from './HeroSection';
+import HeroSection, { HeroSectionContentType, HeroSectionDisplayTemplate } from './HeroSection';
 import FeedSection, { FeedSectionContentType } from './FeedSection';
 import ImageBlock, { ImageContentType, ImageDisplayTemplate } from './Image';
 import HeroBlock, { HeroBlockContentType, HeroBlockDisplayTemplate } from './BasicBlocks/HeroBlock';
@@ -65,7 +65,7 @@ export const registeredContentTypes = [
 
 initContentTypeRegistry(registeredContentTypes);
 
-initDisplayTemplateRegistry([ParagraphDisplayTemplate, ImageDisplayTemplate, ColumnDisplayTemplate, HeroBlockDisplayTemplate]);
+initDisplayTemplateRegistry([ParagraphDisplayTemplate, ParagraphSimpleDisplayTemplate, ImageDisplayTemplate, ColumnDisplayTemplate, HeroBlockDisplayTemplate, HeroSectionDisplayTemplate, BlankSectionCustomDisplayTemplate]);
 
 initReactComponentRegistry({
   resolver: {
