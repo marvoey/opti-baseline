@@ -19,16 +19,19 @@ The agenda order is intentional. Sections 1-4 are designed to hook the Business/
 ---
 
 ## 1. Demonstration of Platform Interface (15 min)
-*Goal: Hook the business stakeholders. Lead with what the marketer sees and controls, proving that the platform is ready today with no developer bottlenecks.*
+*Goal: Hook the business stakeholders. Open with the operational cost of the current state, then show the platform as infrastructure — not a website.*
 
-*   **Action [Live App Demo]:** Open the published CIBC Mellon Next.js site. Show a visitor-facing page.
-*   **Talk Track:** Introduce the end-user experience. Explain how headless architecture cleanly separates presentation from content while `siteConfig.ts` strictly enforces CIBC Mellon's brand governance (fonts, colors, layouts).
-*   **Action [Live App Demo]:** Resize the browser window to demonstrate mobile-responsive Tailwind views. Use the `LanguageSwitcher` to instantly toggle between English and French.
-*   **Talk Track:** Notice how the Next.js Proxy routing handles bilingual compliance and SEO clean URLs instantly, without a full page reload.
+*   **Talk Track [Challenger Reframe]:** "Before we look at any features, I want to show you the cost of inaction. Your current site is a regulatory and operational bottleneck — every T+1 settlement cycle where a Pension Fund update sits in a manual publishing queue is a direct SLA risk. What you're about to see isn't a new website; it's the operational layer that eliminates that bottleneck."
+*   **Action [Live App Demo]:** Open `/stack-strategic-briefing` — the "Strategic Expansion Briefing: European Equities" page. This page uses a Hero + Sidebar layout with live institutional content, and is the clearest single-page illustration of the platform's output.
+*   **Talk Track:** This is what a marketer publishes without touching a developer. The brand governance layer — `siteConfig.ts` for nav, identity, and copy; `globals.css` for the design token palette — is the single file a developer configures once, and then marketing owns everything above it.
+*   **Action [Live App Demo]:** Resize the browser window to demonstrate mobile-responsive Tailwind views.
+*   **Talk Track:** Full mobile parity out of the box. Schedule D requires mobile-friendly views — this is structural, not a stylesheet patch applied after the fact.
+*   **Action [Live App Demo]:** Use the `LanguageSwitcher` in the top nav to show the bilingual URL architecture (`/fr/stack-strategic-briefing`). Point out the clean URL structure and the absence of a full page reload.
+*   **Talk Track:** The routing layer handles bilingual compliance and SEO clean URLs natively. French content is content — not a separate codebase. When a marketer publishes a French variant in the CMS, it surfaces at that URL automatically with zero developer involvement.
 *   **Action [CMS Editor Demo]:** Switch tabs into the Optimizely CMS Visual Builder for the same page.
-*   **Talk Track:** Now, look at the marketer experience. Show how a marketer builds a campaign page by dragging pre-built sections (Hero, Split) and blocks (Card, Compliance) onto the canvas. 
-*   **Action [CMS Editor Demo]:** Click Preview. 
-*   **Talk Track:** Show the `/preview` route. Marketers get real-time, high-fidelity previews of draft content rendered natively in the Next.js app before it goes live.
+*   **Talk Track:** Now the marketer's view. Show how a page is built by dragging pre-built sections — **HeroSection** (full-bleed banner), **SidebarSection** (article + Table of Contents nav, the 25%/75% split driving this page), **SplitSection** (task + guidance), **FeedSection** (content grid) — and dropping blocks inside them: **HeroBlockv2** (with Intent and Geo taxonomy fields — note those fields, they matter in Section 3), **CardBlock**, **ComplianceBlock**, **Paragraph**.
+*   **Action [CMS Editor Demo]:** Click Preview.
+*   **Talk Track:** Show the `/preview` route. Marketers get a real-time, high-fidelity preview of draft content rendered natively in the Next.js app — exactly what a visitor will see — before anything goes live.
 
 ## 2. Customer Journey Mapping & Experience Optimization (10 min)
 *Goal: Tell a story. Walk a specific persona through a content journey to show how the platform supports it end-to-end.*

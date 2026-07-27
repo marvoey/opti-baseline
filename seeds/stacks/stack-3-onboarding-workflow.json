@@ -117,7 +117,8 @@
                           "value": {
                             "html": "<p>Onboarded $5B in alternatives seamlessly across 12 sub-funds using our streamlined RFP workflow. Full go-live achieved in under 60 days.</p>"
                           }
-                        }
+                        },
+                        "Service": { "value": ["onboarding"] }
                       }
                     }
                   }
@@ -138,7 +139,8 @@
                           "value": {
                             "html": "<p>Transitioned recordkeeping for a $2.3B defined benefit plan within 90 days, with zero participant disruption during the conversion window.</p>"
                           }
-                        }
+                        },
+                        "Service": { "value": ["onboarding", "recordkeeping"] }
                       }
                     }
                   }

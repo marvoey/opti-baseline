@@ -14,6 +14,7 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { createRequire } from 'node:module';
+import { createInterface } from 'node:readline';
 
 // Load .env via Next.js env loader (no dotenv dependency required).
 try {
@@ -25,6 +26,24 @@ try {
 }
 
 const DEFAULT_GATEWAY = 'https://api.cms.optimizely.com';
+
+function shortHash(input) {
+  let h = 0;
+  for (let i = 0; i < input.length; i++) {
+    h = (Math.imul(31, h) + input.charCodeAt(i)) | 0;
+  }
+  return (h >>> 0).toString(16).padStart(8, '0').slice(0, 8);
+}
+
+function buildRouteSegment(seed) {
+  if (seed.routeSegment) return seed.routeSegment;
+  const base = seed.displayName
+    .toLowerCase()
+    .replace(/\s+/g, '-')
+    .replace(/[^a-z0-9-]/g, '');
+  const suffix = seed.key ? seed.key.replace(/-/g, '').slice(0, 8) : shortHash(seed.displayName);
+  return `${base}-${suffix}`;
+}
 const ROOT_CONTAINER_KEY = process.env.ROOT_CONTAINER ?? '43f936c99b234ea397b261c538ad07c9';
 
 function apiBase() {
@@ -55,14 +74,14 @@ async function getAccessToken(base, clientId, clientSecret) {
   return data.access_token;
 }
 
-async function createExperience(base, token, seed) {
+async function createExperience(base, token, seed, routeSegment) {
   const body = {
     contentType: seed.contentType ?? 'BlankExperience',
     container: seed.container ?? ROOT_CONTAINER_KEY,
     initialVersion: {
       displayName: seed.displayName,
       locale: seed.locale ?? 'en',
-      ...(seed.routeSegment ? { routeSegment: seed.routeSegment } : {}),
+      routeSegment,
       properties: {},
     },
   };
@@ -80,9 +99,7 @@ async function createExperience(base, token, seed) {
   });
 
   if (res.status === 409) {
-    const existing = await res.json();
-    if (existing.key && existing.version != null) return { key: existing.key, version: existing.version };
-    throw new Error('Experience already exists but response is missing key/version.');
+    return { existed: true };
   }
   if (!res.ok) {
     const text = await res.text();
@@ -93,7 +110,7 @@ async function createExperience(base, token, seed) {
   const key = data.key;
   const version = data.initialVersion?.version ?? data.version;
   if (!key || version == null) throw new Error('POST /content response missing key or version.');
-  return { key, version };
+  return { key, version, existed: false };
 }
 
 async function patchComposition(base, token, key, version, composition) {
@@ -112,15 +129,57 @@ async function patchComposition(base, token, key, version, composition) {
   }
 }
 
+async function deleteContent(base, token, key) {
+  await fetch(`${base}/v1/content/${encodeURIComponent(key)}`, {
+    method: 'DELETE',
+    headers: { authorization: `Bearer ${token}` },
+  }).catch(() => undefined);
+}
+
+/** Page through published versions to find the content key for a given routeSegment. */
+async function findKeyByRouteSegment(base, token, routeSegment) {
+  let pageIndex = 0;
+  while (true) {
+    const res = await fetch(
+      `${base}/v1/content/versions:all?statuses=published&pageSize=100&pageIndex=${pageIndex}`,
+      { headers: { authorization: `Bearer ${token}` } },
+    );
+    if (!res.ok) return null;
+    const data = await res.json();
+    const match = data.items?.find((v) => v.routeSegment === routeSegment);
+    if (match?.key) return match.key;
+    if (!data.items?.length || data.items.length < 100) return null;
+    pageIndex++;
+  }
+}
+
 async function publishVersion(base, token, key, version) {
   const res = await fetch(`${base}/v1/content/${encodeURIComponent(key)}/versions/${version}:publish`, {
     method: 'POST',
     headers: { authorization: `Bearer ${token}` },
   });
-  if (!res.ok) {
-    const text = await res.text();
-    throw new Error(`Publish failed (${res.status}): ${text}`);
-  }
+
+  if (res.ok) return { routeConflict: false };
+
+  let body = {};
+  try { body = await res.json(); } catch { throw new Error(`Publish failed (${res.status}): (unreadable response)`); }
+
+  const hasRouteConflict = body.errors?.some((e) => e.field === 'RouteSegment') ?? false;
+  if (hasRouteConflict) return { routeConflict: true };
+
+  const details = body.errors?.map((e) => e.detail).filter(Boolean).join('; ');
+  throw new Error(`Publish failed (${res.status})${details ? `: ${details}` : ''}`);
+}
+
+function prompt(question) {
+  const rl = createInterface({ input: process.stdin, output: process.stdout });
+  return new Promise((resolve) => {
+    rl.question(question, (answer) => { rl.close(); resolve(answer.trim()); });
+  });
+}
+
+function toSlug(input) {
+  return input.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
 }
 
 // ---------------------------------------------------------------------------
@@ -151,20 +210,69 @@ try {
   console.log(`Authenticating…`);
   const token = await getAccessToken(base, cred.clientId, cred.clientSecret);
 
-  console.log(`Creating experience "${seed.displayName}"…`);
-  const { key, version } = await createExperience(base, token, seed);
+  let routeSegment = buildRouteSegment(seed);
 
-  console.log(`Patching composition…`);
-  await patchComposition(base, token, key, version, seed.composition);
+  while (true) {
+    console.log(`Creating experience "${seed.displayName}"…`);
+    const result = await createExperience(base, token, seed, routeSegment);
 
-  console.log(`Publishing…`);
-  await publishVersion(base, token, key, version);
+    if (result.existed) {
+      console.log(`\nSkipped — experience already exists in the CMS.`);
+      console.log(`  URL:     /${routeSegment}`);
+      process.exit(0);
+    }
 
-  const slug = seed.routeSegment ?? seed.displayName.toLowerCase().replace(/\s+/g, '-');
-  console.log(`\nDone.`);
-  console.log(`  Key:     ${key}`);
-  console.log(`  Version: ${version}`);
-  console.log(`  URL:     /${slug}`);
+    const { key, version } = result;
+
+    console.log(`Patching composition…`);
+    await patchComposition(base, token, key, version, seed.composition);
+
+    console.log(`Publishing…`);
+    const publish = await publishVersion(base, token, key, version);
+
+    if (publish.routeConflict) {
+      await deleteContent(base, token, key);
+      console.log(`\nURL "/${routeSegment}" is already in use by a published page.`);
+
+      const overwrite = await prompt('Overwrite the existing page? [y/N] ');
+      if (overwrite.toLowerCase() === 'y') {
+        console.log('Looking up existing page…');
+        const existingKey = await findKeyByRouteSegment(base, token, routeSegment);
+        if (!existingKey) {
+          console.error('Could not locate the existing page via the API. Delete it manually in the CMS and re-run.');
+          process.exit(1);
+        }
+        await deleteContent(base, token, existingKey);
+        console.log('Existing page deleted. Retrying…');
+        continue;
+      }
+
+      const createNew = await prompt('Create with a different URL? [y/N] ');
+      if (createNew.toLowerCase() !== 'y') {
+        console.log('Aborted.');
+        process.exit(0);
+      }
+
+      const name = await prompt('Enter a name for the URL: ');
+      if (!name) {
+        console.error('No name provided. Aborted.');
+        process.exit(1);
+      }
+
+      const colonIdx = seed.displayName.indexOf(': ');
+      const prefix = colonIdx !== -1 ? seed.displayName.slice(0, colonIdx + 2) : '';
+      seed.displayName = prefix + name;
+      routeSegment = toSlug(name);
+      console.log(`Retrying with display name "${seed.displayName}" and URL "/${routeSegment}"…`);
+      continue;
+    }
+
+    console.log(`\nDone.`);
+    console.log(`  Key:     ${key}`);
+    console.log(`  Version: ${version}`);
+    console.log(`  URL:     /${routeSegment}`);
+    break;
+  }
 } catch (err) {
   console.error(`\nFailed: ${err.message}`);
   process.exit(1);

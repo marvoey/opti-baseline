@@ -66,52 +66,52 @@
       },
       {
         "nodeType": "section",
-        "displayName": "Sidebar — Targeted Insight",
+        "displayName": "Article Content",
         "layoutType": "grid",
-        "component": { "contentType": "SidebarSection" },
+        "component": { "contentType": "BlankSection" },
         "nodes": [
           {
             "nodeType": "row",
-            "displayName": "Content Row",
+            "displayName": "Article Row",
             "nodes": [
               {
                 "nodeType": "column",
-                "displayName": "Contents (25%)",
+                "displayName": "Article",
                 "nodes": [
                   {
                     "nodeType": "component",
-                    "displayName": "Table of Contents",
+                    "displayName": "Strategic Briefing Article",
                     "component": {
                       "contentType": "Paragraph",
                       "properties": {
                         "Text": {
                           "value": {
-                            "html": "<h3>Contents</h3><ul><li>Regulatory Impact</li><li>Custody Requirements</li><li>FX Execution</li></ul>"
+                            "html": "<h1>Strategic Expansion Briefing: European Equities</h1><p>This briefing outlines the regulatory, operational, and product considerations for expanding client exposure to European equity markets. Review each section before scheduling a strategy session.</p><p>Prepared for institutional clients with active mandates in cross-border securities and alternative asset classes.</p><h2>Regulatory Impact</h2><p>MiFID II reporting obligations apply to all transactions in European-listed equities, regardless of client domicile. Ensure your reporting infrastructure is certified for T+1 reconciliation before executing block trades.</p><p>Clients classified as Professional under EMIR must submit trade reports within the prescribed window. Failure to comply carries regulatory censure risk. CIBC Mellon provides regulatory reporting support as part of its global custody service.</p><h2>Custody Requirements</h2><p>European equities require settlement across a range of central securities depositories, including Euroclear, Clearstream, and local CSDs in Nordic and Eastern European markets. Custody arrangements must account for each market's settlement cycle, corporate action processing, and withholding tax procedures.</p><p>Sub-custodian networks should be reviewed for credit standing, service levels, and local regulatory compliance before expanding into new markets.</p><h2>FX Execution</h2><p>Cross-currency settlements in EUR, GBP, CHF, SEK, NOK, and DKK require coordinated FX execution. Automated FX facilities reduce operational friction and ensure settlement occurs within the required window.</p><p>Clients should evaluate standing instruction arrangements against transaction-by-transaction execution to optimize cost and timing. FX conversion timing relative to ex-dividend dates requires particular attention for dividend repatriation.</p><h2>Corporate Actions and Income Processing</h2><p>European issuers generate a high volume of corporate actions including rights issues, tender offers, dividend reinvestment options, and AGM voting rights. Timely instruction and entitlement processing are critical to client outcomes.</p><p>Income processing must account for local withholding taxes, double-taxation treaty reclaims, and the varying ex-dividend and payment date conventions across European markets.</p><h2>Compliance and Risk</h2><p>Institutional clients expanding into European equities must review their Investment Policy Statements and custodian due-diligence programmes. Local market risk, counterparty risk, and operational risk require ongoing monitoring across all relevant jurisdictions.</p>"
                           }
                         }
                       }
                     }
                   }
                 ]
-              },
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nodeType": "section",
+        "displayName": "Compliance",
+        "layoutType": "grid",
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "displayName": "Compliance Row",
+            "nodes": [
               {
                 "nodeType": "column",
-                "displayName": "Main Content (75%)",
+                "displayName": "Compliance Block",
                 "nodes": [
-                  {
-                    "nodeType": "component",
-                    "displayName": "Targeted Insight",
-                    "component": {
-                      "contentType": "Paragraph",
-                      "properties": {
-                        "Text": {
-                          "value": {
-                            "html": "<h2>Extracted Insight: Regulatory Impact</h2><p>MiFID II reporting obligations apply to all transactions in European-listed equities, regardless of client domicile. Ensure your reporting infrastructure is certified for T+1 reconciliation before executing block trades.</p><p>Clients classified as Professional under EMIR must submit trade reports within the prescribed window. Failure to comply carries regulatory censure risk.</p>"
-                          }
-                        }
-                      }
-                    }
-                  },
                   {
                     "nodeType": "component",
                     "displayName": "Global Compliance Lock",
@@ -158,7 +158,8 @@
                           "value": {
                             "html": "<p>Multi-market settlement and safekeeping services for European-listed securities across 30+ markets.</p>"
                           }
-                        }
+                        },
+                        "Service": { "value": ["global_custody"] }
                       }
                     }
                   }
@@ -179,7 +180,8 @@
                           "value": {
                             "html": "<p>Automated FX execution for cross-currency settlements, including EUR, GBP, CHF, and SEK pairs.</p>"
                           }
-                        }
+                        },
+                        "Service": { "value": ["foreign_exchange"] }
                       }
                     }
                   }
@@ -200,7 +202,8 @@
                           "value": {
                             "html": "<p>Generate incremental yield on European equity holdings via our fully-indemnified lending programme.</p>"
                           }
-                        }
+                        },
+                        "Service": { "value": ["securities_lending"] }
                       }
                     }
                   }
