@@ -18,6 +18,7 @@ import HeroSection, { HeroSectionContentType, HeroSectionDisplayTemplate } from 
 import FeedSection, { FeedSectionContentType } from './FeedSection';
 import ImageBlock, { ImageContentType, ImageDisplayTemplate } from './Image';
 import HeroBlock, { HeroBlockContentType, HeroBlockDisplayTemplate } from './BasicBlocks/HeroBlock';
+import MainNavBlock, { MainNavContentType } from './BasicBlocks/MainNav';
 import { ColumnDisplayTemplate } from './ColumnTemplate';
 
 /**
@@ -61,6 +62,7 @@ export const registeredContentTypes = [
   FeedSectionContentType,
   ImageContentType,
   HeroBlockContentType,
+  MainNavContentType,
 ];
 
 initContentTypeRegistry(registeredContentTypes);
@@ -81,5 +83,6 @@ initReactComponentRegistry({
     FeedSection,
     Image: ImageBlock,
     HeroBlockv2: HeroBlock,
+    MainNav: MainNavBlock,
   },
 });

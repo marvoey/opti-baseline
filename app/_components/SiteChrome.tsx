@@ -12,7 +12,7 @@ import Footer from './Footer';
 export default function SiteChrome({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <TopNav />
+      {/* <TopNav /> */}
       <MainNav />
       <div className="flex-1">{children}</div>
       <Footer />

@@ -1,0 +1,239 @@
+{
+  "displayName": "Client Access — Reporting &amp; Account Services",
+  "routeSegment": "client-access",
+  "locale": "en",
+  "composition": {
+    "nodeType": "experience",
+    "layoutType": "outline",
+    "nodes": [
+      {
+        "nodeType": "section",
+        "displayName": "Hero — Client Access",
+        "layoutType": "grid",
+        "displaySettings": {
+          "displayTemplate": "HeroSectionDefault",
+          "settings": { "theme": "default" }
+        },
+        "component": { "contentType": "HeroSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "displayName": "Hero Row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "displayName": "Hero Slot",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Hero Copy",
+                    "component": {
+                      "contentType": "Paragraph",
+                      "properties": {
+                        "Text": {
+                          "value": {
+                            "html": "<h1>Client Access</h1><p>Secure access to CIBC Mellon's institutional reporting, account services, and investment information. Sign in to view your portfolio positions, cash activity, corporate action notifications, and performance data.</p>"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nodeType": "section",
+        "displayName": "Article — Client Services",
+        "layoutType": "grid",
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "displayName": "Article Row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "displayName": "Article Body",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Client Services Article",
+                    "component": {
+                      "contentType": "Paragraph",
+                      "properties": {
+                        "Text": {
+                          "value": {
+                            "html": "<h2>Institutional Reporting and Account Management</h2><p>CIBC Mellon provides institutional clients with secure access to portfolio positions, cash balances, transaction history, corporate action notifications, and performance reporting. Information is available across your accounts and asset classes, with reporting formats designed to support your internal accounting, compliance, and governance processes.</p><p>Access is managed through controlled user credentials. Clients can define role-based access levels so that different members of your team — portfolio managers, operations staff, compliance officers, and finance teams — see the information relevant to their function.</p><h2>Investment Information and Data Delivery</h2><p>CIBC Mellon's investment information and analytics capabilities support a range of data delivery models. Clients may access portfolio data through online reporting, standardized file feeds to internal systems, or custom reporting arrangements agreed as part of your service configuration.</p><p>Data covers settlement and custody positions, multicurrency cash, income and corporate action processing status, and performance attribution inputs. Consistent identifiers and reconciled control totals support integration with your internal investment accounting and risk systems.</p><h2>Corporate Actions and Elections</h2><p>Clients receive notifications of corporate events — including dividends, rights issues, tender offers, conversions, and AGM voting — through CIBC Mellon's corporate action processing service. Elections and instructions are submitted through your designated channel within the deadlines applicable to each event and market.</p><p>Your CIBC Mellon service team coordinates notifications, default entitlement processing, and income reconciliation. Voluntary events require client instruction within the specified window; your relationship manager can confirm procedures for specific markets and event types.</p><h2>Support and Service Contacts</h2><p>CIBC Mellon maintains dedicated client service teams for custody, fund administration, recordkeeping, and related services. For access issues, reporting queries, or account changes, contact your assigned relationship manager or the applicable service desk. Recordkeeping clients are supported by a dedicated client and dealer support function.</p>"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nodeType": "section",
+        "displayName": "Compliance",
+        "layoutType": "grid",
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "displayName": "Compliance Row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "displayName": "Compliance Block",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Client Access Compliance Notice",
+                    "component": {
+                      "contentType": "ComplianceBlock",
+                      "properties": {
+                        "Jurisdiction": { "value": "Canada" },
+                        "Body": {
+                          "value": {
+                            "html": "<p><strong>SECURITY NOTICE (LOCKED)</strong> — CIBC Mellon will never ask clients to provide passwords, security tokens, or account credentials via email, phone, or unsolicited communications. If you receive a suspicious communication purporting to be from CIBC Mellon, do not click any links and contact your relationship manager immediately. Access to institutional accounts is subject to CIBC Mellon's security and acceptable-use policies. This block may not be modified by the AI content assembly engine.</p>"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nodeType": "section",
+        "displayName": "Grid — Client Services",
+        "layoutType": "grid",
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "displayName": "Services Cards Row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "displayName": "Reporting",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Card: Investment Reporting",
+                    "component": {
+                      "contentType": "CardBlock",
+                      "properties": {
+                        "Title": { "value": "Investment Reporting" },
+                        "Body": {
+                          "value": {
+                            "html": "<p>Access portfolio positions, cash balances, transaction history, and performance attribution data across your custody and administration accounts.</p>"
+                          }
+                        },
+                        "Intent": { "value": "simulate_transact" },
+                        "Persona": { "value": "asset_manager" },
+                        "Geo": { "value": "canada" },
+                        "Service": { "value": ["recordkeeping"] }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "column",
+                "displayName": "Corporate Actions",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Card: Corporate Actions",
+                    "component": {
+                      "contentType": "CardBlock",
+                      "properties": {
+                        "Title": { "value": "Corporate Actions" },
+                        "Body": {
+                          "value": {
+                            "html": "<p>Receive notifications and submit elections for dividends, rights issues, tender offers, and other corporate events across your portfolio positions.</p>"
+                          }
+                        },
+                        "Intent": { "value": "simulate_transact" },
+                        "Persona": { "value": "asset_manager" },
+                        "Geo": { "value": "canada" },
+                        "Service": { "value": ["global_custody"] }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "column",
+                "displayName": "Account Management",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Card: Account Management",
+                    "component": {
+                      "contentType": "CardBlock",
+                      "properties": {
+                        "Title": { "value": "Account Management" },
+                        "Body": {
+                          "value": {
+                            "html": "<p>Manage standing settlement instructions, user access levels, account configuration, and service requests with your CIBC Mellon relationship team.</p>"
+                          }
+                        },
+                        "Intent": { "value": "simulate_transact" },
+                        "Persona": { "value": "asset_manager" },
+                        "Geo": { "value": "canada" },
+                        "Service": { "value": ["onboarding"] }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nodeType": "section",
+        "displayName": "Action — Sign In",
+        "layoutType": "grid",
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "displayName": "CTA Row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "displayName": "CTA Slot",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Sign In to Client Portal",
+                    "component": {
+                      "contentType": "ActionBlock",
+                      "properties": {
+                        "Label": { "value": "Sign In to Client Portal" },
+                        "Href": { "value": "" },
+                        "Variant": { "value": "primary" }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

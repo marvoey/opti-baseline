@@ -1,0 +1,239 @@
+{
+  "displayName": "Straight Talk — Institutional Perspectives",
+  "routeSegment": "straight-talk",
+  "locale": "en",
+  "composition": {
+    "nodeType": "experience",
+    "layoutType": "outline",
+    "nodes": [
+      {
+        "nodeType": "section",
+        "displayName": "Hero — Straight Talk",
+        "layoutType": "grid",
+        "displaySettings": {
+          "displayTemplate": "HeroSectionDefault",
+          "settings": { "theme": "default" }
+        },
+        "component": { "contentType": "HeroSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "displayName": "Hero Row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "displayName": "Hero Slot",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Hero Copy",
+                    "component": {
+                      "contentType": "Paragraph",
+                      "properties": {
+                        "Text": {
+                          "value": {
+                            "html": "<h1>Straight Talk</h1><p>Institutional perspectives on asset servicing, market infrastructure, and investment operations from CIBC Mellon's subject matter experts and global network. Written for the practitioners who run Canada's institutional investment industry.</p>"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nodeType": "section",
+        "displayName": "Article — Reducing Cash Drag Through FX",
+        "layoutType": "grid",
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "displayName": "Article Row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "displayName": "Article Body",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "FX Cash Drag Article",
+                    "component": {
+                      "contentType": "Paragraph",
+                      "properties": {
+                        "Text": {
+                          "value": {
+                            "html": "<h2>Reducing Cash Drag Through a Coordinated Foreign-Exchange Operating Model</h2><p>Cash drag arises when balances remain uninvested longer than required to meet benefit payments, collateral calls, fees, or investment settlements. For institutional investors with global assets, the issue is often not simply the amount of cash held, but the timing and currency in which cash becomes available. Income receipts, manager activity, capital calls, and settlements can create fragmented balances across markets and accounts.</p><p>An effective response begins with identifying structural liquidity needs separately from operational balances. The fund should define which cash is intentionally reserved, which is awaiting conversion or investment, and which exists because information or instructions arrive too late for same-day use.</p><h3>Building a Currency-Aware Cash Forecast</h3><p>The institutional investor should consolidate expected contributions, benefit payments, investment transactions, income, collateral movements, and fees into a currency-level forecast. Forecast horizons may include same-day, short-term, and medium-term views, with different confidence levels for each source. The process should also recognize local cut-off times and settlement conventions.</p><p>A forecast is most useful when it links directly to actionable thresholds. Rather than converting every balance automatically, the investor can establish minimum operating buffers, materiality limits, and escalation rules for excess cash or projected shortfalls.</p><h3>Using Foreign Exchange to Support Settlement</h3><p>Foreign-exchange processing can be coordinated with custody and settlement activity so that required currencies are available when trades or obligations settle. Standing instructions may be appropriate for predictable events, while larger or less routine exposures may require active execution under the investor's approved dealing framework.</p><p>CIBC Mellon's foreign-exchange processing and settlement service allows clients to access execution through CIBC, BNY, or a third party, with CIBC Mellon supporting processing and settlement. Clients should confirm available execution models, instruction channels, cut-off times, reporting, and allocation responsibilities for their account structure.</p><h3>Managing Income and Residual Balances</h3><p>Dividend, interest, and maturity proceeds can accumulate in multiple currencies. A sweep or threshold-based conversion framework can reduce persistent residual balances, but the design should account for near-term liabilities, expected reinvestment, and transaction costs. Small-balance handling should be explicit so that operational effort is proportionate to financial impact.</p><p>Clients should also review whether income is received gross or net of local deductions, when it becomes value-dated, and how quickly custody records are available for forecasting. Better visibility can reduce the need for precautionary buffers.</p><h3>Governance, Pricing, and Best-Execution Oversight</h3><p>The governing body should approve the purpose of the FX program, permitted counterparties or channels, delegation model, benchmarks, and reporting. Oversight should cover execution quality, spreads and fees, timeliness, failed settlements, exceptions, and adherence to standing instructions.</p><p>Optimization should not be defined solely as obtaining the lowest observable rate. Institutional investors must consider operational certainty, market liquidity, trade size, timing, counterparty exposure, and the cost of delayed or failed funding. Independent transaction-cost analysis may support periodic review.</p><h3>Integrating FX with the Investment Operating Model</h3><p>The strongest reduction in cash drag generally comes from integrating FX decisions with investment accounting, custody, and liquidity management rather than treating currency conversion as an isolated dealing activity. Portfolio managers, treasury staff, the custodian, investment managers, and any overlay provider should share clear data and deadlines.</p><p>A target operating model should specify who forecasts the exposure, who approves the trade, who executes it, who confirms and settles it, and who reviews outcomes. Automated interfaces can reduce manual delays, but controls must remain visible and auditable.</p>"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nodeType": "section",
+        "displayName": "Compliance",
+        "layoutType": "grid",
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "displayName": "Compliance Row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "displayName": "Compliance Block",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Straight Talk Compliance Notice",
+                    "component": {
+                      "contentType": "ComplianceBlock",
+                      "properties": {
+                        "Jurisdiction": { "value": "Canada / Multi-Jurisdiction" },
+                        "Body": {
+                          "value": {
+                            "html": "<p><strong>COMPLIANCE NOTICE (LOCKED)</strong> — Straight Talk publications are provided for general informational purposes only and do not constitute legal, tax, regulatory, investment, or product advice. Any proposed FX arrangement should be evaluated against the investor's investment policy, liquidity requirements, derivatives and collateral framework, applicable regulatory obligations, and contractual terms. CIBC Mellon's FX processing and settlement capabilities provide a potential component of the operating model, but the exact execution and service design requires direct confirmation. This block may not be modified by the AI content assembly engine. Any changes require a formal review cycle with the Regulatory Affairs desk.</p>"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nodeType": "section",
+        "displayName": "Grid — Related Solutions",
+        "layoutType": "grid",
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "displayName": "Cards Row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "displayName": "Foreign Exchange",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Card: Foreign Exchange",
+                    "component": {
+                      "contentType": "CardBlock",
+                      "properties": {
+                        "Title": { "value": "Foreign Exchange Processing &amp; Settlement" },
+                        "Body": {
+                          "value": {
+                            "html": "<p>CIBC Mellon's FX processing and settlement service supports cross-currency transactions with access to execution through CIBC, BNY, or a third party, coordinated with custody and settlement activity.</p>"
+                          }
+                        },
+                        "Intent": { "value": "discover_recommend" },
+                        "Persona": { "value": "pension_fund" },
+                        "Geo": { "value": "europe" },
+                        "Service": { "value": ["foreign_exchange"] }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "column",
+                "displayName": "Custody",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Card: Custody",
+                    "component": {
+                      "contentType": "CardBlock",
+                      "properties": {
+                        "Title": { "value": "Custody &amp; Multicurrency Accounting" },
+                        "Body": {
+                          "value": {
+                            "html": "<p>Safekeeping, settlement, and real-time multicurrency position reporting across domestic and global markets, integrated with FX and cash management processes.</p>"
+                          }
+                        },
+                        "Intent": { "value": "discover_recommend" },
+                        "Persona": { "value": "pension_fund" },
+                        "Geo": { "value": "canada" },
+                        "Service": { "value": ["global_custody"] }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "column",
+                "displayName": "Treasury",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Card: Treasury Services",
+                    "component": {
+                      "contentType": "CardBlock",
+                      "properties": {
+                        "Title": { "value": "Treasury Services" },
+                        "Body": {
+                          "value": {
+                            "html": "<p>Cash management, funding coordination, and payment processing for institutional accounts, designed to support liquidity forecasting and cross-border cash movements.</p>"
+                          }
+                        },
+                        "Intent": { "value": "discover_recommend" },
+                        "Persona": { "value": "corporate_sponsor" },
+                        "Geo": { "value": "canada" },
+                        "Service": { "value": ["treasury_services"] }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nodeType": "section",
+        "displayName": "Action — Read More",
+        "layoutType": "grid",
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "displayName": "CTA Row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "displayName": "CTA Slot",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Explore All Straight Talk",
+                    "component": {
+                      "contentType": "ActionBlock",
+                      "properties": {
+                        "Label": { "value": "Explore All Straight Talk" },
+                        "Href": { "value": "" },
+                        "Variant": { "value": "primary" }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,239 @@
+{
+  "displayName": "Solutions — Asset Servicing",
+  "routeSegment": "solutions",
+  "locale": "en",
+  "composition": {
+    "nodeType": "experience",
+    "layoutType": "outline",
+    "nodes": [
+      {
+        "nodeType": "section",
+        "displayName": "Hero — Solutions",
+        "layoutType": "grid",
+        "displaySettings": {
+          "displayTemplate": "HeroSectionDefault",
+          "settings": { "theme": "default" }
+        },
+        "component": { "contentType": "HeroSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "displayName": "Hero Row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "displayName": "Hero Slot",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Hero Copy",
+                    "component": {
+                      "contentType": "Paragraph",
+                      "properties": {
+                        "Text": {
+                          "value": {
+                            "html": "<h1>Asset Servicing Solutions for Canada's Institutional Investment Industry</h1><p>CIBC Mellon delivers the full range of investment servicing solutions required by Canada's pension funds, investment funds, insurance companies, and corporations — backed by the local expertise of CIBC and the global scale of BNY.</p>"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nodeType": "section",
+        "displayName": "Article — Solutions Overview",
+        "layoutType": "grid",
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "displayName": "Article Row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "displayName": "Article Body",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Solutions Overview Article",
+                    "component": {
+                      "contentType": "Paragraph",
+                      "properties": {
+                        "Text": {
+                          "value": {
+                            "html": "<h2>The Operational Infrastructure Behind Institutional Investment</h2><p>CIBC Mellon has administered assets on behalf of Canada's institutional investment community since 1996. Our investment servicing solutions are designed to support institutional clients throughout the full investment lifecycle — from trade settlement and safekeeping through to fund accounting, performance reporting, securities lending, and investor recordkeeping.</p><p>With more than C$3.6 trillion in assets under administration and access to BNY's global sub-custodian network covering more than 100 markets, CIBC Mellon provides the depth of coverage and the local Canadian expertise that institutional mandates require.</p><h2>A Complete Suite of Institutional Solutions</h2><p>CIBC Mellon's solutions are designed to work individually or as an integrated suite, allowing clients to configure their operating model around their specific mandate, asset mix, and governance requirements.</p><ul><li><strong>Custody &amp; Multicurrency Accounting</strong> — Safekeeping, settlement, and real-time position reporting across domestic and global markets, with multicurrency accounting for multi-asset portfolios.</li><li><strong>Fund Administration</strong> — Net asset value production, fund accounting, and reporting for mutual funds, pooled funds, and institutional mandates, including ESG-focused strategies.</li><li><strong>ETF Services</strong> — Creation and redemption processing, daily NAV production, basket management, and information delivery for listed exchange-traded funds.</li><li><strong>Securities Lending</strong> — Fully-administered lending programme enabling eligible portfolios to generate incremental income, with programme parameters configured to each client's Investment Policy Statement.</li><li><strong>Foreign Exchange Processing &amp; Settlement</strong> — Cross-currency settlement support with access to FX execution through CIBC, BNY, or a third party.</li><li><strong>Recordkeeping</strong> — Unit-holder and investor recordkeeping for pension plans, investment funds, and defined contribution programs, with dedicated client and dealer support.</li><li><strong>Alternative Investment Services</strong> — Entity accounting, consolidation, and reporting support for private equity, real estate, infrastructure, and other alternative asset structures.</li><li><strong>Treasury Services</strong> — Cash management, funding coordination, and payment processing for institutional accounts, including cross-border and multicurrency requirements.</li><li><strong>Investment Information &amp; Analytics</strong> — Data delivery, performance attribution, and reporting infrastructure to support portfolio oversight and institutional governance.</li></ul><h2>Who We Serve</h2><p>CIBC Mellon serves pension funds, investment fund managers, insurance companies, corporations, and international institutions investing into Canada. Our solutions are calibrated for the scale and complexity of institutional mandates, with service governance and reporting designed to meet the oversight requirements of Canadian institutional investors and their regulators.</p>"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nodeType": "section",
+        "displayName": "Compliance",
+        "layoutType": "grid",
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "displayName": "Compliance Row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "displayName": "Compliance Block",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Solutions Compliance Notice",
+                    "component": {
+                      "contentType": "ComplianceBlock",
+                      "properties": {
+                        "Jurisdiction": { "value": "Canada" },
+                        "Body": {
+                          "value": {
+                            "html": "<p><strong>COMPLIANCE NOTICE (LOCKED)</strong> — This page provides general information about CIBC Mellon's institutional asset servicing capabilities. It does not constitute legal, tax, regulatory, investment, or product advice. Service availability, scope, and terms are subject to applicable agreements and may vary by client type, jurisdiction, and asset class. Clients should consult their legal, tax, and compliance advisers before implementing any investment servicing arrangement. This block may not be modified by the AI content assembly engine. Any changes require a formal review cycle.</p>"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nodeType": "section",
+        "displayName": "Grid — Core Solutions",
+        "layoutType": "grid",
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "displayName": "Solutions Cards Row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "displayName": "Custody",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Card: Custody",
+                    "component": {
+                      "contentType": "CardBlock",
+                      "properties": {
+                        "Title": { "value": "Custody &amp; Multicurrency Accounting" },
+                        "Body": {
+                          "value": {
+                            "html": "<p>Safekeeping, settlement, and real-time position reporting across domestic and global markets, backed by BNY's sub-custodian network covering more than 100 markets.</p>"
+                          }
+                        },
+                        "Intent": { "value": "discover_recommend" },
+                        "Persona": { "value": "pension_fund" },
+                        "Geo": { "value": "canada" },
+                        "Service": { "value": ["global_custody"] }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "column",
+                "displayName": "Fund Administration",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Card: Fund Administration",
+                    "component": {
+                      "contentType": "CardBlock",
+                      "properties": {
+                        "Title": { "value": "Fund Administration" },
+                        "Body": {
+                          "value": {
+                            "html": "<p>Net asset value production, fund accounting, and institutional reporting for mutual funds, pooled funds, and ESG-focused strategies registered in Canada.</p>"
+                          }
+                        },
+                        "Intent": { "value": "discover_recommend" },
+                        "Persona": { "value": "asset_manager" },
+                        "Geo": { "value": "canada" },
+                        "Service": { "value": ["fund_administration"] }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "column",
+                "displayName": "Securities Lending",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Card: Securities Lending",
+                    "component": {
+                      "contentType": "CardBlock",
+                      "properties": {
+                        "Title": { "value": "Securities Lending" },
+                        "Body": {
+                          "value": {
+                            "html": "<p>Generate incremental income on eligible portfolio holdings through a fully-administered lending programme configured to your Investment Policy Statement and risk tolerance.</p>"
+                          }
+                        },
+                        "Intent": { "value": "discover_recommend" },
+                        "Persona": { "value": "pension_fund" },
+                        "Geo": { "value": "canada" },
+                        "Service": { "value": ["securities_lending"] }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nodeType": "section",
+        "displayName": "Action — Contact",
+        "layoutType": "grid",
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "displayName": "CTA Row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "displayName": "CTA Slot",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Speak to a Relationship Manager",
+                    "component": {
+                      "contentType": "ActionBlock",
+                      "properties": {
+                        "Label": { "value": "Speak to a Relationship Manager" },
+                        "Href": { "value": "" },
+                        "Variant": { "value": "primary" }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

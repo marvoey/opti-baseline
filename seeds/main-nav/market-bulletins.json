@@ -1,0 +1,239 @@
+{
+  "displayName": "Market Bulletins — Settlement &amp; Market Updates",
+  "routeSegment": "market-bulletins",
+  "locale": "en",
+  "composition": {
+    "nodeType": "experience",
+    "layoutType": "outline",
+    "nodes": [
+      {
+        "nodeType": "section",
+        "displayName": "Hero — Market Bulletins",
+        "layoutType": "grid",
+        "displaySettings": {
+          "displayTemplate": "HeroSectionDefault",
+          "settings": { "theme": "default" }
+        },
+        "component": { "contentType": "HeroSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "displayName": "Hero Row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "displayName": "Hero Slot",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Hero Copy",
+                    "component": {
+                      "contentType": "Paragraph",
+                      "properties": {
+                        "Text": {
+                          "value": {
+                            "html": "<h1>Market Bulletins</h1><p>Timely notices on settlement cycle changes, market infrastructure developments, regulatory updates, and corporate action processing requirements affecting Canadian and global institutional investors. Published by CIBC Mellon's market and operations teams.</p>"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nodeType": "section",
+        "displayName": "Article — Canadian Sub-Custody and Market Infrastructure",
+        "layoutType": "grid",
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "displayName": "Article Row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "displayName": "Article Body",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Sub-Custody Market Infrastructure Article",
+                    "component": {
+                      "contentType": "Paragraph",
+                      "properties": {
+                        "Text": {
+                          "value": {
+                            "html": "<h2>Canadian Sub-Custody: Market Infrastructure and Settlement</h2><p>Foreign banks, global custodians, broker-dealers, and institutional investors use a Canadian sub-custodian to connect their global operating models with local market infrastructure. The sub-custodian holds or services assets in the Canadian market, supports settlement and asset servicing, and communicates local requirements and market changes to the global institution.</p><p>CIBC Mellon describes itself as focused on Canadian institutional investors and international institutional investors investing into Canada, combining local market expertise with the scale and reach of BNY and CIBC.</p><h3>Trade Settlement and Depository Connectivity</h3><p>Canadian securities settlement depends on timely and accurate instructions, funding, and connectivity to local infrastructure. CIBC Mellon's publicly described relationship with the Canadian Depository for Securities (CDS) supports settlement, trade matching, fail management, and reconciliation for institutional accounts.</p><p>Institutions should confirm current settlement cycle conventions with their service team. Accelerated settlement across North American markets has increased the importance of early trade allocation, timely funding, and proactive exception management.</p><h3>Asset Servicing and Corporate Actions</h3><p>Sub-custody includes income collection, corporate-action notifications, elections, and other lifecycle events. Institutions should understand notification channels, election deadlines, default-option treatment, and the evidence retained for completed elections. Tax treatment and withholding relief depend on the asset type, investor classification, and applicable documentation — the service scope should distinguish standard processing from advisory or specialized reclaim activity.</p><h3>Cash, Foreign Exchange, and Reconciliation</h3><p>Canadian-dollar cash must be coordinated with securities settlement and income activity. CIBC Mellon publicly lists foreign-exchange processing and settlement among its services, with access to execution through CIBC, BNY, or third parties depending on the arrangement. Daily cash and position reporting should reconcile to the foreign institution's global books, with clear break ownership and escalation procedures.</p><h3>Market Developments and Regulatory Updates</h3><p>CIBC Mellon publishes Market Bulletins to notify clients of material developments affecting Canadian market operations, including changes to settlement cycles, CDS procedures, income processing deadlines, corporate action conventions, and relevant regulatory guidance. Clients are encouraged to review each bulletin with their operations and compliance teams and to direct questions to their CIBC Mellon relationship manager.</p><p>Historical Market Bulletins are available on request. For time-sensitive operational matters, contact your assigned service team directly.</p>"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nodeType": "section",
+        "displayName": "Compliance",
+        "layoutType": "grid",
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "displayName": "Compliance Row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "displayName": "Compliance Block",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Market Bulletins Compliance Notice",
+                    "component": {
+                      "contentType": "ComplianceBlock",
+                      "properties": {
+                        "Jurisdiction": { "value": "Canada" },
+                        "Body": {
+                          "value": {
+                            "html": "<p><strong>COMPLIANCE NOTICE (LOCKED)</strong> — Market Bulletins are provided for operational informational purposes only. They do not constitute legal, tax, regulatory, or investment advice. Market practices, settlement conventions, and regulatory requirements are subject to change; clients should verify current requirements with their legal and compliance advisers and confirm the applicability of any bulletin to their specific account structure and jurisdiction. This block may not be modified by the AI content assembly engine. Any changes require a formal review cycle with the Regulatory Affairs desk.</p>"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nodeType": "section",
+        "displayName": "Grid — Key Topics",
+        "layoutType": "grid",
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "displayName": "Topics Cards Row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "displayName": "Settlement",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Card: Settlement Cycles",
+                    "component": {
+                      "contentType": "CardBlock",
+                      "properties": {
+                        "Title": { "value": "Settlement Cycles" },
+                        "Body": {
+                          "value": {
+                            "html": "<p>Updates on North American and international settlement cycle changes, including trade allocation deadlines, funding requirements, and fail-management procedures.</p>"
+                          }
+                        },
+                        "Intent": { "value": "educate_govern" },
+                        "Persona": { "value": "foreign_institution" },
+                        "Geo": { "value": "global" },
+                        "Service": { "value": ["global_custody"] }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "column",
+                "displayName": "Corporate Actions",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Card: Corporate Action Processing",
+                    "component": {
+                      "contentType": "CardBlock",
+                      "properties": {
+                        "Title": { "value": "Corporate Action Processing" },
+                        "Body": {
+                          "value": {
+                            "html": "<p>Notices on upcoming corporate events, election deadlines, income processing timelines, and changes to withholding or entitlement procedures in Canadian and global markets.</p>"
+                          }
+                        },
+                        "Intent": { "value": "educate_govern" },
+                        "Persona": { "value": "asset_manager" },
+                        "Geo": { "value": "canada" },
+                        "Service": { "value": ["global_custody"] }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "column",
+                "displayName": "Regulatory",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Card: Regulatory Updates",
+                    "component": {
+                      "contentType": "CardBlock",
+                      "properties": {
+                        "Title": { "value": "Regulatory Updates" },
+                        "Body": {
+                          "value": {
+                            "html": "<p>Operational guidance on regulatory developments affecting custody, fund administration, recordkeeping, and institutional reporting obligations across Canadian and applicable international jurisdictions.</p>"
+                          }
+                        },
+                        "Intent": { "value": "educate_govern" },
+                        "Persona": { "value": "pension_fund" },
+                        "Geo": { "value": "canada" },
+                        "Service": { "value": ["regulatory"] }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nodeType": "section",
+        "displayName": "Action — Subscribe",
+        "layoutType": "grid",
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "displayName": "CTA Row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "displayName": "CTA Slot",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "displayName": "Subscribe to Market Bulletins",
+                    "component": {
+                      "contentType": "ActionBlock",
+                      "properties": {
+                        "Label": { "value": "Subscribe to Market Bulletins" },
+                        "Href": { "value": "" },
+                        "Variant": { "value": "primary" }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

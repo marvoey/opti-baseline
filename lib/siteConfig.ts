@@ -33,10 +33,10 @@ export const siteConfig = {
 
   /** Primary header navigation. */
   mainNavLinks: [
-    { label: 'Solutions', href: '#' },
-    { label: 'Client Access', href: '#' },
-    { label: 'Straight Talk', href: '/services' },
-    { label: 'Market Bulletins', href: '/locations' },
+    { label: 'Solutions', href: '/solutions' },
+    { label: 'Client Access', href: '/client-access' },
+    { label: 'Straight Talk', href: '/straight-talk' },
+    { label: 'Market Bulletins', href: '/market-bulletins' },
   ] satisfies NavLink[],
   /** Header call-to-action button. */
   primaryCta: { label: 'Get Started', href: '#' } satisfies NavLink,
@@ -45,7 +45,7 @@ export const siteConfig = {
 
   /** Footer. */
   footerTagline:
-    'The operational infrastructure for Canada’s institutional investment industry — asset servicing, settlement and analytics at scale.',
+    "The operational infrastructure for Canada's institutional investment industry — asset servicing, settlement and analytics at scale.",
   footerColumns: [
     {
       heading: 'Solutions',
@@ -56,7 +56,15 @@ export const siteConfig = {
       ],
     },
     {
-      heading: 'Resources',
+      heading: 'Client Access',
+      links: [
+        { label: 'Online Services', href: '#' },
+        { label: 'Reporting', href: '#' },
+        { label: 'Account Management', href: '#' },
+      ],
+    },
+    {
+      heading: 'Insights',
       links: [
         { label: 'Straight Talk', href: '#' },
         { label: 'Market Bulletins', href: '#' },
