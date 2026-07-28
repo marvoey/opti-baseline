@@ -11,9 +11,25 @@ function isElement(node: Node): node is Element {
   return !('text' in node);
 }
 
+const HTML_ENTITIES: Record<string, string> = {
+  '&amp;': '&', '&lt;': '<', '&gt;': '>', '&quot;': '"',
+  '&apos;': "'", '&#39;': "'", '&nbsp;': ' ',
+};
+
+function decodeEntities(s: string) {
+  return s
+    .replace(/&[a-zA-Z]+;|&#\d+;|&#x[0-9a-fA-F]+;/g, m =>
+      HTML_ENTITIES[m] ?? (m.startsWith('&#x')
+        ? String.fromCodePoint(parseInt(m.slice(3, -1), 16))
+        : m.startsWith('&#')
+          ? String.fromCodePoint(parseInt(m.slice(2, -1), 10))
+          : m)
+    );
+}
+
 function extractText(children: Node[]): string {
   return children.map(n =>
-    'text' in n ? (n as Text).text : extractText((n as Element).children)
+    'text' in n ? decodeEntities((n as Text).text) : extractText((n as Element).children)
   ).join('');
 }
 
