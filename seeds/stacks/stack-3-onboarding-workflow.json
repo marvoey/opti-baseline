@@ -1,6 +1,6 @@
 {
   "displayName": "Stack 3: Complex Onboarding Workflow",
-  "routeSegment": "stack-onboarding-workflow",
+  "routeSegment": "stack-3--complex-onboarding-workflow",
   "locale": "en",
   "composition": {
     "nodeType": "experience",
@@ -10,7 +10,9 @@
         "nodeType": "section",
         "displayName": "Hero — Process Tracker",
         "layoutType": "grid",
-        "component": { "contentType": "HeroSection" },
+        "component": {
+          "contentType": "HeroSection"
+        },
         "nodes": [
           {
             "nodeType": "row",
@@ -44,7 +46,9 @@
         "nodeType": "section",
         "displayName": "Split — Intake Form + Context",
         "layoutType": "grid",
-        "component": { "contentType": "SplitSection" },
+        "component": {
+          "contentType": "SplitSection"
+        },
         "nodes": [
           {
             "nodeType": "row",
@@ -60,9 +64,15 @@
                     "component": {
                       "contentType": "ActionBlock",
                       "properties": {
-                        "Label": { "value": "Continue to Next Step" },
-                        "Href": { "value": "#" },
-                        "Variant": { "value": "primary" }
+                        "Label": {
+                          "value": "Continue to Next Step"
+                        },
+                        "Href": {
+                          "value": "#"
+                        },
+                        "Variant": {
+                          "value": "primary"
+                        }
                       }
                     }
                   }
@@ -96,7 +106,9 @@
         "nodeType": "section",
         "displayName": "Grid — Related Success Stories",
         "layoutType": "grid",
-        "component": { "contentType": "BlankSection" },
+        "component": {
+          "contentType": "BlankSection"
+        },
         "nodes": [
           {
             "nodeType": "row",
@@ -112,13 +124,19 @@
                     "component": {
                       "contentType": "CardBlock",
                       "properties": {
-                        "Title": { "value": "Large Public Pension" },
+                        "Title": {
+                          "value": "Large Public Pension"
+                        },
                         "Body": {
                           "value": {
                             "html": "<p>Onboarded $5B in alternatives seamlessly across 12 sub-funds using our streamlined RFP workflow. Full go-live achieved in under 60 days.</p>"
                           }
                         },
-                        "Service": { "value": ["onboarding"] }
+                        "Service": {
+                          "value": [
+                            "13"
+                          ]
+                        }
                       }
                     }
                   }
@@ -134,13 +152,20 @@
                     "component": {
                       "contentType": "CardBlock",
                       "properties": {
-                        "Title": { "value": "Corporate Plan Sponsor" },
+                        "Title": {
+                          "value": "Corporate Plan Sponsor"
+                        },
                         "Body": {
                           "value": {
                             "html": "<p>Transitioned recordkeeping for a $2.3B defined benefit plan within 90 days, with zero participant disruption during the conversion window.</p>"
                           }
                         },
-                        "Service": { "value": ["onboarding", "recordkeeping"] }
+                        "Service": {
+                          "value": [
+                            "13",
+                            "8"
+                          ]
+                        }
                       }
                     }
                   }

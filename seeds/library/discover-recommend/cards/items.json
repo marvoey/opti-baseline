@@ -1,531 +1,1057 @@
 {
-  "container": { "$env": "FOLDER_DISCOVER_RECOMMEND_CARD_BLOCKS" },
+  "container": {
+    "$env": "FOLDER_DISCOVER_RECOMMEND_CARD_BLOCKS"
+  },
   "items": [
-
     {
       "contentType": "CardBlock",
       "key": "8a84fa5cbf1741428057fb4e08ddbfb0",
       "displayName": "Fund Administration – Canada (Asset Manager)",
       "locale": "en",
       "properties": {
-        "Title": { "value": "Fund Administration" },
-        "Body": { "value": { "html": "<p>CIBC Mellon provides fund accounting and administration services to investment managers in Canada, supporting multicurrency accounting, NAV calculation, and regulatory reporting throughout the fund lifecycle. Integrated operational solutions are available for managers transitioning to outsourced investment operations models.</p>" } },
-        "Intent": { "value": "discover_recommend" },
-        "Persona": { "value": "asset_manager" },
-        "Service": { "value": ["fund_administration"] },
-        "Geo": { "value": "canada" }
+        "Title": {
+          "value": "Fund Administration"
+        },
+        "Body": {
+          "value": {
+            "html": "<p>CIBC Mellon provides fund accounting and administration services to investment managers in Canada, supporting multicurrency accounting, NAV calculation, and regulatory reporting throughout the fund lifecycle. Integrated operational solutions are available for managers transitioning to outsourced investment operations models.</p>"
+          }
+        },
+        "Intent": {
+          "value": "1"
+        },
+        "Persona": {
+          "value": "1"
+        },
+        "Service": {
+          "value": [
+            "1"
+          ]
+        },
+        "Geo": {
+          "value": "1"
+        }
       }
     },
-
     {
       "contentType": "CardBlock",
       "key": "46dfe6ecc30c4c42bac15e6e66035ae3",
       "displayName": "Fund Administration – Europe (Asset Manager)",
       "locale": "en",
       "properties": {
-        "Title": { "value": "Fund Administration" },
-        "Body": { "value": { "html": "<p>European asset managers allocating to Canadian markets can access CIBC Mellon's fund accounting and administration services for their Canadian-held fund structures. CIBC Mellon bridges cross-border operational requirements with the Canadian regulatory and market environment, drawing on its joint ownership by BNY and CIBC.</p>" } },
-        "Intent": { "value": "discover_recommend" },
-        "Persona": { "value": "asset_manager" },
-        "Service": { "value": ["fund_administration"] },
-        "Geo": { "value": "europe" }
+        "Title": {
+          "value": "Fund Administration"
+        },
+        "Body": {
+          "value": {
+            "html": "<p>European asset managers allocating to Canadian markets can access CIBC Mellon's fund accounting and administration services for their Canadian-held fund structures. CIBC Mellon bridges cross-border operational requirements with the Canadian regulatory and market environment, drawing on its joint ownership by BNY and CIBC.</p>"
+          }
+        },
+        "Intent": {
+          "value": "1"
+        },
+        "Persona": {
+          "value": "1"
+        },
+        "Service": {
+          "value": [
+            "1"
+          ]
+        },
+        "Geo": {
+          "value": "2"
+        }
       }
     },
-
     {
       "contentType": "CardBlock",
       "key": "93d918722dc34194a7c580b9bf30b61c",
       "displayName": "Fund Administration – Canada (Insurance Provider)",
       "locale": "en",
       "properties": {
-        "Title": { "value": "Fund Administration" },
-        "Body": { "value": { "html": "<p>CIBC Mellon supports Canadian insurance companies with outsourced fund accounting and investment operations, including general insurance fund accounting and segregated fund administration. The firm has delivered Canada's first integrated outsourced investment operations solution for a major Canadian life and health insurer.</p>" } },
-        "Intent": { "value": "discover_recommend" },
-        "Persona": { "value": "insurance_provider" },
-        "Service": { "value": ["fund_administration"] },
-        "Geo": { "value": "canada" }
+        "Title": {
+          "value": "Fund Administration"
+        },
+        "Body": {
+          "value": {
+            "html": "<p>CIBC Mellon supports Canadian insurance companies with outsourced fund accounting and investment operations, including general insurance fund accounting and segregated fund administration. The firm has delivered Canada's first integrated outsourced investment operations solution for a major Canadian life and health insurer.</p>"
+          }
+        },
+        "Intent": {
+          "value": "1"
+        },
+        "Persona": {
+          "value": "5"
+        },
+        "Service": {
+          "value": [
+            "1"
+          ]
+        },
+        "Geo": {
+          "value": "1"
+        }
       }
     },
-
     {
       "contentType": "CardBlock",
       "key": "99c0e2647d9e45e49354a0d3497afdce",
       "displayName": "Foreign Exchange – Canada (Pension Fund)",
       "locale": "en",
       "properties": {
-        "Title": { "value": "Foreign Exchange" },
-        "Body": { "value": { "html": "<p>CIBC Mellon provides foreign exchange processing and settlement services integrated with custody workflows, supporting Canadian pension funds managing currency exposures across domestic and international portfolios. FX services are operationally aligned with settlement activity to reduce friction on cross-border investment flows.</p>" } },
-        "Intent": { "value": "discover_recommend" },
-        "Persona": { "value": "pension_fund" },
-        "Service": { "value": ["foreign_exchange"] },
-        "Geo": { "value": "canada" }
+        "Title": {
+          "value": "Foreign Exchange"
+        },
+        "Body": {
+          "value": {
+            "html": "<p>CIBC Mellon provides foreign exchange processing and settlement services integrated with custody workflows, supporting Canadian pension funds managing currency exposures across domestic and international portfolios. FX services are operationally aligned with settlement activity to reduce friction on cross-border investment flows.</p>"
+          }
+        },
+        "Intent": {
+          "value": "1"
+        },
+        "Persona": {
+          "value": "2"
+        },
+        "Service": {
+          "value": [
+            "2"
+          ]
+        },
+        "Geo": {
+          "value": "1"
+        }
       }
     },
-
     {
       "contentType": "CardBlock",
       "key": "512f883a6b604da6a9ca1edca67d1c60",
       "displayName": "Foreign Exchange – Europe (Pension Fund)",
       "locale": "en",
       "properties": {
-        "Title": { "value": "Foreign Exchange" },
-        "Body": { "value": { "html": "<p>European pension funds investing in Canadian markets can access CIBC Mellon's foreign exchange processing capabilities to manage currency conversions and settlement flows between their home currency and the Canadian dollar. FX services are integrated with sub-custody operations to support efficient cross-border settlement.</p>" } },
-        "Intent": { "value": "discover_recommend" },
-        "Persona": { "value": "pension_fund" },
-        "Service": { "value": ["foreign_exchange"] },
-        "Geo": { "value": "europe" }
+        "Title": {
+          "value": "Foreign Exchange"
+        },
+        "Body": {
+          "value": {
+            "html": "<p>European pension funds investing in Canadian markets can access CIBC Mellon's foreign exchange processing capabilities to manage currency conversions and settlement flows between their home currency and the Canadian dollar. FX services are integrated with sub-custody operations to support efficient cross-border settlement.</p>"
+          }
+        },
+        "Intent": {
+          "value": "1"
+        },
+        "Persona": {
+          "value": "2"
+        },
+        "Service": {
+          "value": [
+            "2"
+          ]
+        },
+        "Geo": {
+          "value": "2"
+        }
       }
     },
-
     {
       "contentType": "CardBlock",
       "key": "b45616f9fb3347da90b1ed46181cd04d",
       "displayName": "Foreign Exchange – Canada (Foreign Institution)",
       "locale": "en",
       "properties": {
-        "Title": { "value": "Foreign Exchange" },
-        "Body": { "value": { "html": "<p>Foreign institutions settling Canadian securities purchases benefit from CIBC Mellon's integrated foreign exchange processing, which handles currency conversion as part of the custody and settlement workflow. This reduces operational complexity for international investors transacting in Canadian markets.</p>" } },
-        "Intent": { "value": "discover_recommend" },
-        "Persona": { "value": "foreign_institution" },
-        "Service": { "value": ["foreign_exchange"] },
-        "Geo": { "value": "canada" }
+        "Title": {
+          "value": "Foreign Exchange"
+        },
+        "Body": {
+          "value": {
+            "html": "<p>Foreign institutions settling Canadian securities purchases benefit from CIBC Mellon's integrated foreign exchange processing, which handles currency conversion as part of the custody and settlement workflow. This reduces operational complexity for international investors transacting in Canadian markets.</p>"
+          }
+        },
+        "Intent": {
+          "value": "1"
+        },
+        "Persona": {
+          "value": "4"
+        },
+        "Service": {
+          "value": [
+            "2"
+          ]
+        },
+        "Geo": {
+          "value": "1"
+        }
       }
     },
-
     {
       "contentType": "CardBlock",
       "key": "9759b19a065f453ab4bfa55e4089a573",
       "displayName": "Treasury Services – Canada (Pension Fund)",
       "locale": "en",
       "properties": {
-        "Title": { "value": "Treasury Services" },
-        "Body": { "value": { "html": "<p>CIBC Mellon offers treasury and cash management services to Canadian pension funds, providing liquidity management and cash processing in support of investment operations. These services complement custody and settlement mandates and have been recognized by Global Finance Magazine with a #1 global award for outstanding achievement in treasury operations.</p>" } },
-        "Intent": { "value": "discover_recommend" },
-        "Persona": { "value": "pension_fund" },
-        "Service": { "value": ["treasury_services"] },
-        "Geo": { "value": "canada" }
+        "Title": {
+          "value": "Treasury Services"
+        },
+        "Body": {
+          "value": {
+            "html": "<p>CIBC Mellon offers treasury and cash management services to Canadian pension funds, providing liquidity management and cash processing in support of investment operations. These services complement custody and settlement mandates and have been recognized by Global Finance Magazine with a #1 global award for outstanding achievement in treasury operations.</p>"
+          }
+        },
+        "Intent": {
+          "value": "1"
+        },
+        "Persona": {
+          "value": "2"
+        },
+        "Service": {
+          "value": [
+            "3"
+          ]
+        },
+        "Geo": {
+          "value": "1"
+        }
       }
     },
-
     {
       "contentType": "CardBlock",
       "key": "0d5c62ba26d94b92b27551431c36360e",
       "displayName": "Treasury Services – Canada (Corporate Sponsor)",
       "locale": "en",
       "properties": {
-        "Title": { "value": "Treasury Services" },
-        "Body": { "value": { "html": "<p>Corporate plan sponsors in Canada can access CIBC Mellon's treasury and cash management services as part of a comprehensive pension asset servicing arrangement. The service supports short-term liquidity needs and cash processing for corporate-sponsored pension and benefit programs.</p>" } },
-        "Intent": { "value": "discover_recommend" },
-        "Persona": { "value": "corporate_sponsor" },
-        "Service": { "value": ["treasury_services"] },
-        "Geo": { "value": "canada" }
+        "Title": {
+          "value": "Treasury Services"
+        },
+        "Body": {
+          "value": {
+            "html": "<p>Corporate plan sponsors in Canada can access CIBC Mellon's treasury and cash management services as part of a comprehensive pension asset servicing arrangement. The service supports short-term liquidity needs and cash processing for corporate-sponsored pension and benefit programs.</p>"
+          }
+        },
+        "Intent": {
+          "value": "1"
+        },
+        "Persona": {
+          "value": "3"
+        },
+        "Service": {
+          "value": [
+            "3"
+          ]
+        },
+        "Geo": {
+          "value": "1"
+        }
       }
     },
-
     {
       "contentType": "CardBlock",
       "key": "0eb5d702b56b4df882456419fea20df9",
       "displayName": "Treasury Services – United States (Corporate Sponsor)",
       "locale": "en",
       "properties": {
-        "Title": { "value": "Treasury Services" },
-        "Body": { "value": { "html": "<p>US-based corporate sponsors with Canadian pension or benefit plan obligations can engage CIBC Mellon for treasury and cash management services aligned with the Canadian regulatory environment. CIBC Mellon's familiarity with cross-border operational requirements helps US corporations manage their Canadian market presence efficiently.</p>" } },
-        "Intent": { "value": "discover_recommend" },
-        "Persona": { "value": "corporate_sponsor" },
-        "Service": { "value": ["treasury_services"] },
-        "Geo": { "value": "united_states" }
+        "Title": {
+          "value": "Treasury Services"
+        },
+        "Body": {
+          "value": {
+            "html": "<p>US-based corporate sponsors with Canadian pension or benefit plan obligations can engage CIBC Mellon for treasury and cash management services aligned with the Canadian regulatory environment. CIBC Mellon's familiarity with cross-border operational requirements helps US corporations manage their Canadian market presence efficiently.</p>"
+          }
+        },
+        "Intent": {
+          "value": "1"
+        },
+        "Persona": {
+          "value": "3"
+        },
+        "Service": {
+          "value": [
+            "3"
+          ]
+        },
+        "Geo": {
+          "value": "3"
+        }
       }
     },
-
     {
       "contentType": "CardBlock",
       "key": "affec4322a5943cdb772467cb5b344b9",
       "displayName": "ETF Services – Canada (Asset Manager)",
       "locale": "en",
       "properties": {
-        "Title": { "value": "ETF Services" },
-        "Body": { "value": { "html": "<p>CIBC Mellon is Canada's leading ETF custodian and administrator, supporting over 600 Canadian-listed ETFs across creation and redemption processing, NAV calculation, regulatory reporting, and back-office technology. Recognized across five categories at the 2025 ETF Express Canadian Awards, CIBC Mellon serves ETF providers ranging from traditional passive strategies to innovative alternative structures.</p>" } },
-        "Intent": { "value": "discover_recommend" },
-        "Persona": { "value": "asset_manager" },
-        "Service": { "value": ["etf_services"] },
-        "Geo": { "value": "canada" }
+        "Title": {
+          "value": "ETF Services"
+        },
+        "Body": {
+          "value": {
+            "html": "<p>CIBC Mellon is Canada's leading ETF custodian and administrator, supporting over 600 Canadian-listed ETFs across creation and redemption processing, NAV calculation, regulatory reporting, and back-office technology. Recognized across five categories at the 2025 ETF Express Canadian Awards, CIBC Mellon serves ETF providers ranging from traditional passive strategies to innovative alternative structures.</p>"
+          }
+        },
+        "Intent": {
+          "value": "1"
+        },
+        "Persona": {
+          "value": "1"
+        },
+        "Service": {
+          "value": [
+            "4"
+          ]
+        },
+        "Geo": {
+          "value": "1"
+        }
       }
     },
-
     {
       "contentType": "CardBlock",
       "key": "68336114c2b64be1adc4c744af281ae1",
       "displayName": "Alternative Investments – Canada (Pension Fund)",
       "locale": "en",
       "properties": {
-        "Title": { "value": "Alternative Investments" },
-        "Body": { "value": { "html": "<p>CIBC Mellon offers alternative investment administration services to Canadian institutional investors navigating growing allocations to private equity, real estate, infrastructure, and private debt. Drawing on the firm's institutional accounting platform and the BNY parent network, the service supports clients across complex, multi-asset-class alternative portfolios. Prospective clients should discuss specific capabilities directly with CIBC Mellon's relationship management team.</p>" } },
-        "Intent": { "value": "discover_recommend" },
-        "Persona": { "value": "pension_fund" },
-        "Service": { "value": ["alternative_investments"] },
-        "Geo": { "value": "canada" }
+        "Title": {
+          "value": "Alternative Investments"
+        },
+        "Body": {
+          "value": {
+            "html": "<p>CIBC Mellon offers alternative investment administration services to Canadian institutional investors navigating growing allocations to private equity, real estate, infrastructure, and private debt. Drawing on the firm's institutional accounting platform and the BNY parent network, the service supports clients across complex, multi-asset-class alternative portfolios. Prospective clients should discuss specific capabilities directly with CIBC Mellon's relationship management team.</p>"
+          }
+        },
+        "Intent": {
+          "value": "1"
+        },
+        "Persona": {
+          "value": "2"
+        },
+        "Service": {
+          "value": [
+            "5"
+          ]
+        },
+        "Geo": {
+          "value": "1"
+        }
       }
     },
-
     {
       "contentType": "CardBlock",
       "key": "6a7b452d1a254d9fb306aed75852e0ce",
       "displayName": "Alternative Investments – Global (Asset Manager)",
       "locale": "en",
       "properties": {
-        "Title": { "value": "Alternative Investments" },
-        "Body": { "value": { "html": "<p>Asset managers with global real estate, infrastructure, or private market mandates that include Canadian-held assets can access CIBC Mellon's alternative investment administration services. The service draws on the BNY parent network for broader global alternatives expertise while providing the dedicated Canadian market focus that generalist global administrators may not replicate. Specific capabilities should be confirmed directly with CIBC Mellon.</p>" } },
-        "Intent": { "value": "discover_recommend" },
-        "Persona": { "value": "asset_manager" },
-        "Service": { "value": ["alternative_investments"] },
-        "Geo": { "value": "global" }
+        "Title": {
+          "value": "Alternative Investments"
+        },
+        "Body": {
+          "value": {
+            "html": "<p>Asset managers with global real estate, infrastructure, or private market mandates that include Canadian-held assets can access CIBC Mellon's alternative investment administration services. The service draws on the BNY parent network for broader global alternatives expertise while providing the dedicated Canadian market focus that generalist global administrators may not replicate. Specific capabilities should be confirmed directly with CIBC Mellon.</p>"
+          }
+        },
+        "Intent": {
+          "value": "1"
+        },
+        "Persona": {
+          "value": "1"
+        },
+        "Service": {
+          "value": [
+            "5"
+          ]
+        },
+        "Geo": {
+          "value": "4"
+        }
       }
     },
-
     {
       "contentType": "CardBlock",
       "key": "0efb3e605abf4eae972c5d917a121ae4",
       "displayName": "Securities Lending – Canada (Pension Fund)",
       "locale": "en",
       "properties": {
-        "Title": { "value": "Securities Lending" },
-        "Body": { "value": { "html": "<p>CIBC Mellon provides securities lending services through the BNY Securities Finance program — one of the world's largest agent lending platforms — enabling eligible Canadian pension funds to generate incremental income from their securities holdings. The program draws on a global borrower network with trading offices across North America, Europe, and Asia.</p>" } },
-        "Intent": { "value": "discover_recommend" },
-        "Persona": { "value": "pension_fund" },
-        "Service": { "value": ["securities_lending"] },
-        "Geo": { "value": "canada" }
+        "Title": {
+          "value": "Securities Lending"
+        },
+        "Body": {
+          "value": {
+            "html": "<p>CIBC Mellon provides securities lending services through the BNY Securities Finance program — one of the world's largest agent lending platforms — enabling eligible Canadian pension funds to generate incremental income from their securities holdings. The program draws on a global borrower network with trading offices across North America, Europe, and Asia.</p>"
+          }
+        },
+        "Intent": {
+          "value": "1"
+        },
+        "Persona": {
+          "value": "2"
+        },
+        "Service": {
+          "value": [
+            "6"
+          ]
+        },
+        "Geo": {
+          "value": "1"
+        }
       }
     },
-
     {
       "contentType": "CardBlock",
       "key": "57d4d86631134253ac0a77c65cb94bdb",
       "displayName": "Securities Lending – Canada (Asset Manager)",
       "locale": "en",
       "properties": {
-        "Title": { "value": "Securities Lending" },
-        "Body": { "value": { "html": "<p>Investment managers with eligible Canadian securities holdings can access CIBC Mellon's agent lending program, operated in conjunction with the BNY Securities Finance business, to generate incremental yield. The fully integrated program connects lendable Canadian securities to a global borrower network spanning major financial centres.</p>" } },
-        "Intent": { "value": "discover_recommend" },
-        "Persona": { "value": "asset_manager" },
-        "Service": { "value": ["securities_lending"] },
-        "Geo": { "value": "canada" }
+        "Title": {
+          "value": "Securities Lending"
+        },
+        "Body": {
+          "value": {
+            "html": "<p>Investment managers with eligible Canadian securities holdings can access CIBC Mellon's agent lending program, operated in conjunction with the BNY Securities Finance business, to generate incremental yield. The fully integrated program connects lendable Canadian securities to a global borrower network spanning major financial centres.</p>"
+          }
+        },
+        "Intent": {
+          "value": "1"
+        },
+        "Persona": {
+          "value": "1"
+        },
+        "Service": {
+          "value": [
+            "6"
+          ]
+        },
+        "Geo": {
+          "value": "1"
+        }
       }
     },
-
     {
       "contentType": "CardBlock",
       "key": "f164db6abf1e4d5984e68762d5bd5094",
       "displayName": "Global Custody – Canada (Foreign Institution)",
       "locale": "en",
       "properties": {
-        "Title": { "value": "Global Custody" },
-        "Body": { "value": { "html": "<p>Foreign institutions investing in Canadian markets can access CIBC Mellon as Canada's dedicated sub-custodian, providing direct CDS connectivity, local market expertise, and settlement infrastructure for Canadian-listed securities. CIBC Mellon has been recognized as the World's Best Sub-Custodian by Global Finance Magazine for four consecutive years (2022–2025).</p>" } },
-        "Intent": { "value": "discover_recommend" },
-        "Persona": { "value": "foreign_institution" },
-        "Service": { "value": ["global_custody"] },
-        "Geo": { "value": "canada" }
+        "Title": {
+          "value": "Global Custody"
+        },
+        "Body": {
+          "value": {
+            "html": "<p>Foreign institutions investing in Canadian markets can access CIBC Mellon as Canada's dedicated sub-custodian, providing direct CDS connectivity, local market expertise, and settlement infrastructure for Canadian-listed securities. CIBC Mellon has been recognized as the World's Best Sub-Custodian by Global Finance Magazine for four consecutive years (2022–2025).</p>"
+          }
+        },
+        "Intent": {
+          "value": "1"
+        },
+        "Persona": {
+          "value": "4"
+        },
+        "Service": {
+          "value": [
+            "7"
+          ]
+        },
+        "Geo": {
+          "value": "1"
+        }
       }
     },
-
     {
       "contentType": "CardBlock",
       "key": "8f898b82c2ba44ef88a93d6a270c3d47",
       "displayName": "Global Custody – Europe (Foreign Institution)",
       "locale": "en",
       "properties": {
-        "Title": { "value": "Global Custody" },
-        "Body": { "value": { "html": "<p>European institutional investors and global custodians with Canadian market exposure rely on CIBC Mellon as their Canadian sub-custodian, combining direct CDS market access with the operational standards expected by global counterparties. As the recognized World's Best Sub-Custodian (Global Finance, 2022–2025), CIBC Mellon provides European institutions with a single, accountable Canadian market partner.</p>" } },
-        "Intent": { "value": "discover_recommend" },
-        "Persona": { "value": "foreign_institution" },
-        "Service": { "value": ["global_custody"] },
-        "Geo": { "value": "europe" }
+        "Title": {
+          "value": "Global Custody"
+        },
+        "Body": {
+          "value": {
+            "html": "<p>European institutional investors and global custodians with Canadian market exposure rely on CIBC Mellon as their Canadian sub-custodian, combining direct CDS market access with the operational standards expected by global counterparties. As the recognized World's Best Sub-Custodian (Global Finance, 2022–2025), CIBC Mellon provides European institutions with a single, accountable Canadian market partner.</p>"
+          }
+        },
+        "Intent": {
+          "value": "1"
+        },
+        "Persona": {
+          "value": "4"
+        },
+        "Service": {
+          "value": [
+            "7"
+          ]
+        },
+        "Geo": {
+          "value": "2"
+        }
       }
     },
-
     {
       "contentType": "CardBlock",
       "key": "3cbd330390254542b1b8b645911520e0",
       "displayName": "Global Custody – United States (Foreign Institution)",
       "locale": "en",
       "properties": {
-        "Title": { "value": "Global Custody" },
-        "Body": { "value": { "html": "<p>US-based global custodians and institutional investors with Canadian asset allocations use CIBC Mellon as their Canadian sub-custodian, benefiting from its direct CDS connectivity and purpose-built Canadian market infrastructure. The firm's joint ownership by BNY and CIBC provides US counterparties with familiar operational standards alongside deep local market expertise.</p>" } },
-        "Intent": { "value": "discover_recommend" },
-        "Persona": { "value": "foreign_institution" },
-        "Service": { "value": ["global_custody"] },
-        "Geo": { "value": "united_states" }
+        "Title": {
+          "value": "Global Custody"
+        },
+        "Body": {
+          "value": {
+            "html": "<p>US-based global custodians and institutional investors with Canadian asset allocations use CIBC Mellon as their Canadian sub-custodian, benefiting from its direct CDS connectivity and purpose-built Canadian market infrastructure. The firm's joint ownership by BNY and CIBC provides US counterparties with familiar operational standards alongside deep local market expertise.</p>"
+          }
+        },
+        "Intent": {
+          "value": "1"
+        },
+        "Persona": {
+          "value": "4"
+        },
+        "Service": {
+          "value": [
+            "7"
+          ]
+        },
+        "Geo": {
+          "value": "3"
+        }
       }
     },
-
     {
       "contentType": "CardBlock",
       "key": "3c791d3d91bc415b9054daa90a6f6157",
       "displayName": "Global Custody – United States (Insurance Provider)",
       "locale": "en",
       "properties": {
-        "Title": { "value": "Global Custody" },
-        "Body": { "value": { "html": "<p>US-based insurance providers with Canadian investment mandates can access CIBC Mellon's custody and asset servicing infrastructure for their Canadian holdings. CIBC Mellon provides the local market expertise and regulatory familiarity that international insurance investors require when navigating the distinct Canadian custodial environment.</p>" } },
-        "Intent": { "value": "discover_recommend" },
-        "Persona": { "value": "insurance_provider" },
-        "Service": { "value": ["global_custody"] },
-        "Geo": { "value": "united_states" }
+        "Title": {
+          "value": "Global Custody"
+        },
+        "Body": {
+          "value": {
+            "html": "<p>US-based insurance providers with Canadian investment mandates can access CIBC Mellon's custody and asset servicing infrastructure for their Canadian holdings. CIBC Mellon provides the local market expertise and regulatory familiarity that international insurance investors require when navigating the distinct Canadian custodial environment.</p>"
+          }
+        },
+        "Intent": {
+          "value": "1"
+        },
+        "Persona": {
+          "value": "5"
+        },
+        "Service": {
+          "value": [
+            "7"
+          ]
+        },
+        "Geo": {
+          "value": "3"
+        }
       }
     },
-
     {
       "contentType": "CardBlock",
       "key": "7a8be07385bd426ea8d57c3e5cb2cf6e",
       "displayName": "Global Custody – Canada (Pension Fund)",
       "locale": "en",
       "properties": {
-        "Title": { "value": "Global Custody" },
-        "Body": { "value": { "html": "<p>Canadian pension funds with domestic and international holdings can access CIBC Mellon's global custody services, combining direct Canadian market infrastructure with access to BNY's global agent bank network spanning 100+ markets. The service supports pension plans ranging from single-employer plans to large multi-employer arrangements.</p>" } },
-        "Intent": { "value": "discover_recommend" },
-        "Persona": { "value": "pension_fund" },
-        "Service": { "value": ["global_custody"] },
-        "Geo": { "value": "canada" }
+        "Title": {
+          "value": "Global Custody"
+        },
+        "Body": {
+          "value": {
+            "html": "<p>Canadian pension funds with domestic and international holdings can access CIBC Mellon's global custody services, combining direct Canadian market infrastructure with access to BNY's global agent bank network spanning 100+ markets. The service supports pension plans ranging from single-employer plans to large multi-employer arrangements.</p>"
+          }
+        },
+        "Intent": {
+          "value": "1"
+        },
+        "Persona": {
+          "value": "2"
+        },
+        "Service": {
+          "value": [
+            "7"
+          ]
+        },
+        "Geo": {
+          "value": "1"
+        }
       }
     },
-
     {
       "contentType": "CardBlock",
       "key": "4c61855ddff04e748b19fcc91ef8ee35",
       "displayName": "Global Custody – Global (Asset Manager)",
       "locale": "en",
       "properties": {
-        "Title": { "value": "Global Custody" },
-        "Body": { "value": { "html": "<p>Canadian asset managers with global mandates can access cross-border custody services through CIBC Mellon, leveraging BNY's worldwide agent bank network for international holdings alongside CIBC Mellon's direct Canadian market infrastructure. This provides a single service relationship for both domestic and global portfolio custody requirements.</p>" } },
-        "Intent": { "value": "discover_recommend" },
-        "Persona": { "value": "asset_manager" },
-        "Service": { "value": ["global_custody"] },
-        "Geo": { "value": "global" }
+        "Title": {
+          "value": "Global Custody"
+        },
+        "Body": {
+          "value": {
+            "html": "<p>Canadian asset managers with global mandates can access cross-border custody services through CIBC Mellon, leveraging BNY's worldwide agent bank network for international holdings alongside CIBC Mellon's direct Canadian market infrastructure. This provides a single service relationship for both domestic and global portfolio custody requirements.</p>"
+          }
+        },
+        "Intent": {
+          "value": "1"
+        },
+        "Persona": {
+          "value": "1"
+        },
+        "Service": {
+          "value": [
+            "7"
+          ]
+        },
+        "Geo": {
+          "value": "4"
+        }
       }
     },
-
     {
       "contentType": "CardBlock",
       "key": "7e78b761c9244404b68612269793f26c",
       "displayName": "Recordkeeping – Canada (Pension Fund)",
       "locale": "en",
       "properties": {
-        "Title": { "value": "Recordkeeping" },
-        "Body": { "value": { "html": "<p>CIBC Mellon provides institutional recordkeeping services for Canadian pension plans, supporting defined benefit and defined contribution plan sponsors with member account maintenance, benefit disbursement processing, and compliance reporting under Canadian pension and securities regulations. The service is available for domestic and global pooled structures, segregated accounts, and master trust arrangements.</p>" } },
-        "Intent": { "value": "discover_recommend" },
-        "Persona": { "value": "pension_fund" },
-        "Service": { "value": ["recordkeeping"] },
-        "Geo": { "value": "canada" }
+        "Title": {
+          "value": "Recordkeeping"
+        },
+        "Body": {
+          "value": {
+            "html": "<p>CIBC Mellon provides institutional recordkeeping services for Canadian pension plans, supporting defined benefit and defined contribution plan sponsors with member account maintenance, benefit disbursement processing, and compliance reporting under Canadian pension and securities regulations. The service is available for domestic and global pooled structures, segregated accounts, and master trust arrangements.</p>"
+          }
+        },
+        "Intent": {
+          "value": "1"
+        },
+        "Persona": {
+          "value": "2"
+        },
+        "Service": {
+          "value": [
+            "8"
+          ]
+        },
+        "Geo": {
+          "value": "1"
+        }
       }
     },
-
     {
       "contentType": "CardBlock",
       "key": "88e340cb36f840408fe591e37cfb3258",
       "displayName": "Recordkeeping – Global (Corporate Sponsor)",
       "locale": "en",
       "properties": {
-        "Title": { "value": "Recordkeeping" },
-        "Body": { "value": { "html": "<p>Multinational corporate plan sponsors with Canadian pension obligations can engage CIBC Mellon for pension trust fund recordkeeping, supporting DB and DC plan structures under Canadian regulatory requirements. CIBC Mellon's service model accommodates standalone accounts, pooled arrangements, and global fund structures for corporate sponsors operating across multiple jurisdictions.</p>" } },
-        "Intent": { "value": "discover_recommend" },
-        "Persona": { "value": "corporate_sponsor" },
-        "Service": { "value": ["recordkeeping"] },
-        "Geo": { "value": "global" }
+        "Title": {
+          "value": "Recordkeeping"
+        },
+        "Body": {
+          "value": {
+            "html": "<p>Multinational corporate plan sponsors with Canadian pension obligations can engage CIBC Mellon for pension trust fund recordkeeping, supporting DB and DC plan structures under Canadian regulatory requirements. CIBC Mellon's service model accommodates standalone accounts, pooled arrangements, and global fund structures for corporate sponsors operating across multiple jurisdictions.</p>"
+          }
+        },
+        "Intent": {
+          "value": "1"
+        },
+        "Persona": {
+          "value": "3"
+        },
+        "Service": {
+          "value": [
+            "8"
+          ]
+        },
+        "Geo": {
+          "value": "4"
+        }
       }
     },
-
     {
       "contentType": "CardBlock",
       "key": "9a1b0200fe424c3abf897640a047d632",
       "displayName": "ESG – Canada (Asset Manager)",
       "locale": "en",
       "properties": {
-        "Title": { "value": "ESG" },
-        "Body": { "value": { "html": "<p>CIBC Mellon supports Canadian asset managers navigating the evolving ESG disclosure and responsible investment landscape, providing access to ESG-related data and analytics through the BNY and CIBC parent networks. The firm publishes research and facilitates industry dialogue on mandatory reporting developments, energy sector transition, and the integration of ESG considerations into investment policy.</p>" } },
-        "Intent": { "value": "discover_recommend" },
-        "Persona": { "value": "asset_manager" },
-        "Service": { "value": ["esg"] },
-        "Geo": { "value": "canada" }
+        "Title": {
+          "value": "ESG"
+        },
+        "Body": {
+          "value": {
+            "html": "<p>CIBC Mellon supports Canadian asset managers navigating the evolving ESG disclosure and responsible investment landscape, providing access to ESG-related data and analytics through the BNY and CIBC parent networks. The firm publishes research and facilitates industry dialogue on mandatory reporting developments, energy sector transition, and the integration of ESG considerations into investment policy.</p>"
+          }
+        },
+        "Intent": {
+          "value": "1"
+        },
+        "Persona": {
+          "value": "1"
+        },
+        "Service": {
+          "value": [
+            "9"
+          ]
+        },
+        "Geo": {
+          "value": "1"
+        }
       }
     },
-
     {
       "contentType": "CardBlock",
       "key": "074ab47239a247e19103ab42d344ba4e",
       "displayName": "ESG – Canada (Pension Fund)",
       "locale": "en",
       "properties": {
-        "Title": { "value": "ESG" },
-        "Body": { "value": { "html": "<p>Canadian pension funds facing beneficiary and regulatory pressure to integrate ESG considerations into investment decision-making can look to CIBC Mellon for access to ESG data and analytics tools and informed perspective on Canada's mandatory disclosure requirements, including forthcoming ISSB-aligned reporting standards. ESG capabilities are facilitated through the BNY and CIBC parent networks.</p>" } },
-        "Intent": { "value": "discover_recommend" },
-        "Persona": { "value": "pension_fund" },
-        "Service": { "value": ["esg"] },
-        "Geo": { "value": "canada" }
+        "Title": {
+          "value": "ESG"
+        },
+        "Body": {
+          "value": {
+            "html": "<p>Canadian pension funds facing beneficiary and regulatory pressure to integrate ESG considerations into investment decision-making can look to CIBC Mellon for access to ESG data and analytics tools and informed perspective on Canada's mandatory disclosure requirements, including forthcoming ISSB-aligned reporting standards. ESG capabilities are facilitated through the BNY and CIBC parent networks.</p>"
+          }
+        },
+        "Intent": {
+          "value": "1"
+        },
+        "Persona": {
+          "value": "2"
+        },
+        "Service": {
+          "value": [
+            "9"
+          ]
+        },
+        "Geo": {
+          "value": "1"
+        }
       }
     },
-
     {
       "contentType": "CardBlock",
       "key": "07ff6a99ae1a4c6a9f1cd1da8dfe7965",
       "displayName": "Regulatory – Canada (Asset Manager)",
       "locale": "en",
       "properties": {
-        "Title": { "value": "Regulatory" },
-        "Body": { "value": { "html": "<p>CIBC Mellon supports Canadian investment fund managers in meeting regulatory obligations through investment compliance monitoring, regulatory reporting, and proactive client guidance on evolving CSA and CIRO requirements — including T+1 settlement, Total Cost Reporting, and fund transparency mandates. Relationship managers work directly with clients ahead of significant regulatory transitions.</p>" } },
-        "Intent": { "value": "discover_recommend" },
-        "Persona": { "value": "asset_manager" },
-        "Service": { "value": ["regulatory"] },
-        "Geo": { "value": "canada" }
+        "Title": {
+          "value": "Regulatory"
+        },
+        "Body": {
+          "value": {
+            "html": "<p>CIBC Mellon supports Canadian investment fund managers in meeting regulatory obligations through investment compliance monitoring, regulatory reporting, and proactive client guidance on evolving CSA and CIRO requirements — including T+1 settlement, Total Cost Reporting, and fund transparency mandates. Relationship managers work directly with clients ahead of significant regulatory transitions.</p>"
+          }
+        },
+        "Intent": {
+          "value": "1"
+        },
+        "Persona": {
+          "value": "1"
+        },
+        "Service": {
+          "value": [
+            "10"
+          ]
+        },
+        "Geo": {
+          "value": "1"
+        }
       }
     },
-
     {
       "contentType": "CardBlock",
       "key": "e06bcd2007cb4c83a5cad82ee870aa69",
       "displayName": "Regulatory – Canada (Foreign Institution)",
       "locale": "en",
       "properties": {
-        "Title": { "value": "Regulatory" },
-        "Body": { "value": { "html": "<p>Foreign institutions investing into Canadian markets must navigate a distinct regulatory environment spanning CIRO, CSA, and CRA requirements. CIBC Mellon's relationship management team provides guidance on Canadian securities law compliance obligations and assists foreign institutional clients in understanding the operational implications of Canadian market regulation for their investment activity.</p>" } },
-        "Intent": { "value": "discover_recommend" },
-        "Persona": { "value": "foreign_institution" },
-        "Service": { "value": ["regulatory"] },
-        "Geo": { "value": "canada" }
+        "Title": {
+          "value": "Regulatory"
+        },
+        "Body": {
+          "value": {
+            "html": "<p>Foreign institutions investing into Canadian markets must navigate a distinct regulatory environment spanning CIRO, CSA, and CRA requirements. CIBC Mellon's relationship management team provides guidance on Canadian securities law compliance obligations and assists foreign institutional clients in understanding the operational implications of Canadian market regulation for their investment activity.</p>"
+          }
+        },
+        "Intent": {
+          "value": "1"
+        },
+        "Persona": {
+          "value": "4"
+        },
+        "Service": {
+          "value": [
+            "10"
+          ]
+        },
+        "Geo": {
+          "value": "1"
+        }
       }
     },
-
     {
       "contentType": "CardBlock",
       "key": "ec4af04742a84f9a8dd28cb3a9e6a431",
       "displayName": "Regulatory – Canada (Pension Fund)",
       "locale": "en",
       "properties": {
-        "Title": { "value": "Regulatory" },
-        "Body": { "value": { "html": "<p>CIBC Mellon provides Canadian pension plans with investment compliance monitoring against investment policy statements and regulatory investment guidelines, as a contracted service within broader custody and administration mandates. The firm also provides proactive guidance on pension-relevant regulatory developments under OSFI and provincial pension legislation.</p>" } },
-        "Intent": { "value": "discover_recommend" },
-        "Persona": { "value": "pension_fund" },
-        "Service": { "value": ["regulatory"] },
-        "Geo": { "value": "canada" }
+        "Title": {
+          "value": "Regulatory"
+        },
+        "Body": {
+          "value": {
+            "html": "<p>CIBC Mellon provides Canadian pension plans with investment compliance monitoring against investment policy statements and regulatory investment guidelines, as a contracted service within broader custody and administration mandates. The firm also provides proactive guidance on pension-relevant regulatory developments under OSFI and provincial pension legislation.</p>"
+          }
+        },
+        "Intent": {
+          "value": "1"
+        },
+        "Persona": {
+          "value": "2"
+        },
+        "Service": {
+          "value": [
+            "10"
+          ]
+        },
+        "Geo": {
+          "value": "1"
+        }
       }
     },
-
     {
       "contentType": "CardBlock",
       "key": "599fc9221bdb4f469652d57c78855ddf",
       "displayName": "Tax – Canada (Asset Manager)",
       "locale": "en",
       "properties": {
-        "Title": { "value": "Tax" },
-        "Body": { "value": { "html": "<p>CIBC Mellon provides operational support for Canadian tax reporting obligations applicable to investment fund managers, including CRA trust disclosure requirements and investment cost transparency rules. Relationship managers work proactively with clients to identify compliance requirements within their service arrangements. Clients should engage qualified tax advisors for substantive tax guidance.</p>" } },
-        "Intent": { "value": "discover_recommend" },
-        "Persona": { "value": "asset_manager" },
-        "Service": { "value": ["tax"] },
-        "Geo": { "value": "canada" }
+        "Title": {
+          "value": "Tax"
+        },
+        "Body": {
+          "value": {
+            "html": "<p>CIBC Mellon provides operational support for Canadian tax reporting obligations applicable to investment fund managers, including CRA trust disclosure requirements and investment cost transparency rules. Relationship managers work proactively with clients to identify compliance requirements within their service arrangements. Clients should engage qualified tax advisors for substantive tax guidance.</p>"
+          }
+        },
+        "Intent": {
+          "value": "1"
+        },
+        "Persona": {
+          "value": "1"
+        },
+        "Service": {
+          "value": [
+            "11"
+          ]
+        },
+        "Geo": {
+          "value": "1"
+        }
       }
     },
-
     {
       "contentType": "CardBlock",
       "key": "a097c90493944426bae6a23c41f00fd0",
       "displayName": "Tax – Europe (Asset Manager)",
       "locale": "en",
       "properties": {
-        "Title": { "value": "Tax" },
-        "Body": { "value": { "html": "<p>European asset managers launching or expanding Canadian investment fund operations must navigate Canadian tax reporting requirements including CRA trust and fund disclosure rules. CIBC Mellon's relationship team can assist in identifying the Canadian tax reporting obligations that arise from fund structures and Canadian market activity, and refers clients to qualified tax counsel for substantive advice.</p>" } },
-        "Intent": { "value": "discover_recommend" },
-        "Persona": { "value": "asset_manager" },
-        "Service": { "value": ["tax"] },
-        "Geo": { "value": "europe" }
+        "Title": {
+          "value": "Tax"
+        },
+        "Body": {
+          "value": {
+            "html": "<p>European asset managers launching or expanding Canadian investment fund operations must navigate Canadian tax reporting requirements including CRA trust and fund disclosure rules. CIBC Mellon's relationship team can assist in identifying the Canadian tax reporting obligations that arise from fund structures and Canadian market activity, and refers clients to qualified tax counsel for substantive advice.</p>"
+          }
+        },
+        "Intent": {
+          "value": "1"
+        },
+        "Persona": {
+          "value": "1"
+        },
+        "Service": {
+          "value": [
+            "11"
+          ]
+        },
+        "Geo": {
+          "value": "2"
+        }
       }
     },
-
     {
       "contentType": "CardBlock",
       "key": "8597298794974c14bb97938f3e507420",
       "displayName": "Tax – Canada (Pension Fund)",
       "locale": "en",
       "properties": {
-        "Title": { "value": "Tax" },
-        "Body": { "value": { "html": "<p>CIBC Mellon provides Canadian pension plan sponsors with operational support for pension trust tax reporting obligations under CRA requirements, including trust disclosure filings and applicable regulatory changes. The firm's relationship managers identify impacted clients and clarify the operational dimensions of Canadian tax compliance within the scope of their service mandates.</p>" } },
-        "Intent": { "value": "discover_recommend" },
-        "Persona": { "value": "pension_fund" },
-        "Service": { "value": ["tax"] },
-        "Geo": { "value": "canada" }
+        "Title": {
+          "value": "Tax"
+        },
+        "Body": {
+          "value": {
+            "html": "<p>CIBC Mellon provides Canadian pension plan sponsors with operational support for pension trust tax reporting obligations under CRA requirements, including trust disclosure filings and applicable regulatory changes. The firm's relationship managers identify impacted clients and clarify the operational dimensions of Canadian tax compliance within the scope of their service mandates.</p>"
+          }
+        },
+        "Intent": {
+          "value": "1"
+        },
+        "Persona": {
+          "value": "2"
+        },
+        "Service": {
+          "value": [
+            "11"
+          ]
+        },
+        "Geo": {
+          "value": "1"
+        }
       }
     },
-
     {
       "contentType": "CardBlock",
       "key": "164471c650fb459f880c6e9190a85c13",
       "displayName": "Onboarding – Canada (Foreign Institution)",
       "locale": "en",
       "properties": {
-        "Title": { "value": "Onboarding" },
-        "Body": { "value": { "html": "<p>Foreign institutions establishing Canadian market access through CIBC Mellon benefit from structured client onboarding processes aligned with Canadian KYC and AML requirements. CIBC Mellon's implementation team has experience transitioning complex institutional mandates, including international sub-custody relationships and cross-border custody arrangements, to its Canadian servicing platform.</p>" } },
-        "Intent": { "value": "discover_recommend" },
-        "Persona": { "value": "foreign_institution" },
-        "Service": { "value": ["onboarding"] },
-        "Geo": { "value": "canada" }
+        "Title": {
+          "value": "Onboarding"
+        },
+        "Body": {
+          "value": {
+            "html": "<p>Foreign institutions establishing Canadian market access through CIBC Mellon benefit from structured client onboarding processes aligned with Canadian KYC and AML requirements. CIBC Mellon's implementation team has experience transitioning complex institutional mandates, including international sub-custody relationships and cross-border custody arrangements, to its Canadian servicing platform.</p>"
+          }
+        },
+        "Intent": {
+          "value": "1"
+        },
+        "Persona": {
+          "value": "4"
+        },
+        "Service": {
+          "value": [
+            "13"
+          ]
+        },
+        "Geo": {
+          "value": "1"
+        }
       }
     },
-
     {
       "contentType": "CardBlock",
       "key": "30305e1461a74e69a80713691c167da3",
       "displayName": "Onboarding – Canada (Asset Manager)",
       "locale": "en",
       "properties": {
-        "Title": { "value": "Onboarding" },
-        "Body": { "value": { "html": "<p>Asset managers launching new Canadian fund structures or transitioning custody and administration mandates to CIBC Mellon benefit from a structured onboarding process designed around Canadian regulatory requirements. The firm has onboarded a broad range of mandates, including ETF provider relationships and outsourced investment operations arrangements.</p>" } },
-        "Intent": { "value": "discover_recommend" },
-        "Persona": { "value": "asset_manager" },
-        "Service": { "value": ["onboarding"] },
-        "Geo": { "value": "canada" }
+        "Title": {
+          "value": "Onboarding"
+        },
+        "Body": {
+          "value": {
+            "html": "<p>Asset managers launching new Canadian fund structures or transitioning custody and administration mandates to CIBC Mellon benefit from a structured onboarding process designed around Canadian regulatory requirements. The firm has onboarded a broad range of mandates, including ETF provider relationships and outsourced investment operations arrangements.</p>"
+          }
+        },
+        "Intent": {
+          "value": "1"
+        },
+        "Persona": {
+          "value": "1"
+        },
+        "Service": {
+          "value": [
+            "13"
+          ]
+        },
+        "Geo": {
+          "value": "1"
+        }
       }
     },
-
     {
       "contentType": "CardBlock",
       "key": "07f9d05c875e4f479529bf00dc8f276b",
       "displayName": "Compliance – Canada (Pension Fund)",
       "locale": "en",
       "properties": {
-        "Title": { "value": "Compliance" },
-        "Body": { "value": { "html": "<p>CIBC Mellon provides investment compliance monitoring services as a contracted component of pension custody and administration mandates, supporting plan sponsors in monitoring adherence to investment policy statements, regulatory investment restrictions, and risk parameters under Canadian pension legislation. This service has been confirmed as part of multi-year pension mandates with major Canadian plans.</p>" } },
-        "Intent": { "value": "discover_recommend" },
-        "Persona": { "value": "pension_fund" },
-        "Service": { "value": ["compliance"] },
-        "Geo": { "value": "canada" }
+        "Title": {
+          "value": "Compliance"
+        },
+        "Body": {
+          "value": {
+            "html": "<p>CIBC Mellon provides investment compliance monitoring services as a contracted component of pension custody and administration mandates, supporting plan sponsors in monitoring adherence to investment policy statements, regulatory investment restrictions, and risk parameters under Canadian pension legislation. This service has been confirmed as part of multi-year pension mandates with major Canadian plans.</p>"
+          }
+        },
+        "Intent": {
+          "value": "1"
+        },
+        "Persona": {
+          "value": "2"
+        },
+        "Service": {
+          "value": [
+            "14"
+          ]
+        },
+        "Geo": {
+          "value": "1"
+        }
       }
     },
-
     {
       "contentType": "CardBlock",
       "key": "24031ec7974c4d62b117a3d8840183af",
       "displayName": "Compliance – Canada (Asset Manager)",
       "locale": "en",
       "properties": {
-        "Title": { "value": "Compliance" },
-        "Body": { "value": { "html": "<p>CIBC Mellon supports Canadian investment fund managers with investment compliance monitoring against fund investment restrictions and regulatory guidelines as part of integrated custody and administration arrangements. The service helps managers demonstrate ongoing compliance with NI 81-102 and other applicable regulatory investment constraints.</p>" } },
-        "Intent": { "value": "discover_recommend" },
-        "Persona": { "value": "asset_manager" },
-        "Service": { "value": ["compliance"] },
-        "Geo": { "value": "canada" }
+        "Title": {
+          "value": "Compliance"
+        },
+        "Body": {
+          "value": {
+            "html": "<p>CIBC Mellon supports Canadian investment fund managers with investment compliance monitoring against fund investment restrictions and regulatory guidelines as part of integrated custody and administration arrangements. The service helps managers demonstrate ongoing compliance with NI 81-102 and other applicable regulatory investment constraints.</p>"
+          }
+        },
+        "Intent": {
+          "value": "1"
+        },
+        "Persona": {
+          "value": "1"
+        },
+        "Service": {
+          "value": [
+            "14"
+          ]
+        },
+        "Geo": {
+          "value": "1"
+        }
       }
     },
-
     {
       "contentType": "CardBlock",
       "key": "c5bc8d4ad3344273815080c8dc9a3d99",
       "displayName": "Compliance – Canada (Foreign Institution)",
       "locale": "en",
       "properties": {
-        "Title": { "value": "Compliance" },
-        "Body": { "value": { "html": "<p>Foreign institutions investing into Canadian markets can access CIBC Mellon's compliance monitoring capabilities to support adherence to Canadian regulatory investment requirements. The firm provides guidance on Canadian securities law compliance obligations within the context of its sub-custody and asset servicing relationships.</p>" } },
-        "Intent": { "value": "discover_recommend" },
-        "Persona": { "value": "foreign_institution" },
-        "Service": { "value": ["compliance"] },
-        "Geo": { "value": "canada" }
+        "Title": {
+          "value": "Compliance"
+        },
+        "Body": {
+          "value": {
+            "html": "<p>Foreign institutions investing into Canadian markets can access CIBC Mellon's compliance monitoring capabilities to support adherence to Canadian regulatory investment requirements. The firm provides guidance on Canadian securities law compliance obligations within the context of its sub-custody and asset servicing relationships.</p>"
+          }
+        },
+        "Intent": {
+          "value": "1"
+        },
+        "Persona": {
+          "value": "4"
+        },
+        "Service": {
+          "value": [
+            "14"
+          ]
+        },
+        "Geo": {
+          "value": "1"
+        }
       }
     }
-
   ]
 }

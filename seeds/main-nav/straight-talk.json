@@ -1,6 +1,6 @@
 {
   "displayName": "Straight Talk — Institutional Perspectives",
-  "routeSegment": "straight-talk",
+  "routeSegment": "straight-talk--institutional-perspectives",
   "locale": "en",
   "composition": {
     "nodeType": "experience",
@@ -12,9 +12,13 @@
         "layoutType": "grid",
         "displaySettings": {
           "displayTemplate": "HeroSectionDefault",
-          "settings": { "theme": "default" }
+          "settings": {
+            "theme": "default"
+          }
         },
-        "component": { "contentType": "HeroSection" },
+        "component": {
+          "contentType": "HeroSection"
+        },
         "nodes": [
           {
             "nodeType": "row",
@@ -48,7 +52,9 @@
         "nodeType": "section",
         "displayName": "Article — Reducing Cash Drag Through FX",
         "layoutType": "grid",
-        "component": { "contentType": "BlankSection" },
+        "component": {
+          "contentType": "BlankSection"
+        },
         "nodes": [
           {
             "nodeType": "row",
@@ -82,7 +88,9 @@
         "nodeType": "section",
         "displayName": "Compliance",
         "layoutType": "grid",
-        "component": { "contentType": "BlankSection" },
+        "component": {
+          "contentType": "BlankSection"
+        },
         "nodes": [
           {
             "nodeType": "row",
@@ -98,7 +106,9 @@
                     "component": {
                       "contentType": "ComplianceBlock",
                       "properties": {
-                        "Jurisdiction": { "value": "Canada / Multi-Jurisdiction" },
+                        "Jurisdiction": {
+                          "value": "Canada / Multi-Jurisdiction"
+                        },
                         "Body": {
                           "value": {
                             "html": "<p><strong>COMPLIANCE NOTICE (LOCKED)</strong> — Straight Talk publications are provided for general informational purposes only and do not constitute legal, tax, regulatory, investment, or product advice. Any proposed FX arrangement should be evaluated against the investor's investment policy, liquidity requirements, derivatives and collateral framework, applicable regulatory obligations, and contractual terms. CIBC Mellon's FX processing and settlement capabilities provide a potential component of the operating model, but the exact execution and service design requires direct confirmation. This block may not be modified by the AI content assembly engine. Any changes require a formal review cycle with the Regulatory Affairs desk.</p>"
@@ -117,7 +127,9 @@
         "nodeType": "section",
         "displayName": "Grid — Related Solutions",
         "layoutType": "grid",
-        "component": { "contentType": "BlankSection" },
+        "component": {
+          "contentType": "BlankSection"
+        },
         "nodes": [
           {
             "nodeType": "row",
@@ -133,16 +145,28 @@
                     "component": {
                       "contentType": "CardBlock",
                       "properties": {
-                        "Title": { "value": "Foreign Exchange Processing &amp; Settlement" },
+                        "Title": {
+                          "value": "Foreign Exchange Processing & Settlement"
+                        },
                         "Body": {
                           "value": {
                             "html": "<p>CIBC Mellon's FX processing and settlement service supports cross-currency transactions with access to execution through CIBC, BNY, or a third party, coordinated with custody and settlement activity.</p>"
                           }
                         },
-                        "Intent": { "value": "discover_recommend" },
-                        "Persona": { "value": "pension_fund" },
-                        "Geo": { "value": "europe" },
-                        "Service": { "value": ["foreign_exchange"] }
+                        "Intent": {
+                          "value": "1"
+                        },
+                        "Persona": {
+                          "value": "2"
+                        },
+                        "Geo": {
+                          "value": "2"
+                        },
+                        "Service": {
+                          "value": [
+                            "2"
+                          ]
+                        }
                       }
                     }
                   }
@@ -158,16 +182,28 @@
                     "component": {
                       "contentType": "CardBlock",
                       "properties": {
-                        "Title": { "value": "Custody &amp; Multicurrency Accounting" },
+                        "Title": {
+                          "value": "Custody & Multicurrency Accounting"
+                        },
                         "Body": {
                           "value": {
                             "html": "<p>Safekeeping, settlement, and real-time multicurrency position reporting across domestic and global markets, integrated with FX and cash management processes.</p>"
                           }
                         },
-                        "Intent": { "value": "discover_recommend" },
-                        "Persona": { "value": "pension_fund" },
-                        "Geo": { "value": "canada" },
-                        "Service": { "value": ["global_custody"] }
+                        "Intent": {
+                          "value": "1"
+                        },
+                        "Persona": {
+                          "value": "2"
+                        },
+                        "Geo": {
+                          "value": "1"
+                        },
+                        "Service": {
+                          "value": [
+                            "7"
+                          ]
+                        }
                       }
                     }
                   }
@@ -183,16 +219,28 @@
                     "component": {
                       "contentType": "CardBlock",
                       "properties": {
-                        "Title": { "value": "Treasury Services" },
+                        "Title": {
+                          "value": "Treasury Services"
+                        },
                         "Body": {
                           "value": {
                             "html": "<p>Cash management, funding coordination, and payment processing for institutional accounts, designed to support liquidity forecasting and cross-border cash movements.</p>"
                           }
                         },
-                        "Intent": { "value": "discover_recommend" },
-                        "Persona": { "value": "corporate_sponsor" },
-                        "Geo": { "value": "canada" },
-                        "Service": { "value": ["treasury_services"] }
+                        "Intent": {
+                          "value": "1"
+                        },
+                        "Persona": {
+                          "value": "3"
+                        },
+                        "Geo": {
+                          "value": "1"
+                        },
+                        "Service": {
+                          "value": [
+                            "3"
+                          ]
+                        }
                       }
                     }
                   }
@@ -206,7 +254,9 @@
         "nodeType": "section",
         "displayName": "Action — Read More",
         "layoutType": "grid",
-        "component": { "contentType": "BlankSection" },
+        "component": {
+          "contentType": "BlankSection"
+        },
         "nodes": [
           {
             "nodeType": "row",
@@ -222,9 +272,15 @@
                     "component": {
                       "contentType": "ActionBlock",
                       "properties": {
-                        "Label": { "value": "Explore All Straight Talk" },
-                        "Href": { "value": "" },
-                        "Variant": { "value": "primary" }
+                        "Label": {
+                          "value": "Explore All Straight Talk"
+                        },
+                        "Href": {
+                          "value": ""
+                        },
+                        "Variant": {
+                          "value": "primary"
+                        }
                       }
                     }
                   }

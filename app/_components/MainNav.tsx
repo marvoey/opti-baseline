@@ -14,7 +14,7 @@ const NavBrand = () => (
 );
 
 async function DesktopNav() {
-  const links = (await fetchMainNav()).map((l) => ({ label: l.text ?? '', href: l.default ?? '#' }));
+  const links = (await fetchMainNav()).map((l) => ({ label: (l.text ?? '').split(' — ')[0].trim(), href: l.url?.default ?? '#' }));
 
   return (
     <nav className="hidden lg:flex gap-8 font-semibold text-white/80">

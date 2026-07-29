@@ -33,10 +33,10 @@ export const siteConfig = {
 
   /** Primary header navigation. */
   mainNavLinks: [
-    { label: 'Solutions', href: '/solutions' },
-    { label: 'Client Access', href: '/client-access' },
-    { label: 'Straight Talk', href: '/straight-talk' },
-    { label: 'Market Bulletins', href: '/market-bulletins' },
+    { label: 'Solutions', href: '/solutions--asset-servicing-config' },
+    { label: 'Client Access', href: '/client-access--reporting--account-services' },
+    { label: 'Straight Talk', href: '/straight-talk--institutional-perspectives' },
+    { label: 'Market Bulletins', href: '/market-bulletins--settlement--market-updates' },
   ] satisfies NavLink[],
   /** Header call-to-action button. */
   primaryCta: { label: 'Get Started', href: '#' } satisfies NavLink,

@@ -92,28 +92,14 @@ async function getAccessToken(base: string, clientId: string, clientSecret: stri
 // URL helpers
 // ---------------------------------------------------------------------------
 
-/** Stable 8-char hex suffix derived from a string. Same input → same output. */
-function shortHash(input: string): string {
-  let h = 0;
-  for (let i = 0; i < input.length; i++) {
-    h = (Math.imul(31, h) + input.charCodeAt(i)) | 0;
-  }
-  return (h >>> 0).toString(16).padStart(8, '0').slice(0, 8);
-}
-
-/**
- * Build a unique, stable routeSegment.
- * - Explicit `routeSegment` in the seed → used verbatim.
- * - Otherwise: slugified displayName + 8-char hash of the key (or displayName).
- */
+/** Match the CMS slugification: non-alphanum → `-`, collapse 3+ dashes to `--`. */
 function buildRouteSegment(seed: ExperienceSeed): string {
   if (seed.routeSegment) return seed.routeSegment;
-  const base = seed.displayName
+  return seed.displayName
     .toLowerCase()
-    .replace(/\s+/g, '-')
-    .replace(/[^a-z0-9-]/g, '');
-  const suffix = seed.key ? seed.key.replace(/-/g, '').slice(0, 8) : shortHash(seed.displayName);
-  return `${base}-${suffix}`;
+    .replace(/[^a-z0-9]/g, '-')
+    .replace(/-{3,}/g, '--')
+    .replace(/^-+|-+$/g, '');
 }
 
 // ---------------------------------------------------------------------------

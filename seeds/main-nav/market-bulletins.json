@@ -1,6 +1,6 @@
 {
-  "displayName": "Market Bulletins — Settlement &amp; Market Updates",
-  "routeSegment": "market-bulletins",
+  "displayName": "Market Bulletins — Settlement & Market Updates",
+  "routeSegment": "market-bulletins--settlement--market-updates",
   "locale": "en",
   "composition": {
     "nodeType": "experience",
@@ -12,9 +12,13 @@
         "layoutType": "grid",
         "displaySettings": {
           "displayTemplate": "HeroSectionDefault",
-          "settings": { "theme": "default" }
+          "settings": {
+            "theme": "default"
+          }
         },
-        "component": { "contentType": "HeroSection" },
+        "component": {
+          "contentType": "HeroSection"
+        },
         "nodes": [
           {
             "nodeType": "row",
@@ -48,7 +52,9 @@
         "nodeType": "section",
         "displayName": "Article — Canadian Sub-Custody and Market Infrastructure",
         "layoutType": "grid",
-        "component": { "contentType": "BlankSection" },
+        "component": {
+          "contentType": "BlankSection"
+        },
         "nodes": [
           {
             "nodeType": "row",
@@ -82,7 +88,9 @@
         "nodeType": "section",
         "displayName": "Compliance",
         "layoutType": "grid",
-        "component": { "contentType": "BlankSection" },
+        "component": {
+          "contentType": "BlankSection"
+        },
         "nodes": [
           {
             "nodeType": "row",
@@ -98,7 +106,9 @@
                     "component": {
                       "contentType": "ComplianceBlock",
                       "properties": {
-                        "Jurisdiction": { "value": "Canada" },
+                        "Jurisdiction": {
+                          "value": "Canada"
+                        },
                         "Body": {
                           "value": {
                             "html": "<p><strong>COMPLIANCE NOTICE (LOCKED)</strong> — Market Bulletins are provided for operational informational purposes only. They do not constitute legal, tax, regulatory, or investment advice. Market practices, settlement conventions, and regulatory requirements are subject to change; clients should verify current requirements with their legal and compliance advisers and confirm the applicability of any bulletin to their specific account structure and jurisdiction. This block may not be modified by the AI content assembly engine. Any changes require a formal review cycle with the Regulatory Affairs desk.</p>"
@@ -117,7 +127,9 @@
         "nodeType": "section",
         "displayName": "Grid — Key Topics",
         "layoutType": "grid",
-        "component": { "contentType": "BlankSection" },
+        "component": {
+          "contentType": "BlankSection"
+        },
         "nodes": [
           {
             "nodeType": "row",
@@ -133,16 +145,28 @@
                     "component": {
                       "contentType": "CardBlock",
                       "properties": {
-                        "Title": { "value": "Settlement Cycles" },
+                        "Title": {
+                          "value": "Settlement Cycles"
+                        },
                         "Body": {
                           "value": {
                             "html": "<p>Updates on North American and international settlement cycle changes, including trade allocation deadlines, funding requirements, and fail-management procedures.</p>"
                           }
                         },
-                        "Intent": { "value": "educate_govern" },
-                        "Persona": { "value": "foreign_institution" },
-                        "Geo": { "value": "global" },
-                        "Service": { "value": ["global_custody"] }
+                        "Intent": {
+                          "value": "2"
+                        },
+                        "Persona": {
+                          "value": "4"
+                        },
+                        "Geo": {
+                          "value": "4"
+                        },
+                        "Service": {
+                          "value": [
+                            "7"
+                          ]
+                        }
                       }
                     }
                   }
@@ -158,16 +182,28 @@
                     "component": {
                       "contentType": "CardBlock",
                       "properties": {
-                        "Title": { "value": "Corporate Action Processing" },
+                        "Title": {
+                          "value": "Corporate Action Processing"
+                        },
                         "Body": {
                           "value": {
                             "html": "<p>Notices on upcoming corporate events, election deadlines, income processing timelines, and changes to withholding or entitlement procedures in Canadian and global markets.</p>"
                           }
                         },
-                        "Intent": { "value": "educate_govern" },
-                        "Persona": { "value": "asset_manager" },
-                        "Geo": { "value": "canada" },
-                        "Service": { "value": ["global_custody"] }
+                        "Intent": {
+                          "value": "2"
+                        },
+                        "Persona": {
+                          "value": "1"
+                        },
+                        "Geo": {
+                          "value": "1"
+                        },
+                        "Service": {
+                          "value": [
+                            "7"
+                          ]
+                        }
                       }
                     }
                   }
@@ -183,16 +219,28 @@
                     "component": {
                       "contentType": "CardBlock",
                       "properties": {
-                        "Title": { "value": "Regulatory Updates" },
+                        "Title": {
+                          "value": "Regulatory Updates"
+                        },
                         "Body": {
                           "value": {
                             "html": "<p>Operational guidance on regulatory developments affecting custody, fund administration, recordkeeping, and institutional reporting obligations across Canadian and applicable international jurisdictions.</p>"
                           }
                         },
-                        "Intent": { "value": "educate_govern" },
-                        "Persona": { "value": "pension_fund" },
-                        "Geo": { "value": "canada" },
-                        "Service": { "value": ["regulatory"] }
+                        "Intent": {
+                          "value": "2"
+                        },
+                        "Persona": {
+                          "value": "2"
+                        },
+                        "Geo": {
+                          "value": "1"
+                        },
+                        "Service": {
+                          "value": [
+                            "10"
+                          ]
+                        }
                       }
                     }
                   }
@@ -206,7 +254,9 @@
         "nodeType": "section",
         "displayName": "Action — Subscribe",
         "layoutType": "grid",
-        "component": { "contentType": "BlankSection" },
+        "component": {
+          "contentType": "BlankSection"
+        },
         "nodes": [
           {
             "nodeType": "row",
@@ -222,9 +272,15 @@
                     "component": {
                       "contentType": "ActionBlock",
                       "properties": {
-                        "Label": { "value": "Subscribe to Market Bulletins" },
-                        "Href": { "value": "" },
-                        "Variant": { "value": "primary" }
+                        "Label": {
+                          "value": "Subscribe to Market Bulletins"
+                        },
+                        "Href": {
+                          "value": ""
+                        },
+                        "Variant": {
+                          "value": "primary"
+                        }
                       }
                     }
                   }

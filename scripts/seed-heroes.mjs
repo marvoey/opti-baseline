@@ -25,6 +25,7 @@
  * Flags:
  *   --dry-run    Resolve all refs and print what would be sent — no API calls made.
  *   --limit <n>  Only process the first n items.
+ *   --live       Use ROOT_CONTAINER_LIVE instead of ROOT_CONTAINER as the target folder.
  *
  * Generate a CMS-compatible key (UUID without hyphens):
  *   node -e "const {randomUUID}=require('crypto'); console.log(randomUUID().replaceAll('-',''))"
@@ -49,7 +50,8 @@ try {
 
 const DEFAULT_GATEWAY = 'https://api.cms.optimizely.com';
 const DEFAULT_INPUT = 'seeds/library/discover-recommend/heroes/items.json';
-const ROOT_CONTAINER_KEY = process.env.ROOT_CONTAINER ?? '43f936c99b234ea397b261c538ad07c9';
+const live = process.argv.includes('--live');
+const ROOT_CONTAINER_KEY = (live ? process.env.ROOT_CONTAINER_LIVE : process.env.ROOT_CONTAINER) ?? '43f936c99b234ea397b261c538ad07c9';
 
 function apiBase() {
   return (process.env.OPTIMIZELY_CMS_API_URL || DEFAULT_GATEWAY).replace(/\/$/, '');

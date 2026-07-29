@@ -2,8 +2,11 @@
  * Create and publish a BlankExperience from a JSON seed file.
  *
  * Usage:
- *   node scripts/seed-experience.mjs <path-to-seed.json>
- *   npm run seed:experience -- <path-to-seed.json>
+ *   node scripts/seed-experience.mjs <path-to-seed.json> [--live]
+ *   npm run seed:experience -- <path-to-seed.json> [--live]
+ *
+ * Flags:
+ *   --live   Use ROOT_CONTAINER_LIVE instead of ROOT_CONTAINER as the target folder.
  *
  * Required env vars (add to .env):
  *   OPTIMIZELY_CMS_CLIENT_ID
@@ -27,24 +30,16 @@ try {
 
 const DEFAULT_GATEWAY = 'https://api.cms.optimizely.com';
 
-function shortHash(input) {
-  let h = 0;
-  for (let i = 0; i < input.length; i++) {
-    h = (Math.imul(31, h) + input.charCodeAt(i)) | 0;
-  }
-  return (h >>> 0).toString(16).padStart(8, '0').slice(0, 8);
-}
-
 function buildRouteSegment(seed) {
   if (seed.routeSegment) return seed.routeSegment;
-  const base = seed.displayName
+  return seed.displayName
     .toLowerCase()
-    .replace(/\s+/g, '-')
-    .replace(/[^a-z0-9-]/g, '');
-  const suffix = seed.key ? seed.key.replace(/-/g, '').slice(0, 8) : shortHash(seed.displayName);
-  return `${base}-${suffix}`;
+    .replace(/[^a-z0-9]/g, '-')
+    .replace(/-{3,}/g, '--')
+    .replace(/^-+|-+$/g, '');
 }
-const ROOT_CONTAINER_KEY = process.env.ROOT_CONTAINER ?? '43f936c99b234ea397b261c538ad07c9';
+const live = process.argv.includes('--live');
+const ROOT_CONTAINER_KEY = (live ? process.env.ROOT_CONTAINER_LIVE : process.env.ROOT_CONTAINER) ?? '43f936c99b234ea397b261c538ad07c9';
 
 function apiBase() {
   return (process.env.OPTIMIZELY_CMS_API_URL || DEFAULT_GATEWAY).replace(/\/$/, '');

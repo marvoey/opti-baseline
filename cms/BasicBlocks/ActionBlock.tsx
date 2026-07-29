@@ -1,87 +1,21 @@
 import { contentType, type ContentProps } from '@optimizely/cms-sdk';
+import { taxonomyEnums, INTENT, PERSONA, SERVICE, GEO } from '@/lib/cms/taxonomy';
 import { getPreviewUtils } from '@optimizely/cms-sdk/react/server';
 
 export const ActionBlockContentType = contentType({
   key: 'ActionBlock',
   baseType: '_component',
-  displayName: 'Action Block',
+  displayName: '[CIBC] Action Block',
   description: 'A governed call-to-action button for triggering workflows. Access controlled by RBAC.',
   compositionBehaviors: ['elementEnabled'],
   properties: {
     Label:   { type: 'string', displayName: 'Label',   isLocalized: true,  indexingType: 'searchable' },
     Href:    { type: 'url',    displayName: 'URL',     isLocalized: false, indexingType: 'disabled' },
     Variant: { type: 'string', displayName: 'Variant', isLocalized: false, indexingType: 'disabled' },
-    Intent: {
-      type: 'string',
-      format: 'selectOne',
-      displayName: 'Intent',
-      isLocalized: false,
-      indexingType: 'queryable',
-      group: 'Taxonomy',
-      sortOrder: 10,
-      enum: [
-        { value: 'discover_recommend', displayName: 'Discover / Recommend' },
-        { value: 'educate_govern',     displayName: 'Educate / Govern' },
-        { value: 'simulate_transact',  displayName: 'Simulate / Transact' },
-      ],
-    },
-    Persona: {
-      type: 'string',
-      format: 'selectOne',
-      displayName: 'Persona',
-      isLocalized: false,
-      indexingType: 'queryable',
-      group: 'Taxonomy',
-      sortOrder: 11,
-      enum: [
-        { value: 'asset_manager',       displayName: 'Asset Manager' },
-        { value: 'pension_fund',        displayName: 'Pension Fund' },
-        { value: 'corporate_sponsor',   displayName: 'Corporate Sponsor' },
-        { value: 'foreign_institution', displayName: 'Foreign Institution' },
-        { value: 'insurance_provider',  displayName: 'Insurance Provider' },
-      ],
-    },
-    Service: {
-      type: 'array',
-      format: 'selectMany',
-      displayName: 'Service',
-      group: 'Taxonomy',
-      sortOrder: 12,
-      items: {
-        type: 'string',
-        enum: [
-          { value: 'fund_administration',     displayName: 'Fund Administration' },
-          { value: 'foreign_exchange',        displayName: 'Foreign Exchange' },
-          { value: 'treasury_services',       displayName: 'Treasury Services' },
-          { value: 'etf_services',            displayName: 'ETF Services' },
-          { value: 'alternative_investments', displayName: 'Alternative Investments' },
-          { value: 'securities_lending',      displayName: 'Securities Lending' },
-          { value: 'global_custody',          displayName: 'Global Custody' },
-          { value: 'recordkeeping',           displayName: 'Recordkeeping' },
-          { value: 'esg',                     displayName: 'ESG' },
-          { value: 'regulatory',              displayName: 'Regulatory' },
-          { value: 'tax',                     displayName: 'Tax' },
-          { value: 'digital_assets',          displayName: 'Digital Assets' },
-          { value: 'onboarding',              displayName: 'Onboarding' },
-          { value: 'compliance',              displayName: 'Compliance' },
-        ],
-      },
-    },
-    Geo: {
-      type: 'string',
-      format: 'selectOne',
-      displayName: 'Geo',
-      isLocalized: false,
-      indexingType: 'queryable',
-      group: 'Taxonomy',
-      sortOrder: 13,
-      enum: [
-        { value: 'canada',        displayName: 'Canada' },
-        { value: 'europe',        displayName: 'Europe' },
-        { value: 'united_states', displayName: 'United States' },
-        { value: 'global',        displayName: 'Global' },
-      ],
-    },
+    Intent:  { type: 'string', format: 'selectOne',  displayName: 'Intent',  isLocalized: false, indexingType: 'queryable', group: 'Taxonomy', sortOrder: 10, enum: taxonomyEnums(INTENT) },
+    Persona: { type: 'string', format: 'selectOne',  displayName: 'Persona', isLocalized: false, indexingType: 'queryable', group: 'Taxonomy', sortOrder: 11, enum: taxonomyEnums(PERSONA) },
+    Service: { type: 'array',  format: 'selectMany', displayName: 'Service',                                                group: 'Taxonomy', sortOrder: 12, items: { type: 'string', enum: taxonomyEnums(SERVICE) } },
+    Geo:     { type: 'string', format: 'selectOne',  displayName: 'Geo',     isLocalized: false, indexingType: 'queryable', group: 'Taxonomy', sortOrder: 13, enum: taxonomyEnums(GEO) },
   },
 });
 

@@ -1,6 +1,6 @@
 {
   "displayName": "Client Access — Reporting & Account Services",
-  "routeSegment": "client-access",
+  "routeSegment": "client-access--reporting--account-services",
   "locale": "en",
   "composition": {
     "nodeType": "experience",
@@ -12,9 +12,13 @@
         "layoutType": "grid",
         "displaySettings": {
           "displayTemplate": "HeroSectionDefault",
-          "settings": { "theme": "default" }
+          "settings": {
+            "theme": "default"
+          }
         },
-        "component": { "contentType": "HeroSection" },
+        "component": {
+          "contentType": "HeroSection"
+        },
         "nodes": [
           {
             "nodeType": "row",
@@ -48,7 +52,9 @@
         "nodeType": "section",
         "displayName": "Article — Client Services",
         "layoutType": "grid",
-        "component": { "contentType": "BlankSection" },
+        "component": {
+          "contentType": "BlankSection"
+        },
         "nodes": [
           {
             "nodeType": "row",
@@ -82,7 +88,9 @@
         "nodeType": "section",
         "displayName": "Compliance",
         "layoutType": "grid",
-        "component": { "contentType": "BlankSection" },
+        "component": {
+          "contentType": "BlankSection"
+        },
         "nodes": [
           {
             "nodeType": "row",
@@ -98,7 +106,9 @@
                     "component": {
                       "contentType": "ComplianceBlock",
                       "properties": {
-                        "Jurisdiction": { "value": "Canada" },
+                        "Jurisdiction": {
+                          "value": "Canada"
+                        },
                         "Body": {
                           "value": {
                             "html": "<p><strong>SECURITY NOTICE (LOCKED)</strong> — CIBC Mellon will never ask clients to provide passwords, security tokens, or account credentials via email, phone, or unsolicited communications. If you receive a suspicious communication purporting to be from CIBC Mellon, do not click any links and contact your relationship manager immediately. Access to institutional accounts is subject to CIBC Mellon's security and acceptable-use policies. This block may not be modified by the AI content assembly engine.</p>"
@@ -117,7 +127,9 @@
         "nodeType": "section",
         "displayName": "Grid — Client Services",
         "layoutType": "grid",
-        "component": { "contentType": "BlankSection" },
+        "component": {
+          "contentType": "BlankSection"
+        },
         "nodes": [
           {
             "nodeType": "row",
@@ -133,16 +145,28 @@
                     "component": {
                       "contentType": "CardBlock",
                       "properties": {
-                        "Title": { "value": "Investment Reporting" },
+                        "Title": {
+                          "value": "Investment Reporting"
+                        },
                         "Body": {
                           "value": {
                             "html": "<p>Access portfolio positions, cash balances, transaction history, and performance attribution data across your custody and administration accounts.</p>"
                           }
                         },
-                        "Intent": { "value": "simulate_transact" },
-                        "Persona": { "value": "asset_manager" },
-                        "Geo": { "value": "canada" },
-                        "Service": { "value": ["recordkeeping"] }
+                        "Intent": {
+                          "value": "3"
+                        },
+                        "Persona": {
+                          "value": "1"
+                        },
+                        "Geo": {
+                          "value": "1"
+                        },
+                        "Service": {
+                          "value": [
+                            "8"
+                          ]
+                        }
                       }
                     }
                   }
@@ -158,16 +182,28 @@
                     "component": {
                       "contentType": "CardBlock",
                       "properties": {
-                        "Title": { "value": "Corporate Actions" },
+                        "Title": {
+                          "value": "Corporate Actions"
+                        },
                         "Body": {
                           "value": {
                             "html": "<p>Receive notifications and submit elections for dividends, rights issues, tender offers, and other corporate events across your portfolio positions.</p>"
                           }
                         },
-                        "Intent": { "value": "simulate_transact" },
-                        "Persona": { "value": "asset_manager" },
-                        "Geo": { "value": "canada" },
-                        "Service": { "value": ["global_custody"] }
+                        "Intent": {
+                          "value": "3"
+                        },
+                        "Persona": {
+                          "value": "1"
+                        },
+                        "Geo": {
+                          "value": "1"
+                        },
+                        "Service": {
+                          "value": [
+                            "7"
+                          ]
+                        }
                       }
                     }
                   }
@@ -183,16 +219,28 @@
                     "component": {
                       "contentType": "CardBlock",
                       "properties": {
-                        "Title": { "value": "Account Management" },
+                        "Title": {
+                          "value": "Account Management"
+                        },
                         "Body": {
                           "value": {
                             "html": "<p>Manage standing settlement instructions, user access levels, account configuration, and service requests with your CIBC Mellon relationship team.</p>"
                           }
                         },
-                        "Intent": { "value": "simulate_transact" },
-                        "Persona": { "value": "asset_manager" },
-                        "Geo": { "value": "canada" },
-                        "Service": { "value": ["onboarding"] }
+                        "Intent": {
+                          "value": "3"
+                        },
+                        "Persona": {
+                          "value": "1"
+                        },
+                        "Geo": {
+                          "value": "1"
+                        },
+                        "Service": {
+                          "value": [
+                            "13"
+                          ]
+                        }
                       }
                     }
                   }
@@ -206,7 +254,9 @@
         "nodeType": "section",
         "displayName": "Action — Sign In",
         "layoutType": "grid",
-        "component": { "contentType": "BlankSection" },
+        "component": {
+          "contentType": "BlankSection"
+        },
         "nodes": [
           {
             "nodeType": "row",
@@ -222,9 +272,15 @@
                     "component": {
                       "contentType": "ActionBlock",
                       "properties": {
-                        "Label": { "value": "Sign In to Client Portal" },
-                        "Href": { "value": "" },
-                        "Variant": { "value": "primary" }
+                        "Label": {
+                          "value": "Sign In to Client Portal"
+                        },
+                        "Href": {
+                          "value": ""
+                        },
+                        "Variant": {
+                          "value": "primary"
+                        }
                       }
                     }
                   }

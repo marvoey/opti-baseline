@@ -1,6 +1,6 @@
 {
   "displayName": "Demo — European Equities Briefing: Platform Interface (Section 1)",
-  "routeSegment": "demo-european-equities-briefing-platform-interface",
+  "routeSegment": "demo--european-equities-briefing--platform-interface--section-1",
   "locale": "en",
   "composition": {
     "nodeType": "experience",
@@ -12,9 +12,13 @@
         "layoutType": "grid",
         "displaySettings": {
           "displayTemplate": "HeroSectionDefault",
-          "settings": { "theme": "default" }
+          "settings": {
+            "theme": "default"
+          }
         },
-        "component": { "contentType": "HeroSection" },
+        "component": {
+          "contentType": "HeroSection"
+        },
         "nodes": [
           {
             "nodeType": "row",
@@ -30,8 +34,12 @@
                     "component": {
                       "contentType": "Image",
                       "properties": {
-                        "AltText": { "value": "European financial district skyline" },
-                        "Image": { "value": "cms://content/7758cc126a7148c995eb85081c1525ec" }
+                        "AltText": {
+                          "value": "European financial district skyline"
+                        },
+                        "Image": {
+                          "value": "cms://content/7758cc126a7148c995eb85081c1525ec"
+                        }
                       }
                     }
                   },
@@ -59,7 +67,9 @@
         "nodeType": "section",
         "displayName": "Article — Regulatory & Custody Considerations",
         "layoutType": "grid",
-        "component": { "contentType": "BlankSection" },
+        "component": {
+          "contentType": "BlankSection"
+        },
         "nodes": [
           {
             "nodeType": "row",
@@ -77,7 +87,7 @@
                       "properties": {
                         "Text": {
                           "value": {
-                            "html": "<h1>Strategic Expansion Briefing: European Equities</h1><p>As Canadian pension funds and asset managers increase allocations to European equity markets, the operational and regulatory requirements for cross-border settlement demand careful preparation. CIBC Mellon — with more than C$3.6 trillion in assets under administration and the backing of BNY's global custody network — provides the full range of asset servicing solutions required to support these mandates.</p><h2>Custody &amp; Settlement</h2><p>European equity settlement spans a range of central securities depositories, including Euroclear and Clearstream, as well as local CSDs in Nordic and Eastern European markets. Each market operates distinct settlement cycles, corporate action processing conventions, and income payment procedures. Your custodian's sub-custodian network should be reviewed for credit standing, service levels, and local regulatory compliance before committing to new markets.</p><p>CIBC Mellon's custody service provides multicurrency accounting and real-time position reporting across all asset classes, supported by BNY's global sub-custodian network where applicable.</p><h2>FX Execution</h2><p>Cross-currency settlements across EUR, GBP, CHF, SEK, NOK, and DKK require coordinated foreign exchange execution. CIBC Mellon's foreign exchange processing and settlement service provides standing instruction arrangements and transaction-by-transaction execution to minimise cost and settlement risk. FX conversion timing relative to ex-dividend dates requires particular attention for dividend repatriation to Canadian dollar mandates.</p><h2>Securities Lending</h2><p>European equity holdings may be eligible for CIBC Mellon's securities lending programme, generating incremental yield while maintaining the ability to recall positions ahead of corporate events. Programme parameters — including eligible counterparties, collateral types, and maximum on-loan limits — are configured to match each client's Investment Policy Statement.</p><h2>Regulatory Framework</h2><p>Institutional investors with European equity exposure should confirm their reporting infrastructure is aligned to the applicable regulatory framework for each execution venue and jurisdiction. Regulatory requirements vary by market; CIBC Mellon recommends clients engage their compliance and legal teams to review obligations prior to execution. General information on European regulatory frameworks is available through applicable competent authorities.</p><h2>How CIBC Mellon Can Help</h2><p>CIBC Mellon has administered assets on behalf of Canada's pension funds, investment funds, insurance companies, and corporations since 1996. Our investment servicing solutions — custody, multicurrency accounting, fund administration, recordkeeping, FX, securities lending, and treasury services — are designed to support institutional clients throughout the full investment lifecycle, including cross-border mandates.</p><h2>Pre-Trade Readiness Checklist</h2><p>Before executing your first European equity mandate, confirm the following with your CIBC Mellon relationship manager:</p><ul><li>Custody account configuration and CSD connectivity confirmed for target markets</li><li>Multicurrency accounting set up for EUR, GBP, CHF, and applicable Nordic currencies</li><li>FX standing instructions reviewed and aligned to Investment Policy Statement</li><li>Securities lending programme parameters documented and approved</li><li>Corporate action elections workflow tested end-to-end</li><li>Income and withholding tax procedures documented per jurisdiction (where applicable)</li><li>Recordkeeping and reporting formats agreed for cross-border positions</li></ul><p>Your CIBC Mellon service team will coordinate across each of these workstreams as part of the onboarding assessment.</p>"
+                            "html": "<h1>Strategic Expansion Briefing: European Equities</h1><p>As Canadian pension funds and asset managers increase allocations to European equity markets, the operational and regulatory requirements for cross-border settlement demand careful preparation. CIBC Mellon — with more than C$3.6 trillion in assets under administration and the backing of BNY's global custody network — provides the full range of asset servicing solutions required to support these mandates.</p><h2>Custody & Settlement</h2><p>European equity settlement spans a range of central securities depositories, including Euroclear and Clearstream, as well as local CSDs in Nordic and Eastern European markets. Each market operates distinct settlement cycles, corporate action processing conventions, and income payment procedures. Your custodian's sub-custodian network should be reviewed for credit standing, service levels, and local regulatory compliance before committing to new markets.</p><p>CIBC Mellon's custody service provides multicurrency accounting and real-time position reporting across all asset classes, supported by BNY's global sub-custodian network where applicable.</p><h2>FX Execution</h2><p>Cross-currency settlements across EUR, GBP, CHF, SEK, NOK, and DKK require coordinated foreign exchange execution. CIBC Mellon's foreign exchange processing and settlement service provides standing instruction arrangements and transaction-by-transaction execution to minimise cost and settlement risk. FX conversion timing relative to ex-dividend dates requires particular attention for dividend repatriation to Canadian dollar mandates.</p><h2>Securities Lending</h2><p>European equity holdings may be eligible for CIBC Mellon's securities lending programme, generating incremental yield while maintaining the ability to recall positions ahead of corporate events. Programme parameters — including eligible counterparties, collateral types, and maximum on-loan limits — are configured to match each client's Investment Policy Statement.</p><h2>Regulatory Framework</h2><p>Institutional investors with European equity exposure should confirm their reporting infrastructure is aligned to the applicable regulatory framework for each execution venue and jurisdiction. Regulatory requirements vary by market; CIBC Mellon recommends clients engage their compliance and legal teams to review obligations prior to execution. General information on European regulatory frameworks is available through applicable competent authorities.</p><h2>How CIBC Mellon Can Help</h2><p>CIBC Mellon has administered assets on behalf of Canada's pension funds, investment funds, insurance companies, and corporations since 1996. Our investment servicing solutions — custody, multicurrency accounting, fund administration, recordkeeping, FX, securities lending, and treasury services — are designed to support institutional clients throughout the full investment lifecycle, including cross-border mandates.</p><h2>Pre-Trade Readiness Checklist</h2><p>Before executing your first European equity mandate, confirm the following with your CIBC Mellon relationship manager:</p><ul><li>Custody account configuration and CSD connectivity confirmed for target markets</li><li>Multicurrency accounting set up for EUR, GBP, CHF, and applicable Nordic currencies</li><li>FX standing instructions reviewed and aligned to Investment Policy Statement</li><li>Securities lending programme parameters documented and approved</li><li>Corporate action elections workflow tested end-to-end</li><li>Income and withholding tax procedures documented per jurisdiction (where applicable)</li><li>Recordkeeping and reporting formats agreed for cross-border positions</li></ul><p>Your CIBC Mellon service team will coordinate across each of these workstreams as part of the onboarding assessment.</p>"
                           }
                         }
                       }
@@ -93,7 +103,9 @@
         "nodeType": "section",
         "displayName": "Compliance",
         "layoutType": "grid",
-        "component": { "contentType": "BlankSection" },
+        "component": {
+          "contentType": "BlankSection"
+        },
         "nodes": [
           {
             "nodeType": "row",
@@ -109,7 +121,9 @@
                     "component": {
                       "contentType": "ComplianceBlock",
                       "properties": {
-                        "Jurisdiction": { "value": "Cross-Border / Multi-Jurisdiction" },
+                        "Jurisdiction": {
+                          "value": "Cross-Border / Multi-Jurisdiction"
+                        },
                         "Body": {
                           "value": {
                             "html": "<p><strong>COMPLIANCE NOTICE (LOCKED)</strong> — This content has been reviewed and approved by the CIBC Mellon Compliance team. Regulatory requirements for cross-border equity mandates vary by jurisdiction and client classification. This briefing is provided for general informational purposes only and does not constitute legal, tax, or regulatory advice. Clients must consult their own legal and compliance advisors before executing cross-border mandates. This block may not be modified by the AI content assembly engine. Any changes require a formal review cycle with the Regulatory Affairs desk.</p>"
@@ -128,7 +142,9 @@
         "nodeType": "section",
         "displayName": "Grid — Required CIBC Mellon Solutions",
         "layoutType": "grid",
-        "component": { "contentType": "BlankSection" },
+        "component": {
+          "contentType": "BlankSection"
+        },
         "nodes": [
           {
             "nodeType": "row",
@@ -144,13 +160,19 @@
                     "component": {
                       "contentType": "CardBlock",
                       "properties": {
-                        "Title": { "value": "Custody & Multicurrency Accounting" },
+                        "Title": {
+                          "value": "Custody & Multicurrency Accounting"
+                        },
                         "Body": {
                           "value": {
                             "html": "<p>CIBC Mellon's custody service provides safekeeping, settlement, and real-time multicurrency position reporting across global markets. Backed by BNY's global sub-custodian network, custody accounts can be configured for European CSD connectivity as part of the onboarding assessment.</p>"
                           }
                         },
-                        "Service": { "value": ["global_custody"] }
+                        "Service": {
+                          "value": [
+                            "7"
+                          ]
+                        }
                       }
                     }
                   }
@@ -166,13 +188,19 @@
                     "component": {
                       "contentType": "CardBlock",
                       "properties": {
-                        "Title": { "value": "Foreign Exchange Processing & Settlement" },
+                        "Title": {
+                          "value": "Foreign Exchange Processing & Settlement"
+                        },
                         "Body": {
                           "value": {
                             "html": "<p>CIBC Mellon's FX processing and settlement service supports cross-currency transactions across EUR, GBP, CHF, SEK, NOK, DKK, and other major pairs. Standing instruction arrangements and transaction-by-transaction execution are available to match each client's operational model.</p>"
                           }
                         },
-                        "Service": { "value": ["foreign_exchange"] }
+                        "Service": {
+                          "value": [
+                            "2"
+                          ]
+                        }
                       }
                     }
                   }
@@ -188,13 +216,19 @@
                     "component": {
                       "contentType": "CardBlock",
                       "properties": {
-                        "Title": { "value": "Securities Lending" },
+                        "Title": {
+                          "value": "Securities Lending"
+                        },
                         "Body": {
                           "value": {
                             "html": "<p>CIBC Mellon's securities lending programme enables eligible European equity holdings to generate incremental income, with programme parameters — counterparty eligibility, collateral types, and on-loan limits — configured to align with each client's Investment Policy Statement and risk tolerance.</p>"
                           }
                         },
-                        "Service": { "value": ["securities_lending"] }
+                        "Service": {
+                          "value": [
+                            "6"
+                          ]
+                        }
                       }
                     }
                   }
@@ -208,7 +242,9 @@
         "nodeType": "section",
         "displayName": "Action — Schedule Assessment",
         "layoutType": "grid",
-        "component": { "contentType": "BlankSection" },
+        "component": {
+          "contentType": "BlankSection"
+        },
         "nodes": [
           {
             "nodeType": "row",
@@ -224,9 +260,15 @@
                     "component": {
                       "contentType": "ActionBlock",
                       "properties": {
-                        "Label": { "value": "Schedule an Onboarding Assessment" },
-                        "Href": { "value": "" },
-                        "Variant": { "value": "primary" }
+                        "Label": {
+                          "value": "Schedule an Onboarding Assessment"
+                        },
+                        "Href": {
+                          "value": ""
+                        },
+                        "Variant": {
+                          "value": "primary"
+                        }
                       }
                     }
                   }

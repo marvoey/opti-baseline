@@ -5,7 +5,7 @@ import { RichText as RichTextRenderer } from "@optimizely/cms-sdk/react/richText
 export const ComplianceBlockContentType = contentType({
   key: "ComplianceBlock",
   baseType: "_component",
-  displayName: "Compliance Block",
+  displayName: "[CIBC] Compliance Block",
   description:
     "Legally mandated text. Content is governed — the AI assembly engine may not populate this inline; it must reference a pre-approved item.",
   compositionBehaviors: ["elementEnabled"],

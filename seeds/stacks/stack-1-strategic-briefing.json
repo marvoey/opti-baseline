@@ -1,6 +1,6 @@
 {
   "displayName": "Stack 1: Strategic Expansion Briefing",
-  "routeSegment": "stack-strategic-briefing",
+  "routeSegment": "stack-1--strategic-expansion-briefing",
   "locale": "en",
   "composition": {
     "nodeType": "experience",
@@ -16,7 +16,9 @@
             "theme": "default"
           }
         },
-        "component": { "contentType": "HeroSection" },
+        "component": {
+          "contentType": "HeroSection"
+        },
         "nodes": [
           {
             "nodeType": "row",
@@ -32,8 +34,12 @@
                     "component": {
                       "contentType": "Image",
                       "properties": {
-                        "AltText": { "value": "European equities hero" },
-                        "Image": { "value": "cms://content/DamImageSource/740c72b0687411f18b7e4ef65a1508fe" }
+                        "AltText": {
+                          "value": "European equities hero"
+                        },
+                        "Image": {
+                          "value": "cms://content/DamImageSource/740c72b0687411f18b7e4ef65a1508fe"
+                        }
                       }
                     }
                   },
@@ -61,7 +67,9 @@
         "nodeType": "section",
         "displayName": "Article Content",
         "layoutType": "grid",
-        "component": { "contentType": "BlankSection" },
+        "component": {
+          "contentType": "BlankSection"
+        },
         "nodes": [
           {
             "nodeType": "row",
@@ -95,7 +103,9 @@
         "nodeType": "section",
         "displayName": "Compliance",
         "layoutType": "grid",
-        "component": { "contentType": "BlankSection" },
+        "component": {
+          "contentType": "BlankSection"
+        },
         "nodes": [
           {
             "nodeType": "row",
@@ -111,7 +121,9 @@
                     "component": {
                       "contentType": "ComplianceBlock",
                       "properties": {
-                        "Jurisdiction": { "value": "EU / MiFID II" },
+                        "Jurisdiction": {
+                          "value": "EU / MiFID II"
+                        },
                         "Body": {
                           "value": {
                             "html": "<p><strong>GLOBAL COMPLIANCE BLOCK (LOCKED)</strong> — This content has been reviewed and approved by the Compliance team. The AI assembly engine may not modify or replace this block. Any changes require a formal review cycle.</p>"
@@ -130,7 +142,9 @@
         "nodeType": "section",
         "displayName": "Grid — Required Solutions",
         "layoutType": "grid",
-        "component": { "contentType": "BlankSection" },
+        "component": {
+          "contentType": "BlankSection"
+        },
         "nodes": [
           {
             "nodeType": "row",
@@ -146,13 +160,19 @@
                     "component": {
                       "contentType": "CardBlock",
                       "properties": {
-                        "Title": { "value": "Global Custody" },
+                        "Title": {
+                          "value": "Global Custody"
+                        },
                         "Body": {
                           "value": {
                             "html": "<p>Multi-market settlement and safekeeping services for European-listed securities across 30+ markets.</p>"
                           }
                         },
-                        "Service": { "value": ["global_custody"] }
+                        "Service": {
+                          "value": [
+                            "7"
+                          ]
+                        }
                       }
                     }
                   }
@@ -168,13 +188,19 @@
                     "component": {
                       "contentType": "CardBlock",
                       "properties": {
-                        "Title": { "value": "Foreign Exchange" },
+                        "Title": {
+                          "value": "Foreign Exchange"
+                        },
                         "Body": {
                           "value": {
                             "html": "<p>Automated FX execution for cross-currency settlements, including EUR, GBP, CHF, and SEK pairs.</p>"
                           }
                         },
-                        "Service": { "value": ["foreign_exchange"] }
+                        "Service": {
+                          "value": [
+                            "2"
+                          ]
+                        }
                       }
                     }
                   }
@@ -190,13 +216,19 @@
                     "component": {
                       "contentType": "CardBlock",
                       "properties": {
-                        "Title": { "value": "Securities Lending" },
+                        "Title": {
+                          "value": "Securities Lending"
+                        },
                         "Body": {
                           "value": {
                             "html": "<p>Generate incremental yield on European equity holdings via our fully-indemnified lending programme.</p>"
                           }
                         },
-                        "Service": { "value": ["securities_lending"] }
+                        "Service": {
+                          "value": [
+                            "6"
+                          ]
+                        }
                       }
                     }
                   }
@@ -210,7 +242,9 @@
         "nodeType": "section",
         "displayName": "Action — CTA",
         "layoutType": "grid",
-        "component": { "contentType": "BlankSection" },
+        "component": {
+          "contentType": "BlankSection"
+        },
         "nodes": [
           {
             "nodeType": "row",
@@ -226,9 +260,15 @@
                     "component": {
                       "contentType": "ActionBlock",
                       "properties": {
-                        "Label": { "value": "Schedule Strategy Session" },
-                        "Href": { "value": "" },
-                        "Variant": { "value": "primary" }
+                        "Label": {
+                          "value": "Schedule Strategy Session"
+                        },
+                        "Href": {
+                          "value": ""
+                        },
+                        "Variant": {
+                          "value": "primary"
+                        }
                       }
                     }
                   }

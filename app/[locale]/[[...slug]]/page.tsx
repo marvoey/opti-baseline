@@ -63,7 +63,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 async function Page({ params }: Props) {
   const { locale, slug = [] } = await params;
   const content = await loadContent(locale, slug);
-  
+  if (!content) return notFound();
   return <OptimizelyComponent content={content} />;
 }
 

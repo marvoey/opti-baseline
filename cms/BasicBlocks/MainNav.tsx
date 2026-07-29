@@ -5,7 +5,7 @@ import Link from 'next/link';
 export const MainNavContentType = contentType({
   key: 'MainNav',
   baseType: '_component',
-  displayName: 'Main Nav Links',
+  displayName: '[CIBC] Main Nav Links',
   compositionBehaviors: ['elementEnabled'],
   properties: {
     MainNavLinks: {

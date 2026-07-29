@@ -1,6 +1,6 @@
 {
   "displayName": "Stack 2: Regulatory Impact Assembly",
-  "routeSegment": "stack-regulatory-impact",
+  "routeSegment": "stack-2--regulatory-impact-assembly",
   "locale": "en",
   "composition": {
     "nodeType": "experience",
@@ -10,7 +10,9 @@
         "nodeType": "section",
         "displayName": "Split — Definition + Checklist",
         "layoutType": "grid",
-        "component": { "contentType": "SplitSection" },
+        "component": {
+          "contentType": "SplitSection"
+        },
         "nodes": [
           {
             "nodeType": "row",
@@ -64,7 +66,9 @@
         "nodeType": "section",
         "displayName": "Feed — Implementation Timeline",
         "layoutType": "grid",
-        "component": { "contentType": "FeedSection" },
+        "component": {
+          "contentType": "FeedSection"
+        },
         "nodes": [
           {
             "nodeType": "row",
@@ -124,7 +128,9 @@
         "nodeType": "section",
         "displayName": "Compliance — Legal Disclaimer",
         "layoutType": "grid",
-        "component": { "contentType": "BlankSection" },
+        "component": {
+          "contentType": "BlankSection"
+        },
         "nodes": [
           {
             "nodeType": "row",
@@ -140,7 +146,9 @@
                     "component": {
                       "contentType": "ComplianceBlock",
                       "properties": {
-                        "Jurisdiction": { "value": "Global" },
+                        "Jurisdiction": {
+                          "value": "Global"
+                        },
                         "Body": {
                           "value": {
                             "html": "<p><strong>LEGAL DISCLAIMER</strong> — This document is for informational purposes only and does not constitute legal or regulatory advice. The information contained herein is based on publicly available regulatory guidance and internal interpretation as of the date of publication. Clients should seek independent legal counsel before taking action based on this content.</p>"
