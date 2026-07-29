@@ -57,7 +57,6 @@ export const CardBlockContentType = contentType({
       type: "array",
       format: "selectMany",
       displayName: "Service",
-      isRequired: true,
       group: "Taxonomy",
       sortOrder: 12,
       items: {

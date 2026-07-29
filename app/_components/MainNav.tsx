@@ -1,7 +1,8 @@
 import Link from 'next/link';
-import { Search, User, Menu } from 'lucide-react';
+import { User, Menu } from 'lucide-react';
 import { siteConfig } from '@/lib/siteConfig';
 import { fetchMainNav } from '@/lib/cms/fetchMainNav';
+import LanguageSwitcher from './LanguageSwitcher';
 
 const NavBrand = () => (
   <div className="navbar-brand branding flex items-center" data-cms-field="brand_logo">
@@ -32,15 +33,7 @@ async function DesktopNav() {
 
 const NavActions = () => (
   <div className="utility-container flex items-center gap-3">
-    {/* <Link
-      href={siteConfig.primaryCta.href}
-      className="hidden sm:inline-flex items-center px-5 py-2 bg-gold text-blue-950 font-bold rounded-full hover:bg-gold-dark transition-colors"
-    >
-      {siteConfig.primaryCta.label}
-    </Link> */}
-    {/* <button className="hidden md:flex items-center gap-2 px-4 py-2 text-white/80 font-semibold hover:bg-white/10 rounded-lg transition-colors">
-      <Search size={20} />
-    </button> */}
+    <LanguageSwitcher />
     <button className="flex items-center gap-2 px-4 py-2 border-2 border-white/40 text-white font-bold rounded-full hover:bg-white/10 transition-all">
       <User size={18} />
       <span className="hidden sm:inline">{siteConfig.accountLabel}</span>
