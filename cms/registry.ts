@@ -20,6 +20,7 @@ import ImageBlock, { ImageContentType, ImageDisplayTemplate } from './Image';
 import HeroBlock, { HeroBlockContentType, HeroBlockDisplayTemplate } from './BasicBlocks/HeroBlock';
 import MainNavBlock, { MainNavContentType } from './BasicBlocks/MainNav';
 import { ColumnDisplayTemplate } from './ColumnTemplate';
+import AdminPage, { AdminPageContentType } from './AdminPage';
 
 /**
  * Single configuration + registration point for the Optimizely SDK.
@@ -63,6 +64,7 @@ export const registeredContentTypes = [
   ImageContentType,
   HeroBlockContentType,
   MainNavContentType,
+  AdminPageContentType,
 ];
 
 initContentTypeRegistry(registeredContentTypes);
@@ -84,5 +86,6 @@ initReactComponentRegistry({
     Image: ImageBlock,
     HeroBlockv2: HeroBlock,
     MainNav: MainNavBlock,
+    AdminPage,
   },
 });
