@@ -5,12 +5,12 @@
   "items": [
     {
       "contentType": "Paragraph",
-      "key": "4d4a1f8e4b6e440194b459c91ac09886",
+      "key": "dbddc49c147c4e7fba7841e16cc6c657",
       "displayName": "ESG Mutual Fund Administration – Canada",
       "locale": "en",
       "properties": {
         "Text": {
-          "$richTextFile": "seeds/library/discover-recommend/html/pack-01.html"
+          "$richTextFile": "seeds/library/discover-recommend/paragraphs/html/pack-01.html"
         },
         "Intent": {
           "value": "1"
@@ -31,12 +31,12 @@
     },
     {
       "contentType": "Paragraph",
-      "key": "c27b51e9f85347f4aa01074d468e4425",
+      "key": "3638bcd3f0114dcaac4615e5dccbabea",
       "displayName": "UK Pension Fund FX Cash Drag – Europe",
       "locale": "en",
       "properties": {
         "Text": {
-          "$richTextFile": "seeds/library/discover-recommend/html/pack-02.html"
+          "$richTextFile": "seeds/library/discover-recommend/paragraphs/html/pack-02.html"
         },
         "Intent": {
           "value": "1"
@@ -56,12 +56,12 @@
     },
     {
       "contentType": "Paragraph",
-      "key": "0f23ca6cd8eb4a139e75947dfd3434a1",
+      "key": "cc65d7ecea8640508ecb0fe6ff669f2c",
       "displayName": "US Corporate Treasury Entering Canada – United States",
       "locale": "en",
       "properties": {
         "Text": {
-          "$richTextFile": "seeds/library/discover-recommend/html/pack-03.html"
+          "$richTextFile": "seeds/library/discover-recommend/paragraphs/html/pack-03.html"
         },
         "Intent": {
           "value": "1"
@@ -81,12 +81,12 @@
     },
     {
       "contentType": "Paragraph",
-      "key": "387eeffefdd64629a5f08ffdae0f3b3b",
+      "key": "a93bc10221504fbf87513390bced1ceb",
       "displayName": "ETF Servicing – Canada",
       "locale": "en",
       "properties": {
         "Text": {
-          "$richTextFile": "seeds/library/discover-recommend/html/pack-04.html"
+          "$richTextFile": "seeds/library/discover-recommend/paragraphs/html/pack-04.html"
         },
         "Intent": {
           "value": "1"
@@ -106,12 +106,12 @@
     },
     {
       "contentType": "Paragraph",
-      "key": "3f180683be6f45168ebf9ba5b091d154",
+      "key": "cb4bfcbfd7bc4b2e894e390399074ec0",
       "displayName": "Alternative Investment Servicing – Global",
       "locale": "en",
       "properties": {
         "Text": {
-          "$richTextFile": "seeds/library/discover-recommend/html/pack-05.html"
+          "$richTextFile": "seeds/library/discover-recommend/paragraphs/html/pack-05.html"
         },
         "Intent": {
           "value": "1"
@@ -131,12 +131,12 @@
     },
     {
       "contentType": "Paragraph",
-      "key": "ef7f6d0c27e446efbe1ed9d58cf790a8",
+      "key": "a50c6ec032e74b67a47e1e4b93c156d3",
       "displayName": "Securities Lending Program Design – Canada",
       "locale": "en",
       "properties": {
         "Text": {
-          "$richTextFile": "seeds/library/discover-recommend/html/pack-06.html"
+          "$richTextFile": "seeds/library/discover-recommend/paragraphs/html/pack-06.html"
         },
         "Intent": {
           "value": "1"
@@ -156,12 +156,12 @@
     },
     {
       "contentType": "Paragraph",
-      "key": "ab230f04479d4b4f97c84cbb6ee04eef",
+      "key": "f00297cbf972451fafcf14d37340f883",
       "displayName": "Global Custody Options – United States",
       "locale": "en",
       "properties": {
         "Text": {
-          "$richTextFile": "seeds/library/discover-recommend/html/pack-07.html"
+          "$richTextFile": "seeds/library/discover-recommend/paragraphs/html/pack-07.html"
         },
         "Intent": {
           "value": "1"
@@ -181,12 +181,12 @@
     },
     {
       "contentType": "Paragraph",
-      "key": "d08d6bc103444a389bb02f14f80e39d4",
+      "key": "1d0b38ba53b74e1ab6aba60617d59ce4",
       "displayName": "Cross-Border Fund Administration – Europe",
       "locale": "en",
       "properties": {
         "Text": {
-          "$richTextFile": "seeds/library/discover-recommend/html/pack-08.html"
+          "$richTextFile": "seeds/library/discover-recommend/paragraphs/html/pack-08.html"
         },
         "Intent": {
           "value": "1"
@@ -206,12 +206,12 @@
     },
     {
       "contentType": "Paragraph",
-      "key": "a36e2bc18f2648998f67cb2b27d8504e",
+      "key": "2538cc6903ba4165a61585a242340957",
       "displayName": "Canadian Sub-Custody for Foreign Institutions – Canada",
       "locale": "en",
       "properties": {
         "Text": {
-          "$richTextFile": "seeds/library/discover-recommend/html/pack-09.html"
+          "$richTextFile": "seeds/library/discover-recommend/paragraphs/html/pack-09.html"
         },
         "Intent": {
           "value": "1"
@@ -231,12 +231,12 @@
     },
     {
       "contentType": "Paragraph",
-      "key": "dac553bdf88b41ca9a345646320cdc82",
+      "key": "e4253f540e634f709714ee5ee5b4038d",
       "displayName": "Recordkeeping Models for Multinational Sponsors – Global",
       "locale": "en",
       "properties": {
         "Text": {
-          "$richTextFile": "seeds/library/discover-recommend/html/pack-10.html"
+          "$richTextFile": "seeds/library/discover-recommend/paragraphs/html/pack-10.html"
         },
         "Intent": {
           "value": "1"
