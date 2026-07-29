@@ -5,7 +5,6 @@
   "items": [
     {
       "contentType": "HeroBlockv2",
-      "key": "cda73eb8aa254eb99e08336e162729d6",
       "displayName": "Canadian Institutional Markets",
       "locale": "en",
       "properties": {
@@ -24,7 +23,6 @@
     },
     {
       "contentType": "HeroBlockv2",
-      "key": "194135eb8ace408cbff03d5b5cde7186",
       "displayName": "European Institutional Solutions",
       "locale": "en",
       "properties": {
@@ -43,7 +41,6 @@
     },
     {
       "contentType": "HeroBlockv2",
-      "key": "9716b25a13d1470d868077a203f6bb5c",
       "displayName": "US Institutional Solutions",
       "locale": "en",
       "properties": {
@@ -62,7 +59,6 @@
     },
     {
       "contentType": "HeroBlockv2",
-      "key": "5c1838eeabd8474abe464de3e7e0ae9d",
       "displayName": "Global Institutional Solutions",
       "locale": "en",
       "properties": {

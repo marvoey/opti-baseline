@@ -5,7 +5,6 @@
   "items": [
     {
       "contentType": "CardBlock",
-      "key": "8a84fa5cbf1741428057fb4e08ddbfb0",
       "displayName": "Fund Administration – Canada (Asset Manager)",
       "locale": "en",
       "properties": {
@@ -35,7 +34,6 @@
     },
     {
       "contentType": "CardBlock",
-      "key": "46dfe6ecc30c4c42bac15e6e66035ae3",
       "displayName": "Fund Administration – Europe (Asset Manager)",
       "locale": "en",
       "properties": {
@@ -65,7 +63,6 @@
     },
     {
       "contentType": "CardBlock",
-      "key": "93d918722dc34194a7c580b9bf30b61c",
       "displayName": "Fund Administration – Canada (Insurance Provider)",
       "locale": "en",
       "properties": {
@@ -95,7 +92,6 @@
     },
     {
       "contentType": "CardBlock",
-      "key": "99c0e2647d9e45e49354a0d3497afdce",
       "displayName": "Foreign Exchange – Canada (Pension Fund)",
       "locale": "en",
       "properties": {
@@ -125,7 +121,6 @@
     },
     {
       "contentType": "CardBlock",
-      "key": "512f883a6b604da6a9ca1edca67d1c60",
       "displayName": "Foreign Exchange – Europe (Pension Fund)",
       "locale": "en",
       "properties": {
@@ -155,7 +150,6 @@
     },
     {
       "contentType": "CardBlock",
-      "key": "b45616f9fb3347da90b1ed46181cd04d",
       "displayName": "Foreign Exchange – Canada (Foreign Institution)",
       "locale": "en",
       "properties": {
@@ -185,7 +179,6 @@
     },
     {
       "contentType": "CardBlock",
-      "key": "9759b19a065f453ab4bfa55e4089a573",
       "displayName": "Treasury Services – Canada (Pension Fund)",
       "locale": "en",
       "properties": {
@@ -215,7 +208,6 @@
     },
     {
       "contentType": "CardBlock",
-      "key": "0d5c62ba26d94b92b27551431c36360e",
       "displayName": "Treasury Services – Canada (Corporate Sponsor)",
       "locale": "en",
       "properties": {
@@ -245,7 +237,6 @@
     },
     {
       "contentType": "CardBlock",
-      "key": "0eb5d702b56b4df882456419fea20df9",
       "displayName": "Treasury Services – United States (Corporate Sponsor)",
       "locale": "en",
       "properties": {
@@ -275,7 +266,6 @@
     },
     {
       "contentType": "CardBlock",
-      "key": "affec4322a5943cdb772467cb5b344b9",
       "displayName": "ETF Services – Canada (Asset Manager)",
       "locale": "en",
       "properties": {
@@ -305,7 +295,6 @@
     },
     {
       "contentType": "CardBlock",
-      "key": "68336114c2b64be1adc4c744af281ae1",
       "displayName": "Alternative Investments – Canada (Pension Fund)",
       "locale": "en",
       "properties": {
@@ -335,7 +324,6 @@
     },
     {
       "contentType": "CardBlock",
-      "key": "6a7b452d1a254d9fb306aed75852e0ce",
       "displayName": "Alternative Investments – Global (Asset Manager)",
       "locale": "en",
       "properties": {
@@ -365,7 +353,6 @@
     },
     {
       "contentType": "CardBlock",
-      "key": "0efb3e605abf4eae972c5d917a121ae4",
       "displayName": "Securities Lending – Canada (Pension Fund)",
       "locale": "en",
       "properties": {
@@ -395,7 +382,6 @@
     },
     {
       "contentType": "CardBlock",
-      "key": "57d4d86631134253ac0a77c65cb94bdb",
       "displayName": "Securities Lending – Canada (Asset Manager)",
       "locale": "en",
       "properties": {
@@ -425,7 +411,6 @@
     },
     {
       "contentType": "CardBlock",
-      "key": "f164db6abf1e4d5984e68762d5bd5094",
       "displayName": "Global Custody – Canada (Foreign Institution)",
       "locale": "en",
       "properties": {
@@ -455,7 +440,6 @@
     },
     {
       "contentType": "CardBlock",
-      "key": "8f898b82c2ba44ef88a93d6a270c3d47",
       "displayName": "Global Custody – Europe (Foreign Institution)",
       "locale": "en",
       "properties": {
@@ -485,7 +469,6 @@
     },
     {
       "contentType": "CardBlock",
-      "key": "3cbd330390254542b1b8b645911520e0",
       "displayName": "Global Custody – United States (Foreign Institution)",
       "locale": "en",
       "properties": {
@@ -515,7 +498,6 @@
     },
     {
       "contentType": "CardBlock",
-      "key": "3c791d3d91bc415b9054daa90a6f6157",
       "displayName": "Global Custody – United States (Insurance Provider)",
       "locale": "en",
       "properties": {
@@ -545,7 +527,6 @@
     },
     {
       "contentType": "CardBlock",
-      "key": "7a8be07385bd426ea8d57c3e5cb2cf6e",
       "displayName": "Global Custody – Canada (Pension Fund)",
       "locale": "en",
       "properties": {
@@ -575,7 +556,6 @@
     },
     {
       "contentType": "CardBlock",
-      "key": "4c61855ddff04e748b19fcc91ef8ee35",
       "displayName": "Global Custody – Global (Asset Manager)",
       "locale": "en",
       "properties": {
@@ -605,7 +585,6 @@
     },
     {
       "contentType": "CardBlock",
-      "key": "7e78b761c9244404b68612269793f26c",
       "displayName": "Recordkeeping – Canada (Pension Fund)",
       "locale": "en",
       "properties": {
@@ -635,7 +614,6 @@
     },
     {
       "contentType": "CardBlock",
-      "key": "88e340cb36f840408fe591e37cfb3258",
       "displayName": "Recordkeeping – Global (Corporate Sponsor)",
       "locale": "en",
       "properties": {
@@ -665,7 +643,6 @@
     },
     {
       "contentType": "CardBlock",
-      "key": "9a1b0200fe424c3abf897640a047d632",
       "displayName": "ESG – Canada (Asset Manager)",
       "locale": "en",
       "properties": {
@@ -695,7 +672,6 @@
     },
     {
       "contentType": "CardBlock",
-      "key": "074ab47239a247e19103ab42d344ba4e",
       "displayName": "ESG – Canada (Pension Fund)",
       "locale": "en",
       "properties": {
@@ -725,7 +701,6 @@
     },
     {
       "contentType": "CardBlock",
-      "key": "07ff6a99ae1a4c6a9f1cd1da8dfe7965",
       "displayName": "Regulatory – Canada (Asset Manager)",
       "locale": "en",
       "properties": {
@@ -755,7 +730,6 @@
     },
     {
       "contentType": "CardBlock",
-      "key": "e06bcd2007cb4c83a5cad82ee870aa69",
       "displayName": "Regulatory – Canada (Foreign Institution)",
       "locale": "en",
       "properties": {
@@ -785,7 +759,6 @@
     },
     {
       "contentType": "CardBlock",
-      "key": "ec4af04742a84f9a8dd28cb3a9e6a431",
       "displayName": "Regulatory – Canada (Pension Fund)",
       "locale": "en",
       "properties": {
@@ -815,7 +788,6 @@
     },
     {
       "contentType": "CardBlock",
-      "key": "599fc9221bdb4f469652d57c78855ddf",
       "displayName": "Tax – Canada (Asset Manager)",
       "locale": "en",
       "properties": {
@@ -845,7 +817,6 @@
     },
     {
       "contentType": "CardBlock",
-      "key": "a097c90493944426bae6a23c41f00fd0",
       "displayName": "Tax – Europe (Asset Manager)",
       "locale": "en",
       "properties": {
@@ -875,7 +846,6 @@
     },
     {
       "contentType": "CardBlock",
-      "key": "8597298794974c14bb97938f3e507420",
       "displayName": "Tax – Canada (Pension Fund)",
       "locale": "en",
       "properties": {
@@ -905,7 +875,6 @@
     },
     {
       "contentType": "CardBlock",
-      "key": "164471c650fb459f880c6e9190a85c13",
       "displayName": "Onboarding – Canada (Foreign Institution)",
       "locale": "en",
       "properties": {
@@ -935,7 +904,6 @@
     },
     {
       "contentType": "CardBlock",
-      "key": "30305e1461a74e69a80713691c167da3",
       "displayName": "Onboarding – Canada (Asset Manager)",
       "locale": "en",
       "properties": {
@@ -965,7 +933,6 @@
     },
     {
       "contentType": "CardBlock",
-      "key": "07f9d05c875e4f479529bf00dc8f276b",
       "displayName": "Compliance – Canada (Pension Fund)",
       "locale": "en",
       "properties": {
@@ -995,7 +962,6 @@
     },
     {
       "contentType": "CardBlock",
-      "key": "24031ec7974c4d62b117a3d8840183af",
       "displayName": "Compliance – Canada (Asset Manager)",
       "locale": "en",
       "properties": {
@@ -1025,7 +991,6 @@
     },
     {
       "contentType": "CardBlock",
-      "key": "c5bc8d4ad3344273815080c8dc9a3d99",
       "displayName": "Compliance – Canada (Foreign Institution)",
       "locale": "en",
       "properties": {
