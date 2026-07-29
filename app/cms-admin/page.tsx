@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import { headers } from 'next/headers';
 import { fetchSiteFolder, type FolderWithChildren } from '@/lib/cms/fetchSiteFolders';
 import { siteOrigin } from '@/lib/siteHost';
 import CopyableId from './_components/CopyableId';
@@ -37,10 +36,6 @@ export const metadata: Metadata = {
 };
 
 export default async function CmsAdminPage() {
-  const host = (await headers()).get('host') ?? '';
-  const port = process.env.PORT ?? '3000';
-  const isLocalhost = host === `localhost:${port}` || host === 'localhost';
-
   const base = (await siteOrigin()) ?? '';
   const result = await fetchSiteFolder(base);
 
@@ -58,27 +53,25 @@ export default async function CmsAdminPage() {
       </div>
 
       <main className="mx-auto max-w-5xl px-6 py-10">
-        {isLocalhost && (
-          <section>
-            <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
-              Site Folder
-            </h2>
+        <section>
+          <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+            Site Folder
+          </h2>
 
-            {result.ok ? (
-              <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-800">
-                <FolderRow folder={result.folder} />
-              </div>
-            ) : (
-              <div className="rounded-2xl border border-amber-200 bg-amber-50 px-5 py-4 text-sm dark:border-amber-800 dark:bg-amber-950">
-                <p className="font-medium text-amber-800 dark:text-amber-300">Folder not found</p>
-                <p className="mt-1 font-mono text-xs text-amber-700 dark:text-amber-400">{result.error}</p>
-                <p className="mt-2 text-xs text-amber-600 dark:text-amber-500">
-                  base: <code className="font-mono">{base}</code> · host: <code className="font-mono">{host}</code>
-                </p>
-              </div>
-            )}
-          </section>
-        )}
+          {result.ok ? (
+            <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-800">
+              <FolderRow folder={result.folder} />
+            </div>
+          ) : (
+            <div className="rounded-2xl border border-amber-200 bg-amber-50 px-5 py-4 text-sm dark:border-amber-800 dark:bg-amber-950">
+              <p className="font-medium text-amber-800 dark:text-amber-300">Folder not found</p>
+              <p className="mt-1 font-mono text-xs text-amber-700 dark:text-amber-400">{result.error}</p>
+              <p className="mt-2 text-xs text-amber-600 dark:text-amber-500">
+                base: <code className="font-mono">{base}</code>
+              </p>
+            </div>
+          )}
+        </section>
       </main>
     </div>
   );
