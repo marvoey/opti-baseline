@@ -226,29 +226,54 @@ async function publishVersion(
 // ---------------------------------------------------------------------------
 
 export async function seedExperience(seed: ExperienceSeed): Promise<SeedResult> {
+  const log = (msg: string) => console.log(`[seedExperience] ${msg}`);
+
   try {
+    log(`starting — "${seed.displayName}"`);
+
     const cred = readCredentials();
     const base = apiBase();
+    log(`api base: ${base}`);
+    log(`credentials present: clientId=${cred.clientId.slice(0, 6)}… clientSecret=${cred.clientSecret.slice(0, 4)}…`);
+
+    log('fetching OAuth token…');
     const token = await getAccessToken(base, cred.clientId, cred.clientSecret);
+    log('token obtained');
 
     const routeSegment = buildRouteSegment(seed);
+    log(`route segment: ${routeSegment}`);
+    log(`container: ${seed.container ?? ROOT_CONTAINER_KEY}`);
+
+    log('creating experience stub…');
     const result = await createExperience(base, token, seed, routeSegment);
 
     if (result.existed) {
+      log('experience already exists (409) — skipping');
       return { ok: true, skipped: true, url: `/${routeSegment}` };
     }
 
     const { key, version } = result;
+    log(`experience created — key=${key} version=${version}`);
+
+    log('patching composition…');
+    log(`composition nodes: ${seed.composition.nodes?.length ?? 0}`);
     await patchComposition(base, token, key, version, seed.composition);
+    log('composition patched');
+
+    log('publishing…');
     const publish = await publishVersion(base, token, key, version);
 
     if (publish.routeConflict) {
+      log(`publish failed — route conflict on "${routeSegment}", deleting draft ${key}`);
       await deleteContent(base, token, key);
       return { ok: true, skipped: true, url: `/${routeSegment}` };
     }
 
+    log(`published — url: /${routeSegment}`);
     return { ok: true, key, version, url: `/${routeSegment}` };
   } catch (err) {
-    return { ok: false, message: err instanceof Error ? err.message : String(err) };
+    const message = err instanceof Error ? err.message : String(err);
+    console.error(`[seedExperience] failed — ${message}`);
+    return { ok: false, message };
   }
 }

@@ -107,12 +107,17 @@ export async function fetchByTaxonomy(
 
   try {
     const data = (await getClient().request(query, {})) as QueryData;
+    const seen = new Set<string>();
     const results = [
       ...mapItems('CardBlock',   data.CardBlock?.items,   filters.service),
       ...mapItems('Paragraph',   data.Paragraph?.items,   filters.service),
       ...mapItems('ActionBlock', data.ActionBlock?.items,  filters.service),
       ...mapItems('HeroBlockv2', data.HeroBlockv2?.items,  filters.service),
-    ];
+    ].filter(b => {
+      if (seen.has(b.key)) return false;
+      seen.add(b.key);
+      return true;
+    });
     return { results };
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
