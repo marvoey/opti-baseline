@@ -430,9 +430,11 @@ export function AssembleWizard({ intents, permutations }: Props) {
           <div className="flex flex-wrap items-center gap-3">
             <a
               href={doneUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="rounded-lg bg-green-600 px-5 py-2 text-sm font-semibold text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
             >
-              View page →
+              View page ↗
             </a>
             <button
               onClick={reset}

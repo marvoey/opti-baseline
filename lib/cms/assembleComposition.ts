@@ -13,21 +13,27 @@ function contentRef(key: string): string {
   return `cms://content/${key}`;
 }
 
-// HeroBlockv2 and Paragraph have `sectionEnabled` — place directly as section nodes.
-// CardBlock / ActionBlock have only `elementEnabled` — must live inside rows/columns.
-function refSection(block: TaxonomyBlock): CompositionNode {
+// Every section node must have a section-base content type (BlankSection).
+// The actual block is a component node nested inside a row → column.
+function wrapInSection(block: TaxonomyBlock): CompositionNode {
   return {
     nodeType: 'section',
     displayName: block.displayName,
-    component: { contentType: block._type, reference: contentRef(block.key) },
-  };
-}
-
-function refElement(block: TaxonomyBlock): CompositionNode {
-  return {
-    nodeType: 'component',
-    displayName: block.displayName,
-    component: { contentType: block._type, reference: contentRef(block.key) },
+    layoutType: 'grid',
+    component: { contentType: 'BlankSection' },
+    nodes: [{
+      nodeType: 'row',
+      displayName: block.displayName,
+      nodes: [{
+        nodeType: 'column',
+        displayName: 'Content',
+        nodes: [{
+          nodeType: 'component',
+          displayName: block.displayName,
+          component: { contentType: block._type, reference: contentRef(block.key) },
+        }],
+      }],
+    }],
   };
 }
 
@@ -41,32 +47,34 @@ export function assembleComposition(
 
   const nodes: CompositionNode[] = [];
 
-  // Hero blocks render their own full-width section layout
   for (const hero of heroes) {
-    nodes.push(refSection(hero));
+    nodes.push(wrapInSection(hero));
   }
 
-  // Paragraph blocks render their own layout (with auto-TOC when headings present)
   for (const para of paras) {
-    nodes.push(refSection(para));
+    nodes.push(wrapInSection(para));
   }
 
-  // Cards live inside a FeedSection (one row per card)
+  // All cards share one section; each card gets its own column in a single row.
   if (cards.length > 0) {
     nodes.push({
       nodeType: 'section',
       displayName: 'Cards',
       layoutType: 'grid',
-      component: { contentType: 'FeedSection' },
-      nodes: cards.map(card => ({
+      component: { contentType: 'BlankSection' },
+      nodes: [{
         nodeType: 'row',
-        displayName: card.displayName,
-        nodes: [{
+        displayName: 'Cards',
+        nodes: cards.map(card => ({
           nodeType: 'column',
-          displayName: 'Content',
-          nodes: [refElement(card)],
-        }],
-      })),
+          displayName: card.displayName,
+          nodes: [{
+            nodeType: 'component',
+            displayName: card.displayName,
+            component: { contentType: card._type, reference: contentRef(card.key) },
+          }],
+        })),
+      }],
     });
   }
 
