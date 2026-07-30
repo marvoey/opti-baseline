@@ -55,5 +55,5 @@ export const config = {
   // routes, and any path containing a dot (static assets like /logo.svg). The
   // preview, admin and styleguide routes live outside [locale] and must not be
   // rewritten into a locale.
-  matcher: ['/((?!api|_next/static|_next/image|preview|admin|cms-admin|styleguide|favicon.ico|.*\\..*).*)'],
+  matcher: ['/((?!api|_next/static|_next/image|preview|admin|cms-admin|styleguide|content-library|favicon.ico|.*\\..*).*)'],
 };

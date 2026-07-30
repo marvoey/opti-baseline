@@ -21,6 +21,7 @@ import HeroBlock, { HeroBlockContentType, HeroBlockDisplayTemplate } from './Bas
 import MainNavBlock, { MainNavContentType } from './BasicBlocks/MainNav';
 import { ColumnDisplayTemplate } from './ColumnTemplate';
 import AdminPage, { AdminPageContentType } from './AdminPage';
+import SharedCard, { SharedCardContentType } from './BasicBlocks/SharedCard';
 
 /**
  * Single configuration + registration point for the Optimizely SDK.
@@ -65,6 +66,7 @@ export const registeredContentTypes = [
   HeroBlockContentType,
   MainNavContentType,
   AdminPageContentType,
+  SharedCardContentType,
 ];
 
 initContentTypeRegistry(registeredContentTypes);
@@ -87,5 +89,6 @@ initReactComponentRegistry({
     HeroBlockv2: HeroBlock,
     MainNav: MainNavBlock,
     AdminPage,
+    SharedCard,
   },
 });
