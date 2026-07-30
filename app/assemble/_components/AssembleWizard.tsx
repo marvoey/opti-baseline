@@ -179,6 +179,15 @@ export function AssembleWizard({ intents, permutations }: Props) {
 
   // ── API calls ─────────────────────────────────────────────────────────────
 
+  async function parseJson<T>(res: Response): Promise<T> {
+    const text = await res.text();
+    try {
+      return JSON.parse(text) as T;
+    } catch {
+      throw new Error(`Server returned non-JSON (${res.status}): ${text.slice(0, 200)}`);
+    }
+  }
+
   async function handlePreview() {
     setStep('loading');
     setError('');
@@ -189,7 +198,7 @@ export function AssembleWizard({ intents, permutations }: Props) {
     if (geo)     qs.set('geo',     geo);
     try {
       const res  = await fetch(`/api/assemble?${qs}`);
-      const data = await res.json() as { results?: TaxonomyBlock[]; error?: string };
+      const data = await parseJson<{ results?: TaxonomyBlock[]; error?: string }>(res);
       if (!res.ok || data.error) { setError(data.error ?? 'Preview failed'); setStep('error'); return; }
       setBlocks(data.results ?? []);
       setStep('preview');
@@ -213,7 +222,7 @@ export function AssembleWizard({ intents, permutations }: Props) {
           geo:     geo     || undefined,
         }),
       });
-      const data = await res.json() as { ok: boolean; url?: string; error?: string };
+      const data = await parseJson<{ ok: boolean; url?: string; error?: string }>(res);
       if (!res.ok || !data.ok) { setError(data.error ?? 'Assembly failed'); setStep('error'); return; }
       setDoneUrl(data.url ?? '/');
       setStep('done');

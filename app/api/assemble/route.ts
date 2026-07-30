@@ -7,9 +7,10 @@ import { seedExperience } from '@/lib/cms/seedExperience';
 
 export const dynamic = 'force-dynamic';
 
-// API routes don't run app/layout.tsx, so initialize the Graph SDK here.
-const env = requireEnv();
-config({ apiKey: env.OPTIMIZELY_GRAPH_SINGLE_KEY, graphUrl: env.OPTIMIZELY_GRAPH_GATEWAY });
+function initGraph() {
+  const env = requireEnv();
+  config({ apiKey: env.OPTIMIZELY_GRAPH_SINGLE_KEY, graphUrl: env.OPTIMIZELY_GRAPH_GATEWAY });
+}
 
 function readParams(entries: Record<string, string | null>): AssemblyParams {
   return {
@@ -22,6 +23,10 @@ function readParams(entries: Record<string, string | null>): AssemblyParams {
 
 /** GET /api/assemble?intent=1&persona=4&service=7&geo=1 — preview matching blocks */
 export async function GET(req: NextRequest) {
+  try { initGraph(); } catch (e) {
+    return NextResponse.json({ error: e instanceof Error ? e.message : String(e) }, { status: 500 });
+  }
+
   const sp = req.nextUrl.searchParams;
   const params = readParams({
     intent:  sp.get('intent'),
@@ -37,6 +42,19 @@ export async function GET(req: NextRequest) {
 
 /** POST /api/assemble — assemble + publish a BlankExperience, returns { ok, url } */
 export async function POST(req: NextRequest) {
+  try { initGraph(); } catch (e) {
+    return NextResponse.json({ ok: false, error: e instanceof Error ? e.message : String(e) }, { status: 500 });
+  }
+
+  const clientId = process.env.OPTIMIZELY_CMS_CLIENT_ID?.trim();
+  const clientSecret = process.env.OPTIMIZELY_CMS_CLIENT_SECRET?.trim();
+  if (!clientId || !clientSecret) {
+    return NextResponse.json(
+      { ok: false, error: 'CMS credentials are not configured. Set OPTIMIZELY_CMS_CLIENT_ID and OPTIMIZELY_CMS_CLIENT_SECRET in your environment variables.' },
+      { status: 500 },
+    );
+  }
+
   let body: AssemblyParams;
   try {
     body = await req.json();
@@ -64,5 +82,6 @@ export async function POST(req: NextRequest) {
   const result = await seedExperience(seed);
 
   if (!result.ok) return NextResponse.json({ ok: false, error: result.message }, { status: 500 });
+  if (result.skipped) return NextResponse.json({ ok: false, error: `A page for this combination already exists at ${result.url} — view it there or try different attributes.` }, { status: 409 });
   return NextResponse.json({ ok: true, url: result.url });
 }
