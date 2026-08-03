@@ -14,15 +14,18 @@ export const PrgvGlobalComplianceDisclosureContentType = contentType({
       type: "string",
       displayName: "Disclosure Name",
       isRequired: true,
+      indexingType: "searchable",
     },
     EffectiveDate: {
       type: "dateTime",
       displayName: "Effective Date",
+      indexingType: "searchable",
     },
     LegalText: {
       type: "richText",
       displayName: "Legal Text",
       isRequired: true,
+      indexingType: "searchable",
     },
     LineOfBusiness: {
       type: "array",
@@ -30,6 +33,7 @@ export const PrgvGlobalComplianceDisclosureContentType = contentType({
       displayName: "Line of Business",
       description: "Which insurance products does this block apply to?",
       group: "Taxonomy",
+      indexingType: "searchable",
       items: {
         type: "string",
         enum: taxonomyEnums(LINE_OF_BUSINESS),
@@ -41,6 +45,7 @@ export const PrgvGlobalComplianceDisclosureContentType = contentType({
       format: "selectOne",
       enum: taxonomyEnums(US_JURISDICTION),
       group: "Taxonomy",
+      indexingType: "searchable",
     },
     Jurisdiction: {
       type: "string",
@@ -48,6 +53,7 @@ export const PrgvGlobalComplianceDisclosureContentType = contentType({
       format: "selectOne",
       enum: taxonomyEnums(US_JURISDICTION),
       group: "Taxonomy",
+      indexingType: "searchable",
     },
     Category: {
       type: "contentReference",

@@ -14,6 +14,7 @@ export const PrgvStandardInstructionBlockContentType = contentType({
       type: "richText",
       displayName: "Instruction Text",
       isRequired: true,
+      indexingType: "searchable",
     },
     LineOfBusiness: {
       type: "array",
@@ -21,6 +22,7 @@ export const PrgvStandardInstructionBlockContentType = contentType({
       displayName: "Line of Business",
       description: "Which insurance products does this block apply to?",
       group: "Taxonomy",
+      indexingType: "searchable",
       items: {
         type: "string",
         enum: taxonomyEnums(LINE_OF_BUSINESS),
@@ -32,6 +34,7 @@ export const PrgvStandardInstructionBlockContentType = contentType({
       format: "selectOne",
       enum: taxonomyEnums(US_JURISDICTION),
       group: "Taxonomy",
+      indexingType: "searchable",
     },
     Category: {
       type: "contentReference",
@@ -45,6 +48,7 @@ export const PrgvStandardInstructionBlockContentType = contentType({
       format: "selectOne",
       enum: taxonomyEnums(TARGET_AUDIENCE),
       group: "Taxonomy",
+      indexingType: "searchable",
     },
   },
 });

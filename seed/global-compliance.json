@@ -1,0 +1,106 @@
+[
+  {
+    "name": "Global Compliance Disclosure - Personal Auto",
+    "contentType": "prgv_GlobalComplianceDisclosure",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "DisclosureName": "Personal Auto Statutory Fraud & Telematics Disclosure",
+      "EffectiveDate": "2026-08-01T00:00:00Z",
+      "LegalText": "<p><strong>FRAUD WARNING & COMPLIANCE DISCLOSURE:</strong> Any person who knowingly and with intent to defraud any insurance company or other person files a statement of claim containing any materially false information, or conceals for the purpose of misleading, information concerning any fact material thereto, commits a fraudulent insurance act, which is a crime and subjects such person to criminal and civil penalties. Please note that if your policy includes Progressive's Snapshot or other telematics programs, driving data collected around the time of the loss may be reviewed as part of this investigation. All calls are recorded for quality assurance and compliance with state Departments of Insurance.</p>"
+    }
+  },
+  {
+    "name": "Global Compliance Disclosure - Commercial Auto",
+    "contentType": "prgv_GlobalComplianceDisclosure",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "1"
+      ],
+      "DisclosureName": "Commercial Auto & FMCSA Regulatory Disclosure",
+      "EffectiveDate": "2026-08-01T00:00:00Z",
+      "LegalText": "<p><strong>FRAUD WARNING & COMMERCIAL COMPLIANCE DISCLOSURE:</strong> Any person who knowingly presents a false or fraudulent claim for payment of a loss is guilty of a crime and may be subject to fines and confinement in state prison. For commercial auto policies, Progressive is required to comply with all applicable Federal Motor Carrier Safety Administration (FMCSA) and Department of Transportation (DOT) reporting requirements. Information regarding this claim may be shared with federal and state regulatory agencies. Furthermore, if the driver was in the course and scope of employment, workers' compensation subrogation rules may apply.</p>"
+    }
+  },
+  {
+    "name": "Global Compliance Disclosure - Homeowners",
+    "contentType": "prgv_GlobalComplianceDisclosure",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "DisclosureName": "Property Fraud, Mitigation & Lienholder Disclosure",
+      "EffectiveDate": "2026-08-01T00:00:00Z",
+      "LegalText": "<p><strong>FRAUD WARNING & PROPERTY COMPLIANCE DISCLOSURE:</strong> Any person who knowingly files a fraudulent claim is subject to criminal and civil penalties. As a condition of your Progressive Homeowners policy, you have a duty to mitigate further damage to your property. Failure to protect the property from subsequent damage may result in a denial of coverage for the secondary damage. Additionally, we are legally obligated to include any named mortgagees or lienholders on settlement payments exceeding statutory or policy-defined thresholds.</p>"
+    }
+  },
+  {
+    "name": "Global Compliance Disclosure - Renters",
+    "contentType": "prgv_GlobalComplianceDisclosure",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "3"
+      ],
+      "DisclosureName": "Renters Liability & Subrogation Acknowledgment",
+      "EffectiveDate": "2026-08-01T00:00:00Z",
+      "LegalText": "<p><strong>FRAUD WARNING & RENTERS COMPLIANCE DISCLOSURE:</strong> Knowingly presenting false or misleading information in an insurance claim is a punishable offense. Progressive Renters policies cover your personal property and personal liability only, not the physical structure of the building. You may be required to provide a sworn proof of loss and an itemized inventory of damaged or stolen property, supported by receipts or other proof of ownership. Progressive reserves the right to share claim information with the property owner's insurer for subrogation purposes.</p>"
+    }
+  },
+  {
+    "name": "Global Compliance Disclosure - Motorcycle / ATV",
+    "contentType": "prgv_GlobalComplianceDisclosure",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "4"
+      ],
+      "DisclosureName": "Powersports Custom Parts & Safety Apparel Disclosure",
+      "EffectiveDate": "2026-08-01T00:00:00Z",
+      "LegalText": "<p><strong>FRAUD WARNING & MOTORCYCLE COMPLIANCE DISCLOSURE:</strong> Submitting a fraudulent insurance claim is a crime punishable by law. Please be advised that coverage for Custom Parts and Equipment (CPE) and safety apparel is strictly limited to the endorsements specifically listed on your declarations page. You will be required to provide receipts or prior photographic evidence of any claimed aftermarket modifications. We may also review local traffic and helmet law compliance as it pertains to comparative negligence and bodily injury recovery.</p>"
+    }
+  },
+  {
+    "name": "Global Compliance Disclosure - Boat / PWC",
+    "contentType": "prgv_GlobalComplianceDisclosure",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "5"
+      ],
+      "DisclosureName": "Marine Navigational & Environmental Compliance Warning",
+      "EffectiveDate": "2026-08-01T00:00:00Z",
+      "LegalText": "<p><strong>FRAUD WARNING & MARINE COMPLIANCE DISCLOSURE:</strong> Insurance fraud is a crime subject to strict penalties. Marine claims are subject to applicable state laws and Federal Admiralty/Maritime law. You have a legal duty to report any fuel spills or environmental contamination to the US Coast Guard and local environmental authorities. Failure to report pollution can result in severe federal fines which may not be covered by your policy. Navigational limits strictly apply; losses occurring outside the defined territory on your declarations page will not be covered.</p>"
+    }
+  },
+  {
+    "name": "Global Compliance Disclosure - RV / Trailer",
+    "contentType": "prgv_GlobalComplianceDisclosure",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "6"
+      ],
+      "DisclosureName": "Recreational Vehicle Residency & Loss of Use Disclosure",
+      "EffectiveDate": "2026-08-01T00:00:00Z",
+      "LegalText": "<p><strong>FRAUD WARNING & RV COMPLIANCE DISCLOSURE:</strong> Providing false information on a claim is a crime. Claims handling for Recreational Vehicles relies on the accurate disclosure of the vehicle's use. Misrepresenting a 'Full-Timer' (primary residence) risk as a standard recreational risk may constitute policy misrepresentation. Settlement for personal property within the RV is subject to the specific limits and depreciation schedules defined in your policy. We may require proof of residency or travel itineraries to validate loss of use and emergency expense coverages.</p>"
+    }
+  },
+  {
+    "name": "Global Compliance Disclosure - Umbrella Policy",
+    "contentType": "prgv_GlobalComplianceDisclosure",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "7"
+      ],
+      "DisclosureName": "Personal Umbrella Underlying Limits Acknowledgment",
+      "EffectiveDate": "2026-08-01T00:00:00Z",
+      "LegalText": "<p><strong>FRAUD WARNING & UMBRELLA COMPLIANCE DISCLOSURE:</strong> Any person who knowingly and with intent to defraud an insurance company files a claim containing materially false information commits a fraudulent insurance act. Your Personal Umbrella policy provides excess liability coverage only. As a strict condition of this coverage, you are required to maintain the minimum underlying primary insurance limits (e.g., auto, homeowners, watercraft) exactly as stated on your umbrella declarations page. Progressive reserves the right to deny coverage if the underlying policies were allowed to lapse or were reduced below the required minimums.</p>"
+    }
+  }
+]

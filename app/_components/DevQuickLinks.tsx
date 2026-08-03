@@ -4,8 +4,10 @@ import { useState } from 'react';
 import Link from 'next/link';
 
 const LINKS = [
-  { label: 'Demo Flow', href: '/demo-flow' },
+  { label: 'Home', href: '/' },
   { label: 'KB', href: '/kb' },
+  { label: 'Search', href: '/search' },
+  { label: 'KB-Opal', href: '/kb-workspace/opal' },
   { label: 'Demo', href: '/demo' },
   { label: 'Demo V2', href: '/demo-v2' },
   { label: 'Demo Marketing', href: '/demo-marketing' },
@@ -14,6 +16,7 @@ const LINKS = [
   { label: 'Component Library', href: '/component-library' },
   { label: 'Render Preview', href: '/component-library/previews' },
   { label: 'Import Policies', href: '/admin/import-policies' },
+  { label: 'Demo Flow', href: '/demo-flow' },
 ];
 
 export default function DevQuickLinks() {

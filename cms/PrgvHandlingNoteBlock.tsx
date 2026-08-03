@@ -14,6 +14,7 @@ export const PrgvHandlingNoteBlockContentType = contentType({
       type: "richText",
       displayName: "Note Content",
       isRequired: true,
+      indexingType: "searchable",
     },
     LineOfBusiness: {
       type: "array",
@@ -21,6 +22,7 @@ export const PrgvHandlingNoteBlockContentType = contentType({
       displayName: "Line of Business",
       description: "Which insurance products does this block apply to?",
       group: "Taxonomy",
+      indexingType: "searchable",
       items: {
         type: "string",
         enum: taxonomyEnums(LINE_OF_BUSINESS),
@@ -32,6 +34,7 @@ export const PrgvHandlingNoteBlockContentType = contentType({
       format: "selectOne",
       enum: taxonomyEnums(US_JURISDICTION),
       group: "Taxonomy",
+      indexingType: "searchable",
     },
     RuleCategory: {
       type: "string",
@@ -39,6 +42,7 @@ export const PrgvHandlingNoteBlockContentType = contentType({
       format: "selectOne",
       enum: taxonomyEnums(RULE_CATEGORY),
       group: "Taxonomy",
+      indexingType: "searchable",
     },
     SeverityLevel: {
       type: "string",
@@ -46,6 +50,7 @@ export const PrgvHandlingNoteBlockContentType = contentType({
       format: "selectOne",
       enum: taxonomyEnums(SEVERITY_LEVEL),
       group: "Taxonomy",
+      indexingType: "searchable",
     },
     Category: {
       type: "contentReference",

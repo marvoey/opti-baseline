@@ -14,6 +14,7 @@ export const PrgvScriptingBlockContentType = contentType({
       type: "richText",
       displayName: "Verbatim Script",
       isRequired: true,
+      indexingType: "searchable",
     },
     LineOfBusiness: {
       type: "array",
@@ -21,6 +22,7 @@ export const PrgvScriptingBlockContentType = contentType({
       displayName: "Line of Business",
       description: "Which insurance products does this block apply to?",
       group: "Taxonomy",
+      indexingType: "searchable",
       items: {
         type: "string",
         enum: taxonomyEnums(LINE_OF_BUSINESS),
@@ -32,6 +34,7 @@ export const PrgvScriptingBlockContentType = contentType({
       format: "selectOne",
       enum: taxonomyEnums(US_JURISDICTION),
       group: "Taxonomy",
+      indexingType: "searchable",
     },
     Category: {
       type: "contentReference",

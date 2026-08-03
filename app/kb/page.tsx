@@ -786,6 +786,7 @@ function HomeView() {
         <Link href="/kb?browse=lob">Browse by Line of Business</Link>
         <Link href="/kb?browse=recent">View Recent Updates</Link>
         <Link href="/kb?browse=directory">Agent Directory</Link>
+        <Link href="/search">PRGV Block Search</Link>
       </div>
     </div>
   );

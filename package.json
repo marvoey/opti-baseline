@@ -20,6 +20,7 @@
     "cms:import:handling-notes:personal-auto": "node seed/scripts/import-handling-notes.mjs",
     "cms:import:handling-notes:home": "node seed/scripts/import-handling-notes-home.mjs",
     "cms:import:scripting-blocks:personal-auto": "node seed/scripts/import-scripting-blocks-personal-auto.mjs",
+    "cms:import:global-compliance": "node seed/scripts/import-global-compliance.mjs",
     "cms:publish:policies": "node scripts/publish-policies.mjs",
     "screenshot": "node scripts/screenshot.mjs",
     "screenshot:click": "node scripts/screenshot-click.mjs",
