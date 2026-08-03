@@ -20,6 +20,14 @@ import PrgvCorePrinciple, { PrgvCorePrincipleContentType } from './PrgvCorePrinc
 import PrgvJurisdictionalOverride, { PrgvJurisdictionalOverrideContentType } from './PrgvJurisdictionalOverride';
 import PrgvStatutoryDisclosure, { PrgvStatutoryDisclosureContentType } from './PrgvStatutoryDisclosure';
 import PrgvProceduralSafeguard, { PrgvProceduralSafeguardContentType } from './PrgvProceduralSafeguard';
+import PrgvGlobalComplianceDisclosure, { PrgvGlobalComplianceDisclosureContentType } from './PrgvGlobalComplianceDisclosure';
+import PrgvHandlingNoteBlock, { PrgvHandlingNoteBlockContentType } from './PrgvHandlingNoteBlock';
+import PrgvScriptingBlock, { PrgvScriptingBlockContentType } from './PrgvScriptingBlock';
+import PrgvStandardInstructionBlock, { PrgvStandardInstructionBlockContentType } from './PrgvStandardInstructionBlock';
+import PrgvCategory, { PrgvCategoryContentType } from './PrgvCategory';
+import PrgvComplianceDisclosureMatrix, { PrgvComplianceDisclosureMatrixContentType } from './PrgvComplianceDisclosureMatrix';
+import PrgvGovernanceOperationalPlan, { PrgvGovernanceOperationalPlanContentType } from './PrgvGovernanceOperationalPlan';
+import PrgvKnowledgeArticle, { PrgvKnowledgeArticleContentType } from './PrgvKnowledgeArticle';
 
 /**
  * Single configuration + registration point for the Optimizely SDK.
@@ -63,11 +71,21 @@ export const registeredContentTypes = [
   // Progressive experience types
   PrgvDemoContentType,
   PrgvDemov2ContentType,
+  // Progressive CMS-only block types
+  PrgvGlobalComplianceDisclosureContentType,
+  PrgvHandlingNoteBlockContentType,
+  PrgvScriptingBlockContentType,
+  PrgvStandardInstructionBlockContentType,
   // Progressive Resolve intent — 4 atomic copy types
   PrgvCorePrincipleContentType,
   PrgvJurisdictionalOverrideContentType,
   PrgvStatutoryDisclosureContentType,
   PrgvProceduralSafeguardContentType,
+  // Progressive page types
+  PrgvCategoryContentType,
+  PrgvComplianceDisclosureMatrixContentType,
+  PrgvGovernanceOperationalPlanContentType,
+  PrgvKnowledgeArticleContentType,
 ];
 
 initContentTypeRegistry(registeredContentTypes);
@@ -87,10 +105,20 @@ initReactComponentRegistry({
     // Progressive experience types
     PrgvDemo,
     PrgvDemov2,
+    // Progressive CMS-only block types
+    prgv_GlobalComplianceDisclosure: PrgvGlobalComplianceDisclosure,
+    prgv_HandlingNoteBlock: PrgvHandlingNoteBlock,
+    prgv_ScriptingBlock: PrgvScriptingBlock,
+    prgv_StandardInstructionBlock: PrgvStandardInstructionBlock,
     // Progressive Resolve intent — 4 atomic copy types
     PrgvCorePrinciple,
     PrgvJurisdictionalOverride,
     PrgvStatutoryDisclosure,
     PrgvProceduralSafeguard,
+    // Progressive page types
+    PrgvCategory,
+    PrgvComplianceDisclosureMatrix,
+    PrgvGovernanceOperationalPlan,
+    PrgvKnowledgeArticle,
   },
 });
