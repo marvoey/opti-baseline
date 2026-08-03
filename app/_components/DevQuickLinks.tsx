@@ -17,6 +17,8 @@ const LINKS = [
   { label: 'Render Preview', href: '/component-library/previews' },
   { label: 'Import Policies', href: '/admin/import-policies' },
   { label: 'Demo Flow', href: '/demo-flow' },
+  { label: 'Walkthrough', href: '/walkthrough' },
+  { label: 'Presentation', href: '/docs-presentation/index.html' },
 ];
 
 export default function DevQuickLinks() {

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>From Word Docs to Structured Content · Progressive × Optimizely</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reset.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/night.css">
+    <style>
+        .reveal h1, .reveal h2, .reveal h3 {
+            color: #CADCFC;
+            text-transform: none;
+        }
+        .reveal p, .reveal li {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            color: #F5F5F5;
+        }
+        .reveal .accent { color: #02C39A; }
+        .reveal .muted  { color: rgba(245,245,245,0.5); }
+
+        .reveal .callout {
+            background: rgba(255,255,255,0.07);
+            border-left: 5px solid #02C39A;
+            padding: 20px 26px;
+            margin: 24px auto;
+            border-radius: 4px;
+            max-width: 820px;
+        }
+
+        .reveal .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+            margin-top: 28px;
+            text-align: left;
+        }
+        .reveal .card {
+            border-radius: 10px;
+            padding: 24px 26px;
+        }
+        .reveal .card p { font-size: 1rem; margin: 6px 0 0; }
+        .reveal .card .card-head {
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+        }
+        .reveal .card li { font-size: 1rem; margin-bottom: 8px; }
+
+        .reveal .word-card {
+            background: rgba(239,68,68,0.1);
+            border: 1px solid rgba(239,68,68,0.35);
+        }
+        .reveal .word-card .card-head { color: #fca5a5; }
+
+        .reveal .cms-card {
+            background: rgba(2,195,154,0.08);
+            border: 1px solid rgba(2,195,154,0.35);
+        }
+        .reveal .cms-card .card-head { color: #02C39A; }
+
+        .reveal .big-quote {
+            font-size: 1.5rem;
+            font-style: italic;
+            color: #CADCFC;
+            line-height: 1.5;
+            max-width: 820px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+
+        <!-- ── 1. Cover ── -->
+        <section data-background-gradient="linear-gradient(to bottom right, #065A82, #1E2761)">
+            <h2>What you're about to see<br>is nothing like a Word doc</h2>
+            <p class="muted" style="margin-top: 32px;">Press <strong>S</strong> for speaker notes &nbsp;·&nbsp; <strong>→</strong> to advance</p>
+
+            <aside class="notes">
+                The goal of this presentation is to set expectations before the demo. Most people think of a "knowledge base" as a digital filing cabinet — a place to store Word documents. What we're about to show is fundamentally different. Frame it early so the audience understands why what they're seeing is a step-change, not an upgrade.
+            </aside>
+        </section>
+
+        <!-- ── 2. Word is a piece of paper ── -->
+        <section data-background-gradient="linear-gradient(to bottom right, #1E2761, #21295C)">
+            <h2>A Word doc is a digital piece of paper</h2>
+            <p style="margin-top: 24px;">It looks flexible. But it has the same fundamental limitation as a printed page:</p>
+            <ul style="margin-top: 20px; text-align: left; max-width: 760px; margin-left: auto; margin-right: auto;">
+                <li class="fragment">It can only say <strong>one thing</strong> — to everyone, all the time</li>
+                <li class="fragment">It has no idea <strong>who is reading it</strong> or what they actually need</li>
+                <li class="fragment">It cannot <strong>update itself</strong> when the rules change</li>
+                <li class="fragment">When you need to change it, you have to find <strong>every copy</strong> and change each one manually</li>
+            </ul>
+
+            <aside class="notes">
+                This is the core limitation. Word documents (and PDFs, and SharePoint pages) are static artifacts. They were designed to be printed, distributed, and filed. They have no awareness of context — who is reading, where they are, what role they have, what state they're in.
+
+                The result is that knowledge managers spend enormous time maintaining copies, chasing versions, and hoping consultants are reading the right document.
+            </aside>
+        </section>
+
+        <!-- ── 3. The contrast ── -->
+        <section data-background-gradient="linear-gradient(to bottom right, #1E2761, #065A82)">
+            <h2>What if content knew who was asking?</h2>
+            <div class="two-col">
+                <div class="card word-card">
+                    <div class="card-head">Word Doc</div>
+                    <ul>
+                        <li>One version for everyone</li>
+                        <li>You find the document</li>
+                        <li>You read what's relevant and skip the rest</li>
+                        <li>You hope it's still current</li>
+                    </ul>
+                </div>
+                <div class="card cms-card">
+                    <div class="card-head">What I'm showing you today</div>
+                    <ul>
+                        <li>Content is assembled <em>for you</em></li>
+                        <li>Only what's relevant to your role appears</li>
+                        <li>State-specific rules surface automatically</li>
+                        <li>The moment content is updated, everyone sees it</li>
+                    </ul>
+                </div>
+            </div>
+
+            <aside class="notes">
+                This is the key contrast to establish. The mental shift is from "searching for a document" to "content being assembled for you."
+
+                In the Word world, the burden is on the reader — find the right file, navigate to the right section, figure out what applies to them. In the CMS world, the system does that work. The right content surfaces based on who is asking, what state they're in, and what they need.
+            </aside>
+        </section>
+
+        <!-- ── 4. The binder analogy ── -->
+        <section data-background-gradient="linear-gradient(to bottom right, #2C5F2D, #1E2761)">
+            <h2>Think of it like a smart binder</h2>
+            <div class="callout">
+                <p>Instead of printing everything into one flat document, you fill a binder with individual cards — each card knows who it's for, where it applies, and when it expires.</p>
+            </div>
+            <p class="fragment" style="margin-top: 24px;">
+                When an agent pulls up a procedure, the system reads those cards, picks the right ones for that agent, and builds their screen — <span class="accent">instantly and automatically.</span>
+            </p>
+
+            <aside class="notes">
+                The binder analogy from the source notes:
+
+                "Imagine the Knowledge Article is an empty binder labeled 'Auto Claims FNOL Procedure.' Instead of slipping a single, flat piece of printed paper into that binder, you fill it with smart, individual index cards. You drop in an instruction card for the Procedural Steps, an amber warning card for the Fraud Alerts, a verbatim card for the Agent Script, and a legal reference that automatically pulls the exact California Compliance Disclosure.
+
+                When a frontline agent searches for the procedure, the CMS grabs that binder, reads all the index cards inside it, filters them by the agent's role and state, and instantly builds a clean, interactive webpage on their screen."
+            </aside>
+        </section>
+
+        <!-- ── 5. Why it matters ── -->
+        <section data-background-gradient="linear-gradient(to bottom right, #1E2761, #21295C)">
+            <h2>One edit. Every agent. Immediately.</h2>
+            <p style="margin-top: 20px; max-width: 760px; margin-left: auto; margin-right: auto;">
+                In the Word world, when Legal updates a disclosure, someone has to find every document that contains it — there could be dozens — and manually update each one.
+            </p>
+            <div class="callout fragment">
+                <p>In what you're about to see, that disclosure lives in <strong>one place</strong>. Every procedure that references it updates the moment Legal makes a change. There is no search-and-replace. There is no version drift.</p>
+            </div>
+
+            <aside class="notes">
+                This is the most compelling single argument for compliance-conscious audiences.
+
+                Full quote from the source notes: "If 10 procedures need that script, they all share the exact same block. When Legal updates the block, all 10 procedures update instantly."
+
+                The operational cost of the Word model compounds over time — more procedures, more states, more regulatory changes. The CMS model scales in the opposite direction: more content, same maintenance cost.
+            </aside>
+        </section>
+
+        <!-- ── 6. Transition to demo ── -->
+        <section data-background-gradient="linear-gradient(to bottom right, #065A82, #1E2761)">
+            <div class="big-quote">
+                "You're not managing documents anymore.<br>You're managing a database of smart content —<br>and the system does the rest."
+            </div>
+            <p class="accent" style="margin-top: 48px; font-size: 1.1rem;">Let me show you what that looks like.</p>
+
+            <aside class="notes">
+                Closing line before transitioning to the live demo. The goal of this presentation was to shift the frame — so that when they see content assembling dynamically in the demo, they understand *why* it works that way, not just *that* it works that way.
+
+                Full summary from the source document: "By breaking a single Word document into atomic blocks and global taxonomies, your content becomes Composable. You are no longer writing 'Documents.' You are managing a database of smart content chunks. Optimizely CMS acts as the brain, pulling those chunks together to assemble the perfect, personalized screen for whichever agent is asking for help."
+            </aside>
+        </section>
+
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/notes/notes.js"></script>
+<script>
+    Reveal.initialize({
+        hash: true,
+        progress: true,
+        controls: true,
+        transition: 'slide',
+        transitionSpeed: 'default',
+        plugins: [ RevealNotes ],
+        width: 1200,
+        height: 700,
+        margin: 0.06,
+    });
+</script>
+</body>
+</html>

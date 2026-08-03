@@ -79,6 +79,31 @@ const ALL_RESULTS = [
   { title: 'Legal_Disclaimer_Commercial_2024_REPLACED_BY_2026_VERSION.pdf', date: 'Jan 02, 2024', type: 'PDF',   typeKey: 'pdf',   pages: '3 pp',   dept: 'Legal & Compliance', deptKey: 'legal',        status: 'superseded', stateKey: 'national',  yearKey: '2024',  lob: 'Commercial Auto', docRef: '1', excerpt: '…2024 commercial legal disclaimer. Replaced by mandatory 2026 disclaimer effective May 2025. Do not attach to new policies. Retained for auditing purposes only…' },
 ];
 
+const LEGACY_DOCS_PDF = [
+  '01_Auto_Claims_FNOL_Procedure.pdf',
+  '02_Multi_Product_Service_Handling_Guide.pdf',
+  '03_Knowledge_Article_Standards_and_Templates.pdf',
+  '04_State_Specific_Compliance_and_Disclosure_Matrix.pdf',
+  '05_Knowledge_Migration_and_Archiving_Plan.pdf',
+  'Legacy_KB_Teen_Driver.pdf',
+];
+
+const LEGACY_DOCS_DOCX = [
+  '01_Auto_Claims_FNOL_Procedure.docx',
+  '02_Multi_Product_Service_Handling_Guide.docx',
+  '03_Knowledge_Article_Standards_and_Templates.docx',
+  '04_State_Specific_Compliance_and_Disclosure_Matrix.docx',
+  '05_Knowledge_Migration_and_Archiving_Plan.docx',
+  'Legacy_KB_Teen_Driver.docx',
+];
+
+function pickLegacyDoc(title: string, typeKey: string): string {
+  let hash = 0;
+  for (let i = 0; i < title.length; i++) hash = (hash * 31 + title.charCodeAt(i)) >>> 0;
+  const list = typeKey === 'pdf' ? LEGACY_DOCS_PDF : typeKey === 'word' ? LEGACY_DOCS_DOCX : [...LEGACY_DOCS_PDF, ...LEGACY_DOCS_DOCX];
+  return `/legacy_docs/${list[hash % list.length]}`;
+}
+
 const STATUS_STYLES: Record<string, { bg: string; text: string; label: string }> = {
   active:     { bg: 'bg-green-50',  text: 'text-green-700',  label: 'Active' },
   superseded: { bg: 'bg-orange-50', text: 'text-orange-700', label: 'Superseded' },
@@ -944,12 +969,14 @@ function ResultsView({ query, filters }: { query: string; filters: ActiveFilters
                     <div className="flex items-start gap-3">
                       <FileText size={15} className={`${fc} shrink-0 mt-0.5`} />
                       <div className="flex-1 min-w-0">
-                        <Link
-                          href={`/kb?q=${encodeURIComponent(query)}&doc=${r.docRef}`}
+                        <a
+                          href={pickLegacyDoc(r.title, r.typeKey)}
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className="text-xl font-semibold text-blue-600 hover:underline break-all leading-snug"
                         >
                           {r.title}
-                        </Link>
+                        </a>
                         <div className="flex flex-wrap items-center gap-3 mt-1 mb-1.5 text-lg text-slate-400">
                           <span className={`px-1.5 py-0.5 rounded text-lg font-semibold ${st.bg} ${st.text}`}>{st.label}</span>
                           <span>{r.type} · {r.pages}</span>
