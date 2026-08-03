@@ -1,0 +1,614 @@
+[
+  {
+    "name": "Scripting Block - Personal Auto - Alabama",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "0",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. Since Alabama follows contributory negligence rules, our team will conduct a thorough investigation of all parties involved. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - Alaska",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "1",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. Given the vast distances in Alaska, please ensure your vehicle is secure; an adjuster will review your towing limits before arranging transport. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - Arizona",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "2",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. If your windshield was damaged, please note that Arizona policies may include zero-deductible safety glass coverage, which your adjuster will verify. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - Arkansas",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "3",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. In Arkansas, we will investigate fault percentages closely, as this impacts your recovery process. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - California",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "4",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. As required by California's Fair Claims Settlement Practices, we will process your claim promptly. Please let us know if you need assistance locating an approved repair facility. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - Colorado",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "5",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. For Colorado claims, especially those involving winter weather or hail, we may deploy specialized field appraisers to assess the damage. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - Connecticut",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "6",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. Your Connecticut adjuster will review all repair estimates to ensure they meet state guidelines regarding aftermarket parts. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - Delaware",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "7",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. Because Delaware is a PIP state, we will open a medical claim alongside your auto damage claim to ensure your injuries are addressed. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - District of Columbia",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "8",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. In the District of Columbia, you will have 60 days to elect whether to receive PIP benefits or pursue a claim against the at-fault driver. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - Florida",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "9",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. Please remember that under Florida law, you must seek initial medical treatment within 14 days to be eligible for your Personal Injury Protection (PIP) benefits. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - Georgia",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "10",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. Once your vehicle is repaired, we will also evaluate it for any potential Diminished Value, as required in Georgia. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - Hawaii",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "11",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. Under Hawaii's no-fault rules, your medical coverages are primary. Your adjuster will guide you through the required injury thresholds. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - Idaho",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "12",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. Your Idaho adjuster will evaluate the road conditions and liability factors before setting up your repair options. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - Illinois",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "13",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. In Illinois, we will carefully determine fault percentages, as you must be less than 50 percent at fault to recover damages from another driver. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - Indiana",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "14",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. Your Indiana adjuster will review the police report and coordinate your repairs or total loss evaluation. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - Iowa",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "15",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. For Iowa claims, we will evaluate the comparative fault of all drivers to accurately process your settlement. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - Kansas",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "16",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. Since Kansas is a No-Fault state, we will explain your PIP benefits and assist with your medical providers. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - Kentucky",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "17",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. Your Kentucky adjuster will verify your PIP coverage selections and coordinate your medical and vehicle damage claims. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - Louisiana",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "18",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. Under Louisiana's 'No Pay, No Play' law, we will need to verify the insurance status of all parties involved in the accident. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - Maine",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "19",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. Your Maine claims representative will review the liability details and assist you with our network of repair shops. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - Maryland",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "20",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. Because Maryland applies contributory negligence, we will need to obtain recorded statements from all drivers to properly determine liability. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - Massachusetts",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "21",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. In Massachusetts, fault determinations will be made according to the Safe Driver Insurance Plan standards, and your adjuster will explain the appeals process if necessary. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - Michigan",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "22",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. Under Michigan's No-Fault system, your medical claims are handled by your own policy, and your adjuster will explain how your specific collision coverage applies. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - Minnesota",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "23",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. For Minnesota claims, we will quickly establish your No-Fault injury claim and send you the required PIP informational packet. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - Mississippi",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "24",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. In Mississippi, we evaluate claims based on pure comparative fault, meaning we will carefully document all contributing factors. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - Missouri",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "25",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. Your Missouri adjuster will review the fault of all parties involved to ensure an accurate settlement process. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - Montana",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "26",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. In Montana, you have the right to choose your repair facility, and your adjuster can assist you with that process. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - Nebraska",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "27",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. Your Nebraska claims rep will gather the police report and scene details to assess liability accurately. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - Nevada",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "28",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. For Nevada claims, especially if rideshare services were involved, we will carefully review all applicable endorsements. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - New Hampshire",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "29",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. In New Hampshire, we will closely review Uninsured Motorist coverages if the other party lacks insurance. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - New Jersey",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "30",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. Since New Jersey has complex No-Fault rules, your adjuster will review your policy's lawsuit threshold selection and PIP limits. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - New Mexico",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "31",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. In New Mexico, we will evaluate the exact percentage of fault for each driver to process your claim fairly. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - New York",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "32",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. Under New York's Regulation 64, we will handle your claim within strict timelines and provide you with required photo inspection disclosures. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - North Carolina",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "33",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. Because North Carolina follows strict contributory negligence laws, our liability investigation will be extremely detailed. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - North Dakota",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "34",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. For North Dakota claims, we will coordinate your No-Fault PIP benefits and review any severe injury thresholds. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - Ohio",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "35",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. Your Ohio adjuster will verify all driver details and ensure your repairs or total loss are handled swiftly. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - Oklahoma",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "36",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. In Oklahoma, we will assign an appraiser to review your damage and assess the comparative fault of the drivers. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - Oregon",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "37",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. Since Oregon mandates PIP coverage, we will establish a medical claim for any injured occupants, pedestrians, or cyclists involved. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - Pennsylvania",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "38",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. Your Pennsylvania adjuster will check your Full or Limited Tort selection to properly advise you on your injury claim options. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - Rhode Island",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "39",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. In Rhode Island, you have the right to select your own repair shop, and we will review estimates according to state part regulations. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - South Carolina",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "40",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. For South Carolina claims, we will gather the police report to review the fault percentages and any traffic citations issued. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - South Dakota",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "41",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. In South Dakota, we apply the 'slight versus gross' negligence standard to determine how your claim will be settled. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - Tennessee",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "42",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. Your Tennessee claims representative will evaluate the comparative fault of all drivers involved in the accident. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - Texas",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "43",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. In accordance with Texas Department of Insurance guidelines, we will acknowledge and investigate your claim within strict statutory timeframes. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - Utah",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "44",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. Because Utah is a No-Fault state, we will guide you through your PIP benefits and the state's medical expense thresholds. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - Vermont",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "45",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. Your Vermont adjuster will assist with your repair estimates and review any necessary towing coverage. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - Virginia",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "46",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. As Virginia is a contributory negligence state, we will act quickly to secure recorded statements and lock in the facts of the loss. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - Washington",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "47",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. In Washington, we will also evaluate your vehicle for potential diminished value once repairs are completed. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - West Virginia",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "48",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. Your West Virginia claims representative will coordinate your repairs and evaluate the comparative fault of the drivers. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - Wisconsin",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "49",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. For Wisconsin claims, we will promptly assign an appraiser and review the liability details of the accident. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  },
+  {
+    "name": "Scripting Block - Personal Auto - Wyoming",
+    "contentType": "prgv_ScriptingBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "50",
+      "VerbatimScript": "<p><strong>MANDATORY EXPECTATION SETTING SCRIPT (DO NOT SKIP)</strong><em>I have documented the reported loss and will submit this claim for handling. Your Wyoming adjuster will gather the police report and assess the comparative negligence of all parties involved. A claims representative will review the details, and if additional information is needed, we will contact you using the phone number or email on file. Timeframes can vary based on the type of loss, injuries, vehicle damage, and state-specific requirements.</em></p>"
+    }
+  }
+]

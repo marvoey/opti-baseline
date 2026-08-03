@@ -1,0 +1,614 @@
+[
+  {
+    "name": "Handling Note - Personal Auto - Alabama",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "0",
+      "NoteContent": "<p><strong>CRITICAL:</strong> Pure contributory negligence state. If the insured is even 1% at fault, they may be barred from recovery. <em><strong>Investigate all third-party liability meticulously.</strong></em></p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - Alaska",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "1",
+      "NoteContent": "<p><strong>HIGH PRIORITY:</strong> Extreme weather handling applies. If the vehicle is non-drivable outside of Anchorage or Fairbanks, <em>verify remote towing limits</em> before dispatching recovery services.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - Arizona",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "2",
+      "NoteContent": "<p><strong>MEDIUM PRIORITY:</strong> Zero deductible glass state if the insured purchased full safety glass coverage. <strong>Do not</strong> apply the comprehensive deductible for windshield repair or replacement claims.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - Arkansas",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "3",
+      "NoteContent": "<p><strong>MEDIUM PRIORITY:</strong> Modified comparative fault (50% rule). If our driver is 50% or more at fault, they cannot recover from the other party. Gather independent witness statements early.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - California",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "4",
+      "NoteContent": "<p><strong>CRITICAL:</strong> Strict adherence to <strong>Fair Claims Settlement Practices Regulations</strong>. If claimant <em><strong>requests repair guidance,</strong></em> provide the approved repair-choice disclosure and note whether the vehicle is garaged in-state or out-of-state. If injuries are reported, do not speculate on medical payments or liability outcomes.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - Colorado",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "5",
+      "NoteContent": "<p><strong>HIGH PRIORITY:</strong> Frequent catastrophic hail claims. Check for Uninsured Motorist Property Damage (UMPD) and verify if winter traction laws apply if the accident occurred in the mountainous zones.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - Connecticut",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "6",
+      "NoteContent": "<p><strong>CRITICAL:</strong> Strict regulations on aftermarket and salvage parts. Ensure the estimate complies with OEM part guidelines for newer vehicles. <strong>Do not</strong> mandate non-OEM parts without explicit customer disclosure.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - Delaware",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "7",
+      "NoteContent": "<p><strong>MEDIUM PRIORITY:</strong> Mandatory PIP state. If injuries are reported, establish the PIP claim immediately. <em>Do not speculate on medical payments or liability outcomes</em> before the PIP adjuster reviews the file.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - District of Columbia",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "8",
+      "NoteContent": "<p><strong>HIGH PRIORITY:</strong> Claimants have 60 days to elect whether to receive PIP benefits or pursue a tort claim against the at-fault driver. Note the exact date of loss and transfer to the DC PIP queue.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - Florida",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "9",
+      "NoteContent": "<p><strong>CRITICAL:</strong> 14-Day PIP Rule applies. The insured <em><strong>must seek medical treatment within 14 days</strong></em> of the accident to access their full PIP benefits. Additionally, Florida mandates a zero-deductible for windshield replacements.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - Georgia",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "10",
+      "NoteContent": "<p><strong>CRITICAL:</strong> Diminished Value (17c formula) must be assessed on <strong>all first-party collision claims</strong>. Automatically refer the vehicle to the DV evaluation queue once physical repairs are completed.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - Hawaii",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "11",
+      "NoteContent": "<p><strong>MEDIUM PRIORITY:</strong> No-fault state with strict injury thresholds. Note whether the vehicle was shipped inter-island and establish the injury claim under Hawaii PIP guidelines.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - Idaho",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "12",
+      "NoteContent": "<p><strong>LOW PRIORITY:</strong> Standard comparative negligence. Document road conditions and ensure timely appraisal assignment. No unusual statutory requirements for initial intake.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - Illinois",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "13",
+      "NoteContent": "<p><strong>HIGH PRIORITY:</strong> Modified comparative fault (51% rule). Ensure swift evaluation of intersection accidents. For total losses, verify local salvage and title retention rules.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - Indiana",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "14",
+      "NoteContent": "<p><strong>MEDIUM PRIORITY:</strong> Modified comparative fault (51%). For any claims involving state property or municipal vehicles, a tort claim notice must be filed within 180 days.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - Iowa",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "15",
+      "NoteContent": "<p><strong>MEDIUM PRIORITY:</strong> Modified comparative fault (51%). Ask the caller specifically about farm equipment or rural road conditions, as these frequently impact liability assessments.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - Kansas",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "16",
+      "NoteContent": "<p><strong>HIGH PRIORITY:</strong> No-fault PIP state. <em><strong>Promptly identify any medical providers</strong></em> and explain Kansas PIP benefits. Do not discuss bodily injury settlements until PIP is exhausted.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - Kentucky",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "17",
+      "NoteContent": "<p><strong>HIGH PRIORITY:</strong> Choice no-fault state. Verify on the dec page if the insured formally rejected PIP (No-Fault) coverage. If PIP is active, route to the KY PIP unit.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - Louisiana",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "18",
+      "NoteContent": "<p><strong>CRITICAL:</strong> <strong>No Pay, No Play statute</strong> in effect. If the claimant was uninsured at the time of the accident, they are barred from collecting the first $15,000 of bodily injury and $25,000 of property damage.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - Maine",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "19",
+      "NoteContent": "<p><strong>MEDIUM PRIORITY:</strong> Modified comparative fault (50% rule). Verify the presence of animals (e.g., moose collisions) and process under comprehensive coverage rather than collision.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - Maryland",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "20",
+      "NoteContent": "<p><strong>CRITICAL:</strong> Pure contributory negligence state. Any negligence by the claimant bars recovery. <em><strong>Obtain recorded statements from all parties immediately.</strong></em></p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - Massachusetts",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "21",
+      "NoteContent": "<p><strong>CRITICAL:</strong> Strict no-fault state. <strong>Safe Driver Insurance Plan (SDIP)</strong> rules apply. Fault determinations must align with MA Division of Insurance Standards of Fault. Advise the customer of the appeals process if they are found at fault.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - Michigan",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "22",
+      "NoteContent": "<p><strong>CRITICAL:</strong> Michigan No-Fault rules apply. Determine if the insured has <em><strong>Broad Form Collision, Standard, or Limited</strong></em>. If the other party is at fault, explain the Michigan Mini-Tort recovery process ($3,000 max).</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - Minnesota",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "23",
+      "NoteContent": "<p><strong>HIGH PRIORITY:</strong> No-fault state. High PIP limits apply. For any injuries, immediately assign a MN PIP adjuster and provide the mandatory no-fault packet within 30 days.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - Mississippi",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "24",
+      "NoteContent": "<p><strong>MEDIUM PRIORITY:</strong> Pure comparative fault. <em>Even if our driver is 99% at fault,</em> the claimant can recover 1% of their damages. Thoroughly document all contributing factors.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - Missouri",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "25",
+      "NoteContent": "<p><strong>MEDIUM PRIORITY:</strong> Pure comparative fault state. Document the scene accurately. There are no restrictive caps on non-economic damages for auto accidents.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - Montana",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "26",
+      "NoteContent": "<p><strong>HIGH PRIORITY:</strong> Modified comparative fault (51%). Inform the insured of their right to use the repair facility of their choice. <strong>Anti-steering laws are strictly enforced.</strong></p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - Nebraska",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "27",
+      "NoteContent": "<p><strong>MEDIUM PRIORITY:</strong> Modified comparative fault (50%). Gather the police report immediately to confirm traffic control devices and right-of-way for intersection claims.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - Nevada",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "28",
+      "NoteContent": "<p><strong>HIGH PRIORITY:</strong> Modified comparative fault (51%). Note any involvement of rideshare (Uber/Lyft) or delivery services, as Las Vegas has high TNC frequency. Check the TNC endorsement.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - New Hampshire",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "29",
+      "NoteContent": "<p><strong>HIGH PRIORITY:</strong> Auto insurance is not strictly mandatory, leading to high UM/UIM exposure. <em><strong>Verify UM/UIM limits immediately</strong></em> if the at-fault party is uninsured.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - New Jersey",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "30",
+      "NoteContent": "<p><strong>CRITICAL:</strong> Complex No-Fault state. Verify if the policy has the <strong>Limitation on Lawsuit (Verbal Threshold)</strong> or <strong>No Threshold</strong>. This dictates their ability to sue for pain and suffering.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - New Mexico",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "31",
+      "NoteContent": "<p><strong>MEDIUM PRIORITY:</strong> Pure comparative fault. Ensure all involved vehicles and witnesses are contacted to establish exact negligence percentages.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - New York",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "32",
+      "NoteContent": "<p><strong>CRITICAL:</strong> <strong>Regulation 64 compliance is mandatory.</strong> Strict timelines for inspections and settlement offers. New York No-Fault (PIP) must be opened for any vehicle occupant injuries. Provide the mandatory NY photo inspection disclosures.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - North Carolina",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "33",
+      "NoteContent": "<p><strong>CRITICAL:</strong> Pure contributory negligence state. The 1% rule applies. <em><strong>Thoroughly investigate claimant negligence</strong></em> before accepting liability for property damage or bodily injury.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - North Dakota",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "34",
+      "NoteContent": "<p><strong>HIGH PRIORITY:</strong> No-fault PIP state. Threshold for tort claims is $2,500 in medical expenses or severe injury. Route injury claims directly to ND PIP adjusters.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - Ohio",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "35",
+      "NoteContent": "<p><strong>MEDIUM PRIORITY:</strong> Modified comparative fault (51%). Ensure swift appraisal assignment. Note whether the vehicle is garaged in-state or out-of-state for rental tax purposes.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - Oklahoma",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "36",
+      "NoteContent": "<p><strong>MEDIUM PRIORITY:</strong> Modified comparative fault (51%). Verify tribal land jurisdiction if the accident occurred on a reservation, as this can affect liability and tort laws.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - Oregon",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "37",
+      "NoteContent": "<p><strong>HIGH PRIORITY:</strong> PIP is mandatory for all policies. Determine if the claimant is a bicyclist or pedestrian, as OR PIP extends to non-occupants struck by the insured vehicle.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - Pennsylvania",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "38",
+      "NoteContent": "<p><strong>CRITICAL:</strong> Choice No-Fault state. Verify if the insured selected <strong>Full Tort or Limited Tort</strong>. Limited Tort restricts the ability to sue for non-monetary damages unless injuries are \"serious.\"</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - Rhode Island",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "39",
+      "NoteContent": "<p><strong>MEDIUM PRIORITY:</strong> Pure comparative fault. Ensure the insured is aware they can select their own repair shop. Rhode Island heavily regulates the use of aftermarket parts on newer vehicles.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - South Carolina",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "40",
+      "NoteContent": "<p><strong>MEDIUM PRIORITY:</strong> Modified comparative fault (51%). Punitive damages are common in DUI or reckless driving cases; escalate if a police report notes egregious traffic violations.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - South Dakota",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "41",
+      "NoteContent": "<p><strong>HIGH PRIORITY:</strong> Follows a unique \"Slight/Gross\" negligence rule rather than a strict percentage. If the plaintiff's negligence is more than slight, they are barred from recovery.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - Tennessee",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "42",
+      "NoteContent": "<p><strong>MEDIUM PRIORITY:</strong> Modified comparative fault (50%). Verify if the accident involved uninsured motorists, as TN has specific requirements for physical contact in hit-and-run UM claims.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - Texas",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "43",
+      "NoteContent": "<p><strong>CRITICAL:</strong> Modified comparative fault (51%). <em><strong>Verify Named Driver Exclusions</strong></em> carefully. If the driver is excluded on the Texas policy, there is absolutely no coverage. Texas also requires swift resolution under Chapter 542 of the Insurance Code.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - Utah",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "44",
+      "NoteContent": "<p><strong>HIGH PRIORITY:</strong> No-fault PIP state. A $3,000 medical expense threshold must be met to step outside the no-fault system. Route all passenger injuries to UT PIP.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - Vermont",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "45",
+      "NoteContent": "<p><strong>MEDIUM PRIORITY:</strong> Modified comparative fault (51%). Ensure rapid response for winter weather claims. Review towing limits closely as rural tows can easily exceed standard limits.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - Virginia",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "46",
+      "NoteContent": "<p><strong>CRITICAL:</strong> Pure contributory negligence state. Any degree of fault on the claimant bars recovery. <strong>Secure recorded statements immediately</strong> to lock in the facts of the loss.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - Washington",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "47",
+      "NoteContent": "<p><strong>HIGH PRIORITY:</strong> Pure comparative fault. Washington handles diminished value actively. Assess both vehicles for DV potential if the repairs are significant but the vehicle is not a total loss.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - West Virginia",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "48",
+      "NoteContent": "<p><strong>MEDIUM PRIORITY:</strong> Modified comparative fault (50%). Note whether the accident involved logging trucks, coal trucks, or mountainous terrain which might require specialized field adjusters.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - Wisconsin",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "49",
+      "NoteContent": "<p><strong>MEDIUM PRIORITY:</strong> Modified comparative fault (51%). Check for specific animal collision details, as deer hits are processed under comprehensive coverage. Ensure swift appraisal.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Personal Auto - Wyoming",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "0"
+      ],
+      "ApplicableState": "50",
+      "NoteContent": "<p><strong>MEDIUM PRIORITY:</strong> Modified comparative fault (50%). Check jurisdiction for accidents occurring in Yellowstone or Grand Teton National Parks, as federal tort claims act rules may interplay if government vehicles are involved.</p>"
+    }
+  }
+]

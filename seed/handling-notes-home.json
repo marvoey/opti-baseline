@@ -1,0 +1,614 @@
+[
+  {
+    "name": "Handling Note - Homeowners - Alabama",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "0",
+      "NoteContent": "<p><strong>HIGH PRIORITY:</strong> Verify if a <strong>Named Storm Deductible</strong> applies for coastal properties. For tornado claims, <em>dispatch independent adjusters immediately</em> to assess structural integrity.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - Alaska",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "1",
+      "NoteContent": "<p><strong>MEDIUM PRIORITY:</strong> Check for \"Weight of Ice and Snow\" endorsements. If the claim involves frozen pipes, <em><strong>verify that the insured maintained heat</strong></em> in the dwelling.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - Arizona",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "2",
+      "NoteContent": "<p><strong>MEDIUM PRIORITY:</strong> Wildfire and haboob (dust storm) claims are common. Check for smoke damage exclusions and note any <strong>roof tile damage</strong> from high winds.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - Arkansas",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "3",
+      "NoteContent": "<p><strong>HIGH PRIORITY:</strong> High frequency of tornadic activity and severe hail. <em>Confirm roof age and material</em> to determine if settlement is Actual Cash Value (ACV) or Replacement Cost (RCV).</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - California",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "4",
+      "NoteContent": "<p><strong>CRITICAL:</strong> Wildfire proximity requires immediate review of <strong>smoke/ash damage</strong> vs. direct fire. Note that standard policies exclude earth movement; refer earthquake claims to the CEA if applicable.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - Colorado",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "5",
+      "NoteContent": "<p><strong>CRITICAL:</strong> Catastrophic hail is highly probable. Verify roof endorsements. Also, check for <em><strong>ordinance or law coverage</strong></em> if roof replacement requires upgraded local code compliance.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - Connecticut",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "6",
+      "NoteContent": "<p><strong>MEDIUM PRIORITY:</strong> Coastal storm deductibles may apply. Be aware of <strong>crumbling foundation exclusions</strong> which are strictly denied under standard AOP coverage.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - Delaware",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "7",
+      "NoteContent": "<p><strong>MEDIUM PRIORITY:</strong> Review policy for strict coastal windstorm deductibles. <em>Document exact date and time of loss</em> to cross-reference with named storm tracking.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - District of Columbia",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "8",
+      "NoteContent": "<p><strong>HIGH PRIORITY:</strong> Historic home restrictions often apply. Review <em><strong>Ordinance or Law (Coverage C)</strong></em> limits closely, as municipal building codes can drastically inflate repair costs.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - Florida",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "9",
+      "NoteContent": "<p><strong>CRITICAL:</strong> Calendar-year <strong>Hurricane Deductibles</strong> apply. Hyper-vigilance required for <em>Assignment of Benefits (AOB)</em> abuse and managed repair program mandates. Assess wind vs. flood carefully.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - Georgia",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "10",
+      "NoteContent": "<p><strong>HIGH PRIORITY:</strong> Severe wind and hail. Georgia requires insurers to consider <strong>matching of siding and roofing</strong> if a reasonably uniform appearance cannot be achieved.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - Hawaii",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "11",
+      "NoteContent": "<p><strong>CRITICAL:</strong> Hurricane and wind deductibles are common. Note that standard HO policies <em><strong>exclude volcanic eruption and lava flow</strong></em> damage unless specifically endorsed.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - Idaho",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "12",
+      "NoteContent": "<p><strong>MEDIUM PRIORITY:</strong> Wildfire and winter freeze claims predominate. Verify outbuilding and supplementary structure limits for rural properties.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - Illinois",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "13",
+      "NoteContent": "<p><strong>HIGH PRIORITY:</strong> High risk of basement flooding. Verify if the policy carries the <strong>Water Backup and Sump Overflow endorsement</strong> before authorizing emergency water mitigation.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - Indiana",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "14",
+      "NoteContent": "<p><strong>MEDIUM PRIORITY:</strong> Wind and hail claims require adherence to Indiana's reasonable matching regulations. <em>Confirm exact siding and shingle materials</em> on FNOL.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - Iowa",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "15",
+      "NoteContent": "<p><strong>HIGH PRIORITY:</strong> Severe wind/derecho claims. Verify if the property has agricultural exposures, as farming operations require separate commercial or farm/ranch liability coverage.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - Kansas",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "16",
+      "NoteContent": "<p><strong>CRITICAL:</strong> High tornado and hail frequency. Review the declarations page for <strong>Actual Cash Value (ACV) roof endorsements</strong> which heavily depreciate older roofs.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - Kentucky",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "17",
+      "NoteContent": "<p><strong>HIGH PRIORITY:</strong> Check for <em>Mine Subsidence exclusions</em>. If the damage involves sinkholes or earth movement, standard homeowners coverage typically will not apply.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - Louisiana",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "18",
+      "NoteContent": "<p><strong>CRITICAL:</strong> Named Storm and Hurricane deductibles strictly apply. For coastal or low-lying areas, distinguish meticulously between <strong>wind-driven rain</strong> (covered) and <strong>rising flood water</strong> (excluded).</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - Maine",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "19",
+      "NoteContent": "<p><strong>MEDIUM PRIORITY:</strong> Ice dam and frozen pipe claims are frequent. <em><strong>Investigate vacancy status</strong></em>\u2014if the home was unoccupied, verify that the water supply was shut off and drained.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - Maryland",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "20",
+      "NoteContent": "<p><strong>MEDIUM PRIORITY:</strong> Coastal properties may trigger a percentage windstorm deductible. For inland homes, verify <em>Sump Pump Failure</em> limits during heavy spring rains.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - Massachusetts",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "21",
+      "NoteContent": "<p><strong>HIGH PRIORITY:</strong> Winter storm \"Weight of Ice and Snow\" and ice dam claims are prevalent. Assess interior water damage and dispatch mitigation <strong>before mold growth begins</strong>.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - Michigan",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "22",
+      "NoteContent": "<p><strong>MEDIUM PRIORITY:</strong> Review Water Backup limits closely. Note any <em><strong>mold remediation sub-limits</strong></em> (e.g., $10,000 cap) on policies with prolonged water exposure.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - Minnesota",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "23",
+      "NoteContent": "<p><strong>HIGH PRIORITY:</strong> Severe winter weather. Minnesota has strict statutes regarding the <strong>matching of roofing and siding</strong>; complete replacement may be required if a match cannot be found.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - Mississippi",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "24",
+      "NoteContent": "<p><strong>CRITICAL:</strong> Named storm deductibles apply. During hurricane events, the <em>anti-concurrent causation clause</em> may be invoked if both wind and excluded flood damage occur simultaneously.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - Missouri",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "25",
+      "NoteContent": "<p><strong>HIGH PRIORITY:</strong> Tornado and hail damage. Verify Coverage B (Other Structures) limits if the property has detached garages, sheds, or significant fencing.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - Montana",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "26",
+      "NoteContent": "<p><strong>MEDIUM PRIORITY:</strong> Wildfire and freeze claims. Determine fire department proximity; rural properties may have surcharges or coverage limitations if fire protection class is high.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - Nebraska",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "27",
+      "NoteContent": "<p><strong>HIGH PRIORITY:</strong> Severe windstorm and hail. <em><strong>Verify the roof surfacing payment schedule</strong></em>. Many policies use a tiered depreciation schedule based on the exact age of the roof.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - Nevada",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "28",
+      "NoteContent": "<p><strong>MEDIUM PRIORITY:</strong> Wildfires and sudden/accidental water discharge. Because of the dry climate, investigate any water leak for long-term seepage vs. sudden burst, as long-term is excluded.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - New Hampshire",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "29",
+      "NoteContent": "<p><strong>MEDIUM PRIORITY:</strong> Winter freeze and tree fall claims. If a tree falls on the property, <strong>verify if it hit a covered structure</strong>; debris removal for trees that hit nothing is strictly limited.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - New Jersey",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "30",
+      "NoteContent": "<p><strong>CRITICAL:</strong> Coastal deductibles and strict regulations on emergency water mitigation. Mitigation contractors <em>must follow approved pricing guidelines</em>; review mitigation estimates aggressively.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - New Mexico",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "31",
+      "NoteContent": "<p><strong>MEDIUM PRIORITY:</strong> Wildfires and wind. Verify smoke damage to interior textiles and electronics. Check for <strong>Evacuation/Loss of Use</strong> coverage if civil authorities mandate evacuation.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - New York",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "32",
+      "NoteContent": "<p><strong>CRITICAL:</strong> Coastal windstorm deductibles (especially Long Island). Strict liability environments for multi-family units or brownstones. <em><strong>Determine subrogation potential</strong></em> if a neighbor's negligence caused the loss.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - North Carolina",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "33",
+      "NoteContent": "<p><strong>CRITICAL:</strong> Coastal properties may have wind and hail completely excluded if covered by the NCIUA (Coastal Property Insurance Pool). <em>Verify the perils insured against</em> immediately.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - North Dakota",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "34",
+      "NoteContent": "<p><strong>MEDIUM PRIORITY:</strong> Weight of ice and snow, and freezing pipes. Ascertain whether the insured took reasonable care to maintain heat during deep freeze events.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - Ohio",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "35",
+      "NoteContent": "<p><strong>HIGH PRIORITY:</strong> Wind and hail claims. The Ohio Administrative Code dictates strict rules for <strong>matching roofing and siding</strong>. Assess the availability of obsolete materials early.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - Oklahoma",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "36",
+      "NoteContent": "<p><strong>CRITICAL:</strong> Extremely high tornado and hail frequency. Most roofs are endorsed for <em><strong>Actual Cash Value (ACV)</strong></em>. Explain depreciation and out-of-pocket expectations to the insured on the first call.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - Oregon",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "37",
+      "NoteContent": "<p><strong>HIGH PRIORITY:</strong> Wildfires and heavy rain. Review roof leaks to ensure they are the result of a covered peril (e.g., wind creating an opening) rather than simply wear and tear/maintenance issues.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - Pennsylvania",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "38",
+      "NoteContent": "<p><strong>HIGH PRIORITY:</strong> Winter storms and water backup. In older urban areas, verify <em>Ordinance or Law coverage</em>, as repairing structural damage often triggers mandatory code upgrades.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - Rhode Island",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "39",
+      "NoteContent": "<p><strong>MEDIUM PRIORITY:</strong> Nor'easters and coastal deductibles. For roof claims, verify if it was a wind event or weight of snow/ice, as deductibles may differ.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - South Carolina",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "40",
+      "NoteContent": "<p><strong>CRITICAL:</strong> Coastal properties are subject to named storm deductibles. For hurricanes, meticulously document damage to distinguish between <strong>wind (covered)</strong> and <strong>storm surge/flood (excluded)</strong>.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - South Dakota",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "41",
+      "NoteContent": "<p><strong>MEDIUM PRIORITY:</strong> Hail and freeze claims. Confirm the extent of cosmetic vs. functional damage, as some policies endorse out <em>cosmetic-only hail damage</em> to metal roofs.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - Tennessee",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "42",
+      "NoteContent": "<p><strong>HIGH PRIORITY:</strong> Tornadoes and severe storms. <strong>Verify Additional Living Expense (ALE) limits</strong> immediately if a major storm renders the dwelling uninhabitable.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - Texas",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "43",
+      "NoteContent": "<p><strong>CRITICAL:</strong> Wind/Hail deductibles (1%, 2%, or 5%) frequently apply. Texas Department of Insurance (TDI) Chapter 542 imposes <em><strong>strict statutory deadlines</strong></em> for acknowledging, investigating, and paying claims.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - Utah",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "44",
+      "NoteContent": "<p><strong>MEDIUM PRIORITY:</strong> Wildfires and weight of ice/snow. Verify if the dwelling was a primary residence or a secondary/seasonal home, which may impact freezing exclusions.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - Vermont",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "45",
+      "NoteContent": "<p><strong>MEDIUM PRIORITY:</strong> Ice dams and freeze claims. Check for resulting interior water damage and <strong>deploy water mitigation specialists</strong> promptly to preserve hardwood floors and drywall.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - Virginia",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "46",
+      "NoteContent": "<p><strong>HIGH PRIORITY:</strong> Coastal storms trigger hurricane/wind deductibles in eastern counties. For inland properties, tree falls are common; <em>verify if the tree struck a covered structure</em>.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - Washington",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "47",
+      "NoteContent": "<p><strong>HIGH PRIORITY:</strong> Wildfires and winter storms. Landslides and mudslides are expressly excluded under Earth Movement clauses; verify the exact proximate cause of the loss.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - West Virginia",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "48",
+      "NoteContent": "<p><strong>MEDIUM PRIORITY:</strong> Wind and severe winter weather. Like KY, check for <strong>Mine Subsidence endorsements</strong> if the dwelling exhibits sudden structural cracking or sinking.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - Wisconsin",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "49",
+      "NoteContent": "<p><strong>HIGH PRIORITY:</strong> Ice dams and basement water backup. Review the <em>Water Backup / Sump Discharge endorsement</em> limits, which often cap out at $5,000 or $10,000.</p>"
+    }
+  },
+  {
+    "name": "Handling Note - Homeowners - Wyoming",
+    "contentType": "prgv_HandlingNoteBlock",
+    "language": "en",
+    "properties": {
+      "LineOfBusiness": [
+        "2"
+      ],
+      "ApplicableState": "50",
+      "NoteContent": "<p><strong>MEDIUM PRIORITY:</strong> Wildfires and severe winter weather. Assess remote properties for accessibility, and <strong>confirm outbuilding (Coverage B) limits</strong> for barns or large detached structures.</p>"
+    }
+  }
+]
