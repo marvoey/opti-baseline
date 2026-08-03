@@ -9,7 +9,7 @@
     "dev": "node scripts/run-next.mjs dev",
     "predev": "npm run gen:locales",
     "build": "next build",
-    "prebuild": "npm run gen:locales",
+    "prebuild": "tsc --noEmit && npm run gen:locales",
     "start": "node scripts/run-next.mjs start",
     "lint": "eslint",
     "gen:locales": "node scripts/generate-locales.mjs",
