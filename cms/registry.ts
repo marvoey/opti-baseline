@@ -14,7 +14,7 @@ import Page, { PageContentType } from './Page';
 import Hero, { HeroContentType } from './Hero';
 import RichText, { RichTextContentType } from './RichText';
 import ArticleCard, { ArticleCardContentType } from './ArticleCardBlock';
-import MainBody, { MainBodyContentType } from './MainBodyBlock';
+import MainBody, { MainBodyContentType, MainBodyDisplayTemplate, MainBodySimpleDisplayTemplate } from './MainBodyBlock';
 import CardContainer, { CardContainerContentType } from './CardContainerBlock';
 
 /**
@@ -66,7 +66,10 @@ initContentTypeRegistry([
   BlankSectionContentType,
 ]);
 
-initDisplayTemplateRegistry([]);
+initDisplayTemplateRegistry([
+  MainBodyDisplayTemplate,
+  MainBodySimpleDisplayTemplate,
+]);
 
 initReactComponentRegistry({
   resolver: {
