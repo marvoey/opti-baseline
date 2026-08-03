@@ -78,7 +78,6 @@ export const HeroContentType = contentType({
       type: 'link',
       displayName: 'Primary CTA',
       description: 'Core action button.',
-      isRequired: true,
       isLocalized: true,
       sortOrder: 80,
     },

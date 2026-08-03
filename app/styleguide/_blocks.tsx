@@ -2,23 +2,6 @@ import type { ReactNode } from 'react';
 
 import Hero, { HeroContentType } from '@/cms/Hero';
 import RichText, { RichTextContentType } from '@/cms/RichText';
-import CibcHero, { CibcHeroContentType, CibcHeroDisplayTemplate } from '@/cms/CibcHero';
-import CibcAlertFeed, {
-  CibcAlertContentType,
-  CibcAlertFeedContentType,
-} from '@/cms/CibcAlertFeed';
-import CibcAssetGrid, {
-  CibcAssetCardContentType,
-  CibcAssetGridContentType,
-  CibcAssetGridDisplayTemplate,
-} from '@/cms/CibcAssetGrid';
-import CibcOnboardingJourney, {
-  CibcMilestoneContentType,
-  CibcOnboardingJourneyContentType,
-} from '@/cms/CibcOnboardingJourney';
-import CibcRegulatoryDirective, {
-  CibcRegulatoryDirectiveContentType,
-} from '@/cms/CibcRegulatoryDirective';
 
 /**
  * Single source of truth for the /styleguide route. Both the index page and the
@@ -149,89 +132,6 @@ const richTextContent = {
   },
 };
 
-const cibcHeroContent = {
-  Eyebrow: 'Asset Intelligence',
-  Headline: 'See the whole picture of your private markets',
-  Subtext:
-    'Surface insight across funds, mandates and counterparties — with AI extraction built for the back office.',
-  PrimaryCta: { text: 'Explore the platform', title: null, target: null, url: { default: '#' } },
-  SecondaryCta: { text: 'Read the brief', title: null, target: null, url: { default: '#' } },
-};
-
-const cibcAlertFeedContent = {
-  Heading: 'Operational Alerts',
-  FeedLabel: 'Live Feed',
-  Alerts: [
-    {
-      Severity: 'URGENT',
-      Title: 'Settlement break detected — Fund VII',
-      Summary: 'A T+1 settlement mismatch was flagged on a private credit position. Review required.',
-      Timestamp: '2 mins ago',
-    },
-    {
-      Severity: 'MARKET',
-      Title: 'FX exposure threshold approached',
-      Summary: 'CAD/USD exposure is within 3% of the mandate ceiling for the institutional book.',
-      Timestamp: '18 mins ago',
-    },
-    {
-      Severity: 'HOLIDAY',
-      Title: 'Reduced settlement window Friday',
-      Summary: 'A market holiday shortens the settlement window; expect delayed confirmations.',
-      Timestamp: '1 hour ago',
-    },
-  ],
-};
-
-const cibcAssetGridContent = {
-  Heading: 'Asset Intelligence (AI-Tagged)',
-  AllowUpload: true,
-  Assets: [
-    {
-      AssetName: 'Fund_VII_LPA_Executed.pdf',
-      AssetClass: 'Private Equity',
-      Metadata: ['Vintage 2024', 'Buyout', 'Tier-1 LP'],
-      ExtractedBy: 'Opal',
-      FileLink: { text: null, title: null, target: null, url: { default: '#' } },
-    },
-    {
-      AssetName: 'Tower_District_Appraisal.xlsx',
-      AssetClass: 'Real Estate',
-      Metadata: ['Core+', 'Toronto', 'Q2 valuation'],
-      ExtractedBy: 'Opal',
-      FileLink: { text: null, title: null, target: null, url: { default: '#' } },
-    },
-    {
-      AssetName: 'Infra_Debt_Term_Sheet.pdf',
-      AssetClass: 'Private Credit',
-      Metadata: ['Senior', 'Floating', 'Investment grade'],
-      ExtractedBy: 'Opal',
-      FileLink: { text: null, title: null, target: null, url: { default: '#' } },
-    },
-  ],
-};
-
-const cibcOnboardingContent = {
-  Title: 'Institutional Onboarding',
-  Segment: 'Pension & Sovereign Wealth',
-  Milestones: [
-    { Step: '01', Title: 'KYC & Entity', Status: 'COMPLETE' },
-    { Step: '02', Title: 'Mandate Setup', Status: 'COMPLETE' },
-    { Step: '03', Title: 'Funding', Status: 'IN PROGRESS' },
-    { Step: '04', Title: 'Go Live', Status: 'PENDING' },
-  ],
-};
-
-const cibcRegulatoryContent = {
-  Heading: 'Regulatory Directive — OSFI B-20 Update',
-  Body: {
-    html: '<p>New stress-testing guidance takes effect next quarter. Affected mandates must refile risk attestations through the compliance desk before the deadline.</p>',
-  },
-  Severity: 'critical',
-  PrimaryCta: { text: 'Download Guidance PDF', title: null, target: null, url: { default: '#' } },
-  SecondaryCta: { text: 'Contact Compliance Desk', title: null, target: null, url: { default: '#' } },
-};
-
 // ---------------------------------------------------------------------------
 
 export const SHOWCASE: ShowcaseBlock[] = [
@@ -256,84 +156,6 @@ export const SHOWCASE: ShowcaseBlock[] = [
     sourceFile: 'cms/RichText.tsx',
     variants: [{ content: richTextContent }],
     render: (v) => <RichText content={v.content as ContentOf<typeof RichText>} />,
-  },
-  {
-    slug: 'cibc-hero',
-    name: 'CIBC: Hero',
-    summary:
-      'Branded hero with eyebrow, serif headline, subtext and up to two CTAs. Theme is a display-template choice.',
-    contentType: ct(CibcHeroContentType),
-    sourceFile: 'cms/CibcHero.tsx',
-    displayTemplates: [dt(CibcHeroDisplayTemplate)],
-    variants: [
-      { label: 'Theme: Teal (dark)', content: cibcHeroContent, displaySettings: { theme: 'dark' } },
-      { label: 'Theme: Stone (light)', content: cibcHeroContent, displaySettings: { theme: 'light' } },
-    ],
-    render: (v) => (
-      <CibcHero
-        content={v.content as ContentOf<typeof CibcHero>}
-        displaySettings={v.displaySettings as DisplayOf<typeof CibcHero>}
-      />
-    ),
-  },
-  {
-    slug: 'cibc-alert-feed',
-    name: 'CIBC: Operational Alert Feed',
-    summary:
-      'A heading plus an ordered list of operational alert rows (severity, title, summary, timestamp).',
-    contentType: ct(CibcAlertFeedContentType),
-    sourceFile: 'cms/CibcAlertFeed.tsx',
-    itemTypes: [ct(CibcAlertContentType)],
-    variants: [{ content: cibcAlertFeedContent }],
-    render: (v) => <CibcAlertFeed content={v.content as ContentOf<typeof CibcAlertFeed>} />,
-  },
-  {
-    slug: 'cibc-asset-grid',
-    name: 'CIBC: Asset Intelligence Grid',
-    summary:
-      'A heading plus a grid of AI-tagged asset cards. Column count is a display-template choice.',
-    contentType: ct(CibcAssetGridContentType),
-    sourceFile: 'cms/CibcAssetGrid.tsx',
-    itemTypes: [ct(CibcAssetCardContentType)],
-    displayTemplates: [dt(CibcAssetGridDisplayTemplate)],
-    variants: [
-      { label: 'Columns: Two', content: cibcAssetGridContent, displaySettings: { columns: 'two' } },
-      {
-        label: 'Columns: Three',
-        content: cibcAssetGridContent,
-        displaySettings: { columns: 'three' },
-      },
-    ],
-    render: (v) => (
-      <CibcAssetGrid
-        content={v.content as ContentOf<typeof CibcAssetGrid>}
-        displaySettings={v.displaySettings as DisplayOf<typeof CibcAssetGrid>}
-      />
-    ),
-  },
-  {
-    slug: 'cibc-onboarding-journey',
-    name: 'CIBC: Onboarding Journey',
-    summary:
-      'An onboarding dashboard: title, segment and an ordered set of milestone cards with status-driven progress bars.',
-    contentType: ct(CibcOnboardingJourneyContentType),
-    sourceFile: 'cms/CibcOnboardingJourney.tsx',
-    itemTypes: [ct(CibcMilestoneContentType)],
-    variants: [{ content: cibcOnboardingContent }],
-    render: (v) => (
-      <CibcOnboardingJourney content={v.content as ContentOf<typeof CibcOnboardingJourney>} />
-    ),
-  },
-  {
-    slug: 'cibc-regulatory-directive',
-    name: 'CIBC: Regulatory Directive',
-    summary: 'A left-accent callout with heading, rich-text body and up to two CTAs.',
-    contentType: ct(CibcRegulatoryDirectiveContentType),
-    sourceFile: 'cms/CibcRegulatoryDirective.tsx',
-    variants: [{ content: cibcRegulatoryContent }],
-    render: (v) => (
-      <CibcRegulatoryDirective content={v.content as ContentOf<typeof CibcRegulatoryDirective>} />
-    ),
   },
 ];
 

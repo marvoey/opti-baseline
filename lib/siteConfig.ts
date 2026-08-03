@@ -9,65 +9,114 @@
 
 export type NavLink = { label: string; href: string };
 export type FooterColumn = { heading: string; links: NavLink[] };
+export type SocialLink = { platform: string; href: string };
 
 export const siteConfig = {
   /** Used for the document <title> fallback and the logo alt text. */
-  name: 'CIBC Mellon',
+  name: 'Zscaler',
   /** Default browser-tab title (per-page titles override via CMS MetaTitle). */
-  title: 'CIBC Mellon | Institutional Asset Servicing',
+  title: 'Zscaler | Zero Trust Security',
   /** Default meta description. */
   description:
-    "CIBC Mellon — the operational infrastructure for Canada's institutional investment industry.",
+    'Zscaler — the world\'s largest security cloud, delivering zero trust exchange for every user, workload, and location.',
 
   /** Header logo (place the asset in /public). */
   logoSrc: '/logo.svg',
-  logoAlt: 'CIBC Mellon',
+  logoAlt: 'Zscaler',
 
   /** Top utility bar. */
   topNavLinks: [
-    { label: 'Client Access', href: '#' },
-    { label: 'Insights', href: '#' },
-    { label: 'Contact', href: '#' },
+    { label: 'ThreatLabz', href: '#' },
+    { label: 'Customer Success Stories', href: '#' },
+    { label: 'Careers', href: '#' },
+    { label: 'Partners', href: '#' },
+    { label: 'Support', href: '#' },
   ] satisfies NavLink[],
-  phone: '1-800-387-0825',
+  phone: '1-408-533-0288',
 
   /** Primary header navigation. */
   mainNavLinks: [
+    { label: 'Platform', href: '#' },
+    { label: 'Products', href: '#' },
     { label: 'Solutions', href: '#' },
-    { label: 'Client Access', href: '#' },
-    { label: 'Straight Talk', href: '/services' },
-    { label: 'Market Bulletins', href: '/locations' },
+    { label: 'Resources', href: '#' },
+    { label: 'Company', href: '#' },
   ] satisfies NavLink[],
-  /** Header call-to-action button. */
-  primaryCta: { label: 'Get Started', href: '#' } satisfies NavLink,
-  /** Account / login button label. */
+  /** Primary header call-to-action (filled button). */
+  primaryCta: { label: 'Request a demo', href: '#' } satisfies NavLink,
+  /** Secondary header call-to-action (outlined button). */
+  secondaryCta: { label: 'Take a product tour', href: '#' } satisfies NavLink,
+  /** Account / login button label (utility bar). */
   accountLabel: 'Sign In',
 
   /** Footer. */
   footerTagline:
-    'The operational infrastructure for Canada’s institutional investment industry — asset servicing, settlement and analytics at scale.',
+    'The world\'s largest security cloud — protecting thousands of enterprises from cyberattacks and data loss with zero trust.',
   footerColumns: [
     {
-      heading: 'Solutions',
+      heading: 'Platform',
       links: [
-        { label: 'Asset Servicing', href: '#' },
-        { label: 'Settlement', href: '#' },
-        { label: 'Analytics', href: '#' },
+        { label: 'Zero Trust Exchange', href: '#' },
+        { label: 'AI Security', href: '#' },
+        { label: 'Data Security', href: '#' },
+        { label: 'SecOps', href: '#' },
+        { label: 'Industries', href: '#' },
+      ],
+    },
+    {
+      heading: 'Company',
+      links: [
+        { label: 'About', href: '#' },
+        { label: 'Leadership', href: '#' },
+        { label: 'Careers', href: '#' },
+        { label: 'Investors', href: '#' },
+        { label: 'Press', href: '#' },
+      ],
+    },
+    {
+      heading: 'Popular Links',
+      links: [
+        { label: 'Community', href: '#' },
+        { label: 'Analysts', href: '#' },
+        { label: 'Events', href: '#' },
+        { label: 'ThreatLabz', href: '#' },
+        { label: 'Executive App', href: '#' },
       ],
     },
     {
       heading: 'Resources',
       links: [
-        { label: 'Straight Talk', href: '#' },
-        { label: 'Market Bulletins', href: '#' },
-        { label: 'Careers', href: '#' },
+        { label: 'Library', href: '#' },
+        { label: 'Blog', href: '#' },
+        { label: 'Webinars', href: '#' },
+        { label: 'Zpedia', href: '#' },
+        { label: 'Academy', href: '#' },
+      ],
+    },
+    {
+      heading: 'Support',
+      links: [
+        { label: 'Help Portal', href: '#' },
+        { label: 'Advisories', href: '#' },
+        { label: 'Vulnerability Disclosure', href: '#' },
+        { label: 'Compliance', href: '#' },
       ],
     },
   ] satisfies FooterColumn[],
-  footerLegal: `© ${'2026'} CIBC Mellon. A global leader in asset servicing infrastructure.`,
+  footerSocialLinks: [
+    { platform: 'Facebook', href: '#' },
+    { platform: 'LinkedIn', href: '#' },
+    { platform: 'X', href: '#' },
+    { platform: 'YouTube', href: '#' },
+    { platform: 'Instagram', href: '#' },
+  ] satisfies SocialLink[],
+  footerLegal: `© ${'2026'} Zscaler, Inc. All rights reserved. Zscaler™ and other trademarks are registered trademarks of Zscaler, Inc.`,
   footerLegalLinks: [
+    { label: 'Sitemap', href: '#' },
     { label: 'Privacy', href: '#' },
-    { label: 'Terms', href: '#' },
+    { label: 'Legal', href: '#' },
+    { label: 'Security', href: '#' },
+    { label: 'Cookie Preferences', href: '#' },
   ] satisfies NavLink[],
 } as const;
 

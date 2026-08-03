@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Optimizely CMS Content Types Definition",
+  "description": "Schema definition for generating Optimizely CMS models (C# or TypeScript SDK).",
+  "blockTypes": [
+    {
+      "name": "HeroBlock",
+      "displayName": "Hero Block",
+      "description": "Handles the top banner, headline, and author metadata.",
+      "properties": [
+        {
+          "name": "backgroundImage",
+          "type": "ImageReference",
+          "displayName": "Background Image"
+        },
+        {
+          "name": "categoryTag",
+          "type": "String",
+          "displayName": "Category Tag"
+        },
+        {
+          "name": "headline",
+          "type": "String",
+          "displayName": "Headline"
+        },
+        {
+          "name": "authorImage",
+          "type": "ImageReference",
+          "displayName": "Author Image"
+        },
+        {
+          "name": "authorName",
+          "type": "String",
+          "displayName": "Author Name"
+        },
+        {
+          "name": "publishDate",
+          "type": "Date",
+          "displayName": "Publish Date"
+        }
+      ]
+    },
+    {
+      "name": "MainBodyBlock",
+      "displayName": "Main Body Block",
+      "description": "Holds the core editorial rich text content.",
+      "properties": [
+        {
+          "name": "articleContent",
+          "type": "XhtmlString",
+          "displayName": "Article Content"
+        }
+      ]
+    },
+    {
+      "name": "CardContainerBlock",
+      "displayName": "Card Container Block",
+      "description": "Acts as a wrapper/layout element for related article cards.",
+      "properties": [
+        {
+          "name": "sectionHeading",
+          "type": "String",
+          "displayName": "Section Heading"
+        },
+        {
+          "name": "cards",
+          "type": "ContentArea",
+          "displayName": "Cards",
+          "allowedTypes": ["ArticleCardBlock"],
+          "description": "Restricted content area that only accepts Article Card Blocks."
+        }
+      ]
+    },
+    {
+      "name": "ArticleCardBlock",
+      "displayName": "Article Card Block",
+      "description": "Represents a single related article thumbnail and link.",
+      "properties": [
+        {
+          "name": "thumbnailImage",
+          "type": "ImageReference",
+          "displayName": "Thumbnail Image"
+        },
+        {
+          "name": "cardTitle",
+          "type": "String",
+          "displayName": "Card Title"
+        },
+        {
+          "name": "postLink",
+          "type": "Url",
+          "displayName": "Post Link"
+        }
+      ]
+    }
+  ]
+}

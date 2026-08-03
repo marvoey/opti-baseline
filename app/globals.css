@@ -24,34 +24,33 @@
    * │  these ~11 hex values. Set blue-950 = your darkest brand colour and    │
    * │  blue-800 = your primary; the rest are tints/shades between.           │
    * └──────────────────────────────────────────────────────────────────────┘
-   * CIBC Mellon teal ramp — primary teal #00485e, dark #003342.
+   * Zscaler navy/blue ramp — primary navy #003d8a, deep #040c1e.
    */
-  --color-blue-950: #002733; /* darkest — footer / hero background */
-  --color-blue-900: #003342; /* teal-dark — header bg */
-  --color-blue-800: #00485e; /* primary teal — links */
-  --color-blue-700: #00596f;
-  --color-blue-600: #006280; /* teal-mid */
-  --color-blue-500: #0f7d8c;
-  --color-blue-400: #1c919b; /* teal-light */
-  --color-blue-300: #4fb0ad;
-  --color-blue-200: #6fc8b9; /* mint */
-  --color-blue-100: #c9e6df;
-  --color-blue-50: #eef6f3; /* light wash */
+  --color-blue-950: #040c1e; /* darkest — footer / hero background */
+  --color-blue-900: #0a1533; /* dark navy */
+  --color-blue-800: #236bf5; /* Zscaler brand blue — primary CTA, links */
+  --color-blue-700: #1558d6; /* darker hover */
+  --color-blue-600: #3a7ff7;
+  --color-blue-500: #5592f9;
+  --color-blue-400: #7aadfb; /* light blue accent */
+  --color-blue-300: #a0c6fc;
+  --color-blue-200: #c5ddfe;
+  --color-blue-100: #e0eeff;
+  --color-blue-50:  #f0f6ff; /* light wash */
 
-  /* Named brand + gold accent tokens for direct use in custom components. */
-  --color-brand: #00485e;
-  --color-brand-dark: #003342;
-  --color-brand-accent: #a29060;
-  --color-gold: #a29060;
-  --color-gold-dark: #8e7228;
-  --color-gold-bright: #f4bd0c;
-  --color-stone: #f4f2ec;
+  /* Named brand + accent tokens for direct use in custom components. */
+  --color-brand: #236bf5;
+  --color-brand-dark: #0a1533;
+  --color-brand-accent: #5592f9;
+  --color-gold: #7aadfb;      /* repurposed: light blue accent */
+  --color-gold-dark: #5592f9;
+  --color-gold-bright: #a0c6fc;
+  --color-stone: #f4f6fb;
+  --color-pink: #e8157b;        /* Zscaler magenta accent — "Read post" links */
 
   /*
-   * Explicit CIBC Mellon palette — used by the ported cms/Cibc* block
-   * components (Hero, AlertFeed, AssetGrid, OnboardingJourney, Regulatory
-   * Directive). Mirrors the source brand system so those components render
-   * verbatim; the blue-* ramp above still drives the site chrome.
+   * Explicit CIBC Mellon palette — retained for CMS content blocks that
+   * reference these tokens directly; not used by site chrome.
    */
   --color-cibc-teal: #00485e;
   --color-cibc-teal-dark: #003342;
