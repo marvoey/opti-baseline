@@ -21,7 +21,7 @@ export const ArticleContainerContentType = contentType({
       minItems: 3,
       items: {
         type: 'contentReference',
-        contentType: 'BlankExperience',
+        allowedTypes: ['BlankExperience'],
       },
       sortOrder: 20,
     },
@@ -58,7 +58,7 @@ export default async function ArticleContainer({ content }: Props) {
         {articles.map((article, i) => {
           const href = article._metadata?.url?.default ?? '#';
           const name = article._metadata?.displayName ?? 'Article';
-          const imageSrc = article.ThumbnailImage ? src(article.ThumbnailImage) : undefined;
+          const imageSrc = article.ThumbnailImage ? src(article.ThumbnailImage as Parameters<typeof src>[0]) : undefined;
           return (
             <a
               key={article._metadata?.key ?? i}
