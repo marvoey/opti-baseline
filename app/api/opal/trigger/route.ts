@@ -10,8 +10,8 @@ export async function POST(request: NextRequest) {
   const HL  = '\x1b[1m\x1b[36m'; // bold cyan
   const RST = '\x1b[0m';
 
-  if (!webhookUrl || !webhookToken) {
-    console.error(`[${FILE}:9] OPAL_WEBHOOK_URL or OPAL_WEBHOOK_TOKEN env var is not set`);
+  if (!webhookUrl) {
+    console.error(`[${FILE}:9] OPAL_WEBHOOK_URL env var is not set`);
     return Response.json({ error: 'Opal webhook is not configured' }, { status: 500 });
   }
 
@@ -22,13 +22,13 @@ export async function POST(request: NextRequest) {
   };
   console.log(`${HL}[${FILE}:22] ► sending question to Opal webhook: "${question}" | client-${clientId} | correlation-${correlationId}${RST}`);
 
+  const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+  if (webhookToken) headers['Authorization'] = `Bearer ${webhookToken}`;
+
   try {
     const res = await fetch(webhookUrl, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${webhookToken}`,
-      },
+      headers,
       body: JSON.stringify({ question, clientId, correlationId }),
     });
     console.log(`[${FILE}:30] webhook response status:`, res.status);
