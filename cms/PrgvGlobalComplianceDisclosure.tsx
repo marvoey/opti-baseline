@@ -1,7 +1,7 @@
 import { contentType, type ContentProps } from "@optimizely/cms-sdk";
 import { getPreviewUtils } from "@optimizely/cms-sdk/react/server";
 import { RichText as RichTextRenderer } from "@optimizely/cms-sdk/react/richText";
-import { LINE_OF_BUSINESS, taxonomyEnums, labelFor } from "@/lib/cms/taxonomy";
+import { LINE_OF_BUSINESS, US_JURISDICTION, taxonomyEnums, labelFor } from "@/lib/cms/taxonomy";
 
 export const PrgvGlobalComplianceDisclosureContentType = contentType({
   key: "prgv_GlobalComplianceDisclosure",
@@ -19,31 +19,41 @@ export const PrgvGlobalComplianceDisclosureContentType = contentType({
       type: "dateTime",
       displayName: "Effective Date",
     },
-    Jurisdiction: {
-      type: "contentReference",
-      displayName: "Jurisdiction",
-    },
     LegalText: {
       type: "richText",
       displayName: "Legal Text",
       isRequired: true,
-    },
-    Category: {
-      type: "contentReference",
-      displayName: "Category",
-      allowedTypes: ["PrgvCategory"],
     },
     LineOfBusiness: {
       type: "array",
       format: "selectMany",
       displayName: "Line of Business",
       description: "Which insurance products does this block apply to?",
-      group: "Content",
-      isRequired: true,
+      group: "Taxonomy",
       items: {
         type: "string",
         enum: taxonomyEnums(LINE_OF_BUSINESS),
       },
+    },
+    ApplicableState: {
+      type: "string",
+      displayName: "Applicable State",
+      format: "selectOne",
+      enum: taxonomyEnums(US_JURISDICTION),
+      group: "Taxonomy",
+    },
+    Jurisdiction: {
+      type: "string",
+      displayName: "Jurisdiction",
+      format: "selectOne",
+      enum: taxonomyEnums(US_JURISDICTION),
+      group: "Taxonomy",
+    },
+    Category: {
+      type: "contentReference",
+      displayName: "Category",
+      allowedTypes: ["PrgvCategory"],
+      group: "Taxonomy",
     },
   },
 });
@@ -59,6 +69,16 @@ export default function PrgvGlobalComplianceDisclosure({ content }: Props) {
         <span {...pa("DisclosureName")} className="font-semibold text-gray-900">
           {content.DisclosureName}
         </span>
+        {content.Jurisdiction != null && (
+          <span {...pa("Jurisdiction")} className="text-xs font-medium text-gray-600">
+            {labelFor(US_JURISDICTION, content.Jurisdiction)}
+          </span>
+        )}
+        {content.ApplicableState != null && (
+          <span {...pa("ApplicableState")} className="rounded bg-green-100 px-2 py-0.5 text-xs font-medium text-green-800">
+            {labelFor(US_JURISDICTION, content.ApplicableState)}
+          </span>
+        )}
         {content.EffectiveDate && (
           <span className="text-xs text-gray-500">
             Effective: {new Date(content.EffectiveDate).toLocaleDateString()}

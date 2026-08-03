@@ -22,7 +22,7 @@ type Props = {
 
 export default function ExperiencePage({ content }: Props) {
   return (
-    <main>
+    <main className="space-y-8 py-6 sm:space-y-12 sm:py-8 lg:py-12">
       <OptimizelyComposition
         nodes={content.composition.nodes ?? []}
         ComponentWrapper={ComponentWrapper}

@@ -2,6 +2,8 @@ import {
   config,
   initContentTypeRegistry,
   initDisplayTemplateRegistry,
+  BlankExperienceContentType,
+  BlankSectionContentType,
 } from '@optimizely/cms-sdk';
 import { initReactComponentRegistry } from '@optimizely/cms-sdk/react/server';
 import { requireEnv } from '@/lib/env';
@@ -59,6 +61,8 @@ config({
  * registered with the SDK below.
  */
 export const registeredContentTypes = [
+  BlankExperienceContentType,
+  BlankSectionContentType,
   ExperiencePageContentType,
   PageContentType,
   // Blocks
@@ -94,6 +98,7 @@ initDisplayTemplateRegistry([]);
 
 initReactComponentRegistry({
   resolver: {
+    BlankExperience: ExperiencePage,
     ExperiencePage,
     Page,
     // Blocks (resolver key === content-type key)

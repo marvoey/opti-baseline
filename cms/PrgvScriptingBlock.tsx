@@ -1,7 +1,7 @@
 import { contentType, type ContentProps } from "@optimizely/cms-sdk";
 import { getPreviewUtils } from "@optimizely/cms-sdk/react/server";
 import { RichText as RichTextRenderer } from "@optimizely/cms-sdk/react/richText";
-import { LINE_OF_BUSINESS, taxonomyEnums, labelFor } from "@/lib/cms/taxonomy";
+import { LINE_OF_BUSINESS, US_JURISDICTION, taxonomyEnums, labelFor } from "@/lib/cms/taxonomy";
 
 export const PrgvScriptingBlockContentType = contentType({
   key: "prgv_ScriptingBlock",
@@ -15,26 +15,29 @@ export const PrgvScriptingBlockContentType = contentType({
       displayName: "Verbatim Script",
       isRequired: true,
     },
-    ApplicableState: {
-      type: "contentReference",
-      displayName: "Applicable State",
-    },
-    Category: {
-      type: "contentReference",
-      displayName: "Category",
-      allowedTypes: ["PrgvCategory"],
-    },
     LineOfBusiness: {
       type: "array",
       format: "selectMany",
       displayName: "Line of Business",
       description: "Which insurance products does this block apply to?",
-      group: "Content",
-      isRequired: true,
+      group: "Taxonomy",
       items: {
         type: "string",
         enum: taxonomyEnums(LINE_OF_BUSINESS),
       },
+    },
+    ApplicableState: {
+      type: "string",
+      displayName: "Applicable State",
+      format: "selectOne",
+      enum: taxonomyEnums(US_JURISDICTION),
+      group: "Taxonomy",
+    },
+    Category: {
+      type: "contentReference",
+      displayName: "Category",
+      allowedTypes: ["PrgvCategory"],
+      group: "Taxonomy",
     },
   },
 });
@@ -46,9 +49,14 @@ export default function PrgvScriptingBlock({ content }: Props) {
 
   return (
     <div className="space-y-2 rounded border border-blue-300 bg-blue-50 p-3">
-      {content.LineOfBusiness != null && content.LineOfBusiness.length > 0 && (
-        <div {...pa("LineOfBusiness")} className="flex flex-wrap gap-1">
-          {content.LineOfBusiness.map((lob: string) => (
+      {(content.ApplicableState != null || (content.LineOfBusiness != null && content.LineOfBusiness.length > 0)) && (
+        <div className="flex flex-wrap gap-1">
+          {content.ApplicableState != null && (
+            <span {...pa("ApplicableState")} className="rounded bg-green-100 px-2 py-0.5 text-xs font-medium text-green-800">
+              {labelFor(US_JURISDICTION, content.ApplicableState)}
+            </span>
+          )}
+          {content.LineOfBusiness != null && content.LineOfBusiness.map((lob: string) => (
             <span key={lob} className="rounded bg-blue-200 px-2 py-0.5 text-xs font-medium text-blue-900">
               {labelFor(LINE_OF_BUSINESS, lob)}
             </span>

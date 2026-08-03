@@ -1,0 +1,9 @@
+[
+  {
+    "displayName": "Sample Instruction Block",
+    "ApplicableState": "4",
+    "TargetAudience": "0",
+    "LineOfBusiness": ["personal_auto"],
+    "InstructionText": "<p><strong>Standard Procedure (All Jurisdictions):</strong> Before initiating a new FNOL in the Claims Intake Platform (CIP), the consultant MUST verify the caller identity and relationship to the policy using approved CPN verification procedures (see POL-102 and CLAIM-VERIFY-11 for special handling overrides). After verification, determine whether the caller is reporting a new loss, checking status on an existing claim, or requesting roadside/towing only. If the interaction is a new loss, capture the date and time of loss, garaging location, exact loss location, involved vehicle(s), driver at time of loss, police report status, injuries, witness availability, third-party involvement, drivable status, current vehicle location, tow destination if applicable, and whether photos or video exist. Enter all required details on the Loss Details screen before proceeding to liability, injury, and specialty handling questions. If the customer reports any injuries, emergency response, suspected fraud, hit-and-run, vehicle fire, total loss indicators, attorney representation, or a commercial exposure on a personal line, pause the standard path and follow the escalation rules below. Once intake is complete, the consultant MUST summarize next steps, provide any required disclosures, confirm best contact information, and route the claim to the correct downstream queue.</p>"
+  }
+]

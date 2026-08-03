@@ -7,7 +7,7 @@ export const WayfindingBlockContentType = contentType({
   baseType: '_component',
   displayName: 'v2: Wayfinding Block',
   description: 'Structural navigation: table of contents, breadcrumbs, or step wizard.',
-  compositionBehaviors: ['elementEnabled', 'sectionEnabled'],
+  compositionBehaviors: ['sectionEnabled'],
   properties: {
     WayfindingType: {
       type: 'string',
