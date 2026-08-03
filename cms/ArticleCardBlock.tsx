@@ -44,7 +44,7 @@ export default function ArticleCard({ content }: Props) {
       className="group flex flex-col overflow-hidden rounded-2xl bg-blue-100 transition-shadow hover:shadow-md"
     >
       <div className="aspect-[4/3] w-full overflow-hidden bg-blue-200">
-        {imageSrc && (
+        {imageSrc ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
             {...pa('ThumbnailImage')}
@@ -52,6 +52,11 @@ export default function ArticleCard({ content }: Props) {
             alt={content.CardTitle ?? ''}
             className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
           />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center bg-blue-200">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo.svg" alt="" className="w-24 opacity-20" />
+          </div>
         )}
       </div>
 

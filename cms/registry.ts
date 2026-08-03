@@ -16,6 +16,7 @@ import RichText, { RichTextContentType } from './RichText';
 import ArticleCard, { ArticleCardContentType } from './ArticleCardBlock';
 import MainBody, { MainBodyContentType, MainBodyDisplayTemplate, MainBodySimpleDisplayTemplate } from './MainBodyBlock';
 import CardContainer, { CardContainerContentType } from './CardContainerBlock';
+import ArticleContainer, { ArticleContainerContentType } from './ArticleContainerBlock';
 
 /**
  * Single configuration + registration point for the Optimizely SDK.
@@ -55,6 +56,7 @@ export const registeredContentTypes = [
   ArticleCardContentType,
   MainBodyContentType,
   CardContainerContentType,
+  ArticleContainerContentType,
 ];
 
 // BlankExperience and BlankSection are SDK built-ins — not pushed to the CMS
@@ -84,5 +86,6 @@ initReactComponentRegistry({
     ArticleCardBlock: ArticleCard,
     MainBodyBlock: MainBody,
     CardContainerBlock: CardContainer,
+    ArticleContainerBlock: ArticleContainer,
   },
 });

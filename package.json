@@ -15,7 +15,9 @@
     "gen:locales": "node scripts/generate-locales.mjs",
     "cms:push": "npx @optimizely/cms-cli config push optimizely.config.mjs",
     "schema:pull": "node scripts/fetch-openapi.mjs",
-    "seed:hero": "node scripts/seed-atomic-hero.mjs"
+    "seed:hero": "node scripts/seed-atomic-hero.mjs",
+    "seed:experiences": "node seed/scripts/import-experiences.mjs",
+    "seed:experiences:dry": "node seed/scripts/import-experiences.mjs --dry-run"
   },
   "dependencies": {
     "@optimizely/cms-cli": "^2.0.0",
