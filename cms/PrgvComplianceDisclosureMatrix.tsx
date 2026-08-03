@@ -38,6 +38,7 @@ export const PrgvComplianceDisclosureMatrixContentType = contentType({
       type: 'contentReference',
       displayName: 'Products / LOBs',
       description: 'Select the applicable products or LOBs from the Taxonomy tree.',
+      allowedTypes: [],
     },
   },
 });
