@@ -1,6 +1,8 @@
 # Global Taxonomy & Categorization Strategy
 
-This document outlines the structured taxonomy and categorization model designed for the Optimizely CMS Knowledge Base. It details the specific enumerations used for audience targeting, product lines, lifecycles, and regional compliance, as well as how they drive frontline content assembly.
+This document outlines the structured taxonomy and categorization model for the Optimizely CMS Knowledge Base. It details the enumerations used for audience targeting, product lines, lifecycles, and regional compliance, and how they drive frontline content assembly.
+
+> **Implementation note:** All enum values in the CMS are stored as **numeric string codes** (`"0"`, `"1"`, …), not slug strings. The canonical decode table lives in `lib/cms/taxonomy.ts`. See `notes/Block Content Types & Taxonomy Reference.md` for the full code-to-label mapping and per-block property breakdown.
 
 ---
 

@@ -127,3 +127,8 @@ initReactComponentRegistry({
     PrgvKnowledgeArticle,
   },
 });
+
+// PrgvGlobalComplianceDisclosure,
+// PrgvHandlingNoteBlock,
+// PrgvScriptingBlock,
+// PrgvStandardInstructionBlock,

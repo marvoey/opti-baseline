@@ -1,7 +1,9 @@
 import Link from 'next/link';
-import { Search, SlidersHorizontal, ChevronDown, FileText, AlertTriangle, Mic, BookOpen, FileCheck, X } from 'lucide-react';
+import { Search, SlidersHorizontal, ChevronDown, FileText, AlertTriangle, Mic, BookOpen, FileCheck, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import FilterForm from './_components/FilterForm';
 import { fetchPrgvBlocks, type PrgvBlock, type BlockType } from './_actions';
+
+const PAGE_SIZE = 25;
 import {
   LINE_OF_BUSINESS, US_JURISDICTION, RULE_CATEGORY,
   SEVERITY_LEVEL, TARGET_AUDIENCE, taxonomyEnums, labelFor, abbrFor,
@@ -17,6 +19,7 @@ type SP = {
   fsev?: string | string[];
   fcat?: string | string[];
   faud?: string | string[];
+  page?: string;
 };
 
 type Props = { searchParams: Promise<SP> };
@@ -316,6 +319,69 @@ function ResultCard({ block }: { block: PrgvBlock }) {
   );
 }
 
+// ── Pagination ────────────────────────────────────────────────────────────────
+
+function buildPageHref(sp: SP, page: number): string {
+  const params = new URLSearchParams();
+  if (sp.q) params.set('q', sp.q);
+  for (const k of ['ftype','flob','fstate','fsev','fcat','faud'] as const) {
+    const v = sp[k];
+    if (!v) continue;
+    for (const item of Array.isArray(v) ? v : [v]) params.append(k, item);
+  }
+  if (page > 1) params.set('page', String(page));
+  return `/search?${params.toString()}`;
+}
+
+function Pagination({ currentPage, totalPages, sp }: { currentPage: number; totalPages: number; sp: SP }) {
+  if (totalPages <= 1) return null;
+
+  const pages: (number | '…')[] = [];
+  if (totalPages <= 7) {
+    for (let i = 1; i <= totalPages; i++) pages.push(i);
+  } else {
+    pages.push(1);
+    if (currentPage > 3) pages.push('…');
+    for (let i = Math.max(2, currentPage - 1); i <= Math.min(totalPages - 1, currentPage + 1); i++) pages.push(i);
+    if (currentPage < totalPages - 2) pages.push('…');
+    pages.push(totalPages);
+  }
+
+  return (
+    <div className="flex items-center justify-center gap-1 py-6">
+      {currentPage > 1 ? (
+        <a href={buildPageHref(sp, currentPage - 1)} className="flex items-center gap-1 rounded border border-slate-300 bg-white px-3 py-1.5 text-sm text-slate-600 hover:border-blue-400 hover:text-blue-600 transition-colors">
+          <ChevronLeft size={14} /> Prev
+        </a>
+      ) : (
+        <span className="flex items-center gap-1 rounded border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm text-slate-400 cursor-not-allowed">
+          <ChevronLeft size={14} /> Prev
+        </span>
+      )}
+
+      {pages.map((p, i) =>
+        p === '…' ? (
+          <span key={`ellipsis-${i}`} className="px-2 py-1.5 text-sm text-slate-400">…</span>
+        ) : p === currentPage ? (
+          <span key={p} className="rounded border border-blue-500 bg-blue-600 px-3 py-1.5 text-sm font-semibold text-white">{p}</span>
+        ) : (
+          <a key={p} href={buildPageHref(sp, p)} className="rounded border border-slate-300 bg-white px-3 py-1.5 text-sm text-slate-600 hover:border-blue-400 hover:text-blue-600 transition-colors">{p}</a>
+        )
+      )}
+
+      {currentPage < totalPages ? (
+        <a href={buildPageHref(sp, currentPage + 1)} className="flex items-center gap-1 rounded border border-slate-300 bg-white px-3 py-1.5 text-sm text-slate-600 hover:border-blue-400 hover:text-blue-600 transition-colors">
+          Next <ChevronRight size={14} />
+        </a>
+      ) : (
+        <span className="flex items-center gap-1 rounded border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm text-slate-400 cursor-not-allowed">
+          Next <ChevronRight size={14} />
+        </span>
+      )}
+    </div>
+  );
+}
+
 // ── LOB quick-filter strip (shared between home + results views) ──────────────
 
 const LOB_ENTRIES = Object.entries(LINE_OF_BUSINESS) as [string, { displayName: string }][];
@@ -417,9 +483,12 @@ export default async function SearchPage({ searchParams }: Props) {
   }
 
   let allBlocks: PrgvBlock[] = [];
+  let graphTotal = 0;
   let fetchError: string | null = null;
   try {
-    allBlocks = await fetchPrgvBlocks(q || undefined);
+    const result = await fetchPrgvBlocks(q || undefined);
+    allBlocks = result.blocks;
+    graphTotal = result.graphTotal;
   } catch (err) {
     fetchError = err instanceof Error ? err.message : String(err);
   }
@@ -427,6 +496,12 @@ export default async function SearchPage({ searchParams }: Props) {
   const filtered = applyFilters(allBlocks, filters);
   const hasFilters = Object.values(filters).some(f => f.length > 0);
   const clearHref = q ? `/search?q=${encodeURIComponent(q)}` : '/search';
+
+  const currentPage = Math.max(1, parseInt(sp.page ?? '1', 10));
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const safePage = Math.min(currentPage, totalPages);
+  const pageStart = (safePage - 1) * PAGE_SIZE;
+  const pageResults = filtered.slice(pageStart, pageStart + PAGE_SIZE);
 
   const BLOCK_TYPE_FACET = (Object.entries(BLOCK_META) as [BlockType, (typeof BLOCK_META)[BlockType]][]).map(([, m]) => ({
     label: m.label,
@@ -468,7 +543,16 @@ export default async function SearchPage({ searchParams }: Props) {
         <span>
           {fetchError != null
             ? <span className="text-red-600">Error fetching results.</span>
-            : <><strong className="text-slate-700">{filtered.length}</strong> block{filtered.length !== 1 ? 's' : ''} {hasFilters ? 'match filters' : 'found'} {q && <> for <em>&ldquo;{q}&rdquo;</em></>}</>
+            : filtered.length === 0
+              ? <><strong className="text-slate-700">0</strong> pages</>
+              : <>
+                  <strong className="text-slate-700">{pageStart + 1}–{Math.min(pageStart + PAGE_SIZE, filtered.length)}</strong>
+                  {' of '}
+                  <strong className="text-slate-700">{filtered.length}</strong>
+                  {' page'}{filtered.length !== 1 ? 's' : ''}{' '}
+                  {hasFilters ? 'match filters' : 'found'}
+                  {q && <> for <em>&ldquo;{q}&rdquo;</em></>}
+                </>
           }
         </span>
         {hasFilters && (
@@ -557,11 +641,15 @@ export default async function SearchPage({ searchParams }: Props) {
               )}
             </div>
           ) : (
-            <div className="space-y-3">
-              {filtered.map(b => (
-                <ResultCard key={b._metadata.key} block={b} />
-              ))}
-            </div>
+            <>
+              <Pagination currentPage={safePage} totalPages={totalPages} sp={sp} />
+              <div className="space-y-3">
+                {pageResults.map(b => (
+                  <ResultCard key={b._metadata.key} block={b} />
+                ))}
+              </div>
+              <Pagination currentPage={safePage} totalPages={totalPages} sp={sp} />
+            </>
           )}
         </main>
       </div>

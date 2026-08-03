@@ -141,7 +141,9 @@ type RawInstr = { _metadata?: Meta; InstructionText?: RT; LineOfBusiness?: strin
 
 // ── Main export ───────────────────────────────────────────────────────────────
 
-export async function fetchPrgvBlocks(q?: string): Promise<PrgvBlock[]> {
+export type FetchResult = { blocks: PrgvBlock[]; graphTotal: number };
+
+export async function fetchPrgvBlocks(q?: string): Promise<FetchResult> {
   const singleKey = process.env.OPTIMIZELY_GRAPH_SINGLE_KEY?.trim();
   if (!singleKey) throw new Error('OPTIMIZELY_GRAPH_SINGLE_KEY is not set');
 
@@ -161,7 +163,7 @@ export async function fetchPrgvBlocks(q?: string): Promise<PrgvBlock[]> {
   }
 
   const json = (await res.json()) as {
-    data?: Record<string, { items?: unknown[] } | null>;
+    data?: Record<string, { total?: number; items?: unknown[] } | null>;
     errors?: { message: string }[];
   };
 
@@ -169,6 +171,12 @@ export async function fetchPrgvBlocks(q?: string): Promise<PrgvBlock[]> {
 
   const data = json.data ?? {};
   const results: PrgvBlock[] = [];
+  let graphTotal = 0;
+
+  graphTotal += data.prgv_GlobalComplianceDisclosure?.total ?? 0;
+  graphTotal += data.prgv_HandlingNoteBlock?.total ?? 0;
+  graphTotal += data.prgv_ScriptingBlock?.total ?? 0;
+  graphTotal += data.prgv_StandardInstructionBlock?.total ?? 0;
 
   for (const raw of (data.prgv_GlobalComplianceDisclosure?.items ?? []) as RawDisc[]) {
     results.push({
@@ -220,5 +228,5 @@ export async function fetchPrgvBlocks(q?: string): Promise<PrgvBlock[]> {
     });
   }
 
-  return results;
+  return { blocks: results, graphTotal };
 }
