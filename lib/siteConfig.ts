@@ -20,7 +20,7 @@ export const siteConfig = {
     "CI Assante — Canada's leading network of independent financial advisors, managing $69 billion of Canadian wealth.",
 
   /** Header logo (place the asset in /public). */
-  logoSrc: '/Optimizely_Primary-Logo_Medium_Green_RGB.png',
+  logoSrc: '/logo.svg',
   logoAlt: 'CI Assante Wealth Management',
 
   /** Top utility bar. */
