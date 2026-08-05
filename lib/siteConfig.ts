@@ -12,73 +12,74 @@ export type FooterColumn = { heading: string; links: NavLink[] };
 
 export const siteConfig = {
   /** Used for the document <title> fallback and the logo alt text. */
-  name: 'Optimizely',
+  name: 'CI Assante Wealth Management',
   /** Default browser-tab title (per-page titles override via CMS MetaTitle). */
-  title: 'Optimizely | Digital Experience Platform',
+  title: 'CI Assante Wealth Management',
   /** Default meta description. */
   description:
-    'Optimizely — the digital experience platform that helps teams create, test, and optimize digital experiences at scale.',
+    "CI Assante — Canada's leading network of independent financial advisors, managing $69 billion of Canadian wealth.",
 
   /** Header logo (place the asset in /public). */
   logoSrc: '/Optimizely_Primary-Logo_Medium_Green_RGB.png',
-  logoAlt: 'Optimizely',
+  logoAlt: 'CI Assante Wealth Management',
 
   /** Top utility bar. */
   topNavLinks: [
-    { label: 'Partners', href: '#' },
-    { label: 'Support', href: '#' },
+    { label: 'For Advisors', href: '#' },
+    { label: 'For Investors', href: '#' },
   ] satisfies NavLink[],
 
   /** Primary header navigation. */
   mainNavLinks: [
-    { label: 'Products', href: '#' },
-    { label: 'Solutions', href: '#' },
-    { label: 'Customers', href: '#' },
-    { label: 'Resources', href: '#' },
-    { label: 'Pricing', href: '#' },
+    { label: 'About Us', href: '#' },
+    { label: 'Services', href: '#' },
+    { label: 'Find an Advisor', href: '#' },
+    { label: 'Insights', href: '#' },
+    { label: 'Contact', href: '#' },
   ] satisfies NavLink[],
   /** Header call-to-action button. */
-  primaryCta: { label: 'Get started free', href: '#' } satisfies NavLink,
+  primaryCta: { label: 'Find an Advisor', href: '#' } satisfies NavLink,
   /** Account / login button label. */
-  accountLabel: 'Log in',
+  accountLabel: 'Client Login',
 
   /** Footer. */
   footerTagline:
-    'Create, test, and optimize digital experiences that turn visitors into loyal customers.',
+    "Canada's leading network of independent financial advisors — personalized wealth management strategies for every stage of life.",
   footerColumns: [
     {
-      heading: 'Products',
+      heading: 'Services',
       links: [
-        { label: 'Content Management', href: '#' },
-        { label: 'Experimentation', href: '#' },
-        { label: 'Commerce', href: '#' },
-        { label: 'Personalization', href: '#' },
-      ],
-    },
-    {
-      heading: 'Solutions',
-      links: [
-        { label: 'B2B Commerce', href: '#' },
-        { label: 'B2C Commerce', href: '#' },
-        { label: 'Digital Marketing', href: '#' },
-        { label: 'Customer Journeys', href: '#' },
+        { label: 'Investment Management', href: '#' },
+        { label: 'Retirement Planning', href: '#' },
+        { label: 'Tax Planning', href: '#' },
+        { label: 'Estate Planning', href: '#' },
+        { label: 'Insurance & Risk', href: '#' },
       ],
     },
     {
       heading: 'Resources',
       links: [
-        { label: 'Blog', href: '#' },
-        { label: 'Documentation', href: '#' },
-        { label: 'Community', href: '#' },
-        { label: 'Webinars', href: '#' },
+        { label: 'Market Insights', href: '#' },
+        { label: 'Retirement Guide', href: '#' },
+        { label: 'ESG Investing', href: '#' },
+        { label: 'Client Portal', href: '#' },
+      ],
+    },
+    {
+      heading: 'Company',
+      links: [
+        { label: 'About CI Assante', href: '#' },
+        { label: 'Find an Advisor', href: '#' },
+        { label: 'Join Our Network', href: '#' },
+        { label: 'News & Media', href: '#' },
       ],
     },
   ] satisfies FooterColumn[],
-  footerLegal: `© ${2026} Optimizely. All rights reserved.`,
+  footerLegal: `© ${2026} CI Assante Wealth Management. CI Assante is regulated by CIRO and is a member of the Canadian Investor Protection Fund.`,
   footerLegalLinks: [
     { label: 'Privacy Policy', href: '#' },
-    { label: 'Terms of Service', href: '#' },
-    { label: 'Cookie Settings', href: '#' },
+    { label: 'Legal', href: '#' },
+    { label: 'Accessibility', href: '#' },
   ] satisfies NavLink[],
 } as const;
 

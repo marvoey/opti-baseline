@@ -10,7 +10,7 @@ const Footer = () => (
       </div>
       {siteConfig.footerColumns.map((col) => (
         <div key={col.heading}>
-          <h4 className="text-blue-200 uppercase tracking-widest text-xs font-bold mb-5">
+          <h4 className="text-sage uppercase tracking-widest text-xs font-bold mb-5">
             {col.heading}
           </h4>
           <ul className="space-y-3 text-sm">

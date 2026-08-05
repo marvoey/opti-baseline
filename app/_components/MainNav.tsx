@@ -31,7 +31,7 @@ const MainNav = () => (
         </button>
         <Link
           href={siteConfig.primaryCta.href}
-          className="hidden sm:inline-flex items-center px-4 py-2 bg-blue-200 text-blue-950 font-bold text-sm rounded-full hover:bg-blue-400 transition-colors"
+          className="hidden sm:inline-flex items-center px-4 py-2 bg-lime text-blue-950 font-bold text-sm rounded-full hover:bg-lime-dark transition-colors"
         >
           {siteConfig.primaryCta.label}
         </Link>

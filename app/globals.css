@@ -3,7 +3,7 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #231f20;
 }
 
 @theme inline {
@@ -19,35 +19,33 @@
    * │  REBRAND HERE.  This is the whole colour theme for the site.          │
    * │  The Tailwind `blue-*` scale is remapped, so chrome and blocks that   │
    * │  use `bg-blue-950`, `text-blue-800`, etc. all reskin when you edit    │
-   * │  these ~11 hex values. Set blue-950 = your darkest brand colour and   │
-   * │  blue-800 = your primary; the rest are tints/shades between.          │
+   * │  these ~11 hex values.                                                │
    * └──────────────────────────────────────────────────────────────────────┘
    *
-   * Optimizely brand green ramp.
-   * Anchors: Dark Fir #08251a (darkest), LFGreen #abff44 (signature accent).
+   * CI Assante Wealth Management teal ramp.
+   * Anchors: #011f1f (darkest), #023737 (primary brand dark teal),
+   *          #7a9d96 (sage), #a8c208 (lime accent).
    */
-  --color-blue-950: #08251a; /* Dark Fir — footer / hero background */
-  --color-blue-900: #0d3a29; /* Mid Fir — header bg */
-  --color-blue-800: #197050; /* Light Fir — primary green, links */
-  --color-blue-700: #3ab533; /* Good-to-go */
-  --color-blue-600: #4dc844;
-  --color-blue-500: #62d84f;
-  --color-blue-400: #7ddd3d; /* Grass */
-  --color-blue-300: #91dbda; /* Light Blue — teal accent */
-  --color-blue-200: #abff44; /* LFGreen — signature bright green */
-  --color-blue-100: #d8e4cb; /* Neutral 4 */
-  --color-blue-50:  #e4f0da; /* Neutral 3 — light wash */
+  --color-blue-950: #011f1f; /* deepest dark — footer / hero background */
+  --color-blue-900: #023737; /* CI Assante dark teal — header bg */
+  --color-blue-800: #035050; /* primary teal — links */
+  --color-blue-700: #0a6464;
+  --color-blue-600: #157878;
+  --color-blue-500: #268888;
+  --color-blue-400: #3d9898;
+  --color-blue-300: #7a9d96; /* Assante sage — secondary teal */
+  --color-blue-200: #a3bfba;
+  --color-blue-100: #c8dbd8;
+  --color-blue-50:  #e8f2f0; /* light wash */
 
-  /* Named Optimizely brand tokens for direct use in custom components. */
-  --color-lfgreen:    #abff44;
-  --color-grass:      #7ddd3d;
-  --color-good-to-go: #3ab533;
-  --color-dark-fir:   #08251a;
-  --color-mid-fir:    #0d3a29;
-  --color-light-fir:  #197050;
-  --color-light-blue: #91dbda;
-  --color-neutral-2:  #eff6e9;
-  --color-neutral-3:  #e4f0da;
+  /* Named CI Assante brand tokens for direct use in custom components. */
+  --color-brand:      #023737;
+  --color-brand-dark: #011f1f;
+  --color-sage:       #7a9d96;
+  --color-lime:       #a8c208; /* lime accent — CTAs, highlights */
+  --color-lime-dark:  #849a06;
+  --color-ink:        #231f20;
+  --color-stone:      #f5f5f2;
 }
 
 @media (prefers-color-scheme: dark) {
