@@ -20,11 +20,33 @@ type Props = {
   content: ContentProps<typeof ExperiencePageContentType>;
 };
 
+// Optimizely Graph always returns __typename: '_Component' for every
+// CompositionComponentNode's .component, regardless of the actual type.
+// The concrete type is reliably available as node.type (part of the fixed
+// ICompositionNode fragment) — so we inject it as __typename so the SDK's
+// findComponent lookup works correctly.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function fixCompositionTypes(nodes: any[]): any[] {
+  return nodes.map((node) => {
+    if (
+      node.__typename === 'CompositionComponentNode' &&
+      node.type &&
+      node.component?.__typename === '_Component'
+    ) {
+      return { ...node, component: { ...node.component, __typename: node.type } };
+    }
+    if (node.nodes) {
+      return { ...node, nodes: fixCompositionTypes(node.nodes) };
+    }
+    return node;
+  });
+}
+
 export default function ExperiencePage({ content }: Props) {
   return (
     <main>
       <OptimizelyComposition
-        nodes={content.composition.nodes ?? []}
+        nodes={fixCompositionTypes(content.composition.nodes ?? [])}
         ComponentWrapper={ComponentWrapper}
       />
     </main>
