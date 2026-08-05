@@ -1,26 +1,25 @@
 import type { Metadata } from "next";
-import { Source_Serif_4, Inter } from "next/font/google";
+import { Space_Grotesk, Inter } from "next/font/google";
 import Script from "next/script";
 import OptimizelyActivation from "./_components/OptimizelyActivation";
 import { siteConfig } from "@/lib/siteConfig";
 import "./globals.css";
 import "@/cms/registry";
 
-// Publico Banner (CIBC Mellon's display serif) is a licensed face; Source Serif 4
-// is the closest free substitute for the high-contrast institutional headings.
-const publico = Source_Serif_4({
-  variable: "--font-publico",
+// VC Nudge (Optimizely's display face) is a licensed face; Space Grotesk is the
+// closest free substitute — chunky, geometric grotesque with strong personality.
+const displayFont = Space_Grotesk({
+  variable: "--font-display",
   subsets: ["latin"],
-  weight: ["400", "600", "700"],
-  style: ["normal", "italic"],
+  weight: ["400", "500", "600", "700"],
 });
 
-// Akkurat Pro (the brand body face) → Inter as the closest grotesque substitute.
-const akkurat = Inter({
-  variable: "--font-akkurat",
+// Die Grotesk B (the brand body face) → Inter as the closest neutral grotesque.
+const bodyFont = Inter({
+  variable: "--font-body",
   subsets: ["latin"],
 });
-  
+
 export const metadata: Metadata = {
   title: siteConfig.title,
   description: siteConfig.description,
@@ -39,7 +38,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${publico.variable} ${akkurat.variable} h-full antialiased`}
+      className={`${displayFont.variable} ${bodyFont.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         {children}
@@ -63,7 +62,6 @@ export default function RootLayout({
               src={`https://cdn.optimizely.com/js/${WEB_SNIPPET_ID}.js`}
               strategy="afterInteractive"
             />
-            {/* Re-activate the Web snippet on client-side route changes (soft navigations). */}
             <OptimizelyActivation />
           </>
         )}

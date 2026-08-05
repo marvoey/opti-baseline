@@ -9,61 +9,45 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-akkurat);
-  --font-serif: var(--font-publico);
-  /* Real monospace stack: Tailwind Preflight applies this to <code>/<pre> and
-     it backs the `font-mono` utility (code chips, the styleguide code blocks). */
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
   --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas,
     "Liberation Mono", "Courier New", monospace;
 
   /*
    * ┌──────────────────────────────────────────────────────────────────────┐
-   * │  REBRAND HERE.  This is the whole colour theme for the site.           │
-   * │  The Tailwind `blue-*` scale is remapped, so chrome and blocks that    │
-   * │  use `bg-blue-950`, `text-blue-800`, etc. all reskin when you edit     │
-   * │  these ~11 hex values. Set blue-950 = your darkest brand colour and    │
-   * │  blue-800 = your primary; the rest are tints/shades between.           │
+   * │  REBRAND HERE.  This is the whole colour theme for the site.          │
+   * │  The Tailwind `blue-*` scale is remapped, so chrome and blocks that   │
+   * │  use `bg-blue-950`, `text-blue-800`, etc. all reskin when you edit    │
+   * │  these ~11 hex values. Set blue-950 = your darkest brand colour and   │
+   * │  blue-800 = your primary; the rest are tints/shades between.          │
    * └──────────────────────────────────────────────────────────────────────┘
-   * CIBC Mellon teal ramp — primary teal #00485e, dark #003342.
+   *
+   * Optimizely brand green ramp.
+   * Anchors: Dark Fir #08251a (darkest), LFGreen #abff44 (signature accent).
    */
-  --color-blue-950: #002733; /* darkest — footer / hero background */
-  --color-blue-900: #003342; /* teal-dark — header bg */
-  --color-blue-800: #00485e; /* primary teal — links */
-  --color-blue-700: #00596f;
-  --color-blue-600: #006280; /* teal-mid */
-  --color-blue-500: #0f7d8c;
-  --color-blue-400: #1c919b; /* teal-light */
-  --color-blue-300: #4fb0ad;
-  --color-blue-200: #6fc8b9; /* mint */
-  --color-blue-100: #c9e6df;
-  --color-blue-50: #eef6f3; /* light wash */
+  --color-blue-950: #08251a; /* Dark Fir — footer / hero background */
+  --color-blue-900: #0d3a29; /* Mid Fir — header bg */
+  --color-blue-800: #197050; /* Light Fir — primary green, links */
+  --color-blue-700: #3ab533; /* Good-to-go */
+  --color-blue-600: #4dc844;
+  --color-blue-500: #62d84f;
+  --color-blue-400: #7ddd3d; /* Grass */
+  --color-blue-300: #91dbda; /* Light Blue — teal accent */
+  --color-blue-200: #abff44; /* LFGreen — signature bright green */
+  --color-blue-100: #d8e4cb; /* Neutral 4 */
+  --color-blue-50:  #e4f0da; /* Neutral 3 — light wash */
 
-  /* Named brand + gold accent tokens for direct use in custom components. */
-  --color-brand: #00485e;
-  --color-brand-dark: #003342;
-  --color-brand-accent: #a29060;
-  --color-gold: #a29060;
-  --color-gold-dark: #8e7228;
-  --color-gold-bright: #f4bd0c;
-  --color-stone: #f4f2ec;
-
-  /*
-   * Explicit CIBC Mellon palette — used by the ported cms/Cibc* block
-   * components (Hero, AlertFeed, AssetGrid, OnboardingJourney, Regulatory
-   * Directive). Mirrors the source brand system so those components render
-   * verbatim; the blue-* ramp above still drives the site chrome.
-   */
-  --color-cibc-teal: #00485e;
-  --color-cibc-teal-dark: #003342;
-  --color-cibc-teal-mid: #006280;
-  --color-cibc-teal-light: #1c919b;
-  --color-cibc-mint: #6fc8b9;
-  --color-cibc-gold: #a29060;
-  --color-cibc-gold-bright: #f4bd0c;
-  --color-cibc-gold-dark: #8e7228;
-  --color-cibc-rust: #9c3828;
-  --color-cibc-ink: #4b4b4b;
-  --color-cibc-stone: #f4f2ec;
+  /* Named Optimizely brand tokens for direct use in custom components. */
+  --color-lfgreen:    #abff44;
+  --color-grass:      #7ddd3d;
+  --color-good-to-go: #3ab533;
+  --color-dark-fir:   #08251a;
+  --color-mid-fir:    #0d3a29;
+  --color-light-fir:  #197050;
+  --color-light-blue: #91dbda;
+  --color-neutral-2:  #eff6e9;
+  --color-neutral-3:  #e4f0da;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -79,9 +63,8 @@ body {
   font-family: var(--font-sans);
 }
 
-/* Headings use the display serif (Source Serif 4) site-wide. */
 h1,
 h2,
 h3 {
-  font-family: var(--font-serif);
+  font-family: var(--font-display);
 }

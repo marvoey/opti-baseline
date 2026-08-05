@@ -1,48 +1,42 @@
 import Link from 'next/link';
-import { Search, User, Menu } from 'lucide-react';
+import { User, Menu } from 'lucide-react';
 import { siteConfig } from '@/lib/siteConfig';
 
 const MainNav = () => (
   <header className="sticky top-0 z-50 bg-blue-900 shadow-sm">
-    <div className="container mx-auto px-4 flex justify-between items-center h-20">
-      {/* Brand Logo */}
-      <div className="navbar-brand branding flex items-center" data-cms-field="brand_logo">
-        <Link href="/" title="Go to home page" className="header-logo flex items-center">
+    <div className="container mx-auto px-4 flex justify-between items-center h-16">
+      <div className="navbar-brand flex items-center" data-cms-field="brand_logo">
+        <Link href="/" title="Go to home page" className="flex items-center">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={siteConfig.logoSrc} alt={siteConfig.logoAlt} className="h-9 w-auto" />
+          <img src={siteConfig.logoSrc} alt={siteConfig.logoAlt} className="h-14 w-auto" />
         </Link>
       </div>
 
-      {/* Desktop Links */}
-      <nav className="hidden lg:flex gap-8 font-semibold text-white/80">
+      <nav className="hidden lg:flex gap-8 font-medium text-white/80 text-sm">
         {siteConfig.mainNavLinks.map((link) => (
           <Link
             key={link.label}
             href={link.href}
-            className="hover:text-white flex items-center gap-1 transition-colors"
+            className="hover:text-white transition-colors"
           >
             {link.label}
           </Link>
         ))}
       </nav>
 
-      {/* Action Buttons (utility menu) */}
-      <div className="utility-container flex items-center gap-3">
+      <div className="flex items-center gap-3">
+        <button className="hidden sm:flex items-center gap-2 px-3 py-1.5 text-white/70 font-medium text-sm hover:text-white transition-colors">
+          <User size={16} />
+          <span>{siteConfig.accountLabel}</span>
+        </button>
         <Link
           href={siteConfig.primaryCta.href}
-          className="hidden sm:inline-flex items-center px-5 py-2 bg-gold text-blue-950 font-bold rounded-full hover:bg-gold-dark transition-colors"
+          className="hidden sm:inline-flex items-center px-4 py-2 bg-blue-200 text-blue-950 font-bold text-sm rounded-full hover:bg-blue-400 transition-colors"
         >
           {siteConfig.primaryCta.label}
         </Link>
-        <button className="hidden md:flex items-center gap-2 px-4 py-2 text-white/80 font-semibold hover:bg-white/10 rounded-lg transition-colors">
-          <Search size={20} />
-        </button>
-        <button className="flex items-center gap-2 px-4 py-2 border-2 border-white/40 text-white font-bold rounded-full hover:bg-white/10 transition-all">
-          <User size={18} />
-          <span className="hidden sm:inline">{siteConfig.accountLabel}</span>
-        </button>
         <button className="lg:hidden p-2 text-white">
-          <Menu size={24} />
+          <Menu size={22} />
         </button>
       </div>
     </div>

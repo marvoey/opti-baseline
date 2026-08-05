@@ -12,62 +12,73 @@ export type FooterColumn = { heading: string; links: NavLink[] };
 
 export const siteConfig = {
   /** Used for the document <title> fallback and the logo alt text. */
-  name: 'CIBC Mellon',
+  name: 'Optimizely',
   /** Default browser-tab title (per-page titles override via CMS MetaTitle). */
-  title: 'CIBC Mellon | Institutional Asset Servicing',
+  title: 'Optimizely | Digital Experience Platform',
   /** Default meta description. */
   description:
-    "CIBC Mellon — the operational infrastructure for Canada's institutional investment industry.",
+    'Optimizely — the digital experience platform that helps teams create, test, and optimize digital experiences at scale.',
 
   /** Header logo (place the asset in /public). */
-  logoSrc: '/logo.svg',
-  logoAlt: 'CIBC Mellon',
+  logoSrc: '/Optimizely_Primary-Logo_Medium_Green_RGB.png',
+  logoAlt: 'Optimizely',
 
   /** Top utility bar. */
   topNavLinks: [
-    { label: 'Client Access', href: '#' },
-    { label: 'Insights', href: '#' },
-    { label: 'Contact', href: '#' },
+    { label: 'Partners', href: '#' },
+    { label: 'Support', href: '#' },
   ] satisfies NavLink[],
-  phone: '1-800-387-0825',
 
   /** Primary header navigation. */
   mainNavLinks: [
+    { label: 'Products', href: '#' },
     { label: 'Solutions', href: '#' },
-    { label: 'Client Access', href: '#' },
-    { label: 'Straight Talk', href: '/services' },
-    { label: 'Market Bulletins', href: '/locations' },
+    { label: 'Customers', href: '#' },
+    { label: 'Resources', href: '#' },
+    { label: 'Pricing', href: '#' },
   ] satisfies NavLink[],
   /** Header call-to-action button. */
-  primaryCta: { label: 'Get Started', href: '#' } satisfies NavLink,
+  primaryCta: { label: 'Get started free', href: '#' } satisfies NavLink,
   /** Account / login button label. */
-  accountLabel: 'Sign In',
+  accountLabel: 'Log in',
 
   /** Footer. */
   footerTagline:
-    'The operational infrastructure for Canada’s institutional investment industry — asset servicing, settlement and analytics at scale.',
+    'Create, test, and optimize digital experiences that turn visitors into loyal customers.',
   footerColumns: [
+    {
+      heading: 'Products',
+      links: [
+        { label: 'Content Management', href: '#' },
+        { label: 'Experimentation', href: '#' },
+        { label: 'Commerce', href: '#' },
+        { label: 'Personalization', href: '#' },
+      ],
+    },
     {
       heading: 'Solutions',
       links: [
-        { label: 'Asset Servicing', href: '#' },
-        { label: 'Settlement', href: '#' },
-        { label: 'Analytics', href: '#' },
+        { label: 'B2B Commerce', href: '#' },
+        { label: 'B2C Commerce', href: '#' },
+        { label: 'Digital Marketing', href: '#' },
+        { label: 'Customer Journeys', href: '#' },
       ],
     },
     {
       heading: 'Resources',
       links: [
-        { label: 'Straight Talk', href: '#' },
-        { label: 'Market Bulletins', href: '#' },
-        { label: 'Careers', href: '#' },
+        { label: 'Blog', href: '#' },
+        { label: 'Documentation', href: '#' },
+        { label: 'Community', href: '#' },
+        { label: 'Webinars', href: '#' },
       ],
     },
   ] satisfies FooterColumn[],
-  footerLegal: `© ${'2026'} CIBC Mellon. A global leader in asset servicing infrastructure.`,
+  footerLegal: `© ${2026} Optimizely. All rights reserved.`,
   footerLegalLinks: [
-    { label: 'Privacy', href: '#' },
-    { label: 'Terms', href: '#' },
+    { label: 'Privacy Policy', href: '#' },
+    { label: 'Terms of Service', href: '#' },
+    { label: 'Cookie Settings', href: '#' },
   ] satisfies NavLink[],
 } as const;
 
