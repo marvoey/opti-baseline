@@ -21,6 +21,18 @@ needs no change here.
 - `KNOWN_LOCALE_SEGMENTS` — the route segments of the **non-default** locales enabled
   in the CMS, sourced from `lib/locales.generated.ts` (refresh with `npm run gen:locales`).
   The default locale has no segment here because it has no visible prefix.
+- `PROXY_EXCLUDED_PATHS` — comma-separated list of first path segments that bypass
+  locale rewriting entirely (early `NextResponse.next()`). Use this for standalone app
+  routes that live outside the CMS catch-all and must not be rewritten into a locale.
+
+  ```
+  PROXY_EXCLUDED_PATHS=preview,DemoHomepages,DemoPrototype
+  ```
+
+  These are checked at runtime inside `proxy()`, so adding or removing entries requires
+  only an `.env` change and a server restart — no code change needed. The `config.matcher`
+  is intentionally kept to static/performance exclusions only (`_next/*`, `api`,
+  `favicon.ico`, files with dots).
 
 ## Decision flow
 
@@ -76,9 +88,13 @@ browser never sees `/en/...`.
 ## Matcher
 
 ```js
-matcher: ['/((?!api|_next/static|_next/image|preview|favicon.ico|.*\\..*).*)']
+matcher: ['/((?!api|_next/static|_next/image|favicon.ico|.*\\..*).*)']
 ```
 
 Runs on everything **except** API routes, Next.js internals (`_next/static`,
-`_next/image`), the `preview` route, `favicon.ico`, and any path containing a dot
-(static assets like `/logo.svg`).
+`_next/image`), `favicon.ico`, and any path containing a dot (static assets like
+`/logo.svg`). These are hard-coded because they are purely about performance — they
+should never need locale logic.
+
+Custom route exclusions (e.g. `preview`, `DemoPrototype`) are **not** in the matcher;
+they are handled inside `proxy()` via `PROXY_EXCLUDED_PATHS` (see Configuration above).
