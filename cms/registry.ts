@@ -12,6 +12,12 @@ import ExperiencePage, { ExperiencePageContentType } from './ExperiencePage';
 import BlankSection from './BlankSection';
 import Page, { PageContentType } from './Page';
 import RichText, { RichTextContentType } from './RichText';
+import IntentHeroBlock, { IntentHeroBlockContentType } from './IntentHeroBlock';
+import CardItemBlock, { CardItemBlockContentType } from './CardItemBlock';
+import UniversalCardGridBlock, { UniversalCardGridBlockContentType } from './UniversalCardGridBlock';
+import SplitContentBlock, { SplitContentBlockContentType } from './SplitContentBlock';
+import RichTextValuePropBlock, { RichTextValuePropBlockContentType } from './RichTextValuePropBlock';
+import InteractiveWidgetBlock, { InteractiveWidgetBlockContentType } from './InteractiveWidgetBlock';
 
 /**
  * Single configuration + registration point for the Optimizely SDK.
@@ -50,6 +56,12 @@ export const registeredContentTypes = [
   PageContentType,
   // Blocks
   RichTextContentType,
+  IntentHeroBlockContentType,
+  CardItemBlockContentType,
+  UniversalCardGridBlockContentType,
+  SplitContentBlockContentType,
+  RichTextValuePropBlockContentType,
+  InteractiveWidgetBlockContentType,
 ];
 
 initContentTypeRegistry(registeredContentTypes);
@@ -65,5 +77,11 @@ initReactComponentRegistry({
     Page,
     // Blocks (resolver key === content-type key)
     RichTextBlock: RichText,
+    IntentHeroBlock,
+    CardItemBlock,
+    UniversalCardGridBlock,
+    SplitContentBlock,
+    RichTextValuePropBlock,
+    InteractiveWidgetBlock,
   },
 });

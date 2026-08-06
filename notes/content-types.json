@@ -1,0 +1,217 @@
+Here is the finalized JSON array containing only the Block Types, ready for your SDK script:
+[
+  {
+    "name": "IntentHeroBlock",
+    "displayName": "Intent Hero Block",
+    "description": "The conversational hero section with search and quick actions.",
+    "baseType": "Block",
+    "properties": [
+      {
+        "name": "headline",
+        "displayName": "Headline Prompt",
+        "dataType": "PropertyString",
+        "sortOrder": 10
+      },
+      {
+        "name": "searchPlaceholder",
+        "displayName": "Search Placeholder Text",
+        "dataType": "PropertyString",
+        "sortOrder": 20
+      },
+      {
+        "name": "destinationFlow",
+        "displayName": "Destination URL",
+        "description": "Where the search input submits to.",
+        "dataType": "PropertyUrl",
+        "sortOrder": 30
+      },
+      {
+        "name": "actionPills",
+        "displayName": "Quick Action Pills",
+        "dataType": "PropertyLinkCollection",
+        "sortOrder": 40
+      },
+      {
+        "name": "theme",
+        "displayName": "Theme / Background Style",
+        "description": "e.g., Dark Fir, Light Blue Overlay",
+        "dataType": "PropertyString",
+        "sortOrder": 50
+      }
+    ]
+  },
+  {
+    "name": "CardItemBlock",
+    "displayName": "Card Item Block",
+    "description": "A single card representing a product, article, doctor, or account.",
+    "baseType": "Block",
+    "properties": [
+      {
+        "name": "image",
+        "displayName": "Card Image / Icon",
+        "dataType": "PropertyContentReference",
+        "sortOrder": 10
+      },
+      {
+        "name": "eyebrowText",
+        "displayName": "Eyebrow Text",
+        "dataType": "PropertyString",
+        "sortOrder": 20
+      },
+      {
+        "name": "title",
+        "displayName": "Title",
+        "dataType": "PropertyString",
+        "sortOrder": 30
+      },
+      {
+        "name": "featureList",
+        "displayName": "Feature List",
+        "dataType": "PropertyXhtmlString",
+        "sortOrder": 40
+      },
+      {
+        "name": "valueOrPrice",
+        "displayName": "Value / Price",
+        "dataType": "PropertyString",
+        "sortOrder": 50
+      },
+      {
+        "name": "primaryCTA",
+        "displayName": "Primary Call to Action",
+        "dataType": "PropertyUrl",
+        "sortOrder": 60
+      },
+      {
+        "name": "badge",
+        "displayName": "Badge Highlight",
+        "description": "e.g., Recommended, Best Match",
+        "dataType": "PropertyString",
+        "sortOrder": 70
+      }
+    ]
+  },
+  {
+    "name": "UniversalCardGridBlock",
+    "displayName": "Universal Card Grid Block",
+    "description": "A grid container for rendering lists of Card Item Blocks.",
+    "baseType": "Block",
+    "properties": [
+      {
+        "name": "gridLayout",
+        "displayName": "Grid Layout Variant",
+        "description": "e.g., 2-Column, 3-Column, Masonry",
+        "dataType": "PropertyString",
+        "sortOrder": 10
+      },
+      {
+        "name": "showSidebarFilters",
+        "displayName": "Show Sidebar Filters",
+        "dataType": "PropertyBoolean",
+        "sortOrder": 20
+      },
+      {
+        "name": "cards",
+        "displayName": "Card Items",
+        "description": "Add Card Item Blocks here.",
+        "dataType": "PropertyContentArea",
+        "sortOrder": 30
+      }
+    ]
+  },
+  {
+    "name": "SplitContentBlock",
+    "displayName": "Split Content Block (50/50)",
+    "description": "A two-column layout for side-by-side content or widgets.",
+    "baseType": "Block",
+    "properties": [
+      {
+        "name": "verticalAlignment",
+        "displayName": "Vertical Alignment",
+        "description": "e.g., Top, Center, Bottom",
+        "dataType": "PropertyString",
+        "sortOrder": 10
+      },
+      {
+        "name": "reverseOnMobile",
+        "displayName": "Reverse Order on Mobile",
+        "dataType": "PropertyBoolean",
+        "sortOrder": 20
+      },
+      {
+        "name": "leftColumn",
+        "displayName": "Left Column Content",
+        "dataType": "PropertyContentArea",
+        "sortOrder": 30
+      },
+      {
+        "name": "rightColumn",
+        "displayName": "Right Column Content",
+        "dataType": "PropertyContentArea",
+        "sortOrder": 40
+      }
+    ]
+  },
+  {
+    "name": "RichTextValuePropBlock",
+    "displayName": "Rich Text & Value Prop Block",
+    "description": "Text component for headlines, paragraphs, and CTAs.",
+    "baseType": "Block",
+    "properties": [
+      {
+        "name": "eyebrowTag",
+        "displayName": "Eyebrow Tag",
+        "dataType": "PropertyString",
+        "sortOrder": 10
+      },
+      {
+        "name": "headline",
+        "displayName": "Headline",
+        "description": "Uses rich text to allow inline highlights/underlines.",
+        "dataType": "PropertyXhtmlString",
+        "sortOrder": 20
+      },
+      {
+        "name": "body",
+        "displayName": "Body Copy",
+        "dataType": "PropertyXhtmlString",
+        "sortOrder": 30
+      },
+      {
+        "name": "primaryCTA",
+        "displayName": "Primary Call to Action",
+        "dataType": "PropertyUrl",
+        "sortOrder": 40
+      },
+      {
+        "name": "showSocialProof",
+        "displayName": "Show Social Proof Widget",
+        "description": "Toggles the 'Trusted by X million' avatar UI.",
+        "dataType": "PropertyBoolean",
+        "sortOrder": 50
+      }
+    ]
+  },
+  {
+    "name": "InteractiveWidgetBlock",
+    "displayName": "Interactive Widget Block",
+    "description": "Mounts a complex frontend React application/widget.",
+    "baseType": "Block",
+    "properties": [
+      {
+        "name": "widgetType",
+        "displayName": "Widget Application Name",
+        "description": "e.g., InsuranceWizard, AssetCalculator, MapDirectory",
+        "dataType": "PropertyString",
+        "sortOrder": 10
+      },
+      {
+        "name": "configurationPayload",
+        "displayName": "Configuration Payload (JSON)",
+        "description": "Pass variables to the widget (e.g., API endpoints, default filters).",
+        "dataType": "PropertyString",
+        "sortOrder": 20
+      }
+    ]
+  }
+]
