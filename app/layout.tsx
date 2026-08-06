@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Space_Grotesk, Inter } from "next/font/google";
 import Script from "next/script";
 import OptimizelyActivation from "./_components/OptimizelyActivation";
+import { QuickLinks } from "./_components/QuickLinks";
+import DevQuickLinks from "./_components/DevQuickLinks";
 import { siteConfig } from "@/lib/siteConfig";
 import "./globals.css";
 import "@/cms/registry";
@@ -56,6 +58,8 @@ export default function RootLayout({
           The project id comes from NEXT_PUBLIC_OPTIMIZELY_WEB_SNIPPET_ID; without
           it, neither the snippet nor the route-change re-activation is rendered.
         */}
+        <QuickLinks />
+        <DevQuickLinks />
         {WEB_SNIPPET_ID && (
           <>
             <Script
