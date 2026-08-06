@@ -23,6 +23,14 @@ const DEFAULT_LOCALE = process.env.OPTIMIZELY_DEFAULT_LOCALE || 'en';
 // locale serves clean URLs, so it has no segment here.
 const KNOWN_LOCALE_SEGMENTS = LOCALE_SEGMENTS;
 
+// First path segments that bypass locale rewriting entirely.
+// Configure via PROXY_EXCLUDED_PATHS in .env (comma-separated).
+// e.g. PROXY_EXCLUDED_PATHS=preview,DemoHomepages,DemoPrototype
+const EXCLUDED_PATHS = (process.env.PROXY_EXCLUDED_PATHS ?? '')
+  .split(',')
+  .map(s => s.trim())
+  .filter(Boolean);
+
 function firstSegment(pathname: string): string {
   return pathname.split('/')[1] ?? '';
 }
@@ -30,6 +38,11 @@ function firstSegment(pathname: string): string {
 export function proxy(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
   const seg = firstSegment(pathname);
+
+  // Configured bypass routes — serve as-is without locale rewriting.
+  if (EXCLUDED_PATHS.includes(seg)) {
+    return NextResponse.next();
+  }
 
   // Default-locale prefix is visible → redirect to the clean path (canonical/SEO).
   //   /en/vb-demo → /vb-demo
@@ -51,9 +64,7 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  // Run on everything EXCEPT API, Next internals, the preview/admin/styleguide
-  // routes, and any path containing a dot (static assets like /logo.svg). The
-  // preview, admin and styleguide routes live outside [locale] and must not be
-  // rewritten into a locale.
-  matcher: ['/((?!api|_next/static|_next/image|preview|admin|styleguide|favicon.ico|.*\\..*).*)'],
+  // Excludes API routes, Next.js internals, favicon, and any path with a dot
+  // (static assets). Custom route exclusions live in PROXY_EXCLUDED_PATHS (.env).
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|.*\\..*).*)'],
 };
