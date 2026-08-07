@@ -40,9 +40,9 @@ export function proxy(request: NextRequest) {
   const seg = firstSegment(pathname);
 
   // Root → demo landing page.
-  if (pathname === '/') {
-    return NextResponse.redirect(new URL('/DemoPrototype', request.url));
-  }
+  // if (pathname === '/') {
+  //   return NextResponse.redirect(new URL('/DemoPrototype', request.url));
+  // }
 
   // Configured bypass routes — serve as-is without locale rewriting.
   if (EXCLUDED_PATHS.includes(seg)) {
