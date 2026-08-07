@@ -18,7 +18,13 @@ export default function SFAHomepages() {
         <div className="flex h-screen bg-blue-50 font-sans">
             {/* Sidebar */}
             <div className="w-64 bg-white border-r border-gray-200 p-4 flex flex-col gap-2 shadow-sm z-10">
-                <div className="text-xl font-bold text-gray-800 mb-6 px-2">SFA Prototypes</div>
+                <div className="mb-6 px-2">
+                    <a href="/">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src="/logo.svg" alt="Specialty Food Association" className="h-10 w-auto" />
+                    </a>
+                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mt-2">Prototypes</p>
+                </div>
                 {demos.map(demo => (
                     <button
                         key={demo.id}

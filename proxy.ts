@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { LOCALE_SEGMENTS } from '@/lib/locales';
+import { readdirSync, existsSync } from 'fs';
+import { join } from 'path';
 
 /**
  * Next.js 16 Proxy (the replacement for Middleware) — locale clean-URLs for the
@@ -23,13 +25,28 @@ const DEFAULT_LOCALE = process.env.OPTIMIZELY_DEFAULT_LOCALE || 'en';
 // locale serves clean URLs, so it has no segment here.
 const KNOWN_LOCALE_SEGMENTS = LOCALE_SEGMENTS;
 
-// First path segments that bypass locale rewriting entirely.
-// Configure via PROXY_EXCLUDED_PATHS in .env (comma-separated).
-// e.g. PROXY_EXCLUDED_PATHS=preview,DemoHomepages,DemoPrototype
-const EXCLUDED_PATHS = (process.env.PROXY_EXCLUDED_PATHS ?? '')
-  .split(',')
-  .map(s => s.trim())
-  .filter(Boolean);
+// First path segments that bypass locale rewriting entirely. Evaluated once at
+// module load (Node.js runtime — Next.js 16 default) so no build step is needed.
+// Combines manual entries from PROXY_EXCLUDED_PATHS in .env (e.g. "preview")
+// with every directory found under app/(pages)/, which map 1:1 to URL segments.
+// Adding a new app/(pages)/ route only requires a server restart — no code change.
+function buildExcludedPaths(): Set<string> {
+  const manual = (process.env.PROXY_EXCLUDED_PATHS ?? '')
+    .split(',')
+    .map(s => s.trim())
+    .filter(Boolean);
+
+  const pagesDir = join(process.cwd(), 'app', '(pages)');
+  const detected = existsSync(pagesDir)
+    ? readdirSync(pagesDir, { withFileTypes: true })
+        .filter(d => d.isDirectory())
+        .map(d => d.name)
+    : [];
+
+  return new Set([...manual, ...detected]);
+}
+
+const EXCLUDED_PATHS = buildExcludedPaths();
 
 function firstSegment(pathname: string): string {
   return pathname.split('/')[1] ?? '';
@@ -45,7 +62,7 @@ export function proxy(request: NextRequest) {
   // }
 
   // Configured bypass routes — serve as-is without locale rewriting.
-  if (EXCLUDED_PATHS.includes(seg)) {
+  if (EXCLUDED_PATHS.has(seg)) {
     return NextResponse.next();
   }
 
