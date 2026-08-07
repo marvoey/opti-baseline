@@ -15,7 +15,7 @@ export default function SFAHomepages() {
     ];
 
     return (
-        <div className="flex h-screen bg-gray-50 font-sans">
+        <div className="flex h-screen bg-blue-50 font-sans">
             {/* Sidebar */}
             <div className="w-64 bg-white border-r border-gray-200 p-4 flex flex-col gap-2 shadow-sm z-10">
                 <div className="text-xl font-bold text-gray-800 mb-6 px-2">SFA Prototypes</div>
@@ -31,7 +31,7 @@ export default function SFAHomepages() {
                 ))}
             </div>
             {/* Main Content */}
-            <div className="flex-1 overflow-hidden flex items-center justify-center bg-gray-100 p-8">
+            <div className="flex-1 overflow-hidden flex items-center justify-center bg-blue-50 p-8">
                 <div className="w-full max-w-5xl h-full bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200 relative">
                     {activeDemo === 'search' && <SearchFirst />}
                     {activeDemo === 'chat' && <Conversational />}
@@ -98,7 +98,7 @@ function Conversational() {
                         I want to become a member and access resources
                         <ArrowRight className="w-5 h-5 opacity-0 group-hover:opacity-100 transform translate-x-[-10px] group-hover:translate-x-0 transition-all" />
                     </button>
-                    <button className="bg-purple-50 border border-purple-200 text-purple-700 p-4 rounded-xl text-left hover:bg-purple-100 transition-colors font-medium flex justify-between items-center group">
+                    <button className="bg-[#ede8ee] border border-[#c8b6ca] text-[#89688D] p-4 rounded-xl text-left hover:bg-[#e0d4e2] transition-colors font-medium flex justify-between items-center group">
                         I want to attend or exhibit at a Fancy Food Show
                         <ArrowRight className="w-5 h-5 opacity-0 group-hover:opacity-100 transform translate-x-[-10px] group-hover:translate-x-0 transition-all" />
                     </button>
@@ -121,7 +121,7 @@ function Conversational() {
 // 3. Intent Bento
 function IntentBento() {
     return (
-        <div className="h-full bg-gray-900 p-12 overflow-y-auto">
+        <div className="h-full bg-blue-950 p-12 overflow-y-auto">
             <div className="max-w-4xl mx-auto">
                 <h1 className="text-4xl font-bold text-white mb-2">Specialty Food Association</h1>
                 <p className="text-gray-400 text-xl mb-10">How can we support your growth today?</p>
@@ -133,21 +133,21 @@ function IntentBento() {
                         <p className="text-blue-100">Become a member, unlock benefits, and connect with 4,000+ businesses.</p>
                         <div className="mt-8 flex items-center text-white font-medium">Explore Membership <ChevronRight className="w-5 h-5 ml-1" /></div>
                     </div>
-                    <div className="bg-gradient-to-br from-purple-500 to-purple-700 rounded-3xl p-8 cursor-pointer hover:scale-[1.02] transition-transform shadow-lg group relative overflow-hidden">
+                    <div className="bg-gradient-to-br from-[#89688D] to-[#6c5270] rounded-3xl p-8 cursor-pointer hover:scale-[1.02] transition-transform shadow-lg group relative overflow-hidden">
                         <div className="absolute top-0 right-0 -mt-4 -mr-4 w-32 h-32 bg-white opacity-10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700"></div>
                         <Calendar className="w-12 h-12 text-white mb-6" />
                         <h2 className="text-3xl font-bold text-white mb-2">Attend an Event</h2>
                         <p className="text-purple-100">Get tickets or exhibit at the Summer Fancy Food Show &amp; Winter FancyFaire.</p>
                         <div className="mt-8 flex items-center text-white font-medium">View Events <ChevronRight className="w-5 h-5 ml-1" /></div>
                     </div>
-                    <div className="bg-gradient-to-br from-orange-500 to-orange-700 rounded-3xl p-8 cursor-pointer hover:scale-[1.02] transition-transform shadow-lg group relative overflow-hidden">
+                    <div className="bg-gradient-to-br from-[#c95606] to-[#8e0000] rounded-3xl p-8 cursor-pointer hover:scale-[1.02] transition-transform shadow-lg group relative overflow-hidden">
                         <div className="absolute top-0 right-0 -mt-4 -mr-4 w-32 h-32 bg-white opacity-10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700"></div>
                         <Award className="w-12 h-12 text-white mb-6" />
                         <h2 className="text-3xl font-bold text-white mb-2">Apply for Awards</h2>
                         <p className="text-orange-100">Submit your products for the sofi™ Awards or Good Food Awards.</p>
                         <div className="mt-8 flex items-center text-white font-medium">Award Submissions <ChevronRight className="w-5 h-5 ml-1" /></div>
                     </div>
-                    <div className="bg-gradient-to-br from-emerald-500 to-emerald-700 rounded-3xl p-8 cursor-pointer hover:scale-[1.02] transition-transform shadow-lg group relative overflow-hidden">
+                    <div className="bg-gradient-to-br from-[#1DB693] to-[#28807C] rounded-3xl p-8 cursor-pointer hover:scale-[1.02] transition-transform shadow-lg group relative overflow-hidden">
                         <div className="absolute top-0 right-0 -mt-4 -mr-4 w-32 h-32 bg-white opacity-10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700"></div>
                         <BookOpen className="w-12 h-12 text-white mb-6" />
                         <h2 className="text-3xl font-bold text-white mb-2">Learn &amp; Grow</h2>
@@ -182,7 +182,7 @@ function RoleBased() {
                     <span>looking to...</span>
                 </div>
             </div>
-            <div className="flex-1 p-12 bg-gray-50 flex flex-col justify-center">
+            <div className="flex-1 p-12 bg-blue-50 flex flex-col justify-center">
                 {role === 'maker' && (
                     <div className="grid grid-cols-3 gap-6 animate-fade-in-up">
                         <ActionCard icon={<Briefcase/>} title="Join the SFA" desc="Get the resources to scale your brand." color="blue" />
@@ -213,7 +213,7 @@ function ActionCard({ icon, title, desc, color }) {
     const colorClasses = {
         blue: 'text-blue-600 bg-blue-50 border-blue-200 hover:border-blue-400 hover:bg-blue-100',
         orange: 'text-orange-600 bg-orange-50 border-orange-200 hover:border-orange-400 hover:bg-orange-100',
-        purple: 'text-purple-600 bg-purple-50 border-purple-200 hover:border-purple-400 hover:bg-purple-100',
+        purple: 'text-[#89688D] bg-[#ede8ee] border-[#c8b6ca] hover:border-[#89688D] hover:bg-[#e0d4e2]',
         emerald: 'text-emerald-600 bg-emerald-50 border-emerald-200 hover:border-emerald-400 hover:bg-emerald-100',
     };
     return (

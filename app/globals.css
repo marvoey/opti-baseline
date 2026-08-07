@@ -2,8 +2,8 @@
 @plugin "@tailwindcss/typography";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f5f1e8;
+  --foreground: #222222;
 }
 
 @theme inline {
@@ -18,42 +18,43 @@
    * ┌──────────────────────────────────────────────────────────────────────┐
    * │  REBRAND HERE.  This is the whole colour theme for the site.          │
    * │  The Tailwind `blue-*` scale is remapped, so chrome and blocks that   │
-   * │  use `bg-blue-950`, `text-blue-800`, etc. all reskin when you edit    │
-   * │  these ~11 hex values. Set blue-950 = your darkest brand colour and   │
-   * │  blue-800 = your primary; the rest are tints/shades between.          │
+   * │  use `bg-blue-950`, `text-blue-700`, etc. all reskin when you edit    │
+   * │  these ~11 hex values. Set blue-600 = your primary interactive colour.│
    * └──────────────────────────────────────────────────────────────────────┘
    *
-   * Optimizely brand green ramp.
-   * Anchors: Dark Fir #08251a (darkest), LFGreen #abff44 (signature accent).
+   * Specialty Food Association brand teal ramp.
+   * Primary: #2E9791 (interactive teal), #28807C (dark teal hover).
+   * Accent:  #89688D (SFA purple), #FFAD00 (amber).
+   * Dark:    #0B1014 (SFA navy — hero / footer backgrounds).
    */
-  --color-blue-950: #08251a; /* Dark Fir — footer / hero background */
-  --color-blue-900: #0d3a29; /* Mid Fir — header bg */
-  --color-blue-800: #197050; /* Light Fir — primary green, links */
-  --color-blue-700: #3ab533; /* Good-to-go */
-  --color-blue-600: #4dc844;
-  --color-blue-500: #62d84f;
-  --color-blue-400: #7ddd3d; /* Grass */
-  --color-blue-300: #91dbda; /* Light Blue — teal accent */
-  --color-blue-200: #abff44; /* LFGreen — signature bright green */
-  --color-blue-100: #d8e4cb; /* Neutral 4 */
-  --color-blue-50:  #e4f0da; /* Neutral 3 — light wash */
+  --color-blue-950: #0B1014; /* SFA Dark Navy — footer / hero background */
+  --color-blue-900: #1c2e2d; /* Deep dark teal — header bg */
+  --color-blue-800: #1c5956; /* Dark teal */
+  --color-blue-700: #28807C; /* SFA Primary Teal — hover / emphasis */
+  --color-blue-600: #2E9791; /* SFA Interactive Teal — links / CTAs */
+  --color-blue-500: #1DB693; /* SFA Light Teal — accent */
+  --color-blue-400: #96DAF5; /* Sky blue */
+  --color-blue-300: #abdde5; /* Pale blue — focus rings */
+  --color-blue-200: #FFAD00; /* SFA Amber — highlight accent */
+  --color-blue-100: #f5f1e8; /* SFA Warm Off-White */
+  --color-blue-50:  #f0eeeb; /* SFA Light Wash */
 
-  /* Named Optimizely brand tokens for direct use in custom components. */
-  --color-lfgreen:    #abff44;
-  --color-grass:      #7ddd3d;
-  --color-good-to-go: #3ab533;
-  --color-dark-fir:   #08251a;
-  --color-mid-fir:    #0d3a29;
-  --color-light-fir:  #197050;
-  --color-light-blue: #91dbda;
-  --color-neutral-2:  #eff6e9;
-  --color-neutral-3:  #e4f0da;
+  /* Named SFA brand tokens for direct use in custom components. */
+  --color-sfa-teal:        #2E9791;
+  --color-sfa-teal-dark:   #28807C;
+  --color-sfa-teal-light:  #1DB693;
+  --color-sfa-purple:      #89688D;
+  --color-sfa-amber:       #FFAD00;
+  --color-sfa-dark:        #0B1014;
+  --color-sfa-gray:        #545456;
+  --color-sfa-warm-white:  #f5f1e8;
+  --color-sfa-off-white:   #f0eeeb;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #0B1014;
+    --foreground: #f0eeeb;
   }
 }
 

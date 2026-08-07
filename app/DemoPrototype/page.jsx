@@ -7,7 +7,7 @@ export default function SFAHybridDemo() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     return (
-        <div className="flex flex-col min-h-screen bg-gray-50 font-sans">
+        <div className="flex flex-col min-h-screen bg-blue-50 font-sans">
             {/* Top Navigation */}
             <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
                 <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
@@ -23,7 +23,7 @@ export default function SFAHybridDemo() {
                                     <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
                                 </button>
                                 <div className="flex items-center gap-3 pl-4 border-l border-gray-200">
-                                    <div className="w-8 h-8 bg-gradient-to-tr from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-medium text-sm">
+                                    <div className="w-8 h-8 bg-gradient-to-tr from-[#2E9791] to-[#89688D] rounded-full flex items-center justify-center text-white font-medium text-sm">
                                         JD
                                     </div>
                                     <button 
@@ -90,7 +90,7 @@ function UnauthenticatedView() {
             {/* Intent Bento Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {/* Primary Action (Large) */}
-                <div className="lg:col-span-2 lg:row-span-2 bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl p-10 text-white shadow-xl hover:-translate-y-1 transition-transform cursor-pointer group relative overflow-hidden">
+                <div className="lg:col-span-2 lg:row-span-2 bg-gradient-to-br from-[#0B1014] to-[#1c2e2d] rounded-3xl p-10 text-white shadow-xl hover:-translate-y-1 transition-transform cursor-pointer group relative overflow-hidden">
                     <div className="absolute top-0 right-0 -mt-8 -mr-8 w-64 h-64 bg-blue-500 opacity-20 rounded-full blur-3xl group-hover:scale-110 transition-transform duration-700"></div>
                     <Briefcase className="w-12 h-12 text-blue-400 mb-8" />
                     <h2 className="text-4xl font-bold mb-4">Join the Community</h2>
@@ -106,12 +106,12 @@ function UnauthenticatedView() {
 
                 {/* Secondary Actions */}
                 <div className="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer group">
-                    <Calendar className="w-10 h-10 text-purple-600 mb-6 bg-purple-50 p-2 rounded-xl" />
+                    <Calendar className="w-10 h-10 text-[#89688D] mb-6 bg-[#ede8ee] p-2 rounded-xl" />
                     <h3 className="text-xl font-bold text-gray-900 mb-2">Winter FancyFaire</h3>
                     <p className="text-gray-500 text-sm mb-6">
                         {role === 'maker' ? "Exhibit your products to thousands of buyers." : "Discover the next big specialty items."}
                     </p>
-                    <div className="flex items-center text-purple-600 font-medium text-sm">
+                    <div className="flex items-center text-[#89688D] font-medium text-sm">
                         {role === 'maker' ? "Book a Booth" : "Register to Attend"} <ChevronRight className="w-4 h-4 ml-1" />
                     </div>
                 </div>
@@ -127,14 +127,14 @@ function UnauthenticatedView() {
                     </div>
                 </div>
 
-                <div className="lg:col-span-2 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-3xl p-8 text-white shadow-lg hover:-translate-y-1 transition-transform cursor-pointer flex flex-col md:flex-row items-start md:items-center justify-between group overflow-hidden relative">
-                    <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+                <div className="lg:col-span-2 bg-gradient-to-r from-[#1DB693] to-[#28807C] rounded-3xl p-8 text-white shadow-lg hover:-translate-y-1 transition-transform cursor-pointer flex flex-col md:flex-row items-start md:items-center justify-between group overflow-hidden relative">
+                    <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle,_white_1px,_transparent_1px)] bg-[length:20px_20px]"></div>
                     <div className="relative z-10">
-                        <BookOpen className="w-10 h-10 text-emerald-100 mb-4" />
+                        <BookOpen className="w-10 h-10 text-white/80 mb-4" />
                         <h3 className="text-2xl font-bold mb-2">Consumer Outlook 2026</h3>
-                        <p className="text-emerald-50">Download our latest trend report and market data.</p>
+                        <p className="text-white/90">Download our latest trend report and market data.</p>
                     </div>
-                    <button className="relative z-10 mt-6 md:mt-0 bg-white text-emerald-600 px-6 py-3 rounded-full font-bold shadow-sm hover:shadow-md transition-shadow flex items-center">
+                    <button className="relative z-10 mt-6 md:mt-0 bg-white text-[#28807C] px-6 py-3 rounded-full font-bold shadow-sm hover:shadow-md transition-shadow flex items-center">
                         Get the Report <ArrowRight className="w-4 h-4 ml-2" />
                     </button>
                 </div>
@@ -222,11 +222,11 @@ function AuthenticatedView() {
                     </div>
 
                     {/* Dedicated CTA Bento */}
-                    <div className="bg-gradient-to-br from-purple-600 to-indigo-700 rounded-3xl p-8 text-white shadow-md relative overflow-hidden group cursor-pointer">
+                    <div className="bg-gradient-to-br from-[#89688D] to-[#6c5270] rounded-3xl p-8 text-white shadow-md relative overflow-hidden group cursor-pointer">
                         <div className="absolute -right-10 -bottom-10 w-40 h-40 bg-white opacity-10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700"></div>
-                        <Calendar className="w-10 h-10 text-purple-200 mb-4" />
+                        <Calendar className="w-10 h-10 text-white/70 mb-4" />
                         <h3 className="text-2xl font-bold mb-2">Winter FancyFaire</h3>
-                        <p className="text-purple-100 text-sm mb-8">Your exhibitor portal is ready. Finalize your booth details by Oct 15th.</p>
+                        <p className="text-white/80 text-sm mb-8">Your exhibitor portal is ready. Finalize your booth details by Oct 15th.</p>
                         <div className="bg-white/20 hover:bg-white/30 transition-colors backdrop-blur-sm py-2 px-4 rounded-xl inline-flex items-center font-medium text-sm border border-white/20">
                             Go to Portal <ArrowRight className="w-4 h-4 ml-2" />
                         </div>
