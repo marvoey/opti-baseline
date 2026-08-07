@@ -1,0 +1,206 @@
+{
+  "contentTypes": [
+    {
+      "name": "EventLandingPage",
+      "displayName": "Event Landing Page",
+      "description": "Standard landing page used for SFA Homepage, FancyFaire, and Awards pages.",
+      "type": "PageType",
+      "properties": [
+        {
+          "name": "Title",
+          "displayName": "Meta Title",
+          "type": "PropertyString",
+          "required": true
+        },
+        {
+          "name": "MainContentArea",
+          "displayName": "Main Content Area",
+          "description": "Drag and drop layout and content blocks here.",
+          "type": "PropertyContentArea",
+          "required": false
+        },
+        {
+          "name": "SidebarContentArea",
+          "displayName": "Sidebar Content Area",
+          "description": "Used for sidebar navigation and ads on pages like sofi Awards.",
+          "type": "PropertyContentArea",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "HeroBannerBlock",
+      "displayName": "Hero Banner Block",
+      "description": "Full width hero with optional video background, text, and CTAs.",
+      "type": "BlockType",
+      "properties": [
+        {
+          "name": "Heading",
+          "displayName": "Heading (H1)",
+          "type": "PropertyString"
+        },
+        {
+          "name": "Subtext",
+          "displayName": "Subtext",
+          "type": "PropertyXhtmlString"
+        },
+        {
+          "name": "BackgroundImage",
+          "displayName": "Background Image",
+          "type": "PropertyContentReference"
+        },
+        {
+          "name": "BackgroundVideoUrl",
+          "displayName": "Background Video URL",
+          "type": "PropertyUrl"
+        },
+        {
+          "name": "PrimaryCtaLink",
+          "displayName": "Primary CTA",
+          "type": "PropertyUrl"
+        },
+        {
+          "name": "PrimaryCtaText",
+          "displayName": "Primary CTA Text",
+          "type": "PropertyString"
+        }
+      ]
+    },
+    {
+      "name": "TwoColumnSplitBlock",
+      "displayName": "Two Column Layout Block",
+      "description": "Split layout for text and media. Reversible alignment.",
+      "type": "BlockType",
+      "properties": [
+        {
+          "name": "MediaAlignment",
+          "displayName": "Media Alignment",
+          "type": "PropertyString",
+          "description": "Left or Right"
+        },
+        {
+          "name": "LeftContentArea",
+          "displayName": "Left Content",
+          "type": "PropertyContentArea"
+        },
+        {
+          "name": "RightContentArea",
+          "displayName": "Right Content",
+          "type": "PropertyContentArea"
+        }
+      ]
+    },
+    {
+      "name": "RichTextBlock",
+      "displayName": "Rich Text Block",
+      "description": "Standard WYSIWYG text block with theme color options.",
+      "type": "BlockType",
+      "properties": [
+        {
+          "name": "MainBody",
+          "displayName": "Body Content",
+          "type": "PropertyXhtmlString"
+        },
+        {
+          "name": "BackgroundColor",
+          "displayName": "Background Theme Color",
+          "type": "PropertyString",
+          "description": "e.g., Default, LightGold, DarkBlue"
+        }
+      ]
+    },
+    {
+      "name": "AlertCalloutBlock",
+      "displayName": "Alert / Promo Banner Block",
+      "description": "Inline callout for deadlines or sponsor promos.",
+      "type": "BlockType",
+      "properties": [
+        {
+          "name": "CalloutTitle",
+          "displayName": "Alert Title",
+          "type": "PropertyString"
+        },
+        {
+          "name": "Message",
+          "displayName": "Alert Message",
+          "type": "PropertyXhtmlString"
+        },
+        {
+          "name": "ThemeStyle",
+          "displayName": "Theme Style",
+          "type": "PropertyString"
+        }
+      ]
+    },
+    {
+      "name": "MetricCardBlock",
+      "displayName": "Metric / KPI Card",
+      "description": "Used in multi-column grids to show event stats.",
+      "type": "BlockType",
+      "properties": [
+        {
+          "name": "MetricNumber",
+          "displayName": "Large Number / Stat",
+          "type": "PropertyString"
+        },
+        {
+          "name": "MetricLabel",
+          "displayName": "Label",
+          "type": "PropertyString"
+        },
+        {
+          "name": "IconAsset",
+          "displayName": "Icon Image",
+          "type": "PropertyContentReference"
+        }
+      ]
+    },
+    {
+      "name": "DynamicCarouselBlock",
+      "displayName": "Dynamic Carousel / Slider",
+      "description": "Container for sliders (Testimonials, Profiles, Galleries).",
+      "type": "BlockType",
+      "properties": [
+        {
+          "name": "CarouselTitle",
+          "displayName": "Section Title",
+          "type": "PropertyString"
+        },
+        {
+          "name": "Items",
+          "displayName": "Carousel Items",
+          "type": "PropertyContentArea",
+          "description": "Accepts Profile Blocks, Image Blocks, or Testimonial Blocks"
+        },
+        {
+          "name": "ShowNavigation",
+          "displayName": "Show Arrows/Dots",
+          "type": "PropertyBoolean"
+        }
+      ]
+    },
+    {
+      "name": "IframeEmbedBlock",
+      "displayName": "External Embed Block",
+      "description": "Embeds YouTube, Ceros, or Ad Banners.",
+      "type": "BlockType",
+      "properties": [
+        {
+          "name": "EmbedTitle",
+          "displayName": "Internal Title",
+          "type": "PropertyString"
+        },
+        {
+          "name": "IframeUrl",
+          "displayName": "Source URL",
+          "type": "PropertyUrl"
+        },
+        {
+          "name": "Height",
+          "displayName": "Height (px)",
+          "type": "PropertyNumber"
+        }
+      ]
+    }
+  ]
+}
