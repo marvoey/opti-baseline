@@ -114,13 +114,13 @@ export default function ContentTypeExplorer({
               onClick={() => selectTab(g.baseType)}
               className={`rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${
                 isActive
-                  ? 'bg-slate-900 text-white'
+                  ? 'bg-blue-900 text-white'
                   : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
               }`}
             >
               {g.label}
               <span
-                className={`ml-1.5 text-xs ${isActive ? 'text-slate-300' : 'text-slate-400'}`}
+                className={`ml-1.5 text-xs ${isActive ? 'text-blue-300' : 'text-slate-400'}`}
               >
                 {g.types.length}
               </span>

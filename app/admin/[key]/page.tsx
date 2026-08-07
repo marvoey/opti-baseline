@@ -118,13 +118,13 @@ function ContentTypeDetail({
         {ct.compositionBehaviors?.map((b) => (
           <span
             key={b}
-            className="rounded-full bg-emerald-50 px-2.5 py-0.5 text-xs font-medium text-emerald-700"
+            className="rounded-full bg-blue-500/10 px-2.5 py-0.5 text-xs font-medium text-blue-500"
           >
             {b}
           </span>
         ))}
         {mayContain.length > 0 && (
-          <span className="rounded-full bg-sky-50 px-2.5 py-0.5 text-xs font-medium text-sky-700">
+          <span className="rounded-full bg-blue-400/15 px-2.5 py-0.5 text-xs font-medium text-blue-700">
             may contain: {mayContain.join(', ')}
           </span>
         )}

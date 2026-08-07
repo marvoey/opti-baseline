@@ -21,13 +21,13 @@ export default function Error({
 
   return (
     <main className="mx-auto flex min-h-[50vh] max-w-2xl flex-col items-center justify-center px-6 py-24 text-center">
-      <h1 className="text-2xl font-bold text-slate-900">Something went wrong</h1>
-      <p className="mt-3 text-slate-600">
+      <h1 className="text-2xl font-bold text-foreground">Something went wrong</h1>
+      <p className="mt-3 text-foreground/60">
         We hit an unexpected error loading this page. Please try again.
       </p>
       <button
         onClick={reset}
-        className="mt-8 rounded-full bg-blue-800 px-6 py-3 font-bold text-white transition-colors hover:bg-blue-900"
+        className="mt-8 rounded-full bg-blue-700 px-6 py-3 font-bold text-white transition-colors hover:bg-blue-800"
       >
         Try again
       </button>

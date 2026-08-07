@@ -107,7 +107,7 @@ export default async function AdminPage({ searchParams }: Props) {
         subtitle={
           <>
             {contentTypes.length} type{contentTypes.length === 1 ? '' : 's'} in the CMS ·{' '}
-            <span className="font-medium text-indigo-700">{registeredCount} registered</span> in
+            <span className="font-medium text-blue-600">{registeredCount} registered</span> in
             this codebase.
           </>
         }

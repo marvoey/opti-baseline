@@ -24,14 +24,18 @@ async function Page({ searchParams }: Props) {
   const params = (await searchParams) as unknown as PreviewParams;
   const content = await getClient().getPreviewContent(params);
 
-  const injectorSrc = new URL(
-    '/util/javascript/communicationinjector.js',
-    process.env.OPTIMIZELY_CMS_URL,
-  ).href;
+  // OPTIMIZELY_CMS_URL is the authoritative server-side var; fall back to the
+  // NEXT_PUBLIC_ variant (available at build time on Vercel) if the server-only
+  // one isn't set. Skip the script entirely rather than crashing with Invalid URL.
+  const cmsBase =
+    process.env.OPTIMIZELY_CMS_URL ?? process.env.NEXT_PUBLIC_OPTIMIZELY_CMS_URL;
+  const injectorSrc = cmsBase
+    ? new URL('/util/javascript/communicationinjector.js', cmsBase).href
+    : null;
 
   return (
     <>
-      <Script src={injectorSrc} strategy="afterInteractive" />
+      {injectorSrc && <Script src={injectorSrc} strategy="afterInteractive" />}
       <PreviewComponent />
       <OptimizelyComponent content={content} />
     </>

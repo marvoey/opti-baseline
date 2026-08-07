@@ -12,72 +12,72 @@ export type FooterColumn = { heading: string; links: NavLink[] };
 
 export const siteConfig = {
   /** Used for the document <title> fallback and the logo alt text. */
-  name: 'Optimizely',
+  name: 'Specialty Food Association',
   /** Default browser-tab title (per-page titles override via CMS MetaTitle). */
-  title: 'Optimizely | Digital Experience Platform',
+  title: 'Specialty Food Association | The Business of Specialty Food',
   /** Default meta description. */
   description:
-    'Optimizely — the digital experience platform that helps teams create, test, and optimize digital experiences at scale.',
+    'The Specialty Food Association is the leading trade organization for specialty food makers, importers, and buyers. Discover awards, events, and industry resources.',
 
   /** Header logo (place the asset in /public). */
-  logoSrc: '/Optimizely_Primary-Logo_Medium_Green_RGB.png',
-  logoAlt: 'Optimizely',
+  logoSrc: '/logo.svg',
+  logoAlt: 'Specialty Food Association',
 
   /** Top utility bar. */
   topNavLinks: [
-    { label: 'Partners', href: '#' },
-    { label: 'Support', href: '#' },
+    { label: 'Member Resources', href: '#' },
+    { label: 'Industry Insights', href: '#' },
   ] satisfies NavLink[],
 
   /** Primary header navigation. */
   mainNavLinks: [
-    { label: 'Products', href: '#' },
-    { label: 'Solutions', href: '#' },
-    { label: 'Customers', href: '#' },
+    { label: 'Membership', href: '#' },
+    { label: 'Events', href: '#' },
+    { label: 'Awards', href: '#' },
+    { label: 'News', href: '#' },
     { label: 'Resources', href: '#' },
-    { label: 'Pricing', href: '#' },
   ] satisfies NavLink[],
   /** Header call-to-action button. */
-  primaryCta: { label: 'Get started free', href: '#' } satisfies NavLink,
+  primaryCta: { label: 'Become a Member', href: '#' } satisfies NavLink,
   /** Account / login button label. */
   accountLabel: 'Log in',
 
   /** Footer. */
   footerTagline:
-    'Create, test, and optimize digital experiences that turn visitors into loyal customers.',
+    'The definitive community for specialty food professionals — connecting makers, buyers, and innovators since 1952.',
   footerColumns: [
     {
-      heading: 'Products',
+      heading: 'Membership',
       links: [
-        { label: 'Content Management', href: '#' },
-        { label: 'Experimentation', href: '#' },
-        { label: 'Commerce', href: '#' },
-        { label: 'Personalization', href: '#' },
+        { label: 'Join Today', href: '#' },
+        { label: 'Member Benefits', href: '#' },
+        { label: 'Find a Member', href: '#' },
+        { label: 'Renew Membership', href: '#' },
       ],
     },
     {
-      heading: 'Solutions',
+      heading: 'Events & Shows',
       links: [
-        { label: 'B2B Commerce', href: '#' },
-        { label: 'B2C Commerce', href: '#' },
-        { label: 'Digital Marketing', href: '#' },
-        { label: 'Customer Journeys', href: '#' },
+        { label: 'Summer Fancy Food Show', href: '#' },
+        { label: 'Winter FancyFaire', href: '#' },
+        { label: 'sofi™ Awards', href: '#' },
+        { label: 'All Events', href: '#' },
       ],
     },
     {
       heading: 'Resources',
       links: [
-        { label: 'Blog', href: '#' },
-        { label: 'Documentation', href: '#' },
-        { label: 'Community', href: '#' },
-        { label: 'Webinars', href: '#' },
+        { label: 'State of the Industry', href: '#' },
+        { label: 'Trendspotter Report', href: '#' },
+        { label: 'SFA Blog', href: '#' },
+        { label: 'Supplier Directory', href: '#' },
       ],
     },
   ] satisfies FooterColumn[],
-  footerLegal: `© ${2026} Optimizely. All rights reserved.`,
+  footerLegal: `© ${2026} Specialty Food Association. All rights reserved.`,
   footerLegalLinks: [
     { label: 'Privacy Policy', href: '#' },
-    { label: 'Terms of Service', href: '#' },
+    { label: 'Terms of Use', href: '#' },
     { label: 'Cookie Settings', href: '#' },
   ] satisfies NavLink[],
 } as const;

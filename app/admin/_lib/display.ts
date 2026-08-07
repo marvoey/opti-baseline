@@ -66,7 +66,7 @@ export function statusBadge({ registered, inCms }: TypeStatus): {
     return { label: 'Code only', className: 'bg-amber-50 text-amber-700' };
   }
   if (registered) {
-    return { label: 'Code + CMS', className: 'bg-indigo-50 text-indigo-700' };
+    return { label: 'Code + CMS', className: 'bg-blue-600/10 text-blue-600' };
   }
   return { label: 'CMS only', className: 'bg-slate-100 text-slate-500' };
 }
