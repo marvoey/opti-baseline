@@ -24,17 +24,34 @@ export const RichTextContentType = contentType({
       isLocalized: true,
       sortOrder: 10,
     },
+    BackgroundColor: {
+      type: 'string',
+      displayName: 'Background Theme Color',
+      description: 'e.g. Default, LightGold, DarkBlue',
+      sortOrder: 15,
+      enum: [
+        { value: 'Default',   displayName: 'Default (White)' },
+        { value: 'LightGold', displayName: 'Light Gold' },
+        { value: 'DarkBlue',  displayName: 'Dark Blue' },
+      ],
+    },
   },
 });
+
+const BG_CLASS: Record<string, string> = {
+  LightGold: 'bg-amber-50',
+  DarkBlue:  'bg-blue-900 text-white [&_.prose]:prose-invert',
+};
 
 type Props = { content: ContentProps<typeof RichTextContentType> };
 
 export default function RichText({ content }: Props) {
   const { pa } = getPreviewUtils(content);
   const block = (content as { __composition?: { key: string } }).__composition;
+  const bgClass = BG_CLASS[content.BackgroundColor ?? ''] ?? '';
 
   return (
-    <section {...pa(block)} className="w-full px-6 py-12">
+    <section {...pa(block)} className={`w-full px-6 py-12 ${bgClass}`}>
       <div {...pa('Body')} className={`prose mx-auto ${widthClass(content.BlockWidth)}`}>
         <RichTextRenderer content={content.Body?.json} />
       </div>

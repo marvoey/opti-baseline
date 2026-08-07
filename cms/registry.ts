@@ -15,6 +15,16 @@ import RichText, { RichTextContentType } from './RichText';
 import DemoPhaseBlock, { DemoPhaseBlockContentType } from './DemoPhaseBlock';
 import DemoScriptPage, { DemoScriptPageContentType } from './DemoScriptPage';
 
+// SFA Modular Component System
+import HeroBannerBlock, { HeroBannerBlockContentType } from './sfa/HeroBannerBlock';
+import TwoColumnSplitBlock, { TwoColumnSplitBlockContentType } from './sfa/TwoColumnSplitBlock';
+import AlertCalloutBlock, { AlertCalloutBlockContentType } from './sfa/AlertCalloutBlock';
+import MetricCardBlock, { MetricCardBlockContentType } from './sfa/MetricCardBlock';
+import DynamicCarouselBlock, { DynamicCarouselBlockContentType } from './sfa/DynamicCarouselBlock';
+import IframeEmbedBlock, { IframeEmbedBlockContentType } from './sfa/IframeEmbedBlock';
+import ImageGalleryBlock, { ImageGalleryBlockContentType } from './sfa/ImageGalleryBlock';
+import MultiColumnGridContainer, { MultiColumnGridContainerContentType } from './sfa/MultiColumnGridContainer';
+
 /**
  * Single configuration + registration point for the Optimizely SDK.
  * Imported for side effects by app/layout.tsx.
@@ -55,6 +65,15 @@ export const registeredContentTypes = [
   DemoPhaseBlockContentType,
   // Pages
   DemoScriptPageContentType,
+  // SFA Modular Component System
+  HeroBannerBlockContentType,
+  TwoColumnSplitBlockContentType,
+  AlertCalloutBlockContentType,
+  MetricCardBlockContentType,
+  DynamicCarouselBlockContentType,
+  IframeEmbedBlockContentType,
+  ImageGalleryBlockContentType,
+  MultiColumnGridContainerContentType,
 ];
 
 initContentTypeRegistry(registeredContentTypes);
@@ -72,5 +91,14 @@ initReactComponentRegistry({
     RichTextBlock: RichText,
     DemoPhaseBlock,
     DemoScriptPage,
+    // SFA Modular Component System
+    SFA_HeroBannerBlock: HeroBannerBlock,
+    SFA_TwoColumnSplitBlock: TwoColumnSplitBlock,
+    SFA_AlertCalloutBlock: AlertCalloutBlock,
+    SFA_MetricCardBlock: MetricCardBlock,
+    SFA_DynamicCarouselBlock: DynamicCarouselBlock,
+    SFA_IframeEmbedBlock: IframeEmbedBlock,
+    SFA_ImageGalleryBlock: ImageGalleryBlock,
+    SFA_MultiColumnGridContainer: MultiColumnGridContainer,
   },
 });
