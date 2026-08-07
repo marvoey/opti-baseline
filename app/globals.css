@@ -39,6 +39,15 @@
   --color-blue-100: #f5f1e8; /* SFA Warm Off-White */
   --color-blue-50:  #f0eeeb; /* SFA Light Wash */
 
+  /* Optimizely brand tokens — used by DemoScriptPage and DemoPhaseBlock. */
+  --color-opti-green:      #ABFF44;
+  --color-opti-grass:      #7DDD3D;
+  --color-opti-good:       #3AB533;
+  --color-opti-dark:       #08251A;
+  --color-opti-n3:         #E4F0DA;
+  --color-opti-light-blue: #91DBDA;
+  --radius-opti:           32px;
+
   /* Named SFA brand tokens for direct use in custom components. */
   --color-sfa-teal:        #2E9791;
   --color-sfa-teal-dark:   #28807C;
@@ -97,4 +106,26 @@ a:not([class]):hover {
   outline: 2px solid var(--color-sfa-teal);
   outline-offset: 2px;
   border-radius: 2px;
+}
+
+/* DemoScriptPage utilities */
+.talk-track {
+  border-left: 4px solid #ABFF44;
+  background-color: #E4F0DA;
+  color: #08251A;
+  position: relative;
+}
+.talk-track::before {
+  content: '\201C';
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  font-size: 3rem;
+  color: rgba(171, 255, 68, 0.3);
+  font-family: serif;
+}
+.gradient-text {
+  background: linear-gradient(90deg, #3AB533, #ABFF44);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

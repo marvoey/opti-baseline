@@ -12,6 +12,8 @@ import ExperiencePage, { ExperiencePageContentType } from './ExperiencePage';
 import BlankSection from './BlankSection';
 import Page, { PageContentType } from './Page';
 import RichText, { RichTextContentType } from './RichText';
+import DemoPhaseBlock, { DemoPhaseBlockContentType } from './DemoPhaseBlock';
+import DemoScriptPage, { DemoScriptPageContentType } from './DemoScriptPage';
 
 /**
  * Single configuration + registration point for the Optimizely SDK.
@@ -50,6 +52,9 @@ export const registeredContentTypes = [
   PageContentType,
   // Blocks
   RichTextContentType,
+  DemoPhaseBlockContentType,
+  // Pages
+  DemoScriptPageContentType,
 ];
 
 initContentTypeRegistry(registeredContentTypes);
@@ -65,5 +70,7 @@ initReactComponentRegistry({
     Page,
     // Blocks (resolver key === content-type key)
     RichTextBlock: RichText,
+    DemoPhaseBlock,
+    DemoScriptPage,
   },
 });
