@@ -2,7 +2,7 @@ import { displayTemplate, BlankSectionContentType, type ContentProps } from '@op
 import type { StructureContainerProps } from '@optimizely/cms-sdk/react/server';
 import { OptimizelyGridSection, getPreviewUtils } from '@optimizely/cms-sdk/react/server';
 import { ComponentWrapper } from './wrappers';
-import { sfaContainerWidthSettings } from './sfa/sfaDisplaySettings';
+import { sfaContainerWidthSettings, containerWidthClass } from './sfa/sfaDisplaySettings';
 
 export const BlankSectionDisplayTemplate = displayTemplate({
   key: 'BlankSectionDefault',
@@ -23,12 +23,12 @@ export default function BlankSection({ content, displaySettings }: Props) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { pa } = getPreviewUtils(content as any);
   const nodes = content.nodes ?? [];
-  const constrained = displaySettings?.containerWidth === 'constrained';
+  const widthClass = containerWidthClass(displaySettings?.containerWidth);
 
   function SectionRow({ node, children }: StructureContainerProps) {
     const hasColumns = (node.nodes?.length ?? 0) > 0;
     return (
-      <div {...pa(node)} className="flex gap-4 w-full">
+      <div {...pa(node)} className="flex flex-col md:flex-row gap-4 w-full">
         {hasColumns ? children : (
           <p className="flex-1 border border-dashed border-gray-300 rounded p-4 text-sm text-gray-400 text-center">
             This row has no columns yet
@@ -63,7 +63,7 @@ export default function BlankSection({ content, displaySettings }: Props) {
   return (
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     <section {...pa(content as any)} className="w-full">
-      <div className={constrained ? 'mx-auto max-w-3xl' : undefined}>
+      <div className={widthClass}>
         <OptimizelyGridSection
           nodes={nodes}
           row={SectionRow}
