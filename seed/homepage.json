@@ -1,0 +1,402 @@
+{
+  "displayName": "Homepage",
+  "routeSegment": "",
+  "locale": "en",
+  "composition": {
+    "nodeType": "experience",
+    "layoutType": "outline",
+    "nodes": [
+      {
+        "nodeType": "section",
+        "displayName": "Hero Carousel",
+        "layoutType": "grid",
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "SFA_HeroBannerBlock",
+                      "properties": {
+                        "Heading": { "value": "Winter FancyFaire® 2027" },
+                        "Subtext": {
+                          "value": {
+                            "html": "<p>Join the specialty food community to kick off 2027 in one of the world's great food cities: San Francisco. Elevate your trade show experience with offsite sampling, unstructured networking, and local immersion.</p><p><strong>January 17–19 in San Francisco, CA</strong></p>"
+                          }
+                        },
+                        "PrimaryCtaText": { "value": "Attend" },
+                        "PrimaryCtaLink": { "value": "https://www.specialtyfood.com/events/winter-fancyfaire/attend/" }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "SFA_HeroBannerBlock",
+                      "properties": {
+                        "Heading": { "value": "2027 sofi™ Awards" },
+                        "Subtext": {
+                          "value": {
+                            "html": "<p>Applications open through July 31, 2026! Submit your products for food's most coveted trophy. Both finalists and winners will be featured and celebrated at Winter FancyFaire® 2027, January 17–19 in San Francisco!</p>"
+                          }
+                        },
+                        "PrimaryCtaText": { "value": "Learn More" },
+                        "PrimaryCtaLink": { "value": "https://www.specialtyfood.com/awards/sofi-awards/" }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nodeType": "section",
+        "displayName": "Premier Provider Benefits",
+        "layoutType": "grid",
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "SFA_AlertCalloutBlock",
+                      "properties": {
+                        "CalloutTitle": { "value": "Premier Provider Benefits" },
+                        "Message": {
+                          "value": {
+                            "html": "<p>Explore exclusive discounts and opportunities from our Premier Providers.</p>"
+                          }
+                        },
+                        "ThemeStyle": { "value": "promo" }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nodeType": "section",
+        "displayName": "About SFA",
+        "layoutType": "grid",
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "RichTextBlock",
+                      "properties": {
+                        "Body": {
+                          "value": {
+                            "html": "<h2>About SFA</h2><p>The Specialty Food Association is a non-profit trade group within the <strong>$219-billion</strong> specialty food industry. Founded in <strong>1952</strong> and representing more than <strong>4,000 businesses</strong>, SFA produces events, programs, and education to support, connect, and champion our diverse member community. We proudly represent food makers, buyers, importers, distributors, and more from all over the world and all walks of life.</p><p><a href='/membership/become-a-member'>Become a Member</a> &nbsp; <a href='/membership/member-directory'>Member Directory</a></p>"
+                          }
+                        },
+                        "BlockWidth": { "value": "medium" },
+                        "BackgroundColor": { "value": "Default" }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nodeType": "section",
+        "displayName": "SFA by the Numbers",
+        "layoutType": "grid",
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "SFA_MetricCardBlock",
+                      "properties": {
+                        "MetricNumber": { "value": "$219B" },
+                        "MetricLabel": { "value": "specialty food industry" }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "SFA_MetricCardBlock",
+                      "properties": {
+                        "MetricNumber": { "value": "1952" },
+                        "MetricLabel": { "value": "year founded" }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "SFA_MetricCardBlock",
+                      "properties": {
+                        "MetricNumber": { "value": "4,000+" },
+                        "MetricLabel": { "value": "member businesses" }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nodeType": "section",
+        "displayName": "Good Food Foundation Integration",
+        "layoutType": "grid",
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "SFA_AlertCalloutBlock",
+                      "properties": {
+                        "CalloutTitle": { "value": "SFA Welcomes Former Good Food Members" },
+                        "Message": {
+                          "value": {
+                            "html": "<p>The Specialty Food Association has completed its Good Food Foundation integration. “We at SFA are beyond excited about the opportunity to work with Good Food crafters and retailers in new ways following this integration.” — Mary Beth Vultee, SVP of Membership at SFA. <a href='/news/good-food-foundation-integration'>Learn More</a></p>"
+                          }
+                        },
+                        "ThemeStyle": { "value": "info" }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nodeType": "section",
+        "displayName": "Member Exclusive Resources",
+        "layoutType": "grid",
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "RichTextBlock",
+                      "properties": {
+                        "Body": {
+                          "value": {
+                            "html": "<h2>Member Exclusive Resources</h2><h3>Exclusive Education and Insights for SFA Members</h3><p>Stay ahead in the specialty food industry with exclusive access to expert-led webinars, practical resources, and strategic insights—created just for SFA members. From food safety to sales strategy.</p><p><a href='/news/member-resources'>Learn More</a></p>"
+                          }
+                        },
+                        "BlockWidth": { "value": "medium" },
+                        "BackgroundColor": { "value": "LightGold" }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nodeType": "section",
+        "displayName": "Member Press Releases",
+        "layoutType": "grid",
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "RichTextBlock",
+                      "properties": {
+                        "Body": {
+                          "value": {
+                            "html": "<p><strong>Aug 07, 2026 — Heray Spice</strong></p><p>Heray Spice Launches Alcohol-Free Saffron Extract Drops</p><p><a href='/news/member-press-releases'>Read More</a></p>"
+                          }
+                        },
+                        "BlockWidth": { "value": "full" },
+                        "BackgroundColor": { "value": "Default" }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "RichTextBlock",
+                      "properties": {
+                        "Body": {
+                          "value": {
+                            "html": "<p><strong>Aug 07, 2026 — PRiMO</strong></p><p>PRiMO Introduces Professional Size Fruit Spreads</p><p><a href='/news/member-press-releases'>Read More</a></p>"
+                          }
+                        },
+                        "BlockWidth": { "value": "full" },
+                        "BackgroundColor": { "value": "Default" }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "RichTextBlock",
+                      "properties": {
+                        "Body": {
+                          "value": {
+                            "html": "<p><strong>Aug 07, 2026 — Maison Roucadil</strong></p><p>Maison Roucadil Brings 130 Years of French Culinary Heritage to U.S. Market</p><p><a href='/news/member-press-releases'>Read More</a></p>"
+                          }
+                        },
+                        "BlockWidth": { "value": "full" },
+                        "BackgroundColor": { "value": "Default" }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nodeType": "section",
+        "displayName": "Latest News",
+        "layoutType": "grid",
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "RichTextBlock",
+                      "properties": {
+                        "Body": {
+                          "value": {
+                            "html": "<p><strong>Aug 03, 2026</strong></p><p>DANDS Snacks Simplify Back-to-School for Quality-Conscious Families</p><p><a href='/news'>Read More</a></p>"
+                          }
+                        },
+                        "BlockWidth": { "value": "full" },
+                        "BackgroundColor": { "value": "Default" }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "RichTextBlock",
+                      "properties": {
+                        "Body": {
+                          "value": {
+                            "html": "<p><strong>Jul 23, 2026</strong></p><p>Buzzworthy: Moka Energy's Coffee Bean Bars Upended Expectations at the 2026 Summer Fancy Food Show</p><p><a href='/news'>Read More</a></p>"
+                          }
+                        },
+                        "BlockWidth": { "value": "full" },
+                        "BackgroundColor": { "value": "Default" }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "RichTextBlock",
+                      "properties": {
+                        "Body": {
+                          "value": {
+                            "html": "<p><strong>Jul 15, 2026</strong></p><p>From Monaco to Jamaica to Cyprus, 17 Global Nations Represented Among Newest Members of the Specialty Food Association</p><p><a href='/news'>Read More</a></p>"
+                          }
+                        },
+                        "BlockWidth": { "value": "full" },
+                        "BackgroundColor": { "value": "Default" }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

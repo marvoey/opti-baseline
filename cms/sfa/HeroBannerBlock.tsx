@@ -7,7 +7,7 @@ export const HeroBannerBlockContentType = contentType({
   baseType: '_component',
   displayName: '(_SFA) Hero Banner Block',
   description: 'Full width hero with optional video background, text, and CTAs.',
-  compositionBehaviors: ['elementEnabled'],
+  compositionBehaviors: ['sectionEnabled', 'elementEnabled'],
   properties: {
     Heading: {
       type: 'string',
