@@ -1,5 +1,6 @@
-import { contentType, type ContentProps } from '@optimizely/cms-sdk';
+import { contentType, displayTemplate, type ContentProps } from '@optimizely/cms-sdk';
 import { getPreviewUtils } from '@optimizely/cms-sdk/react/server';
+import { sfaContainerWidthSettings } from './sfaDisplaySettings';
 
 export const ImageGalleryBlockContentType = contentType({
   key: 'SFA_ImageGalleryBlock',
@@ -32,48 +33,62 @@ export const ImageGalleryBlockContentType = contentType({
   },
 });
 
-type Props = { content: ContentProps<typeof ImageGalleryBlockContentType> };
+export const ImageGalleryBlockDisplayTemplate = displayTemplate({
+  key: 'SFA_ImageGalleryBlockDefault',
+  contentType: 'SFA_ImageGalleryBlock',
+  isDefault: true,
+  displayName: 'Image Gallery / Grid Block',
+  settings: sfaContainerWidthSettings,
+});
 
-export default function ImageGalleryBlock({ content }: Props) {
+type Props = {
+  content: ContentProps<typeof ImageGalleryBlockContentType>;
+  displaySettings?: ContentProps<typeof ImageGalleryBlockDisplayTemplate>;
+};
+
+export default function ImageGalleryBlock({ content, displaySettings }: Props) {
   const { pa } = getPreviewUtils(content);
   const block = (content as { __composition?: { key: string } }).__composition;
   const images = content.Images ?? [];
   const isMasonry = content.Layout === 'masonry';
+  const constrained = displaySettings?.containerWidth === 'constrained';
 
   return (
-    <figure {...pa(block)} className="w-full py-8">
-      {isMasonry ? (
-        <div {...pa('Images')} className="columns-2 md:columns-3 gap-4 space-y-4">
-          {images.map((img, i) => (
-            img?.url?.default && (
-              <img
-                key={i}
-                src={img.url.default}
-                alt=""
-                className="w-full rounded-md break-inside-avoid"
-              />
-            )
-          ))}
-        </div>
-      ) : (
-        <div {...pa('Images')} className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          {images.map((img, i) => (
-            img?.url?.default && (
-              <img
-                key={i}
-                src={img.url.default}
-                alt=""
-                className="w-full aspect-square object-cover rounded-md"
-              />
-            )
-          ))}
-        </div>
-      )}
-      {content.Caption && (
-        <figcaption {...pa('Caption')} className="text-sm text-gray-500 text-center mt-3">
-          {content.Caption}
-        </figcaption>
-      )}
-    </figure>
+    <div {...pa(block)} className={constrained ? 'mx-auto max-w-3xl' : undefined}>
+      <figure className="w-full py-8">
+        {isMasonry ? (
+          <div {...pa('Images')} className="columns-2 md:columns-3 gap-4 space-y-4">
+            {images.map((img, i) => (
+              img?.url?.default && (
+                <img
+                  key={i}
+                  src={img.url.default}
+                  alt=""
+                  className="w-full rounded-md break-inside-avoid"
+                />
+              )
+            ))}
+          </div>
+        ) : (
+          <div {...pa('Images')} className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {images.map((img, i) => (
+              img?.url?.default && (
+                <img
+                  key={i}
+                  src={img.url.default}
+                  alt=""
+                  className="w-full aspect-square object-cover rounded-md"
+                />
+              )
+            ))}
+          </div>
+        )}
+        {content.Caption && (
+          <figcaption {...pa('Caption')} className="text-sm text-gray-500 text-center mt-3">
+            {content.Caption}
+          </figcaption>
+        )}
+      </figure>
+    </div>
   );
 }

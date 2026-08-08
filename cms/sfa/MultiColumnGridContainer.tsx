@@ -1,5 +1,6 @@
-import { contentType, type ContentProps } from '@optimizely/cms-sdk';
+import { contentType, displayTemplate, type ContentProps } from '@optimizely/cms-sdk';
 import { OptimizelyComponent, getPreviewUtils } from '@optimizely/cms-sdk/react/server';
+import { sfaContainerWidthSettings } from './sfaDisplaySettings';
 
 const GRID_COLS: Record<string, string> = {
   '2': 'grid-cols-2',
@@ -41,25 +42,39 @@ export const MultiColumnGridContainerContentType = contentType({
   },
 });
 
-type Props = { content: ContentProps<typeof MultiColumnGridContainerContentType> };
+export const MultiColumnGridContainerDisplayTemplate = displayTemplate({
+  key: 'SFA_MultiColumnGridContainerDefault',
+  contentType: 'SFA_MultiColumnGridContainer',
+  isDefault: true,
+  displayName: 'Multi-Column Grid Container',
+  settings: sfaContainerWidthSettings,
+});
 
-export default function MultiColumnGridContainer({ content }: Props) {
+type Props = {
+  content: ContentProps<typeof MultiColumnGridContainerContentType>;
+  displaySettings?: ContentProps<typeof MultiColumnGridContainerDisplayTemplate>;
+};
+
+export default function MultiColumnGridContainer({ content, displaySettings }: Props) {
   const { pa } = getPreviewUtils(content);
   const block = (content as { __composition?: { key: string } }).__composition;
   const colClass = GRID_COLS[content.ColumnCount ?? '3'] ?? 'grid-cols-3';
+  const constrained = displaySettings?.containerWidth === 'constrained';
 
   return (
-    <section {...pa(block)} className="w-full px-6 py-10">
-      {content.SectionTitle && (
-        <h2 {...pa('SectionTitle')} className="text-2xl font-bold text-center mb-8">
-          {content.SectionTitle}
-        </h2>
-      )}
-      <div {...pa('Items')} className={`grid ${colClass} gap-6`}>
-        {(content.Items ?? []).map((item, i) => (
-          <OptimizelyComponent key={i} content={item} />
-        ))}
-      </div>
-    </section>
+    <div {...pa(block)} className={constrained ? 'mx-auto max-w-3xl' : undefined}>
+      <section className="w-full px-6 py-10">
+        {content.SectionTitle && (
+          <h2 {...pa('SectionTitle')} className="text-2xl font-bold text-center mb-8">
+            {content.SectionTitle}
+          </h2>
+        )}
+        <div {...pa('Items')} className={`grid ${colClass} gap-6`}>
+          {(content.Items ?? []).map((item, i) => (
+            <OptimizelyComponent key={i} content={item} />
+          ))}
+        </div>
+      </section>
+    </div>
   );
 }

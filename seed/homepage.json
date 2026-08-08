@@ -10,6 +10,7 @@
         "nodeType": "section",
         "displayName": "Hero Carousel",
         "layoutType": "grid",
+        "displaySettings": { "displayTemplate": "BlankSectionDefault", "settings": { "containerWidth": "full" } },
         "component": { "contentType": "BlankSection" },
         "nodes": [
           {
@@ -65,6 +66,7 @@
         "nodeType": "section",
         "displayName": "Premier Provider Benefits",
         "layoutType": "grid",
+        "displaySettings": { "displayTemplate": "BlankSectionDefault", "settings": { "containerWidth": "constrained" } },
         "component": { "contentType": "BlankSection" },
         "nodes": [
           {
@@ -98,6 +100,7 @@
         "nodeType": "section",
         "displayName": "About SFA",
         "layoutType": "grid",
+        "displaySettings": { "displayTemplate": "BlankSectionDefault", "settings": { "containerWidth": "constrained" } },
         "component": { "contentType": "BlankSection" },
         "nodes": [
           {
@@ -131,6 +134,7 @@
         "nodeType": "section",
         "displayName": "SFA by the Numbers",
         "layoutType": "grid",
+        "displaySettings": { "displayTemplate": "BlankSectionDefault", "settings": { "containerWidth": "constrained" } },
         "component": { "contentType": "BlankSection" },
         "nodes": [
           {
@@ -189,6 +193,7 @@
         "nodeType": "section",
         "displayName": "Good Food Foundation Integration",
         "layoutType": "grid",
+        "displaySettings": { "displayTemplate": "BlankSectionDefault", "settings": { "containerWidth": "constrained" } },
         "component": { "contentType": "BlankSection" },
         "nodes": [
           {
@@ -222,6 +227,7 @@
         "nodeType": "section",
         "displayName": "Member Exclusive Resources",
         "layoutType": "grid",
+        "displaySettings": { "displayTemplate": "BlankSectionDefault", "settings": { "containerWidth": "constrained" } },
         "component": { "contentType": "BlankSection" },
         "nodes": [
           {
@@ -255,6 +261,7 @@
         "nodeType": "section",
         "displayName": "Member Press Releases",
         "layoutType": "grid",
+        "displaySettings": { "displayTemplate": "BlankSectionDefault", "settings": { "containerWidth": "constrained" } },
         "component": { "contentType": "BlankSection" },
         "nodes": [
           {
@@ -328,6 +335,7 @@
         "nodeType": "section",
         "displayName": "Latest News",
         "layoutType": "grid",
+        "displaySettings": { "displayTemplate": "BlankSectionDefault", "settings": { "containerWidth": "constrained" } },
         "component": { "contentType": "BlankSection" },
         "nodes": [
           {

@@ -9,21 +9,21 @@ import { initReactComponentRegistry } from '@optimizely/cms-sdk/react/server';
 import { requireEnv } from '@/lib/env';
 
 import ExperiencePage, { ExperiencePageContentType } from './ExperiencePage';
-import BlankSection from './BlankSection';
+import BlankSection, { BlankSectionDisplayTemplate } from './BlankSection';
 import Page, { PageContentType } from './Page';
 import RichText, { RichTextContentType } from './RichText';
 import DemoPhaseBlock, { DemoPhaseBlockContentType } from './DemoPhaseBlock';
 import DemoScriptPage, { DemoScriptPageContentType } from './DemoScriptPage';
 
 // SFA Modular Component System
-import HeroBannerBlock, { HeroBannerBlockContentType } from './sfa/HeroBannerBlock';
-import TwoColumnSplitBlock, { TwoColumnSplitBlockContentType } from './sfa/TwoColumnSplitBlock';
-import AlertCalloutBlock, { AlertCalloutBlockContentType } from './sfa/AlertCalloutBlock';
-import MetricCardBlock, { MetricCardBlockContentType } from './sfa/MetricCardBlock';
-import DynamicCarouselBlock, { DynamicCarouselBlockContentType } from './sfa/DynamicCarouselBlock';
-import IframeEmbedBlock, { IframeEmbedBlockContentType } from './sfa/IframeEmbedBlock';
-import ImageGalleryBlock, { ImageGalleryBlockContentType } from './sfa/ImageGalleryBlock';
-import MultiColumnGridContainer, { MultiColumnGridContainerContentType } from './sfa/MultiColumnGridContainer';
+import HeroBannerBlock, { HeroBannerBlockContentType, HeroBannerBlockDisplayTemplate } from './sfa/HeroBannerBlock';
+import TwoColumnSplitBlock, { TwoColumnSplitBlockContentType, TwoColumnSplitBlockDisplayTemplate } from './sfa/TwoColumnSplitBlock';
+import AlertCalloutBlock, { AlertCalloutBlockContentType, AlertCalloutBlockDisplayTemplate } from './sfa/AlertCalloutBlock';
+import MetricCardBlock, { MetricCardBlockContentType, MetricCardBlockDisplayTemplate } from './sfa/MetricCardBlock';
+import DynamicCarouselBlock, { DynamicCarouselBlockContentType, DynamicCarouselBlockDisplayTemplate } from './sfa/DynamicCarouselBlock';
+import IframeEmbedBlock, { IframeEmbedBlockContentType, IframeEmbedBlockDisplayTemplate } from './sfa/IframeEmbedBlock';
+import ImageGalleryBlock, { ImageGalleryBlockContentType, ImageGalleryBlockDisplayTemplate } from './sfa/ImageGalleryBlock';
+import MultiColumnGridContainer, { MultiColumnGridContainerContentType, MultiColumnGridContainerDisplayTemplate } from './sfa/MultiColumnGridContainer';
 
 /**
  * Single configuration + registration point for the Optimizely SDK.
@@ -78,7 +78,17 @@ export const registeredContentTypes = [
 
 initContentTypeRegistry(registeredContentTypes);
 
-initDisplayTemplateRegistry([]);
+initDisplayTemplateRegistry([
+  BlankSectionDisplayTemplate,
+  HeroBannerBlockDisplayTemplate,
+  TwoColumnSplitBlockDisplayTemplate,
+  AlertCalloutBlockDisplayTemplate,
+  MetricCardBlockDisplayTemplate,
+  DynamicCarouselBlockDisplayTemplate,
+  IframeEmbedBlockDisplayTemplate,
+  ImageGalleryBlockDisplayTemplate,
+  MultiColumnGridContainerDisplayTemplate,
+]);
 
 initReactComponentRegistry({
   resolver: {

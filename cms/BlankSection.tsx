@@ -1,18 +1,29 @@
+import { displayTemplate, BlankSectionContentType, type ContentProps } from '@optimizely/cms-sdk';
 import type { StructureContainerProps } from '@optimizely/cms-sdk/react/server';
 import { OptimizelyGridSection, getPreviewUtils } from '@optimizely/cms-sdk/react/server';
 import { ComponentWrapper } from './wrappers';
+import { sfaContainerWidthSettings } from './sfa/sfaDisplaySettings';
+
+export const BlankSectionDisplayTemplate = displayTemplate({
+  key: 'BlankSectionDefault',
+  contentType: 'BlankSection',
+  isDefault: true,
+  displayName: 'SFA Section',
+  settings: sfaContainerWidthSettings,
+});
 
 type Props = {
-  content: {
+  content: ContentProps<typeof BlankSectionContentType> & {
     nodes?: Parameters<typeof OptimizelyGridSection>[0]['nodes'];
-    [key: string]: unknown;
   };
+  displaySettings?: ContentProps<typeof BlankSectionDisplayTemplate>;
 };
 
-export default function BlankSection({ content }: Props) {
+export default function BlankSection({ content, displaySettings }: Props) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { pa } = getPreviewUtils(content as any);
   const nodes = content.nodes ?? [];
+  const constrained = displaySettings?.containerWidth === 'constrained';
 
   function SectionRow({ node, children }: StructureContainerProps) {
     const hasColumns = (node.nodes?.length ?? 0) > 0;
@@ -52,12 +63,14 @@ export default function BlankSection({ content }: Props) {
   return (
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     <section {...pa(content as any)} className="w-full">
-      <OptimizelyGridSection
-        nodes={nodes}
-        row={SectionRow}
-        column={SectionColumn}
-        ComponentWrapper={ComponentWrapper}
-      />
+      <div className={constrained ? 'mx-auto max-w-3xl' : undefined}>
+        <OptimizelyGridSection
+          nodes={nodes}
+          row={SectionRow}
+          column={SectionColumn}
+          ComponentWrapper={ComponentWrapper}
+        />
+      </div>
     </section>
   );
 }

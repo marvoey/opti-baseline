@@ -1,5 +1,6 @@
-import { contentType, type ContentProps } from '@optimizely/cms-sdk';
+import { contentType, displayTemplate, type ContentProps } from '@optimizely/cms-sdk';
 import { OptimizelyComponent, getPreviewUtils } from '@optimizely/cms-sdk/react/server';
+import { sfaContainerWidthSettings } from './sfaDisplaySettings';
 
 export const TwoColumnSplitBlockContentType = contentType({
   key: 'SFA_TwoColumnSplitBlock',
@@ -33,27 +34,40 @@ export const TwoColumnSplitBlockContentType = contentType({
   },
 });
 
-type Props = { content: ContentProps<typeof TwoColumnSplitBlockContentType> };
+export const TwoColumnSplitBlockDisplayTemplate = displayTemplate({
+  key: 'SFA_TwoColumnSplitBlockDefault',
+  contentType: 'SFA_TwoColumnSplitBlock',
+  isDefault: true,
+  displayName: 'Two Column Layout Block',
+  settings: sfaContainerWidthSettings,
+});
 
-export default function TwoColumnSplitBlock({ content }: Props) {
+type Props = {
+  content: ContentProps<typeof TwoColumnSplitBlockContentType>;
+  displaySettings?: ContentProps<typeof TwoColumnSplitBlockDisplayTemplate>;
+};
+
+export default function TwoColumnSplitBlock({ content, displaySettings }: Props) {
   const { pa } = getPreviewUtils(content);
   const block = (content as { __composition?: { key: string } }).__composition;
   const reversed = content.MediaAlignment === 'right';
+  const constrained = displaySettings?.containerWidth === 'constrained';
 
   return (
-    <div
-      {...pa(block)}
-      className={`grid grid-cols-1 md:grid-cols-2 gap-8 ${reversed ? 'md:[&>*:first-child]:order-2 md:[&>*:last-child]:order-1' : ''}`}
-    >
-      <div {...pa('LeftContentArea')}>
-        {(content.LeftContentArea ?? []).map((item, i) => (
-          <OptimizelyComponent key={i} content={item} />
-        ))}
-      </div>
-      <div {...pa('RightContentArea')}>
-        {(content.RightContentArea ?? []).map((item, i) => (
-          <OptimizelyComponent key={i} content={item} />
-        ))}
+    <div {...pa(block)} className={constrained ? 'mx-auto max-w-3xl' : undefined}>
+      <div
+        className={`grid grid-cols-1 md:grid-cols-2 gap-8 ${reversed ? 'md:[&>*:first-child]:order-2 md:[&>*:last-child]:order-1' : ''}`}
+      >
+        <div {...pa('LeftContentArea')}>
+          {(content.LeftContentArea ?? []).map((item, i) => (
+            <OptimizelyComponent key={i} content={item} />
+          ))}
+        </div>
+        <div {...pa('RightContentArea')}>
+          {(content.RightContentArea ?? []).map((item, i) => (
+            <OptimizelyComponent key={i} content={item} />
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
-import { contentType, type ContentProps } from '@optimizely/cms-sdk';
+import { contentType, displayTemplate, type ContentProps } from '@optimizely/cms-sdk';
 import { getPreviewUtils } from '@optimizely/cms-sdk/react/server';
 import { RichText as RichTextRenderer } from '@optimizely/cms-sdk/react/richText';
+import { sfaContainerWidthSettings } from './sfaDisplaySettings';
 
 const THEME_CLASSES: Record<string, string> = {
   deadline: 'bg-red-50 border-red-400 text-red-900',
@@ -40,28 +41,39 @@ export const AlertCalloutBlockContentType = contentType({
   },
 });
 
-type Props = { content: ContentProps<typeof AlertCalloutBlockContentType> };
+export const AlertCalloutBlockDisplayTemplate = displayTemplate({
+  key: 'SFA_AlertCalloutBlockDefault',
+  contentType: 'SFA_AlertCalloutBlock',
+  isDefault: true,
+  displayName: 'Alert / Promo Banner Block',
+  settings: sfaContainerWidthSettings,
+});
 
-export default function AlertCalloutBlock({ content }: Props) {
+type Props = {
+  content: ContentProps<typeof AlertCalloutBlockContentType>;
+  displaySettings?: ContentProps<typeof AlertCalloutBlockDisplayTemplate>;
+};
+
+export default function AlertCalloutBlock({ content, displaySettings }: Props) {
   const { pa } = getPreviewUtils(content);
   const block = (content as { __composition?: { key: string } }).__composition;
   const themeClass = THEME_CLASSES[content.ThemeStyle ?? ''] ?? 'bg-gray-50 border-gray-300 text-gray-900';
+  const constrained = displaySettings?.containerWidth === 'constrained';
 
   return (
-    <div
-      {...pa(block)}
-      className={`w-full border-l-4 px-6 py-4 rounded-r-md ${themeClass}`}
-    >
-      {content.CalloutTitle && (
-        <p {...pa('CalloutTitle')} className="font-bold text-sm uppercase tracking-wide mb-1">
-          {content.CalloutTitle}
-        </p>
-      )}
-      {content.Message && (
-        <div {...pa('Message')} className="prose prose-sm max-w-none">
-          <RichTextRenderer content={content.Message.json} />
-        </div>
-      )}
+    <div {...pa(block)} className={constrained ? 'mx-auto max-w-3xl' : undefined}>
+      <div className={`w-full border-l-4 px-6 py-4 rounded-r-md ${themeClass}`}>
+        {content.CalloutTitle && (
+          <p {...pa('CalloutTitle')} className="font-bold text-sm uppercase tracking-wide mb-1">
+            {content.CalloutTitle}
+          </p>
+        )}
+        {content.Message && (
+          <div {...pa('Message')} className="prose prose-sm max-w-none">
+            <RichTextRenderer content={content.Message.json} />
+          </div>
+        )}
+      </div>
     </div>
   );
 }
