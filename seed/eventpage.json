@@ -1,0 +1,599 @@
+{
+  "displayName": "Winter FancyFaire 2027",
+  "routeSegment": "winter-fancyfaire",
+  "locale": "en",
+  "composition": {
+    "nodeType": "experience",
+    "layoutType": "outline",
+    "nodes": [
+      {
+        "nodeType": "section",
+        "displayName": "Hero",
+        "layoutType": "grid",
+        "displaySettings": { "displayTemplate": "BlankSectionDefault", "settings": { "containerWidth": "full" } },
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "SFA_HeroBannerBlock",
+                      "properties": {
+                        "Heading": { "value": "Winter FancyFaire® 2027" },
+                        "Subtext": {
+                          "value": {
+                            "html": "<p>The first industry event of the year. Join the specialty food community to kick off 2027 in one of the world's great food cities.</p><p><strong>January 17–19, 2027 &bull; San Francisco, CA</strong></p>"
+                          }
+                        },
+                        "PrimaryCtaText": { "value": "Register Now" },
+                        "PrimaryCtaLink": { "value": "https://www.specialtyfood.com/fancy-food-shows/winter-fancyfaire/attend/" }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nodeType": "section",
+        "displayName": "Registration Alert",
+        "layoutType": "grid",
+        "displaySettings": { "displayTemplate": "BlankSectionDefault", "settings": { "containerWidth": "constrained" } },
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "SFA_AlertCalloutBlock",
+                      "properties": {
+                        "CalloutTitle": { "value": "Registration Now Open" },
+                        "Message": {
+                          "value": {
+                            "html": "<p>Exhibit space and buyer badges are available now. The specialty food industry&rsquo;s first gathering of the year fills fast &mdash; secure your spot today.</p>"
+                          }
+                        },
+                        "ThemeStyle": { "value": "deadline" }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nodeType": "section",
+        "displayName": "Event Overview",
+        "layoutType": "grid",
+        "displaySettings": { "displayTemplate": "BlankSectionDefault", "settings": { "containerWidth": "constrained" } },
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "SFA_HeroBannerBlock",
+                      "properties": {
+                        "Heading": { "value": "The First Industry Event of the Year" },
+                        "Subtext": {
+                          "value": {
+                            "html": "<p>Winter FancyFaire&reg; brings the specialty food community to San Francisco for an elevated trade show experience unlike any other. Elevate your connections with offsite sampling events, unstructured networking, and deep local immersion throughout the city&rsquo;s world-class food scene.</p><p>Whether you&rsquo;re a buyer discovering your next bestseller, a maker launching a new product, or an industry professional staying ahead of trends &mdash; FancyFaire delivers.</p>"
+                          }
+                        },
+                        "PrimaryCtaText": { "value": "Attend" },
+                        "PrimaryCtaLink": { "value": "https://www.specialtyfood.com/fancy-food-shows/winter-fancyfaire/attend/" }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "SFA_AlertCalloutBlock",
+                      "properties": {
+                        "CalloutTitle": { "value": "Exhibit at Winter FancyFaire® 2027" },
+                        "Message": {
+                          "value": {
+                            "html": "<p>Connect your brand with more than 4,000 buyer attendees and 12,000 industry professionals across 135,450 square feet of exhibit space.</p><p>Stand out in 40+ specialty food categories &mdash; from functional beverages to high-protein snacks.</p>"
+                          }
+                        },
+                        "ThemeStyle": { "value": "promo" }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nodeType": "section",
+        "displayName": "Show Stats",
+        "layoutType": "grid",
+        "displaySettings": { "displayTemplate": "BlankSectionDefault", "settings": { "containerWidth": "full" } },
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "SFA_MetricCardBlock",
+                      "properties": {
+                        "MetricNumber": { "value": "12,000+" },
+                        "MetricLabel": { "value": "industry professionals" }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "SFA_MetricCardBlock",
+                      "properties": {
+                        "MetricNumber": { "value": "4,000+" },
+                        "MetricLabel": { "value": "buyer attendees" }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "SFA_MetricCardBlock",
+                      "properties": {
+                        "MetricNumber": { "value": "1,000+" },
+                        "MetricLabel": { "value": "exhibitors" }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "SFA_MetricCardBlock",
+                      "properties": {
+                        "MetricNumber": { "value": "135,450" },
+                        "MetricLabel": { "value": "sq ft of exhibit space" }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "SFA_MetricCardBlock",
+                      "properties": {
+                        "MetricNumber": { "value": "16" },
+                        "MetricLabel": { "value": "offsite sampling locations" }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nodeType": "section",
+        "displayName": "Convention Center Highlights",
+        "layoutType": "grid",
+        "displaySettings": { "displayTemplate": "BlankSectionDefault", "settings": { "containerWidth": "constrained" } },
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "SFA_AlertCalloutBlock",
+                      "properties": {
+                        "CalloutTitle": { "value": "Convention Center Activities" },
+                        "Message": {
+                          "value": {
+                            "html": "<ul><li><strong>Spotlight Shoppe</strong> &mdash; Browse curated products from emerging and established brands</li><li><strong>First Taste Table</strong> &mdash; Be among the first to experience new product launches</li><li><strong>40+ Specialty Food Categories</strong> &mdash; From functional beverages and high-protein snacks to artisan cheeses and global pantry staples</li><li>Unstructured networking throughout the show floor</li></ul>"
+                          }
+                        },
+                        "ThemeStyle": { "value": "info" }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nodeType": "section",
+        "displayName": "San Francisco Experience",
+        "layoutType": "grid",
+        "displaySettings": { "displayTemplate": "BlankSectionDefault", "settings": { "containerWidth": "constrained" } },
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "SFA_AlertCalloutBlock",
+                      "properties": {
+                        "CalloutTitle": { "value": "Campus Tasting Trail" },
+                        "Message": {
+                          "value": {
+                            "html": "<p>Explore the best of San Francisco&rsquo;s food scene through our Campus Tasting Trail &mdash; featuring chef demonstrations and neighborhood restaurant partnerships that bring the city&rsquo;s culinary culture directly into the show experience.</p>"
+                          }
+                        },
+                        "ThemeStyle": { "value": "info" }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "SFA_AlertCalloutBlock",
+                      "properties": {
+                        "CalloutTitle": { "value": "Offsite Sampling Events" },
+                        "Message": {
+                          "value": {
+                            "html": "<p>Taste your way through San Francisco at 16 handpicked offsite sampling locations. Discover new products in settings that showcase the city&rsquo;s world-class food identity &mdash; from the waterfront to the Mission.</p>"
+                          }
+                        },
+                        "ThemeStyle": { "value": "promo" }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nodeType": "section",
+        "displayName": "sofi Awards",
+        "layoutType": "grid",
+        "displaySettings": { "displayTemplate": "BlankSectionDefault", "settings": { "containerWidth": "full" } },
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "SFA_HeroBannerBlock",
+                      "properties": {
+                        "Heading": { "value": "2027 sofi™ Awards" },
+                        "Subtext": {
+                          "value": {
+                            "html": "<p>Food&rsquo;s most coveted trophy. Sample products from this year&rsquo;s finalists and be in the room for live winner announcements at Winter FancyFaire&reg; 2027.</p><p>Applications open through July 31, 2026. Submit your products and let the specialty food community discover what you&rsquo;ve created.</p>"
+                          }
+                        },
+                        "PrimaryCtaText": { "value": "Learn About sofi Awards" },
+                        "PrimaryCtaLink": { "value": "https://www.specialtyfood.com/awards/sofi-awards/" }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nodeType": "section",
+        "displayName": "Trend and Industry Outlook",
+        "layoutType": "grid",
+        "displaySettings": { "displayTemplate": "BlankSectionDefault", "settings": { "containerWidth": "constrained" } },
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "SFA_AlertCalloutBlock",
+                      "properties": {
+                        "CalloutTitle": { "value": "2027 Trend of the Year" },
+                        "Message": {
+                          "value": {
+                            "html": "<p>The SFA&rsquo;s annual Trend of the Year announcement sets the direction for the specialty food industry. Revealed exclusively at Winter FancyFaire&reg;, the 2027 trend spotlights the flavors, formats, and values driving the market forward.</p>"
+                          }
+                        },
+                        "ThemeStyle": { "value": "info" }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "SFA_AlertCalloutBlock",
+                      "properties": {
+                        "CalloutTitle": { "value": "Industry Outlook 2027 Reveal" },
+                        "Message": {
+                          "value": {
+                            "html": "<p>Get ahead of the curve with the SFA&rsquo;s annual Industry Outlook research presentation. Packed with market data and actionable insights, this session is essential for every specialty food professional planning for the year ahead.</p>"
+                          }
+                        },
+                        "ThemeStyle": { "value": "info" }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nodeType": "section",
+        "displayName": "Attendee Testimonials",
+        "layoutType": "grid",
+        "displaySettings": { "displayTemplate": "BlankSectionDefault", "settings": { "containerWidth": "constrained" } },
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "SFA_AlertCalloutBlock",
+                      "properties": {
+                        "CalloutTitle": { "value": "Buyer, Specialty Retail" },
+                        "Message": {
+                          "value": {
+                            "html": "<p>&ldquo;The quality of networking at FancyFaire is unmatched. I made connections in three days that would have taken a year to cultivate any other way.&rdquo;</p>"
+                          }
+                        },
+                        "ThemeStyle": { "value": "info" }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "SFA_AlertCalloutBlock",
+                      "properties": {
+                        "CalloutTitle": { "value": "Exhibitor, Artisan Food Maker" },
+                        "Message": {
+                          "value": {
+                            "html": "<p>&ldquo;We landed three major retail accounts from our booth at FancyFaire. The buyer attendance and engagement here is unlike any other trade show we&rsquo;ve done.&rdquo;</p>"
+                          }
+                        },
+                        "ThemeStyle": { "value": "info" }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "SFA_AlertCalloutBlock",
+                      "properties": {
+                        "CalloutTitle": { "value": "Attendee, Food Distributor" },
+                        "Message": {
+                          "value": {
+                            "html": "<p>&ldquo;The offsite events and the show floor together give you a complete picture of the industry. I always leave San Francisco inspired and with a full pipeline.&rdquo;</p>"
+                          }
+                        },
+                        "ThemeStyle": { "value": "info" }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nodeType": "section",
+        "displayName": "Show Hours",
+        "layoutType": "grid",
+        "displaySettings": { "displayTemplate": "BlankSectionDefault", "settings": { "containerWidth": "constrained" } },
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "SFA_AlertCalloutBlock",
+                      "properties": {
+                        "CalloutTitle": { "value": "Show Hours — January 2027" },
+                        "Message": {
+                          "value": {
+                            "html": "<ul><li><strong>Sunday, January 17</strong> &mdash; 10:00 am &ndash; 5:00 pm</li><li><strong>Monday, January 18</strong> &mdash; 10:00 am &ndash; 5:00 pm</li><li><strong>Tuesday, January 19</strong> &mdash; 10:00 am &ndash; 3:00 pm</li></ul><p><em>*Buyer badge access opens at 9:30 am daily.</em></p>"
+                          }
+                        },
+                        "ThemeStyle": { "value": "deadline" }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nodeType": "section",
+        "displayName": "Contact Information",
+        "layoutType": "grid",
+        "displaySettings": { "displayTemplate": "BlankSectionDefault", "settings": { "containerWidth": "constrained" } },
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "SFA_AlertCalloutBlock",
+                      "properties": {
+                        "CalloutTitle": { "value": "Get in Touch" },
+                        "Message": {
+                          "value": {
+                            "html": "<ul><li><strong>Membership:</strong> 212-482-6440</li><li><strong>Registration:</strong> 212-482-6444</li><li><strong>Exhibits &amp; Sponsorship:</strong> 212-482-6443</li><li><strong>Attendee Services:</strong> 212-482-6441</li><li><strong>Media Inquiries:</strong> <a href='mailto:press@specialtyfood.com'>press@specialtyfood.com</a></li></ul>"
+                          }
+                        },
+                        "ThemeStyle": { "value": "info" }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nodeType": "section",
+        "displayName": "Register CTA",
+        "layoutType": "grid",
+        "displaySettings": { "displayTemplate": "BlankSectionDefault", "settings": { "containerWidth": "full" } },
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "SFA_HeroBannerBlock",
+                      "properties": {
+                        "Heading": { "value": "Join Us in San Francisco" },
+                        "Subtext": {
+                          "value": {
+                            "html": "<p>January 17&ndash;19, 2027. Don&rsquo;t miss the specialty food industry&rsquo;s first &mdash; and finest &mdash; event of the year.</p>"
+                          }
+                        },
+                        "PrimaryCtaText": { "value": "Register Now" },
+                        "PrimaryCtaLink": { "value": "https://www.specialtyfood.com/fancy-food-shows/winter-fancyfaire/attend/" }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "SFA_HeroBannerBlock",
+                      "properties": {
+                        "Heading": { "value": "Book Your Exhibit Space" },
+                        "Subtext": {
+                          "value": {
+                            "html": "<p>Showcase your brand to 12,000+ industry professionals and 4,000+ buyers at the premier specialty food show of early 2027.</p>"
+                          }
+                        },
+                        "PrimaryCtaText": { "value": "Book Exhibit" },
+                        "PrimaryCtaLink": { "value": "https://www.specialtyfood.com/fancy-food-shows/winter-fancyfaire/exhibit/" }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,6 +1,6 @@
 import { contentType, displayTemplate, type ContentProps } from '@optimizely/cms-sdk';
 import { getPreviewUtils } from '@optimizely/cms-sdk/react/server';
-import { sfaContainerWidthSettings } from './sfaDisplaySettings';
+import { sfaContainerWidthSettings, containerWidthClass } from './sfaDisplaySettings';
 
 export const MetricCardBlockContentType = contentType({
   key: 'SFA_MetricCardBlock',
@@ -47,10 +47,10 @@ export default function MetricCardBlock({ content, displaySettings }: Props) {
   const { pa } = getPreviewUtils(content);
   const block = (content as { __composition?: { key: string } }).__composition;
   const iconSrc = content.IconAsset?.url?.default;
-  const constrained = displaySettings?.containerWidth === 'constrained';
+  const widthClass = containerWidthClass(displaySettings?.containerWidth);
 
   return (
-    <div {...pa(block)} className={constrained ? 'mx-auto max-w-3xl' : undefined}>
+    <div {...pa(block)} className={widthClass}>
       <div className="flex flex-col items-center text-center gap-2 p-6">
         {iconSrc && (
           <img

@@ -1,6 +1,6 @@
 import { contentType, displayTemplate, type ContentProps } from '@optimizely/cms-sdk';
 import { getPreviewUtils } from '@optimizely/cms-sdk/react/server';
-import { sfaContainerWidthSettings } from './sfaDisplaySettings';
+import { sfaContainerWidthSettings, containerWidthClass } from './sfaDisplaySettings';
 
 export const IframeEmbedBlockContentType = contentType({
   key: 'SFA_IframeEmbedBlock',
@@ -46,12 +46,12 @@ export default function IframeEmbedBlock({ content, displaySettings }: Props) {
   const block = (content as { __composition?: { key: string } }).__composition;
   const src = content.IframeUrl?.default;
   const height = content.Height ?? 400;
-  const constrained = displaySettings?.containerWidth === 'constrained';
+  const widthClass = containerWidthClass(displaySettings?.containerWidth);
 
   if (!src) return null;
 
   return (
-    <div {...pa(block)} className={constrained ? 'mx-auto max-w-3xl' : undefined}>
+    <div {...pa(block)} className={widthClass}>
       <div className="w-full">
         <iframe
           {...pa('IframeUrl')}

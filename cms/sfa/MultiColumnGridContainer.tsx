@@ -1,6 +1,6 @@
 import { contentType, displayTemplate, type ContentProps } from '@optimizely/cms-sdk';
 import { OptimizelyComponent, getPreviewUtils } from '@optimizely/cms-sdk/react/server';
-import { sfaContainerWidthSettings } from './sfaDisplaySettings';
+import { sfaContainerWidthSettings, containerWidthClass } from './sfaDisplaySettings';
 
 const GRID_COLS: Record<string, string> = {
   '2': 'grid-cols-2',
@@ -59,10 +59,10 @@ export default function MultiColumnGridContainer({ content, displaySettings }: P
   const { pa } = getPreviewUtils(content);
   const block = (content as { __composition?: { key: string } }).__composition;
   const colClass = GRID_COLS[content.ColumnCount ?? '3'] ?? 'grid-cols-3';
-  const constrained = displaySettings?.containerWidth === 'constrained';
+  const widthClass = containerWidthClass(displaySettings?.containerWidth);
 
   return (
-    <div {...pa(block)} className={constrained ? 'mx-auto max-w-3xl' : undefined}>
+    <div {...pa(block)} className={widthClass}>
       <section className="w-full px-6 py-10">
         {content.SectionTitle && (
           <h2 {...pa('SectionTitle')} className="text-2xl font-bold text-center mb-8">

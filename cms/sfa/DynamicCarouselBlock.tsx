@@ -1,6 +1,6 @@
 import { contentType, displayTemplate, type ContentProps } from '@optimizely/cms-sdk';
 import { OptimizelyComponent, getPreviewUtils } from '@optimizely/cms-sdk/react/server';
-import { sfaContainerWidthSettings } from './sfaDisplaySettings';
+import { sfaContainerWidthSettings, containerWidthClass } from './sfaDisplaySettings';
 
 export const DynamicCarouselBlockContentType = contentType({
   key: 'SFA_DynamicCarouselBlock',
@@ -47,10 +47,10 @@ export default function DynamicCarouselBlock({ content, displaySettings }: Props
   const { pa } = getPreviewUtils(content);
   const block = (content as { __composition?: { key: string } }).__composition;
   const items = content.Items ?? [];
-  const constrained = displaySettings?.containerWidth === 'constrained';
+  const widthClass = containerWidthClass(displaySettings?.containerWidth);
 
   return (
-    <div {...pa(block)} className={constrained ? 'mx-auto max-w-3xl' : undefined}>
+    <div {...pa(block)} className={widthClass}>
       <section className="w-full py-8">
         {content.CarouselTitle && (
           <h2 {...pa('CarouselTitle')} className="text-2xl font-bold text-center mb-6">

@@ -16,7 +16,8 @@
     "cms:push": "npx @optimizely/cms-cli config push optimizely.config.mjs",
     "schema:pull": "node scripts/fetch-openapi.mjs",
     "seed:experience": "node seed/scripts/seed-experience.mjs",
-    "seed:homepage": "node seed/scripts/seed-experience.mjs seed/homepage.json"
+    "seed:homepage": "node seed/scripts/seed-experience.mjs seed/homepage.json",
+    "seed:eventpage": "node seed/scripts/seed-experience.mjs seed/eventpage.json"
   },
   "dependencies": {
     "@optimizely/cms-cli": "^2.0.0",

@@ -1,7 +1,7 @@
 import { contentType, displayTemplate, type ContentProps } from '@optimizely/cms-sdk';
 import { getPreviewUtils } from '@optimizely/cms-sdk/react/server';
 import { RichText as RichTextRenderer } from '@optimizely/cms-sdk/react/richText';
-import { sfaContainerWidthSettings } from './sfaDisplaySettings';
+import { sfaContainerWidthSettings, containerWidthClass } from './sfaDisplaySettings';
 
 export const HeroBannerBlockContentType = contentType({
   key: 'SFA_HeroBannerBlock',
@@ -65,10 +65,10 @@ export default function HeroBannerBlock({ content, displaySettings }: Props) {
   const block = (content as { __composition?: { key: string } }).__composition;
   const videoSrc = content.BackgroundVideoUrl?.default;
   const imageSrc = content.BackgroundImage?.url?.default;
-  const constrained = displaySettings?.containerWidth === 'constrained';
+  const widthClass = containerWidthClass(displaySettings?.containerWidth);
 
   return (
-    <div {...pa(block)} className={constrained ? 'mx-auto max-w-3xl' : undefined}>
+    <div {...pa(block)} className={widthClass}>
       <section
         className="relative w-full min-h-[480px] flex items-end overflow-hidden bg-slate-800"
         style={!videoSrc && imageSrc ? { backgroundImage: `url(${imageSrc})`, backgroundSize: 'cover', backgroundPosition: 'center' } : undefined}

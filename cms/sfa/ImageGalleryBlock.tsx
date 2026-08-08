@@ -1,6 +1,6 @@
 import { contentType, displayTemplate, type ContentProps } from '@optimizely/cms-sdk';
 import { getPreviewUtils } from '@optimizely/cms-sdk/react/server';
-import { sfaContainerWidthSettings } from './sfaDisplaySettings';
+import { sfaContainerWidthSettings, containerWidthClass } from './sfaDisplaySettings';
 
 export const ImageGalleryBlockContentType = contentType({
   key: 'SFA_ImageGalleryBlock',
@@ -51,10 +51,10 @@ export default function ImageGalleryBlock({ content, displaySettings }: Props) {
   const block = (content as { __composition?: { key: string } }).__composition;
   const images = content.Images ?? [];
   const isMasonry = content.Layout === 'masonry';
-  const constrained = displaySettings?.containerWidth === 'constrained';
+  const widthClass = containerWidthClass(displaySettings?.containerWidth);
 
   return (
-    <div {...pa(block)} className={constrained ? 'mx-auto max-w-3xl' : undefined}>
+    <div {...pa(block)} className={widthClass}>
       <figure className="w-full py-8">
         {isMasonry ? (
           <div {...pa('Images')} className="columns-2 md:columns-3 gap-4 space-y-4">

@@ -1,6 +1,6 @@
 import { contentType, displayTemplate, type ContentProps } from '@optimizely/cms-sdk';
 import { OptimizelyComponent, getPreviewUtils } from '@optimizely/cms-sdk/react/server';
-import { sfaContainerWidthSettings } from './sfaDisplaySettings';
+import { sfaContainerWidthSettings, containerWidthClass } from './sfaDisplaySettings';
 
 export const TwoColumnSplitBlockContentType = contentType({
   key: 'SFA_TwoColumnSplitBlock',
@@ -51,10 +51,10 @@ export default function TwoColumnSplitBlock({ content, displaySettings }: Props)
   const { pa } = getPreviewUtils(content);
   const block = (content as { __composition?: { key: string } }).__composition;
   const reversed = content.MediaAlignment === 'right';
-  const constrained = displaySettings?.containerWidth === 'constrained';
+  const widthClass = containerWidthClass(displaySettings?.containerWidth);
 
   return (
-    <div {...pa(block)} className={constrained ? 'mx-auto max-w-3xl' : undefined}>
+    <div {...pa(block)} className={widthClass}>
       <div
         className={`grid grid-cols-1 md:grid-cols-2 gap-8 ${reversed ? 'md:[&>*:first-child]:order-2 md:[&>*:last-child]:order-1' : ''}`}
       >
