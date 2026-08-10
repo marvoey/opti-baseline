@@ -2,6 +2,7 @@ import { contentType, displayTemplate, type ContentProps } from '@optimizely/cms
 import { getPreviewUtils } from '@optimizely/cms-sdk/react/server';
 import { RichText as RichTextRenderer } from '@optimizely/cms-sdk/react/richText';
 import { sfaContainerWidthSettings, containerWidthClass } from './sfaDisplaySettings';
+import { taxonomyEnums, PRODUCT_CATEGORY, MAKER_ATTRIBUTE, RECOGNITION, EVENT } from '@/lib/cms/taxonomy';
 
 export const HeroBannerBlockContentType = contentType({
   key: 'SFA_HeroBannerBlock',
@@ -51,6 +52,10 @@ export const HeroBannerBlockContentType = contentType({
       isLocalized: true,
       sortOrder: 30,
     },
+    ProductCategory: { type: 'string', format: 'selectOne', displayName: 'Product Category', isLocalized: false, indexingType: 'queryable', group: 'Taxonomy', sortOrder: 50, enum: taxonomyEnums(PRODUCT_CATEGORY) },
+    MakerAttribute:  { type: 'string', format: 'selectOne', displayName: 'Maker Attribute',  isLocalized: false, indexingType: 'queryable', group: 'Taxonomy', sortOrder: 51, enum: taxonomyEnums(MAKER_ATTRIBUTE) },
+    Recognition:     { type: 'string', format: 'selectOne', displayName: 'Recognition',       isLocalized: false, indexingType: 'queryable', group: 'Taxonomy', sortOrder: 52, enum: taxonomyEnums(RECOGNITION) },
+    Event:           { type: 'string', format: 'selectOne', displayName: 'Event',             isLocalized: false, indexingType: 'queryable', group: 'Taxonomy', sortOrder: 53, enum: taxonomyEnums(EVENT) },
   },
 });
 

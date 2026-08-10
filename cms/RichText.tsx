@@ -2,6 +2,7 @@ import { contentType, type ContentProps } from '@optimizely/cms-sdk';
 import { getPreviewUtils } from '@optimizely/cms-sdk/react/server';
 import { RichText as RichTextRenderer } from '@optimizely/cms-sdk/react/richText';
 import { blockWidth, widthClass } from './blockWidth';
+import { taxonomyEnums, PRODUCT_CATEGORY, MAKER_ATTRIBUTE, RECOGNITION, EVENT } from '@/lib/cms/taxonomy';
 
 /**
  * Rich Text — a block of formatted prose (headings, lists, links, tables)
@@ -35,6 +36,10 @@ export const RichTextContentType = contentType({
         { value: 'DarkBlue',  displayName: 'Dark Blue' },
       ],
     },
+    ProductCategory: { type: 'string', format: 'selectOne', displayName: 'Product Category', isLocalized: false, indexingType: 'queryable', group: 'Taxonomy', sortOrder: 50, enum: taxonomyEnums(PRODUCT_CATEGORY) },
+    MakerAttribute:  { type: 'string', format: 'selectOne', displayName: 'Maker Attribute',  isLocalized: false, indexingType: 'queryable', group: 'Taxonomy', sortOrder: 51, enum: taxonomyEnums(MAKER_ATTRIBUTE) },
+    Recognition:     { type: 'string', format: 'selectOne', displayName: 'Recognition',       isLocalized: false, indexingType: 'queryable', group: 'Taxonomy', sortOrder: 52, enum: taxonomyEnums(RECOGNITION) },
+    Event:           { type: 'string', format: 'selectOne', displayName: 'Event',             isLocalized: false, indexingType: 'queryable', group: 'Taxonomy', sortOrder: 53, enum: taxonomyEnums(EVENT) },
   },
 });
 
