@@ -28,10 +28,16 @@ export const HeroBannerBlockContentType = contentType({
       allowedTypes: ['graph:cmp_PublicImageAsset'],
       sortOrder: 15,
     },
-    BackgroundVideoUrl: {
+    BackgroundVideo: {
       type: 'contentReference',
+      displayName: 'Background Video',
+      allowedTypes: ['VideoMedia'],
+      sortOrder: 18,
+    },
+    BackgroundVideoUrl: {
+      type: 'string',
       displayName: 'Background Video URL',
-      allowedTypes: ['graph:cmp_PublicVideoAsset'],
+      description: 'Paste a YouTube or Vimeo URL to use as the background video. Takes priority over Background Video.',
       sortOrder: 20,
     },
     PrimaryCtaLink: {
@@ -61,24 +67,68 @@ type Props = {
   displaySettings?: ContentProps<typeof HeroBannerBlockDisplayTemplate>;
 };
 
+type EmbedVideo =
+  | { kind: 'iframe'; url: string }
+  | { kind: 'video'; url: string };
+
+function resolveEmbedVideo(raw: string): EmbedVideo | undefined {
+  try {
+    const u = new URL(raw);
+    if (u.hostname.includes('youtube.com') || u.hostname.includes('youtu.be')) {
+      const id = u.hostname.includes('youtu.be')
+        ? u.pathname.slice(1)
+        : u.searchParams.get('v');
+      if (!id) return undefined;
+      return {
+        kind: 'iframe',
+        url: `https://www.youtube.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}&controls=0&playsinline=1`,
+      };
+    }
+    if (u.hostname.includes('vimeo.com')) {
+      const id = u.pathname.split('/').filter(Boolean).pop();
+      if (!id) return undefined;
+      return {
+        kind: 'iframe',
+        url: `https://player.vimeo.com/video/${id}?autoplay=1&muted=1&loop=1&background=1`,
+      };
+    }
+    return { kind: 'video', url: raw };
+  } catch {
+    return undefined;
+  }
+}
+
 export default function HeroBannerBlock({ content, displaySettings }: Props) {
   const { pa, src } = getPreviewUtils(content);
   const block = (content as { __composition?: { key: string } }).__composition;
-  const videoSrc = content.BackgroundVideoUrl ? src(content.BackgroundVideoUrl) : undefined;
-  const imageSrc = src(content.BackgroundImage);
   const widthClass = containerWidthClass(displaySettings?.containerWidth);
+
+  // Priority: external video URL > DAM video > image
+  const embedVideo = content.BackgroundVideoUrl ? resolveEmbedVideo(content.BackgroundVideoUrl) : undefined;
+  const damVideoSrc = !embedVideo && content.BackgroundVideo ? src(content.BackgroundVideo) : undefined;
+  const imageSrc = !embedVideo && !damVideoSrc ? src(content.BackgroundImage) : undefined;
 
   return (
     <div {...pa(block)} className={widthClass}>
       <section
         className="relative w-full min-h-120 flex items-end overflow-hidden bg-slate-800"
-        style={!videoSrc && imageSrc ? { backgroundImage: `url(${imageSrc})`, backgroundSize: 'cover', backgroundPosition: 'center' } : undefined}
+        style={imageSrc ? { backgroundImage: `url(${imageSrc})`, backgroundSize: 'cover', backgroundPosition: 'center' } : undefined}
       >
-        {videoSrc && (
+        {embedVideo?.kind === 'iframe' && (
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <iframe
+              className="absolute top-1/2 left-1/2 min-w-full min-h-full w-[177.78vh] h-[56.25vw] -translate-x-1/2 -translate-y-1/2"
+              src={embedVideo.url}
+              allow="autoplay; fullscreen"
+              title=""
+            />
+          </div>
+        )}
+        {(embedVideo?.kind === 'video' || damVideoSrc) && (
           <video
             autoPlay muted loop playsInline
             className="absolute inset-0 w-full h-full object-cover"
-            src={videoSrc}
+            src={embedVideo?.kind === 'video' ? embedVideo.url : damVideoSrc}
           />
         )}
         <div className="absolute inset-0 bg-black/40" />
