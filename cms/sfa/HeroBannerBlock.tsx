@@ -25,12 +25,13 @@ export const HeroBannerBlockContentType = contentType({
     BackgroundImage: {
       type: 'contentReference',
       displayName: 'Background Image',
-      restrictedTypes: [],
+      allowedTypes: ['graph:cmp_PublicImageAsset'],
       sortOrder: 15,
     },
     BackgroundVideoUrl: {
-      type: 'url',
+      type: 'contentReference',
       displayName: 'Background Video URL',
+      allowedTypes: ['graph:cmp_PublicVideoAsset'],
       sortOrder: 20,
     },
     PrimaryCtaLink: {
@@ -61,16 +62,16 @@ type Props = {
 };
 
 export default function HeroBannerBlock({ content, displaySettings }: Props) {
-  const { pa } = getPreviewUtils(content);
+  const { pa, src } = getPreviewUtils(content);
   const block = (content as { __composition?: { key: string } }).__composition;
-  const videoSrc = content.BackgroundVideoUrl?.default;
-  const imageSrc = content.BackgroundImage?.url?.default;
+  const videoSrc = content.BackgroundVideoUrl ? src(content.BackgroundVideoUrl) : undefined;
+  const imageSrc = src(content.BackgroundImage);
   const widthClass = containerWidthClass(displaySettings?.containerWidth);
 
   return (
     <div {...pa(block)} className={widthClass}>
       <section
-        className="relative w-full min-h-[480px] flex items-end overflow-hidden bg-slate-800"
+        className="relative w-full min-h-120 flex items-end overflow-hidden bg-slate-800"
         style={!videoSrc && imageSrc ? { backgroundImage: `url(${imageSrc})`, backgroundSize: 'cover', backgroundPosition: 'center' } : undefined}
       >
         {videoSrc && (
@@ -81,7 +82,7 @@ export default function HeroBannerBlock({ content, displaySettings }: Props) {
           />
         )}
         <div className="absolute inset-0 bg-black/40" />
-        <div className="relative z-10 px-8 py-12 max-w-4xl">
+        <div className="relative z-10 pl-48 pr-8 py-12 max-w-4xl">
           {content.Heading && (
             <h1 {...pa('Heading')} className="text-4xl md:text-6xl font-bold text-white mb-4">
               {content.Heading}

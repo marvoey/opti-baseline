@@ -11,6 +11,7 @@
 //   npm run dev -- -H 0.0.0.0
 
 import { spawn } from 'node:child_process';
+import { rmSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -38,6 +39,16 @@ const port = process.env.PORT?.trim() || DEFAULT_PORT;
 if (!/^\d+$/.test(port)) {
   console.error(`[run-next] Invalid PORT "${port}" — must be a number.`);
   process.exit(1);
+}
+
+if (command === 'dev') {
+  const cacheDir = join(ROOT, '.next', 'cache');
+  try {
+    rmSync(cacheDir, { recursive: true, force: true });
+    console.log('[run-next] Cleared .next/cache');
+  } catch (err) {
+    console.warn(`[run-next] Could not clear cache: ${err.message}`);
+  }
 }
 
 console.log(`[run-next] Starting "next ${command}" on port ${port}`);
