@@ -19,9 +19,9 @@ export const LOCALES: Locale[] = [
     "routeSegment": ""
   },
   {
-    "key": "fr",
-    "displayName": "français",
-    "routeSegment": "fr"
+    "key": "es",
+    "displayName": "español",
+    "routeSegment": "es"
   },
   {
     "key": "sv",
@@ -30,22 +30,12 @@ export const LOCALES: Locale[] = [
   },
   {
     "key": "ko",
-    "displayName": "한국어",
+    "displayName": "Korean",
     "routeSegment": "ko"
   },
   {
-    "key": "ko-KR",
-    "displayName": "Korean (South Korea)",
-    "routeSegment": "ko-KR"
-  },
-  {
-    "key": "cy",
-    "displayName": "Welsh",
-    "routeSegment": "cy"
-  },
-  {
-    "key": "zh",
-    "displayName": "Chinese",
-    "routeSegment": "zh"
+    "key": "fr-FR",
+    "displayName": "français (France)",
+    "routeSegment": "fr-FR"
   }
 ];
