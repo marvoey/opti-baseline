@@ -1,6 +1,7 @@
 import { contentType, displayTemplate, type ContentProps } from '@optimizely/cms-sdk';
 import { OptimizelyComponent, getPreviewUtils } from '@optimizely/cms-sdk/react/server';
 import { sfaContainerWidthSettings, containerWidthClass } from './sfaDisplaySettings';
+import { CarouselShell } from './CarouselShell';
 
 export const DynamicCarouselBlockContentType = contentType({
   key: 'SFA_DynamicCarouselBlock',
@@ -57,23 +58,17 @@ export default function DynamicCarouselBlock({ content, displaySettings }: Props
             {content.CarouselTitle}
           </h2>
         )}
-        <div
-          {...pa('Items')}
-          className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-4 scroll-smooth"
+        <CarouselShell
+          itemCount={items.length}
+          showNavigation={content.ShowNavigation}
+          trackAttrs={pa('Items')}
         >
           {items.map((item, i) => (
-            <div key={i} className="snap-start shrink-0">
+            <div key={i} className="snap-start shrink-0 w-full">
               <OptimizelyComponent content={item} />
             </div>
           ))}
-        </div>
-        {content.ShowNavigation && items.length > 1 && (
-          <div className="flex justify-center gap-2 mt-4" aria-hidden>
-            {items.map((_, i) => (
-              <span key={i} className="w-2 h-2 rounded-full bg-gray-400" />
-            ))}
-          </div>
-        )}
+        </CarouselShell>
       </section>
     </div>
   );
