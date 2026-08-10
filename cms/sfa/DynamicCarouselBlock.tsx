@@ -1,6 +1,6 @@
 import { contentType, displayTemplate, type ContentProps } from '@optimizely/cms-sdk';
 import { OptimizelyComponent, getPreviewUtils } from '@optimizely/cms-sdk/react/server';
-import { sfaContainerWidthSettings, containerWidthClass } from './sfaDisplaySettings';
+import { sfaContainerWidthSettings, containerWidthClass, sfaContentAlignmentSettings, contentAlignmentClass } from './sfaDisplaySettings';
 import { CarouselShell } from './CarouselShell';
 
 export const DynamicCarouselBlockContentType = contentType({
@@ -36,7 +36,7 @@ export const DynamicCarouselBlockDisplayTemplate = displayTemplate({
   contentType: 'SFA_DynamicCarouselBlock',
   isDefault: true,
   displayName: 'Dynamic Carousel / Slider',
-  settings: sfaContainerWidthSettings,
+  settings: { ...sfaContainerWidthSettings, ...sfaContentAlignmentSettings },
 });
 
 type Props = {
@@ -49,14 +49,17 @@ export default function DynamicCarouselBlock({ content, displaySettings }: Props
   const block = (content as { __composition?: { key: string } }).__composition;
   const items = content.Items ?? [];
   const widthClass = containerWidthClass(displaySettings?.containerWidth);
+  const alignClass = contentAlignmentClass(displaySettings?.contentAlignment);
 
   return (
     <div {...pa(block)} className={widthClass}>
       <section className="w-full py-8">
         {content.CarouselTitle && (
-          <h2 {...pa('CarouselTitle')} className="text-2xl font-bold text-center mb-6">
-            {content.CarouselTitle}
-          </h2>
+          <div className={`flex flex-col ${alignClass}`}>
+            <h2 {...pa('CarouselTitle')} className="text-2xl font-bold mb-6">
+              {content.CarouselTitle}
+            </h2>
+          </div>
         )}
         <CarouselShell
           itemCount={items.length}
