@@ -1,0 +1,592 @@
+{
+  "displayName": "SFA Block Showcase",
+  "routeSegment": "sfa-block-showcase",
+  "locale": "en",
+  "composition": {
+    "nodeType": "experience",
+    "layoutType": "outline",
+    "nodes": [
+
+      {
+        "nodeType": "section",
+        "displayName": "HeroBannerBlock",
+        "layoutType": "grid",
+        "displaySettings": { "displayTemplate": "BlankSectionDefault", "settings": { "containerWidth": "full" } },
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "SFA_HeroBannerBlock",
+                      "properties": {
+                        "Heading": { "value": "SFA Block Showcase" },
+                        "Subtext": {
+                          "value": {
+                            "html": "<p>Every SFA block rendered on a single page. Use this as a visual reference and regression check when updating block styles or display settings.</p>"
+                          }
+                        },
+                        "PrimaryCtaText": { "value": "View All Blocks" },
+                        "PrimaryCtaLink": { "value": "https://www.specialtyfood.com/" }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+
+      {
+        "nodeType": "section",
+        "displayName": "AlertCalloutBlock — All Three Themes",
+        "layoutType": "grid",
+        "displaySettings": { "displayTemplate": "BlankSectionDefault", "settings": { "containerWidth": "constrained" } },
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "SFA_AlertCalloutBlock",
+                      "properties": {
+                        "CalloutTitle": { "value": "Deadline Theme" },
+                        "Message": {
+                          "value": {
+                            "html": "<p>Registration closes <strong>January 10, 2027</strong>. Early-bird pricing ends sooner &mdash; book now to lock in your rate.</p>"
+                          }
+                        },
+                        "ThemeStyle": { "value": "deadline" }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "SFA_AlertCalloutBlock",
+                      "properties": {
+                        "CalloutTitle": { "value": "Promo Theme" },
+                        "Message": {
+                          "value": {
+                            "html": "<p>SFA members save <strong>20%</strong> on exhibit booth fees. Log in to apply your member discount at checkout.</p>"
+                          }
+                        },
+                        "ThemeStyle": { "value": "promo" }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "SFA_AlertCalloutBlock",
+                      "properties": {
+                        "CalloutTitle": { "value": "Info Theme" },
+                        "Message": {
+                          "value": {
+                            "html": "<p>Buyer badge access opens at <strong>9:30 am</strong> daily. General floor access begins at 10:00 am for all badge types.</p>"
+                          }
+                        },
+                        "ThemeStyle": { "value": "info" }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+
+      {
+        "nodeType": "section",
+        "displayName": "MetricCardBlock — 4 Cards",
+        "layoutType": "grid",
+        "displaySettings": { "displayTemplate": "BlankSectionDefault", "settings": { "containerWidth": "wide" } },
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "SFA_MetricCardBlock",
+                      "properties": {
+                        "MetricNumber": { "value": "12,000+" },
+                        "MetricLabel": { "value": "industry professionals" }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "SFA_MetricCardBlock",
+                      "properties": {
+                        "MetricNumber": { "value": "4,000+" },
+                        "MetricLabel": { "value": "buyer attendees" }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "SFA_MetricCardBlock",
+                      "properties": {
+                        "MetricNumber": { "value": "1,000+" },
+                        "MetricLabel": { "value": "exhibitors" }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "SFA_MetricCardBlock",
+                      "properties": {
+                        "MetricNumber": { "value": "$219B" },
+                        "MetricLabel": { "value": "specialty food industry" }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+
+      {
+        "nodeType": "section",
+        "displayName": "TwoColumnSplitBlock — Media Left",
+        "layoutType": "grid",
+        "displaySettings": { "displayTemplate": "BlankSectionDefault", "settings": { "containerWidth": "wide" } },
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "SFA_TwoColumnSplitBlock",
+                      "properties": {
+                        "MediaAlignment": { "value": "left" },
+                        "LeftContentArea": {
+                          "value": [
+                            {
+                              "contentType": "SFA_HeroBannerBlock",
+                              "properties": {
+                                "Heading": { "value": "Left Column" },
+                                "Subtext": {
+                                  "value": {
+                                    "html": "<p>This is the <strong>LeftContentArea</strong> of a TwoColumnSplitBlock with <code>MediaAlignment: left</code>.</p>"
+                                  }
+                                },
+                                "PrimaryCtaText": { "value": "Learn More" },
+                                "PrimaryCtaLink": { "value": "https://www.specialtyfood.com/" }
+                              }
+                            }
+                          ]
+                        },
+                        "RightContentArea": {
+                          "value": [
+                            {
+                              "contentType": "SFA_AlertCalloutBlock",
+                              "properties": {
+                                "CalloutTitle": { "value": "Right Column" },
+                                "Message": {
+                                  "value": {
+                                    "html": "<p>This is the <strong>RightContentArea</strong>. Stacks vertically on mobile, side by side from <code>md</code>.</p>"
+                                  }
+                                },
+                                "ThemeStyle": { "value": "info" }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+
+      {
+        "nodeType": "section",
+        "displayName": "TwoColumnSplitBlock — Media Right",
+        "layoutType": "grid",
+        "displaySettings": { "displayTemplate": "BlankSectionDefault", "settings": { "containerWidth": "wide" } },
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "SFA_TwoColumnSplitBlock",
+                      "properties": {
+                        "MediaAlignment": { "value": "right" },
+                        "LeftContentArea": {
+                          "value": [
+                            {
+                              "contentType": "SFA_AlertCalloutBlock",
+                              "properties": {
+                                "CalloutTitle": { "value": "Left Column (order-2 on desktop)" },
+                                "Message": {
+                                  "value": {
+                                    "html": "<p>With <code>MediaAlignment: right</code> columns swap visually on desktop via CSS order, preserving DOM order for accessibility.</p>"
+                                  }
+                                },
+                                "ThemeStyle": { "value": "promo" }
+                              }
+                            }
+                          ]
+                        },
+                        "RightContentArea": {
+                          "value": [
+                            {
+                              "contentType": "SFA_AlertCalloutBlock",
+                              "properties": {
+                                "CalloutTitle": { "value": "Right Column (order-1 on desktop)" },
+                                "Message": {
+                                  "value": {
+                                    "html": "<p>This column visually leads on desktop when <code>MediaAlignment</code> is set to <strong>right</strong>.</p>"
+                                  }
+                                },
+                                "ThemeStyle": { "value": "deadline" }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+
+      {
+        "nodeType": "section",
+        "displayName": "MultiColumnGridContainer — 3 Columns",
+        "layoutType": "grid",
+        "displaySettings": { "displayTemplate": "BlankSectionDefault", "settings": { "containerWidth": "wide" } },
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "SFA_MultiColumnGridContainer",
+                      "properties": {
+                        "SectionTitle": { "value": "MultiColumnGridContainer (3 Columns)" },
+                        "ColumnCount": { "value": "3" },
+                        "Items": {
+                          "value": [
+                            {
+                              "contentType": "SFA_AlertCalloutBlock",
+                              "properties": {
+                                "CalloutTitle": { "value": "Column 1" },
+                                "Message": { "value": { "html": "<p>Grid item via <strong>Items</strong>. Stacks 1→2→3 across mobile/sm/md.</p>" } },
+                                "ThemeStyle": { "value": "info" }
+                              }
+                            },
+                            {
+                              "contentType": "SFA_AlertCalloutBlock",
+                              "properties": {
+                                "CalloutTitle": { "value": "Column 2" },
+                                "Message": { "value": { "html": "<p>Any element-enabled SFA block works as a grid item.</p>" } },
+                                "ThemeStyle": { "value": "promo" }
+                              }
+                            },
+                            {
+                              "contentType": "SFA_AlertCalloutBlock",
+                              "properties": {
+                                "CalloutTitle": { "value": "Column 3" },
+                                "Message": { "value": { "html": "<p>MetricCardBlock, AlertCalloutBlock, and HeroBannerBlock all work in grid slots.</p>" } },
+                                "ThemeStyle": { "value": "deadline" }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+
+      {
+        "nodeType": "section",
+        "displayName": "MultiColumnGridContainer — 5 Columns",
+        "layoutType": "grid",
+        "displaySettings": { "displayTemplate": "BlankSectionDefault", "settings": { "containerWidth": "full" } },
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "SFA_MultiColumnGridContainer",
+                      "properties": {
+                        "SectionTitle": { "value": "MultiColumnGridContainer (5 Columns)" },
+                        "ColumnCount": { "value": "5" },
+                        "Items": {
+                          "value": [
+                            {
+                              "contentType": "SFA_MetricCardBlock",
+                              "properties": { "MetricNumber": { "value": "12,000+" }, "MetricLabel": { "value": "industry professionals" } }
+                            },
+                            {
+                              "contentType": "SFA_MetricCardBlock",
+                              "properties": { "MetricNumber": { "value": "4,000+" }, "MetricLabel": { "value": "buyer attendees" } }
+                            },
+                            {
+                              "contentType": "SFA_MetricCardBlock",
+                              "properties": { "MetricNumber": { "value": "1,000+" }, "MetricLabel": { "value": "exhibitors" } }
+                            },
+                            {
+                              "contentType": "SFA_MetricCardBlock",
+                              "properties": { "MetricNumber": { "value": "135,450" }, "MetricLabel": { "value": "sq ft exhibit space" } }
+                            },
+                            {
+                              "contentType": "SFA_MetricCardBlock",
+                              "properties": { "MetricNumber": { "value": "16" }, "MetricLabel": { "value": "offsite sampling locations" } }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+
+      {
+        "nodeType": "section",
+        "displayName": "DynamicCarouselBlock",
+        "layoutType": "grid",
+        "displaySettings": { "displayTemplate": "BlankSectionDefault", "settings": { "containerWidth": "constrained" } },
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "SFA_DynamicCarouselBlock",
+                      "properties": {
+                        "CarouselTitle": { "value": "DynamicCarouselBlock — Attendee Testimonials" },
+                        "ShowNavigation": { "value": true },
+                        "Items": {
+                          "value": [
+                            {
+                              "contentType": "SFA_AlertCalloutBlock",
+                              "properties": {
+                                "CalloutTitle": { "value": "Buyer, Specialty Retail" },
+                                "Message": { "value": { "html": "<p>&ldquo;The quality of networking at FancyFaire is unmatched. I made connections in three days that would have taken a year to cultivate any other way.&rdquo;</p>" } },
+                                "ThemeStyle": { "value": "info" }
+                              }
+                            },
+                            {
+                              "contentType": "SFA_AlertCalloutBlock",
+                              "properties": {
+                                "CalloutTitle": { "value": "Exhibitor, Artisan Food Maker" },
+                                "Message": { "value": { "html": "<p>&ldquo;We landed three major retail accounts directly from our booth. The buyer attendance here is unlike any other show we&rsquo;ve done.&rdquo;</p>" } },
+                                "ThemeStyle": { "value": "info" }
+                              }
+                            },
+                            {
+                              "contentType": "SFA_AlertCalloutBlock",
+                              "properties": {
+                                "CalloutTitle": { "value": "Attendee, Food Distributor" },
+                                "Message": { "value": { "html": "<p>&ldquo;The offsite events and the show floor together give you a complete picture of the industry. I always leave inspired and with a full pipeline.&rdquo;</p>" } },
+                                "ThemeStyle": { "value": "info" }
+                              }
+                            },
+                            {
+                              "contentType": "SFA_AlertCalloutBlock",
+                              "properties": {
+                                "CalloutTitle": { "value": "Importer, Global Specialty Foods" },
+                                "Message": { "value": { "html": "<p>&ldquo;FancyFaire is where we debut every new import line. The concentrated buyer access in three days is impossible to replicate any other way.&rdquo;</p>" } },
+                                "ThemeStyle": { "value": "info" }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+
+      {
+        "nodeType": "section",
+        "displayName": "IframeEmbedBlock",
+        "layoutType": "grid",
+        "displaySettings": { "displayTemplate": "BlankSectionDefault", "settings": { "containerWidth": "constrained" } },
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "SFA_IframeEmbedBlock",
+                      "properties": {
+                        "EmbedTitle": { "value": "SFA — About the Specialty Food Association" },
+                        "IframeUrl": { "value": "https://www.youtube.com/embed/dQw4w9WgXcQ" },
+                        "Height": { "value": 480 }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+
+      {
+        "nodeType": "section",
+        "displayName": "ImageGalleryBlock — Grid Layout",
+        "layoutType": "grid",
+        "displaySettings": { "displayTemplate": "BlankSectionDefault", "settings": { "containerWidth": "wide" } },
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "SFA_ImageGalleryBlock",
+                      "properties": {
+                        "Layout": { "value": "grid" },
+                        "Caption": { "value": "ImageGalleryBlock — Grid layout (grid-cols-2 md:grid-cols-3). Populate Images with media references." },
+                        "Images": { "value": [] }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+
+      {
+        "nodeType": "section",
+        "displayName": "ImageGalleryBlock — Masonry Layout",
+        "layoutType": "grid",
+        "displaySettings": { "displayTemplate": "BlankSectionDefault", "settings": { "containerWidth": "wide" } },
+        "component": { "contentType": "BlankSection" },
+        "nodes": [
+          {
+            "nodeType": "row",
+            "nodes": [
+              {
+                "nodeType": "column",
+                "nodes": [
+                  {
+                    "nodeType": "component",
+                    "component": {
+                      "contentType": "SFA_ImageGalleryBlock",
+                      "properties": {
+                        "Layout": { "value": "masonry" },
+                        "Caption": { "value": "ImageGalleryBlock — Masonry layout (columns-2 md:columns-3). Populate Images with media references." },
+                        "Images": { "value": [] }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+
+    ]
+  }
+}

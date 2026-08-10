@@ -14,10 +14,14 @@
     "lint": "eslint",
     "gen:locales": "node scripts/generate-locales.mjs",
     "cms:push": "npx @optimizely/cms-cli config push optimizely.config.mjs",
+    "cms:push:force": "npx @optimizely/cms-cli config push optimizely.config.mjs --force",
+    "cms:push:type": "node scripts/push-content-type.mjs",
+    "cms:push:type:force": "node scripts/push-content-type.mjs --force",
     "schema:pull": "node scripts/fetch-openapi.mjs",
     "seed:experience": "node seed/scripts/seed-experience.mjs",
     "seed:homepage": "node seed/scripts/seed-experience.mjs seed/homepage.json",
-    "seed:eventpage": "node seed/scripts/seed-experience.mjs seed/eventpage.json"
+    "seed:eventpage": "node seed/scripts/seed-experience.mjs seed/eventpage.json",
+    "seed:showcase": "node seed/scripts/seed-experience.mjs seed/sfa-showcase.json"
   },
   "dependencies": {
     "@optimizely/cms-cli": "^2.0.0",
