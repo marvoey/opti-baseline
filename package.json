@@ -13,9 +13,11 @@
     "start": "node scripts/run-next.mjs start",
     "lint": "eslint",
     "gen:locales": "node scripts/generate-locales.mjs",
-    "cms:push": "npx @optimizely/cms-cli config push optimizely.config.mjs",
+    "cms:push": "node --env-file=.env scripts/cms-push.mjs",
+    "cms:push:all": "node --env-file=.env scripts/cms-push.mjs --all",
     "schema:pull": "node scripts/fetch-openapi.mjs",
-    "seed:hero": "node scripts/seed-atomic-hero.mjs"
+    "seed:hero": "node scripts/seed-atomic-hero.mjs",
+    "cms:check": "node --env-file=.env scripts/check-content-types.mjs"
   },
   "dependencies": {
     "@optimizely/cms-cli": "^2.0.0",
