@@ -1,7 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // @optimizely/cms-cli is an oclif CLI tool — its deps (like @oclif/core) are
+  // not bundleable. Tell Next.js to leave the package as a native Node require.
+  serverExternalPackages: ['@optimizely/cms-cli'],
 };
 
 export default nextConfig;
