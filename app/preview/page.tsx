@@ -13,7 +13,7 @@ type Props = {
 /**
  * CMS live-preview / on-page-editing route. The CMS opens this URL with preview
  * params (preview_token, key, ctx, ver, loc).
- * 
+ *
  * Site chrome comes from app/preview/layout (mirroring how the catch-all gets
  * it from app/[locale]/layout).
  *

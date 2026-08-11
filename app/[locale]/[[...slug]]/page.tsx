@@ -6,6 +6,7 @@ import { notFound } from 'next/navigation';
 import { DEFAULT_LOCALE } from '@/lib/locales';
 import { siteOrigin } from '@/lib/siteHost';
 import { siteConfig } from '@/lib/siteConfig';
+import HomePageFallback from '@/app/_components/HomePageFallback';
 
 type Props = {
   params: Promise<{ locale: string; slug?: string[] }>;
@@ -63,7 +64,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 async function Page({ params }: Props) {
   const { locale, slug = [] } = await params;
   const content = await loadContent(locale, slug);
-  if (!content) notFound();
+
+  if (!content) {
+    if (slug.length === 0) return <HomePageFallback />;
+    notFound();
+  }
 
   return <OptimizelyComponent content={content} />;
 }
