@@ -24,10 +24,9 @@ async function Page({ searchParams }: Props) {
   const params = (await searchParams) as unknown as PreviewParams;
   const content = await getClient().getPreviewContent(params);
 
-  const injectorSrc = new URL(
-    '/util/javascript/communicationinjector.js',
-    process.env.OPTIMIZELY_CMS_URL,
-  ).href;
+  const cmsUrl = process.env.OPTIMIZELY_CMS_URL;
+  if (!cmsUrl) throw new Error('OPTIMIZELY_CMS_URL is not set');
+  const injectorSrc = new URL('/util/javascript/communicationinjector.js', cmsUrl).href;
 
   return (
     <>
