@@ -7,6 +7,7 @@ import { House } from 'lucide-react';
 const NAV_LINKS = [
   { href: '/admin', label: 'Content Types', exact: true },
   { href: '/admin/display-templates', label: 'Display Templates', exact: false },
+  { href: '/admin/diagnostics', label: 'Diagnostics', exact: false },
 ];
 
 export default function AdminNav() {
