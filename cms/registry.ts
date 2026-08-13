@@ -8,16 +8,8 @@ import {
 import { initReactComponentRegistry } from '@optimizely/cms-sdk/react/server';
 import { requireEnv } from '@/lib/env';
 
-import ExperiencePage, { ExperiencePageContentType } from './ExperiencePage';
 import BlankSection from './BlankSection';
-import Page, { PageContentType } from './Page';
 import RichText, { RichTextContentType } from './RichText';
-import IntentHeroBlock, { IntentHeroBlockContentType } from './IntentHeroBlock';
-import CardItemBlock, { CardItemBlockContentType } from './CardItemBlock';
-import UniversalCardGridBlock, { UniversalCardGridBlockContentType } from './UniversalCardGridBlock';
-import SplitContentBlock, { SplitContentBlockContentType } from './SplitContentBlock';
-import RichTextValuePropBlock, { RichTextValuePropBlockContentType } from './RichTextValuePropBlock';
-import InteractiveWidgetBlock, { InteractiveWidgetBlockContentType } from './InteractiveWidgetBlock';
 
 /**
  * Single configuration + registration point for the Optimizely SDK.
@@ -52,16 +44,8 @@ export const registeredContentTypes = [
   // SDK-native types the CMS can send (e.g. during preview).
   BlankExperienceContentType,
   BlankSectionContentType,
-  ExperiencePageContentType,
-  PageContentType,
   // Blocks
   RichTextContentType,
-  IntentHeroBlockContentType,
-  CardItemBlockContentType,
-  UniversalCardGridBlockContentType,
-  SplitContentBlockContentType,
-  RichTextValuePropBlockContentType,
-  InteractiveWidgetBlockContentType,
 ];
 
 initContentTypeRegistry(registeredContentTypes);
@@ -70,18 +54,8 @@ initDisplayTemplateRegistry([]);
 
 initReactComponentRegistry({
   resolver: {
-    // SDK-native experience type — same composition rendering as ExperiencePage.
-    BlankExperience: ExperiencePage,
     BlankSection,
-    ExperiencePage,
-    Page,
     // Blocks (resolver key === content-type key)
     RichTextBlock: RichText,
-    IntentHeroBlock,
-    CardItemBlock,
-    UniversalCardGridBlock,
-    SplitContentBlock,
-    RichTextValuePropBlock,
-    InteractiveWidgetBlock,
   },
 });
