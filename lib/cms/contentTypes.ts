@@ -143,6 +143,33 @@ export async function fetchCmsContentTypes(): Promise<FetchContentTypesResult> {
   }
 }
 
+/** Delete a content type by key via the CMS Management API. */
+export async function deleteCmsContentType(
+  key: string,
+): Promise<{ ok: boolean; message?: string }> {
+  const cred = readCredentials();
+  if (!cred) return { ok: false, message: MISSING_CREDENTIALS_MESSAGE };
+
+  const base = apiBase();
+  try {
+    const token = await getAccessToken(base, cred.clientId, cred.clientSecret);
+    const res = await fetch(`${base}/v1/contenttypes/${encodeURIComponent(key)}`, {
+      method: 'DELETE',
+      headers: { authorization: `Bearer ${token}` },
+    });
+    if (!res.ok) {
+      const body = await res.text().catch(() => '');
+      return {
+        ok: false,
+        message: `Delete failed (${res.status})${body ? ': ' + body : ''}`,
+      };
+    }
+    return { ok: true };
+  } catch (err) {
+    return { ok: false, message: err instanceof Error ? err.message : String(err) };
+  }
+}
+
 /** Fetch a single content type by key. Used by the /admin/[key] detail page. */
 export async function fetchCmsContentType(key: string): Promise<FetchContentTypeResult> {
   const cred = readCredentials();

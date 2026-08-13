@@ -8,7 +8,6 @@ import {
 import { initReactComponentRegistry } from '@optimizely/cms-sdk/react/server';
 import { requireEnv } from '@/lib/env';
 
-import ExperiencePage, { ExperiencePageContentType } from './ExperiencePage';
 import BlankSection from './BlankSection';
 import Page, { PageContentType } from './Page';
 import RichText, { RichTextContentType } from './RichText';
@@ -46,7 +45,6 @@ export const registeredContentTypes = [
   // SDK-native types the CMS can send (e.g. during preview).
   BlankExperienceContentType,
   BlankSectionContentType,
-  ExperiencePageContentType,
   PageContentType,
   // Blocks
   RichTextContentType,
@@ -58,10 +56,7 @@ initDisplayTemplateRegistry([]);
 
 initReactComponentRegistry({
   resolver: {
-    // SDK-native experience type — same composition rendering as ExperiencePage.
-    BlankExperience: ExperiencePage,
     BlankSection,
-    ExperiencePage,
     Page,
     // Blocks (resolver key === content-type key)
     RichTextBlock: RichText,

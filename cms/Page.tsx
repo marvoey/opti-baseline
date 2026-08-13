@@ -13,7 +13,7 @@ export const PageContentType = contentType({
   baseType: '_page',
   displayName: 'Page (v1)',
   description: 'A page built from an ordered list of content blocks.',
-  mayContainTypes: ['ExperiencePage', 'Page'],
+  mayContainTypes: ['Page'],
   properties: {
     MetaTitle: {
       type: 'string',
