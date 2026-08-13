@@ -1,7 +1,6 @@
 import { contentType, type ContentProps } from '@optimizely/cms-sdk';
 import { getPreviewUtils } from '@optimizely/cms-sdk/react/server';
 import { RichText as RichTextRenderer } from '@optimizely/cms-sdk/react/richText';
-import { blockWidth, widthClass } from './blockWidth';
 
 /**
  * Rich Text — a block of formatted prose (headings, lists, links, tables)
@@ -14,9 +13,8 @@ export const RichTextContentType = contentType({
   baseType: '_component',
   displayName: 'Rich Text',
   description: 'A block of formatted text content.',
-  compositionBehaviors: ['elementEnabled', 'sectionEnabled'],
+  compositionBehaviors: ['elementEnabled'],
   properties: {
-    ...blockWidth(),
     Body: {
       type: 'richText',
       displayName: 'Body',
@@ -35,7 +33,7 @@ export default function RichText({ content }: Props) {
 
   return (
     <section {...pa(block)} className="w-full px-6 py-12">
-      <div {...pa('Body')} className={`prose mx-auto ${widthClass(content.BlockWidth)}`}>
+      <div {...pa('Body')} className="prose mx-auto">
         <RichTextRenderer content={content.Body?.json} />
       </div>
     </section>

@@ -11,6 +11,8 @@ import { requireEnv } from '@/lib/env';
 import BlankExperience from './BlankExperience';
 import BlankSection from './BlankSection';
 import RichText, { RichTextContentType } from './RichText';
+import SharedContent, { SharedContentContentType } from './SharedContent';
+import StringElement, { StringElementContentType } from './StringElement';
 
 /**
  * Single configuration + registration point for the Optimizely SDK.
@@ -47,6 +49,8 @@ export const registeredContentTypes = [
   BlankSectionContentType,
   // Blocks
   RichTextContentType,
+  SharedContentContentType,
+  StringElementContentType,
 ];
 
 initContentTypeRegistry(registeredContentTypes);
@@ -59,5 +63,7 @@ initReactComponentRegistry({
     BlankSection,
     // Blocks (resolver key === content-type key)
     RichTextBlock: RichText,
+    SharedContent,
+    StringElement,
   },
 });
