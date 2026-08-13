@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { House } from 'lucide-react';
 
 const NAV_LINKS = [
   { href: '/admin', label: 'Content Types', exact: true },
@@ -21,6 +22,14 @@ export default function AdminNav() {
         <span className="mr-4 text-xs font-semibold uppercase tracking-wider text-slate-400">
           Admin
         </span>
+        <Link
+          href="/"
+          className="mr-3 flex items-center gap-1.5 text-sm text-slate-500 transition-colors hover:text-slate-900"
+        >
+          <House size={14} />
+          Home
+        </Link>
+        <span className="mr-3 text-slate-200">|</span>
         {NAV_LINKS.map(({ href, label, exact }) => (
           <Link
             key={href}
