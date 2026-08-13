@@ -8,6 +8,7 @@ import {
 import { initReactComponentRegistry } from '@optimizely/cms-sdk/react/server';
 import { requireEnv } from '@/lib/env';
 
+import BlankExperience from './BlankExperience';
 import BlankSection from './BlankSection';
 import RichText, { RichTextContentType } from './RichText';
 
@@ -54,6 +55,7 @@ initDisplayTemplateRegistry([]);
 
 initReactComponentRegistry({
   resolver: {
+    BlankExperience,
     BlankSection,
     // Blocks (resolver key === content-type key)
     RichTextBlock: RichText,
