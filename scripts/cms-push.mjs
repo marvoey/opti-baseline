@@ -5,14 +5,17 @@
  * Already-existing types are listed and skipped to avoid accidental overwrites.
  *
  * Flags:
- *   --all    Push every content type regardless of CMS state (original behaviour)
- *   --dry    Show what would be pushed without sending anything
+ *   --all          Push every content type regardless of CMS state (original behaviour)
+ *   --dry          Show what would be pushed without sending anything
+ *   --type <key>   Push only the content type with this key (combine with --all to force-push it)
  *
  * Examples:
- *   node --env-file=.env scripts/cms-push.mjs           # push missing only
- *   node --env-file=.env scripts/cms-push.mjs --all     # push everything
- *   node --env-file=.env scripts/cms-push.mjs --dry     # preview missing push
+ *   node --env-file=.env scripts/cms-push.mjs                        # push missing only
+ *   node --env-file=.env scripts/cms-push.mjs --all                  # push everything
+ *   node --env-file=.env scripts/cms-push.mjs --dry                  # preview missing push
  *   node --env-file=.env scripts/cms-push.mjs --all --dry
+ *   node --env-file=.env scripts/cms-push.mjs --type RichTextBlock   # push one missing type
+ *   node --env-file=.env scripts/cms-push.mjs --type RichTextBlock --all  # force-push one type
  */
 
 import { dirname, join, resolve } from 'node:path';
@@ -26,8 +29,10 @@ import {
 import { mapContentToManifest } from '@optimizely/cms-cli/dist/mapper/contentToPackage.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
-const ALL_MODE = process.argv.includes('--all');
-const DRY_MODE = process.argv.includes('--dry');
+const ARGS = process.argv.slice(2);
+const ALL_MODE = ARGS.includes('--all');
+const DRY_MODE = ARGS.includes('--dry');
+const TYPE_FILTER = (() => { const i = ARGS.indexOf('--type'); return i !== -1 ? ARGS[i + 1] : null; })();
 
 // ── Env ───────────────────────────────────────────────────────────────────────
 if (
@@ -140,15 +145,27 @@ async function main() {
     return;
   }
 
-  // 2. Fetch CMS state + auth (can run in parallel)
+  // 2. Apply --type filter
+  let scopedTypes = allMapped;
+  if (TYPE_FILTER) {
+    scopedTypes = allMapped.filter(ct => ct.key === TYPE_FILTER);
+    if (scopedTypes.length === 0) {
+      console.error(c.red(`Error: content type "${TYPE_FILTER}" not found locally.`));
+      console.log(c.dim('  Known keys: ' + allMapped.map(ct => ct.key).join(', ')));
+      process.exitCode = 1;
+      return;
+    }
+  }
+
+  // 3. Fetch CMS state + auth (can run in parallel)
   const token = await getToken();
   const cmsKeys = await fetchCmsKeys(token);
 
-  // 3. Partition
-  const existing = allMapped.filter(ct => cmsKeys.has(ct.key));
-  const missing  = allMapped.filter(ct => !cmsKeys.has(ct.key));
+  // 4. Partition
+  const existing = scopedTypes.filter(ct => cmsKeys.has(ct.key));
+  const missing  = scopedTypes.filter(ct => !cmsKeys.has(ct.key));
 
-  // 4. Report existing
+  // 5. Report existing
   if (existing.length > 0) {
     console.log(c.bold('\nContent types already in the CMS (skipped):'));
     for (const ct of existing) {
@@ -166,15 +183,15 @@ async function main() {
     }
   }
 
-  // 5. Decide what to push
-  const toPush = ALL_MODE ? allMapped : missing;
+  // 6. Decide what to push
+  const toPush = ALL_MODE ? scopedTypes : missing;
 
   if (toPush.length === 0) {
     console.log(c.green('\nAll content types are already in the CMS. Nothing to push.'));
     return;
   }
 
-  // 6. Preview
+  // 7. Preview
   console.log(
     c.bold(
       `\nContent types to push (${toPush.length}):`,
@@ -189,7 +206,7 @@ async function main() {
     return;
   }
 
-  // 7. Push
+  // 8. Push
   console.log(c.dim('\nUploading…'));
 
   const normalizedGroups = propertyGroups

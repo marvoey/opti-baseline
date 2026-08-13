@@ -1,6 +1,6 @@
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
-import { LOCALE_SEGMENTS } from '@/lib/locales';
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import { LOCALE_SEGMENTS } from "@/lib/locales";
 
 /**
  * Next.js 16 Proxy (the replacement for Middleware) — locale clean-URLs for the
@@ -17,14 +17,14 @@ import { LOCALE_SEGMENTS } from '@/lib/locales';
  * page therefore needs no change here.
  */
 
-const DEFAULT_LOCALE = process.env.OPTIMIZELY_DEFAULT_LOCALE || 'en';
+const DEFAULT_LOCALE = process.env.OPTIMIZELY_DEFAULT_LOCALE || "en";
 // Route segments of the non-default locales enabled in the CMS, sourced from
 // lib/locales.generated.ts (refreshed by `npm run gen:locales`). The default
 // locale serves clean URLs, so it has no segment here.
 const KNOWN_LOCALE_SEGMENTS = LOCALE_SEGMENTS;
 
 function firstSegment(pathname: string): string {
-  return pathname.split('/')[1] ?? '';
+  return pathname.split("/")[1] ?? "";
 }
 
 export function proxy(request: NextRequest) {
@@ -35,7 +35,7 @@ export function proxy(request: NextRequest) {
   //   /en/vb-demo → /vb-demo
   if (seg === DEFAULT_LOCALE) {
     const stripped =
-      pathname.replace(new RegExp(`^/${DEFAULT_LOCALE}(?=/|$)`), '') || '/';
+      pathname.replace(new RegExp(`^/${DEFAULT_LOCALE}(?=/|$)`), "") || "/";
     return NextResponse.redirect(new URL(stripped + search, request.url));
   }
 
@@ -55,5 +55,7 @@ export const config = {
   // routes, and any path containing a dot (static assets like /logo.svg). The
   // preview, admin and styleguide routes live outside [locale] and must not be
   // rewritten into a locale.
-  matcher: ['/((?!api|_next/static|_next/image|preview|admin|styleguide|favicon.ico|.*\\..*).*)'],
+  matcher: [
+    "/((?!api|_next/static|_next/image|preview|admin|styleguide|favicon.ico|.*\\..*).*)",
+  ],
 };
