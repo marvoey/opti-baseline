@@ -5,6 +5,9 @@ import type { ComponentContainerProps } from '@optimizely/cms-sdk/react/server';
  * Wraps every component node rendered inside an experience composition.
  * Applies `pa(node)` so on-page editing overlays attach to each block in
  * preview/edit mode (a no-op outside the editor).
+ *
+ * Renders a <section> instead of <div> when the content type declares
+ * compositionBehaviors: ['sectionEnabled'].
  */
 export function ComponentWrapper({ children, node }: ComponentContainerProps) {
   const { pa } = getPreviewUtils(node);

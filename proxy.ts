@@ -56,6 +56,6 @@ export const config = {
   // preview, admin and styleguide routes live outside [locale] and must not be
   // rewritten into a locale.
   matcher: [
-    "/((?!api|_next/static|_next/image|preview|admin|styleguide|favicon.ico|.*\\..*).*)",
+    "/((?!api|_next/static|_next/image|preview|admin|cms-admin|styleguide|favicon.ico|.*\\..*).*)",
   ],
 };

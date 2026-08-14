@@ -7,6 +7,7 @@ import {
   type CmsDisplayTemplate,
   type CmsDisplayTemplateSetting,
 } from '@/lib/cms/displayTemplates';
+import DeleteButton from '../_components/DeleteButton';
 
 export const dynamic = 'force-dynamic';
 
@@ -62,13 +63,16 @@ function DisplayTemplateDetail({ template: t }: { template: CmsDisplayTemplate }
 
   return (
     <article>
-      <div className="flex flex-wrap items-center gap-2">
-        <h1 className="text-2xl font-semibold tracking-tight text-slate-900">{t.displayName}</h1>
-        {t.isDefault && (
-          <span className="rounded-full bg-emerald-50 px-2.5 py-0.5 text-xs font-medium text-emerald-700">
-            default
-          </span>
-        )}
+      <div className="flex flex-wrap items-start justify-between gap-2">
+        <div className="flex flex-wrap items-center gap-2">
+          <h1 className="text-2xl font-semibold tracking-tight text-slate-900">{t.displayName}</h1>
+          {t.isDefault && (
+            <span className="rounded-full bg-emerald-50 px-2.5 py-0.5 text-xs font-medium text-emerald-700">
+              default
+            </span>
+          )}
+        </div>
+        <DeleteButton templateKey={t.key} />
       </div>
 
       <div className="mt-2 flex flex-wrap items-center gap-3 text-sm text-slate-500">

@@ -8,6 +8,7 @@
  *   --all          Push every content type regardless of CMS state (original behaviour)
  *   --dry          Show what would be pushed without sending anything
  *   --type <key>   Push only the content type with this key (combine with --all to force-push it)
+ *   --force        Ignore breaking-change / data-loss warnings from the CMS API
  *
  * Examples:
  *   node --env-file=.env scripts/cms-push.mjs                        # push missing only
@@ -16,6 +17,7 @@
  *   node --env-file=.env scripts/cms-push.mjs --all --dry
  *   node --env-file=.env scripts/cms-push.mjs --type RichTextBlock   # push one missing type
  *   node --env-file=.env scripts/cms-push.mjs --type RichTextBlock --all  # force-push one type
+ *   node --env-file=.env scripts/cms-push.mjs --all --force          # push + ignore data-loss warnings
  */
 
 import { dirname, join, resolve } from 'node:path';
@@ -30,8 +32,9 @@ import { mapContentToManifest } from '@optimizely/cms-cli/dist/mapper/contentToP
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const ARGS = process.argv.slice(2);
-const ALL_MODE = ARGS.includes('--all');
-const DRY_MODE = ARGS.includes('--dry');
+const ALL_MODE   = ARGS.includes('--all');
+const DRY_MODE   = ARGS.includes('--dry');
+const FORCE_MODE = ARGS.includes('--force');
 const TYPE_FILTER = (() => { const i = ARGS.indexOf('--type'); return i !== -1 ? ARGS[i + 1] : null; })();
 
 // ── Env ───────────────────────────────────────────────────────────────────────
@@ -93,13 +96,14 @@ async function fetchCmsKeys(token) {
 }
 
 // ── POST manifest ─────────────────────────────────────────────────────────────
-async function postManifest(token, manifest) {
+async function postManifest(token, manifest, { ignoreDataLossWarnings = false } = {}) {
   const res = await fetch(`${GATEWAY}/v1/manifest`, {
     method: 'POST',
     headers: {
       authorization: `Bearer ${token}`,
       accept: 'application/json',
       'content-type': 'application/vnd.optimizely.cms.v1.manifest+json',
+      'cms-ignore-data-loss-warnings': ignoreDataLossWarnings,
     },
     body: JSON.stringify(manifest),
   });
@@ -219,7 +223,7 @@ async function main() {
     propertyGroups: normalizedGroups,
   };
 
-  const result = await postManifest(token, manifest);
+  const result = await postManifest(token, manifest, { ignoreDataLossWarnings: FORCE_MODE });
 
   console.log(c.green('\n✓ Upload complete'));
 

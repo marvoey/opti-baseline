@@ -2,6 +2,7 @@ import { type ContentProps } from '@optimizely/cms-sdk';
 import { BlankExperienceContentType } from '@optimizely/cms-sdk';
 import { OptimizelyComposition, getPreviewUtils } from '@optimizely/cms-sdk/react/server';
 import { ComponentWrapper } from './wrappers';
+import JsonDebug from '@/app/_components/JsonDebug';
 
 type Props = {
   content: ContentProps<typeof BlankExperienceContentType>;
@@ -44,6 +45,7 @@ export default function BlankExperience({ content }: Props) {
 
   return (
     <main>
+      {/* <JsonDebug value={nodes} label="BlankExperience · nodes" /> */}
       <OptimizelyComposition nodes={nodes} ComponentWrapper={ComponentWrapper} />
     </main>
   );

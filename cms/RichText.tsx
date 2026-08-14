@@ -20,6 +20,9 @@ export const RichTextContentType = contentType({
       displayName: 'Body',
       description: 'Formatted text content.',
       isLocalized: true,
+      "editorSettings": {
+        "preset": "expanded"
+      },
       sortOrder: 10,
     },
   },
@@ -32,8 +35,8 @@ export default function RichText({ content }: Props) {
   const block = (content as { __composition?: { key: string } }).__composition;
 
   return (
-    <section {...pa(block)} className="w-full px-6 py-12">
-      <div {...pa('Body')} className="prose mx-auto">
+    <section {...pa(block)} >
+      <div {...pa('Body')} className="prose">
         <RichTextRenderer content={content.Body?.json} />
       </div>
     </section>

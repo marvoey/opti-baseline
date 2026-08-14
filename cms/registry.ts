@@ -10,9 +10,12 @@ import { requireEnv } from '@/lib/env';
 
 import BlankExperience from './BlankExperience';
 import BlankSection from './BlankSection';
+import { SectionDisplayTemplate } from './sectionDisplayTemplate';
 import RichText, { RichTextContentType } from './RichText';
-import SharedContent, { SharedContentContentType } from './SharedContent';
+import SharedContent, { SharedContentContentType, SharedContentDisplayTemplate } from './SharedContent';
 import StringElement, { StringElementContentType } from './StringElement';
+import IndustryHeroBlock, { IndustryHeroBlockContentType } from './IndustryHeroBlock';
+import CardBlock, { CardBlockContentType } from './CardBlock';
 
 /**
  * Single configuration + registration point for the Optimizely SDK.
@@ -51,11 +54,13 @@ export const registeredContentTypes = [
   RichTextContentType,
   SharedContentContentType,
   StringElementContentType,
+  IndustryHeroBlockContentType,
+  CardBlockContentType,
 ];
 
 initContentTypeRegistry(registeredContentTypes);
 
-initDisplayTemplateRegistry([]);
+initDisplayTemplateRegistry([SectionDisplayTemplate, SharedContentDisplayTemplate]);
 
 initReactComponentRegistry({
   resolver: {
@@ -65,5 +70,7 @@ initReactComponentRegistry({
     RichTextBlock: RichText,
     SharedContent,
     StringElement,
+    IndustryHeroBlock,
+    CardBlock,
   },
 });

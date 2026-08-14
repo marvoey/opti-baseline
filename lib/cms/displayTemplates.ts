@@ -125,6 +125,35 @@ export async function fetchCmsDisplayTemplates(): Promise<FetchDisplayTemplatesR
   }
 }
 
+export type DeleteDisplayTemplateResult =
+  | { ok: true }
+  | { ok: false; reason: 'missing-credentials' | 'not-found' | 'error'; message: string };
+
+export async function deleteCmsDisplayTemplate(key: string): Promise<DeleteDisplayTemplateResult> {
+  const cred = readCredentials();
+  if (!cred) return { ok: false, reason: 'missing-credentials', message: MISSING_CREDENTIALS_MESSAGE };
+
+  const base = apiBase();
+
+  try {
+    const token = await getAccessToken(base, cred.clientId, cred.clientSecret);
+    const res = await fetch(`${base}/v1/displaytemplates/${encodeURIComponent(key)}`, {
+      method: 'DELETE',
+      headers: { authorization: `Bearer ${token}` },
+      cache: 'no-store',
+    });
+
+    if (res.status === 404) {
+      return { ok: false, reason: 'not-found', message: `No display template with key "${key}".` };
+    }
+    if (!res.ok) throw new Error(`DELETE displaytemplates/${key} failed (${res.status}).`);
+
+    return { ok: true };
+  } catch (err) {
+    return { ok: false, reason: 'error', message: err instanceof Error ? err.message : String(err) };
+  }
+}
+
 export async function fetchCmsDisplayTemplate(key: string): Promise<FetchDisplayTemplateResult> {
   const cred = readCredentials();
   if (!cred) return { ok: false, reason: 'missing-credentials', message: MISSING_CREDENTIALS_MESSAGE };

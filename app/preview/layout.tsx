@@ -8,5 +8,7 @@ import SiteChrome from '../_components/SiteChrome';
  * preview matches the published page.
  */
 export default function PreviewLayout({ children }: { children: React.ReactNode }) {
-  return <SiteChrome>{children}</SiteChrome>;
+  return (
+    <SiteChrome>{children}</SiteChrome>
+  );
 }

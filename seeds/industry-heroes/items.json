@@ -1,0 +1,125 @@
+{
+  "container": { "$env": "ROOT_CONTAINER" },
+  "items": [
+    {
+      "key": "1458dd6b69fd4a9e80db31131391a2c8",
+      "contentType": "IndustryHeroBlock",
+      "displayName": "Industry Hero - Retail Banking",
+      "properties": {
+        "Headline": "What are your financial goals today?",
+        "SearchPlaceholder": "e.g., Open a checking account, Get a mortgage...",
+        "QuickAction1": "Open an account",
+        "QuickAction2": "Check current rates",
+        "QuickAction3": "Find an ATM"
+      }
+    },
+    {
+      "key": "4f65b4da114a4b43b18e18245054d74b",
+      "contentType": "IndustryHeroBlock",
+      "displayName": "Industry Hero - Insurance",
+      "properties": {
+        "Headline": "What do you need to protect?",
+        "SearchPlaceholder": "e.g., Auto, Home, Life...",
+        "QuickAction1": "Get a quote",
+        "QuickAction2": "File a claim",
+        "QuickAction3": "Manage my policy"
+      }
+    },
+    {
+      "key": "40df669c9f664bdb8976c3e03ba80061",
+      "contentType": "IndustryHeroBlock",
+      "displayName": "Industry Hero - Asset Management",
+      "properties": {
+        "Headline": "How can we help grow your wealth?",
+        "SearchPlaceholder": "e.g., Retirement planning, College fund...",
+        "QuickAction1": "Explore our funds",
+        "QuickAction2": "Talk to an advisor",
+        "QuickAction3": "Market insights"
+      }
+    },
+    {
+      "key": "9f16f5e91449478bbb0439a9f606a72a",
+      "contentType": "IndustryHeroBlock",
+      "displayName": "Industry Hero - Healthcare",
+      "properties": {
+        "Headline": "How can we help you get care today?",
+        "SearchPlaceholder": "Search for doctors, locations, or symptoms...",
+        "QuickAction1": "Book an appointment",
+        "QuickAction2": "Patient Portal",
+        "QuickAction3": "Find Urgent Care"
+      }
+    },
+    {
+      "key": "03e461b8b23f454c89e58d19adb81534",
+      "contentType": "IndustryHeroBlock",
+      "displayName": "Industry Hero - Software (SaaS)",
+      "properties": {
+        "Headline": "What problem are you trying to solve?",
+        "SearchPlaceholder": "e.g., Team collaboration, Sales tracking...",
+        "QuickAction1": "Start free trial",
+        "QuickAction2": "Request a demo",
+        "QuickAction3": "View pricing"
+      }
+    },
+    {
+      "key": "9b78dc3d48f1478ebe66113a31cb162c",
+      "contentType": "IndustryHeroBlock",
+      "displayName": "Industry Hero - Retail",
+      "properties": {
+        "Headline": "What are you looking for today?",
+        "SearchPlaceholder": "Search for products, brands, or categories...",
+        "QuickAction1": "Shop the sale",
+        "QuickAction2": "Track my order",
+        "QuickAction3": "Find a store"
+      }
+    },
+    {
+      "key": "07b11a971e1640439779903a11efdc64",
+      "contentType": "IndustryHeroBlock",
+      "displayName": "Industry Hero - Airlines",
+      "properties": {
+        "Headline": "Where would you like to go?",
+        "SearchPlaceholder": "Enter destination or flight number...",
+        "QuickAction1": "Book a flight",
+        "QuickAction2": "Check-in online",
+        "QuickAction3": "Flight status"
+      }
+    },
+    {
+      "key": "82e7b17bf8974c3889aa56a7cb0adcd7",
+      "contentType": "IndustryHeroBlock",
+      "displayName": "Industry Hero - Media",
+      "properties": {
+        "Headline": "What do you want to read or watch?",
+        "SearchPlaceholder": "Search topics, shows, or articles...",
+        "QuickAction1": "Latest breaking news",
+        "QuickAction2": "Watch live",
+        "QuickAction3": "Subscribe"
+      }
+    },
+    {
+      "key": "de9a590850ba41f598881885b733000b",
+      "contentType": "IndustryHeroBlock",
+      "displayName": "Industry Hero - Manufacturing",
+      "properties": {
+        "Headline": "What parts or materials do you need?",
+        "SearchPlaceholder": "Search by SKU, product name, or category...",
+        "QuickAction1": "Request a quote",
+        "QuickAction2": "Track shipment",
+        "QuickAction3": "Supplier portal"
+      }
+    },
+    {
+      "key": "742f9d741df240129efa8032c29b471d",
+      "contentType": "IndustryHeroBlock",
+      "displayName": "Industry Hero - Professional Services",
+      "properties": {
+        "Headline": "What expertise does your business need?",
+        "SearchPlaceholder": "e.g., Tax audit, Legal consulting, M&A...",
+        "QuickAction1": "Schedule consultation",
+        "QuickAction2": "View case studies",
+        "QuickAction3": "Our services"
+      }
+    }
+  ]
+}
