@@ -7,6 +7,7 @@ import { DEFAULT_LOCALE } from '@/lib/locales';
 import { siteOrigin } from '@/lib/siteHost';
 import { siteConfig } from '@/lib/siteConfig';
 import HomePageFallback from '@/app/_components/HomePageFallback';
+import FurnitureFallback from '@/app/_components/FurnitureFallback';
 
 type Props = {
   params: Promise<{ locale: string; slug?: string[] }>;
@@ -67,6 +68,7 @@ async function Page({ params }: Props) {
 
   if (!content) {
     if (slug.length === 0) return <HomePageFallback />;
+    if (slug.join('/') === 'departments/furniture') return <FurnitureFallback />;
     notFound();
   }
 

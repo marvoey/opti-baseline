@@ -5,28 +5,28 @@ const NAV = `${LS}/lp_blocks/2026/06/summern-nav-2026`;
 const PROD = `${LS}/productassets`;
 
 const CATEGORIES = [
-  { label: 'Living Room',            sub: 'Sofas, Sectionals & More',   href: '#',                                             img: `${NAV}/d_01_living_room.jpg` },
-  { label: 'Bedroom',                sub: 'Beds, Dressers & More',       href: '#',                                             img: `${NAV}/d_02_bedroom.jpg` },
-  { label: 'Dining Room',            sub: 'Tables, Chairs & More',       href: '#',                                             img: `${NAV}/d_04_dining_room.jpg` },
-  { label: 'Home Office',            sub: 'Desks, Seating & Storage',    href: '/prototype/departments/furniture/home-office',  img: `${NAV}/d_05_office.jpg` },
-  { label: 'Kids + Teens',           sub: 'Beds, Study & Nursery',       href: '#',                                             img: `${NAV}/d_06_kids_teens.jpg` },
-  { label: 'Entertainment',          sub: 'TV Stands & Media Storage',   href: '#',                                             img: `${NAV}/d_01_living_room.jpg` },
-  { label: 'Entryway',               sub: 'Benches, Consoles & More',    href: '#',                                             img: `${NAV}/d_02_bedroom.jpg` },
-  { label: 'Reclining Furniture',    sub: 'Recliners & Power Sofas',     href: '#',                                             img: `${NAV}/d_01_living_room.jpg` },
+  { label: 'Living Room',         sub: 'Sofas, Sectionals & More',  href: '#',                                   img: `${NAV}/d_01_living_room.jpg` },
+  { label: 'Bedroom',             sub: 'Beds, Dressers & More',      href: '#',                                   img: `${NAV}/d_02_bedroom.jpg` },
+  { label: 'Dining Room',         sub: 'Tables, Chairs & More',      href: '#',                                   img: `${NAV}/d_04_dining_room.jpg` },
+  { label: 'Home Office',         sub: 'Desks, Seating & Storage',   href: '/departments/furniture/home-office',  img: `${NAV}/d_05_office.jpg` },
+  { label: 'Kids + Teens',        sub: 'Beds, Study & Nursery',      href: '#',                                   img: `${NAV}/d_06_kids_teens.jpg` },
+  { label: 'Entertainment',       sub: 'TV Stands & Media Storage',  href: '#',                                   img: `${NAV}/d_01_living_room.jpg` },
+  { label: 'Entryway',            sub: 'Benches, Consoles & More',   href: '#',                                   img: `${NAV}/d_02_bedroom.jpg` },
+  { label: 'Reclining Furniture', sub: 'Recliners & Power Sofas',    href: '#',                                   img: `${NAV}/d_01_living_room.jpg` },
 ];
 
 const STYLE_TILES = [
-  { label: 'Modern Sofas',           href: '#', img: `${PROD}/200000-299999/250000-259999/253000-253999/253500-253599/253568/253568_grey_wicker_sofa_signature_01.jpg` },
-  { label: 'Mid-Century Beds',       href: '#', img: `${PROD}/400000-499999/400000-409999/402000-402999/402400-402499/402411/402411_grey_fabric_chaise_signature_01.jpg` },
-  { label: 'Farmhouse Dining',       href: '#', img: `${PROD}/200000-299999/270000-279999/277000-277999/277100-277199/277149/277149_white_wood_desk_signature_01.jpg` },
-  { label: 'Modern Desks',           href: '/prototype/departments/furniture/home-office/office-desks', img: `${PROD}/300000-399999/310000-319999/313000-313999/313400-313499/313416/313416_natural_wood_writing_desk_signature_01.jpg` },
+  { label: 'Modern Sofas',     href: '#',                                             img: `${PROD}/200000-299999/250000-259999/253000-253999/253500-253599/253568/253568_grey_wicker_sofa_signature_01.jpg` },
+  { label: 'Mid-Century Beds', href: '#',                                             img: `${PROD}/400000-499999/400000-409999/402000-402999/402400-402499/402411/402411_grey_fabric_chaise_signature_01.jpg` },
+  { label: 'Farmhouse Dining', href: '#',                                             img: `${PROD}/200000-299999/270000-279999/277000-277999/277100-277199/277149/277149_white_wood_desk_signature_01.jpg` },
+  { label: 'Modern Desks',     href: '/departments/furniture/home-office/office-desks', img: `${PROD}/300000-399999/310000-319999/313000-313999/313400-313499/313416/313416_natural_wood_writing_desk_signature_01.jpg` },
 ];
 
 const FEATURE_TILES = [
-  { label: 'Sofa Beds for Small Spaces', href: '#', img: `${PROD}/200000-299999/250000-259999/253000-253999/253500-253599/253568/253568_grey_wicker_sofa_signature_01.jpg` },
-  { label: 'Storage Beds',               href: '#', img: `${PROD}/400000-499999/400000-409999/402000-402999/402400-402499/402411/402411_grey_fabric_chaise_signature_01.jpg` },
-  { label: 'Round Dining Tables',        href: '#', img: `${PROD}/200000-299999/270000-279999/277000-277999/277100-277199/277149/277149_white_wood_desk_signature_01.jpg` },
-  { label: 'Ergonomic Office Chairs',    href: '/prototype/departments/furniture/home-office', img: `${PROD}/300000-399999/310000-319999/313000-313999/313400-313499/313416/313416_natural_wood_writing_desk_signature_01.jpg` },
+  { label: 'Sofa Beds for Small Spaces', href: '#',                                  img: `${PROD}/200000-299999/250000-259999/253000-253999/253500-253599/253568/253568_grey_wicker_sofa_signature_01.jpg` },
+  { label: 'Storage Beds',               href: '#',                                  img: `${PROD}/400000-499999/400000-409999/402000-402999/402400-402499/402411/402411_grey_fabric_chaise_signature_01.jpg` },
+  { label: 'Round Dining Tables',        href: '#',                                  img: `${PROD}/200000-299999/270000-279999/277000-277999/277100-277199/277149/277149_white_wood_desk_signature_01.jpg` },
+  { label: 'Ergonomic Office Chairs',    href: '/departments/furniture/home-office', img: `${PROD}/300000-399999/310000-319999/313000-313999/313400-313499/313416/313416_natural_wood_writing_desk_signature_01.jpg` },
 ];
 
 const BESTSELLERS = [
@@ -35,8 +35,8 @@ const BESTSELLERS = [
     price: '$695',
     rating: '4.8',
     reviews: 246,
-    badge: 'Get it Fast',
-    href: '/prototype/pdp-voyage-writing-desk',
+    badge: 'Get it Fast' as string | null,
+    href: '/pdp-voyage-writing-desk',
     img: `${PROD}/300000-399999/310000-319999/313000-313999/313400-313499/313416/313416_natural_wood_writing_desk_signature_01.jpg`,
   },
   {
@@ -53,7 +53,7 @@ const BESTSELLERS = [
     price: '$295',
     rating: '4.7',
     reviews: 412,
-    badge: 'Get it Fast',
+    badge: 'Get it Fast' as string | null,
     href: '#',
     img: `${PROD}/400000-499999/400000-409999/402000-402999/402400-402499/402411/402411_grey_fabric_chaise_signature_01.jpg`,
   },
@@ -68,16 +68,17 @@ const BESTSELLERS = [
   },
 ];
 
-const STARS = (r: string) => '★'.repeat(Math.round(parseFloat(r))) + '☆'.repeat(5 - Math.round(parseFloat(r)));
+const STARS = (r: string) =>
+  '★'.repeat(Math.round(parseFloat(r))) + '☆'.repeat(5 - Math.round(parseFloat(r)));
 
-export default function FurnitureLandingPage() {
+export default function FurnitureFallback() {
   return (
     <main className="max-w-7xl mx-auto px-6 py-8">
       {/* Breadcrumb */}
       <nav className="flex gap-2 items-center text-sm text-ls-gray mb-6">
-        <Link href="/prototype" className="hover:text-blue-700">Home</Link>
+        <Link href="/" className="hover:text-blue-700">Home</Link>
         <span>/</span>
-        <Link href="/prototype/departments" className="hover:text-blue-700">All Departments</Link>
+        <Link href="/departments" className="hover:text-blue-700">All Departments</Link>
         <span>/</span>
         <span className="text-ls-charcoal font-medium">Furniture</span>
       </nav>
@@ -196,7 +197,7 @@ export default function FurnitureLandingPage() {
         </div>
       </section>
 
-      {/* Browse by Features */}
+      {/* Browse by Feature */}
       <section className="mb-14">
         <h2 className="font-display font-bold text-xl text-ls-charcoal mb-5">Browse by Feature</h2>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -232,7 +233,7 @@ export default function FurnitureLandingPage() {
               Sun-drenched oak, clean lines, and timeless design. The Voyage collection brings designer sensibility to every home.
             </p>
             <Link
-              href="/prototype/pdp-voyage-writing-desk"
+              href="/pdp-voyage-writing-desk"
               className="self-start bg-blue-200 text-blue-950 font-bold text-sm px-7 py-3 rounded-full hover:bg-blue-300 transition-colors"
             >
               Shop Voyage Collection
@@ -250,14 +251,14 @@ export default function FurnitureLandingPage() {
 
       {/* Build Your Own + Custom Fabrics strip */}
       <section className="grid sm:grid-cols-2 gap-5 mb-10">
-        <Link href="#" className="group flex items-center gap-5 bg-ls-light-gray rounded-xl p-6 hover:bg-ls-border transition-colors">
+        <Link href="#" className="flex items-center gap-5 bg-ls-light-gray rounded-xl p-6 hover:bg-ls-border transition-colors">
           <span className="text-3xl">🛋️</span>
           <div>
             <p className="font-display font-bold text-ls-charcoal mb-0.5">Build Your Own Sectional</p>
             <p className="text-ls-gray text-sm">Mix and match modules to fit your space exactly.</p>
           </div>
         </Link>
-        <Link href="#" className="group flex items-center gap-5 bg-ls-light-gray rounded-xl p-6 hover:bg-ls-border transition-colors">
+        <Link href="#" className="flex items-center gap-5 bg-ls-light-gray rounded-xl p-6 hover:bg-ls-border transition-colors">
           <span className="text-3xl">🎨</span>
           <div>
             <p className="font-display font-bold text-ls-charcoal mb-0.5">Custom Fabrics</p>

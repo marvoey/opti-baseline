@@ -2,6 +2,7 @@
 
 ## Voyage 60" Writing Desk (Home Office)
 [Living Spaces Homepage](https://www.livingspaces.com/)
+[Living Spaces Departments Landing Page](https://www.livingspaces.com/departments)
 [Living Spaces Furniture Landing Page](https://www.livingspaces.com/departments/furniture)
 [Living Spaces Home Office Landing Page](https://www.livingspaces.com/departments/furniture/home-office)
 [Living Spaces Office Desks Listing Page](https://www.livingspaces.com/departments/furniture/home-office/office-desks/p135301)
@@ -9,6 +10,7 @@
 
 ## Marques Heritage Green 84" Sofa (Living Room)
 [Living Spaces Homepage](https://www.livingspaces.com/)
+[Living Spaces Departments Landing Page](https://www.livingspaces.com/departments)
 [Living Spaces Furniture Landing Page](https://www.livingspaces.com/departments/furniture)
 [Living Spaces Living Room Landing Page](https://www.livingspaces.com/departments/furniture/living-room)
 [Living Spaces Sofas Listing Page](https://www.livingspaces.com/departments/furniture/living-room/sofas-and-sectionals/sofas/p135268)
@@ -16,6 +18,7 @@
 
 ## Mika Natural Oak Extendable Dining Table (Dining)
 [Living Spaces Homepage](https://www.livingspaces.com/)
+[Living Spaces Departments Landing Page](https://www.livingspaces.com/departments)
 [Living Spaces Furniture Landing Page](https://www.livingspaces.com/departments/furniture)
 [Living Spaces Dining Room Landing Page](https://www.livingspaces.com/departments/furniture/dining-room)
 [Living Spaces Dining Tables Listing Page](https://www.livingspaces.com/departments/furniture/dining-room/dining-tables)
@@ -23,6 +26,7 @@
 
 ## Dean Sand II Queen Upholstered Panel Bed (Bedroom)
 [Living Spaces Homepage](https://www.livingspaces.com/)
+[Living Spaces Departments Landing Page](https://www.livingspaces.com/departments)
 [Living Spaces Furniture Landing Page](https://www.livingspaces.com/departments/furniture)
 [Living Spaces Bedroom Landing Page](https://www.livingspaces.com/departments/furniture/bedroom)
 [Living Spaces Beds Listing Page](https://www.livingspaces.com/departments/furniture/bedroom/beds)
