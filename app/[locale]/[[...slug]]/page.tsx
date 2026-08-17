@@ -66,13 +66,14 @@ async function Page({ params }: Props) {
   const { locale, slug = [] } = await params;
   const content = await loadContent(locale, slug);
 
-  if (!content) {
-    if (slug.length === 0) return <HomePageFallback />;
-    if (slug.join('/') === 'departments/furniture') return <FurnitureFallback />;
-    notFound();
-  }
+  // CMS wins whenever content is published at this path.
+  if (content) return <OptimizelyComponent content={content} />;
 
-  return <OptimizelyComponent content={content} />;
+  // Fallbacks while CMS content is not yet published.
+  if (slug.length === 0) return <HomePageFallback />;
+  if (slug.join('/') === 'departments/furniture') return <FurnitureFallback />;
+
+  notFound();
 }
 
 export default withAppContext(Page);
