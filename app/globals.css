@@ -23,31 +23,31 @@
    * │  blue-800 = your primary; the rest are tints/shades between.          │
    * └──────────────────────────────────────────────────────────────────────┘
    *
-   * Optimizely brand green ramp.
-   * Anchors: Dark Fir #08251a (darkest), LFGreen #abff44 (signature accent).
+   * Living Spaces brand palette.
+   * Source: extracted from livingspaces.com CSS (aboveFoldGeneral.css).
+   * Anchors: #333 charcoal (header/primary), #00699a mid-blue (links/accent).
    */
-  --color-blue-950: #08251a; /* Dark Fir — footer / hero background */
-  --color-blue-900: #0d3a29; /* Mid Fir — header bg */
-  --color-blue-800: #197050; /* Light Fir — primary green, links */
-  --color-blue-700: #3ab533; /* Good-to-go */
-  --color-blue-600: #4dc844;
-  --color-blue-500: #62d84f;
-  --color-blue-400: #7ddd3d; /* Grass */
-  --color-blue-300: #91dbda; /* Light Blue — teal accent */
-  --color-blue-200: #abff44; /* LFGreen — signature bright green */
-  --color-blue-100: #d8e4cb; /* Neutral 4 */
-  --color-blue-50:  #e4f0da; /* Neutral 3 — light wash */
+  --color-blue-950: #1a1a1a; /* Near-black — footer background */
+  --color-blue-900: #333333; /* Charcoal — header / utility bar */
+  --color-blue-800: #005780; /* Deep navy — strong accent */
+  --color-blue-700: #00699a; /* Mid blue — primary links */
+  --color-blue-600: #0080b5;
+  --color-blue-500: #1a96cc;
+  --color-blue-400: #33a8d8; /* Hover accent */
+  --color-blue-300: #66c8e8;
+  --color-blue-200: #c8e8f8; /* Light blue — CTA button background */
+  --color-blue-100: #e0f3fc;
+  --color-blue-50:  #f0f9fd; /* Very light wash */
 
-  /* Named Optimizely brand tokens for direct use in custom components. */
-  --color-lfgreen:    #abff44;
-  --color-grass:      #7ddd3d;
-  --color-good-to-go: #3ab533;
-  --color-dark-fir:   #08251a;
-  --color-mid-fir:    #0d3a29;
-  --color-light-fir:  #197050;
-  --color-light-blue: #91dbda;
-  --color-neutral-2:  #eff6e9;
-  --color-neutral-3:  #e4f0da;
+  /* Named Living Spaces brand tokens for direct use in custom components. */
+  --color-ls-charcoal:   #333333;
+  --color-ls-navy:       #005780;
+  --color-ls-blue:       #00699a;
+  --color-ls-success:    #238747;
+  --color-ls-price:      #b9170f;
+  --color-ls-gray:       #686868;
+  --color-ls-light-gray: #f5f5f5;
+  --color-ls-border:     #d5d5d5;
 }
 
 @media (prefers-color-scheme: dark) {

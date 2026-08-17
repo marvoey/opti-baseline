@@ -12,73 +12,76 @@ export type FooterColumn = { heading: string; links: NavLink[] };
 
 export const siteConfig = {
   /** Used for the document <title> fallback and the logo alt text. */
-  name: 'Optimizely',
+  name: 'Living Spaces',
   /** Default browser-tab title (per-page titles override via CMS MetaTitle). */
-  title: 'Optimizely | Digital Experience Platform',
+  title: 'Living Spaces | Home, Décor & Outdoor Furniture Store',
   /** Default meta description. */
   description:
-    'Optimizely — the digital experience platform that helps teams create, test, and optimize digital experiences at scale.',
+    'Shop quality furniture and home décor at Living Spaces. Find sofas, beds, dining tables, outdoor furniture, and more with free delivery options.',
 
   /** Header logo (place the asset in /public). */
-  logoSrc: '/Optimizely_Primary-Logo_Medium_Green_RGB.png',
-  logoAlt: 'Optimizely',
+  logoSrc: '/living-spaces-logo.svg',
+  logoAlt: 'Living Spaces',
 
   /** Top utility bar. */
   topNavLinks: [
-    { label: 'Partners', href: '#' },
-    { label: 'Support', href: '#' },
+    { label: 'Find a Store', href: '#' },
+    { label: 'Track Delivery', href: '#' },
   ] satisfies NavLink[],
 
-  /** Primary header navigation. */
+  /** Primary header navigation — mirrors livingspaces.com main nav. */
   mainNavLinks: [
-    { label: 'Products', href: '#' },
-    { label: 'Solutions', href: '#' },
-    { label: 'Customers', href: '#' },
-    { label: 'Resources', href: '#' },
-    { label: 'Pricing', href: '#' },
+    { label: 'Living Room', href: '/departments/furniture/living-room' },
+    { label: 'Bedroom', href: '/departments/furniture/bedroom' },
+    { label: 'Mattresses', href: '/departments/mattresses/guide' },
+    { label: 'Dining', href: '/departments/furniture/dining-room' },
+    { label: 'Home Office', href: '/departments/furniture/home-office' },
+    { label: 'Outdoor', href: '/departments/outdoor' },
+    { label: 'Rugs', href: '/departments/rugs' },
+    { label: 'Decor', href: '/departments/home-decor' },
   ] satisfies NavLink[],
   /** Header call-to-action button. */
-  primaryCta: { label: 'Get started free', href: '#' } satisfies NavLink,
+  primaryCta: { label: 'Find a Store', href: '#' } satisfies NavLink,
   /** Account / login button label. */
-  accountLabel: 'Log in',
+  accountLabel: 'Sign in',
 
   /** Footer. */
   footerTagline:
-    'Create, test, and optimize digital experiences that turn visitors into loyal customers.',
+    'Quality furniture and home décor for every style and budget, with free delivery options across the US.',
   footerColumns: [
     {
-      heading: 'Products',
+      heading: 'Help',
       links: [
-        { label: 'Content Management', href: '#' },
-        { label: 'Experimentation', href: '#' },
-        { label: 'Commerce', href: '#' },
-        { label: 'Personalization', href: '#' },
+        { label: 'Help Center', href: '#' },
+        { label: 'Contact Us', href: '#' },
+        { label: 'Shipping FAQs', href: '#' },
+        { label: 'Track Delivery', href: '#' },
       ],
     },
     {
-      heading: 'Solutions',
+      heading: 'Our Company',
       links: [
-        { label: 'B2B Commerce', href: '#' },
-        { label: 'B2C Commerce', href: '#' },
-        { label: 'Digital Marketing', href: '#' },
-        { label: 'Customer Journeys', href: '#' },
+        { label: 'About Us', href: '#' },
+        { label: 'Careers', href: '#' },
+        { label: 'Low Price Guarantee', href: '#' },
+        { label: 'Accessibility Statement', href: '#' },
       ],
     },
     {
       heading: 'Resources',
       links: [
-        { label: 'Blog', href: '#' },
-        { label: 'Documentation', href: '#' },
-        { label: 'Community', href: '#' },
-        { label: 'Webinars', href: '#' },
+        { label: 'Ideas + Advice', href: '#' },
+        { label: 'Trade Program', href: '#' },
+        { label: 'Virtual Design Services', href: '#' },
+        { label: 'Care Free Plan', href: '#' },
       ],
     },
   ] satisfies FooterColumn[],
-  footerLegal: `© ${2026} Optimizely. All rights reserved.`,
+  footerLegal: '© 2026 Living Spaces. All rights reserved.',
   footerLegalLinks: [
+    { label: 'Terms & Conditions', href: '#' },
     { label: 'Privacy Policy', href: '#' },
-    { label: 'Terms of Service', href: '#' },
-    { label: 'Cookie Settings', href: '#' },
+    { label: 'Terms of Use', href: '#' },
   ] satisfies NavLink[],
 } as const;
 
