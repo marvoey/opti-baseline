@@ -1,23 +1,24 @@
 import Link from 'next/link';
-import { User, Menu } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import { siteConfig } from '@/lib/siteConfig';
+import { SignInMenu } from './SignInMenu';
 
 const MainNav = () => (
-  <header className="sticky top-0 z-50 bg-blue-900 shadow-sm">
+  <header className="sticky top-0 z-50 bg-blue-900 shadow-md">
     <div className="container mx-auto px-4 flex justify-between items-center h-16">
-      <div className="navbar-brand flex items-center" data-cms-field="brand_logo">
-        <Link href="/" title="Go to home page" className="flex items-center">
+      <div className="navbar-brand self-start flex items-start" data-cms-field="brand_logo">
+        <Link href="/" title="Go to home page" className="flex items-center bg-white rounded-b px-4 pb-2 pt-0 shadow-lg">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={siteConfig.logoSrc} alt={siteConfig.logoAlt} className="h-14 w-auto" />
+          <img src={siteConfig.logoSrc} alt={siteConfig.logoAlt} className="h-20 w-auto" />
         </Link>
       </div>
 
-      <nav className="hidden lg:flex gap-8 font-medium text-white/80 text-sm">
+      <nav className="hidden lg:flex gap-7 font-semibold text-white/85 text-sm">
         {siteConfig.mainNavLinks.map((link) => (
           <Link
             key={link.label}
             href={link.href}
-            className="hover:text-white transition-colors"
+            className="hover:text-white border-b-2 border-transparent hover:border-orange-400 pb-0.5 transition-colors"
           >
             {link.label}
           </Link>
@@ -25,17 +26,14 @@ const MainNav = () => (
       </nav>
 
       <div className="flex items-center gap-3">
-        <button className="hidden sm:flex items-center gap-2 px-3 py-1.5 text-white/70 font-medium text-sm hover:text-white transition-colors">
-          <User size={16} />
-          <span>{siteConfig.accountLabel}</span>
-        </button>
         <Link
           href={siteConfig.primaryCta.href}
-          className="hidden sm:inline-flex items-center px-4 py-2 bg-blue-200 text-blue-950 font-bold text-sm rounded-full hover:bg-blue-400 transition-colors"
+          className="hidden sm:inline-flex items-center px-4 py-2 border-2 border-white/60 text-white font-semibold text-sm rounded hover:border-white hover:bg-white/10 transition-colors"
         >
           {siteConfig.primaryCta.label}
         </Link>
-        <button className="lg:hidden p-2 text-white">
+        <SignInMenu />
+        <button className="lg:hidden p-2 text-white" aria-label="Open menu">
           <Menu size={22} />
         </button>
       </div>

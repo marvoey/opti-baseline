@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Inter } from "next/font/google";
+import { Montserrat, Open_Sans } from "next/font/google";
 import Script from "next/script";
 import OptimizelyActivation from "./_components/OptimizelyActivation";
 import { QuickLinks } from "./_components/QuickLinks";
@@ -8,16 +8,15 @@ import { siteConfig } from "@/lib/siteConfig";
 import "./globals.css";
 import "@/cms/registry";
 
-// VC Nudge (Optimizely's display face) is a licensed face; Space Grotesk is the
-// closest free substitute — chunky, geometric grotesque with strong personality.
-const displayFont = Space_Grotesk({
+// Montserrat: geometric, authoritative display face used widely in financial services.
+const displayFont = Montserrat({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800"],
 });
 
-// Die Grotesk B (the brand body face) → Inter as the closest neutral grotesque.
-const bodyFont = Inter({
+// Open Sans: highly legible body face — ideal for financial content readability.
+const bodyFont = Open_Sans({
   variable: "--font-body",
   subsets: ["latin"],
 });
