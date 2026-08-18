@@ -19,15 +19,19 @@ export const RichTextContentType = contentType({
   },
 });
 
-type Props = { content: ContentProps<typeof RichTextContentType> };
+type Props = {
+  content: ContentProps<typeof RichTextContentType>;
+  displaySettings?: Record<string, string | boolean>;
+};
 
-export default function RichText({ content }: Props) {
+export default function RichText({ content, displaySettings }: Props) {
   const { pa } = getPreviewUtils(content);
   const block = (content as { __composition?: { key: string } }).__composition;
+  const isDisclaimer = displaySettings?.Disclaimer === true;
 
   return (
-    <section {...pa(block)} className="w-full px-6 py-12">
-      <div {...pa('Body')} className="prose mx-auto max-w-3xl">
+    <section {...pa(block)} className={isDisclaimer ? undefined : 'w-full px-6 py-12'}>
+      <div {...pa('Body')} className={isDisclaimer ? 'prose prose-sm max-w-none' : 'prose mx-auto max-w-3xl'}>
         <RichTextRenderer content={content.Body?.json} />
       </div>
     </section>

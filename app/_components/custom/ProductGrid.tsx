@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+
 export type Product = {
   name: string;
   brand: string;
@@ -47,37 +49,48 @@ export default function ProductGrid({
           <span className="text-sm text-ls-gray">Showing {resultCount} results</span>
         </div>
         <div className="grid grid-cols-3 gap-5">
-          {products.map((p) => (
-            <div
-              key={p.name}
-              onClick={() => p.route && navigate(p.route)}
-              className={`group flex flex-col bg-white border rounded-lg overflow-hidden transition-shadow ${
-                p.route
-                  ? 'border-blue-400 ring-1 ring-blue-300 cursor-pointer hover:shadow-md'
-                  : 'border-ls-border cursor-default'
-              }`}
-            >
-              <div className="aspect-square overflow-hidden bg-ls-light-gray relative">
-                <img
-                  src={p.img}
-                  alt={p.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-                {p.route && (
-                  <span className="absolute top-2 left-2 bg-blue-700 text-white text-xs font-bold px-2 py-0.5 rounded">
-                    Featured
-                  </span>
-                )}
+          {products.map((p) => {
+            const inner = (
+              <>
+                <div className="aspect-square overflow-hidden bg-ls-light-gray relative">
+                  <img
+                    src={p.img}
+                    alt={p.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  {p.route && (
+                    <span className="absolute top-2 left-2 bg-blue-700 text-white text-xs font-bold px-2 py-0.5 rounded">
+                      Featured
+                    </span>
+                  )}
+                </div>
+                <div className="p-4">
+                  <p className="text-ls-gray text-xs mb-0.5">{p.brand}</p>
+                  <p className="text-ls-charcoal text-sm font-semibold leading-snug mb-1 group-hover:text-blue-700 transition-colors">
+                    {p.name}
+                  </p>
+                  <p className="font-bold text-ls-charcoal">{p.price}</p>
+                </div>
+              </>
+            );
+
+            return p.route ? (
+              <Link
+                key={p.name}
+                href={p.route}
+                className="group flex flex-col bg-white border border-blue-400 ring-1 ring-blue-300 rounded-lg overflow-hidden hover:shadow-md transition-shadow"
+              >
+                {inner}
+              </Link>
+            ) : (
+              <div
+                key={p.name}
+                className="group flex flex-col bg-white border border-ls-border rounded-lg overflow-hidden"
+              >
+                {inner}
               </div>
-              <div className="p-4">
-                <p className="text-ls-gray text-xs mb-0.5">{p.brand}</p>
-                <p className="text-ls-charcoal text-sm font-semibold leading-snug mb-1 group-hover:text-blue-700 transition-colors">
-                  {p.name}
-                </p>
-                <p className="font-bold text-ls-charcoal">{p.price}</p>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>

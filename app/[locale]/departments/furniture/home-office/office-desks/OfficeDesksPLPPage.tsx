@@ -10,7 +10,7 @@ const MIKKEL_BASE = `${PROD}/300000-399999/340000-349999/344000-344999/344100-34
 const ABERDEEN_BASE = `${PROD}/200000-299999/270000-279999/277000-277999/277100-277199/277149/277149_white_wood_desk`;
 
 const DESK_PRODUCTS = [
-  { name: 'Voyage Natural 60" Writing Desk',   brand: 'Nate + Jeremiah', price: '$695',   img: `${VOYAGE_BASE}_signature_01.jpg`,   href: '/pdp-voyage-writing-desk', featured: true },
+  { name: 'Voyage Natural 60" Writing Desk',   brand: 'Nate + Jeremiah', price: '$695',   img: `${VOYAGE_BASE}_signature_01.jpg`,   href: '/voyage-natural-60-writing-desk', featured: true },
   { name: 'Idris L-Shaped Executive Desk',     brand: 'Essential',       price: '$1,095', img: `${IDRIS_BASE}_signature_01.jpg`,    href: null, featured: false },
   { name: 'Mikkel 60" Executive Desk',         brand: 'Essential',       price: '$549',   img: `${MIKKEL_BASE}_signature_01.jpg`,   href: null, featured: false },
   { name: 'Aberdeen 66" Writing Desk',         brand: 'Essential',       price: '$399',   img: `${ABERDEEN_BASE}_signature_01.jpg`, href: null, featured: false },
