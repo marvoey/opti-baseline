@@ -31,14 +31,14 @@ export const siteConfig = {
 
   /** Primary header navigation — mirrors livingspaces.com main nav. */
   mainNavLinks: [
-    { label: 'Living Room', href: '/departments/furniture/living-room' },
-    { label: 'Bedroom', href: '/departments/furniture/bedroom' },
-    { label: 'Mattresses', href: '/departments/mattresses/guide' },
-    { label: 'Dining', href: '/departments/furniture/dining-room' },
-    { label: 'Home Office', href: '/departments/furniture/home-office' },
-    { label: 'Outdoor', href: '/departments/outdoor' },
-    { label: 'Rugs', href: '/departments/rugs' },
-    { label: 'Decor', href: '/departments/home-decor' },
+    { label: 'Bestsellers', href: '#' },
+    { label: 'Shop by Room', href: '#' },
+    { label: 'Small Spaces', href: '#' },
+    { label: 'Contract Grade', href: '#' },
+    { label: 'Trade Program', href: '#' },
+    { label: 'Catalogs', href: '#' },
+    { label: 'Shop by Style', href: '#' },
+    { label: 'Financing', href: '#' },
   ] satisfies NavLink[],
   /** Header call-to-action button. */
   primaryCta: { label: 'Find a Store', href: '#' } satisfies NavLink,
