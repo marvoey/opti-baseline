@@ -6,6 +6,7 @@ import Link from 'next/link';
 const LINKS = [
   { label: 'Home',            href: '/' },
   { label: 'Interactive Demo',        href: '/prototype' },
+  { label: 'Intent Driven DXP',        href: '/prototype/intent-driven-dxp'},
   // { label: 'Content Library', href: '/content-library' },
   { label: 'Admin',           href: '/admin' },
   { label: 'CMS',             href: '/cms-admin' },
