@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Business Tools & Bulk Operations - Living Spaces</title>
+    
+    <!-- Reveal.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reset.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
+    
+    <!-- Google Material Symbols (Rounded, 300 weight per brand guidelines) -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,300,0,0" rel="stylesheet" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'lf-green': '#ABFF44',
+                        'grass': '#7DDD3D',
+                        'good-to-go': '#3AB533',
+                        'neutral-1': '#FFFFFF',
+                        'neutral-3': '#E4F0DA',
+                        'dark-fir': '#08251A',
+                        'light-blue': '#91DBDA'
+                    },
+                    borderRadius: {
+                        'brand': '32px'
+                    },
+                    fontFamily: {
+                        'sans': ['system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom overrides for Reveal.js to match brand guidelines */
+        .reveal {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        }
+        .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+            font-family: inherit;
+            text-transform: none;
+            font-weight: 800; /* Mimic VC Nudge ExtraBold */
+            letter-spacing: -0.03em;
+            margin-bottom: 20px;
+        }
+        .reveal-viewport {
+            background-color: #E4F0DA; /* Neutral 3 backdrop */
+        }
+        /* Style for extruded text look */
+        .text-extruded {
+            text-shadow: 2px 2px 0px #08251A, 4px 4px 0px #08251A, 6px 6px 0px #08251A;
+        }
+        
+        .material-symbols-rounded {
+            font-variation-settings:
+            'FILL' 1,
+            'wght' 300,
+            'GRAD' 0,
+            'opsz' 48
+        }
+    </style>
+</head>
+<body class="bg-neutral-3">
+    <div class="reveal">
+        <div class="slides">
+            
+            <!-- Slide 1: Title -->
+            <section data-background-color="#08251A" class="text-left">
+                <div class="flex flex-col justify-center h-full px-20">
+                    <h2 class="text-lf-green text-5xl font-bold tracking-widest uppercase mb-4">OPTIMIZELY + LIVING SPACES</h2>
+                    <h1 class="text-lf-green text-8xl font-extrabold leading-tight mb-8">Business Tools & <br>Bulk Operations</h1>
+                    <p class="text-white text-5xl max-w-4xl leading-relaxed">
+                        Meeting your teams where they work: streamlining SEO, Merchandising, and Content Management at scale.
+                    </p>
+                    <div class="mt-12 flex gap-6">
+                        <div class="bg-lf-green text-dark-fir px-8 py-4 rounded-brand font-bold text-5xl flex items-center gap-3 w-max shadow-lg">
+                            <span class="material-symbols-rounded">rocket_launch</span>
+                            Ready to Go
+                        </div>
+                    </div>
+                </div>
+                
+                <aside class="notes">
+                    Welcome, everyone from Living Spaces. Today, we're diving into a topic we know is critical for your teams—especially Merchandising and SEO. We're going to talk about how Optimizely empowers your business users to handle internal tools and execute bulk operations efficiently. We know scale is important to you, so let's get right into it.
+                </aside>
+            </section>
+
+            <!-- Slide 2: The Core Question -->
+            <section data-background-color="#E4F0DA" class="text-left">
+                <div class="flex flex-col justify-center h-full px-20 py-10">
+                    <h2 class="text-dark-fir text-6xl mb-12">Where should business users work?</h2>
+                    <div class="grid grid-cols-2 gap-10 flex-grow">
+                        <div class="bg-white p-12 rounded-brand shadow-xl border-4 border-white flex flex-col">
+                            <div class="bg-lf-green w-20 h-20 rounded-full flex items-center justify-center mb-8">
+                                <span class="material-symbols-rounded text-dark-fir text-5xl">dashboard</span>
+                            </div>
+                            <h3 class="text-dark-fir text-5xl mb-4">Directly in the CMS</h3>
+                            <p class="text-dark-fir text-5xl leading-relaxed mb-6 flex-grow">
+                                For most editors and marketers, the CMS should be the single pane of glass. Optimizely's UI is designed to be intuitive enough that specialized external tools often aren't necessary.
+                            </p>
+                        </div>
+                        
+                        <div class="bg-dark-fir p-12 rounded-brand shadow-xl flex flex-col">
+                            <div class="bg-light-blue w-20 h-20 rounded-full flex items-center justify-center mb-8">
+                                <span class="material-symbols-rounded text-dark-fir text-5xl">api</span>
+                            </div>
+                            <h3 class="text-lf-green text-5xl mb-4">Through Custom Tools</h3>
+                            <p class="text-white text-5xl leading-relaxed mb-6 flex-grow">
+                                For highly specialized workflows (like heavy PIM/Merchandising syncs), you can build external tools that interact seamlessly with the CMS via Optimizely Content Graph and Management APIs.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <aside class="notes">
+                    A common question we get is whether business users should work directly in the CMS or if you need to build custom, external tools for them. The short answer is: both, depending on the role. For day-to-day tasks and content editing, Optimizely's UI is robust and acts as a single pane of glass. But for highly specialized workflows, like heavy PIM syncs or bespoke merchandising tools, our API-first architecture lets you build external tools that plug right into the platform.
+                </aside>
+            </section>
+
+            <!-- Slide 3: Solving the SEO Use Case -->
+            <section data-background-color="#08251A" class="text-left">
+                <div class="flex flex-col justify-center h-full px-20 py-10">
+                    <div class="flex justify-between items-end mb-12">
+                        <h2 class="text-lf-green text-6xl max-w-3xl">Identifying pages with missing metadata</h2>
+                        <span class="material-symbols-rounded text-light-blue text-8xl">search_insights</span>
+                    </div>
+                    
+                    <div class="grid grid-cols-3 gap-8">
+                        <div class="bg-white rounded-brand p-8">
+                            <h4 class="text-dark-fir text-5xl font-bold mb-4 flex items-center gap-2">
+                                <span class="material-symbols-rounded text-good-to-go">1</span> The Query
+                            </h4>
+                            <p class="text-gray-700 text-5xl">Use <b>Optimizely Content Graph (GraphQL)</b> to instantly query the entire repository for products or pages where <code>seoDescription</code> is null.</p>
+                        </div>
+                        <div class="bg-white rounded-brand p-8">
+                            <h4 class="text-dark-fir text-5xl font-bold mb-4 flex items-center gap-2">
+                                <span class="material-symbols-rounded text-good-to-go">2</span> The View
+                            </h4>
+                            <p class="text-gray-700 text-5xl">Surface these results in a custom dashboard right inside the Optimizely UI using a custom gadget, or export them to your external SEO tool.</p>
+                        </div>
+                        <div class="bg-white rounded-brand p-8">
+                            <h4 class="text-dark-fir text-5xl font-bold mb-4 flex items-center gap-2">
+                                <span class="material-symbols-rounded text-good-to-go">3</span> The Action
+                            </h4>
+                            <p class="text-gray-700 text-5xl">Editors click directly from the dashboard report into the specific CMS page to update the metadata immediately.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <aside class="notes">
+                    Let's look at a concrete example you asked about: finding pages with missing metadata. Using Optimizely Content Graph, you can query your entire repository instantly using standard GraphQL. You can then surface these results in a custom dashboard right inside the CMS UI. This means your editors can see the report, click the offending page, and fix the metadata immediately, without ever leaving their workflow.
+                </aside>
+            </section>
+
+            <!-- Slide 4: Bulk Operations & Projects -->
+            <section data-background-color="#E4F0DA" class="text-left">
+                <div class="flex flex-col justify-center h-full px-20 py-10">
+                    <h2 class="text-dark-fir text-6xl mb-8">Bulk Operations & Updates</h2>
+                    <p class="text-5xl text-dark-fir mb-12">How to handle updates across dozens of pages at once.</p>
+                    
+                    <div class="grid grid-cols-2 gap-12">
+                        <div>
+                            <div class="bg-lf-green rounded-brand p-8 shadow-md mb-6 relative overflow-hidden">
+                                <div class="relative z-10">
+                                    <h3 class="text-dark-fir text-5xl mb-3">Optimizely Projects</h3>
+                                    <p class="text-dark-fir text-5xl">Native capability to group dozens of page and product updates into a single "Project." Review them together, preview the entire site in that future state, and publish them all at exactly the same time.</p>
+                                </div>
+                                <span class="material-symbols-rounded absolute -right-4 -bottom-4 text-9xl text-white opacity-40">inventory_2</span>
+                            </div>
+                            
+                            <div class="bg-white rounded-brand p-8 shadow-md relative overflow-hidden">
+                                <div class="relative z-10">
+                                    <h3 class="text-dark-fir text-5xl mb-3">Bulk Find-and-Replace</h3>
+                                    <p class="text-dark-fir text-5xl">Can be achieved via a lightweight custom addon in the CMS UI, or programmatically via the Content Management API for massive catalog updates.</p>
+                                </div>
+                                <span class="material-symbols-rounded absolute -right-4 -bottom-4 text-9xl text-neutral-3 opacity-50">find_replace</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-center">
+                            <!-- Visual representation of bulk workflow -->
+                            <div class="w-full bg-white rounded-brand p-8 shadow-xl border-t-8 border-dark-fir">
+                                <div class="flex justify-between items-center border-b pb-4 mb-4">
+                                    <span class="font-bold text-dark-fir text-5xl">Summer Sale Metadata Update</span>
+                                    <span class="bg-lf-green text-dark-fir px-3 py-1 rounded-full text-5xl font-bold">142 Items</span>
+                                </div>
+                                <ul class="space-y-4">
+                                    <li class="flex items-center gap-4 text-5xl text-gray-600"><span class="material-symbols-rounded text-good-to-go">check_circle</span> Update 'Sofas' Category Meta</li>
+                                    <li class="flex items-center gap-4 text-5xl text-gray-600"><span class="material-symbols-rounded text-good-to-go">check_circle</span> Append "Summer Sale" to 50 Products</li>
+                                    <li class="flex items-center gap-4 text-5xl text-gray-600"><span class="material-symbols-rounded text-good-to-go">check_circle</span> Replace legacy warranty text</li>
+                                    <li class="flex items-center gap-4 text-5xl text-gray-400"><span class="material-symbols-rounded text-gray-300">pending</span> Publishing at Midnight...</li>
+                                </ul>
+                                <button class="w-full mt-8 bg-dark-fir text-white py-3 rounded-brand font-bold text-5xl hover:bg-opacity-90 transition">Publish All</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <aside class="notes">
+                    When it comes to bulk updates—say you're doing a massive Summer Sale where content changes across 100 pages—Optimizely handles this natively through a feature called 'Projects'. Projects let you group all those updates, preview your entire site in that future state, and publish them all simultaneously. If you're looking for true programmatic find-and-replace, you can achieve that through our Content Management APIs or by plugging a lightweight UI add-on directly into the CMS.
+                </aside>
+            </section>
+
+            <!-- Slide 5: Extensibility -->
+            <section data-background-color="#08251A" class="text-center">
+                <div class="flex flex-col items-center justify-center h-full px-20">
+                    <h2 class="text-lf-green text-7xl mb-8 font-extrabold text-extruded">Uncompromising Extensibility</h2>
+                    <p class="text-white text-5xl max-w-4xl mb-12">
+                        Whether you build custom React-based tools inside the Optimizely UI or external headless applications, your business logic remains the same.
+                    </p>
+                    
+                    <div class="flex gap-8 justify-center">
+                        <div class="bg-white p-6 rounded-brand w-72 flex flex-col items-center">
+                            <span class="material-symbols-rounded text-good-to-go text-6xl mb-4">extension</span>
+                            <h4 class="text-dark-fir font-bold text-5xl mb-2">CMS Add-ons</h4>
+                            <p class="text-5xl text-gray-600">Build custom views right in the editor interface.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-brand w-72 flex flex-col items-center">
+                            <span class="material-symbols-rounded text-good-to-go text-6xl mb-4">webhook</span>
+                            <h4 class="text-dark-fir font-bold text-5xl mb-2">Management API</h4>
+                            <p class="text-5xl text-gray-600">Push bulk data from your ERP or custom PIM.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-brand w-72 flex flex-col items-center">
+                            <span class="material-symbols-rounded text-good-to-go text-6xl mb-4">hub</span>
+                            <h4 class="text-dark-fir font-bold text-5xl mb-2">Content Graph</h4>
+                            <p class="text-5xl text-gray-600">Query and analyze your entire catalog instantly.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <aside class="notes">
+                    Ultimately, Optimizely offers uncompromising extensibility. Whether you're building custom UI add-ons for your marketing team, syncing bulk data via the Management API, or querying via Content Graph, your business logic remains centralized. The choice between working in the CMS or in external tools is completely up to the workflow that makes your team the most efficient.
+                </aside>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Reveal.js Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/notes/notes.min.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            width: 1920,
+            height: 1080,
+            margin: 0.1,
+            controls: true,
+            progress: true,
+            center: true,
+            transition: 'slide',
+            backgroundTransition: 'fade',
+            plugins: [ RevealNotes ]
+        });
+    </script>
+
+    <!-- DevQuickLinks -->
+    <div id="dql" style="position:fixed;bottom:12px;left:64px;z-index:9999;display:flex;flex-direction:column;align-items:flex-start;">
+      <div id="dql-menu" style="display:none;margin-bottom:8px;background:white;border:1px solid #e5e7eb;border-radius:8px;box-shadow:0 20px 25px -5px rgb(0 0 0/.1);padding:6px;min-width:148px;">
+        <a href="/" style="display:block;border-radius:6px;padding:6px 12px;font-size:12px;font-weight:500;color:#374151;text-decoration:none;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background=''">Home</a>
+        <a href="/prototype" style="display:block;border-radius:6px;padding:6px 12px;font-size:12px;font-weight:500;color:#374151;text-decoration:none;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background=''">Prototype</a>
+        <a href="/prototype/interactive-demo" style="display:block;border-radius:6px;padding:6px 12px;font-size:12px;font-weight:500;color:#374151;text-decoration:none;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background=''">Prototype - Interactive demo</a>
+        <a href="/cms-admin" style="display:block;border-radius:6px;padding:6px 12px;font-size:12px;font-weight:500;color:#374151;text-decoration:none;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background=''">CMS</a>
+        <a href="/business-tools-deck.html" style="display:block;border-radius:6px;padding:6px 12px;font-size:12px;font-weight:500;color:#374151;text-decoration:none;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background=''">Business Tools Deck</a>
+      </div>
+      <button onclick="var m=document.getElementById('dql-menu');m.style.display=m.style.display==='none'?'block':'none'" title="Quick links" style="width:28px;height:28px;border-radius:9999px;overflow:hidden;box-shadow:0 4px 6px -1px rgb(0 0 0/.1);border:none;padding:0;cursor:pointer;transition:transform .15s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform=''">
+        <img src="https://media.ffycdn.net/eu/episerver/YKPBoHJ87Gba79trvfkP.png?width=28" alt="Optimizely quick links" width="28" height="28" style="width:100%;height:100%;object-fit:cover;display:block;">
+      </button>
+    </div>
+</body>
+</html>
