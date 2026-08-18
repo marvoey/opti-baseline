@@ -7,10 +7,12 @@ const LINKS = [
   { label: 'Home',            href: '/' },
   { label: 'Prototype',       href: '/prototype' },
   { label: 'Prototype - Interactive demo',       href: '/prototype/interactive-demo' },
-  { label: 'Assemble',        href: '/assemble' },
-  { label: 'Content Library', href: '/content-library' },
-  { label: 'Admin',           href: '/admin' },
+  // { label: 'Assemble',        href: '/assemble' },
+  // { label: 'Content Library', href: '/content-library' },
+  // { label: 'Admin',           href: '/admin' },
   { label: 'CMS',             href: '/cms-admin' },
+  { label: 'Business Tools Deck', href: '/business-tools-deck.html' },
+  { label: 'Business Tools Deck - RevealJS', href: '/business-tools-deck-revealjs.html' },
 ];
 
 export default function DevQuickLinks() {
