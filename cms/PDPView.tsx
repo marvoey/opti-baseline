@@ -16,13 +16,14 @@ export const PDPViewContentType = contentType({
       displayName: 'Disclaimer',
       isLocalized: true,
       isRequired: false,
+      allowedTypes: [],
     },
     Enrichment: {
       type: 'array',
       displayName: 'Enrichment',
       isLocalized: true,
       isRequired: false,
-      items: { type: 'content' },
+      items: { type: 'content', allowedTypes: [] },
     },
   },
 });
@@ -102,7 +103,7 @@ export default function PDPView({ content }: Props) {
         </div>
       </div>
 
-      {(content.Enrichment as unknown[])?.map((e, i) => (
+      {(content.Enrichment as { __typename: string }[])?.map((e, i) => (
         <OptimizelyComponent key={i} content={e} />
       ))}
     </div>
