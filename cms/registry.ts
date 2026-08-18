@@ -12,6 +12,8 @@ import ExperiencePage, { ExperiencePageContentType } from './ExperiencePage';
 import BlankSection from './BlankSection';
 import Page, { PageContentType } from './Page';
 import RichText, { RichTextContentType } from './RichText';
+import HeroBlock, { HeroBlockContentType } from './HeroBlock';
+import LoginForm, { LoginFormContentType, LoginFormDisplayTemplate } from './LoginForm';
 
 /**
  * Single configuration + registration point for the Optimizely SDK.
@@ -49,12 +51,14 @@ export const registeredContentTypes = [
   ExperiencePageContentType,
   PageContentType,
   // Blocks
+  HeroBlockContentType,
+  LoginFormContentType,
   RichTextContentType,
 ];
 
 initContentTypeRegistry(registeredContentTypes);
 
-initDisplayTemplateRegistry([]);
+initDisplayTemplateRegistry([LoginFormDisplayTemplate]);
 
 initReactComponentRegistry({
   resolver: {
@@ -64,6 +68,8 @@ initReactComponentRegistry({
     ExperiencePage,
     Page,
     // Blocks (resolver key === content-type key)
+    HeroBlock,
+    LoginForm,
     RichTextBlock: RichText,
   },
 });

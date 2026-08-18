@@ -7,7 +7,7 @@ const LINKS = [
   { label: 'Home',            href: '/' },
   { label: 'Interactive Demo',        href: '/prototype' },
   // { label: 'Content Library', href: '/content-library' },
-  // { label: 'Admin',           href: '/admin' },
+  { label: 'Admin',           href: '/admin' },
   { label: 'CMS',             href: '/cms-admin' },
 ];
 
