@@ -46,14 +46,34 @@ const loadContent = cache(async (locale: string, slug: string[]) => {
   return content?.[0];
 });
 
-/** Per-page <title> from the CMS, falling back to the site name. */
+/** Per-page SEO metadata from the CMS, falling back to site defaults. */
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug = [] } = await params;
   const content = await loadContent(locale, slug);
-  const item = content as { MetaTitle?: string; _metadata?: { displayName?: string } } | undefined;
+  const item = content as {
+    MetaTitle?: string;
+    MetaDescription?: string;
+    Keywords?: string;
+    CanonicalUrl?: string;
+    RobotsDirectives?: string;
+    OgImageUrl?: string;
+    _metadata?: { displayName?: string };
+  } | undefined;
   const pageTitle = item?.MetaTitle || item?._metadata?.displayName;
+  const title = pageTitle ? `${pageTitle} | ${siteConfig.name}` : siteConfig.title;
+  const description = item?.MetaDescription || siteConfig.description;
   return {
-    title: pageTitle ? `${pageTitle} | ${siteConfig.name}` : siteConfig.title,
+    title,
+    description,
+    ...(item?.Keywords ? { keywords: item.Keywords } : {}),
+    ...(item?.RobotsDirectives ? { robots: item.RobotsDirectives } : {}),
+    ...(item?.CanonicalUrl ? { alternates: { canonical: item.CanonicalUrl } } : {}),
+    openGraph: {
+      title,
+      description,
+      siteName: siteConfig.name,
+      ...(item?.OgImageUrl ? { images: [item.OgImageUrl] } : {}),
+    },
   };
 }
 

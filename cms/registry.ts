@@ -2,13 +2,12 @@ import {
   config,
   initContentTypeRegistry,
   initDisplayTemplateRegistry,
-  BlankExperienceContentType,
   BlankSectionContentType,
 } from '@optimizely/cms-sdk';
 import { initReactComponentRegistry } from '@optimizely/cms-sdk/react/server';
 import { requireEnv } from '@/lib/env';
 
-import BlankExperience from './BlankExperience';
+import BlankExperience, { BlankExperienceContentType } from './BlankExperience';
 import BlankSection from './BlankSection';
 import Page, { PageContentType } from './Page';
 import RichText, { RichTextContentType } from './RichText';
