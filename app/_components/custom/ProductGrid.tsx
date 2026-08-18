@@ -28,11 +28,11 @@ export default function ProductGrid({
   navigate = () => {},
 }: Props) {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-14 flex gap-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-14 flex flex-col lg:flex-row gap-6 lg:gap-8">
       {/* Filters */}
-      <aside className="w-56 shrink-0">
-        <h3 className="font-display font-bold text-ls-charcoal mb-4 pb-2 border-b border-ls-border">Filter By</h3>
-        <div className="space-y-2.5 text-sm text-ls-charcoal">
+      <aside className="w-full lg:w-56 lg:shrink-0">
+        <h3 className="font-display font-bold text-ls-charcoal mb-3 pb-2 border-b border-ls-border">Filter By</h3>
+        <div className="flex flex-wrap gap-x-5 gap-y-2.5 lg:flex-col lg:space-y-2.5 text-sm text-ls-charcoal">
           {filters.map((f) => (
             <label key={f} className="flex items-center gap-2 cursor-pointer">
               <input type="checkbox" className="rounded border-ls-border" />
@@ -43,12 +43,12 @@ export default function ProductGrid({
       </aside>
 
       {/* Grid */}
-      <div className="flex-1">
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="font-display font-bold text-3xl text-ls-charcoal">{title}</h1>
+      <div className="flex-1 min-w-0">
+        <div className="flex flex-wrap justify-between items-baseline gap-2 mb-5 sm:mb-6">
+          <h1 className="font-display font-bold text-2xl sm:text-3xl text-ls-charcoal">{title}</h1>
           <span className="text-sm text-ls-gray">Showing {resultCount} results</span>
         </div>
-        <div className="grid grid-cols-3 gap-5">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5">
           {products.map((p) => {
             const inner = (
               <>
