@@ -1,0 +1,181 @@
+﻿
+@media only screen and (max-width:759px) {
+
+    img.desktop,
+    img.tablet {
+        display: none !important
+    }
+
+    img.mobile {
+        display: inline-block !important
+    }
+}
+
+@media only screen and (min-width:760px) {
+
+    img.desktop,
+    img.mobile {
+        display: none !important
+    }
+
+    img.tablet {
+        display: inline-block !important
+    }
+}
+
+@media only screen and (max-width:983px) { 
+
+    .padd-mobile { 
+        padding-left: 1em; 
+        padding-right: 1em; 
+    }
+}
+
+@media only screen and (min-width:1360px) {
+
+    img.mobile,
+    img.tablet {
+        display: none !important
+    }
+
+    img.desktop {
+        display: inline-block !important
+    }
+}
+
+.CS-CTA ul>li.FAQ a:before,
+.CS-CTA ul>li.atm-location a:before,
+.CS-CTA ul>li.chat a:before,
+.CS-CTA ul>li.mail a:before,
+.CS-CTA ul>li.phone> a:before {
+    content: ''
+}
+
+.CS-CTA ul>li.phone1> a:before {
+    content: '\e81f'
+}
+
+.CS-CTA ul>li.mail1 a:before {
+    content: '\e83c'
+}
+
+.CS-CTA ul>li.atm-location1 a:before {
+    content: '\e837'
+}
+
+.CS-CTA ul>li.FAQ1 a:before {
+    content: '\e704'
+}
+
+.CS-CTA ul>li.chat1 a:before {
+    content: '\e83a'
+}
+
+.question {
+    position: relative;
+    color: #3d86c6;
+    cursor: pointer
+}
+
+.search-listing .search-criteria {
+    margin-right: initial;
+    margin-left: initial;
+    padding-bottom: 1em
+}
+
+.attention-alert:before,
+.help-alert:before,
+.icon-call:before,
+.icon-chat:before,
+.icon-help-circled-alt:before,
+.icon-location:before,
+.icon-mail:before,
+.info-alert:before {
+    content: '' !important
+}
+
+.icon-call_1:before {
+    content: '\e81f' !important
+}
+
+.icon-chat_1:before {
+    content: '\e83a' !important
+}
+
+.icon-mail_1:before {
+    content: '\e83c' !important
+}
+
+.icon-location_1:before {
+    content: '\e837' !important
+}
+
+.icon-help-circled-alt_1:before {
+    content: '\e845' !important
+}
+
+.attention-alert_1:before {
+    content: '\e805' !important
+}
+
+.info-alert_1:before {
+    content: '\e841' !important
+}
+
+.help-alert_1:before {
+    content: '\e704' !important
+}
+
+span.screen-reader-text {
+    clip: rect(1px, 1px, 1px, 1px);
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden
+}
+
+.modalInner a:focus {
+    outline-color: #000
+}
+
+.list-block .avoid-fees button {
+    border: none;
+    background-color: transparent;
+    text-align: left;
+    padding: 0;
+    margin-bottom: 0;
+    overflow: visible
+}
+
+span.current-branch-count,
+span.current-prime-rate,
+span.current-prime-rate-date {
+    display: inline;
+    padding: inherit;
+    color: inherit
+}
+
+.secondary-nav ul li ul li.selected ul.active-category {
+    border: none;
+    padding-bottom: 0
+}
+
+#divBioDetail .flex-container a:active,
+#divBioDetail .flex-container a:focus,
+.flexslider a:active,
+.flexslider a:focus {
+    outline: auto
+}
+
+h2 p, h3 p, h4 p, h5 p {
+    margin: 0;
+}
+
+@media only screen and (min-width:983px) { 
+   .mega-menu.wealth .menu-row.last {
+      padding-top: 3em;
+   }
+  .sub-nav-toggle {
+    display: none !important;
+  }
+}

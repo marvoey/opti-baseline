@@ -1,0 +1,937 @@
+//$(document).ready(function () {
+//    $('.skipToContent a').on('keyup', function(event) {
+//        if (event.which == 13) {
+//            var adjustScroll = $('.main-logo').outerHeight();
+
+//            window.location.hash = $(".skipToContent a").attr('href');
+//            $(window).scrollTop($(window).scrollTop() - adjustScroll);
+//        }
+//    });
+//    $('.skipToContent a').on('click', function(event) {
+//        event.preventDefault();
+        
+//        var adjustScroll = $('.main-logo').outerHeight();
+
+//        window.location.hash = $(".skipToContent a").attr('href');
+//        $(window).scrollTop($(window).scrollTop() - adjustScroll);
+//    });
+//});
+
+//Fix z-index youtube video embedding
+function updateQueryStringParameter(uri, key, value) {
+    if (typeof uri != "undefined") {
+        var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+        var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+        if (uri.match(re)) {
+            return uri.replace(re, '$1' + key + "=" + value + '$2');
+        } else {
+            return uri + separator + key + "=" + value;
+        }
+    }
+}
+
+/*
+$(document).ready(function () {
+    $('iframe').each(function () {
+        var url = $(this).attr("src");
+        $(this).attr("src", updateQueryStringParameter(url, "wmode", "transparent"));
+    });
+});
+*/
+
+//Main navigation script
+$(document).ready(function () {
+    var $menu = $('.main-nav'),
+        $menulink = $('.main-nav-toggle');
+
+    $menulink.click(function (e) {
+        /*when clicked, the main nav toggle button adds a class of active to itself (#main-nav-toggle) and the main nav (#main-nav)*/
+        e.preventDefault();
+        $menulink.toggleClass('active');
+        $menu.toggleClass('active');
+    });
+
+    var toggle_links = function () {
+        /*the button that toggles the nav is hidden on smaller screens through the css. Check if the nav is visible(indicating the screen is small/mobile) fire up the functionality*/
+        if ($('.main-nav-toggle').is(":visible")) {
+            if ($(".sub-nav-toggle").length > 0) { } else {
+                /* if the buttons that toggle the sub navs arent there, go through each li and add them if there is a sub nav (nested ul)*/
+                if ($(".sub-nav-toggle").length == 0) {
+                    $('.main-nav ul li').each(function () {
+                        if ($(this).children('ul').length > 0) {
+                            $(this).append('<a class="sub-nav-toggle"></a>');
+                        }
+                    });
+                }
+                /* tell the sub nav toggle buttons to add the class of active to itself and also the subnav in the li with it*/
+                $('.sub-nav-toggle').click(function (e) {
+                    var $this = $(this);
+                    $this.toggleClass('active').siblings('ul').toggleClass('active');
+                });
+            }
+        }
+            /*if the button that toggles the main nav is hidden, remove all classes and subnav taggle buttons that were added while it was visible. Basically resets everything*/
+        else {
+            $('.sub-nav-toggle').remove();
+            $('.main-nav ul, .main-nav, .main-nav-toggle').removeClass('active');
+            $('.main-nav>ul>li').hover(function () {
+                var pageWidth = $("[role='main']").width();
+                var elementLeft = $(this).position().left;
+                var elementWidth = $(this).find(">ul").width();
+                if ((elementWidth + elementLeft) > pageWidth) {
+                    $(this).find(">ul").toggleClass("left");
+                }
+            });
+
+        }
+    }
+    /*if the window resizes to where the button that toggles the main nav is hidden or vice versa, run this function to add or remove all classes and sub nav toggle links*/
+    toggle_links();
+    $(window).bind("resize", toggle_links);
+
+});
+
+//If you need to clone the main nav in the footer (or anywhere else) on mobile, uncomment this and change "body" to some other element
+//if ($('.main-nav-toggle').is(":visible")) {
+//  $('.main-nav').clone().insertAfter('body');
+//}
+
+// Add "clicked" class to parent span of radios and checkboxes when checked for browsers that dont support the CSS :checked selector (IE8)
+// Facilitates the styling of checked elements
+$(document).ready(function () {
+    $(':radio[checked]').parent("span").toggleClass("clicked", true);
+});
+$(document).ready(function () {
+    $(':checkbox[checked]').parent("span").toggleClass("clicked", true);
+});
+//add class of "clicked" to radiobutton and checkboxes that are clicked by default on page load
+
+function setClickedClass(a) {
+    $(a).click(function () {
+        $(this).parent().toggleClass("clicked")
+    });
+}
+
+function setClickedClassRadio() {
+    $('input[type="radio"]').change(function () {
+        var a = $(this).attr("name");
+        $('input[name="' + a + '"]').parent("span").removeClass("clicked");
+        $(this).parent("span").toggleClass("clicked", this.selected)
+    });
+}
+$(document).ready(function (a) {
+    setClickedClass('input[type="checkbox"]');
+    setClickedClassRadio()
+});
+// fix for ios bug. If you remove, ios will not activate radios and checkboxes when you click the label.
+$('label').click(function () { });
+
+//globally show and hide elements on click
+//USAGE: <a href="" class="hiddenTriggerClick">show stuff when this is clicked</a><div class="hiddenContent>I will show when that link over there is clicked</div>
+$(document).ready(function () {
+    $(".hiddenTriggerClick").click(function () {
+        targetClickShowHide(this);
+    });
+});
+
+function targetClickShowHide(sender) {
+    $(sender).toggleClass("active");
+    var hiddenElement = $(sender).nextAll('.hiddenContent');
+    if (hiddenElement.length > 0) {
+        $(hiddenElement[0]).toggleClass('notHidden');
+        $(sender).attr('aria-expanded', function (i, attr) { return attr == 'true' ? 'false' : 'true' });
+    }
+    kickTheBrowser();
+}
+
+// Responsive tabs/accordion. Basically just adds class .active to first tab on load and then any tab clicked on. you show and hide the proceeding content through the css
+// Responsive behavior is in the CSS
+$(document).ready(function () {
+    //loop through all instances of tabs on the page and add "active" to the first one
+    $('.tabs').each(function () {
+        $(this).children('li').first().children('a').addClass('active');
+    });
+
+    //toggle the "active" class on the links with click
+    $('.tabs > li > a').click(function () {
+        var accordion = $(this).closest(".accordion");
+        
+        $('.empty').html('');
+        
+        if (!$(this).hasClass('active')) {
+            $(this).closest('.tabs').find('a.active').removeClass('active');
+            $(this).addClass('active');
+            /*In the css, the li's have display:block set on them for mobile view, which is changed to display:inline on larger screens. So we check if the li has display:block, and if so, scroll the page so the open item is at the top of the viewscreen so it is easier to read and the accordion doesnt jump around like a weirdo.*/
+            if ($(this).parent('li').css('display') == 'block') {
+                $('html, body').animate({
+                    scrollTop: $(this).offset().top - 50
+                }, 500);
+                /* add the ios fix. The duration of the fix needs to match the duration of your animation. If you leave the duration blank it will occur immediately*/
+                iosScrollTopBugFix(500);
+                return false;
+            }
+        } else if (!accordion.hasClass("preventClose")) {
+            if ($('.main-nav-toggle').is(":visible")) {
+                $(this).removeClass('active');
+            } else {
+                if ($('.tabs > li').css('display') == 'block') {
+                    $(this).closest('.tabs').find('a.active').removeClass('active');
+                }
+            }
+        }
+    });
+
+    // Allow tab and shift-tab to navigate the accordion tabs
+    $('.tabs li').on('keydown', function (e) {
+        // move to next tab
+        if (e.which == 9 && !e.shiftKey) { //(e.which == 39 || (e.which == 9 && !e.shiftKey))
+            var tab = $(this).next('.tabs li').find('a.aTab')
+            if (tab.attr('class') !== undefined) {
+                tab.focus();
+                e.preventDefault();
+                return false;
+            }
+            else {
+                // when moving past the last tab let focus fall on the first element after the accordion
+                $(this).closest('.tabs').focus();
+            }
+        } else if (e.which == 9 && e.shiftKey) { //(e.which == 37 || (e.which == 9 && e.shiftKey)) 
+            // move to previous tab
+            var tab = $(this).prev('.tabs li').find('a.aTab');
+            if (tab.attr('class') !== undefined) {
+                tab.focus();
+                e.preventDefault();
+                return false;
+            }
+        }
+    });
+
+});
+
+/*hack for IE8 and below not re-rendering UI after DOM changes.
+Quickly adds a class to the body and removes it. This forces a redraw of the screen.
+If you are manipulating the DOM through JS and IE8 and below don't update even though the script has worked, add this function to your script. */
+
+function kickTheBrowser() {
+    $('body').addClass('smellTheCoffeeDude');
+    setTimeout(function () {
+        $('body').removeClass('smellTheCoffeeDude');
+    }, 0);
+}
+
+function findTheOffset(targetOffset, defaultModifier) {
+    if (!defaultModifier)
+        defaultModifier = 25;
+    if (window.matchMedia("(min-width: 983px)").matches) {
+        // It's not mobile
+        // 2.5 the height of the header when not fixed
+        var modifier = 2.5;
+        if ($(".main-header").hasClass('fixed')) {
+            // 1.5 the height of the header when not fixed
+            modifier = 1.5;
+        }
+        var headerHeight = $(".main-header").outerHeight(true);
+        targetOffset = targetOffset - (headerHeight * modifier);
+    }
+    else
+        targetOffset = targetOffset - defaultModifier;
+    return targetOffset;
+}
+
+//scroll effect to any internal anchor links to give visual feedback of where users are in the document and that they have not been taken to another page
+$(document).ready(function () {
+    $('a[href*=\\#]').click(function () {
+        if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+            var $target = $(this.hash);
+            $target = $target.length && $target || $('[name=' + this.hash.slice(1) + ']');
+            if ($target.length) {
+                var targetOffset = findTheOffset($target.offset().top);
+
+                $('html,body').animate({
+                    scrollTop: targetOffset
+                }, 500);
+                /* add the ios fix. The duration of the fix needs to match the duration of your animation. If you leave the duration blank it will occur immediately*/
+                iosScrollTopBugFix(500);
+                return false;
+            }
+        }
+    });
+});
+// show a back to top link once user scrolls down the page. Used on the style guide.
+$(document).ready(function () {
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 400) {
+            $('.back-to-top').fadeIn(200);
+        } else {
+            $('.back-to-top').fadeOut(200);
+        }
+    });
+});
+
+//make nav stick to top
+jQuery(document).ready(function () {
+    if (!!jQuery('.main-header').offset()) {
+        var stickyTop = jQuery('.main-header').offset().top;
+        jQuery(window).scroll(function () {
+            var windowTop = jQuery(window).scrollTop();
+            var bodyPadding = $('.main-header').height();
+            if (stickyTop < windowTop) {
+                jQuery('.main-header').addClass('fixed');
+                if (window.matchMedia("(min-width: 983px)").matches) {
+                    $('body').css('padding-top', bodyPadding);
+                }
+            } else {
+                jQuery('.main-header').removeClass('fixed');
+                $('body').css('padding-top', '');
+            }
+        });
+    }
+});
+/*hack for iphone/ipad bug where programmatic scroll screws up fixed elements*/
+function iosScrollTopBugFix(wait) {
+    if (wait == null)
+        wait = 0;
+    var hack = document.createElement("div");
+    hack.style.height = "101%";
+    document.body.appendChild(hack);
+    setTimeout(function () {
+        document.body.removeChild(hack);
+        hack = null;
+        /*the time below needs to be at least as long as the programmatic scroll time. If the div is added/removed before the scroll completes, this won't work*/
+    }, wait);
+}
+
+//toggle the site search class
+$(document).ready(function () {
+    $(".txtHeaderKeyword").focus(function () {
+        $(".site-search").addClass("active");
+    })
+    $(".txtHeaderKeyword").blur(function () {
+        $(".site-search").removeClass("active");
+    })
+});
+
+$(document).ready(function () {
+    $('.search-toggle').click(function () {
+        $(this).parent().find('.site-search .search-field #site-search').focus();
+    });
+});
+
+//Hack to stop ios from centering fixed div when focusing on search field
+if (navigator.userAgent.match(/(iPod|iPhone|iPad)/)) {
+    $('.txtHeaderKeyword').focus(function () {
+        var top = $(window).scrollTop();
+        setTimeout(function () {
+            $(window).scrollTop(top);
+        }, 0);
+    });
+}
+
+//remove the labels that have the X on them when clicked
+$(":not(.hp-alert).label.close").click(function () {
+    $(this).addClass("visually-hidden");
+});
+
+// close alert only if the X icon is clicked 
+$('.hp-alert.label.close').on('click', function (event) {
+    const parentRect = this.getBoundingClientRect();
+    const pseudoStyle = window.getComputedStyle(this, '::before');
+
+    const pseudoLeft = parentRect.width - 25;
+    const pseudoTop = 5;
+    const pseudoWidth = parseFloat(pseudoStyle.width);
+    const pseudoHeight = parseFloat(pseudoStyle.height);
+
+    const clickX = event.clientX - parentRect.left;
+    const clickY = event.clientY - parentRect.top;
+
+    if (clickX >= pseudoLeft && clickX <= (pseudoLeft + pseudoWidth) &&
+        clickY >= pseudoTop && clickY <= (pseudoTop + pseudoHeight)) {
+        $(this).addClass("visually-hidden");
+    }
+});
+
+
+
+//small nav to dropdown pattern
+$(document).ready(function () {
+    $('.dropdown-to-nav li.selected a').attr("href", "javascript:void(0)");
+    $('.dropdown-to-nav li.selected a').click(function (e) {
+        //e.preventDefault();
+        $(this).toggleClass('active');
+        $(this).closest('ul').toggleClass('open');
+    });
+});
+
+//scroll carousel
+$('#carousel-next, #carousel-prev').click(function (e) {
+    e.preventDefault();
+    var id = e.target.id;
+    if (id == 'carousel-next') {
+        $('ul.hp-carousel li:first').appendTo('ul.hp-carousel');
+    } else {
+        $('ul.hp-carousel li:last').prependTo('ul.hp-carousel');
+    }
+});
+
+//modals
+$(document).ready(function () {
+    $.fn.modal = function () {
+        var centerModal = function (modalBox) {
+            modalBox.css('left', ($(window).width() - modalBox.outerWidth()) / 2 + 'px');
+            //modalBox.css('top',($(window).height()-modalBox.outerHeight())/ 2 + 'px');
+            $('.modalInner').css('max-height', modalBox.height() + 1);
+            $('.modalInner img').css('max-height', modalBox.height() + 1);
+        };
+        $.fn.modal.showModal = function (id) {
+            var modalBox = $('.modalContent[id="' + id + '"]');
+            var focusedElBeforeShowModal = $(document.activeElement);
+            if (modalBox != null) {
+                modalBox.addClass('visible').wrapInner("<div class='modalInner' />").append("<a class='modalClose' title='close' href='javascript:void(0)'><span>Close</span></a>");
+                $('body').append($("<div></div>").addClass('modalCover'));
+                $('.modalCover').click(function () {
+                    hideModal();
+                });
+                $('.modalClose').click(function () {
+                    hideModal();
+                });
+                focusableEls = modalBox.find('a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), .dialog-confirm [tabindex="0"]');
+                focusableEls.first().focus();
+                modalBox.bind('keydown', function (event) {
+                    switch (event.keyCode) {
+                        case 9: // tab key
+                            if (focusableEls.length < 2) {
+                                event.preventDefault();
+                                break;
+                            }
+                            var focusedEl = $(document.activeElement);
+                            if (event.shiftKey) {
+                                // handle backward tab
+                                if (focusedEl[0] === focusableEls.first()[0]) {
+                                    event.preventDefault();
+                                    focusableEls.last().focus();
+                                }
+                            } else {
+                                // handle forward tab
+                                if (focusedEl[0] === focusableEls.last()[0]) {
+                                    event.preventDefault();
+                                    focusableEls.first().focus();
+                                }
+                            }
+                            break;
+                        case 27: // esc key
+                            event.preventDefault();
+                            hideModal();
+                            break;
+                        default:
+                            break;
+                    }
+                });
+                centerModal(modalBox);
+            }
+            function hideModal() {
+                modalBox.removeClass('visible');
+                $('.modalCover').remove();
+                $('.modalClose').remove();
+                //$('.modalInner').replaceWith($('.modalInner').contents());
+                focusedElBeforeShowModal.focus();
+            }
+        }
+        $('.modalTrigger').on('click', function (e) {
+            e.preventDefault();
+            showModal($(this).attr('href'));
+            return false;
+        });
+        $(window).resize(function () {
+            centerModal($('.modalContent.visible'));
+        });
+    };
+    $(".modalContent").modal();
+});
+function showModal(id) {
+    $.fn.modal.showModal(id);
+}
+
+
+//make all thumbnail containers equal the height of the tallest one
+
+
+var rtime = new Date(1, 1, 2000, 12, 00, 00);
+var timeout = false;
+var delta = 5;
+$(window).on('load', function () { // wait for all content and images are loaded
+    setEqualHeight();
+    $(window).resize(function () {
+        rtime = new Date();
+        $('.equal-height').css('height', '');
+        if (timeout === false) {
+            timeout = true;
+            setTimeout(resizeEndEqualHeight, delta);
+        }
+    })
+});
+
+function resizeEndEqualHeight() {
+    if (new Date() - rtime < delta) {
+        setTimeout(resizeEndEqualHeight, delta);
+    } else {
+        timeout = false;
+        setEqualHeight();
+    }
+}
+
+function setEqualHeight() {
+    $('.equal-height').parent().each(
+        function () {
+            //add if statement so this doesnt happen on mobile?
+            var biggestHeight = 0;
+            $(this).children('.equal-height').each(
+                function () {
+                    if ($(this).outerHeight() > biggestHeight) {
+                        biggestHeight = $(this).outerHeight();
+                    }
+                });
+            $(this).children('.equal-height').css('height', (biggestHeight));
+            //end add if
+        });
+}
+
+
+//polyfill form field placeholder text for browsers that don't support it
+$(document).ready(function () {
+    if (!Modernizr.input.placeholder) {
+        if (!("placeholder" in document.createElement("input"))) {
+            $("input[placeholder], textarea[placeholder]").each(function () {
+                var val = $(this).attr("placeholder");
+                if (this.value == "") {
+                    this.value = val;
+                }
+                $(this).focus(function () {
+                    if (this.value == val) {
+                        this.value = "";
+                    }
+                }).blur(function () {
+                    if ($.trim(this.value) == "") {
+                        this.value = val;
+                    }
+                })
+            });
+
+            // Clear default placeholder values on form submit
+            $('form').submit(function () {
+                $(this).find("input[placeholder], textarea[placeholder]").each(function () {
+                    if (this.value == $(this).attr("placeholder")) {
+                        this.value = "";
+                    }
+                });
+            });
+        }
+    }
+});
+
+
+/* Fix for ios not rendering the placeholder element on orientation change ( http://mooki83.tistory.com ) */
+$(document).ready(function () {
+    function fm_optimizeInput() {
+        $("input[placeholder],textarea[placeholder]").each(function () {
+            var tmpText = $(this).attr("placeholder");
+            if (tmpText != "") {
+                $(this).attr("placeholder", "").attr("placeholder", tmpText);
+            }
+        })
+    }
+    $(window).bind("orientationchange.fm_optimizeInput", fm_optimizeInput);
+});
+
+
+// Similar functionality for secondary nav items
+$(document).ready(function () {
+
+    $('.footer-links > ul > li').each(function () {
+        if ($(this).children('ul').length > 0) {
+            $(this).append('<span class="footer-nav-toggle"></span>');
+        }
+    });
+
+    $(".footer-nav-toggle").click(function () {
+        $(this).closest('li').find('ul').toggleClass('show');
+        $(this).toggleClass("active");
+    });
+    $(".footer-nav-toggle").click(function () {
+        $(this).closest('li').find('.header').toggleClass('active-menu');
+    });
+});
+
+// this approach prevents different toggling of classes if hovered on page load
+$(window).on('load', function () {
+    $(".main-nav .main > li").hover(
+        function () {
+            $(this).addClass('active-category');
+            $(this).children('ul.mega-menu').addClass('active-mega');
+            $(this).parent().addClass('active-menu');
+        },
+        function () {
+            $(this).removeClass('active-category');
+            $(this).children('ul.mega-menu').removeClass('active-mega');
+            $(this).parent().removeClass('active-menu');
+        }
+    )
+});
+
+$('.main-nav.careers ul.main > li:last').addClass('apply');
+
+// Add close button for mega menu on touch
+$(window).on('load', function () {
+
+    if (Modernizr.touch) {
+
+        $('ul.main').append('<span class="close-menu"> </span>');
+
+    } else {
+
+
+    }
+
+});
+
+
+// match Media for equal height initiate after mobile
+var mql = window.matchMedia("(min-width: 480px),(min-device-width: 480px),only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: 480px),only screen and (min--moz-device-pixel-ratio: 2)and(min-width: 480px),only screen and (-o-min-device-pixel-ratio: 2/1) and (min-width: 480px),only screen and (min-device-pixel-ratio: 2) and (min-width: 480px),only screen and (min-resolution: 192dpi) and (min-width: 480px),only screen and (min-resolution: 2dppx)  and (min-width: 480px)");
+
+if (mql.matches) {
+
+    $('.audience-listing .quick-click').addClass('equal-height');
+
+} else {
+
+    $('.audience-listing .quick-click').removeClass('equal-height');
+}
+
+
+// match Media for equal height initiate after mobile
+var mql = window.matchMedia("(min-width: 480px),(min-device-width: 480px),only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: 480px),only screen and (min--moz-device-pixel-ratio: 2)and(min-width: 480px),only screen and (-o-min-device-pixel-ratio: 2/1) and (min-width: 480px),only screen and (min-device-pixel-ratio: 2) and (min-width: 480px),only screen and (min-resolution: 192dpi) and (min-width: 480px),only screen and (min-resolution: 2dppx)  and (min-width: 480px)");
+
+if (mql.matches) {
+
+    $('.audience-listing--updated .quick-click').removeClass('equal-height');
+
+} else {
+
+    $('.audience-listing--updated .quick-click').removeClass('equal-height');
+}
+/*! Picturefill - v2.2.0-beta - 2014-11-19
+* http://scottjehl.github.io/picturefill
+* Copyright (c) 2014 https://github.com/scottjehl/picturefill/blob/master/Authors.txt; Licensed MIT */
+window.matchMedia || (window.matchMedia = function () { "use strict"; var a = window.styleMedia || window.media; if (!a) { var b = document.createElement("style"), c = document.getElementsByTagName("script")[0], d = null; b.type = "text/css", b.id = "matchmediajs-test", c.parentNode.insertBefore(b, c), d = "getComputedStyle" in window && window.getComputedStyle(b, null) || b.currentStyle, a = { matchMedium: function (a) { var c = "@media " + a + "{ #matchmediajs-test { width: 1px; } }"; return b.styleSheet ? b.styleSheet.cssText = c : b.textContent = c, "1px" === d.width } } } return function (b) { return { matches: a.matchMedium(b || "all"), media: b || "all" } } }()), function (a, b, c) { "use strict"; function d(a) { var b, c, d, e, g, h = a || {}; b = h.elements || f.getAllElements(); for (var i = 0, j = b.length; j > i; i++) if (c = b[i], d = c.parentNode, e = void 0, g = void 0, "IMG" === c.nodeName.toUpperCase() && (c[f.ns] || (c[f.ns] = {}), h.reevaluate || !c[f.ns].evaluated)) { if ("PICTURE" === d.nodeName.toUpperCase()) { if (f.removeVideoShim(d), e = f.getMatch(c, d), e === !1) continue } else e = void 0; ("PICTURE" === d.nodeName.toUpperCase() || c.srcset && !f.srcsetSupported || !f.sizesSupported && c.srcset && c.srcset.indexOf("w") > -1) && f.dodgeSrcset(c), e ? (g = f.processSourceSet(e), f.applyBestCandidate(g, c)) : (g = f.processSourceSet(c), (void 0 === c.srcset || c[f.ns].srcset) && f.applyBestCandidate(g, c)), c[f.ns].evaluated = !0 } } function e() { function c() { var b; a._picturefillWorking || (a._picturefillWorking = !0, a.clearTimeout(b), b = a.setTimeout(function () { d({ reevaluate: !0 }), a._picturefillWorking = !1 }, 60)) } d(); var e = setInterval(function () { return d(), /^loaded|^i|^c/.test(b.readyState) ? void clearInterval(e) : void 0 }, 250); a.addEventListener ? a.addEventListener("resize", c, !1) : a.attachEvent && a.attachEvent("onresize", c) } if (a.HTMLPictureElement) return void (a.picturefill = function () { }); b.createElement("picture"); var f = {}; f.ns = "picturefill", function () { f.srcsetSupported = "srcset" in c, f.sizesSupported = "sizes" in c }(), f.trim = function (a) { return a.trim ? a.trim() : a.replace(/^\s+|\s+$/g, "") }, f.endsWith = function (a, b) { return a.endsWith ? a.endsWith(b) : -1 !== a.indexOf(b, a.length - b.length) }, f.restrictsMixedContent = function () { return "https:" === a.location.protocol }, f.matchesMedia = function (b) { return a.matchMedia && a.matchMedia(b).matches }, f.getDpr = function () { return a.devicePixelRatio || 1 }, f.getWidthFromLength = function (a) { a = a && a.indexOf("%") > -1 == !1 && (parseFloat(a) > 0 || a.indexOf("calc(") > -1) ? a : "100vw", a = a.replace("vw", "%"), f.lengthEl || (f.lengthEl = b.createElement("div"), f.lengthEl.style.cssText = "border:0;display:block;font-size:1em;left:0;margin:0;padding:0;position:absolute;visibility:hidden"), f.lengthEl.style.width = a, b.body.appendChild(f.lengthEl), f.lengthEl.className = "helper-from-picturefill-js", f.lengthEl.offsetWidth <= 0 && (f.lengthEl.style.width = b.documentElement.offsetWidth + "px"); var c = f.lengthEl.offsetWidth; return b.body.removeChild(f.lengthEl), c }, f.types = {}, f.types["image/jpeg"] = !0, f.types["image/gif"] = !0, f.types["image/png"] = !0, f.types["image/svg+xml"] = b.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#Image", "1.1"), f.types["image/webp"] = function () { var a = "image/webp"; c.onerror = function () { f.types[a] = !1, d() }, c.onload = function () { f.types[a] = 1 === c.width, d() }, c.src = "data:image/webp;base64,UklGRh4AAABXRUJQVlA4TBEAAAAvAAAAAAfQ//73v/+BiOh/AAA=" }, f.verifyTypeSupport = function (a) { var b = a.getAttribute("type"); return null === b || "" === b ? !0 : "function" == typeof f.types[b] ? (f.types[b](), "pending") : f.types[b] }, f.parseSize = function (a) { var b = /(\([^)]+\))?\s*(.+)/g.exec(a); return { media: b && b[1], length: b && b[2] } }, f.findWidthFromSourceSize = function (a) { for (var b, c = f.trim(a).split(/\s*,\s*/), d = 0, e = c.length; e > d; d++) { var g = c[d], h = f.parseSize(g), i = h.length, j = h.media; if (i && (!j || f.matchesMedia(j))) { b = i; break } } return f.getWidthFromLength(b) }, f.parseSrcset = function (a) { for (var b = []; "" !== a;) { a = a.replace(/^\s+/g, ""); var c, d = a.search(/\s/g), e = null; if (-1 !== d) { c = a.slice(0, d); var f = c.slice(-1); if (("," === f || "" === c) && (c = c.replace(/,+$/, ""), e = ""), a = a.slice(d + 1), null === e) { var g = a.indexOf(","); -1 !== g ? (e = a.slice(0, g), a = a.slice(g + 1)) : (e = a, a = "") } } else c = a, a = ""; (c || e) && b.push({ url: c, descriptor: e }) } return b }, f.parseDescriptor = function (a, b) { var c, d = b || "100vw", e = a && a.replace(/(^\s+|\s+$)/g, ""), g = f.findWidthFromSourceSize(d); if (e) for (var h = e.split(" "), i = h.length - 1; i >= 0; i--) { var j = h[i], k = j && j.slice(j.length - 1); if ("h" !== k && "w" !== k || f.sizesSupported) { if ("x" === k) { var l = j && parseFloat(j, 10); c = l && !isNaN(l) ? l : 1 } } else c = parseFloat(parseInt(j, 10) / g) } return c || 1 }, f.getCandidatesFromSourceSet = function (a, b) { for (var c = f.parseSrcset(a), d = [], e = 0, g = c.length; g > e; e++) { var h = c[e]; d.push({ url: h.url, resolution: f.parseDescriptor(h.descriptor, b) }) } return d }, f.dodgeSrcset = function (a) { a.srcset && (a[f.ns].srcset = a.srcset, a.removeAttribute("srcset")) }, f.processSourceSet = function (a) { var b = a.getAttribute("srcset"), c = a.getAttribute("sizes"), d = []; return "IMG" === a.nodeName.toUpperCase() && a[f.ns] && a[f.ns].srcset && (b = a[f.ns].srcset), b && (d = f.getCandidatesFromSourceSet(b, c)), d }, f.applyBestCandidate = function (a, b) { var c, d, e; a.sort(f.ascendingSort), d = a.length, e = a[d - 1]; for (var g = 0; d > g; g++) if (c = a[g], c.resolution >= f.getDpr()) { e = c; break } if (e && !f.endsWith(b.src, e.url)) if (f.restrictsMixedContent() && "http:" === e.url.substr(0, "http:".length).toLowerCase()) void 0 !== typeof console && console.warn("Blocked mixed content image " + e.url); else { b.src = e.url, b.currentSrc = b.src; var h = b.style || {}, i = "webkitBackfaceVisibility" in h, j = h.zoom; i && (h.zoom = ".999", i = b.offsetWidth, h.zoom = j) } }, f.ascendingSort = function (a, b) { return a.resolution - b.resolution }, f.removeVideoShim = function (a) { var b = a.getElementsByTagName("video"); if (b.length) { for (var c = b[0], d = c.getElementsByTagName("source") ; d.length;) a.insertBefore(d[0], c); c.parentNode.removeChild(c) } }, f.getAllElements = function () { for (var a = [], c = b.getElementsByTagName("img"), d = 0, e = c.length; e > d; d++) { var g = c[d]; ("PICTURE" === g.parentNode.nodeName.toUpperCase() || null !== g.getAttribute("srcset") || g[f.ns] && null !== g[f.ns].srcset) && a.push(g) } return a }, f.getMatch = function (a, b) { for (var c, d = b.childNodes, e = 0, g = d.length; g > e; e++) { var h = d[e]; if (1 === h.nodeType) { if (h === a) return c; if ("SOURCE" === h.nodeName.toUpperCase()) { null !== h.getAttribute("src") && void 0 !== typeof console && console.warn("The `src` attribute is invalid on `picture` `source` element; instead, use `srcset`."); var i = h.getAttribute("media"); if (h.getAttribute("srcset") && (!i || f.matchesMedia(i))) { var j = f.verifyTypeSupport(h); if (j === !0) { c = h; break } if ("pending" === j) return !1 } } } } return c }, e(), d._ = f, "object" == typeof module && "object" == typeof module.exports ? module.exports = d : "function" == typeof define && define.amd ? define(function () { return d }) : "object" == typeof a && (a.picturefill = d) }(this, this.document, new this.Image);
+
+var OnlineBanking = {
+    SubmitForm: function (url, data) {
+        var form = $("<form></form>");
+
+        form.prop("method", "POST");
+        form.prop("action", url);
+
+        for (var key in data) {
+            if (data.hasOwnProperty(key)) {
+                var element = $('<input type="hidden" />');
+
+                element.attr("name", key);
+                element.attr("value", data[key]);
+
+                form.append(element);
+            }
+        }
+
+        form.hide();
+        form.appendTo("body");
+        form.submit();
+        form.remove();
+    },
+
+    PersonalLogin: function (form) {
+        var username = $("input.username", form).val();
+        var password = $("input.password", form).val();
+
+        if (username == '' || username == $("input.username", form).prop("placeholder")) {
+            alert('Please enter your Member # / User ID');
+
+            return false;
+        }
+        else if (password == '') {
+            alert('Please enter your password');
+
+            return false;
+        }
+        else {
+            var data = {
+                userid: username,
+                password: password
+            };
+
+            OnlineBanking.SubmitForm("https://eslpersonalbanking.esl.org/tob/live/usp-core/app/initialLogin", data);
+        }
+    },
+
+    BusinessLogin: function (form) {
+        var username = $("input.username", form).val();
+        var password = $("input.password", form).val();
+
+        if (username == '' || username == $("input.username", form).prop("placeholder")) {
+            alert('Please enter your User ID');
+            return false;
+        }
+        else if ($("div.password", form).is(":visible") && password == '') {
+            alert('Please enter your password');
+            return false;
+        }
+        else {
+            var data = {
+                user_id: username,
+                password: ''
+            };
+            if ($("div.password", form).is(":visible"))
+                data.password = password;
+            else
+                data.forgot_password = true;
+            OnlineBanking.SubmitForm("https://eslbusinessbanking.esl.org/ESLFederalCreditUnionOnline/uux.aspx", data); 
+        }
+    },
+
+    Initialize: function () {
+        if (navigator.userAgent.indexOf("Trident") > -1) {
+            $("input.placeholder").on("focus", function (event) {
+                var textbox = $(this);
+                var value = textbox.val();
+                var defaultValue = textbox.prop("placeholder");
+
+                if (value === "") {
+                    value = defaultValue;
+
+                    textbox.val(defaultValue);
+                }
+
+                if (value === defaultValue) {
+                    setTimeout(function () {
+                        textbox.prop({
+                            selectionStart: 0,
+                            selectionEnd: 0
+                        });
+                    }, 100);
+                }
+            });
+
+            $("input.placeholder").on("blur", function (event) {
+                var textbox = $(this);
+                var value = textbox.val();
+                var defaultValue = textbox.prop("placeholder");
+
+                if ($.trim(value) === "")
+                    textbox.val(defaultValue);
+            });
+
+            $("input.placeholder").on("keypress", function (event) {
+                var textbox = $(this);
+                var value = textbox.val();
+                var defaultValue = textbox.prop("placeholder");
+
+                if (value === defaultValue)
+                    textbox.val("");
+            });
+        }
+
+        $("input[type='submit']", "div.personal-online-banking-login").on("click", function (event) {
+            event.preventDefault();
+
+            var form = $(this).closest("div.personal-online-banking-login");
+
+            OnlineBanking.PersonalLogin(form);
+        });
+
+        $("a.forgot-password", "div.business-online-banking-login").on("click", function (event) {
+            event.preventDefault();
+
+            var form = $(this).closest("div.business-online-banking-login");
+
+            $("div.password", form).hide();
+            $(this).hide();
+            $(this).next("span.separator").hide();
+            $("input[type='submit']", form).val("Submit");
+        });
+        $("input[type='submit']", "div.business-online-banking-login").on("click", function (event) {
+            event.preventDefault();
+
+            var form = $(this).closest("div.business-online-banking-login");
+
+            OnlineBanking.BusinessLogin(form);
+        });
+
+        $("ul.utility-login-content > li > a, ul.login-content > li > a").on("click", function (event) {
+            var container = $(this).parent("li");
+
+            $("div.password, a.forgot-password, span.separator", container).show();
+            $("input[type='submit']", container).val("Login");
+        });
+    }
+};
+
+$(document).ready(function () {
+    OnlineBanking.Initialize();
+});
+
+function getRateFeeTimestamp() {
+    var now = new Date();
+    var rateDateTime = now.toLocaleString();
+    return rateDateTime.replace('PM', 'p.m.').replace('AM', 'a.m.');
+}
+
+$(document).ready(function () {
+    $('time.rate-fee-timestamp').html(getRateFeeTimestamp());
+
+    var elemRatesUploaded = $('#hidRatesUploadedTimestamp');
+    if (elemRatesUploaded) $('time.rates-uploaded-timestamp').html(elemRatesUploaded.val());
+
+    var elemPrimeRate = $('#hidPrimeRateDynamic');
+    if (elemPrimeRate) $('span.current-prime-rate').html(elemPrimeRate.val());
+
+    var elemPrimeRate = $('#hidPrimeRateDateDynamic');
+    if (elemPrimeRate) $('span.current-prime-rate-date').html(elemPrimeRate.val());
+
+    var elemBranchCount = $('#hidBranchCountDynamic');
+    if (elemBranchCount) $('span.current-branch-count').html(elemBranchCount.val());
+});
+
+$(document).ready(function () {
+    $('section.FAQ .question').click(function () {
+        if ($(this).closest('section.FAQ').find('.answer').is(':visible')) {
+            var linkText = $(this).text();
+            ga('send', 'event', 'accordion', 'click', linkText);
+        }
+    })
+    $('section.avoid-fees .hiddenTriggerClick').click(function () {
+        if ($(this).closest('section.avoid-fees').find('.hiddenContent').is(':visible')) {
+            var linkText = $(this).text();
+            ga('send', 'event', 'accordion', 'click', linkText);
+        }
+    })
+});
+
+
+
+/* Instructions:
+1. Define the main element you want moved (theElement)
+2. Define the container you want the element moved to (destination: '.destinationContainer')
+3. Define the breakpoint at which you want the element moved in pixels (mediaQuery: 1000) 
+    3a. This is optional - the default is 1023
+4. Define the modifier class you want added to the element while it is moved (movedClass: 'someClassName')
+    4a. This is optional - the default is 'is-moved'
+    5. Define whether you would like the element to be prepended (added to beginning)
+    or appended (added to end) of destination container
+
+FULL EXAMPLE:
+$('.navCallout').retach({
+    destination:'.globals-mobile', 
+    mediaQuery: 641,
+    movedClass: 'navCallout-mobile',
+    prependAppend: 'prepend'
+});
+
+Let's break this down:
+
+//.navCallout is what we want to move around
+$('.navCallout').retach({
+
+    //We specify that the element should be moved to the div with the class of .globals-mobile
+    destination: '.globals-mobile',
+
+    //This element should be moved while screen width is LESS THAN 641px wide
+    mediaQuery: 641,
+
+    //We add the class of "navCallout-mobile" to the element while it is moved from it's original location
+    movedClass: 'navCallout-mobile',
+
+    //instead of appending the element to the container, we will prepend it
+    prependAppend: 'prepend'
+});
+
+HEADER SPECIFIC EXAMPLE:
+Let's say different headers have different elements and we want some to appear in the global-mobiles drawer
+
+    //for the element we want to move, just add the classname of the appropriate header
+    $('.headerMain--franchise .locSearch').retach({
+        destination:'.globals-mobile', 
+        mediaQuery: 641,
+        movedClass: 'locSearch-mobile',
+        prependAppend: 'prepend'
+    });
+
+*/
+
+
+// $(document).ready(function() {
+//   //send the filters to the drawer on mobile
+//   $('.ABA').retach({
+//     destination: '.footer-connect',
+//     mediaQuery: 641,
+//     prependAppend: 'prepend'
+//   });
+// });
+
+
+
+// (function($) {
+//   $.fn.retach = function(options) {
+//     var defaults = {
+//       destination: 'body',
+//       mediaQuery: 1023,
+//       movedClass: 'is-moved',
+//       prependAppend: 'append'
+//     };
+//     var options = $.extend({}, defaults, options);
+
+//     var $items = this;
+//     var $destination = $(options.destination);
+//     var mediaQuery = options.mediaQuery;
+//     var movedClass = options.movedClass;
+//     var $prependAppend = options.prependAppend;
+
+//     var placeholderID = Math.floor((Math.random() * 10000) + 1) + Math.floor((Math.random() * 10000) + 1);
+//     var $placeholder = $('');
+
+//     function moveItems() {
+//       if ($('i[data-placeholderID="' + placeholderID + '"]').length <= 0) {
+//         $items.first().before($placeholder);
+//       }
+//       if (window.matchMedia("(max-width: " + mediaQuery + "px)").matches) {
+//         if ($prependAppend == 'append') {
+//           $destination.append($items);
+//         } else {
+//           $destination.prepend($items);
+//         }
+
+//         $items.addClass(movedClass);
+//       } else {
+//         $placeholder.after($items);
+//         $items.removeClass(movedClass);
+//       }
+//     }
+
+//     moveItems();
+//     $(window).resize(function() {
+//       moveItems();
+//     });
+//     return $items;
+//   }
+// }(jQuery));
+
+// Magnific Popup v1.0.0 by Dmitry Semenov
+// http://bit.ly/magnific-popup#build=inline+image+ajax+iframe+gallery+retina+imagezoom+fastclick
+(function(a){typeof define=="function"&&define.amd?define(["jquery"],a):typeof exports=="object"?a(require("jquery")):a(window.jQuery||window.Zepto)})(function(a){var b="Close",c="BeforeClose",d="AfterClose",e="BeforeAppend",f="MarkupParse",g="Open",h="Change",i="mfp",j="."+i,k="mfp-ready",l="mfp-removing",m="mfp-prevent-close",n,o=function(){},p=!!window.jQuery,q,r=a(window),s,t,u,v,w=function(a,b){n.ev.on(i+a+j,b)},x=function(b,c,d,e){var f=document.createElement("div");return f.className="mfp-"+b,d&&(f.innerHTML=d),e?c&&c.appendChild(f):(f=a(f),c&&f.appendTo(c)),f},y=function(b,c){n.ev.triggerHandler(i+b,c),n.st.callbacks&&(b=b.charAt(0).toLowerCase()+b.slice(1),n.st.callbacks[b]&&n.st.callbacks[b].apply(n,a.isArray(c)?c:[c]))},z=function(b){if(b!==v||!n.currTemplate.closeBtn)n.currTemplate.closeBtn=a(n.st.closeMarkup.replace("%title%",n.st.tClose)),v=b;return n.currTemplate.closeBtn},A=function(){a.magnificPopup.instance||(n=new o,n.init(),a.magnificPopup.instance=n)},B=function(){var a=document.createElement("p").style,b=["ms","O","Moz","Webkit"];if(a.transition!==undefined)return!0;while(b.length)if(b.pop()+"Transition"in a)return!0;return!1};o.prototype={constructor:o,init:function(){var b=navigator.appVersion;n.isIE7=b.indexOf("MSIE 7.")!==-1,n.isIE8=b.indexOf("MSIE 8.")!==-1,n.isLowIE=n.isIE7||n.isIE8,n.isAndroid=/android/gi.test(b),n.isIOS=/iphone|ipad|ipod/gi.test(b),n.supportsTransition=B(),n.probablyMobile=n.isAndroid||n.isIOS||/(Opera Mini)|Kindle|webOS|BlackBerry|(Opera Mobi)|(Windows Phone)|IEMobile/i.test(navigator.userAgent),s=a(document),n.popupsCache={}},open:function(b){var c;if(b.isObj===!1){n.items=b.items.toArray(),n.index=0;var d=b.items,e;for(c=0;c<d.length;c++){e=d[c],e.parsed&&(e=e.el[0]);if(e===b.el[0]){n.index=c;break}}}else n.items=a.isArray(b.items)?b.items:[b.items],n.index=b.index||0;if(n.isOpen){n.updateItemHTML();return}n.types=[],u="",b.mainEl&&b.mainEl.length?n.ev=b.mainEl.eq(0):n.ev=s,b.key?(n.popupsCache[b.key]||(n.popupsCache[b.key]={}),n.currTemplate=n.popupsCache[b.key]):n.currTemplate={},n.st=a.extend(!0,{},a.magnificPopup.defaults,b),n.fixedContentPos=n.st.fixedContentPos==="auto"?!n.probablyMobile:n.st.fixedContentPos,n.st.modal&&(n.st.closeOnContentClick=!1,n.st.closeOnBgClick=!1,n.st.showCloseBtn=!1,n.st.enableEscapeKey=!1),n.bgOverlay||(n.bgOverlay=x("bg").on("click"+j,function(){n.close()}),n.wrap=x("wrap").attr("tabindex",-1).on("click"+j,function(a){n._checkIfClose(a.target)&&n.close()}),n.container=x("container",n.wrap)),n.contentContainer=x("content"),n.st.preloader&&(n.preloader=x("preloader",n.container,n.st.tLoading));var h=a.magnificPopup.modules;for(c=0;c<h.length;c++){var i=h[c];i=i.charAt(0).toUpperCase()+i.slice(1),n["init"+i].call(n)}y("BeforeOpen"),n.st.showCloseBtn&&(n.st.closeBtnInside?(w(f,function(a,b,c,d){c.close_replaceWith=z(d.type)}),u+=" mfp-close-btn-in"):n.wrap.append(z())),n.st.alignTop&&(u+=" mfp-align-top"),n.fixedContentPos?n.wrap.css({overflow:n.st.overflowY,overflowX:"hidden",overflowY:n.st.overflowY}):n.wrap.css({top:r.scrollTop(),position:"absolute"}),(n.st.fixedBgPos===!1||n.st.fixedBgPos==="auto"&&!n.fixedContentPos)&&n.bgOverlay.css({height:s.height(),position:"absolute"}),n.st.enableEscapeKey&&s.on("keyup"+j,function(a){a.keyCode===27&&n.close()}),r.on("resize"+j,function(){n.updateSize()}),n.st.closeOnContentClick||(u+=" mfp-auto-cursor"),u&&n.wrap.addClass(u);var l=n.wH=r.height(),m={};if(n.fixedContentPos&&n._hasScrollBar(l)){var o=n._getScrollbarSize();o&&(m.marginRight=o)}n.fixedContentPos&&(n.isIE7?a("body, html").css("overflow","hidden"):m.overflow="hidden");var p=n.st.mainClass;return n.isIE7&&(p+=" mfp-ie7"),p&&n._addClassToMFP(p),n.updateItemHTML(),y("BuildControls"),a("html").css(m),n.bgOverlay.add(n.wrap).prependTo(n.st.prependTo||a(document.body)),n._lastFocusedEl=document.activeElement,setTimeout(function(){n.content?(n._addClassToMFP(k),n._setFocus()):n.bgOverlay.addClass(k),s.on("focusin"+j,n._onFocusIn)},16),n.isOpen=!0,n.updateSize(l),y(g),b},close:function(){if(!n.isOpen)return;y(c),n.isOpen=!1,n.st.removalDelay&&!n.isLowIE&&n.supportsTransition?(n._addClassToMFP(l),setTimeout(function(){n._close()},n.st.removalDelay)):n._close()},_close:function(){y(b);var c=l+" "+k+" ";n.bgOverlay.detach(),n.wrap.detach(),n.container.empty(),n.st.mainClass&&(c+=n.st.mainClass+" "),n._removeClassFromMFP(c);if(n.fixedContentPos){var e={marginRight:""};n.isIE7?a("body, html").css("overflow",""):e.overflow="",a("html").css(e)}s.off("keyup"+j+" focusin"+j),n.ev.off(j),n.wrap.attr("class","mfp-wrap").removeAttr("style"),n.bgOverlay.attr("class","mfp-bg"),n.container.attr("class","mfp-container"),n.st.showCloseBtn&&(!n.st.closeBtnInside||n.currTemplate[n.currItem.type]===!0)&&n.currTemplate.closeBtn&&n.currTemplate.closeBtn.detach(),n._lastFocusedEl&&a(n._lastFocusedEl).focus(),n.currItem=null,n.content=null,n.currTemplate=null,n.prevHeight=0,y(d)},updateSize:function(a){if(n.isIOS){var b=document.documentElement.clientWidth/window.innerWidth,c=window.innerHeight*b;n.wrap.css("height",c),n.wH=c}else n.wH=a||r.height();n.fixedContentPos||n.wrap.css("height",n.wH),y("Resize")},updateItemHTML:function(){var b=n.items[n.index];n.contentContainer.detach(),n.content&&n.content.detach(),b.parsed||(b=n.parseEl(n.index));var c=b.type;y("BeforeChange",[n.currItem?n.currItem.type:"",c]),n.currItem=b;if(!n.currTemplate[c]){var d=n.st[c]?n.st[c].markup:!1;y("FirstMarkupParse",d),d?n.currTemplate[c]=a(d):n.currTemplate[c]=!0}t&&t!==b.type&&n.container.removeClass("mfp-"+t+"-holder");var e=n["get"+c.charAt(0).toUpperCase()+c.slice(1)](b,n.currTemplate[c]);n.appendContent(e,c),b.preloaded=!0,y(h,b),t=b.type,n.container.prepend(n.contentContainer),y("AfterChange")},appendContent:function(a,b){n.content=a,a?n.st.showCloseBtn&&n.st.closeBtnInside&&n.currTemplate[b]===!0?n.content.find(".mfp-close").length||n.content.append(z()):n.content=a:n.content="",y(e),n.container.addClass("mfp-"+b+"-holder"),n.contentContainer.append(n.content)},parseEl:function(b){var c=n.items[b],d;c.tagName?c={el:a(c)}:(d=c.type,c={data:c,src:c.src});if(c.el){var e=n.types;for(var f=0;f<e.length;f++)if(c.el.hasClass("mfp-"+e[f])){d=e[f];break}c.src=c.el.attr("data-mfp-src"),c.src||(c.src=c.el.attr("href"))}return c.type=d||n.st.type||"inline",c.index=b,c.parsed=!0,n.items[b]=c,y("ElementParse",c),n.items[b]},addGroup:function(a,b){var c=function(c){c.mfpEl=this,n._openClick(c,a,b)};b||(b={});var d="click.magnificPopup";b.mainEl=a,b.items?(b.isObj=!0,a.off(d).on(d,c)):(b.isObj=!1,b.delegate?a.off(d).on(d,b.delegate,c):(b.items=a,a.off(d).on(d,c)))},_openClick:function(b,c,d){var e=d.midClick!==undefined?d.midClick:a.magnificPopup.defaults.midClick;if(!e&&(b.which===2||b.ctrlKey||b.metaKey||b.altKey||b.shiftKey))return;var f=d.disableOn!==undefined?d.disableOn:a.magnificPopup.defaults.disableOn;if(f)if(a.isFunction(f)){if(!f.call(n))return!0}else if(r.width()<f)return!0;b.type&&(b.preventDefault(),n.isOpen&&b.stopPropagation()),d.el=a(b.mfpEl),d.delegate&&(d.items=c.find(d.delegate)),n.open(d)},updateStatus:function(a,b){if(n.preloader){q!==a&&n.container.removeClass("mfp-s-"+q),!b&&a==="loading"&&(b=n.st.tLoading);var c={status:a,text:b};y("UpdateStatus",c),a=c.status,b=c.text,n.preloader.html(b),n.preloader.find("a").on("click",function(a){a.stopImmediatePropagation()}),n.container.addClass("mfp-s-"+a),q=a}},_checkIfClose:function(b){if(a(b).hasClass(m))return;var c=n.st.closeOnContentClick,d=n.st.closeOnBgClick;if(c&&d)return!0;if(!n.content||a(b).hasClass("mfp-close")||n.preloader&&b===n.preloader[0])return!0;if(b!==n.content[0]&&!a.contains(n.content[0],b)){if(d&&a.contains(document,b))return!0}else if(c)return!0;return!1},_addClassToMFP:function(a){n.bgOverlay.addClass(a),n.wrap.addClass(a)},_removeClassFromMFP:function(a){this.bgOverlay.removeClass(a),n.wrap.removeClass(a)},_hasScrollBar:function(a){return(n.isIE7?s.height():document.body.scrollHeight)>(a||r.height())},_setFocus:function(){(n.st.focus?n.content.find(n.st.focus).eq(0):n.wrap).focus()},_onFocusIn:function(b){if(b.target!==n.wrap[0]&&!a.contains(n.wrap[0],b.target))return n._setFocus(),!1},_parseMarkup:function(b,c,d){var e;d.data&&(c=a.extend(d.data,c)),y(f,[b,c,d]),a.each(c,function(a,c){if(c===undefined||c===!1)return!0;e=a.split("_");if(e.length>1){var d=b.find(j+"-"+e[0]);if(d.length>0){var f=e[1];f==="replaceWith"?d[0]!==c[0]&&d.replaceWith(c):f==="img"?d.is("img")?d.attr("src",c):d.replaceWith('<img src="'+c+'" class="'+d.attr("class")+'" />'):d.attr(e[1],c)}}else b.find(j+"-"+a).html(c)})},_getScrollbarSize:function(){if(n.scrollbarSize===undefined){var a=document.createElement("div");a.style.cssText="width: 99px; height: 99px; overflow: scroll; position: absolute; top: -9999px;",document.body.appendChild(a),n.scrollbarSize=a.offsetWidth-a.clientWidth,document.body.removeChild(a)}return n.scrollbarSize}},a.magnificPopup={instance:null,proto:o.prototype,modules:[],open:function(b,c){return A(),b?b=a.extend(!0,{},b):b={},b.isObj=!0,b.index=c||0,this.instance.open(b)},close:function(){return a.magnificPopup.instance&&a.magnificPopup.instance.close()},registerModule:function(b,c){c.options&&(a.magnificPopup.defaults[b]=c.options),a.extend(this.proto,c.proto),this.modules.push(b)},defaults:{disableOn:0,key:null,midClick:!1,mainClass:"",preloader:!0,focus:"",closeOnContentClick:!1,closeOnBgClick:!0,closeBtnInside:!0,showCloseBtn:!0,enableEscapeKey:!0,modal:!1,alignTop:!1,removalDelay:0,prependTo:null,fixedContentPos:"auto",fixedBgPos:"auto",overflowY:"auto",closeMarkup:'<button title="%title%" type="button" class="mfp-close">&#215;</button>',tClose:"Close (Esc)",tLoading:"Loading..."}},a.fn.magnificPopup=function(b){A();var c=a(this);if(typeof b=="string")if(b==="open"){var d,e=p?c.data("magnificPopup"):c[0].magnificPopup,f=parseInt(arguments[1],10)||0;e.items?d=e.items[f]:(d=c,e.delegate&&(d=d.find(e.delegate)),d=d.eq(f)),n._openClick({mfpEl:d},c,e)}else n.isOpen&&n[b].apply(n,Array.prototype.slice.call(arguments,1));else b=a.extend(!0,{},b),p?c.data("magnificPopup",b):c[0].magnificPopup=b,n.addGroup(c,b);return c};var C="inline",D,E,F,G=function(){F&&(E.after(F.addClass(D)).detach(),F=null)};a.magnificPopup.registerModule(C,{options:{hiddenClass:"hide",markup:"",tNotFound:"Content not found"},proto:{initInline:function(){n.types.push(C),w(b+"."+C,function(){G()})},getInline:function(b,c){G();if(b.src){var d=n.st.inline,e=a(b.src);if(e.length){var f=e[0].parentNode;f&&f.tagName&&(E||(D=d.hiddenClass,E=x(D),D="mfp-"+D),F=e.after(E).detach().removeClass(D)),n.updateStatus("ready")}else n.updateStatus("error",d.tNotFound),e=a("<div>");return b.inlineElement=e,e}return n.updateStatus("ready"),n._parseMarkup(c,{},b),c}}});var H="ajax",I,J=function(){I&&a(document.body).removeClass(I)},K=function(){J(),n.req&&n.req.abort()};a.magnificPopup.registerModule(H,{options:{settings:null,cursor:"mfp-ajax-cur",tError:'<a href="%url%">The content</a> could not be loaded.'},proto:{initAjax:function(){n.types.push(H),I=n.st.ajax.cursor,w(b+"."+H,K),w("BeforeChange."+H,K)},getAjax:function(b){I&&a(document.body).addClass(I),n.updateStatus("loading");var c=a.extend({url:b.src,success:function(c,d,e){var f={data:c,xhr:e};y("ParseAjax",f),n.appendContent(a(f.data),H),b.finished=!0,J(),n._setFocus(),setTimeout(function(){n.wrap.addClass(k)},16),n.updateStatus("ready"),y("AjaxContentAdded")},error:function(){J(),b.finished=b.loadError=!0,n.updateStatus("error",n.st.ajax.tError.replace("%url%",b.src))}},n.st.ajax.settings);return n.req=a.ajax(c),""}}});var L,M=function(b){if(b.data&&b.data.title!==undefined)return b.data.title;var c=n.st.image.titleSrc;if(c){if(a.isFunction(c))return c.call(n,b);if(b.el)return b.el.attr(c)||""}return""};a.magnificPopup.registerModule("image",{options:{markup:'<div class="mfp-figure"><div class="mfp-close"></div><figure><div class="mfp-img"></div><figcaption><div class="mfp-bottom-bar"><div class="mfp-title"></div><div class="mfp-counter"></div></div></figcaption></figure></div>',cursor:"mfp-zoom-out-cur",titleSrc:"title",verticalFit:!0,tError:'<a href="%url%">The image</a> could not be loaded.'},proto:{initImage:function(){var c=n.st.image,d=".image";n.types.push("image"),w(g+d,function(){n.currItem.type==="image"&&c.cursor&&a(document.body).addClass(c.cursor)}),w(b+d,function(){c.cursor&&a(document.body).removeClass(c.cursor),r.off("resize"+j)}),w("Resize"+d,n.resizeImage),n.isLowIE&&w("AfterChange",n.resizeImage)},resizeImage:function(){var a=n.currItem;if(!a||!a.img)return;if(n.st.image.verticalFit){var b=0;n.isLowIE&&(b=parseInt(a.img.css("padding-top"),10)+parseInt(a.img.css("padding-bottom"),10)),a.img.css("max-height",n.wH-b)}},_onImageHasSize:function(a){a.img&&(a.hasSize=!0,L&&clearInterval(L),a.isCheckingImgSize=!1,y("ImageHasSize",a),a.imgHidden&&(n.content&&n.content.removeClass("mfp-loading"),a.imgHidden=!1))},findImageSize:function(a){var b=0,c=a.img[0],d=function(e){L&&clearInterval(L),L=setInterval(function(){if(c.naturalWidth>0){n._onImageHasSize(a);return}b>200&&clearInterval(L),b++,b===3?d(10):b===40?d(50):b===100&&d(500)},e)};d(1)},getImage:function(b,c){var d=0,e=function(){b&&(b.img[0].complete?(b.img.off(".mfploader"),b===n.currItem&&(n._onImageHasSize(b),n.updateStatus("ready")),b.hasSize=!0,b.loaded=!0,y("ImageLoadComplete")):(d++,d<200?setTimeout(e,100):f()))},f=function(){b&&(b.img.off(".mfploader"),b===n.currItem&&(n._onImageHasSize(b),n.updateStatus("error",g.tError.replace("%url%",b.src))),b.hasSize=!0,b.loaded=!0,b.loadError=!0)},g=n.st.image,h=c.find(".mfp-img");if(h.length){var i=document.createElement("img");i.className="mfp-img",b.el&&b.el.find("img").length&&(i.alt=b.el.find("img").attr("alt")),b.img=a(i).on("load.mfploader",e).on("error.mfploader",f),i.src=b.src,h.is("img")&&(b.img=b.img.clone()),i=b.img[0],i.naturalWidth>0?b.hasSize=!0:i.width||(b.hasSize=!1)}return n._parseMarkup(c,{title:M(b),img_replaceWith:b.img},b),n.resizeImage(),b.hasSize?(L&&clearInterval(L),b.loadError?(c.addClass("mfp-loading"),n.updateStatus("error",g.tError.replace("%url%",b.src))):(c.removeClass("mfp-loading"),n.updateStatus("ready")),c):(n.updateStatus("loading"),b.loading=!0,b.hasSize||(b.imgHidden=!0,c.addClass("mfp-loading"),n.findImageSize(b)),c)}}});var N,O=function(){return N===undefined&&(N=document.createElement("p").style.MozTransform!==undefined),N};a.magnificPopup.registerModule("zoom",{options:{enabled:!1,easing:"ease-in-out",duration:300,opener:function(a){return a.is("img")?a:a.find("img")}},proto:{initZoom:function(){var a=n.st.zoom,d=".zoom",e;if(!a.enabled||!n.supportsTransition)return;var f=a.duration,g=function(b){var c=b.clone().removeAttr("style").removeAttr("class").addClass("mfp-animated-image"),d="all "+a.duration/1e3+"s "+a.easing,e={position:"fixed",zIndex:9999,left:0,top:0,"-webkit-backface-visibility":"hidden"},f="transition";return e["-webkit-"+f]=e["-moz-"+f]=e["-o-"+f]=e[f]=d,c.css(e),c},h=function(){n.content.css("visibility","visible")},i,j;w("BuildControls"+d,function(){if(n._allowZoom()){clearTimeout(i),n.content.css("visibility","hidden"),e=n._getItemToZoom();if(!e){h();return}j=g(e),j.css(n._getOffset()),n.wrap.append(j),i=setTimeout(function(){j.css(n._getOffset(!0)),i=setTimeout(function(){h(),setTimeout(function(){j.remove(),e=j=null,y("ZoomAnimationEnded")},16)},f)},16)}}),w(c+d,function(){if(n._allowZoom()){clearTimeout(i),n.st.removalDelay=f;if(!e){e=n._getItemToZoom();if(!e)return;j=g(e)}j.css(n._getOffset(!0)),n.wrap.append(j),n.content.css("visibility","hidden"),setTimeout(function(){j.css(n._getOffset())},16)}}),w(b+d,function(){n._allowZoom()&&(h(),j&&j.remove(),e=null)})},_allowZoom:function(){return n.currItem.type==="image"},_getItemToZoom:function(){return n.currItem.hasSize?n.currItem.img:!1},_getOffset:function(b){var c;b?c=n.currItem.img:c=n.st.zoom.opener(n.currItem.el||n.currItem);var d=c.offset(),e=parseInt(c.css("padding-top"),10),f=parseInt(c.css("padding-bottom"),10);d.top-=a(window).scrollTop()-e;var g={width:c.width(),height:(p?c.innerHeight():c[0].offsetHeight)-f-e};return O()?g["-moz-transform"]=g.transform="translate("+d.left+"px,"+d.top+"px)":(g.left=d.left,g.top=d.top),g}}});var P="iframe",Q="//about:blank",R=function(a){if(n.currTemplate[P]){var b=n.currTemplate[P].find("iframe");b.length&&(a||(b[0].src=Q),n.isIE8&&b.css("display",a?"block":"none"))}};a.magnificPopup.registerModule(P,{options:{markup:'<div class="mfp-iframe-scaler"><div class="mfp-close"></div><iframe class="mfp-iframe" src="//about:blank" frameborder="0" allowfullscreen></iframe></div>',srcAction:"iframe_src",patterns:{youtube:{index:"youtube.com",id:"v=",src:"//www.youtube.com/embed/%id%?autoplay=1"},vimeo:{index:"vimeo.com/",id:"/",src:"//player.vimeo.com/video/%id%?autoplay=1"},gmaps:{index:"//maps.google.",src:"%id%&output=embed"}}},proto:{initIframe:function(){n.types.push(P),w("BeforeChange",function(a,b,c){b!==c&&(b===P?R():c===P&&R(!0))}),w(b+"."+P,function(){R()})},getIframe:function(b,c){var d=b.src,e=n.st.iframe;a.each(e.patterns,function(){if(d.indexOf(this.index)>-1)return this.id&&(typeof this.id=="string"?d=d.substr(d.lastIndexOf(this.id)+this.id.length,d.length):d=this.id.call(this,d)),d=this.src.replace("%id%",d),!1});var f={};return e.srcAction&&(f[e.srcAction]=d),n._parseMarkup(c,f,b),n.updateStatus("ready"),c}}});var S=function(a){var b=n.items.length;return a>b-1?a-b:a<0?b+a:a},T=function(a,b,c){return a.replace(/%curr%/gi,b+1).replace(/%total%/gi,c)};a.magnificPopup.registerModule("gallery",{options:{enabled:!1,arrowMarkup:'<button title="%title%" type="button" class="mfp-arrow mfp-arrow-%dir%"></button>',preload:[0,2],navigateByImgClick:!0,arrows:!0,tPrev:"Previous (Left arrow key)",tNext:"Next (Right arrow key)",tCounter:"%curr% of %total%"},proto:{initGallery:function(){var c=n.st.gallery,d=".mfp-gallery",e=Boolean(a.fn.mfpFastClick);n.direction=!0;if(!c||!c.enabled)return!1;u+=" mfp-gallery",w(g+d,function(){c.navigateByImgClick&&n.wrap.on("click"+d,".mfp-img",function(){if(n.items.length>1)return n.next(),!1}),s.on("keydown"+d,function(a){a.keyCode===37?n.prev():a.keyCode===39&&n.next()})}),w("UpdateStatus"+d,function(a,b){b.text&&(b.text=T(b.text,n.currItem.index,n.items.length))}),w(f+d,function(a,b,d,e){var f=n.items.length;d.counter=f>1?T(c.tCounter,e.index,f):""}),w("BuildControls"+d,function(){if(n.items.length>1&&c.arrows&&!n.arrowLeft){var b=c.arrowMarkup,d=n.arrowLeft=a(b.replace(/%title%/gi,c.tPrev).replace(/%dir%/gi,"left")).addClass(m),f=n.arrowRight=a(b.replace(/%title%/gi,c.tNext).replace(/%dir%/gi,"right")).addClass(m),g=e?"mfpFastClick":"click";d[g](function(){n.prev()}),f[g](function(){n.next()}),n.isIE7&&(x("b",d[0],!1,!0),x("a",d[0],!1,!0),x("b",f[0],!1,!0),x("a",f[0],!1,!0)),n.container.append(d.add(f))}}),w(h+d,function(){n._preloadTimeout&&clearTimeout(n._preloadTimeout),n._preloadTimeout=setTimeout(function(){n.preloadNearbyImages(),n._preloadTimeout=null},16)}),w(b+d,function(){s.off(d),n.wrap.off("click"+d),n.arrowLeft&&e&&n.arrowLeft.add(n.arrowRight).destroyMfpFastClick(),n.arrowRight=n.arrowLeft=null})},next:function(){n.direction=!0,n.index=S(n.index+1),n.updateItemHTML()},prev:function(){n.direction=!1,n.index=S(n.index-1),n.updateItemHTML()},goTo:function(a){n.direction=a>=n.index,n.index=a,n.updateItemHTML()},preloadNearbyImages:function(){var a=n.st.gallery.preload,b=Math.min(a[0],n.items.length),c=Math.min(a[1],n.items.length),d;for(d=1;d<=(n.direction?c:b);d++)n._preloadItem(n.index+d);for(d=1;d<=(n.direction?b:c);d++)n._preloadItem(n.index-d)},_preloadItem:function(b){b=S(b);if(n.items[b].preloaded)return;var c=n.items[b];c.parsed||(c=n.parseEl(b)),y("LazyLoad",c),c.type==="image"&&(c.img=a('<img class="mfp-img" />').on("load.mfploader",function(){c.hasSize=!0}).on("error.mfploader",function(){c.hasSize=!0,c.loadError=!0,y("LazyLoadError",c)}).attr("src",c.src)),c.preloaded=!0}}});var U="retina";a.magnificPopup.registerModule(U,{options:{replaceSrc:function(a){return a.src.replace(/\.\w+$/,function(a){return"@2x"+a})},ratio:1},proto:{initRetina:function(){if(window.devicePixelRatio>1){var a=n.st.retina,b=a.ratio;b=isNaN(b)?b():b,b>1&&(w("ImageHasSize."+U,function(a,c){c.img.css({"max-width":c.img[0].naturalWidth/b,width:"100%"})}),w("ElementParse."+U,function(c,d){d.src=a.replaceSrc(d,b)}))}}}}),function(){var b=1e3,c="ontouchstart"in window,d=function(){r.off("touchmove"+f+" touchend"+f)},e="mfpFastClick",f="."+e;a.fn.mfpFastClick=function(e){return a(this).each(function(){var g=a(this),h;if(c){var i,j,k,l,m,n;g.on("touchstart"+f,function(a){l=!1,n=1,m=a.originalEvent?a.originalEvent.touches[0]:a.touches[0],j=m.clientX,k=m.clientY,r.on("touchmove"+f,function(a){m=a.originalEvent?a.originalEvent.touches:a.touches,n=m.length,m=m[0];if(Math.abs(m.clientX-j)>10||Math.abs(m.clientY-k)>10)l=!0,d()}).on("touchend"+f,function(a){d();if(l||n>1)return;h=!0,a.preventDefault(),clearTimeout(i),i=setTimeout(function(){h=!1},b),e()})})}g.on("click"+f,function(){h||e()})})},a.fn.destroyMfpFastClick=function(){a(this).off("touchstart"+f+" click"+f),c&&r.off("touchmove"+f+" touchend"+f)}}(),A()})
+$(document).ready(function() {
+    $('.gallery-images').magnificPopup({
+        delegate: 'figure:not(.slick-cloned) a',
+        type: 'image',
+        gallery: {
+            enabled: true
+        }
+    });
+});
