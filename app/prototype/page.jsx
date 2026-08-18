@@ -184,10 +184,10 @@ export default function ESLDemo() {
           <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-2xl overflow-hidden border border-blue-100 flex flex-col min-h-200 transform transition-all duration-300">
 
             {/* Simulated ESL Header */}
-            <header className="bg-blue-900 py-3 px-6 flex justify-between items-center sticky top-0 z-20">
-              <div className="flex items-center gap-2">
-                <div className="w-10 h-10 bg-white rounded flex items-center justify-center font-bold text-xl text-blue-900">E</div>
-                <div className="font-bold text-white text-base tracking-tight">ESL Federal Credit Union</div>
+            <header className="bg-blue-900 py-0 px-6 flex justify-between items-center sticky top-0 z-20">
+              <div className="flex items-center">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/esl-logo.png" alt="ESL Federal Credit Union" className="h-14 w-auto bg-white rounded-b px-3 pb-1.5 shadow-lg" />
               </div>
               <nav className="hidden md:flex gap-5 text-sm font-semibold text-white/80">
                 <span className="hover:text-white hover:border-b hover:border-orange-400 pb-0.5 cursor-pointer transition-colors">Personal</span>

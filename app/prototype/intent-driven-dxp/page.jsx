@@ -240,12 +240,12 @@ export default function IntentDrivenDemo() {
 
             {/* ESL Simulated Header */}
             <header className="bg-white border-b border-slate-100 py-4 px-6 flex justify-between items-center sticky top-0 z-20 shadow-sm">
-              <div 
-                className="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity"
+              <div
+                className="cursor-pointer hover:opacity-80 transition-opacity"
                 onClick={() => navigateTo('/')}
               >
-                <div className="w-10 h-10 bg-[#005596] rounded flex items-center justify-center text-white font-bold text-xl shadow-inner">E</div>
-                <div className="font-bold text-[#005596] text-xl tracking-tight hidden sm:block">ESL Federal Credit Union</div>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/esl-logo.png" alt="ESL Federal Credit Union" className="h-10 w-auto" />
               </div>
               <nav className="flex gap-4 md:gap-8 text-sm font-semibold text-slate-600">
                 <button onClick={() => navigateTo('/')} className={`hover:text-[#005596] transition-colors ${currentRoute === '/' ? 'text-[#005596]' : ''}`}>Home</button>
