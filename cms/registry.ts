@@ -8,9 +8,17 @@ import {
 import { initReactComponentRegistry } from '@optimizely/cms-sdk/react/server';
 import { requireEnv } from '@/lib/env';
 
+import BlankExperience from './BlankExperience';
 import BlankSection from './BlankSection';
 import Page, { PageContentType } from './Page';
 import RichText, { RichTextContentType } from './RichText';
+import PromoBannerBlock, { PromoBannerBlockContentType } from './PromoBannerBlock';
+import HeroBlock, { HeroBlockContentType } from './HeroBlock';
+import ShopByRoom, { ShopByRoomContentType } from './ShopByRoom';
+import ShopByCategory, { ShopByCategoryContentType } from './ShopByCategory';
+import ProductGrid, { ProductGridContentType } from './ProductGrid';
+import Breadcrumb, { BreadcrumbContentType } from './Breadcrumb';
+import PDPView, { PDPViewContentType } from './PDPView';
 
 /**
  * Single configuration + registration point for the Optimizely SDK.
@@ -48,6 +56,13 @@ export const registeredContentTypes = [
   PageContentType,
   // Blocks
   RichTextContentType,
+  PromoBannerBlockContentType,
+  HeroBlockContentType,
+  ShopByRoomContentType,
+  ShopByCategoryContentType,
+  ProductGridContentType,
+  BreadcrumbContentType,
+  PDPViewContentType,
 ];
 
 initContentTypeRegistry(registeredContentTypes);
@@ -56,9 +71,17 @@ initDisplayTemplateRegistry([]);
 
 initReactComponentRegistry({
   resolver: {
+    BlankExperience,
     BlankSection,
     Page,
     // Blocks (resolver key === content-type key)
     RichTextBlock: RichText,
+    PromoBannerBlock,
+    HeroBlock,
+    ShopByRoom,
+    ShopByCategory,
+    ProductGrid,
+    Breadcrumb,
+    PDPView,
   },
 });

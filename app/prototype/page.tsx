@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import ShopByRoom from '@/app/_components/custom/ShopByRoom';
 
 const LS = 'https://www.livingspaces.com/globalassets';
 const NAV = `${LS}/lp_blocks/2026/06/summern-nav-2026`;
@@ -88,24 +89,7 @@ export default function PrototypeHomePage() {
       </section>
 
       {/* Shop by Room */}
-      <section className="max-w-screen-xl mx-auto px-6 py-14">
-        <h2 className="font-display font-bold text-2xl text-ls-charcoal mb-6">Shop by Room</h2>
-        <div className="grid grid-cols-3 gap-4">
-          {ROOM_TILES.map((tile) => (
-            <Link key={tile.label} href={tile.href} className="group block relative aspect-[4/3] rounded-lg overflow-hidden bg-ls-light-gray">
-              <img
-                src={tile.img}
-                alt={tile.label}
-                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="absolute inset-0 bg-blue-950/40 group-hover:bg-blue-950/55 transition-colors" />
-              <div className="absolute inset-0 flex items-end p-5">
-                <span className="font-display font-bold text-xl text-white">{tile.label}</span>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
+      <ShopByRoom tiles={ROOM_TILES} />
 
       {/* Designer banner — Nate + Jeremiah */}
       <section className="bg-blue-900 text-white">

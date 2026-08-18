@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Breadcrumb from '@/app/_components/Breadcrumb';
 
 const LS = 'https://www.livingspaces.com/globalassets';
 const NAV = `${LS}/lp_blocks/2026/06/summern-nav-2026`;
@@ -74,14 +75,11 @@ const STARS = (r: string) =>
 export default function FurnitureFallback() {
   return (
     <main className="max-w-7xl mx-auto px-6 py-8">
-      {/* Breadcrumb */}
-      <nav className="flex gap-2 items-center text-sm text-ls-gray mb-6">
-        <Link href="/" className="hover:text-blue-700">Home</Link>
-        <span>/</span>
-        <Link href="/departments" className="hover:text-blue-700">All Departments</Link>
-        <span>/</span>
-        <span className="text-ls-charcoal font-medium">Furniture</span>
-      </nav>
+      <Breadcrumb crumbs={[
+        { label: 'Home', href: '/' },
+        { label: 'All Departments', href: '/departments' },
+        { label: 'Furniture' },
+      ]} />
 
       {/* Hero */}
       <section className="relative h-64 rounded-xl mb-12 flex items-center overflow-hidden">

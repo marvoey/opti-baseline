@@ -1,6 +1,8 @@
 'use client';
 
 import { useState } from 'react';
+import ProductGrid from '@/app/_components/custom/ProductGrid';
+import PDPView from '@/app/_components/custom/PDPView';
 
 const LS = 'https://www.livingspaces.com/globalassets';
 const NAV = `${LS}/lp_blocks/2026/06/summern-nav-2026`;
@@ -15,16 +17,16 @@ const ABERDEEN_BASE = `${PROD}/200000-299999/270000-279999/277000-277999/277100-
 
 function CMSBlock({ id, label, children }: { id: string; label: string; children: React.ReactNode }) {
   return (
-    <div className="relative border-2 border-dashed border-blue-400 rounded-lg my-5 p-4 bg-blue-50/60">
-      <div className="absolute -top-3 left-4 flex items-center gap-2">
+    <div className="border-2 border-dashed border-blue-400 rounded-lg my-5 bg-blue-50/60">
+      <div className="flex items-center gap-2 px-4 pt-3 pb-2 border-b border-dashed border-blue-300">
         <span className="bg-blue-700 text-white text-xs font-bold px-2.5 py-1 rounded shadow-sm">
           CMS Block {id}
         </span>
-        <span className="bg-white border border-blue-300 text-blue-700 text-xs font-semibold px-2 py-1 rounded shadow-sm">
+        <span className="text-blue-700 text-xs font-semibold">
           {label}
         </span>
       </div>
-      <div className="mt-2">{children}</div>
+      <div className="p-4">{children}</div>
     </div>
   );
 }
@@ -231,170 +233,12 @@ function PLPView({ navigate }: { navigate: (r: string) => void }) {
         </div>
       </CMSBlock>
 
-      <div className="flex gap-8 mt-8">
-        {/* Filters */}
-        <aside className="w-56 shrink-0">
-          <h3 className="font-display font-bold text-ls-charcoal mb-4 pb-2 border-b border-ls-border">Filter By</h3>
-          <div className="space-y-2.5 text-sm text-ls-charcoal">
-            {['Writing Desks', 'Standing Desks', 'Executive Desks', 'L-Shaped Desks'].map((f) => (
-              <label key={f} className="flex items-center gap-2 cursor-pointer">
-                <input type="checkbox" className="rounded border-ls-border" />
-                {f}
-              </label>
-            ))}
-          </div>
-        </aside>
-
-        {/* Grid */}
-        <div className="flex-1">
-          <div className="flex justify-between items-center mb-6">
-            <h1 className="font-display font-bold text-3xl text-ls-charcoal">Office Desks</h1>
-            <span className="text-sm text-ls-gray">Showing 42 results</span>
-          </div>
-          <div className="grid grid-cols-3 gap-5">
-            {DESK_PRODUCTS.map((p) => (
-              <div
-                key={p.name}
-                onClick={() => p.route && navigate(p.route)}
-                className={`group flex flex-col bg-white border rounded-lg overflow-hidden transition-shadow ${
-                  p.route
-                    ? 'border-blue-400 ring-1 ring-blue-300 cursor-pointer hover:shadow-md'
-                    : 'border-ls-border cursor-default'
-                }`}
-              >
-                <div className="aspect-square overflow-hidden bg-ls-light-gray relative">
-                  <img
-                    src={p.img}
-                    alt={p.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  {p.route && (
-                    <span className="absolute top-2 left-2 bg-blue-700 text-white text-xs font-bold px-2 py-0.5 rounded">
-                      Featured
-                    </span>
-                  )}
-                </div>
-                <div className="p-4">
-                  <p className="text-ls-gray text-xs mb-0.5">{p.brand}</p>
-                  <p className="text-ls-charcoal text-sm font-semibold leading-snug mb-1 group-hover:text-blue-700 transition-colors">
-                    {p.name}
-                  </p>
-                  <p className="font-bold text-ls-charcoal">{p.price}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+      <ProductGrid products={DESK_PRODUCTS} navigate={navigate} />
     </div>
   );
 }
 
 // ─── PDP View (Voyage Writing Desk) ──────────────────────────────────────────
-
-function PDPView({ navigate }: { navigate: (r: string) => void }) {
-  return (
-    <div>
-      <Breadcrumb
-        navigate={navigate}
-        crumbs={[
-          { label: 'Home', route: '/' },
-          { label: 'Home Office', route: '/home-office' },
-          { label: 'Office Desks', route: '/office-desks' },
-          { label: 'Voyage 60" Writing Desk' },
-        ]}
-      />
-
-      <div className="grid grid-cols-2 gap-12 mb-16">
-        {/* Images */}
-        <div className="space-y-3">
-          <div className="aspect-4/3 rounded-xl overflow-hidden bg-ls-light-gray">
-            <img
-              src={`${VOYAGE_BASE}_signature_01.jpg`}
-              alt="Voyage Writing Desk"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div className="grid grid-cols-3 gap-3">
-            {['_room_01', '_room_02', '_detail_01'].map((suffix) => (
-              <div key={suffix} className="aspect-square rounded-lg overflow-hidden bg-ls-light-gray border border-ls-border">
-                <img
-                  src={`${VOYAGE_BASE}${suffix}.jpg`}
-                  alt="Voyage desk view"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Details */}
-        <div>
-          <p className="text-ls-gray text-xs font-semibold uppercase tracking-widest mb-2">Nate + Jeremiah For Living Spaces</p>
-          <h1 className="font-display font-bold text-4xl text-ls-charcoal mb-4 leading-tight">
-            Voyage Natural 60&quot; Writing Desk
-          </h1>
-
-          <div className="flex items-baseline gap-4 mb-2">
-            <span className="font-display font-bold text-3xl text-ls-charcoal">$695.00</span>
-            <span className="text-sm text-green-700 font-semibold">In Stock</span>
-          </div>
-          <p className="text-ls-gray text-sm mb-6">★★★★★ 4.8 (246 reviews)</p>
-
-          <p className="text-ls-gray leading-relaxed mb-8">
-            Crafted from solid oak with a light, natural finish, the Voyage writing desk brings warmth and
-            sophisticated geometry to your home office. Features two soft-close drawers for seamless storage.
-          </p>
-
-          <button className="w-full bg-blue-900 text-white font-bold py-4 text-lg rounded-full hover:bg-blue-800 transition-colors mb-4">
-            Add to Cart
-          </button>
-
-          <CMSBlock id="101" label="RichContentBlock — PDP Disclaimer (managed by Merchandising)">
-            <div className="flex items-start gap-3 p-4 bg-amber-50 text-amber-900 border border-amber-200 rounded-lg text-sm">
-              <svg className="w-5 h-5 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <div>
-                <strong>Assembly Required.</strong> Ships in two separate boxes. Please allow 1–2 hours for setup.
-              </div>
-            </div>
-          </CMSBlock>
-
-          <div className="border-t border-ls-border mt-6 pt-6">
-            <h3 className="font-display font-bold text-ls-charcoal mb-3">Specifications</h3>
-            <ul className="text-sm space-y-2 text-ls-gray">
-              <li><span className="text-ls-charcoal font-semibold">Dimensions:</span> 60&quot;W × 28&quot;D × 30&quot;H</li>
-              <li><span className="text-ls-charcoal font-semibold">Material:</span> Solid Oak, Veneer</li>
-              <li><span className="text-ls-charcoal font-semibold">Weight:</span> 95 lbs</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      {/* CMS Enrichment */}
-      <CMSBlock id="102" label="RichContentBlock — PDP Enrichment (managed by SEO team)">
-        <div className="bg-blue-950 text-white rounded-xl overflow-hidden grid grid-cols-2">
-          <div className="p-10 flex flex-col justify-center">
-            <p className="text-blue-200 text-xs font-semibold uppercase tracking-widest mb-3">Designer Tip</p>
-            <h2 className="font-display font-bold text-3xl mb-4 leading-tight">Styled By<br />Jeremiah Brent</h2>
-            <p className="text-white/70 leading-relaxed italic mb-0">
-              &ldquo;Keep the surface minimal. Pair it with a highly textured chair — boucle or leather — to
-              contrast the sleek oak lines.&rdquo;
-            </p>
-          </div>
-          <div className="aspect-video overflow-hidden">
-            <img
-              src={`${LS}/homepage/2025/10/2501006_nj_hero_d.jpg`}
-              alt="Nate + Jeremiah styling"
-              className="w-full h-full object-cover"
-            />
-          </div>
-        </div>
-      </CMSBlock>
-    </div>
-  );
-}
 
 // ─── Demo Navigation Bar ──────────────────────────────────────────────────────
 

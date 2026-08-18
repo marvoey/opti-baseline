@@ -17,6 +17,7 @@
     "cms:push:all": "node --env-file=.env scripts/cms-push.mjs --all",
     "schema:pull": "node scripts/fetch-openapi.mjs",
     "seed:hero": "node scripts/seed-atomic-hero.mjs",
+    "cms:push:one": "node --env-file=.env scripts/cms-push-one.mjs",
     "cms:check": "node --env-file=.env scripts/check-content-types.mjs"
   },
   "dependencies": {
