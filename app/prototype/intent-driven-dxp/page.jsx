@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { 
   LayoutTemplate, Database, Sparkles, Monitor, Smartphone, 
   ChevronRight, Activity, User, Target, MousePointerClick, Zap 
@@ -13,7 +13,7 @@ export default function IntentDrivenDemo() {
   // Simulated User State (Data Layer)
   const [userIntent, setUserIntent] = useState('unknown'); // unknown, mortgage, wealth
   const [eventStream, setEventStream] = useState([
-    { id: 1, time: new Date().toLocaleTimeString(), action: 'First Visit', detail: 'Landed on Homepage' }
+    { id: 1, time: '', action: 'First Visit', detail: 'Landed on Homepage' }
   ]);
 
   // Next.js Frontend State (Right Panel)
