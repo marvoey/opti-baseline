@@ -245,7 +245,7 @@ export default function PersonalizedHeroDemoWidget({ blocks }: { blocks: Persona
                         <div className={`absolute inset-0 ${styles.overlay}`} />
                       </>
                     )}
-                    <div className="relative z-10">
+                    <div className="relative z-10 max-w-xl mx-auto w-full">
                       {userIntent !== 'unknown' && (
                         <span className={`inline-flex items-center gap-1 ${styles.badge} backdrop-blur-sm px-3 py-1 rounded-full text-[10px] font-bold mb-4 animate-pulse`}>
                           <Sparkles size={10} /> Personalized for you
@@ -263,7 +263,8 @@ export default function PersonalizedHeroDemoWidget({ blocks }: { blocks: Persona
                     </div>
                   </div>
 
-                  <div className="p-8 text-center flex-1">
+                  <div className="flex-1 flex flex-col items-center py-8">
+                    <div className="w-full max-w-xl px-8 py-8 text-center">
                     <p className="text-xs text-slate-500 mb-5">Click a section to simulate user behaviour.</p>
                     <div className="flex justify-center gap-4">
                       <button onClick={() => navigateTo('/mortgage-calculator')} className="flex flex-col items-center p-5 border border-slate-200 rounded-xl hover:border-green-400 hover:shadow-md transition-all group">
@@ -274,6 +275,7 @@ export default function PersonalizedHeroDemoWidget({ blocks }: { blocks: Persona
                         <div className="w-10 h-10 bg-slate-100 group-hover:bg-purple-100 rounded-full flex items-center justify-center mb-2.5 transition-colors text-xl">📈</div>
                         <span className="text-xs font-semibold text-slate-700 group-hover:text-purple-700">Wealth Planning</span>
                       </button>
+                    </div>
                     </div>
                   </div>
                 </div>
