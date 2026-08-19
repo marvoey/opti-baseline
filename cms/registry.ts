@@ -21,6 +21,11 @@ import ExistingLoanCalculator, { ExistingLoanCalculatorContentType, ExistingLoan
 import PayoffCalculator, { PayoffCalculatorContentType, PayoffCalculatorDisplayTemplate } from './PayoffCalculator';
 import PersonalizedHero, { PersonalizedHeroContentType, PersonalizedHeroDisplayTemplate } from './PersonalizedHero';
 import Experiment, { ExperimentContentType, ExperimentDisplayTemplate } from './Experiment';
+import BrandColorPalette, { BrandColorPaletteContentType, BrandColorPaletteDisplayTemplate } from './BrandColorPalette';
+import BrandTypography, { BrandTypographyContentType, BrandTypographyDisplayTemplate } from './BrandTypography';
+import BrandButtons, { BrandButtonsContentType, BrandButtonsDisplayTemplate } from './BrandButtons';
+import BrandLogos, { BrandLogosContentType, BrandLogosDisplayTemplate } from './BrandLogos';
+import SharedContent, { SharedContentContentType, SharedContentDisplayTemplate } from './SharedContent';
 import { SectionRowDisplayTemplate } from './SectionRow';
 import { SectionColumnDisplayTemplate } from './SectionColumn';
 
@@ -62,6 +67,10 @@ export const registeredContentTypes = [
   PageContentType,
   // Blocks
   AllArticlesContentType,
+  BrandColorPaletteContentType,
+  BrandTypographyContentType,
+  BrandButtonsContentType,
+  BrandLogosContentType,
   ExistingLoanCalculatorContentType,
   ExperimentContentType,
   FeaturedArticlesContentType,
@@ -70,11 +79,12 @@ export const registeredContentTypes = [
   PersonalizedHeroContentType,
   LoginFormContentType,
   RichTextContentType,
+  SharedContentContentType,
 ];
 
 initContentTypeRegistry(registeredContentTypes);
 
-initDisplayTemplateRegistry([AllArticlesDisplayTemplate, ExperimentDisplayTemplate, ExistingLoanCalculatorDisplayTemplate, FeaturedArticlesDisplayTemplate, LoginFormDisplayTemplate, PayoffCalculatorDisplayTemplate, PersonalizedHeroDisplayTemplate, SectionRowDisplayTemplate, SectionColumnDisplayTemplate]);
+initDisplayTemplateRegistry([AllArticlesDisplayTemplate, BrandColorPaletteDisplayTemplate, BrandTypographyDisplayTemplate, BrandButtonsDisplayTemplate, BrandLogosDisplayTemplate, ExperimentDisplayTemplate, ExistingLoanCalculatorDisplayTemplate, FeaturedArticlesDisplayTemplate, LoginFormDisplayTemplate, PayoffCalculatorDisplayTemplate, PersonalizedHeroDisplayTemplate, SharedContentDisplayTemplate, SectionRowDisplayTemplate, SectionColumnDisplayTemplate]);
 
 initReactComponentRegistry({
   resolver: {
@@ -86,6 +96,10 @@ initReactComponentRegistry({
     Page,
     // Blocks (resolver key === content-type key)
     AllArticles,
+    BrandColorPalette,
+    BrandTypography,
+    BrandButtons,
+    BrandLogos,
     Experiment,
     ExistingLoanCalculator,
     FeaturedArticles,
@@ -94,5 +108,6 @@ initReactComponentRegistry({
     PersonalizedHero,
     LoginForm,
     RichTextBlock: RichText,
+    SharedContent,
   },
 });
