@@ -72,6 +72,28 @@ export const HeroBlockContentType = contentType({
       isRequired: false,
       sortOrder: 80,
     },
+    Audiences: {
+      type: 'string',
+      format: 'selectOne',
+      displayName: 'Target Audience',
+      description: 'ODP audience segment this hero variant is targeted at. Used for personalization rules.',
+      isRequired: false,
+      sortOrder: 90,
+      enum: [
+        { value: '1',  displayName: 'First-Time Homebuyers'    },
+        { value: '2',  displayName: 'Homeowners (Refinancing)'  },
+        { value: '3',  displayName: 'Auto Buyers'               },
+        { value: '4',  displayName: 'Young Professionals'       },
+        { value: '5',  displayName: 'Families'                  },
+        { value: '6',  displayName: 'Near Retirement (50+)'     },
+        { value: '7',  displayName: 'Retirees'                  },
+        { value: '8',  displayName: 'Small Business Owners'     },
+        { value: '9',  displayName: 'Students'                  },
+        { value: '10', displayName: 'Military & Veterans'       },
+        { value: '11', displayName: 'Wealth Seekers'            },
+        { value: '12', displayName: 'New Members'               },
+      ],
+    },
   },
 });
 

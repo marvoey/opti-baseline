@@ -8,6 +8,9 @@ import {
 import { initReactComponentRegistry } from '@optimizely/cms-sdk/react/server';
 import { requireEnv } from '@/lib/env';
 
+import AllArticles, { AllArticlesContentType, AllArticlesDisplayTemplate } from './AllArticles';
+import ArticlePage, { ArticlePageContentType } from './ArticlePage';
+import FeaturedArticles, { FeaturedArticlesContentType, FeaturedArticlesDisplayTemplate } from './FeaturedArticles';
 import ExperiencePage, { ExperiencePageContentType } from './ExperiencePage';
 import BlankSection from './BlankSection';
 import Page, { PageContentType } from './Page';
@@ -16,6 +19,7 @@ import HeroBlock, { HeroBlockContentType } from './HeroBlock';
 import LoginForm, { LoginFormContentType, LoginFormDisplayTemplate } from './LoginForm';
 import ExistingLoanCalculator, { ExistingLoanCalculatorContentType, ExistingLoanCalculatorDisplayTemplate } from './ExistingLoanCalculator';
 import PayoffCalculator, { PayoffCalculatorContentType, PayoffCalculatorDisplayTemplate } from './PayoffCalculator';
+import PersonalizedHero, { PersonalizedHeroContentType, PersonalizedHeroDisplayTemplate } from './PersonalizedHero';
 import { SectionRowDisplayTemplate } from './SectionRow';
 import { SectionColumnDisplayTemplate } from './SectionColumn';
 
@@ -50,33 +54,41 @@ config({
  */
 export const registeredContentTypes = [
   // SDK-native types the CMS can send (e.g. during preview).
+  ArticlePageContentType,
   BlankExperienceContentType,
   BlankSectionContentType,
   ExperiencePageContentType,
   PageContentType,
   // Blocks
+  AllArticlesContentType,
   ExistingLoanCalculatorContentType,
+  FeaturedArticlesContentType,
   HeroBlockContentType,
   PayoffCalculatorContentType,
+  PersonalizedHeroContentType,
   LoginFormContentType,
   RichTextContentType,
 ];
 
 initContentTypeRegistry(registeredContentTypes);
 
-initDisplayTemplateRegistry([ExistingLoanCalculatorDisplayTemplate, LoginFormDisplayTemplate, PayoffCalculatorDisplayTemplate, SectionRowDisplayTemplate, SectionColumnDisplayTemplate]);
+initDisplayTemplateRegistry([AllArticlesDisplayTemplate, ExistingLoanCalculatorDisplayTemplate, FeaturedArticlesDisplayTemplate, LoginFormDisplayTemplate, PayoffCalculatorDisplayTemplate, PersonalizedHeroDisplayTemplate, SectionRowDisplayTemplate, SectionColumnDisplayTemplate]);
 
 initReactComponentRegistry({
   resolver: {
     // SDK-native experience type — same composition rendering as ExperiencePage.
+    ArticlePage,
     BlankExperience: ExperiencePage,
     BlankSection,
     ExperiencePage,
     Page,
     // Blocks (resolver key === content-type key)
+    AllArticles,
     ExistingLoanCalculator,
+    FeaturedArticles,
     HeroBlock,
     PayoffCalculator,
+    PersonalizedHero,
     LoginForm,
     RichTextBlock: RichText,
   },
