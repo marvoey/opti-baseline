@@ -1,5 +1,5 @@
 import { contentType, displayTemplate, type ContentProps } from '@optimizely/cms-sdk';
-import { getPreviewUtils } from '@optimizely/cms-sdk/react/server';
+import { OptimizelyComponent, getPreviewUtils } from '@optimizely/cms-sdk/react/server';
 
 export const SharedContentContentType = contentType({
   key: 'SharedContent',
@@ -31,12 +31,13 @@ type Props = { content: ContentProps<typeof SharedContentContentType> };
 export default function SharedContent({ content }: Props) {
   const { pa } = getPreviewUtils(content);
   const block = (content as { __composition?: { key: string } }).__composition;
-  const ref = content.SharedContent_ContentReference as { name?: string } | undefined;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const ref = content.SharedContent_ContentReference as any;
 
   return (
     <div {...pa(block)} {...pa('SharedContent_ContentReference')}>
-      {ref?.name ? (
-        <span className="text-sm text-slate-500 italic">{ref.name}</span>
+      {ref?.__typename ? (
+        <OptimizelyComponent content={ref} />
       ) : (
         <p className="border border-dashed border-gray-300 rounded p-4 text-sm text-gray-400 text-center">
           No content reference selected

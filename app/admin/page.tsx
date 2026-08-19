@@ -133,8 +133,18 @@ export default async function AdminPage({ searchParams }: Props) {
 function PageHeader({ subtitle }: { subtitle: React.ReactNode }) {
   return (
     <header className="mb-10 border-b border-slate-200 pb-6">
-      <h1 className="text-3xl font-semibold tracking-tight text-slate-900">Content Types</h1>
-      <p className="mt-2 text-slate-600">{subtitle}</p>
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <h1 className="text-3xl font-semibold tracking-tight text-slate-900">Content Types</h1>
+          <p className="mt-2 text-slate-600">{subtitle}</p>
+        </div>
+        <a
+          href="/admin/content"
+          className="shrink-0 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-600 hover:bg-slate-50 transition-colors whitespace-nowrap"
+        >
+          Content Items →
+        </a>
+      </div>
     </header>
   );
 }
