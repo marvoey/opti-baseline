@@ -20,6 +20,7 @@ import LoginForm, { LoginFormContentType, LoginFormDisplayTemplate } from './Log
 import ExistingLoanCalculator, { ExistingLoanCalculatorContentType, ExistingLoanCalculatorDisplayTemplate } from './ExistingLoanCalculator';
 import PayoffCalculator, { PayoffCalculatorContentType, PayoffCalculatorDisplayTemplate } from './PayoffCalculator';
 import PersonalizedHero, { PersonalizedHeroContentType, PersonalizedHeroDisplayTemplate } from './PersonalizedHero';
+import Experiment, { ExperimentContentType, ExperimentDisplayTemplate } from './Experiment';
 import { SectionRowDisplayTemplate } from './SectionRow';
 import { SectionColumnDisplayTemplate } from './SectionColumn';
 
@@ -62,6 +63,7 @@ export const registeredContentTypes = [
   // Blocks
   AllArticlesContentType,
   ExistingLoanCalculatorContentType,
+  ExperimentContentType,
   FeaturedArticlesContentType,
   HeroBlockContentType,
   PayoffCalculatorContentType,
@@ -72,7 +74,7 @@ export const registeredContentTypes = [
 
 initContentTypeRegistry(registeredContentTypes);
 
-initDisplayTemplateRegistry([AllArticlesDisplayTemplate, ExistingLoanCalculatorDisplayTemplate, FeaturedArticlesDisplayTemplate, LoginFormDisplayTemplate, PayoffCalculatorDisplayTemplate, PersonalizedHeroDisplayTemplate, SectionRowDisplayTemplate, SectionColumnDisplayTemplate]);
+initDisplayTemplateRegistry([AllArticlesDisplayTemplate, ExperimentDisplayTemplate, ExistingLoanCalculatorDisplayTemplate, FeaturedArticlesDisplayTemplate, LoginFormDisplayTemplate, PayoffCalculatorDisplayTemplate, PersonalizedHeroDisplayTemplate, SectionRowDisplayTemplate, SectionColumnDisplayTemplate]);
 
 initReactComponentRegistry({
   resolver: {
@@ -84,6 +86,7 @@ initReactComponentRegistry({
     Page,
     // Blocks (resolver key === content-type key)
     AllArticles,
+    Experiment,
     ExistingLoanCalculator,
     FeaturedArticles,
     HeroBlock,
