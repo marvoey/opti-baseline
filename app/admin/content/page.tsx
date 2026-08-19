@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Suspense } from 'react';
 import { registeredContentTypes } from '@/cms/registry';
-import { fetchContent } from './_lib/fetchContent';
+import { fetchContent, type ContentSearchParams } from './_lib/fetchContent';
 import ContentSearchClient from './_components/ContentSearchClient';
 
 export const metadata: Metadata = {
@@ -31,7 +31,7 @@ export default async function ContentSearchPage({ searchParams }: Props) {
     contentType: params.contentType,
     locale:      params.locale,
     status:      params.status,
-    sort:        params.sort as Parameters<typeof fetchContent>[0]['sort'],
+    sort:        params.sort as ContentSearchParams['sort'],
     page,
   });
 
