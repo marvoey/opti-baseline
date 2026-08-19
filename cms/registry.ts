@@ -12,10 +12,8 @@ import ExperiencePage, { ExperiencePageContentType } from './ExperiencePage';
 import Page, { PageContentType } from './Page';
 import RichText, { RichTextContentType } from './RichText';
 import MediaBlock, { MediaBlockContentType } from './MediaBlock';
-import ActionBlock, { ActionBlockContentType } from './ActionBlock';
 import { NavigationNodeContentType } from './NavigationNode';
 import WayfindingBlock, { WayfindingBlockContentType } from './WayfindingBlock';
-import CardBlock, { CardBlockContentType } from './CardBlock';
 import PrgvDemo, { PrgvDemoContentType } from './PrgvDemo';
 import PrgvDemov2, { PrgvDemov2ContentType } from './PrgvDemov2';
 import PrgvCorePrinciple, { PrgvCorePrincipleContentType } from './PrgvCorePrinciple';
@@ -30,6 +28,8 @@ import PrgvCategory, { PrgvCategoryContentType } from './PrgvCategory';
 import PrgvComplianceDisclosureMatrix, { PrgvComplianceDisclosureMatrixContentType } from './PrgvComplianceDisclosureMatrix';
 import PrgvGovernanceOperationalPlan, { PrgvGovernanceOperationalPlanContentType } from './PrgvGovernanceOperationalPlan';
 import PrgvKnowledgeArticle, { PrgvKnowledgeArticleContentType } from './PrgvKnowledgeArticle';
+import StepperBlock, { StepperBlockContentType } from './StepperBlock';
+import { StepItemBlockContentType } from './StepItemBlock';
 
 /**
  * Single configuration + registration point for the Optimizely SDK.
@@ -68,10 +68,8 @@ export const registeredContentTypes = [
   // Blocks
   RichTextContentType,
   MediaBlockContentType,
-  ActionBlockContentType,
   NavigationNodeContentType,
   WayfindingBlockContentType,
-  CardBlockContentType,
   // Progressive experience types
   PrgvDemoContentType,
   PrgvDemov2ContentType,
@@ -90,6 +88,9 @@ export const registeredContentTypes = [
   PrgvComplianceDisclosureMatrixContentType,
   PrgvGovernanceOperationalPlanContentType,
   PrgvKnowledgeArticleContentType,
+  // Stepper
+  StepperBlockContentType,
+  StepItemBlockContentType,
 ];
 
 initContentTypeRegistry(registeredContentTypes);
@@ -104,9 +105,7 @@ initReactComponentRegistry({
     // Blocks (resolver key === content-type key)
     ProseBlock: RichText,
     MediaBlock,
-    ActionBlock,
     WayfindingBlock,
-    CardBlock,
     // Progressive experience types
     PrgvDemo,
     PrgvDemov2,
@@ -125,6 +124,8 @@ initReactComponentRegistry({
     PrgvComplianceDisclosureMatrix,
     PrgvGovernanceOperationalPlan,
     PrgvKnowledgeArticle,
+    // Stepper
+    StepperBlock,
   },
 });
 

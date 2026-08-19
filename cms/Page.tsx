@@ -3,9 +3,7 @@ import { OptimizelyComponent, getPreviewUtils } from '@optimizely/cms-sdk/react/
 
 import { RichTextContentType } from './RichText';
 import { MediaBlockContentType } from './MediaBlock';
-import { ActionBlockContentType } from './ActionBlock';
 import { WayfindingBlockContentType } from './WayfindingBlock';
-import { CardBlockContentType } from './CardBlock';
 
 /**
  * Page — a fixed-layout Page (`_page`). The body is a `Content` area: an ordered
@@ -35,9 +33,7 @@ export const PageContentType = contentType({
         allowedTypes: [
           RichTextContentType,
           MediaBlockContentType,
-          ActionBlockContentType,
           WayfindingBlockContentType,
-          CardBlockContentType,
         ],
         restrictedTypes: [],
       },
