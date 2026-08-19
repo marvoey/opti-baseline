@@ -14,6 +14,10 @@ import Page, { PageContentType } from './Page';
 import RichText, { RichTextContentType } from './RichText';
 import HeroBlock, { HeroBlockContentType } from './HeroBlock';
 import LoginForm, { LoginFormContentType, LoginFormDisplayTemplate } from './LoginForm';
+import ExistingLoanCalculator, { ExistingLoanCalculatorContentType, ExistingLoanCalculatorDisplayTemplate } from './ExistingLoanCalculator';
+import PayoffCalculator, { PayoffCalculatorContentType, PayoffCalculatorDisplayTemplate } from './PayoffCalculator';
+import { SectionRowDisplayTemplate } from './SectionRow';
+import { SectionColumnDisplayTemplate } from './SectionColumn';
 
 /**
  * Single configuration + registration point for the Optimizely SDK.
@@ -51,14 +55,16 @@ export const registeredContentTypes = [
   ExperiencePageContentType,
   PageContentType,
   // Blocks
+  ExistingLoanCalculatorContentType,
   HeroBlockContentType,
+  PayoffCalculatorContentType,
   LoginFormContentType,
   RichTextContentType,
 ];
 
 initContentTypeRegistry(registeredContentTypes);
 
-initDisplayTemplateRegistry([LoginFormDisplayTemplate]);
+initDisplayTemplateRegistry([ExistingLoanCalculatorDisplayTemplate, LoginFormDisplayTemplate, PayoffCalculatorDisplayTemplate, SectionRowDisplayTemplate, SectionColumnDisplayTemplate]);
 
 initReactComponentRegistry({
   resolver: {
@@ -68,7 +74,9 @@ initReactComponentRegistry({
     ExperiencePage,
     Page,
     // Blocks (resolver key === content-type key)
+    ExistingLoanCalculator,
     HeroBlock,
+    PayoffCalculator,
     LoginForm,
     RichTextBlock: RichText,
   },

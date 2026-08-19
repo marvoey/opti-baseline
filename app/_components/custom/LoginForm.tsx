@@ -46,26 +46,28 @@ export function LoginForm() {
 
         {(activeTab === 'personal' || activeTab === 'business') && (
           <>
-            {/* Username */}
-            <input
-              type="text"
-              placeholder={activeTab === 'personal' ? 'Member # / User ID' : 'User ID'}
-              className="w-full px-3 py-2 border border-gray-300 bg-gray-50 text-sm placeholder:text-gray-400 focus:outline-none focus:border-blue-800"
-              autoComplete="username"
-            />
-
-            {/* Password + Login */}
-            <div className="flex gap-2">
+            <form onSubmit={e => e.preventDefault()} autoComplete="on">
+              {/* Username */}
               <input
-                type="password"
-                placeholder="Password"
-                className="flex-1 min-w-0 px-3 py-2 border border-gray-300 bg-gray-50 text-sm placeholder:text-gray-400 focus:outline-none focus:border-blue-800"
-                autoComplete="current-password"
+                type="text"
+                placeholder={activeTab === 'personal' ? 'Member # / User ID' : 'User ID'}
+                className="w-full px-3 py-2 border border-gray-300 bg-gray-50 text-sm placeholder:text-gray-400 focus:outline-none focus:border-blue-800"
+                autoComplete="username"
               />
-              <button className="bg-blue-800 hover:bg-blue-900 text-white font-semibold text-sm px-4 py-2 transition-colors">
-                Login
-              </button>
-            </div>
+
+              {/* Password + Login */}
+              <div className="flex gap-2 mt-2" suppressHydrationWarning>
+                <input
+                  type="password"
+                  placeholder="Password"
+                  className="flex-1 min-w-0 px-3 py-2 border border-gray-300 bg-gray-50 text-sm placeholder:text-gray-400 focus:outline-none focus:border-blue-800"
+                  autoComplete="current-password"
+                />
+                <button type="submit" className="bg-blue-800 hover:bg-blue-900 text-white font-semibold text-sm px-4 py-2 transition-colors">
+                  Login
+                </button>
+              </div>
+            </form>
 
             {/* Helper links */}
             <div className="pt-1 text-xs text-blue-700 space-x-1">

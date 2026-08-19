@@ -7,6 +7,8 @@ const LINKS = [
   { label: 'Home',            href: '/' },
   { label: 'Interactive Demo',        href: '/prototype' },
   { label: 'Intent Driven DXP',        href: '/prototype/intent-driven-dxp'},
+  { label: 'Loan Calculator',          href: '/prototype/loan-calculator' },
+  { label: 'Payoff Calculator',        href: '/prototype/payoff-calculator' },
   // { label: 'Content Library', href: '/content-library' },
   { label: 'Admin',           href: '/admin' },
   { label: 'CMS',             href: '/cms-admin' },
