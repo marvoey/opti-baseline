@@ -12,8 +12,6 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const DATA_FILE = join(ROOT, 'app', '[locale]', 'kb-workspace', '_data', 'policies.json');
-const ROOT_CONTAINER_KEY = '43f936c99b234ea397b261c538ad07c9';
-
 // Map CopyType → CMS content type key
 const TYPE_MAP = {
   'Core Principle': 'PrgvCorePrinciple',
@@ -27,6 +25,7 @@ const args = process.argv.slice(2);
 const DRY_RUN = args.includes('--dry-run');
 const concurrencyArg = args.find(a => a.startsWith('--concurrency='));
 const CONCURRENCY = concurrencyArg ? parseInt(concurrencyArg.split('=')[1], 10) : 5;
+const containerArg = args.find(a => a.startsWith('--container='));
 
 // --- Env ---
 if (
@@ -42,6 +41,9 @@ if (
 
 const { OPTIMIZELY_CMS_CLIENT_ID, OPTIMIZELY_CMS_CLIENT_SECRET } = process.env;
 const GATEWAY = (process.env.OPTIMIZELY_CMS_API_URL || 'https://api.cms.optimizely.com').replace(/\/$/, '');
+const ROOT_CONTAINER_KEY = containerArg
+  ? containerArg.split('=')[1]
+  : (process.env.OPTIMIZELY_CMS_CONTAINER_KEY ?? '43f936c99b234ea397b261c538ad07c9');
 
 // --- Auth ---
 let _token = null;

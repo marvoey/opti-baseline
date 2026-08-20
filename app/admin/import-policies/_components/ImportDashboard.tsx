@@ -34,9 +34,9 @@ const TOPICS = [
 
 const CONCURRENCY = 5;
 
-type Props = { blocks: PolicyBlock[]; credentialsAvailable: boolean };
+type Props = { blocks: PolicyBlock[]; credentialsAvailable: boolean; containerOverrides?: Record<string, string> };
 
-export default function ImportDashboard({ blocks, credentialsAvailable }: Props) {
+export default function ImportDashboard({ blocks, credentialsAvailable, containerOverrides }: Props) {
   const [statuses, setStatuses] = useState<Record<number, BlockStatus>>({});
   const [log, setLog] = useState<LogEntry[]>([]);
   const [isImporting, setIsImporting] = useState(false);
@@ -94,7 +94,7 @@ export default function ImportDashboard({ blocks, credentialsAvailable }: Props)
         const block = blocks[i];
 
         setStatuses(prev => ({ ...prev, [i]: 'importing' }));
-        const result = await importPolicyBlock(block);
+        const result = await importPolicyBlock(block, containerOverrides);
         const status: BlockStatus =
           result.status === 'no-credentials' ? 'error' : result.status;
 

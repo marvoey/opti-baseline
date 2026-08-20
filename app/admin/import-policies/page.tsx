@@ -2,20 +2,24 @@ import type { Metadata } from 'next';
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import Link from 'next/link';
-import { checkCredentials } from './actions';
+import { checkCredentials, fetchFolderTree } from './actions';
 import type { PolicyBlock } from './actions';
-import ImportDashboard from './_components/ImportDashboard';
+import { CONTAINER_CONFIG } from './config';
+import ImportControls from './_components/ImportControls';
 
 export const metadata: Metadata = { title: 'Import Policies · Admin' };
 export const dynamic = 'force-dynamic';
 
 export default async function ImportPoliciesPage() {
-  const [raw, credentialsAvailable] = await Promise.all([
-    readFile(
-      join(process.cwd(), 'app', '[locale]', 'kb-workspace', '_data', 'policies.json'),
-      'utf8',
-    ),
-    checkCredentials(),
+  const [[raw, credentialsAvailable], { folders: allFolders, error: folderError }] = await Promise.all([
+    Promise.all([
+      readFile(
+        join(process.cwd(), 'app', '[locale]', 'kb-workspace', '_data', 'policies.json'),
+        'utf8',
+      ),
+      checkCredentials(),
+    ]),
+    fetchFolderTree(),
   ]);
 
   const { blocks } = JSON.parse(raw) as { blocks: PolicyBlock[] };
@@ -55,7 +59,18 @@ export default async function ImportPoliciesPage() {
         </div>
       )}
 
-      <ImportDashboard blocks={blocks} credentialsAvailable={credentialsAvailable} />
+      {folderError && (
+        <div className="mb-6 rounded-2xl border border-red-200 bg-red-50 px-5 py-4 text-sm text-red-700 font-mono break-all">
+          Folder tree error: {folderError}
+        </div>
+      )}
+
+      <ImportControls
+        blocks={blocks}
+        credentialsAvailable={credentialsAvailable}
+        config={CONTAINER_CONFIG}
+        allFolders={allFolders}
+      />
     </main>
   );
 }

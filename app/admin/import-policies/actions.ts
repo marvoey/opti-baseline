@@ -2,20 +2,15 @@
 
 const DEFAULT_GATEWAY = 'https://api.cms.optimizely.com';
 
-const TYPE_MAP: Record<string, string> = {
-  'Core Principle': 'PrgvCorePrinciple',
-  'Jurisdictional Override': 'PrgvJurisdictionalOverride',
-  'Statutory Disclosure': 'PrgvStatutoryDisclosure',
-  'Procedural Safeguard': 'PrgvProceduralSafeguard',
-};
+import { CONTAINER_CONFIG } from './config';
 
-// Each CopyType routes to its dedicated subfolder under /SysSiteAssets/policies/
-const CONTAINER_MAP: Record<string, string> = {
-  'Core Principle': '0d0b8481337c4a65acbd860ef00f3fee',
-  'Jurisdictional Override': 'a6fb9dbbe05144d4b6c7d8609f20d810',
-  'Statutory Disclosure': '03692842eee843ecbe36611ab46f2174',
-  'Procedural Safeguard': 'a09729113d824a949acb9fe7c564d597',
-};
+const TYPE_MAP: Record<string, string> = Object.fromEntries(
+  CONTAINER_CONFIG.map(c => [c.copyType, c.contentType]),
+);
+
+const CONTAINER_MAP: Record<string, string> = Object.fromEntries(
+  CONTAINER_CONFIG.map(c => [c.copyType, c.key]),
+);
 
 export type PolicyBlock = {
   BlockType: string;
@@ -182,6 +177,52 @@ async function publishExistingDraft(
   }
 }
 
+export type FolderInfo = {
+  key: string;
+  displayName: string;
+  routeSegment: string;
+  contentType: string;
+  parentKey?: string;
+};
+
+export async function resolveFolderInfo(key: string): Promise<FolderInfo | null> {
+  try {
+    const token = await getToken();
+    const res = await fetch(`${apiBase()}/v1/content/${key}`, {
+      headers: { authorization: `Bearer ${token}` },
+      cache: 'no-store',
+    });
+    if (!res.ok) return null;
+    const data = (await res.json()) as { items?: FolderInfo[] };
+    const item = data.items?.[0];
+    if (!item) return null;
+    return { key: item.key, displayName: item.displayName, routeSegment: item.routeSegment, contentType: item.contentType };
+  } catch {
+    return null;
+  }
+}
+
+export async function fetchFolderTree(): Promise<{ folders: FolderInfo[]; error: string | null }> {
+  try {
+    const { fetchSiteFolder } = await import('@/lib/cms/fetchSiteFolders');
+    const { siteOrigin } = await import('@/lib/siteHost');
+    const base = (await siteOrigin()) ?? '';
+    const result = await fetchSiteFolder(base);
+    if (!result.ok) return { folders: [], error: result.error };
+
+    function flatten(folder: import('@/lib/cms/fetchSiteFolders').FolderWithChildren, parentKey?: string): FolderInfo[] {
+      return [
+        { key: folder.key, displayName: folder.displayName, routeSegment: '', contentType: 'SysContentFolder', parentKey },
+        ...folder.children.flatMap(child => flatten(child, folder.key)),
+      ];
+    }
+
+    return { folders: flatten(result.folder), error: null };
+  } catch (err) {
+    return { folders: [], error: err instanceof Error ? err.message : String(err) };
+  }
+}
+
 export async function checkCredentials(): Promise<boolean> {
   return !!(
     process.env.OPTIMIZELY_CMS_CLIENT_ID?.trim() &&
@@ -189,7 +230,10 @@ export async function checkCredentials(): Promise<boolean> {
   );
 }
 
-export async function importPolicyBlock(block: PolicyBlock): Promise<ImportResult> {
+export async function importPolicyBlock(
+  block: PolicyBlock,
+  containerOverrides?: Record<string, string>,
+): Promise<ImportResult> {
   if (!(await checkCredentials())) return { status: 'no-credentials' };
 
   const contentTypeKey = TYPE_MAP[block.CopyType];
@@ -197,7 +241,7 @@ export async function importPolicyBlock(block: PolicyBlock): Promise<ImportResul
     return { status: 'error', detail: `Unknown CopyType: ${block.CopyType}` };
   }
 
-  const containerKey = CONTAINER_MAP[block.CopyType];
+  const containerKey = containerOverrides?.[block.CopyType] ?? CONTAINER_MAP[block.CopyType];
   if (!containerKey) {
     return { status: 'error', detail: `No folder mapped for CopyType: ${block.CopyType}` };
   }
