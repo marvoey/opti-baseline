@@ -10,9 +10,22 @@ export function PolicyCard({ policy }: { policy: PolicyContent }) {
         </span>
       </h4>
 
-      {/* 1 — Core Principle */}
-      {policy.corePrinciple && (
+      {/* 1 — Procedural Safeguard */}
+      {policy.proceduralSafeguard && (
         <div>
+          <span className="inline-block text-xs font-bold uppercase tracking-wider text-amber-800 bg-amber-50 px-2 py-0.5 rounded border border-amber-200 mb-2">
+            Consultant Action
+          </span>
+          <div
+            className="text-gray-700 text-sm prose prose-sm max-w-none"
+            dangerouslySetInnerHTML={{ __html: policy.proceduralSafeguard }}
+          />
+        </div>
+      )}
+
+      {/* 2 — Core Principle */}
+      {policy.corePrinciple && (
+        <div className={policy.proceduralSafeguard ? "border-t border-gray-100 pt-4" : ""}>
           <span className="inline-block text-xs font-bold uppercase tracking-wider text-gray-600 bg-gray-100 px-2 py-0.5 rounded border border-gray-200 mb-2">
             National Policy
           </span>
@@ -23,7 +36,7 @@ export function PolicyCard({ policy }: { policy: PolicyContent }) {
         </div>
       )}
 
-      {/* 2 — Jurisdictional Override */}
+      {/* 2b — Jurisdictional Override */}
       {policy.override && (
         <div className="border-t border-gray-100 pt-4">
           <div className="flex items-center gap-2 mb-2">
@@ -49,20 +62,7 @@ export function PolicyCard({ policy }: { policy: PolicyContent }) {
         </div>
       )}
 
-      {/* 3 — Procedural Safeguard */}
-      {policy.proceduralSafeguard && (
-        <div className="border-t border-gray-100 pt-4">
-          <span className="inline-block text-xs font-bold uppercase tracking-wider text-amber-800 bg-amber-50 px-2 py-0.5 rounded border border-amber-200 mb-2">
-            Consultant Action
-          </span>
-          <div
-            className="text-gray-700 text-sm prose prose-sm max-w-none"
-            dangerouslySetInnerHTML={{ __html: policy.proceduralSafeguard }}
-          />
-        </div>
-      )}
-
-      {/* 4 — Statutory Disclosure */}
+      {/* 3 — Statutory Disclosure */}
       {policy.disclosure && (
         <div className="border-t border-gray-100 pt-4">
           <span className="inline-block text-xs font-bold uppercase tracking-wider text-red-800 bg-red-50 px-2 py-0.5 rounded border border-red-200 mb-2">

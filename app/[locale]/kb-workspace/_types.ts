@@ -10,6 +10,12 @@ export type LogEntry = {
   detail?: string;
 };
 
+export type ServerLogEntry = {
+  level: LogLevel;
+  label: string;
+  detail?: string;
+};
+
 export type OpalPayload = {
   lob?: string;
   LOB?: string;
@@ -23,6 +29,7 @@ export type OpalPayload = {
 
 export type PolicyContentWithDebug = PolicyContent & {
   _debug?: Record<string, unknown>;
+  _logs?: ServerLogEntry[];
 };
 
 export type Message = {

@@ -7,11 +7,13 @@ import { PolicyCard } from "../_components/PolicyCard";
 import { NoContentCard } from "../_components/NoContentCard";
 import { Combobox } from "../_components/Combobox";
 import { DevPanel } from "../_components/DevPanel";
+import { KbLogPanel } from "../_components/KbLogPanel";
 
 export default function OpalPage() {
-  const { messages, isLoading, submit, logs, clearLogs } = useOpalChat();
+  const { messages, isLoading, submit, logs, clearLogs, serverLogs, clearServerLogs } = useOpalChat();
   const bottomRef = useRef<HTMLDivElement>(null);
   const [devPanelOpen, setDevPanelOpen] = useState(false);
+  const [kbLogPanelOpen, setKbLogPanelOpen] = useState(false);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -122,6 +124,27 @@ export default function OpalPage() {
           <div ref={bottomRef} />
         </div>
         </main>
+
+        {/* KB log panel toggle tab */}
+        <button
+          onClick={() => setKbLogPanelOpen((o) => !o)}
+          className="shrink-0 flex items-center justify-center w-5 bg-gray-900 hover:bg-gray-700 border-l border-gray-700 transition-colors"
+          title={kbLogPanelOpen ? "Hide API logs" : "Show API logs"}
+        >
+          <svg
+            className={`w-3 h-3 text-gray-400 transition-transform duration-200 ${kbLogPanelOpen ? "rotate-180" : ""}`}
+            fill="none" stroke="currentColor" viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+
+        {/* KB log panel */}
+        <div className={`shrink-0 flex overflow-hidden transition-all duration-200 ${kbLogPanelOpen ? "w-80" : "w-0"}`}>
+          <div className="w-80 shrink-0">
+            <KbLogPanel logs={serverLogs} onClear={clearServerLogs} />
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -22,6 +22,7 @@ async function fetchPolicyContent(
 export function useOpalChat() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [logs, setLogs] = useState<LogEntry[]>([]);
+  const [serverLogs, setServerLogs] = useState<LogEntry[]>([]);
 
   const clientIdRef = useRef(`client-${crypto.randomUUID()}`);
   const esRef = useRef<EventSource | null>(null);
@@ -37,11 +38,12 @@ export function useOpalChat() {
   }, []);
 
   const clearLogs = useCallback(() => setLogs([]), []);
+  const clearServerLogs = useCallback(() => setServerLogs([]), []);
 
   useEffect(() => {
     const es = new EventSource(`/api/opal/response?clientId=${clientIdRef.current}`);
     esRef.current = es;
-    addLog('info', 'SSE stream opened', `clientId: ${clientIdRef.current}`);
+    // addLog('info', 'SSE stream opened', `clientId: ${clientIdRef.current}`);
 
     es.onmessage = (e) => {
       try {
@@ -49,16 +51,16 @@ export function useOpalChat() {
           correlationId: string;
           payload: unknown;
         };
-        const pendingIds = [...handlersRef.current.keys()];
-        addLog('info', 'SSE message received', `correlationId: ${correlationId}`);
-        addLog('info', 'Pending handlers', pendingIds.join(', ') || '(none)');
+        // const pendingIds = [...handlersRef.current.keys()];
+        // addLog('info', 'SSE message received', `correlationId: ${correlationId}`);
+        // addLog('info', 'Pending handlers', pendingIds.join(', ') || '(none)');
         const handler = handlersRef.current.get(correlationId);
         if (handler) {
-          addLog('success', 'Handler matched', correlationId);
+          // addLog('success', 'Handler matched', correlationId);
           handler(payload);
           handlersRef.current.delete(correlationId);
         } else {
-          addLog('error', 'No handler matched', `received: ${correlationId}`);
+          // addLog('error', 'No handler matched', `received: ${correlationId}`);
         }
       } catch (err) {
         addLog('error', 'SSE parse error', String(err));
@@ -66,11 +68,11 @@ export function useOpalChat() {
     };
 
     es.addEventListener('timeout', () => {
-      addLog('warn', 'SSE timeout', 'browser will reconnect automatically');
+      // addLog('warn', 'SSE timeout', 'browser will reconnect automatically');
     });
 
     es.onerror = () => {
-      addLog('error', 'SSE connection error', 'browser will attempt to reconnect');
+      // addLog('error', 'SSE connection error', 'browser will attempt to reconnect');
     };
 
     return () => {
@@ -96,8 +98,8 @@ export function useOpalChat() {
       },
     ]);
 
-    addLog('info', 'Question submitted', question);
-    addLog('info', 'Routing IDs', `clientId: ${clientIdRef.current} | correlationId: ${correlationId}`);
+    addLog('info', 'Question being sent to Opal', question);
+    // addLog('info', 'Routing IDs', `clientId: ${clientIdRef.current} | correlationId: ${correlationId}`);
 
     function onPayload(rawPayload: unknown) {
       const payload =
@@ -107,8 +109,8 @@ export function useOpalChat() {
           ? (rawPayload as OpalPayload)
           : {};
 
-      addLog('success', 'Opal payload received', JSON.stringify(payload));
-
+      // addLog('success', 'Opal payload received', JSON.stringify(payload));
+      addLog('success', 'Opal reasoning complete', JSON.stringify(payload));
       const lob   = (typeof payload.lob === 'string'   && payload.lob)
                  || (typeof payload.LOB === 'string'   && payload.LOB)
                  || knownLob;
@@ -121,7 +123,7 @@ export function useOpalChat() {
                         || knownJurisdiction
                         || undefined;
 
-      addLog('info', 'LOB / topic resolved', `lob=${lob ?? '—'} · topic=${topic ?? '—'} · jurisdiction=${jurisdiction ?? '—'}`);
+      // addLog('info', 'LOB / topic resolved', `lob=${lob ?? '—'} · topic=${topic ?? '—'} · jurisdiction=${jurisdiction ?? '—'}`);
 
       setMessages((prev) =>
         prev.map((m) =>
@@ -137,19 +139,36 @@ export function useOpalChat() {
       );
 
       if (lob && topic) {
-        addLog('info', 'GET /api/kb-content', `lob=${lob} · topic=${topic}${jurisdiction ? ` · jurisdiction=${jurisdiction}` : ''}`);
+        // addLog('info', 'GET /api/kb-content', `lob=${lob} · topic=${topic}${jurisdiction ? ` · jurisdiction=${jurisdiction}` : ''}`);
+        addLog('info', 'Opal sending resolved Topic and LOB back to application', `lob=${lob} · topic=${topic}${jurisdiction ? ` · jurisdiction=${jurisdiction}` : ''}`);
 
         fetchPolicyContent(lob, topic, jurisdiction).then((policyContent) => {
           if (policyContent?._debug?.found) {
-            addLog('success', 'Policy content loaded', `${lob} · ${topic}`);
+            // addLog('success', 'Policy content loaded', `${lob} · ${topic} · ${jurisdiction ?? '—'}`);
+            addLog('info', 'Application fetching approved content', `${lob} · ${topic} · ${jurisdiction ?? '—'}`);
           } else {
             addLog('warn', 'No policy content found', `lob=${lob} · topic=${topic}`);
+          }
+          if (policyContent?._logs?.length) {
+            const now = Date.now();
+            setServerLogs((prev) => [
+              ...prev,
+              ...policyContent._logs!.map((entry, i) => ({
+                id: crypto.randomUUID(),
+                ts: now + i,
+                level: entry.level,
+                label: entry.label,
+                detail: entry.detail,
+              })),
+            ]);
           }
           setMessages((prev) =>
             prev.map((m) =>
               m.id === id ? { ...m, policyContent, contentLoading: false } : m,
             ),
           );
+        }).finally(() => {
+          addLog('success', 'Policies rendered', `id=${id}`);
         });
       }
     }
@@ -157,14 +176,16 @@ export function useOpalChat() {
     handlersRef.current.set(correlationId, onPayload);
 
     try {
-      addLog('info', 'POST /api/opal/trigger', question);
+      // addLog('info', 'POST /api/opal/trigger', question);
       const res = await fetch("/api/opal/trigger", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ question, clientId: clientIdRef.current, correlationId }),
       });
       if (!res.ok) throw new Error(`Trigger failed (${res.status})`);
-      addLog('success', 'Trigger acknowledged', `status ${res.status}`);
+      // addLog('success', 'Trigger acknowledged', `status ${res.status}`);
+      // addLog('success', 'Question received by Opal', `status ${res.status}`);
+      addLog('info', 'Opal analysis started...', `status ${res.status}`);
     } catch (err) {
       const message = err instanceof Error ? err.message : 'Failed to send question to Opal.';
       addLog('error', 'Trigger failed', message);
@@ -179,5 +200,5 @@ export function useOpalChat() {
     }
   }
 
-  return { messages, isLoading, submit, logs, clearLogs };
+  return { messages, isLoading, submit, logs, clearLogs, serverLogs, clearServerLogs };
 }

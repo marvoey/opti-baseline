@@ -1,5 +1,6 @@
 import { fetchKbBlocks } from '@/app/[locale]/kb-workspace/test/_actions';
 import type { PolicyContent } from '@/app/[locale]/kb-workspace/_lib/twoPassResolve';
+import type { ServerLogEntry } from '@/app/[locale]/kb-workspace/_types';
 
 const STATE_NAMES: Record<string, string> = {
   AL: 'Alabama', AK: 'Alaska', AZ: 'Arizona', AR: 'Arkansas',
@@ -23,7 +24,9 @@ export async function GET(request: Request) {
   const topic        = searchParams.get('topic') ?? '';
   const jurisdiction = searchParams.get('jurisdiction')?.toUpperCase() || undefined;
 
-  console.log(`[kb-content] query — lob: "${lob}", topic: "${topic}", jurisdiction: "${jurisdiction}"`);
+  const logs: ServerLogEntry[] = [];
+
+  logs.push({ level: 'info', label: 'Query params', detail: `lob="${lob}" topic="${topic}" jurisdiction="${jurisdiction ?? '—'}"` });
 
   if (!lob || !topic) {
     return Response.json({ error: 'lob and topic are required' }, { status: 400 });
@@ -31,7 +34,11 @@ export async function GET(request: Request) {
 
   const result = await fetchKbBlocks(lob, topic, jurisdiction);
 
-  console.log(`[kb-content] corePrinciples: ${result.corePrinciples.length}, overrides: ${result.overrides.length}, safeguards: ${result.proceduralSafeguards.length}, disclosures: ${result.disclosures.length}`);
+  logs.push({
+    level: 'info',
+    label: 'Graph results',
+    detail: `corePrinciples=${result.corePrinciples.length} overrides=${result.overrides.length} safeguards=${result.proceduralSafeguards.length} disclosures=${result.disclosures.length}`,
+  });
 
   const hasJurisdiction = !!jurisdiction;
   const pass: 1 | 2 = result.overrides.length > 0 ? 1 : 2;
@@ -51,7 +58,8 @@ export async function GET(request: Request) {
   };
 
   const found = !!(content.corePrinciple || content.override || content.proceduralSafeguard || content.disclosure);
-  console.log(`[kb-content] content found: ${found}`);
+  logs.push({ level: found ? 'success' : 'warn', label: 'Content found', detail: String(found) });
+  logs.push({ level: 'info', label: 'PolicyContent', detail: JSON.stringify(content) });
 
-  return Response.json({ ...content, _debug: { lob, topic, jurisdiction, found } });
+  return Response.json({ ...content, _debug: { lob, topic, jurisdiction, found }, _logs: logs });
 }
