@@ -58,7 +58,7 @@ export default function RootLayout({
           The project id comes from NEXT_PUBLIC_OPTIMIZELY_WEB_SNIPPET_ID; without
           it, neither the snippet nor the route-change re-activation is rendered.
         */}
-        <QuickLinks />
+        {/* <QuickLinks /> */}
         <DevQuickLinks />
         {WEB_SNIPPET_ID && (
           <>

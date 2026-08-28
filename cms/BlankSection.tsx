@@ -19,9 +19,12 @@ export default function BlankSection({ content }: Props) {
     return (
       <div {...pa(node)} className="flex gap-4 w-full">
         {hasColumns ? children : (
-          <p className="flex-1 border border-dashed border-gray-300 rounded p-4 text-sm text-gray-400 text-center">
-            This row has no columns yet
-          </p>
+          <div className="flex-1 border border-dashed border-gray-300 rounded p-4 text-center">
+            <p className="text-sm font-medium text-gray-500">This row has no columns yet</p>
+            <p className="mt-1 text-sm text-gray-400">
+              Split this row into columns to place content side by side, then drop elements like Rich Text into a column.
+            </p>
+          </div>
         )}
       </div>
     );
@@ -43,8 +46,25 @@ export default function BlankSection({ content }: Props) {
   if (nodes.length === 0) {
     return (
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      <section {...pa(content as any)} className="w-full border border-dashed border-gray-300 rounded-lg p-8 text-center text-sm text-gray-400">
-        This section has no rows yet
+      <section {...pa(content as any)} className="w-full border border-dashed border-gray-300 rounded-lg p-8 text-center">
+        <p className="text-sm font-medium text-gray-500">This section has no rows yet</p>
+        <p className="mt-1 text-sm text-gray-400">
+          Add a row to start filling this section, then split it into columns.
+        </p>
+        <dl className="mt-6 grid gap-4 text-left sm:grid-cols-2 max-w-lg mx-auto">
+          <div>
+            <dt className="text-sm font-medium text-gray-500">Row</dt>
+            <dd className="mt-1 text-sm text-gray-400">
+              A horizontal strip within the section. Add multiple rows to stack content vertically.
+            </dd>
+          </div>
+          <div>
+            <dt className="text-sm font-medium text-gray-500">Column</dt>
+            <dd className="mt-1 text-sm text-gray-400">
+              Splits a row into side-by-side slots. Once a row has columns, drop elements like Rich Text into them.
+            </dd>
+          </div>
+        </dl>
       </section>
     );
   }
