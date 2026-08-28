@@ -35,9 +35,12 @@ export default function BlankSection({ content }: Props) {
     return (
       <div {...pa(node)} className="flex-1">
         {hasComponents ? children : (
-          <p className="border border-dashed border-gray-300 rounded p-4 text-sm text-gray-400 text-center">
-            This column has no content yet
-          </p>
+          <div className="border border-dashed border-gray-300 rounded p-4 text-center">
+            <p className="text-sm font-medium text-gray-500">This column has no content yet</p>
+            <p className="mt-1 text-sm text-gray-400">
+              Add an element, such as Rich Text, to fill this column.
+            </p>
+          </div>
         )}
       </div>
     );
