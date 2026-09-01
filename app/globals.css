@@ -45,9 +45,16 @@
   --color-dark-fir:   #08251a;
   --color-mid-fir:    #0d3a29;
   --color-light-fir:  #197050;
+  --color-dark-blue:  #007b79;
   --color-light-blue: #91dbda;
+  --color-light-pink: #ff99b6;
+  --color-dark-pink:  #8f4764;
+  --color-neutral-1:  #ffffff;
   --color-neutral-2:  #eff6e9;
   --color-neutral-3:  #e4f0da;
+  --color-neutral-4:  #d8e4cb;
+  --color-neutral-5:  #c3ceaf;
+  --color-neutral-6:  #a1ac8d;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -61,6 +68,83 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+}
+
+/*
+ * Rich Text theme color themes — one per text color used across the
+ * brand-visual-identity styleguide's approved text/background pairings
+ * (app/styleguide/page.tsx). @tailwindcss/typography sets its own gray
+ * palette as --tw-prose-* custom properties directly on h1/p/a/etc, which
+ * wins over an inherited `text-*` class from an ancestor — these utilities
+ * override every one of those properties so every element the plugin
+ * styles (headings, links, bold, lists, blockquotes, code, table borders)
+ * renders in the pairing's color, not Typography's default gray.
+ *
+ * Code blocks (pre/code) always use fixed dark chrome regardless of the
+ * pairing, like a terminal, so they stay legible against every background.
+ * See "Adding custom color themes" in the @tailwindcss/typography README.
+ */
+@utility prose-on-dark-fir {
+  --tw-prose-body: var(--color-dark-fir);
+  --tw-prose-headings: var(--color-dark-fir);
+  --tw-prose-lead: var(--color-dark-fir);
+  --tw-prose-links: var(--color-dark-fir);
+  --tw-prose-bold: var(--color-dark-fir);
+  --tw-prose-counters: var(--color-dark-fir);
+  --tw-prose-bullets: var(--color-dark-fir);
+  --tw-prose-hr: var(--color-dark-fir);
+  --tw-prose-quotes: var(--color-dark-fir);
+  --tw-prose-quote-borders: var(--color-dark-fir);
+  --tw-prose-captions: var(--color-dark-fir);
+  --tw-prose-kbd: var(--color-dark-fir);
+  --tw-prose-kbd-shadows: color-mix(in oklab, var(--color-dark-fir) 10%, transparent);
+  --tw-prose-code: var(--color-dark-fir);
+  --tw-prose-pre-code: var(--color-neutral-1);
+  --tw-prose-pre-bg: var(--color-dark-fir);
+  --tw-prose-th-borders: var(--color-dark-fir);
+  --tw-prose-td-borders: var(--color-dark-fir);
+}
+
+@utility prose-on-neutral-1 {
+  --tw-prose-body: var(--color-neutral-1);
+  --tw-prose-headings: var(--color-neutral-1);
+  --tw-prose-lead: var(--color-neutral-1);
+  --tw-prose-links: var(--color-neutral-1);
+  --tw-prose-bold: var(--color-neutral-1);
+  --tw-prose-counters: var(--color-neutral-1);
+  --tw-prose-bullets: var(--color-neutral-1);
+  --tw-prose-hr: var(--color-neutral-1);
+  --tw-prose-quotes: var(--color-neutral-1);
+  --tw-prose-quote-borders: var(--color-neutral-1);
+  --tw-prose-captions: var(--color-neutral-1);
+  --tw-prose-kbd: var(--color-neutral-1);
+  --tw-prose-kbd-shadows: color-mix(in oklab, var(--color-neutral-1) 10%, transparent);
+  --tw-prose-code: var(--color-neutral-1);
+  --tw-prose-pre-code: var(--color-neutral-1);
+  --tw-prose-pre-bg: var(--color-dark-fir);
+  --tw-prose-th-borders: var(--color-neutral-1);
+  --tw-prose-td-borders: var(--color-neutral-1);
+}
+
+@utility prose-on-lfgreen {
+  --tw-prose-body: var(--color-lfgreen);
+  --tw-prose-headings: var(--color-lfgreen);
+  --tw-prose-lead: var(--color-lfgreen);
+  --tw-prose-links: var(--color-lfgreen);
+  --tw-prose-bold: var(--color-lfgreen);
+  --tw-prose-counters: var(--color-lfgreen);
+  --tw-prose-bullets: var(--color-lfgreen);
+  --tw-prose-hr: var(--color-lfgreen);
+  --tw-prose-quotes: var(--color-lfgreen);
+  --tw-prose-quote-borders: var(--color-lfgreen);
+  --tw-prose-captions: var(--color-lfgreen);
+  --tw-prose-kbd: var(--color-lfgreen);
+  --tw-prose-kbd-shadows: color-mix(in oklab, var(--color-lfgreen) 10%, transparent);
+  --tw-prose-code: var(--color-lfgreen);
+  --tw-prose-pre-code: var(--color-neutral-1);
+  --tw-prose-pre-bg: var(--color-dark-fir);
+  --tw-prose-th-borders: var(--color-lfgreen);
+  --tw-prose-td-borders: var(--color-lfgreen);
 }
 
 h1,

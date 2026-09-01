@@ -9,9 +9,9 @@ import { initReactComponentRegistry } from '@optimizely/cms-sdk/react/server';
 import { requireEnv } from '@/lib/env';
 
 import BlankExperience from './BlankExperience';
-import BlankSection from './BlankSection';
+import BlankSection, { LayoutPreviewDisplayTemplate } from './BlankSection';
 import Page, { PageContentType } from './Page';
-import RichText, { RichTextContentType } from './RichText';
+import RichText, { RichTextContentType, RichTextThemeDisplayTemplate } from './RichText';
 
 /**
  * Single configuration + registration point for the Optimizely SDK.
@@ -53,7 +53,7 @@ export const registeredContentTypes = [
 
 initContentTypeRegistry(registeredContentTypes);
 
-initDisplayTemplateRegistry([]);
+initDisplayTemplateRegistry([LayoutPreviewDisplayTemplate, RichTextThemeDisplayTemplate]);
 
 initReactComponentRegistry({
   resolver: {

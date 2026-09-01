@@ -9,6 +9,8 @@ const LINKS = [
   { label: 'Content Library', href: '/content-library' },
   { label: 'Admin',           href: '/admin' },
   { label: 'CMS',             href: '/cms-admin' },
+  { label: 'Styleguide',      href: '/styleguide' },
+  { label: 'Agentic Studio',  href: '/agentic-studio' },
 ];
 
 export default function DevQuickLinks() {
