@@ -9,6 +9,8 @@ const LINKS = [
   { label: 'Content Library', href: '/content-library' },
   { label: 'Admin',           href: '/admin' },
   { label: 'CMS',             href: '/cms-admin' },
+  { label: 'Mock: Peacock Payment', href: '/mock/peacock/help/article/how-do-i-change-my-payment-method' },
+  { label: 'Mock: NOW TV Payment',  href: '/mock/nowtv/gb/help/article/change-my-payment-method-or-billing-address' },
 ];
 
 export default function DevQuickLinks() {

@@ -52,8 +52,8 @@ export function proxy(request: NextRequest) {
 
 export const config = {
   // Run on everything EXCEPT API, Next internals, the preview/admin/styleguide
-  // routes, and any path containing a dot (static assets like /logo.svg). The
-  // preview, admin and styleguide routes live outside [locale] and must not be
-  // rewritten into a locale.
-  matcher: ['/((?!api|_next/static|_next/image|preview|admin|styleguide|applications|favicon.ico|.*\\..*).*)'],
+  // routes, the static brand mocks under /mock, and any path containing a dot
+  // (static assets like /logo.svg). These all live outside [locale] and must
+  // not be rewritten into a locale.
+  matcher: ['/((?!api|_next/static|_next/image|preview|admin|styleguide|applications|mock|favicon.ico|.*\\..*).*)'],
 };
