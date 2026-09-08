@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { LOCALE_SEGMENTS } from '@/lib/locales';
+import { isThemeId } from '@/lib/themes';
+import { THEME_HEADER } from '@/lib/theme';
 
 /**
  * Next.js 16 Proxy (the replacement for Middleware) — locale clean-URLs for the
@@ -15,6 +17,12 @@ import { LOCALE_SEGMENTS } from '@/lib/locales';
  *
  * CMS-first routing: every path flows to the CMS catch-all. Adding a new CMS
  * page therefore needs no change here.
+ *
+ * Also forwards a `?theme=` query param as the `x-theme-override` request
+ * header (lib/theme.ts reads it) so the theme can be swapped by URL alone —
+ * no .env edit / dev-server restart needed. This has to happen here (not in a
+ * Server Component) because only the proxy sees the raw query string early
+ * enough to attach it to the SAME request via `request.headers`.
  */
 
 const DEFAULT_LOCALE = process.env.OPTIMIZELY_DEFAULT_LOCALE || 'en';
@@ -28,26 +36,36 @@ function firstSegment(pathname: string): string {
 }
 
 export function proxy(request: NextRequest) {
-  const { pathname, search } = request.nextUrl;
+  const { pathname, search, searchParams } = request.nextUrl;
   const seg = firstSegment(pathname);
+
+  const requestHeaders = new Headers(request.headers);
+  const themeParam = searchParams.get('theme');
+  if (isThemeId(themeParam)) {
+    requestHeaders.set(THEME_HEADER, themeParam);
+  }
 
   // Default-locale prefix is visible → redirect to the clean path (canonical/SEO).
   //   /en/vb-demo → /vb-demo
   if (seg === DEFAULT_LOCALE) {
     const stripped =
       pathname.replace(new RegExp(`^/${DEFAULT_LOCALE}(?=/|$)`), '') || '/';
+    // A redirect keeps `search` (so ?theme= survives) and re-enters proxy on
+    // the follow-up request, which re-attaches the header below.
     return NextResponse.redirect(new URL(stripped + search, request.url));
   }
 
   // A non-default known locale is already present → leave it; [locale] is populated.
   if (KNOWN_LOCALE_SEGMENTS.includes(seg)) {
-    return NextResponse.next();
+    return NextResponse.next({ request: { headers: requestHeaders } });
   }
 
   // Clean CMS path with no locale → rewrite into the default locale so [locale] is set.
   //   /vb-demo → /en/vb-demo
   const rewritten = `/${DEFAULT_LOCALE}${pathname}`;
-  return NextResponse.rewrite(new URL(rewritten + search, request.url));
+  return NextResponse.rewrite(new URL(rewritten + search, request.url), {
+    request: { headers: requestHeaders },
+  });
 }
 
 export const config = {

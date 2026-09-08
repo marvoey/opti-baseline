@@ -11,6 +11,27 @@ import { requireEnv } from '@/lib/env';
 import BlankExperience from './BlankExperience';
 import BlankSection from './BlankSection';
 import RichText, { RichTextContentType } from './RichText';
+import { NbcSharedNoticeBlockContentType } from './NbcSharedNoticeBlock';
+import { NbcStepGroupBlockContentType } from './NbcStepGroupBlock';
+import { NbcPartnerCardGridBlockContentType } from './NbcPartnerCardGridBlock';
+import { NbcFaqAccordionBlockContentType } from './NbcFaqAccordionBlock';
+import { NbcImageBlockContentType } from './NbcImageBlock';
+import { NbcHelpArticleContentType } from './NbcHelpArticle';
+import PeacockHero, { PeacockHeroBlockContentType } from '@/app/mock/peacock/_components/Hero';
+import PeacockSportsCarousel, { PeacockSportsCarouselBlockContentType } from '@/app/mock/peacock/_components/SportsCarousel';
+import PeacockShowcase, { PeacockShowcaseBlockContentType } from '@/app/mock/peacock/_components/Showcase';
+import PeacockPricing, { PeacockPricingBlockContentType } from '@/app/mock/peacock/_components/Pricing';
+import PeacockFeatures, { PeacockFeaturesBlockContentType } from '@/app/mock/peacock/_components/Features';
+import PeacockGiftCards, { PeacockGiftCardsBlockContentType } from '@/app/mock/peacock/_components/GiftCards';
+import PeacockFaq, { PeacockFaqBlockContentType } from '@/app/mock/peacock/_components/Faq';
+import PeacockExploreMore, { PeacockExploreMoreBlockContentType } from '@/app/mock/peacock/_components/ExploreMore';
+import NowTvPromoBanner, { NowTvPromoBannerBlockContentType } from '@/app/mock/nowtv/gb/_components/PromoBanner';
+import NowTvMemberships, { NowTvMembershipsBlockContentType } from '@/app/mock/nowtv/gb/_components/Memberships';
+import NowTvSports, { NowTvSportsBlockContentType } from '@/app/mock/nowtv/gb/_components/Sports';
+import NowTvEntertainment, { NowTvEntertainmentBlockContentType } from '@/app/mock/nowtv/gb/_components/Entertainment';
+import NowTvCinema, { NowTvCinemaBlockContentType } from '@/app/mock/nowtv/gb/_components/Cinema';
+import NowTvFaq, { NowTvFaqBlockContentType } from '@/app/mock/nowtv/gb/_components/Faq';
+import NowTvExploreMore, { NowTvExploreMoreBlockContentType } from '@/app/mock/nowtv/gb/_components/ExploreMore';
 
 /**
  * Single configuration + registration point for the Optimizely SDK.
@@ -47,6 +68,30 @@ export const registeredContentTypes = [
   BlankSectionContentType,
   // Blocks
   RichTextContentType,
+  // NBC Help Center content types (schema only — no renderers registered yet)
+  NbcSharedNoticeBlockContentType,
+  NbcStepGroupBlockContentType,
+  NbcPartnerCardGridBlockContentType,
+  NbcFaqAccordionBlockContentType,
+  NbcImageBlockContentType,
+  NbcHelpArticleContentType,
+  // Peacock mock homepage section content types
+  PeacockHeroBlockContentType,
+  PeacockSportsCarouselBlockContentType,
+  PeacockShowcaseBlockContentType,
+  PeacockPricingBlockContentType,
+  PeacockFeaturesBlockContentType,
+  PeacockGiftCardsBlockContentType,
+  PeacockFaqBlockContentType,
+  PeacockExploreMoreBlockContentType,
+  // NOW TV mock homepage section content types
+  NowTvPromoBannerBlockContentType,
+  NowTvMembershipsBlockContentType,
+  NowTvSportsBlockContentType,
+  NowTvEntertainmentBlockContentType,
+  NowTvCinemaBlockContentType,
+  NowTvFaqBlockContentType,
+  NowTvExploreMoreBlockContentType,
 ];
 
 initContentTypeRegistry(registeredContentTypes);
@@ -59,5 +104,22 @@ initReactComponentRegistry({
     BlankSection,
     // Blocks (resolver key === content-type key)
     RichTextBlock: RichText,
+    // Peacock mock homepage sections
+    PeacockHeroBlock: PeacockHero,
+    PeacockSportsCarouselBlock: PeacockSportsCarousel,
+    PeacockShowcaseBlock: PeacockShowcase,
+    PeacockPricingBlock: PeacockPricing,
+    PeacockFeaturesBlock: PeacockFeatures,
+    PeacockGiftCardsBlock: PeacockGiftCards,
+    PeacockFaqBlock: PeacockFaq,
+    PeacockExploreMoreBlock: PeacockExploreMore,
+    // NOW TV mock homepage sections
+    NowTvPromoBannerBlock: NowTvPromoBanner,
+    NowTvMembershipsBlock: NowTvMemberships,
+    NowTvSportsBlock: NowTvSports,
+    NowTvEntertainmentBlock: NowTvEntertainment,
+    NowTvCinemaBlock: NowTvCinema,
+    NowTvFaqBlock: NowTvFaq,
+    NowTvExploreMoreBlock: NowTvExploreMore,
   },
 });

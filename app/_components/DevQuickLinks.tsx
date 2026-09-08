@@ -9,8 +9,15 @@ const LINKS = [
   { label: 'Content Library', href: '/content-library' },
   { label: 'Admin',           href: '/admin' },
   { label: 'CMS',             href: '/cms-admin' },
+  { label: 'Mock: Peacock Home',    href: '/mock/peacock' },
   { label: 'Mock: Peacock Payment', href: '/mock/peacock/help/article/how-do-i-change-my-payment-method' },
+  { label: 'Mock: NOW TV Home',     href: '/mock/nowtv/gb' },
   { label: 'Mock: NOW TV Payment',  href: '/mock/nowtv/gb/help/article/change-my-payment-method-or-billing-address' },
+  // proxy.ts forwards ?theme= as a request header lib/theme.ts reads, so
+  // these are just plain links — no cookie/redirect route needed.
+  { label: 'Theme: Optimizely', href: '/?theme=optimizely' },
+  { label: 'Theme: Peacock',    href: '/?theme=peacock' },
+  { label: 'Theme: NOW',        href: '/?theme=nowtv' },
 ];
 
 export default function DevQuickLinks() {

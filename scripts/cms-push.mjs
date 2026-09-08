@@ -7,12 +7,16 @@
  * Flags:
  *   --all    Push every content type regardless of CMS state (original behaviour)
  *   --dry    Show what would be pushed without sending anything
+ *   --force  Apply changes even if the CMS flags them as breaking / a data-loss
+ *            risk (e.g. a removed or narrowed property). Mirrors the official
+ *            CLI's --force flag: sends the 'cms-ignore-data-loss-warnings' header.
  *
  * Examples:
- *   node --env-file=.env scripts/cms-push.mjs           # push missing only
- *   node --env-file=.env scripts/cms-push.mjs --all     # push everything
- *   node --env-file=.env scripts/cms-push.mjs --dry     # preview missing push
+ *   node --env-file=.env scripts/cms-push.mjs             # push missing only
+ *   node --env-file=.env scripts/cms-push.mjs --all       # push everything
+ *   node --env-file=.env scripts/cms-push.mjs --dry       # preview missing push
  *   node --env-file=.env scripts/cms-push.mjs --all --dry
+ *   node --env-file=.env scripts/cms-push.mjs --all --force  # push through data-loss warnings
  */
 
 import { dirname, join, resolve } from 'node:path';
@@ -28,6 +32,7 @@ import { mapContentToManifest } from '@optimizely/cms-cli/dist/mapper/contentToP
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const ALL_MODE = process.argv.includes('--all');
 const DRY_MODE = process.argv.includes('--dry');
+const FORCE_MODE = process.argv.includes('--force');
 
 // ── Env ───────────────────────────────────────────────────────────────────────
 if (
@@ -88,13 +93,14 @@ async function fetchCmsKeys(token) {
 }
 
 // ── POST manifest ─────────────────────────────────────────────────────────────
-async function postManifest(token, manifest) {
+async function postManifest(token, manifest, { force = false } = {}) {
   const res = await fetch(`${GATEWAY}/v1/manifest`, {
     method: 'POST',
     headers: {
       authorization: `Bearer ${token}`,
       accept: 'application/json',
       'content-type': 'application/vnd.optimizely.cms.v1.manifest+json',
+      ...(force ? { 'cms-ignore-data-loss-warnings': 'true' } : {}),
     },
     body: JSON.stringify(manifest),
   });
@@ -190,6 +196,9 @@ async function main() {
   }
 
   // 7. Push
+  if (FORCE_MODE) {
+    console.log(c.bold(c.yellow('\n--force is used! This applies changes even if the CMS flags them as breaking / a data-loss risk.')));
+  }
   console.log(c.dim('\nUploading…'));
 
   const normalizedGroups = propertyGroups
@@ -202,7 +211,7 @@ async function main() {
     propertyGroups: normalizedGroups,
   };
 
-  const result = await postManifest(token, manifest);
+  const result = await postManifest(token, manifest, { force: FORCE_MODE });
 
   console.log(c.green('\n✓ Upload complete'));
 

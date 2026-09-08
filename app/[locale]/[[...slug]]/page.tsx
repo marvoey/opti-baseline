@@ -5,7 +5,8 @@ import { OptimizelyComponent, withAppContext } from '@optimizely/cms-sdk/react/s
 import { notFound } from 'next/navigation';
 import { DEFAULT_LOCALE } from '@/lib/locales';
 import { siteOrigin } from '@/lib/siteHost';
-import { siteConfig } from '@/lib/siteConfig';
+import { resolveTheme } from '@/lib/theme';
+import { themeMeta } from '@/lib/themes';
 import HomePageFallback from '@/app/_components/HomePageFallback';
 
 type Props = {
@@ -45,14 +46,15 @@ const loadContent = cache(async (locale: string, slug: string[]) => {
   return content?.[0];
 });
 
-/** Per-page <title> from the CMS, falling back to the site name. */
+/** Per-page <title> from the CMS, falling back to the active theme's site name. */
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug = [] } = await params;
-  const content = await loadContent(locale, slug);
+  const [content, theme] = await Promise.all([loadContent(locale, slug), resolveTheme()]);
+  const meta = themeMeta[theme];
   const item = content as { MetaTitle?: string; _metadata?: { displayName?: string } } | undefined;
   const pageTitle = item?.MetaTitle || item?._metadata?.displayName;
   return {
-    title: pageTitle ? `${pageTitle} | ${siteConfig.name}` : siteConfig.title,
+    title: pageTitle ? `${pageTitle} | ${meta.name}` : meta.title,
   };
 }
 

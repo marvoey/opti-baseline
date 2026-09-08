@@ -13,19 +13,27 @@
   --font-display: var(--font-display);
   --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas,
     "Liberation Mono", "Courier New", monospace;
+}
 
-  /*
-   * ┌──────────────────────────────────────────────────────────────────────┐
-   * │  REBRAND HERE.  This is the whole colour theme for the site.          │
-   * │  The Tailwind `blue-*` scale is remapped, so chrome and blocks that   │
-   * │  use `bg-blue-950`, `text-blue-800`, etc. all reskin when you edit    │
-   * │  these ~11 hex values. Set blue-950 = your darkest brand colour and   │
-   * │  blue-800 = your primary; the rest are tints/shades between.          │
-   * └──────────────────────────────────────────────────────────────────────┘
-   *
-   * Optimizely brand green ramp.
-   * Anchors: Dark Fir #08251a (darkest), LFGreen #abff44 (signature accent).
-   */
+/*
+ * ┌──────────────────────────────────────────────────────────────────────┐
+ * │  REBRAND HERE.  This is the whole colour theme for the site.          │
+ * │  The Tailwind `blue-*` scale is remapped, so chrome and blocks that   │
+ * │  use `bg-blue-950`, `text-blue-800`, etc. all reskin when you edit    │
+ * │  these ~11 hex values. Set blue-950 = your darkest brand colour and   │
+ * │  blue-800 = your primary; the rest are tints/shades between.          │
+ * │                                                                        │
+ * │  NOTE: this is a plain `@theme` block, not `@theme inline` — inline   │
+ * │  bakes the literal hex into every utility class at build time, which  │
+ * │  would make the [data-theme] overrides below a no-op. Plain `@theme`  │
+ * │  keeps utilities pointing at `var(--color-blue-950)` etc. so they can │
+ * │  still be swapped per-request.                                       │
+ * └──────────────────────────────────────────────────────────────────────┘
+ *
+ * Optimizely brand green ramp.
+ * Anchors: Dark Fir #08251a (darkest), LFGreen #abff44 (signature accent).
+ */
+@theme {
   --color-blue-950: #08251a; /* Dark Fir — footer / hero background */
   --color-blue-900: #0d3a29; /* Mid Fir — header bg */
   --color-blue-800: #197050; /* Light Fir — primary green, links */
@@ -48,6 +56,53 @@
   --color-light-blue: #91dbda;
   --color-neutral-2:  #eff6e9;
   --color-neutral-3:  #e4f0da;
+
+  /* Additive tokens not part of the blue-* ramp — every theme sets these for
+     its CTA button/link colour; the values here are the optimizely default. */
+  --color-cta-gradient: var(--color-lfgreen);
+  --color-link: var(--color-light-fir);
+}
+
+/*
+ * ┌──────────────────────────────────────────────────────────────────────┐
+ * │  PEACOCK / NOW THEME OVERRIDES                                       │
+ * │  Selected per-request by lib/theme.ts (host- or cookie-based) and     │
+ * │  applied via a `data-theme` attribute on <html> (see app/layout.tsx). │
+ * │  Same tokens as the block above, different attribute scope.          │
+ * └──────────────────────────────────────────────────────────────────────┘
+ */
+[data-theme='peacock'] {
+  --color-blue-950: #000000;
+  --color-blue-900: #0a0a0a;
+  --color-blue-800: #171717;
+  --color-blue-700: #262626;
+  --color-blue-600: #404040;
+  --color-blue-500: #737373;
+  --color-blue-400: #a3a3a3;
+  --color-blue-300: #d4d4d4;
+  --color-blue-200: #FFCE00;
+  --color-blue-100: #f5f5f5;
+  --color-blue-50:  #fafafa;
+
+  --color-cta-gradient: linear-gradient(90deg, #FFCE00, #FF9300);
+  --color-link: #0091D6;
+}
+
+[data-theme='nowtv'] {
+  --color-blue-950: #0B0B10;
+  --color-blue-900: #111117;
+  --color-blue-800: #1c1c24;
+  --color-blue-700: #2b2b35;
+  --color-blue-600: #46465a;
+  --color-blue-500: #6a6a85;
+  --color-blue-400: #9a9ab5;
+  --color-blue-300: #c2c2d8;
+  --color-blue-200: #00E0FF;
+  --color-blue-100: #eef0fa;
+  --color-blue-50:  #f7f8fd;
+
+  --color-cta-gradient: linear-gradient(120deg, #00E0FF, #FF2E93);
+  --color-link: #0072CE;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -68,3 +123,12 @@ h2,
 h3 {
   font-family: var(--font-display);
 }
+
+.btn-cta {
+  background: var(--color-cta-gradient);
+}
+
+.link-themed {
+  color: var(--color-link);
+}
+
