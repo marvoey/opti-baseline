@@ -10,7 +10,6 @@ import { requireEnv } from '@/lib/env';
 
 import BlankExperience from './BlankExperience';
 import BlankSection from './BlankSection';
-import Page, { PageContentType } from './Page';
 import RichText, { RichTextContentType } from './RichText';
 
 /**
@@ -46,7 +45,6 @@ export const registeredContentTypes = [
   // SDK-native types the CMS can send (e.g. during preview).
   BlankExperienceContentType,
   BlankSectionContentType,
-  PageContentType,
   // Blocks
   RichTextContentType,
 ];
@@ -59,7 +57,6 @@ initReactComponentRegistry({
   resolver: {
     BlankExperience,
     BlankSection,
-    Page,
     // Blocks (resolver key === content-type key)
     RichTextBlock: RichText,
   },
