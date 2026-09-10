@@ -1,9 +1,9 @@
 {
-  "openapi": "3.0.4",
+  "openapi": "3.1.1",
   "info": {
     "title": "Optimizely CMS REST API - Content",
     "description": "The Optimizely CMS REST API for Content allows you to define and manage content within your Optimizely CMS environment. This API provides endpoints for creating, retrieving, updating, and deleting content items, as well as managing content types and related definitions. This API uses URL-based versioning (/v1/). Breaking changes will result in a new version. The current version (v1) will be supported for at least 12 months after a new version is released.",
-    "version": "v1"
+    "version": "v1.1"
   },
   "servers": [
     {
@@ -50,6 +50,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A single page of items in a paged collection, including paging metadata such as the current page index, page size, and an estimated total item count.",
                   "$ref": "#/components/schemas/ApplicationPage"
                 }
               }
@@ -86,6 +87,7 @@
           "content": {
             "application/json": {
               "schema": {
+                "description": "A CMS application (website or remote website).",
                 "$ref": "#/components/schemas/Application"
               }
             }
@@ -122,6 +124,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A CMS application (website or remote website).",
                   "$ref": "#/components/schemas/Application"
                 }
               }
@@ -205,6 +208,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A CMS application (website or remote website).",
                   "$ref": "#/components/schemas/Application"
                 }
               }
@@ -318,6 +322,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A CMS application (website or remote website).",
                   "$ref": "#/components/schemas/Application"
                 }
               }
@@ -398,6 +403,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A CMS application (website or remote website).",
                   "$ref": "#/components/schemas/Application"
                 }
               }
@@ -468,6 +474,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A single page of items in a paged collection, including paging metadata such as the current page index, page size, and an estimated total item count.",
                   "$ref": "#/components/schemas/BlueprintPage"
                 }
               }
@@ -504,6 +511,7 @@
           "content": {
             "application/json": {
               "schema": {
+                "description": "A blueprint of a content item.",
                 "$ref": "#/components/schemas/Blueprint"
               }
             }
@@ -540,6 +548,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A blueprint of a content item.",
                   "$ref": "#/components/schemas/Blueprint"
                 }
               }
@@ -623,6 +632,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A blueprint of a content item.",
                   "$ref": "#/components/schemas/Blueprint"
                 }
               }
@@ -736,6 +746,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A blueprint of a content item.",
                   "$ref": "#/components/schemas/Blueprint"
                 }
               }
@@ -816,6 +827,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A blueprint of a content item.",
                   "$ref": "#/components/schemas/Blueprint"
                 }
               }
@@ -869,6 +881,7 @@
           "content": {
             "application/json": {
               "schema": {
+                "description": "New content and the initial data required to create it.",
                 "$ref": "#/components/schemas/NewContent"
               }
             },
@@ -881,6 +894,7 @@
                 "type": "object",
                 "properties": {
                   "content": {
+                    "description": "New content and the initial data required to create it.",
                     "$ref": "#/components/schemas/NewContent"
                   },
                   "file": {
@@ -932,6 +946,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "The result of creating a new content item.",
                   "$ref": "#/components/schemas/NewContentNode"
                 }
               }
@@ -988,6 +1003,7 @@
           "content": {
             "application/json": {
               "schema": {
+                "description": "Options for copying content.",
                 "$ref": "#/components/schemas/CopyContentOptions"
               }
             }
@@ -1010,6 +1026,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "Metadata about a content item in the content hierarchy — ownership, localization, and audit information — but not its property values.",
                   "$ref": "#/components/schemas/ContentNode"
                 }
               }
@@ -1075,6 +1092,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "Metadata about a content item in the content hierarchy — ownership, localization, and audit information — but not its property values.",
                   "$ref": "#/components/schemas/ContentNode"
                 }
               }
@@ -1164,6 +1182,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "Metadata about a content item in the content hierarchy — ownership, localization, and audit information — but not its property values.",
                   "$ref": "#/components/schemas/ContentNode"
                 }
               }
@@ -1277,6 +1296,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "Metadata about a content item in the content hierarchy — ownership, localization, and audit information — but not its property values.",
                   "$ref": "#/components/schemas/ContentNode"
                 }
               }
@@ -1365,6 +1385,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "Metadata about a content item in the content hierarchy — ownership, localization, and audit information — but not its property values.",
                   "$ref": "#/components/schemas/ContentNode"
                 }
               }
@@ -1456,6 +1477,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A single page of items in a paged collection, including paging metadata such as the current page index, page size, and an estimated total item count.",
                   "$ref": "#/components/schemas/ContentNodePage"
                 }
               }
@@ -1538,6 +1560,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A single page of items in a paged collection, including paging metadata such as the current page index, page size, and an estimated total item count.",
                   "$ref": "#/components/schemas/ContentNodePage"
                 }
               }
@@ -1617,6 +1640,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A single page of items in a paged collection, including paging metadata such as the current page index, page size, and an estimated total item count.",
                   "$ref": "#/components/schemas/ContentVersionPage"
                 }
               }
@@ -1680,6 +1704,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A version of a content item.",
                   "$ref": "#/components/schemas/ContentVersion"
                 }
               }
@@ -1756,6 +1781,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A single page of items in a paged collection, including paging metadata such as the current page index, page size, and an estimated total item count.",
                   "$ref": "#/components/schemas/ContentNodePage"
                 }
               }
@@ -1817,7 +1843,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "enum": [
+                "examples": [
                   "draft",
                   "ready",
                   "published",
@@ -1827,7 +1853,7 @@
                   "inReview"
                 ],
                 "type": "string",
-                "description": "Represent the different status values of a content version."
+                "description": "The status of a content version."
               }
             }
           },
@@ -1860,6 +1886,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A single page of items in a paged collection, including paging metadata such as the current page index, page size, and an estimated total item count.",
                   "$ref": "#/components/schemas/ContentVersionPage"
                 }
               }
@@ -1911,6 +1938,7 @@
           "content": {
             "application/json": {
               "schema": {
+                "description": "A version of a content item.",
                 "$ref": "#/components/schemas/ContentVersion"
               }
             },
@@ -1923,6 +1951,7 @@
                 "type": "object",
                 "properties": {
                   "content": {
+                    "description": "A version of a content item.",
                     "$ref": "#/components/schemas/ContentVersion"
                   },
                   "file": {
@@ -1974,6 +2003,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A version of a content item.",
                   "$ref": "#/components/schemas/ContentVersion"
                 }
               }
@@ -2055,6 +2085,7 @@
           "content": {
             "application/json": {
               "schema": {
+                "description": "Options for approving or rejecting a content version.",
                 "$ref": "#/components/schemas/ApprovalDecisionOptions"
               }
             }
@@ -2090,6 +2121,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A version of a content item.",
                   "$ref": "#/components/schemas/ContentVersion"
                 }
               }
@@ -2199,6 +2231,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A version of a content item.",
                   "$ref": "#/components/schemas/ContentVersion"
                 }
               }
@@ -2283,6 +2316,7 @@
           "content": {
             "application/json": {
               "schema": {
+                "description": "Options for publishing a content version.",
                 "$ref": "#/components/schemas/PublishContentOptions"
               }
             }
@@ -2318,6 +2352,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A version of a content item.",
                   "$ref": "#/components/schemas/ContentVersion"
                 }
               }
@@ -2402,6 +2437,7 @@
           "content": {
             "application/json": {
               "schema": {
+                "description": "Options for transitioning a content version to ready status.",
                 "$ref": "#/components/schemas/ReadyContentOptions"
               }
             }
@@ -2437,6 +2473,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A version of a content item.",
                   "$ref": "#/components/schemas/ContentVersion"
                 }
               }
@@ -2521,6 +2558,7 @@
           "content": {
             "application/json": {
               "schema": {
+                "description": "Options for approving or rejecting a content version.",
                 "$ref": "#/components/schemas/ApprovalDecisionOptions"
               }
             }
@@ -2556,6 +2594,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A version of a content item.",
                   "$ref": "#/components/schemas/ContentVersion"
                 }
               }
@@ -2652,6 +2691,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A version of a content item.",
                   "$ref": "#/components/schemas/ContentVersion"
                 }
               }
@@ -2777,6 +2817,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A version of a content item.",
                   "$ref": "#/components/schemas/ContentVersion"
                 }
               }
@@ -2866,6 +2907,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A version of a content item.",
                   "$ref": "#/components/schemas/ContentVersion"
                 }
               }
@@ -3004,6 +3046,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A single page of items in a paged collection, including paging metadata such as the current page index, page size, and an estimated total item count.",
                   "$ref": "#/components/schemas/PreviewPage"
                 }
               }
@@ -3056,7 +3099,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "enum": [
+                "examples": [
                   "draft",
                   "ready",
                   "published",
@@ -3066,7 +3109,7 @@
                   "inReview"
                 ],
                 "type": "string",
-                "description": "Represent the different status values of a content version."
+                "description": "The status of a content version."
               }
             }
           },
@@ -3099,6 +3142,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A single page of items in a paged collection, including paging metadata such as the current page index, page size, and an estimated total item count.",
                   "$ref": "#/components/schemas/ContentVersionPage"
                 }
               }
@@ -3157,6 +3201,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A single page of items in a paged collection, including paging metadata such as the current page index, page size, and an estimated total item count.",
                   "$ref": "#/components/schemas/ContentSourcePage"
                 }
               }
@@ -3196,6 +3241,7 @@
           "content": {
             "application/json": {
               "schema": {
+                "description": "A content source used within the CMS.",
                 "$ref": "#/components/schemas/ContentSource"
               }
             }
@@ -3232,6 +3278,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A content source used within the CMS.",
                   "$ref": "#/components/schemas/ContentSource"
                 }
               }
@@ -3315,6 +3362,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A content source used within the CMS.",
                   "$ref": "#/components/schemas/ContentSource"
                 }
               }
@@ -3431,6 +3479,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A content source used within the CMS.",
                   "$ref": "#/components/schemas/ContentSource"
                 }
               }
@@ -3511,6 +3560,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A content source used within the CMS.",
                   "$ref": "#/components/schemas/ContentSource"
                 }
               }
@@ -3581,6 +3631,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A single page of items in a paged collection, including paging metadata such as the current page index, page size, and an estimated total item count.",
                   "$ref": "#/components/schemas/ContentTypeBindingPage"
                 }
               }
@@ -3617,6 +3668,7 @@
           "content": {
             "application/json": {
               "schema": {
+                "description": "A binding between two content types.",
                 "$ref": "#/components/schemas/ContentTypeBinding"
               }
             }
@@ -3653,6 +3705,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A binding between two content types.",
                   "$ref": "#/components/schemas/ContentTypeBinding"
                 }
               }
@@ -3736,6 +3789,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A binding between two content types.",
                   "$ref": "#/components/schemas/ContentTypeBinding"
                 }
               }
@@ -3849,6 +3903,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A binding between two content types.",
                   "$ref": "#/components/schemas/ContentTypeBinding"
                 }
               }
@@ -3929,6 +3984,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A binding between two content types.",
                   "$ref": "#/components/schemas/ContentTypeBinding"
                 }
               }
@@ -4019,6 +4075,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A single page of items in a paged collection, including paging metadata such as the current page index, page size, and an estimated total item count.",
                   "$ref": "#/components/schemas/ContentTypePage"
                 }
               }
@@ -4055,6 +4112,7 @@
           "content": {
             "application/json": {
               "schema": {
+                "description": "A content type definition.",
                 "$ref": "#/components/schemas/ContentType"
               }
             }
@@ -4091,6 +4149,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A content type definition.",
                   "$ref": "#/components/schemas/ContentType"
                 }
               }
@@ -4174,6 +4233,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A content type definition.",
                   "$ref": "#/components/schemas/ContentType"
                 }
               }
@@ -4295,6 +4355,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A content type definition.",
                   "$ref": "#/components/schemas/ContentType"
                 }
               }
@@ -4375,6 +4436,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A content type definition.",
                   "$ref": "#/components/schemas/ContentType"
                 }
               }
@@ -4445,6 +4507,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A single page of items in a paged collection, including paging metadata such as the current page index, page size, and an estimated total item count.",
                   "$ref": "#/components/schemas/DisplayTemplatePage"
                 }
               }
@@ -4481,6 +4544,7 @@
           "content": {
             "application/json": {
               "schema": {
+                "description": "A display template that can be assigned to content.",
                 "$ref": "#/components/schemas/DisplayTemplate"
               }
             }
@@ -4517,6 +4581,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A display template that can be assigned to content.",
                   "$ref": "#/components/schemas/DisplayTemplate"
                 }
               }
@@ -4600,6 +4665,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A display template that can be assigned to content.",
                   "$ref": "#/components/schemas/DisplayTemplate"
                 }
               }
@@ -4713,6 +4779,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A display template that can be assigned to content.",
                   "$ref": "#/components/schemas/DisplayTemplate"
                 }
               }
@@ -4793,6 +4860,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A display template that can be assigned to content.",
                   "$ref": "#/components/schemas/DisplayTemplate"
                 }
               }
@@ -4863,6 +4931,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A single page of items in a paged collection, including paging metadata such as the current page index, page size, and an estimated total item count.",
                   "$ref": "#/components/schemas/LocalePage"
                 }
               }
@@ -4899,6 +4968,7 @@
           "content": {
             "application/json": {
               "schema": {
+                "description": "A locale that can be used for content.",
                 "$ref": "#/components/schemas/Locale"
               }
             }
@@ -4935,6 +5005,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A locale that can be used for content.",
                   "$ref": "#/components/schemas/Locale"
                 }
               }
@@ -5018,6 +5089,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A locale that can be used for content.",
                   "$ref": "#/components/schemas/Locale"
                 }
               }
@@ -5131,6 +5203,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A locale that can be used for content.",
                   "$ref": "#/components/schemas/Locale"
                 }
               }
@@ -5211,6 +5284,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A locale that can be used for content.",
                   "$ref": "#/components/schemas/Locale"
                 }
               }
@@ -5260,14 +5334,14 @@
             "schema": {
               "type": "array",
               "items": {
-                "enum": [
+                "examples": [
                   "locales",
                   "contentTypes",
                   "propertyGroups",
                   "displayTemplates"
                 ],
                 "type": "string",
-                "description": "Defines names of sections in the Manifest."
+                "description": "The sections of a manifest."
               }
             }
           },
@@ -5287,6 +5361,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A set of content model definitions (content types, property groups, display templates, and locales).",
                   "$ref": "#/components/schemas/Manifest"
                 }
               }
@@ -5329,6 +5404,7 @@
           "content": {
             "application/json": {
               "schema": {
+                "description": "A set of content model definitions (content types, property groups, display templates, and locales).",
                 "$ref": "#/components/schemas/Manifest"
               }
             }
@@ -5341,6 +5417,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "The result of a manifest import operation.",
                   "$ref": "#/components/schemas/ManifestImportResult"
                 }
               }
@@ -5408,6 +5485,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A single page of items in a paged collection, including paging metadata such as the current page index, page size, and an estimated total item count.",
                   "$ref": "#/components/schemas/PropertyFormatPage"
                 }
               }
@@ -5493,6 +5571,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A semantic property format available to content type properties.",
                   "$ref": "#/components/schemas/PropertyFormat"
                 }
               }
@@ -5562,6 +5641,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A single page of items in a paged collection, including paging metadata such as the current page index, page size, and an estimated total item count.",
                   "$ref": "#/components/schemas/PropertyGroupPage"
                 }
               }
@@ -5598,6 +5678,7 @@
           "content": {
             "application/json": {
               "schema": {
+                "description": "A property group of a content type.",
                 "$ref": "#/components/schemas/PropertyGroup"
               }
             }
@@ -5634,6 +5715,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A property group of a content type.",
                   "$ref": "#/components/schemas/PropertyGroup"
                 }
               }
@@ -5717,6 +5799,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A property group of a content type.",
                   "$ref": "#/components/schemas/PropertyGroup"
                 }
               }
@@ -5830,6 +5913,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A property group of a content type.",
                   "$ref": "#/components/schemas/PropertyGroup"
                 }
               }
@@ -5910,6 +5994,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "A property group of a content type.",
                   "$ref": "#/components/schemas/PropertyGroup"
                 }
               }
@@ -5964,14 +6049,20 @@
             "maxLength": 255,
             "minLength": 1,
             "type": "string",
-            "description": "The display name of this Application."
+            "description": "The display name of this application."
           },
           "type": {
-            "$ref": "#/components/schemas/ApplicationType"
+            "examples": [
+              "website",
+              "inProcessWebsite"
+            ],
+            "maxLength": 50,
+            "type": "string",
+            "description": "The type of this application."
           },
           "source": {
             "type": "string",
-            "description": "A string that is used to indicate the source of this Application.",
+            "description": "A string that is used to indicate the source of this application.",
             "readOnly": true
           },
           "entryPoint": {
@@ -5988,16 +6079,19 @@
             "description": "Whether this application uses a dedicated assets folder."
           },
           "assetsRoot": {
-            "type": "string",
-            "description": "Returns the root for application-specific assets, if UseApplicationSpecificAssets is true.",
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Returns the root for application-specific assets, if 'useApplicationSpecificAssets' is true.",
             "format": "uri",
-            "nullable": true,
             "readOnly": true
           },
           "hosts": {
             "maxItems": 1000,
             "type": "array",
             "items": {
+              "description": "A host entry for an application.",
               "$ref": "#/components/schemas/ApplicationHost"
             },
             "description": "The hosts assigned to this application."
@@ -6037,7 +6131,7 @@
           }
         },
         "additionalProperties": false,
-        "description": "Represents a CMS application (website or remote website)."
+        "description": "A CMS application (website or remote website)."
       },
       "ApplicationHost": {
         "required": [
@@ -6052,18 +6146,35 @@
             "description": "The DNS host name or IP address and optional port of this host."
           },
           "type": {
-            "$ref": "#/components/schemas/ApplicationHostType"
+            "examples": [
+              "default",
+              "primary",
+              "preview",
+              "redirectPermanent",
+              "redirectTemporary",
+              "edit",
+              "media"
+            ],
+            "maxLength": 50,
+            "type": "string",
+            "description": "The type of this host."
           },
           "locale": {
             "type": "string",
             "description": "The locale associated with this host."
           },
           "preferredUrlScheme": {
-            "$ref": "#/components/schemas/UrlScheme"
+            "examples": [
+              "http",
+              "https"
+            ],
+            "maxLength": 50,
+            "type": "string",
+            "description": "The preferred URL scheme to be used when accessing this host. Will be used by the CMS when generating links to this host."
           }
         },
         "additionalProperties": false,
-        "description": "Represents a host entry for an Application."
+        "description": "A host entry for an application."
       },
       "ApplicationHostPatch": {
         "type": "object",
@@ -6071,34 +6182,51 @@
           "authority": {
             "maxLength": 255,
             "minLength": 1,
-            "type": "string",
-            "description": "The DNS host name or IP address and optional port of this host.",
-            "nullable": true
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "The DNS host name or IP address and optional port of this host."
           },
           "type": {
-            "$ref": "#/components/schemas/ApplicationHostTypePatch"
+            "examples": [
+              "default",
+              "primary",
+              "preview",
+              "redirectPermanent",
+              "redirectTemporary",
+              "edit",
+              "media"
+            ],
+            "maxLength": 50,
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "The type of this host."
           },
           "locale": {
-            "type": "string",
-            "description": "The locale associated with this host.",
-            "nullable": true
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "The locale associated with this host."
           },
           "preferredUrlScheme": {
-            "$ref": "#/components/schemas/UrlSchemePatch"
+            "examples": [
+              "http",
+              "https"
+            ],
+            "maxLength": 50,
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "The preferred URL scheme to be used when accessing this host. Will be used by the CMS when generating links to this host."
           }
         },
         "additionalProperties": false,
-        "description": "Represents a host entry for an Application."
-      },
-      "ApplicationHostType": {
-        "type": "object",
-        "additionalProperties": false,
-        "description": "Represents the type of an ApplicationHost."
-      },
-      "ApplicationHostTypePatch": {
-        "type": "object",
-        "additionalProperties": false,
-        "description": "Represents the type of an ApplicationHost."
+        "description": "A host entry for an application."
       },
       "ApplicationPage": {
         "type": "object",
@@ -6106,6 +6234,7 @@
           "items": {
             "type": "array",
             "items": {
+              "description": "A CMS application (website or remote website).",
               "$ref": "#/components/schemas/Application"
             },
             "description": "The items in this paged collection.",
@@ -6124,15 +6253,17 @@
             "readOnly": true
           },
           "totalCount": {
-            "type": "integer",
+            "type": [
+              "null",
+              "integer"
+            ],
             "description": "The estimated total number of items in the collection. May be omitted if the total count is unknown.",
             "format": "int32",
-            "nullable": true,
             "readOnly": true
           }
         },
         "additionalProperties": false,
-        "description": "Represents a single page of items in a paged collection, including paging metadata such as the current page index, page size, and an estimated total item count."
+        "description": "A single page of items in a paged collection, including paging metadata such as the current page index, page size, and an estimated total item count."
       },
       "ApplicationPatch": {
         "type": "object",
@@ -6140,73 +6271,76 @@
           "displayName": {
             "maxLength": 255,
             "minLength": 1,
-            "type": "string",
-            "description": "The display name of this Application.",
-            "nullable": true
-          },
-          "type": {
-            "$ref": "#/components/schemas/ApplicationTypePatch"
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "The display name of this application."
           },
           "entryPoint": {
-            "type": "string",
+            "type": [
+              "null",
+              "string"
+            ],
             "description": "A reference to the entry point (start page) content for this application.",
-            "format": "uri",
-            "nullable": true
+            "format": "uri"
           },
           "isDefault": {
-            "type": "boolean",
-            "description": "Whether this is the default application.",
-            "nullable": true
+            "type": [
+              "null",
+              "boolean"
+            ],
+            "description": "Whether this is the default application."
           },
           "useApplicationSpecificAssets": {
-            "type": "boolean",
-            "description": "Whether this application uses a dedicated assets folder.",
-            "nullable": true
+            "type": [
+              "null",
+              "boolean"
+            ],
+            "description": "Whether this application uses a dedicated assets folder."
           },
           "hosts": {
             "maxItems": 1000,
-            "type": "array",
+            "type": [
+              "null",
+              "array"
+            ],
             "items": {
               "$ref": "#/components/schemas/ApplicationHostPatch"
             },
-            "description": "The hosts assigned to this application.",
-            "nullable": true
+            "description": "The hosts assigned to this application."
           },
           "usePreviewTokens": {
-            "type": "boolean",
-            "description": "Whether to use preview tokens for this application. Only applicable when the type is 'website'.",
-            "nullable": true
+            "type": [
+              "null",
+              "boolean"
+            ],
+            "description": "Whether to use preview tokens for this application. Only applicable when the type is 'website'."
           },
           "previewUrlFormats": {
-            "type": "object",
+            "type": [
+              "null",
+              "object"
+            ],
             "additionalProperties": {
               "type": "string"
             },
-            "description": "A dictionary of preview URL formats keyed by content type base or content type key. Only applicable when the type is 'website'.",
-            "nullable": true
+            "description": "A dictionary of preview URL formats keyed by content type base or content type key. Only applicable when the type is 'website'."
           }
         },
         "additionalProperties": false,
-        "description": "Represents a CMS application (website or remote website)."
-      },
-      "ApplicationType": {
-        "type": "object",
-        "additionalProperties": false,
-        "description": "Represents the type of an Application."
-      },
-      "ApplicationTypePatch": {
-        "type": "object",
-        "additionalProperties": false,
-        "description": "Represents the type of an Application."
+        "description": "A CMS application (website or remote website)."
       },
       "ApprovalDecisionOptions": {
         "type": "object",
         "properties": {
           "comment": {
             "maxLength": 255,
-            "type": "string",
-            "description": "An optional comment to include with the approval decision. May be required depending on the approval definition configuration.",
-            "nullable": true
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "An optional comment to include with the approval decision. May be required depending on the approval definition configuration."
           },
           "force": {
             "type": "boolean",
@@ -6223,7 +6357,7 @@
         "type": "object",
         "properties": {
           "type": {
-            "enum": [
+            "examples": [
               "string",
               "url",
               "boolean",
@@ -6235,8 +6369,10 @@
               "link",
               "richText",
               "json",
-              "component"
+              "component",
+              "composition"
             ],
+            "maxLength": 50,
             "type": "string",
             "description": "The fundamental data type for the items in the array (e.g., string, integer, content reference)."
           },
@@ -6249,68 +6385,78 @@
             "description": "The content type that items in the array may contain, when the 'type' is set to 'component'."
           },
           "minimum": {
+            "type": "null",
             "oneOf": [
               {
                 "type": "integer",
-                "format": "int32",
-                "nullable": true
+                "description": "Integer value to be used when the property data type is integer.",
+                "format": "int32"
               },
               {
                 "type": "number",
-                "format": "double",
-                "nullable": true
+                "description": "Numerical value to be used when the property data type is float.",
+                "format": "double"
               },
               {
                 "type": "string",
-                "nullable": true
+                "description": "String value to be used when the property data type is string. Does not apply to range conditions."
               },
               {
                 "type": "string",
-                "format": "date-time",
-                "nullable": true
+                "description": "Date-time value to be used when the property data type is date.",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
               }
             ],
-            "description": "The minimum value that properties of this type should be able to contain. Value type must match the type of the array item.",
-            "nullable": true
+            "description": "The minimum value that properties of this type should be able to contain. Value type must match the type of the array item."
           },
           "maximum": {
+            "type": "null",
             "oneOf": [
               {
                 "type": "integer",
-                "format": "int32",
-                "nullable": true
+                "description": "Integer value to be used when the property data type is integer.",
+                "format": "int32"
               },
               {
                 "type": "number",
-                "format": "double",
-                "nullable": true
+                "description": "Numerical value to be used when the property data type is float.",
+                "format": "double"
               },
               {
                 "type": "string",
-                "nullable": true
+                "description": "String value to be used when the property data type is string. Does not apply to range conditions."
               },
               {
                 "type": "string",
-                "format": "date-time",
-                "nullable": true
+                "description": "Date-time value to be used when the property data type is date.",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
               }
             ],
-            "description": "The maximum value that array items of this type should be able to contain. Value type must match the type of the array item.",
-            "nullable": true
+            "description": "The maximum value that array items of this type should be able to contain. Value type must match the type of the array item."
           },
           "minLength": {
             "minimum": 0,
-            "type": "integer",
+            "type": [
+              "null",
+              "integer"
+            ],
             "description": "The minimum string length that array items of this type should be able to contain.",
-            "format": "int32",
-            "nullable": true
+            "format": "int32"
           },
           "maxLength": {
             "minimum": 0,
-            "type": "integer",
+            "type": [
+              "null",
+              "integer"
+            ],
             "description": "The maximum string length that array items of this type should be able to contain.",
-            "format": "int32",
-            "nullable": true
+            "format": "int32"
           },
           "pattern": {
             "type": "string",
@@ -6319,12 +6465,15 @@
           },
           "enum": {
             "maxItems": 1000,
-            "type": "array",
+            "type": [
+              "null",
+              "array"
+            ],
             "items": {
+              "description": "A single value in an enumeration of possible values.",
               "$ref": "#/components/schemas/EnumerationValue"
             },
-            "description": "A predefined list of allowed values for array items of this type. The enumeration values must match the property's data type. Allowed for string, integer, float and date-time property types.",
-            "nullable": true
+            "description": "A predefined list of allowed values for array items of this type. The enumeration values must match the property's data type. Allowed for string, integer, float and date-time property types."
           },
           "allowedTypes": {
             "maxItems": 1000,
@@ -6349,14 +6498,16 @@
             "description": "Defines content and base types that array items of this type may not contain."
           },
           "editorSettings": {
-            "type": "object",
+            "type": [
+              "null",
+              "object"
+            ],
             "additionalProperties": {},
-            "description": "Defines editor specific settings for this item. The settings are specific to the item and editor type.",
-            "nullable": true
+            "description": "Defines editor specific settings for this item. The settings are specific to the item and editor type."
           }
         },
         "additionalProperties": false,
-        "description": "Describes the items of a content type property of type 'array'."
+        "description": "The item definition for a content type property of type 'array'."
       },
       "Blueprint": {
         "required": [
@@ -6404,28 +6555,31 @@
             "readOnly": true
           },
           "content": {
+            "description": "The content structure of this blueprint.",
             "$ref": "#/components/schemas/BlueprintData"
           }
         },
         "additionalProperties": false,
-        "description": "Represents a blueprint of a content item."
+        "description": "A blueprint of a content item."
       },
       "BlueprintData": {
         "allOf": [
           {
+            "description": "Content property values conforming to the content type, with an optional binding to source content.",
             "$ref": "#/components/schemas/ContentData"
           },
           {
             "type": "object",
             "properties": {
               "composition": {
+                "description": "The composition structure of this blueprint, if any. Only relevant for blueprints of experiences and sections.",
                 "$ref": "#/components/schemas/CompositionNode"
               }
             },
             "additionalProperties": false
           }
         ],
-        "description": "Represents the data part of a Blueprint."
+        "description": "The data part of a blueprint."
       },
       "BlueprintDataPatch": {
         "allOf": [
@@ -6442,7 +6596,7 @@
             "additionalProperties": false
           }
         ],
-        "description": "Represents the data part of a Blueprint."
+        "description": "The data part of a blueprint."
       },
       "BlueprintPage": {
         "type": "object",
@@ -6450,6 +6604,7 @@
           "items": {
             "type": "array",
             "items": {
+              "description": "A blueprint of a content item.",
               "$ref": "#/components/schemas/Blueprint"
             },
             "description": "The items in this paged collection.",
@@ -6468,15 +6623,17 @@
             "readOnly": true
           },
           "totalCount": {
-            "type": "integer",
+            "type": [
+              "null",
+              "integer"
+            ],
             "description": "The estimated total number of items in the collection. May be omitted if the total count is unknown.",
             "format": "int32",
-            "nullable": true,
             "readOnly": true
           }
         },
         "additionalProperties": false,
-        "description": "Represents a single page of items in a paged collection, including paging metadata such as the current page index, page size, and an estimated total item count."
+        "description": "A single page of items in a paged collection, including paging metadata such as the current page index, page size, and an estimated total item count."
       },
       "BlueprintPatch": {
         "type": "object",
@@ -6484,16 +6641,93 @@
           "displayName": {
             "maxLength": 255,
             "minLength": 1,
-            "type": "string",
-            "description": "The display name of this blueprint.",
-            "nullable": true
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "The display name of this blueprint."
           },
           "content": {
             "$ref": "#/components/schemas/BlueprintDataPatch"
           }
         },
         "additionalProperties": false,
-        "description": "Represents a blueprint of a content item."
+        "description": "A blueprint of a content item."
+      },
+      "CompositionConfiguration": {
+        "type": "object",
+        "properties": {
+          "format": {
+            "type": "string",
+            "description": "The layout type to use for the built-in composition (e.g. `outline` or `grid`). When empty, the default layout for the base type is used."
+          },
+          "allowedTypes": {
+            "maxItems": 1000,
+            "type": "array",
+            "items": {
+              "maxLength": 255,
+              "minLength": 2,
+              "pattern": "^_?[A-Za-z][:_0-9A-Za-z]*$",
+              "type": "string"
+            },
+            "description": "Content types and base types that the built-in composition is permitted to contain."
+          },
+          "restrictedTypes": {
+            "maxItems": 1000,
+            "type": "array",
+            "items": {
+              "maxLength": 255,
+              "minLength": 2,
+              "pattern": "^_?[A-Za-z][:_0-9A-Za-z]*$",
+              "type": "string"
+            },
+            "description": "Content types and base types that the built-in composition is forbidden from containing."
+          }
+        },
+        "additionalProperties": false,
+        "description": "Configures the built-in composition (the \"canvas\") of an experience or section content type. Only applicable to content types with base type `_experience` or `_section`."
+      },
+      "CompositionConfigurationPatch": {
+        "type": "object",
+        "properties": {
+          "format": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "The layout type to use for the built-in composition (e.g. `outline` or `grid`). When empty, the default layout for the base type is used."
+          },
+          "allowedTypes": {
+            "maxItems": 1000,
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "maxLength": 255,
+              "minLength": 2,
+              "pattern": "^_?[A-Za-z][:_0-9A-Za-z]*$",
+              "type": "string"
+            },
+            "description": "Content types and base types that the built-in composition is permitted to contain."
+          },
+          "restrictedTypes": {
+            "maxItems": 1000,
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "maxLength": 255,
+              "minLength": 2,
+              "pattern": "^_?[A-Za-z][:_0-9A-Za-z]*$",
+              "type": "string"
+            },
+            "description": "Content types and base types that the built-in composition is forbidden from containing."
+          }
+        },
+        "additionalProperties": false,
+        "description": "Configures the built-in composition (the \"canvas\") of an experience or section content type. Only applicable to content types with base type `_experience` or `_section`."
       },
       "CompositionDisplaySettings": {
         "required": [
@@ -6507,37 +6741,43 @@
             "description": "The display template that these settings apply to."
           },
           "settings": {
-            "type": "object",
+            "type": [
+              "null",
+              "object"
+            ],
             "additionalProperties": {
               "type": "string"
             },
-            "description": "The display settings of this CompositionNode.",
-            "nullable": true
+            "description": "The display settings of this composition node."
           }
         },
         "additionalProperties": false,
-        "description": "Defines display settings for a CompositionNode."
+        "description": "Display settings for a composition node."
       },
       "CompositionDisplaySettingsPatch": {
         "type": "object",
         "properties": {
           "displayTemplate": {
             "minLength": 1,
-            "type": "string",
-            "description": "The display template that these settings apply to.",
-            "nullable": true
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "The display template that these settings apply to."
           },
           "settings": {
-            "type": "object",
+            "type": [
+              "null",
+              "object"
+            ],
             "additionalProperties": {
               "type": "string"
             },
-            "description": "The display settings of this CompositionNode.",
-            "nullable": true
+            "description": "The display settings of this composition node."
           }
         },
         "additionalProperties": false,
-        "description": "Defines display settings for a CompositionNode."
+        "description": "Display settings for a composition node."
       },
       "CompositionNode": {
         "required": [
@@ -6547,65 +6787,78 @@
         "properties": {
           "id": {
             "type": "string",
-            "description": "Specifies an identifier of this CompositionNode."
+            "description": "Specifies an identifier of this composition node."
           },
           "displayName": {
             "maxLength": 255,
             "type": "string",
-            "description": "The display name of this ContentType."
+            "description": "The display name of this composition node."
           },
           "nodeType": {
             "minLength": 1,
             "type": "string",
-            "description": "The node type of this CompositionNode."
+            "description": "The node type of this composition node."
           },
           "layoutType": {
             "type": "string",
-            "description": "The node layout type of this CompositionNode"
+            "description": "The node layout type of this composition node"
           },
           "displaySettings": {
+            "description": "Optional display settings for the composition node.",
             "$ref": "#/components/schemas/CompositionDisplaySettings"
           },
           "component": {
+            "description": "Specifies the associated content for this composition node, if any.",
             "$ref": "#/components/schemas/ContentComponent"
           },
           "nodes": {
             "maxItems": 1000,
-            "type": "array",
+            "type": [
+              "null",
+              "array"
+            ],
             "items": {
+              "description": "A node in a content composition.",
               "$ref": "#/components/schemas/CompositionNode"
             },
-            "description": "The child nodes for this CompositionNode.",
-            "nullable": true
+            "description": "The child nodes for this composition node."
           }
         },
         "additionalProperties": false,
-        "description": "Specifies a node in a content composition."
+        "description": "A node in a content composition."
       },
       "CompositionNodePatch": {
         "type": "object",
         "properties": {
           "id": {
-            "type": "string",
-            "description": "Specifies an identifier of this CompositionNode.",
-            "nullable": true
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Specifies an identifier of this composition node."
           },
           "displayName": {
             "maxLength": 255,
-            "type": "string",
-            "description": "The display name of this ContentType.",
-            "nullable": true
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "The display name of this composition node."
           },
           "nodeType": {
             "minLength": 1,
-            "type": "string",
-            "description": "The node type of this CompositionNode.",
-            "nullable": true
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "The node type of this composition node."
           },
           "layoutType": {
-            "type": "string",
-            "description": "The node layout type of this CompositionNode",
-            "nullable": true
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "The node layout type of this composition node"
           },
           "displaySettings": {
             "$ref": "#/components/schemas/CompositionDisplaySettingsPatch"
@@ -6615,16 +6868,18 @@
           },
           "nodes": {
             "maxItems": 1000,
-            "type": "array",
+            "type": [
+              "null",
+              "array"
+            ],
             "items": {
               "$ref": "#/components/schemas/CompositionNodePatch"
             },
-            "description": "The child nodes for this CompositionNode.",
-            "nullable": true
+            "description": "The child nodes for this composition node."
           }
         },
         "additionalProperties": false,
-        "description": "Specifies a node in a content composition."
+        "description": "A node in a content composition."
       },
       "ContentBinding": {
         "required": [
@@ -6643,25 +6898,29 @@
           }
         },
         "additionalProperties": false,
-        "description": "Associates a content item with another source content item, establishing a relationship defined by a content type binding. Used for linking managed content to external or reference content."
+        "description": "An association between a content item and a source content item, defined by a content type binding. Used for linking managed content with external or reference content."
       },
       "ContentBindingPatch": {
         "type": "object",
         "properties": {
           "contentTypeBinding": {
-            "type": "string",
-            "description": "The binding definition key that controls how the source content item is linked and accessed.",
-            "nullable": true
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "The binding definition key that controls how the source content item is linked and accessed."
           },
           "source": {
-            "type": "string",
+            "type": [
+              "null",
+              "string"
+            ],
             "description": "The reference to the source content item that is being bound. This cannot be empty.",
-            "format": "uri",
-            "nullable": true
+            "format": "uri"
           }
         },
         "additionalProperties": false,
-        "description": "Associates a content item with another source content item, establishing a relationship defined by a content type binding. Used for linking managed content to external or reference content."
+        "description": "An association between a content item and a source content item, defined by a content type binding. Used for linking managed content with external or reference content."
       },
       "ContentComponent": {
         "allOf": [
@@ -6672,10 +6931,12 @@
             "type": "object",
             "properties": {
               "reference": {
-                "type": "string",
+                "type": [
+                  "null",
+                  "string"
+                ],
                 "description": "A reference to the content of this component. Cannot be assigned together with 'contentType' or 'properties'.",
-                "format": "uri",
-                "nullable": true
+                "format": "uri"
               },
               "contentType": {
                 "type": "string",
@@ -6685,7 +6946,7 @@
             "additionalProperties": false
           }
         ],
-        "description": "Represents a content component."
+        "description": "A content component."
       },
       "ContentComponentPatch": {
         "allOf": [
@@ -6696,38 +6957,44 @@
             "type": "object",
             "properties": {
               "reference": {
-                "type": "string",
+                "type": [
+                  "null",
+                  "string"
+                ],
                 "description": "A reference to the content of this component. Cannot be assigned together with 'contentType' or 'properties'.",
-                "format": "uri",
-                "nullable": true
+                "format": "uri"
               },
               "contentType": {
-                "type": "string",
-                "description": "The key of the content type that this is an embedded instance of.",
-                "nullable": true
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "description": "The key of the content type that this is an embedded instance of."
               }
             },
             "additionalProperties": false
           }
         ],
-        "description": "Represents a content component."
+        "description": "A content component."
       },
       "ContentData": {
         "type": "object",
         "properties": {
           "binding": {
+            "description": "Optional binding to another content item.",
             "$ref": "#/components/schemas/ContentBinding"
           },
           "properties": {
             "type": "object",
             "additionalProperties": {
+              "description": "A single property value of a content item. The value's type and format are determined by the property definition in the content type schema.",
               "$ref": "#/components/schemas/PropertyData"
             },
             "description": "Properties as they are defined by corresponding component or content type."
           }
         },
         "additionalProperties": false,
-        "description": "Base structure for content data. Contains properties defined by the content type and optional bindings to source content. Property values must conform to the types defined in the associated ContentType definition."
+        "description": "Content property values conforming to the content type, with an optional binding to source content."
       },
       "ContentDataPatch": {
         "type": "object",
@@ -6736,16 +7003,19 @@
             "$ref": "#/components/schemas/ContentBindingPatch"
           },
           "properties": {
-            "type": "object",
+            "type": [
+              "null",
+              "object"
+            ],
             "additionalProperties": {
+              "description": "A single property value of a content item. The value's type and format are determined by the property definition in the content type schema.",
               "$ref": "#/components/schemas/PropertyData"
             },
-            "description": "Properties as they are defined by corresponding component or content type.",
-            "nullable": true
+            "description": "Properties as they are defined by corresponding component or content type."
           }
         },
         "additionalProperties": false,
-        "description": "Base structure for content data. Contains properties defined by the content type and optional bindings to source content. Property values must conform to the types defined in the associated ContentType definition."
+        "description": "Content property values conforming to the content type, with an optional binding to source content."
       },
       "ContentNode": {
         "type": "object",
@@ -6803,10 +7073,12 @@
             "readOnly": true
           },
           "deleted": {
-            "type": "string",
+            "type": [
+              "null",
+              "string"
+            ],
             "description": "If populated, the date and time when this content was deleted.",
             "format": "date-time",
-            "nullable": true,
             "readOnly": true
           },
           "deletedBy": {
@@ -6816,7 +7088,7 @@
           }
         },
         "additionalProperties": false,
-        "description": "Metadata about a content item in the content hierarchy, including ownership, localization, and audit information. This represents the structural information without the actual property values."
+        "description": "Metadata about a content item in the content hierarchy — ownership, localization, and audit information — but not its property values."
       },
       "ContentNodePage": {
         "type": "object",
@@ -6824,6 +7096,7 @@
           "items": {
             "type": "array",
             "items": {
+              "description": "Metadata about a content item in the content hierarchy — ownership, localization, and audit information — but not its property values.",
               "$ref": "#/components/schemas/ContentNode"
             },
             "description": "The items in this paged collection.",
@@ -6842,32 +7115,38 @@
             "readOnly": true
           },
           "totalCount": {
-            "type": "integer",
+            "type": [
+              "null",
+              "integer"
+            ],
             "description": "The estimated total number of items in the collection. May be omitted if the total count is unknown.",
             "format": "int32",
-            "nullable": true,
             "readOnly": true
           }
         },
         "additionalProperties": false,
-        "description": "Represents a single page of items in a paged collection, including paging metadata such as the current page index, page size, and an estimated total item count."
+        "description": "A single page of items in a paged collection, including paging metadata such as the current page index, page size, and an estimated total item count."
       },
       "ContentNodePatch": {
         "type": "object",
         "properties": {
           "container": {
-            "type": "string",
-            "description": "The content item that contains this item in the hierarchy.",
-            "nullable": true
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "The content item that contains this item in the hierarchy."
           },
           "owner": {
-            "type": "string",
-            "description": "The content item that owns this item. Content that is owned by another content is also known as an asset. Cannot be combined with container.",
-            "nullable": true
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "The content item that owns this item. Content that is owned by another content is also known as an asset. Cannot be combined with container."
           }
         },
         "additionalProperties": false,
-        "description": "Metadata about a content item in the content hierarchy, including ownership, localization, and audit information. This represents the structural information without the actual property values."
+        "description": "Metadata about a content item in the content hierarchy — ownership, localization, and audit information — but not its property values."
       },
       "ContentSource": {
         "required": [
@@ -6897,7 +7176,7 @@
             "maxLength": 50,
             "minLength": 1,
             "type": "string",
-            "description": "The key of the source that this ContentSource relates to."
+            "description": "The key of the source that this content source relates to."
           },
           "sourceType": {
             "maxLength": 255,
@@ -6910,7 +7189,7 @@
             "maxLength": 255,
             "minLength": 1,
             "type": "string",
-            "description": "The display name of this ContentSource."
+            "description": "The display name of this content source."
           },
           "created": {
             "type": "string",
@@ -6935,7 +7214,7 @@
             "readOnly": true
           },
           "baseType": {
-            "enum": [
+            "examples": [
               "_page",
               "_component",
               "_media",
@@ -6950,11 +7229,12 @@
             "description": "Represents the base of the corresponding content type."
           },
           "propertyMappings": {
+            "description": "Specifies which properties to include and the mappings for them.",
             "$ref": "#/components/schemas/PropertyMappings"
           }
         },
         "additionalProperties": false,
-        "description": "Describes a content source used within CMS."
+        "description": "A content source used within the CMS."
       },
       "ContentSourcePage": {
         "type": "object",
@@ -6962,6 +7242,7 @@
           "items": {
             "type": "array",
             "items": {
+              "description": "A content source used within the CMS.",
               "$ref": "#/components/schemas/ContentSource"
             },
             "description": "The items in this paged collection.",
@@ -6980,15 +7261,17 @@
             "readOnly": true
           },
           "totalCount": {
-            "type": "integer",
+            "type": [
+              "null",
+              "integer"
+            ],
             "description": "The estimated total number of items in the collection. May be omitted if the total count is unknown.",
             "format": "int32",
-            "nullable": true,
             "readOnly": true
           }
         },
         "additionalProperties": false,
-        "description": "Represents a single page of items in a paged collection, including paging metadata such as the current page index, page size, and an estimated total item count."
+        "description": "A single page of items in a paged collection, including paging metadata such as the current page index, page size, and an estimated total item count."
       },
       "ContentSourcePatch": {
         "type": "object",
@@ -6996,34 +7279,42 @@
           "type": {
             "maxLength": 50,
             "minLength": 1,
-            "type": "string",
-            "description": "Specifies the type of source. For example 'graph' for a GraphQL content source.",
-            "nullable": true
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Specifies the type of source. For example 'graph' for a GraphQL content source."
           },
           "sourceKey": {
             "maxLength": 50,
             "minLength": 1,
-            "type": "string",
-            "description": "The key of the source that this ContentSource relates to.",
-            "nullable": true
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "The key of the source that this content source relates to."
           },
           "sourceType": {
             "maxLength": 255,
             "minLength": 2,
             "pattern": "^[A-Za-z][_0-9A-Za-z]+$",
-            "type": "string",
-            "description": "Specifies the source type of this source.",
-            "nullable": true
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Specifies the source type of this source."
           },
           "displayName": {
             "maxLength": 255,
             "minLength": 1,
-            "type": "string",
-            "description": "The display name of this ContentSource.",
-            "nullable": true
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "The display name of this content source."
           },
           "baseType": {
-            "enum": [
+            "examples": [
               "_page",
               "_component",
               "_media",
@@ -7034,16 +7325,18 @@
               "_section",
               "_element"
             ],
-            "type": "string",
-            "description": "Represents the base of the corresponding content type.",
-            "nullable": true
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Represents the base of the corresponding content type."
           },
           "propertyMappings": {
             "$ref": "#/components/schemas/PropertyMappingsPatch"
           }
         },
         "additionalProperties": false,
-        "description": "Describes a content source used within CMS."
+        "description": "A content source used within the CMS."
       },
       "ContentType": {
         "required": [
@@ -7062,21 +7355,35 @@
             "maxLength": 255,
             "minLength": 1,
             "type": "string",
-            "description": "The display name of this ContentType."
+            "description": "The display name of this content type."
           },
           "description": {
             "maxLength": 255,
             "type": "string",
-            "description": "A description of this ContentType."
+            "description": "A description of this content type."
           },
           "baseType": {
-            "type": "string",
-            "description": "The base type of this ContentType. Ignored for contracts; required for all other content types.",
-            "nullable": true
+            "examples": [
+              "_page",
+              "_component",
+              "_media",
+              "_image",
+              "_video",
+              "_folder",
+              "_experience",
+              "_section",
+              "_element"
+            ],
+            "maxLength": 50,
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "The base type of this content type. Ignored for contracts; required for all other content types."
           },
           "isContract": {
             "type": "boolean",
-            "description": "Specifies if the ContentType is a contract type."
+            "description": "Specifies if the content type is a contract type."
           },
           "source": {
             "type": "string",
@@ -7085,7 +7392,7 @@
           },
           "sortOrder": {
             "type": "integer",
-            "description": "A value that is used to when sorting ContentType instances.",
+            "description": "A value that is used when sorting content type instances.",
             "format": "int32"
           },
           "mayContainTypes": {
@@ -7111,15 +7418,19 @@
             "maxItems": 1000,
             "type": "array",
             "items": {
-              "enum": [
+              "examples": [
                 "sectionEnabled",
                 "elementEnabled",
                 "formsElementEnabled"
               ],
               "type": "string",
-              "description": "Represent a Composition behavior for a ContentType."
+              "description": "A composition behavior for a content type."
             },
             "description": "Provides a set of composition behaviors specifying how this content type can be used within compositions. Currently this can only be assigned when baseType is 'component'."
+          },
+          "composition": {
+            "description": "Configures the built-in composition (the \"canvas\") for experience and section content types. Only applicable when BaseType is `_experience` or `_section`.",
+            "$ref": "#/components/schemas/CompositionConfiguration"
           },
           "contracts": {
             "maxItems": 1000,
@@ -7157,22 +7468,26 @@
           "properties": {
             "type": "object",
             "additionalProperties": {
+              "description": "A single property of a content type, including its data type, validation rules, and editorial metadata.",
               "$ref": "#/components/schemas/ContentTypeProperty"
             },
-            "description": "Dictionary with all custom properties of this ContentType."
+            "description": "Dictionary with all custom properties of this content type."
           },
           "accessRights": {
             "maxItems": 1000,
-            "type": "array",
+            "type": [
+              "null",
+              "array"
+            ],
             "items": {
+              "description": "A user, role, or application that can be granted access to a resource.",
               "$ref": "#/components/schemas/SecurityIdentity"
             },
-            "description": "The access rights assigned to this content type that defines who can create content of this type. If no access rights are assigned, everyone will be able to create content of this type. An empty array means that no new content of this type can be created.",
-            "nullable": true
+            "description": "The access rights assigned to this content type that defines who can create content of this type. If no access rights are assigned, everyone will be able to create content of this type. An empty array means that no new content of this type can be created."
           }
         },
         "additionalProperties": false,
-        "description": "Represents a content type definition."
+        "description": "A content type definition."
       },
       "ContentTypeBinding": {
         "required": [
@@ -7227,13 +7542,14 @@
           "propertyMappings": {
             "type": "object",
             "additionalProperties": {
+              "description": "The mapping of a single content type property to a source property.",
               "$ref": "#/components/schemas/PropertyMapping"
             },
             "description": "Object map with all property mappings for this content type binding. The field name represents the path that the property should bind to."
           }
         },
         "additionalProperties": false,
-        "description": "Defines the binding between two content types."
+        "description": "A binding between two content types."
       },
       "ContentTypeBindingPage": {
         "type": "object",
@@ -7241,6 +7557,7 @@
           "items": {
             "type": "array",
             "items": {
+              "description": "A binding between two content types.",
               "$ref": "#/components/schemas/ContentTypeBinding"
             },
             "description": "The items in this paged collection.",
@@ -7259,15 +7576,17 @@
             "readOnly": true
           },
           "totalCount": {
-            "type": "integer",
+            "type": [
+              "null",
+              "integer"
+            ],
             "description": "The estimated total number of items in the collection. May be omitted if the total count is unknown.",
             "format": "int32",
-            "nullable": true,
             "readOnly": true
           }
         },
         "additionalProperties": false,
-        "description": "Represents a single page of items in a paged collection, including paging metadata such as the current page index, page size, and an estimated total item count."
+        "description": "A single page of items in a paged collection, including paging metadata such as the current page index, page size, and an estimated total item count."
       },
       "ContentTypeBindingPatch": {
         "type": "object",
@@ -7276,29 +7595,36 @@
             "maxLength": 255,
             "minLength": 2,
             "pattern": "^[A-Za-z][_0-9A-Za-z]+$",
-            "type": "string",
-            "description": "Specifies the key of the content type that this binding is from.",
-            "nullable": true
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Specifies the key of the content type that this binding is from."
           },
           "to": {
             "maxLength": 255,
             "minLength": 2,
             "pattern": "^[A-Za-z][_0-9A-Za-z]+$",
-            "type": "string",
-            "description": "Specifies the key of the content type that this binding is to.",
-            "nullable": true
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Specifies the key of the content type that this binding is to."
           },
           "propertyMappings": {
-            "type": "object",
+            "type": [
+              "null",
+              "object"
+            ],
             "additionalProperties": {
+              "description": "The mapping of a single content type property to a source property.",
               "$ref": "#/components/schemas/PropertyMapping"
             },
-            "description": "Object map with all property mappings for this content type binding. The field name represents the path that the property should bind to.",
-            "nullable": true
+            "description": "Object map with all property mappings for this content type binding. The field name represents the path that the property should bind to."
           }
         },
         "additionalProperties": false,
-        "description": "Defines the binding between two content types."
+        "description": "A binding between two content types."
       },
       "ContentTypePage": {
         "type": "object",
@@ -7306,6 +7632,7 @@
           "items": {
             "type": "array",
             "items": {
+              "description": "A content type definition.",
               "$ref": "#/components/schemas/ContentType"
             },
             "description": "The items in this paged collection.",
@@ -7324,15 +7651,17 @@
             "readOnly": true
           },
           "totalCount": {
-            "type": "integer",
+            "type": [
+              "null",
+              "integer"
+            ],
             "description": "The estimated total number of items in the collection. May be omitted if the total count is unknown.",
             "format": "int32",
-            "nullable": true,
             "readOnly": true
           }
         },
         "additionalProperties": false,
-        "description": "Represents a single page of items in a paged collection, including paging metadata such as the current page index, page size, and an estimated total item count."
+        "description": "A single page of items in a paged collection, including paging metadata such as the current page index, page size, and an estimated total item count."
       },
       "ContentTypePatch": {
         "type": "object",
@@ -7340,90 +7669,112 @@
           "displayName": {
             "maxLength": 255,
             "minLength": 1,
-            "type": "string",
-            "description": "The display name of this ContentType.",
-            "nullable": true
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "The display name of this content type."
           },
           "description": {
             "maxLength": 255,
-            "type": "string",
-            "description": "A description of this ContentType.",
-            "nullable": true
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "A description of this content type."
           },
           "sortOrder": {
-            "type": "integer",
-            "description": "A value that is used to when sorting ContentType instances.",
-            "format": "int32",
-            "nullable": true
+            "type": [
+              "null",
+              "integer"
+            ],
+            "description": "A value that is used when sorting content type instances.",
+            "format": "int32"
           },
           "mayContainTypes": {
             "maxItems": 1000,
-            "type": "array",
+            "type": [
+              "null",
+              "array"
+            ],
             "items": {
               "maxLength": 255,
               "minLength": 2,
               "pattern": "^_?[A-Za-z][:_0-9A-Za-z]*$|^\\*$",
               "type": "string"
             },
-            "description": "Provides a set of content types that can be created in containers of this type",
-            "nullable": true
+            "description": "Provides a set of content types that can be created in containers of this type"
           },
           "mediaFileExtensions": {
             "maxItems": 1000,
-            "type": "array",
+            "type": [
+              "null",
+              "array"
+            ],
             "items": {
               "type": "string"
             },
-            "description": "Provides a set of media file extensions that this content type can handle.",
-            "nullable": true
+            "description": "Provides a set of media file extensions that this content type can handle."
           },
           "compositionBehaviors": {
             "maxItems": 1000,
-            "type": "array",
+            "type": [
+              "null",
+              "array"
+            ],
             "items": {
-              "enum": [
+              "examples": [
                 "sectionEnabled",
                 "elementEnabled",
                 "formsElementEnabled"
               ],
               "type": "string",
-              "description": "Represent a Composition behavior for a ContentType."
+              "description": "A composition behavior for a content type."
             },
-            "description": "Provides a set of composition behaviors specifying how this content type can be used within compositions. Currently this can only be assigned when baseType is 'component'.",
-            "nullable": true
+            "description": "Provides a set of composition behaviors specifying how this content type can be used within compositions. Currently this can only be assigned when baseType is 'component'."
+          },
+          "composition": {
+            "$ref": "#/components/schemas/CompositionConfigurationPatch"
           },
           "contracts": {
             "maxItems": 1000,
-            "type": "array",
+            "type": [
+              "null",
+              "array"
+            ],
             "items": {
               "maxLength": 255,
               "minLength": 2,
               "pattern": "^[A-Za-z][_0-9A-Za-z]+$",
               "type": "string"
             },
-            "description": "Provides a set of contract content types that this content type is bound to.",
-            "nullable": true
+            "description": "Provides a set of contract content types that this content type is bound to."
           },
           "properties": {
-            "type": "object",
+            "type": [
+              "null",
+              "object"
+            ],
             "additionalProperties": {
+              "description": "A single property of a content type, including its data type, validation rules, and editorial metadata.",
               "$ref": "#/components/schemas/ContentTypeProperty"
             },
-            "description": "Dictionary with all custom properties of this ContentType.",
-            "nullable": true
+            "description": "Dictionary with all custom properties of this content type."
           },
           "accessRights": {
             "maxItems": 1000,
-            "type": "array",
+            "type": [
+              "null",
+              "array"
+            ],
             "items": {
               "$ref": "#/components/schemas/SecurityIdentityPatch"
             },
-            "description": "The access rights assigned to this content type that defines who can create content of this type. If no access rights are assigned, everyone will be able to create content of this type. An empty array means that no new content of this type can be created.",
-            "nullable": true
+            "description": "The access rights assigned to this content type that defines who can create content of this type. If no access rights are assigned, everyone will be able to create content of this type. An empty array means that no new content of this type can be created."
           }
         },
         "additionalProperties": false,
-        "description": "Represents a content type definition."
+        "description": "A content type definition."
       },
       "ContentTypeProperty": {
         "required": [
@@ -7432,7 +7783,7 @@
         "type": "object",
         "properties": {
           "type": {
-            "enum": [
+            "examples": [
               "string",
               "url",
               "boolean",
@@ -7445,8 +7796,10 @@
               "richText",
               "json",
               "array",
-              "component"
+              "component",
+              "composition"
             ],
+            "maxLength": 50,
             "type": "string",
             "description": "The fundamental data type of this property (e.g., string, integer, content reference)."
           },
@@ -7486,7 +7839,7 @@
             "format": "int32"
           },
           "indexingType": {
-            "enum": [
+            "examples": [
               "disabled",
               "queryable",
               "searchable"
@@ -7495,85 +7848,99 @@
             "description": "Indicates how this property will be indexed in the search engine. If not explicitly set, the property will be indexed using the default indexing setting of the search engine."
           },
           "displayMode": {
-            "enum": [
+            "examples": [
               "available",
               "hidden"
             ],
+            "maxLength": 50,
             "type": "string",
             "description": "Indicates how this property is displayed in the editing interface. If not explicitly set, the property will be available for editing."
           },
           "minimum": {
+            "type": "null",
             "oneOf": [
               {
                 "type": "integer",
-                "format": "int32",
-                "nullable": true
+                "description": "Integer value to be used when the property data type is integer.",
+                "format": "int32"
               },
               {
                 "type": "number",
-                "format": "double",
-                "nullable": true
+                "description": "Numerical value to be used when the property data type is float.",
+                "format": "double"
               },
               {
                 "type": "string",
-                "nullable": true
+                "description": "String value to be used when the property data type is string. Does not apply to range conditions."
               },
               {
                 "type": "string",
-                "format": "date-time",
-                "nullable": true
+                "description": "Date-time value to be used when the property data type is date.",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
               }
             ],
-            "description": "The lowest value (inclusive) allowed for numeric or date properties. Type must match the property's data type.",
-            "nullable": true
+            "description": "The lowest value (inclusive) allowed for numeric or date properties. Type must match the property's data type."
           },
           "maximum": {
+            "type": "null",
             "oneOf": [
               {
                 "type": "integer",
-                "format": "int32",
-                "nullable": true
+                "description": "Integer value to be used when the property data type is integer.",
+                "format": "int32"
               },
               {
                 "type": "number",
-                "format": "double",
-                "nullable": true
+                "description": "Numerical value to be used when the property data type is float.",
+                "format": "double"
               },
               {
                 "type": "string",
-                "nullable": true
+                "description": "String value to be used when the property data type is string. Does not apply to range conditions."
               },
               {
                 "type": "string",
-                "format": "date-time",
-                "nullable": true
+                "description": "Date-time value to be used when the property data type is date.",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
               }
             ],
-            "description": "The highest value (inclusive) allowed for numeric or date properties. Type must match the property's data type.",
-            "nullable": true
+            "description": "The highest value (inclusive) allowed for numeric or date properties. Type must match the property's data type."
           },
           "enum": {
             "maxItems": 1000,
-            "type": "array",
+            "type": [
+              "null",
+              "array"
+            ],
             "items": {
+              "description": "A single value in an enumeration of possible values.",
               "$ref": "#/components/schemas/EnumerationValue"
             },
-            "description": "A predefined list of allowed values for this property. The enumeration values must match the property's data type. Allowed for string, integer, float and date-time property types.",
-            "nullable": true
+            "description": "A predefined list of allowed values for this property. The enumeration values must match the property's data type. Allowed for string, integer, float and date-time property types."
           },
           "minLength": {
             "minimum": 0,
-            "type": "integer",
+            "type": [
+              "null",
+              "integer"
+            ],
             "description": "The minimum character length for string-type properties.",
-            "format": "int32",
-            "nullable": true
+            "format": "int32"
           },
           "maxLength": {
             "minimum": 0,
-            "type": "integer",
+            "type": [
+              "null",
+              "integer"
+            ],
             "description": "The maximum character length for string-type properties.",
-            "format": "int32",
-            "nullable": true
+            "format": "int32"
           },
           "pattern": {
             "type": "string",
@@ -7582,17 +7949,21 @@
           },
           "minItems": {
             "minimum": 0,
-            "type": "integer",
+            "type": [
+              "null",
+              "integer"
+            ],
             "description": "The minimum number of items allowed in array-type properties.",
-            "format": "int32",
-            "nullable": true
+            "format": "int32"
           },
           "maxItems": {
             "minimum": 0,
-            "type": "integer",
+            "type": [
+              "null",
+              "integer"
+            ],
             "description": "The maximum number of items allowed in array-type properties.",
-            "format": "int32",
-            "nullable": true
+            "format": "int32"
           },
           "allowedTypes": {
             "maxItems": 1000,
@@ -7617,17 +7988,20 @@
             "description": "Content types and base types that items in this property are forbidden from containing. Used by properties of content or content reference type."
           },
           "editorSettings": {
-            "type": "object",
+            "type": [
+              "null",
+              "object"
+            ],
             "additionalProperties": {},
-            "description": "Defines editor specific settings for this property. Editor settings are specific to the item and editor type.",
-            "nullable": true
+            "description": "Defines editor specific settings for this property. Editor settings are specific to the item and editor type."
           },
           "items": {
+            "description": "Defines information and restrictions about the items in an array property.",
             "$ref": "#/components/schemas/ArrayItem"
           }
         },
         "additionalProperties": false,
-        "description": "Defines a single property within a content type, including its data type, validation rules, and editorial metadata."
+        "description": "A single property of a content type, including its data type, validation rules, and editorial metadata."
       },
       "ContentVersion": {
         "allOf": [
@@ -7669,19 +8043,23 @@
                 "description": "The display name of this content version."
               },
               "published": {
-                "type": "string",
+                "type": [
+                  "null",
+                  "string"
+                ],
                 "description": "Indicates a time when this content was published or should be published.",
-                "format": "date-time",
-                "nullable": true
+                "format": "date-time"
               },
               "expired": {
-                "type": "string",
+                "type": [
+                  "null",
+                  "string"
+                ],
                 "description": "Indicates a time when this content expired or should expire.",
-                "format": "date-time",
-                "nullable": true
+                "format": "date-time"
               },
               "status": {
-                "enum": [
+                "examples": [
                   "draft",
                   "ready",
                   "published",
@@ -7695,10 +8073,12 @@
                 "readOnly": true
               },
               "delayPublishUntil": {
-                "type": "string",
+                "type": [
+                  "null",
+                  "string"
+                ],
                 "description": "The timestamp when a scheduled version will be published. Only present when status is 'scheduled'.",
                 "format": "date-time",
-                "nullable": true,
                 "readOnly": true
               },
               "routeSegment": {
@@ -7722,16 +8102,18 @@
                 "readOnly": true
               },
               "composition": {
+                "description": "The composition structure of this content version, if any. Only relevant for experiences and sections.",
                 "$ref": "#/components/schemas/CompositionNode"
               },
               "media": {
+                "description": "Media data attached to this content version.",
                 "$ref": "#/components/schemas/MediaData"
               }
             },
             "additionalProperties": false
           }
         ],
-        "description": "Represents a version of a content item."
+        "description": "A version of a content item."
       },
       "ContentVersionPage": {
         "type": "object",
@@ -7739,6 +8121,7 @@
           "items": {
             "type": "array",
             "items": {
+              "description": "A version of a content item.",
               "$ref": "#/components/schemas/ContentVersion"
             },
             "description": "The items in this paged collection.",
@@ -7757,15 +8140,17 @@
             "readOnly": true
           },
           "totalCount": {
-            "type": "integer",
+            "type": [
+              "null",
+              "integer"
+            ],
             "description": "The estimated total number of items in the collection. May be omitted if the total count is unknown.",
             "format": "int32",
-            "nullable": true,
             "readOnly": true
           }
         },
         "additionalProperties": false,
-        "description": "Represents a single page of items in a paged collection, including paging metadata such as the current page index, page size, and an estimated total item count."
+        "description": "A single page of items in a paged collection, including paging metadata such as the current page index, page size, and an estimated total item count."
       },
       "ContentVersionPatch": {
         "allOf": [
@@ -7778,34 +8163,44 @@
               "displayName": {
                 "maxLength": 255,
                 "minLength": 1,
-                "type": "string",
-                "description": "The display name of this content version.",
-                "nullable": true
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "description": "The display name of this content version."
               },
               "published": {
-                "type": "string",
+                "type": [
+                  "null",
+                  "string"
+                ],
                 "description": "Indicates a time when this content was published or should be published.",
-                "format": "date-time",
-                "nullable": true
+                "format": "date-time"
               },
               "expired": {
-                "type": "string",
+                "type": [
+                  "null",
+                  "string"
+                ],
                 "description": "Indicates a time when this content expired or should expire.",
-                "format": "date-time",
-                "nullable": true
+                "format": "date-time"
               },
               "routeSegment": {
                 "maxLength": 255,
-                "type": "string",
-                "description": "A string that represents the segment that should be used when routing or generating routes to the current content instance. This value will always be null when content is based on a non-routable content type.",
-                "nullable": true
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "description": "A string that represents the segment that should be used when routing or generating routes to the current content instance. This value will always be null when content is based on a non-routable content type."
               },
               "simpleRoute": {
                 "maxLength": 253,
                 "pattern": "^[^/].*$",
-                "type": "string",
-                "description": "A simple route (shortcut URL) used to access pages and experiences.",
-                "nullable": true
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "description": "A simple route (shortcut URL) used to access pages and experiences."
               },
               "composition": {
                 "$ref": "#/components/schemas/CompositionNodePatch"
@@ -7817,20 +8212,24 @@
             "additionalProperties": false
           }
         ],
-        "description": "Represents a version of a content item."
+        "description": "A version of a content item."
       },
       "CopyContentOptions": {
         "type": "object",
         "properties": {
           "container": {
-            "type": "string",
-            "description": "Optional key of the container where the copied content should be placed.",
-            "nullable": true
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Optional key of the container where the copied content should be placed."
           },
           "owner": {
-            "type": "string",
-            "description": "Optional key of the owner where the copied content should be placed.",
-            "nullable": true
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Optional key of the owner where the copied content should be placed."
           }
         },
         "additionalProperties": false,
@@ -7861,13 +8260,14 @@
           "choices": {
             "type": "object",
             "additionalProperties": {
+              "description": "A selectable choice for a display setting.",
               "$ref": "#/components/schemas/DisplaySettingChoice"
             },
             "description": "The available choices for this display setting."
           }
         },
         "additionalProperties": false,
-        "description": "Describes a setting for a display template."
+        "description": "A setting for a display template."
       },
       "DisplaySettingChoice": {
         "required": [
@@ -7888,7 +8288,7 @@
           }
         },
         "additionalProperties": false,
-        "description": "Describes a setting for a display template."
+        "description": "A selectable choice for a display setting."
       },
       "DisplayTemplate": {
         "required": [
@@ -7917,9 +8317,23 @@
             "description": "The optional node type this display template is valid for."
           },
           "baseType": {
-            "type": "string",
-            "description": "The optional base type this display template is valid for.",
-            "nullable": true
+            "examples": [
+              "_page",
+              "_component",
+              "_media",
+              "_image",
+              "_video",
+              "_folder",
+              "_experience",
+              "_section",
+              "_element"
+            ],
+            "maxLength": 50,
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "The optional base type this display template is valid for."
           },
           "contentType": {
             "type": "string",
@@ -7954,13 +8368,14 @@
           "settings": {
             "type": "object",
             "additionalProperties": {
+              "description": "A setting for a display template.",
               "$ref": "#/components/schemas/DisplaySetting"
             },
             "description": "The available settings for this display template."
           }
         },
         "additionalProperties": false,
-        "description": "Describes a display template that can be assigned to content."
+        "description": "A display template that can be assigned to content."
       },
       "DisplayTemplatePage": {
         "type": "object",
@@ -7968,6 +8383,7 @@
           "items": {
             "type": "array",
             "items": {
+              "description": "A display template that can be assigned to content.",
               "$ref": "#/components/schemas/DisplayTemplate"
             },
             "description": "The items in this paged collection.",
@@ -7986,15 +8402,17 @@
             "readOnly": true
           },
           "totalCount": {
-            "type": "integer",
+            "type": [
+              "null",
+              "integer"
+            ],
             "description": "The estimated total number of items in the collection. May be omitted if the total count is unknown.",
             "format": "int32",
-            "nullable": true,
             "readOnly": true
           }
         },
         "additionalProperties": false,
-        "description": "Represents a single page of items in a paged collection, including paging metadata such as the current page index, page size, and an estimated total item count."
+        "description": "A single page of items in a paged collection, including paging metadata such as the current page index, page size, and an estimated total item count."
       },
       "DisplayTemplatePatch": {
         "type": "object",
@@ -8002,44 +8420,69 @@
           "displayName": {
             "maxLength": 255,
             "minLength": 1,
-            "type": "string",
-            "description": "The display name of this display template.",
-            "nullable": true
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "The display name of this display template."
           },
           "nodeType": {
             "maxLength": 50,
             "minLength": 2,
             "pattern": "^[A-Za-z][_0-9A-Za-z]+$",
-            "type": "string",
-            "description": "The optional node type this display template is valid for.",
-            "nullable": true
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "The optional node type this display template is valid for."
           },
           "baseType": {
-            "type": "string",
-            "description": "The optional base type this display template is valid for.",
-            "nullable": true
+            "examples": [
+              "_page",
+              "_component",
+              "_media",
+              "_image",
+              "_video",
+              "_folder",
+              "_experience",
+              "_section",
+              "_element"
+            ],
+            "maxLength": 50,
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "The optional base type this display template is valid for."
           },
           "contentType": {
-            "type": "string",
-            "description": "The optional key of the content type this display template is valid for.",
-            "nullable": true
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "The optional key of the content type this display template is valid for."
           },
           "isDefault": {
-            "type": "boolean",
-            "description": "If this is the default display template for the associated base type, node type or content type.",
-            "nullable": true
+            "type": [
+              "null",
+              "boolean"
+            ],
+            "description": "If this is the default display template for the associated base type, node type or content type."
           },
           "settings": {
-            "type": "object",
+            "type": [
+              "null",
+              "object"
+            ],
             "additionalProperties": {
+              "description": "A setting for a display template.",
               "$ref": "#/components/schemas/DisplaySetting"
             },
-            "description": "The available settings for this display template.",
-            "nullable": true
+            "description": "The available settings for this display template."
           }
         },
         "additionalProperties": false,
-        "description": "Describes a display template that can be assigned to content."
+        "description": "A display template that can be assigned to content."
       },
       "EnumerationValue": {
         "required": [
@@ -8052,22 +8495,25 @@
             "oneOf": [
               {
                 "type": "integer",
-                "format": "int32",
-                "nullable": true
+                "description": "Integer value to be used when the property data type is integer.",
+                "format": "int32"
               },
               {
                 "type": "number",
-                "format": "double",
-                "nullable": true
+                "description": "Numerical value to be used when the property data type is float.",
+                "format": "double"
               },
               {
                 "type": "string",
-                "nullable": true
+                "description": "String value to be used when the property data type is string. Does not apply to range conditions."
               },
               {
                 "type": "string",
-                "format": "date-time",
-                "nullable": true
+                "description": "Date-time value to be used when the property data type is date.",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
               }
             ],
             "description": "The defined enumeration value. Value type must match the property type."
@@ -8079,16 +8525,18 @@
           }
         },
         "additionalProperties": false,
-        "description": "Describes one value in an enumeration of possible values."
+        "description": "A single value in an enumeration of possible values."
       },
       "Link": {
         "type": "object",
         "properties": {
           "url": {
-            "type": "string",
+            "type": [
+              "null",
+              "string"
+            ],
             "description": "The URL that the link points to.",
-            "format": "uri",
-            "nullable": true
+            "format": "uri"
           },
           "target": {
             "type": "string",
@@ -8111,7 +8559,7 @@
           }
         },
         "additionalProperties": false,
-        "description": "Represents a HTML hyperlink with URL, display text, and optional rendering properties."
+        "description": "An HTML hyperlink with URL, display text, and optional rendering properties."
       },
       "Locale": {
         "required": [
@@ -8149,12 +8597,15 @@
           },
           "accessRights": {
             "maxItems": 1000,
-            "type": "array",
+            "type": [
+              "null",
+              "array"
+            ],
             "items": {
+              "description": "A user, role, or application that can be granted access to a resource.",
               "$ref": "#/components/schemas/SecurityIdentity"
             },
-            "description": "The access rights assigned to this locale that defines who can create content in this locale. If no access rights are assigned, everyone will be able to create content in this locale. An empty array means that no user will be allowed to create or change content in this locale.",
-            "nullable": true
+            "description": "The access rights assigned to this locale that defines who can create content in this locale. If no access rights are assigned, everyone will be able to create content in this locale. An empty array means that no user will be allowed to create or change content in this locale."
           },
           "created": {
             "type": "string",
@@ -8176,10 +8627,17 @@
             "type": "string",
             "description": "The username of the user that last modified this locale.",
             "readOnly": true
+          },
+          "fallback": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "A fallback locale that should be used if content is not available in the current locale."
           }
         },
         "additionalProperties": false,
-        "description": "Represents a locale that can be used for content."
+        "description": "A locale that can be used for content."
       },
       "LocalePage": {
         "type": "object",
@@ -8187,6 +8645,7 @@
           "items": {
             "type": "array",
             "items": {
+              "description": "A locale that can be used for content.",
               "$ref": "#/components/schemas/Locale"
             },
             "description": "The items in this paged collection.",
@@ -8205,15 +8664,17 @@
             "readOnly": true
           },
           "totalCount": {
-            "type": "integer",
+            "type": [
+              "null",
+              "integer"
+            ],
             "description": "The estimated total number of items in the collection. May be omitted if the total count is unknown.",
             "format": "int32",
-            "nullable": true,
             "readOnly": true
           }
         },
         "additionalProperties": false,
-        "description": "Represents a single page of items in a paged collection, including paging metadata such as the current page index, page size, and an estimated total item count."
+        "description": "A single page of items in a paged collection, including paging metadata such as the current page index, page size, and an estimated total item count."
       },
       "LocalePatch": {
         "type": "object",
@@ -8221,79 +8682,108 @@
           "displayName": {
             "maxLength": 255,
             "minLength": 1,
-            "type": "string",
-            "description": "The display name of this locale.",
-            "nullable": true
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "The display name of this locale."
           },
           "isEnabled": {
-            "type": "boolean",
-            "description": "Indicates whether this locale is enabled and can be used to create content.",
-            "nullable": true
+            "type": [
+              "null",
+              "boolean"
+            ],
+            "description": "Indicates whether this locale is enabled and can be used to create content."
           },
           "routeSegment": {
             "maxLength": 255,
             "minLength": 1,
-            "type": "string",
-            "description": "A string that represents the segment that should be used when routing or generate routes to the current locale",
-            "nullable": true
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "A string that represents the segment that should be used when routing or generate routes to the current locale"
           },
           "sortOrder": {
-            "type": "integer",
+            "type": [
+              "null",
+              "integer"
+            ],
             "description": "A value that is used when sorting locales.",
-            "format": "int32",
-            "nullable": true
+            "format": "int32"
           },
           "accessRights": {
             "maxItems": 1000,
-            "type": "array",
+            "type": [
+              "null",
+              "array"
+            ],
             "items": {
               "$ref": "#/components/schemas/SecurityIdentityPatch"
             },
-            "description": "The access rights assigned to this locale that defines who can create content in this locale. If no access rights are assigned, everyone will be able to create content in this locale. An empty array means that no user will be allowed to create or change content in this locale.",
-            "nullable": true
+            "description": "The access rights assigned to this locale that defines who can create content in this locale. If no access rights are assigned, everyone will be able to create content in this locale. An empty array means that no user will be allowed to create or change content in this locale."
+          },
+          "fallback": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "A fallback locale that should be used if content is not available in the current locale."
           }
         },
         "additionalProperties": false,
-        "description": "Represents a locale that can be used for content."
+        "description": "A locale that can be used for content."
       },
       "Manifest": {
         "type": "object",
         "properties": {
           "locales": {
             "maxItems": 1000,
-            "type": "array",
+            "type": [
+              "null",
+              "array"
+            ],
             "items": {
+              "description": "A locale that can be used for content.",
               "$ref": "#/components/schemas/Locale"
             },
-            "description": "List of locales that are part of this manifest.",
-            "nullable": true
+            "description": "List of locales that are part of this manifest."
           },
           "propertyGroups": {
             "maxItems": 1000,
-            "type": "array",
+            "type": [
+              "null",
+              "array"
+            ],
             "items": {
+              "description": "A property group of a content type.",
               "$ref": "#/components/schemas/PropertyGroup"
             },
-            "description": "List of content type property groups that are part of this manifest.",
-            "nullable": true
+            "description": "List of content type property groups that are part of this manifest."
           },
           "contentTypes": {
             "maxItems": 1000,
-            "type": "array",
+            "type": [
+              "null",
+              "array"
+            ],
             "items": {
+              "description": "A content type definition.",
               "$ref": "#/components/schemas/ContentType"
             },
-            "description": "List of content types that are part of this manifest.",
-            "nullable": true
+            "description": "List of content types that are part of this manifest."
           },
           "displayTemplates": {
             "maxItems": 1000,
-            "type": "array",
+            "type": [
+              "null",
+              "array"
+            ],
             "items": {
+              "description": "A display template that can be assigned to content.",
               "$ref": "#/components/schemas/DisplayTemplate"
             },
-            "description": "List of display templates that are part of this manifest.",
-            "nullable": true
+            "description": "List of display templates that are part of this manifest."
           },
           "lastModified": {
             "type": "string",
@@ -8302,7 +8792,7 @@
           }
         },
         "additionalProperties": false,
-        "description": "Manifest that describes CMS definitions."
+        "description": "A set of content model definitions (content types, property groups, display templates, and locales)."
       },
       "ManifestImportMessage": {
         "type": "object",
@@ -8316,13 +8806,15 @@
             "description": "The message describing an outcome or error."
           },
           "resource": {
-            "type": "string",
-            "description": "The identifier of the resource that was the reason for this message to be created.",
-            "nullable": true
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "The identifier of the resource that was the reason for this message to be created."
           }
         },
         "additionalProperties": false,
-        "description": "Describes a message from a manifest importing operation."
+        "description": "A message from a manifest import operation."
       },
       "ManifestImportResult": {
         "type": "object",
@@ -8330,6 +8822,7 @@
           "outcomes": {
             "type": "array",
             "items": {
+              "description": "A message from a manifest import operation.",
               "$ref": "#/components/schemas/ManifestImportMessage"
             },
             "description": "List of messages describing the outcome from the manifest import.",
@@ -8338,6 +8831,7 @@
           "errors": {
             "type": "array",
             "items": {
+              "description": "A message from a manifest import operation.",
               "$ref": "#/components/schemas/ManifestImportMessage"
             },
             "description": "List of error messages from the manifest import.",
@@ -8357,12 +8851,12 @@
           }
         },
         "additionalProperties": false,
-        "description": "Represents media data attached to a content item."
+        "description": "Media data attached to a content item."
       },
       "MediaDataPatch": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Represents media data attached to a content item."
+        "description": "Media data attached to a content item."
       },
       "NewContent": {
         "required": [
@@ -8388,29 +8882,36 @@
             "type": "string",
             "description": "The key that identifies the owner for the content item to be created. Content that is owned by another content is also known as an asset."
           },
+          "blueprint": {
+            "type": "string",
+            "description": "The key of a blueprint to use as a template for the new content item. When provided, the blueprint's composition and properties are used as defaults for the initial version. Explicit values in the request take precedence over blueprint defaults."
+          },
           "initialVersion": {
+            "description": "The initial version of the content that should be created.",
             "$ref": "#/components/schemas/ContentVersion"
           }
         },
         "additionalProperties": false,
-        "description": "Represents a new content and the initial data required to create it."
+        "description": "New content and the initial data required to create it."
       },
       "NewContentNode": {
         "allOf": [
           {
+            "description": "Metadata about a content item in the content hierarchy — ownership, localization, and audit information — but not its property values.",
             "$ref": "#/components/schemas/ContentNode"
           },
           {
             "type": "object",
             "properties": {
               "initialVersion": {
+                "description": "The initial version of the content that was created.",
                 "$ref": "#/components/schemas/ContentVersion"
               }
             },
             "additionalProperties": false
           }
         ],
-        "description": "Represents the result of creating a new content item."
+        "description": "The result of creating a new content item."
       },
       "Preview": {
         "type": "object",
@@ -8427,7 +8928,7 @@
           }
         },
         "additionalProperties": false,
-        "description": "Represents a preview for a specific application."
+        "description": "A preview for a specific application."
       },
       "PreviewPage": {
         "type": "object",
@@ -8435,6 +8936,7 @@
           "items": {
             "type": "array",
             "items": {
+              "description": "A preview for a specific application.",
               "$ref": "#/components/schemas/Preview"
             },
             "description": "The items in this paged collection.",
@@ -8453,57 +8955,74 @@
             "readOnly": true
           },
           "totalCount": {
-            "type": "integer",
+            "type": [
+              "null",
+              "integer"
+            ],
             "description": "The estimated total number of items in the collection. May be omitted if the total count is unknown.",
             "format": "int32",
-            "nullable": true,
             "readOnly": true
           }
         },
         "additionalProperties": false,
-        "description": "Represents a single page of items in a paged collection, including paging metadata such as the current page index, page size, and an estimated total item count."
+        "description": "A single page of items in a paged collection, including paging metadata such as the current page index, page size, and an estimated total item count."
       },
       "ProblemDetails": {
         "type": "object",
         "properties": {
           "type": {
-            "type": "string",
+            "type": [
+              "null",
+              "string"
+            ],
             "description": "A URI reference that identifies the problem type.",
-            "format": "uri",
-            "nullable": true
+            "format": "uri"
           },
           "title": {
-            "type": "string",
-            "description": "A short, human-readable summary of the problem type.",
-            "nullable": true
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "A short, human-readable summary of the problem type."
           },
           "status": {
             "maximum": 599,
             "minimum": 100,
-            "type": "integer",
+            "type": [
+              "null",
+              "integer"
+            ],
             "description": "The HTTP status code generated by the origin server for this occurrence of the problem.",
-            "format": "int32",
-            "nullable": true
+            "format": "int32"
           },
           "detail": {
-            "type": "string",
-            "description": "A human-readable explanation specific to this occurrence of the problem.",
-            "nullable": true
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "A human-readable explanation specific to this occurrence of the problem."
           },
           "instance": {
-            "type": "string",
+            "type": [
+              "null",
+              "string"
+            ],
             "description": "A URI reference that identifies the specific occurrence of the problem. It may or may not yield further information if dereferenced.",
-            "format": "uri",
-            "nullable": true
+            "format": "uri"
           },
           "code": {
-            "type": "string",
-            "description": "Error code that identifies the problem type.",
-            "nullable": true
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Error code that identifies the problem type."
           },
           "errors": {
             "maxItems": 1000,
-            "type": "array",
+            "type": [
+              "null",
+              "array"
+            ],
             "items": {
               "type": "object",
               "properties": {
@@ -8512,15 +9031,16 @@
                   "description": "A granular explanation of one specific error related to a field, header or query parameter."
                 },
                 "field": {
-                  "type": "string",
+                  "type": [
+                    "null",
+                    "string"
+                  ],
                   "description": "A string that may provide a hint to which field that was the source of the error.",
-                  "nullable": true,
                   "example": "properties.header.displayName"
                 }
               }
             },
-            "description": "An array of error details with more detailed information about the problem.",
-            "nullable": true
+            "description": "An array of error details with more detailed information about the problem."
           }
         },
         "additionalProperties": {}
@@ -8529,6 +9049,7 @@
         "type": "object",
         "properties": {
           "value": {
+            "type": "null",
             "oneOf": [
               {
                 "type": "string",
@@ -8557,9 +9078,11 @@
                 "description": "The value is represented as an integer number when the content type property is defined with type 'int'."
               },
               {
+                "description": "An HTML hyperlink with URL, display text, and optional rendering properties.",
                 "$ref": "#/components/schemas/Link"
               },
               {
+                "description": "Represents a rich text content value.",
                 "$ref": "#/components/schemas/RichText"
               },
               {
@@ -8600,9 +9123,11 @@
                       "description": "The value is represented as an integer number when the item type is defined as 'int'."
                     },
                     {
+                      "description": "An HTML hyperlink with URL, display text, and optional rendering properties.",
                       "$ref": "#/components/schemas/Link"
                     },
                     {
+                      "description": "Represents a rich text content value.",
                       "$ref": "#/components/schemas/RichText"
                     },
                     {
@@ -8616,12 +9141,11 @@
                 }
               }
             ],
-            "description": "The property value, which can be a string, number, boolean, object, array, or null depending on the property type defined in the content type.",
-            "nullable": true
+            "description": "The property value, which can be a string, number, boolean, object, array, or null depending on the property type defined in the content type."
           }
         },
         "additionalProperties": false,
-        "description": "A single property value for a content item. The value's type and format are determined by the property definition in the content type schema."
+        "description": "A single property value of a content item. The value's type and format are determined by the property definition in the content type schema."
       },
       "PropertyFormat": {
         "type": "object",
@@ -8634,7 +9158,7 @@
             "description": "The unique identifier (key) of the resource."
           },
           "dataType": {
-            "enum": [
+            "examples": [
               "string",
               "url",
               "boolean",
@@ -8647,13 +9171,14 @@
               "richText",
               "json",
               "array",
-              "component"
+              "component",
+              "composition"
             ],
             "type": "string",
-            "description": "The underlying data type used for this PropertyFormat."
+            "description": "The underlying data type used for this property format."
           },
           "itemType": {
-            "enum": [
+            "examples": [
               "string",
               "url",
               "boolean",
@@ -8666,7 +9191,8 @@
               "richText",
               "json",
               "array",
-              "component"
+              "component",
+              "composition"
             ],
             "type": "string",
             "description": "The underlying item type used for this property format. Specifies the item type when the dataType is 'array'.",
@@ -8674,7 +9200,7 @@
           },
           "displayName": {
             "type": "string",
-            "description": "The display name of this PropertyFormat."
+            "description": "The display name of this property format."
           },
           "isDeleted": {
             "type": "boolean",
@@ -8705,7 +9231,7 @@
           }
         },
         "additionalProperties": false,
-        "description": "Represent the definition of semantic property formats for content items."
+        "description": "A semantic property format available to content type properties."
       },
       "PropertyFormatPage": {
         "type": "object",
@@ -8713,6 +9239,7 @@
           "items": {
             "type": "array",
             "items": {
+              "description": "A semantic property format available to content type properties.",
               "$ref": "#/components/schemas/PropertyFormat"
             },
             "description": "The items in this paged collection.",
@@ -8731,15 +9258,17 @@
             "readOnly": true
           },
           "totalCount": {
-            "type": "integer",
+            "type": [
+              "null",
+              "integer"
+            ],
             "description": "The estimated total number of items in the collection. May be omitted if the total count is unknown.",
             "format": "int32",
-            "nullable": true,
             "readOnly": true
           }
         },
         "additionalProperties": false,
-        "description": "Represents a single page of items in a paged collection, including paging metadata such as the current page index, page size, and an estimated total item count."
+        "description": "A single page of items in a paged collection, including paging metadata such as the current page index, page size, and an estimated total item count."
       },
       "PropertyGroup": {
         "required": [
@@ -8759,7 +9288,7 @@
             "maxLength": 255,
             "minLength": 1,
             "type": "string",
-            "description": "The display name of this PropertyGroup."
+            "description": "The display name of this property group."
           },
           "source": {
             "type": "string",
@@ -8768,7 +9297,7 @@
           },
           "sortOrder": {
             "type": "integer",
-            "description": "A value that is used to when sorting PropertyGroup instances.",
+            "description": "A value that is used when sorting property group instances.",
             "format": "int32"
           },
           "created": {
@@ -8794,7 +9323,7 @@
           }
         },
         "additionalProperties": false,
-        "description": "Describes a property group of a ContentType in the CMS."
+        "description": "A property group of a content type."
       },
       "PropertyGroupPage": {
         "type": "object",
@@ -8802,6 +9331,7 @@
           "items": {
             "type": "array",
             "items": {
+              "description": "A property group of a content type.",
               "$ref": "#/components/schemas/PropertyGroup"
             },
             "description": "The items in this paged collection.",
@@ -8820,15 +9350,17 @@
             "readOnly": true
           },
           "totalCount": {
-            "type": "integer",
+            "type": [
+              "null",
+              "integer"
+            ],
             "description": "The estimated total number of items in the collection. May be omitted if the total count is unknown.",
             "format": "int32",
-            "nullable": true,
             "readOnly": true
           }
         },
         "additionalProperties": false,
-        "description": "Represents a single page of items in a paged collection, including paging metadata such as the current page index, page size, and an estimated total item count."
+        "description": "A single page of items in a paged collection, including paging metadata such as the current page index, page size, and an estimated total item count."
       },
       "PropertyGroupPatch": {
         "type": "object",
@@ -8836,19 +9368,23 @@
           "displayName": {
             "maxLength": 255,
             "minLength": 1,
-            "type": "string",
-            "description": "The display name of this PropertyGroup.",
-            "nullable": true
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "The display name of this property group."
           },
           "sortOrder": {
-            "type": "integer",
-            "description": "A value that is used to when sorting PropertyGroup instances.",
-            "format": "int32",
-            "nullable": true
+            "type": [
+              "null",
+              "integer"
+            ],
+            "description": "A value that is used when sorting property group instances.",
+            "format": "int32"
           }
         },
         "additionalProperties": false,
-        "description": "Describes a property group of a ContentType in the CMS."
+        "description": "A property group of a content type."
       },
       "PropertyMapping": {
         "required": [
@@ -8869,7 +9405,7 @@
           }
         },
         "additionalProperties": false,
-        "description": "Specifies the binding for a property."
+        "description": "The mapping of a single content type property to a source property."
       },
       "PropertyMappings": {
         "type": "object",
@@ -8885,42 +9421,64 @@
             "description": "The key to use for the item in cms. Required if the SourceType is not of type '_Item'."
           },
           "keyFormat": {
+            "examples": [
+              "digits",
+              "digitsWithHyphens",
+              "digitsWithHyphensAndBraces",
+              "digitsWithHyphensAndParentheses",
+              "digitsWithThreeHyphens"
+            ],
             "pattern": "^digits$|^digitsWithHyphens$|^digitsWithHyphensAndBraces$|^digitsWithHyphensAndParentheses$|^digitsWithThreeHyphens$|^undefined$",
-            "type": "string",
-            "description": "Specifies the format of the source identifier key.",
-            "nullable": true
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Specifies the format of the source identifier key."
           }
         },
         "additionalProperties": false,
-        "description": " Represents a mapping between a property in an external source and its corresponding property in the CMS. Used to define how external properties are mapped to CMS property identifiers and names."
+        "description": "A mapping between a property in an external source and its corresponding property in the CMS."
       },
       "PropertyMappingsPatch": {
         "type": "object",
         "properties": {
           "displayName": {
             "maxLength": 255,
-            "type": "string",
-            "description": "The key to use for the item in cms. Required if the SourceType is not of type '_Item'.",
-            "nullable": true
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "The key to use for the item in cms. Required if the SourceType is not of type '_Item'."
           },
           "keyFormat": {
+            "examples": [
+              "digits",
+              "digitsWithHyphens",
+              "digitsWithHyphensAndBraces",
+              "digitsWithHyphensAndParentheses",
+              "digitsWithThreeHyphens"
+            ],
             "pattern": "^digits$|^digitsWithHyphens$|^digitsWithHyphensAndBraces$|^digitsWithHyphensAndParentheses$|^digitsWithThreeHyphens$|^undefined$",
-            "type": "string",
-            "description": "Specifies the format of the source identifier key.",
-            "nullable": true
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Specifies the format of the source identifier key."
           }
         },
         "additionalProperties": false,
-        "description": " Represents a mapping between a property in an external source and its corresponding property in the CMS. Used to define how external properties are mapped to CMS property identifiers and names."
+        "description": "A mapping between a property in an external source and its corresponding property in the CMS."
       },
       "PublishContentOptions": {
         "type": "object",
         "properties": {
           "delayUntil": {
-            "type": "string",
+            "type": [
+              "null",
+              "string"
+            ],
             "description": "Gets or sets the date and time at which the content should be published, sets the version into 'scheduled' state if a future date is specified.",
-            "format": "date-time",
-            "nullable": true
+            "format": "date-time"
           },
           "force": {
             "type": "boolean",
@@ -8935,9 +9493,11 @@
         "properties": {
           "comment": {
             "maxLength": 255,
-            "type": "string",
-            "description": "An optional comment to include when starting the approval process. May be required depending on the approval definition configuration.",
-            "nullable": true
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "An optional comment to include when starting the approval process. May be required depending on the approval definition configuration."
           }
         },
         "additionalProperties": false,
@@ -8947,10 +9507,12 @@
         "type": "object",
         "properties": {
           "html": {
-            "type": "string",
+            "type": [
+              "null",
+              "string"
+            ],
             "description": "A HTML representation of the rich text content. May be null to indicate no content.",
-            "format": "html",
-            "nullable": true
+            "format": "html"
           }
         },
         "description": "Represents a rich text content value."
@@ -8968,17 +9530,18 @@
             "description": "The unique name of the user, role or application that this identifier references."
           },
           "type": {
-            "enum": [
+            "examples": [
               "user",
               "role",
               "application"
             ],
+            "maxLength": 50,
             "type": "string",
             "description": "The type of the security entity that this identifier references. Will default to 'role' if not specified."
           }
         },
         "additionalProperties": false,
-        "description": "Identifies a user, role or application that can be assigned access associated with a resource."
+        "description": "A user, role, or application that can be granted access to a resource."
       },
       "SecurityIdentityPatch": {
         "type": "object",
@@ -8986,33 +9549,28 @@
           "name": {
             "maxLength": 255,
             "minLength": 1,
-            "type": "string",
-            "description": "The unique name of the user, role or application that this identifier references.",
-            "nullable": true
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "The unique name of the user, role or application that this identifier references."
           },
           "type": {
-            "enum": [
+            "examples": [
               "user",
               "role",
               "application"
             ],
-            "type": "string",
-            "description": "The type of the security entity that this identifier references. Will default to 'role' if not specified.",
-            "nullable": true
+            "maxLength": 50,
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "The type of the security entity that this identifier references. Will default to 'role' if not specified."
           }
         },
         "additionalProperties": false,
-        "description": "Identifies a user, role or application that can be assigned access associated with a resource."
-      },
-      "UrlScheme": {
-        "type": "object",
-        "additionalProperties": false,
-        "description": "Specifies the preferred URL scheme to be used when accessing a host."
-      },
-      "UrlSchemePatch": {
-        "type": "object",
-        "additionalProperties": false,
-        "description": "Specifies the preferred URL scheme to be used when accessing a host."
+        "description": "A user, role, or application that can be granted access to a resource."
       }
     },
     "responses": {

@@ -11,12 +11,12 @@ import { requireEnv } from '@/lib/env';
 import BlankExperience from './BlankExperience';
 import BlankSection from './BlankSection';
 import RichText, { RichTextContentType } from './RichText';
-import { NbcSharedNoticeBlockContentType } from './NbcSharedNoticeBlock';
-import { NbcStepGroupBlockContentType } from './NbcStepGroupBlock';
+import NbcSharedNoticeBlock, { NbcSharedNoticeBlockContentType } from './NbcSharedNoticeBlock';
+import NbcStepGroupBlock, { NbcStepGroupBlockContentType } from './NbcStepGroupBlock';
 import { NbcPartnerCardGridBlockContentType } from './NbcPartnerCardGridBlock';
-import { NbcFaqAccordionBlockContentType } from './NbcFaqAccordionBlock';
+import NbcFaqAccordionBlock, { NbcFaqAccordionBlockContentType } from './NbcFaqAccordionBlock';
 import { NbcImageBlockContentType } from './NbcImageBlock';
-import { NbcHelpArticleContentType } from './NbcHelpArticle';
+import NbcHelpArticle, { NbcHelpArticleContentType } from './NbcHelpArticle';
 import PeacockHero, { PeacockHeroBlockContentType } from '@/app/mock/peacock/_components/Hero';
 import PeacockSportsCarousel, { PeacockSportsCarouselBlockContentType } from '@/app/mock/peacock/_components/SportsCarousel';
 import PeacockShowcase, { PeacockShowcaseBlockContentType } from '@/app/mock/peacock/_components/Showcase';
@@ -68,7 +68,8 @@ export const registeredContentTypes = [
   BlankSectionContentType,
   // Blocks
   RichTextContentType,
-  // NBC Help Center content types (schema only — no renderers registered yet)
+  // NBC Help Center content types (NbcSharedNoticeBlock, NbcStepGroupBlock and
+  // NbcHelpArticle have renderers below; the rest remain schema only)
   NbcSharedNoticeBlockContentType,
   NbcStepGroupBlockContentType,
   NbcPartnerCardGridBlockContentType,
@@ -104,6 +105,12 @@ initReactComponentRegistry({
     BlankSection,
     // Blocks (resolver key === content-type key)
     RichTextBlock: RichText,
+    // NBC Help Center content types with renderers (NbcPartnerCardGridBlock
+    // and NbcImageBlock remain schema only for now).
+    NbcSharedNoticeBlock,
+    NbcStepGroupBlock,
+    NbcFaqAccordionBlock,
+    NbcHelpArticle,
     // Peacock mock homepage sections
     PeacockHeroBlock: PeacockHero,
     PeacockSportsCarouselBlock: PeacockSportsCarousel,

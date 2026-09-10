@@ -1,12 +1,12 @@
-# MockHome components
+# Peacock mock homepage sections
 
-`_components/MockHome.tsx` composes a high-fidelity static recreation of peacocktv.com's homepage — specifically just the `<main id="main-content">` region (hero through the "Browse / Sports / Collections / Originals / Trending / About" link columns). It's rendered by `app/mock/peacock/page.tsx` between `<BrandHeader>` and `<BrandFooter>`; the real `<footer>` (legal links, social, copyright) is `BrandFooter`'s job, not this file's.
+`_components/composition.ts` builds a hand-authored CMS composition tree — standing in for what Optimizely Graph would return for a real experience — listing the 8 sections below as top-level nodes. `app/mock/peacock/page.tsx` renders that tree through `cms/BlankExperience` (the same `OptimizelyComposition` pipeline a real Visual Builder-driven page uses) between `<BrandHeader>` and `<BrandFooter>`; the real `<footer>` (legal links, social, copyright) is `BrandFooter`'s job, not this composition's.
 
 Live sports listings are illustrative placeholders, not real dated games, so they won't go stale.
 
 For internal prototyping/reference only.
 
-Each section lives in its own file in `_components/` and also exports a CMS `contentType()` definition (`_component` baseType, `compositionBehaviors: ['sectionEnabled']`, no properties yet), so the sections are discoverable and pushable via `npm run cms:push` and droppable directly into a Visual Builder experience as their own section. `cms/registry.ts` registers each type's schema and maps its content-type key to its React component in `initReactComponentRegistry`, so it renders when placed in a `BlankExperience`. Each component still renders its own hardcoded content directly — none of them read from CMS `content` yet, since there are no properties to read.
+Each section lives in its own file in `_components/` and also exports a CMS `contentType()` definition (`_component` baseType, `compositionBehaviors: ['sectionEnabled']`, no properties yet), so the sections are discoverable and pushable via `npm run cms:push` and droppable directly into a Visual Builder experience as their own section. `cms/registry.ts` registers each type's schema and maps its content-type key to its React component in `initReactComponentRegistry`, so it renders wherever it's placed in a composition — including `composition.ts`'s mock one. Each component still renders its own hardcoded content directly — none of them read from CMS `content` yet, since there are no properties to read.
 
 ## Icons
 
@@ -17,7 +17,7 @@ Each section lives in its own file in `_components/` and also exports a CMS `con
 
 ## Sections
 
-Rendered in this order inside `MockHome`:
+Rendered in this order by `composition.ts`'s composition tree:
 
 1. **`Hero.tsx`** (`PeacockHeroBlock`) — top banner with headline, subhead, "Get Peacock" / "Get Bundle" CTAs, and a sign-in note for existing subscribers.
 2. **`SportsCarousel.tsx`** (`PeacockSportsCarouselBlock`) — horizontally scrollable row of live/upcoming sports events, sourced from a local `SPORTS_EVENTS` array (sport, matchup, when).
@@ -30,6 +30,6 @@ Rendered in this order inside `MockHome`:
 
 Each section's static data array is private to its own file (not exported).
 
-## `MockHome.tsx`
+## `composition.ts`
 
-Imports the default component from each section file above and composes them into the `<main>` element. Default export: **`MockHome`**.
+Exports `peacockMockExperienceContent`, a mock `BlankExperience` content object whose `composition.nodes` array references each section above by its content-type key (`component.__typename`), matching the keys registered in `cms/registry.ts`. No row/column nesting — `sectionEnabled` components sit directly as top-level nodes.

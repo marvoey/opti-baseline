@@ -1,4 +1,5 @@
-import { contentType } from '@optimizely/cms-sdk';
+import { contentType, type ContentProps } from '@optimizely/cms-sdk';
+import { RichText as RichTextRenderer } from '@optimizely/cms-sdk/react/richText';
 
 export const NbcSharedNoticeBlockContentType = contentType({
   key: 'NbcSharedNoticeBlock',
@@ -41,3 +42,16 @@ export const NbcSharedNoticeBlockContentType = contentType({
     },
   },
 });
+
+type Props = { content: ContentProps<typeof NbcSharedNoticeBlockContentType> };
+
+export default function NbcSharedNoticeBlock({ content }: Props) {
+  return (
+    <div className="mt-8 rounded-xl border border-black/10 bg-neutral-50 p-4 text-[14px] text-black/70">
+      <p className="font-semibold text-black">{content.heading}</p>
+      <div className="mt-1">
+        <RichTextRenderer content={content.body?.json} />
+      </div>
+    </div>
+  );
+}
