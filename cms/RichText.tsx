@@ -1,12 +1,13 @@
 import { contentType, type ContentProps } from '@optimizely/cms-sdk';
 import { getPreviewUtils } from '@optimizely/cms-sdk/react/server';
 import { RichText as RichTextRenderer } from '@optimizely/cms-sdk/react/richText';
+import { intentTaxonomyProperties } from './shared';
 
 export const RichTextContentType = contentType({
   key: 'RichTextBlock',
   baseType: '_component',
-  displayName: 'Rich Text',
-  description: 'A block of formatted text content.',
+  displayName: 'Rich Text (Prose)',
+  description: 'Editorial narrative and formatted prose block.',
   compositionBehaviors: ['elementEnabled', 'sectionEnabled'],
   properties: {
     Body: {
@@ -16,6 +17,7 @@ export const RichTextContentType = contentType({
       isLocalized: true,
       sortOrder: 10,
     },
+    ...intentTaxonomyProperties,
   },
 });
 

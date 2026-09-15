@@ -12,6 +12,10 @@ import BlankExperience from './BlankExperience';
 import BlankSection from './BlankSection';
 import Page, { PageContentType } from './Page';
 import RichText, { RichTextContentType } from './RichText';
+import CardBlock, { CardBlockContentType } from './CardBlock';
+import ActionBlock, { ActionBlockContentType } from './ActionBlock';
+import MediaBlock, { MediaBlockContentType } from './MediaBlock';
+import WayfindingBlock, { WayfindingBlockContentType } from './WayfindingBlock';
 
 /**
  * Single configuration + registration point for the Optimizely SDK.
@@ -28,7 +32,7 @@ import RichText, { RichTextContentType } from './RichText';
  *        - initContentTypeRegistry      → the contentType() definition
  *        - initDisplayTemplateRegistry  → any display template(s)
  *        - initReactComponentRegistry   → map the content type key → component
- *   3. Run `npm run config:push` to push the type(s) to the CMS.
+ *   3. Run `npm run cms:push` to push the type(s) to the CMS.
  */
 const env = requireEnv();
 
@@ -49,6 +53,10 @@ export const registeredContentTypes = [
   PageContentType,
   // Blocks
   RichTextContentType,
+  CardBlockContentType,
+  ActionBlockContentType,
+  MediaBlockContentType,
+  WayfindingBlockContentType,
 ];
 
 initContentTypeRegistry(registeredContentTypes);
@@ -62,5 +70,9 @@ initReactComponentRegistry({
     Page,
     // Blocks (resolver key === content-type key)
     RichTextBlock: RichText,
+    CardPrimitiveBlock: CardBlock,
+    ActionPrimitiveBlock: ActionBlock,
+    MediaPrimitiveBlock: MediaBlock,
+    WayfindingPrimitiveBlock: WayfindingBlock,
   },
 });
