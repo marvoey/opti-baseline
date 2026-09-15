@@ -1,0 +1,152 @@
+import type { LocaleInfo, LocaleKey, PersonaInfo, RetiredPlugin, VisitorProfile } from "./types";
+
+export const personaData: Record<VisitorProfile, PersonaInfo> = {
+  anonymous: {
+    accountName: "Anonymous Visitor",
+    crmStatus: "No CRM Record Linked",
+    intentScore: "0 / 100",
+    industry: "General Visitor",
+    heroTag: "The Full View™ of Consumer Intelligence",
+    headline: "Intelligence. Now even smarter.",
+    subhead:
+      "NIQ's ecosystem of data, emerging tech, AI and experts delivers the most complete and clear understanding of consumer buying behavior.",
+    cta: "Explore All Solutions",
+    featuredReport: "2026 Global Consumer Trends Overview",
+    price: "$1,499",
+  },
+  cpg: {
+    accountName: "Unilever Global Insights (Tier 1)",
+    crmStatus: "Active Sync • Dynamics Record #UNI-8849",
+    intentScore: "94 / 100 (High Buying Intent: Shelf Velocity & Optiq)",
+    industry: "Consumer Packaged Goods (CPG)",
+    heroTag: "ODP Identified: Global FMCG Category Leader",
+    headline: "FMCG Intelligence: Category Share & Pricing Elasticity in an AI World",
+    subhead:
+      "Empowering Unilever category managers with real-time scanner data from 21M+ stores to protect volume velocity against private label expansion.",
+    cta: "Download Unilever Custom Category Brief",
+    featuredReport: "2026 Global FMCG Market Share & Brand Equity Benchmark",
+    price: "$3,800",
+  },
+  retail: {
+    accountName: "Walmart Global Merchandising",
+    crmStatus: "Active Sync • Dynamics Record #WMT-1102",
+    intentScore: "91 / 100 (Researching Omnichannel Grocery Scanner Feeds)",
+    industry: "Retail & Omnichannel Commerce",
+    heroTag: "ODP Identified: Omnichannel Retail Enterprise",
+    headline: "Retail Intelligence: Omnichannel Basket Velocity & Space Optimization",
+    subhead:
+      "Predictive transaction analytics across 177M SKUs to maximize space productivity, eliminate out-of-stocks, and accelerate supplier joint business planning.",
+    cta: "Explore Retail Scanner Suite",
+    featuredReport: "2026 Omnichannel Grocery & Shelf Velocity Index",
+    price: "$2,950",
+  },
+};
+
+export const localizedStrings: Record<LocaleKey, LocaleInfo> = {
+  en: {
+    flag: "🇺🇸",
+    name: "Global (English)",
+    stat1: "$7.4T",
+    stat1Lbl: "Global consumer spend measured",
+    stat2: "177M",
+    stat2Lbl: "Products tracked across 21M+ stores",
+    articleTitle: "A Tale of Two Consumers: Polarized Mindsets Reshaping Global Consumption",
+    badge: "CPG & Retail Intelligence",
+  },
+  de: {
+    flag: "🇩🇪",
+    name: "Germany (Deutsch)",
+    stat1: "€6,8 Bio.",
+    stat1Lbl: "Gemessene Konsumausgaben weltweit",
+    stat2: "177 Mio.",
+    stat2Lbl: "Erfasste Produkte in 21 Mio.+ Filialen",
+    articleTitle: "Konsumententrends 2026: Preisdynamik und Eigenmarken-Wachstum im DACH-Handel",
+    badge: "FMCG & Handelsanalyse DACH",
+  },
+  fr: {
+    flag: "🇫🇷",
+    name: "France (Français)",
+    stat1: "7,4 T$",
+    stat1Lbl: "Dépenses de consommation analysées",
+    stat2: "177M",
+    stat2Lbl: "Produits suivis dans 21M+ points de vente",
+    articleTitle: "Comportement d'Achat 2026 : La polarisation des ménages face à l'arbitrage budgétaire",
+    badge: "Grande Consommation & Retail",
+  },
+  ja: {
+    flag: "🇯🇵",
+    name: "Japan (日本語)",
+    stat1: "7.4兆ドル",
+    stat1Lbl: "測定された世界全体の消費者支出",
+    stat2: "1.77億",
+    stat2Lbl: "2,100万店舗以上で追跡される製品数",
+    articleTitle: "2026年リテールトレンド：オムニチャネル購買行動の劇的変化と勝機",
+    badge: "消費財・リテール分析",
+  },
+};
+
+export const retiredPlugins: RetiredPlugin[] = [
+  {
+    name: "Advanced Custom Fields (ACF)",
+    role: "Custom Schema & Field Modeling",
+    replacement: "Native SaaS CMS Content Types & Blueprints",
+    saving: "$2,400/yr",
+    category: "content",
+  },
+  {
+    name: "Ninja Forms Enterprise",
+    role: "Lead Capture & Inquiries",
+    replacement: "Visual Builder Forms + Direct Dynamics Webhooks",
+    saving: "$4,800/yr",
+    category: "forms",
+  },
+  {
+    name: "WPML Multilingual CMS",
+    role: "Multilingual Translation Management",
+    replacement: "Optimizely Graph Auto-Localization & Locale Trees",
+    saving: "$3,600/yr",
+    category: "content",
+  },
+  {
+    name: "Logic Hop Personalization",
+    role: "Static Geolocation Rules",
+    replacement: "Optimizely Data Platform (ODP) Real-Time Audiences",
+    saving: "$7,200/yr",
+    category: "content",
+  },
+  {
+    name: "Nelio A/B Testing Plugin",
+    role: "Basic Page Optimization",
+    replacement: "Optimizely Web Experimentation Engine",
+    saving: "$8,400/yr",
+    category: "content",
+  },
+  {
+    name: "UserWay Accessibility",
+    role: "Accessibility Overlay Tool",
+    replacement: "Compliant Semantic HTML + Design System Tokens",
+    saving: "$1,900/yr",
+    category: "content",
+  },
+  {
+    name: "Yoast SEO Premium",
+    role: "On-Page Metadata & XML Sitemaps",
+    replacement: "Automated Graph Meta Ingestion & Headless SEO",
+    saving: "$2,200/yr",
+    category: "content",
+  },
+  {
+    name: "MailPoet / WooCommerce Mail",
+    role: "Shop Transactional Notifications",
+    replacement: "Optimizely Campaign Unified Outbound Messaging",
+    saving: "$5,500/yr",
+    category: "forms",
+  },
+  {
+    name: "Custom PHP Backend Modules",
+    role: "Internal Site Administration Fixes",
+    replacement: "Fully Managed Multi-Tenant SaaS Infrastructure",
+    saving: "$48,000/yr dev time",
+    category: "content",
+  },
+];
