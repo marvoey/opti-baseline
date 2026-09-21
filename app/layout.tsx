@@ -8,15 +8,15 @@ import { siteConfig } from "@/lib/siteConfig";
 import "./globals.css";
 import "@/cms/registry";
 
-// VC Nudge (Optimizely's display face) is a licensed face; Space Grotesk is the
-// closest free substitute — chunky, geometric grotesque with strong personality.
+// Chunky, geometric grotesque with strong personality — used for headings.
+// Swap here if a client brand has a specific licensed display face.
 const displayFont = Space_Grotesk({
   variable: "--font-display",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
 
-// Die Grotesk B (the brand body face) → Inter as the closest neutral grotesque.
+// Neutral grotesque body face. Swap here if a client brand has a specific body face.
 const bodyFont = Inter({
   variable: "--font-body",
   subsets: ["latin"],

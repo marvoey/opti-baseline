@@ -3,7 +3,7 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #0a0e1a;
 }
 
 @theme inline {
@@ -23,37 +23,44 @@
    * │  blue-800 = your primary; the rest are tints/shades between.          │
    * └──────────────────────────────────────────────────────────────────────┘
    *
-   * Optimizely brand green ramp.
-   * Anchors: Dark Fir #08251a (darkest), LFGreen #abff44 (signature accent).
+   * Ontic brand ramp — navy chrome, orange signature accent.
+   * Anchors: navy #070A13/#0A0E1A (darkest, chrome), orange #E96822
+   * (primary accent, traced from the Ontic logo mark).
+   *
+   * Note: unlike a single-hue brand ramp, this one pivots hue partway down
+   * (navy at 950/900, then orange from 800 downward) because the two chrome
+   * shades and the accent color are genuinely different hues on ontic.co.
+   * blue-200/blue-400 are kept pale on purpose — MainNav's CTA button still
+   * lays `text-blue-950` on top of them, so they need to stay light enough
+   * for that dark text to read.
    */
-  --color-blue-950: #08251a; /* Dark Fir — footer / hero background */
-  --color-blue-900: #0d3a29; /* Mid Fir — header bg */
-  --color-blue-800: #197050; /* Light Fir — primary green, links */
-  --color-blue-700: #3ab533; /* Good-to-go */
-  --color-blue-600: #4dc844;
-  --color-blue-500: #62d84f;
-  --color-blue-400: #7ddd3d; /* Grass */
-  --color-blue-300: #91dbda; /* Light Blue — teal accent */
-  --color-blue-200: #abff44; /* LFGreen — signature bright green */
-  --color-blue-100: #d8e4cb; /* Neutral 4 */
-  --color-blue-50:  #e4f0da; /* Neutral 3 — light wash */
+  --color-blue-950: #070a13; /* Darkest navy — utility bar / footer background */
+  --color-blue-900: #0a0e1a; /* Navy — header / hero background */
+  --color-blue-800: #e96822; /* Brand orange — primary accent, links, CTAs */
+  --color-blue-700: #d15a16; /* Orange pressed/hover shade */
+  --color-blue-600: #c24e12; /* Deeper orange */
+  --color-blue-500: #f1854c; /* Lighter orange tint */
+  --color-blue-400: #f3b58b; /* Light apricot — CTA button hover (needs navy text on top) */
+  --color-blue-300: #f7d9c0; /* Paler orange tint */
+  --color-blue-200: #fdeee4; /* Palest orange wash — CTA button background (navy text on top) */
+  --color-blue-100: #f8fafc; /* Near-white cool neutral — light section wash */
+  --color-blue-50:  #ffffff; /* White — light section background */
 
-  /* Named Optimizely brand tokens for direct use in custom components. */
-  --color-lfgreen:    #abff44;
-  --color-grass:      #7ddd3d;
-  --color-good-to-go: #3ab533;
-  --color-dark-fir:   #08251a;
-  --color-mid-fir:    #0d3a29;
-  --color-light-fir:  #197050;
-  --color-light-blue: #91dbda;
-  --color-neutral-2:  #eff6e9;
-  --color-neutral-3:  #e4f0da;
+  /* Named Ontic brand tokens for direct use in custom components. */
+  --color-accent:       #e96822;
+  --color-accent-hover: #d15a16;
+  --color-accent-deep:  #c24e12;
+  --color-accent-light: #f1854c;
+  --color-navy-950:     #070a13;
+  --color-navy-900:     #0a0e1a;
+  --color-navy-800:     #0f172a;
+  --color-surface:      #f8fafc;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #070a13;
+    --foreground: #f1f5f9;
   }
 }
 

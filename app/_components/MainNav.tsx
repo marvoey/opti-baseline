@@ -1,14 +1,14 @@
 import Link from 'next/link';
 import { User, Menu } from 'lucide-react';
 import { siteConfig } from '@/lib/siteConfig';
+import { OnticLogo } from './OnticLogo';
 
 const MainNav = () => (
   <header className="sticky top-0 z-50 bg-blue-900 shadow-sm">
     <div className="container mx-auto px-4 flex justify-between items-center h-16">
       <div className="navbar-brand flex items-center" data-cms-field="brand_logo">
         <Link href="/" title="Go to home page" className="flex items-center">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={siteConfig.logoSrc} alt={siteConfig.logoAlt} className="h-14 w-auto" />
+          <OnticLogo className="h-8 w-auto" />
         </Link>
       </div>
 

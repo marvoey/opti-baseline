@@ -1,6 +1,10 @@
 import TopNav from './TopNav';
 import MainNav from './MainNav';
 import Footer from './Footer';
+import { AnnouncementBanner } from '../demo-mock/_components/announcement-banner';
+import { UtilityBar } from '../demo-mock/_components/utility-bar';
+import { SiteHeader } from '../demo-mock/_components/site-header';
+import { SiteFooter } from '../demo-mock/_components/site-footer';
 
 /**
  * Shared static site chrome — header (TopNav + MainNav) and Footer — wrapped
@@ -12,10 +16,11 @@ import Footer from './Footer';
 export default function SiteChrome({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <TopNav />
-      <MainNav />
+      <AnnouncementBanner />
+      <UtilityBar />
+      <SiteHeader />
       <div className="flex-1">{children}</div>
-      <Footer />
+      <SiteFooter />
     </>
   );
 }

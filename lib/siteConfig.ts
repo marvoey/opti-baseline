@@ -3,82 +3,79 @@
  * demo. Colours live in app/globals.css (the `@theme` token block); everything
  * else — site name, logo, nav links, footer columns, legal copy — lives here.
  *
- * To stand up a new demo: edit this file, drop a new public/logo.svg, and tweak
- * the hex values in app/globals.css. No component edits required.
+ * The logo itself is the <OnticLogo/> component (app/_components/OnticLogo.tsx),
+ * rendered directly by MainNav/Footer rather than an <img src=...> here, since
+ * it's an inline SVG, not a static asset.
  */
 
 export type NavLink = { label: string; href: string };
 export type FooterColumn = { heading: string; links: NavLink[] };
 
 export const siteConfig = {
-  /** Used for the document <title> fallback and the logo alt text. */
-  name: 'Optimizely',
+  /** Used for the document <title> fallback. */
+  name: 'Ontic',
   /** Default browser-tab title (per-page titles override via CMS MetaTitle). */
-  title: 'Optimizely | Digital Experience Platform',
+  title: 'Ontic | Protective Intelligence Platform',
   /** Default meta description. */
   description:
-    'Optimizely — the digital experience platform that helps teams create, test, and optimize digital experiences at scale.',
-
-  /** Header logo (place the asset in /public). */
-  logoSrc: '/Optimizely_Primary-Logo_Medium_Green_RGB.png',
-  logoAlt: 'Optimizely',
+    'Ontic is the protective intelligence software platform built to unify threat data, automate security workflows, and safeguard people and physical operations.',
 
   /** Top utility bar. */
   topNavLinks: [
-    { label: 'Partners', href: '#' },
-    { label: 'Support', href: '#' },
+    { label: 'Careers', href: '/demo-mock/platform' },
+    { label: 'Call: 512-572-7400', href: 'tel:512-572-7400' },
   ] satisfies NavLink[],
 
   /** Primary header navigation. */
   mainNavLinks: [
-    { label: 'Products', href: '#' },
-    { label: 'Solutions', href: '#' },
-    { label: 'Customers', href: '#' },
-    { label: 'Resources', href: '#' },
-    { label: 'Pricing', href: '#' },
+    { label: 'Platform & AI', href: '/demo-mock/platform' },
+    { label: 'Solutions', href: '/demo-mock/solutions' },
+    { label: 'Executive Protection', href: '/demo-mock/solutions/executive-protection' },
+    { label: 'Incident Response', href: '/demo-mock/solutions/incident-management' },
   ] satisfies NavLink[],
   /** Header call-to-action button. */
-  primaryCta: { label: 'Get started free', href: '#' } satisfies NavLink,
+  primaryCta: { label: 'Request a Demo', href: '/demo-mock' } satisfies NavLink,
   /** Account / login button label. */
-  accountLabel: 'Log in',
+  accountLabel: 'Client Login',
 
   /** Footer. */
   footerTagline:
-    'Create, test, and optimize digital experiences that turn visitors into loyal customers.',
+    'Ontic is the protective intelligence software platform built to unify threat data, automate security workflows, and safeguard people and physical operations.',
   footerColumns: [
-    {
-      heading: 'Products',
-      links: [
-        { label: 'Content Management', href: '#' },
-        { label: 'Experimentation', href: '#' },
-        { label: 'Commerce', href: '#' },
-        { label: 'Personalization', href: '#' },
-      ],
-    },
     {
       heading: 'Solutions',
       links: [
-        { label: 'B2B Commerce', href: '#' },
-        { label: 'B2C Commerce', href: '#' },
-        { label: 'Digital Marketing', href: '#' },
-        { label: 'Customer Journeys', href: '#' },
+        { label: 'Executive Protection', href: '/demo-mock/solutions/executive-protection' },
+        { label: 'Incident Management', href: '/demo-mock/solutions/incident-management' },
+        { label: 'Threat Intelligence', href: '/demo-mock/solutions' },
+        { label: 'Corporate Investigations', href: '/demo-mock/solutions' },
       ],
     },
     {
-      heading: 'Resources',
+      heading: 'Products',
       links: [
-        { label: 'Blog', href: '#' },
-        { label: 'Documentation', href: '#' },
-        { label: 'Community', href: '#' },
-        { label: 'Webinars', href: '#' },
+        { label: 'Ontic Platform', href: '/demo-mock/platform' },
+        { label: 'Ontic AI Engine', href: '/demo-mock/platform' },
+        { label: 'Risk Intelligence', href: '/demo-mock/platform' },
+        { label: '60+ Integrations', href: '/demo-mock/platform' },
+      ],
+    },
+    {
+      heading: 'Company',
+      links: [
+        { label: 'About Us', href: '/demo-mock' },
+        { label: 'Client Stories', href: '/demo-mock' },
+        { label: 'Trust and Security', href: '/demo-mock/platform' },
+        { label: 'Request Demo', href: '/demo-mock' },
       ],
     },
   ] satisfies FooterColumn[],
-  footerLegal: `© ${2026} Optimizely. All rights reserved.`,
+  footerLegal: `© 2026 Ontic Technologies, Inc. All rights reserved.`,
   footerLegalLinks: [
-    { label: 'Privacy Policy', href: '#' },
-    { label: 'Terms of Service', href: '#' },
-    { label: 'Cookie Settings', href: '#' },
+    { label: 'Privacy Notice', href: '#' },
+    { label: 'Terms of Use', href: '#' },
+    { label: 'Security Overview', href: '#' },
+    { label: 'Cookie Preferences', href: '#' },
   ] satisfies NavLink[],
 } as const;
 

@@ -1,11 +1,11 @@
 import { siteConfig } from '@/lib/siteConfig';
+import { OnticLogo } from './OnticLogo';
 
 const Footer = () => (
   <footer className="bg-blue-950 text-white pt-16 pb-8" data-cms-group="Footer">
     <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
       <div>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={siteConfig.logoSrc} alt={siteConfig.logoAlt} className="h-10 w-auto mb-6" />
+        <OnticLogo className="h-7 w-auto mb-6" />
         <p className="text-white/50 text-sm leading-relaxed">{siteConfig.footerTagline}</p>
       </div>
       {siteConfig.footerColumns.map((col) => (
