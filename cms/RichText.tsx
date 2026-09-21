@@ -5,8 +5,8 @@ import { RichText as RichTextRenderer } from '@optimizely/cms-sdk/react/richText
 export const RichTextContentType = contentType({
   key: 'RichTextBlock',
   baseType: '_component',
-  displayName: 'Rich Text',
-  description: 'A block of formatted text content.',
+  displayName: 'Rich Text (Prose)',
+  description: 'Editorial narrative and formatted prose block.',
   compositionBehaviors: ['elementEnabled', 'sectionEnabled'],
   properties: {
     Body: {
@@ -14,7 +14,27 @@ export const RichTextContentType = contentType({
       displayName: 'Body',
       description: 'Formatted text content.',
       isLocalized: true,
-      sortOrder: 10,
+      editorSettings: { preset: 'expanded' },
+    },
+    Intent: {
+      type: 'string',
+      displayName: 'Intent Tag',
+      description: 'High-level user intent (e.g., explore, evaluate, transact, compliance).',
+    },
+    Audience: {
+      type: 'string',
+      displayName: 'Target Audience',
+      description: 'Target audience segment (e.g., enterprise, smb, developer, c-suite).',
+    },
+    Domain: {
+      type: 'string',
+      displayName: 'Domain / Vertical',
+      description: 'Functional domain (e.g., security, cloud, governance, finance).',
+    },
+    Geo: {
+      type: 'string',
+      displayName: 'Geo / Region',
+      description: 'Geographic region or "global".',
     },
   },
 });
