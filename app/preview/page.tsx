@@ -29,10 +29,23 @@ async function Page({ searchParams }: Props) {
     process.env.OPTIMIZELY_CMS_URL,
   ).href;
 
+  const port = process.env.PORT?.trim() || '3009';
+  const relativePath = content?._metadata?.url?.default as string | undefined;
+
   return (
     <>
       <Script src={injectorSrc} strategy="afterInteractive" />
       <PreviewComponent />
+      {relativePath && (
+        <a
+          href={`http://localhost:${port}${relativePath}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="fixed top-3 right-3 z-[9999] rounded-md border border-gray-200 bg-white px-2.5 py-1 text-xs font-medium text-gray-700 shadow-md hover:bg-gray-100 transition-colors"
+        >
+          Open on localhost:{port}
+        </a>
+      )}
       <OptimizelyComponent content={content} />
     </>
   );
