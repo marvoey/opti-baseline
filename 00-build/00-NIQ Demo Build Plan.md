@@ -21,7 +21,8 @@ To prove the **5,760 Combinatorial Explosion** and demonstrate the **Single-Temp
                             ▼
 ┌────────────────────────────────────────────────────────┐
 │ TO BUILD IN OPTIMIZELY TENANT (~60–75 mins total)      │
-│ 1. Three (3) Minimal Atomic Component Schemas          │
+│ 1. Three (3) Atomic Component Schemas                   │
+│    (HeroBlock extended · ProofBlock + ActionBlock new) │
 │ 2. Five (5) Seeded Content Blocks (2 Permutations)     │
 │ 3. One (1) Master Experience Template + Blueprint      │
 │ 4. Front-End Context Switcher (or GraphiQL Query)      │
@@ -33,26 +34,29 @@ To prove the **5,760 Combinatorial Explosion** and demonstrate the **Single-Temp
 
 ## 2. Step-by-Step Tenant Build Plan
 
-### Step 1: Model 3 Atomic Primitives in CMS SaaS (15 Mins)
-*Keep property schemas lean and clean. Use simple text and choice fields.*
+### Step 1: Model 3 Atomic Primitives in CMS SaaS (Done — see `cms/HeroBlock.tsx`, `cms/ProofBlock.tsx`, `cms/ActionBlock.tsx`, `cms/taxonomy.ts`)
+*Before modeling, the live tenant's existing content types were compared against what this repo registers (`cms/registry.ts`). Result: `HeroBlock` already existed as a type shared with another (banking/mortgage) demo, so it was extended in place rather than rebuilt; no close match existed for `ProofBlock`/`ActionBlock`, so those are net-new.*
 
-#### A. `HeroBlock`
-* `Headline` (Text, Single-line)
-* `Subhead` (Text or Rich Text, target ~100–150 words)
-* `PrimaryCTA` (Text)
-* **Taxonomy Metadata:**
+#### A. `HeroBlock` (pre-existing shared type, extended — not new)
+* `Headline` (Text, single-line, required)
+* `Subheadline` (Text, single-line) — *renamed from the original `Subhead` to match the live schema*
+* `PrimaryCtaLabel` / `PrimaryCtaUrl` (Text) — *split label + URL, replacing the original single `PrimaryCTA` field*
+* `SecondaryCtaLabel` / `SecondaryCtaUrl` (Text) — optional second CTA, inherited from the shared type
+* `Eyebrow` (Text), `BackgroundImage` (Image reference), `MembersOnly` (Boolean) — inherited from the shared type; optional, leave unset for this demo
+* `Audiences` (Choice, banking/mortgage taxonomy) — inherited from the shared type; **not used** by the NIQ demo, leave blank
+* **New Taxonomy Metadata (added for this demo):**
   * `Industry` (Choice: `CPG_FMCG`, `Beverage_Alcohol`, `Tech_Durables`)
   * `Persona` (Choice: `Ecommerce_Lead`, `Insights_Director`, `Category_Manager`)
   * `Solution` (Choice: `DigitalShelf`, `ConsumerPanel`, `BASES`)
 
-#### B. `ProofBlock`
+#### B. `ProofBlock` (new dedicated type)
 * `MetricNumber` (Text, e.g. `"-18%"`, `"92%"`)
 * `MetricLabel` (Text, e.g. `"Retailer Out-of-Stocks"`, `"SKU Forecast Accuracy"`)
 * `ClientQuote` (Text, 1–2 sentences)
 * `ClientIdentifier` (Text, e.g. `"Global FMCG Personal Care Brand"`)
-* **Taxonomy Metadata:** `Industry`, `Persona`
+* **Taxonomy Metadata:** `Industry`, `Persona` (same choice values as `HeroBlock`)
 
-#### C. `ActionBlock`
+#### C. `ActionBlock` (new dedicated type — separate from the tenant's existing generic `ActionPrimitiveBlock` CTA-button type)
 * `Headline` (Text, e.g. `"Connect with your dedicated account lead"`)
 * `LeadName` (Text, e.g. `"Sarah Jenkins"`)
 * `LeadTitle` (Text, e.g. `"Unilever Global Client Director"`)
@@ -67,8 +71,8 @@ To prove the **5,760 Combinatorial Explosion** and demonstrate the **Single-Temp
 #### Permutation A: Marvin Oey (Unilever • Ecommerce VP • Digital Shelf Whitespace)
 1. **Hero Block 1:**
    * **Headline:** *"Unilever Omnichannel Performance: Win the Digital Shelf Across 40+ European Retailers"*
-   * **Subhead:** *"Connect store-level availability directly to omnichannel revenue and share of search on Amazon, Tesco, and Carrefour. Eliminate retailer blindspots with NIQ UPC-level referential data."*
-   * **CTA:** *"Explore Digital Shelf Analytics"*
+   * **Subheadline:** *"Connect store-level availability directly to omnichannel revenue and share of search on Amazon, Tesco, and Carrefour. Eliminate retailer blindspots with NIQ UPC-level referential data."*
+   * **PrimaryCtaLabel:** *"Explore Digital Shelf Analytics"* (leave **PrimaryCtaUrl** pointing at the demo page, or `#` for the mock)
    * **Tags:** `Industry: CPG_FMCG`, `Persona: Ecommerce_Lead`, `Solution: DigitalShelf`
 2. **Proof Block 1:**
    * **Metric:** `"-18%"`
@@ -80,8 +84,8 @@ To prove the **5,760 Combinatorial Explosion** and demonstrate the **Single-Temp
 #### Permutation B: Sarah Jenkins (Unilever • Insights Director • Consumer Panel Focus)
 3. **Hero Block 2:**
    * **Headline:** *"Unilever Consumer Intelligence: Predict Emerging Shopper Shifts with 100% Panel Precision"*
-   * **Subhead:** *"Decode omnichannel buyer behavior and brand switching patterns across FMCG categories. Move from observation to predictive growth with verified consumer panel datasets."*
-   * **CTA:** *"Access Consumer Panel Insights"*
+   * **Subheadline:** *"Decode omnichannel buyer behavior and brand switching patterns across FMCG categories. Move from observation to predictive growth with verified consumer panel datasets."*
+   * **PrimaryCtaLabel:** *"Access Consumer Panel Insights"* (leave **PrimaryCtaUrl** pointing at the demo page, or `#` for the mock)
    * **Tags:** `Industry: CPG_FMCG`, `Persona: Insights_Director`, `Solution: ConsumerPanel`
 4. **Proof Block 2:**
    * **Metric:** `"92%"`
@@ -137,7 +141,7 @@ To prove the **5,760 Combinatorial Explosion** and demonstrate the **Single-Temp
   query ResolveABM($persona: String!) {
     HeroBlock(where: { Persona: { eq: $persona } }) {
       Headline
-      Subhead
+      Subheadline
     }
     ProofBlock(where: { Persona: { eq: $persona } }) {
       MetricNumber

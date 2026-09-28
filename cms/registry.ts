@@ -8,9 +8,12 @@ import {
 import { initReactComponentRegistry } from '@optimizely/cms-sdk/react/server';
 import { requireEnv } from '@/lib/env';
 
+import ActionBlock, { ActionBlockContentType } from './ActionBlock';
 import BlankExperience from './BlankExperience';
 import BlankSection from './BlankSection';
+import HeroBlock, { HeroBlockContentType } from './HeroBlock';
 import Page, { PageContentType } from './Page';
+import ProofBlock, { ProofBlockContentType } from './ProofBlock';
 import RichText, { RichTextContentType } from './RichText';
 
 /**
@@ -49,6 +52,9 @@ export const registeredContentTypes = [
   PageContentType,
   // Blocks
   RichTextContentType,
+  HeroBlockContentType,
+  ProofBlockContentType,
+  ActionBlockContentType,
 ];
 
 initContentTypeRegistry(registeredContentTypes);
@@ -62,5 +68,8 @@ initReactComponentRegistry({
     Page,
     // Blocks (resolver key === content-type key)
     RichTextBlock: RichText,
+    HeroBlock,
+    ProofBlock,
+    ActionBlock,
   },
 });
