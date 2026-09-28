@@ -5,10 +5,10 @@ import Link from 'next/link';
 
 const LINKS = [
   { label: 'Home',            href: '/' },
-  { label: 'Assemble',        href: '/assemble' },
-  { label: 'Content Library', href: '/content-library' },
+  { label: 'Page List',        href: '/demo/governance-drift/params' },
+  { label: 'Demo', href: '/demo/governance-drift' },
   { label: 'Admin',           href: '/admin' },
-  { label: 'CMS',             href: '/cms-admin' },
+  { label: 'Asset Folders',             href: '/admin/asset-folders' },
 ];
 
 export default function DevQuickLinks() {

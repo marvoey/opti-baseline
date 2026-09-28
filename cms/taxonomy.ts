@@ -11,6 +11,9 @@ export function industryProperty(sortOrder = 20) {
       format: 'selectOne',
       displayName: 'Industry',
       description: 'Prospect industry vertical this content targets.',
+      // Required for GraphQL `where` filtering (see /demo/governance-drift) —
+      // without this, the field is invisible to the where-input schema.
+      indexingType: 'queryable' as const,
       sortOrder,
       enum: [
         { value: 'CPG_FMCG', displayName: 'CPG / FMCG' },
@@ -32,6 +35,7 @@ export function personaProperty(sortOrder = 21) {
       format: 'selectOne',
       displayName: 'Persona',
       description: 'Buyer persona this content targets.',
+      indexingType: 'queryable' as const,
       sortOrder,
       enum: [
         { value: 'Ecommerce_Lead', displayName: 'Ecommerce Lead' },
@@ -52,6 +56,7 @@ export function solutionProperty(sortOrder = 22) {
       format: 'selectOne',
       displayName: 'Solution',
       description: 'NIQ solution area this content promotes.',
+      indexingType: 'queryable' as const,
       sortOrder,
       enum: [
         { value: 'DigitalShelf', displayName: 'Digital Shelf' },
@@ -70,6 +75,7 @@ export function tierProperty(sortOrder = 20) {
       format: 'selectOne',
       displayName: 'Tier',
       description: 'Account tier this action is scoped to.',
+      indexingType: 'queryable' as const,
       sortOrder,
       enum: [
         { value: 'StrategicCustomer', displayName: 'Strategic Customer' },

@@ -27,6 +27,9 @@ import {
   RotateCcw
 } from 'lucide-react';
 
+type ProfileKey = 'anonymous' | 'cpg' | 'retail';
+type LangKey = 'en' | 'de' | 'fr' | 'ja';
+
 export default function NIQMicroFulfillmentDemo() {
   // Active Teaser Step in the Sandler Micro-Fulfillment Flow
   const [activeTeaser, setActiveTeaser] = useState(1); // 1 = ODP CRM Recognition, 2 = 10-Market Localization, 3 = Closed-Loop Form & Plugin Relief
@@ -34,11 +37,11 @@ export default function NIQMicroFulfillmentDemo() {
   const [showConsole, setShowConsole] = useState(false);
 
   // Teaser 1 State (ODP Account Recognition)
-  const [visitorProfile, setVisitorProfile] = useState('cpg'); // 'anonymous', 'cpg', 'retail'
+  const [visitorProfile, setVisitorProfile] = useState<ProfileKey>('cpg');
   const [isResolvingProfile, setIsResolvingProfile] = useState(false);
 
   // Teaser 2 State (10-Market Localization)
-  const [selectedLang, setSelectedLang] = useState('de'); // 'en', 'de', 'fr', 'ja'
+  const [selectedLang, setSelectedLang] = useState<LangKey>('de');
   const [isLocalizing, setIsLocalizing] = useState(false);
 
   // Teaser 3 State (Lead Ingestion & Plugin Retirement)
@@ -57,13 +60,13 @@ export default function NIQMicroFulfillmentDemo() {
     { ts: '10:24:02', type: 'ODP', msg: 'Bi-directional MS Dynamics CRM connector handshake verified [OK]' }
   ]);
 
-  const addLog = (type, msg) => {
+  const addLog = (type: string, msg: string) => {
     const time = new Date().toLocaleTimeString();
     setTelemetryLogs(prev => [{ ts: time, type, msg }, ...prev.slice(0, 15)]);
   };
 
   // Handle Persona Change in Teaser 1
-  const handlePersonaChange = (profileKey) => {
+  const handlePersonaChange = (profileKey: ProfileKey) => {
     setIsResolvingProfile(true);
     setVisitorProfile(profileKey);
     addLog('ODP_SYNC', `Querying Graph edge for persona: ${profileKey.toUpperCase()}`);
@@ -74,7 +77,7 @@ export default function NIQMicroFulfillmentDemo() {
   };
 
   // Handle Language Change in Teaser 2
-  const handleLangChange = (langKey) => {
+  const handleLangChange = (langKey: LangKey) => {
     setIsLocalizing(true);
     setSelectedLang(langKey);
     addLog('GRAPH_I18N', `Edge query dispatched for locale: ${langKey.toUpperCase()}`);
@@ -85,7 +88,7 @@ export default function NIQMicroFulfillmentDemo() {
   };
 
   // Handle Form Submission in Teaser 3
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setFormSubmitted(true);
     addLog('DYNAMICS_POST', `Webhook dispatched: MS Dynamics Marketing API (HTTP 201 Created)`);
@@ -313,7 +316,7 @@ export default function NIQMicroFulfillmentDemo() {
                   Talk Track Script:
                 </p>
                 <p className="italic bg-[#E4F0DA]/60 p-3 rounded-xl border border-[#7DDD3D]/30 leading-relaxed text-slate-900">
-                  "Patrick, you mentioned earlier that the CMS has zero awareness of Microsoft Dynamics CRM data—so every visitor looks like an anonymous stranger. Watch what happens in real time. Today, when Unilever visits NIQ.com, WordPress sees an anonymous IP. But when ODP is connected to your Dynamics CRM, the moment they hit the page, Optimizely Graph dynamically restructures the entire experience to FMCG category intelligence in under 18 milliseconds—with zero manual editor work."
+                  &ldquo;Patrick, you mentioned earlier that the CMS has zero awareness of Microsoft Dynamics CRM data—so every visitor looks like an anonymous stranger. Watch what happens in real time. Today, when Unilever visits NIQ.com, WordPress sees an anonymous IP. But when ODP is connected to your Dynamics CRM, the moment they hit the page, Optimizely Graph dynamically restructures the entire experience to FMCG category intelligence in under 18 milliseconds—with zero manual editor work.&rdquo;
                 </p>
                 <p className="text-[11px] text-slate-600 pt-1">
                   &rarr; <strong>Action:</strong> Click the persona buttons below to trigger live re-hydration of the hero headline and featured report.
@@ -327,7 +330,7 @@ export default function NIQMicroFulfillmentDemo() {
                   Talk Track Script:
                 </p>
                 <p className="italic bg-[#E4F0DA]/60 p-3 rounded-xl border border-[#7DDD3D]/30 leading-relaxed text-slate-900">
-                  "You flagged that manual translation across your 10 core markets is creating major release bottlenecks, leaving local sites with dated or substandard analysis. Watch this: instead of waiting three weeks for agencies and WPML plugin syncs, Optimizely Graph serves localized, on-brand analysis to Germany, France, or Japan instantaneously at the edge."
+                  &ldquo;You flagged that manual translation across your 10 core markets is creating major release bottlenecks, leaving local sites with dated or substandard analysis. Watch this: instead of waiting three weeks for agencies and WPML plugin syncs, Optimizely Graph serves localized, on-brand analysis to Germany, France, or Japan instantaneously at the edge.&rdquo;
                 </p>
                 <p className="text-[11px] text-slate-600 pt-1">
                   &rarr; <strong>Action:</strong> Toggle between the German, French, and Japanese flags. Stop talking and let him observe the instantaneous translation.
@@ -341,10 +344,10 @@ export default function NIQMicroFulfillmentDemo() {
                   Talk Track Script:
                 </p>
                 <p className="italic bg-[#E4F0DA]/60 p-3 rounded-xl border border-[#7DDD3D]/30 leading-relaxed text-slate-900">
-                  "Today, Ninja Forms submissions sit in WordPress until someone manually exports a CSV and uploads it to Microsoft Dynamics. Watch what happens when an enterprise buyer requests a brief here: it streams into Dynamics in real time, creates the lead record, and triggers an automated 1:1 welcome in Optimizely Campaign under one unified domain reputation. And as you can see in the table below, that immediately retires 9 commercial plugins and custom code upkeep."
+                  &ldquo;Today, Ninja Forms submissions sit in WordPress until someone manually exports a CSV and uploads it to Microsoft Dynamics. Watch what happens when an enterprise buyer requests a brief here: it streams into Dynamics in real time, creates the lead record, and triggers an automated 1:1 welcome in Optimizely Campaign under one unified domain reputation. And as you can see in the table below, that immediately retires 9 commercial plugins and custom code upkeep.&rdquo;
                 </p>
                 <p className="text-[11px] text-slate-600 pt-1">
-                  &rarr; <strong>Action:</strong> Click 'Submit Brief' on the live form, then highlight the 9-plugin retirement ledger.
+                  &rarr; <strong>Action:</strong> Click &apos;Submit Brief&apos; on the live form, then highlight the 9-plugin retirement ledger.
                 </p>
               </div>
             )}
@@ -405,12 +408,14 @@ export default function NIQMicroFulfillmentDemo() {
                 Select Regional Market:
               </span>
               <div className="flex items-center gap-1.5 bg-[#E4F0DA] p-1 rounded-xl border border-[#7DDD3D]/40">
-                {[
-                  { key: 'en', flag: '🇺🇸', label: 'Global (EN)' },
-                  { key: 'de', flag: '🇩🇪', label: 'Germany (DE)' },
-                  { key: 'fr', flag: '🇫🇷', label: 'France (FR)' },
-                  { key: 'ja', flag: '🇯🇵', label: 'Japan (JA)' }
-                ].map(item => (
+                {(
+                  [
+                    { key: 'en', flag: '🇺🇸', label: 'Global (EN)' },
+                    { key: 'de', flag: '🇩🇪', label: 'Germany (DE)' },
+                    { key: 'fr', flag: '🇫🇷', label: 'France (FR)' },
+                    { key: 'ja', flag: '🇯🇵', label: 'Japan (JA)' }
+                  ] as const
+                ).map(item => (
                   <button
                     key={item.key}
                     onClick={() => handleLangChange(item.key)}
