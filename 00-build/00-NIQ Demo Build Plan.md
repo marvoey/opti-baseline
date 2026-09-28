@@ -24,7 +24,8 @@ To prove the **5,760 Combinatorial Explosion** and demonstrate the **Single-Temp
 │ 1. Three (3) Atomic Component Schemas                   │
 │    (HeroBlock extended · ProofBlock + ActionBlock new) │
 │ 2. Five (5) Seeded Content Blocks (2 Permutations)     │
-│ 3. One (1) Master Experience Template + Blueprint      │
+│ 3. Two (2) NIQLimitlessPage Instances, one per persona │
+│    (Hero/Proof/Action slots)                           │
 │ 4. Front-End Context Switcher (or GraphiQL Query)      │
 │ 5. One (1) Pre-Saved Mark CMP Prompt                   │
 └────────────────────────────────────────────────────────┘
@@ -104,17 +105,20 @@ To prove the **5,760 Combinatorial Explosion** and demonstrate the **Single-Temp
 
 ---
 
-### Step 3: Create The Master Experience in Visual Builder (20 Mins)
-1. **Create One Single Experience:**
-   * URL Path: `/solutions/enterprise-omnichannel`
-2. **Assemble Layout Structure:**
-   * Add a Section with 3 stacked slots/rows:
-     * **Slot 1:** Hero Block
-     * **Slot 2:** Proof Block
-     * **Slot 3:** Action / Meeting Block
-3. **Save as Blueprint:**
-   * Highlight the section in the Outline panel $\rightarrow$ Click **"Save Blueprint"** $\rightarrow$ Name it: `"ABM Enterprise Strategic Expansion"`.
-   * *Demo Purpose:* Proves marketers instantiate pre-governed design patterns in clicks without filing engineering tickets.
+### Step 3: Instantiate the `NIQLimitlessPage` Template, Once Per Persona (15 Mins)
+*Supersedes the original Visual Builder Experience + Blueprint approach. A dedicated page type — `NIQLimitlessPage` — was modeled directly in the CMS with three fixed `contentReference` slots (`HeroSlot` → `HeroBlock`, `ProofSlot` → `ProofBlock`, `ActionSlot` → `ActionBlock`) instead of an ad-hoc Visual Builder section. It's already registered and rendered in code (`cms/NiqLimitlessPage.tsx`, wired in `cms/registry.ts`) — a contentReference only delivers `{key, url}` from Graph, so the renderer resolves each slot's referenced item via the existing `expandReferences` helper (`cms/expandRefs.ts`) before handing it to the `HeroBlock`/`ProofBlock`/`ActionBlock` components. No Blueprint step is needed: the reusable pattern **is** the content type itself, so "instantiating a governed pattern in clicks" now means creating a new `NIQLimitlessPage` item and pointing its slots at tagged blocks — zero markup, zero new code.*
+
+1. **Create Page Instance 1 — Marvin (Ecommerce Lead):**
+   * URL Path: `/solutions/enterprise-omnichannel-marvin`
+   * `HeroSlot` → Hero Block 1 (Marvin, Digital Shelf)
+   * `ProofSlot` → Proof Block 1 (`-18%` Out-of-Stocks)
+   * `ActionSlot` → Action Block 1 (Strategic Account Scheduling)
+2. **Create Page Instance 2 — Sarah (Insights Director):**
+   * URL Path: `/solutions/enterprise-omnichannel-sarah`
+   * `HeroSlot` → Hero Block 2 (Sarah, Consumer Panel)
+   * `ProofSlot` → Proof Block 2 (`92%` Forecast Accuracy)
+   * `ActionSlot` → Action Block 1 (same shared Action block as Instance 1)
+   * *Demo Purpose:* Two pages, one template, zero engineering tickets — proves the "single-template multi-intent engine" without needing a same-URL runtime toggle.
 
 ---
 
@@ -123,17 +127,17 @@ To prove the **5,760 Combinatorial Explosion** and demonstrate the **Single-Temp
 *Choose the demonstration vehicle that best fits your audience:*
 
 #### Option A: Interactive Front-End Switcher (Recommended for Business / Marketing Leaders)
-* On the demo landing page template, render a small floating diagnostic pill in the top-right corner:
+* On both `NIQLimitlessPage` instances, render a small floating diagnostic pill in the top-right corner:
   ```html
   <div class="demo-switcher">
     <span>Visitor Context:</span>
-    <select onchange="switchPersona(this.value)">
-      <option value="marvin">Marvin Oey (VP Ecommerce • Digital Shelf Surge)</option>
-      <option value="sarah">Sarah Jenkins (Director Insights • Panel Focus)</option>
+    <select onchange="location.href = this.value">
+      <option value="/solutions/enterprise-omnichannel-marvin">Marvin Oey (VP Ecommerce • Digital Shelf Surge)</option>
+      <option value="/solutions/enterprise-omnichannel-sarah">Sarah Jenkins (Director Insights • Panel Focus)</option>
     </select>
   </div>
   ```
-* Selecting the dropdown re-renders Slot 1 & Slot 2 immediately via dynamic state/query on the **same URL without page reloading**.
+* Selecting the dropdown navigates between the two page instances. Since both are the same `NIQLimitlessPage` type with the same slot layout, the Hero/Proof/Action content still visibly "morphs" while the page shell stays identical — the point is the **template resolves differently per instance's tagged slot references**, not a same-URL client-side toggle.
 
 #### Option B: GraphiQL Explorer (Recommended for Technical / Architecture Leads)
 * Open Optimizely Graph API Explorer and run the query live:
@@ -169,8 +173,8 @@ To prove the **5,760 Combinatorial Explosion** and demonstrate the **Single-Temp
 
 | Common Overthinking Pitfall | What to Do Instead | Why |
 |---|---|---|
-| **Building 10–20 separate pages** | Build **ONE** master template with dynamic slots. | Building multiple pages contradicts the Challenger insight that page cloning is obsolete. |
-| **Writing custom CSS/themes** | Use standard Visual Builder components. | The prospect evaluates time-to-market and operational handoffs, not custom styling. |
+| **Building 10–20 separate hand-coded pages** | Build **ONE** governed page type (`NIQLimitlessPage`) and instantiate it per persona by referencing tagged blocks. | Two zero-code instances of the same template is categorically different from engineers hand-cloning markup across 5,760 permutations. |
+| **Writing custom CSS/themes** | Reuse the existing `HeroBlock`/`ProofBlock`/`ActionBlock` renderers. | The prospect evaluates time-to-market and operational handoffs, not custom styling. |
 | **Building live 6sense webhook APIs** | Use the existing LinkedIn Feed mock canvas. | Live external webhooks add latency and failure risk during live demos. |
 | **Adding complete header/footer menus** | Keep the layout focused on Hero, Proof, and CTA. | Full navigation menus distract the audience from the core narrative contrast. |
 
@@ -182,6 +186,6 @@ To prove the **5,760 Combinatorial Explosion** and demonstrate the **Single-Temp
 |---|---|---|---|
 | **0:00 – 1:45** | **Act 1: Validate the Genius** | LinkedIn Feed Canvas (`dat7o4a9io6g009udcag`) | *"Look at how sophisticated your ABM intelligence is. 6sense identifies Marvin Oey at Unilever surging on digital shelf analytics (94/100). The LinkedIn ad speaks directly to his pain."* |
 | **1:45 – 3:30** | **Act 2: Expose the Pain & The Math** | Click to live `nielseniq.com/products/digital-shelf/` | *"Marvin clicks 'Learn more'. Look at the page: generic title, spirits case study, and an SDR lead form. Why? Because manual page cloning across 5,760 permutations causes operational paralysis."* |
-| **3:30 – 5:30** | **Act 3: Orchestrate with CMP & Mark** | Optimizely CMP + Visual Builder | *"Mark synthesizes the brief in seconds. In Visual Builder, marketers assemble governed Blueprints. Mark writes persona copy variants in 3 seconds without developer tickets."* |
-| **5:30 – 7:15** | **Act 3: Live Permutation Switch** | Demo Page `/solutions/enterprise-omnichannel` | Toggle from **Marvin** to **Sarah**. Show the Hero, Proof, and CTA morph instantly on the exact same URL via Graph in <50ms. |
+| **3:30 – 5:30** | **Act 3: Orchestrate with CMP & Mark** | Optimizely CMP + CMS | *"Mark synthesizes the brief in seconds. Marketers instantiate the governed `NIQLimitlessPage` template and point its slots at tagged blocks — no Visual Builder assembly required. Mark writes persona copy variants in 3 seconds without developer tickets."* |
+| **5:30 – 7:15** | **Act 3: Live Permutation Switch** | `/solutions/enterprise-omnichannel-marvin` → `/solutions/enterprise-omnichannel-sarah` | Toggle from **Marvin** to **Sarah** via the dropdown. Same `NIQLimitlessPage` template, same slot layout — only the referenced Hero/Proof/CTA blocks differ, resolved via Graph in <50ms. |
 | **7:15 – 8:00** | **The Challenger Close** | Architecture Canvas (`dat7ad29io6g009p6h2g`) | *"From intent signal to live personalized experience in minutes, not months. Zero tickets. Zero cloned pages. Zero context loss."* |

@@ -16,6 +16,9 @@ export function industryProperty(sortOrder = 20) {
         { value: 'CPG_FMCG', displayName: 'CPG / FMCG' },
         { value: 'Beverage_Alcohol', displayName: 'Beverage & Alcohol' },
         { value: 'Tech_Durables', displayName: 'Tech & Durables' },
+        { value: 'PersonalCare', displayName: 'Personal Care' },
+        { value: 'PackagedFoods', displayName: 'Packaged Foods' },
+        { value: 'BeverageAlcohol', displayName: 'Beverage Alcohol' },
       ],
     },
   };
@@ -34,6 +37,8 @@ export function personaProperty(sortOrder = 21) {
         { value: 'Ecommerce_Lead', displayName: 'Ecommerce Lead' },
         { value: 'Insights_Director', displayName: 'Insights Director' },
         { value: 'Category_Manager', displayName: 'Category Manager' },
+        { value: 'Ecommerce_VP', displayName: 'Ecommerce VP' },
+        { value: 'Category_Commercial', displayName: 'Category & Commercial' },
       ],
     },
   };
@@ -70,6 +75,7 @@ export function tierProperty(sortOrder = 20) {
         { value: 'StrategicCustomer', displayName: 'Strategic Customer' },
         { value: 'MidMarket', displayName: 'Mid-Market' },
         { value: 'Prospect', displayName: 'Prospect' },
+        { value: 'ConsiderationProspect', displayName: 'Consideration Prospect' },
       ],
     },
   };

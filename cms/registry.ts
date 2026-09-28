@@ -12,6 +12,7 @@ import ActionBlock, { ActionBlockContentType } from './ActionBlock';
 import BlankExperience from './BlankExperience';
 import BlankSection from './BlankSection';
 import HeroBlock, { HeroBlockContentType } from './HeroBlock';
+import NiqLimitlessPage, { NiqLimitlessPageContentType } from './NiqLimitlessPage';
 import Page, { PageContentType } from './Page';
 import ProofBlock, { ProofBlockContentType } from './ProofBlock';
 import RichText, { RichTextContentType } from './RichText';
@@ -50,6 +51,7 @@ export const registeredContentTypes = [
   BlankExperienceContentType,
   BlankSectionContentType,
   PageContentType,
+  NiqLimitlessPageContentType,
   // Blocks
   RichTextContentType,
   HeroBlockContentType,
@@ -66,6 +68,7 @@ initReactComponentRegistry({
     BlankExperience,
     BlankSection,
     Page,
+    NIQLimitlessPage: NiqLimitlessPage,
     // Blocks (resolver key === content-type key)
     RichTextBlock: RichText,
     HeroBlock,

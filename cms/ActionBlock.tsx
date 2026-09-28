@@ -44,6 +44,14 @@ export const ActionBlockContentType = contentType({
       description: 'Scheduling link, e.g. a Calendly URL.',
       sortOrder: 4,
     },
+    ButtonText: {
+      type: 'string',
+      format: 'shortString',
+      displayName: 'Button Text',
+      description: "Label for the primary CTA button (overrides the default 'Schedule a meeting').",
+      isLocalized: true,
+      sortOrder: 5,
+    },
     ...tierProperty(20),
   },
 });
@@ -75,7 +83,7 @@ export default function ActionBlock({ content }: Props) {
             href={content.CalendarUrl.default}
             className="mt-2 rounded-md bg-blue-600 px-6 py-3 font-semibold text-white"
           >
-            Schedule a meeting
+            {content.ButtonText || 'Schedule a meeting'}
           </a>
         )}
       </div>
