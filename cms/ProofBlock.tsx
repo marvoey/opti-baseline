@@ -1,6 +1,7 @@
 import { contentType, type ContentProps } from '@optimizely/cms-sdk';
 import { getPreviewUtils } from '@optimizely/cms-sdk/react/server';
 import { Quote } from 'lucide-react';
+import { AnimatedMetric } from '@/app/_components/AnimatedMetric';
 
 import { industryProperty, personaProperty } from './taxonomy';
 
@@ -55,9 +56,13 @@ export const ProofBlockContentType = contentType({
   },
 });
 
-type Props = { content: ContentProps<typeof ProofBlockContentType> };
+/**
+ * `animate` defaults to true (web). Pass `animate={false}` for static
+ * contexts — e.g. an email preview — where a count-up wouldn't render/apply.
+ */
+type Props = { content: ContentProps<typeof ProofBlockContentType>; animate?: boolean };
 
-export default function ProofBlock({ content }: Props) {
+export default function ProofBlock({ content, animate = true }: Props) {
   const { pa } = getPreviewUtils(content);
   const block = (content as { __composition?: { key: string } }).__composition;
 
@@ -68,7 +73,7 @@ export default function ProofBlock({ content }: Props) {
           {...pa('MetricNumber')}
           className="bg-gradient-to-r from-[#2D6DF6] to-[#00D2FF] bg-clip-text text-6xl font-black text-transparent"
         >
-          {content.MetricNumber}
+          <AnimatedMetric value={content.MetricNumber ?? ''} animate={animate} />
         </p>
         <p
           {...pa('MetricLabel')}

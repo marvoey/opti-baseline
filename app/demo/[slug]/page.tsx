@@ -75,8 +75,19 @@ async function GovernanceDriftPage({ searchParams }: Props) {
   if (!result.ok) notFound();
 
   const content = buildSyntheticLimitlessPage(result.keys);
+  const emailPreviewUrl = `/demo/email-preview?${new URLSearchParams({ persona, industry, tier }).toString()}`;
 
-  return <OptimizelyComponent content={content} />;
+  return (
+    <>
+      <OptimizelyComponent content={content} />
+      <a
+        href={emailPreviewUrl}
+        className="fixed bottom-6 right-6 z-50 rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white shadow-lg hover:bg-slate-700"
+      >
+        View as Email →
+      </a>
+    </>
+  );
 }
 
 export default withAppContext(GovernanceDriftPage);
