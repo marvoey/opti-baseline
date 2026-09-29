@@ -29,10 +29,6 @@ function buildSyntheticLimitlessPage(keys: LimitlessSlotKeys): SyntheticContent 
 
 export const dynamic = 'force-dynamic';
 
-export const metadata: Metadata = {
-  title: 'Governance Drift Demo',
-};
-
 /**
  * Live resolution route for 00-build/03-NIQ Limitless Page Inventory...md
  * Section 4/5 — reached via the "Learn more" link in public/linkedin.html,
@@ -52,6 +48,22 @@ const DEFAULTS = {
 type Props = {
   searchParams: Promise<{ persona?: string; industry?: string; tier?: string }>;
 };
+
+/**
+ * Title reflects the exact Persona/Industry/Tier permutation being simulated
+ * (the same tags GovernanceDriftPage resolves content by), so a presenter
+ * flipping between browser tabs can tell them apart at a glance.
+ */
+export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
+  const params = await searchParams;
+  const persona = params.persona ?? DEFAULTS.persona;
+  const industry = params.industry ?? DEFAULTS.industry;
+  const tier = params.tier ?? DEFAULTS.tier;
+
+  return {
+    title: `${persona} / ${industry} / ${tier} — NIQ Limitless`,
+  };
+}
 
 async function GovernanceDriftPage({ searchParams }: Props) {
   const params = await searchParams;

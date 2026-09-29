@@ -50,7 +50,7 @@ export default function LanguageSwitcher() {
         aria-haspopup="listbox"
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
-        className="flex items-center gap-1 text-white/80 hover:text-white"
+        className="flex items-center gap-1 text-blue-950/70 hover:text-blue-950"
       >
         <Globe size={14} />
         <span>{current.displayName}</span>
@@ -70,7 +70,7 @@ export default function LanguageSwitcher() {
                   href={localizePath(cleanPath, locale.key)}
                   onClick={() => setOpen(false)}
                   className={`block px-4 py-2 text-sm transition-colors hover:bg-slate-50 ${
-                    active ? 'font-bold text-blue-800' : 'text-slate-600'
+                    active ? 'font-bold text-blue-600' : 'text-slate-600'
                   }`}
                 >
                   {locale.displayName}

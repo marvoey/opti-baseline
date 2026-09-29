@@ -1,14 +1,17 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import Link from 'next/link';
+import { useState } from "react";
+import Link from "next/link";
 
 const LINKS = [
-  { label: 'Home',            href: '/' },
-  { label: 'Page List',        href: '/demo/governance-drift/params' },
-  { label: 'Demo', href: '/demo/governance-drift' },
-  { label: 'Admin',           href: '/admin' },
-  { label: 'Asset Folders',             href: '/admin/asset-folders' },
+  { label: "Home", href: "/" },
+  { label: "Deck", href: "/deck.html" },
+  { label: "LinkedIn", href: "/demo/linkedin" },
+  { label: "Page List", href: "/demo/limitless/params" },
+  { label: "Demo", href: "/demo/limitless" },
+  { label: "Admin", href: "/admin" },
+  { label: "Asset Folders", href: "/admin/asset-folders" },
+  { label: "NIQ Digital Shelf", href: "https://nielseniq.com/global/en/products/digital-shelf/" },
 ];
 
 export default function DevQuickLinks() {

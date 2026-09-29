@@ -1,5 +1,6 @@
 import { contentType, damAssets, type ContentProps } from '@optimizely/cms-sdk';
 import { getPreviewUtils } from '@optimizely/cms-sdk/react/server';
+import { ArrowRight, Sparkles } from 'lucide-react';
 
 import { industryProperty, personaProperty, solutionProperty } from './taxonomy';
 
@@ -118,6 +119,11 @@ export default function HeroBlock({ content }: Props) {
 
   return (
     <section {...pa(block)} className="relative w-full overflow-hidden px-6 py-24 text-white">
+      {/* Fallback gradient — always present, visible whenever there's no background image */}
+      <div className="absolute inset-0 -z-30 bg-linear-to-b from-[#070B14] via-[#0A1224] to-[#040812]" />
+      <div className="absolute top-0 right-0 -z-20 h-96 w-96 animate-pulse rounded-full bg-[#2D6DF6]/20 blur-3xl [animation-duration:4s]" />
+      <div className="absolute bottom-0 inset-x-0 -z-20 h-[3px] bg-gradient-to-r from-[#2D6DF6] via-[#00D2FF] to-transparent" />
+
       {content.BackgroundImage && (
         // eslint-disable-next-line @next/next/no-img-element
         <img
@@ -126,36 +132,45 @@ export default function HeroBlock({ content }: Props) {
           className="absolute inset-0 -z-10 h-full w-full object-cover"
         />
       )}
-      <div className="absolute inset-0 -z-10 bg-black/50" />
-      <div className="mx-auto max-w-3xl text-center">
+      {content.BackgroundImage && <div className="absolute inset-0 -z-10 bg-black/50" />}
+      <div className="mx-auto max-w-4xl text-center">
         {content.Eyebrow && (
-          <p {...pa('Eyebrow')} className="mb-3 text-sm font-semibold uppercase tracking-wide text-white/80">
-            {content.Eyebrow}
-          </p>
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-400/30 bg-blue-500/10 px-3 py-1 opacity-0 [animation-delay:0ms] [animation-fill-mode:forwards] animate-[fade-slide-up_0.6s_ease-out]">
+            <Sparkles className="h-3.5 w-3.5 text-[#00E5FF]" />
+            <span {...pa('Eyebrow')} className="text-xs font-bold uppercase tracking-wide text-[#00E5FF]">
+              {content.Eyebrow}
+            </span>
+          </div>
         )}
-        <h1 {...pa('Headline')} className="text-4xl font-bold sm:text-5xl">
+        <h1
+          {...pa('Headline')}
+          className="text-4xl font-extrabold tracking-tight opacity-0 [animation-delay:120ms] [animation-fill-mode:forwards] animate-[fade-slide-up_0.6s_ease-out] sm:text-6xl"
+        >
           {content.Headline}
         </h1>
         {content.Subheadline && (
-          <p {...pa('Subheadline')} className="mt-4 text-lg text-white/90">
+          <p
+            {...pa('Subheadline')}
+            className="mt-4 text-lg text-white/90 opacity-0 [animation-delay:220ms] [animation-fill-mode:forwards] animate-[fade-slide-up_0.6s_ease-out]"
+          >
             {content.Subheadline}
           </p>
         )}
-        <div className="mt-8 flex justify-center gap-4">
+        <div className="mt-8 flex justify-center gap-4 opacity-0 [animation-delay:320ms] [animation-fill-mode:forwards] animate-[fade-slide-up_0.6s_ease-out]">
           {content.PrimaryCtaLabel && (
             <a
-              {...pa('PrimaryCtaLabel')}
               href={content.PrimaryCtaUrl ?? '#'}
-              className="rounded-md bg-white px-6 py-3 font-semibold text-black"
+              className="group inline-flex items-center gap-2 rounded-full bg-[#2D6DF6] px-6 py-3 font-bold text-white shadow-lg shadow-blue-600/30 transition-all hover:bg-blue-600"
             >
-              {content.PrimaryCtaLabel}
+              <span {...pa('PrimaryCtaLabel')}>{content.PrimaryCtaLabel}</span>
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </a>
           )}
           {content.SecondaryCtaLabel && (
             <a
               {...pa('SecondaryCtaLabel')}
               href={content.SecondaryCtaUrl ?? '#'}
-              className="rounded-md border border-white px-6 py-3 font-semibold text-white"
+              className="rounded-full border border-white/30 px-6 py-3 font-semibold text-white/90 transition-all hover:bg-white/10"
             >
               {content.SecondaryCtaLabel}
             </a>

@@ -20,8 +20,8 @@ export const siteConfig = {
     'Optimizely — the digital experience platform that helps teams create, test, and optimize digital experiences at scale.',
 
   /** Header logo (place the asset in /public). */
-  logoSrc: '/Optimizely_Primary-Logo_Medium_Green_RGB.png',
-  logoAlt: 'Optimizely',
+  logoSrc: '/niq-logo.svg',
+  logoAlt: 'NielsenIQ',
 
   /** Top utility bar. */
   topNavLinks: [

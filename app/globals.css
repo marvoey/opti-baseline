@@ -3,7 +3,7 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #212529; /* NIQ body copy ink */
 }
 
 @theme inline {
@@ -20,34 +20,35 @@
    * │  The Tailwind `blue-*` scale is remapped, so chrome and blocks that   │
    * │  use `bg-blue-950`, `text-blue-800`, etc. all reskin when you edit    │
    * │  these ~11 hex values. Set blue-950 = your darkest brand colour and   │
-   * │  blue-800 = your primary; the rest are tints/shades between.          │
+   * │  blue-600 = your primary; the rest are tints/shades between.          │
    * └──────────────────────────────────────────────────────────────────────┘
    *
-   * Optimizely brand green ramp.
-   * Anchors: Dark Fir #08251a (darkest), LFGreen #abff44 (signature accent).
+   * NielsenIQ brand ramp, lifted from nielseniq.com's live theme CSS.
+   * Anchors: Deep Blue #060a45 (darkest, body copy/headings on white),
+   * NIQ Blue #2d6df6 (primary — CTAs, links, focus rings). NIQ's chrome is
+   * white/light, not dark, so unlike a "reversed" white-on-dark header this
+   * ramp is read light-to-dark: text and CTAs sit on white section
+   * backgrounds rather than the sections themselves being filled dark.
    */
-  --color-blue-950: #08251a; /* Dark Fir — footer / hero background */
-  --color-blue-900: #0d3a29; /* Mid Fir — header bg */
-  --color-blue-800: #197050; /* Light Fir — primary green, links */
-  --color-blue-700: #3ab533; /* Good-to-go */
-  --color-blue-600: #4dc844;
-  --color-blue-500: #62d84f;
-  --color-blue-400: #7ddd3d; /* Grass */
-  --color-blue-300: #91dbda; /* Light Blue — teal accent */
-  --color-blue-200: #abff44; /* LFGreen — signature bright green */
-  --color-blue-100: #d8e4cb; /* Neutral 4 */
-  --color-blue-50:  #e4f0da; /* Neutral 3 — light wash */
+  --color-blue-950: #060a45; /* Deep Blue — ink, headings, nav/footer text */
+  --color-blue-900: #0a1157; /* darkest navy — reserved for dark sections */
+  --color-blue-800: #142a8f;
+  --color-blue-700: #1f52d6;
+  --color-blue-600: #2d6df6; /* NIQ Blue — primary CTA / links / focus */
+  --color-blue-500: #5089f7;
+  --color-blue-400: #7ba8f9;
+  --color-blue-300: #a7c4fb;
+  --color-blue-200: #c4d6fd; /* light blue wash — hover bg for outline buttons */
+  --color-blue-100: #e3ecfe;
+  --color-blue-50:  #f3f6fe; /* faint blue-white section wash */
 
-  /* Named Optimizely brand tokens for direct use in custom components. */
-  --color-lfgreen:    #abff44;
-  --color-grass:      #7ddd3d;
-  --color-good-to-go: #3ab533;
-  --color-dark-fir:   #08251a;
-  --color-mid-fir:    #0d3a29;
-  --color-light-fir:  #197050;
-  --color-light-blue: #91dbda;
-  --color-neutral-2:  #eff6e9;
-  --color-neutral-3:  #e4f0da;
+  /* Named NielsenIQ brand tokens for direct use in custom components. */
+  --color-deep-blue:  #060a45; /* darkest ink */
+  --color-niq-blue:   #2d6df6; /* primary accent */
+  --color-niq-green:  #59ad00; /* secondary accent (focus rings, tags) */
+  --color-niq-orange: #ef5f17; /* secondary accent (highlights, tags) */
+  --color-ink:        #3b4145; /* secondary body copy */
+  --color-light-wash: #c4d6fd;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -67,4 +68,18 @@ h1,
 h2,
 h3 {
   font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+/* Subtle entrance animation for hero content — staggered via [animation-delay:*] per element. */
+@keyframes fade-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

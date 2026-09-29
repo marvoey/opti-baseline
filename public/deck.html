@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Experience Chasm: NIQ Challenger Demo Presentation</title>
+
+  <!-- Reveal.js Stylesheets -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/theme/black.min.css" id="theme">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+  <!-- Optimizely Brand Green Custom Theme & Typography -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap');
+
+    :root {
+      /* Optimizely Brand Colors */
+      --opti-green: #00874e;
+      --opti-green-primary: #10b981;
+      --opti-green-bright: #22c55e;
+      --opti-green-light: #4ade80;
+      --opti-mint: #a7f3d0;
+      --opti-lime: #84cc16;
+      --opti-dark-bg: #070d0a;
+      --opti-panel: #0d1712;
+      --opti-card: #122119;
+      --opti-border: #1a3325;
+      --opti-border-bright: #255038;
+      --opti-glow: rgba(34, 197, 94, 0.28);
+      --text-main: #f0fdf4;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --danger-red: #ef4444;
+      --warning-amber: #f59e0b;
+    }
+
+    /* Reveal.js Global Overrides */
+    .reveal {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--opti-dark-bg);
+      color: var(--text-main);
+    }
+
+    .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      text-transform: none;
+      color: #ffffff;
+    }
+
+    .reveal h1 { font-size: 2.3em; line-height: 1.15; }
+    .reveal h2 { font-size: 1.7em; line-height: 1.2; margin-bottom: 0.6em; }
+    .reveal h3 { font-size: 1.25em; color: var(--opti-green-light); }
+
+    .reveal p, .reveal li {
+      font-size: 0.85em;
+      line-height: 1.5;
+      color: #cbd5e1;
+    }
+
+    .reveal strong {
+      color: var(--text-main);
+      font-weight: 700;
+    }
+
+    .reveal em {
+      color: var(--opti-mint);
+      font-style: italic;
+    }
+
+    /* Tag Pills & Badges */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.3rem 0.85rem;
+      border-radius: 9999px;
+      font-size: 0.55em;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      background: rgba(34, 197, 94, 0.15);
+      border: 1px solid var(--opti-green-bright);
+      color: var(--opti-mint);
+      margin-bottom: 0.8rem;
+    }
+
+    .badge-amber {
+      background: rgba(245, 158, 11, 0.15);
+      border-color: var(--warning-amber);
+      color: #fbbf24;
+    }
+
+    .badge-red {
+      background: rgba(239, 68, 68, 0.15);
+      border-color: var(--danger-red);
+      color: #f87171;
+    }
+
+    /* Cards & Containers */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      text-align: left;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1rem;
+      text-align: left;
+    }
+
+    .slide-card {
+      background: var(--opti-card);
+      border: 1px solid var(--opti-border-bright);
+      border-radius: 12px;
+      padding: 1.25rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    }
+
+    .slide-card.highlight {
+      border-color: var(--opti-green-bright);
+      box-shadow: 0 0 20px var(--opti-glow);
+    }
+
+    .card-title {
+      font-size: 0.9em;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Code & Callouts */
+    pre code {
+      font-family: 'JetBrains Mono', monospace !important;
+      font-size: 0.7em !important;
+      border-radius: 8px !important;
+      border: 1px solid var(--opti-border-bright) !important;
+      background: #040806 !important;
+    }
+
+    .math-callout {
+      background: #040806;
+      border: 1px dashed var(--opti-green-bright);
+      border-radius: 10px;
+      padding: 1rem 1.5rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85em;
+      color: var(--opti-mint);
+      margin: 1rem 0;
+      text-align: center;
+    }
+
+    .math-callout strong {
+      color: #fff;
+      font-size: 1.2em;
+    }
+
+    .quote-box {
+      border-left: 4px solid var(--opti-green-bright);
+      background: rgba(34, 197, 94, 0.08);
+      padding: 0.85rem 1.25rem;
+      border-radius: 0 8px 8px 0;
+      text-align: left;
+      font-size: 0.75em;
+      margin: 1rem 0;
+      line-height: 1.5;
+    }
+
+    /* Table Styles */
+    .reveal table {
+      font-size: 0.6em;
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+    }
+
+    .reveal table th {
+      background: #0d1e14;
+      color: var(--opti-green-light);
+      border-bottom: 2px solid var(--opti-green-bright);
+      padding: 0.6rem 0.8rem;
+      font-weight: 700;
+    }
+
+    .reveal table td {
+      border-bottom: 1px solid var(--opti-border);
+      padding: 0.55rem 0.8rem;
+      color: #cbd5e1;
+    }
+
+    .speaker-note-hint {
+      position: absolute;
+      bottom: 15px;
+      right: 20px;
+      font-size: 0.45em;
+      color: var(--text-dim);
+      font-family: 'JetBrains Mono', monospace;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- SLIDE 1: TITLE SLIDE -->
+      <section data-background-gradient="linear-gradient(135deg, #070d0a 0%, #0d1e14 100%)">
+        <div class="badge">The Challenger Sale • Commercial Teaching</div>
+        <h1>The Experience Chasm</h1>
+        <h3 style="color: var(--opti-green-light); font-weight: 500; font-size: 1.1em; margin-top: 0.5rem;">
+          Solving the "Audience Without Content" Trap for NielsenIQ
+        </h3>
+        <p style="font-size: 0.7em; color: var(--text-muted); margin-top: 2rem;">
+          A Presales Demo Blueprint & Choreography by Optimizely
+        </p>
+        <div class="speaker-note-hint">Press [S] for Speaker Notes</div>
+
+        <aside class="notes">
+          <strong>PRESENTER OPENING NOTE:</strong><br>
+          "Good morning/afternoon team. Today we aren't going to give you a standard feature tour of Optimizely. Instead, we want to share a commercial insight about modern enterprise marketing.<br><br>
+          NielsenIQ has spent millions building a world-class commercial intelligence and ABM data engine. You know who your clients are, what products they own, and when they surge on intent.<br><br>
+          Yet across B2B enterprise marketing, there is an invisible breakdown that destroys the ROI of that intelligence: The Experience Chasm. Today we'll show you where it happens, why traditional CMS architecture causes it, and how Optimizely closes it in sub-second runtime."
+        </aside>
+      </section>
+
+      <!-- SLIDE 2: THE CORE CONFLICT -->
+      <section>
+        <div class="badge badge-amber">The Industry Diagnosis</div>
+        <h2>The Precision-Execution Paradox</h2>
+        <div class="grid-2">
+          <div class="slide-card">
+            <div class="card-title"><span>📡</span> Upstream Precision (The "WHO")</div>
+            <p>ABM & intent stacks (6sense, Demandbase, Salesforce) have become extraordinarily sophisticated at identifying:</p>
+            <ul>
+              <li>Exact strategic accounts surging on whitespace</li>
+              <li>Buying stages (Awareness vs. Consideration)</li>
+              <li>Target personas & key job responsibilities</li>
+            </ul>
+          </div>
+          <div class="slide-card" style="border-color: var(--danger-red);">
+            <div class="card-title" style="color: #f87171;"><span>💥</span> Downstream Paralysis (The "WHAT")</div>
+            <p>Digital experience engines remain trapped in monolithic, page-based architectures:</p>
+            <ul>
+              <li>Marketers cannot author thousands of unique pages</li>
+              <li>Every landing page variation requires JIRA tickets & devs</li>
+              <li><strong>Result:</strong> 99% of surging buyers land on generic content</li>
+            </ul>
+          </div>
+        </div>
+
+        <aside class="notes">
+          <strong>TALK TRACK:</strong><br>
+          "Ask any B2B marketing leader what their top priority is, and they will say 'Personalization' or 'Account-Based Marketing'.<br><br>
+          And they've done their job: they bought 6sense or Demandbase. They have CRM enrichment. They know the exact WHO.<br><br>
+          The crisis is the WHAT: once your data tells you that Account X, Persona Y, wants Solution Z—how much work is required to turn that insight into an actual customer experience? In most organizations, the answer is: exports, tickets, campaign builds, creative requests, and 3 to 4 weeks of delay. By then, the intent has decayed."
+        </aside>
+      </section>
+
+      <!-- SLIDE 3: ACT 1 - VALIDATE THE GENIUS -->
+      <section>
+        <div class="badge">Act 1: The Segmentation Trap</div>
+        <h2>The Illusion of Precision</h2>
+        <div class="slide-card highlight" style="text-align: left;">
+          <div class="card-title"><span>🎯</span> Scenario: Unilever Foods Expansion</div>
+          <div class="grid-2" style="font-size: 0.85em; margin-top: 0.5rem;">
+            <div>
+              <p><strong>Target Account:</strong> Unilever Global (8-Figure Client)</p>
+              <p><strong>Target Buyer:</strong> Aris Thorne, VP of Global E-Commerce</p>
+              <p><strong>Location:</strong> Rotterdam, Netherlands</p>
+            </div>
+            <div>
+              <p><strong>Owned Products:</strong> Market Measurement + Panel</p>
+              <p><strong>Target Whitespace:</strong> Digital Shelf Analytics</p>
+              <p><strong>6sense Signal:</strong> <span style="color: var(--opti-green-bright); font-weight:700;">94/100 Intent Surge</span></p>
+            </div>
+          </div>
+        </div>
+        <div class="quote-box">
+          <em>The Outbound Ad Hook:</em> "Eliminate Online Grocery Out-of-Stocks Across Tesco & Carrefour — Connect store-level availability directly to omnichannel revenue with NIQ UPC-level data."
+        </div>
+
+        <aside class="notes">
+          <strong>DEMO CHOREOGRAPHY - SCREEN SETUP:</strong><br>
+          Show Tab 1: The LinkedIn Feed Mockup with Aris Thorne's profile and the NielsenIQ sponsored post.<br><br>
+          <strong>SCRIPT:</strong><br>
+          "NIQ's commercial intelligence is extraordinary. Your ABM stack doesn't just know that 'Unilever' is browsing. It identifies that Aris Thorne, VP of Global E-Commerce for Unilever Foods in Rotterdam, is surging at 94/100 on grocery replenishment blindspots across Albert Heijn, Tesco, and Carrefour.<br><br>
+          Your outbound team did the exact right thing: they delivered a precision-targeted LinkedIn campaign speaking directly to grocery out-of-stocks and checkout scanner data.<br><br>
+          Up to this point, your ABM execution is flawless. But here is the problem: Aris is just 1 of 5,760 distinct buying contexts your data can identify.<br><br>
+          What happens when Aris clicks?"
+        </aside>
+      </section>
+
+      <!-- SLIDE 4: ACT 2 - EXPOSE THE CHASM -->
+      <section>
+        <div class="badge badge-red">Act 2: Exposing The Experience Chasm</div>
+        <h2>Watch Where Your Data Dies</h2>
+        <div class="grid-2">
+          <div class="slide-card">
+            <div class="card-title" style="color: var(--opti-green-light);">The Upstream Promise</div>
+            <p><strong>LinkedIn Sponsored Campaign:</strong></p>
+            <ul style="font-size: 0.8em;">
+              <li>Tailored for Packaged Foods E-Commerce</li>
+              <li>Speaks to European grocers (Tesco, Carrefour)</li>
+              <li>Focuses on store-level replenishment</li>
+              <li>Addresses an 8-figure enterprise client</li>
+            </ul>
+          </div>
+          <div class="slide-card" style="border-color: var(--danger-red);">
+            <div class="card-title" style="color: #f87171;">The Live Site Reality (nielseniq.com)</div>
+            <p><strong>What Aris Actually Sees Today:</strong></p>
+            <ul style="font-size: 0.8em;">
+              <li>Headline: <code>NIQ Digital Shelf</code> (Bare title)</li>
+              <li>Dense 45-word unsegmented paragraph</li>
+              <li>Social Proof: <strong>William Grant & Sons (Scotch Whisky!)</strong></li>
+              <li>CTA: "Book a Demo" SDR form asking company size</li>
+            </ul>
+          </div>
+        </div>
+
+        <aside class="notes">
+          <strong>DEMO CHOREOGRAPHY - THE CLICK:</strong><br>
+          Click "Learn more" on the LinkedIn ad and toggle directly to the live NIQ website: <code>nielseniq.com/global/en/products/digital-shelf/</code>.<br><br>
+          <strong>SCRIPT:</strong><br>
+          "Look at what just happened. You spent hundreds of dollars to detect Aris's intent and earn his click. But the instant he crossed the threshold onto your website, your site forgot everything you knew about him.<br><br>
+          He wasn't greeted as an eight-figure strategic customer. He wasn't greeted with grocery metrics. He was greeted with a bare title and a testimonial from William Grant & Sons—a single-malt Scotch whisky distiller that has zero relevance to Unilever's food business.<br><br>
+          And if he clicks 'Book a demo', he's dropped into a generic form asking how many employees Unilever has. How likely is a global VP to fill that out? He bounces. The intent decays, the ad spend is wasted, and the cross-sell window closes."
+        </aside>
+      </section>
+
+      <!-- SLIDE 5: LIVE AUDIT DETAILS -->
+      <section>
+        <div class="badge badge-amber">Live Web Audit</div>
+        <h2>Verified NIQ Digital Presence</h2>
+        <div class="grid-2">
+          <div class="slide-card">
+            <div class="card-title">Homepage Reality</div>
+            <p style="font-family: monospace; font-size: 0.7em; color: var(--opti-mint);">https://nielseniq.com/global/en/</p>
+            <p><strong>H2 Headline:</strong> "Intelligence. Now even smarter."</p>
+            <p style="font-size: 0.75em; color: var(--text-muted);">"For the teams behind the world’s brands and retailers: ask a question in plain language..."</p>
+            <p style="font-size: 0.75em;"><strong>CTAs:</strong> "Explore Optiq" | "Watch demo"</p>
+          </div>
+          <div class="slide-card">
+            <div class="card-title">Digital Shelf Cross-Sell Page</div>
+            <p style="font-family: monospace; font-size: 0.7em; color: var(--opti-mint);">https://nielseniq.com/.../digital-shelf/</p>
+            <p><strong>H1 Headline:</strong> "NIQ Digital Shelf"</p>
+            <p style="font-size: 0.75em; color: var(--text-muted);">"Most digital shelf tools tell you what changed. NIQ Digital Shelf tells you why it changed, what it cost you, and what to do next..."</p>
+            <p style="font-size: 0.75em;"><strong>Social Proof:</strong> William Grant & Sons (Spirits)</p>
+          </div>
+        </div>
+
+        <aside class="notes">
+          <strong>TALK TRACK:</strong><br>
+          "This isn't a hypothetical problem. These are the verified, exact copy points on NIQ's live website right now.<br><br>
+          Whether a visitor is an alcohol category lead from Diageo, an e-commerce director from Unilever, or a baby food manager from Nestlé, they see the exact same headline, the exact same whisky quote, and the exact same lead capture form.<br><br>
+          Why? Does NIQ lack creative talent? Does marketing not care? Absolutely not. The failure is architectural."
+        </aside>
+      </section>
+
+      <!-- SLIDE 6: THE MATHEMATICAL TRAP -->
+      <section>
+        <div class="badge badge-red">The Root Cause</div>
+        <h2>The 5,760 Combinatorial Math Trap</h2>
+        <p style="font-size: 0.8em; margin-bottom: 0.5rem;">Overlaying NIQ's product portfolio across target accounts creates an explosion:</p>
+        <div class="math-callout">
+          8 Industries × 6 Personas × 10 Solutions × 4 Buying Stages × 3 Relationship Tiers<br>
+          = <strong>5,760 Potential Customer Contexts</strong>
+        </div>
+        <div class="quote-box" style="border-color: var(--danger-red); background: rgba(239, 68, 68, 0.08);">
+          <strong>The Operational Retreat:</strong><br>
+          In a traditional monolithic CMS, serving 5,760 contexts requires authoring, testing, and deploying <strong>5,760 separate webpages</strong>. Because no team can maintain 5,000+ pages, organizations retreat to <strong>one generic page</strong> that tries to speak to everyone and speaks to no one.
+        </div>
+
+        <aside class="notes">
+          <strong>THE KILLER CHALLENGER QUESTION:</strong><br>
+          "Your ABM platform is brilliant at identifying WHO should receive a message across these 5,760 contexts. But ask yourself: How many of those 5,760 audiences can your marketing team actually deliver differentiated, relevant content to before they hit a wall?<br><br>
+          If your answer is 10 or 20, you have confirmed the diagnosis.<br><br>
+          The industry told marketers to personalize by building landing pages. But page-based personalization is a mathematical dead end. To solve this, you don't need more copywriters or more developers. You need to change the atomic unit of content."
+        </aside>
+      </section>
+
+      <!-- SLIDE 7: ACT 3, BEAT 1 - WHAT IS A CONTENT BLOCK? -->
+      <section>
+        <div class="badge">Act 3: The Differentiating Reveal</div>
+        <h2>The Shift: Slabs of Concrete vs. LEGO Bricks</h2>
+        <div class="grid-2">
+          <div class="slide-card">
+            <div class="card-title">Traditional Model: The Monolithic Page</div>
+            <p><strong>A slab of concrete:</strong></p>
+            <ul>
+              <li>Headline, copy, case study, and form glued together</li>
+              <li>Every change requires cloning the entire page</li>
+              <li>High maintenance, link rot, governance drift</li>
+            </ul>
+          </div>
+          <div class="slide-card highlight">
+            <div class="card-title">Optimizely Model: The Content Block</div>
+            <p><strong>A LEGO brick with a smart luggage tag:</strong></p>
+            <ul>
+              <li><strong>One specific message:</strong> A single headline, proof point, or action button</li>
+              <li><strong>A smart taxonomy tag:</strong> <em>"I belong to E-commerce"</em> or <em>"I belong to Packaged Foods"</em></li>
+              <li>Snaps into a single master template at runtime</li>
+            </ul>
+          </div>
+        </div>
+
+        <aside class="notes">
+          <strong>TALK TRACK - EXPLAINING THE PARADIGM SHIFT:</strong><br>
+          "Up until now, the digital industry has forced marketing to think in Pages. A page is a monolithic slab of concrete: headline, body copy, case study, and form all glued together under one fixed URL. If you want to change one sentence for Aris Thorne at Unilever Foods, you have to clone the entire slab.<br><br>
+          Optimizely breaks that slab into Content Blocks.<br><br>
+          Think of a content block as an independent LEGO brick that has two things:<br>
+          1. One specific message: A single headline, a single case study, or a single meeting button.<br>
+          2. A smart label (taxonomy tag): A metadata tag that says: 'I belong to E-commerce' or 'I belong to Packaged Foods'.<br><br>
+          You don't build pages anymore. Your copywriters author individual blocks once. Then, when a visitor arrives, our engine snaps the matching blocks together on the fly into a single layout."
+        </aside>
+      </section>
+
+      <!-- SLIDE 8: BEAT 2 - MARK (AI COPILOT) -->
+      <section>
+        <div class="badge">Act 3: Force Multiplier</div>
+        <h2>Mark (AI): Solving the Combinatorial Explosion</h2>
+        <div class="grid-3">
+          <div class="slide-card">
+            <div class="card-title"><span>📋</span> CMP Brief Synthesizer</div>
+            <p style="font-size: 0.75em;">Ingests 6sense account triggers and auto-generates structured ABM campaign briefs in seconds.</p>
+          </div>
+          <div class="slide-card highlight">
+            <div class="card-title"><span>✍️</span> Variant Engine</div>
+            <p style="font-size: 0.75em;">Takes core solution messaging and adapts persona copy variants directly inside Visual Builder in 3 seconds.</p>
+          </div>
+          <div class="slide-card">
+            <div class="card-title"><span>🏷️</span> Taxonomy Enrichment</div>
+            <p style="font-size: 0.75em;">Scans DAM assets and components, applying multi-dimensional metadata for Optimizely Graph resolution.</p>
+          </div>
+        </div>
+        <div class="quote-box" style="margin-top: 1.25rem;">
+          <code>@mark Tailor this Digital Shelf value prop for an Enterprise FMCG Ecommerce Director surging on out-of-stocks. Maintain NIQ brand guardrails, keep length 100-200 words.</code>
+        </div>
+
+        <aside class="notes">
+          <strong>TALK TRACK - MARK'S ROLE:</strong><br>
+          "How does NIQ generate variations for 6 personas across 8 industries without hiring 40 copywriters? That is where Mark (formerly Opal) comes in.<br><br>
+          Mark is embedded directly into Optimizely CMP and CMS SaaS. It doesn't write random hallucinated copy—it takes your approved, governed brand collateral and tailors it for specific personas within strict character counts and tone guidelines.<br><br>
+          What used to take 2 weeks of creative request queuing now happens in 3 seconds directly inside the authoring workflow."
+        </aside>
+      </section>
+
+      <!-- SLIDE 9: BEAT 3 - THE POWER OF 8 -->
+      <section>
+        <div class="badge">Act 3: Combinatorial Scaling</div>
+        <h2>The "Power of 8" Multiplier</h2>
+        <p style="font-size: 0.8em;">By designing 3 slots around <strong>orthogonal business dimensions</strong>:</p>
+        <div class="grid-3" style="margin-top: 0.75rem;">
+          <div class="slide-card">
+            <div class="card-title">Slot 1: Hero (Role)</div>
+            <p style="font-size: 0.75em;"><strong>WHO is reading?</strong></p>
+            <ul style="font-size: 0.7em;">
+              <li>H1: Ecommerce VP</li>
+              <li>H2: Insights Director</li>
+              <li>H3: Category / Trade Lead</li>
+            </ul>
+          </div>
+          <div class="slide-card">
+            <div class="card-title">Slot 2: Proof (Industry)</div>
+            <p style="font-size: 0.75em;"><strong>WHAT is their category?</strong></p>
+            <ul style="font-size: 0.7em;">
+              <li>P1: Personal Care (-18%)</li>
+              <li>P2: Packaged Foods (+14%)</li>
+              <li>P3: Beverage Alcohol (22%)</li>
+            </ul>
+          </div>
+          <div class="slide-card">
+            <div class="card-title">Slot 3: Action (Tier)</div>
+            <p style="font-size: 0.75em;"><strong>WHERE in lifecycle?</strong></p>
+            <ul style="font-size: 0.7em;">
+              <li>A1: VIP Client Director Calendar</li>
+              <li>A2: In-Market Benchmark PDF</li>
+            </ul>
+          </div>
+        </div>
+        <div class="math-callout" style="margin-top: 1rem;">
+          3 Heroes × 3 Proof Points × 2 Actions = <strong>18 Coherent Enterprise Pages</strong>
+        </div>
+
+        <aside class="notes">
+          <strong>THE BRIDGE FROM MICRO TO MACRO:</strong><br>
+          "Earlier, we saw that NIQ's ABM data identifies 5,760 potential buying contexts. In your current CMS, covering those contexts requires hand-crafting 5,760 separate pages—which is why your team retreated to one generic page.<br><br>
+          Now look at the math of atomic blocks:<br><br>
+          In our demo tenant, we authored just 8 blocks: 3 Heroes, 3 Proofs, and 2 Actions. Because each block is orthogonal, 3 × 3 × 2 = 18 completely unique, high-converting enterprise experiences.<br><br>
+          We achieved 18 personalized experiences from just 8 blocks. At full scale, an inventory of 25 to 30 blocks covers hundreds of high-value account permutations—including the entire Unilever matrix—without creating a single duplicate URL or filing a single developer ticket."
+        </aside>
+      </section>
+
+      <!-- SLIDE 10: BEAT 4 - GOVERNANCE DRIFT -->
+      <section>
+        <div class="badge badge-red">Brand Safety & Governance</div>
+        <h2>Preventing "Governance Drift"</h2>
+        <div class="grid-2">
+          <div class="slide-card" style="border-color: var(--danger-red);">
+            <div class="card-title" style="color: #f87171;">The Ungoverned Risk ("Franken-Pages")</div>
+            <p style="font-size: 0.75em;">When systems assemble content without taxonomy rules, disaster strikes:</p>
+            <ul style="font-size: 0.7em;">
+              <li><strong>Category Clash:</strong> Serving Scottish Whisky to a Unilever Baby/Personal Care lead</li>
+              <li><strong>Entitlement Leak:</strong> Leaking a Senior Director's private Calendly to a cold 5-person lead</li>
+              <li><strong>Journey Downgrade:</strong> Forcing an 8-figure client to download a generic PDF form</li>
+            </ul>
+          </div>
+          <div class="slide-card highlight">
+            <div class="card-title">The Optimizely Guardrail</div>
+            <p style="font-size: 0.75em;"><strong>Optimizely Graph acts as the programmatic brand guardian:</strong></p>
+            <ul style="font-size: 0.7em;">
+              <li>Deterministic taxonomy filters (not black-box guessing)</li>
+              <li>Mathematical impossibility of serving whisky to personal care</li>
+              <li>Strict entitlement gating for VIP meeting links</li>
+            </ul>
+          </div>
+        </div>
+
+        <aside class="notes">
+          <strong>ADDRESSING THE BUYER'S SILENT FEAR:</strong><br>
+          "When enterprise CMOs hear 'dynamic assembly,' their hair stands on end. They imagine an ungoverned system pairing a Unilever personal care headline with an alcohol proof point. That’s brand dissonance.<br><br>
+          In fact, that's what NIQ’s live site does right now to every non-alcohol visitor who lands on the digital shelf page!<br><br>
+          Optimizely Graph eliminates the risk of governance drift deterministically. It’s not an AI 'guessing' what looks good. It’s a hard taxonomy rule: if the visitor’s account is flagged as Personal Care, an alcohol proof block is mathematically barred from ever rendering in that slot.<br><br>
+          You get the scaling power of 18 permutations, with 100% brand safety guaranteed by code."
+        </aside>
+      </section>
+
+      <!-- SLIDE 11: BEAT 4 CONT. - GRAPH RESOLUTION -->
+      <section>
+        <div class="badge">Dynamic Delivery Fabric</div>
+        <h2>Optimizely Graph: Sub-Second Resolution</h2>
+        <pre><code class="language-graphql">query ResolveBrandSafeLimitlessPage(
+  $visitorRole: String = "Ecommerce_VP",
+  $visitorIndustry: String = "PackagedFoods",
+  $visitorTier: String = "StrategicCustomer"
+) {
+  # 1. Hero resolves ONLY to visitor's role
+  heroSlot: HeroBlock(where: { Persona: { eq: $visitorRole } }) {
+    Headline
+    Subhead
+  }
+  # 2. Proof resolves ONLY to visitor's vertical (No Whisky on Foods!)
+  proofSlot: ProofBlock(where: { Industry: { eq: $visitorIndustry } }) {
+    MetricNumber
+    ClientQuote
+  }
+  # 3. Action resolves ONLY to verified entitlement tier
+  actionSlot: ActionBlock(where: { Tier: { eq: $visitorTier } }) {
+    LeadName
+    CalendarUrl
+  }
+}</code></pre>
+        <p style="font-size: 0.75em; color: var(--opti-mint);">
+          ⚡ Resolved & served at the edge in &lt;35 milliseconds. Zero URL redirects.
+        </p>
+
+        <aside class="notes">
+          <strong>TALK TRACK:</strong><br>
+          "There are no cloned URLs. There is one single master layout.<br><br>
+          When Aris Thorne reaches the site, Optimizely Graph queries your atomic library and returns the exact combination matching his context in 35 milliseconds.<br><br>
+          Notice the query filters: because Graph enforces Industry: PackagedFoods, it is impossible for William Grant & Sons whisky to render. Graph is your automated brand guardian."
+        </aside>
+      </section>
+
+      <!-- SLIDE 12: BEAT 5 - LIVE CONTRAST -->
+      <section>
+        <div class="badge">Act 3: The Climax</div>
+        <h2>One URL, Two Completely Different Worlds</h2>
+        <div class="grid-2">
+          <div class="slide-card highlight">
+            <div class="card-title">Visitor 1: Aris Thorne (Unilever Foods)</div>
+            <p><strong>Persona:</strong> Ecommerce VP | <strong>Category:</strong> Foods</p>
+            <div style="font-size: 0.75em; background: #040806; padding: 0.75rem; border-radius: 6px; margin-top: 0.5rem;">
+              <p style="color: var(--opti-green-light); font-weight:700;">[Hero] Eliminate Online Grocery Out-of-Stocks</p>
+              <p style="color: #cbd5e1;">[Proof] +14% Promo ROI Uplift on Tesco & Carrefour</p>
+              <p style="color: var(--opti-mint);">[CTA] Direct 1-Click with Client Director Sarah Jenkins</p>
+            </div>
+          </div>
+          <div class="slide-card highlight">
+            <div class="card-title">Visitor 2: Sarah Jenkins (Unilever Insights)</div>
+            <p><strong>Persona:</strong> Insights Director | <strong>Category:</strong> Foods</p>
+            <div style="font-size: 0.75em; background: #040806; padding: 0.75rem; border-radius: 6px; margin-top: 0.5rem;">
+              <p style="color: var(--opti-green-light); font-weight:700;">[Hero] Predict Emerging Shopper Shifts with 100% Panel Precision</p>
+              <p style="color: #cbd5e1;">[Proof] 92% SKU Adoption Forecasting Accuracy</p>
+              <p style="color: var(--opti-mint);">[CTA] Connect with Nielsen Household Panel Team</p>
+            </div>
+          </div>
+        </div>
+        <div class="quote-box" style="margin-top: 1rem; text-align: center;">
+          <strong>One Template. Zero Developer Tickets. Zero Duplicate Pages.</strong>
+        </div>
+
+        <aside class="notes">
+          <strong>DEMO CHOREOGRAPHY - THE PUNCHLINE:</strong><br>
+          Open the master template in Visual Builder. Toggle the persona switcher from Aris Thorne to Sarah Jenkins live on screen.<br><br>
+          <strong>SCRIPT:</strong><br>
+          "Watch what happens when we toggle between these two decision-makers from Unilever on the exact same URL.<br><br>
+          Aris sees online grocery availability, checkout scanner ROI, and his dedicated director.<br><br>
+          Sarah sees consumer household panel accuracy, SKU forecasting case studies, and her panel account team.<br><br>
+          Two completely different enterprise experiences. Two completely different buying committees inside Unilever.<br><br>
+          One template. Zero developer tickets. Zero duplicate pages.<br><br>
+          That is how you bridge the 'Audience Without Content' gap."
+        </aside>
+      </section>
+
+      <!-- SLIDE 13: SUMMARY COMPARISON TABLE -->
+      <section>
+        <div class="badge">The Commercial Shift</div>
+        <h2>NIQ Status Quo vs. Optimizely & Mark</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Dimension</th>
+              <th>NIQ Status Quo (The Chasm)</th>
+              <th>With Optimizely & Mark</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Signal-to-Experience Latency</strong></td>
+              <td>3 to 4 weeks (sprints & tickets)</td>
+              <td>Sub-second runtime resolution</td>
+            </tr>
+            <tr>
+              <td><strong>Engineering Dependency</strong></td>
+              <td>High (JIRA tickets, devs, QA)</td>
+              <td>Zero (Visual Builder Blueprints)</td>
+            </tr>
+            <tr>
+              <td><strong>Content Production</strong></td>
+              <td>Monolithic page duplication</td>
+              <td>Reusable atomic content blocks</td>
+            </tr>
+            <tr>
+              <td><strong>Audience Scaling Limit</strong></td>
+              <td>Paralyzed after ~15-20 pages</td>
+              <td>Scales to 5,000+ permutations</td>
+            </tr>
+            <tr>
+              <td><strong>Buyer Journey Continuity</strong></td>
+              <td>Severed at web ("Hello everybody!")</td>
+              <td>Preserved end-to-end (Ad → Web → Sales)</td>
+            </tr>
+            <tr>
+              <td><strong>Enterprise CTA</strong></td>
+              <td>Generic SDR lead form</td>
+              <td>1-click meeting with dedicated Client Director</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <aside class="notes">
+          <strong>CLOSING EXECUTIVE SUMMARY:</strong><br>
+          "To summarize the commercial transition for NIQ:<br><br>
+          Today, you are paying 6sense and Demandbase to tell you who is surging, but your content engine forces you into an operational retreat. Every surge costs 3 weeks of delay, and high-value buyers are met with generic content.<br><br>
+          With Optimizely CMP, CMS SaaS Visual Builder, Optimizely Graph, and Mark AI, you eliminate the ticket tax, collapse cycle time from weeks to seconds, and deliver on the promise of enterprise ABM."
+        </aside>
+      </section>
+
+      <!-- SLIDE 14: CLOSING & Q&A -->
+      <section data-background-gradient="linear-gradient(135deg, #070d0a 0%, #0d1e14 100%)">
+        <div class="badge">Next Steps</div>
+        <h2>Close The Experience Chasm</h2>
+        <p style="font-size: 0.9em; color: var(--opti-mint); margin-top: 1rem;">
+          From Intent Signal to Governed Digital Experience in Milliseconds.
+        </p>
+        <div style="margin-top: 2rem; display: flex; justify-content: center; gap: 1rem;">
+          <div class="slide-card" style="padding: 1rem 2rem; text-align: center;">
+            <p style="font-size: 0.8em; margin: 0; color: #fff;"><strong>Marvin Oey</strong></p>
+            <p style="font-size: 0.7em; margin: 0; color: var(--text-muted);">Principal Solutions Architect, Optimizely</p>
+          </div>
+        </div>
+
+        <aside class="notes">
+          <strong>CLOSING QUESTION TO THE CLIENT:</strong><br>
+          "When you look at your next 8-figure enterprise renewals like Unilever, Nestlé, or Diageo—can you afford to keep letting your website forget who they are?<br><br>
+          Let's discuss how we can pilot this single-template Limitless Page model on your Digital Shelf portfolio."
+        </aside>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js Core & Plugins -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/plugin/notes/notes.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/plugin/highlight/highlight.min.js"></script>
+
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      controls: true,
+      progress: true,
+      center: true,
+      transition: 'fade',
+      transitionSpeed: 'fast',
+      plugins: [ RevealNotes, RevealHighlight ]
+    });
+  </script>
+</body>
+</html>

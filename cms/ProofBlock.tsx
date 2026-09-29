@@ -1,5 +1,6 @@
 import { contentType, type ContentProps } from '@optimizely/cms-sdk';
 import { getPreviewUtils } from '@optimizely/cms-sdk/react/server';
+import { Quote } from 'lucide-react';
 
 import { industryProperty, personaProperty } from './taxonomy';
 
@@ -61,24 +62,33 @@ export default function ProofBlock({ content }: Props) {
   const block = (content as { __composition?: { key: string } }).__composition;
 
   return (
-    <section {...pa(block)} className="w-full px-6 py-16">
-      <div className="mx-auto max-w-2xl text-center">
-        <p {...pa('MetricNumber')} className="text-5xl font-bold text-blue-600">
+    <section {...pa(block)} className="w-full bg-blue-50 px-6 py-20">
+      <div className="mx-auto max-w-2xl rounded-2xl border border-blue-100 bg-white p-10 text-center shadow-lg shadow-blue-900/5 transition-transform duration-300 hover:-translate-y-1">
+        <p
+          {...pa('MetricNumber')}
+          className="bg-gradient-to-r from-[#2D6DF6] to-[#00D2FF] bg-clip-text text-6xl font-black text-transparent"
+        >
           {content.MetricNumber}
         </p>
         <p
           {...pa('MetricLabel')}
-          className="mt-2 text-sm font-medium uppercase tracking-wide text-gray-500"
+          className="mt-2 text-xs font-bold uppercase tracking-widest text-blue-900/60"
         >
           {content.MetricLabel}
         </p>
         {content.ClientQuote && (
-          <blockquote {...pa('ClientQuote')} className="mt-8 text-lg italic text-gray-700">
-            &ldquo;{content.ClientQuote}&rdquo;
-          </blockquote>
+          <>
+            <Quote className="mx-auto mt-8 h-6 w-6 text-blue-200" />
+            <blockquote {...pa('ClientQuote')} className="mt-2 text-xl font-medium text-ink italic">
+              &ldquo;{content.ClientQuote}&rdquo;
+            </blockquote>
+          </>
         )}
         {content.ClientIdentifier && (
-          <p {...pa('ClientIdentifier')} className="mt-4 text-sm font-semibold text-gray-500">
+          <p
+            {...pa('ClientIdentifier')}
+            className="mt-4 inline-block rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700"
+          >
             — {content.ClientIdentifier}
           </p>
         )}

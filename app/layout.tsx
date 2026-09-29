@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Inter } from "next/font/google";
+import { Inter } from "next/font/google";
 import Script from "next/script";
 import OptimizelyActivation from "./_components/OptimizelyActivation";
 import { QuickLinks } from "./_components/QuickLinks";
@@ -8,15 +8,15 @@ import { siteConfig } from "@/lib/siteConfig";
 import "./globals.css";
 import "@/cms/registry";
 
-// VC Nudge (Optimizely's display face) is a licensed face; Space Grotesk is the
-// closest free substitute — chunky, geometric grotesque with strong personality.
-const displayFont = Space_Grotesk({
+// NielsenIQ's brand face is Aktiv Grotesk (licensed) — a single neutral
+// grotesque used for both display and body copy, no separate display face.
+// Inter is the closest free substitute with the same variable-weight range.
+const displayFont = Inter({
   variable: "--font-display",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
 
-// Die Grotesk B (the brand body face) → Inter as the closest neutral grotesque.
 const bodyFont = Inter({
   variable: "--font-body",
   subsets: ["latin"],
@@ -25,6 +25,9 @@ const bodyFont = Inter({
 export const metadata: Metadata = {
   title: siteConfig.title,
   description: siteConfig.description,
+  icons: {
+    icon: "https://cdn.opal.optimizely.com/opal-app-frontend-prod/icon.svg",
+  },
 };
 
 // Optimizely Web Experimentation / Personalization project id. Public by design

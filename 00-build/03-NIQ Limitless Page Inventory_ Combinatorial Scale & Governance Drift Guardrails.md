@@ -45,6 +45,44 @@ Each block is modeled in CMS SaaS with minimal properties and clean taxonomy met
 
 ---
 
+## 1a. Full Schema Taxonomy vs. This Build's Seeded Subset
+
+The three taxonomy fields — `Persona` on `HeroBlock`, `Industry` on `ProofBlock`, `Tier` on `ActionBlock` — are defined in code (`cms/taxonomy.ts`, consumed by `cms/HeroBlock.tsx`, `cms/ProofBlock.tsx`, `cms/ActionBlock.tsx`) with **more enum values than this 18-combination demo actually seeds content for**. Only the values below have a seeded block from Section 2; querying an unseeded value via the Section 5 GraphQL query returns no match (which is exactly the `notFound()` path in `app/demo/[slug]/page.tsx`).
+
+**`Persona`** (`HeroBlock.Persona`) — 5 defined in schema, 3 seeded here:
+
+| Value | Display Name | Seeded Block |
+|---|---|---|
+| `Ecommerce_VP` | Ecommerce VP | H1 |
+| `Insights_Director` | Insights Director | H2 |
+| `Category_Commercial` | Category & Commercial | H3 |
+| `Ecommerce_Lead` | Ecommerce Lead | *— not seeded* |
+| `Category_Manager` | Category Manager | *— not seeded* |
+
+**`Industry`** (`ProofBlock.Industry`) — 6 defined in schema, 3 seeded here:
+
+| Value | Display Name | Seeded Block |
+|---|---|---|
+| `PersonalCare` | Personal Care | P1 |
+| `PackagedFoods` | Packaged Foods | P2 |
+| `BeverageAlcohol` | Beverage Alcohol | P3 |
+| `CPG_FMCG` | CPG / FMCG | *— not seeded* |
+| `Beverage_Alcohol` | Beverage & Alcohol | *— not seeded. **Note:** distinct enum value from `BeverageAlcohol` above (underscore vs. no underscore) — apparent schema drift from an earlier taxonomy revision, not an intentional second value.* |
+| `Tech_Durables` | Tech & Durables | *— not seeded* |
+
+**`Tier`** (`ActionBlock.Tier`) — 4 defined in schema, 2 seeded here:
+
+| Value | Display Name | Seeded Block |
+|---|---|---|
+| `StrategicCustomer` | Strategic Customer | A1 |
+| `ConsiderationProspect` | Consideration Prospect | A2 |
+| `MidMarket` | Mid-Market | *— not seeded* |
+| `Prospect` | Prospect | *— not seeded* |
+
+The schema's full combinatorial space is therefore 5 × 6 × 4 = **120 possible tag combinations**, of which this build seeds content for the 3 × 3 × 2 = 18 covered in Section 3. Extending the seeded set to any of the unseeded values above requires adding a corresponding content block, not just a query-param change.
+
+---
+
 ## 2. Seed Content Specifications
 
 ### Slot 1: Hero Blocks (`HeroBlock`)
