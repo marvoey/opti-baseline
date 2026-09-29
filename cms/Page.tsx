@@ -2,6 +2,12 @@ import { contentType, type ContentProps } from '@optimizely/cms-sdk';
 import { OptimizelyComponent, getPreviewUtils } from '@optimizely/cms-sdk/react/server';
 
 import { RichTextContentType } from './RichText';
+import { HeroBlockContentType } from './HeroBlock';
+import { FdPromoSplitContentType } from './FdPromoSplit';
+import { FdFeatureGridContentType } from './FdFeatureGrid';
+import { FdProductGridContentType } from './FdProductGrid';
+import { FdProductDetailContentType } from './FdProductDetail';
+import { FdShopTheLookContentType } from './FdShopTheLook';
 
 /**
  * Page — a fixed-layout Page (`_page`). The body is a `Content` area: an ordered
@@ -28,7 +34,15 @@ export const PageContentType = contentType({
       isLocalized: true,
       items: {
         type: 'content',
-        allowedTypes: [RichTextContentType],
+        allowedTypes: [
+          RichTextContentType,
+          HeroBlockContentType,
+          FdPromoSplitContentType,
+          FdFeatureGridContentType,
+          FdProductGridContentType,
+          FdProductDetailContentType,
+          FdShopTheLookContentType,
+        ],
         restrictedTypes: [],
       },
     },
@@ -44,10 +58,10 @@ export default function Page({ content }: Props) {
   const items = content.Content ?? [];
 
   return (
-    <main {...pa('Content')} className="w-full">
+    <div {...pa('Content')} className="w-full space-y-10">
       {items.map((item, i) => (
         <OptimizelyComponent key={i} content={item} />
       ))}
-    </main>
+    </div>
   );
 }

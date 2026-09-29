@@ -12,6 +12,13 @@ import BlankExperience from './BlankExperience';
 import BlankSection from './BlankSection';
 import Page, { PageContentType } from './Page';
 import RichText, { RichTextContentType } from './RichText';
+import HeroBlock, { HeroBlockContentType } from './HeroBlock';
+import FdPromoSplit, { FdPromoSplitContentType } from './FdPromoSplit';
+import FdFeatureGrid, { FdFeatureGridContentType, FdFeatureItemContentType } from './FdFeatureGrid';
+import FdProduct, { FdProductContentType } from './FdProduct';
+import FdProductGrid, { FdProductGridContentType } from './FdProductGrid';
+import FdProductDetail, { FdProductDetailContentType } from './FdProductDetail';
+import FdShopTheLook, { FdShopTheLookContentType, FdHotspotContentType } from './FdShopTheLook';
 
 /**
  * Single configuration + registration point for the Optimizely SDK.
@@ -49,6 +56,15 @@ export const registeredContentTypes = [
   PageContentType,
   // Blocks
   RichTextContentType,
+  HeroBlockContentType,
+  FdPromoSplitContentType,
+  FdFeatureItemContentType,
+  FdFeatureGridContentType,
+  FdProductContentType,
+  FdProductGridContentType,
+  FdProductDetailContentType,
+  FdHotspotContentType,
+  FdShopTheLookContentType,
 ];
 
 initContentTypeRegistry(registeredContentTypes);
@@ -62,5 +78,12 @@ initReactComponentRegistry({
     Page,
     // Blocks (resolver key === content-type key)
     RichTextBlock: RichText,
+    HeroBlock,
+    FdPromoSplit,
+    FdFeatureGrid,
+    FdProduct,
+    FdProductGrid,
+    FdProductDetail,
+    FdShopTheLook,
   },
 });

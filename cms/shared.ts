@@ -14,3 +14,8 @@ export type OptiLink = {
 export function ctaHref(link: OptiLink): string {
   return link?.url?.default ?? '#';
 }
+
+/** The composition node (if any) for `pa()` on a section block — see RichText.tsx. */
+export function blockNode(content: unknown): { key: string } | undefined {
+  return (content as { __composition?: { key: string } }).__composition;
+}
