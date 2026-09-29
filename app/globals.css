@@ -2,8 +2,8 @@
 @plugin "@tailwindcss/typography";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f5f5f5; /* neutral-100 canvas */
+  --foreground: #1f2937;
 }
 
 @theme inline {
@@ -23,38 +23,27 @@
    * │  blue-800 = your primary; the rest are tints/shades between.          │
    * └──────────────────────────────────────────────────────────────────────┘
    *
-   * Optimizely brand green ramp.
-   * Anchors: Dark Fir #08251a (darkest), LFGreen #abff44 (signature accent).
+   * Floor & Decor ramp (see app/mock/page.jsx).
+   * Anchors: navy #1b2a4a (darkest), orange #df4a26 (primary / CTA).
    */
-  --color-blue-950: #08251a; /* Dark Fir — footer / hero background */
-  --color-blue-900: #0d3a29; /* Mid Fir — header bg */
-  --color-blue-800: #197050; /* Light Fir — primary green, links */
-  --color-blue-700: #3ab533; /* Good-to-go */
-  --color-blue-600: #4dc844;
-  --color-blue-500: #62d84f;
-  --color-blue-400: #7ddd3d; /* Grass */
-  --color-blue-300: #91dbda; /* Light Blue — teal accent */
-  --color-blue-200: #abff44; /* LFGreen — signature bright green */
-  --color-blue-100: #d8e4cb; /* Neutral 4 */
-  --color-blue-50:  #e4f0da; /* Neutral 3 — light wash */
+  --color-blue-950: #1b2a4a; /* Navy — announcement bar / dark panels */
+  --color-blue-900: #243a63; /* Mid navy */
+  --color-blue-800: #df4a26; /* Brand orange — primary, links, CTAs */
+  --color-blue-700: #c63a18; /* Orange hover */
+  --color-blue-600: #e85d3a;
+  --color-blue-500: #ef7a5c;
+  --color-blue-400: #f4967d;
+  --color-blue-300: #f8b8a6;
+  --color-blue-200: #fbd3c7;
+  --color-blue-100: #fdeae4;
+  --color-blue-50:  #fef5f2;
 
-  /* Named Optimizely brand tokens for direct use in custom components. */
-  --color-lfgreen:    #abff44;
-  --color-grass:      #7ddd3d;
-  --color-good-to-go: #3ab533;
-  --color-dark-fir:   #08251a;
-  --color-mid-fir:    #0d3a29;
-  --color-light-fir:  #197050;
-  --color-light-blue: #91dbda;
-  --color-neutral-2:  #eff6e9;
-  --color-neutral-3:  #e4f0da;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Named brand tokens for direct use in custom components. */
+  --color-brand-navy:        #1b2a4a;
+  --color-brand-navy-dark:   #121c33;
+  --color-brand-orange:      #df4a26;
+  --color-brand-orange-dark: #c63a18;
+  --color-brand-red:         #ea1722; /* mega-nav bar */
 }
 
 body {
@@ -67,4 +56,13 @@ h1,
 h2,
 h3 {
   font-family: var(--font-display);
+  letter-spacing: -0.01em;
+}
+
+/* Hide scrollbars on the horizontally-scrolling mega-nav. */
+.scrollbar-none {
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
 }

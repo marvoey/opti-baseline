@@ -70,7 +70,13 @@ async function Page({ params }: Props) {
     notFound();
   }
 
-  return <OptimizelyComponent content={content} />;
+  // Vertical rhythm between top-level sections, as in the mock's HomePage
+  // (`space-y-10`). Sections own their own `max-w-7xl mx-auto px-4` container.
+  return (
+    <div className="space-y-10">
+      <OptimizelyComponent content={content} />
+    </div>
+  );
 }
 
 export default withAppContext(Page);
