@@ -12,6 +12,10 @@ import BlankExperience from './BlankExperience';
 import BlankSection from './BlankSection';
 import Page, { PageContentType } from './Page';
 import RichText, { RichTextContentType } from './RichText';
+import CCOEmployerHeaderBlock, { CCOEmployerHeaderBlockContentType } from './CCOEmployerHeaderBlock';
+import CCOClinicalHeroBlock, { CCOClinicalHeroBlockContentType } from './CCOClinicalHeroBlock';
+import CCOClinicalTrustBlock, { CCOClinicalTrustBlockContentType } from './CCOClinicalTrustBlock';
+import CCOHygiaChatCardBlock, { CCOHygiaChatCardBlockContentType } from './CCOHygiaChatCardBlock';
 
 /**
  * Single configuration + registration point for the Optimizely SDK.
@@ -49,6 +53,10 @@ export const registeredContentTypes = [
   PageContentType,
   // Blocks
   RichTextContentType,
+  CCOEmployerHeaderBlockContentType,
+  CCOClinicalHeroBlockContentType,
+  CCOClinicalTrustBlockContentType,
+  CCOHygiaChatCardBlockContentType,
 ];
 
 initContentTypeRegistry(registeredContentTypes);
@@ -62,5 +70,9 @@ initReactComponentRegistry({
     Page,
     // Blocks (resolver key === content-type key)
     RichTextBlock: RichText,
+    CCOEmployerHeaderBlock,
+    CCOClinicalHeroBlock,
+    CCOClinicalTrustBlock,
+    CCOHygiaChatCardBlock,
   },
 });

@@ -5,10 +5,10 @@ import Link from 'next/link';
 
 const LINKS = [
   { label: 'Home',            href: '/' },
-  { label: 'Assemble',        href: '/assemble' },
-  { label: 'Content Library', href: '/content-library' },
+  { label: 'CCO Site',       href: 'https://www.ccoptimization.com/' },
+  { label: '3-Tier Architecture', href: '/visuals/3-tier-arch' },
+  { label: 'Visuals',         href: '/visuals' },
   { label: 'Admin',           href: '/admin' },
-  { label: 'CMS',             href: '/cms-admin' },
 ];
 
 export default function DevQuickLinks() {
