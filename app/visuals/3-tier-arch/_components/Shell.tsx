@@ -69,7 +69,7 @@ export function Shell({ children }: { children: ReactNode }) {
           <button
             onClick={openPresenter}
             className="ml-4 flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-800 bg-slate-900 text-slate-400 hover:text-white"
-            title="Open presenter window (P)"
+            title="Open presenter window (P) · Full screen (F)"
           >
             <MonitorPlay className="w-4 h-4 text-teal-400" /> Presenter
           </button>

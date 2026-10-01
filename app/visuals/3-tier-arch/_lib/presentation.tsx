@@ -111,7 +111,7 @@ export function PresentationProvider({ children }: { children: ReactNode }) {
     presenterWin.current = window.open(PRESENTER_PATH, 'cco-presenter', 'popup,width=560,height=860');
   }, []);
 
-  // Keyboard: ← / → step, P opens presenter.
+  // Keyboard: ← / → step, P opens presenter, F toggles full screen.
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       const t = e.target as HTMLElement | null;
@@ -120,6 +120,10 @@ export function PresentationProvider({ children }: { children: ReactNode }) {
       if (e.key === 'ArrowRight') goTo(step + 1);
       else if (e.key === 'ArrowLeft') goTo(step - 1);
       else if ((e.key === 'p' || e.key === 'P') && !isPresenter) openPresenter();
+      else if (e.key === 'f' || e.key === 'F') {
+        if (document.fullscreenElement) void document.exitFullscreen();
+        else void document.documentElement.requestFullscreen?.();
+      }
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
