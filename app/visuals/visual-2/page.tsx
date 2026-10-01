@@ -40,8 +40,20 @@ import {
   Zap
 } from 'lucide-react';
 
+type VariationKey = 'Original' | 'Variation1' | 'Variation2';
+
+type VariationContent = {
+  tag: string;
+  headline: string;
+  body: string;
+  cta: string;
+  hygiaGreeting: string;
+  themeColor: string;
+  targetAudience: string;
+};
+
 export default function VisualBuilderMock() {
-  const [activeVariation, setActiveVariation] = useState('Original');
+  const [activeVariation, setActiveVariation] = useState<VariationKey>('Original');
   const [variationDropdownOpen, setVariationDropdownOpen] = useState(false);
   const [deviceView, setDeviceView] = useState('desktop');
   const [isEditing, setIsEditing] = useState(false);
@@ -49,7 +61,7 @@ export default function VisualBuilderMock() {
   const [showPresenterNotes, setShowPresenterNotes] = useState(true);
 
   // Editable Content States per Variation
-  const [content, setContent] = useState({
+  const [content, setContent] = useState<Record<VariationKey, VariationContent>>({
     Original: {
       tag: "PILOT EMPLOYER ONBOARDING",
       headline: "Reclaim Your Momentum, on Your Terms.",
@@ -79,7 +91,7 @@ export default function VisualBuilderMock() {
     }
   });
 
-  const handleTextChange = (field, value) => {
+  const handleTextChange = (field: keyof VariationContent, value: string) => {
     setContent(prev => ({
       ...prev,
       [activeVariation]: {
