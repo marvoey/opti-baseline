@@ -803,9 +803,12 @@ export default function NIQSimulatorApp() {
   const [showChallengerCue, setShowChallengerCue] = useState(false);
   const [presenterBarOpen, setPresenterBarOpen] = useState(false);
 
-  const profile = useMemo(() => PROFILES[activeProfileId] || PROFILES['p1'], [activeProfileId]);
+  const profile = useMemo(
+    () => PROFILES[activeProfileId as keyof typeof PROFILES] || PROFILES['p1'],
+    [activeProfileId]
+  );
 
-  const handleProfileChange = (newId) => {
+  const handleProfileChange = (newId: string) => {
     setActiveProfileId(newId);
     setLiked(false);
   };
