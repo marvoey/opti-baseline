@@ -7,18 +7,18 @@ import { CONNECTORS, LAYERS } from './_data/layers';
 // Overview: one compact row per layer. Click through to zoom into a layer.
 export default function CCOArchitectureOverview() {
   return (
-    <div className="max-w-3xl mx-auto space-y-2">
+    <div className="max-w-6xl w-full mx-auto h-full flex flex-col justify-between">
       {LAYERS.map((layer, i) => {
         const a = layer.accent;
         const c = CONNECTORS[i];
         return (
-          <div key={layer.n}>
+          <div key={layer.n} className="flex-1 min-h-0 flex flex-col">
             <Link
               href={layer.path}
-              className={`group block rounded-2xl border border-slate-800/80 bg-slate-900/60 p-6 relative overflow-hidden transition-all ${a.hover}`}
+              className={`group flex-1 flex items-center rounded-2xl border border-slate-800/80 bg-slate-900/60 p-4 relative overflow-hidden transition-all ${a.hover}`}
             >
               <div className={`absolute top-0 right-0 w-48 h-48 rounded-full blur-3xl pointer-events-none ${a.glow}`} />
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-4 w-full">
                 <div className={`p-3 rounded-xl border ${a.iconBox}`}>
                   <layer.icon className="w-6 h-6" />
                 </div>
@@ -37,13 +37,13 @@ export default function CCOArchitectureOverview() {
 
             {c && (
               <div className="flex flex-col items-center">
-                <div className={`h-4 w-px bg-gradient-to-b ${c.line}`} />
+                <div className={`h-2 w-px bg-gradient-to-b ${c.line}`} />
                 <div className="bg-slate-900 border border-slate-700/80 px-4 py-1.5 rounded-full text-xs font-mono text-slate-300 flex items-center gap-2 shadow-lg">
                   <c.icon className={`w-3.5 h-3.5 ${c.iconColor}`} />
                   <span>{c.label}</span>
                   <ArrowDown className="w-3.5 h-3.5 text-slate-400" />
                 </div>
-                <div className={`h-4 w-px bg-gradient-to-b ${c.line}`} />
+                <div className={`h-2 w-px bg-gradient-to-b ${c.line}`} />
               </div>
             )}
           </div>
