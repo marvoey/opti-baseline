@@ -18,6 +18,12 @@ export type ProductData = {
   /** One feature per line. */
   Features?: string | null;
   DetailUrl?: string | null;
+  // --- New fields for F&D Demo ---
+  AestheticStyle?: 'Modern' | 'Classic' | 'Farmhouse' | 'Transitional' | 'Industrial' | null;
+  MatchingGroutSku?: string | null;
+  RecommendedProfile?: string | null;
+  ProTipSubtext?: string | null;
+  CommercialWarranty?: string | null;
 };
 
 export const lines = (s?: string | null) =>
@@ -28,3 +34,26 @@ export function refUrl(v: unknown): string | undefined {
   const u = (v as { url?: { default?: string | null } | string | null } | null)?.url;
   return typeof u === 'string' ? u : (u?.default ?? undefined);
 }
+
+/** Content feed item for automated blog & TV Page video distribution. */
+export type ContentFeedItem = {
+  id: string;
+  type: 'Video Guide (TV Page)' | 'DIY Article (Blog)' | 'Installation Guide';
+  title: string;
+  tag: string;
+  durationOrReadTime: string;
+  thumbnailUrl: string;
+  viewsOrAuthor?: string;
+  url?: string;
+};
+
+/** Project Bundle kit item for collection selling. */
+export type BundleItem = {
+  role: 'Primary Tile' | 'Matching Grout' | 'Thinset Mortar' | 'Edge Trim' | 'Leveling System';
+  name: string;
+  sku: string;
+  priceFormatted: string;
+  coverageFormula: string;
+  image: string;
+  requiredQty: number;
+};

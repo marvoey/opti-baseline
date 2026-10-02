@@ -19,6 +19,11 @@ import FdProduct, { FdProductContentType } from './FdProduct';
 import FdProductGrid, { FdProductGridContentType } from './FdProductGrid';
 import FdProductDetail, { FdProductDetailContentType } from './FdProductDetail';
 import FdShopTheLook, { FdShopTheLookContentType, FdHotspotContentType } from './FdShopTheLook';
+import FdScheduledSlot, { FdScheduledSlotContentType } from './FdScheduledSlot';
+import FdContentDistributionFeed, { FdContentDistributionFeedContentType } from './FdContentDistributionFeed';
+import FdProjectBundle, { FdProjectBundleContentType } from './FdProjectBundle';
+import FdAiStyleClassifier, { FdAiStyleClassifierContentType } from './FdAiStyleClassifier';
+import FdExperimentContainer, { FdExperimentContainerContentType } from './FdExperimentContainer';
 
 /**
  * Single configuration + registration point for the Optimizely SDK.
@@ -65,6 +70,11 @@ export const registeredContentTypes = [
   FdProductDetailContentType,
   FdHotspotContentType,
   FdShopTheLookContentType,
+  FdScheduledSlotContentType,
+  FdContentDistributionFeedContentType,
+  FdProjectBundleContentType,
+  FdAiStyleClassifierContentType,
+  FdExperimentContainerContentType,
 ];
 
 initContentTypeRegistry(registeredContentTypes);
@@ -85,5 +95,10 @@ initReactComponentRegistry({
     FdProductGrid,
     FdProductDetail,
     FdShopTheLook,
+    FdScheduledSlot,
+    FdContentDistributionFeed,
+    FdProjectBundle,
+    FdAiStyleClassifier,
+    FdExperimentContainer,
   },
 });
