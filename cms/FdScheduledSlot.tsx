@@ -10,8 +10,8 @@ export const FdScheduledSlotContentType = contentType({
   compositionBehaviors: ['sectionEnabled'],
   properties: {
     SlotName: { type: 'string', format: 'shortString', displayName: 'Slot Identifier', sortOrder: 10 },
-    CampaignStart: { type: 'string', displayName: 'Start Date/Time (ISO)', sortOrder: 20 },
-    CampaignEnd: { type: 'string', displayName: 'End Date/Time (Auto-Expire)', sortOrder: 30 },
+    CampaignStart: { type: 'dateTime', displayName: 'Start Date/Time (ISO)', sortOrder: 20 },
+    CampaignEnd: { type: 'dateTime', displayName: 'End Date/Time (Auto-Expire)', sortOrder: 30 },
     ActiveContent: {
       type: 'content',
       displayName: 'Active Promotional Block',

@@ -6,8 +6,9 @@ import { getPreviewUtils } from '@optimizely/cms-sdk/react/server';
 import { refUrl } from '@/app/_components/fd/types';
 
 /**
- * HeroBlock — already exists in the CMS (shared with other demos); this is a
- * compatible subset (only fields the F&D hero uses), so `cms:push` skips it.
+ * HeroBlock — shared with other demos on this CMS instance. This definition mirrors
+ * the live CMS type exactly (including the targeting fields the F&D hero doesn't
+ * render), so `cms:push:all` is a no-op for it and never triggers a data-loss warning.
  */
 export const HeroBlockContentType = contentType({
   key: 'HeroBlock',
@@ -16,14 +17,95 @@ export const HeroBlockContentType = contentType({
   description: 'Full-width hero banner with background image, eyebrow, headline, subheadline, and up to two CTAs.',
   compositionBehaviors: ['elementEnabled', 'sectionEnabled'],
   properties: {
-    Eyebrow: { type: 'string', format: 'shortString', displayName: 'Eyebrow', isLocalized: true },
-    Headline: { type: 'string', format: 'shortString', displayName: 'Headline', isLocalized: true, isRequired: true },
-    Subheadline: { type: 'string', format: 'shortString', displayName: 'Subheadline', isLocalized: true },
+    MembersOnly: { type: 'boolean', displayName: 'MembersOnly' },
+    Eyebrow: {
+      type: 'string',
+      format: 'shortString',
+      displayName: 'Eyebrow',
+      description: 'Small label above the headline (e.g. "Summer 2026").',
+      isLocalized: true,
+    },
+    Headline: {
+      type: 'string',
+      format: 'shortString',
+      displayName: 'Headline',
+      description: 'Main hero heading.',
+      isLocalized: true,
+      isRequired: true,
+    },
+    Industry: {
+      type: 'string',
+      format: 'selectOne',
+      displayName: 'Industry',
+      description: 'Prospect industry vertical this content targets.',
+      indexingType: 'queryable',
+      enum: [
+        { value: 'CPG_FMCG', displayName: 'CPG / FMCG' },
+        { value: 'Beverage_Alcohol', displayName: 'Beverage & Alcohol' },
+        { value: 'Tech_Durables', displayName: 'Tech & Durables' },
+        { value: 'PersonalCare', displayName: 'Personal Care' },
+        { value: 'PackagedFoods', displayName: 'Packaged Foods' },
+        { value: 'BeverageAlcohol', displayName: 'Beverage Alcohol' },
+      ],
+    },
+    Persona: {
+      type: 'string',
+      format: 'selectOne',
+      displayName: 'Persona',
+      description: 'Buyer persona this content targets.',
+      indexingType: 'queryable',
+      enum: [
+        { value: 'Ecommerce_Lead', displayName: 'Ecommerce Lead' },
+        { value: 'Insights_Director', displayName: 'Insights Director' },
+        { value: 'Category_Manager', displayName: 'Category Manager' },
+        { value: 'Ecommerce_VP', displayName: 'Ecommerce VP' },
+        { value: 'Category_Commercial', displayName: 'Category & Commercial' },
+      ],
+    },
+    Solution: {
+      type: 'string',
+      format: 'selectOne',
+      displayName: 'Solution',
+      description: 'NIQ solution area this content promotes.',
+      indexingType: 'queryable',
+      enum: [
+        { value: 'DigitalShelf', displayName: 'Digital Shelf' },
+        { value: 'ConsumerPanel', displayName: 'Consumer Panel' },
+        { value: 'BASES', displayName: 'BASES' },
+      ],
+    },
+    Subheadline: {
+      type: 'string',
+      format: 'shortString',
+      displayName: 'Subheadline',
+      description: 'Supporting text below the headline.',
+      isLocalized: true,
+    },
     BackgroundImage: { type: 'contentReference', displayName: 'Background Image', allowedTypes: ['_image'] },
     PrimaryCtaLabel: { type: 'string', format: 'shortString', displayName: 'Primary CTA Label', isLocalized: true },
     PrimaryCtaUrl: { type: 'string', format: 'shortString', displayName: 'Primary CTA URL' },
     SecondaryCtaLabel: { type: 'string', format: 'shortString', displayName: 'Secondary CTA Label', isLocalized: true },
     SecondaryCtaUrl: { type: 'string', format: 'shortString', displayName: 'Secondary CTA URL' },
+    Audiences: {
+      type: 'string',
+      format: 'selectOne',
+      displayName: 'Target Audience',
+      description: 'ODP audience segment this hero variant is targeted at. Used for personalization rules.',
+      enum: [
+        { value: '1', displayName: 'First-Time Homebuyers' },
+        { value: '2', displayName: 'Homeowners (Refinancing)' },
+        { value: '3', displayName: 'Auto Buyers' },
+        { value: '4', displayName: 'Young Professionals' },
+        { value: '5', displayName: 'Families' },
+        { value: '6', displayName: 'Near Retirement (50+)' },
+        { value: '7', displayName: 'Retirees' },
+        { value: '8', displayName: 'Small Business Owners' },
+        { value: '9', displayName: 'Students' },
+        { value: '10', displayName: 'Military & Veterans' },
+        { value: '11', displayName: 'Wealth Seekers' },
+        { value: '12', displayName: 'New Members' },
+      ],
+    },
   },
 });
 

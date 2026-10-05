@@ -6,8 +6,8 @@ import type { ProductData } from '@/app/_components/fd/types';
 
 /**
  * Product — data block (not a section). Embedded/shared, then referenced by
- * FdProductGrid, FdProductDetail and FdShopTheLook. Images/Features are
- * newline-separated so editors fill plain text fields.
+ * FdProductGrid, FdProductDetail and FdShopTheLook. Images is a DAM-backed
+ * list of image references; Features is newline-separated text.
  */
 export const FdProductContentType = contentType({
   key: 'FdProduct',
@@ -23,7 +23,13 @@ export const FdProductContentType = contentType({
     PriceSqft: { type: 'float', displayName: 'Price per sq. ft.', sortOrder: 60 },
     Rating: { type: 'float', displayName: 'Rating', sortOrder: 70 },
     Reviews: { type: 'integer', displayName: 'Review count', sortOrder: 80 },
-    Images: { type: 'string', displayName: 'Image URLs', description: 'One URL per line; first is primary.', sortOrder: 90 },
+    Images: {
+      type: 'array',
+      displayName: 'Product Image Set (DAM)',
+      description: 'Select images from Optimizely DAM or the media library. Drag to reorder; first is the primary hero.',
+      items: { type: 'contentReference', allowedTypes: ['_image'] },
+      sortOrder: 90,
+    },
     Material: { type: 'string', format: 'shortString', displayName: 'Material', sortOrder: 100 },
     Finish: { type: 'string', format: 'shortString', displayName: 'Finish', sortOrder: 110 },
     PeiRating: { type: 'string', format: 'shortString', displayName: 'PEI rating', sortOrder: 120 },

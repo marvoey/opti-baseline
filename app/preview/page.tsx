@@ -46,6 +46,20 @@ async function Page({ searchParams }: Props) {
           Open on localhost:{port}
         </a>
       )}
+      {params.ctx === 'edit' && (
+        // The CMS edit overlay captures clicks on editable content inside this iframe, so the
+        // image-set manager is reached in a standalone tab (same preview params and token).
+        <a
+          href={`/preview?${new URLSearchParams(
+            Object.entries(params).filter((e): e is [string, string] => typeof e[1] === 'string'),
+          ).toString()}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="fixed top-12 right-3 z-[9999] rounded-md border border-gray-200 bg-white px-2.5 py-1 text-xs font-medium text-gray-700 shadow-md hover:bg-gray-100 transition-colors"
+        >
+          Open image manager in new tab
+        </a>
+      )}
       <OptimizelyComponent content={content} />
     </>
   );

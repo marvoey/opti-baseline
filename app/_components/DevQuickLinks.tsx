@@ -6,6 +6,8 @@ import Link from 'next/link';
 const LINKS = [
   { label: 'Home',            href: '/' },
   { label: 'Mock',        href: '/mock' },
+  { label: 'Admin',        href: '/admin' },
+  { label: 'Asset Folders',        href: '/admin/asset-folders' },
 ];
 
 export default function DevQuickLinks() {

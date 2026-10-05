@@ -60,7 +60,9 @@ export default async function CmsAdminPage() {
 
           {result.ok ? (
             <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-800">
-              <FolderRow folder={result.folder} />
+              {result.folders.map((folder) => (
+                <FolderRow key={folder.key} folder={folder} />
+              ))}
             </div>
           ) : (
             <div className="rounded-2xl border border-amber-200 bg-amber-50 px-5 py-4 text-sm dark:border-amber-800 dark:bg-amber-950">

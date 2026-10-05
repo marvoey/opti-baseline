@@ -16,7 +16,8 @@
     "cms:push": "node --env-file=.env scripts/cms-push.mjs",
     "cms:push:all": "node --env-file=.env scripts/cms-push.mjs --all",
     "schema:pull": "node scripts/fetch-openapi.mjs",
-    "seed:hero": "node scripts/seed-atomic-hero.mjs",
+    "seed:blocks": "node --env-file=.env scripts/seed-shared-blocks.mjs",
+    "seed:clp": "node --env-file=.env scripts/seed-clp-experience.mjs",
     "cms:check": "node --env-file=.env scripts/check-content-types.mjs"
   },
   "dependencies": {

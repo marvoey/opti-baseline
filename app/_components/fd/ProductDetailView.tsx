@@ -3,11 +3,18 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Calendar, Check, Layers, ShoppingCart, Star, Store } from 'lucide-react';
-import { lines, type ProductData } from './types';
+import { getProductImages, lines, padImages, type ProductData } from './types';
 
 /** PDP body: gallery, price, box calculator, stock, specs (client: gallery + calculator state). */
-export default function ProductDetailView({ product: p }: { product: ProductData }) {
-  const images = lines(p.Images);
+export default function ProductDetailView({
+  product: p,
+  images: imageOverride,
+}: {
+  product: ProductData;
+  /** Images authored on the detail section; replaces the product's own images when non-empty. */
+  images?: string[];
+}) {
+  const images = imageOverride?.length ? padImages(imageOverride, p) : getProductImages(p);
   const [selected, setSelected] = useState(0);
   const [roomSqft, setRoomSqft] = useState(120);
   const [addWaste, setAddWaste] = useState(true);

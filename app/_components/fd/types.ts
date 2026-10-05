@@ -8,8 +8,8 @@ export type ProductData = {
   PriceSqft?: number | null;
   Rating?: number | null;
   Reviews?: number | null;
-  /** One image URL per line; first is the primary image. */
-  Images?: string | null;
+  /** DAM image references (or legacy URL strings); first is the primary image. */
+  Images?: (string | { key?: string | null; url?: { default?: string | null } | string | null })[] | string | null;
   Material?: string | null;
   Finish?: string | null;
   PeiRating?: string | null;
@@ -33,6 +33,43 @@ export const lines = (s?: string | null) =>
 export function refUrl(v: unknown): string | undefined {
   const u = (v as { url?: { default?: string | null } | string | null } | null)?.url;
   return typeof u === 'string' ? u : (u?.default ?? undefined);
+}
+
+const MIN_IMAGES = 4;
+
+/** Unsplash fallbacks (already used across the demo) so a product always has a gallery. */
+const FALLBACK_IMAGES = [
+  'photo-1600585154340-be6161a56a0c',
+  'photo-1584622650111-993a426fbf0a',
+  'photo-1595428774223-ef52624120d2',
+  'photo-1552321554-5fefe8c9ef14',
+  'photo-1615971677499-5467cbab01c0',
+  'photo-1513694203232-719a280e022f',
+].map((id) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1200&q=80`);
+
+/**
+ * Image URLs from DAM references, plain URL strings, or a legacy newline-separated string.
+ * Authored images come first; Unsplash fallbacks pad the list to at least MIN_IMAGES.
+ */
+export function getProductImages(p: ProductData, opts: { pad?: boolean } = {}): string[] {
+  const authored = Array.isArray(p.Images)
+    ? p.Images.map((img) => (typeof img === 'string' ? img : refUrl(img) ?? '')).filter(Boolean)
+    : typeof p.Images === 'string'
+      ? lines(p.Images)
+      : [];
+  return opts.pad === false ? authored : padImages(authored, p);
+}
+
+/** Pad an image list to MIN_IMAGES with Unsplash fallbacks (rotated by SKU/name per product). */
+export function padImages(authored: string[], p: ProductData): string[] {
+  if (authored.length >= MIN_IMAGES) return authored;
+  const seed = [...(p.Sku ?? p.Name ?? '')].reduce((a, c) => a + c.charCodeAt(0), 0);
+  const images = [...authored];
+  for (let i = 0; images.length < MIN_IMAGES; i++) {
+    const url = FALLBACK_IMAGES[(seed + i) % FALLBACK_IMAGES.length];
+    if (!images.includes(url)) images.push(url);
+  }
+  return images;
 }
 
 /** Content feed item for automated blog & TV Page video distribution. */

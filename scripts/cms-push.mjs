@@ -7,8 +7,11 @@
  * Flags:
  *   --all    Push every content type regardless of CMS state (original behaviour)
  *   --dry    Show what would be pushed without sending anything
+ *   --type=Key[,Key2]  Push only the named content type(s), even if they already exist
+ *   --force  Apply breaking changes even if they may cause data loss
  *
  * Examples:
+ *   node --env-file=.env scripts/cms-push.mjs --type=FdProduct --force
  *   node --env-file=.env scripts/cms-push.mjs           # push missing only
  *   node --env-file=.env scripts/cms-push.mjs --all     # push everything
  *   node --env-file=.env scripts/cms-push.mjs --dry     # preview missing push
@@ -28,6 +31,12 @@ import { mapContentToManifest } from '@optimizely/cms-cli/dist/mapper/contentToP
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const ALL_MODE = process.argv.includes('--all');
 const DRY_MODE = process.argv.includes('--dry');
+const FORCE_MODE = process.argv.includes('--force');
+const ONLY_KEYS = process.argv
+  .filter(a => a.startsWith('--type='))
+  .flatMap(a => a.slice('--type='.length).split(','))
+  .map(k => k.trim())
+  .filter(Boolean);
 
 // ── Env ───────────────────────────────────────────────────────────────────────
 if (
@@ -95,6 +104,7 @@ async function postManifest(token, manifest) {
       authorization: `Bearer ${token}`,
       accept: 'application/json',
       'content-type': 'application/vnd.optimizely.cms.v1.manifest+json',
+      ...(FORCE_MODE ? { 'cms-ignore-data-loss-warnings': 'true' } : {}),
     },
     body: JSON.stringify(manifest),
   });
@@ -140,6 +150,18 @@ async function main() {
     return;
   }
 
+  if (ONLY_KEYS.length > 0) {
+    const unknown = ONLY_KEYS.filter(k => !allMapped.some(ct => ct.key === k));
+    if (unknown.length > 0) {
+      console.error(
+        c.red(`Unknown content type(s): ${unknown.join(', ')}\n`) +
+          c.dim(`Available: ${allMapped.map(ct => ct.key).join(', ')}`),
+      );
+      process.exitCode = 1;
+      return;
+    }
+  }
+
   // 2. Fetch CMS state + auth (can run in parallel)
   const token = await getToken();
   const cmsKeys = await fetchCmsKeys(token);
@@ -167,7 +189,10 @@ async function main() {
   }
 
   // 5. Decide what to push
-  const toPush = ALL_MODE ? allMapped : missing;
+  const toPush =
+    ONLY_KEYS.length > 0
+      ? allMapped.filter(ct => ONLY_KEYS.includes(ct.key))
+      : ALL_MODE ? allMapped : missing;
 
   if (toPush.length === 0) {
     console.log(c.green('\nAll content types are already in the CMS. Nothing to push.'));
@@ -190,6 +215,7 @@ async function main() {
   }
 
   // 7. Push
+  if (FORCE_MODE) console.log(c.yellow('--force: ignoring data-loss warnings'));
   console.log(c.dim('\nUploading…'));
 
   const normalizedGroups = propertyGroups

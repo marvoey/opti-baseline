@@ -40,3 +40,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# seed-shared-blocks tracking file (environment-specific)
+scripts/.seed-shared-blocks.state.json
+scripts/.seed-clp-experience.state.json
+
+# downloaded Unsplash images
+app/images/

@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import { Star } from 'lucide-react';
-import { lines, type ProductData } from './types';
+import { getProductImages, type ProductData } from './types';
 
 export default function ProductCard({ product: p }: { product: ProductData }) {
-  const image = lines(p.Images)[0];
+  const image = getProductImages(p)[0];
   const price = p.PriceSqft ?? 0;
   const card = (
     <div className="group h-full bg-white rounded-lg border border-neutral-200 overflow-hidden hover:shadow-xl hover:border-neutral-300 transition flex flex-col justify-between">
