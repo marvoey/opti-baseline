@@ -7,9 +7,9 @@
   },
   "scripts": {
     "dev": "node scripts/run-next.mjs dev --webpack",
-    "predev": "npm run gen:locales",
+    "predev": "npm run gen:all-locales",
     "build": "next build",
-    "prebuild": "npm run gen:locales",
+    "prebuild": "npm run gen:all-locales",
     "start": "node scripts/run-next.mjs start",
     "lint": "eslint",
     "gen:locales": "node scripts/generate-locales.mjs",
