@@ -5,10 +5,34 @@ import { RichText as RichTextRenderer } from '@optimizely/cms-sdk/react/richText
 export const RichTextContentType = contentType({
   key: 'RichTextBlock',
   baseType: '_component',
-  displayName: 'Rich Text',
-  description: 'A block of formatted text content.',
+  displayName: 'Rich Text (Prose)',
+  description: 'Editorial narrative and formatted prose block.',
   compositionBehaviors: ['elementEnabled', 'sectionEnabled'],
   properties: {
+    Intent: {
+      type: 'string',
+      displayName: 'Intent Tag',
+      description: 'High-level user intent (e.g., explore, evaluate, transact, compliance).',
+      sortOrder: 1,
+    },
+    Audience: {
+      type: 'string',
+      displayName: 'Target Audience',
+      description: 'Target audience segment (e.g., enterprise, smb, developer, c-suite).',
+      sortOrder: 2,
+    },
+    Domain: {
+      type: 'string',
+      displayName: 'Domain / Vertical',
+      description: 'Functional domain (e.g., security, cloud, governance, finance).',
+      sortOrder: 3,
+    },
+    Geo: {
+      type: 'string',
+      displayName: 'Geo / Region',
+      description: 'Geographic region or "global".',
+      sortOrder: 4,
+    },
     Body: {
       type: 'richText',
       displayName: 'Body',
