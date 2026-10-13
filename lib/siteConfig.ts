@@ -12,73 +12,78 @@ export type FooterColumn = { heading: string; links: NavLink[] };
 
 export const siteConfig = {
   /** Used for the document <title> fallback and the logo alt text. */
-  name: 'Optimizely',
+  name: 'UPS',
   /** Default browser-tab title (per-page titles override via CMS MetaTitle). */
-  title: 'Optimizely | Digital Experience Platform',
+  title: 'UPS - United States | Moving our world forward by delivering what matters',
   /** Default meta description. */
   description:
-    'Optimizely — the digital experience platform that helps teams create, test, and optimize digital experiences at scale.',
+    'Ship, track and manage deliveries with UPS. Explore shipping, tracking and logistics solutions for individuals and businesses.',
 
   /** Header logo (place the asset in /public). */
-  logoSrc: '/Optimizely_Primary-Logo_Medium_Green_RGB.png',
-  logoAlt: 'Optimizely',
+  logoSrc: 'https://www.ups.com/webassets/icons/logo.svg',
+  logoAlt: 'UPS',
 
   /** Top utility bar. */
   topNavLinks: [
-    { label: 'Partners', href: '#' },
-    { label: 'Support', href: '#' },
+    { label: 'Support', href: 'https://www.ups.com/us/en/support/contact-us' },
   ] satisfies NavLink[],
 
   /** Primary header navigation. */
   mainNavLinks: [
-    { label: 'Products', href: '#' },
-    { label: 'Solutions', href: '#' },
-    { label: 'Customers', href: '#' },
-    { label: 'Resources', href: '#' },
-    { label: 'Pricing', href: '#' },
+    { label: 'Shipping', href: 'https://www.ups.com/ship?loc=en_US' },
+    { label: 'Tracking', href: 'https://www.ups.com/track?loc=en_US' },
+    { label: 'Products & Services', href: 'https://www.ups.com/us/en/customized-shipping-logistic-services' },
+    { label: 'The UPS Store', href: 'https://www.ups.com/us/en/the-ups-store' },
   ] satisfies NavLink[],
   /** Header call-to-action button. */
-  primaryCta: { label: 'Get started free', href: '#' } satisfies NavLink,
-  /** Account / login button label. */
-  accountLabel: 'Log in',
+  primaryCta: {
+    label: 'Sign Up',
+    href: 'https://wwwapps.ups.com/doapp/SignUp?loc=en_US',
+  } satisfies NavLink,
+  /** Account / login button. */
+  accountLabel: 'Log In',
+  accountHref: 'https://www.ups.com/lasso/login?loc=en_US',
 
   /** Footer. */
-  footerTagline:
-    'Create, test, and optimize digital experiences that turn visitors into loyal customers.',
+  footerTagline: 'Moving our world forward by delivering what matters.',
   footerColumns: [
     {
-      heading: 'Products',
+      heading: 'Support',
       links: [
-        { label: 'Content Management', href: '#' },
-        { label: 'Experimentation', href: '#' },
-        { label: 'Commerce', href: '#' },
-        { label: 'Personalization', href: '#' },
+        { label: 'Help and Support Center', href: 'https://www.ups.com/us/en/support/contact-us' },
+        { label: 'Tracking Support', href: 'https://www.ups.com/us/en/support/tracking-support' },
+        { label: 'Where’s My Package', href: 'https://www.ups.com/us/en/support/tracking-support/where-is-my-package' },
+        { label: 'Shipping Guides and Resources', href: 'https://www.ups.com/us/en/support/shipping-support' },
+        { label: 'International Shipping Guides', href: 'https://www.ups.com/us/en/shipping/international-shipping' },
+        { label: 'Communication Preferences', href: 'https://www.ups.com/marketingpreferences?loc=en_US' },
       ],
     },
     {
-      heading: 'Solutions',
+      heading: 'UPS Sites',
       links: [
-        { label: 'B2B Commerce', href: '#' },
-        { label: 'B2C Commerce', href: '#' },
-        { label: 'Digital Marketing', href: '#' },
-        { label: 'Customer Journeys', href: '#' },
+        { label: 'About UPS', href: 'https://about.ups.com/us/en/home.html' },
+        { label: 'UPS Jobs', href: 'https://www.jobs-ups.com/' },
+        { label: 'UPS Healthcare', href: 'https://www.ups.com/us/en/ups-healthcare' },
+        { label: 'UPS Supply Chain Solutions', href: 'https://www.ups.com/us/en/ups-supplychain' },
+        { label: 'The UPS Store', href: 'https://www.theupsstore.com/' },
+        { label: 'UPS Developer Portal', href: 'https://developer.ups.com/' },
       ],
     },
     {
-      heading: 'Resources',
+      heading: 'UPS Companies',
       links: [
-        { label: 'Blog', href: '#' },
-        { label: 'Documentation', href: '#' },
-        { label: 'Community', href: '#' },
-        { label: 'Webinars', href: '#' },
+        { label: 'Happy Returns', href: 'https://www.ups.com/us/en/ups-happyreturns' },
+        { label: 'Roadie', href: 'https://www.ups.com/us/en/ups-roadie' },
+        { label: 'UPS Secure Commerce', href: 'https://www.ups.com/us/en/ups-securecommerce' },
+        { label: 'Delivery Solutions', href: 'https://deliverysolutions.co/' },
       ],
     },
   ] satisfies FooterColumn[],
-  footerLegal: `© ${2026} Optimizely. All rights reserved.`,
+  footerLegal: `Copyright ©1994-${new Date().getFullYear()} United Parcel Service of America, Inc. All rights reserved.`,
   footerLegalLinks: [
-    { label: 'Privacy Policy', href: '#' },
-    { label: 'Terms of Service', href: '#' },
-    { label: 'Cookie Settings', href: '#' },
+    { label: 'Terms and Conditions', href: 'https://www.ups.com/us/en/support/shipping-support/legal-terms-conditions' },
+    { label: 'Privacy Notice', href: 'https://www.ups.com/us/en/support/shipping-support/legal-terms-conditions/privacy-notice' },
+    { label: 'Cookie Settings', href: '#cookie-settings' },
   ] satisfies NavLink[],
 } as const;
 

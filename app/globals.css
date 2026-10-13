@@ -3,7 +3,7 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #121212;
 }
 
 @theme inline {
@@ -20,41 +20,33 @@
    * │  The Tailwind `blue-*` scale is remapped, so chrome and blocks that   │
    * │  use `bg-blue-950`, `text-blue-800`, etc. all reskin when you edit    │
    * │  these ~11 hex values. Set blue-950 = your darkest brand colour and   │
-   * │  blue-800 = your primary; the rest are tints/shades between.          │
+   * │  blue-800 = your link/primary colour; the rest are tints/shades.      │
    * └──────────────────────────────────────────────────────────────────────┘
    *
-   * Optimizely brand green ramp.
-   * Anchors: Dark Fir #08251a (darkest), LFGreen #abff44 (signature accent).
+   * UPS brand ramp (sampled from public/ups-home.html).
+   * Anchors: UPS Brown #351c15 (darkest), UPS Gold #ffc400 (signature accent),
+   * link blue #0662bb.
    */
-  --color-blue-950: #08251a; /* Dark Fir — footer / hero background */
-  --color-blue-900: #0d3a29; /* Mid Fir — header bg */
-  --color-blue-800: #197050; /* Light Fir — primary green, links */
-  --color-blue-700: #3ab533; /* Good-to-go */
-  --color-blue-600: #4dc844;
-  --color-blue-500: #62d84f;
-  --color-blue-400: #7ddd3d; /* Grass */
-  --color-blue-300: #91dbda; /* Light Blue — teal accent */
-  --color-blue-200: #abff44; /* LFGreen — signature bright green */
-  --color-blue-100: #d8e4cb; /* Neutral 4 */
-  --color-blue-50:  #e4f0da; /* Neutral 3 — light wash */
+  --color-blue-950: #351c15; /* UPS Brown — footer / dark text */
+  --color-blue-900: #4b2a1f; /* Mid brown */
+  --color-blue-800: #0662bb; /* Link blue — primary actions, links */
+  --color-blue-700: #3860be;
+  --color-blue-600: #6b5444;
+  --color-blue-500: #907963; /* Warm taupe */
+  --color-blue-400: #ffd54a; /* Gold hover */
+  --color-blue-300: #ffe08a;
+  --color-blue-200: #ffc400; /* UPS Gold — signature accent / CTA */
+  --color-blue-100: #e2e2e2; /* Border grey */
+  --color-blue-50:  #f7f5f2; /* Warm light wash */
 
-  /* Named Optimizely brand tokens for direct use in custom components. */
-  --color-lfgreen:    #abff44;
-  --color-grass:      #7ddd3d;
-  --color-good-to-go: #3ab533;
-  --color-dark-fir:   #08251a;
-  --color-mid-fir:    #0d3a29;
-  --color-light-fir:  #197050;
-  --color-light-blue: #91dbda;
-  --color-neutral-2:  #eff6e9;
-  --color-neutral-3:  #e4f0da;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Named UPS brand tokens for direct use in custom components. */
+  --color-ups-brown:  #351c15;
+  --color-ups-gold:   #ffc400;
+  --color-ups-blue:   #0662bb;
+  --color-ups-red:    #991c00;
+  --color-ups-green:  #68b631;
+  --color-ups-taupe:  #907963;
+  --color-ups-grey:   #d8d8d8;
 }
 
 body {
