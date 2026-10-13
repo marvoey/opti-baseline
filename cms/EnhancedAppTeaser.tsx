@@ -3,7 +3,7 @@ import { getPreviewUtils } from '@optimizely/cms-sdk/react/server';
 import QuoteTrackTabs from '../app/_components/QuoteTrackTabs';
 import SmartCta, { contentLocale, isEditorContent } from '../app/_components/SmartCta';
 import { DEFAULT_LOCALE } from '../lib/locales';
-import { ctaHref, ctaLabel } from './shared';
+import { ctaHref, ctaLabel, resolveCta } from './shared';
 
 export const EnhancedAppTeaserContentType = contentType({
   key: 'UpsEnhancedAppTeaser',
@@ -19,8 +19,12 @@ export const EnhancedAppTeaserContentType = contentType({
     PromoDiscount: { type: 'string', displayName: 'Discount', description: 'e.g. "52%"', group: 'promo', isLocalized: true, sortOrder: 40 },
     PromoCodeInfix: { type: 'string', displayName: 'Promo Code Infix', description: 'e.g. "with promo code"', group: 'promo', isLocalized: true, sortOrder: 50 },
     PromoCode: { type: 'string', displayName: 'Promo Code', group: 'promo', sortOrder: 60 },
-    PromoCta: { type: 'link', displayName: 'Promo CTA', group: 'promo', isLocalized: true, sortOrder: 70 },
-    TermsLink: { type: 'link', displayName: 'Terms Link', group: 'promo', isLocalized: true, sortOrder: 80 },
+    PromoCta: { type: 'link', displayName: 'Promo CTA (legacy link)', description: 'Fallback. Used only when Promo CTA Label and Promo CTA URL are both empty.', group: 'promo', isLocalized: true, sortOrder: 70 },
+    PromoCtaLabel: { type: 'string', displayName: 'Promo CTA Label', description: 'Translatable button text. Preferred over the legacy link.', group: 'promo', isLocalized: true, sortOrder: 71 },
+    PromoCtaUrl: { type: 'string', displayName: 'Promo CTA URL', description: 'Destination, shared across locales. Internal paths are localized at render time.', group: 'promo', sortOrder: 72 },
+    TermsLink: { type: 'link', displayName: 'Terms Link (legacy link)', description: 'Fallback for a blank Terms Label or Terms URL.', group: 'promo', isLocalized: true, sortOrder: 80 },
+    TermsLabel: { type: 'string', displayName: 'Terms Label', description: 'Translatable link text. Preferred over the legacy link.', group: 'promo', isLocalized: true, sortOrder: 81 },
+    TermsUrl: { type: 'string', displayName: 'Terms URL', description: 'Destination, shared across locales. Falls back to the legacy Terms Link URL when blank.', group: 'promo', sortOrder: 82 },
     // ── Quote & Tracking ──
     ShippingTabLabel: { type: 'string', displayName: 'Shipping Tab Label', group: 'quote', isLocalized: true, sortOrder: 110 },
     FromLabel: { type: 'string', displayName: 'From Field Label', description: 'e.g. "From Address or Postal Code"', group: 'quote', isLocalized: true, sortOrder: 120 },
@@ -46,6 +50,17 @@ export default function EnhancedAppTeaser({ content }: Props) {
   const locale = contentLocale(content, DEFAULT_LOCALE);
   const isEditor = isEditorContent(content);
   const code = content.PromoCode || 'SUNNY26';
+  // Per-field fallback: a blank Terms URL / Label falls back to the legacy Terms Link's value.
+  const terms = resolveCta(
+    content.TermsLabel,
+    content.TermsUrl?.trim() || content.TermsLink?.url?.default,
+    content.TermsLink,
+    ctaLabel(content.TermsLink, '*Terms and Conditions Apply'),
+  );
+  const promoCta = resolveCta(content.PromoCtaLabel, content.PromoCtaUrl, content.PromoCta, 'Start Shipping') ?? {
+    label: 'Start Shipping',
+    href: '#',
+  };
 
   return (
     <section className="w-full border-b border-blue-100 bg-blue-50 px-4 py-8">
@@ -64,16 +79,16 @@ export default function EnhancedAppTeaser({ content }: Props) {
               <span {...pa('PromoDiscount')}>{content.PromoDiscount || '52%'}</span>{' '}
               <span {...pa('PromoCodeInfix')}>{content.PromoCodeInfix || 'with promo code'}</span>{' '}
               <strong {...pa('PromoCode')} className="font-bold text-blue-950">{code}</strong>.{' '}
-              {content.TermsLink?.url?.default && (
-                <a href={ctaHref(content.TermsLink)} className="underline">
-                  {ctaLabel(content.TermsLink, '*Terms and Conditions Apply')}
+              {terms && terms.href !== '#' && (
+                <a href={terms.href} className="underline">
+                  {terms.label}
                 </a>
               )}
             </p>
           </div>
           <SmartCta
-            label={ctaLabel(content.PromoCta, 'Start Shipping')}
-            href={ctaHref(content.PromoCta)}
+            label={promoCta.label}
+            href={promoCta.href}
             requiredService="sunny_promo"
             currentLocale={locale}
             isEditor={isEditor}

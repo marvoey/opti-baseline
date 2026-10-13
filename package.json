@@ -15,6 +15,7 @@
     "gen:locales": "node scripts/generate-locales.mjs",
     "cms:push": "node --env-file=.env scripts/cms-push.mjs",
     "cms:push:all": "node --env-file=.env scripts/cms-push.mjs --all",
+    "cms:push:force": "node --env-file=.env scripts/cms-push.mjs --all --force",
     "schema:pull": "node scripts/fetch-openapi.mjs",
     "cms:check": "node --env-file=.env scripts/check-content-types.mjs",
     "cms:audit": "node --env-file=.env scripts/cms-market-audit.mjs",

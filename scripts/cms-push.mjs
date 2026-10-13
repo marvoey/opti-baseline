@@ -7,12 +7,17 @@
  * Flags:
  *   --all    Push every content type regardless of CMS state (original behaviour)
  *   --dry    Show what would be pushed without sending anything
+ *   --force  Apply breaking changes anyway (sends cms-ignore-data-loss-warnings,
+ *            same as `opti-cli config push --force`). May cause data loss.
+ *   --only   Comma-separated content type keys; push just those (includes
+ *            existing types, so no --all needed)
  *
  * Examples:
  *   node --env-file=.env scripts/cms-push.mjs           # push missing only
  *   node --env-file=.env scripts/cms-push.mjs --all     # push everything
  *   node --env-file=.env scripts/cms-push.mjs --dry     # preview missing push
  *   node --env-file=.env scripts/cms-push.mjs --all --dry
+ *   node --env-file=.env scripts/cms-push.mjs --only UpsFeatureListSection --force
  */
 
 import { dirname, join, resolve } from 'node:path';
@@ -28,6 +33,15 @@ import { mapContentToManifest } from '@optimizely/cms-cli/dist/mapper/contentToP
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const ALL_MODE = process.argv.includes('--all');
 const DRY_MODE = process.argv.includes('--dry');
+const FORCE_MODE = process.argv.includes('--force');
+const ONLY_KEYS = (() => {
+  const argv = process.argv;
+  const i = argv.findIndex(a => a === '--only' || a.startsWith('--only='));
+  if (i === -1) return null;
+  const raw = argv[i].includes('=') ? argv[i].split('=')[1] : argv[i + 1];
+  const keys = (raw ?? '').split(',').map(k => k.trim()).filter(Boolean);
+  return keys.length ? new Set(keys) : null;
+})();
 
 // ── Env ───────────────────────────────────────────────────────────────────────
 if (
@@ -88,13 +102,15 @@ async function fetchCmsKeys(token) {
 }
 
 // ── POST manifest ─────────────────────────────────────────────────────────────
-async function postManifest(token, manifest) {
+async function postManifest(token, manifest, { force = false } = {}) {
   const res = await fetch(`${GATEWAY}/v1/manifest`, {
     method: 'POST',
     headers: {
       authorization: `Bearer ${token}`,
       accept: 'application/json',
       'content-type': 'application/vnd.optimizely.cms.v1.manifest+json',
+      // Accept breaking changes (possible data loss) — mirrors the CLI's --force.
+      ...(force ? { 'cms-ignore-data-loss-warnings': 'true' } : {}),
     },
     body: JSON.stringify(manifest),
   });
@@ -167,7 +183,17 @@ async function main() {
   }
 
   // 5. Decide what to push
-  const toPush = ALL_MODE ? allMapped : missing;
+  let toPush = ALL_MODE ? allMapped : missing;
+  if (ONLY_KEYS) {
+    const known = new Set(allMapped.map(ct => ct.key));
+    const unknown = [...ONLY_KEYS].filter(k => !known.has(k));
+    if (unknown.length) {
+      console.error(c.red(`\nUnknown content type key(s) in --only: ${unknown.join(', ')}`));
+      process.exitCode = 1;
+      return;
+    }
+    toPush = allMapped.filter(ct => ONLY_KEYS.has(ct.key));
+  }
 
   if (toPush.length === 0) {
     console.log(c.green('\nAll content types are already in the CMS. Nothing to push.'));
@@ -190,6 +216,13 @@ async function main() {
   }
 
   // 7. Push
+  if (FORCE_MODE) {
+    console.warn(
+      c.yellow(
+        '\n--force is used: breaking content type changes will be applied and may result in data loss.',
+      ),
+    );
+  }
   console.log(c.dim('\nUploading…'));
 
   const normalizedGroups = propertyGroups
@@ -202,7 +235,7 @@ async function main() {
     propertyGroups: normalizedGroups,
   };
 
-  const result = await postManifest(token, manifest);
+  const result = await postManifest(token, manifest, { force: FORCE_MODE });
 
   console.log(c.green('\n✓ Upload complete'));
 
