@@ -1,5 +1,5 @@
 {
-  "name": "nextjs-banner",
+  "name": "ups-baseline",
   "version": "0.1.0",
   "private": true,
   "engines": {
@@ -16,8 +16,9 @@
     "cms:push": "node --env-file=.env scripts/cms-push.mjs",
     "cms:push:all": "node --env-file=.env scripts/cms-push.mjs --all",
     "schema:pull": "node scripts/fetch-openapi.mjs",
-    "seed:hero": "node scripts/seed-atomic-hero.mjs",
-    "cms:check": "node --env-file=.env scripts/check-content-types.mjs"
+    "cms:check": "node --env-file=.env scripts/check-content-types.mjs",
+    "cms:audit": "node --env-file=.env scripts/cms-market-audit.mjs",
+    "cms:home-blocks": "node --env-file=.env scripts/cms-home-blocks.mjs"
   },
   "dependencies": {
     "@optimizely/cms-cli": "^2.0.0",

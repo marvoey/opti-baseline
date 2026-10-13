@@ -14,3 +14,8 @@ export type OptiLink = {
 export function ctaHref(link: OptiLink): string {
   return link?.url?.default ?? '#';
 }
+
+/** Visible text of a `link` property, falling back to a default label. */
+export function ctaLabel(link: OptiLink, fallback: string): string {
+  return link?.text || fallback;
+}

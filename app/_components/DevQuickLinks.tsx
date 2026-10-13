@@ -2,13 +2,11 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { siteConfig } from '@/lib/siteConfig';
 
 const LINKS = [
   { label: 'Home',            href: '/' },
-  { label: 'Assemble',        href: '/assemble' },
-  { label: 'Content Library', href: '/content-library' },
   { label: 'Admin',           href: '/admin' },
-  { label: 'CMS',             href: '/cms-admin' },
 ];
 
 export default function DevQuickLinks() {
@@ -33,15 +31,15 @@ export default function DevQuickLinks() {
       <button
         onClick={() => setOpen((o) => !o)}
         title="Quick links"
-        className="w-7 h-7 rounded-full overflow-hidden shadow-md hover:scale-110 transition-transform focus:outline-none focus-visible:ring-2 focus-visible:ring-green-400"
+        className="w-7 h-7 rounded-full overflow-hidden shadow-md hover:scale-110 transition-transform focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-200"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="https://media.ffycdn.net/eu/episerver/YKPBoHJ87Gba79trvfkP.png?width=28"
-          alt="Optimizely quick links"
+          src={siteConfig.logoSrc}
+          alt="UPS quick links"
           width={28}
           height={28}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-contain bg-white"
         />
       </button>
     </div>

@@ -4575,29 +4575,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nextjs-banner@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "nextjs-banner@workspace:."
-  dependencies:
-    "@optimizely/cms-cli": "npm:^2.0.0"
-    "@optimizely/cms-sdk": "npm:^2.0.0"
-    "@tailwindcss/postcss": "npm:^4"
-    "@tailwindcss/typography": "npm:^0.5.20"
-    "@types/node": "npm:^20"
-    "@types/react": "npm:^19"
-    "@types/react-dom": "npm:^19"
-    eslint: "npm:^9"
-    eslint-config-next: "npm:16.2.9"
-    lucide-react: "npm:^1.18.0"
-    next: "npm:16.2.9"
-    react: "npm:19.2.4"
-    react-dom: "npm:19.2.4"
-    shiki: "npm:^4.3.0"
-    tailwindcss: "npm:^4"
-    typescript: "npm:^5"
-  languageName: unknown
-  linkType: soft
-
 "node-exports-info@npm:^1.6.0":
   version: 1.6.2
   resolution: "node-exports-info@npm:1.6.2"
@@ -5964,6 +5941,29 @@ __metadata:
   checksum: 10c0/837b4ea8c4934228c5c2a922ea747a54b0ec9d1c408d2fbc9220a9b98327c04109776e6ea1206fa056ea61ed8534863af472d9f2cfce569d35f04e98c95db739
   languageName: node
   linkType: hard
+
+"ups-baseline@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "ups-baseline@workspace:."
+  dependencies:
+    "@optimizely/cms-cli": "npm:^2.0.0"
+    "@optimizely/cms-sdk": "npm:^2.0.0"
+    "@tailwindcss/postcss": "npm:^4"
+    "@tailwindcss/typography": "npm:^0.5.20"
+    "@types/node": "npm:^20"
+    "@types/react": "npm:^19"
+    "@types/react-dom": "npm:^19"
+    eslint: "npm:^9"
+    eslint-config-next: "npm:16.2.9"
+    lucide-react: "npm:^1.18.0"
+    next: "npm:16.2.9"
+    react: "npm:19.2.4"
+    react-dom: "npm:19.2.4"
+    shiki: "npm:^4.3.0"
+    tailwindcss: "npm:^4"
+    typescript: "npm:^5"
+  languageName: unknown
+  linkType: soft
 
 "uri-js@npm:^4.2.2":
   version: 4.4.1

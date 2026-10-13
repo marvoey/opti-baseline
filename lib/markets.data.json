@@ -1,0 +1,478 @@
+{
+  "US": {
+    "countryCode": "US",
+    "countryName": "United States",
+    "defaultLocale": "en-US",
+    "cmsLocales": [
+      "en-US",
+      "es-US"
+    ],
+    "services": [
+      "ups_store",
+      "happy_returns",
+      "roadie",
+      "virtual_consultation",
+      "ground_saver",
+      "tariff_refunds",
+      "sunny_promo",
+      "my_choice",
+      "pickup_options",
+      "order_supplies"
+    ]
+  },
+  "CA": {
+    "countryCode": "CA",
+    "countryName": "Canada",
+    "defaultLocale": "en-CA",
+    "cmsLocales": [
+      "en-CA",
+      "fr-CA"
+    ],
+    "services": [
+      "ups_store",
+      "my_choice",
+      "pickup_options",
+      "order_supplies"
+    ]
+  },
+  "MX": {
+    "countryCode": "MX",
+    "countryName": "Mexico",
+    "defaultLocale": "es-MX",
+    "cmsLocales": [
+      "es-MX"
+    ],
+    "services": [
+      "my_choice",
+      "pickup_options",
+      "order_supplies"
+    ]
+  },
+  "BR": {
+    "countryCode": "BR",
+    "countryName": "Brazil",
+    "defaultLocale": "pt-BR",
+    "cmsLocales": [
+      "pt-BR"
+    ],
+    "services": [
+      "pickup_options",
+      "order_supplies"
+    ]
+  },
+  "GB": {
+    "countryCode": "GB",
+    "countryName": "United Kingdom",
+    "defaultLocale": "en-GB",
+    "cmsLocales": [
+      "en-GB"
+    ],
+    "services": [
+      "my_choice",
+      "pickup_options",
+      "order_supplies"
+    ]
+  },
+  "IE": {
+    "countryCode": "IE",
+    "countryName": "Ireland",
+    "defaultLocale": "en-IE",
+    "cmsLocales": [
+      "en-IE"
+    ],
+    "services": [
+      "pickup_options",
+      "order_supplies"
+    ]
+  },
+  "DE": {
+    "countryCode": "DE",
+    "countryName": "Germany",
+    "defaultLocale": "de-DE",
+    "cmsLocales": [
+      "de-DE"
+    ],
+    "services": [
+      "my_choice",
+      "pickup_options",
+      "order_supplies"
+    ]
+  },
+  "FR": {
+    "countryCode": "FR",
+    "countryName": "France",
+    "defaultLocale": "fr-FR",
+    "cmsLocales": [
+      "fr-FR"
+    ],
+    "services": [
+      "my_choice",
+      "pickup_options",
+      "order_supplies"
+    ]
+  },
+  "ES": {
+    "countryCode": "ES",
+    "countryName": "Spain",
+    "defaultLocale": "es-ES",
+    "cmsLocales": [
+      "es-ES"
+    ],
+    "services": [
+      "pickup_options",
+      "order_supplies"
+    ]
+  },
+  "IT": {
+    "countryCode": "IT",
+    "countryName": "Italy",
+    "defaultLocale": "it-IT",
+    "cmsLocales": [
+      "it-IT"
+    ],
+    "services": [
+      "pickup_options",
+      "order_supplies"
+    ]
+  },
+  "NL": {
+    "countryCode": "NL",
+    "countryName": "Netherlands",
+    "defaultLocale": "nl-NL",
+    "cmsLocales": [
+      "nl-NL"
+    ],
+    "services": [
+      "pickup_options",
+      "order_supplies"
+    ]
+  },
+  "BE": {
+    "countryCode": "BE",
+    "countryName": "Belgium",
+    "defaultLocale": "nl-BE",
+    "cmsLocales": [
+      "nl-BE",
+      "fr-BE"
+    ],
+    "services": [
+      "pickup_options",
+      "order_supplies"
+    ]
+  },
+  "AT": {
+    "countryCode": "AT",
+    "countryName": "Austria",
+    "defaultLocale": "de-AT",
+    "cmsLocales": [
+      "de-AT"
+    ],
+    "services": [
+      "pickup_options",
+      "order_supplies"
+    ]
+  },
+  "CH": {
+    "countryCode": "CH",
+    "countryName": "Switzerland",
+    "defaultLocale": "de-CH",
+    "cmsLocales": [
+      "de-CH",
+      "fr-CH"
+    ],
+    "services": [
+      "pickup_options",
+      "order_supplies"
+    ]
+  },
+  "SE": {
+    "countryCode": "SE",
+    "countryName": "Sweden",
+    "defaultLocale": "sv-SE",
+    "cmsLocales": [
+      "sv-SE"
+    ],
+    "services": [
+      "pickup_options",
+      "order_supplies"
+    ]
+  },
+  "NO": {
+    "countryCode": "NO",
+    "countryName": "Norway",
+    "defaultLocale": "nb-NO",
+    "cmsLocales": [
+      "nb-NO"
+    ],
+    "services": [
+      "pickup_options",
+      "order_supplies"
+    ]
+  },
+  "DK": {
+    "countryCode": "DK",
+    "countryName": "Denmark",
+    "defaultLocale": "da-DK",
+    "cmsLocales": [
+      "da-DK"
+    ],
+    "services": [
+      "pickup_options",
+      "order_supplies"
+    ]
+  },
+  "FI": {
+    "countryCode": "FI",
+    "countryName": "Finland",
+    "defaultLocale": "fi-FI",
+    "cmsLocales": [
+      "fi-FI"
+    ],
+    "services": [
+      "pickup_options",
+      "order_supplies"
+    ]
+  },
+  "PL": {
+    "countryCode": "PL",
+    "countryName": "Poland",
+    "defaultLocale": "pl-PL",
+    "cmsLocales": [
+      "pl-PL"
+    ],
+    "services": [
+      "pickup_options",
+      "order_supplies"
+    ]
+  },
+  "CZ": {
+    "countryCode": "CZ",
+    "countryName": "Czechia",
+    "defaultLocale": "cs-CZ",
+    "cmsLocales": [
+      "cs-CZ"
+    ],
+    "services": [
+      "pickup_options",
+      "order_supplies"
+    ]
+  },
+  "PT": {
+    "countryCode": "PT",
+    "countryName": "Portugal",
+    "defaultLocale": "pt-PT",
+    "cmsLocales": [
+      "pt-PT"
+    ],
+    "services": [
+      "pickup_options",
+      "order_supplies"
+    ]
+  },
+  "GR": {
+    "countryCode": "GR",
+    "countryName": "Greece",
+    "defaultLocale": "el-GR",
+    "cmsLocales": [
+      "el-GR"
+    ],
+    "services": [
+      "pickup_options",
+      "order_supplies"
+    ]
+  },
+  "TR": {
+    "countryCode": "TR",
+    "countryName": "Turkey",
+    "defaultLocale": "tr-TR",
+    "cmsLocales": [
+      "tr-TR"
+    ],
+    "services": [
+      "pickup_options",
+      "order_supplies"
+    ]
+  },
+  "SA": {
+    "countryCode": "SA",
+    "countryName": "Saudi Arabia",
+    "defaultLocale": "ar-SA",
+    "cmsLocales": [
+      "ar-SA"
+    ],
+    "services": [
+      "pickup_options",
+      "order_supplies"
+    ]
+  },
+  "AE": {
+    "countryCode": "AE",
+    "countryName": "United Arab Emirates",
+    "defaultLocale": "ar-AE",
+    "cmsLocales": [
+      "ar-AE"
+    ],
+    "services": [
+      "pickup_options",
+      "order_supplies"
+    ]
+  },
+  "DZ": {
+    "countryCode": "DZ",
+    "countryName": "Algeria",
+    "defaultLocale": "fr-DZ",
+    "cmsLocales": [
+      "fr-DZ",
+      "ar-DZ"
+    ],
+    "services": [
+      "pickup_options",
+      "order_supplies"
+    ]
+  },
+  "IN": {
+    "countryCode": "IN",
+    "countryName": "India",
+    "defaultLocale": "en-IN",
+    "cmsLocales": [
+      "en-IN"
+    ],
+    "services": [
+      "pickup_options",
+      "order_supplies"
+    ]
+  },
+  "CN": {
+    "countryCode": "CN",
+    "countryName": "China",
+    "defaultLocale": "zh-CN",
+    "cmsLocales": [
+      "zh-CN"
+    ],
+    "services": [
+      "pickup_options",
+      "order_supplies"
+    ]
+  },
+  "HK": {
+    "countryCode": "HK",
+    "countryName": "Hong Kong",
+    "defaultLocale": "zh-HK",
+    "cmsLocales": [
+      "zh-HK",
+      "en-HK"
+    ],
+    "services": [
+      "pickup_options",
+      "order_supplies"
+    ]
+  },
+  "TW": {
+    "countryCode": "TW",
+    "countryName": "Taiwan",
+    "defaultLocale": "zh-TW",
+    "cmsLocales": [
+      "zh-TW"
+    ],
+    "services": [
+      "pickup_options",
+      "order_supplies"
+    ]
+  },
+  "JP": {
+    "countryCode": "JP",
+    "countryName": "Japan",
+    "defaultLocale": "ja-JP",
+    "cmsLocales": [
+      "ja-JP"
+    ],
+    "services": [
+      "pickup_options",
+      "order_supplies"
+    ]
+  },
+  "KR": {
+    "countryCode": "KR",
+    "countryName": "South Korea",
+    "defaultLocale": "ko-KR",
+    "cmsLocales": [
+      "ko-KR"
+    ],
+    "services": [
+      "pickup_options",
+      "order_supplies"
+    ]
+  },
+  "SG": {
+    "countryCode": "SG",
+    "countryName": "Singapore",
+    "defaultLocale": "en-SG",
+    "cmsLocales": [
+      "en-SG"
+    ],
+    "services": [
+      "pickup_options",
+      "order_supplies"
+    ]
+  },
+  "AU": {
+    "countryCode": "AU",
+    "countryName": "Australia",
+    "defaultLocale": "en-AU",
+    "cmsLocales": [
+      "en-AU"
+    ],
+    "services": [
+      "pickup_options",
+      "order_supplies"
+    ]
+  },
+  "NZ": {
+    "countryCode": "NZ",
+    "countryName": "New Zealand",
+    "defaultLocale": "en-NZ",
+    "cmsLocales": [
+      "en-NZ"
+    ],
+    "services": [
+      "pickup_options",
+      "order_supplies"
+    ]
+  },
+  "TH": {
+    "countryCode": "TH",
+    "countryName": "Thailand",
+    "defaultLocale": "th-TH",
+    "cmsLocales": [
+      "th-TH"
+    ],
+    "services": [
+      "pickup_options",
+      "order_supplies"
+    ]
+  },
+  "MY": {
+    "countryCode": "MY",
+    "countryName": "Malaysia",
+    "defaultLocale": "en-MY",
+    "cmsLocales": [
+      "en-MY"
+    ],
+    "services": [
+      "pickup_options",
+      "order_supplies"
+    ]
+  },
+  "PH": {
+    "countryCode": "PH",
+    "countryName": "Philippines",
+    "defaultLocale": "en-PH",
+    "cmsLocales": [
+      "en-PH"
+    ],
+    "services": [
+      "pickup_options",
+      "order_supplies"
+    ]
+  }
+}

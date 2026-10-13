@@ -12,6 +12,12 @@ import BlankExperience from './BlankExperience';
 import BlankSection from './BlankSection';
 import Page, { PageContentType } from './Page';
 import RichText, { RichTextContentType } from './RichText';
+import EnhancedAppTeaser, { EnhancedAppTeaserContentType } from './EnhancedAppTeaser';
+import SolutionsSection, { SolutionsSectionContentType, SolutionCardContentType } from './SolutionsSection';
+import DynamicBanner, { DynamicBannerContentType } from './DynamicBanner';
+import CarouselSection, { CarouselSectionContentType, MetricContentType, StoryCardContentType } from './CarouselSection';
+import FeatureListSection, { FeatureListSectionContentType, FeatureItemContentType } from './FeatureListSection';
+import AccordionSection, { AccordionSectionContentType, AccordionItemContentType } from './AccordionSection';
 
 /**
  * Single configuration + registration point for the Optimizely SDK.
@@ -49,6 +55,18 @@ export const registeredContentTypes = [
   PageContentType,
   // Blocks
   RichTextContentType,
+  // UPS homepage blocks (+ the nested item types they use)
+  EnhancedAppTeaserContentType,
+  SolutionsSectionContentType,
+  SolutionCardContentType,
+  DynamicBannerContentType,
+  CarouselSectionContentType,
+  MetricContentType,
+  StoryCardContentType,
+  FeatureListSectionContentType,
+  FeatureItemContentType,
+  AccordionSectionContentType,
+  AccordionItemContentType,
 ];
 
 initContentTypeRegistry(registeredContentTypes);
@@ -62,5 +80,11 @@ initReactComponentRegistry({
     Page,
     // Blocks (resolver key === content-type key)
     RichTextBlock: RichText,
+    UpsEnhancedAppTeaser: EnhancedAppTeaser,
+    UpsSolutionsSection: SolutionsSection,
+    UpsDynamicBanner: DynamicBanner,
+    UpsCarouselSection: CarouselSection,
+    UpsFeatureListSection: FeatureListSection,
+    UpsAccordionSection: AccordionSection,
   },
 });

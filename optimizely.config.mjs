@@ -12,5 +12,8 @@ export default buildConfig({
   // Declare custom property groups here as content types are added.
   // Use a negative sortOrder to float a group above the built-in/system groups
   // (Settings, SEO, Categories, …), which sit at 0–60. None needed for the base.
-  propertyGroups: [],
+  propertyGroups: [
+    { key: 'promo', displayName: 'Promo', sortOrder: -20 },
+    { key: 'quote', displayName: 'Quote & Tracking', sortOrder: -10 },
+  ],
 });

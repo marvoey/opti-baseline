@@ -3,10 +3,10 @@ import type { ReactNode } from 'react';
 export type BadgeColor = 'gold' | 'teal' | 'mint' | 'rust';
 
 const BADGE_COLORS: Record<BadgeColor, string> = {
-  gold: 'bg-cibc-gold/10 text-cibc-gold-dark border-cibc-gold/30',
-  teal: 'bg-cibc-teal/10 text-cibc-teal border-cibc-teal/20',
-  mint: 'bg-cibc-mint/20 text-cibc-teal border-cibc-mint/50',
-  rust: 'bg-cibc-rust/10 text-cibc-rust border-cibc-rust/20',
+  gold: 'bg-blue-200/25 text-blue-950 border-blue-200/60',
+  teal: 'bg-blue-800/10 text-blue-800 border-blue-800/30',
+  mint: 'bg-ups-green/15 text-blue-950 border-ups-green/40',
+  rust: 'bg-ups-red/10 text-ups-red border-ups-red/30',
 };
 
 /** Brand pill badge. Shared component (usable in Server and Client trees). */
