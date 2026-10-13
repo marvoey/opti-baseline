@@ -13,6 +13,8 @@
     "start": "node scripts/run-next.mjs start",
     "lint": "eslint",
     "gen:locales": "node scripts/generate-locales.mjs",
+    "cms:locales": "node --env-file=.env scripts/seed-locales.mjs",
+    "gen:all-locales": "node scripts/generate-all-locales.mjs",
     "cms:push": "node --env-file=.env scripts/cms-push.mjs",
     "cms:push:all": "node --env-file=.env scripts/cms-push.mjs --all",
     "cms:push:force": "node --env-file=.env scripts/cms-push.mjs --all --force",
