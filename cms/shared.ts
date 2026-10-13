@@ -10,6 +10,27 @@ export type OptiLink = {
   url: { default: string | null } | null;
 } | null;
 
+/**
+ * Resolve a CTA from the translatable split (`label` string + `url`) with the
+ * legacy `link` property as fallback. The link is only used when neither half
+ * of the split is provided. Returns null when there is nothing to render.
+ */
+export function resolveCta(
+  label: string | null | undefined,
+  url: string | null | undefined,
+  link: OptiLink | undefined,
+  fallbackLabel: string,
+): { label: string; href: string } | null {
+  const splitUrl = url?.trim() || null;
+  if (label || splitUrl) {
+    return { label: label || fallbackLabel, href: splitUrl ?? '#' };
+  }
+  if (link) {
+    return { label: ctaLabel(link, fallbackLabel), href: ctaHref(link) };
+  }
+  return null;
+}
+
 /** Resolve a usable href from a `link` property (falls back to '#'). */
 export function ctaHref(link: OptiLink): string {
   return link?.url?.default ?? '#';

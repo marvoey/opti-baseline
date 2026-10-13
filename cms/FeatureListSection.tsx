@@ -2,7 +2,7 @@ import { contentType, type ContentProps } from '@optimizely/cms-sdk';
 import { getPreviewUtils } from '@optimizely/cms-sdk/react/server';
 import SmartCta, { contentLocale, isEditorContent } from '../app/_components/SmartCta';
 import { DEFAULT_LOCALE } from '../lib/locales';
-import { ctaHref, ctaLabel } from './shared';
+import { resolveCta } from './shared';
 
 export const FeatureItemContentType = contentType({
   key: 'UpsFeatureItem',
@@ -31,7 +31,26 @@ export const FeatureListSectionContentType = contentType({
       items: { type: 'component', contentType: FeatureItemContentType },
       sortOrder: 20,
     },
-    Cta: { type: 'link', displayName: 'Call to Action', isLocalized: true, sortOrder: 30 },
+    Cta: {
+      type: 'link',
+      displayName: 'Call to Action (legacy link)',
+      description: 'Fallback. Used only when CTA Label and CTA URL are both empty.',
+      isLocalized: true,
+      sortOrder: 30,
+    },
+    CtaLabel: {
+      type: 'string',
+      displayName: 'CTA Label',
+      description: 'Translatable button text. Preferred over the legacy link.',
+      isLocalized: true,
+      sortOrder: 40,
+    },
+    CtaUrl: {
+      type: 'string',
+      displayName: 'CTA URL',
+      description: 'Destination, shared across locales. Internal paths are localized at render time.',
+      sortOrder: 50,
+    },
   },
 });
 
@@ -41,6 +60,7 @@ export default function FeatureListSection({ content }: Props) {
   const { pa } = getPreviewUtils(content);
   const locale = contentLocale(content, DEFAULT_LOCALE);
   const items = content.Features ?? [];
+  const cta = resolveCta(content.CtaLabel, content.CtaUrl, content.Cta, 'Create a Profile');
 
   return (
     <section className="w-full px-4 py-12">
@@ -59,11 +79,11 @@ export default function FeatureListSection({ content }: Props) {
             </li>
           ))}
         </ul>
-        {content.Cta && (
+        {cta && (
           <div className="mt-8">
             <SmartCta
-              label={ctaLabel(content.Cta, 'Create a Profile')}
-              href={ctaHref(content.Cta)}
+              label={cta.label}
+              href={cta.href}
               currentLocale={locale}
               isEditor={isEditorContent(content)}
               className="inline-block rounded-full bg-blue-200 px-6 py-3 text-sm font-bold text-blue-950 transition-colors hover:bg-blue-400"
