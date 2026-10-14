@@ -11,6 +11,7 @@ import { requireEnv } from '@/lib/env';
 import BlankExperience from './BlankExperience';
 import BlankSection from './BlankSection';
 import Page, { PageContentType } from './Page';
+import AbmLandingPage, { AbmLandingPageContentType } from './AbmLandingPage';
 import RichText, { RichTextContentType } from './RichText';
 
 /**
@@ -47,6 +48,7 @@ export const registeredContentTypes = [
   BlankExperienceContentType,
   BlankSectionContentType,
   PageContentType,
+  AbmLandingPageContentType,
   // Blocks
   RichTextContentType,
 ];
@@ -60,6 +62,7 @@ initReactComponentRegistry({
     BlankExperience,
     BlankSection,
     Page,
+    AbmLandingPage,
     // Blocks (resolver key === content-type key)
     RichTextBlock: RichText,
   },
