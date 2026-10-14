@@ -51,19 +51,6 @@
       background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
       background-size: 24px 24px;
     }
-    .flow-connector {
-      position: relative;
-    }
-    .flow-connector::after {
-      content: '';
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 2px;
-      height: 24px;
-      background: linear-gradient(to bottom, rgba(99, 102, 241, 0.8), rgba(99, 102, 241, 0.2));
-    }
   </style>
 </head>
 <body class="grid-bg min-h-screen py-10 px-4 sm:px-8">
@@ -79,13 +66,16 @@
         Governed Content Supply Chain Architecture
       </h1>
       <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
-        How <span class="text-amber-400 font-semibold">UPS In-House Orchestration</span>, <span class="text-blue-400 font-semibold">Optimizely Opal Specialized Agents</span>, and <span class="text-red-400 font-semibold">Adobe AEM / Edge Delivery Services</span> integrate into an automated, closed-loop publishing engine.
+        How <span class="text-amber-400 font-semibold">UPS In-House Orchestration</span>, <span class="text-blue-400 font-semibold">Optimizely Opal Specialized Agents</span>, <span class="text-red-400 font-semibold">Adobe AEM / Edge Delivery Services</span>, and an optional <span class="text-amber-300 font-semibold">CMP Work Tracking Layer</span> integrate into an automated, closed-loop publishing engine.
       </p>
 
       <!-- Key Guarantees Badges -->
       <div class="flex flex-wrap justify-center gap-2 pt-2">
         <span class="px-3 py-1 rounded-md text-xs font-medium bg-amber-950/60 border border-amber-600/40 text-amber-300">
           ✓ Preserves UPS Custom Intake UI & Agent
+        </span>
+        <span class="px-3 py-1 rounded-md text-xs font-medium bg-amber-950/40 border border-dashed border-amber-400/60 text-amber-200">
+          ⚙ Optional CMP Work-Tracking Layer (Zero UI/Orchestration Disruption)
         </span>
         <span class="px-3 py-1 rounded-md text-xs font-medium bg-blue-950/60 border border-blue-600/40 text-blue-300">
           ✓ Out-of-the-Box Opal Specialized Agents
@@ -147,6 +137,152 @@
               &nbsp;&nbsp;<span class="text-blue-400">"intent"</span>: "rate_update_q4",<br/>
               &nbsp;&nbsp;<span class="text-blue-400">"urgency"</span>: "standard"<br/>
               <span class="text-amber-400 font-semibold">}</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONNECTOR DOWN -->
+      <div class="flex justify-center -my-3 relative z-10">
+        <div class="bg-slate-800 border border-slate-700 px-4 py-1.5 rounded-full text-xs font-mono text-slate-300 flex items-center gap-2 shadow-md">
+          <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+          Optional Work Tracking Handoff &bull; CMP Open REST API
+        </div>
+      </div>
+
+      <!-- OPTIONAL WORK TRACKING LAYER: OPTIMIZELY CMP -->
+      <section class="bg-slate-900/90 border-2 border-dashed border-amber-400/60 rounded-2xl p-6 shadow-2xl backdrop-blur relative">
+        <div class="absolute -top-3 left-6 px-3 py-0.5 rounded-full bg-amber-400 text-slate-950 text-xs font-black uppercase tracking-wider flex items-center gap-1.5 shadow-md">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+          Optional Work Tracking Layer &bull; Optimizely CMP (Runs Beneath UPS UI)
+        </div>
+
+        <div class="mt-2 space-y-4">
+          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3 bg-slate-950/80 border border-slate-800 rounded-xl p-4">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 text-[10px] font-mono font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30 rounded uppercase">Optional Add-On</span>
+                <span class="text-xs font-bold text-white">Tracks Lifecycle Handoffs Without Replacing UPS Intake UI or Orchestrator</span>
+              </div>
+              <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+                UPS Intake Bot creates the master work item via the <strong>CMP Open REST API</strong>. CMP tracks cross-team progress across Sapient, TransPerfect, and Regional Reviewers. Workflow steps fire webhooks (<code class="text-amber-300 font-mono">external_sub_step_started</code>) to trigger Opal agents, while approvals are deferred back to the UPS UI via the Task API.
+              </p>
+            </div>
+            <div class="shrink-0 flex items-center gap-2">
+              <span class="text-[11px] font-mono text-slate-400 bg-slate-900 border border-slate-700 px-3 py-1.5 rounded">
+                REST API + Webhook Bus
+              </span>
+            </div>
+          </div>
+
+          <!-- 7-Step Lifecycle Pipeline Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3 pt-1">
+            
+            <!-- Step 1 -->
+            <div class="bg-slate-800/80 border border-slate-700/80 rounded-xl p-3 flex flex-col justify-between">
+              <div>
+                <div class="text-[10px] font-mono text-amber-400 font-bold mb-1">STEP 01</div>
+                <div class="text-xs font-bold text-white leading-tight">Request Ingest</div>
+                <div class="text-[11px] text-slate-400 mt-1">UPS Intake Agent</div>
+              </div>
+              <div class="mt-2 pt-2 border-t border-slate-700 text-[10px] font-mono text-slate-400">
+                via CMP Task API
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="bg-slate-800/80 border border-slate-700/80 rounded-xl p-3 flex flex-col justify-between">
+              <div>
+                <div class="text-[10px] font-mono text-amber-400 font-bold mb-1">STEP 02</div>
+                <div class="text-xs font-bold text-white leading-tight">Triage & Routing</div>
+                <div class="text-[11px] text-slate-400 mt-1">UPS Content Ops</div>
+              </div>
+              <div class="mt-2 pt-2 border-t border-slate-700 text-[10px] font-mono text-blue-300">
+                ⚡ Opal Router Agent
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="bg-slate-800/80 border border-slate-700/80 rounded-xl p-3 flex flex-col justify-between">
+              <div>
+                <div class="text-[10px] font-mono text-amber-400 font-bold mb-1">STEP 03</div>
+                <div class="text-xs font-bold text-white leading-tight">Brand & Copy</div>
+                <div class="text-[11px] text-slate-400 mt-1">Opal Specialized Agents</div>
+              </div>
+              <div class="mt-2 pt-2 border-t border-slate-700 text-[10px] font-mono text-blue-300">
+                ⚡ Brand & Tone (SP)
+              </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="bg-slate-800/80 border border-slate-700/80 rounded-xl p-3 flex flex-col justify-between">
+              <div>
+                <div class="text-[10px] font-mono text-amber-400 font-bold mb-1">STEP 04</div>
+                <div class="text-xs font-bold text-white leading-tight">Production Build</div>
+                <div class="text-[11px] text-slate-400 mt-1">Sapient / AEM Team</div>
+              </div>
+              <div class="mt-2 pt-2 border-t border-slate-700 text-[10px] font-mono text-indigo-300">
+                Linked External Task
+              </div>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="bg-slate-800/80 border border-slate-700/80 rounded-xl p-3 flex flex-col justify-between">
+              <div>
+                <div class="text-[10px] font-mono text-amber-400 font-bold mb-1">STEP 05</div>
+                <div class="text-xs font-bold text-white leading-tight">Localization</div>
+                <div class="text-[11px] text-slate-400 mt-1">TransPerfect + TM</div>
+              </div>
+              <div class="mt-2 pt-2 border-t border-slate-700 text-[10px] font-mono text-amber-300">
+                ⚡ 92% QA Gate
+              </div>
+            </div>
+
+            <!-- Step 6 -->
+            <div class="bg-slate-800/80 border border-slate-700/80 rounded-xl p-3 flex flex-col justify-between">
+              <div>
+                <div class="text-[10px] font-mono text-amber-400 font-bold mb-1">STEP 06</div>
+                <div class="text-xs font-bold text-white leading-tight">Regional Review</div>
+                <div class="text-[11px] text-slate-400 mt-1">In-Market Leads</div>
+              </div>
+              <div class="mt-2 pt-2 border-t border-slate-700 text-[10px] font-mono text-emerald-300">
+                Deferred to UPS UI
+              </div>
+            </div>
+
+            <!-- Step 7 -->
+            <div class="bg-slate-800/80 border border-slate-700/80 rounded-xl p-3 flex flex-col justify-between">
+              <div>
+                <div class="text-[10px] font-mono text-amber-400 font-bold mb-1">STEP 07</div>
+                <div class="text-xs font-bold text-white leading-tight">Publish & Handoff</div>
+                <div class="text-[11px] text-slate-400 mt-1">EDS & Optimization</div>
+              </div>
+              <div class="mt-2 pt-2 border-t border-slate-700 text-[10px] font-mono text-emerald-300">
+                ⚡ Experimentation
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 3 Architectural Guarantees & Discovery Note -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3 pt-2 text-xs">
+            <div class="bg-slate-950/60 border border-slate-800 p-3 rounded-lg">
+              <span class="font-bold text-amber-300 uppercase tracking-wider text-[11px] block mb-1">1. System of Engagement Stays UPS</span>
+              <p class="text-slate-400 text-[11px] leading-relaxed">
+                Requesters use the UPS chat UI, reviewers approve in the UPS dashboard, and engineers orchestrate via Adobe MCP. Frontline users never need CMP seat licenses.
+              </p>
+            </div>
+            <div class="bg-slate-950/60 border border-slate-800 p-3 rounded-lg">
+              <span class="font-bold text-blue-300 uppercase tracking-wider text-[11px] block mb-1">2. Multi-Party Operational Visibility</span>
+              <p class="text-slate-400 text-[11px] leading-relaxed">
+                Solves Buddy's pain of tracking requests scattered across email and SharePoint. Provides a single ledger tracking Sapient and TransPerfect SLA turnarounds.
+              </p>
+            </div>
+            <div class="bg-slate-950/60 border border-slate-800 p-3 rounded-lg">
+              <span class="font-bold text-emerald-300 uppercase tracking-wider text-[11px] block mb-1">3. Discovery-Gated Inclusion</span>
+              <p class="text-slate-400 text-[11px] leading-relaxed">
+                If UPS's new intake UI already includes end-to-end task tracking, this layer is omitted. If multi-vendor handoffs remain a blind spot, CMP plugs in seamlessly.
+              </p>
             </div>
           </div>
         </div>
@@ -459,6 +595,12 @@
                 <td class="py-2.5 px-3 text-amber-300 font-medium">UPS Chatbot & UI collects validated briefs</td>
                 <td class="py-2.5 px-3 text-slate-500">None (Intake already solved by UPS)</td>
                 <td class="py-2.5 px-3 text-slate-500">None</td>
+              </tr>
+              <tr class="bg-amber-950/20">
+                <td class="py-2.5 px-3 font-semibold text-amber-300">Work Tracking (Optional CMP)</td>
+                <td class="py-2.5 px-3 text-amber-300 font-medium">Requesters & reviewers stay in UPS custom UI</td>
+                <td class="py-2.5 px-3 text-blue-300 font-medium">Tracks 7-step lifecycle & triggers Opal agents via webhooks</td>
+                <td class="py-2.5 px-3 text-slate-400">Sapient updates external task status</td>
               </tr>
               <tr>
                 <td class="py-2.5 px-3 font-semibold text-white">2. Orchestration</td>
