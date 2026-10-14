@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UPS x Optimizely - System Architecture Diagram</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #0b0f19;
+      color: #e2e8f0;
+      overflow-x: auto;
+    }
+    .mono {
+      font-family: 'Fira Code', monospace;
+    }
+    /* Grid background pattern */
+    .blueprint-grid {
+      background-size: 32px 32px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    }
+    /* Architecture boundary dashed lines */
+    .boundary-ups {
+      border: 1px dashed rgba(245, 158, 11, 0.4);
+      background: radial-gradient(circle at top left, rgba(245, 158, 11, 0.04) 0%, rgba(11, 15, 25, 0.8) 100%);
+    }
+    .boundary-opal {
+      border: 1px dashed rgba(59, 130, 246, 0.45);
+      background: radial-gradient(circle at top left, rgba(59, 130, 246, 0.05) 0%, rgba(11, 15, 25, 0.8) 100%);
+    }
+    .boundary-adobe {
+      border: 1px dashed rgba(239, 68, 68, 0.4);
+      background: radial-gradient(circle at top left, rgba(239, 68, 68, 0.04) 0%, rgba(11, 15, 25, 0.8) 100%);
+    }
+    .boundary-feedback {
+      border: 1px dashed rgba(16, 185, 129, 0.4);
+      background: radial-gradient(circle at top left, rgba(16, 185, 129, 0.04) 0%, rgba(11, 15, 25, 0.8) 100%);
+    }
+    /* SVG Connector animations */
+    @keyframes dash {
+      to {
+        stroke-dashoffset: -24;
+      }
+    }
+    .flow-line {
+      stroke-dasharray: 6 6;
+      animation: dash 1.2s linear infinite;
+    }
+    .flow-paused {
+      animation-play-state: paused !important;
+    }
+    /* Custom scrollbars */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0b0f19;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1e293b;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #334155;
+    }
+  </style>
+</head>
+<body class="blueprint-grid min-w-[1580px] p-8 antialiased selection:bg-blue-600 selection:text-white">
+
+  <!-- TOP HEADER / CONTROL BAR -->
+  <header class="mb-8 flex items-center justify-between border-b border-slate-800 pb-6">
+    <div class="flex items-center space-x-4">
+      <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 via-indigo-600 to-amber-500 shadow-lg shadow-blue-500/20">
+        <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+        </svg>
+      </div>
+      <div>
+        <div class="flex items-center space-x-3">
+          <h1 class="text-2xl font-bold tracking-tight text-white">UPS x Optimizely Content Supply Chain</h1>
+          <span class="mono rounded border border-blue-500/30 bg-blue-500/10 px-2.5 py-0.5 text-xs font-medium text-blue-400">ARCH-SPEC v2.4</span>
+          <span class="mono rounded border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 text-xs font-medium text-emerald-400">NON-INVASIVE OVERLAY</span>
+        </div>
+        <p class="mt-1 text-sm text-slate-400">
+          Target System Topology: Preserves UPS Intake + AEM/EDS Core Publishing while injecting Optimizely Opal Specialized Agents & Continuous Optimization
+        </p>
+      </div>
+    </div>
+
+    <!-- Interactive Filter & View Toggles -->
+    <div class="flex items-center space-x-3">
+      <div class="flex items-center rounded-lg border border-slate-700 bg-slate-900/80 p-1 backdrop-blur">
+        <button id="btn-flow-all" onclick="setFilter('all')" class="rounded px-3 py-1.5 text-xs font-semibold text-white bg-slate-800 shadow-sm transition">Full Pipeline</button>
+        <button id="btn-flow-agents" onclick="setFilter('agents')" class="rounded px-3 py-1.5 text-xs font-semibold text-slate-400 hover:text-white transition">Agent Ingestion</button>
+        <button id="btn-flow-publishing" onclick="setFilter('publishing')" class="rounded px-3 py-1.5 text-xs font-semibold text-slate-400 hover:text-white transition">AEM / EDS Push</button>
+        <button id="btn-flow-loop" onclick="setFilter('loop')" class="rounded px-3 py-1.5 text-xs font-semibold text-slate-400 hover:text-white transition">Optimization Loop</button>
+      </div>
+      <button onclick="toggleAnimation()" id="toggle-anim-btn" class="flex items-center space-x-2 rounded-lg border border-slate-700 bg-slate-900/80 px-3 py-2 text-xs font-semibold text-slate-300 hover:bg-slate-800 hover:text-white transition">
+        <span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" id="anim-indicator"></span>
+        <span id="anim-text">Flow Active</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ARCHITECTURE CANVAS CONTAINER -->
+  <div class="relative w-full rounded-2xl border border-slate-800/80 bg-slate-950/60 p-6 shadow-2xl backdrop-blur-sm">
+    
+    <!-- 4 MAIN SYSTEM BOUNDARY ZONES -->
+    <div class="grid grid-cols-4 gap-6">
+
+      <!-- ================= ZONE 1: UPS INTAKE & ORCHESTRATION (UPS OWNED) ================= -->
+      <div class="boundary-ups relative flex flex-col justify-between rounded-xl p-5">
+        <div class="flex items-center justify-between border-b border-amber-500/20 pb-3">
+          <div class="flex items-center space-x-2">
+            <span class="h-2.5 w-2.5 rounded-full bg-amber-500"></span>
+            <h2 class="text-sm font-bold uppercase tracking-wider text-amber-400">Boundary 1: UPS Enterprise Intake</h2>
+          </div>
+          <span class="mono text-[10px] text-amber-500/70">UPS MANAGED</span>
+        </div>
+
+        <div class="my-6 space-y-4">
+          <!-- Node 1.1: Request Origin -->
+          <div class="group relative rounded-lg border border-slate-800 bg-slate-900/90 p-4 transition hover:border-amber-500/50 hover:shadow-lg hover:shadow-amber-500/5 cursor-pointer" onclick="showDetails('node-intake-ui')">
+            <div class="flex items-center justify-between">
+              <span class="mono text-[10px] text-amber-400 uppercase font-semibold">Client Interface</span>
+              <span class="mono text-[10px] text-slate-500">UI / Teams / Web</span>
+            </div>
+            <div class="mt-2 text-sm font-semibold text-white">UPS Change Request Portal</div>
+            <p class="mt-1 text-xs text-slate-400">Global internal UI replacing SharePoint for multi-country change submissions.</p>
+            <div class="mt-3 flex items-center justify-between border-t border-slate-800/80 pt-2 text-[10px] text-slate-500">
+              <span>Status: <span class="text-amber-400">In Production Rollout</span></span>
+              <span class="mono text-slate-400">201 Locales</span>
+            </div>
+          </div>
+
+          <!-- Flow Arrow Down -->
+          <div class="flex justify-center text-slate-600">
+            <svg class="h-5 w-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+          </div>
+
+          <!-- Node 1.2: Intake Agent -->
+          <div class="group relative rounded-lg border border-slate-800 bg-slate-900/90 p-4 transition hover:border-amber-500/50 hover:shadow-lg hover:shadow-amber-500/5 cursor-pointer" onclick="showDetails('node-intake-agent')">
+            <div class="flex items-center justify-between">
+              <span class="mono text-[10px] text-amber-400 uppercase font-semibold">AI Conversational Intake</span>
+              <span class="mono text-[10px] text-emerald-400">Active Agent</span>
+            </div>
+            <div class="mt-2 text-sm font-semibold text-white">UPS Native Intake Agent</div>
+            <p class="mt-1 text-xs text-slate-400">Dynamically cross-checks missing fields, validates request scope, prevents endless email churn.</p>
+            <div class="mt-3 rounded bg-slate-950 p-2 text-[11px] mono text-slate-400">
+              <span class="text-amber-400">OUTPUT:</span> Clean JSON Task Spec
+            </div>
+          </div>
+
+          <!-- Flow Arrow Down -->
+          <div class="flex justify-center text-slate-600">
+            <svg class="h-5 w-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+          </div>
+
+          <!-- Node 1.3: UPS Orchestrator -->
+          <div class="group relative rounded-lg border border-slate-800 bg-slate-900/90 p-4 transition hover:border-amber-500/50 hover:shadow-lg hover:shadow-amber-500/5 cursor-pointer" onclick="showDetails('node-ups-orchestrator')">
+            <div class="flex items-center justify-between">
+              <span class="mono text-[10px] text-amber-400 uppercase font-semibold">Control Plane</span>
+              <span class="mono text-[10px] text-indigo-400">State Engine</span>
+            </div>
+            <div class="mt-2 text-sm font-semibold text-white">UPS Internal Orchestrator</div>
+            <p class="mt-1 text-xs text-slate-400">Coordinates pipeline tasks, maintains job state, and talks outbound to tool vendors.</p>
+            <div class="mt-3 flex items-center space-x-2">
+              <span class="mono rounded bg-amber-500/10 px-1.5 py-0.5 text-[10px] text-amber-400 border border-amber-500/20">MCP Client</span>
+              <span class="mono rounded bg-blue-500/10 px-1.5 py-0.5 text-[10px] text-blue-400 border border-blue-500/20">REST/Webhook</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Zone Footer Protocol -->
+        <div class="border-t border-amber-500/20 pt-3 text-[11px] text-slate-400">
+          <span class="font-semibold text-amber-400">Outbound Handoff:</span> Authenticated Webhook / Model Context Protocol (MCP) tool call
+        </div>
+      </div>
+
+      <!-- ================= ZONE 2: OPTIMIZELY OPAL INTELLIGENCE ENGINE (PLUGGABLE) ================= -->
+      <div class="boundary-opal relative flex flex-col justify-between rounded-xl p-5">
+        <div class="flex items-center justify-between border-b border-blue-500/20 pb-3">
+          <div class="flex items-center space-x-2">
+            <span class="h-2.5 w-2.5 rounded-full bg-blue-500 animate-pulse"></span>
+            <h2 class="text-sm font-bold uppercase tracking-wider text-blue-400">Boundary 2: Optimizely Opal Agents</h2>
+          </div>
+          <span class="mono text-[10px] text-blue-400/80">INTELLIGENCE OVERLAY</span>
+        </div>
+
+        <div class="my-4 space-y-3">
+          <!-- Gateway Node -->
+          <div class="rounded-lg border border-blue-500/30 bg-blue-950/20 p-2.5 text-center cursor-pointer hover:bg-blue-950/40 transition" onclick="showDetails('node-opal-gateway')">
+            <div class="mono text-[10px] text-blue-400 uppercase font-semibold">Integration Gateway</div>
+            <div class="text-xs font-bold text-white">Opal Agent Execution Broker</div>
+            <div class="text-[10px] text-slate-400">Invoked via MCP Tool Server or Direct Webhook Event</div>
+          </div>
+
+          <!-- Agent 1: Brand & Tone -->
+          <div class="group relative rounded-lg border border-slate-800 bg-slate-900/90 p-3 transition hover:border-blue-500/50 hover:shadow-lg hover:shadow-blue-500/5 cursor-pointer" onclick="showDetails('node-agent-brand')">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-white flex items-center space-x-1.5">
+                <span class="h-1.5 w-1.5 rounded-full bg-blue-400"></span>
+                <span>Brand & Tone Agent</span>
+              </span>
+              <span class="mono text-[10px] text-slate-400">RAG Grounded</span>
+            </div>
+            <p class="mt-1 text-[11px] text-slate-400">Verifies voice, compliance & legal boundaries using UPS SharePoint corpora.</p>
+            <div class="mt-2 flex items-center space-x-1 text-[10px] text-blue-400/90 mono">
+              <span>Grounding:</span>
+              <span class="underline">SharePoint Tone & Brand Guidelines</span>
+            </div>
+          </div>
+
+          <!-- Agent 2: Translation QA (92% Gate) -->
+          <div class="group relative rounded-lg border border-slate-800 bg-slate-900/90 p-3 transition hover:border-blue-500/50 hover:shadow-lg hover:shadow-blue-500/5 cursor-pointer" onclick="showDetails('node-agent-trans')">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-white flex items-center space-x-1.5">
+                <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
+                <span>Translation QA Agent</span>
+              </span>
+              <span class="mono text-[10px] text-amber-400">92% Quality Gate</span>
+            </div>
+            <p class="mt-1 text-[11px] text-slate-400">Calculates semantic accuracy score on MT copy across 42 languages.</p>
+            <div class="mt-2 grid grid-cols-2 gap-1 text-[9px] mono text-slate-300">
+              <div class="rounded bg-emerald-950/40 border border-emerald-500/20 p-1 text-center text-emerald-300">&ge; 92%: Auto-Pass</div>
+              <div class="rounded bg-amber-950/40 border border-amber-500/20 p-1 text-center text-amber-300">&lt; 92%: Human Gate</div>
+            </div>
+          </div>
+
+          <!-- Agent 3: SEO & AEO -->
+          <div class="group relative rounded-lg border border-slate-800 bg-slate-900/90 p-3 transition hover:border-blue-500/50 hover:shadow-lg hover:shadow-blue-500/5 cursor-pointer" onclick="showDetails('node-agent-seo')">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-white flex items-center space-x-1.5">
+                <span class="h-1.5 w-1.5 rounded-full bg-indigo-400"></span>
+                <span>SEO & AEO Engine</span>
+              </span>
+              <span class="mono text-[10px] text-slate-400">Discovery Agent</span>
+            </div>
+            <p class="mt-1 text-[11px] text-slate-400">Audits keyword resonance and synthetic LLM query discoverability.</p>
+          </div>
+
+          <!-- Sub-Node: TransPerfect TM Feedback Bridge -->
+          <div class="rounded-lg border border-dashed border-emerald-500/30 bg-emerald-950/10 p-2.5 cursor-pointer hover:bg-emerald-950/20 transition" onclick="showDetails('node-transperfect-bridge')">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-semibold text-emerald-400">TransPerfect TM Bridge</span>
+              <span class="mono text-[9px] text-emerald-400/80">Feedback Loop</span>
+            </div>
+            <p class="mt-1 text-[10px] text-slate-400">When human regional reviewers correct strings (e.g. "dog food"), export delta back to TransPerfect's hosted TM repository.</p>
+          </div>
+        </div>
+
+        <div class="border-t border-blue-500/20 pt-3 text-[11px] text-slate-400">
+          <span class="font-semibold text-blue-400">Output Payload:</span> Validated localized strings + metadata schema via Adobe MCP
+        </div>
+      </div>
+
+      <!-- ================= ZONE 3: ADOBE AEM & EDGE DELIVERY SERVICES (AEM OWNED) ================= -->
+      <div class="boundary-adobe relative flex flex-col justify-between rounded-xl p-5">
+        <div class="flex items-center justify-between border-b border-red-500/20 pb-3">
+          <div class="flex items-center space-x-2">
+            <span class="h-2.5 w-2.5 rounded-full bg-red-500"></span>
+            <h2 class="text-sm font-bold uppercase tracking-wider text-red-400">Boundary 3: Adobe Publishing Core</h2>
+          </div>
+          <span class="mono text-[10px] text-red-400/80">CURRENT UPS STACK</span>
+        </div>
+
+        <div class="my-6 space-y-4">
+          <!-- Node 3.1: Adobe MCP Server -->
+          <div class="group relative rounded-lg border border-slate-800 bg-slate-900/90 p-4 transition hover:border-red-500/50 hover:shadow-lg hover:shadow-red-500/5 cursor-pointer" onclick="showDetails('node-adobe-mcp')">
+            <div class="flex items-center justify-between">
+              <span class="mono text-[10px] text-red-400 uppercase font-semibold">API Receptor</span>
+              <span class="mono text-[10px] text-slate-400">MCP Protocol</span>
+            </div>
+            <div class="mt-2 text-sm font-semibold text-white">Adobe MCP Server Interface</div>
+            <p class="mt-1 text-xs text-slate-400">Receives authorized agent modifications into AEM asset and page pipelines without manual import.</p>
+          </div>
+
+          <!-- Flow Arrow Down -->
+          <div class="flex justify-center text-slate-600">
+            <svg class="h-5 w-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+          </div>
+
+          <!-- Node 3.2: Universal Editor & AEM Core -->
+          <div class="group relative rounded-lg border border-slate-800 bg-slate-900/90 p-4 transition hover:border-red-500/50 hover:shadow-lg hover:shadow-red-500/5 cursor-pointer" onclick="showDetails('node-aem-authoring')">
+            <div class="flex items-center justify-between">
+              <span class="mono text-[10px] text-red-400 uppercase font-semibold">Authoring Layer</span>
+              <span class="mono text-[10px] text-slate-400">WYSIWYG / Preview</span>
+            </div>
+            <div class="mt-2 text-sm font-semibold text-white">Universal Editor & AEM Sites</div>
+            <p class="mt-1 text-xs text-slate-400">Marketers visually inspect localized drafts directly in-context across 201 country folder structures.</p>
+            <div class="mt-3 flex items-center justify-between border-t border-slate-800/80 pt-2 text-[10px] text-slate-400">
+              <span>Universal Editor View</span>
+              <span class="mono text-red-400">No Re-platforming</span>
+            </div>
+          </div>
+
+          <!-- Flow Arrow Down -->
+          <div class="flex justify-center text-slate-600">
+            <svg class="h-5 w-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+          </div>
+
+          <!-- Node 3.3: Edge Delivery Services (EDS) -->
+          <div class="group relative rounded-lg border border-slate-800 bg-slate-900/90 p-4 transition hover:border-red-500/50 hover:shadow-lg hover:shadow-red-500/5 cursor-pointer" onclick="showDetails('node-aem-eds')">
+            <div class="flex items-center justify-between">
+              <span class="mono text-[10px] text-red-400 uppercase font-semibold">Edge CDN Pipeline</span>
+              <span class="mono text-[10px] text-emerald-400">100 Lighthouse</span>
+            </div>
+            <div class="mt-2 text-sm font-semibold text-white">Edge Delivery Services (EDS)</div>
+            <p class="mt-1 text-xs text-slate-400">Ultra-fast global edge rendering. Compiles approved content into lightweight edge blocks.</p>
+            <div class="mt-3 rounded bg-red-950/20 border border-red-500/20 p-2 text-[11px] mono text-slate-300">
+              <span class="text-red-400">LIVE TARGET:</span> ups.com/{locale}/*
+            </div>
+          </div>
+        </div>
+
+        <div class="border-t border-red-500/20 pt-3 text-[11px] text-slate-400">
+          <span class="font-semibold text-red-400">Publish Target:</span> Global CDN Edge Cache (Cloudflare / Fastly)
+        </div>
+      </div>
+
+      <!-- ================= ZONE 4: RECURSIVE OPTIMIZATION & EXPERIMENTATION ================= -->
+      <div class="boundary-feedback relative flex flex-col justify-between rounded-xl p-5">
+        <div class="flex items-center justify-between border-b border-emerald-500/20 pb-3">
+          <div class="flex items-center space-x-2">
+            <span class="h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            <h2 class="text-sm font-bold uppercase tracking-wider text-emerald-400">Boundary 4: Optimization Loop</h2>
+          </div>
+          <span class="mono text-[10px] text-emerald-400/80">CLOSED LOOP</span>
+        </div>
+
+        <div class="my-6 space-y-4">
+          <!-- Node 4.1: Optimizely Web Experimentation on EDS -->
+          <div class="group relative rounded-lg border border-slate-800 bg-slate-900/90 p-4 transition hover:border-emerald-500/50 hover:shadow-lg hover:shadow-emerald-500/5 cursor-pointer" onclick="showDetails('node-optimizely-exp')">
+            <div class="flex items-center justify-between">
+              <span class="mono text-[10px] text-emerald-400 uppercase font-semibold">Edge Testing</span>
+              <span class="mono text-[10px] text-slate-400">Zero Flicker</span>
+            </div>
+            <div class="mt-2 text-sm font-semibold text-white">Optimizely Experimentation</div>
+            <p class="mt-1 text-xs text-slate-400">Injects test variations (A/B, Multi-Armed Bandit) directly at the EDS edge layer without re-deploying code.</p>
+            <div class="mt-3 flex items-center space-x-2 text-[10px] mono text-emerald-400">
+              <span>Stats Engine</span> &bull; <span>Bandits</span> &bull; <span>Geo Routing</span>
+            </div>
+          </div>
+
+          <!-- Flow Arrow Down -->
+          <div class="flex justify-center text-slate-600">
+            <svg class="h-5 w-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+          </div>
+
+          <!-- Node 4.2: Closed Loop Agent -->
+          <div class="group relative rounded-lg border border-slate-800 bg-slate-900/90 p-4 transition hover:border-emerald-500/50 hover:shadow-lg hover:shadow-emerald-500/5 cursor-pointer" onclick="showDetails('node-opt-agent')">
+            <div class="flex items-center justify-between">
+              <span class="mono text-[10px] text-emerald-400 uppercase font-semibold">Autonomous Insights</span>
+              <span class="mono text-[10px] text-emerald-400">Opal Agent</span>
+            </div>
+            <div class="mt-2 text-sm font-semibold text-white">Optimization Recommendation Agent</div>
+            <p class="mt-1 text-xs text-slate-400">Monitors statistical significance, detects winning variants, and flags content fatigue or drift.</p>
+            <div class="mt-3 rounded bg-emerald-950/20 border border-emerald-500/20 p-2 text-[11px] mono text-slate-300">
+              <span class="text-emerald-400">TRIGGER:</span> Stat-Sig Winner &ge; 95%
+            </div>
+          </div>
+
+          <!-- Flow Arrow Down -->
+          <div class="flex justify-center text-slate-600">
+            <svg class="h-5 w-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+          </div>
+
+          <!-- Node 4.3: Automated Baseline Promotion -->
+          <div class="group relative rounded-lg border border-slate-800 bg-slate-900/90 p-4 transition hover:border-emerald-500/50 hover:shadow-lg hover:shadow-emerald-500/5 cursor-pointer" onclick="showDetails('node-auto-promotion')">
+            <div class="flex items-center justify-between">
+              <span class="mono text-[10px] text-emerald-400 uppercase font-semibold">Recursive Promotion</span>
+              <span class="mono text-[10px] text-emerald-400">Self-Healing</span>
+            </div>
+            <div class="mt-2 text-sm font-semibold text-white">Automated Baseline Publisher</div>
+            <p class="mt-1 text-xs text-slate-400">Promotes winning copy directly to AEM production baseline and cleanly decommissions edge test.</p>
+            <div class="mt-2 rounded bg-slate-950 p-1.5 text-[10px] mono text-emerald-400/90">
+              &cularr; Loops back to Zone 1/3 (Zero Dead Code)
+            </div>
+          </div>
+        </div>
+
+        <div class="border-t border-emerald-500/20 pt-3 text-[11px] text-slate-400">
+          <span class="font-semibold text-emerald-400">Outcome:</span> Continuous revenue optimization without author overhead
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RECURSIVE LOOP CONNECTOR (BOTTOM SVG ARROW) -->
+    <div class="relative mt-8 rounded-xl border border-dashed border-emerald-500/40 bg-emerald-950/10 p-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+          <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-500/20 text-emerald-400 font-bold mono">
+            &cularr;
+          </div>
+          <div>
+            <div class="text-xs font-bold text-white uppercase tracking-wider">The Paige Miller "Recursive Feedback Loop"</div>
+            <div class="text-xs text-slate-400">Automated Promotion Pipeline: Experiment Winners &rarr; Trigger AEM Content Update &rarr; Publish Baseline &rarr; Decommission Test</div>
+          </div>
+        </div>
+        <div class="flex items-center space-x-2 text-xs mono text-emerald-400">
+          <span class="h-2 w-2 rounded-full bg-emerald-400 animate-ping"></span>
+          <span>Continuous Learning Cycle Active</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ARCHITECTURAL INSPECTOR PANEL (INTERACTIVE DRILL-DOWN) -->
+  <section class="mt-8 rounded-2xl border border-slate-800 bg-slate-900/90 p-6 shadow-xl">
+    <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+      <div class="flex items-center space-x-3">
+        <div class="rounded-lg bg-blue-500/10 p-2 text-blue-400">
+          <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        </div>
+        <div>
+          <h3 class="text-sm font-bold text-white uppercase tracking-wider">Component Deep-Dive & Protocol Inspector</h3>
+          <p class="text-xs text-slate-400">Click any component card in the diagram above to inspect API contracts, data models, and integration mechanisms.</p>
+        </div>
+      </div>
+      <div id="inspector-badge" class="mono rounded border border-blue-500/30 bg-blue-500/10 px-3 py-1 text-xs text-blue-400 font-medium">
+        NODE: node-intake-agent
+      </div>
+    </div>
+
+    <!-- Inspector Content Container -->
+    <div id="inspector-body" class="mt-6 grid grid-cols-3 gap-6 text-sm">
+      <!-- Populated via JavaScript -->
+    </div>
+  </section>
+
+  <!-- ARCHITECTURAL FAQ / STRATEGY NOTES FOR PRE-SALES -->
+  <section class="mt-8 grid grid-cols-3 gap-6 text-xs text-slate-400">
+    <div class="rounded-xl border border-slate-800/80 bg-slate-950/40 p-4">
+      <h4 class="font-bold text-slate-200 uppercase tracking-wider flex items-center space-x-2">
+        <span class="h-2 w-2 rounded-full bg-amber-400"></span>
+        <span>Why this honors Paige's Architecture</span>
+      </h4>
+      <p class="mt-2 leading-relaxed">
+        Paige explicitly cautioned: <em>"Changing platforms isn't viable in the short term."</em> This architecture keeps AEM, EDS, and Universal Editor as the center of gravity. Optimizely never touches the core CMS repository directly—it acts purely as an external intelligence provider.
+      </p>
+    </div>
+    <div class="rounded-xl border border-slate-800/80 bg-slate-950/40 p-4">
+      <h4 class="font-bold text-slate-200 uppercase tracking-wider flex items-center space-x-2">
+        <span class="h-2 w-2 rounded-full bg-blue-400"></span>
+        <span>How it solves Buddy's Translation Dilemma</span>
+      </h4>
+      <p class="mt-2 leading-relaxed">
+        Buddy noted that 201 country locales and 42 languages make folder structures in AEM too rigid for manual review. The Opal Translation QA Agent introduces an automated 92% confidence gate, routing only high-risk copy to humans, and exports corrections back to TransPerfect's hosted TM.
+      </p>
+    </div>
+    <div class="rounded-xl border border-slate-800/80 bg-slate-950/40 p-4">
+      <h4 class="font-bold text-slate-200 uppercase tracking-wider flex items-center space-x-2">
+        <span class="h-2 w-2 rounded-full bg-emerald-400"></span>
+        <span>Closing the Experimentation Gap</span>
+      </h4>
+      <p class="mt-2 leading-relaxed">
+        While Dave Massey's team runs core testing, Paige and Milin wanted to see the optimization loop. By injecting Optimizely Experimentation onto EDS pages, UPS can test personalized variants and automatically promote winners into AEM baseline without manual dev tickets.
+      </p>
+    </div>
+  </section>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    const nodeData = {
+      'node-intake-ui': {
+        title: 'UPS Change Request Portal (Custom Web/Teams UI)',
+        zone: 'Boundary 1: UPS Enterprise Intake',
+        protocol: 'Internal HTTPS / REST / Webhook',
+        summary: 'Front-end conversational portal built by UPS to eliminate disparate emails, spreadsheets, and SharePoint threads. Deployed globally to UPS regional marketing and business units across 201 country markets.',
+        inputs: 'User natural language change requests, target URLs, redlines, campaign objectives.',
+        outputs: 'Structured conversation transcript & initial change ticket dispatched to UPS Intake Agent.',
+        sandlerNotes: 'Validates that Optimizely does NOT attempt to replace their intake front-end. We praise this investment and start downstream.'
+      },
+      'node-intake-agent': {
+        title: 'UPS Native Conversational Intake Agent',
+        zone: 'Boundary 1: UPS Enterprise Intake',
+        protocol: 'LLM Agent / Python / Internal Orchestrator',
+        summary: 'The conversational agent that Paige and Buddy built. It actively queries the requester to ensure all required fields (country locale, target URLs, asset links, urgency) are fully provided before entering the pipeline.',
+        inputs: 'Raw change requests from portal users.',
+        outputs: 'Standardized JSON Task Payload (Ticket ID, Target Locales [1..201], Source Text, Destination EDS Block IDs).',
+        sandlerNotes: 'Buddy explicitly stated: "It understands what you are missing and takes away a ton of churn." We treat this node as an authoritative upstream producer.'
+      },
+      'node-ups-orchestrator': {
+        title: 'UPS Internal Orchestration Layer',
+        zone: 'Boundary 1: UPS Enterprise Intake',
+        protocol: 'MCP Client / Custom Workflow Engine',
+        summary: 'The central business state machine UPS is engineering. It enforces internal compliance, manages queue priorities, and dispatches external tool calls to specialized agent clusters like Optimizely Opal.',
+        inputs: 'Structured JSON Task Payload from Intake Agent.',
+        outputs: 'JSON-RPC Tool Invocations over Model Context Protocol (MCP) or Webhook events to Opal.',
+        sandlerNotes: 'Crucial distinction: We do not pitch Opal as their sole master orchestrator; we offer Opal agents as plug-and-play tools that their orchestrator invokes.'
+      },
+      'node-opal-gateway': {
+        title: 'Optimizely Opal Agent Execution Broker',
+        zone: 'Boundary 2: Optimizely Opal Agents',
+        protocol: 'Model Context Protocol (MCP) Server / OpenAPI Webhook',
+        summary: 'The interop layer that exposes Optimizely Opal agents as standard MCP tools. Allows UPS orchestrators to dispatch parallel jobs without maintaining agent models, prompts, or LLM fine-tuning pipelines.',
+        inputs: 'Authenticated MCP Call: { agent: "brand_check", payload: {...} }',
+        outputs: 'Execution ID, streaming agent thoughts, validated artifact payload.',
+        sandlerNotes: 'Fulfills Paige\'s explicit ask: "Can we get agents out of the box so we don\'t have to build and train them ourselves?"'
+      },
+      'node-agent-brand': {
+        title: 'Opal Brand & Voice Compliance Agent',
+        zone: 'Boundary 2: Optimizely Opal Agents',
+        protocol: 'RAG Pipeline / Vector Indexing over SharePoint',
+        summary: 'Inspects generated or proposed copy against corporate tone, voice guidelines, and legal requirements. Grounded natively via Opal connectors into UPS\'s unstructured SharePoint documentation.',
+        inputs: 'Draft copy + Target audience persona.',
+        outputs: 'Compliance score, suggested editorial redlines, brand conformance badge.',
+        sandlerNotes: 'Directly addresses Paige\'s insight: "We have brand guidelines, past AB tests, and tone and voice unstructured in SharePoint. We need to build the brain."'
+      },
+      'node-agent-trans': {
+        title: 'Opal Translation QA Agent (92% Quality Gate)',
+        zone: 'Boundary 2: Optimizely Opal Agents',
+        protocol: 'Neural Translation / Quality Scoring Model',
+        summary: 'Audits multi-lingual content across Buddy\'s 41-42 target languages. Evaluates machine translation confidence. Strings >= 92% pass automatically; strings < 92% trigger human review tasks in the UPS dashboard.',
+        inputs: 'Source English copy + machine translated strings.',
+        outputs: 'Translation QA Confidence Score + Routing Flag [PASS | HUMAN_REVIEW_REQUIRED].',
+        sandlerNotes: 'Resolves Buddy\'s concern over global translation fidelity across 201 country sites.'
+      },
+      'node-transperfect-bridge': {
+        title: 'TransPerfect TM Feedback Loop Bridge',
+        zone: 'Boundary 2: Optimizely Opal Agents',
+        protocol: 'TransPerfect Hosted TM REST API / Bi-directional Export',
+        summary: 'When a regional reviewer corrects a translation (e.g. "how to ship dog food" in Germany), this agent formats the delta and calls TransPerfect\'s hosted API to update their central Translation Memory.',
+        inputs: 'Approved human edits from localized in-region review.',
+        outputs: 'TM update payload sent directly to TransPerfect repository (no local caching).',
+        sandlerNotes: 'Directly solves Paige and Buddy\'s hard requirement: TransPerfect hosts their memory; we must not lock it inside Optimizely.'
+      },
+      'node-agent-seo': {
+        title: 'Opal SEO & AEO (Artificial Engine Optimization) Agent',
+        zone: 'Boundary 2: Optimizely Opal Agents',
+        protocol: 'Search Graph / LLM Synthetic Discovery Audit',
+        summary: 'Verifies traditional Google search keyword densities while evaluating synthetic LLM engine discovery (ChatGPT, Perplexity, Gemini citations) to ensure high visibility.',
+        inputs: 'Validated localized text blocks.',
+        outputs: 'Optimized meta tags, structured schema JSON-LD, keyword suggestions.',
+        sandlerNotes: 'Delivers on Paige\'s interest in proactive content recommendations.'
+      },
+      'node-adobe-mcp': {
+        title: 'Adobe MCP Server / AEM Cloud Interface',
+        zone: 'Boundary 3: Adobe Publishing Core',
+        protocol: 'Adobe Model Context Protocol / AEM Asset API',
+        summary: 'The official Adobe MCP server UPS is connecting to. Accepts validated copy, structured metadata, and localized content objects from the upstream agents and registers them into AEM.',
+        inputs: 'Authenticated JSON-RPC mutation commands from Opal/UPS orchestrator.',
+        outputs: 'Updated AEM JCR content nodes and page models ready for editor preview.',
+        sandlerNotes: 'Proves Optimizely works seamlessly with Adobe rather than trying to rip-and-replace it.'
+      },
+      'node-aem-authoring': {
+        title: 'Universal Editor & AEM Sites Core',
+        zone: 'Boundary 3: Adobe Publishing Core',
+        protocol: 'In-Context Visual WYSIWYG / Cloud Service',
+        summary: 'Adobe\'s premier visual editing surface. UPS authors can preview generated copy in real-time, inspect translations in their localized layout, and execute final human sign-offs before edge publish.',
+        inputs: 'Staged content changes across 201 country folder structures.',
+        outputs: 'Approved release packages pushed to edge build pipeline.',
+        sandlerNotes: 'Directly mirrors Paige\'s confirmation: "We use AEM with EDS... we mostly use the Universal Editor on top of it."'
+      },
+      'node-aem-eds': {
+        title: 'Edge Delivery Services (EDS) Global CDN',
+        zone: 'Boundary 3: Adobe Publishing Core',
+        protocol: 'Cloudflare / Fastly CDN Edge / Static HTML & JS Blocks',
+        summary: 'Adobe\'s modern high-speed publishing engine that compiles authored pages into edge-delivered blocks, guaranteeing sub-second response times and 100/100 Lighthouse performance.',
+        inputs: 'Published pages from AEM Sites / Universal Editor.',
+        outputs: 'Live global user experience at ups.com across 201 localized sites.',
+        sandlerNotes: 'Demonstrates our deep architectural respect for their choice of EDS for edge performance.'
+      },
+      'node-optimizely-exp': {
+        title: 'Optimizely Web Experimentation at the Edge',
+        zone: 'Boundary 4: Optimization Loop',
+        protocol: 'Edge Script / Stats Engine / Multi-Armed Bandit',
+        summary: 'Runs multivariate and A/B experiments directly on live EDS pages without client-side flicker. Segments traffic by geography, device, and customer tier to measure real conversion lift.',
+        inputs: 'Live user traffic visiting ups.com edge experiences.',
+        outputs: 'Real-time conversion metrics, statistical significance logs, variant performance.',
+        sandlerNotes: 'Addresses Paige and Milin\'s interest in experimentation, while maintaining awareness of Dave Massey and Katie Oakum\'s ownership.'
+      },
+      'node-opt-agent': {
+        title: 'Optimization Recommendation Agent',
+        zone: 'Boundary 4: Optimization Loop',
+        protocol: 'Opal Autonomous Analysis / Bayesian Stats',
+        summary: 'The recursive intelligence engine requested by Paige. Continuously monitors running tests on EDS; when a variant hits statistical significance (e.g. 95%), generates an executive summary and baseline promotion brief.',
+        inputs: 'Experiment telemetry and historical baseline conversion data.',
+        outputs: 'Automated Recommendation Brief: "Variant B outperforms baseline by +14.2% in DACH region."',
+        sandlerNotes: 'Directly answers Paige: "We want that recursive flow at the end that learns from insights and makes recommendations."'
+      },
+      'node-auto-promotion': {
+        title: 'Automated Baseline Promotion Dispatcher',
+        zone: 'Boundary 4: Optimization Loop',
+        protocol: 'Webhook Trigger back to UPS Orchestrator / Adobe MCP',
+        summary: 'Closes the loop entirely. Automatically triggers a content change ticket back into Step 1 to bake the winning test variant permanently into AEM production copy, and decommissions the edge test to prevent technical debt.',
+        inputs: 'Approved winning experiment variant.',
+        outputs: 'Automated change ticket into AEM baseline + experiment retirement event.',
+        sandlerNotes: 'The ultimate differentiator: No other vendor can offer an end-to-end loop from content generation through experimentation to permanent production promotion.'
+      }
+    };
+
+    function showDetails(nodeKey) {
+      const data = nodeData[nodeKey];
+      if (!data) return;
+
+      document.getElementById('inspector-badge').textContent = `NODE: ${nodeKey}`;
+      document.getElementById('inspector-body').innerHTML = `
+        <div class="space-y-3 rounded-xl border border-slate-800 bg-slate-950 p-4">
+          <div class="text-xs font-bold text-amber-400 uppercase tracking-wider">${data.zone}</div>
+          <div class="text-base font-bold text-white">${data.title}</div>
+          <div class="rounded bg-slate-900 border border-slate-800 p-2 mono text-xs text-blue-400">
+            Protocol: ${data.protocol}
+          </div>
+          <p class="text-xs text-slate-300 leading-relaxed">${data.summary}</p>
+        </div>
+
+        <div class="space-y-3 rounded-xl border border-slate-800 bg-slate-950 p-4">
+          <div class="text-xs font-bold text-blue-400 uppercase tracking-wider">Payload Specifications</div>
+          <div class="space-y-2">
+            <div>
+              <span class="mono text-[10px] uppercase font-bold text-slate-500">Inputs Received:</span>
+              <p class="mt-0.5 text-xs text-slate-300">${data.inputs}</p>
+            </div>
+            <div class="border-t border-slate-800/80 pt-2">
+              <span class="mono text-[10px] uppercase font-bold text-emerald-500">Outputs Dispatched:</span>
+              <p class="mt-0.5 text-xs text-slate-300">${data.outputs}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-3 rounded-xl border border-slate-800 bg-slate-950 p-4">
+          <div class="text-xs font-bold text-emerald-400 uppercase tracking-wider">Commercial & Discovery Context</div>
+          <div class="rounded-lg bg-emerald-950/20 border border-emerald-500/20 p-3 text-xs text-emerald-200 leading-relaxed">
+            ${data.sandlerNotes}
+          </div>
+          <div class="text-[11px] text-slate-500">
+            Source: Optimizely Discovery Call & Transcript Analysis (UPS Content Supply Chain POV).
+          </div>
+        </div>
+      `;
+    }
+
+    // Initialize with default node
+    showDetails('node-intake-agent');
+
+    // Filter toggle logic
+    function setFilter(mode) {
+      const btnAll = document.getElementById('btn-flow-all');
+      const btnAgents = document.getElementById('btn-flow-agents');
+      const btnPub = document.getElementById('btn-flow-publishing');
+      const btnLoop = document.getElementById('btn-flow-loop');
+
+      [btnAll, btnAgents, btnPub, btnLoop].forEach(b => {
+        b.className = 'rounded px-3 py-1.5 text-xs font-semibold text-slate-400 hover:text-white transition';
+      });
+
+      if (mode === 'all') btnAll.className = 'rounded px-3 py-1.5 text-xs font-semibold text-white bg-slate-800 shadow-sm';
+      if (mode === 'agents') {
+        btnAgents.className = 'rounded px-3 py-1.5 text-xs font-semibold text-white bg-blue-600 shadow-sm';
+        showDetails('node-opal-gateway');
+      }
+      if (mode === 'publishing') {
+        btnPub.className = 'rounded px-3 py-1.5 text-xs font-semibold text-white bg-red-600 shadow-sm';
+        showDetails('node-adobe-mcp');
+      }
+      if (mode === 'loop') {
+        btnLoop.className = 'rounded px-3 py-1.5 text-xs font-semibold text-white bg-emerald-600 shadow-sm';
+        showDetails('node-opt-agent');
+      }
+    }
+
+    // Toggle animation
+    let isAnimated = true;
+    function toggleAnimation() {
+      isAnimated = !isAnimated;
+      const indicator = document.getElementById('anim-indicator');
+      const text = document.getElementById('anim-text');
+
+      if (isAnimated) {
+        indicator.className = 'h-2 w-2 rounded-full bg-emerald-400 animate-pulse';
+        text.textContent = 'Flow Active';
+      } else {
+        indicator.className = 'h-2 w-2 rounded-full bg-slate-500';
+        text.textContent = 'Flow Paused';
+      }
+    }
+  </script>
+</body>
+</html>

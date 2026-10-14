@@ -7,6 +7,8 @@ import { siteConfig } from '@/lib/siteConfig';
 const LINKS = [
   { label: 'Home',            href: '/' },
   { label: 'Admin',           href: '/admin' },
+  { label: 'Architecture Overview',         href: '/graphic.html' },
+  { label: 'Architecture',        href: '/architecture.html' },
 ];
 
 export default function DevQuickLinks() {
