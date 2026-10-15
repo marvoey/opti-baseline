@@ -1,7 +1,7 @@
 // @ts-nocheck — demo UI ported from the canvas mock (plain JS). Remove this line and add types if you want strict checking.
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 
 /* =========================================================
    NORTHSTAR CRM (mock) — Limitless 1:1 live demo
@@ -475,7 +475,95 @@ function CRMOpportunities({ setSelectedId, go }) {
   );
 }
 
-function CRMCampaigns({ selectedId, setSelectedId, liveStatus, triggerOpal, isSyncing }) {
+const LOG_COLOR = { info: "text-slate-300", ok: "text-emerald-400", warn: "text-amber-300", error: "text-rose-400" };
+
+/** Live log of a Limitless run: CRM trigger events plus CMS changes picked up by polling. */
+function LimitlessConsole({ logs, onClear, runActive }) {
+  const ref = useRef(null);
+  useEffect(() => {
+    if (ref.current) ref.current.scrollTop = ref.current.scrollHeight;
+  }, [logs]);
+  return (
+    <Card
+      title="Limitless console"
+      right={
+        <div className="flex items-center gap-3">
+          {runActive && <Badge color="violet">Watching {runActive.name}…</Badge>}
+          <button onClick={onClear} className="text-xs font-medium text-slate-500 hover:text-slate-800">Clear</button>
+        </div>
+      }
+    >
+      <div ref={ref} className="h-48 overflow-auto rounded-lg bg-slate-900 p-3 font-mono text-xs leading-relaxed">
+        {logs.length === 0 ? (
+          <div className="text-slate-500">Run Limitless on an account to see progress here.</div>
+        ) : (
+          logs.map((l, i) => (
+            <div key={i} className={LOG_COLOR[l.level] || LOG_COLOR.info}>
+              <span className="text-slate-500">{l.ts}</span> {l.text}
+            </div>
+          ))
+        )}
+      </div>
+    </Card>
+  );
+}
+
+/** Links to the ABM landing pages in the CMS (children of the ABM container). */
+function AbmPagesCard({ pages, onRefresh, refreshing, lastUpdated }) {
+  return (
+    <Card
+      title="ABM landing pages (CMS)"
+      right={
+        <div className="flex items-center gap-3">
+          {lastUpdated && <span className="text-xs text-slate-400">Updated {lastUpdated.toLocaleTimeString()}</span>}
+          <Badge color="slate">{pages.length}</Badge>
+          <button
+            onClick={onRefresh}
+            disabled={refreshing}
+            title="Refresh from the CMS"
+            aria-label="Refresh ABM landing pages"
+            className="rounded-md p-1 text-slate-500 hover:bg-slate-100 hover:text-slate-800 disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            {/* rotate-cw: the standard "refresh" glyph */}
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={refreshing ? "animate-spin" : ""} aria-hidden="true">
+              <path d="M21 12a9 9 0 1 1-3-6.7L21 8" />
+              <path d="M21 3v5h-5" />
+            </svg>
+          </button>
+        </div>
+      }
+    >
+      {pages.length === 0 ? (
+        <div className="text-sm text-slate-500">No landing pages created yet.</div>
+      ) : (
+        <ul className="divide-y divide-slate-100 text-sm">
+          {pages.map((p) => {
+            const pending = p.status !== "published";
+            const badge = !pending ? ["green", "Live"] : p.hasPublished ? ["amber", "Live · newer draft"] : ["amber", "Draft"];
+            return (
+              <li key={p.key} className="flex items-center justify-between gap-3 py-2">
+                <div className="min-w-0">
+                  <div className="truncate font-medium text-slate-800">{p.accountName}</div>
+                  <div className="truncate text-xs text-slate-500">{p.versionNote || `v${p.version}`}</div>
+                </div>
+                <div className="flex shrink-0 items-center gap-3">
+                  <Badge color={badge[0]}>{badge[1]}</Badge>
+                  {p.url ? (
+                    <a href={p.url} target="_blank" rel="noreferrer" className="font-medium text-sky-700 hover:underline">Open ↗</a>
+                  ) : (
+                    <span className="text-xs text-slate-400">Publish in CMS</span>
+                  )}
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+      )}
+    </Card>
+  );
+}
+
+function CRMCampaigns({ selectedId, setSelectedId, liveStatus, triggerOpal, isSyncing, logs, clearLogs, runActive, abmPages, refreshPages, refreshing, lastUpdated }) {
   const acc = ACCOUNTS.find((a) => a.id === selectedId);
   const d = DETAILS[selectedId];
   const st = liveLabel(liveStatus[acc.id]);
@@ -555,6 +643,10 @@ function CRMCampaigns({ selectedId, setSelectedId, liveStatus, triggerOpal, isSy
           )}
         </Card>
       </div>
+      <div className="mt-6 grid gap-4 lg:grid-cols-2">
+        <LimitlessConsole logs={logs} onClear={clearLogs} runActive={runActive} />
+        <AbmPagesCard pages={abmPages} onRefresh={refreshPages} refreshing={refreshing} lastUpdated={lastUpdated} />
+      </div>
     </>
   );
 }
@@ -616,6 +708,18 @@ export default function CRMApplication() {
   const [isSyncing, setIsSyncing] = useState({});
   const [liveStatus, setLiveStatus] = useState({}); // { [accountId]: { live, url, versionNote, mode, lastRefreshed } }
   const [notice, setNotice] = useState(null);
+  const [logs, setLogs] = useState([]); // Limitless console: { ts, level, text }
+  const [abmPages, setAbmPages] = useState([]); // AbmLandingPages in the CMS, drafts included
+  const [runActive, setRunActive] = useState(null); // { id, name, startedAt } while a run is being watched
+  const [refreshing, setRefreshing] = useState(false);
+  const [lastUpdated, setLastUpdated] = useState(null);
+  const fetchPagesRef = useRef(null); // set by the polling effect; used by the refresh button
+  const prevPages = useRef(null);
+  const lastPollError = useRef(null);
+  const log = useCallback(
+    (level, text) => setLogs((l) => [...l.slice(-199), { ts: new Date().toLocaleTimeString(), level, text }]),
+    []
+  );
   const liveMicrosites = ACCOUNTS.filter((a) => liveStatus[a.id]?.live).map((a) => a.id);
 
   const go = (p) => setPage(p);
@@ -641,6 +745,69 @@ export default function CRMApplication() {
     return () => { cancelled = true; clearInterval(interval); };
   }, []);
 
+  // Poll the CMS (drafts included) for ABM pages every 5 min, or every 5s while a run is being
+  // watched so the console shows progress. The refresh button calls the same fetch via fetchPagesRef.
+  // The first poll is a silent baseline; later differences become console messages.
+  useEffect(() => {
+    let cancelled = false;
+    let timer;
+    const tick = async () => {
+      clearTimeout(timer); // a manual refresh must not leave a second poll chain running
+      setRefreshing(true);
+      try {
+        const res = await fetch("/api/limitless/pages", { cache: "no-store" });
+        const data = await res.json().catch(() => null);
+        if (cancelled) return;
+        if (res.ok && data?.ok) {
+          lastPollError.current = null;
+          const prev = prevPages.current;
+          if (prev) {
+            for (const p of data.pages) {
+              const o = prev.get(p.key);
+              const note = p.versionNote ? ` · ${p.versionNote}` : "";
+              const published = p.status === "published";
+              if (!o) {
+                log("ok", published ? `Page found: ${p.accountName} (v${p.version})` : `Draft created: ${p.accountName} (v${p.version})`);
+              } else if (o.version !== p.version) {
+                log("ok", `${published ? "Published" : "Draft updated"}: ${p.accountName} → v${p.version}${note}`);
+              } else if (o.status !== p.status && published) {
+                log("ok", `Published: ${p.accountName}`);
+              } else {
+                continue;
+              }
+              // Stop fast polling once the watched account's page goes live.
+              if (runActive && published && p.accountId === runActive.id) {
+                log("ok", `Run complete for ${runActive.name}`);
+                setRunActive(null);
+              }
+            }
+          }
+          prevPages.current = new Map(data.pages.map((p) => [p.key, p]));
+          setAbmPages(data.pages);
+          setLastUpdated(new Date());
+        } else {
+          const msg = data?.error || `HTTP ${res.status}`;
+          if (lastPollError.current !== msg) log("error", `CMS poll failed: ${msg}`);
+          lastPollError.current = msg;
+        }
+      } catch {
+        /* network blip: retry on the next tick */
+      } finally {
+        if (!cancelled) setRefreshing(false);
+      }
+      if (cancelled) return;
+      if (runActive && Date.now() - runActive.startedAt > 5 * 60 * 1000) {
+        log("warn", `No new CMS activity for ${runActive.name} after 5 min. Check the workflow run logs in Opal.`);
+        setRunActive(null);
+        return; // the effect re-runs with runActive = null, which restarts polling at the idle interval
+      }
+      timer = setTimeout(tick, runActive ? 5000 : 5 * 60 * 1000);
+    };
+    fetchPagesRef.current = tick;
+    tick();
+    return () => { cancelled = true; clearTimeout(timer); };
+  }, [runActive, log]);
+
   useEffect(() => {
     if (!notice) return undefined;
     const t = setTimeout(() => setNotice(null), 6000);
@@ -651,6 +818,7 @@ export default function CRMApplication() {
   const triggerOpal = async (acc) => {
     setIsSyncing((prev) => ({ ...prev, [acc.id]: true }));
     const d = DETAILS[acc.id];
+    log("info", `Sending ${acc.name} to the Limitless workflow in Opal…`);
     try {
       const res = await fetch("/api/limitless/trigger", {
         method: "POST",
@@ -665,12 +833,21 @@ export default function CRMApplication() {
         }),
       });
       const data = await res.json().catch(() => ({}));
+      if (res.ok) {
+        log("ok", `Accepted by Opal (HTTP ${data.status || res.status}). Workflow started.`);
+        log("info", "Watching the CMS for the page. Router, Researcher and Creator steps are visible in the Opal workflow logs.");
+        setRunActive({ id: acc.id, name: acc.name, startedAt: Date.now() });
+      } else {
+        const detail = data.error || data.opal || "no details";
+        log("error", `Opal trigger failed (HTTP ${data.status || res.status}): ${detail}`);
+      }
       setNotice(
         res.ok
           ? { tone: "ok", text: `${acc.name} sent to the Limitless workflow in Opal` }
           : { tone: "error", text: `Opal trigger failed: ${data.error || `HTTP ${data.status || res.status}`}` }
       );
     } catch {
+      log("error", "Could not reach /api/limitless/trigger");
       setNotice({ tone: "error", text: "Could not reach /api/limitless/trigger" });
     } finally {
       setTimeout(() => setIsSyncing((prev) => ({ ...prev, [acc.id]: false })), 3000);
@@ -700,7 +877,7 @@ export default function CRMApplication() {
         {page === "Accounts" && <CRMAccounts key={selectedId} selectedId={selectedId} setSelectedId={setSelectedId} liveStatus={liveStatus} go={go} triggerOpal={triggerOpal} isSyncing={isSyncing} />}
         {page === "Contacts" && <CRMContacts setSelectedId={setSelectedId} go={go} />}
         {page === "Opportunities" && <CRMOpportunities setSelectedId={setSelectedId} go={go} />}
-        {page === "Campaigns" && <CRMCampaigns selectedId={selectedId} setSelectedId={setSelectedId} liveStatus={liveStatus} triggerOpal={triggerOpal} isSyncing={isSyncing} />}
+        {page === "Campaigns" && <CRMCampaigns selectedId={selectedId} setSelectedId={setSelectedId} liveStatus={liveStatus} triggerOpal={triggerOpal} isSyncing={isSyncing} logs={logs} clearLogs={() => setLogs([])} runActive={runActive} abmPages={abmPages} refreshPages={() => fetchPagesRef.current?.()} refreshing={refreshing} lastUpdated={lastUpdated} />}
         {page === "Reports" && <CRMReports liveMicrosites={liveMicrosites} />}
       </main>
       {notice && (
