@@ -9,6 +9,7 @@ const LINKS = [
   { label: 'Content Library', href: '/content-library' },
   { label: 'Admin',           href: '/admin' },
   { label: 'CMS',             href: '/cms-admin' },
+  { label: 'CRM', href: '/demo/crm' },
 ];
 
 export default function DevQuickLinks() {
