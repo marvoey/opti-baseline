@@ -23,6 +23,7 @@ export async function POST(req: Request) {
     ...body,
     // Server-owned: start page the agents create under (not overridable by the client)
     homePageContentId: process.env.HOME_PAGE_CONTENT_ID || null,
+    abmContainerKey: process.env.ABM_CONTAINER_KEY || null,
   };
 
   const res = await fetch(url, {
