@@ -21,6 +21,8 @@ export async function POST(req: Request) {
     campaign: 'Q4 Tier-1 ABM',
     triggeredAt: new Date().toISOString(),
     ...body,
+    // Server-owned: start page the agents create under (not overridable by the client)
+    homePageContentId: process.env.HOME_PAGE_CONTENT_ID || null,
   };
 
   const res = await fetch(url, {
