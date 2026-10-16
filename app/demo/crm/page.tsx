@@ -333,7 +333,7 @@ function CRMHome({ liveMicrosites, go, setSelectedId }) {
   );
 }
 
-function CRMAccounts({ selectedId, setSelectedId, liveStatus, go, triggerOpal, isSyncing }) {
+function CRMAccounts({ selectedId, setSelectedId, liveStatus, go, triggerOpal, isSyncing, abmPages = [] }) {
   const [q, setQ] = useState("");
   const [owner, setOwner] = useState("All owners");
   const [openId, setOpenId] = useState(null);
@@ -348,6 +348,7 @@ function CRMAccounts({ selectedId, setSelectedId, liveStatus, go, triggerOpal, i
     const contacts = ALL_CONTACTS.filter((c) => c.accountId === acc.id);
     const opps = OPPS.filter((o) => o.acct === acc.id);
     const timeline = d ? d.activity : [`${acc.lastActivity}`, "Added to Q4 Tier-1 ABM campaign", "Account created from event lead"];
+    const pageInCms = abmPages.find((p) => p.accountId === acc.id);
     
     return (
       <>
@@ -420,7 +421,19 @@ function CRMAccounts({ selectedId, setSelectedId, liveStatus, go, triggerOpal, i
                 </>
               ) : "No published page yet. Run the Limitless workflow to research and generate a draft, then approve it in CMS."}
             </p>
-            <button onClick={() => go("Campaigns")} className="mt-3 text-sm font-medium text-sky-700 hover:underline">See in campaign list</button>
+            {pageInCms?.cmsEditUrl && (
+              <div className="mt-3">
+                <a
+                  href={pageInCms.cmsEditUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-violet-200 bg-violet-50 px-3 py-1.5 text-xs font-semibold text-violet-700 transition-colors hover:bg-violet-100"
+                >
+                  Review in CMS Visual Builder ↗
+                </a>
+              </div>
+            )}
+            <button onClick={() => go("Campaigns")} className="mt-3 block text-sm font-medium text-sky-700 hover:underline">See in campaign list</button>
           </Card>
         </div>
       </>
@@ -597,11 +610,30 @@ function AbmPagesCard({ pages, onRefresh, refreshing, lastUpdated }) {
                 </div>
                 <div className="flex shrink-0 items-center gap-3">
                   <Badge color={badge[0]}>{badge[1]}</Badge>
-                  {p.url ? (
-                    <a href={p.url} target="_blank" rel="noreferrer" className="font-medium text-sky-700 hover:underline">Open ↗</a>
-                  ) : (
-                    <span className="text-xs text-slate-400">Publish in CMS</span>
+                  {p.cmsEditUrl && (
+                    <a
+                      href={p.cmsEditUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 rounded-md bg-violet-50 px-2 py-1 text-xs font-semibold text-violet-700 transition-colors hover:bg-violet-100"
+                      title="Open page in Optimizely CMS editor for review"
+                    >
+                      Review in CMS ↗
+                    </a>
                   )}
+                  {p.url ? (
+                    <a
+                      href={p.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 rounded-md bg-slate-50 px-2 py-1 text-xs font-semibold text-slate-700 transition-colors hover:bg-slate-100 hover:text-sky-700"
+                      title="Open live public microsite"
+                    >
+                      Live site ↗
+                    </a>
+                  ) : !p.cmsEditUrl ? (
+                    <span className="text-xs text-slate-400">Publish in CMS</span>
+                  ) : null}
                 </div>
               </li>
             );
@@ -925,7 +957,7 @@ export default function CRMApplication() {
       </aside>
       <main className="flex-1 overflow-auto bg-slate-50 p-6">
         {page === "Home" && <CRMHome liveMicrosites={liveMicrosites} go={go} setSelectedId={setSelectedId} />}
-        {page === "Accounts" && <CRMAccounts key={selectedId} selectedId={selectedId} setSelectedId={setSelectedId} liveStatus={liveStatus} go={go} triggerOpal={triggerOpal} isSyncing={isSyncing} />}
+        {page === "Accounts" && <CRMAccounts key={selectedId} selectedId={selectedId} setSelectedId={setSelectedId} liveStatus={liveStatus} go={go} triggerOpal={triggerOpal} isSyncing={isSyncing} abmPages={abmPages} />}
         {page === "Contacts" && <CRMContacts setSelectedId={setSelectedId} go={go} />}
         {page === "Opportunities" && <CRMOpportunities setSelectedId={setSelectedId} go={go} />}
         {page === "Campaigns" && <CRMCampaigns selectedId={selectedId} setSelectedId={setSelectedId} liveStatus={liveStatus} triggerOpal={triggerOpal} isSyncing={isSyncing} logs={logs} clearLogs={() => setLogs([])} runActive={runActive} abmPages={abmPages} refreshPages={() => fetchPagesRef.current?.()} refreshing={refreshing} lastUpdated={lastUpdated} />}

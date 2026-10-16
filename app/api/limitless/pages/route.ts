@@ -71,6 +71,8 @@ export async function GET() {
     );
     const origin = ((await siteOrigin()) ?? '').replace(/\/$/, '');
     const basePath = await getContainerPath(container);
+    // CMS origin for editor deep links (OPTIMIZELY_CMS_URL may or may not end in /edit).
+    const cmsOrigin = (process.env.OPTIMIZELY_CMS_URL || '').replace(/\/$/, '').replace(/\/edit\/?$/, '');
 
     const pages = await Promise.all(
       (nodes.items ?? []).map(async ({ key }) => {
@@ -93,6 +95,8 @@ export async function GET() {
           hasPublished: !!published,
           // Public URL exists once any version is published (drafts have none yet).
           url: published && latest.routeSegment ? `${origin}${basePath}${latest.routeSegment}/` : null,
+          // Deep link into the CMS editor for review/sign-off (works for drafts too).
+          cmsEditUrl: cmsOrigin ? `${cmsOrigin}/ui/cms/#context=epi.cms.contentdata:///${key}` : null,
         };
       }),
     );
