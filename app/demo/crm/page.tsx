@@ -537,7 +537,7 @@ function CRMOpportunities({ setSelectedId, go }) {
   );
 }
 
-const LOG_COLOR = { info: "text-slate-300", ok: "text-emerald-400", warn: "text-amber-300", error: "text-rose-400" };
+const LOG_COLOR = { info: "text-slate-300", step: "text-violet-300 font-semibold", tool: "text-sky-300", ok: "text-emerald-400", warn: "text-amber-300", error: "text-rose-400" };
 
 /** Live log of a Limitless run: CRM trigger events plus CMS changes picked up by polling. */
 function LimitlessConsole({ logs, onClear, runActive }) {
@@ -555,7 +555,7 @@ function LimitlessConsole({ logs, onClear, runActive }) {
         </div>
       }
     >
-      <div ref={ref} className="h-48 overflow-auto rounded-lg bg-slate-900 p-3 font-mono text-xs leading-relaxed">
+      <div ref={ref} className="h-60 overflow-auto rounded-lg bg-slate-900 p-3 font-mono text-xs leading-relaxed">
         {logs.length === 0 ? (
           <div className="text-slate-500">Run Limitless on an account to see progress here.</div>
         ) : (
@@ -785,6 +785,144 @@ function CRMReports({ liveMicrosites }) {
 
 /* ---------- MAIN APPLICATION ---------- */
 
+/**
+ * Builds the timed console trace simulating `lim1_abm_orchestrator` steps
+ * while the real Opal workflow runs and `/api/limitless/pages` polls the CMS.
+ */
+function buildOrchestratorTrace(acc, d, contacts, existingPage) {
+  const isUpdate = !!existingPage;
+  const slug = acc.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+  const rolesSummary = contacts.map((c) => `${c.name} (${c.role})`).join(", ");
+
+  if (!isUpdate) {
+    // CREATE MODE: Router -> Condition (mode === "create") -> Researcher -> Creator
+    return [
+      {
+        delay: 900,
+        level: "step",
+        text: `[lim1_abm_orchestrator] Webhook trigger received event "crm.abm_account.sync" for ${acc.name} (${acc.id}).`,
+      },
+      {
+        delay: 2400,
+        level: "tool",
+        text: `[lim1_account_router] Calling graph_content_graphql_executor → query AbmLandingPage(AccountId: "${acc.id}")…`,
+      },
+      {
+        delay: 4500,
+        level: "ok",
+        text: `[lim1_account_router] 0 published pages found in Graph → output {"mode":"create","slug":"${slug}","contentKey":null}.`,
+      },
+      {
+        delay: 6000,
+        level: "step",
+        text: `[lim1_abm_orchestrator] Condition matched mode == "create" → routing to [lim1_account_researcher].`,
+      },
+      {
+        delay: 8200,
+        level: "info",
+        text: `[lim1_account_researcher] Ingesting CRM context (${acc.pipeline} · ${acc.stage}) & mapping buying committee: ${rolesSummary}.`,
+      },
+      {
+        delay: 11500,
+        level: "info",
+        text: `[lim1_account_researcher] Enriching with ODP behavioral feed (${d?.odp?.[0] || "first-party intent sessions"}) + ${d?.signals?.length || 0} external market signals…`,
+      },
+      {
+        delay: 15000,
+        level: "tool",
+        text: `[lim1_account_researcher] Running web search for ${acc.industry} industry benchmarks & regulatory context…`,
+      },
+      {
+        delay: 19000,
+        level: "ok",
+        text: `[lim1_account_researcher] Audience intelligence brief compiled for 3 personas (Economic Buyer, Technical Evaluator, Champion).`,
+      },
+      {
+        delay: 21000,
+        level: "step",
+        text: `[lim1_abm_orchestrator] Handing research JSON to [lim1_page_creator] (Brand Pack skill active).`,
+      },
+      {
+        delay: 24000,
+        level: "tool",
+        text: `[lim1_page_creator] Calling cms_create_content_item (ContentType: "AbmLandingPage", RouteSegment: "${slug}")…`,
+      },
+      {
+        delay: 28000,
+        level: "tool",
+        text: `[lim1_page_creator] Calling cms_update_content_item → writing Hero, Problem, 3 Persona tabs, ProofStats & FaqItems…`,
+      },
+      {
+        delay: 32000,
+        level: "tool",
+        text: `[lim1_page_creator] Calling cms_get_content_preview_url (status: "draft" — awaiting human governance sign-off)…`,
+      },
+      {
+        delay: 35500,
+        level: "info",
+        text: `[lim1_abm_orchestrator] Polling Optimizely CMS Management API for new AbmLandingPage draft…`,
+      },
+    ];
+  }
+
+  // UPDATE MODE: Router -> Condition (mode === "update") -> Updater (90-day delta check + JSON Merge Patch)
+  const newContact = contacts.find((c) => c.isNew);
+  const latestSignal = d?.signals?.[0]?.text || "recent CRM stage & stakeholder shift";
+
+  return [
+    {
+      delay: 900,
+      level: "step",
+      text: `[lim1_abm_orchestrator] Webhook trigger received event "crm.abm_account.sync" for ${acc.name} (${acc.id}).`,
+    },
+    {
+      delay: 2400,
+      level: "tool",
+      text: `[lim1_account_router] Calling graph_content_graphql_executor → query AbmLandingPage(AccountId: "${acc.id}")…`,
+    },
+    {
+      delay: 4500,
+      level: "ok",
+      text: `[lim1_account_router] Existing page found (key: ${existingPage.key.slice(0, 8)}…, ${existingPage.versionNote || `v${existingPage.version}`}) → output {"mode":"update"}.`,
+    },
+    {
+      delay: 6200,
+      level: "step",
+      text: `[lim1_abm_orchestrator] Condition matched mode == "update" → skipping Researcher, routing to [lim1_page_updater].`,
+    },
+    {
+      delay: 8500,
+      level: "tool",
+      text: `[lim1_page_updater] Calling cms_get_content_data (contentKey: "${existingPage.key.slice(0, 8)}…") to inspect published baseline…`,
+    },
+    {
+      delay: 11800,
+      level: "info",
+      text: `[lim1_page_updater] Evaluating 90-day delta window since LastRefreshed → detected ${d?.signals?.length || 2} material signals (${latestSignal}).`,
+    },
+    {
+      delay: 15500,
+      level: "info",
+      text: `[lim1_page_updater] Mapping minimal field diff → targeting TechnicalEvaluatorTitle, TechnicalEvaluatorBody${newContact ? ` (for ${newContact.name})` : ""}, HeroSubhead & PageVersionNote.`,
+    },
+    {
+      delay: 19500,
+      level: "tool",
+      text: `[lim1_page_updater] Calling cms_update_content_item (contentVersion: 0, JSON Merge Patch on changed fields only)…`,
+    },
+    {
+      delay: 23500,
+      level: "tool",
+      text: `[lim1_page_updater] Calling cms_get_content_preview_url → draft saved for human review (unchanged sections preserved).`,
+    },
+    {
+      delay: 27000,
+      level: "info",
+      text: `[lim1_abm_orchestrator] Polling Optimizely CMS Management API for updated draft version…`,
+    },
+  ];
+}
+
 export default function CRMApplication() {
   const [page, setPage] = useState("Campaigns");
   const [selectedId, setSelectedId] = useState("helix");
@@ -798,6 +936,12 @@ export default function CRMApplication() {
   const [lastUpdated, setLastUpdated] = useState(null);
   const fetchPagesRef = useRef(null); // set by the polling effect; used by the refresh button
   const prevPages = useRef(null);
+  const simTimersRef = useRef([]); // active simulation timeouts for lim1_abm_orchestrator
+  const clearSimTimers = useCallback(() => {
+    simTimersRef.current.forEach(clearTimeout);
+    simTimersRef.current = [];
+  }, []);
+  useEffect(() => () => clearSimTimers(), [clearSimTimers]);
   const lastPollError = useRef(null);
   const log = useCallback(
     (level, text) => setLogs((l) => [...l.slice(-199), { ts: new Date().toLocaleTimeString(), level, text }]),
@@ -850,10 +994,13 @@ export default function CRMApplication() {
               const note = p.versionNote ? ` · ${p.versionNote}` : "";
               const published = p.status === "published";
               if (!o) {
+                clearSimTimers();
                 log("ok", published ? `Page found: ${p.accountName} (v${p.version})` : `Draft created: ${p.accountName} (v${p.version})`);
               } else if (o.version !== p.version) {
+                clearSimTimers();
                 log("ok", `${published ? "Published" : "Draft updated"}: ${p.accountName} → v${p.version}${note}`);
               } else if (o.status !== p.status && published) {
+                clearSimTimers();
                 log("ok", `Published: ${p.accountName}`);
               } else {
                 continue;
@@ -889,7 +1036,7 @@ export default function CRMApplication() {
     fetchPagesRef.current = tick;
     tick();
     return () => { cancelled = true; clearTimeout(timer); };
-  }, [runActive, log]);
+  }, [runActive, log, clearSimTimers]);
 
   useEffect(() => {
     if (!notice) return undefined;
@@ -917,9 +1064,17 @@ export default function CRMApplication() {
       });
       const data = await res.json().catch(() => ({}));
       if (res.ok) {
-        log("ok", `Accepted by Opal (HTTP ${data.status || res.status}). Workflow started.`);
-        log("info", "Watching the CMS for the page. Router, Researcher and Creator steps are visible in the Opal workflow logs.");
+        log("ok", `Accepted by Opal (HTTP ${data.status || res.status}). Starting lim1_abm_orchestrator…`);
         setRunActive({ id: acc.id, name: acc.name, startedAt: Date.now() });
+
+        // Simulated lim1_abm_orchestrator step logs while waiting for the CMS draft
+        clearSimTimers();
+        const contacts = d ? d.contacts : EXTRA_CONTACTS[acc.id] || [];
+        const existingPage =
+          abmPages.find((p) => p.accountId === acc.id) ||
+          (liveStatus[acc.id]?.live ? { key: acc.id, version: "1", versionNote: liveStatus[acc.id].versionNote } : null);
+        const trace = buildOrchestratorTrace(acc, d, contacts, existingPage);
+        simTimersRef.current = trace.map((step) => setTimeout(() => log(step.level, step.text), step.delay));
       } else {
         const detail = data.error || data.opal || "no details";
         log("error", `Opal trigger failed (HTTP ${data.status || res.status}): ${detail}`);
@@ -960,7 +1115,7 @@ export default function CRMApplication() {
         {page === "Accounts" && <CRMAccounts key={selectedId} selectedId={selectedId} setSelectedId={setSelectedId} liveStatus={liveStatus} go={go} triggerOpal={triggerOpal} isSyncing={isSyncing} abmPages={abmPages} />}
         {page === "Contacts" && <CRMContacts setSelectedId={setSelectedId} go={go} />}
         {page === "Opportunities" && <CRMOpportunities setSelectedId={setSelectedId} go={go} />}
-        {page === "Campaigns" && <CRMCampaigns selectedId={selectedId} setSelectedId={setSelectedId} liveStatus={liveStatus} triggerOpal={triggerOpal} isSyncing={isSyncing} logs={logs} clearLogs={() => setLogs([])} runActive={runActive} abmPages={abmPages} refreshPages={() => fetchPagesRef.current?.()} refreshing={refreshing} lastUpdated={lastUpdated} />}
+        {page === "Campaigns" && <CRMCampaigns selectedId={selectedId} setSelectedId={setSelectedId} liveStatus={liveStatus} triggerOpal={triggerOpal} isSyncing={isSyncing} logs={logs} clearLogs={() => { clearSimTimers(); setLogs([]); }} runActive={runActive} abmPages={abmPages} refreshPages={() => fetchPagesRef.current?.()} refreshing={refreshing} lastUpdated={lastUpdated} />}
         {page === "Reports" && <CRMReports liveMicrosites={liveMicrosites} />}
       </main>
       {notice && (
