@@ -344,7 +344,7 @@ const KNOWLEDGE_CHECK_FLASHCARDS = [
 ];
 
 /* --- Upwards Extrusion Headline Component (Level 02 Playful Type Expression) --- */
-function ExtrudedWord({ children }) {
+function ExtrudedWord({ children }: { children: React.ReactNode }) {
   const layers = [
     { color: "#0D593E", offset: 8 },
     { color: "#166E49", offset: 6 },
@@ -413,12 +413,12 @@ export default function App() {
   const [showCues, setShowCues] = useState(true);
   const [showRubricDrawer, setShowRubricDrawer] = useState(false);
   const [activeSectionId, setActiveSectionId] = useState("part-1");
-  const [completedSections, setCompletedSections] = useState({});
+  const [completedSections, setCompletedSections] = useState<Record<string, boolean>>({});
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
   const [themeMode, setThemeMode] = useState("darkFir");
 
-  const scrollerRef = useRef(null);
-  const sectionRefs = useRef({});
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
 
   const totalTargetSeconds = 510;
 
@@ -441,7 +441,7 @@ export default function App() {
     };
   }, [isPlaying, scrollSpeed]);
 
-  const jumpToSection = (id) => {
+  const jumpToSection = (id: string) => {
     setActiveSectionId(id);
     const el = sectionRefs.current[id];
     if (el && scrollerRef.current) {
@@ -450,7 +450,7 @@ export default function App() {
     }
   };
 
-  const jumpRelativeSection = (delta) => {
+  const jumpRelativeSection = (delta: number) => {
     const idx = SCRIPT_SECTIONS.findIndex((s) => s.id === activeSectionId);
     const nextIdx = Math.max(
       0,
@@ -460,8 +460,9 @@ export default function App() {
   };
 
   useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA")
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const tag = (e.target as HTMLElement | null)?.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA")
         return;
 
       if (e.code === "Space") {
@@ -509,7 +510,7 @@ export default function App() {
     }
   };
 
-  const toggleComplete = (id) => {
+  const toggleComplete = (id: string) => {
     setCompletedSections((prev) => ({ ...prev, [id]: !prev[id] }));
   };
 
@@ -522,7 +523,7 @@ export default function App() {
     }
   };
 
-  const formatTime = (sec) => {
+  const formatTime = (sec: number) => {
     const m = Math.floor(sec / 60);
     const s = sec % 60;
     return `${m}:${s < 10 ? "0" : ""}${s}`;
