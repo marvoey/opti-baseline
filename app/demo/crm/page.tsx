@@ -160,6 +160,54 @@ function Card({ title, right, children, className = "" }) {
   );
 }
 
+const SIGNAL_COLOR = {
+  c_suite_hire: "amber",
+  earnings_call: "rose",
+  buying_stage_shift: "violet",
+  expansion: "green",
+  hiring: "blue",
+};
+
+/** Account enrichment: ODP first-party behaviour + external web research signals. */
+function EnrichmentCards({ d, className = "mt-6" }) {
+  return (
+    <div className={`${className} grid gap-4 lg:grid-cols-2`}>
+      <Card title="ODP behavioral intelligence" right={<Badge color="green">Optimizely Data Platform</Badge>}>
+        {d?.odp && d.odp.length > 0 ? (
+          <ul className="space-y-2 text-sm text-slate-700">
+            {d.odp.map((item, idx) => (
+              <li key={idx} className="flex items-start gap-2.5">
+                <span className="mt-0.5 text-xs font-bold text-emerald-600">✦</span>
+                <span className="leading-snug">{item}</span>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div className="text-sm text-slate-500">No recent digital intent sessions captured in ODP.</div>
+        )}
+      </Card>
+
+      <Card title="Web research & market signals" right={<Badge color="blue">External Intelligence</Badge>}>
+        {d?.signals && d.signals.length > 0 ? (
+          <ul className="space-y-2.5 text-sm text-slate-700">
+            {d.signals.map((sig, idx) => (
+              <li key={idx} className="flex items-start justify-between gap-3 border-l-2 border-sky-400 pl-3">
+                <div>
+                  <div className="font-medium leading-snug text-slate-800">{sig.text}</div>
+                  <div className="mt-0.5 text-xs text-slate-400">{sig.date}</div>
+                </div>
+                <Badge color={SIGNAL_COLOR[sig.type] || "slate"}>{sig.type.replace(/_/g, " ")}</Badge>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div className="text-sm text-slate-500">No external intelligence signals logged.</div>
+        )}
+      </Card>
+    </div>
+  );
+}
+
 function PageHeader({ eyebrow, title, sub, actions }) {
   return (
     <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
@@ -359,6 +407,7 @@ function CRMAccounts({ selectedId, setSelectedId, liveStatus, go, triggerOpal, i
             ))}
           </Card>
         </div>
+        <EnrichmentCards d={d} className="mt-4" />
         <div className="mt-4 grid gap-4 lg:grid-cols-3">
           <Card title="Activity timeline" className="lg:col-span-2">
             <ul className="space-y-2 text-sm text-slate-700">{timeline.map((x) => <li key={x} className="border-l-2 border-sky-300 pl-3">{x}</li>)}</ul>
@@ -643,6 +692,8 @@ function CRMCampaigns({ selectedId, setSelectedId, liveStatus, triggerOpal, isSy
           )}
         </Card>
       </div>
+      {/* --- Account Enrichment (ODP + Web Research Signals) --- */}
+      <EnrichmentCards d={d} />
       <div className="mt-6 grid gap-4 lg:grid-cols-2">
         <LimitlessConsole logs={logs} onClear={clearLogs} runActive={runActive} />
         <AbmPagesCard pages={abmPages} onRefresh={refreshPages} refreshing={refreshing} lastUpdated={lastUpdated} />
