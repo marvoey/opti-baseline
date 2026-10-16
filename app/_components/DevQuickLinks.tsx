@@ -10,6 +10,7 @@ const LINKS = [
   { label: 'Admin',           href: '/admin' },
   { label: 'CMS',             href: '/cms-admin' },
   { label: 'CRM', href: '/demo/crm' },
+  { label: 'Teleprompter', href: '/demo/teleprompter' }
 ];
 
 export default function DevQuickLinks() {
