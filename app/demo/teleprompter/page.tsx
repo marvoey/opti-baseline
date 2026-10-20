@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import React, { useState, useEffect, useRef } from "react";
 
@@ -27,36 +27,38 @@ const SCRIPT_SECTIONS = [
     cues: [
       {
         time: "0:00",
-        action: "Look directly into the camera lens. Conversational, candid Challenger posture.",
+        action:
+          "Look directly into the camera lens. Conversational, candid Challenger posture.",
       },
     ],
     paragraphs: [
       {
         speaker: "OPENING REFRAME",
-        text: "For the last twenty years, our industry has sold a polite fiction called 'personalization.' Look under the hood of almost any enterprise personalization program today, and what are they actually doing? They're putting buyers into broad buckets—Healthcare, Financial Services, EMEA—and serving everyone in that bucket the exact same static experience.",
-        highlight: "That isn't personalization. That's categorization.",
+        text: "Most of what we've called personalization over the past twenty years isn't really personalization. Think about how most companies approach it today. They group customers into broad segments like Healthcare, Financial Services, or EMEA, and then show everyone in that group pretty much the same content.",
+        highlight:
+          "We're calling it personalization, but really, we're just putting people into categories.",
       },
       {
         speaker: "THE MID-FUNNEL PROBLEM",
-        text: "And categorization is the exact reason B2B pipeline stalls in the middle of the funnel. Because when you're closing a seven-figure enterprise deal, you aren't selling to a bucket. You're selling to a buying committee.",
+        text: "And this becomes a problem, especially in enterprise B2B sales. When you're working on a million-dollar deal, you're not selling to an industry or a segment. You're working with a buying committee.",
         highlight:
-          "You have a CFO scrutinizing margin pressure, a VP of Architecture worried about legacy migration risk, and an Operations Director looking for day-one workflow relief.",
+          "You've got a CFO focused on the financial impact, an IT leader worried about how everything integrates with their existing systems, and an operations leader who wants to know how this actually makes things easier for their team. Same solution, but three very different priorities.",
       },
       {
         speaker: "THE SOLUTION & LIFECYCLE",
-        text: "Your marketing team knows every one of those stakeholders needs tailored proof points—but manual production simply cannot scale to build, govern, and maintain bespoke experiences for hundreds of target accounts.",
+        text: "Marketing teams already understand this. They know these different stakeholders need different messages and different content. The problem is, how do you do that for hundreds of accounts without creating a massive amount of manual work?",
         highlight:
-          "Optimizely's Limitless 1:1 Personalization blows that bottleneck off the hinges.",
+          "And that's where Optimizely Limitless comes in. We're using AI to make this level of personalization practical, even when you're dealing with hundreds of accounts.",
       },
       {
         speaker: "THE CONCRETE ARTIFACT",
-        text: "Instead of segment buckets, autonomous AI agents in Opal research, write, govern, and continuously update a genuinely tailored microsite for every single target account.",
+        text: "What we're doing is using AI agents in Opal to research, create, and maintain a personalized microsite for each account. We're bringing together information from the CRM, behavioral data from ODP, and external market signals to understand what's relevant to that particular customer.",
         highlight:
-          "It combines your CRM context, first-party behavioral intent from ODP, and live market signals to assemble an on-brand landing page in Optimizely CMS—complete with CMP approval governance and automatic delta updates whenever the account shifts.",
+          "We then use that context to build the experience in Optimizely CMS, using the company's existing content structure and brand guidelines. CMP handles the approval process, and when something changes with the account, the agents can update just the relevant content instead of starting all over again.",
       },
       {
         speaker: "TRANSITION TO DEMO",
-        text: "Let me show you how we move from static buckets to living 1:1 microsites in under five minutes.",
+        text: "So let me show you what this actually looks like and how all these pieces come together.",
         highlight: null,
       },
     ],
@@ -73,11 +75,13 @@ const SCRIPT_SECTIONS = [
     cues: [
       {
         time: "1:00",
-        action: "Switch to Screen Share on Northstar CRM (/demo/crm) -> Click 'View Q4 Tier-1 ABM' (Campaigns tab).",
+        action:
+          "Switch to Screen Share on Northstar CRM (/demo/crm) -> Click 'View Q4 Tier-1 ABM' (Campaigns tab).",
       },
       {
         time: "1:25",
-        action: "Gesture across the 6 target accounts table (Helix Freight, Apex Health, Northbridge, Solara, Kestrel, Lumen).",
+        action:
+          "Gesture across the 6 target accounts table (Helix Freight, Apex Health, Northbridge, Solara, Kestrel, Lumen).",
       },
     ],
     paragraphs: [
@@ -106,15 +110,18 @@ const SCRIPT_SECTIONS = [
     cues: [
       {
         time: "2:00",
-        action: "Ensure Helix Freight Group is selected. Scroll slightly so Buying Committee, ODP Behavioral Intelligence, and Web Research Signals cards are centered.",
+        action:
+          "Ensure Helix Freight Group is selected. Scroll slightly so Buying Committee, ODP Behavioral Intelligence, and Web Research Signals cards are centered.",
       },
       {
         time: "2:20",
-        action: "Hover over Marcus Lee (Economic Buyer), Priya Natarajan (Technical Evaluator), and Tom Becker (Champion).",
+        action:
+          "Hover over Marcus Lee (Economic Buyer), Priya Natarajan (Technical Evaluator), and Tom Becker (Champion).",
       },
       {
         time: "2:50",
-        action: "Hover over the 'ODP behavioral intelligence' card and 'Web research & market signals' card.",
+        action:
+          "Hover over the 'ODP behavioral intelligence' card and 'Web research & market signals' card.",
       },
     ],
     paragraphs: [
@@ -155,11 +162,13 @@ const SCRIPT_SECTIONS = [
     cues: [
       {
         time: "3:30",
-        action: "Click the violet 'Run Limitless' button on the Helix Freight Group row.",
+        action:
+          "Click the violet 'Run Limitless' button on the Helix Freight Group row.",
       },
       {
         time: "3:45",
-        action: "Point to the dark 'Limitless agent console' card as the webhook payload dispatches and polling starts.",
+        action:
+          "Point to the dark 'Limitless agent console' card as the webhook payload dispatches and polling starts.",
       },
     ],
     paragraphs: [
@@ -194,15 +203,18 @@ const SCRIPT_SECTIONS = [
     cues: [
       {
         time: "5:00",
-        action: "Click on the 'Apex Health Partners' row in the Q4 Tier-1 ABM table.",
+        action:
+          "Click on the 'Apex Health Partners' row in the Q4 Tier-1 ABM table.",
       },
       {
         time: "5:20",
-        action: "Point to 'Dr. Elena Park' with the amber 'New' badge, and the 'Web research & market signals' card (2026-10-02 C-suite hire & 2026-09-28 stage shift).",
+        action:
+          "Point to 'Dr. Elena Park' with the amber 'New' badge, and the 'Web research & market signals' card (2026-10-02 C-suite hire & 2026-09-28 stage shift).",
       },
       {
         time: "6:00",
-        action: "Optional: Click 'Run Limitless' on Apex or point to the 'Live - newer draft' badge in ABM landing pages card.",
+        action:
+          "Optional: Click 'Run Limitless' on Apex or point to the 'Live - newer draft' badge in ABM landing pages card.",
       },
     ],
     paragraphs: [
@@ -238,15 +250,18 @@ const SCRIPT_SECTIONS = [
     cues: [
       {
         time: "6:30",
-        action: "Scroll to the 'ABM landing pages (CMS)' card. Point to the 'Draft' / 'Live - newer draft' badges.",
+        action:
+          "Scroll to the 'ABM landing pages (CMS)' card. Point to the 'Draft' / 'Live - newer draft' badges.",
       },
       {
         time: "6:45",
-        action: "Click 'Review in CMS' to open Optimizely CMS UI (#context=epi.cms.contentdata:///372) in a new tab.",
+        action:
+          "Click 'Review in CMS' to open Optimizely CMS UI (#context=epi.cms.contentdata:///372) in a new tab.",
       },
       {
         time: "7:10",
-        action: "Click 'Live site' to show the published account-specific microsite URL.",
+        action:
+          "Click 'Live site' to show the published account-specific microsite URL.",
       },
     ],
     paragraphs: [
@@ -282,7 +297,8 @@ const SCRIPT_SECTIONS = [
     cues: [
       {
         time: "7:45",
-        action: "Stop screen share. Look directly into the camera lens for the executive close.",
+        action:
+          "Stop screen share. Look directly into the camera lens for the executive close.",
       },
     ],
     paragraphs: [
@@ -413,7 +429,9 @@ export default function App() {
   const [showCues, setShowCues] = useState(true);
   const [showRubricDrawer, setShowRubricDrawer] = useState(false);
   const [activeSectionId, setActiveSectionId] = useState("part-1");
-  const [completedSections, setCompletedSections] = useState<Record<string, boolean>>({});
+  const [completedSections, setCompletedSections] = useState<
+    Record<string, boolean>
+  >({});
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
   const [themeMode, setThemeMode] = useState("darkFir");
 
@@ -454,7 +472,7 @@ export default function App() {
     const idx = SCRIPT_SECTIONS.findIndex((s) => s.id === activeSectionId);
     const nextIdx = Math.max(
       0,
-      Math.min(SCRIPT_SECTIONS.length - 1, idx + delta)
+      Math.min(SCRIPT_SECTIONS.length - 1, idx + delta),
     );
     jumpToSection(SCRIPT_SECTIONS[nextIdx].id);
   };
@@ -462,8 +480,7 @@ export default function App() {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       const tag = (e.target as HTMLElement | null)?.tagName;
-      if (tag === "INPUT" || tag === "TEXTAREA")
-        return;
+      if (tag === "INPUT" || tag === "TEXTAREA") return;
 
       if (e.code === "Space") {
         e.preventDefault();
@@ -530,7 +547,8 @@ export default function App() {
   };
 
   const isDark = themeMode === "darkFir";
-  const completedCount = Object.values(completedSections).filter(Boolean).length;
+  const completedCount =
+    Object.values(completedSections).filter(Boolean).length;
 
   return (
     <div
@@ -762,7 +780,7 @@ export default function App() {
             <button
               onClick={() =>
                 setThemeMode((t) =>
-                  t === "darkFir" ? "neutralLight" : "darkFir"
+                  t === "darkFir" ? "neutralLight" : "darkFir",
                 )
               }
               className="font-mono-brand text-xs font-semibold px-3.5 py-2 rounded-full border-2"
@@ -844,8 +862,8 @@ export default function App() {
                       backgroundColor: isActive
                         ? "#ABFF44"
                         : isDone
-                        ? "#E4F0DA"
-                        : "#FFFFFF",
+                          ? "#E4F0DA"
+                          : "#FFFFFF",
                       borderColor: "#08251A",
                     }}
                   >
@@ -945,7 +963,9 @@ export default function App() {
               </div>
               <div className="flex justify-between">
                 <span>Prev / Next Step</span>
-                <span className="font-mono-brand font-semibold">LEFT / RIGHT</span>
+                <span className="font-mono-brand font-semibold">
+                  LEFT / RIGHT
+                </span>
               </div>
             </div>
           </div>
