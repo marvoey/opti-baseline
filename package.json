@@ -24,9 +24,9 @@
     "@optimizely/cms-sdk": "^2.0.0",
     "@tailwindcss/typography": "^0.5.20",
     "lucide-react": "^1.18.0",
-    "next": "16.2.9",
-    "react": "19.2.4",
-    "react-dom": "19.2.4",
+    "next": "16.4.2",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
     "shiki": "^4.3.0"
   },
   "devDependencies": {
@@ -35,7 +35,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "16.2.9",
+    "eslint-config-next": "16.4.2",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
