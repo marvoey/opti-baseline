@@ -1,49 +1,50 @@
-'use client';
+import fs from 'node:fs';
+import path from 'node:path';
+import DevQuickLinksMenu, { type QuickLink } from './DevQuickLinksMenu';
 
-import { useState } from 'react';
-import Link from 'next/link';
+// Route folders (relative to app/) whose pages are listed in the menu.
+const ROUTE_ROOTS = ['demo', 'admin'];
+const PAGE_FILE = /^page\.(tsx|ts|jsx|js|mdx)$/;
 
-const LINKS = [
-  { label: 'Home',            href: '/' },
-  { label: 'Assemble',        href: '/assemble' },
-  { label: 'Content Library', href: '/content-library' },
-  { label: 'Admin',           href: '/admin' },
-  { label: 'CMS',             href: '/cms-admin' },
-];
+const toLabel = (segment: string) =>
+  segment
+    .replace(/[-_]+/g, ' ')
+    .replace(/\b\w/g, (c) => c.toUpperCase());
+
+// Walks a route folder under app/ and returns a link for every folder that contains a page file.
+// Route groups "(x)" don't affect the URL; private "_x" and dynamic "[x]" /
+// parallel "@x" folders are skipped since they can't be linked to directly.
+function collectLinks(dir: string, root: string, segments: string[]): QuickLink[] {
+  let entries: fs.Dirent[];
+  try {
+    entries = fs.readdirSync(dir, { withFileTypes: true });
+  } catch {
+    return [];
+  }
+
+  const links: QuickLink[] = [];
+
+  if (entries.some((e) => e.isFile() && PAGE_FILE.test(e.name))) {
+    links.push({
+      label: toLabel(segments.length ? segments[segments.length - 1] : root),
+      href: '/' + [root, ...segments].join('/'),
+    });
+  }
+
+  for (const entry of entries.filter((e) => e.isDirectory()).sort((a, b) => a.name.localeCompare(b.name))) {
+    const { name } = entry;
+    if (/^[_@[]/.test(name)) continue;
+    const isGroup = name.startsWith('(') && name.endsWith(')');
+    links.push(...collectLinks(path.join(dir, name), root, isGroup ? segments : [...segments, name]));
+  }
+
+  return links;
+}
 
 export default function DevQuickLinks() {
-  const [open, setOpen] = useState(false);
-
-  return (
-    <div className="fixed bottom-3 left-16 z-[9998] flex flex-col items-start">
-      {open && (
-        <div className="mb-2 flex flex-col gap-0.5 rounded-lg border border-gray-200 bg-white shadow-xl p-1.5 min-w-[148px]">
-          {LINKS.map(({ label, href }) => (
-            <Link
-              key={href}
-              href={href}
-              onClick={() => setOpen(false)}
-              className="block rounded-md px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-100 transition-colors"
-            >
-              {label}
-            </Link>
-          ))}
-        </div>
-      )}
-      <button
-        onClick={() => setOpen((o) => !o)}
-        title="Quick links"
-        className="w-7 h-7 rounded-full overflow-hidden shadow-md hover:scale-110 transition-transform focus:outline-none focus-visible:ring-2 focus-visible:ring-green-400"
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="https://media.ffycdn.net/eu/episerver/YKPBoHJ87Gba79trvfkP.png?width=28"
-          alt="Optimizely quick links"
-          width={28}
-          height={28}
-          className="w-full h-full object-cover"
-        />
-      </button>
-    </div>
+  const links = ROUTE_ROOTS.flatMap((root) =>
+    collectLinks(path.join(process.cwd(), 'app', root), root, []),
   );
+  if (links.length === 0) return null;
+  return <DevQuickLinksMenu links={links} />;
 }
