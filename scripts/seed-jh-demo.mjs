@@ -74,6 +74,51 @@ const element = (displayName, contentType, properties) => ({
   ],
 });
 
+// Act 1 audit report (mirrors app/_components/jh/auditDefaults.ts). Stored as flat
+// Row<N>Block/Current/Proposed/Risk/Action string properties (json isn't allowed on
+// element-enabled content types).
+const AUDIT_ROWS = [
+    {
+      block: 'Tax Help / Standard Deduction',
+      current: 'For 2025, single filers can claim a $14,600 standard deduction, while married couples filing jointly receive $29,200.',
+      proposed: 'For the 2026 tax year, single filers can claim a $15,000 standard deduction, while married couples filing jointly receive $30,000.',
+      risk: 'High',
+      action: 'Approve Update',
+    },
+    {
+      block: 'Important Tax Deadlines',
+      current: 'Mark your calendar: Tax Day is Tuesday, April 15, 2025. File before midnight to avoid IRS penalties.',
+      proposed: 'Mark your calendar: Tax Day is Wednesday, April 15, 2026. File before midnight to avoid IRS penalties.',
+      risk: 'High',
+      action: 'Approve Update',
+    },
+    {
+      block: 'Refund Advance Loan Overview',
+      current: 'Get up to $3,500 with a 0% APR Refund Advance starting December 2024 through February 2025.',
+      proposed: 'Get up to $3,500 with a 0% APR Refund Advance starting December 2025 through February 2026.',
+      risk: 'Medium',
+      action: 'Approve Update',
+    },
+    {
+      block: 'Walmart In-Store Kiosk FAQ',
+      current: 'Drop off your 2024 W-2s at any of our 3,000+ Walmart locations during January 2025.',
+      proposed: 'Drop off your 2025 W-2s at any of our 3,000+ Walmart locations during January 2026.',
+      risk: 'Medium',
+      action: 'Approve Update',
+    },
+];
+
+const auditRowProps = () =>
+  Object.fromEntries(
+    AUDIT_ROWS.flatMap((r, i) => [
+      [`Row${i + 1}Block`, r.block],
+      [`Row${i + 1}Current`, r.current],
+      [`Row${i + 1}Proposed`, r.proposed],
+      [`Row${i + 1}Risk`, r.risk],
+      [`Row${i + 1}Action`, r.action],
+    ]),
+  );
+
 const payload = {
   key: KEY,
   contentType: 'BlankExperience',
@@ -92,16 +137,33 @@ const payload = {
       nodes: [
         element('Intent Hero', 'JhTaxIntentHero', {
           BadgeText: '2026 Tax Season Ready',
-          Headline: 'Maximum Refund Guaranteed. In-Store or Online.',
-          Subheadline: 'File with over 5,200 local Tax Pros, inside Walmart, or file yourself online for just $25.',
+          Headline: 'File Your Taxes with Jackson Hewitt. Max Refund Guaranteed.',
+          Subheadline: 'File with a local Tax Pro, inside Walmart, or online. Maximum Refund and 100% Accuracy Guarantees.',
           CtaLabel: 'Find a Location Near You',
-          WalmartHeadline: 'Expert Tax Prep Right Where You Shop. Walk In or Drop Off Today.',
-          OnlineHeadline: 'File Your Taxes Online for One Flat $25 Fee. No Surprise Upsells.',
-          AdvanceHeadline: 'Need Your Tax Refund Money Fast? Get Up to $4,000 Today.',
+          WalmartHypothesis:
+            'Promoting retail convenience and zero-wait walk-ins will increase local office bookings among in-person filers.',
+          WalmartHeadline: 'File While You Shop: Expert Tax Help Inside Your Local Walmart.',
+          WalmartSubheadline:
+            'No appointments needed. Walk in today, meet with a certified Tax Pro, and leave with your max refund guaranteed.',
+          WalmartCta: 'Find a Walmart Tax Pro Near You',
+          OnlineHypothesis:
+            "Highlighting fixed, no-surprise pricing directly challenges TurboTax's hidden tier upgrades and reduces landing page bounce.",
+          OnlineHeadline: 'Simple, Flat $25 Tax Filing. Federal & State Included.',
+          OnlineSubheadline:
+            'No surprise fees or hidden upgrades based on schedules. Fast, secure online filing from your phone or laptop.',
+          OnlineCta: 'Start Your $25 Return Today',
+          AdvanceHypothesis:
+            'Leading with $0 fee early liquidity captures early January filers who prioritize immediate access to refund dollars.',
+          AdvanceHeadline: 'Need Cash Fast? Get Up to $3,500 in Minutes with 0% APR.',
+          AdvanceSubheadline:
+            "Don't wait weeks for the IRS. Qualified filers can get an Early Refund Advance loan within 24 hours of filing.",
+          AdvanceCta: 'Apply for Refund Advance',
         }),
         element('Tax Rule Audit', 'JhTaxRuleAuditBlock', {
-          Title: 'Key Tax Deductions, Credits and Filing Thresholds',
-          Description: 'Structured CMS content blocks powering Jackson Hewitt calculators, landing pages, and FAQ hubs.',
+          Title: '2026 Tax Season Content Audit',
+          Description:
+            'Opal scans tax education and promotional pages for outdated 2025 parameters and proposes IRS-compliant 2026 updates for editor approval.',
+          ...auditRowProps(),
         }),
       ],
     },

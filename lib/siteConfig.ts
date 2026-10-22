@@ -29,17 +29,17 @@ export const siteConfig = {
   /** Top utility bar. */
   topNavLinks: [
     { label: 'Office Locator', href: '#' },
-    { label: 'Tax Tools & Calculators', href: '#' },
+    { label: 'Tax Tips & Topics', href: '/tax-help/tax-tips-topics/filing-your-taxes' },
     { label: '1-800-234-1040', href: 'tel:18002341040' },
   ] satisfies NavLink[],
 
   /** Primary header navigation. */
   mainNavLinks: [
-    { label: 'File with a Tax Pro', href: '#' },
-    { label: 'File Online ($25)', href: '#' },
+    { label: 'File with a Tax Pro', href: '/file-taxes-options-products' },
+    { label: 'File Online ($25)', href: '/file-taxes-options-products/file-taxes-online' },
     { label: 'Walmart Locations', href: '#' },
-    { label: 'Refund Advance', href: '#' },
-    { label: 'Tax Tools', href: '#' },
+    { label: 'Refund Advance', href: '/refund-advance' },
+    { label: 'Tax Tips', href: '/tax-help/tax-tips-topics/filing-your-taxes' },
   ] satisfies NavLink[],
   /** Header call-to-action button. */
   primaryCta: { label: 'Find an Office', href: '#' } satisfies NavLink,
@@ -62,7 +62,7 @@ export const siteConfig = {
     {
       heading: 'Refunds & Loans',
       links: [
-        { label: 'Refund Advance', href: '#' },
+        { label: 'Refund Advance', href: '/refund-advance' },
         { label: 'Refund Calculator', href: '#' },
         { label: 'Where\'s My Refund?', href: '#' },
         { label: 'Maximum Refund Guarantee', href: '#' },

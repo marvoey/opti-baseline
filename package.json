@@ -17,6 +17,7 @@
     "cms:push:all": "node --env-file=.env scripts/cms-push.mjs --all",
     "schema:pull": "node scripts/fetch-openapi.mjs",
     "seed:jh": "node --env-file=.env scripts/seed-jh-demo.mjs",
+    "seed:jh:pages": "node --env-file=.env scripts/seed-jh-pages.mjs",
     "cms:check": "node --env-file=.env scripts/check-content-types.mjs"
   },
   "dependencies": {

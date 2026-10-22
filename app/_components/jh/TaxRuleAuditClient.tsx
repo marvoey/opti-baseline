@@ -1,199 +1,166 @@
 'use client';
 
 import { useState } from 'react';
-import { AlertTriangle, Check, CheckCircle2, Clock, Lock, RefreshCw, Sparkles } from 'lucide-react';
-import { INITIAL_TAX_RULES, type TaxRule } from './demoData';
+import type { AuditRisk, AuditRow } from './auditDefaults';
 
 type EditAttrs = Record<string, string | undefined>;
 
 type Props = {
   title: string;
   description: string;
-  edit: { title: EditAttrs; description: EditAttrs };
+  rows: AuditRow[];
+  /** `pa()` attributes computed on the server so on-page editing overlays attach. */
+  edit: { title: EditAttrs; description: EditAttrs; rowProposed: EditAttrs[] };
 };
 
-const applyProposal = (rule: TaxRule): TaxRule => ({
-  ...rule,
-  ...rule.proposed2026,
-  auditStatus: 'Opal Verified 2026',
-});
+const RISK_STYLES: Record<AuditRisk, string> = {
+  High: 'bg-rose-100 text-rose-800 border-rose-200',
+  Medium: 'bg-amber-100 text-amber-800 border-amber-200',
+  Low: 'bg-emerald-100 text-emerald-800 border-emerald-200',
+};
 
-export default function TaxRuleAuditClient({ title, description, edit }: Props) {
-  const [rules, setRules] = useState<TaxRule[]>(INITIAL_TAX_RULES);
-  const [running, setRunning] = useState(false);
-  const [audited, setAudited] = useState(false);
+export default function TaxRuleAuditClient({ title, description, rows, edit }: Props) {
+  // Demo state: scan → report → editor approves each row (Approve & Push to CMS).
+  const [phase, setPhase] = useState<'idle' | 'scanning' | 'report'>('idle');
+  const [pushed, setPushed] = useState<ReadonlySet<number>>(new Set());
 
-  const outdated = rules.filter((r) => r.taxYear === '2025').length;
+  const approvable = rows.map((r, i) => (r.action === 'Approve Update' ? i : -1)).filter((i) => i >= 0);
+  const pending = approvable.filter((i) => !pushed.has(i)).length;
+  const needsReview = rows.length - approvable.length;
 
   const runAudit = () => {
-    setRunning(true);
-    setTimeout(() => {
-      setRunning(false);
-      setAudited(true);
-    }, 800);
+    setPhase('scanning');
+    setTimeout(() => setPhase('report'), 800);
   };
-
-  const approveOne = (id: string) =>
-    setRules((prev) => prev.map((r) => (r.id === id ? applyProposal(r) : r)));
-  const approveAll = () => setRules((prev) => prev.map(applyProposal));
+  const approve = (i: number) => setPushed((prev) => new Set(prev).add(i));
+  const approveAll = () => setPushed(new Set(approvable));
   const reset = () => {
-    setRules(INITIAL_TAX_RULES);
-    setAudited(false);
+    setPushed(new Set());
+    setPhase('idle');
   };
 
   return (
     <div className="max-w-6xl mx-auto">
-      <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+      {/* Header & Agent Trigger Demo Bar */}
+      <div className="bg-jh-gold-light border-2 border-dashed border-jh-gold p-6 rounded-2xl mb-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div>
-          <div className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-jh-navy bg-blue-100/80 px-3 py-1 rounded-full mb-2">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Opal Content Audit Agent</span>
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="bg-jh-navy text-white text-xs font-bold px-2.5 py-1 rounded">
+              🤖 Opal Content Audit Agent
+            </span>
+            <span className="text-xs font-bold text-amber-900">
+              {phase === 'report'
+                ? pending === 0
+                  ? 'STATUS: All approved updates pushed to CMS'
+                  : `STATUS: ${rows.length} blocks flagged — ${pending} awaiting editor approval`
+                : phase === 'scanning'
+                  ? 'STATUS: Scanning tax education and promo pages…'
+                  : 'STATUS: Ready to audit for outdated 2025 parameters'}
+            </span>
           </div>
-          <h2 {...edit.title} className="text-2xl sm:text-3xl font-extrabold text-jh-navy">
+          <h2 {...edit.title} className="text-xl font-bold text-jh-navy mt-2">
             {title}
           </h2>
-          <p {...edit.description} className="text-sm text-slate-600 mt-1">
+          <p {...edit.description} className="text-xs text-slate-600 mt-1 max-w-2xl">
             {description}
           </p>
         </div>
 
-        <div className="flex flex-wrap items-center gap-3 bg-white p-3 rounded-xl border border-slate-200 shadow-xs">
-          <div className="flex items-center gap-2 px-2 text-xs font-bold">
-            {outdated > 0 ? (
-              <>
-                <span className="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse" />
-                <span className="text-slate-700">
-                  <strong className="text-amber-700">{outdated} blocks</strong> still referencing{' '}
-                  <span className="underline decoration-amber-500">2025 rules</span>
-                </span>
-              </>
-            ) : (
-              <>
-                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                <span className="text-emerald-800">All {rules.length} blocks verified for 2026</span>
-              </>
-            )}
-          </div>
-
-          {outdated === 0 ? (
-            <button
-              type="button"
-              onClick={reset}
-              className="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold px-3 py-1.5 rounded-lg flex items-center gap-1 cursor-pointer"
-            >
-              <RefreshCw className="w-3 h-3" />
-              <span>Reset to 2025 State</span>
-            </button>
-          ) : audited ? (
+        <div className="flex gap-2">
+          {phase === 'report' && pending > 0 && (
             <button
               type="button"
               onClick={approveAll}
-              className="bg-emerald-500 hover:bg-emerald-600 text-slate-950 text-xs font-extrabold px-3.5 py-2 rounded-lg flex items-center gap-1.5 cursor-pointer"
+              className="px-4 py-3 rounded-lg font-bold text-xs uppercase tracking-wider bg-emerald-500 text-slate-950 hover:bg-emerald-600 shadow-md"
             >
-              <CheckCircle2 className="w-3.5 h-3.5" />
-              <span>Approve and Publish All {outdated}</span>
+              Approve All ({pending})
+            </button>
+          )}
+          {phase === 'report' ? (
+            <button
+              type="button"
+              onClick={reset}
+              className="px-4 py-3 rounded-lg font-bold text-xs uppercase tracking-wider bg-slate-700 text-white hover:bg-slate-800 shadow-md"
+            >
+              ↺ Reset
             </button>
           ) : (
             <button
               type="button"
               onClick={runAudit}
-              disabled={running}
-              className="bg-jh-red hover:bg-jh-red-hover disabled:opacity-60 text-white text-xs font-bold px-3.5 py-2 rounded-lg flex items-center gap-1.5 cursor-pointer"
+              disabled={phase === 'scanning'}
+              className="px-5 py-3 rounded-lg font-bold text-xs uppercase tracking-wider bg-jh-red text-white hover:bg-jh-red-hover disabled:opacity-60 shadow-md"
             >
-              <Sparkles className={`w-3.5 h-3.5 ${running ? 'animate-spin' : ''}`} />
-              <span>{running ? 'Scanning Optimizely Graph…' : 'Run Opal 2025 to 2026 Audit'}</span>
+              {phase === 'scanning' ? 'Scanning…' : '⚡ Run Opal 2026 Tax Audit'}
             </button>
           )}
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {rules.map((rule) => {
-          const isOutdated = rule.taxYear === '2025';
-          return (
-            <div
-              key={rule.id}
-              className={`bg-white rounded-2xl border-2 p-6 flex flex-col justify-between shadow-sm transition-all ${
-                isOutdated ? 'border-amber-300/90' : 'border-emerald-500/80'
-              }`}
-            >
-              <div>
-                <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
-                  <span className="text-[11px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded bg-slate-100 text-slate-700">
-                    {rule.category}
-                  </span>
-                  {isOutdated ? (
-                    <span className="inline-flex items-center gap-1.5 text-xs font-extrabold px-3 py-1 rounded-full bg-amber-100 text-amber-900 border border-amber-300">
-                      <AlertTriangle className="w-3.5 h-3.5 text-amber-600" />
-                      <span>Tax Year {rule.taxYear} (Outdated)</span>
-                    </span>
-                  ) : (
-                    <span className="inline-flex items-center gap-1.5 text-xs font-extrabold px-3 py-1 rounded-full bg-emerald-100 text-emerald-900 border border-emerald-300">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-                      <span>Tax Year {rule.taxYear} • Opal Verified</span>
-                    </span>
-                  )}
-                </div>
+      {phase === 'report' && (
+        <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+          <div className="hidden lg:grid grid-cols-12 gap-4 p-4 bg-slate-50 border-b border-slate-200 text-xs text-slate-500 font-medium">
+            <span className="col-span-2">Page / Content Block</span>
+            <span className="col-span-3">Current 2025 Copy (Outdated)</span>
+            <span className="col-span-3">Proposed 2026 Update (IRS Compliant)</span>
+            <span className="col-span-1">Risk</span>
+            <span className="col-span-3 text-right">Editor Action</span>
+          </div>
 
-                <h3 className="text-xl font-extrabold text-jh-navy mb-3">{rule.ruleTitle}</h3>
-
-                <div
-                  className={`rounded-xl p-4 mb-4 border ${
-                    isOutdated ? 'bg-amber-50/60 border-amber-200' : 'bg-emerald-50/60 border-emerald-200'
-                  }`}
-                >
-                  <div className="flex items-baseline justify-between">
-                    <span className="text-xs uppercase font-bold text-slate-500">thresholdAmount</span>
-                    <span className="text-[11px] font-mono text-slate-500">Prior: {rule.previousAmount}</span>
+          <div className="divide-y divide-slate-100">
+            {rows.map((row, i) => {
+              const isPushed = pushed.has(i);
+              const manual = row.action === 'Manual Review Needed';
+              return (
+                <div key={row.block} className="p-4 grid grid-cols-1 lg:grid-cols-12 gap-3 lg:gap-4 items-start">
+                  <div className="lg:col-span-2 text-sm font-bold text-jh-navy">{row.block}</div>
+                  <p className="lg:col-span-3 text-xs italic text-rose-700 line-through decoration-rose-300">
+                    {row.current}
+                  </p>
+                  <p
+                    {...edit.rowProposed[i]}
+                    className={`lg:col-span-3 text-xs italic ${
+                      isPushed ? 'text-emerald-800 font-semibold' : 'text-emerald-700'
+                    }`}
+                  >
+                    {row.proposed}
+                  </p>
+                  <div className="lg:col-span-1">
+                    <span className={`text-[11px] font-bold px-2 py-0.5 rounded-full border ${RISK_STYLES[row.risk]}`}>
+                      {row.risk}
+                    </span>
                   </div>
-                  <div className="text-2xl font-black text-jh-navy mt-1">{rule.thresholdAmount}</div>
-
-                  {audited && isOutdated && (
-                    <div className="mt-3 pt-3 border-t border-amber-200/80 flex items-center justify-between gap-2 bg-indigo-50/90 px-3 py-2 rounded-lg border border-indigo-200">
-                      <div>
-                        <div className="text-[10px] font-extrabold uppercase tracking-wider text-indigo-700 flex items-center gap-1">
-                          <Sparkles className="w-3 h-3" />
-                          <span>Opal proposed 2026 update</span>
-                        </div>
-                        <div className="text-sm font-black text-indigo-950">
-                          {rule.proposed2026.thresholdAmount}
-                        </div>
-                      </div>
+                  <div className="lg:col-span-3 lg:text-right">
+                    {isPushed ? (
+                      <span className="inline-block text-[11px] font-extrabold px-3 py-1.5 rounded-lg bg-emerald-100 text-emerald-900">
+                        ✓ Published 2026
+                      </span>
+                    ) : manual ? (
+                      <span className="inline-block text-[11px] font-bold px-3 py-1.5 rounded-lg bg-amber-100 text-amber-900">
+                        Manual Review Needed
+                      </span>
+                    ) : (
                       <button
                         type="button"
-                        onClick={() => approveOne(rule.id)}
-                        className="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1 shrink-0 cursor-pointer"
+                        onClick={() => approve(i)}
+                        className="text-[11px] font-bold px-3 py-1.5 rounded-lg bg-jh-navy text-white hover:bg-jh-navy-dark"
                       >
-                        <Check className="w-3.5 h-3.5" />
-                        <span>Approve 2026</span>
+                        Approve &amp; Push to CMS
                       </button>
-                    </div>
-                  )}
+                    )}
+                  </div>
                 </div>
+              );
+            })}
+          </div>
 
-                <p className="text-sm text-slate-700 leading-relaxed mb-4">{rule.ruleSummary}</p>
-              </div>
-
-              <div className="pt-4 border-t border-slate-100 space-y-2 text-xs">
-                <div className="flex items-center justify-between text-slate-600 font-medium">
-                  <span className="flex items-center gap-1.5">
-                    <Clock className="w-3.5 h-3.5 text-jh-navy" />
-                    <span>Filing deadline: </span>
-                    <strong>{rule.effectiveDeadline}</strong>
-                  </span>
-                  <span className="font-mono text-[11px] text-slate-400">{rule.cmsPath}</span>
-                </div>
-                <div className="bg-slate-50 p-2.5 rounded-lg border border-slate-200/70 text-[11px] text-slate-500 flex items-start gap-2">
-                  <Lock className="w-3.5 h-3.5 text-slate-400 shrink-0 mt-0.5" />
-                  <span>
-                    <strong>Compliance guardrail:</strong> {rule.irsComplianceDisclaimer}
-                  </span>
-                </div>
-              </div>
-            </div>
-          );
-        })}
-      </div>
+          <div className="p-3 bg-slate-50 border-t border-slate-200 text-[11px] text-slate-500">
+            {rows.length} blocks flagged · {pending} pending approval
+            {needsReview > 0 ? ` · ${needsReview} need manual review` : ''} · Editors approve every change before it
+            publishes.
+          </div>
+        </div>
+      )}
     </div>
   );
 }

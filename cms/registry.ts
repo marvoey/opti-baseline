@@ -14,6 +14,14 @@ import Page, { PageContentType } from './Page';
 import RichText, { RichTextContentType } from './RichText';
 import JhTaxIntentHero, { JhTaxIntentHeroContentType } from './JhTaxIntentHero';
 import JhTaxRuleAuditBlock, { JhTaxRuleAuditBlockContentType } from './JhTaxRuleAuditBlock';
+import JhPageHero, { JhPageHeroContentType } from './JhPageHero';
+import JhFeatureList, { JhFeatureListContentType } from './JhFeatureList';
+import JhStepList, { JhStepListContentType } from './JhStepList';
+import JhCardGrid, { JhCardGridContentType } from './JhCardGrid';
+import JhFaqAccordion, { JhFaqAccordionContentType } from './JhFaqAccordion';
+import JhPromoBanner, { JhPromoBannerContentType } from './JhPromoBanner';
+import JhArticleList, { JhArticleListContentType } from './JhArticleList';
+import JhDisclosure, { JhDisclosureContentType } from './JhDisclosure';
 
 /**
  * Single configuration + registration point for the Optimizely SDK.
@@ -53,6 +61,14 @@ export const registeredContentTypes = [
   RichTextContentType,
   JhTaxIntentHeroContentType,
   JhTaxRuleAuditBlockContentType,
+  JhPageHeroContentType,
+  JhFeatureListContentType,
+  JhStepListContentType,
+  JhCardGridContentType,
+  JhFaqAccordionContentType,
+  JhPromoBannerContentType,
+  JhArticleListContentType,
+  JhDisclosureContentType,
 ];
 
 initContentTypeRegistry(registeredContentTypes);
@@ -68,5 +84,13 @@ initReactComponentRegistry({
     RichTextBlock: RichText,
     JhTaxIntentHero,
     JhTaxRuleAuditBlock,
+    JhPageHero,
+    JhFeatureList,
+    JhStepList,
+    JhCardGrid,
+    JhFaqAccordion,
+    JhPromoBanner,
+    JhArticleList,
+    JhDisclosure,
   },
 });
