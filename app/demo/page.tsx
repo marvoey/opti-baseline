@@ -166,8 +166,10 @@ const INTENT_VARIANTS = {
   }
 };
 
+type IntentKey = keyof typeof INTENT_VARIANTS;
+
 export default function JacksonHewittTrojanHorsePreview() {
-  const [activeIntent, setActiveIntent] = useState('refund-advance');
+  const [activeIntent, setActiveIntent] = useState<IntentKey>('refund-advance');
   const [taxRules, setTaxRules] = useState(INITIAL_TAX_RULES);
   const [opalDrawerOpen, setOpalDrawerOpen] = useState(true);
   const [auditRunning, setAuditRunning] = useState(false);
@@ -188,7 +190,7 @@ export default function JacksonHewittTrojanHorsePreview() {
     }, 800);
   };
 
-  const handleApproveSingleRule = (ruleId) => {
+  const handleApproveSingleRule = (ruleId: string) => {
     setTaxRules((prev) =>
       prev.map((rule) => {
         if (rule.id === ruleId) {
@@ -257,7 +259,7 @@ export default function JacksonHewittTrojanHorsePreview() {
               {Object.values(INTENT_VARIANTS).map((variant) => (
                 <button
                   key={variant.id}
-                  onClick={() => setActiveIntent(variant.id)}
+                  onClick={() => setActiveIntent(variant.id as IntentKey)}
                   className={`px-2.5 py-1 rounded text-xs font-semibold transition-all cursor-pointer ${
                     activeIntent === variant.id
                       ? 'bg-[#E31837] text-white shadow-sm'
@@ -409,7 +411,7 @@ export default function JacksonHewittTrojanHorsePreview() {
                   {Object.values(INTENT_VARIANTS).map((v) => (
                     <button
                       key={v.id}
-                      onClick={() => setActiveIntent(v.id)}
+                      onClick={() => setActiveIntent(v.id as IntentKey)}
                       className={`px-2 py-0.5 rounded text-[11px] font-bold transition-all cursor-pointer ${
                         activeIntent === v.id
                           ? 'bg-white text-[#003A70]'
