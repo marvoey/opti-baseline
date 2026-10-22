@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 64" role="img" aria-label="Jackson Hewitt Tax Service">
+  <rect x="2" y="8" width="48" height="48" rx="10" fill="#ffffff"/>
+  <text x="26" y="42" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="900" font-size="26" letter-spacing="-1.5" fill="#002d62">JH</text>
+  <circle cx="48" cy="10" r="7" fill="#e31837" stroke="#002d62" stroke-width="3"/>
+  <text x="62" y="35" font-family="Arial, Helvetica, sans-serif" font-weight="900" font-size="24" letter-spacing="-0.5" fill="#ffffff">JACKSON HEWITT</text>
+  <text x="63" y="53" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="12" letter-spacing="3.5" fill="#ffb81c">TAX SERVICE</text>
+</svg>

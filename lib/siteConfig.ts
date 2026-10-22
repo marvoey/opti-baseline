@@ -12,69 +12,73 @@ export type FooterColumn = { heading: string; links: NavLink[] };
 
 export const siteConfig = {
   /** Used for the document <title> fallback and the logo alt text. */
-  name: 'Optimizely',
+  name: 'Jackson Hewitt',
   /** Default browser-tab title (per-page titles override via CMS MetaTitle). */
-  title: 'Optimizely | Digital Experience Platform',
+  title: 'Jackson Hewitt | Tax Preparation & Maximum Refund Guarantee',
   /** Default meta description. */
   description:
-    'Optimizely — the digital experience platform that helps teams create, test, and optimize digital experiences at scale.',
+    'File with a Jackson Hewitt Tax Pro at 5,200+ offices and 2,600+ Walmart locations, or file online for a flat $25. Maximum Refund and 100% Accuracy Guarantees.',
 
   /** Header logo (place the asset in /public). */
-  logoSrc: '/Optimizely_Primary-Logo_Medium_Green_RGB.png',
-  logoAlt: 'Optimizely',
+  logoSrc: '/jh-logo.svg',
+  logoAlt: 'Jackson Hewitt Tax Service',
+
+  /** Customer service line shown in the utility bar. */
+  phone: '1-800-234-1040',
 
   /** Top utility bar. */
   topNavLinks: [
-    { label: 'Partners', href: '#' },
-    { label: 'Support', href: '#' },
+    { label: 'Office Locator', href: '#' },
+    { label: 'Tax Tools & Calculators', href: '#' },
+    { label: '1-800-234-1040', href: 'tel:18002341040' },
   ] satisfies NavLink[],
 
   /** Primary header navigation. */
   mainNavLinks: [
-    { label: 'Products', href: '#' },
-    { label: 'Solutions', href: '#' },
-    { label: 'Customers', href: '#' },
-    { label: 'Resources', href: '#' },
-    { label: 'Pricing', href: '#' },
+    { label: 'File with a Tax Pro', href: '#' },
+    { label: 'File Online ($25)', href: '#' },
+    { label: 'Walmart Locations', href: '#' },
+    { label: 'Refund Advance', href: '#' },
+    { label: 'Tax Tools', href: '#' },
   ] satisfies NavLink[],
   /** Header call-to-action button. */
-  primaryCta: { label: 'Get started free', href: '#' } satisfies NavLink,
+  primaryCta: { label: 'Find an Office', href: '#' } satisfies NavLink,
   /** Account / login button label. */
-  accountLabel: 'Log in',
+  accountLabel: 'Sign in to MyJH',
 
   /** Footer. */
   footerTagline:
-    'Create, test, and optimize digital experiences that turn visitors into loyal customers.',
+    'Tax preparation backed by our Maximum Refund and 100% Accuracy Guarantees. In-store, at Walmart, or online.',
   footerColumns: [
     {
-      heading: 'Products',
+      heading: 'File Your Taxes',
       links: [
-        { label: 'Content Management', href: '#' },
-        { label: 'Experimentation', href: '#' },
-        { label: 'Commerce', href: '#' },
-        { label: 'Personalization', href: '#' },
+        { label: 'File with a Tax Pro', href: '#' },
+        { label: 'File Online ($25)', href: '#' },
+        { label: 'Drop Off Your Taxes', href: '#' },
+        { label: 'Walmart Locations', href: '#' },
       ],
     },
     {
-      heading: 'Solutions',
+      heading: 'Refunds & Loans',
       links: [
-        { label: 'B2B Commerce', href: '#' },
-        { label: 'B2C Commerce', href: '#' },
-        { label: 'Digital Marketing', href: '#' },
-        { label: 'Customer Journeys', href: '#' },
+        { label: 'Refund Advance', href: '#' },
+        { label: 'Refund Calculator', href: '#' },
+        { label: 'Where\'s My Refund?', href: '#' },
+        { label: 'Maximum Refund Guarantee', href: '#' },
       ],
     },
     {
-      heading: 'Resources',
+      heading: 'Tax Help',
       links: [
-        { label: 'Blog', href: '#' },
-        { label: 'Documentation', href: '#' },
-        { label: 'Community', href: '#' },
-        { label: 'Webinars', href: '#' },
+        { label: 'Standard Deduction', href: '#' },
+        { label: 'Earned Income Tax Credit', href: '#' },
+        { label: 'Tax Calculators', href: '#' },
+        { label: 'Tax Resolution', href: '#' },
       ],
     },
   ] satisfies FooterColumn[],
-  footerLegal: `© ${2026} Optimizely. All rights reserved.`,
+  footerLegal: `© ${2026} Jackson Hewitt Tax Service. All rights reserved.`,
   footerLegalLinks: [
     { label: 'Privacy Policy', href: '#' },
     { label: 'Terms of Service', href: '#' },

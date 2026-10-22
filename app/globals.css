@@ -23,31 +23,28 @@
    * │  blue-800 = your primary; the rest are tints/shades between.          │
    * └──────────────────────────────────────────────────────────────────────┘
    *
-   * Optimizely brand green ramp.
-   * Anchors: Dark Fir #08251a (darkest), LFGreen #abff44 (signature accent).
+   * Jackson Hewitt navy ramp. Anchors: navy #002D62, red #E31837, gold #FFB81C.
    */
-  --color-blue-950: #08251a; /* Dark Fir — footer / hero background */
-  --color-blue-900: #0d3a29; /* Mid Fir — header bg */
-  --color-blue-800: #197050; /* Light Fir — primary green, links */
-  --color-blue-700: #3ab533; /* Good-to-go */
-  --color-blue-600: #4dc844;
-  --color-blue-500: #62d84f;
-  --color-blue-400: #7ddd3d; /* Grass */
-  --color-blue-300: #91dbda; /* Light Blue — teal accent */
-  --color-blue-200: #abff44; /* LFGreen — signature bright green */
-  --color-blue-100: #d8e4cb; /* Neutral 4 */
-  --color-blue-50:  #e4f0da; /* Neutral 3 — light wash */
+  --color-blue-950: #001d40; /* Deep navy — footer / top bar */
+  --color-blue-900: #002d62; /* JH navy — header bg */
+  --color-blue-800: #003a70; /* Primary navy, links */
+  --color-blue-700: #1a5490;
+  --color-blue-600: #3a6ea5;
+  --color-blue-500: #5b88b8;
+  --color-blue-400: #86a8cc;
+  --color-blue-300: #aac3dd;
+  --color-blue-200: #ffb81c; /* JH gold — header CTA button accent */
+  --color-blue-100: #dbe6f2;
+  --color-blue-50:  #eef3f9; /* Light wash */
 
-  /* Named Optimizely brand tokens for direct use in custom components. */
-  --color-lfgreen:    #abff44;
-  --color-grass:      #7ddd3d;
-  --color-good-to-go: #3ab533;
-  --color-dark-fir:   #08251a;
-  --color-mid-fir:    #0d3a29;
-  --color-light-fir:  #197050;
-  --color-light-blue: #91dbda;
-  --color-neutral-2:  #eff6e9;
-  --color-neutral-3:  #e4f0da;
+  /* Named Jackson Hewitt brand tokens for direct use in custom components. */
+  --color-jh-navy:       #002d62;
+  --color-jh-navy-dark:  #001d40;
+  --color-jh-red:        #e31837;
+  --color-jh-red-hover:  #c4122e;
+  --color-jh-gold:       #ffb81c;
+  --color-jh-gold-light: #fff8e7;
+  --color-jh-surface:    #f4f6f9;
 }
 
 @media (prefers-color-scheme: dark) {
