@@ -34,31 +34,24 @@ const SCRIPT_SECTIONS = [
     paragraphs: [
       {
         speaker: "OPENING REFRAME",
-        text: "Most of what we've called personalization over the past twenty years isn't really personalization. Think about how most companies approach it today. They group customers into broad segments like Healthcare, Financial Services, or EMEA, and then show everyone in that group pretty much the same content.",
-        highlight:
-          "We're calling it personalization, but really, we're just putting people into categories.",
+        text: "For twenty years, we've called it personalization, but we've really been putting customers into segments like Healthcare or EMEA and showing everyone in the segment the same content.",
+        highlight: "That's not personalization. That's categorization.",
       },
       {
         speaker: "THE MID-FUNNEL PROBLEM",
-        text: "And this becomes a problem, especially in enterprise B2B sales. When you're working on a million-dollar deal, you're not selling to an industry or a segment. You're working with a buying committee.",
+        text: "In enterprise B2B, that breaks down. You're not selling to a segment, you're selling to a buying committee.",
         highlight:
-          "You've got a CFO focused on the financial impact, an IT leader worried about how everything integrates with their existing systems, and an operations leader who wants to know how this actually makes things easier for their team. Same solution, but three very different priorities.",
-      },
-      {
-        speaker: "THE SOLUTION & LIFECYCLE",
-        text: "Marketing teams already understand this. They know these different stakeholders need different messages and different content. The problem is, how do you do that for hundreds of accounts without creating a massive amount of manual work?",
-        highlight:
-          "And that's where Optimizely Limitless comes in. We're using AI to make this level of personalization practical, even when you're dealing with hundreds of accounts.",
+          "A CFO, an IT leader, and an operations leader: same solution, three different priorities, and never enough content to serve them all.",
       },
       {
         speaker: "THE CONCRETE ARTIFACT",
-        text: "What we're doing is using AI agents in Opal to research, create, and maintain a personalized microsite for each account. We're bringing together information from the CRM, behavioral data from ODP, and external market signals to understand what's relevant to that particular customer.",
+        text: "Optimizely Limitless fixes that. AI agents in Opal research, build, and maintain a governed microsite for every target account.",
         highlight:
-          "We then use that context to build the experience in Optimizely CMS, using the company's existing content structure and brand guidelines. CMP handles the approval process, and when something changes with the account, the agents can update just the relevant content instead of starting all over again.",
+          "They pull from CRM, ODP, and market signals, build in CMS on your brand guidelines, route approval through CMP, and update only what changes.",
       },
       {
         speaker: "TRANSITION TO DEMO",
-        text: "So let me show you what this actually looks like and how all these pieces come together.",
+        text: "Let me show you how it works.",
         highlight: null,
       },
     ],
