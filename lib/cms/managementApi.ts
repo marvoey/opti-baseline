@@ -42,3 +42,35 @@ export async function cmsGet<T>(path: string): Promise<T> {
   if (!res.ok) throw new Error(`CMS GET ${path} failed: ${res.status}`);
   return (await res.json()) as T;
 }
+
+/** POST JSON to a Management API path (e.g. `/v1/content/<key>/versions`) and return the parsed JSON. */
+export async function cmsPost<T>(path: string, body: unknown): Promise<T> {
+  const token = await getCmsToken();
+  const res = await fetch(`${GATEWAY}${path}`, {
+    method: 'POST',
+    headers: { authorization: `Bearer ${token}`, 'content-type': 'application/json', prefer: 'return=representation' },
+    body: JSON.stringify(body),
+    cache: 'no-store',
+  });
+  if (!res.ok) {
+    const detail = (await res.text().catch(() => '')).slice(0, 300);
+    throw new Error(`CMS POST ${path} failed: ${res.status}${detail ? ` ${detail}` : ''}`);
+  }
+  // A 201/204 may come back without a body; treat that as an empty object.
+  const text = await res.text();
+  return (text ? JSON.parse(text) : {}) as T;
+}
+
+/** DELETE a Management API path (e.g. `/v1/content/<key>`). Resolves once the CMS accepts it. */
+export async function cmsDelete(path: string): Promise<void> {
+  const token = await getCmsToken();
+  const res = await fetch(`${GATEWAY}${path}`, {
+    method: 'DELETE',
+    headers: { authorization: `Bearer ${token}` },
+    cache: 'no-store',
+  });
+  if (!res.ok) {
+    const detail = (await res.text().catch(() => '')).slice(0, 300);
+    throw new Error(`CMS DELETE ${path} failed: ${res.status}${detail ? ` ${detail}` : ''}`);
+  }
+}

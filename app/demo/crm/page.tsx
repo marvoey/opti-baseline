@@ -71,9 +71,27 @@ const DETAILS = {
 
 /** Turn a status-route response into a badge label. versionNote looks like "v2 · updated: new CMIO". */
 function liveLabel(st) {
-  if (!st || !st.live) return { text: "Not published", short: "None", color: "slate" };
+  if (!st || !st.live) return { text: "No page", short: "No page", color: "slate" };
   const v = (st.versionNote || "").split(" · ")[0];
-  return { text: v ? `Live · ${v}` : "Live", short: v ? `Live · ${v}` : "Live", color: "green" };
+  return { text: v ? `Published · ${v}` : "Published", short: v ? `Published · ${v}` : "Published", color: "green" };
+}
+
+/** Badge label for an ABM page from the CMS pages route (drafts included); same labels as the ABM card. */
+function pageLabel(p) {
+  if (p.status === "published") return { text: "Published", short: "Published", color: "green" };
+  if (p.hasPublished) return { text: "Published · newer draft", short: "Published · newer draft", color: "blue" };
+  return { text: "Draft · not published", short: "Draft · not published", color: "amber" };
+}
+
+/** Microsite status for an account: the CMS pages (source of the ABM card) win, Graph status is the fallback. */
+function findAbmPage(abmPages, acc) {
+  const norm = (v) => (v || "").trim().toLowerCase();
+  return abmPages.find((x) => x.accountId === acc.id) || abmPages.find((x) => norm(x.accountName) === norm(acc.name));
+}
+
+function micrositeLabel(abmPages, liveStatus, acc) {
+  const page = findAbmPage(abmPages, acc);
+  return page ? pageLabel(page) : liveLabel(liveStatus[acc.id]);
 }
 
 const EXTRA_CONTACTS = {
@@ -348,7 +366,7 @@ function CRMAccounts({ selectedId, setSelectedId, liveStatus, go, triggerOpal, i
     const contacts = ALL_CONTACTS.filter((c) => c.accountId === acc.id);
     const opps = OPPS.filter((o) => o.acct === acc.id);
     const timeline = d ? d.activity : [`${acc.lastActivity}`, "Added to Q4 Tier-1 ABM campaign", "Account created from event lead"];
-    const pageInCms = abmPages.find((p) => p.accountId === acc.id);
+    const pageInCms = findAbmPage(abmPages, acc);
     
     return (
       <>
@@ -571,12 +589,19 @@ function LimitlessConsole({ logs, onClear, runActive }) {
 }
 
 /** Links to the ABM landing pages in the CMS (children of the ABM container). */
-function AbmPagesCard({ pages, onRefresh, refreshing, lastUpdated }) {
+function AbmPagesCard({ pages, onRefresh, refreshing, lastUpdated, acc, isSyncing, triggerOpal, onDelete, deletingKey }) {
   return (
     <Card
       title="ABM landing pages (CMS)"
       right={
         <div className="flex items-center gap-3">
+          <button
+            onClick={() => triggerOpal(acc)}
+            disabled={isSyncing[acc.id]}
+            className={`rounded-lg px-3 py-1.5 text-xs font-semibold text-white shadow-sm ${isSyncing[acc.id] ? "bg-violet-400 cursor-not-allowed" : "bg-violet-600 hover:bg-violet-700"}`}
+          >
+            {isSyncing[acc.id] ? `✦ Sending ${acc.name} to Opal…` : `✦ Run Limitless · ${acc.name}`}
+          </button>
           {lastUpdated && <span className="text-xs text-slate-400">Updated {lastUpdated.toLocaleTimeString()}</span>}
           <Badge color="slate">{pages.length}</Badge>
           <button
@@ -600,8 +625,7 @@ function AbmPagesCard({ pages, onRefresh, refreshing, lastUpdated }) {
       ) : (
         <ul className="divide-y divide-slate-100 text-sm">
           {pages.map((p) => {
-            const pending = p.status !== "published";
-            const badge = !pending ? ["green", "Live"] : p.hasPublished ? ["amber", "Live · newer draft"] : ["amber", "Draft"];
+            const badge = pageLabel(p);
             return (
               <li key={p.key} className="flex items-center justify-between gap-3 py-2">
                 <div className="min-w-0">
@@ -609,7 +633,15 @@ function AbmPagesCard({ pages, onRefresh, refreshing, lastUpdated }) {
                   <div className="truncate text-xs text-slate-500">{p.versionNote || `v${p.version}`}</div>
                 </div>
                 <div className="flex shrink-0 items-center gap-3">
-                  <Badge color={badge[0]}>{badge[1]}</Badge>
+                  <Badge color={badge.color}>{badge.text}</Badge>
+                  <button
+                    onClick={() => onDelete(p)}
+                    disabled={deletingKey === p.key}
+                    className="inline-flex items-center gap-1 rounded-md bg-rose-50 px-2 py-1 text-xs font-semibold text-rose-700 transition-colors hover:bg-rose-100 disabled:cursor-not-allowed disabled:opacity-60"
+                    title={p.status !== "published" && p.hasPublished ? "Discard the unpublished draft; the published page stays live" : "Delete this page from the CMS"}
+                  >
+                    {deletingKey === p.key ? "Deleting…" : p.status !== "published" && p.hasPublished ? "Discard draft" : "Delete"}
+                  </button>
                   {p.cmsEditUrl && (
                     <a
                       href={p.cmsEditUrl}
@@ -644,11 +676,10 @@ function AbmPagesCard({ pages, onRefresh, refreshing, lastUpdated }) {
   );
 }
 
-function CRMCampaigns({ selectedId, setSelectedId, liveStatus, triggerOpal, isSyncing, logs, clearLogs, runActive, abmPages, refreshPages, refreshing, lastUpdated }) {
+function CRMCampaigns({ selectedId, setSelectedId, liveStatus, triggerOpal, isSyncing, logs, clearLogs, runActive, abmPages, refreshPages, refreshing, lastUpdated, onDelete, deletingKey }) {
   const acc = ACCOUNTS.find((a) => a.id === selectedId);
   const d = DETAILS[selectedId];
-  const st = liveLabel(liveStatus[acc.id]);
-  const isLive = !!liveStatus[acc.id]?.live;
+  const st = micrositeLabel(abmPages, liveStatus, acc);
   const statusText = st.text;
   const statusColor = st.color;
 
@@ -658,19 +689,10 @@ function CRMCampaigns({ selectedId, setSelectedId, liveStatus, triggerOpal, isSy
         eyebrow="Campaign list"
         title="Q4 Tier-1 ABM"
         sub={`${ACCOUNTS.length} target accounts`}
-        actions={
-          <button 
-            onClick={() => triggerOpal(acc)} 
-            disabled={isSyncing[acc.id]} 
-            className={`rounded-lg px-4 py-2 text-sm font-semibold text-white shadow-sm ${isSyncing[acc.id] ? "bg-violet-400 cursor-not-allowed" : "bg-violet-600 hover:bg-violet-700"}`}
-          >
-            {isSyncing[acc.id] ? `✦ Sending ${acc.name} to Opal…` : `✦ Run Limitless · ${acc.name}`}
-          </button>
-        }
       />
       <DataTable heads={["Account", "Industry", "Stage", "Pipeline", "Owner", "Last activity", "Microsite"]}>
         {ACCOUNTS.map((a) => {
-          const ls = liveLabel(liveStatus[a.id]);
+          const ls = micrositeLabel(abmPages, liveStatus, a);
           return (
             <tr key={a.id} onClick={() => setSelectedId(a.id)} className={`cursor-pointer border-t border-slate-100 ${a.id === selectedId ? "bg-sky-50" : "hover:bg-slate-50"}`}>
               <td className="px-4 py-3 font-medium text-sky-700">{a.name}</td>
@@ -728,7 +750,7 @@ function CRMCampaigns({ selectedId, setSelectedId, liveStatus, triggerOpal, isSy
       <EnrichmentCards d={d} />
       <div className="mt-6 grid gap-4 lg:grid-cols-2">
         <LimitlessConsole logs={logs} onClear={clearLogs} runActive={runActive} />
-        <AbmPagesCard pages={abmPages} onRefresh={refreshPages} refreshing={refreshing} lastUpdated={lastUpdated} />
+        <AbmPagesCard pages={abmPages} onRefresh={refreshPages} refreshing={refreshing} lastUpdated={lastUpdated} acc={acc} isSyncing={isSyncing} triggerOpal={triggerOpal} onDelete={onDelete} deletingKey={deletingKey} />
       </div>
     </>
   );
@@ -934,6 +956,7 @@ export default function CRMApplication() {
   const [runActive, setRunActive] = useState(null); // { id, name, startedAt } while a run is being watched
   const [refreshing, setRefreshing] = useState(false);
   const [lastUpdated, setLastUpdated] = useState(null);
+  const [deletingKey, setDeletingKey] = useState(null); // page key while a delete request is in flight
   const fetchPagesRef = useRef(null); // set by the polling effect; used by the refresh button
   const prevPages = useRef(null);
   const simTimersRef = useRef([]); // active simulation timeouts for lim1_abm_orchestrator
@@ -1044,9 +1067,78 @@ export default function CRMApplication() {
     return () => clearTimeout(t);
   }, [notice]);
 
+  // A page with a newer draft only loses that draft (published stays live); otherwise the whole page goes.
+  const deletePage = async (pg) => {
+    const discardDraft = pg.status !== "published" && pg.hasPublished;
+    const ok = window.confirm(
+      discardDraft
+        ? `Discard the unpublished draft (v${pg.version}) of ${pg.accountName}? The published page stays live.`
+        : `Delete the ${pg.accountName} landing page from the CMS? This cannot be undone.`
+    );
+    if (!ok) return;
+    setDeletingKey(pg.key);
+    log("info", discardDraft ? `Discarding draft v${pg.version} of ${pg.accountName}…` : `Deleting the ${pg.accountName} page from the CMS…`);
+    try {
+      const res = await fetch("/api/limitless/delete", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(discardDraft ? { key: pg.key, version: pg.version } : { key: pg.key }),
+      });
+      const data = await res.json().catch(() => null);
+      if (res.ok && data?.ok) {
+        log("ok", discardDraft ? `Draft discarded for ${pg.accountName}` : `Page deleted: ${pg.accountName}`);
+        prevPages.current = null; // the next poll is a silent baseline, not a "page removed" diff
+        await fetchPagesRef.current?.();
+      } else {
+        log("error", `Delete failed: ${data?.error || `HTTP ${res.status}`}`);
+      }
+    } catch {
+      log("error", "Could not reach /api/limitless/delete");
+    } finally {
+      setDeletingKey(null);
+    }
+  };
+
+  // Update mode: the page already exists in the CMS, so create a new draft of it instead of re-running
+  // the Opal create flow. The poll then reports it as "Published · newer draft".
+  const updateExistingPage = async (acc, pg) => {
+    log("info", `${acc.name} already has a page in the CMS. Creating an update draft…`);
+    try {
+      const res = await fetch("/api/limitless/update-draft", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ key: pg.key }),
+      });
+      const data = await res.json().catch(() => null);
+      if (res.ok && data?.ok) {
+        if (data.created) {
+          log("ok", `Update draft created for ${acc.name} (v${data.version}). Review and publish it in the CMS.`);
+          setNotice({ tone: "ok", text: `New draft created for ${acc.name}` });
+        } else {
+          log("warn", `${acc.name} already has an unpublished draft (v${data.version}); nothing created. Review it in the CMS.`);
+          setNotice({ tone: "ok", text: `${acc.name} already has an unpublished draft` });
+        }
+        await fetchPagesRef.current?.();
+      } else {
+        const msg = data?.error || `HTTP ${res.status}`;
+        log("error", `Update draft failed: ${msg}`);
+        setNotice({ tone: "error", text: `Update draft failed: ${msg}` });
+      }
+    } catch {
+      log("error", "Could not reach /api/limitless/update-draft");
+      setNotice({ tone: "error", text: "Could not reach /api/limitless/update-draft" });
+    }
+  };
+
   // Payload shape matches /api/limitless/trigger (requires account.id) and the Router prompt.
   const triggerOpal = async (acc) => {
     setIsSyncing((prev) => ({ ...prev, [acc.id]: true }));
+    const existing = findAbmPage(abmPages, acc);
+    if (existing) {
+      await updateExistingPage(acc, existing);
+      setIsSyncing((prev) => ({ ...prev, [acc.id]: false }));
+      return;
+    }
     const d = DETAILS[acc.id];
     log("info", `Sending ${acc.name} to the Limitless workflow in Opal…`);
     try {
@@ -1071,7 +1163,7 @@ export default function CRMApplication() {
         clearSimTimers();
         const contacts = d ? d.contacts : EXTRA_CONTACTS[acc.id] || [];
         const existingPage =
-          abmPages.find((p) => p.accountId === acc.id) ||
+          findAbmPage(abmPages, acc) ||
           (liveStatus[acc.id]?.live ? { key: acc.id, version: "1", versionNote: liveStatus[acc.id].versionNote } : null);
         const trace = buildOrchestratorTrace(acc, d, contacts, existingPage);
         simTimersRef.current = trace.map((step) => setTimeout(() => log(step.level, step.text), step.delay));
@@ -1115,7 +1207,7 @@ export default function CRMApplication() {
         {page === "Accounts" && <CRMAccounts key={selectedId} selectedId={selectedId} setSelectedId={setSelectedId} liveStatus={liveStatus} go={go} triggerOpal={triggerOpal} isSyncing={isSyncing} abmPages={abmPages} />}
         {page === "Contacts" && <CRMContacts setSelectedId={setSelectedId} go={go} />}
         {page === "Opportunities" && <CRMOpportunities setSelectedId={setSelectedId} go={go} />}
-        {page === "Campaigns" && <CRMCampaigns selectedId={selectedId} setSelectedId={setSelectedId} liveStatus={liveStatus} triggerOpal={triggerOpal} isSyncing={isSyncing} logs={logs} clearLogs={() => { clearSimTimers(); setLogs([]); }} runActive={runActive} abmPages={abmPages} refreshPages={() => fetchPagesRef.current?.()} refreshing={refreshing} lastUpdated={lastUpdated} />}
+        {page === "Campaigns" && <CRMCampaigns selectedId={selectedId} setSelectedId={setSelectedId} liveStatus={liveStatus} triggerOpal={triggerOpal} isSyncing={isSyncing} logs={logs} clearLogs={() => { clearSimTimers(); setLogs([]); }} runActive={runActive} abmPages={abmPages} refreshPages={() => fetchPagesRef.current?.()} refreshing={refreshing} lastUpdated={lastUpdated} onDelete={deletePage} deletingKey={deletingKey} />}
         {page === "Reports" && <CRMReports liveMicrosites={liveMicrosites} />}
       </main>
       {notice && (
