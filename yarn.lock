@@ -1253,6 +1253,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@optimizely-opal/opal-tools-sdk@npm:^0.1.41-dev":
+  version: 0.1.41-dev
+  resolution: "@optimizely-opal/opal-tools-sdk@npm:0.1.41-dev"
+  dependencies:
+    reflect-metadata: "npm:^0.1.13"
+  peerDependencies:
+    "@types/express": ^4.17.17
+    "@types/node": ^20.4.5
+    axios: ^1.6.0
+    express: ^4.18.2
+    typescript: ^5.1.6
+    zod: ^3.25.0 || ^4.0.0
+  checksum: 10c0/43de63b4eccce56dd1aab972596d5aba667d450a11d86be2918939166f351a5900dbcf811a8255625c1462cafafcd57b5ea0aff1b8572a296ba73af8890b1a0e
+  languageName: node
+  linkType: hard
+
 "@optimizely/cms-cli@npm:^2.0.0":
   version: 2.2.0
   resolution: "@optimizely/cms-cli@npm:2.2.0"
@@ -4613,6 +4629,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "nextjs-banner@workspace:."
   dependencies:
+    "@optimizely-opal/opal-tools-sdk": "npm:^0.1.41-dev"
     "@optimizely/cms-cli": "npm:^2.0.0"
     "@optimizely/cms-sdk": "npm:^2.0.0"
     "@tailwindcss/postcss": "npm:^4"
@@ -5005,6 +5022,13 @@ __metadata:
   version: 19.3.0
   resolution: "react@npm:19.3.0"
   checksum: 10c0/dd3099c3c43a7122bc01223bb26b0f8d5ba13cca569af6fb94a005fb54fa73223c9cb203bb226d40cfd49a82cbeef2e36ce84062a3a6d5b9fe8f4437694c7b52
+  languageName: node
+  linkType: hard
+
+"reflect-metadata@npm:^0.1.13":
+  version: 0.1.14
+  resolution: "reflect-metadata@npm:0.1.14"
+  checksum: 10c0/3a6190c7f6cb224f26a012d11f9e329360c01c1945e2cbefea23976a8bacf9db6b794aeb5bf18adcb673c448a234fbc06fc41853c00a6c206b30f0777ecf019e
   languageName: node
   linkType: hard
 

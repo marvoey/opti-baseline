@@ -30,6 +30,7 @@
     "shiki": "^4.3.0"
   },
   "devDependencies": {
+    "@optimizely-opal/opal-tools-sdk": "^0.1.41-dev",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
