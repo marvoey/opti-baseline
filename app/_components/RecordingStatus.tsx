@@ -7,6 +7,7 @@ type Status = { recording: boolean; name?: string; clientId?: string; since?: nu
 const POLL_MS = 5_000;
 const NAME_KEY = 'recording-name';
 const ID_KEY = 'recording-client-id';
+const COLLAPSED_KEY = 'recording-collapsed';
 
 // Per-browser identity so the server can tell "me" from "someone else".
 function getClientId() {
@@ -30,6 +31,7 @@ export default function RecordingStatus() {
   const [status, setStatus] = useState<Status>({ recording: false });
   const [asking, setAsking] = useState(false);
   const [name, setName] = useState('');
+  const [collapsed, setCollapsed] = useState(false);
 
   const refresh = useCallback(async () => {
     try {
@@ -42,6 +44,7 @@ export default function RecordingStatus() {
     setClientId(getClientId());
     try {
       setName(localStorage.getItem(NAME_KEY) ?? '');
+      setCollapsed(localStorage.getItem(COLLAPSED_KEY) === '1');
     } catch {}
     refresh();
     const t = setInterval(refresh, POLL_MS);
@@ -73,26 +76,53 @@ export default function RecordingStatus() {
     setStatus(await res.json());
   };
 
+  const toggleCollapsed = (value: boolean) => {
+    setCollapsed(value);
+    try {
+      localStorage.setItem(COLLAPSED_KEY, value ? '1' : '0');
+    } catch {}
+  };
+
   const label = !status.recording
     ? 'Recording room is free'
     : mine
       ? 'You are recording'
       : `${status.name} is recording`;
 
+  const dot = (
+    <span
+      className={`inline-block h-3 w-3 rounded-full ${status.recording ? 'animate-pulse' : ''}`}
+      style={{ backgroundColor: status.recording ? '#D6001C' : '#197050' }}
+    />
+  );
+  const colors = {
+    backgroundColor: status.recording ? '#FF99B6' : '#E4F0DA',
+    borderColor: '#08251A',
+    color: '#08251A',
+  };
+
+  if (collapsed) {
+    return (
+      <button
+        onClick={() => toggleCollapsed(false)}
+        className="fixed bottom-4 right-4 z-50 flex items-center gap-2 rounded-full border-2 px-3 py-2 text-sm font-semibold shadow-lg"
+        style={colors}
+        aria-label={`${label} (show recording status)`}
+        title={label}
+      >
+        {dot}
+        <span aria-hidden>◂</span>
+      </button>
+    );
+  }
+
   return (
     <div
-      className="fixed bottom-4 left-4 z-50 flex items-center gap-3 rounded-full border-2 px-4 py-2 text-sm font-semibold shadow-lg"
-      style={{
-        backgroundColor: status.recording ? '#FF99B6' : '#E4F0DA',
-        borderColor: '#08251A',
-        color: '#08251A',
-      }}
+      className="fixed bottom-4 right-4 z-50 flex items-center gap-3 rounded-full border-2 px-4 py-2 text-sm font-semibold shadow-lg"
+      style={colors}
       role="status"
     >
-      <span
-        className={`inline-block h-3 w-3 rounded-full ${status.recording ? 'animate-pulse' : ''}`}
-        style={{ backgroundColor: status.recording ? '#D6001C' : '#197050' }}
-      />
+      {dot}
       <span>{label}</span>
 
       {asking && !status.recording ? (
@@ -139,6 +169,10 @@ export default function RecordingStatus() {
           Clear
         </button>
       )}
+
+      <button onClick={() => toggleCollapsed(true)} aria-label="Hide recording status" title="Hide" className="px-1">
+        ▸
+      </button>
     </div>
   );
 }
