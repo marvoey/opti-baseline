@@ -105,7 +105,7 @@ export default function RecordingStatus() {
     return (
       <button
         onClick={() => toggleCollapsed(false)}
-        className="fixed bottom-4 right-4 z-50 flex items-center gap-2 rounded-full border-2 px-3 py-2 text-sm font-semibold shadow-lg"
+        className="flex items-center gap-2 rounded-full border-2 px-3 py-1 text-sm font-semibold"
         style={colors}
         aria-label={`${label} (show recording status)`}
         title={label}
@@ -118,7 +118,7 @@ export default function RecordingStatus() {
 
   return (
     <div
-      className="fixed bottom-4 right-4 z-50 flex items-center gap-3 rounded-full border-2 px-4 py-2 text-sm font-semibold shadow-lg"
+      className="flex items-center gap-3 rounded-full border-2 px-4 py-1 text-sm font-semibold"
       style={colors}
       role="status"
     >

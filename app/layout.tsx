@@ -5,6 +5,7 @@ import OptimizelyActivation from "./_components/OptimizelyActivation";
 import { QuickLinks } from "./_components/QuickLinks";
 import DevQuickLinks from "./_components/DevQuickLinks";
 import RecordingStatus from "./_components/RecordingStatus";
+import UtilityTray from "./_components/UtilityTray";
 import { siteConfig } from "@/lib/siteConfig";
 import "./globals.css";
 import "@/cms/registry";
@@ -60,8 +61,10 @@ export default function RootLayout({
           it, neither the snippet nor the route-change re-activation is rendered.
         */}
         {/* <QuickLinks /> */}
-        <DevQuickLinks />
-        <RecordingStatus />
+        <UtilityTray>
+          <DevQuickLinks />
+          <RecordingStatus />
+        </UtilityTray>
         {WEB_SNIPPET_ID && (
           <>
             <Script

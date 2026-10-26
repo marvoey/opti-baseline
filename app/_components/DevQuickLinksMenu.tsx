@@ -9,9 +9,9 @@ export default function DevQuickLinksMenu({ links }: { links: QuickLink[] }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="fixed bottom-3 left-16 z-[9998] flex flex-col items-start">
+    <div className="relative">
       {open && (
-        <div className="mb-2 flex flex-col gap-0.5 rounded-lg border border-gray-200 bg-white shadow-xl p-1.5 min-w-[148px]">
+        <div className="absolute bottom-full left-0 z-[9998] mb-2 flex flex-col gap-0.5 rounded-lg border border-gray-200 bg-white shadow-xl p-1.5 min-w-[148px]">
           {links.map(({ label, href }) => (
             <Link
               key={href}
