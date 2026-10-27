@@ -19,33 +19,8 @@ export const LOCALES: Locale[] = [
     "routeSegment": ""
   },
   {
-    "key": "fr",
-    "displayName": "français",
-    "routeSegment": "fr"
-  },
-  {
     "key": "sv",
     "displayName": "svenska",
     "routeSegment": "sv"
-  },
-  {
-    "key": "ko",
-    "displayName": "한국어",
-    "routeSegment": "ko"
-  },
-  {
-    "key": "ko-KR",
-    "displayName": "Korean (South Korea)",
-    "routeSegment": "ko-KR"
-  },
-  {
-    "key": "cy",
-    "displayName": "Welsh",
-    "routeSegment": "cy"
-  },
-  {
-    "key": "zh",
-    "displayName": "Chinese",
-    "routeSegment": "zh"
   }
 ];

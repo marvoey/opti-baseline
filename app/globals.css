@@ -3,14 +3,15 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #00395d;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-body);
-  --font-display: var(--font-display);
+  --font-sans: var(--font-albert-sans);
+  --font-display: var(--font-albert-sans);
+  --font-eyebrow: var(--font-league-spartan);
   --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas,
     "Liberation Mono", "Courier New", monospace;
 
@@ -20,47 +21,44 @@
    * │  The Tailwind `blue-*` scale is remapped, so chrome and blocks that   │
    * │  use `bg-blue-950`, `text-blue-800`, etc. all reskin when you edit    │
    * │  these ~11 hex values. Set blue-950 = your darkest brand colour and   │
-   * │  blue-800 = your primary; the rest are tints/shades between.          │
+   * │  blue-700 = your primary; the rest are tints/shades between.          │
    * └──────────────────────────────────────────────────────────────────────┘
    *
-   * Optimizely brand green ramp.
-   * Anchors: Dark Fir #08251a (darkest), LFGreen #abff44 (signature accent).
+   * ESL Federal Credit Union navy / aqua ramp.
+   * Anchors: Navy 950 #010E23 (darkest), Navy 500 #00395D (primary), Aqua 300 #68E0CC (accent).
    */
-  --color-blue-950: #08251a; /* Dark Fir — footer / hero background */
-  --color-blue-900: #0d3a29; /* Mid Fir — header bg */
-  --color-blue-800: #197050; /* Light Fir — primary green, links */
-  --color-blue-700: #3ab533; /* Good-to-go */
-  --color-blue-600: #4dc844;
-  --color-blue-500: #62d84f;
-  --color-blue-400: #7ddd3d; /* Grass */
-  --color-blue-300: #91dbda; /* Light Blue — teal accent */
-  --color-blue-200: #abff44; /* LFGreen — signature bright green */
-  --color-blue-100: #d8e4cb; /* Neutral 4 */
-  --color-blue-50:  #e4f0da; /* Neutral 3 — light wash */
+  --color-blue-950: #010e23; /* Navy 950 — footer / dark background */
+  --color-blue-900: #001b3d; /* Navy 900 */
+  --color-blue-800: #01375a; /* Navy 800 */
+  --color-blue-700: #00395d; /* Navy 500 — primary brand navy, links */
+  --color-blue-600: #003e65; /* Navy 850 */
+  --color-blue-500: #00a3a3; /* Aqua 500 — accent */
+  --color-blue-400: #51bfb6; /* Teal 500 */
+  --color-blue-300: #68e0cc; /* Aqua 300 — hover / accent on dark */
+  --color-blue-200: #87cef2; /* Sky 300 */
+  --color-blue-100: #d5e5f4; /* card stroke */
+  --color-blue-50:  #ecfbf8; /* Polar — mint surface */
 
-  /* Named Optimizely brand tokens for direct use in custom components. */
-  --color-lfgreen:    #abff44;
-  --color-grass:      #7ddd3d;
-  --color-good-to-go: #3ab533;
-  --color-dark-fir:   #08251a;
-  --color-mid-fir:    #0d3a29;
-  --color-light-fir:  #197050;
-  --color-light-blue: #91dbda;
-  --color-neutral-2:  #eff6e9;
-  --color-neutral-3:  #e4f0da;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Named ESL brand tokens for direct use in custom components. */
+  --color-navy-950: #010e23;
+  --color-navy-900: #001b3d;
+  --color-navy-800: #01375a;
+  --color-navy-500: #00395d;
+  --color-aqua-500: #00a3a3;
+  --color-aqua-300: #68e0cc;
+  --color-teal-500: #51bfb6;
+  --color-sky-300:  #87cef2;
+  --color-mint:     #ecfbf8;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+}
+
+.bg-gradient-dark-navy {
+  background: linear-gradient(135deg, #010e23 0%, #01375a 100%);
 }
 
 h1,

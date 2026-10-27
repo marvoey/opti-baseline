@@ -1,27 +1,29 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Inter } from "next/font/google";
+import { Albert_Sans, League_Spartan } from "next/font/google";
 import Script from "next/script";
 import OptimizelyActivation from "./_components/OptimizelyActivation";
 import { QuickLinks } from "./_components/QuickLinks";
 import DevQuickLinks from "./_components/DevQuickLinks";
+import PagesWidget from "./_components/PagesWidget";
 import RecordingStatus from "./_components/RecordingStatus";
 import UtilityTray from "./_components/UtilityTray";
 import { siteConfig } from "@/lib/siteConfig";
 import "./globals.css";
 import "@/cms/registry";
 
-// VC Nudge (Optimizely's display face) is a licensed face; Space Grotesk is the
-// closest free substitute — chunky, geometric grotesque with strong personality.
-const displayFont = Space_Grotesk({
-  variable: "--font-display",
+// ESL brand faces: Albert Sans for display and body, League Spartan for eyebrows.
+const albertSans = Albert_Sans({
+  variable: "--font-albert-sans",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: "variable",
+  display: "swap",
 });
 
-// Die Grotesk B (the brand body face) → Inter as the closest neutral grotesque.
-const bodyFont = Inter({
-  variable: "--font-body",
+const leagueSpartan = League_Spartan({
+  variable: "--font-league-spartan",
   subsets: ["latin"],
+  weight: "variable",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -42,7 +44,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${displayFont.variable} ${bodyFont.variable} h-full antialiased`}
+      className={`${albertSans.variable} ${leagueSpartan.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         {children}
@@ -63,6 +65,7 @@ export default function RootLayout({
         {/* <QuickLinks /> */}
         <UtilityTray>
           <DevQuickLinks />
+          <PagesWidget />
           <RecordingStatus />
         </UtilityTray>
         {WEB_SNIPPET_ID && (

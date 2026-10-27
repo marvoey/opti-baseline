@@ -3,7 +3,7 @@
  * demo. Colours live in app/globals.css (the `@theme` token block); everything
  * else — site name, logo, nav links, footer columns, legal copy — lives here.
  *
- * To stand up a new demo: edit this file, drop a new public/logo.svg, and tweak
+ * To stand up a new demo: edit this file, drop new logo SVGs in /public, and tweak
  * the hex values in app/globals.css. No component edits required.
  */
 
@@ -12,73 +12,86 @@ export type FooterColumn = { heading: string; links: NavLink[] };
 
 export const siteConfig = {
   /** Used for the document <title> fallback and the logo alt text. */
-  name: 'Optimizely',
+  name: 'ESL Federal Credit Union',
   /** Default browser-tab title (per-page titles override via CMS MetaTitle). */
-  title: 'Optimizely | Digital Experience Platform',
+  title: 'ESL Federal Credit Union',
   /** Default meta description. */
   description:
-    'Optimizely — the digital experience platform that helps teams create, test, and optimize digital experiences at scale.',
+    'Member-owned banking, built around the people and places we call home.',
 
-  /** Header logo (place the asset in /public). */
-  logoSrc: '/Optimizely_Primary-Logo_Medium_Green_RGB.png',
-  logoAlt: 'Optimizely',
+  /** Header logo (navy) and footer logo (white). Place the assets in /public. */
+  logoSrc: '/brand-logo-navy.svg',
+  logoInvertedSrc: '/brand-logo.svg',
+  logoAlt: 'ESL Federal Credit Union',
 
   /** Top utility bar. */
   topNavLinks: [
-    { label: 'Partners', href: '#' },
-    { label: 'Support', href: '#' },
+    { label: 'Locations', href: '#' },
+    { label: 'Help', href: '#' },
   ] satisfies NavLink[],
 
   /** Primary header navigation. */
   mainNavLinks: [
-    { label: 'Products', href: '#' },
-    { label: 'Solutions', href: '#' },
-    { label: 'Customers', href: '#' },
-    { label: 'Resources', href: '#' },
-    { label: 'Pricing', href: '#' },
+    { label: 'Personal', href: '#' },
+    { label: 'Business', href: '#' },
+    { label: 'Wealth', href: '#' },
+    { label: 'Membership', href: '#' },
   ] satisfies NavLink[],
   /** Header call-to-action button. */
-  primaryCta: { label: 'Get started free', href: '#' } satisfies NavLink,
+  primaryCta: { label: 'Join', href: '#' } satisfies NavLink,
   /** Account / login button label. */
-  accountLabel: 'Log in',
+  accountLabel: 'Sign in',
 
   /** Footer. */
   footerTagline:
-    'Create, test, and optimize digital experiences that turn visitors into loyal customers.',
+    'Member-owned banking, built around the people and places we call home.',
+  footerCta: { label: 'Become a member', href: '#' } satisfies NavLink,
   footerColumns: [
     {
-      heading: 'Products',
+      heading: 'Member Tools',
       links: [
-        { label: 'Content Management', href: '#' },
-        { label: 'Experimentation', href: '#' },
-        { label: 'Commerce', href: '#' },
-        { label: 'Personalization', href: '#' },
+        { label: 'Sign in to online banking', href: '#' },
+        { label: 'Find a branch or ATM', href: '#' },
+        { label: 'Rates at a glance', href: '#' },
+        { label: 'Become a Member', href: '#' },
       ],
     },
     {
-      heading: 'Solutions',
+      heading: 'Help & Support',
       links: [
-        { label: 'B2B Commerce', href: '#' },
-        { label: 'B2C Commerce', href: '#' },
-        { label: 'Digital Marketing', href: '#' },
-        { label: 'Customer Journeys', href: '#' },
+        { label: 'Common questions', href: '#' },
+        { label: 'How-to guides', href: '#' },
+        { label: 'Contact us', href: '#' },
+        { label: 'Report fraud', href: '#' },
       ],
     },
     {
-      heading: 'Resources',
+      heading: 'Manage',
       links: [
-        { label: 'Blog', href: '#' },
-        { label: 'Documentation', href: '#' },
+        { label: 'Free Checking', href: '#' },
+        { label: 'Savings', href: '#' },
+        { label: 'Credit Cards', href: '#' },
+        { label: 'Mortgages', href: '#' },
+      ],
+    },
+    {
+      heading: 'About ESL',
+      links: [
+        { label: 'Our story', href: '#' },
+        { label: 'Careers', href: '#' },
         { label: 'Community', href: '#' },
-        { label: 'Webinars', href: '#' },
+        { label: 'Social Channels', href: '#' },
       ],
     },
   ] satisfies FooterColumn[],
-  footerLegal: `© ${2026} Optimizely. All rights reserved.`,
+  footerAddress: '225 Chestnut Street, Rochester NY 14604',
+  footerServiceMarks:
+    'ESL, TEL-E$L, and CheckOK are registered service marks of ESL Federal Credit Union. Membership is subject to eligibility.',
+  footerLegal: `© ${2026} ESL Federal Credit Union. All rights reserved.`,
   footerLegalLinks: [
     { label: 'Privacy Policy', href: '#' },
-    { label: 'Terms of Service', href: '#' },
-    { label: 'Cookie Settings', href: '#' },
+    { label: 'Disclosures', href: '#' },
+    { label: 'Security', href: '#' },
   ] satisfies NavLink[],
 } as const;
 
