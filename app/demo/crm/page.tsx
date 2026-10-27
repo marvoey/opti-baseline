@@ -1,19 +1,21 @@
 // @ts-nocheck — demo UI ported from the canvas mock (plain JS). Remove this line and add types if you want strict checking.
 "use client";
 
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { siteConfig } from "@/lib/siteConfig";
+import {
+  TODAY, STAGES, STAGE_COLOR, STAGE_PROB, ACCOUNTS, OPPS, DETAILS, ALL_CONTACTS, RECENT_FEED,
+  OWNER_NAMES, INDUSTRIES, COUNTIES, PRODUCT_LINES, ACTIVITY_LABELS, hasNewSignals, kFmt,
+} from "./data";
 
 /* =========================================================
    ESL BUSINESS BANKING CRM (mock) — Limitless 1:1 live demo
    Route: /demo/crm  (add "demo" to the proxy.ts matcher exclusions)
    - "Run Limitless" → POST /api/limitless/trigger → Opal workflow webhook
    - Microsite status ← GET /api/limitless/status?account=<id> (Graph, published only)
-   Scenario: ESL Federal Credit Union relationship managers prospect Rochester-area
-   businesses and non-profits. All prospects, people and numbers are fictional.
+   Scenario: ESL Federal Credit Union relationship managers prospect 500 Rochester-area
+   businesses and non-profits (data + generator in ./data.ts). Everything is fictional.
    ========================================================= */
-
-const TODAY = "Oct 27, 2026";
 
 const CRM_NAV = [
   { id: "Home", icon: "⌂" },
@@ -24,51 +26,8 @@ const CRM_NAV = [
   { id: "Reports", icon: "▤" },
 ];
 
-const STAGES = ["Prospecting", "Discovery", "Proposal", "Underwriting", "Funded"];
-const STAGE_COLOR = { Prospecting: "slate", Discovery: "blue", Proposal: "violet", Underwriting: "amber", Funded: "green" };
-const STAGE_PROB = { Prospecting: 15, Discovery: 30, Proposal: 55, Underwriting: 80, Funded: 100 };
-
-const ACCOUNTS = [
-  { id: "lakeshore", name: "Lakeshore Dairy Cooperative", industry: "Agriculture & Food Production", employees: "420", revenue: "$180M", hq: "Medina, NY", stage: "Discovery", pipeline: "$480K", owner: "Jordan Hayes", lastActivity: "Cash management page visit · 2d ago" },
-  { id: "genesee", name: "Genesee Valley Health Partners", industry: "Healthcare Provider Network", employees: "3,200", revenue: "$610M", hq: "Rochester, NY", stage: "Proposal", pipeline: "$1.2M", owner: "Jordan Hayes", lastActivity: "Stage changed · 9d ago" },
-  { id: "fingerlakes", name: "Finger Lakes Vintners Group", industry: "Wine & Hospitality", employees: "260", revenue: "$54M", hq: "Geneva, NY", stage: "Prospecting", pipeline: "$650K", owner: "Priya Raman", lastActivity: "Email opened · 1w ago" },
-  { id: "monroe", name: "Monroe Precision Manufacturing", industry: "Advanced Manufacturing", employees: "1,150", revenue: "$240M", hq: "Rochester, NY", stage: "Discovery", pipeline: "$390K", owner: "Priya Raman", lastActivity: "Equipment loan inquiry · 3d ago" },
-  { id: "cayuga", name: "Cayuga Community Foundation", industry: "Non-profit & Foundations", employees: "45", revenue: "$95M AUM", hq: "Auburn, NY", stage: "Prospecting", pipeline: "$900K", owner: "Sam Okafor", lastActivity: "Event sign-in · 5d ago" },
-  { id: "canandaigua", name: "Canandaigua Lakeside Hospitality", industry: "Hotels & Hospitality", employees: "680", revenue: "$88M", hq: "Canandaigua, NY", stage: "Proposal", pipeline: "$1.5M", owner: "Sam Okafor", lastActivity: "Proposal requested · 1d ago" },
-];
-
-const DETAILS = {
-  lakeshore: {
-    contacts: [
-      { name: "Marcus Lee", title: "Chief Financial Officer", role: "Economic Buyer" },
-      { name: "Priya Natarajan", title: "Controller & Treasury Lead", role: "Technical Evaluator" },
-      { name: "Tom Becker", title: "Director, Farm & Plant Operations", role: "Champion" },
-    ],
-    activity: ["Oct 25 · Visited ESL cash management and fraud prevention pages", "Oct 14 · Discovery call: payment fraud and slow check-run reconciliation raised", "Oct 03 · Attended “Rochester Business Resources” agriculture roundtable"],
-    signals: [
-      { date: "2026-10-08", type: "expansion", text: "Announced a second processing plant serving Orleans and Genesee County farms" },
-      { date: "2026-09-12", type: "earnings_call", text: "Annual member meeting: CFO cites fragmented banking relationships and slow payables as margin pressure" },
-      { date: "2026-10-16", type: "hiring", text: "Hiring a Treasury Analyst and 25+ plant staff" },
-    ],
-    odp: ["11 sessions from lakeshoredairy.example in last 30 days", "Viewed Cash Management page 6×", "Top intent topics: payables automation, fraud prevention, agricultural lending"],
-    crm: ["Opportunity: Treasury & cash management · $480K · Discovery", "3 known contacts mapped to buying roles", "Objection logged: switching cost from incumbent regional bank"],
-  },
-  genesee: {
-    contacts: [
-      { name: "Rachel Owens", title: "SVP Finance", role: "Economic Buyer" },
-      { name: "Daniel Park", title: "Chief Financial Officer", role: "Technical Evaluator", isNew: true },
-      { name: "Victor Hale", title: "Director, Employee Benefits", role: "Champion" },
-    ],
-    activity: ["Oct 18 · Moved to Proposal stage", "Oct 06 · Requested employer retirement plan and executive benefits overview", "Sep 22 · Initial discovery call completed"],
-    // Both signals post-date the v1 page (Jul 2), so the Updater treats them as material.
-    signals: [
-      { date: "2026-10-12", type: "c_suite_hire", text: "Named Daniel Park as Chief Financial Officer" },
-      { date: "2026-10-18", type: "buying_stage_shift", text: "Opportunity moved Discovery → Proposal" },
-    ],
-    odp: ["9 sessions from geneseevalleyhealth.example in last 30 days", "Viewed Employer Retirement Plans page 4×", "Top intent topics: 401(k) for employers, executive benefits, treasury services"],
-    crm: ["Opportunity: Treasury, retirement plan & executive benefits · $1.2M · Proposal", "New contact: Daniel Park (CFO)", "Requested employer retirement plan and executive benefits overview"],
-  },
-};
+const ACCOUNT_IDS = new Set(ACCOUNTS.map((a) => a.id));
+const ALL = "All";
 
 /** Turn a status-route response into a badge label. versionNote looks like "v2 · updated: new CFO". */
 function liveLabel(st) {
@@ -95,50 +54,6 @@ function micrositeLabel(abmPages, liveStatus, acc) {
   return page ? pageLabel(page) : liveLabel(liveStatus[acc.id]);
 }
 
-const EXTRA_CONTACTS = {
-  fingerlakes: [
-    { name: "Elena Voss", title: "Owner & Managing Partner", role: "Economic Buyer" },
-    { name: "Raj Patel", title: "Finance & Operations Manager", role: "Technical Evaluator" },
-    { name: "Claire Duval", title: "Director, Hospitality & Events", role: "Champion" },
-  ],
-  monroe: [
-    { name: "Hannah Brooks", title: "Chief Financial Officer", role: "Economic Buyer" },
-    { name: "Diego Alvarez", title: "Plant Controller", role: "Technical Evaluator" },
-    { name: "Nina Okafor", title: "HR & Benefits Manager", role: "Champion" },
-  ],
-  cayuga: [
-    { name: "Grant Whitfield", title: "Executive Director", role: "Economic Buyer" },
-    { name: "Sofia Marin", title: "Director of Finance & Investments", role: "Technical Evaluator" },
-    { name: "Ben Hartley", title: "Manager, Donor & Grant Programs", role: "Champion" },
-  ],
-  canandaigua: [
-    { name: "Olivia Grant", title: "Owner & President", role: "Economic Buyer" },
-    { name: "Kenji Watanabe", title: "Chief Financial Officer", role: "Technical Evaluator" },
-    { name: "Maya Rossi", title: "General Manager, Lakeside Resort", role: "Champion" },
-  ],
-};
-
-const ENGAGE = ["Opened email · 2d ago", "Visited pricing · 4d ago", "Attended webinar · 1w ago", "Replied to sales · 1d ago", "Downloaded guide · 6d ago"];
-
-const ALL_CONTACTS = ACCOUNTS.flatMap((a, ai) =>
-  (DETAILS[a.id] ? DETAILS[a.id].contacts : EXTRA_CONTACTS[a.id] || []).map((c, ci) => {
-    const clean = c.name.replace("Dr. ", "").toLowerCase().split(" ");
-    return { ...c, accountId: a.id, account: a.name, owner: a.owner, email: `${clean[0]}.${clean[clean.length - 1]}@${a.id}.example`, engaged: ENGAGE[(ai * 3 + ci) % ENGAGE.length] };
-  })
-);
-
-const OPPS = [
-  { id: "o1", name: "Treasury & cash management", acct: "lakeshore", account: "Lakeshore Dairy Cooperative", stage: "Discovery", amount: 480, close: "Dec 12, 2026", owner: "Jordan Hayes" },
-  { id: "o2", name: "Treasury, retirement plan & executive benefits", acct: "genesee", account: "Genesee Valley Health Partners", stage: "Proposal", amount: 1200, close: "Nov 30, 2026", owner: "Jordan Hayes" },
-  { id: "o3", name: "Vineyard expansion loan & business checking", acct: "fingerlakes", account: "Finger Lakes Vintners Group", stage: "Prospecting", amount: 650, close: "Feb 20, 2027", owner: "Priya Raman" },
-  { id: "o4", name: "Equipment financing", acct: "monroe", account: "Monroe Precision Manufacturing", stage: "Discovery", amount: 390, close: "Jan 15, 2027", owner: "Priya Raman" },
-  { id: "o5", name: "Foundation investment & trust services", acct: "cayuga", account: "Cayuga Community Foundation", stage: "Prospecting", amount: 900, close: "Mar 31, 2027", owner: "Sam Okafor" },
-  { id: "o6", name: "Commercial real estate loan & succession planning", acct: "canandaigua", account: "Canandaigua Lakeside Hospitality", stage: "Proposal", amount: 1500, close: "Dec 05, 2026", owner: "Sam Okafor" },
-  { id: "o7", name: "Business checking & payroll services", acct: null, account: "Brightwater Dental Group", stage: "Underwriting", amount: 320, close: "Nov 06, 2026", owner: "Jordan Hayes" },
-  { id: "o8", name: "Line of credit renewal", acct: null, account: "Orchard Row Farm Market", stage: "Funded", amount: 145, close: "Oct 08, 2026", owner: "Priya Raman" },
-  { id: "o9", name: "Merchant services add-on", acct: null, account: "Brightwater Dental Group", stage: "Funded", amount: 210, close: "Sep 17, 2026", owner: "Sam Okafor" },
-];
-
 const INITIAL_TASKS = [
   { id: "t1", text: "Send follow-up to Marcus Lee (Lakeshore) on fraud prevention overview", due: "Today", done: false },
   { id: "t2", text: "Review Limitless draft for Genesee Valley Health Partners", due: "Today", done: false },
@@ -146,10 +61,19 @@ const INITIAL_TASKS = [
   { id: "t4", text: "Update close date: Canandaigua Lakeside Hospitality", due: "Oct 29", done: true },
 ];
 
-const kFmt = (k) => (k >= 1000 ? `$${Math.round(k / 10) / 100}M` : `$${k}K`);
 const initialsOf = (name) => name.replace("Dr. ", "").split(" ").map((x) => x[0]).join("").slice(0, 2);
-const openOpps = OPPS.filter((o) => o.stage !== "Funded");
 const sumK = (list) => list.reduce((s, o) => s + o.amount, 0);
+const weightedK = (list) => Math.round(list.reduce((s, o) => s + (o.amount * STAGE_PROB[o.stage]) / 100, 0));
+
+const ACTIVITY_ICON = { call: "☎", email: "✉", meeting: "◉", web: "◐", event: "★", stage: "⇢", task: "✔" };
+const agoLabel = (ago) => (ago < 1 ? "Today" : ago === 1 ? "Yesterday" : `${ago}d ago`);
+const BUCKETS = ["Under $250K", "$250K–$750K", "$750K+"];
+const bucketOf = (k) => (k < 250 ? BUCKETS[0] : k < 750 ? BUCKETS[1] : BUCKETS[2]);
+const OPP_MONTHS = Array.from(new Set(OPPS.slice().sort((a, b) => a.closeTs - b.closeTs).map((o) => o.closeMonth)));
+const micrositeKind = (abmPages, liveStatus, a) => {
+  const t = micrositeLabel(abmPages, liveStatus, a).text;
+  return t.startsWith("Published") ? "Published" : t.startsWith("Draft") ? "Draft" : "No page";
+};
 
 /* ---------- UI PRIMITIVES ---------- */
 
@@ -187,11 +111,45 @@ const SIGNAL_COLOR = {
   hiring: "blue",
 };
 
+function IntentBadge({ meta }) {
+  const color = meta.band === "High" ? "green" : meta.band === "Medium" ? "amber" : "slate";
+  return <Badge color={color}>Intent {meta.intentScore} · {meta.band}</Badge>;
+}
+
+/** Dated activity entries (type icon, text, who, when). */
+function ActivityList({ items, limit }) {
+  const list = limit ? items.slice(0, limit) : items;
+  return (
+    <ul className="space-y-2 text-sm text-blue-700">
+      {list.map((it, i) => (
+        <li key={i} className="flex items-start gap-2.5 border-l-2 border-blue-300 pl-3">
+          <span className="mt-0.5 w-4 shrink-0 text-center text-blue-500" title={ACTIVITY_LABELS[it.type]}>{ACTIVITY_ICON[it.type]}</span>
+          <div className="min-w-0 flex-1">
+            <div className="leading-snug">{it.text}</div>
+            <div className="text-xs text-blue-700/50">{it.date} · {agoLabel(it.ago)} · {it.by}</div>
+          </div>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 /** Account enrichment: ODP first-party behaviour + external web research signals. */
 function EnrichmentCards({ d, className = "mt-6" }) {
+  const m = d?.odpMeta;
   return (
     <div className={`${className} grid gap-4 lg:grid-cols-2`}>
-      <Card title="ODP behavioral intelligence" right={<Badge color="green">Optimizely Data Platform</Badge>}>
+      <Card
+        title="ODP behavioral intelligence"
+        right={<div className="flex items-center gap-2">{m && <IntentBadge meta={m} />}<Badge color="green">Optimizely Data Platform</Badge></div>}
+      >
+        {m && d.odp.length > 0 && (
+          <div className="mb-3 flex flex-wrap gap-1.5 text-xs text-blue-700">
+            <span className="rounded-md bg-blue-50 px-2 py-1">{m.sessions} sessions · 30d</span>
+            <span className="rounded-md bg-blue-50 px-2 py-1">Last seen {m.lastSeenDays === 0 ? "today" : `${m.lastSeenDays}d ago`}</span>
+            <span className="rounded-md bg-blue-50 px-2 py-1">{m.source}</span>
+          </div>
+        )}
         {d?.odp && d.odp.length > 0 ? (
           <ul className="space-y-2 text-sm text-blue-700">
             {d.odp.map((item, idx) => (
@@ -255,15 +213,120 @@ function Avatar({ name, size = "h-8 w-8 text-xs" }) {
   return <div className={`flex shrink-0 items-center justify-center rounded-full bg-blue-100 font-semibold text-blue-700 ${size}`}>{initialsOf(name)}</div>;
 }
 
-function DataTable({ heads, children }) {
+/** Heads are strings or { label, key } (sortable). */
+function DataTable({ heads, children, sort, onSort }) {
   return (
-    <div className="overflow-hidden rounded-xl border border-blue-100 bg-white shadow-sm">
+    <div className="overflow-x-auto rounded-xl border border-blue-100 bg-white shadow-sm">
       <table className="w-full text-sm">
         <thead className="bg-blue-50 text-left text-xs uppercase tracking-wide text-blue-700/70">
-          <tr>{heads.map((h) => <th key={h} className="px-4 py-3 font-medium">{h}</th>)}</tr>
+          <tr>
+            {heads.map((h) => {
+              const label = typeof h === "string" ? h : h.label;
+              const key = typeof h === "string" ? null : h.key;
+              const active = key && sort?.key === key;
+              return (
+                <th key={label} className="whitespace-nowrap px-4 py-3 font-medium">
+                  {key && onSort ? (
+                    <button onClick={() => onSort(key)} className={`inline-flex items-center gap-1 uppercase tracking-wide hover:text-blue-950 ${active ? "text-blue-950" : ""}`}>
+                      {label}<span className="text-[10px]">{active ? (sort.dir === "asc" ? "▲" : "▼") : "↕"}</span>
+                    </button>
+                  ) : label}
+                </th>
+              );
+            })}
+          </tr>
         </thead>
         <tbody>{children}</tbody>
       </table>
+    </div>
+  );
+}
+
+/** Filter state with a "clear" that resets to the initial values and a count of active filters. */
+function useFilters(initial) {
+  const [f, setF] = useState(initial);
+  const set = (k, v) => setF((p) => ({ ...p, [k]: v }));
+  const clear = () => setF(initial);
+  const active = Object.keys(initial).filter((k) => f[k] !== initial[k]).length;
+  return { f, set, clear, active, sig: JSON.stringify(f) };
+}
+
+/** Sorting + pagination over an already-filtered row list. */
+function useTableView(rows, accessors = {}, initialSort = { key: null, dir: "asc" }, resetSig = "") {
+  const [sort, setSort] = useState(initialSort);
+  // The page number is tied to the filter signature, so changing a filter returns to page 1.
+  const [pageState, setPageState] = useState({ sig: resetSig, no: 0 });
+  const pageNo = pageState.sig === resetSig ? pageState.no : 0;
+  const setPageNo = (no) => setPageState({ sig: resetSig, no });
+  const [size, setSizeState] = useState(25);
+  const sorted = useMemo(() => {
+    if (!sort.key) return rows;
+    const get = accessors[sort.key] || ((r) => r[sort.key]);
+    const dir = sort.dir === "asc" ? 1 : -1;
+    return [...rows].sort((a, b) => {
+      const x = get(a);
+      const y = get(b);
+      return (x < y ? -1 : x > y ? 1 : 0) * dir;
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [rows, sort]);
+  const pages = Math.max(1, Math.ceil(sorted.length / size));
+  const cur = Math.min(pageNo, pages - 1);
+  return {
+    sort,
+    onSort: (key) => { setSort((s) => (s.key === key ? { key, dir: s.dir === "asc" ? "desc" : "asc" } : { key, dir: "asc" })); setPageNo(0); },
+    page: cur, pages, size, total: sorted.length,
+    slice: sorted.slice(cur * size, cur * size + size),
+    setPage: setPageNo,
+    setSize: (n) => { setSizeState(n); setPageNo(0); },
+  };
+}
+
+function Pager({ view }) {
+  if (view.total === 0) return null;
+  const from = view.page * view.size + 1;
+  const to = Math.min(view.total, (view.page + 1) * view.size);
+  const btn = "rounded-lg border border-blue-100 bg-white px-3 py-1.5 text-sm text-blue-700 hover:bg-blue-50 disabled:cursor-not-allowed disabled:opacity-40";
+  return (
+    <div className="mt-3 flex flex-wrap items-center justify-between gap-3 text-sm text-blue-700/80">
+      <div>Showing {from}–{to} of {view.total}</div>
+      <div className="flex items-center gap-2">
+        <label className="flex items-center gap-1.5">Rows
+          <select value={view.size} onChange={(e) => view.setSize(Number(e.target.value))} className="rounded-lg border border-blue-100 bg-white px-2 py-1.5 text-sm text-blue-700">
+            {[25, 50, 100].map((n) => <option key={n} value={n}>{n}</option>)}
+          </select>
+        </label>
+        <button className={btn} disabled={view.page === 0} onClick={() => view.setPage(0)} aria-label="First page">«</button>
+        <button className={btn} disabled={view.page === 0} onClick={() => view.setPage(view.page - 1)}>Prev</button>
+        <span>Page {view.page + 1} of {view.pages}</span>
+        <button className={btn} disabled={view.page >= view.pages - 1} onClick={() => view.setPage(view.page + 1)}>Next</button>
+        <button className={btn} disabled={view.page >= view.pages - 1} onClick={() => view.setPage(view.pages - 1)} aria-label="Last page">»</button>
+      </div>
+    </div>
+  );
+}
+
+function FilterSelect({ label, value, onChange, options }) {
+  return (
+    <label className="flex flex-col gap-1 text-[11px] font-medium uppercase tracking-wide text-blue-700/70">
+      {label}
+      <select value={value} onChange={(e) => onChange(e.target.value)} className={`rounded-lg border bg-white px-2.5 py-1.5 text-sm normal-case tracking-normal text-blue-700 focus:border-blue-400 focus:outline-none ${value === options[0] ? "border-blue-100" : "border-blue-400 bg-blue-50"}`}>
+        {options.map((o) => <option key={o}>{o}</option>)}
+      </select>
+    </label>
+  );
+}
+
+function FilterBar({ fl, count, total, children, noun = "results" }) {
+  return (
+    <div className="mb-4 flex flex-wrap items-end gap-3 rounded-xl border border-blue-100 bg-white p-3 shadow-sm">
+      {children}
+      <div className="ml-auto flex items-center gap-3 pb-1 text-sm text-blue-700/80">
+        <span>{count} of {total} {noun}</span>
+        <button onClick={fl.clear} disabled={fl.active === 0} className="rounded-lg border border-blue-100 px-3 py-1.5 text-blue-700 hover:bg-blue-50 disabled:cursor-not-allowed disabled:opacity-40">
+          {fl.active > 0 ? `Clear filters (${fl.active})` : "No filters"}
+        </button>
+      </div>
     </div>
   );
 }
@@ -274,7 +337,7 @@ function SearchBox({ value, onChange, placeholder }) {
       value={value}
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
-      className="w-64 rounded-lg border border-blue-100 bg-white px-3 py-2 text-sm text-blue-700 placeholder-blue-700/50 focus:border-blue-400 focus:outline-none"
+      className="w-56 rounded-lg border border-blue-100 bg-white px-3 py-2 text-sm text-blue-700 placeholder-blue-700/50 focus:border-blue-400 focus:outline-none"
     />
   );
 }
@@ -293,24 +356,40 @@ function BarRow({ label, value, max, text, color = "bg-blue-500" }) {
 
 /* ---------- VIEWS ---------- */
 
+const ME = "Jordan Hayes";
+
 function CRMHome({ liveMicrosites, go, setSelectedId }) {
   const [tasks, setTasks] = useState(INITIAL_TASKS);
-  const liveCount = liveMicrosites.length;
-  const weighted = Math.round(openOpps.reduce((s, o) => s + (o.amount * STAGE_PROB[o.stage]) / 100, 0));
-  const feed = [
-    { who: "Jordan Hayes", what: "moved Lakeshore Dairy Cooperative to Discovery", when: "10:42 AM", acct: "lakeshore" },
-    { who: "Priya Raman", what: "logged a call with Monroe Precision Manufacturing", when: "09:15 AM", acct: "monroe" },
-    { who: "Sam Okafor", what: "sent a proposal to Canandaigua Lakeside Hospitality", when: "Yesterday", acct: "canandaigua" },
-    { who: "Jordan Hayes", what: "added Daniel Park (CFO) to Genesee Valley Health Partners", when: "Yesterday", acct: "genesee" },
-  ];
+  const [scope, setScope] = useState("My book");
+  const mine = scope === "My book";
+  const accts = useMemo(() => (mine ? ACCOUNTS.filter((a) => a.owner === ME) : ACCOUNTS), [mine]);
+  const opps = useMemo(() => (mine ? OPPS.filter((o) => o.owner === ME) : OPPS), [mine]);
+  const open = opps.filter((o) => o.stage !== "Funded");
+  const funded = opps.filter((o) => o.stage === "Funded");
+  const liveCount = accts.filter((a) => liveMicrosites.includes(a.id)).length;
+  const feed = useMemo(() => RECENT_FEED.filter((f) => !mine || f.owner === ME || f.by === ME).slice(0, 10), [mine]);
+  const stageTotals = STAGES.slice(0, 4).map((s) => ({ s, v: sumK(opps.filter((o) => o.stage === s)) }));
+  const maxStage = Math.max(1, ...stageTotals.map((x) => x.v));
   return (
     <>
-      <PageHeader eyebrow={`${TODAY} · Q4 FY26`} title="Good afternoon, Jordan" sub="here is your pipeline today" actions={<button onClick={() => go("Campaigns")} className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700">View Q4 Business Growth ABM</button>} />
+      <PageHeader
+        eyebrow={`${TODAY} · Q4 FY26`}
+        title="Good afternoon, Jordan"
+        sub="here is your pipeline today"
+        actions={
+          <>
+            <div className="flex overflow-hidden rounded-lg border border-blue-100 bg-white text-sm">
+              {["My book", "All accounts"].map((v) => <button key={v} onClick={() => setScope(v)} className={`px-3 py-2 ${scope === v ? "bg-blue-600 text-white" : "text-blue-700/80 hover:bg-blue-50"}`}>{v}</button>)}
+            </div>
+            <button onClick={() => go("Campaigns")} className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700">View Q4 Business Growth ABM</button>
+          </>
+        }
+      />
       <div className="mb-4 grid grid-cols-2 gap-4 lg:grid-cols-4">
-        <Stat label="Open pipeline" value={kFmt(sumK(openOpps))} note={`${openOpps.length} open opportunities`} />
-        <Stat label="Weighted forecast" value={kFmt(weighted)} note="+8% vs last month" tone="text-emerald-600" />
-        <Stat label="Funded (QTD)" value={kFmt(sumK(OPPS.filter((o) => o.stage === "Funded")))} note="2 deals" />
-        <Stat label="ABM microsites live" value={`${liveCount} of ${ACCOUNTS.length}`} note="Q4 Business Growth ABM" tone="text-blue-600" />
+        <Stat label="Open pipeline" value={kFmt(sumK(open))} note={`${open.length} open opportunities · ${accts.length} accounts`} />
+        <Stat label="Weighted forecast" value={kFmt(weightedK(open))} note="Probability-adjusted" tone="text-emerald-600" />
+        <Stat label="Funded (QTD)" value={kFmt(sumK(funded))} note={`${funded.length} deals`} />
+        <Stat label="ABM microsites live" value={`${liveCount} of ${accts.length}`} note="Q4 Business Growth ABM" tone="text-blue-600" />
       </div>
       <div className="grid gap-4 lg:grid-cols-3">
         <Card title="My tasks" className="lg:col-span-1" right={<span className="text-xs text-blue-700/70">{tasks.filter((t) => !t.done).length} open</span>}>
@@ -328,23 +407,22 @@ function CRMHome({ liveMicrosites, go, setSelectedId }) {
         </Card>
         <Card title="Pipeline by stage" className="lg:col-span-1">
           <div className="space-y-2.5">
-            {STAGES.slice(0, 4).map((s) => {
-              const v = sumK(OPPS.filter((o) => o.stage === s));
-              return <BarRow key={s} label={s} value={v} max={2500} text={kFmt(v)} />;
-            })}
+            {stageTotals.map((x) => <BarRow key={x.s} label={x.s} value={x.v} max={maxStage} text={kFmt(x.v)} />)}
           </div>
         </Card>
-        <Card title="Recent activity" className="lg:col-span-1">
+        <Card title="Recent activity" className="lg:col-span-1" right={<span className="text-xs text-blue-700/70">{mine ? "My book" : "All accounts"}</span>}>
           <ul className="space-y-3 text-sm">
             {feed.map((f, i) => (
               <li key={i} className="flex gap-3">
-                <span className="w-16 shrink-0 text-xs text-blue-700/50">{f.when}</span>
+                <span className="w-16 shrink-0 text-xs text-blue-700/50">{agoLabel(f.ago)}</span>
                 <span className="text-blue-700">
-                  <span className="font-medium text-blue-950">{f.who}</span> {f.what}
+                  <span className="mr-1 text-blue-500">{ACTIVITY_ICON[f.type]}</span>
+                  <span className="font-medium text-blue-950">{f.account}</span> · {f.text}
                   {" "}<button onClick={() => { setSelectedId(f.acct); go("Accounts"); }} className="text-blue-700 hover:underline">View</button>
                 </span>
               </li>
             ))}
+            {feed.length === 0 && <li className="text-blue-700/70">No recent activity.</li>}
           </ul>
         </Card>
       </div>
@@ -352,10 +430,56 @@ function CRMHome({ liveMicrosites, go, setSelectedId }) {
   );
 }
 
+const ACCOUNT_FILTERS = { q: "", owner: ALL, industry: ALL, county: ALL, stage: ALL, tier: ALL, microsite: ALL, intent: ALL, signals: ALL, size: ALL };
+
+function filterAccounts(f, abmPages, liveStatus) {
+  const q = f.q.trim().toLowerCase();
+  return ACCOUNTS.filter((a) => {
+    if (f.owner !== ALL && a.owner !== f.owner) return false;
+    if (f.industry !== ALL && a.industry !== f.industry) return false;
+    if (f.county !== ALL && a.county !== f.county) return false;
+    if (f.stage !== ALL && a.stage !== f.stage) return false;
+    if (f.tier !== ALL && `Tier ${a.tier}` !== f.tier) return false;
+    if (f.size !== ALL && bucketOf(a.pipelineK) !== f.size) return false;
+    if (f.intent !== ALL && DETAILS[a.id].odpMeta.band !== f.intent) return false;
+    if (f.signals !== ALL && !hasNewSignals(a.id)) return false;
+    if (f.microsite !== ALL && micrositeKind(abmPages, liveStatus, a) !== f.microsite) return false;
+    if (q && !(`${a.name} ${a.hq}`.toLowerCase().includes(q) || DETAILS[a.id].contacts.some((c) => c.name.toLowerCase().includes(q)))) return false;
+    return true;
+  });
+}
+
+const ACCOUNT_SORTS = {
+  name: (a) => a.name.toLowerCase(),
+  intent: (a) => DETAILS[a.id].odpMeta.intentScore,
+  signals: (a) => DETAILS[a.id].signals.length,
+};
+
+function AccountFilters({ fl, count }) {
+  const { f, set } = fl;
+  return (
+    <FilterBar fl={fl} count={count} total={ACCOUNTS.length} noun="accounts">
+      <label className="flex flex-col gap-1 text-[11px] font-medium uppercase tracking-wide text-blue-700/70">Search
+        <SearchBox value={f.q} onChange={(v) => set("q", v)} placeholder="Account, town or contact" />
+      </label>
+      <FilterSelect label="Owner" value={f.owner} onChange={(v) => set("owner", v)} options={[ALL, ...OWNER_NAMES]} />
+      <FilterSelect label="Industry" value={f.industry} onChange={(v) => set("industry", v)} options={[ALL, ...INDUSTRIES]} />
+      <FilterSelect label="County" value={f.county} onChange={(v) => set("county", v)} options={[ALL, ...COUNTIES]} />
+      <FilterSelect label="Stage" value={f.stage} onChange={(v) => set("stage", v)} options={[ALL, ...STAGES]} />
+      <FilterSelect label="Tier" value={f.tier} onChange={(v) => set("tier", v)} options={[ALL, "Tier 1", "Tier 2", "Tier 3"]} />
+      <FilterSelect label="Pipeline" value={f.size} onChange={(v) => set("size", v)} options={[ALL, ...BUCKETS]} />
+      <FilterSelect label="Microsite" value={f.microsite} onChange={(v) => set("microsite", v)} options={[ALL, "No page", "Draft", "Published"]} />
+      <FilterSelect label="ODP intent" value={f.intent} onChange={(v) => set("intent", v)} options={[ALL, "High", "Medium", "Low"]} />
+      <FilterSelect label="Signals" value={f.signals} onChange={(v) => set("signals", v)} options={[ALL, "New in last 30 days"]} />
+    </FilterBar>
+  );
+}
+
 function CRMAccounts({ selectedId, setSelectedId, liveStatus, go, triggerOpal, isSyncing, abmPages = [] }) {
-  const [q, setQ] = useState("");
-  const [owner, setOwner] = useState("All owners");
   const [openId, setOpenId] = useState(null);
+  const fl = useFilters(ACCOUNT_FILTERS);
+  const filtered = useMemo(() => filterAccounts(fl.f, abmPages, liveStatus), [fl.sig, abmPages, liveStatus]); // eslint-disable-line react-hooks/exhaustive-deps
+  const view = useTableView(filtered, ACCOUNT_SORTS, { key: null, dir: "asc" }, fl.sig);
 
   if (openId) {
     const acc = ACCOUNTS.find((a) => a.id === openId);
@@ -366,9 +490,8 @@ function CRMAccounts({ selectedId, setSelectedId, liveStatus, go, triggerOpal, i
     const statusColor = st.color;
     const contacts = ALL_CONTACTS.filter((c) => c.accountId === acc.id);
     const opps = OPPS.filter((o) => o.acct === acc.id);
-    const timeline = d ? d.activity : [`${acc.lastActivity}`, "Added to Q4 Business Growth ABM campaign", "Account created from event lead"];
     const pageInCms = findAbmPage(abmPages, acc);
-    
+
     return (
       <>
         <div className="mb-3 text-sm text-blue-700/70"><button onClick={() => setOpenId(null)} className="text-blue-700 hover:underline">Accounts</button> / {acc.name}</div>
@@ -377,14 +500,14 @@ function CRMAccounts({ selectedId, setSelectedId, liveStatus, go, triggerOpal, i
             <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-blue-900 text-lg font-bold text-white">{initialsOf(acc.name)}</div>
             <div>
               <h1 className="text-2xl font-bold text-blue-950">{acc.name}</h1>
-              <div className="mt-1 flex flex-wrap items-center gap-2 text-sm text-blue-700/70">{acc.industry} · {acc.hq} <Badge color={STAGE_COLOR[acc.stage]}>{acc.stage}</Badge><Badge color={statusColor}>Microsite: {statusText}</Badge></div>
+              <div className="mt-1 flex flex-wrap items-center gap-2 text-sm text-blue-700/70">{acc.industry} · {acc.hq} <Badge color={STAGE_COLOR[acc.stage]}>{acc.stage}</Badge><Badge color="slate">Tier {acc.tier}</Badge><Badge color={statusColor}>Microsite: {statusText}</Badge></div>
             </div>
           </div>
           <div className="flex gap-2">
             <button className="rounded-lg border border-blue-100 bg-white px-4 py-2 text-sm text-blue-700 hover:bg-blue-50">Log activity</button>
-            <button 
-              onClick={() => triggerOpal(acc)} 
-              disabled={isSyncing[acc.id]} 
+            <button
+              onClick={() => triggerOpal(acc)}
+              disabled={isSyncing[acc.id]}
               className={`rounded-lg px-4 py-2 text-sm font-semibold text-white ${isSyncing[acc.id] ? "bg-blue-400 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700"}`}
             >
               {isSyncing[acc.id] ? "✦ Sending to Limitless..." : "✦ Run Limitless Agent"}
@@ -395,11 +518,11 @@ function CRMAccounts({ selectedId, setSelectedId, liveStatus, go, triggerOpal, i
           <Card title="Account details">
             <dl className="grid grid-cols-2 gap-y-2 text-sm">
               <dt className="text-blue-700/70">Industry</dt><dd>{acc.industry}</dd>
-              <dt className="text-blue-700/70">HQ</dt><dd>{acc.hq}</dd>
+              <dt className="text-blue-700/70">HQ</dt><dd>{acc.hq} ({acc.county} Co.)</dd>
               <dt className="text-blue-700/70">Employees</dt><dd>{acc.employees}</dd>
               <dt className="text-blue-700/70">Annual revenue</dt><dd>{acc.revenue}</dd>
               <dt className="text-blue-700/70">Owner</dt><dd>{acc.owner}</dd>
-              <dt className="text-blue-700/70">Campaign</dt><dd>Q4 Business Growth ABM</dd>
+              <dt className="text-blue-700/70">Campaign</dt><dd>Q4 Business Growth ABM · Tier {acc.tier}</dd>
             </dl>
           </Card>
           <Card title={`Contacts (${contacts.length})`}>
@@ -419,18 +542,20 @@ function CRMAccounts({ selectedId, setSelectedId, liveStatus, go, triggerOpal, i
             </div>
           </Card>
           <Card title="Opportunities">
-            {opps.map((o) => (
-              <div key={o.id} className="rounded-lg border border-blue-100/50 p-3 text-sm">
-                <div className="font-medium text-blue-950">{o.name}</div>
-                <div className="mt-1 flex items-center justify-between text-blue-700/80"><span>{kFmt(o.amount)} · close {o.close}</span><Badge color={STAGE_COLOR[o.stage]}>{o.stage}</Badge></div>
-              </div>
-            ))}
+            <div className="space-y-2">
+              {opps.map((o) => (
+                <div key={o.id} className="rounded-lg border border-blue-100/50 p-3 text-sm">
+                  <div className="font-medium text-blue-950">{o.name}</div>
+                  <div className="mt-1 flex items-center justify-between text-blue-700/80"><span>{kFmt(o.amount)} · close {o.close}</span><Badge color={STAGE_COLOR[o.stage]}>{o.stage}</Badge></div>
+                </div>
+              ))}
+            </div>
           </Card>
         </div>
         <EnrichmentCards d={d} className="mt-4" />
         <div className="mt-4 grid gap-4 lg:grid-cols-3">
-          <Card title="Activity timeline" className="lg:col-span-2">
-            <ul className="space-y-2 text-sm text-blue-700">{timeline.map((x) => <li key={x} className="border-l-2 border-blue-300 pl-3">{x}</li>)}</ul>
+          <Card title="Recent activity" className="lg:col-span-2" right={<span className="text-xs text-blue-700/50">{d.activityItems.length} entries</span>}>
+            <ActivityList items={d.activityItems} />
           </Card>
           <Card title="Limitless 1:1 microsite" right={<Badge color={statusColor}>{statusText}</Badge>}>
             <p className="text-sm text-blue-700/80">
@@ -452,51 +577,89 @@ function CRMAccounts({ selectedId, setSelectedId, liveStatus, go, triggerOpal, i
                 </a>
               </div>
             )}
-            <button onClick={() => go("Campaigns")} className="mt-3 block text-sm font-medium text-blue-700 hover:underline">See in campaign list</button>
+            <button onClick={() => { setSelectedId(acc.id); go("Campaigns"); }} className="mt-3 block text-sm font-medium text-blue-700 hover:underline">See in campaign list</button>
           </Card>
         </div>
       </>
     );
   }
 
-  const owners = ["All owners", ...Array.from(new Set(ACCOUNTS.map((a) => a.owner)))];
-  const rows = ACCOUNTS.filter((a) => (owner === "All owners" || a.owner === owner) && a.name.toLowerCase().includes(q.toLowerCase()));
-  
   return (
     <>
-      <PageHeader eyebrow="All accounts" title="Accounts" sub={`${rows.length} of ${ACCOUNTS.length}`} actions={<><SearchBox value={q} onChange={setQ} placeholder="Search accounts" /><select value={owner} onChange={(e) => setOwner(e.target.value)} className="rounded-lg border border-blue-100 bg-white px-3 py-2 text-sm text-blue-700">{owners.map((o) => <option key={o}>{o}</option>)}</select><button className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700">+ New account</button></>} />
-      <DataTable heads={["Account", "Industry", "HQ", "Employees", "Revenue", "Owner", "Open opportunity"]}>
-        {rows.map((a) => (
-          <tr key={a.id} onClick={() => { setSelectedId(a.id); setOpenId(a.id); }} className={`cursor-pointer border-t border-blue-100/50 ${a.id === selectedId ? "bg-blue-50" : "hover:bg-blue-50"}`}>
-            <td className="px-4 py-3"><div className="flex items-center gap-3"><div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-900 text-xs font-semibold text-white">{initialsOf(a.name)}</div><span className="font-medium text-blue-700">{a.name}</span></div></td>
-            <td className="px-4 py-3 text-blue-700/80">{a.industry}</td>
-            <td className="px-4 py-3 text-blue-700/80">{a.hq}</td>
-            <td className="px-4 py-3 text-blue-700/80">{a.employees}</td>
-            <td className="px-4 py-3 text-blue-700/80">{a.revenue}</td>
-            <td className="px-4 py-3 text-blue-700/80">{a.owner}</td>
-            <td className="px-4 py-3"><span className="text-blue-700">{a.pipeline}</span> <Badge color={STAGE_COLOR[a.stage]}>{a.stage}</Badge></td>
-          </tr>
-        ))}
+      <PageHeader eyebrow="All accounts" title="Accounts" sub={`${filtered.length} of ${ACCOUNTS.length}`} actions={<button className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700">+ New account</button>} />
+      <AccountFilters fl={fl} count={filtered.length} />
+      <DataTable
+        heads={[{ label: "Account", key: "name" }, { label: "Industry", key: "industry" }, { label: "HQ", key: "hq" }, { label: "Employees", key: "employeesN" }, { label: "Owner", key: "owner" }, { label: "Tier", key: "tier" }, { label: "ODP intent", key: "intent" }, { label: "Last activity", key: "lastActivityAgo" }, { label: "Open opportunity", key: "pipelineK" }]}
+        sort={view.sort}
+        onSort={view.onSort}
+      >
+        {view.slice.map((a) => {
+          const meta = DETAILS[a.id].odpMeta;
+          return (
+            <tr key={a.id} onClick={() => { setSelectedId(a.id); setOpenId(a.id); }} className={`cursor-pointer border-t border-blue-100/50 ${a.id === selectedId ? "bg-blue-50" : "hover:bg-blue-50"}`}>
+              <td className="px-4 py-3"><div className="flex items-center gap-3"><div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-blue-900 text-xs font-semibold text-white">{initialsOf(a.name)}</div><span className="font-medium text-blue-700">{a.name}</span></div></td>
+              <td className="px-4 py-3 text-blue-700/80">{a.industry}</td>
+              <td className="px-4 py-3 text-blue-700/80">{a.hq}</td>
+              <td className="px-4 py-3 text-blue-700/80">{a.employees}</td>
+              <td className="px-4 py-3 text-blue-700/80">{a.owner}</td>
+              <td className="px-4 py-3 text-blue-700/80">{a.tier}</td>
+              <td className="px-4 py-3"><IntentBadge meta={meta} /></td>
+              <td className="px-4 py-3 text-blue-700/70">{a.lastActivity}</td>
+              <td className="px-4 py-3"><span className="text-blue-700">{a.pipeline}</span> <Badge color={STAGE_COLOR[a.stage]}>{a.stage}</Badge></td>
+            </tr>
+          );
+        })}
       </DataTable>
-      {rows.length === 0 && <div className="mt-6 text-center text-sm text-blue-700/70">No accounts match your filters.</div>}
+      {filtered.length === 0 && <div className="mt-6 text-center text-sm text-blue-700/70">No accounts match your filters.</div>}
+      <Pager view={view} />
     </>
   );
 }
 
+const CONTACT_FILTERS = { q: "", role: ALL, industry: ALL, owner: ALL, engaged: ALL, isNew: ALL };
+const ENGAGED = [ALL, "Last 7 days", "Last 30 days", "Over 30 days"];
+
 function CRMContacts({ setSelectedId, go }) {
-  const [q, setQ] = useState("");
-  const [role, setRole] = useState("All roles");
-  const roles = ["All roles", "Economic Buyer", "Technical Evaluator", "Champion"];
-  const rows = ALL_CONTACTS.filter((c) => (role === "All roles" || c.role === role) && `${c.name} ${c.account}`.toLowerCase().includes(q.toLowerCase()));
+  const fl = useFilters(CONTACT_FILTERS);
+  const filtered = useMemo(() => {
+    const { q, role, industry, owner, engaged, isNew } = fl.f;
+    const needle = q.trim().toLowerCase();
+    return ALL_CONTACTS.filter((c) => {
+      if (role !== ALL && c.role !== role) return false;
+      if (industry !== ALL && c.industry !== industry) return false;
+      if (owner !== ALL && c.owner !== owner) return false;
+      if (isNew !== ALL && !c.isNew) return false;
+      if (engaged === "Last 7 days" && c.engagedDays > 7) return false;
+      if (engaged === "Last 30 days" && c.engagedDays > 30) return false;
+      if (engaged === "Over 30 days" && c.engagedDays <= 30) return false;
+      if (needle && !`${c.name} ${c.account} ${c.email} ${c.title}`.toLowerCase().includes(needle)) return false;
+      return true;
+    });
+  }, [fl.sig]); // eslint-disable-line react-hooks/exhaustive-deps
+  const view = useTableView(filtered, { name: (c) => c.name.toLowerCase() }, { key: null, dir: "asc" }, fl.sig);
   return (
     <>
-      <PageHeader eyebrow="All contacts" title="Contacts" sub={`${rows.length} of ${ALL_CONTACTS.length}`} actions={<><SearchBox value={q} onChange={setQ} placeholder="Search name or account" /><select value={role} onChange={(e) => setRole(e.target.value)} className="rounded-lg border border-blue-100 bg-white px-3 py-2 text-sm text-blue-700">{roles.map((r) => <option key={r}>{r}</option>)}</select><button className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700">+ New contact</button></>} />
-      <DataTable heads={["Name", "Title", "Account", "Buying role", "Email", "Last engaged", "Owner"]}>
-        {rows.map((c) => (
-          <tr key={c.email} className="border-t border-blue-100/50 hover:bg-blue-50">
+      <PageHeader eyebrow="All contacts" title="Contacts" sub={`${filtered.length} of ${ALL_CONTACTS.length}`} actions={<button className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700">+ New contact</button>} />
+      <FilterBar fl={fl} count={filtered.length} total={ALL_CONTACTS.length} noun="contacts">
+        <label className="flex flex-col gap-1 text-[11px] font-medium uppercase tracking-wide text-blue-700/70">Search
+          <SearchBox value={fl.f.q} onChange={(v) => fl.set("q", v)} placeholder="Name, account, title or email" />
+        </label>
+        <FilterSelect label="Buying role" value={fl.f.role} onChange={(v) => fl.set("role", v)} options={[ALL, "Economic Buyer", "Technical Evaluator", "Champion"]} />
+        <FilterSelect label="Industry" value={fl.f.industry} onChange={(v) => fl.set("industry", v)} options={[ALL, ...INDUSTRIES]} />
+        <FilterSelect label="Owner" value={fl.f.owner} onChange={(v) => fl.set("owner", v)} options={[ALL, ...OWNER_NAMES]} />
+        <FilterSelect label="Last engaged" value={fl.f.engaged} onChange={(v) => fl.set("engaged", v)} options={ENGAGED} />
+        <FilterSelect label="New" value={fl.f.isNew} onChange={(v) => fl.set("isNew", v)} options={[ALL, "New contacts only"]} />
+      </FilterBar>
+      <DataTable
+        heads={[{ label: "Name", key: "name" }, { label: "Title", key: "title" }, { label: "Account", key: "account" }, { label: "Buying role", key: "role" }, "Email", { label: "Last engaged", key: "engagedDays" }, { label: "Owner", key: "owner" }]}
+        sort={view.sort}
+        onSort={view.onSort}
+      >
+        {view.slice.map((c) => (
+          <tr key={`${c.accountId}-${c.email}`} className="border-t border-blue-100/50 hover:bg-blue-50">
             <td className="px-4 py-3"><div className="flex items-center gap-3"><Avatar name={c.name} /><span className="font-medium text-blue-950">{c.name}</span>{c.isNew && <Badge color="amber">New</Badge>}</div></td>
             <td className="px-4 py-3 text-blue-700/80">{c.title}</td>
-            <td className="px-4 py-3"><button onClick={() => { setSelectedId(c.accountId); go("Accounts"); }} className="text-blue-700 hover:underline">{c.account}</button></td>
+            <td className="px-4 py-3"><button onClick={() => { setSelectedId(c.accountId); go("Accounts"); }} className="text-left text-blue-700 hover:underline">{c.account}</button></td>
             <td className="px-4 py-3"><Badge color="violet">{c.role}</Badge></td>
             <td className="px-4 py-3 text-blue-700/70">{c.email}</td>
             <td className="px-4 py-3 text-blue-700/70">{c.engaged}</td>
@@ -504,26 +667,63 @@ function CRMContacts({ setSelectedId, go }) {
           </tr>
         ))}
       </DataTable>
-      {rows.length === 0 && <div className="mt-6 text-center text-sm text-blue-700/70">No contacts match your filters.</div>}
+      {filtered.length === 0 && <div className="mt-6 text-center text-sm text-blue-700/70">No contacts match your filters.</div>}
+      <Pager view={view} />
     </>
   );
 }
 
+const OPP_FILTERS = { q: "", stage: ALL, owner: ALL, product: ALL, amount: ALL, month: ALL };
+const BOARD_LIMIT = 8;
+
 function CRMOpportunities({ setSelectedId, go }) {
-  const [view, setView] = useState("Board");
+  const [boardView, setBoardView] = useState("Board");
+  const [expanded, setExpanded] = useState({});
+  const fl = useFilters(OPP_FILTERS);
+  const filtered = useMemo(() => {
+    const { q, stage, owner, product, amount, month } = fl.f;
+    const needle = q.trim().toLowerCase();
+    return OPPS.filter((o) => {
+      if (stage !== ALL && o.stage !== stage) return false;
+      if (owner !== ALL && o.owner !== owner) return false;
+      if (product !== ALL && o.product !== product) return false;
+      if (amount !== ALL && bucketOf(o.amount) !== amount) return false;
+      if (month !== ALL && o.closeMonth !== month) return false;
+      if (needle && !`${o.name} ${o.account}`.toLowerCase().includes(needle)) return false;
+      return true;
+    });
+  }, [fl.sig]); // eslint-disable-line react-hooks/exhaustive-deps
+  const view = useTableView(filtered, { name: (o) => o.name.toLowerCase(), account: (o) => o.account.toLowerCase(), close: (o) => o.closeTs }, { key: "amount", dir: "desc" }, fl.sig);
   const open = (o) => { if (o.acct) { setSelectedId(o.acct); go("Accounts"); } };
+  const openFiltered = filtered.filter((o) => o.stage !== "Funded");
   return (
     <>
-      <PageHeader eyebrow="Sales pipeline" title="Opportunities" sub={`${kFmt(sumK(openOpps))} open · ${openOpps.length} deals`} actions={<><div className="flex overflow-hidden rounded-lg border border-blue-100 bg-white text-sm">{["Board", "List"].map((v) => <button key={v} onClick={() => setView(v)} className={`px-3 py-2 ${view === v ? "bg-blue-600 text-white" : "text-blue-700/80 hover:bg-blue-50"}`}>{v}</button>)}</div><button className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700">+ New opportunity</button></>} />
-      {view === "Board" ? (
+      <PageHeader
+        eyebrow="Sales pipeline"
+        title="Opportunities"
+        sub={`${kFmt(sumK(openFiltered))} open · ${openFiltered.length} deals`}
+        actions={<><div className="flex overflow-hidden rounded-lg border border-blue-100 bg-white text-sm">{["Board", "List"].map((v) => <button key={v} onClick={() => setBoardView(v)} className={`px-3 py-2 ${boardView === v ? "bg-blue-600 text-white" : "text-blue-700/80 hover:bg-blue-50"}`}>{v}</button>)}</div><button className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700">+ New opportunity</button></>}
+      />
+      <FilterBar fl={fl} count={filtered.length} total={OPPS.length} noun="opportunities">
+        <label className="flex flex-col gap-1 text-[11px] font-medium uppercase tracking-wide text-blue-700/70">Search
+          <SearchBox value={fl.f.q} onChange={(v) => fl.set("q", v)} placeholder="Opportunity or account" />
+        </label>
+        <FilterSelect label="Stage" value={fl.f.stage} onChange={(v) => fl.set("stage", v)} options={[ALL, ...STAGES]} />
+        <FilterSelect label="Owner" value={fl.f.owner} onChange={(v) => fl.set("owner", v)} options={[ALL, ...OWNER_NAMES]} />
+        <FilterSelect label="Product" value={fl.f.product} onChange={(v) => fl.set("product", v)} options={[ALL, ...PRODUCT_LINES]} />
+        <FilterSelect label="Amount" value={fl.f.amount} onChange={(v) => fl.set("amount", v)} options={[ALL, ...BUCKETS]} />
+        <FilterSelect label="Close month" value={fl.f.month} onChange={(v) => fl.set("month", v)} options={[ALL, ...OPP_MONTHS]} />
+      </FilterBar>
+      {boardView === "Board" ? (
         <div className="grid grid-cols-5 gap-3">
           {STAGES.map((s) => {
-            const list = OPPS.filter((o) => o.stage === s);
+            const list = filtered.filter((o) => o.stage === s).sort((a, b) => b.amount - a.amount);
+            const shown = expanded[s] ? list : list.slice(0, BOARD_LIMIT);
             return (
               <div key={s} className="rounded-xl bg-blue-100/50 p-2">
-                <div className="mb-2 flex items-center justify-between px-1 text-xs font-semibold uppercase tracking-wide text-blue-700/80"><span>{s}</span><span>{kFmt(sumK(list))}</span></div>
+                <div className="mb-2 flex items-center justify-between px-1 text-xs font-semibold uppercase tracking-wide text-blue-700/80"><span>{s} · {list.length}</span><span>{kFmt(sumK(list))}</span></div>
                 <div className="space-y-2">
-                  {list.map((o) => (
+                  {shown.map((o) => (
                     <div key={o.id} onClick={() => open(o)} className={`rounded-lg border border-blue-100 bg-white p-3 text-sm shadow-sm ${o.acct ? "cursor-pointer hover:border-blue-300" : ""}`}>
                       <div className="font-medium text-blue-950">{o.name}</div>
                       <div className="text-xs text-blue-700/70">{o.account}</div>
@@ -532,26 +732,41 @@ function CRMOpportunities({ setSelectedId, go }) {
                     </div>
                   ))}
                   {list.length === 0 && <div className="px-1 py-3 text-xs text-blue-700/50">No deals</div>}
+                  {list.length > BOARD_LIMIT && (
+                    <button onClick={() => setExpanded((e) => ({ ...e, [s]: !e[s] }))} className="w-full rounded-lg py-1.5 text-xs font-medium text-blue-700 hover:bg-blue-100">
+                      {expanded[s] ? "Show less" : `Show all ${list.length}`}
+                    </button>
+                  )}
                 </div>
               </div>
             );
           })}
         </div>
       ) : (
-        <DataTable heads={["Opportunity", "Account", "Stage", "Amount", "Probability", "Close date", "Owner"]}>
-          {OPPS.map((o) => (
-            <tr key={o.id} onClick={() => open(o)} className={`border-t border-blue-100/50 hover:bg-blue-50 ${o.acct ? "cursor-pointer" : ""}`}>
-              <td className="px-4 py-3 font-medium text-blue-700">{o.name}</td>
-              <td className="px-4 py-3 text-blue-700/80">{o.account}</td>
-              <td className="px-4 py-3"><Badge color={STAGE_COLOR[o.stage]}>{o.stage}</Badge></td>
-              <td className="px-4 py-3 text-blue-700">{kFmt(o.amount)}</td>
-              <td className="px-4 py-3 text-blue-700/80">{STAGE_PROB[o.stage]}%</td>
-              <td className="px-4 py-3 text-blue-700/70">{o.close}</td>
-              <td className="px-4 py-3 text-blue-700/80">{o.owner}</td>
-            </tr>
-          ))}
-        </DataTable>
+        <>
+          <DataTable
+            heads={[{ label: "Opportunity", key: "name" }, { label: "Account", key: "account" }, { label: "Product", key: "product" }, { label: "Stage", key: "stage" }, { label: "Amount", key: "amount" }, "Probability", { label: "Close date", key: "close" }, { label: "Owner", key: "owner" }]}
+            sort={view.sort}
+            onSort={view.onSort}
+          >
+            {view.slice.map((o) => (
+              <tr key={o.id} onClick={() => open(o)} className={`border-t border-blue-100/50 hover:bg-blue-50 ${o.acct ? "cursor-pointer" : ""}`}>
+                <td className="px-4 py-3 font-medium text-blue-700">{o.name}</td>
+                <td className="px-4 py-3 text-blue-700/80">{o.account}</td>
+                <td className="px-4 py-3 text-blue-700/80">{o.product}</td>
+                <td className="px-4 py-3"><Badge color={STAGE_COLOR[o.stage]}>{o.stage}</Badge></td>
+                <td className="px-4 py-3 text-blue-700">{kFmt(o.amount)}</td>
+                <td className="px-4 py-3 text-blue-700/80">{STAGE_PROB[o.stage]}%</td>
+                <td className="px-4 py-3 text-blue-700/70">{o.close}</td>
+                <td className="px-4 py-3 text-blue-700/80">{o.owner}</td>
+              </tr>
+            ))}
+          </DataTable>
+          {filtered.length === 0 && <div className="mt-6 text-center text-sm text-blue-700/70">No opportunities match your filters.</div>}
+          <Pager view={view} />
+        </>
       )}
+      {boardView === "Board" && filtered.length === 0 && <div className="mt-6 text-center text-sm text-blue-700/70">No opportunities match your filters.</div>}
     </>
   );
 }
@@ -678,8 +893,11 @@ function AbmPagesCard({ pages, onRefresh, refreshing, lastUpdated, acc, isSyncin
 }
 
 function CRMCampaigns({ selectedId, setSelectedId, liveStatus, triggerOpal, isSyncing, logs, clearLogs, runActive, abmPages, refreshPages, refreshing, lastUpdated, onDelete, deletingKey }) {
-  const acc = ACCOUNTS.find((a) => a.id === selectedId);
-  const d = DETAILS[selectedId];
+  const fl = useFilters({ ...ACCOUNT_FILTERS, tier: "Tier 1" });
+  const filtered = useMemo(() => filterAccounts(fl.f, abmPages, liveStatus), [fl.sig, abmPages, liveStatus]); // eslint-disable-line react-hooks/exhaustive-deps
+  const view = useTableView(filtered, ACCOUNT_SORTS, { key: null, dir: "asc" }, fl.sig);
+  const acc = ACCOUNTS.find((a) => a.id === selectedId) || ACCOUNTS[0];
+  const d = DETAILS[acc.id];
   const st = micrositeLabel(abmPages, liveStatus, acc);
   const statusText = st.text;
   const statusColor = st.color;
@@ -689,16 +907,22 @@ function CRMCampaigns({ selectedId, setSelectedId, liveStatus, triggerOpal, isSy
       <PageHeader
         eyebrow="Campaign list"
         title="Q4 Business Growth ABM"
-        sub={`${ACCOUNTS.length} target accounts`}
+        sub={`${filtered.length} target accounts`}
       />
-      <DataTable heads={["Account", "Industry", "Stage", "Pipeline", "Owner", "Last activity", "Microsite"]}>
-        {ACCOUNTS.map((a) => {
+      <AccountFilters fl={fl} count={filtered.length} />
+      <DataTable
+        heads={[{ label: "Account", key: "name" }, { label: "Industry", key: "industry" }, { label: "Stage", key: "stage" }, { label: "ODP intent", key: "intent" }, { label: "Pipeline", key: "pipelineK" }, { label: "Owner", key: "owner" }, { label: "Last activity", key: "lastActivityAgo" }, "Microsite"]}
+        sort={view.sort}
+        onSort={view.onSort}
+      >
+        {view.slice.map((a) => {
           const ls = micrositeLabel(abmPages, liveStatus, a);
           return (
             <tr key={a.id} onClick={() => setSelectedId(a.id)} className={`cursor-pointer border-t border-blue-100/50 ${a.id === selectedId ? "bg-blue-50" : "hover:bg-blue-50"}`}>
               <td className="px-4 py-3 font-medium text-blue-700">{a.name}</td>
               <td className="px-4 py-3 text-blue-700/80">{a.industry}</td>
               <td className="px-4 py-3"><Badge color={STAGE_COLOR[a.stage]}>{a.stage}</Badge></td>
+              <td className="px-4 py-3"><IntentBadge meta={DETAILS[a.id].odpMeta} /></td>
               <td className="px-4 py-3 text-blue-700">{a.pipeline}</td>
               <td className="px-4 py-3 text-blue-700/80">{a.owner}</td>
               <td className="px-4 py-3 text-blue-700/70">{a.lastActivity}</td>
@@ -707,6 +931,8 @@ function CRMCampaigns({ selectedId, setSelectedId, liveStatus, triggerOpal, isSy
           );
         })}
       </DataTable>
+      {filtered.length === 0 && <div className="mt-6 text-center text-sm text-blue-700/70">No accounts match your filters.</div>}
+      <Pager view={view} />
       <div className="mt-6 grid gap-4 lg:grid-cols-3">
         <Card title={acc.name} right={<Badge color={statusColor}>Microsite: {statusText}</Badge>}>
           <dl className="grid grid-cols-2 gap-y-2 text-sm">
@@ -718,33 +944,23 @@ function CRMCampaigns({ selectedId, setSelectedId, liveStatus, triggerOpal, isSy
           </dl>
         </Card>
         <Card title="Buying committee (known contacts)">
-          {d ? (
-            <div className="space-y-3">
-              {d.contacts.map((c) => (
-                <div key={c.name} className="flex items-center justify-between gap-2">
-                  <div className="flex items-center gap-3">
-                    <Avatar name={c.name} />
-                    <div>
-                      <div className="text-sm font-medium">{c.name} {c.isNew && <Badge color="amber">New</Badge>}</div>
-                      <div className="text-xs text-blue-700/70">{c.title}</div>
-                    </div>
+          <div className="space-y-3">
+            {d.contacts.map((c) => (
+              <div key={c.name} className="flex items-center justify-between gap-2">
+                <div className="flex items-center gap-3">
+                  <Avatar name={c.name} />
+                  <div>
+                    <div className="text-sm font-medium">{c.name} {c.isNew && <Badge color="amber">New</Badge>}</div>
+                    <div className="text-xs text-blue-700/70">{c.title}</div>
                   </div>
-                  <Badge color="violet">{c.role}</Badge>
                 </div>
-              ))}
-            </div>
-          ) : (
-            <div className="text-sm text-blue-700/70">3 contacts · roles not yet mapped</div>
-          )}
+                <Badge color="violet">{c.role}</Badge>
+              </div>
+            ))}
+          </div>
         </Card>
         <Card title="Recent activity">
-          {d ? (
-            <ul className="space-y-2 text-sm text-blue-700">
-              {d.activity.map((x) => <li key={x} className="border-l-2 border-blue-300 pl-3">{x}</li>)}
-            </ul>
-          ) : (
-            <div className="text-sm text-blue-700/70">{acc.lastActivity}</div>
-          )}
+          <ActivityList items={d.activityItems} limit={5} />
         </Card>
       </div>
       {/* --- Account Enrichment (ODP + Web Research Signals) --- */}
@@ -759,47 +975,68 @@ function CRMCampaigns({ selectedId, setSelectedId, liveStatus, triggerOpal, isSy
 
 function CRMReports({ liveMicrosites }) {
   const [range, setRange] = useState("This quarter");
-  const owners = Array.from(new Set(OPPS.map((o) => o.owner)));
-  const byOwner = owners.map((n) => ({ n, v: sumK(openOpps.filter((o) => o.owner === n)) }));
-  const maxOwner = Math.max(...byOwner.map((x) => x.v));
-  const liveCount = liveMicrosites.length;
-  const weighted = Math.round(openOpps.reduce((s, o) => s + (o.amount * STAGE_PROB[o.stage]) / 100, 0));
-  const saved = ["Pipeline by stage", "Win rate by owner", "ABM account engagement", "Forecast vs quota", "Stale opportunities (30+ days)"];
-  
+  const fl = useFilters({ owner: ALL, industry: ALL, county: ALL });
+  const { owner, industry, county } = fl.f;
+  const accts = useMemo(() => ACCOUNTS.filter((a) => (owner === ALL || a.owner === owner) && (industry === ALL || a.industry === industry) && (county === ALL || a.county === county)), [fl.sig]); // eslint-disable-line react-hooks/exhaustive-deps
+  const ids = useMemo(() => new Set(accts.map((a) => a.id)), [accts]);
+  const opps = useMemo(() => OPPS.filter((o) => (o.acct ? ids.has(o.acct) : industry === ALL && county === ALL && (owner === ALL || o.owner === owner))), [ids, owner, industry, county]);
+  const open = opps.filter((o) => o.stage !== "Funded");
+  const funded = opps.filter((o) => o.stage === "Funded");
+  const owners = OWNER_NAMES.map((n) => ({ n, v: sumK(open.filter((o) => o.owner === n)) })).filter((x) => x.v > 0).sort((a, b) => b.v - a.v);
+  const maxOwner = Math.max(1, ...owners.map((x) => x.v));
+  const byIndustry = INDUSTRIES.map((n) => ({ n, v: sumK(open.filter((o) => o.acct && ACCOUNTS.find((a) => a.id === o.acct)?.industry === n)) })).filter((x) => x.v > 0).sort((a, b) => b.v - a.v);
+  const maxIndustry = Math.max(1, ...byIndustry.map((x) => x.v));
+  const stageTotals = STAGES.slice(0, 4).map((s) => ({ s, v: sumK(opps.filter((o) => o.stage === s)) }));
+  const maxStage = Math.max(1, ...stageTotals.map((x) => x.v));
+  const tier1 = accts.filter((a) => a.tier === 1);
+  const liveCount = tier1.filter((a) => liveMicrosites.includes(a.id)).length;
+  const engaged = tier1.filter((a) => a.lastActivityAgo <= 30 || DETAILS[a.id].odpMeta.band === "High").length;
+  const meetings = tier1.reduce((s, a) => s + DETAILS[a.id].activityItems.filter((i) => i.type === "meeting" && i.ago <= 30).length, 0);
+  const avgIntent = accts.length ? Math.round(accts.reduce((s, a) => s + DETAILS[a.id].odpMeta.intentScore, 0) / accts.length) : 0;
+  const saved = ["Pipeline by stage", "Pipeline by industry", "ABM account engagement", "Forecast vs quota", "Stale opportunities (30+ days)"];
+  const sel = "rounded-lg border border-blue-100 bg-white px-3 py-2 text-sm text-blue-700";
+
   return (
     <>
-      <PageHeader eyebrow="Analytics" title="Reports" sub="Sales and ABM performance" actions={<><select value={range} onChange={(e) => setRange(e.target.value)} className="rounded-lg border border-blue-100 bg-white px-3 py-2 text-sm text-blue-700">{["This month", "This quarter", "This year"].map((r) => <option key={r}>{r}</option>)}</select><button className="rounded-lg border border-blue-100 bg-white px-4 py-2 text-sm text-blue-700 hover:bg-blue-50">Export CSV</button></>} />
+      <PageHeader eyebrow="Analytics" title="Reports" sub="Sales and ABM performance" actions={<><select value={range} onChange={(e) => setRange(e.target.value)} className={sel}>{["This month", "This quarter", "This year"].map((r) => <option key={r}>{r}</option>)}</select><button className="rounded-lg border border-blue-100 bg-white px-4 py-2 text-sm text-blue-700 hover:bg-blue-50">Export CSV</button></>} />
+      <FilterBar fl={fl} count={accts.length} total={ACCOUNTS.length} noun="accounts">
+        <FilterSelect label="Owner" value={owner} onChange={(v) => fl.set("owner", v)} options={[ALL, ...OWNER_NAMES]} />
+        <FilterSelect label="Industry" value={industry} onChange={(v) => fl.set("industry", v)} options={[ALL, ...INDUSTRIES]} />
+        <FilterSelect label="County" value={county} onChange={(v) => fl.set("county", v)} options={[ALL, ...COUNTIES]} />
+      </FilterBar>
       <div className="mb-4 grid grid-cols-2 gap-4 lg:grid-cols-4">
-        <Stat label="Open pipeline" value={kFmt(sumK(openOpps))} note={range} />
-        <Stat label="Weighted forecast" value={kFmt(weighted)} note="Probability-adjusted" />
-        <Stat label="Win rate" value="31%" note="+3 pts vs last quarter" tone="text-emerald-600" />
-        <Stat label="Average deal size" value={kFmt(Math.round(sumK(OPPS) / OPPS.length))} note={`${OPPS.length} deals`} />
+        <Stat label="Open pipeline" value={kFmt(sumK(open))} note={`${open.length} deals · ${range}`} />
+        <Stat label="Weighted forecast" value={kFmt(weightedK(open))} note="Probability-adjusted" />
+        <Stat label="Funded" value={kFmt(sumK(funded))} note={`${funded.length} deals`} tone="text-emerald-600" />
+        <Stat label="Avg ODP intent score" value={`${avgIntent}`} note={`${accts.length} accounts`} />
       </div>
       <div className="grid gap-4 lg:grid-cols-2">
         <Card title="Open pipeline by stage">
           <div className="space-y-2.5">
-            {STAGES.slice(0, 4).map((s) => {
-              const v = sumK(OPPS.filter((o) => o.stage === s));
-              return <BarRow key={s} label={s} value={v} max={2500} text={kFmt(v)} />;
-            })}
+            {stageTotals.map((x) => <BarRow key={x.s} label={x.s} value={x.v} max={maxStage} text={kFmt(x.v)} />)}
           </div>
         </Card>
         <Card title="Open pipeline by owner">
-          <div className="space-y-2.5">{byOwner.map((x) => <BarRow key={x.n} label={x.n} value={x.v} max={maxOwner} text={kFmt(x.v)} color="bg-blue-500" />)}</div>
+          <div className="space-y-2.5">{owners.map((x) => <BarRow key={x.n} label={x.n} value={x.v} max={maxOwner} text={kFmt(x.v)} color="bg-blue-500" />)}</div>
         </Card>
       </div>
-      <div className="mt-4 grid gap-4 lg:grid-cols-3">
-        <Card title="Campaign performance: Q4 Business Growth ABM" className="lg:col-span-2">
+      <div className="mt-4 grid gap-4 lg:grid-cols-2">
+        <Card title="Open pipeline by industry">
+          <div className="space-y-2.5">{byIndustry.map((x) => <BarRow key={x.n} label={x.n} value={x.v} max={maxIndustry} text={kFmt(x.v)} color="bg-blue-400" />)}</div>
+        </Card>
+        <Card title="Campaign performance: Q4 Business Growth ABM (Tier 1)">
           <table className="w-full text-sm">
             <tbody className="divide-y divide-blue-100/50">
-              {[["Target accounts", `${ACCOUNTS.length}`], ["Personalized microsites live", `${liveCount} of ${ACCOUNTS.length}`], ["Accounts engaged (30 days)", "5 of 6"], ["Meetings booked", "7"], ["Pipeline influenced", kFmt(sumK(openOpps.filter((o) => o.acct)))]].map((r) => (
+              {[["Target accounts", `${tier1.length}`], ["Personalized microsites live", `${liveCount} of ${tier1.length}`], ["Accounts engaged (30 days)", `${engaged} of ${tier1.length}`], ["Meetings booked (30 days)", `${meetings}`], ["Pipeline influenced", kFmt(sumK(open.filter((o) => o.acct && tier1.some((a) => a.id === o.acct))))]].map((r) => (
                 <tr key={r[0]}><td className="py-2 text-blue-700/80">{r[0]}</td><td className="py-2 text-right font-medium text-blue-950">{r[1]}</td></tr>
               ))}
             </tbody>
           </table>
         </Card>
+      </div>
+      <div className="mt-4">
         <Card title="Saved reports">
-          <ul className="space-y-2 text-sm">{saved.map((s) => <li key={s} className="flex items-center justify-between rounded-lg border border-blue-100/50 px-3 py-2 text-blue-700 hover:bg-blue-50"><span>{s}</span><span className="text-blue-700/50">›</span></li>)}</ul>
+          <ul className="grid gap-2 text-sm sm:grid-cols-2 lg:grid-cols-3">{saved.map((s) => <li key={s} className="flex items-center justify-between rounded-lg border border-blue-100/50 px-3 py-2 text-blue-700 hover:bg-blue-50"><span>{s}</span><span className="text-blue-700/50">›</span></li>)}</ul>
         </Card>
       </div>
     </>
@@ -971,30 +1208,41 @@ export default function CRMApplication() {
     (level, text) => setLogs((l) => [...l.slice(-199), { ts: new Date().toLocaleTimeString(), level, text }]),
     []
   );
-  const liveMicrosites = ACCOUNTS.filter((a) => liveStatus[a.id]?.live).map((a) => a.id);
+  // An account is "live" when Graph reports a published page or the CMS list has one published.
+  const liveMicrosites = useMemo(
+    () => ACCOUNTS.filter((a) => liveStatus[a.id]?.live || findAbmPage(abmPages, a)?.status === "published").map((a) => a.id),
+    [liveStatus, abmPages]
+  );
 
   const go = (p) => setPage(p);
 
   // Poll the status route (Graph, published content only) so "Live · v1/v2" appears after you publish in CMS.
+  // With 500 accounts we only poll the selected account plus accounts that already have a CMS page
+  // (known from the single /pages call below); every other account is "No page" without a request.
+  const pollKey = useMemo(
+    () => Array.from(new Set([selectedId, ...abmPages.map((p) => p.accountId).filter((id) => id && ACCOUNT_IDS.has(id))])).join(","),
+    [selectedId, abmPages]
+  );
   useEffect(() => {
     let cancelled = false;
+    const ids = pollKey.split(",").filter(Boolean);
     const fetchStatus = async () => {
       const rows = await Promise.all(
-        ACCOUNTS.map(async (a) => {
+        ids.map(async (id) => {
           try {
-            const res = await fetch(`/api/limitless/status?account=${a.id}`, { cache: "no-store" });
-            return [a.id, res.ok ? await res.json() : { live: false }];
+            const res = await fetch(`/api/limitless/status?account=${encodeURIComponent(id)}`, { cache: "no-store" });
+            return [id, res.ok ? await res.json() : { live: false }];
           } catch {
-            return [a.id, { live: false }];
+            return [id, { live: false }];
           }
         })
       );
-      if (!cancelled) setLiveStatus(Object.fromEntries(rows));
+      if (!cancelled) setLiveStatus((prev) => ({ ...prev, ...Object.fromEntries(rows) }));
     };
     fetchStatus();
     const interval = setInterval(fetchStatus, 10000);
     return () => { cancelled = true; clearInterval(interval); };
-  }, []);
+  }, [pollKey]);
 
   // Poll the CMS (drafts included) for ABM pages every 5 min, or every 5s while a run is being
   // watched so the console shows progress. The refresh button calls the same fetch via fetchPagesRef.
@@ -1148,11 +1396,11 @@ export default function CRMApplication() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           account: acc,
-          contacts: d ? d.contacts : EXTRA_CONTACTS[acc.id] || [],
-          activity: d ? d.activity : [acc.lastActivity],
-          signals: d?.signals || [],
-          odp: d?.odp || [], // simulated ODP behavioural feed
-          crmNotes: d?.crm || [],
+          contacts: d.contacts,
+          activity: d.activity,
+          signals: d.signals,
+          odp: d.odp, // simulated ODP behavioural feed
+          crmNotes: d.crm,
         }),
       });
       const data = await res.json().catch(() => ({}));
@@ -1162,7 +1410,7 @@ export default function CRMApplication() {
 
         // Simulated lim1_abm_orchestrator step logs while waiting for the CMS draft
         clearSimTimers();
-        const contacts = d ? d.contacts : EXTRA_CONTACTS[acc.id] || [];
+        const contacts = d.contacts;
         const existingPage =
           findAbmPage(abmPages, acc) ||
           (liveStatus[acc.id]?.live ? { key: acc.id, version: "1", versionNote: liveStatus[acc.id].versionNote } : null);
