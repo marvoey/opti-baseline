@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mark AI in Optimizely CMS 12 — Shutterfly Architecture & Capability Guide</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,600;0,700;0,900;1,700&family=Roboto+Mono:wght@400;500;600&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@40,300,0,0" />
+  <style>
+    /* Smooth in-page nav scrolling; offset is kept in sync with the sticky header height by JS below */
+    html { scroll-padding-top: 5rem; }
+    @media (prefers-reduced-motion: no-preference) {
+      html { scroll-behavior: smooth; }
+    }
+    :root {
+      --lf-green: #ABFF44;
+      --grass: #7DDD3D;
+      --good-to-go: #3AB533;
+      --neutral-1: #FFFFFF;
+      --neutral-2: #EFF6E9;
+      --neutral-3: #E4F0DA;
+      --neutral-4: #D8E4CB;
+      --light-blue: #91DBDA;
+      --dark-fir: #08251A;
+      --mid-fir: #0D3A29;
+      --light-fir: #197050;
+      --ext-1: #ABFF44;
+      --ext-3: #40A142;
+      --ext-4: #2E8C45;
+      --ext-6: #166E49;
+      --ext-8: #0D593E;
+    }
+
+    body {
+      font-family: 'Die Grotesk B', 'Roboto', sans-serif;
+      background-color: var(--neutral-2);
+      color: var(--dark-fir);
+      line-height: 1.28;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1, h2, .brand-heading {
+      font-family: 'VC Nudge SemiNormal', 'Roboto Condensed', sans-serif;
+      font-weight: 900;
+      line-height: 1.04;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow, .mono-caption {
+      font-family: 'Roboto Mono', monospace;
+      letter-spacing: 0.03em;
+      line-height: 1.25;
+    }
+
+    /* Opal 32px Pillow Corner Radius & Dark Fir Stroke */
+    .opal-card {
+      border-radius: 32px;
+      border: 2px solid var(--dark-fir);
+    }
+
+    .opal-pill {
+      border-radius: 9999px;
+      border: 2px solid var(--dark-fir);
+    }
+
+    .opal-btn {
+      border-radius: 32px;
+      border: 2px solid var(--dark-fir);
+      font-family: 'Roboto Condensed', sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      transition: transform 0.15s ease, background-color 0.15s ease;
+    }
+
+    .opal-btn:hover {
+      transform: translate(2px, -2px);
+    }
+
+    /* Playful Level 02 — Upwards 5-Layer Extrusion on ONE celebratory word */
+    .upwards-stack {
+      position: relative;
+      display: inline-block;
+      margin-left: 14px;
+      margin-right: 8px;
+      margin-bottom: 10px;
+      vertical-align: baseline;
+    }
+
+    .upwards-layer {
+      font-family: 'VC Nudge SemiNormal', 'Roboto Condensed', sans-serif;
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 1;
+      -webkit-text-stroke: 1.5px var(--dark-fir);
+      paint-order: stroke fill;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .upwards-layer.layer-5 { position: absolute; top: 12px; left: -12px; color: var(--ext-8); z-index: 1; }
+    .upwards-layer.layer-4 { position: absolute; top: 9px;  left: -9px;  color: var(--ext-6); z-index: 2; }
+    .upwards-layer.layer-3 { position: absolute; top: 6px;  left: -6px;  color: var(--ext-4); z-index: 3; }
+    .upwards-layer.layer-2 { position: absolute; top: 3px;  left: -3px;  color: var(--ext-3); z-index: 4; }
+    .upwards-layer.layer-1 { position: relative; top: 0;    left: 0;     color: var(--ext-1); z-index: 5; }
+
+    .material-symbols-rounded {
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 40;
+      font-size: 28px;
+      line-height: 1;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--neutral-3);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--dark-fir);
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="min-h-screen pb-20">
+
+  <!-- TOP NAVIGATION BAR -->
+  <header class="sticky top-0 z-50 bg-[#FFFFFF] border-b-2 border-[#08251A]">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <!-- Official Opal AI Lightning Bolt Icon -->
+        <div class="w-10 h-10 bg-[#ABFF44] opal-pill flex items-center justify-center">
+          <svg class="w-5 h-5 text-[#08251A]" viewBox="0 0 24 24" fill="currentColor" aria-label="Opal AI Lightning Bolt">
+            <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z" stroke="#08251A" stroke-width="1.5" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div>
+          <span class="font-bold text-xl tracking-tight text-[#08251A] brand-heading">OPTIMIZELY</span>
+          <span class="ml-2 px-3 py-0.5 text-xs font-semibold bg-[#E4F0DA] text-[#08251A] opal-pill mono-caption">SHUTTERFLY × CMS 12</span>
+        </div>
+      </div>
+
+      <nav class="flex flex-wrap items-center gap-2">
+        <a href="#editorial-copilot" class="px-4 py-1.5 text-sm font-medium text-[#08251A] hover:bg-[#E4F0DA] rounded-full transition">Editorial Copilot</a>
+        <a href="#cd-api-connector" class="px-4 py-1.5 text-sm font-medium text-[#08251A] hover:bg-[#E4F0DA] rounded-full transition">Content Delivery API</a>
+        <a href="#architecture-matrix" class="px-4 py-1.5 text-sm font-medium text-[#08251A] hover:bg-[#E4F0DA] rounded-full transition">CMS 12 vs 13 vs SaaS</a>
+        <a href="#dual-artifact" class="px-4 py-1.5 text-sm font-medium text-[#08251A] hover:bg-[#E4F0DA] rounded-full transition">Razor &amp; C# Bridge</a>
+        <a href="#setup-guide" class="opal-btn px-5 py-1.5 text-sm bg-[#ABFF44] text-[#08251A]">Setup &amp; Code</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="max-w-7xl mx-auto px-6 pt-12 pb-10">
+    <div class="opal-card bg-[#08251A] text-[#FFFFFF] p-8 md:p-14 relative overflow-hidden">
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-10">
+        <div class="max-w-3xl space-y-6">
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-[#ABFF44] text-[#08251A] opal-pill">
+            <svg class="w-4 h-4 text-[#08251A]" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/>
+            </svg>
+            <span class="mono-caption text-xs font-semibold uppercase">SHUTTERFLY ARCHITECTURE BRIEFING • CMS 12 (NO GRAPH REQUIRED)</span>
+          </div>
+
+          <h1 class="text-4xl sm:text-6xl md:text-7xl tracking-tight leading-none text-[#FFFFFF]">
+            CMS 12 CONTENT AT
+            <span class="upwards-stack" aria-label="LIBERATION">
+              <span class="upwards-layer layer-5" aria-hidden="true">LIBERATION</span>
+              <span class="upwards-layer layer-4" aria-hidden="true">LIBERATION</span>
+              <span class="upwards-layer layer-3" aria-hidden="true">LIBERATION</span>
+              <span class="upwards-layer layer-2" aria-hidden="true">LIBERATION</span>
+              <span class="upwards-layer layer-1">LIBERATION</span>
+            </span>
+            SPEED.
+          </h1>
+
+          <p class="text-lg md:text-xl text-[#E4F0DA] max-w-2xl font-normal leading-relaxed">
+            Enough chat, bot. Here is how <strong>Mark AI (Optimizely Opal)</strong> accelerates Shutterfly's seasonal campaigns, Holiday Photo Books, and personalized gifting experiences directly on <strong>Optimizely CMS 12</strong>—using native On-Page Editing context and the <strong>Content Delivery REST API v3.0</strong> with zero dependency on Optimizely Graph.
+          </p>
+
+          <div class="flex flex-wrap gap-4 pt-2">
+            <a href="#editorial-copilot" class="opal-btn bg-[#ABFF44] text-[#08251A] px-6 py-3 text-base flex items-center gap-2">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/>
+              </svg>
+              Explore Shutterfly Capabilities
+            </a>
+            <a href="#cd-api-connector" class="opal-btn bg-[#FFFFFF] text-[#08251A] px-6 py-3 text-base flex items-center gap-2">
+              <span class="material-symbols-rounded text-xl">api</span>
+              See Content Delivery REST API Pattern
+            </a>
+          </div>
+        </div>
+
+        <!-- Hero Right Stat & Architecture Callout Card -->
+        <div class="lg:w-96 shrink-0">
+          <div class="opal-card bg-[#E4F0DA] text-[#08251A] p-6 space-y-5">
+            <div class="flex items-center justify-between border-b-2 border-[#08251A] pb-3">
+              <span class="mono-caption text-xs font-bold uppercase">SHUTTERFLY CMS 12 STACK</span>
+              <span class="px-2.5 py-0.5 bg-[#ABFF44] text-[#08251A] text-xs font-bold opal-pill">REST API NATIVE</span>
+            </div>
+
+            <div class="space-y-3">
+              <div class="p-3.5 bg-[#FFFFFF] opal-card">
+                <div class="mono-caption text-xs text-[#08251A] opacity-75">UI EDITORIAL LAYER</div>
+                <div class="font-bold text-base mt-0.5">Optimizely.Cms.OpalChat</div>
+                <div class="text-xs mt-1">Embedded in On-Page Editing (OPE) &amp; All Properties View with Opti ID SSO.</div>
+              </div>
+
+              <div class="p-3.5 bg-[#91DBDA] opal-card">
+                <div class="mono-caption text-xs text-[#08251A] opacity-75">CONTENT &amp; BLOCK INSPECTION</div>
+                <div class="font-bold text-base mt-0.5">Content Delivery API v3.0</div>
+                <div class="text-xs mt-1">Direct REST inspection by Content ID or Friendly URL with nested ContentArea expansion (`expand=*`)—no Graph required.</div>
+              </div>
+
+              <div class="p-3.5 bg-[#FFFFFF] opal-card">
+                <div class="mono-caption text-xs text-[#08251A] opacity-75">RENDERING ENGINE</div>
+                <div class="font-bold text-base mt-0.5">ASP.NET Core Razor (.cshtml)</div>
+                <div class="text-xs mt-1">Dual-Artifact bridge pairs marketer visual previews with strongly-typed C# models.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PILLAR 1: IN-CMS EDITORIAL COPILOT FOR SHUTTERFLY -->
+  <section id="editorial-copilot" class="max-w-7xl mx-auto px-6 py-8">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+      <div>
+        <div class="mono-caption text-xs font-bold uppercase text-[#08251A] bg-[#ABFF44] inline-block px-3 py-1 opal-pill mb-3">01 / NATIVE EDITORIAL COPILOT</div>
+        <h2 class="text-3xl md:text-5xl text-[#08251A]">WHAT MARK DOES INSIDE SHUTTERFLY'S CMS 12 UI</h2>
+      </div>
+      <p class="text-base max-w-md text-[#08251A]">
+        Installed via <code class="font-mono bg-[#FFFFFF] px-2 py-0.5 border border-[#08251A] rounded">Optimizely.Cms.OpalChat</code>, Mark sits right beside Shutterfly merchandisers and editors in On-Page Editing.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Card 1 -->
+      <div class="opal-card bg-[#FFFFFF] p-7 flex flex-col justify-between">
+        <div>
+          <div class="w-12 h-12 bg-[#ABFF44] opal-pill flex items-center justify-center mb-5">
+            <span class="material-symbols-rounded">visibility</span>
+          </div>
+          <h3 class="brand-heading text-2xl mb-2">Active Page &amp; Block Context</h3>
+          <p class="text-sm leading-relaxed mb-4">
+            Mark automatically detects the active CMS 12 page or shared block loaded in the editorial frame—such as a <strong>Holiday Photo Books</strong> landing page or <strong>Promotional Hero Block</strong>—without copy-pasting.
+          </p>
+        </div>
+        <div class="p-3 bg-[#E4F0DA] rounded-2xl border border-[#08251A] text-xs mono-caption">
+          Prompt: "Review this Holiday Photo Books page and suggest 3 higher-urgency hero headlines for Cyber Week."
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="opal-card bg-[#E4F0DA] p-7 flex flex-col justify-between">
+        <div>
+          <div class="w-12 h-12 bg-[#FFFFFF] opal-pill flex items-center justify-center mb-5">
+            <span class="material-symbols-rounded">edit_note</span>
+          </div>
+          <h3 class="brand-heading text-2xl mb-2">Seasonal Gifting Copy &amp; Variations</h3>
+          <p class="text-sm leading-relaxed mb-4">
+            Generates on-brand headlines, Promo Code banners, Gift Guide blurbs, and TinyMCE rich-text descriptions tailored to moments like Weddings, Graduation, Mother's Day, and Holiday Cards.
+          </p>
+        </div>
+        <div class="p-3 bg-[#FFFFFF] rounded-2xl border border-[#08251A] text-xs mono-caption">
+          Prompt: "Rewrite this Wedding Album block for mobile shoppers—keep the headline under 45 characters."
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="opal-card bg-[#FFFFFF] p-7 flex flex-col justify-between">
+        <div>
+          <div class="w-12 h-12 bg-[#91DBDA] opal-pill flex items-center justify-center mb-5">
+            <span class="material-symbols-rounded">travel_explore</span>
+          </div>
+          <h3 class="brand-heading text-2xl mb-2">SEO, GEO &amp; llms.txt Readiness</h3>
+          <p class="text-sm leading-relaxed mb-4">
+            Audits high-traffic category pages (Custom Mugs, Canvas Prints, Christmas Cards) for search intent, meta descriptions, structured FAQ schema, and <code class="font-mono">llms.txt</code> AI discoverability.
+          </p>
+        </div>
+        <div class="p-3 bg-[#E4F0DA] rounded-2xl border border-[#08251A] text-xs mono-caption">
+          Prompt: "Generate SEO metadata and JSON-LD Product FAQ schema for /en/holiday-photo-books/."
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="opal-card bg-[#91DBDA] p-7 flex flex-col justify-between">
+        <div>
+          <div class="w-12 h-12 bg-[#FFFFFF] opal-pill flex items-center justify-center mb-5">
+            <span class="material-symbols-rounded">translate</span>
+          </div>
+          <h3 class="brand-heading text-2xl mb-2">Audience &amp; Persona Modulation</h3>
+          <p class="text-sm leading-relaxed mb-4">
+            Adapts a single core product story across distinct buyer segments—turning a standard Photo Book block into targeted variations for New Parents, Pet Owners, or Travel Enthusiasts.
+          </p>
+        </div>
+        <div class="p-3 bg-[#FFFFFF] rounded-2xl border border-[#08251A] text-xs mono-caption">
+          Prompt: "Adapt this Layflat Photo Book teaser for First-Time Parents vs. Newlyweds."
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="opal-card bg-[#FFFFFF] p-7 flex flex-col justify-between">
+        <div>
+          <div class="w-12 h-12 bg-[#ABFF44] opal-pill flex items-center justify-center mb-5">
+            <span class="material-symbols-rounded">bolt</span>
+          </div>
+          <h3 class="brand-heading text-2xl mb-2">Reusable Skills &amp; Brand Guardrails</h3>
+          <p class="text-sm leading-relaxed mb-4">
+            Invoke custom <code class="font-mono">/shutterfly-voice</code>, <code class="font-mono">/promo-disclaimer</code>, or <code class="font-mono">/seasonal-checklist</code> skills in chat so every editor follows promo terms and brand standards automatically.
+          </p>
+        </div>
+        <div class="p-3 bg-[#E4F0DA] rounded-2xl border border-[#08251A] text-xs mono-caption">
+          Shortcut: "/promo-compliance Check if this 50% Off banner copy meets legal disclaimer rules"
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="opal-card bg-[#E4F0DA] p-7 flex flex-col justify-between">
+        <div>
+          <div class="w-12 h-12 bg-[#ABFF44] opal-pill flex items-center justify-center mb-5">
+            <span class="material-symbols-rounded">science</span>
+          </div>
+          <h3 class="brand-heading text-2xl mb-2">Experimentation Hypothesis &amp; Variants</h3>
+          <p class="text-sm leading-relaxed mb-4">
+            Pairs with Optimizely Web Experimentation to turn CMS 12 hero banners, pricing callouts, and shipping countdown timers into structured A/B test variations.
+          </p>
+        </div>
+        <div class="p-3 bg-[#FFFFFF] rounded-2xl border border-[#08251A] text-xs mono-caption">
+          Prompt: "Create 3 CTA button and subhead test variants for Free Shipping vs. 40% Sitewide."
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PILLAR 2: DIRECT CMS 12 INTEGRATION WITHOUT GRAPH (CONTENT DELIVERY REST API V3.0) -->
+  <section id="cd-api-connector" class="max-w-7xl mx-auto px-6 py-8">
+    <div class="opal-card bg-[#FFFFFF] p-8 md:p-10">
+      <div class="flex flex-col lg:flex-row justify-between gap-8">
+        <div class="lg:w-5/12 space-y-4">
+          <div class="inline-flex items-center gap-2 px-3 py-1 bg-[#91DBDA] text-[#08251A] opal-pill mono-caption text-xs font-bold">
+            02 / NO GRAPH? NO PROBLEM.
+          </div>
+          <h2 class="text-3xl md:text-4xl text-[#08251A]">DEEP CMS 12 INSPECTION VIA CONTENT DELIVERY API V3.0</h2>
+          <p class="text-sm leading-relaxed">
+            Because Shutterfly runs on <strong>CMS 12 without Optimizely Graph</strong>, Mark AI connects directly to CMS 12's native <strong>Content Delivery REST API v3.0</strong> (<code class="font-mono bg-[#EFF6E9] px-1.5 py-0.5 rounded">EPiServer.ContentDeliveryApi.Cms</code>) via custom Opal Tools (such as <code class="font-mono bg-[#EFF6E9] px-1.5 py-0.5 rounded">fetch_cms12_content</code>).
+          </p>
+
+          <div class="p-5 bg-[#E4F0DA] opal-card space-y-3">
+            <div class="font-bold text-sm uppercase brand-heading flex items-center gap-2">
+              <span class="material-symbols-rounded text-lg">check_circle</span>
+              What This Unlocks Without Optimizely Graph
+            </div>
+            <ul class="text-xs space-y-2 leading-relaxed">
+              <li><strong>Friendly URL Resolution:</strong> Pass any live Shutterfly path (e.g. <code class="font-mono">/en/holiday-photo-books/</code>) and resolve the full page model directly from CMS 12.</li>
+              <li><strong>Nested ContentArea Expansion (<code class="font-mono">expand=*</code>):</strong> Automatically unrolls inline and shared blocks inside <code class="font-mono">MainContentArea</code> (Hero blocks, Product grids, Promo strips) in one REST call.</li>
+              <li><strong>Hierarchy Traversal:</strong> Inspect <code class="font-mono">children</code> or <code class="font-mono">ancestors</code> of any Content ID to audit entire seasonal campaign trees.</li>
+              <li><strong>Zero Additional Licensing or Sync Overhead:</strong> Queries the existing CMS 12 SQL / DXP database in real time via standard REST endpoints.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Interactive Content Delivery API Simulator -->
+        <div class="lg:w-7/12 flex flex-col justify-between bg-[#08251A] text-[#FFFFFF] opal-card p-6 md:p-8">
+          <div>
+            <div class="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-[#197050]">
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-[#ABFF44]"></span>
+                <span class="mono-caption text-xs text-[#ABFF44]">SHUTTERFLY CMS 12 REST API INSPECTOR (NO GRAPH)</span>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <button onclick="setApiMode('url')" id="btn-api-url" class="px-3 py-1 text-xs rounded-full font-mono bg-[#ABFF44] text-[#08251A] font-bold">1. Resolve by Friendly URL</button>
+                <button onclick="setApiMode('id')" id="btn-api-id" class="px-3 py-1 text-xs rounded-full font-mono bg-[#0D3A29] text-[#E4F0DA] border border-[#197050]">2. Fetch by Content ID + Expand</button>
+                <button onclick="setApiMode('children')" id="btn-api-children" class="px-3 py-1 text-xs rounded-full font-mono bg-[#0D3A29] text-[#E4F0DA] border border-[#197050]">3. Inspect Campaign Children</button>
+              </div>
+            </div>
+
+            <pre id="api-code-display" class="mt-4 font-mono text-xs text-[#E4F0DA] overflow-x-auto leading-relaxed p-4 bg-[#0D3A29] rounded-2xl border border-[#197050]"></pre>
+          </div>
+
+          <div class="mt-5 pt-4 border-t border-[#197050] flex flex-wrap items-center justify-between gap-3 text-xs text-[#91DBDA]">
+            <span>Endpoint: <code class="font-mono text-[#FFFFFF]">GET /api/episerver/v3.0/content</code></span>
+            <span>Auth: Opti ID / Bearer Token • Native CMS 12 REST API</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PILLAR 3: INTERACTIVE ARCHITECTURAL MATRIX (CMS 12 NO-GRAPH vs CMS 13 vs CMS SAAS) -->
+  <section id="architecture-matrix" class="max-w-7xl mx-auto px-6 py-8">
+    <div class="mb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
+      <div>
+        <div class="mono-caption text-xs font-bold uppercase text-[#08251A] bg-[#ABFF44] inline-block px-3 py-1 opal-pill mb-3">03 / ARCHITECTURAL REALITY CHECK</div>
+        <h2 class="text-3xl md:text-5xl text-[#08251A]">SHUTTERFLY CMS 12 (NO GRAPH) VS. CMS 13 &amp; SAAS</h2>
+      </div>
+
+      <!-- Filter Buttons -->
+      <div class="flex flex-wrap gap-2">
+        <button onclick="filterMatrix('all')" id="filter-all" class="opal-btn px-4 py-1.5 text-xs bg-[#ABFF44] text-[#08251A]">All Dimensions</button>
+        <button onclick="filterMatrix('editorial')" id="filter-editorial" class="opal-btn px-4 py-1.5 text-xs bg-[#FFFFFF] text-[#08251A]">Editorial &amp; Content</button>
+        <button onclick="filterMatrix('engineering')" id="filter-engineering" class="opal-btn px-4 py-1.5 text-xs bg-[#FFFFFF] text-[#08251A]">Architecture &amp; APIs</button>
+      </div>
+    </div>
+
+    <div class="opal-card bg-[#FFFFFF] overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="bg-[#08251A] text-[#FFFFFF] border-b-2 border-[#08251A]">
+              <th class="p-5 font-bold uppercase text-sm brand-heading w-1/4">Capability / Dimension</th>
+              <th class="p-5 font-bold uppercase text-sm brand-heading bg-[#ABFF44] text-[#08251A] border-x-2 border-[#08251A] w-1/4">
+                <div class="flex items-center gap-1.5">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+                  Shutterfly: CMS 12 (No Graph)
+                </div>
+              </th>
+              <th class="p-5 font-bold uppercase text-sm brand-heading w-1/4">CMS 13 (PaaS)</th>
+              <th class="p-5 font-bold uppercase text-sm brand-heading w-1/4">CMS SaaS</th>
+            </tr>
+          </thead>
+          <tbody id="matrix-tbody" class="divide-y-2 divide-[#08251A] text-sm">
+            <tr data-cat="engineering" class="hover:bg-[#EFF6E9] transition">
+              <td class="p-5 font-bold">Core Runtime &amp; Delivery</td>
+              <td class="p-5 bg-[#E4F0DA] border-x-2 border-[#08251A] font-medium">ASP.NET Core (.NET 6/8) MVC &amp; Razor Views + Content Delivery API v3.0</td>
+              <td class="p-5">ASP.NET Core (.NET 10+) with native Opal Tools &amp; MCP Server</td>
+              <td class="p-5">Multi-tenant Cloud Headless + Visual Builder</td>
+            </tr>
+            <tr data-cat="editorial" class="hover:bg-[#EFF6E9] transition">
+              <td class="p-5 font-bold">Embedded UI Chat Experience</td>
+              <td class="p-5 bg-[#E4F0DA] border-x-2 border-[#08251A] font-medium">
+                <span class="px-2 py-0.5 bg-[#ABFF44] border border-[#08251A] rounded-full text-xs font-bold">Native</span>
+                <code class="font-mono text-xs block mt-1">Optimizely.Cms.OpalChat</code> in On-Page Editing &amp; All Properties
+              </td>
+              <td class="p-5">Built into <code class="font-mono text-xs">EPiServer.CMS</code> (13.2+) with Opti ID</td>
+              <td class="p-5">Native Opal Chat embedded in Visual Builder &amp; Dashboard</td>
+            </tr>
+            <tr data-cat="engineering" class="hover:bg-[#EFF6E9] transition">
+              <td class="p-5 font-bold">How Mark Reads Page &amp; Block Structure</td>
+              <td class="p-5 bg-[#E4F0DA] border-x-2 border-[#08251A] font-medium">
+                <strong>Active UI Context</strong> + <strong>Content Delivery REST API v3.0</strong> (<code class="font-mono text-xs">expand=*</code> for nested ContentAreas; no Graph needed)
+              </td>
+              <td class="p-5">Direct repository inspection via <code class="font-mono text-xs">Optimizely.Cms.Opal.Tools</code></td>
+              <td class="p-5">Native CMS Management REST API &amp; Blueprint schema tools</td>
+            </tr>
+            <tr data-cat="editorial" class="hover:bg-[#EFF6E9] transition">
+              <td class="p-5 font-bold">Content Mutation &amp; Updating</td>
+              <td class="p-5 bg-[#E4F0DA] border-x-2 border-[#08251A] font-medium">Editor-in-the-loop copy/apply in OPE (or custom Content Management API tool)</td>
+              <td class="p-5">Autonomous agent tools (<code class="font-mono text-xs">paas_cms_create_content_item</code>, <code class="font-mono text-xs">update_content_item</code>)</td>
+              <td class="p-5">Autonomous Experience, Section &amp; Component creation/publishing</td>
+            </tr>
+            <tr data-cat="engineering" class="hover:bg-[#EFF6E9] transition">
+              <td class="p-5 font-bold">New Page / Block Type Creation</td>
+              <td class="p-5 bg-[#E4F0DA] border-x-2 border-[#08251A] font-medium">
+                <strong>Code-First C#:</strong> Mark generates <code class="font-mono text-xs">[ContentType]</code> C# classes &amp; <code class="font-mono text-xs">.cshtml</code> views for PR deployment
+              </td>
+              <td class="p-5">Agentic Content Type tools + IDE MCP Server for Cursor / Claude Code</td>
+              <td class="p-5">Dynamic schema creation in UI or via Mark Content Type tools</td>
+            </tr>
+            <tr data-cat="editorial" class="hover:bg-[#EFF6E9] transition">
+              <td class="p-5 font-bold">SEO, Metadata &amp; <code class="font-mono text-xs">llms.txt</code></td>
+              <td class="p-5 bg-[#E4F0DA] border-x-2 border-[#08251A] font-medium">In-chat SEO audits, meta tags, JSON-LD generators &amp; <code class="font-mono text-xs">llms.txt</code> readiness</td>
+              <td class="p-5">Automated <code class="font-mono text-xs">paas_cms_seo_analysis</code> &amp; one-click <code class="font-mono text-xs">paas_cms_seo_edit</code></td>
+              <td class="p-5">Real-time experience SEO &amp; GEO optimization</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- PILLAR 4: THE DUAL-ARTIFACT BRIDGE FOR SHUTTERFLY -->
+  <section id="dual-artifact" class="max-w-7xl mx-auto px-6 py-8">
+    <div class="opal-card bg-[#E4F0DA] p-8 md:p-12">
+      <div class="max-w-3xl mb-8">
+        <div class="mono-caption text-xs font-bold uppercase text-[#08251A] bg-[#FFFFFF] inline-block px-3 py-1 opal-pill mb-3">04 / THE SHUTTERFLY DUAL-ARTIFACT WORKFLOW</div>
+        <h2 class="text-3xl md:text-5xl text-[#08251A]">BRIDGING MERCHANDISING SPEED &amp; C# GOVERNANCE</h2>
+        <p class="text-base mt-3 text-[#08251A]">
+          In CMS 12, new block layouts require compiled C# classes and Razor views. Instead of waiting weeks for front-end prototypes, Shutterfly teams use Mark's <strong>Dual-Artifact Pattern</strong> to design, approve, and ship new seasonal components in hours:
+        </p>
+      </div>
+
+      <!-- Interactive Toggle Tabs -->
+      <div class="flex flex-wrap gap-3 mb-6">
+        <button onclick="switchArtifactTab('marketer')" id="tab-marketer" class="opal-btn px-6 py-3 text-sm bg-[#ABFF44] text-[#08251A] flex items-center gap-2">
+          <span class="material-symbols-rounded text-xl">palette</span>
+          Artifact A: Merchandiser Canvas Preview (Instant Visual Twin)
+        </button>
+        <button onclick="switchArtifactTab('developer')" id="tab-developer" class="opal-btn px-6 py-3 text-sm bg-[#FFFFFF] text-[#08251A] flex items-center gap-2">
+          <span class="material-symbols-rounded text-xl">terminal</span>
+          Artifact B: Production CMS 12 C# Model &amp; Razor View (.cshtml)
+        </button>
+      </div>
+
+      <!-- Tab Panel A: Marketer View -->
+      <div id="panel-marketer" class="opal-card bg-[#FFFFFF] p-6 md:p-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-5 space-y-4">
+            <span class="px-3 py-1 text-xs font-bold bg-[#91DBDA] text-[#08251A] opal-pill mono-caption">MERCHANDISING &amp; DESIGN VIEW</span>
+            <h3 class="text-2xl md:text-3xl brand-heading">Interactive Holiday Photo Book Block Preview</h3>
+            <p class="text-sm leading-relaxed">
+              Mark renders a live HTML/Tailwind visual twin in Canvas (or inspects the live page via <code class="font-mono bg-[#EFF6E9] px-1 rounded">/api/episerver/v3.0/content</code>) so Shutterfly campaign managers can test copy length, discount badges, and CTA hierarchy before a single line of C# is compiled.
+            </p>
+            <ul class="space-y-2 text-xs">
+              <li class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-[#3AB533] border border-[#08251A]"></span> Maps 1:1 to CMS 12 <code class="font-mono">[ContentType]</code> properties</li>
+              <li class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-[#3AB533] border border-[#08251A]"></span> Validates mobile &amp; desktop visual hierarchy</li>
+              <li class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-[#3AB533] border border-[#08251A]"></span> Eliminates rework between Merchandising and .NET Engineering</li>
+            </ul>
+          </div>
+
+          <div class="lg:col-span-7">
+            <!-- Simulated Visual Preview Card inside Canvas -->
+            <div class="opal-card bg-[#08251A] text-[#FFFFFF] p-6 md:p-8">
+              <div class="flex items-center justify-between text-xs mono-caption text-[#91DBDA] mb-4">
+                <span>LIVE CANVAS PREVIEW: HolidayPhotoBookHeroBlock</span>
+                <span class="px-2 py-0.5 bg-[#ABFF44] text-[#08251A] rounded-full font-bold">On-Page Editable</span>
+              </div>
+              <div class="p-6 bg-[#0D3A29] rounded-2xl border border-[#197050] space-y-4">
+                <span class="inline-block px-3 py-0.5 bg-[#ABFF44] text-[#08251A] text-xs font-bold rounded-full mono-caption">CODE: SAVE50 • ENDS SUNDAY</span>
+                <h4 class="text-2xl md:text-3xl brand-heading text-[#FFFFFF]">TURN THIS YEAR'S CAMERA ROLL INTO AN HEIRLOOM</h4>
+                <p class="text-sm text-[#E4F0DA]">
+                  Custom layflat Holiday Photo Books crafted on archival metallic or matte paper. Upload from your phone in minutes.
+                </p>
+                <div class="pt-2 flex flex-wrap gap-3">
+                  <span class="px-5 py-2 bg-[#ABFF44] text-[#08251A] font-bold text-xs rounded-full border border-[#08251A]">Make Your Photo Book →</span>
+                  <span class="px-5 py-2 bg-[#FFFFFF] text-[#08251A] font-bold text-xs rounded-full border border-[#08251A]">Explore 2026 Holiday Styles</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab Panel B: Developer View -->
+      <div id="panel-developer" class="hidden opal-card bg-[#08251A] text-[#FFFFFF] p-6 md:p-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div>
+            <div class="mono-caption text-xs text-[#ABFF44] mb-2">1. C# Block Type Model (HolidayPhotoBookHeroBlock.cs)</div>
+            <pre class="font-mono text-xs text-[#E4F0DA] bg-[#0D3A29] p-4 rounded-2xl border border-[#197050] overflow-x-auto leading-relaxed">[ContentType(
+    DisplayName = "Holiday Photo Book Hero Block",
+    GUID = "8f4b2c10-9e32-4d1a-b821-7a9c1204e512",
+    Description = "Seasonal promotional hero block for Shutterfly Photo Books",
+    GroupName = "Shutterfly Seasonal Campaigns")]
+public class HolidayPhotoBookHeroBlock : BlockData
+{
+    [Display(Name = "Promo Badge", Order = 10, GroupName = SystemTabNames.Content)]
+    [CultureSpecific]
+    public virtual string? PromoBadge { get; set; }
+
+    [Display(Name = "Headline", Order = 20, GroupName = SystemTabNames.Content)]
+    [CultureSpecific]
+    [Required]
+    public virtual string Headline { get; set; } = string.Empty;
+
+    [Display(Name = "Subheading Copy", Order = 30, GroupName = SystemTabNames.Content)]
+    [CultureSpecific]
+    public virtual XhtmlString? Subheading { get; set; }
+
+    [Display(Name = "Primary CTA Text", Order = 40, GroupName = SystemTabNames.Content)]
+    [CultureSpecific]
+    public virtual string? PrimaryCtaText { get; set; }
+
+    [Display(Name = "Primary CTA Url", Order = 50, GroupName = SystemTabNames.Content)]
+    public virtual Url? PrimaryCtaUrl { get; set; }
+}</pre>
+          </div>
+          <div>
+            <div class="mono-caption text-xs text-[#91DBDA] mb-2">2. CMS 12 Razor View (Views/Shared/Blocks/HolidayPhotoBookHeroBlock.cshtml)</div>
+            <pre class="font-mono text-xs text-[#E4F0DA] bg-[#0D3A29] p-4 rounded-2xl border border-[#197050] overflow-x-auto leading-relaxed">@using EPiServer.Web.Mvc.Html
+@model Shutterfly.Web.Models.Blocks.HolidayPhotoBookHeroBlock
+
+&lt;section class="sfly-hero-block"&gt;
+  @if (!string.IsNullOrEmpty(Model.PromoBadge))
+  {
+    &lt;span class="sfly-badge" @Html.EditAttributes(x =&gt; x.PromoBadge)&gt;
+      @Model.PromoBadge
+    &lt;/span&gt;
+  }
+
+  &lt;h2 @Html.EditAttributes(x =&gt; x.Headline)&gt;
+    @Model.Headline
+  &lt;/h2&gt;
+
+  &lt;div class="sfly-subheading"&gt;
+    @Html.PropertyFor(x =&gt; x.Subheading)
+  &lt;/div&gt;
+
+  @if (Model.PrimaryCtaUrl != null)
+  {
+    &lt;a href="@Url.ContentUrl(Model.PrimaryCtaUrl)"
+       @Html.EditAttributes(x =&gt; x.PrimaryCtaText)&gt;
+      @Model.PrimaryCtaText
+    &lt;/a&gt;
+  }
+&lt;/section&gt;</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PILLAR 5: INSTALLATION & CONFIGURATION GUIDE FOR SHUTTERFLY CMS 12 -->
+  <section id="setup-guide" class="max-w-7xl mx-auto px-6 py-8">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <div class="lg:col-span-5 space-y-5">
+        <div class="mono-caption text-xs font-bold uppercase text-[#08251A] bg-[#91DBDA] inline-block px-3 py-1 opal-pill">05 / IMPLEMENTATION RUNBOOK</div>
+        <h2 class="text-3xl md:text-5xl text-[#08251A]">ENABLING MARK IN SHUTTERFLY'S CMS 12</h2>
+        <p class="text-sm leading-relaxed">
+          Enabling Mark AI in Shutterfly's Optimizely CMS 12 environment requires zero content migration and no Optimizely Graph setup. Add the NuGet packages, wire up Opti ID + Content Delivery API in <code class="font-mono bg-[#FFFFFF] px-1.5 py-0.5 border border-[#08251A] rounded">Startup.cs</code>, and assign roles in the Admin Center.
+        </p>
+
+        <div class="space-y-3">
+          <div class="opal-card bg-[#FFFFFF] p-4 flex items-start gap-3.5">
+            <span class="w-7 h-7 rounded-full bg-[#ABFF44] border border-[#08251A] flex items-center justify-center font-bold text-xs shrink-0">1</span>
+            <div>
+              <div class="font-bold text-sm">DXP &amp; Opti ID SSO</div>
+              <p class="text-xs mt-0.5">Ensure the CMS 12 application is connected to Opti ID for single sign-on and user role governance.</p>
+            </div>
+          </div>
+
+          <div class="opal-card bg-[#FFFFFF] p-4 flex items-start gap-3.5">
+            <span class="w-7 h-7 rounded-full bg-[#ABFF44] border border-[#08251A] flex items-center justify-center font-bold text-xs shrink-0">2</span>
+            <div>
+              <div class="font-bold text-sm">Opal Chat + Content Delivery API Packages</div>
+              <p class="text-xs mt-0.5">Install <code class="font-mono">Optimizely.Cms.OpalChat</code> for the embedded UI drawer and <code class="font-mono">EPiServer.ContentDeliveryApi.Cms</code> so Mark can inspect published/draft models via REST.</p>
+            </div>
+          </div>
+
+          <div class="opal-card bg-[#FFFFFF] p-4 flex items-start gap-3.5">
+            <span class="w-7 h-7 rounded-full bg-[#ABFF44] border border-[#08251A] flex items-center justify-center font-bold text-xs shrink-0">3</span>
+            <div>
+              <div class="font-bold text-sm">Browser Cookie Policy</div>
+              <p class="text-xs mt-0.5">Allow third-party cookies in the editorial browser session so the embedded Opal iframe authenticates seamlessly.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lg:col-span-7">
+        <div class="opal-card bg-[#08251A] text-[#FFFFFF] p-6 md:p-8 space-y-5">
+          <div class="flex items-center justify-between border-b border-[#197050] pb-3">
+            <span class="mono-caption text-xs text-[#ABFF44]">CMS 12 CONFIGURATION (NO GRAPH REQUIRED)</span>
+            <button onclick="copyConfig()" id="copy-btn" class="px-3 py-1 bg-[#ABFF44] text-[#08251A] rounded-full text-xs font-bold mono-caption">Copy Snippet</button>
+          </div>
+
+          <pre id="config-snippet" class="font-mono text-xs text-[#E4F0DA] bg-[#0D3A29] p-4 rounded-2xl border border-[#197050] overflow-x-auto leading-relaxed">// 1. Install NuGet Packages
+dotnet add package Optimizely.Cms.OpalChat
+dotnet add package EPiServer.ContentDeliveryApi.Cms
+
+// 2. Register in Startup.cs / Program.cs
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddCms();
+    services.AddOptimizelyIdentity();
+    services.AddOpalChat(); // Enables Mark AI Chat Drawer in CMS 12 UI
+
+    // Enables REST API v3.0 so Mark tools can inspect pages/blocks without Graph
+    services.AddContentDeliveryApi(options =&gt;
+    {
+        options.SiteDefinitionApiEnabled = true;
+    });
+}
+
+// 3. Configure appsettings.json
+{
+  "EPiServer": {
+    "Cms": {
+      "OptimizelyIdentity": {
+        "Authority": "https://login.optimizely.com/oauth2/default",
+        "InstanceId": "&lt;YOUR_INSTANCE_ID&gt;",
+        "ClientId": "&lt;YOUR_CLIENT_ID&gt;",
+        "ClientSecret": "&lt;YOUR_CLIENT_SECRET&gt;"
+      }
+    }
+  },
+  "Optimizely": {
+    "OpalChat": {
+      "InstanceId": "&lt;YOUR_INSTANCE_ID&gt;",
+      "ServiceUrl": "https://opal-backend.optimizely.com"
+    }
+  }
+}</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER CTA -->
+  <footer class="max-w-7xl mx-auto px-6 pt-8">
+    <div class="opal-card bg-[#ABFF44] text-[#08251A] p-8 md:p-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+      <div>
+        <div class="mono-caption text-xs font-bold uppercase mb-1">SHUTTERFLY × OPTIMIZELY OPAL</div>
+        <h3 class="text-2xl md:text-4xl brand-heading">YOU'RE FREE TO CREATE, OPTIMIZE &amp; SHIP ON CMS 12.</h3>
+        <p class="text-sm mt-1 max-w-xl">
+          Embedded editorial copilot in On-Page Editing + direct REST API v3.0 content inspection + Dual-Artifact C#/Razor handoff—purpose-built for Shutterfly's current CMS 12 architecture.
+        </p>
+      </div>
+      <a href="https://docs.optimizely.com/cms-12/docs/optimizely-opal-chat-for-cms-12" target="_blank" rel="noopener noreferrer" class="opal-btn bg-[#08251A] text-[#FFFFFF] px-6 py-3.5 text-sm shrink-0 flex items-center gap-2">
+        Read Official CMS 12 Docs
+        <span class="material-symbols-rounded text-lg">open_in_new</span>
+      </a>
+    </div>
+  </footer>
+
+  <script>
+    // Keep the anchor scroll offset equal to the (possibly wrapped) sticky header height
+    (function () {
+      var header = document.querySelector('header');
+      if (!header) return;
+      function sync() {
+        document.documentElement.style.scrollPaddingTop = (header.offsetHeight + 8) + 'px';
+      }
+      sync();
+      window.addEventListener('resize', sync);
+    })();
+    const apiSnippets = {
+      url: `// 1. Resolve Shutterfly Friendly URL directly via CMS 12 Content Delivery API v3.0
+// Tool call: fetch_cms12_content(match_url="/en/holiday-photo-books/", expand="*")
+GET /api/episerver/v3.0/content?ContentUrl=/en/holiday-photo-books/&expand=*
+Accept: application/json
+Accept-Language: en
+
+// Response (Expanded Page + Nested ContentArea Blocks — No Graph Needed):
+{
+  "contentLink": { "id": 1042, "guidValue": "f9a1c3d0-44b2-4a8e-9102-88b31e20a119" },
+  "name": "Holiday Photo Books",
+  "contentType": ["Page", "SeasonalCategoryPage"],
+  "existingLanguages": [{ "name": "en" }],
+  "mainContentArea": {
+    "expandedValue": [
+      {
+        "contentLink": { "id": 2010 },
+        "name": "Cyber Week 50% Off Hero Block",
+        "contentType": ["Block", "HolidayPhotoBookHeroBlock"],
+        "headline": "Turn This Year's Camera Roll Into an Heirloom",
+        "promoBadge": "CODE: SAVE50 • ENDS SUNDAY"
+      }
+    ]
+  }
+}`,
+      id: `// 2. Fetch Specific CMS 12 Content Item or Shared Block by ID with Full Expansion
+// Tool call: fetch_cms12_content(content_id="1042", expand="mainContentArea", language="en")
+GET /api/episerver/v3.0/content/1042?expand=mainContentArea
+Accept: application/json
+Accept-Language: en
+
+// Enables Mark AI to:
+// - Audit every block inside MainContentArea, PromoStripArea, and FooterArea
+// - Check localized property values and alt text across Shutterfly's seasonal blocks
+// - Suggest copy/SEO updates grounded in the real published or draft JSON payload`,
+      children: `// 3. Traverse Campaign Hierarchy (Children or Ancestors) Directly in CMS 12
+// Tool call: fetch_cms12_content(content_id="1042", sub_path="children")
+GET /api/episerver/v3.0/content/1042/children
+Accept: application/json
+
+// Response (Immediate Child Pages under Holiday Photo Books):
+[
+  { "contentLink": { "id": 1088 }, "name": "Layflat Photo Books", "routeSegment": "layflat" },
+  { "contentLink": { "id": 1089 }, "name": "Family Yearbook Photo Books", "routeSegment": "yearbook" },
+  { "contentLink": { "id": 1094 }, "name": "Wedding Guest Books", "routeSegment": "wedding-guest-books" }
+]`
+    };
+
+    function setApiMode(mode) {
+      document.getElementById('api-code-display').textContent = apiSnippets[mode];
+      const modes = ['url', 'id', 'children'];
+      modes.forEach(m => {
+        const btn = document.getElementById('btn-api-' + m);
+        if (m === mode) {
+          btn.className = 'px-3 py-1 text-xs rounded-full font-mono bg-[#ABFF44] text-[#08251A] font-bold';
+        } else {
+          btn.className = 'px-3 py-1 text-xs rounded-full font-mono bg-[#0D3A29] text-[#E4F0DA] border border-[#197050]';
+        }
+      });
+    }
+
+    function filterMatrix(category) {
+      const rows = document.querySelectorAll('#matrix-tbody tr');
+      rows.forEach(row => {
+        if (category === 'all' || row.getAttribute('data-cat') === category) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+
+      ['all', 'editorial', 'engineering'].forEach(cat => {
+        const btn = document.getElementById('filter-' + cat);
+        if (cat === category) {
+          btn.className = 'opal-btn px-4 py-1.5 text-xs bg-[#ABFF44] text-[#08251A]';
+        } else {
+          btn.className = 'opal-btn px-4 py-1.5 text-xs bg-[#FFFFFF] text-[#08251A]';
+        }
+      });
+    }
+
+    function switchArtifactTab(tab) {
+      const mPanel = document.getElementById('panel-marketer');
+      const dPanel = document.getElementById('panel-developer');
+      const mTab = document.getElementById('tab-marketer');
+      const dTab = document.getElementById('tab-developer');
+
+      if (tab === 'marketer') {
+        mPanel.classList.remove('hidden');
+        dPanel.classList.add('hidden');
+        mTab.className = 'opal-btn px-6 py-3 text-sm bg-[#ABFF44] text-[#08251A] flex items-center gap-2';
+        dTab.className = 'opal-btn px-6 py-3 text-sm bg-[#FFFFFF] text-[#08251A] flex items-center gap-2';
+      } else {
+        mPanel.classList.add('hidden');
+        dPanel.classList.remove('hidden');
+        dTab.className = 'opal-btn px-6 py-3 text-sm bg-[#ABFF44] text-[#08251A] flex items-center gap-2';
+        mTab.className = 'opal-btn px-6 py-3 text-sm bg-[#FFFFFF] text-[#08251A] flex items-center gap-2';
+      }
+    }
+
+    function copyConfig() {
+      const text = document.getElementById('config-snippet').innerText;
+      navigator.clipboard.writeText(text);
+      const btn = document.getElementById('copy-btn');
+      btn.textContent = 'Copied!';
+      setTimeout(() => { btn.textContent = 'Copy Snippet'; }, 2000);
+    }
+
+    // Initialize default snippet
+    setApiMode('url');
+  </script>
+</body>
+</html>

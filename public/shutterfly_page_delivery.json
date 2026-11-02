@@ -1,0 +1,43 @@
+{
+  "contentLink": { "id": 1042, "workId": 0 },
+  "name": "Holiday Photo Books Campaign Page",
+  "contentType": ["Page", "CampaignLandingPage"],
+  "mainContentArea": [
+    {
+      "contentLink": { "id": 2010 },
+      "name": "Level 1 - Main Hero Container",
+      "contentType": ["Block", "ContainerBlock"],
+      "controlTab": { "isVisible": true, "theme": "holiday-red" },
+      "children": [
+        {
+          "contentLink": { "id": 3055 },
+          "name": "Level 2 - Holiday Promo Grid Row",
+          "contentType": ["Block", "GridRowBlock"],
+          "controlTab": { "columns": 3 },
+          "children": [
+            {
+              "contentLink": { "id": 4892 },
+              "name": "Level 3 - 50% Off Hardcover Photo Book Card",
+              "contentType": ["Block", "PromoCardBlock"],
+              "controlTab": {
+                "headline": "50% Off Hardcover Photo Books",
+                "showPromoBadge": true,
+                "ctaUrl": "/photo-books/hardcover"
+              },
+              "deviceTabs": {
+                "desktop": { "inheritFromControl": true, "showPromoBadge": true, "overridePriceText": null },
+                "tablet": { "inheritFromControl": true, "showPromoBadge": true, "overridePriceText": null },
+                "mobile": {
+                  "inheritFromControl": false,
+                  "showPromoBadge": false,
+                  "overridePriceText": "Excludes Disney Collection",
+                  "hiddenLegacyBannerId": "BUG_BANNER_99"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

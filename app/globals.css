@@ -6,6 +6,17 @@
   --foreground: #171717;
 }
 
+/* Smooth in-page anchor scrolling; offset by the sticky header (h-16). */
+html {
+  scroll-padding-top: 4rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

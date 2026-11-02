@@ -4,6 +4,7 @@ import Script from "next/script";
 import OptimizelyActivation from "./_components/OptimizelyActivation";
 import { QuickLinks } from "./_components/QuickLinks";
 import DevQuickLinks from "./_components/DevQuickLinks";
+import PageLinksWidget from "./_components/PageLinksWidget";
 import { siteConfig } from "@/lib/siteConfig";
 import "./globals.css";
 import "@/cms/registry";
@@ -40,6 +41,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      data-scroll-behavior="smooth"
       className={`${displayFont.variable} ${bodyFont.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
@@ -60,6 +62,7 @@ export default function RootLayout({
         */}
         {/* <QuickLinks /> */}
         <DevQuickLinks />
+        <PageLinksWidget />
         {WEB_SNIPPET_ID && (
           <>
             <Script

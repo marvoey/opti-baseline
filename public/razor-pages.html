@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mark + .NET Razor Pages | Architectural Breakdown & Workflow</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700;900&family=Roboto+Mono:wght@400;500&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@40,300,0..1,0" />
+  <style>
+    :root {
+      --lf-green: #ABFF44;
+      --grass: #7DDD3D;
+      --good-to-go: #3AB533;
+      --neutral-1: #FFFFFF;
+      --neutral-2: #EFF6E9;
+      --neutral-3: #E4F0DA;
+      --light-blue: #91DBDA;
+      --dark-fir: #08251A;
+      --ext-1: #ABFF44;
+      --ext-3: #40A142;
+      --ext-4: #2E8C45;
+      --ext-6: #166E49;
+      --ext-8: #0D593E;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      color: var(--dark-fir);
+      background-color: var(--neutral-3);
+      line-height: 1.3;
+    }
+
+    h1, h2, .font-heading {
+      font-family: 'Roboto Condensed', sans-serif;
+      line-height: 1.04;
+      letter-spacing: -0.02em;
+    }
+
+    h1 {
+      letter-spacing: -0.03em;
+    }
+
+    .font-mono-caption {
+      font-family: 'Roboto Mono', monospace;
+      letter-spacing: 0.03em;
+      line-height: 1.25;
+    }
+
+    .opti-card {
+      border-radius: 32px;
+      border: 2px solid var(--dark-fir);
+    }
+
+    .opti-pill {
+      border-radius: 32px;
+      border: 1.5px solid var(--dark-fir);
+    }
+
+    .material-symbols-rounded {
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 40;
+      vertical-align: middle;
+    }
+
+    .nav-item.active {
+      background-color: var(--lf-green);
+      font-weight: 700;
+    }
+
+    .nav-item.active .material-symbols-rounded {
+      font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 40;
+    }
+
+    /* Upwards Extrusion Effect - 5 countable flat steps */
+    .upwards-wrap {
+      position: relative;
+      display: inline-block;
+      margin-left: 14px;
+      margin-bottom: 10px;
+    }
+    .upwards-layer {
+      font-family: 'Roboto Condensed', sans-serif;
+      font-weight: 900;
+      text-transform: uppercase;
+      -webkit-text-stroke: 1.5px var(--dark-fir);
+      paint-order: stroke fill;
+      user-select: none;
+      line-height: 1;
+    }
+    .upwards-layer-base {
+      position: relative;
+      z-index: 5;
+      color: var(--ext-1);
+    }
+    .upwards-step {
+      position: absolute;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+    }
+    .upwards-step-2 { z-index: 4; color: var(--ext-3); transform: translate(-3px, 3px); }
+    .upwards-step-3 { z-index: 3; color: var(--ext-4); transform: translate(-6px, 6px); }
+    .upwards-step-4 { z-index: 2; color: var(--ext-6); transform: translate(-9px, 9px); }
+    .upwards-step-5 { z-index: 1; color: var(--ext-8); transform: translate(-12px, 12px); }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--neutral-3);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--dark-fir);
+      border-radius: 32px;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col lg:flex-row">
+
+  <!-- Mobile Header -->
+  <header class="lg:hidden sticky top-0 z-50 bg-[#FFFFFF] border-b-2 border-[#08251A] px-6 py-4 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 bg-[#ABFF44] opti-pill flex items-center justify-center">
+        <span class="material-symbols-rounded text-[#08251A]">bolt</span>
+      </div>
+      <span class="font-heading font-black text-xl tracking-tight uppercase">Optimizely Opal</span>
+    </div>
+    <button id="mobileMenuBtn" class="opti-pill px-4 py-2 bg-[#EFF6E9] flex items-center gap-2 font-medium text-sm">
+      <span class="material-symbols-rounded text-lg">menu</span>
+      Sections
+    </button>
+  </header>
+
+  <!-- Side Menu Navigation -->
+  <aside id="sidebar" class="fixed inset-y-0 left-0 z-40 w-80 bg-[#FFFFFF] border-r-2 border-[#08251A] transform -translate-x-full lg:translate-x-0 transition-transform duration-200 ease-in-out flex flex-col justify-between p-6 overflow-y-auto">
+    <div>
+      <!-- Brand Header -->
+      <div class="flex items-center gap-3 pb-6 mb-6 border-b-2 border-[#08251A]">
+        <div class="w-11 h-11 bg-[#ABFF44] opti-pill flex items-center justify-center shrink-0">
+          <span class="material-symbols-rounded text-[#08251A] text-2xl" style="font-variation-settings: 'FILL' 1;">bolt</span>
+        </div>
+        <div>
+          <div class="font-mono-caption text-xs uppercase text-[#08251A] font-medium">Architecture Brief</div>
+          <div class="font-heading font-black text-2xl uppercase tracking-tight">Mark + .NET Razor</div>
+        </div>
+      </div>
+
+      <!-- Navigation List -->
+      <div class="font-mono-caption text-xs uppercase mb-3 px-3 text-[#08251A]">On This Page</div>
+      <nav class="space-y-2" id="sideNav">
+        <a href="#overview" class="nav-item active opti-pill flex items-center gap-3 px-4 py-3 text-sm transition-colors hover:bg-[#EFF6E9]">
+          <span class="material-symbols-rounded text-xl">bolt</span>
+          <span>Executive Thesis</span>
+        </a>
+        <a href="#persona-dilemma" class="nav-item opti-pill flex items-center gap-3 px-4 py-3 text-sm transition-colors hover:bg-[#EFF6E9]">
+          <span class="material-symbols-rounded text-xl">groups</span>
+          <span>1. The Persona Dilemma</span>
+        </a>
+        <a href="#preview-challenge" class="nav-item opti-pill flex items-center gap-3 px-4 py-3 text-sm transition-colors hover:bg-[#EFF6E9]">
+          <span class="material-symbols-rounded text-xl">preview</span>
+          <span>2. The Preview Challenge</span>
+        </a>
+        <a href="#cms-comparison" class="nav-item opti-pill flex items-center gap-3 px-4 py-3 text-sm transition-colors hover:bg-[#EFF6E9]">
+          <span class="material-symbols-rounded text-xl">compare_arrows</span>
+          <span>3. CMS 12 vs. CMS SaaS</span>
+        </a>
+        <a href="#ideal-workflow" class="nav-item opti-pill flex items-center gap-3 px-4 py-3 text-sm transition-colors hover:bg-[#EFF6E9]">
+          <span class="material-symbols-rounded text-xl">account_tree</span>
+          <span>4. Ideal Dual-Artifact Flow</span>
+        </a>
+        <a href="#interactive-sandbox" class="nav-item opti-pill flex items-center gap-3 px-4 py-3 text-sm transition-colors hover:bg-[#EFF6E9]">
+          <span class="material-symbols-rounded text-xl">code_blocks</span>
+          <span>5. Live Dual-View Simulator</span>
+        </a>
+      </nav>
+    </div>
+
+    <!-- Bottom Callout Card -->
+    <div class="mt-8 bg-[#EFF6E9] opti-card p-5">
+      <div class="flex items-center gap-2 mb-2">
+        <span class="material-symbols-rounded text-[#08251A]" style="font-variation-settings: 'FILL' 1;">bolt</span>
+        <span class="font-mono-caption text-xs uppercase font-medium">Key Principle</span>
+      </div>
+      <p class="text-sm font-medium mb-3">
+        Move marketers from waiting to making. Hide C# complexity behind instant visual previews.
+      </p>
+      <div class="font-mono-caption text-xs bg-[#ABFF44] opti-pill px-3 py-1.5 inline-block font-medium">
+        You're free to create.
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content Area -->
+  <main class="flex-1 lg:ml-80 p-6 md:p-10 lg:p-14 max-w-6xl mx-auto space-y-12">
+
+    <!-- Hero / Overview Section -->
+    <section id="overview" class="bg-[#FFFFFF] opti-card p-8 md:p-12">
+      <div class="inline-flex items-center gap-2 bg-[#EFF6E9] opti-pill px-4 py-1.5 mb-6">
+        <span class="material-symbols-rounded text-lg" style="font-variation-settings: 'FILL' 1;">bolt</span>
+        <span class="font-mono-caption text-xs uppercase font-medium">Optimizely Opal • Architecture & Strategy</span>
+      </div>
+
+      <h1 class="text-4xl md:text-6xl font-black uppercase mb-6 text-[#08251A]">
+        Can Marketers Use Mark to Create & Preview .NET Razor
+        <span class="upwards-wrap">
+          <span class="upwards-layer upwards-step upwards-step-5">Pages?</span>
+          <span class="upwards-layer upwards-step upwards-step-4">Pages?</span>
+          <span class="upwards-layer upwards-step upwards-step-3">Pages?</span>
+          <span class="upwards-layer upwards-step upwards-step-2">Pages?</span>
+          <span class="upwards-layer upwards-layer-base">Pages?</span>
+        </span>
+      </h1>
+
+      <p class="text-lg md:text-xl max-w-3xl mb-8 leading-relaxed">
+        Enough waiting on two-sprint engineering backlogs just to test a new landing page layout. When Mark acts as the bridge between <strong>marketer intent</strong> and <strong>CMS 12 Razor implementation</strong>, teams get total template liberation—without dragging marketers into C# syntax.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="bg-[#ABFF44] opti-card p-6">
+          <div class="font-mono-caption text-xs uppercase mb-2">Can Mark Write Razor?</div>
+          <div class="font-heading font-black text-2xl uppercase mb-2">100% Yes</div>
+          <p class="text-sm">Generates idiomatic CMS 12 <code>.cshtml</code> views, <code>RazorPageModel&lt;T&gt;</code>, and <code>Html.PropertyFor</code> helpers.</p>
+        </div>
+        <div class="bg-[#91DBDA] opti-card p-6">
+          <div class="font-mono-caption text-xs uppercase mb-2">Can Canvas Run Raw Razor?</div>
+          <div class="font-heading font-black text-2xl uppercase mb-2">Not Natively</div>
+          <p class="text-sm">Browsers can't run C# or Kestrel pipelines directly—so Mark pairs Razor code with a live HTML/Tailwind twin.</p>
+        </div>
+        <div class="bg-[#EFF6E9] opti-card p-6">
+          <div class="font-mono-caption text-xs uppercase mb-2">The Winning Play</div>
+          <div class="font-heading font-black text-2xl uppercase mb-2">Dual-Artifact</div>
+          <p class="text-sm">Marketers iterate visually in Canvas; developers grab the synced <code>.cshtml</code> + <code>PageData</code> model.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 1: The Persona Dilemma -->
+    <section id="persona-dilemma" class="bg-[#FFFFFF] opti-card p-8 md:p-12">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="w-10 h-10 bg-[#ABFF44] opti-pill flex items-center justify-center">
+          <span class="material-symbols-rounded">groups</span>
+        </span>
+        <span class="font-mono-caption text-xs uppercase font-medium">Section 01 • Mindset & Workflow</span>
+      </div>
+      <h2 class="text-3xl md:text-4xl font-black uppercase mb-4">The Persona Dilemma: Marketers vs. Razor</h2>
+      <p class="text-base md:text-lg mb-8 max-w-3xl">
+        Marketers don't wake up wanting to edit <code>_ViewStart.cshtml</code>. They want to get unstuck. Here is how to separate the operational friction from the actual business outcome.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Card 1 -->
+        <div class="bg-[#EFF6E9] opti-card p-6 flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 bg-[#FFFFFF] opti-pill flex items-center justify-center mb-4">
+              <span class="material-symbols-rounded text-2xl">block</span>
+            </div>
+            <h3 class="font-heading font-bold text-2xl uppercase mb-3">Marketers Don't Want Raw .cshtml</h3>
+            <p class="text-sm leading-relaxed">
+              Razor files carry C# directives (<code>@inject</code>, <code>@model</code>), layout inheritance, and Git pull request gates. Handing raw Razor to a marketer pulls them back into admin purgatory.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-[#08251A]/20 font-mono-caption text-xs uppercase">
+            Friction: High Technical Overhead
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="bg-[#EFF6E9] opti-card p-6 flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 bg-[#ABFF44] opti-pill flex items-center justify-center mb-4">
+              <span class="material-symbols-rounded text-2xl">rocket_launch</span>
+            </div>
+            <h3 class="font-heading font-bold text-2xl uppercase mb-3">What They Actually Want: Template Liberation</h3>
+            <p class="text-sm leading-relaxed">
+              They want to dream up a new campaign layout or product comparison experience on Tuesday morning and see it live before lunch—without waiting two sprints for frontend scaffolding.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-[#08251A]/20 font-mono-caption text-xs uppercase">
+            Goal: Speed from Idea to Preview
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="bg-[#ABFF44] opti-card p-6 flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 bg-[#FFFFFF] opti-pill flex items-center justify-center mb-4">
+              <span class="material-symbols-rounded text-2xl" style="font-variation-settings: 'FILL' 1;">bolt</span>
+            </div>
+            <h3 class="font-heading font-bold text-2xl uppercase mb-3">The Sweet Spot: Mark as Translator</h3>
+            <p class="text-sm leading-relaxed">
+              The marketer prompts in plain English. Mark renders an interactive visual mockup for stakeholder sign-off <em>and</em> writes the production Optimizely CMS 12 Razor template behind the scenes.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-[#08251A] font-mono-caption text-xs uppercase font-medium">
+            Outcome: Zero-Friction Handoff
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: The Preview Challenge -->
+    <section id="preview-challenge" class="bg-[#FFFFFF] opti-card p-8 md:p-12">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="w-10 h-10 bg-[#91DBDA] opti-pill flex items-center justify-center">
+          <span class="material-symbols-rounded">preview</span>
+        </span>
+        <span class="font-mono-caption text-xs uppercase font-medium">Section 02 • Technical Reality Check</span>
+      </div>
+      <h2 class="text-3xl md:text-4xl font-black uppercase mb-4">The Preview Challenge: Server-Side .NET vs. Browser Canvas</h2>
+      <p class="text-base md:text-lg mb-8 max-w-3xl">
+        Why can't a browser just open a <code>.cshtml</code> file and render it? Because Razor is a server-side template engine tightly bound to the ASP.NET Core runtime and Optimizely's content pipeline.
+      </p>
+
+      <!-- Comparison Table -->
+      <div class="overflow-x-auto mb-8">
+        <table class="w-full border-collapse bg-[#EFF6E9] opti-card overflow-hidden">
+          <thead>
+            <tr class="bg-[#ABFF44] border-b-2 border-[#08251A] text-left">
+              <th class="p-5 font-heading font-bold text-lg uppercase">Dimension</th>
+              <th class="p-5 font-heading font-bold text-lg uppercase">Canvas Native Preview</th>
+              <th class="p-5 font-heading font-bold text-lg uppercase">.NET Razor (.cshtml) Execution</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-[#08251A]/20 text-sm">
+            <tr>
+              <td class="p-5 font-bold">Execution Environment</td>
+              <td class="p-5">Client-side sandboxed browser iframe (HTML, Tailwind CSS, React, Next.js).</td>
+              <td class="p-5">ASP.NET Core Kestrel server, Roslyn compiler, and C# Dependency Injection.</td>
+            </tr>
+            <tr>
+              <td class="p-5 font-bold">Data Binding</td>
+              <td class="p-5">Mock JSON state or static DOM attributes rendered immediately.</td>
+              <td class="p-5">Requires Optimizely <code>CurrentContent</code>, <code>IContentLoader</code>, and <code>RazorPageModel&lt;T&gt;</code>.</td>
+            </tr>
+            <tr>
+              <td class="p-5 font-bold">On-Page Editing Helpers</td>
+              <td class="p-5">Visual HTML preview with interactive controls.</td>
+              <td class="p-5">Server-rendered <code>@Html.PropertyFor(m =&gt; m.Heading)</code> &amp; <code>ContentArea</code> tags.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Two Solutions -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-[#E4F0DA] opti-card p-6">
+          <div class="inline-block bg-[#ABFF44] opti-pill px-3 py-1 font-mono-caption text-xs uppercase font-medium mb-3">
+            Recommended Pattern
+          </div>
+          <h3 class="font-heading font-bold text-2xl uppercase mb-2">Option A: The Dual-Artifact Pattern</h3>
+          <p class="text-sm mb-4">
+            Mark generates a <strong>visual HTML/Tailwind twin</strong> inside Canvas so the marketer can preview, tweak copy, and test responsive breakpoints in real time—while simultaneously maintaining the companion <code>.cshtml</code> and <code>.cshtml.cs</code> files for engineering.
+          </p>
+          <ul class="space-y-2 text-sm">
+            <li class="flex items-center gap-2">
+              <span class="material-symbols-rounded text-lg">check_circle</span>
+              <span>Zero server compilation latency during ideation</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="material-symbols-rounded text-lg">check_circle</span>
+              <span>1:1 mapping between Tailwind DOM and Razor <code>PropertyFor</code></span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-[#EFF6E9] opti-card p-6">
+          <div class="inline-block bg-[#91DBDA] opti-pill px-3 py-1 font-mono-caption text-xs uppercase font-medium mb-3">
+            Heavyweight Alternative
+          </div>
+          <h3 class="font-heading font-bold text-2xl uppercase mb-2">Option B: Sandbox .NET Compilation</h3>
+          <p class="text-sm mb-4">
+            Mark spins up a headless .NET runtime or <code>RazorEngineCore</code> inside its Linux VM, stubs out mock <code>PageData</code> models, compiles the Razor view, and pipes the rendered HTML string back to Canvas.
+          </p>
+          <ul class="space-y-2 text-sm">
+            <li class="flex items-center gap-2">
+              <span class="material-symbols-rounded text-lg">warning</span>
+              <span>Requires mocking <code>EPiServer.Core</code> and <code>Html.PropertyFor</code></span>
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="material-symbols-rounded text-lg">warning</span>
+              <span>Slower feedback loop for simple visual/copy iterations</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: CMS 12 vs CMS SaaS -->
+    <section id="cms-comparison" class="bg-[#FFFFFF] opti-card p-8 md:p-12">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="w-10 h-10 bg-[#ABFF44] opti-pill flex items-center justify-center">
+          <span class="material-symbols-rounded">compare_arrows</span>
+        </span>
+        <span class="font-mono-caption text-xs uppercase font-medium">Section 03 • Ecosystem Alignment</span>
+      </div>
+      <h2 class="text-3xl md:text-4xl font-black uppercase mb-4">Where This Fits: CMS 12 (PaaS) vs. CMS SaaS</h2>
+      <p class="text-base md:text-lg mb-8 max-w-3xl">
+        Optimizely supports two distinct architectural paradigms. How Mark assists marketers depends on whether the customer runs coupled .NET MVC/Razor or modern headless Visual Builder.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- CMS 12 -->
+        <div class="bg-[#EFF6E9] opti-card p-7">
+          <div class="flex items-center justify-between mb-4">
+            <span class="font-mono-caption text-xs uppercase bg-[#FFFFFF] opti-pill px-3 py-1">Optimizely CMS 12 (.NET)</span>
+            <span class="material-symbols-rounded text-2xl">terminal</span>
+          </div>
+          <h3 class="font-heading font-black text-2xl uppercase mb-3">Coupled MVC &amp; Razor Pages</h3>
+          <p class="text-sm mb-4">
+            In CMS 12, templates are tightly coupled to C# Content Types. Historically, marketers have been locked into whatever Page Types and Content Areas developers built months ago.
+          </p>
+          <div class="bg-[#FFFFFF] opti-card p-4 space-y-2 text-sm">
+            <div class="font-bold uppercase font-heading text-base">How Mark Accelerates CMS 12:</div>
+            <p>• Scaffolds <code>[ContentType]</code> C# classes with data annotations.</p>
+            <p>• Generates <code>RazorPageModel&lt;T&gt;</code> &amp; <code>.cshtml</code> templates.</p>
+            <p>• Gives marketers a live HTML preview to validate before submitting a dev ticket.</p>
+          </div>
+        </div>
+
+        <!-- CMS SaaS -->
+        <div class="bg-[#91DBDA] opti-card p-7">
+          <div class="flex items-center justify-between mb-4">
+            <span class="font-mono-caption text-xs uppercase bg-[#FFFFFF] opti-pill px-3 py-1">Optimizely CMS SaaS</span>
+            <span class="material-symbols-rounded text-2xl">view_quilt</span>
+          </div>
+          <h3 class="font-heading font-black text-2xl uppercase mb-3">Visual Builder &amp; Composition</h3>
+          <p class="text-sm mb-4">
+            In CMS SaaS, the paradigm moves away from server-side Razor views toward headless frontends (Next.js / React) and the <strong>Visual Builder Composition Model</strong>.
+          </p>
+          <div class="bg-[#FFFFFF] opti-card p-4 space-y-2 text-sm">
+            <div class="font-bold uppercase font-heading text-base">How Mark Accelerates CMS SaaS:</div>
+            <p>• Marketers assemble experiences via Sections, Rows, Columns, and Elements.</p>
+            <p>• Mark generates structured JSON Blueprints or Next.js components backed by Optimizely Graph.</p>
+            <p>• No Razor compilation required.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Ideal Workflow -->
+    <section id="ideal-workflow" class="bg-[#FFFFFF] opti-card p-8 md:p-12">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="w-10 h-10 bg-[#ABFF44] opti-pill flex items-center justify-center">
+          <span class="material-symbols-rounded">account_tree</span>
+        </span>
+        <span class="font-mono-caption text-xs uppercase font-medium">Section 04 • Blueprint</span>
+      </div>
+      <h2 class="text-3xl md:text-4xl font-black uppercase mb-6">The Ideal End-to-End Workflow</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
+        <!-- Step 1 -->
+        <div class="bg-[#EFF6E9] opti-card p-6">
+          <div class="w-10 h-10 bg-[#ABFF44] opti-pill flex items-center justify-center font-heading font-black text-lg mb-4">
+            01
+          </div>
+          <h3 class="font-heading font-bold text-xl uppercase mb-2">Marketer Prompts Intent</h3>
+          <p class="text-sm mb-4">
+            "Create a comparison landing page for our Enterprise Cloud offering with a sticky CTA and 3-tier pricing cards."
+          </p>
+          <span class="font-mono-caption text-xs bg-[#FFFFFF] opti-pill px-3 py-1 inline-block">Plain Language Input</span>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="bg-[#ABFF44] opti-card p-6">
+          <div class="w-10 h-10 bg-[#FFFFFF] opti-pill flex items-center justify-center font-heading font-black text-lg mb-4">
+            02
+          </div>
+          <h3 class="font-heading font-bold text-xl uppercase mb-2">Mark Generates Dual Artifacts</h3>
+          <p class="text-sm mb-4">
+            Mark renders an instant interactive HTML preview in Canvas for the marketer, while generating synchronized <code>.cshtml</code> + C# model code.
+          </p>
+          <span class="font-mono-caption text-xs bg-[#FFFFFF] opti-pill px-3 py-1 inline-block">Preview + Code Sync</span>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="bg-[#91DBDA] opti-card p-6">
+          <div class="w-10 h-10 bg-[#FFFFFF] opti-pill flex items-center justify-center font-heading font-black text-lg mb-4">
+            03
+          </div>
+          <h3 class="font-heading font-bold text-xl uppercase mb-2">One-Click Developer Handoff</h3>
+          <p class="text-sm mb-4">
+            Once the marketer approves the visual experience, engineering exports the CMS 12 <code>ArticlePage.cs</code>, <code>ProductModel.cs</code>, and Razor view.
+          </p>
+          <span class="font-mono-caption text-xs bg-[#FFFFFF] opti-pill px-3 py-1 inline-block">PR Ready in Minutes</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5: Interactive Dual-Artifact Simulator -->
+    <section id="interactive-sandbox" class="bg-[#FFFFFF] opti-card p-8 md:p-12">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+        <div>
+          <div class="flex items-center gap-3 mb-2">
+            <span class="w-10 h-10 bg-[#ABFF44] opti-pill flex items-center justify-center">
+              <span class="material-symbols-rounded" style="font-variation-settings: 'FILL' 1;">bolt</span>
+            </span>
+            <span class="font-mono-caption text-xs uppercase font-medium">Section 05 • Interactive Demo</span>
+          </div>
+          <h2 class="text-3xl md:text-4xl font-black uppercase">Live Dual-Artifact Simulator</h2>
+          <p class="text-sm mt-1">Switch between what the <strong>Marketer previews in Canvas</strong> and the <strong>CMS 12 Razor / C# files</strong> Mark generates behind the scenes.</p>
+        </div>
+
+        <!-- Mode Switcher Buttons -->
+        <div class="flex flex-wrap gap-2">
+          <button onclick="switchTab('preview')" id="tab-preview" class="tab-btn bg-[#ABFF44] opti-pill px-5 py-2.5 text-sm font-medium flex items-center gap-2">
+            <span class="material-symbols-rounded text-lg">visibility</span>
+            Marketer Preview (HTML)
+          </button>
+          <button onclick="switchTab('razor')" id="tab-razor" class="tab-btn bg-[#EFF6E9] opti-pill px-5 py-2.5 text-sm font-medium flex items-center gap-2">
+            <span class="material-symbols-rounded text-lg">code</span>
+            Razor View (.cshtml)
+          </button>
+          <button onclick="switchTab('model')" id="tab-model" class="tab-btn bg-[#EFF6E9] opti-pill px-5 py-2.5 text-sm font-medium flex items-center gap-2">
+            <span class="material-symbols-rounded text-lg">data_object</span>
+            PageModel (.cshtml.cs)
+          </button>
+        </div>
+      </div>
+
+      <!-- Tab 1: Marketer Visual Preview -->
+      <div id="panel-preview" class="tab-panel bg-[#E4F0DA] opti-card p-6 md:p-10">
+        <div class="flex items-center justify-between mb-6 pb-4 border-b border-[#08251A]/20">
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-[#3AB533] border border-[#08251A]"></span>
+            <span class="font-mono-caption text-xs uppercase">Canvas Rendered Preview • On-Page Editable Regions Highlighted</span>
+          </div>
+          <label class="flex items-center gap-2 text-xs font-mono-caption cursor-pointer">
+            <input type="checkbox" id="toggleEditMarkers" checked onchange="toggleMarkers()" class="accent-[#08251A] w-4 h-4" />
+            Show CMS PropertyFor Bindings
+          </label>
+        </div>
+
+        <!-- Simulated Rendered Page -->
+        <div class="bg-[#FFFFFF] opti-card p-8 space-y-6">
+          <div class="property-marker relative p-3 rounded-2xl border-2 border-dashed border-[#08251A] bg-[#EFF6E9]/50">
+            <span class="marker-badge font-mono-caption text-[11px] bg-[#ABFF44] px-2.5 py-0.5 opti-pill inline-block mb-2">
+              @Html.DisplayFor(m =&gt; m.Heading)
+            </span>
+            <h3 class="font-heading font-black text-3xl md:text-5xl uppercase">
+              Swap Limits for Limitless Enterprise Scale
+            </h3>
+          </div>
+
+          <div class="property-marker relative p-3 rounded-2xl border-2 border-dashed border-[#08251A] bg-[#EFF6E9]/50">
+            <span class="marker-badge font-mono-caption text-[11px] bg-[#91DBDA] px-2.5 py-0.5 opti-pill inline-block mb-2">
+              @Html.PropertyFor(m =&gt; m.Introduction)
+            </span>
+            <p class="text-base md:text-lg max-w-2xl">
+              Launch faster, experiment everywhere, and turn every touchpoint into a turning point with Optimizely One.
+            </p>
+          </div>
+
+          <div class="property-marker relative p-4 rounded-2xl border-2 border-dashed border-[#08251A] bg-[#EFF6E9]/50">
+            <span class="marker-badge font-mono-caption text-[11px] bg-[#ABFF44] px-2.5 py-0.5 opti-pill inline-block mb-3">
+              @Html.PropertyFor(m =&gt; m.MainBody) / Pricing ContentArea
+            </span>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div class="bg-[#EFF6E9] opti-card p-5">
+                <div class="font-mono-caption text-xs uppercase mb-1">Tier 01</div>
+                <div class="font-heading font-black text-2xl uppercase mb-2">Create</div>
+                <p class="text-xs mb-4">Structured content &amp; visual experiences at speed.</p>
+                <button class="w-full bg-[#FFFFFF] opti-pill py-2 text-xs font-medium">Explore Plan</button>
+              </div>
+              <div class="bg-[#ABFF44] opti-card p-5">
+                <div class="font-mono-caption text-xs uppercase mb-1">Tier 02 • Most Popular</div>
+                <div class="font-heading font-black text-2xl uppercase mb-2">Optimize</div>
+                <p class="text-xs mb-4">Full-stack experimentation and AI-driven personalization.</p>
+                <button class="w-full bg-[#FFFFFF] opti-pill py-2 text-xs font-medium">Start Free Trial</button>
+              </div>
+              <div class="bg-[#91DBDA] opti-card p-5">
+                <div class="font-mono-caption text-xs uppercase mb-1">Tier 03</div>
+                <div class="font-heading font-black text-2xl uppercase mb-2">Enterprise One</div>
+                <p class="text-xs mb-4">Unstoppable agentic workforce across every digital channel.</p>
+                <button class="w-full bg-[#FFFFFF] opti-pill py-2 text-xs font-medium">Book Demo</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 2: Razor View (.cshtml) -->
+      <div id="panel-razor" class="tab-panel hidden bg-[#EFF6E9] opti-card p-6 md:p-8">
+        <div class="flex items-center justify-between mb-4">
+          <span class="font-mono-caption text-xs uppercase font-medium">Pages/Product.cshtml (Optimizely CMS 12)</span>
+          <button onclick="copyCode('code-razor')" class="bg-[#ABFF44] opti-pill px-4 py-1.5 text-xs font-medium flex items-center gap-1.5">
+            <span class="material-symbols-rounded text-base">content_copy</span>
+            <span id="copy-razor-label">Copy Razor</span>
+          </button>
+        </div>
+        <pre id="code-razor" class="bg-[#FFFFFF] opti-card p-6 overflow-x-auto font-mono-caption text-xs leading-relaxed text-[#08251A]"><code>@using EPiServer.Core
+@using EPiServer.Web.Mvc.Html
+@model AlloyMvcTemplates.Pages.ProductModel
+
+&lt;section class="opti-hero-container"&gt;
+    &lt;h1 class="opti-heading-xl"&gt;
+        @Html.DisplayFor(m =&gt; m.CurrentPage.Heading)
+    &lt;/h1&gt;
+
+    &lt;div class="opti-lead" @Html.EditAttributes(m =&gt; m.CurrentPage.Introduction)&gt;
+        @Html.PropertyFor(m =&gt; m.CurrentPage.Introduction)
+    &lt;/div&gt;
+
+    &lt;div class="opti-content-area"&gt;
+        @Html.PropertyFor(m =&gt; m.CurrentPage.MainBody)
+    &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+      </div>
+
+      <!-- Tab 3: PageModel (.cshtml.cs) -->
+      <div id="panel-model" class="tab-panel hidden bg-[#EFF6E9] opti-card p-6 md:p-8">
+        <div class="flex items-center justify-between mb-4">
+          <span class="font-mono-caption text-xs uppercase font-medium">Pages/Product.cshtml.cs (RazorPageModel&lt;T&gt;)</span>
+          <button onclick="copyCode('code-model')" class="bg-[#ABFF44] opti-pill px-4 py-1.5 text-xs font-medium flex items-center gap-1.5">
+            <span class="material-symbols-rounded text-base">content_copy</span>
+            <span id="copy-model-label">Copy C# Model</span>
+          </button>
+        </div>
+        <pre id="code-model" class="bg-[#FFFFFF] opti-card p-6 overflow-x-auto font-mono-caption text-xs leading-relaxed text-[#08251A]"><code>using EPiServer.Core;
+using EPiServer.Web.Mvc;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace AlloyMvcTemplates.Pages
+{
+    public class ProductModel : RazorPageModel&lt;ArticlePage&gt;, IPageViewModel&lt;ArticlePage&gt;
+    {
+        public ArticlePage CurrentPage =&gt; CurrentContent;
+
+        public LayoutModel Layout { get; set; }
+        public IContent Section { get; set; }
+
+        public void OnGet()
+        {
+            Layout = HttpContext.RequestServices
+                .GetService&lt;PageViewContextFactory&gt;()
+                .CreateLayoutModel(CurrentContent.ContentLink, HttpContext);
+        }
+    }
+}</code></pre>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // Mobile sidebar toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const sidebar = document.getElementById('sidebar');
+    if (mobileMenuBtn) {
+      mobileMenuBtn.addEventListener('click', () => {
+        sidebar.classList.toggle('-translate-x-full');
+      });
+    }
+
+    // Active link highlighting on click & scroll
+    const navLinks = document.querySelectorAll('#sideNav .nav-item');
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+        if (window.innerWidth < 1024) {
+          sidebar.classList.add('-translate-x-full');
+        }
+      });
+    });
+
+    // Simulator Tabs
+    function switchTab(tab) {
+      const tabs = ['preview', 'razor', 'model'];
+      tabs.forEach(t => {
+        const btn = document.getElementById('tab-' + t);
+        const panel = document.getElementById('panel-' + t);
+        if (t === tab) {
+          btn.classList.remove('bg-[#EFF6E9]');
+          btn.classList.add('bg-[#ABFF44]');
+          panel.classList.remove('hidden');
+        } else {
+          btn.classList.remove('bg-[#ABFF44]');
+          btn.classList.add('bg-[#EFF6E9]');
+          panel.classList.add('hidden');
+        }
+      });
+    }
+
+    // Toggle CMS PropertyFor markers in visual preview
+    function toggleMarkers() {
+      const checked = document.getElementById('toggleEditMarkers').checked;
+      const markers = document.querySelectorAll('.property-marker');
+      const badges = document.querySelectorAll('.marker-badge');
+      markers.forEach(m => {
+        if (checked) {
+          m.classList.add('border-2', 'border-dashed', 'border-[#08251A]', 'bg-[#EFF6E9]/50');
+        } else {
+          m.classList.remove('border-2', 'border-dashed', 'border-[#08251A]', 'bg-[#EFF6E9]/50');
+        }
+      });
+      badges.forEach(b => {
+        b.style.display = checked ? 'inline-block' : 'none';
+      });
+    }
+
+    // Copy code helper
+    function copyCode(elementId) {
+      const text = document.getElementById(elementId).innerText;
+      navigator.clipboard.writeText(text);
+    }
+  </script>
+<script src="/pages-widget.js" defer></script>
+</body>
+</html>
