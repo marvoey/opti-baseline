@@ -17,7 +17,9 @@
     "cms:push:all": "node --env-file=.env scripts/cms-push.mjs --all",
     "schema:pull": "node scripts/fetch-openapi.mjs",
     "seed:hero": "node scripts/seed-atomic-hero.mjs",
-    "cms:check": "node --env-file=.env scripts/check-content-types.mjs"
+    "cms:check": "node --env-file=.env scripts/check-content-types.mjs",
+    "screenshot": "node scripts/screenshot.mjs",
+    "screenshot:components": "node scripts/screenshot-components.mjs"
   },
   "dependencies": {
     "@optimizely/cms-cli": "^2.0.0",
@@ -37,6 +39,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.4.2",
+    "playwright": "^1.64.1",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
