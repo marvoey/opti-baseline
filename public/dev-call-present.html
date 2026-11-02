@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>From a launch-day bug to an automated gate</title><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700;900&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reset.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css"><style>
+:root{--df:#08251A;--lf:#ABFF44;--n3:#E4F0DA;--lb:#91DBDA;--g:#7DDD3D;--r:32px}
+.reveal{font-family:'Roboto',sans-serif;font-size:32px;color:var(--df)}
+.reveal .slides{text-align:left}
+.reveal .slides section{text-align:left;width:100%}
+.wrap{box-sizing:border-box;height:720px;padding:40px 64px 36px;display:flex;flex-direction:column;align-items:flex-start}
+.dark .wrap{color:#fff}.light .wrap,.green .wrap{color:var(--df)}
+.hdr{display:flex;justify-content:space-between;align-items:center;width:100%;gap:20px}
+.reveal h1{font-family:'Roboto Condensed',sans-serif;font-weight:900;font-size:108px;line-height:1;letter-spacing:-.03em;margin:26px 0 0;color:inherit;text-transform:none;max-width:1100px}
+.reveal h1.q{font-size:88px}
+.reveal h2{font-family:'Roboto Condensed',sans-serif;font-weight:900;font-size:56px;line-height:1.02;letter-spacing:-.02em;margin:18px 0 12px;color:inherit;text-transform:none}
+.light h2{font-size:48px;margin:14px 0 10px}
+.reveal h3{font-family:'Roboto Condensed',sans-serif;font-weight:900;font-size:38px;line-height:1.05;margin:0 0 14px;color:var(--df);text-transform:none}
+.pill{display:inline-block;background:var(--lf);color:var(--df);font-family:'Roboto Mono',monospace;font-size:19px;letter-spacing:.03em;padding:7px 20px;border-radius:var(--r)}
+.pill.inv{background:var(--df);color:#fff}
+.path{font-family:'Roboto Mono',monospace;font-size:18px;letter-spacing:.03em}
+.reveal .lead{font-size:38px;line-height:1.25;margin:36px 0 0;max-width:1000px}
+.reveal .lead.sm{font-size:34px;margin-top:26px}
+.reveal .cap{font-size:25px;line-height:1.3;margin:18px 0 0}
+.reveal .lbl{margin:0 0 6px;line-height:1.2;font-family:'Roboto Mono',monospace;font-size:19px;letter-spacing:.03em;margin:0 0 6px}
+.rows{margin-top:26px;width:100%}
+.row{display:flex;gap:28px;align-items:baseline;background:var(--n3);color:var(--df);border-radius:var(--r);padding:15px 30px;margin:0 0 14px;font-size:30px;line-height:1.25}
+.light .row{background:#fff}
+.row b{font-family:'Roboto Condensed',sans-serif;font-weight:900;font-size:34px;flex:0 0 340px}
+.row span{flex:1}
+.cmd{background:var(--df);color:var(--lf);font-family:'Roboto Mono',monospace;font-size:34px;border-radius:var(--r);padding:22px 34px;margin:18px 0 8px}
+.tree{width:100%;margin-top:14px}
+.node{background:var(--df);color:#fff;font-family:'Roboto Mono',monospace;font-size:22px;border-radius:var(--r);padding:11px 26px;margin-bottom:12px;width:max-content;max-width:100%}
+.node.hot{background:var(--lf);color:var(--df);font-weight:700}
+.flow{display:flex;align-items:stretch;gap:12px;width:100%;margin-top:36px}
+.flow i{font-style:normal;color:var(--lf);font-size:44px;align-self:center}
+.box{flex:1;background:var(--n3);color:var(--df);border-radius:var(--r);padding:22px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.box b{font-family:'Roboto Condensed',sans-serif;font-weight:900;font-size:34px;line-height:1.05}
+.box span{font-size:23px;line-height:1.3}
+.reveal .chipl{line-height:1.3;background:var(--lb);color:var(--df);border-radius:var(--r);padding:14px 28px;font-size:26px;margin:34px 0 0}
+.two{display:flex;gap:24px;width:100%;align-items:flex-start}
+.colL{flex:1.4;min-width:0}.colR{flex:1;min-width:0}
+.chips{display:flex;flex-direction:column;gap:14px;padding-top:4px}
+.chip{background:var(--lb);color:var(--df);border-radius:var(--r);padding:18px 26px;font-size:27px;line-height:1.25}
+.cards{margin-top:26px;align-items:stretch}
+.card{flex:1;background:var(--n3);color:var(--df);border-radius:var(--r);padding:30px 34px}
+.reveal .card ul{display:block;margin:0;padding-left:26px;font-size:28px;line-height:1.4}
+.card li{margin:0 0 8px}
+.ladder{display:flex;align-items:center;gap:14px;margin-top:48px;flex-wrap:wrap}
+.ladder i{font-style:normal;font-size:34px}
+.ladder .pill{font-size:26px;padding:10px 26px}
+.reveal pre{width:100%;margin:6px 0 4px;font-size:inherit;line-height:inherit;box-shadow:none;background:transparent}
+.reveal pre code{display:block;box-sizing:border-box;width:100%;max-height:none;overflow:hidden;background:var(--df);color:#fff;border-radius:var(--r);padding:22px 30px;font-family:'Roboto Mono',monospace;font-size:21px;line-height:1.42;white-space:pre-wrap;word-break:break-word}
+.reveal pre.prompt code{font-size:24px;line-height:1.42}.reveal pre.big code{font-size:26px;line-height:1.42}
+.reveal pre code .k{color:#ABFF44}.reveal pre code .s{color:#91DBDA}.reveal pre code .f,.reveal pre code .n{color:#7DDD3D}.reveal pre code .c{color:#C3CEAF}
+.reveal .controls{color:var(--lf)}.reveal .progress{color:var(--lf)}
+.reveal .slide-number{background:transparent;color:inherit;font-family:'Roboto Mono',monospace;font-size:16px}
+</style></head><body><div class="reveal"><div class="slides">
+<section class="green" data-background-color="#ABFF44"><div class="wrap"><div class="hdr"><span class="pill inv">Mark for developers</span></div><h1>One bug. Five building blocks.</h1><p class="lead">How Mark helps developers, starting with a mobile bug nobody can find.</p></div></section>
+<section class="dark" data-background-color="#08251A"><div class="wrap"><div class="hdr"><span class="pill">The bug</span></div><h2>Launch day. Mobile looks wrong.</h2><div class="rows"><div class="row"><b>Missing</b><span>The 50% Off badge</span></div><div class="row"><b>Showing</b><span>A stray &ldquo;Excludes Disney Collection&rdquo; line</span></div><div class="row"><b>Fine</b><span>Desktop and tablet</span></div></div><p class="lead sm">The cause: a setting in a device tab, three blocks deep.</p></div></section>
+<section class="light" data-background-color="#E4F0DA"><div class="wrap"><div class="hdr"><span class="pill">Where it hides</span></div><h2>Three levels down, in one tab</h2><div class="tree"><div class="node" style="margin-left:0px">Page 1042 · Holiday Photo Books Campaign Page</div><div class="node" style="margin-left:48px">Level 1 · Main Hero Container (2010)</div><div class="node" style="margin-left:96px">Level 2 · Holiday Promo Grid Row (3055)</div><div class="node" style="margin-left:144px">Level 3 · 50% Off Hardcover Photo Book Card (4892)</div><div class="node hot" style="margin-left:192px">deviceTabs.mobile  ←  the rogue settings live here</div></div><p class="cap">Today, finding this means opening each block and each tab by hand.</p></div></section>
+<section class="dark" data-background-color="#08251A"><div class="wrap"><div class="hdr"><span class="pill">The ladder</span></div><h2>Five steps. Each removes a manual job.</h2><div class="rows"><div class="row fragment"><b>1 &middot; Prompt</b><span>Clicking through blocks and tabs</span></div><div class="row fragment"><b>2 &middot; Specialized Agent</b><span>Rewriting the prompt every time</span></div><div class="row fragment"><b>3 &middot; Skill</b><span>Everyone doing it differently</span></div><div class="row fragment"><b>4 &middot; Tool</b><span>Integration to CMS 12</span></div><div class="row fragment"><b>5 &middot; Workflow Agent</b><span>A person having to start it</span></div></div></div></section>
+<section class="light" data-background-color="#E4F0DA"><div class="wrap"><div class="hdr"><span class="pill">Step 1 · Prompt</span></div><h2>Paste the JSON. Ask it like a bug report.</h2><pre class="prompt"><code>Here's the Content Delivery API v3.0 response for page 1042 (Holiday Photo Books). On mobile, the 50% Off badge is missing and an "Excludes Disney Collection" line shows up. Desktop and tablet are fine.
+
+Walk the full block tree, compare each block's controlTab to its deviceTabs, and tell me:
+- which block and which device tab cause it, with the path from the page down
+- every property that differs from controlTab, plus any keys that don't belong
+- the fix in the CMS editor, and what the corrected JSON should look like</code></pre><p class="cap">No setup. The payload and a clear question.</p></div></section>
+<section class="light" data-background-color="#E4F0DA"><div class="wrap"><div class="hdr"><span class="pill">Step 1 · What it finds</span></div><h2>What was hiding in the mobile tab</h2><div class="two"><div class="colL"><p class="lbl">Block 4892, today</p><pre class=""><code><span class="s">"mobile"</span>: {
+  <span class="s">"inheritFromControl"</span>: <span class="k">false</span>,
+  <span class="s">"showPromoBadge"</span>: <span class="k">false</span>,
+  <span class="s">"overridePriceText"</span>: <span class="s">"Excludes Disney Collection"</span>,
+  <span class="s">"hiddenLegacyBannerId"</span>: <span class="s">"BUG_BANNER_99"</span>
+}</code></pre></div><div class="colR"><p class="lbl">Target state</p><pre class=""><code><span class="s">"mobile"</span>: {
+  <span class="s">"inheritFromControl"</span>: <span class="k">true</span>,
+  <span class="s">"showPromoBadge"</span>: <span class="k">true</span>,
+  <span class="s">"overridePriceText"</span>: <span class="k">null</span>
+}</code></pre></div></div><p class="cap">Broken inheritance, two overrides, and one key that does not belong.</p></div></section>
+<section class="dark" data-background-color="#08251A"><div class="wrap"><div class="hdr"><span class="pill">Step 2 · Specialized Agent</span></div><h2>The prompt becomes an agent</h2><div class="rows"><div class="row"><b>Instructions</b><span>The prompt you just wrote</span></div><div class="row"><b>Inputs</b><span>Page ID or URL, optional payload, reported symptom</span></div><div class="row"><b>Output</b><span>The same findings table every run</span></div></div><p class="lead sm">Same logic. Now it is a form.</p></div></section>
+<section class="light" data-background-color="#E4F0DA"><div class="wrap"><div class="hdr"><span class="pill">Step 3 · Skill</span></div><h2>The know-how, saved once</h2><div class="cmd">/audit-block-tree audit this payload</div><div class="rows"><div class="row"><b>One command</b><span>Works in chat, in any agent, for anyone on the team</span></div><div class="row"><b>Your rules too</b><span>Conventions and checklists that live in someone&rsquo;s head today</span></div></div></div></section>
+<section class="light" data-background-color="#E4F0DA"><div class="wrap"><div class="hdr"><span class="pill">Step 4 · Tool</span><span class="path">app/api/opal/discovery/route.ts (trimmed)</span></div><h2>The agent fetches the JSON itself</h2><div class="two"><div class="colL"><pre class=""><code><span class="k">export</span> <span class="k">function</span> <span class="f">GET</span>() {
+  <span class="k">return</span> Response.<span class="f">json</span>({
+    functions: [
+      {
+        name: <span class="s">'fetch_cms12_content'</span>,
+        endpoint: <span class="s">'/tools/fetch_cms12_content'</span>,
+        http_method: <span class="s">'POST'</span>,
+        <span class="c">// parameters: content_id, sub_path,</span>
+        <span class="c">//   match_url, expand, language</span>
+      },
+    ],
+  });
+}</code></pre></div><div class="colR chips"><div class="chip">A plain Next.js route. No .NET changes.</div><div class="chip">Read-only, with validated inputs.</div><div class="chip">Mark discovers it when the registry syncs.</div></div></div><p class="cap">The demo route serves a mock page that follows the v3.0 contract.</p></div></section>
+<section class="dark" data-background-color="#08251A"><div class="wrap"><div class="hdr"><span class="pill">Step 5 · Workflow Agent</span></div><h2>Nobody has to start it</h2><div class="flow"><div class="box fragment"><b>Publish</b><span>A content publish event</span></div><i>&rarr;</i><div class="box fragment"><b>Block Tree Auditor</b><span>Checks every device tab</span></div><i>&rarr;</i><div class="box fragment"><b>Creative QA</b><span>Compares the build to the mock</span></div><i>&rarr;</i><div class="box fragment"><b>Report</b><span>Result posted to Jira or Slack</span></div></div><p class="chipl">Concept for discussion: caught before launch, not on launch day.</p></div></section>
+<section class="light" data-background-color="#E4F0DA"><div class="wrap"><div class="hdr"><span class="pill">Bonus</span><span class="path">Sketch, not in the repo</span></div><h2>Then stop it happening again</h2><pre class="big"><code><span class="k">import</span> { z } <span class="k">from</span> <span class="s">'zod'</span>;
+
+<span class="k">const</span> DeviceTab = z
+  .<span class="f">object</span>({
+    inheritFromControl: z.<span class="f">boolean</span>(),
+    showPromoBadge: z.<span class="f">boolean</span>(),
+    overridePriceText: z.<span class="f">string</span>().<span class="f">nullable</span>(),
+  })
+  .<span class="f">strict</span>(); <span class="c">// rejects keys like hiddenLegacyBannerId</span></code></pre><p class="cap">A strict schema rejects the rogue key in CI, before it reaches a launch.</p></div></section>
+<section class="dark" data-background-color="#08251A"><div class="wrap"><div class="hdr"><span class="pill">Who does what</span></div><h2>Same building blocks, different jobs</h2><div class="two cards"><div class="card"><h3>SiteOps</h3><ul><li>Run the agent with a page ID</li><li>Edit skills in plain English</li><li>Read the findings and the fix</li></ul></div><div class="card"><h3>Developers</h3><ul><li>Build and govern tools</li><li>Set agent inputs and tool access</li><li>Wire workflows to publish events</li></ul></div></div></div></section>
+<section class="green" data-background-color="#ABFF44"><div class="wrap"><div class="hdr"><span class="pill inv">Recap</span></div><h1 class="q">Which ticket would you automate first?</h1><div class="ladder"><span class="pill inv">Prompt</span><i>&rarr;</i><span class="pill inv">Agent</span><i>&rarr;</i><span class="pill inv">Skill</span><i>&rarr;</i><span class="pill inv">Tool</span><i>&rarr;</i><span class="pill inv">Workflow</span></div></div></section>
+</div></div><script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script><script>Reveal.initialize({width:1280,height:720,margin:0.02,center:false,hash:true,slideNumber:'c/t',transition:'slide',controls:true,progress:true});</script><script src="/dev-quick-links.js" defer></script></body></html>

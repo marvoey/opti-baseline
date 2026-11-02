@@ -69,16 +69,19 @@ export function collectPublicHtml(dir: string, segments: string[] = []): QuickLi
     });
 }
 
-export default function DevQuickLinks() {
+export function getQuickLinkGroups(): LinkGroup[] {
   const cwd = process.cwd();
-  const groups: LinkGroup[] = [
+  return [
     {
       title: 'Pages',
       links: ROUTE_ROOTS.flatMap((root) => collectLinks(path.join(cwd, 'app', root), root, [])),
     },
     { title: 'Static HTML', links: collectPublicHtml(path.join(cwd, 'public')) },
   ].filter((g) => g.links.length > 0);
+}
 
+export default function DevQuickLinks() {
+  const groups = getQuickLinkGroups();
   if (groups.length === 0) return null;
   return <DevQuickLinksMenu groups={groups} />;
 }

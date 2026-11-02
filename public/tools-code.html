@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>What is a Tool? Mark for developers</title><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700;900&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reset.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css"><style>
+:root{--df:#08251A;--lf:#ABFF44;--n3:#E4F0DA;--lb:#91DBDA;--g:#7DDD3D;--r:32px}
+.reveal{font-family:'Roboto',sans-serif;font-size:32px;color:var(--df)}
+.reveal .slides{text-align:left}
+.reveal .slides section{text-align:left;width:100%}
+.wrap{box-sizing:border-box;height:720px;padding:44px 64px 40px;display:flex;flex-direction:column;align-items:flex-start}
+.dark .wrap{color:#fff}.light .wrap,.green .wrap{color:var(--df)}
+.reveal h1{font-family:'Roboto Condensed',sans-serif;font-weight:900;font-size:112px;line-height:1;letter-spacing:-.03em;margin:22px 0 0;color:inherit;text-transform:none}
+.reveal h2{font-family:'Roboto Condensed',sans-serif;font-weight:900;font-size:60px;line-height:1;letter-spacing:-.02em;margin:18px 0 10px;color:inherit;text-transform:none}
+.light h2{font-size:46px;margin:12px 0 6px}
+.pill{display:inline-block;background:var(--lf);color:var(--df);font-family:'Roboto Mono',monospace;font-size:17px;letter-spacing:.03em;padding:6px 18px;border-radius:var(--r)}
+.pill.inv{background:var(--df);color:#fff}
+.lead{font-size:38px;line-height:1.25;margin:26px 0 0;max-width:1000px}
+.path{font-family:'Roboto Mono',monospace;font-size:17px;letter-spacing:.03em;line-height:1.3;margin:0;opacity:1}
+.cap{font-size:25px;line-height:1.3;margin:12px 0 0}
+.rows{margin-top:30px;width:100%}
+.row{display:flex;gap:28px;align-items:baseline;background:var(--n3);color:var(--df);border-radius:var(--r);padding:16px 30px;margin:0 0 16px;font-size:30px;line-height:1.25}
+.row b{font-family:'Roboto Condensed',sans-serif;font-weight:900;font-size:34px;min-width:190px;flex:0 0 auto}
+.row span{flex:1}
+.flow{display:flex;align-items:stretch;gap:12px;width:100%;margin-top:40px}
+.flow i{font-style:normal;color:var(--lf);font-size:44px;align-self:center}
+.box{flex:1;background:var(--n3);color:var(--df);border-radius:var(--r);padding:22px 22px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.box b{font-family:'Roboto Condensed',sans-serif;font-weight:900;font-size:32px;line-height:1.05}
+.box span{font-family:'Roboto Mono',monospace;font-size:17px;line-height:1.35;word-break:break-all}
+.chip{background:var(--lb);color:var(--df);border-radius:var(--r);padding:14px 28px;font-size:25px;margin:34px 0 0}
+.tree{width:100%;margin:22px 0 0;font-size:22px;box-shadow:none}
+.two{display:flex;gap:22px;width:100%;align-items:flex-start}
+.reqcol{flex:0 0 30%;min-width:0}.respcol{flex:1;min-width:0}
+.reveal .controls{color:var(--lf)}.reveal .progress{color:var(--lf)}
+.reveal .slide-number{background:transparent;color:inherit;font-family:'Roboto Mono',monospace;font-size:16px}
+.green .wrap h1{max-width:1100px}
+
+/* ===== code panels: high contrast, Optimizely palette only ===== */
+.wrap{padding:34px 56px 30px}
+.hdr{display:flex;justify-content:space-between;align-items:center;width:100%;gap:20px}
+.light h2{font-size:40px;margin:12px 0 8px}
+.cap{font-size:23px;margin:10px 0 0}
+.two .path{margin:0 0 6px}
+.reveal pre{width:100%;margin:4px 0;font-size:inherit;line-height:inherit;box-shadow:none;background:transparent}
+.reveal pre code,.reveal .hljs{display:block;box-sizing:border-box;width:100%;max-height:none;overflow:hidden;background:#08251A!important;color:#FFFFFF!important;border-radius:32px;padding:20px 28px 20px 18px;font-family:'Roboto Mono',monospace;font-size:20px;line-height:1.4;white-space:pre-wrap;word-break:break-word}
+.reveal pre.tree code{font-size:24px;line-height:1.6;padding:26px 32px}
+.reveal .hljs-ln-code{color:#FFFFFF}
+.reveal .hljs .hljs-keyword,.reveal .hljs .hljs-literal,.reveal .hljs .hljs-meta,.reveal .hljs .hljs-doctag,.reveal .hljs .hljs-selector-tag{color:#ABFF44!important}
+.reveal .hljs .hljs-string,.reveal .hljs .hljs-regexp,.reveal .hljs .hljs-template-variable,.reveal .hljs .hljs-subst{color:#91DBDA!important}
+.reveal .hljs .hljs-title,.reveal .hljs .hljs-function,.reveal .hljs .hljs-built_in,.reveal .hljs .hljs-type,.reveal .hljs .hljs-class,.reveal .hljs .hljs-attr,.reveal .hljs .hljs-property,.reveal .hljs .hljs-number,.reveal .hljs .hljs-variable,.reveal .hljs .hljs-params{color:#7DDD3D!important}
+.reveal .hljs .hljs-comment,.reveal .hljs .hljs-quote{color:#C3CEAF!important;font-style:normal!important}
+.reveal .hljs .hljs-punctuation,.reveal .hljs .hljs-operator,.reveal .hljs .hljs-tag{color:#E4F0DA!important}
+.reveal .hljs-ln-numbers{opacity:1!important;color:#C3CEAF!important;text-align:right;vertical-align:top;padding:0 16px 0 10px!important;min-width:34px;border-left:6px solid transparent!important;-webkit-user-select:none;user-select:none}
+.reveal .hljs.has-highlights tr:not(.highlight-line){opacity:.7!important}
+.reveal .hljs.has-highlights tr.highlight-line{opacity:1!important}
+.reveal .hljs.has-highlights tr.highlight-line .hljs-ln-numbers{color:#FFFFFF!important;border-left-color:#ABFF44!important}
+</style></head><body><div class="reveal"><div class="slides">
+<section class="dark" data-background-color="#08251A"><div class="wrap"><span class="pill">Mark for developers</span><h1>What is a Tool?</h1><p class="lead">An API route Mark can discover, call, and read. Two files. Let us read them.</p></div><aside class="notes">Open with the problem: we pasted JSON by hand earlier. A Tool lets Mark fetch it itself. Everything in this deck is real code from app/api/opal on the shutterfly branch.</aside></section>
+<section class="dark" data-background-color="#08251A"><div class="wrap"><span class="pill">The idea</span><h2>A Tool is an API with a manifest</h2><div class="rows"><div class="row"><b>Describe it</b><span>Discovery tells Mark what exists and what it takes.</span></div><div class="row"><b>Run it</b><span>Execution does the work and returns JSON.</span></div><div class="row"><b>Use it</b><span>Mark picks it, fills the parameters, reads the result.</span></div></div></div><aside class="notes">Three jobs, two files. Discovery is a GET that returns a manifest. Execution is a POST that does the work. Mark does the third job itself: choosing the tool and filling in arguments from the conversation.</aside></section>
+<section class="dark" data-background-color="#08251A"><div class="wrap"><span class="pill">The flow</span><h2>The round trip</h2><div class="flow"><div class="box fragment"><b>You ask in chat</b><span>Audit page 1042</span></div><i>→</i><div class="box fragment"><b>Mark picks the tool</b><span>fetch_cms12_content</span></div><i>→</i><div class="box fragment"><b>Your route runs</b><span>POST /tools/fetch_cms12_content</span></div><i>→</i><div class="box fragment"><b>Engine returns JSON</b><span>executeCmsEndpoint</span></div></div><p class="chip fragment">Once, on sync: GET /api/opal/discovery tells Mark the tool exists</p></div><aside class="notes">Walk left to right. The discovery call happens once, when the tool registry syncs, not on every question. After that Mark already knows the tool and its parameters.</aside></section>
+<section class="light" data-background-color="#E4F0DA"><div class="wrap"><span class="pill">The repo</span><h2>Where it lives</h2><pre class="tree"><code class="language-plaintext">app/api/opal/
+  discovery/route.ts                    GET   the manifest
+  tools/fetch_cms12_content/route.ts    POST  the tool
+lib/
+  cmsDelivery.ts                        executeCmsEndpoint, the engine
+  cmsCampaignData.ts                    page 1042, three levels of blocks</code></pre><p class="cap">marvoey/opti-baseline, branch shutterfly</p></div><aside class="notes">Two route files under app/api/opal, and the engine they share with the live Content Delivery API route.</aside></section>
+<section class="green" data-background-color="#ABFF44"><div class="wrap"><span class="pill inv">Part 1</span><h1>Discovery</h1><p class="lead">GET /api/opal/discovery. How Mark finds your tool.</p></div><aside class="notes">Part one is the manifest.</aside></section>
+<section class="light code" data-background-color="#E4F0DA"><div class="wrap"><div class="hdr"><span class="pill">Part 1 · Discovery</span><span class="path">app/api/opal/discovery/route.ts · lines 11-22</span></div><h2>Declare the tool</h2><pre><code class="language-typescript" data-trim data-line-numbers="1|3-5|7|8-9|10-11">export const dynamic = 'force-dynamic';
+
+export function GET() &#123;
+  return Response.json(&#123;
+    functions: [
+      &#123;
+        name: 'fetch_cms12_content',
+        description:
+          'Fetches published or draft Optimizely CMS 12 page/block content models using the Content Delivery REST API v3.0. Supports resolving by Content ID or by friendly URL route, with content area expansion.',
+        endpoint: '/tools/fetch_cms12_content',
+        http_method: 'POST',
+        parameters: [</code></pre><p class="cap">Name, description, endpoint, method. The manifest header in full.</p></div><aside class="notes">Step through: dynamic force-dynamic so it is never cached. GET returns an object with a functions array. Name is what Mark calls. The description is what Mark reads to decide when to use it. Endpoint is relative: Opal resolves it against the discovery URL. Method is POST.</aside></section>
+<section class="light code" data-background-color="#E4F0DA"><div class="wrap"><div class="hdr"><span class="pill">Part 1 · Discovery</span><span class="path">app/api/opal/discovery/route.ts · lines 22-29</span></div><h2>Declare its parameters</h2><pre><code class="language-typescript" data-trim data-line-numbers="1|3|4|5-6|7">        parameters: [
+          &#123;
+            name: 'content_id',
+            type: 'string',
+            description:
+              "The numeric CMS Content ID or GUID (e.g. '1042', '2010'). Omit if querying by match_url.",
+            required: false,
+          &#125;,
+          // ...sub_path, match_url, expand, language follow the same shape</code></pre><p class="cap">Every parameter here is optional. The route enforces the real rules.</p></div><aside class="notes">Each parameter has a name, a type, and a description Mark reads. There are five: content_id, sub_path, match_url, expand, language. They all follow this shape. Required is false on all of them because the either-or rule lives in the route.</aside></section>
+<section class="dark" data-background-color="#08251A"><div class="wrap"><span class="pill">Worth knowing</span><h2>The description is a prompt</h2><p class="lead">Mark reads the name and description to decide when to call your tool. Parameters tell it what to fill in. Write the description like a prompt, because it is one.</p></div><aside class="notes">This is the one thing to take away from discovery. Vague descriptions mean the tool gets skipped or misused. Notice the parameter descriptions include examples such as 1042 and the holiday photo books URL.</aside></section>
+<section class="green" data-background-color="#ABFF44"><div class="wrap"><span class="pill inv">Part 2</span><h1>Execution</h1><p class="lead">POST /api/opal/tools/fetch_cms12_content. Where the work happens.</p></div><aside class="notes">Part two is the handler.</aside></section>
+<section class="light code" data-background-color="#E4F0DA"><div class="wrap"><div class="hdr"><span class="pill">Part 2 · Execution</span><span class="path">app/api/opal/tools/fetch_cms12_content/route.ts · lines 14-27</span></div><h2>Guardrails first</h2><pre><code class="language-typescript" data-trim data-line-numbers="1-3|5-9|11-14">const SUB_PATHS = ['children', 'ancestors'];
+const ID_PATTERN = /^[A-Za-z0-9-]&#123;1,64&#125;&#36;/; // numeric id or GUID
+const MAX_STRING = 512;
+
+function str(value: unknown): string | undefined &#123;
+  return typeof value === 'string' &amp;&amp; value.length &lt;= MAX_STRING &amp;&amp; value.trim() !== ''
+    ? value.trim()
+    : undefined;
+&#125;
+
+// Opal expects a structured body it can show the model, so failures return 200.
+function failure(error: string) &#123;
+  return Response.json(&#123; success: false, error &#125;);
+&#125;</code></pre><p class="cap">An ID pattern, an allow-list, a 512-character cap, and errors as data.</p></div><aside class="notes">Three constants set the limits: allowed sub paths, an ID pattern for numeric IDs or GUIDs, and a maximum string length. The str helper returns a clean string or undefined. The failure helper returns success false with a message and a normal 200, so Mark can read the reason.</aside></section>
+<section class="light code" data-background-color="#E4F0DA"><div class="wrap"><div class="hdr"><span class="pill">Part 2 · Execution</span><span class="path">app/api/opal/tools/fetch_cms12_content/route.ts · lines 31-44</span></div><h2>Read the request</h2><pre><code class="language-typescript" data-trim data-line-numbers="1-8|10-14">export async function POST(request: NextRequest) &#123;
+  let body: Record&lt;string, unknown&gt;;
+  try &#123;
+    const json: unknown = await request.json();
+    body = json &amp;&amp; typeof json === 'object' ? (json as Record&lt;string, unknown&gt;) : &#123;&#125;;
+  &#125; catch &#123;
+    return failure('Request body must be valid JSON.');
+  &#125;
+
+  // Opal may wrap tool arguments in a &#96;parameters&#96; object.
+  const args =
+    body.parameters &amp;&amp; typeof body.parameters === 'object'
+      ? (body.parameters as Record&lt;string, unknown&gt;)
+      : body;</code></pre><p class="cap">Bad JSON fails cleanly. Mark may wrap the arguments, so unwrap them.</p></div><aside class="notes">POST handler. Parse the body inside a try. If it is not valid JSON, return a readable failure instead of throwing. Then handle the case where Opal nests the arguments under a parameters key.</aside></section>
+<section class="light code" data-background-color="#E4F0DA"><div class="wrap"><div class="hdr"><span class="pill">Part 2 · Execution</span><span class="path">app/api/opal/tools/fetch_cms12_content/route.ts · lines 46-55</span></div><h2>Validate everything</h2><pre><code class="language-typescript" data-trim data-line-numbers="1-5|7-10">  const contentId = str(args.content_id);
+  const subPath = str(args.sub_path);
+  const matchUrl = str(args.match_url);
+  const expand = str(args.expand) ?? '*';
+  const language = str(args.language);
+
+  if (contentId &amp;&amp; !ID_PATTERN.test(contentId)) return failure('content_id must be a numeric ID or GUID.');
+  if (subPath &amp;&amp; !SUB_PATHS.includes(subPath)) return failure("sub_path must be 'children' or 'ancestors'.");
+  if (subPath &amp;&amp; !contentId) return failure('sub_path requires content_id.');
+  if (!contentId &amp;&amp; !matchUrl) return failure('Provide content_id or match_url.');</code></pre><p class="cap">Five values pulled out, four checks before anything runs.</p></div><aside class="notes">Every argument goes through str. Expand defaults to a star so nested blocks come back in one call. Then four guards: content_id must match the pattern, sub_path must be children or ancestors, sub_path needs a content_id, and you must give a content_id or a match_url.</aside></section>
+<section class="light code" data-background-color="#E4F0DA"><div class="wrap"><div class="hdr"><span class="pill">Part 2 · Execution</span><span class="path">app/api/opal/tools/fetch_cms12_content/route.ts · lines 57-67</span></div><h2>Build the call</h2><pre><code class="language-typescript" data-trim data-line-numbers="1-2|4-6|8-11">  let path = '/api/episerver/v3.0/content';
+  if (contentId) path += &#96;/&#36;&#123;contentId&#125;&#36;&#123;subPath ? &#96;/&#36;&#123;subPath&#125;&#96; : ''&#125;&#96;;
+
+  const query: CmsQuery = &#123; expand &#125;;
+  if (matchUrl) query.matchUrl = matchUrl;
+  if (language) query.language = language;
+
+  const res = executeCmsEndpoint(path, query, CAMPAIGN_DATABASE, &#123;
+    routes: CAMPAIGN_ROUTES,
+    site: CAMPAIGN_SITE,
+  &#125;);</code></pre><p class="cap">Same engine as the live Delivery API route. No HTTP self-fetch.</p></div><aside class="notes">Build the Content Delivery v3.0 path from the arguments, build the query, and call executeCmsEndpoint directly. The live API route calls the same function, so the tool and the API cannot drift apart. Today the data source is the campaign mock.</aside></section>
+<section class="light code" data-background-color="#E4F0DA"><div class="wrap"><div class="hdr"><span class="pill">Part 2 · Execution</span><span class="path">app/api/opal/tools/fetch_cms12_content/route.ts · lines 69-81</span></div><h2>Handle the result</h2><pre><code class="language-typescript" data-trim data-line-numbers="1-10|12-13">  if (res.status &gt;= 400) &#123;
+    return Response.json(
+      &#123;
+        success: false,
+        error: &#96;CMS 12 endpoint returned &#36;&#123;res.status&#125;: &#36;&#123;res.statusText&#125;&#96;,
+        endpoint_called: path,
+        detail: res.data?.detail ?? res.data?.error,
+      &#125;,
+    );
+  &#125;
+
+  const data = res.data;
+  const contentType: string[] = Array.isArray(data?.contentType) ? data.contentType : [];</code></pre><p class="cap">Errors come back as 200 with success false, so Mark can read why.</p></div><aside class="notes">If the engine returns 400 or above, send a structured failure with the endpoint called and the detail. Otherwise pull out the data and the content type.</aside></section>
+<section class="light code" data-background-color="#E4F0DA"><div class="wrap"><div class="hdr"><span class="pill">Part 2 · Execution</span><span class="path">app/api/opal/tools/fetch_cms12_content/route.ts · lines 83-96</span></div><h2>Shape the answer</h2><pre><code class="language-typescript" data-trim data-line-numbers="1|3-7|8-12">  return Response.json(
+    &#123;
+      success: true,
+      endpoint_called: path + (matchUrl ? &#96;?matchUrl=&#36;&#123;matchUrl&#125;&#96; : ''),
+      content_name: data?.name ?? (Array.isArray(data) ? &#96;Collection (&#36;&#123;data.length&#125; items)&#96; : 'Unknown'),
+      content_type: contentType,
+      content_id: data?.contentLink?.id ?? contentId ?? null,
+      data,
+      summary: Array.isArray(data)
+        ? &#96;Found &#36;&#123;data.length&#125; items for query.&#96;
+        : &#96;Retrieved &#36;&#123;contentType[contentType.length - 1] ?? 'content'&#125; '&#36;&#123;data?.name&#125;' (ID: &#36;&#123;data?.contentLink?.id&#125;) with expand='&#36;&#123;expand&#125;'.&#96;,
+    &#125;,
+  );
+&#125;</code></pre><p class="cap">Structured fields, the full data, and a one-line summary the model can quote.</p></div><aside class="notes">Return success true, the endpoint called, the content name, type and ID, the full data, and a one-sentence summary. The summary is what the model tends to quote back to the user.</aside></section>
+<section class="dark" data-background-color="#08251A"><div class="wrap"><span class="pill">Patterns</span><h2>Four habits worth copying</h2><div class="rows"><div class="row"><b>1</b><span>Validate every input: ID pattern, allow-list, length cap.</span></div><div class="row"><b>2</b><span>Stay read-only.</span></div><div class="row"><b>3</b><span>Return errors as data: 200 with success false.</span></div><div class="row"><b>4</b><span>Share one engine with your live API.</span></div></div></div><aside class="notes">These are choices in the code, not Mark requirements. Read-only matters because the agent decides when to call it. Errors as data matters because the model can read the message and tell the user what went wrong.</aside></section>
+<section class="light code" data-background-color="#E4F0DA"><div class="wrap"><span class="pill">End to end</span><h2>What Mark sends and gets</h2><div class="two"><div class="reqcol"><p class="path">Request</p><pre><code class="language-json" data-trim>&#123;
+  "content_id": "1042",
+  "expand": "*"
+&#125;</code></pre></div><div class="respcol"><p class="path">Response (data trimmed)</p><pre><code class="language-json" data-trim>&#123;
+  "success": true,
+  "endpoint_called": "/api/episerver/v3.0/content/1042",
+  "content_name": "Holiday Photo Books Campaign Page",
+  "content_type": ["Page", "CampaignLandingPage"],
+  "content_id": 1042,
+  "data": &#123; "contentLink": &#123; "id": 1042 &#125;, "...": "full page, trimmed" &#125;,
+  "summary": "Retrieved CampaignLandingPage 'Holiday Photo Books Campaign Page' (ID: 1042) with expand='*'."
+&#125;</code></pre></div></div><p class="cap">The agent reads this, then audits the tree in data.</p></div><aside class="notes">This is the actual shape the route returns for page 1042. The data field holds the full nested payload with controlTab and deviceTabs, which is what the Block Tree Auditor analyses.</aside></section>
+<section class="light code" data-background-color="#E4F0DA"><div class="wrap"><div class="hdr"><span class="pill">Next step</span><span class="path">Sketch, not in the repo</span></div><h2>From mock to your CMS</h2><pre><code class="language-typescript" data-trim data-line-numbers="1-5|7-13">// Today: in-memory mock data
+const res = executeCmsEndpoint(path, query, CAMPAIGN_DATABASE, &#123;
+  routes: CAMPAIGN_ROUTES,
+  site: CAMPAIGN_SITE,
+&#125;);
+
+// Your environment: same result shape, real HTTP call
+const qs = new URLSearchParams(query as Record&lt;string, string&gt;);
+const r = await fetch(BASE_URL + path + '?' + qs, &#123;
+  headers: &#123; Accept: 'application/json' &#125;,
+  cache: 'no-store',
+&#125;);
+const res = &#123; status: r.status, statusText: r.statusText, data: await r.json() &#125;;</code></pre><p class="cap">The handler is already async. Add your auth header and keep it read-only.</p></div><aside class="notes">Be upfront: today the route reads from an in-memory campaign mock that follows the v3.0 contract. Pointing it at a real environment means replacing one call with an HTTP request that returns status, statusText and data. Everything else in the handler stays the same. This slide is a sketch, not committed code.</aside></section>
+<section class="green" data-background-color="#ABFF44"><div class="wrap"><span class="pill inv">Your turn</span><h1>Describe it. Run it. Return it.</h1><p class="lead">Which API do you want Mark to call first?</p></div><aside class="notes">Close with the question. Let them name an internal API: pricing, assets, order status. The same two-file pattern applies.</aside></section>
+</div></div><script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script><script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/highlight/highlight.js"></script><script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/notes/notes.js"></script><script>Reveal.initialize({width:1280,height:720,margin:0.02,center:false,hash:true,slideNumber:'c/t',transition:'slide',controls:true,progress:true,plugins:[RevealHighlight,RevealNotes]});</script><script src="/dev-quick-links.js" defer></script></body></html>
