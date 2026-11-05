@@ -32,6 +32,7 @@
   --color-accent: #ec043d; /* red — use sparingly: accent text, one band */
   --color-teal: #082b32; /* deep teal accent band */
   --color-lime: #aac627; /* highlight band */
+  --color-wine: #310812; /* deep maroon band (platform, integrations, quote panel) */
 
   /* ── Colour: status (observed) ───────────────────────────────────────── */
   --color-positive: #2f864d;

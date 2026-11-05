@@ -2,6 +2,9 @@ import { contentType, type ContentProps } from '@optimizely/cms-sdk';
 import { OptimizelyComponent, getPreviewUtils } from '@optimizely/cms-sdk/react/server';
 
 import { RichTextContentType } from './RichText';
+import { OpenTableHeroContentType } from './OpenTableHero';
+import { OpenTableFeatureGridContentType } from './OpenTableFeatureGrid';
+import { OpenTableCustomerStoryContentType } from './OpenTableCustomerStory';
 
 /**
  * Page — a fixed-layout Page (`_page`). The body is a `Content` area: an ordered
@@ -112,7 +115,12 @@ export const PageContentType = contentType({
       isLocalized: true,
       items: {
         type: 'content',
-        allowedTypes: [RichTextContentType],
+        allowedTypes: [
+          RichTextContentType,
+          OpenTableHeroContentType,
+          OpenTableFeatureGridContentType,
+          OpenTableCustomerStoryContentType,
+        ],
         restrictedTypes: [],
       },
     },

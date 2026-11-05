@@ -12,6 +12,9 @@ import BlankExperience from './BlankExperience';
 import BlankSection from './BlankSection';
 import Page, { PageContentType } from './Page';
 import RichText, { RichTextContentType } from './RichText';
+import OpenTableHero, { OpenTableHeroContentType } from './OpenTableHero';
+import OpenTableFeatureGrid, { OpenTableFeatureGridContentType, OpenTableFeatureItemContentType } from './OpenTableFeatureGrid';
+import OpenTableCustomerStory, { OpenTableCustomerStoryContentType } from './OpenTableCustomerStory';
 
 /**
  * Single configuration + registration point for the Optimizely SDK.
@@ -49,6 +52,10 @@ export const registeredContentTypes = [
   PageContentType,
   // Blocks
   RichTextContentType,
+  OpenTableHeroContentType,
+  OpenTableFeatureItemContentType,
+  OpenTableFeatureGridContentType,
+  OpenTableCustomerStoryContentType,
 ];
 
 initContentTypeRegistry(registeredContentTypes);
@@ -62,5 +69,8 @@ initReactComponentRegistry({
     Page,
     // Blocks (resolver key === content-type key)
     RichTextBlock: RichText,
+    OpenTableHeroBlock: OpenTableHero,
+    OpenTableFeatureGrid,
+    OpenTableCustomerStory,
   },
 });
