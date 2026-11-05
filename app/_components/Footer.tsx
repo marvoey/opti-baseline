@@ -4,8 +4,19 @@ const Footer = () => (
   <footer className="bg-ink text-white pt-14 pb-[60px]" data-cms-group="Footer">
     <div className="page-width grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-14">
       <div>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={siteConfig.logoSrc} alt={siteConfig.logoAlt} className="h-10 w-auto mb-6" />
+        {siteConfig.logoSrc ? (
+          // brightness-0 + invert turns the logo solid white for the ink background.
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={siteConfig.logoSrc}
+            alt={siteConfig.logoAlt}
+            width={siteConfig.logoWidth}
+            height={siteConfig.logoHeight}
+            className="h-9 w-auto mb-6 brightness-0 invert"
+          />
+        ) : (
+          <p className="font-display text-2xl font-semibold text-white mb-6">{siteConfig.name}</p>
+        )}
         <p className="text-white/70 text-fine">{siteConfig.footerTagline}</p>
       </div>
       {siteConfig.footerColumns.map((col) => (

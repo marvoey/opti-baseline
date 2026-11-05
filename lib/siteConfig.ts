@@ -3,78 +3,88 @@
  * demo. Colours live in app/globals.css (the `@theme` token block); everything
  * else — site name, logo, nav links, footer columns, legal copy — lives here.
  *
- * To stand up a new demo: edit this file, drop a new public/logo.svg, and tweak
- * the hex values in app/globals.css. No component edits required.
+ * To stand up a new demo: edit this file, drop a logo into /public and point
+ * `logoSrc` at it, and tweak the tokens in app/globals.css. No component edits
+ * required.
+ *
+ * Nav labels below follow the OpenTable restaurant-solutions site; footer
+ * columns, taglines and all `#` links are placeholders to replace.
  */
 
 export type NavLink = { label: string; href: string };
 export type FooterColumn = { heading: string; links: NavLink[] };
 
 export const siteConfig = {
-  /** Used for the document <title> fallback and the logo alt text. */
-  name: 'Optimizely',
+  /** Used for the document <title> fallback, the logo alt text and the text wordmark. */
+  name: 'OpenTable',
   /** Default browser-tab title (per-page titles override via CMS MetaTitle). */
-  title: 'Optimizely | Digital Experience Platform',
+  title: 'OpenTable Restaurant Solutions',
   /** Default meta description. */
   description:
-    'Optimizely — the digital experience platform that helps teams create, test, and optimize digital experiences at scale.',
+    'Restaurant reservation, guest relationship and marketing tools that help restaurants fill tables and build loyal guests.',
 
-  /** Header logo (place the asset in /public). */
-  logoSrc: '/Optimizely_Primary-Logo_Medium_Green_RGB.png',
-  logoAlt: 'Optimizely',
+  /**
+   * Header/footer logo (place the asset in /public). While this is empty the
+   * chrome renders `name` as a text wordmark instead. The footer sits on a dark
+   * background, so it renders the logo in white (see Footer.tsx).
+   * opentable-logo.svg is OpenTable's default logo, 162×36.
+   */
+  logoSrc: '/opentable-logo.svg' as string,
+  logoAlt: 'OpenTable',
+  logoWidth: 162,
+  logoHeight: 36,
 
   /** Top utility bar. */
   topNavLinks: [
-    { label: 'Partners', href: '#' },
+    { label: 'For diners', href: '#' },
     { label: 'Support', href: '#' },
   ] satisfies NavLink[],
 
   /** Primary header navigation. */
   mainNavLinks: [
-    { label: 'Products', href: '#' },
-    { label: 'Solutions', href: '#' },
-    { label: 'Customers', href: '#' },
+    { label: 'Solutions & benefits', href: '#' },
+    { label: 'Why OpenTable', href: '#' },
+    { label: 'Who we serve', href: '#' },
     { label: 'Resources', href: '#' },
-    { label: 'Pricing', href: '#' },
+    { label: 'Pricing and plans', href: '#' },
   ] satisfies NavLink[],
   /** Header call-to-action button. */
-  primaryCta: { label: 'Get started free', href: '#' } satisfies NavLink,
+  primaryCta: { label: 'Get started', href: '#' } satisfies NavLink,
   /** Account / login button label. */
   accountLabel: 'Log in',
 
   /** Footer. */
   footerTagline:
-    'Create, test, and optimize digital experiences that turn visitors into loyal customers.',
+    'Tools that help restaurants fill tables, know their guests and run service smoothly.',
   footerColumns: [
-    {
-      heading: 'Products',
-      links: [
-        { label: 'Content Management', href: '#' },
-        { label: 'Experimentation', href: '#' },
-        { label: 'Commerce', href: '#' },
-        { label: 'Personalization', href: '#' },
-      ],
-    },
     {
       heading: 'Solutions',
       links: [
-        { label: 'B2B Commerce', href: '#' },
-        { label: 'B2C Commerce', href: '#' },
-        { label: 'Digital Marketing', href: '#' },
-        { label: 'Customer Journeys', href: '#' },
+        { label: 'Restaurant reservation software', href: '#' },
+        { label: 'Restaurant CRM software', href: '#' },
+        { label: 'Marketing tools', href: '#' },
+        { label: 'Pricing and plans', href: '#' },
+      ],
+    },
+    {
+      heading: 'Who we serve',
+      links: [
+        { label: 'Independent restaurants', href: '#' },
+        { label: 'Restaurant groups', href: '#' },
+        { label: 'Hotels and resorts', href: '#' },
       ],
     },
     {
       heading: 'Resources',
       links: [
-        { label: 'Blog', href: '#' },
-        { label: 'Documentation', href: '#' },
-        { label: 'Community', href: '#' },
+        { label: 'Industry insights', href: '#' },
+        { label: 'Guides', href: '#' },
         { label: 'Webinars', href: '#' },
+        { label: 'Support', href: '#' },
       ],
     },
   ] satisfies FooterColumn[],
-  footerLegal: `© ${2026} Optimizely. All rights reserved.`,
+  footerLegal: `© ${2026} OpenTable. All rights reserved.`,
   footerLegalLinks: [
     { label: 'Privacy Policy', href: '#' },
     { label: 'Terms of Service', href: '#' },

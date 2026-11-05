@@ -91,6 +91,15 @@
   max-width: calc(var(--container-content) + 2rem);
 }
 
+/* Wider column (1152px) for the header and utility bar, whose five long nav
+   labels plus two buttons don't fit comfortably in 1024px. */
+@utility page-width-wide {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: 1rem;
+  max-width: calc(72rem + 2rem);
+}
+
 /* Short label that sits above a heading, or a footer column heading
    (observed: Haffer 600, 18/24 — the site's "h-small" style). */
 @utility eyebrow {
@@ -157,6 +166,7 @@
     font-size: 1rem;
     line-height: 1.5rem;
     font-weight: 600;
+    white-space: nowrap;
     text-decoration: none;
     cursor: pointer;
     transition:

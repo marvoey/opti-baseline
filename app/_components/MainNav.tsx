@@ -4,15 +4,25 @@ import { siteConfig } from '@/lib/siteConfig';
 
 const MainNav = () => (
   <header className="sticky top-0 z-50 border-b border-ink/10 bg-background">
-    <div className="page-width flex justify-between items-center h-16">
+    <div className="page-width-wide flex justify-between items-center gap-8 h-16">
       <div className="navbar-brand flex items-center" data-cms-field="brand_logo">
         <Link href="/" title="Go to home page" className="flex items-center">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={siteConfig.logoSrc} alt={siteConfig.logoAlt} className="h-9 w-auto" />
+          {siteConfig.logoSrc ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={siteConfig.logoSrc}
+              alt={siteConfig.logoAlt}
+              width={siteConfig.logoWidth}
+              height={siteConfig.logoHeight}
+              className="h-9 w-auto max-w-none shrink-0"
+            />
+          ) : (
+            <span className="font-display text-2xl font-semibold text-ink">{siteConfig.name}</span>
+          )}
         </Link>
       </div>
 
-      <nav className="hidden lg:flex gap-8 font-semibold text-ink">
+      <nav className="hidden xl:flex gap-6 whitespace-nowrap font-semibold text-ink">
         {siteConfig.mainNavLinks.map((link) => (
           <Link
             key={link.label}
@@ -34,7 +44,7 @@ const MainNav = () => (
         >
           {siteConfig.primaryCta.label}
         </Link>
-        <button className="lg:hidden p-2 text-ink" aria-label="Open menu">
+        <button className="xl:hidden p-2 text-ink" aria-label="Open menu">
           <Menu size={22} />
         </button>
       </div>
