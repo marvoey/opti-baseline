@@ -1,70 +1,231 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/*
+ * ┌──────────────────────────────────────────────────────────────────────────┐
+ * │  THEME — modelled on opentable.com/restaurant-solutions                   │
+ * │                                                                           │
+ * │  Values marked "observed" were read from the live site's CSS variables    │
+ * │  and computed styles (see scripts/extract-design-tokens.browser.js).      │
+ * │  Values marked "inferred" are sensible choices where the site gave no     │
+ * │  direct value — adjust them freely.                                       │
+ * │                                                                           │
+ * │  Look: flat and editorial. Sharp corners, no shadows, near-black ink on   │
+ * │  white / warm cream, a serif display face, red used only as an accent.    │
+ * │  Colours, radii and type sizes are changed here; non-visual chrome (name, │
+ * │  logo, nav links, footer copy) lives in lib/siteConfig.ts.                │
+ * └──────────────────────────────────────────────────────────────────────────┘
+ */
+
+@theme {
+  /* ── Colour: neutrals (observed) ─────────────────────────────────────── */
+  --color-ink: #0c0c0b; /* text, primary buttons, footer background */
+  --color-ink-soft: #262623; /* primary button hover */
+  --color-muted: #91949a; /* de-emphasised text */
+  --color-cream: #f3f0e8; /* alternative section background */
+  --color-cream-hover: #d9d6cf; /* hover on light-on-dark buttons */
+  --color-fog: #f1f2f4; /* quiet button background */
+  --color-fog-hover: #d8d9db;
+  --color-slate: #6f737b; /* disabled button background */
+
+  /* ── Colour: brand accents (observed) ────────────────────────────────── */
+  --color-accent: #ec043d; /* red — use sparingly: accent text, one band */
+  --color-teal: #082b32; /* deep teal accent band */
+  --color-lime: #aac627; /* highlight band */
+
+  /* ── Colour: status (observed) ───────────────────────────────────────── */
+  --color-positive: #2f864d;
+  --color-negative: #931b23;
+  --color-callout: #fdaf08;
+
+  /* ── Colour: semantic aliases ────────────────────────────────────────── */
+  --color-background: #ffffff;
+  --color-foreground: var(--color-ink);
+  --color-line: var(--color-ink);
+
+  /* ── Shape ───────────────────────────────────────────────────────────── */
+  /* Observed: every button, card and image on the site has 0px radius and no
+     shadow. Use `rounded-brand`; change this one value to soften the look. */
+  --radius-brand: 0px;
+
+  /* ── Layout ──────────────────────────────────────────────────────────── */
+  --container-content: 64rem; /* observed: 1024px content column */
+
+  /* ── Type scale ──────────────────────────────────────────────────────────
+     Desktop sizes observed (66/72, 52/60, 48/56, 24/28, 18/24, 14/23.8).
+     The clamp() minimums for mobile are inferred. */
+  --text-display: clamp(2.5rem, 1.6rem + 3.6vw, 4.125rem);
+  --text-display--line-height: 1.1;
+  --text-display-md: clamp(2.25rem, 1.5rem + 3vw, 3.25rem);
+  --text-display-md--line-height: 1.15;
+  --text-heading: clamp(2rem, 1.4rem + 2.4vw, 3rem);
+  --text-heading--line-height: 1.17;
+  --text-subheading: 1.5rem;
+  --text-subheading--line-height: 1.75rem;
+  --text-lead: 1.125rem;
+  --text-lead--line-height: 1.5rem;
+  --text-fine: 0.875rem;
+  --text-fine--line-height: 1.7;
 }
 
+/* Fonts. `inline` so the generated utilities reference the next/font variables
+   (set on <html> in app/layout.tsx) directly.
+   Haffer (sans) → Inter, Nantes (serif display) → Newsreader: both stand-ins
+   for licensed faces. */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-body);
-  --font-display: var(--font-display);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: var(--font-newsreader), ui-serif, Georgia, "Times New Roman",
+    serif;
   --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas,
     "Liberation Mono", "Courier New", monospace;
-
-  /*
-   * ┌──────────────────────────────────────────────────────────────────────┐
-   * │  REBRAND HERE.  This is the whole colour theme for the site.          │
-   * │  The Tailwind `blue-*` scale is remapped, so chrome and blocks that   │
-   * │  use `bg-blue-950`, `text-blue-800`, etc. all reskin when you edit    │
-   * │  these ~11 hex values. Set blue-950 = your darkest brand colour and   │
-   * │  blue-800 = your primary; the rest are tints/shades between.          │
-   * └──────────────────────────────────────────────────────────────────────┘
-   *
-   * Optimizely brand green ramp.
-   * Anchors: Dark Fir #08251a (darkest), LFGreen #abff44 (signature accent).
-   */
-  --color-blue-950: #08251a; /* Dark Fir — footer / hero background */
-  --color-blue-900: #0d3a29; /* Mid Fir — header bg */
-  --color-blue-800: #197050; /* Light Fir — primary green, links */
-  --color-blue-700: #3ab533; /* Good-to-go */
-  --color-blue-600: #4dc844;
-  --color-blue-500: #62d84f;
-  --color-blue-400: #7ddd3d; /* Grass */
-  --color-blue-300: #91dbda; /* Light Blue — teal accent */
-  --color-blue-200: #abff44; /* LFGreen — signature bright green */
-  --color-blue-100: #d8e4cb; /* Neutral 4 */
-  --color-blue-50:  #e4f0da; /* Neutral 3 — light wash */
-
-  /* Named Optimizely brand tokens for direct use in custom components. */
-  --color-lfgreen:    #abff44;
-  --color-grass:      #7ddd3d;
-  --color-good-to-go: #3ab533;
-  --color-dark-fir:   #08251a;
-  --color-mid-fir:    #0d3a29;
-  --color-light-fir:  #197050;
-  --color-light-blue: #91dbda;
-  --color-neutral-2:  #eff6e9;
-  --color-neutral-3:  #e4f0da;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Centred 1024px content column with a 16px gutter (observed 1024px).
+   Used by the header, utility bar and footer. Named `page-width` rather than
+   overriding Tailwind's `container`, which carries its own breakpoint widths. */
+@utility page-width {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: 1rem;
+  max-width: calc(var(--container-content) + 2rem);
+}
+
+/* Short label that sits above a heading, or a footer column heading
+   (observed: Haffer 600, 18/24 — the site's "h-small" style). */
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--text-lead);
+  line-height: var(--text-lead--line-height);
+  font-weight: 600;
+}
+
+@layer base {
+  body {
+    background: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    font-weight: 600;
+  }
+
+  /* Observed focus outline is solid ink; currentColor keeps it visible on the
+     dark footer and teal/ink bands too. */
+  :focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: var(--color-lime);
+    color: var(--color-ink);
+  }
+
+  /* The header is sticky (64px). Keep Visual Builder on-page-edit targets from
+     scrolling underneath it — see docs/Visual Builder Preview Scroll Control Guide.md */
+  [data-epi-edit],
+  [data-epi-block-id] {
+    scroll-margin-top: 80px;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans);
+/*
+ * Buttons — observed: 40px tall, 7px 16px padding, Haffer 600 / 16px, 0 radius,
+ * 1px border, ~50ms colour transition. Variants mirror the site's
+ * `button--action` (solid), `button--outline`, and an inverted solid for dark
+ * sections. Hover colours for outline and the quiet default are inferred.
+ */
+@layer components {
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 2.5rem;
+    padding: 0.4375rem 1rem;
+    border: 1px solid transparent;
+    border-radius: var(--radius-brand);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+      background-color 0.05s ease-out,
+      color 0.05s ease-out,
+      border-color 0.05s ease-out;
+  }
+
+  .btn:disabled,
+  .btn[aria-disabled="true"] {
+    background: var(--color-slate);
+    border-color: transparent;
+    color: #ffffff;
+    cursor: not-allowed;
+  }
+
+  /* Solid ink (on light backgrounds). */
+  .btn-primary {
+    background: var(--color-ink);
+    color: #ffffff;
+  }
+  .btn-primary:hover {
+    background: var(--color-ink-soft);
+  }
+
+  /* Solid white (on ink / teal / photo backgrounds). */
+  .btn-inverse {
+    background: #ffffff;
+    color: var(--color-ink);
+  }
+  .btn-inverse:hover {
+    background: var(--color-cream-hover);
+  }
+
+  /* 1px outline in the current text colour — works on light and dark. */
+  .btn-outline {
+    border-color: currentColor;
+    background: transparent;
+  }
+  .btn-outline:hover {
+    background: color-mix(in srgb, currentColor 10%, transparent);
+  }
+
+  /* Quiet grey default button. */
+  .btn-quiet {
+    background: var(--color-fog);
+    color: var(--color-ink);
+  }
+  .btn-quiet:hover {
+    background: var(--color-fog-hover);
+  }
 }
 
-h1,
-h2,
-h3 {
-  font-family: var(--font-display);
+/* Rich text (@tailwindcss/typography) in the site palette. */
+.prose {
+  --tw-prose-body: var(--color-ink);
+  --tw-prose-headings: var(--color-ink);
+  --tw-prose-lead: var(--color-ink-soft);
+  --tw-prose-links: var(--color-ink);
+  --tw-prose-bold: var(--color-ink);
+  --tw-prose-counters: var(--color-muted);
+  --tw-prose-bullets: var(--color-muted);
+  --tw-prose-hr: var(--color-cream-hover);
+  --tw-prose-quotes: var(--color-ink);
+  --tw-prose-quote-borders: var(--color-ink);
+  --tw-prose-captions: var(--color-muted);
+  --tw-prose-code: var(--color-ink);
+  --tw-prose-pre-code: var(--color-cream);
+  --tw-prose-pre-bg: var(--color-ink);
+  --tw-prose-th-borders: var(--color-cream-hover);
+  --tw-prose-td-borders: var(--color-cream-hover);
 }

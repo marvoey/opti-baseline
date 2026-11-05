@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Inter } from "next/font/google";
+import { Newsreader, Inter } from "next/font/google";
 import Script from "next/script";
 import OptimizelyActivation from "./_components/OptimizelyActivation";
 import { QuickLinks } from "./_components/QuickLinks";
@@ -8,17 +8,18 @@ import { siteConfig } from "@/lib/siteConfig";
 import "./globals.css";
 import "@/cms/registry";
 
-// VC Nudge (Optimizely's display face) is a licensed face; Space Grotesk is the
-// closest free substitute — chunky, geometric grotesque with strong personality.
-const displayFont = Space_Grotesk({
-  variable: "--font-display",
+// The reference site (opentable.com/restaurant-solutions) uses Nantes for
+// headlines and Haffer for body text — both licensed faces. Newsreader is the
+// closest free editorial serif, and Inter the closest neutral grotesque.
+// The CSS variable names are mapped to `--font-display` / `--font-sans` in
+// app/globals.css (`@theme inline`).
+const displayFont = Newsreader({
+  variable: "--font-newsreader",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
 });
 
-// Die Grotesk B (the brand body face) → Inter as the closest neutral grotesque.
 const bodyFont = Inter({
-  variable: "--font-body",
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 

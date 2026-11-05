@@ -50,7 +50,7 @@ export default function LanguageSwitcher() {
         aria-haspopup="listbox"
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
-        className="flex items-center gap-1 text-white/80 hover:text-white"
+        className="flex items-center gap-1 text-ink hover:underline underline-offset-4"
       >
         <Globe size={14} />
         <span>{current.displayName}</span>
@@ -60,7 +60,7 @@ export default function LanguageSwitcher() {
       {open ? (
         <ul
           role="listbox"
-          className="absolute right-0 z-[60] mt-1 min-w-[10rem] overflow-hidden rounded-lg border border-slate-200 bg-white py-1 shadow-lg"
+          className="absolute right-0 z-[60] mt-1 min-w-[10rem] overflow-hidden rounded-brand border border-ink bg-background py-1"
         >
           {LOCALES.map((locale) => {
             const active = locale.key === current.key;
@@ -69,8 +69,8 @@ export default function LanguageSwitcher() {
                 <Link
                   href={localizePath(cleanPath, locale.key)}
                   onClick={() => setOpen(false)}
-                  className={`block px-4 py-2 text-sm transition-colors hover:bg-slate-50 ${
-                    active ? 'font-bold text-blue-800' : 'text-slate-600'
+                  className={`block px-4 py-2 text-sm transition-colors hover:bg-cream ${
+                    active ? 'font-semibold text-ink' : 'text-ink-soft'
                   }`}
                 >
                   {locale.displayName}

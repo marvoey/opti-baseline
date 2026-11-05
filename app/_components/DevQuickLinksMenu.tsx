@@ -27,7 +27,7 @@ export default function DevQuickLinksMenu({ links }: { links: QuickLink[] }) {
       <button
         onClick={() => setOpen((o) => !o)}
         title="Quick links"
-        className="w-7 h-7 rounded-full overflow-hidden shadow-md hover:scale-110 transition-transform focus:outline-none focus-visible:ring-2 focus-visible:ring-green-400"
+        className="w-7 h-7 rounded-full overflow-hidden shadow-md hover:scale-110 transition-transform focus:outline-none focus-visible:ring-2 focus-visible:ring-ink"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img

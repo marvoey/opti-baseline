@@ -22,7 +22,12 @@ export default function GlobalError({
     <html lang="en">
       <body
         style={{
-          fontFamily: 'Arial, Helvetica, sans-serif',
+          // Mirrors the theme in app/globals.css (ink #0c0c0b, 0 radius, 600
+          // weight) with a system font stack, since next/font isn't loaded here.
+          fontFamily:
+            '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+          color: '#0c0c0b',
+          background: '#ffffff',
           display: 'flex',
           minHeight: '100vh',
           alignItems: 'center',
@@ -32,20 +37,22 @@ export default function GlobalError({
         }}
       >
         <div>
-          <h1 style={{ fontSize: '1.5rem', fontWeight: 700 }}>Something went wrong</h1>
-          <p style={{ marginTop: '0.75rem', color: '#475569' }}>
+          <h1 style={{ fontSize: '1.5rem', fontWeight: 600 }}>Something went wrong</h1>
+          <p style={{ marginTop: '0.75rem', color: '#262623' }}>
             A critical error occurred. Please try again.
           </p>
           <button
             onClick={reset}
             style={{
               marginTop: '2rem',
-              borderRadius: '9999px',
-              background: '#1d5b9c',
+              borderRadius: 0,
+              background: '#0c0c0b',
               color: '#fff',
-              fontWeight: 700,
-              padding: '0.75rem 1.5rem',
-              border: 'none',
+              fontWeight: 600,
+              fontSize: '1rem',
+              padding: '0.4375rem 1rem',
+              minHeight: '2.5rem',
+              border: '1px solid transparent',
               cursor: 'pointer',
             }}
           >
