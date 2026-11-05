@@ -17,11 +17,11 @@ export default function BlankSection({ content }: Props) {
   function SectionRow({ node, children }: StructureContainerProps) {
     const hasColumns = (node.nodes?.length ?? 0) > 0;
     return (
-      <div {...pa(node)} className="flex gap-4 w-full">
+      <div {...pa(node)} className="flex w-full flex-col gap-6 md:flex-row">
         {hasColumns ? children : (
-          <div className="flex-1 border border-dashed border-gray-300 rounded p-4 text-center">
-            <p className="text-sm font-medium text-gray-500">This row has no columns yet</p>
-            <p className="mt-1 text-sm text-gray-400">
+          <div className="flex-1 border border-dashed border-ink/30 p-4 text-center">
+            <p className="text-sm font-medium text-ink-soft">This row has no columns yet</p>
+            <p className="mt-1 text-sm text-ink/60">
               Split this row into columns to place content side by side, then drop elements like Rich Text into a column.
             </p>
           </div>
@@ -35,9 +35,9 @@ export default function BlankSection({ content }: Props) {
     return (
       <div {...pa(node)} className="flex-1">
         {hasComponents ? children : (
-          <div className="border border-dashed border-gray-300 rounded p-4 text-center">
-            <p className="text-sm font-medium text-gray-500">This column has no content yet</p>
-            <p className="mt-1 text-sm text-gray-400">
+          <div className="border border-dashed border-ink/30 p-4 text-center">
+            <p className="text-sm font-medium text-ink-soft">This column has no content yet</p>
+            <p className="mt-1 text-sm text-ink/60">
               Add an element, such as Rich Text, to fill this column.
             </p>
           </div>
@@ -49,21 +49,21 @@ export default function BlankSection({ content }: Props) {
   if (nodes.length === 0) {
     return (
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      <section {...pa(content as any)} className="w-full border border-dashed border-gray-300 rounded-lg p-8 text-center">
-        <p className="text-sm font-medium text-gray-500">This section has no rows yet</p>
-        <p className="mt-1 text-sm text-gray-400">
+      <section {...pa(content as any)} className="w-full border border-dashed border-ink/30 p-8 text-center">
+        <p className="text-sm font-medium text-ink-soft">This section has no rows yet</p>
+        <p className="mt-1 text-sm text-ink/60">
           Add a row to start filling this section, then split it into columns.
         </p>
         <dl className="mt-6 grid gap-4 text-left sm:grid-cols-2 max-w-lg mx-auto">
           <div>
-            <dt className="text-sm font-medium text-gray-500">Row</dt>
-            <dd className="mt-1 text-sm text-gray-400">
+            <dt className="text-sm font-medium text-ink-soft">Row</dt>
+            <dd className="mt-1 text-sm text-ink/60">
               A horizontal strip within the section. Add multiple rows to stack content vertically.
             </dd>
           </div>
           <div>
-            <dt className="text-sm font-medium text-gray-500">Column</dt>
-            <dd className="mt-1 text-sm text-gray-400">
+            <dt className="text-sm font-medium text-ink-soft">Column</dt>
+            <dd className="mt-1 text-sm text-ink/60">
               Splits a row into side-by-side slots. Once a row has columns, drop elements like Rich Text into them.
             </dd>
           </div>
@@ -75,12 +75,14 @@ export default function BlankSection({ content }: Props) {
   return (
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     <section {...pa(content as any)} className="w-full">
-      <OptimizelyGridSection
-        nodes={nodes}
-        row={SectionRow}
-        column={SectionColumn}
-        ComponentWrapper={ComponentWrapper}
-      />
+      <div className="page-width">
+        <OptimizelyGridSection
+          nodes={nodes}
+          row={SectionRow}
+          column={SectionColumn}
+          ComponentWrapper={ComponentWrapper}
+        />
+      </div>
     </section>
   );
 }

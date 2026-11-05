@@ -50,7 +50,7 @@ export default function RichText({ content }: Props) {
   const block = (content as { __composition?: { key: string } }).__composition;
 
   return (
-    <section {...pa(block)} className="w-full px-6 py-12">
+    <section {...pa(block)} className="w-full px-6 py-14 md:py-20">
       <div {...pa('Body')} className="prose mx-auto max-w-3xl">
         <RichTextRenderer content={content.Body?.json} />
       </div>

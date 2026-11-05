@@ -220,7 +220,20 @@
   }
 }
 
-/* Rich text (@tailwindcss/typography) in the site palette. */
+/* Rich text (@tailwindcss/typography) in the site palette and type scale:
+   serif headings (via the base heading rule) sized from the theme tokens. */
+.prose :where(h1) {
+  font-size: var(--text-heading);
+  line-height: var(--text-heading--line-height);
+}
+.prose :where(h2) {
+  font-size: var(--text-subheading);
+  line-height: var(--text-subheading--line-height);
+}
+.prose :where(h3) {
+  font-size: var(--text-lead);
+  line-height: var(--text-lead--line-height);
+}
 .prose {
   --tw-prose-body: var(--color-ink);
   --tw-prose-headings: var(--color-ink);
