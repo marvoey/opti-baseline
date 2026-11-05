@@ -34,6 +34,9 @@ yarn-error.log*
 .env*
 !.env.example
 
+# screenshot script output
+/screenshots/
+
 # vercel
 .vercel
 

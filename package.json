@@ -17,7 +17,10 @@
     "cms:push:all": "node --env-file=.env scripts/cms-push.mjs --all",
     "schema:pull": "node scripts/fetch-openapi.mjs",
     "seed:hero": "node scripts/seed-atomic-hero.mjs",
-    "cms:check": "node --env-file=.env scripts/check-content-types.mjs"
+    "cms:check": "node --env-file=.env scripts/check-content-types.mjs",
+    "screenshot": "node scripts/screenshot.mjs",
+    "screenshot:components": "node scripts/screenshot-components.mjs",
+    "screenshot:demo": "node scripts/screenshot-demo-set.mjs"
   },
   "dependencies": {
     "@optimizely/cms-cli": "^2.0.0",
