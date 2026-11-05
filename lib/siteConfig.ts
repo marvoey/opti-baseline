@@ -42,7 +42,7 @@ export const siteConfig = {
 
   /** Primary header navigation. */
   mainNavLinks: [
-    { label: 'Solutions & benefits', href: '#' },
+    { label: 'Solutions & benefits', href: '/another-page' },
     { label: 'Why OpenTable', href: '#' },
     { label: 'Who we serve', href: '#' },
     { label: 'Resources', href: '#' },
