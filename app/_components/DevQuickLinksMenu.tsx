@@ -1,26 +1,51 @@
 'use client';
 
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import Link from 'next/link';
 
-export type QuickLink = { label: string; href: string };
+export type QuickLink = {
+  label: string;
+  href: string;
+  group?: string;
+  /** A file served from public/ (e.g. an .html page): plain link, opens in a new tab. */
+  isStatic?: boolean;
+};
+
+const ITEM_CLASS =
+  'block rounded-md px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-100 transition-colors';
 
 export default function DevQuickLinksMenu({ links }: { links: QuickLink[] }) {
   const [open, setOpen] = useState(false);
+  // Only label the sections when there is more than one to tell apart.
+  const showGroups = new Set(links.map((l) => l.group)).size > 1;
 
   return (
     <div className="fixed bottom-3 left-16 z-[9998] flex flex-col items-start">
       {open && (
-        <div className="mb-2 flex flex-col gap-0.5 rounded-lg border border-gray-200 bg-white shadow-xl p-1.5 min-w-[148px]">
-          {links.map(({ label, href }) => (
-            <Link
-              key={href}
-              href={href}
-              onClick={() => setOpen(false)}
-              className="block rounded-md px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-100 transition-colors"
-            >
-              {label}
-            </Link>
+        <div className="mb-2 flex max-h-[70vh] flex-col gap-0.5 overflow-y-auto rounded-lg border border-gray-200 bg-white shadow-xl p-1.5 min-w-[148px]">
+          {links.map(({ label, href, group, isStatic }, i) => (
+            <Fragment key={href}>
+              {showGroups && group && group !== links[i - 1]?.group && (
+                <div className="px-3 pt-1.5 pb-0.5 text-[10px] font-semibold uppercase tracking-wider text-gray-400">
+                  {group}
+                </div>
+              )}
+              {isStatic ? (
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setOpen(false)}
+                  className={ITEM_CLASS}
+                >
+                  {label}
+                </a>
+              ) : (
+                <Link href={href} onClick={() => setOpen(false)} className={ITEM_CLASS}>
+                  {label}
+                </Link>
+              )}
+            </Fragment>
           ))}
         </div>
       )}

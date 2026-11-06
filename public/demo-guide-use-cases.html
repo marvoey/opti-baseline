@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Liberty Mutual – CMS/DXP Demo Guide: Use Cases</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@600;700;800;900&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<style>
+p,h1,h2,h3,h4,ul,ol,li,blockquote,figure { margin:0; padding:0; }
+ul { list-style:none; }
+:root { --fir:#08251A; --lf:#ABFF44; --n3:#E4F0DA; }
+html,body { margin:0; height:100%; background:#08251A; }
+.reveal { font-family:'Roboto',sans-serif; color:var(--fir); }
+.reveal .slides { text-align:left; }
+.reveal .slides section { padding:0; height:720px; box-sizing:border-box; }
+.reveal .slides > section, .reveal .slides > section > section { top:0 !important; }
+.slide-inner { position:relative; box-sizing:border-box; height:720px; width:1280px; padding:56px 72px 64px; display:flex; flex-direction:column; }
+.h1 { font-family:'Roboto Condensed',sans-serif; font-weight:900; line-height:1; letter-spacing:-0.03em; margin:0; }
+.h2 { font-family:'Roboto Condensed',sans-serif; font-weight:900; line-height:1; letter-spacing:-0.02em; margin:0; }
+.h3 { font-family:'Roboto Condensed',sans-serif; font-weight:700; line-height:1.05; letter-spacing:-0.02em; margin:0; }
+.sub { font-family:'Roboto',sans-serif; font-weight:500; line-height:1.15; margin:0; }
+.eyebrow { font-family:'Roboto',sans-serif; font-weight:700; font-size:17px; text-transform:uppercase; letter-spacing:0; margin:0; }
+.caption { font-family:'Roboto Mono',monospace; font-size:14px; letter-spacing:0.03em; line-height:1.25; text-transform:uppercase; margin:0; }
+
+.panel { border-radius:32px; }
+.pill { display:inline-flex; align-items:center; border-radius:999px; padding:8px 20px; font-weight:500; font-size:17px; }
+.tag { border-radius:999px; padding:8px 20px; font-size:17px; font-weight:500; background:#fff; color:var(--fir); border:1.5px solid var(--fir); }
+.logo { width:100%; height:auto; display:block; }
+.logo .lg-1 { fill:#abff44; } .logo .lg-2 { fill:#0d3a29; }
+.chk { flex-shrink:0; width:34px; height:34px; border-radius:12px; background:var(--lf); color:var(--fir); border:1.5px solid var(--fir); display:inline-flex; align-items:center; justify-content:center; font-weight:700; font-size:18px; margin-top:1px; }
+.num { font-family:'Roboto Mono',monospace; font-size:15px; color:var(--fir); background:var(--lf); border-radius:12px; padding:6px 10px; flex-shrink:0; }
+.icon-chip { width:60px; height:60px; border-radius:18px; background:var(--n3); display:flex; align-items:center; justify-content:center; }
+.vision { font-family:'Roboto Condensed',sans-serif; font-weight:700; font-size:40px; line-height:1.12; letter-spacing:-0.01em; }
+.vision strong { font-weight:900; }
+.quote { font-family:'Roboto Condensed',sans-serif; font-weight:700; font-size:27px; line-height:1.15; }
+ul.bul { padding-left:20px; list-style:disc; } ul.bul li { margin-top:4px; }
+
+.tbl-wrap { border-radius:32px; overflow:hidden; border:1.5px solid var(--fir); }
+table.agenda { width:100%; border-collapse:collapse; font-size:18px; }
+table.agenda th { background:var(--fir); color:var(--lf); text-align:left; padding:11px 24px; font-family:'Roboto Mono',monospace; font-weight:400; font-size:14px; text-transform:uppercase; letter-spacing:.03em; }
+table.agenda td { padding:7px 24px; border-top:1px solid var(--fir); color:var(--fir); }
+table.agenda td.sec { background:var(--n3); font-weight:700; font-family:'Roboto Condensed',sans-serif; font-size:21px; width:26%; vertical-align:middle; }
+table.agenda td.mins { font-family:'Roboto Mono',monospace; font-size:16px; width:22%; }
+table.agenda tr.total td { background:var(--lf); font-weight:700; }
+table.agenda tr.total td.mins { font-weight:700; }
+.legend-dot { width:22px; height:22px; border-radius:8px; background:#fff; border:1.5px solid var(--fir); display:inline-block; }
+.reveal .slide-number { background:var(--fir); color:var(--lf); font-family:'Roboto Mono',monospace; font-size:13px; border-radius:999px; padding:6px 12px; right:18px; bottom:18px; }
+.reveal .controls { color:var(--go); }
+.reveal .progress { color:var(--lf); height:5px; }
+/* utilities */
+.-ml-5{margin-left:-20px}
+.absolute{position:absolute}
+.bg-fir{background-color:#08251A}
+.bg-lfgreen{background-color:#ABFF44}
+.bg-n3{background-color:#E4F0DA}
+.bg-white{background-color:#FFFFFF}
+.bottom-6{bottom:24px}
+.col-span-2{grid-column:span 2 / span 2}
+.col-span-3{grid-column:span 3 / span 3}
+.flex{display:flex}
+.flex-1{flex:1 1 0%}
+.flex-col{flex-direction:column}
+.flex-row{flex-direction:row}
+.font-bold{font-weight:700}
+.font-medium{font-weight:500}
+.gap-10{gap:40px}
+.gap-12{gap:48px}
+.gap-2{gap:8px}
+.gap-2\.5{gap:10px}
+.gap-3{gap:12px}
+.gap-4{gap:16px}
+.gap-5{gap:20px}
+.gap-6{gap:24px}
+.gap-7{gap:28px}
+.gap-8{gap:32px}
+.gap-x-6{column-gap:24px}
+.gap-x-8{column-gap:32px}
+.gap-y-2\.5{row-gap:10px}
+.gap-y-4{row-gap:16px}
+.grid{display:grid}
+.grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}
+.grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.grid-cols-5{grid-template-columns:repeat(5,minmax(0,1fr))}
+.h-10{height:40px}
+.h-11{height:44px}
+.h-12{height:48px}
+.h-14{height:56px}
+.h-16{height:64px}
+.h-6{height:24px}
+.items-center{align-items:center}
+.items-end{align-items:flex-end}
+.items-start{align-items:flex-start}
+.items-stretch{align-items:stretch}
+.justify-between{justify-content:space-between}
+.justify-center{justify-content:center}
+.leading-snug{line-height:1.375}
+.leading-tight{line-height:1.25}
+.list-none{list-style:none}
+.max-w-\[1000px\]{max-width:1000px}
+.max-w-\[1050px\]{max-width:1050px}
+.max-w-\[1080px\]{max-width:1080px}
+.max-w-\[900px\]{max-width:900px}
+.mb-10{margin-bottom:40px}
+.mb-3{margin-bottom:12px}
+.mb-4{margin-bottom:16px}
+.mb-5{margin-bottom:20px}
+.mb-6{margin-bottom:24px}
+.mb-8{margin-bottom:32px}
+.mt-1{margin-top:4px}
+.mt-10{margin-top:40px}
+.mt-2{margin-top:8px}
+.mt-3{margin-top:12px}
+.mt-4{margin-top:16px}
+.mt-5{margin-top:20px}
+.mt-6{margin-top:24px}
+.mt-8{margin-top:32px}
+.mt-auto{margin-top:auto}
+.p-10{padding:40px}
+.p-12{padding:48px}
+.p-6{padding:24px}
+.p-7{padding:28px}
+.p-8{padding:32px}
+.p-9{padding:36px}
+.pb-12{padding-bottom:48px}
+.px-5{padding-left:20px;padding-right:20px}
+.px-6{padding-left:24px;padding-right:24px}
+.px-7{padding-left:28px;padding-right:28px}
+.py-3\.5{padding-top:14px;padding-bottom:14px}
+.py-4{padding-top:16px;padding-bottom:16px}
+.right-\[72px\]{right:72px}
+.self-start{align-self:flex-start}
+.shrink-0{flex-shrink:0}
+.space-y-3>*+*{margin-top:12px}
+.space-y-4>*+*{margin-top:16px}
+.text-\[104px\]{font-size:104px}
+.text-\[15\.5px\]{font-size:15.5px}
+.text-\[15px\]{font-size:15px}
+.text-\[16\.5px\]{font-size:16.5px}
+.text-\[16px\]{font-size:16px}
+.text-\[17\.5px\]{font-size:17.5px}
+.text-\[18px\]{font-size:18px}
+.text-\[19px\]{font-size:19px}
+.text-\[20px\]{font-size:20px}
+.text-\[21px\]{font-size:21px}
+.text-\[22px\]{font-size:22px}
+.text-\[23px\]{font-size:23px}
+.text-\[24px\]{font-size:24px}
+.text-\[26px\]{font-size:26px}
+.text-\[27px\]{font-size:27px}
+.text-\[28px\]{font-size:28px}
+.text-\[30px\]{font-size:30px}
+.text-\[34px\]{font-size:34px}
+.text-\[38px\]{font-size:38px}
+.text-\[44px\]{font-size:44px}
+.text-\[46px\]{font-size:46px}
+.text-\[48px\]{font-size:48px}
+.text-\[50px\]{font-size:50px}
+.text-\[52px\]{font-size:52px}
+.text-\[54px\]{font-size:54px}
+.text-\[60px\]{font-size:60px}
+.text-\[78px\]{font-size:78px}
+.text-fir{color:#08251A}
+.text-fir\/70{color:rgba(8,37,26,0.7)}
+.text-lfgreen{color:#ABFF44}
+.text-n3{color:#E4F0DA}
+.text-n5{color:#C3CEAF}
+.text-white{color:#fff}
+.w-10{width:40px}
+.w-11{width:44px}
+.w-12{width:48px}
+.w-14{width:56px}
+.w-16{width:64px}
+.w-6{width:24px}
+.w-\[220px\]{width:220px}
+.w-\[330px\]{width:330px}
+.w-\[400px\]{width:400px}
+.w-\[420px\]{width:420px}
+</style>
+</head>
+<body>
+<div class="reveal"><div class="slides">
+
+
+<section data-background-color="#E4F0DA">
+ <div class="slide-inner justify-between">
+  <div class="flex items-center justify-between">
+   <div class="w-[220px]">
+<svg class="logo" role="img" aria-label="Optimizely" id="Optimizely_Primary_Logo_Medium" data-name="Optimizely Primary Logo Medium" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 740 254">
+  <defs>
+    <style>
+      .lg-1 {
+        fill: #abff44;
+      }
+
+      .lg-2 {
+        fill: #0d3a29;
+      }
+    </style>
+  </defs>
+  <path class="lg-1" d="M267.653,62.0583h-27.0992v18.9211h-9.5222v19.6536h9.5222v38.9407c0,14.2815,6.1031,20.1418,20.1417,20.1418h17.5784v-19.6536h-7.5691c-2.0752,0-3.0518-.7324-3.0518-2.8075v-36.6215h10.6208v-19.6536h-10.6208v-18.9211Z"/>
+  <path class="lg-1" d="M396.0726,79.6367c-7.2029,0-14.0386,2.8076-19.7755,8.6665-2.6866-6.2251-7.9354-8.6665-15.6254-8.6665-6.5928,0-12.8179,2.8076-18.3108,8.6665v-7.3237h-25.7566v78.7361h27.0992v-57.8619c.8545-1.2206,2.4413-1.953,4.3943-1.953,2.6854,0,3.9061,1.0985,3.9061,3.906v55.9089h27.1006v-57.8619c.8544-1.2206,2.4412-1.953,4.3943-1.953,2.6853,0,3.906,1.0985,3.906,3.906v55.9089h27.0994v-59.8149c0-13.5503-6.4694-20.2639-18.4316-20.2639Z"/>
+  <path class="lg-1" d="M300.4906,54.7346h-6.2264c-6.2252,0-10.8636,4.8826-10.8636,10.9856,0,5.9812,4.6384,10.9871,10.8636,10.9871h6.2264c6.2253,0,10.8638-5.0059,10.8638-10.9871,0-6.103-4.6384-10.9856-10.8638-10.9856Z"/>
+  <rect class="lg-1" x="283.8888" y="80.9795" width="27.0994" height="78.736"/>
+  <path class="lg-1" d="M202.7116,79.5146c-6.8357,0-12.3297,3.1737-16.2358,8.7886-.1221-2.6853-.3661-5.1266-.6102-7.3237h-26.4891c.2441,6.1031.3662,12.0842.3662,18.1887v85.3274h27.0994v-29.9067c4.0281,4.1501,9.156,6.3472,15.2593,6.3472,17.3342,0,27.0994-14.7708,27.0994-40.2834,0-25.8787-9.521-41.1379-26.489-41.1379ZM193.7997,141.5267c-4.8826-.1219-7.5681-7.8134-7.5681-20.63,0-12.9399,2.6855-21.4844,7.5681-21.4844,5.0057-.1221,7.8132,8.4224,7.8132,21.4844,0,12.6947-2.8075,20.5081-7.8132,20.63Z"/>
+  <path class="lg-1" d="M112.0121,60.2274c-25.8788,0-42.6028,19.4093-42.6028,50.0486,0,31.1288,16.724,50.7821,42.6028,50.7821,25.7578,0,42.4805-19.6533,42.4805-50.7821,0-30.6393-16.7227-50.0486-42.4805-50.0486ZM111.89,138.2311c-7.6901,0-12.8167-10.7428-12.8167-27.9551,0-16.724,5.1266-27.2214,12.8167-27.2214,7.5691,0,12.8179,10.4974,12.8179,27.2214,0,17.2123-5.2488,27.9551-12.8179,27.9551Z"/>
+  <rect class="lg-1" x="420.1205" y="80.9795" width="27.0994" height="78.736"/>
+  <path class="lg-1" d="M654.7404,103.5625l-2.8074,21.6064-3.2959-21.2402-4.8826-22.9492h-27.5876l22.2168,78.4919-.7322,3.1736c-.2441,1.3428-1.2207,2.0751-2.4414,2.0751h-14.8928v19.7755h19.2871c13.427,0,20.1418-5.859,23.4375-18.5549l22.0947-84.9612h-26.3669l-4.0293,22.583Z"/>
+  <rect class="lg-1" x="583.9397" y="62.0583" width="27.0994" height="97.6571"/>
+  <path class="lg-1" d="M544.6327,79.5146c-21.8506,0-36.3774,16.1138-36.3774,40.7717,0,25.1465,14.0386,40.7717,36.2554,40.7717,18.5549,0,31.739-12.3296,33.9363-29.908h-26.8564c-.9766,6.8368-4.1503,10.8649-7.8123,10.8649-5.0045,0-7.812-6.1031-8.3003-16.8461h43.213c3.0516-26.6111-11.109-45.6543-34.0582-45.6543ZM535.4779,110.5201c1.3428-7.568,4.5164-12.0844,8.5444-12.0844s6.9578,4.3943,8.1783,12.0844h-16.7228Z"/>
+  <polygon class="lg-1" points="505.692 99.9006 505.692 80.9795 452.8347 80.9795 452.8347 100.6331 475.9072 100.6331 452.8347 141.6488 452.8347 159.7156 506.1802 159.7156 506.1802 140.062 483.109 140.062 505.692 99.9006"/>
+  <path class="lg-1" d="M436.7223,54.7346h-6.2264c-6.2252,0-10.8636,4.8826-10.8636,10.9856,0,5.9812,4.6384,10.9871,10.8636,10.9871h6.2264c6.2253,0,10.8636-5.0059,10.8636-10.9871,0-6.103-4.6383-10.9856-10.8636-10.9856Z"/>
+  <path class="lg-2" d="M685.1366,76.3411h-26.3669c-1.7087,0-2.5632.4883-3.4177,1.3428l-6.1045,6.3472-.8545-4.0281c-.6104-2.4412-2.197-3.6619-4.6384-3.6619h-28.0759v-14.2827c0-2.6853-2.3203-4.7605-4.6395-4.7605h-27.0994c-1.4647,0-2.4413.6104-3.2958,1.4648l-14.7709,14.7698c-.7323.7335-1.3427,1.9541-1.3427,3.2969v3.2957c-5.2488-3.2957-12.2076-5.3708-19.8977-5.3708-11.8413,0-23.9257,3.9061-33.4478,16.7229l-.7324.9764v-11.474c0-2.3192-2.0752-4.6384-4.7605-4.6384h-57.4957c2.6854-3.1748,3.9061-6.4706,3.9061-10.6208,0-8.9106-6.9578-15.6252-15.9905-15.6252h-5.1279c-4.7604,0-8.6665,1.8308-11.9622,5.1279l-15.8695,15.8682c-1.2206,1.2207-2.1971,2.5634-2.9296,4.0293-1.2207-.1221-2.6853-.2441-4.1501-.2441-6.4706,0-13.062,2.0752-18.677,6.5916-3.9072-4.7605-9.0339-6.5916-15.8694-6.5916-5.4929,0-10.865,1.5869-15.5034,5.3708-.2441-2.8074-1.4647-3.906-4.0281-3.906h-30.0302c2.6854-3.1748,3.9073-6.4706,3.9073-10.6208,0-8.9106-6.959-15.6252-15.9917-15.6252h-5.1278c-4.7605,0-8.6666,1.8308-11.9623,5.1279l-10.3766,10.2533v-3.4178c0-2.4412-2.0751-4.6384-4.7606-4.6384h-27.0992c-1.4647,0-2.5634.6104-3.2958,1.4648l-14.7709,14.6477c-.4883.4894-1.3427,1.9541-1.3427,3.2969v5.0046c-5.1267-4.7605-11.1091-7.0798-18.0667-7.0798-4.5165,0-10.0105,1.4648-13.9165,5.3708-.4883-3.1736-1.5869-3.7839-3.662-3.7839h-26.1229c-1.3427,0-2.4412.4883-3.2957,1.3428l-3.0527,3.0515c-7.8121-16.1136-22.583-25.2684-41.0159-25.2684-12.8168,0-24.1699,4.2723-36.01,15.9904l-9.7664,9.7664c-10.8638,10.8636-16.2357,26.1228-16.2357,43.8232,0,33.448,18.5549,55.5427,47.2423,55.5427,12.8167,0,24.1699-4.7605,32.9585-13.5503l10.1324-10.2534v42.3586c0,2.6853,2.0751,4.7605,4.7605,4.7605h26.9773c1.5868,0,2.6854-.6104,3.4191-1.3428l14.6476-14.7709c.9764-.9766,1.4647-2.0751,1.4647-3.2958v-4.3943c6.5928-.8545,11.9635-3.5398,16.3578-8.1794l13.3063-13.3049c1.5867,13.7932,10.4973,20.5078,26.7332,20.5078h243.4097c1.7089,0,2.6853-.6102,3.4177-1.3427l7.4473-7.5692c7.3237,6.959,16.8459,10.3767,27.5874,10.3767,10.865,0,20.7522-4.1501,27.589-10.9869l7.0797-7.2018v12.0854c0,2.5635,2.0751,4.6384,4.6384,4.6384h33.0817v20.0198c0,2.6853,2.0751,4.7605,4.7605,4.7605h17.9445c8.5444,0,15.7476-2.6854,20.2639-7.2018l14.5269-14.5267c3.4177-3.5399,6.2253-8.5458,7.9341-14.8931l22.0947-85.0833c.8545-3.2958-.7324-5.8591-4.6384-5.8591ZM112.0121,161.0581c-25.8788,0-42.6028-19.6533-42.6028-50.7821,0-30.6393,16.724-50.0486,42.6028-50.0486,25.7578,0,42.4805,19.4093,42.4805,50.0486,0,31.1288-16.7227,50.7821-42.4805,50.7821ZM202.1012,160.936c-6.1033,0-11.2312-2.197-15.2593-6.3472v29.9067h-27.0994v-85.3274c0-6.1045-.1221-12.0856-.3662-18.1887h26.4891c.2441,2.1971.4882,4.6384.6102,7.3237,3.9061-5.6149,9.4001-8.7886,16.2358-8.7886,16.968,0,26.489,15.2593,26.489,41.1379,0,25.5127-9.7651,40.2834-27.0994,40.2834ZM278.2738,100.6331h-10.6208v36.6215c0,2.0751.9766,2.8075,3.0518,2.8075h7.5691v19.6536h-17.5784c-14.0386,0-20.1417-5.8604-20.1417-20.1418v-38.9407h-9.5222v-19.6536h9.5222v-18.9211h27.0992v18.9211h10.6208v19.6536ZM310.9882,159.7155h-27.0994v-78.736h27.0994v78.736ZM300.4906,76.7073h-6.2264c-6.2252,0-10.8636-5.0059-10.8636-10.9871,0-6.103,4.6384-10.9856,10.8636-10.9856h6.2264c6.2253,0,10.8638,4.8826,10.8638,10.9856,0,5.9812-4.6384,10.9871-10.8638,10.9871ZM414.5043,159.7156h-27.0994v-55.9089c0-2.8075-1.2207-3.906-3.906-3.906-1.9531,0-3.5399.7324-4.3943,1.953v57.8619h-27.1006v-55.9089c0-2.8075-1.2207-3.906-3.9061-3.906-1.953,0-3.5398.7324-4.3943,1.953v57.8619h-27.0992v-78.7361h25.7566v7.3237c5.4929-5.8589,11.718-8.6665,18.3108-8.6665,7.6899,0,12.9387,2.4414,15.6254,8.6665,5.7369-5.8589,12.5726-8.6665,19.7755-8.6665,11.9623,0,18.4316,6.7136,18.4316,20.2639v59.8149ZM447.2199,159.7155h-27.0994v-78.736h27.0994v78.736ZM436.7223,76.7073h-6.2264c-6.2252,0-10.8636-5.0059-10.8636-10.9871,0-6.103,4.6384-10.9856,10.8636-10.9856h6.2264c6.2253,0,10.8636,4.8826,10.8636,10.9856,0,5.9812-4.6383,10.9871-10.8636,10.9871ZM506.1802,159.7156h-53.3455v-18.0668l23.0725-41.0157h-23.0725v-19.6536h52.8573v18.9211l-22.583,40.1614h23.0712v19.6536ZM578.6909,125.1689h-43.213c.4883,10.7429,3.2958,16.8461,8.3003,16.8461,3.662,0,6.8357-4.0281,7.8123-10.8649h26.8564c-2.1973,17.5784-15.3813,29.908-33.9363,29.908-22.2168,0-36.2554-15.6252-36.2554-40.7717,0-24.658,14.5269-40.7717,36.3774-40.7717,22.9492,0,37.1099,19.0432,34.0582,45.6543ZM611.0391,159.7155h-27.0994V62.0583h27.0994v97.6571ZM663.0419,165.9407c-3.2957,12.6959-10.0105,18.5549-23.4375,18.5549h-19.2871v-19.7755h14.8928c1.2207,0,2.1973-.7323,2.4414-2.0751l.7322-3.1736-22.2168-78.4919h27.5876l4.8826,22.9492,3.2959,21.2402,2.8074-21.6064,4.0293-22.583h26.3669l-22.0947,84.9612Z"/>
+  <path class="lg-2" d="M544.0223,98.4358c-4.0281,0-7.2017,4.5164-8.5444,12.0844h16.7228c-1.2206-7.6901-4.1503-12.0844-8.1783-12.0844Z"/>
+  <path class="lg-2" d="M193.7997,99.4124c-4.8826,0-7.5681,8.5444-7.5681,21.4844,0,12.8167,2.6855,20.5081,7.5681,20.63,5.0057-.1219,7.8132-7.9353,7.8132-20.63,0-13.062-2.8075-21.6064-7.8132-21.4844Z"/>
+  <path class="lg-2" d="M111.89,83.0546c-7.6901,0-12.8167,10.4974-12.8167,27.2214,0,17.2123,5.1266,27.9551,12.8167,27.9551,7.5691,0,12.8179-10.7428,12.8179-27.9551,0-16.724-5.2488-27.2214-12.8179-27.2214Z"/>
+</svg></div>
+   <span class="pill bg-fir text-lfgreen">Liberty Mutual · CMS/DXP Evaluation</span>
+  </div>
+  <div class="max-w-[1000px]">
+   <p class="eyebrow text-fir mb-6">Demo guide</p>
+   <h1 class="h1 text-fir text-[104px]">CMS/DXP Demo Guide</h1>
+   <p class="sub text-fir mt-8 text-[34px]">Two use cases to bring to life</p>
+  </div>
+  <div class="flex gap-4">
+   <span class="tag">Use case 1 · LibertyMutual.com</span><span class="tag">Use case 2 · Independent Agent Portal</span>
+  </div>
+ </div>
+ <aside class="notes">Opening slide. Frame the session: two use cases, LibertyMutual.com trusted answers and the Independent Agent Portal. Press down in each to step through the flow and checklist.</aside>
+</section>
+<section>
+ <section data-background-color="#08251A">
+  <div class="slide-inner justify-center">
+   <span class="pill bg-lfgreen text-fir self-start">LibertyMutual.com use case overview</span>
+   <h2 class="h1 text-lfgreen text-[78px] mt-6 max-w-[1080px]">Trusted Answers, Wherever the Journey Begins</h2>
+   <div class="grid grid-cols-5 gap-6 mt-10">
+    <div class="col-span-3 panel bg-n3 p-8"><p class="caption text-fir">Demo narrative</p><p class="text-fir text-[19px] leading-snug mt-2">A prospective customer asks a natural-language insurance question. The platform retrieves approved, structured Liberty Mutual content, provides an understandable answer, cites or links to the authoritative source, and presents a useful next step. At the same time, Liberty Mutual’s publishing team can create and update the underlying content through governed self-service tools.</p></div>
+    <div class="col-span-2 panel bg-lfgreen p-8 flex flex-col"><p class="caption text-fir">Outcome</p><p class="text-fir text-[21px] leading-snug mt-2 font-medium">Once approved and published, that content becomes available to web pages, site search, enterprise search, AI answer engines, and downstream apps without separate manual publishing processes.</p></div>
+   </div>
+  </div>
+  <aside class="notes">Use case 1: trusted, AI-ready answers. Press down for the core flow and the checklist.</aside>
+ </section>
+ 
+ <section data-background-color="#FFFFFF">
+  <div class="slide-inner">
+   <p class="eyebrow text-fir">LibertyMutual.com use case · Core demonstration flow</p>
+   <h2 class="h2 text-fir text-[44px] mt-1 mb-5">Authoring &amp; Content-Operation Flow</h2>
+   <div class="flex flex-col gap-2.5"><div class="fragment fade-up panel bg-n3 px-5 py-3.5 flex gap-4 items-start"><svg class="w-10 h-10 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 600 600"><path fill="#08251a" d="M219.533 438.589q-92.494 0-156.01-63.526Q0 311.546 0 219.794q0-91.743 63.507-155.269Q127.005 1 218.847 1q91.285 0 155.054 63.525 63.768 63.526 63.768 155.278 0 36.636-11.461 70.937-11.461 34.302-33.58 61.783l198.834 197.988q8.375 8.123 8.535 20.501.16 12.37-8.535 20.392Q582.766 600 570.84 600q-11.917 0-20.368-8.698l-197.43-197.489q-25.85 21.6-61.663 33.184-35.822 11.592-71.846 11.592m-.347-57.189q68.006 0 114.664-46.781 46.648-46.79 46.648-114.825T333.85 104.978q-46.658-46.79-114.664-46.79-68.87 0-115.442 46.79-46.573 46.78-46.573 114.816t46.573 114.825Q150.316 381.4 219.186 381.4"/></svg><div><h4 class="font-bold text-fir text-[19px] leading-tight">User can ask a question in conversational language in an AI-enabled search field</h4><p class="text-fir text-[15.5px] leading-snug mt-1">Demonstrate a customer or agent entering a natural-language question and receiving relevant results or an approved answer.</p></div></div><div class="fragment fade-up panel bg-n3 px-5 py-3.5 flex gap-4 items-start"><svg class="w-10 h-10 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 600 600"><path fill="#08251a" d="M596.137 180.558c-2.566-6.434-6.395-12.204-11.563-17.378-5.17-5.171-10.936-9.003-17.365-11.571-6.43-2.564-13.542-3.864-21.41-3.865H303.968V75.24c-.001-7.874-1.3-14.99-3.862-21.425-2.566-6.434-6.396-12.204-11.563-17.378-5.171-5.171-10.936-9.004-17.366-11.571C264.747 22.3 257.636 21 249.768 21H54.201c-7.869.001-14.98 1.301-21.41 3.866-6.43 2.567-12.195 6.4-17.365 11.57-5.168 5.175-8.998 10.944-11.563 17.379C1.3 60.249 0 67.365 0 75.24v450.514c.001 7.874 1.3 14.991 3.863 21.426 2.566 6.436 6.395 12.207 11.563 17.383 5.17 5.172 10.936 9.004 17.365 11.571 6.43 2.565 13.542 3.865 21.41 3.866h491.598c7.868-.001 14.98-1.301 21.41-3.866 6.429-2.567 12.195-6.4 17.365-11.57 5.168-5.177 8.997-10.948 11.563-17.384 2.563-6.435 3.862-13.552 3.863-21.426V201.983c-.001-7.874-1.301-14.99-3.863-21.425M126.653 529.294h-75.99v-76.038h75.99zm0-126.743h-75.99v-76.038h75.99zm0-128.064h-75.99v-76.038h75.99zm0-126.744h-75.99V71.706h75.99zm126.653 381.551h-75.99v-76.038h75.99zm0-126.743h-75.99v-76.038h75.99zm0-128.064h-75.99v-76.038h75.99zm0-126.744h-75.99V71.706h75.99zm296.031 381.551H303.969v-76.038h61.809v-50.705h-61.809v-77.358h61.809v-50.706h-61.809v-76.038h245.368z"/><path fill="#08251a" d="M479.033 402.551h-50.669v50.705h50.669zm0-128.064h-50.669v50.706h50.669z"/></svg><div><h4 class="font-bold text-fir text-[19px] leading-tight">Search engines and AI answer engines can find and cite the right LM content</h4><p class="text-fir text-[15.5px] leading-snug mt-1">Show how structured content, schema, metadata, and templates make the selected content understandable and retrievable by external search and AI systems.</p></div></div><div class="fragment fade-up panel bg-n3 px-5 py-3.5 flex gap-4 items-start"><svg class="w-10 h-10 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 600 600"><g fill="#08251a" clip-path="url(#cycle77)"><path d="M326.041 46.642c30.97-.006 60.768 6.01 89.148 18.006 28.394 11.989 53.535 29.235 75.23 51.588l12.668 13.046h-58.669c-3.369.004-6.275.582-8.949 1.686-2.67 1.11-5.146 2.763-7.551 5.155-2.398 2.402-4.054 4.875-5.167 7.541-1.106 2.67-1.685 5.572-1.689 8.935.004 3.366.584 6.27 1.689 8.941 1.113 2.667 2.769 5.14 5.166 7.541 2.405 2.393 4.882 4.046 7.552 5.156 2.674 1.104 5.58 1.682 8.949 1.686h96.71c4.031-.004 7.538-.691 10.744-2.006 3.202-1.321 6.144-3.284 8.957-6.083 2.806-2.809 4.772-5.747 6.096-8.945 1.316-3.201 2.005-6.702 2.009-10.726V51.615c-.004-3.364-.583-6.266-1.689-8.935-1.112-2.666-2.768-5.14-5.166-7.54-2.404-2.392-4.881-4.045-7.552-5.156-2.676-1.104-5.584-1.683-8.956-1.687-6.434.011-12.178 1.41-17.659 4.254-1.783.933-2.986 1.897-3.792 2.807-.805.92-1.265 1.776-1.578 2.856-.203.722-.327 1.56-.327 2.58v42.127l-12.898-11.745c-25.49-23.207-53.889-40.823-85.35-52.968C392.492 6.064 359.823.004 325.766 0c-24.329.001-47.65 3.058-70.034 9.156-22.359 6.099-43.595 15.288-63.781 27.612l-.188.115-.19.102c-2.922 1.57-5.249 3.515-7.204 5.971-1.948 2.458-3.53 5.469-4.701 9.223-.9 2.9-1.309 5.569-1.31 8.078.001 1.946.246 3.802.736 5.635.487 1.814 1.22 3.61 2.238 5.43 1.724 2.922 3.685 5.109 5.939 6.793 2.275 1.69 4.884 2.906 8.091 3.665 2.039.48 3.995.708 5.908.709a24.2 24.2 0 0 0 6.288-.833c2.07-.553 4.168-1.394 6.319-2.561 16.441-10.34 34.159-18.333 53.085-23.947 19.108-5.671 38.832-8.508 59.079-8.507M600 285.078q0-5.06-.207-10.148l-.016-.401.024-.393q.057-.908.057-1.766c-.005-3.269-.585-6.055-1.69-8.618-1.114-2.559-2.777-4.938-5.212-7.255-2.728-2.584-5.568-4.401-8.649-5.626-3.083-1.218-6.441-1.854-10.275-1.858-3.063.006-5.601.564-7.911 1.613-2.306 1.058-4.441 2.639-6.526 5.006-2.154 2.458-3.775 5.087-4.954 8.004-1.14 2.831-1.854 5.957-2.123 9.465.197 3.7.304 7.395.304 11.084.002 21.924-3.495 43.61-10.451 64.944-8.173 25.088-20.618 47.865-37.242 68.158-15.938 20.39-34.888 37.623-56.741 51.602-21.871 13.987-45.667 23.986-71.24 29.946l-17.187 4.007 30.196-52.881.038-.064c1.175-2.009 2.012-3.972 2.563-5.924.55-1.954.819-3.901.82-5.919 0-1.933-.25-3.936-.784-6.055l-.002-.005c-.824-3.257-2.099-5.916-3.837-8.222-1.744-2.302-3.981-4.286-6.941-6.018-1.901-1.108-3.743-1.889-5.562-2.401a20 20 0 0 0-5.481-.76c-2.001.001-4.098.31-6.357.979-3.229.962-5.909 2.35-8.248 4.19-2.332 1.844-4.35 4.165-6.104 7.155l-48.326 83.074c-1.372 2.39-2.357 4.728-3.004 7.043a25.7 25.7 0 0 0-.964 6.972c0 2.268.294 4.59.914 7.019.955 3.713 2.452 6.785 4.525 9.473 2.078 2.682 4.765 5.012 8.293 7.035l.031.018 84.004 49.288c1.9 1.108 3.743 1.889 5.562 2.401s3.62.759 5.481.76c2.001-.001 4.098-.31 6.357-.979 3.229-.962 5.909-2.35 8.248-4.19 2.334-1.846 4.353-4.169 6.109-7.162l.018-.031.016-.026c3.357-5.637 5.241-11.292 5.836-17.232q.084-.856.083-1.57c-.002-1.407-.218-2.381-.496-3.084-.29-.706-.62-1.189-1.192-1.729-.384-.354-.892-.724-1.595-1.094l-.114-.06-36.736-20.951 16.695-5.327c27.787-8.868 53.345-21.654 76.78-38.404 23.431-16.756 43.886-36.82 61.436-60.279 17.518-23.799 30.771-49.612 39.82-77.551 7.976-24.635 11.955-49.681 11.957-75.253M223.593 485.697c-.945-3.279-2.349-6.099-4.256-8.641-1.886-2.506-4.286-4.755-7.346-6.781-34.962-19.714-63.085-46.899-84-81.209-10.522-17.248-18.446-35.343-23.724-54.222-5.28-18.879-7.913-38.535-7.912-58.892 0-11.546.922-22.909 2.77-34.073a220 220 0 0 1 8.121-32.975l5.304-16.101 29.001 48.932.059.108c1.777 3.228 3.787 5.634 6.032 7.449 2.253 1.809 4.762 3.074 7.816 3.871 2.013.519 3.951.767 5.874.767a23.2 23.2 0 0 0 6.123-.834c2.076-.565 4.212-1.429 6.429-2.642 3.22-1.769 5.573-3.756 7.313-5.955 1.734-2.208 2.91-4.655 3.608-7.664l.001-.005c.429-1.868.633-3.656.633-5.403a22 22 0 0 0-.858-6.097c-.578-2.029-1.458-4.087-2.696-6.202L133.501 135.4c-2.033-3.533-4.388-6.269-7.111-8.418-2.729-2.143-5.854-3.729-9.607-4.79-2.596-.728-5.073-1.065-7.503-1.066a24.5 24.5 0 0 0-6.639.924c-2.212.622-4.456 1.565-6.756 2.88l-84.328 48.872c-2.737 1.719-4.889 3.691-6.625 5.997-1.74 2.323-3.078 5.006-4.016 8.233-.627 2.169-.915 4.206-.916 6.182.001 1.847.253 3.648.775 5.48.52 1.821 1.313 3.677 2.432 5.596 3.307 5.499 7.405 9.628 12.554 12.751l.004.002c1.375.832 2.596 1.384 3.633 1.716 1.041.333 1.89.453 2.617.454 1.092-.012 1.966-.221 3.058-.793l36.708-20.808-5.046 17.987c-2.63 9.369-4.514 18.989-5.654 28.876q-1.728 15.008-1.727 29.474C49.37 324.121 61.603 369.625 86.19 412c12.304 21.186 26.773 40.007 43.428 56.529 16.657 16.52 35.505 30.746 56.612 42.706l.249.141.241.161c2.131 1.427 4.228 2.44 6.331 3.109 2.105.666 4.223.997 6.465.998 1.99 0 4.05-.238 6.228-.762 3.65-.882 6.607-2.263 9.126-4.13 2.513-1.874 4.632-4.262 6.444-7.416l.023-.039.014-.024c1.116-1.907 1.906-3.761 2.426-5.596.519-1.837.772-3.658.773-5.543-.001-2.038-.302-4.162-.955-6.435z"/></g><defs><clipPath id="cycle77"><path fill="#fff" d="M0 0h600v600H0z"/></clipPath></defs></svg><div><h4 class="font-bold text-fir text-[19px] leading-tight">Published content is automatically indexed by enterprise search platform</h4><p class="text-fir text-[15.5px] leading-snug mt-1">Show the event, connector, webhook, or crawl process that makes newly published content available to enterprise search with product, state, and audience metadata.</p></div></div><div class="fragment fade-up panel bg-n3 px-5 py-3.5 flex gap-4 items-start"><svg class="w-10 h-10 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 600 600"><path fill="#08251a" d="M59.73 593c-16.21 0-30.21-5.904-42.02-17.722S0 549.441 0 533.23V174.041c0-16.211 5.9-30.23 17.71-42.048s25.81-17.722 42.02-17.722h121.93l97.72-97.785C285.08 10.822 291.93 8 299.95 8s15.07 2.832 21.18 8.486l97.21 97.775h121.94c16.2 0 30.2 5.904 42.01 17.722S600 157.82 600 174.031V533.23c0 16.211-5.9 30.23-17.71 42.048S556.48 593 540.28 593zm0-50.564h480.55c2.3 0 4.4-.96 6.32-2.882 1.91-1.911 2.87-4.022 2.87-6.324V174.041c0-2.302-.96-4.413-2.87-6.325-1.92-1.921-4.03-2.881-6.32-2.881H59.73q-3.45 0-6.33 2.881c-1.91 1.912-2.87 4.023-2.87 6.325V533.24c0 2.302.96 4.413 2.87 6.324q2.88 2.883 6.33 2.882zm215.54-93.172-49.47-60.59c-3.15-3.843-7.16-5.724-12-5.664-4.85.07-8.67 2.051-11.47 5.944l-45.25 60.07c-3.53 4.893-4.08 10.087-1.64 15.57 2.44 5.474 6.93 8.216 13.48 8.216h267.19c6.22 0 10.63-2.742 13.23-8.216 2.6-5.483 2.07-10.667-1.6-15.57l-73.35-98.316c-3.23-3.902-7.27-5.723-12.11-5.473s-8.67 2.321-11.47 6.224zm205.87-137.051c7.89-7.895 11.83-17.442 11.83-28.629s-3.94-20.734-11.83-28.629c-7.89-7.896-17.43-11.838-28.61-11.838s-20.71 3.942-28.61 11.838c-7.89 7.895-11.83 17.441-11.83 28.629 0 11.187 3.94 20.734 11.83 28.629s17.43 11.838 28.61 11.838 20.72-3.943 28.61-11.838M236.29 114.271h127.62L300 50.518z"/></svg><div><h4 class="font-bold text-fir text-[19px] leading-tight">Marketing builds and publishes pages from a library of pre-approved components</h4><p class="text-fir text-[15.5px] leading-snug mt-1">Demonstrate a marketer assembling a page using governed components, previewing the result, moving it through approval, and publishing without an engineering ticket.</p></div></div><div class="fragment fade-up panel bg-n3 px-5 py-3.5 flex gap-4 items-start"><svg class="w-10 h-10 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 600 600"><g clip-path="url(#integration77)"><path fill="#08251a" fill-rule="evenodd" stroke="#08251a" stroke-miterlimit="10" stroke-width="2" d="M300.438-.168c19.669 0 36.735 7.025 50.617 20.871 13.883 13.847 20.94 30.884 20.94 50.53 0 17.23-5.419 32.537-16.277 45.448-8.931 10.617-19.9 18.047-32.724 22.195v92.147a66.6 66.6 0 0 1 9.397 3.932l65.462-65.704c-6.12-12.029-8.601-25.073-7.395-38.923 1.467-16.831 8.463-31.513 20.631-43.737l.003-.003c13.879-13.932 30.898-21.03 50.504-21.03 19.598 0 36.616 7.099 50.495 21.03 13.878 13.93 20.939 30.997 20.939 50.639 0 19.641-7.061 36.707-20.939 50.637-12.179 12.225-26.808 19.26-43.604 20.735-13.799 1.211-26.793-1.276-38.773-7.405l-65.469 65.713a66 66 0 0 1 4.104 9.601h92.61c4.149-12.84 11.585-23.82 22.19-32.757 12.902-10.873 28.21-16.296 45.448-16.296 19.57 0 36.565 7.118 50.445 21.05C592.921 262.436 600 279.48 600 299.094c0 19.584-7.06 36.782-20.974 50.681l.001.001c-13.885 13.88-30.875 20.956-50.43 20.956-17.23 0-32.535-5.423-45.444-16.293-10.618-8.94-18.048-19.921-22.195-32.759h-92.309a66.6 66.6 0 0 1-4.133 10.031l65.197 65.442c11.98-6.129 24.975-8.615 38.774-7.404 16.792 1.474 31.431 8.507 43.602 20.733 13.82 13.872 20.831 30.948 20.831 50.639 0 19.687-6.998 36.763-20.831 50.638l.001.001c-13.89 13.941-30.939 21.016-50.577 20.97-19.598-.045-36.59-7.103-50.41-20.959l-.009-.009c-12.174-12.223-19.172-26.895-20.628-43.74-1.205-13.847 1.277-26.889 7.396-38.916l-65.329-65.574a67 67 0 0 1-9.668 3.977v92.841c12.805 4.169 23.746 11.639 32.648 22.281 10.828 12.946 16.222 28.295 16.222 45.573 0 19.688-7.025 36.77-20.88 50.667l.001.001c-13.846 13.898-30.88 20.961-50.524 20.961s-36.679-7.064-50.524-20.961-20.87-30.979-20.87-50.668c0-17.27 5.395-32.617 16.22-45.57 8.904-10.655 19.848-18.118 32.65-22.285v-92.88a66.6 66.6 0 0 1-9.814-4.069l-65.459 65.706c6.119 12.029 8.602 25.073 7.395 38.923-1.467 16.832-8.463 31.513-20.63 43.738l-.004.003c-13.88 13.931-30.898 21.03-50.505 21.03-19.597 0-36.615-7.1-50.494-21.03S67.36 480.772 67.36 461.131s7.06-36.708 20.938-50.638c12.179-12.224 26.807-19.26 43.604-20.734 13.798-1.212 26.792 1.275 38.772 7.404l65.572-65.819a67 67 0 0 1-3.805-9.314h-93.088c-4.166 12.804-11.628 23.746-22.258 32.648-12.933 10.83-28.267 16.223-45.528 16.223-19.594 0-36.62-7.079-50.537-20.96C7.11 336.06 0 319.063 0 299.491c0-19.543 7.091-36.696 21.046-50.546 13.921-13.826 30.943-20.864 50.52-20.864 17.252 0 32.584 5.396 45.524 16.222 10.643 8.904 18.098 19.847 22.262 32.649h92.816a66.6 66.6 0 0 1 4.042-9.967l-65.537-65.781c-11.98 6.129-24.973 8.616-38.771 7.404-16.793-1.474-31.433-8.506-43.605-20.734-13.819-13.871-20.829-30.946-20.829-50.638 0-19.688 6.997-36.766 20.832-50.641 13.89-13.94 30.938-21.014 50.575-20.968 19.6.046 36.592 7.104 50.412 20.96l.567.576c11.828 12.107 18.632 26.583 20.066 43.165l.065.778c1.048 13.561-1.455 26.341-7.46 38.144l65.473 65.72a67 67 0 0 1 9.873-4.099v-91.996c-12.825-4.15-23.792-11.585-32.72-22.19-10.862-12.904-16.28-28.213-16.28-45.453 0-19.646 7.057-36.684 20.952-50.532C263.705 6.856 280.771-.168 300.438-.168Zm-.205 501.914c-7.351 0-13.083 2.427-18.541 7.8-5.309 5.226-7.846 11.285-7.846 18.767 0 7.091 2.479 13.132 7.914 18.587s11.439 7.93 18.473 7.93c7.43 0 13.456-2.536 18.647-7.855l.005-.005c5.321-5.446 7.784-11.51 7.784-18.657 0-7.279-2.553-13.661-7.711-18.831l-.005-.004c-5.195-5.215-11.239-7.732-18.72-7.732Zm161.274-67.162c-7.393-.036-13.403 2.444-18.621 7.682-5.211 5.23-7.736 11.323-7.736 18.855 0 7.525 2.518 13.618 7.736 18.856 5.202 5.221 11.222 7.708 18.624 7.68 7.435-.037 13.479-2.564 18.702-7.814l.005-.005c5.229-5.249 7.736-11.311 7.736-18.717 0-7.4-2.503-13.454-7.736-18.717-5.229-5.248-11.288-7.783-18.71-7.82Zm-322.784.089c-7.423-.073-13.473 2.405-18.73 7.682-4.981 5-7.489 11.03-7.489 18.766s2.508 13.767 7.489 18.767c5.257 5.276 11.307 7.754 18.73 7.681 7.583-.074 13.577-2.609 18.601-7.652 5.303-5.323 7.814-11.41 7.814-18.796s-2.511-13.473-7.814-18.796c-5.209-5.229-10.971-7.577-18.601-7.652ZM71.547 273.001c-7.402 0-13.443 2.513-18.674 7.773-5.248 5.288-7.74 11.344-7.74 18.727 0 7.387 2.493 13.404 7.711 18.608 5.219 5.205 11.267 7.704 18.703 7.704 7.437 0 13.531-2.501 18.82-7.733l.005-.005c5.274-5.209 7.776-11.215 7.776-18.574 0-7.355-2.51-13.411-7.81-18.696-5.309-5.296-11.385-7.804-18.791-7.804Zm457.059-.364c-7.39 0-13.454 2.499-18.73 7.75l-.004.005c-5.262 5.23-7.771 11.275-7.771 18.692 0 7.413 2.518 13.508 7.806 18.815 5.295 5.315 11.341 7.821 18.699 7.821 7.355 0 13.367-2.511 18.583-7.79 5.237-5.31 7.735-11.405 7.735-18.846 0-7.445-2.5-13.501-7.706-18.727-5.205-5.224-11.223-7.72-18.612-7.72Zm-228.069.364c-7.272 0-13.196 2.376-18.287 7.286l-.49.483c-5.257 5.294-7.755 11.353-7.756 18.731 0 3.196.47 6.137 1.425 8.867 1.212 3.255 3.131 6.228 5.799 8.992l.493.5.005.005c3.692 3.671 7.659 5.983 12.045 7.085q1.213.286 2.489.463 1.861.238 3.844.229c7.435-.037 13.484-2.564 18.721-7.821 4.919-4.938 7.428-10.595 7.708-17.414q.02-.587.018-1.185c-.015-3.109-.439-5.949-1.27-8.562-.888-2.711-2.247-5.228-4.094-7.594a31 31 0 0 0-2.047-2.223l-.006-.005c-5.438-5.372-11.481-7.837-18.597-7.837Zm-161.66-162.302c-7.434.038-13.478 2.566-18.702 7.816l-.004.005c-5.23 5.249-7.735 11.31-7.735 18.716 0 7.4 2.501 13.454 7.734 18.716 5.229 5.249 11.289 7.785 18.711 7.821l.689-.003c7.08-.118 12.878-2.605 17.933-7.678 5.21-5.23 7.735-11.324 7.735-18.856 0-7.525-2.517-13.617-7.735-18.855-5.203-5.222-11.223-7.71-18.626-7.682Zm322.788.089c-7.583.074-13.576 2.61-18.601 7.652-5.303 5.324-7.815 11.41-7.815 18.796s2.512 13.473 7.815 18.796c5.024 5.043 11.018 7.578 18.601 7.653 7.423.072 13.473-2.406 18.73-7.683 4.981-4.999 7.488-11.03 7.489-18.766s-2.508-13.767-7.489-18.766c-5.257-5.277-11.307-7.755-18.73-7.682ZM300.537 44.732c-7.477 0-13.533 2.539-18.738 7.838l-.005.005c-5.333 5.423-7.789 11.449-7.79 18.538 0 6.998 2.391 13.167 7.24 18.226l.477.486.005.005c5.209 5.196 11.282 7.715 18.811 7.715 7.399 0 13.16-2.43 18.632-7.782 5.321-5.205 7.85-11.226 7.85-18.65 0-7.033-2.47-13.036-7.918-18.47s-11.483-7.91-18.564-7.91Z" clip-rule="evenodd"/></g><defs><clipPath id="integration77"><path fill="#fff" d="M0 0h600v600H0z"/></clipPath></defs></svg><div><h4 class="font-bold text-fir text-[19px] leading-tight">Marketing can publish content from Profound directly into the CMS / DXP</h4><p class="text-fir text-[15.5px] leading-snug mt-1">Demonstrate or explain the integration pattern through which content created or optimized in Profound enters the CMS / DXP while remaining subject to CMS / DXP workflow and governance.</p></div></div></div>
+  </div>
+  <aside class="notes">Five steps from the conversational question through to governed publishing, including the Profound integration.</aside>
+ </section>
+ <section data-background-color="#E4F0DA">
+  <div class="slide-inner">
+   <p class="eyebrow text-fir">LibertyMutual.com use case</p>
+   <div class="grid grid-cols-5 gap-8 mt-2 flex-1">
+    <div class="col-span-2 flex flex-col">
+     <h2 class="h2 text-fir text-[38px] mb-5">Measurement &amp; Delivery Foundation</h2>
+     <div class="flex flex-col gap-4"><div class="fragment fade-up panel bg-white px-5 py-3.5 flex gap-4 items-start"><svg class="w-10 h-10 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 600 600"><g fill="#08251a" clip-path="url(#analytics77)"><path d="M592.354 43.878q7.012-7.037 7.329-17.597.316-10.551-6.806-18.206-7.646-7.97-18.326-8.074-10.679-.095-18.334 7.552L376.157 187.62q-2.966 2.966-7.586 2.966t-7.585-2.966l-85.646-85.654q-8.545-9.249-20.194-13.492-11.65-4.242-23.717-4.242a65.7 65.7 0 0 0-23.332 4.242q-11.262 4.243-20.58 13.492L7.646 281.838q-7.013 7.038-7.33 17.597Q0 309.987 7.123 317.641q7.646 7.972 18.326 8.075 10.68.093 18.334-7.552l180.06-180.068q2.966-2.966 7.586-2.966t7.585 2.966l85.646 85.654q9.318 8.477 20.58 13.105 11.264 4.629 23.331 4.629 12.069 0 23.718-4.629t20.194-13.105zM437.151 332.341q-10.928 0-18.325 7.397-7.398 7.39-7.397 18.317v216.231q0 10.928 7.388 18.317 7.38 7.397 18.317 7.397 10.928 0 18.326-7.397 7.397-7.39 7.397-18.317V358.055q0-10.928-7.388-18.317-7.38-7.397-18.318-7.397m155.46-129.745q-7.38-7.398-18.317-7.398-10.928 0-18.325 7.398-7.398 7.388-7.398 18.317v353.373q0 10.928 7.389 18.317Q563.34 600 574.277 600q10.928 0 18.326-7.397 7.397-7.39 7.397-18.317V220.913q0-10.93-7.389-18.317M25.723 469.484q-10.928 0-18.326 7.397Q0 484.271 0 495.198v79.088q0 10.928 7.389 18.317Q14.769 600 25.706 600q10.928 0 18.325-7.397 7.398-7.39 7.398-18.317v-79.088q0-10.928-7.389-18.317-7.38-7.397-18.317-7.397m274.286-85.714q-10.93 0-18.326 7.397-7.398 7.389-7.397 18.317v164.802q0 10.928 7.388 18.317 7.38 7.397 18.317 7.397 10.93 0 18.326-7.397 7.398-7.39 7.397-18.317V409.484q0-10.928-7.388-18.317-7.38-7.397-18.317-7.397m-137.143-68.572q-10.93 0-18.326 7.398-7.398 7.388-7.397 18.317v233.373q0 10.928 7.388 18.317 7.38 7.397 18.318 7.397 10.928 0 18.325-7.397 7.397-7.39 7.397-18.317V340.913q0-10.93-7.388-18.317-7.38-7.398-18.317-7.398"/></g><defs><clipPath id="analytics77"><path fill="#fff" d="M0 0h600v600H0z"/></clipPath></defs></svg><div><h4 class="font-bold text-fir text-[19px] leading-tight">Quick-answer analytics for marketers</h4><p class="text-fir text-[16px] leading-snug mt-1">Show how a marketer can obtain directional content-performance information such as page visits, clicks, and scroll depth without initiating a formal analytics request.</p></div></div><div class="fragment fade-up panel bg-white px-5 py-3.5 flex gap-4 items-start"><svg class="w-10 h-10 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 600 600"><g fill="#08251a" clip-path="url(#openapi77)"><path d="M542.34 0H57.66C25.95 0 0 25.97 0 57.72v484.56C0 574.02 25.95 600 57.66 600h484.67c31.72 0 57.66-25.97 57.66-57.72V57.72C599.99 25.97 574.04 0 542.33 0zM553 542.28c0 5.81-4.88 10.72-10.66 10.72H57.66C51.88 553 47 548.09 47 542.28V57.72C47 51.91 51.88 47 57.66 47h484.67c5.78 0 10.66 4.91 10.66 10.72v484.56z"/><path d="M346.94 103.5c-72.51 0-132.14 55.6-138.91 126.75-51.3 20.73-87.53 71.19-87.53 130.2 0 77.5 62.49 140.28 139.56 140.28 72.53 0 132.14-55.61 138.91-126.75 51.3-20.73 87.53-71.2 87.53-130.2 0-77.49-62.51-140.28-139.56-140.28m-86.88 350.23c-50.9 0-92.56-41.52-92.56-93.28 0-33.99 17.98-63.58 44.74-79.87 16.08 59.64 70.31 103.47 134.7 103.47.9 0 1.8-.01 2.69-.03-10.38 40.23-46.7 69.71-89.58 69.71zm86.88-116.68c-42.93 0-79.28-29.53-89.62-69.83.91-.03 1.82-.04 2.73-.04 42.91 0 79.27 29.54 89.61 69.83-.91.03-1.81.04-2.73.04zm47.82-13.4c-16.09-59.63-70.32-103.47-134.7-103.47q-1.35 0-2.7.03c10.38-40.23 46.71-69.71 89.58-69.71 50.89 0 92.56 41.54 92.56 93.28 0 33.99-17.98 63.57-44.74 79.87"/></g><defs><clipPath id="openapi77"><path fill="#fff" d="M0 0h600v600H0z"/></clipPath></defs></svg><div><h4 class="font-bold text-fir text-[19px] leading-tight">Decoupled delivery with a stable content API</h4><p class="text-fir text-[16px] leading-snug mt-1">Show how the same approved content is exposed through a stable, versioned API to a website, portal, search platform, or conversational experience.</p></div></div></div>
+    </div>
+    <div class="col-span-3 panel bg-white p-8">
+     <h3 class="h3 text-fir text-[30px] mb-5">What vendors should explicitly demonstrate</h3>
+     <div class="grid grid-cols-1 gap-x-6 gap-y-2.5"><div class="flex gap-3 items-center"><span class="chk" aria-hidden="true">✓</span><span class="text-fir text-[18px] leading-snug">Natural-language search or answer experience</span></div><div class="flex gap-3 items-center"><span class="chk" aria-hidden="true">✓</span><span class="text-fir text-[18px] leading-snug">Sources and evidence behind the answer</span></div><div class="flex gap-3 items-center"><span class="chk" aria-hidden="true">✓</span><span class="text-fir text-[18px] leading-snug">Fallback when the platform is uncertain</span></div><div class="flex gap-3 items-center"><span class="chk" aria-hidden="true">✓</span><span class="text-fir text-[18px] leading-snug">Structured fields, taxonomy, metadata, and schema</span></div><div class="flex gap-3 items-center"><span class="chk" aria-hidden="true">✓</span><span class="text-fir text-[18px] leading-snug">Self-service authoring and preview</span></div><div class="flex gap-3 items-center"><span class="chk" aria-hidden="true">✓</span><span class="text-fir text-[18px] leading-snug">Approval, versioning, and audit history</span></div><div class="flex gap-3 items-center"><span class="chk" aria-hidden="true">✓</span><span class="text-fir text-[18px] leading-snug">Automatic search indexing</span></div><div class="flex gap-3 items-center"><span class="chk" aria-hidden="true">✓</span><span class="text-fir text-[18px] leading-snug">API retrieval by a second experience</span></div><div class="flex gap-3 items-center"><span class="chk" aria-hidden="true">✓</span><span class="text-fir text-[18px] leading-snug">Content-performance analytics</span></div><div class="flex gap-3 items-center"><span class="chk" aria-hidden="true">✓</span><span class="text-fir text-[18px] leading-snug">Separation between current functionality and roadmap functionality</span></div></div>
+    </div>
+   </div>
+  </div>
+  <aside class="notes">Measurement and API delivery, plus the ten-point checklist evaluators will score against.</aside>
+ </section>
+</section>
+<section>
+ <section data-background-color="#08251A">
+  <div class="slide-inner justify-center">
+   <span class="pill bg-lfgreen text-fir self-start">Independent Agent (IA) Portal use case overview</span>
+   <h2 class="h1 text-lfgreen text-[78px] mt-6 max-w-[1080px]">One Relevant Liberty Experience</h2>
+   <div class="grid grid-cols-5 gap-6 mt-10">
+    <div class="col-span-3 panel bg-n3 p-8"><p class="caption text-fir">Demo narrative</p><p class="text-fir text-[19px] leading-snug mt-2">An independent agent signs in to the IA Portal and lands on a dashboard of product and bundling content, tailored to their role, state, and agency and aligned to current Liberty business priorities. A Liberty marketer changes which products are emphasized, and the agent's view updates without development work. Every portal page shares one brand and design because pages are built from governed templates and components. A content administrator then updates an approved disclosure once, and it appears in the IA Portal and on LM.com.</p></div>
+    <div class="col-span-2 panel bg-lfgreen p-8 flex flex-col"><p class="caption text-fir">Outcome</p><p class="text-fir text-[21px] leading-snug mt-2 font-medium">The agent sees what to focus on and finds approved content to act on a client opportunity, without searching or waiting for IT.</p></div>
+   </div>
+  </div>
+  <aside class="notes">Use case 2: a relevant, governed agent experience. Press down for the three lenses and the checklist.</aside>
+ </section>
+ 
+ <section data-background-color="#FFFFFF">
+  <div class="slide-inner">
+   <p class="eyebrow text-fir">Independent Agent (IA) Portal use case</p>
+   <h2 class="h2 text-fir text-[46px] mt-1 mb-6">Three lenses on one experience</h2>
+   <div class="grid grid-cols-3 gap-6 flex-1"><div class="fragment fade-up panel bg-n3 p-7 flex flex-col"><svg class="w-12 h-12 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 600 600"><g clip-path="url(#b2b77)"><path fill="#08251a" d="M541.104 112.599H436.783V57.637a57.4 57.4 0 0 0-4.563-22.444 57.95 57.95 0 0 0-20.834-25.302A57.3 57.3 0 0 0 379.175 0h-158.35a57.3 57.3 0 0 0-22.432 4.565 57.93 57.93 0 0 0-25.289 20.845 57.4 57.4 0 0 0-9.887 32.227v54.962H58.896C26.503 112.599 0 139.116 0 171.524v369.551C0 573.484 26.503 600 58.896 600h482.208C573.497 600 600 573.484 600 541.075V171.524c0-32.408-26.503-58.925-58.896-58.925M210.217 57.637c.004-1.481.291-2.798.821-4.057.789-1.877 2.198-3.586 3.927-4.75a10.5 10.5 0 0 1 2.762-1.337 10.3 10.3 0 0 1 3.098-.47h158.349c1.481.004 2.797.29 4.055.821 1.876.79 3.584 2.2 4.748 3.93a10.6 10.6 0 0 1 1.337 2.762c.303.975.467 1.988.468 3.1V112.6H210.217zM553 541.075c0 6.451-5.448 11.901-11.896 11.901H58.896c-6.448 0-11.896-5.45-11.896-11.901V343.372h172.79v21.221a35.4 35.4 0 0 0 2.817 13.855 35.6 35.6 0 0 0 12.81 15.562 35.4 35.4 0 0 0 19.873 6.101h89.421a35.4 35.4 0 0 0 13.848-2.82 35.6 35.6 0 0 0 20.038-22.12 35.4 35.4 0 0 0 1.614-10.578v-21.221H553zM266.789 286.633h66.422v66.454h-66.422zm113.422 9.715v-21.221a35.45 35.45 0 0 0-2.818-13.855 35.6 35.6 0 0 0-12.81-15.562 35.4 35.4 0 0 0-19.872-6.101H255.29a35.4 35.4 0 0 0-13.849 2.82 35.6 35.6 0 0 0-20.038 22.12 35.4 35.4 0 0 0-1.613 10.578v21.221H47V171.524c0-6.451 5.448-11.901 11.896-11.901h482.208c6.448 0 11.896 5.45 11.896 11.901v124.824z"/></g><defs><clipPath id="b2b77"><path fill="#fff" d="M0 0h600v600H0z"/></clipPath></defs></svg><h3 class="h3 text-fir text-[26px] mt-4">Agent Experience</h3><div class="mt-4"><h4 class="font-bold text-fir text-[18px] leading-tight">Agent sees product content, and bundles based on their business, relationship and priorities</h4><p class="text-fir text-[15.5px] leading-snug mt-1">Show business rules by role, state, and agency deciding which products and guidance appear.</p></div><div class="mt-4"><h4 class="font-bold text-fir text-[18px] leading-tight">Agent sees consistent brand and design across all portal pages</h4><p class="text-fir text-[15.5px] leading-snug mt-1">Show governed templates keeping pages consistent, and a component change safely propagating.</p></div></div><div class="fragment fade-up panel bg-lfgreen p-7 flex flex-col"><svg class="w-12 h-12 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 600 600"><path fill="#08251a" d="M59.73 593c-16.21 0-30.21-5.904-42.02-17.722S0 549.441 0 533.23V174.041c0-16.211 5.9-30.23 17.71-42.048s25.81-17.722 42.02-17.722h121.93l97.72-97.785C285.08 10.822 291.93 8 299.95 8s15.07 2.832 21.18 8.486l97.21 97.775h121.94c16.2 0 30.2 5.904 42.01 17.722S600 157.82 600 174.031V533.23c0 16.211-5.9 30.23-17.71 42.048S556.48 593 540.28 593zm0-50.564h480.55c2.3 0 4.4-.96 6.32-2.882 1.91-1.911 2.87-4.022 2.87-6.324V174.041c0-2.302-.96-4.413-2.87-6.325-1.92-1.921-4.03-2.881-6.32-2.881H59.73q-3.45 0-6.33 2.881c-1.91 1.912-2.87 4.023-2.87 6.325V533.24c0 2.302.96 4.413 2.87 6.324q2.88 2.883 6.33 2.882zm215.54-93.172-49.47-60.59c-3.15-3.843-7.16-5.724-12-5.664-4.85.07-8.67 2.051-11.47 5.944l-45.25 60.07c-3.53 4.893-4.08 10.087-1.64 15.57 2.44 5.474 6.93 8.216 13.48 8.216h267.19c6.22 0 10.63-2.742 13.23-8.216 2.6-5.483 2.07-10.667-1.6-15.57l-73.35-98.316c-3.23-3.902-7.27-5.723-12.11-5.473s-8.67 2.321-11.47 6.224zm205.87-137.051c7.89-7.895 11.83-17.442 11.83-28.629s-3.94-20.734-11.83-28.629c-7.89-7.896-17.43-11.838-28.61-11.838s-20.71 3.942-28.61 11.838c-7.89 7.895-11.83 17.441-11.83 28.629 0 11.187 3.94 20.734 11.83 28.629s17.43 11.838 28.61 11.838 20.72-3.943 28.61-11.838M236.29 114.271h127.62L300 50.518z"/></svg><h3 class="h3 text-fir text-[26px] mt-4">Liberty Business Experience</h3><div class="mt-4"><h4 class="font-bold text-fir text-[18px] leading-tight">Marketing user changes a priority without development work</h4><p class="text-fir text-[15.5px] leading-snug mt-1">Show a business user changing a priority and the agent's view updating, with no code or release.</p></div><div class="mt-4"><h4 class="font-bold text-fir text-[18px] leading-tight">Marketing user previews the experience for each agent audience</h4><p class="text-fir text-[15.5px] leading-snug mt-1">Show a page previewed as two agents with different roles or agencies before publishing.</p></div></div><div class="fragment fade-up panel bg-n3 p-7 flex flex-col"><svg class="w-12 h-12 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 600 600"><path fill="#08251a" d="M45.54 600c-12.38 0-23.07-4.54-32.06-13.62S0 566.5 0 553.99V270.8c0-12.51 4.49-23.31 13.48-32.4 8.99-9.08 19.68-13.62 32.06-13.62h89.582V46.01c0-12.51 4.49-23.31 13.48-32.39Q162.103 0 180.673 0h373.786c12.38 0 23.071 4.54 32.061 13.62S600 33.5 600 46.01V329.2c0 12.51-4.49 23.31-13.48 32.4-8.99 9.08-19.681 13.62-32.061 13.62h-88.791v178.77c0 12.51-4.49 23.31-13.48 32.39S432.507 600 420.127 600zm0-36.19h374.577c2.43 0 4.66-1.02 6.68-3.07 2.03-2.04 3.04-4.29 3.04-6.75V313.13H35.831v240.86q0 3.69 3.03 6.75c2.03 2.05 4.25 3.07 6.68 3.07m420.128-224.79h88.791c2.43 0 4.65-1.02 6.68-3.06 2.02-2.05 3.03-4.3 3.03-6.76V88.35H170.953v136.44h241.104c15.46 0 28.27 5.12 38.41 15.37 10.141 10.25 15.211 23.16 15.211 38.75v60.12z"/></svg><h3 class="h3 text-fir text-[26px] mt-4">Shared-Content Foundation</h3><div class="mt-4"><h4 class="font-bold text-fir text-[18px] leading-tight">Approved shared content is managed once and distributed to every website</h4><p class="text-fir text-[15.5px] leading-snug mt-1">Show a governed disclosure updated once and appearing in the IA Portal and on LM.com.</p></div><div class="mt-4"><h4 class="font-bold text-fir text-[18px] leading-tight">Every change is approved, auditable, and reversible</h4><p class="text-fir text-[15.5px] leading-snug mt-1">Show the approval step, an audit trail, and a rollback for the disclosure update.</p></div></div></div>
+  </div>
+  <aside class="notes">Agent experience, business-user experience, and the shared-content foundation underneath both.</aside>
+ </section>
+ <section data-background-color="#E4F0DA">
+  <div class="slide-inner">
+   <p class="eyebrow text-fir">Independent Agent (IA) Portal use case</p>
+   <div class="flex gap-10 mt-2 flex-1 items-stretch">
+    <div class="w-[330px] shrink-0 flex flex-col justify-center">
+     <h2 class="h2 text-fir text-[44px]">What vendors should explicitly demonstrate</h2>
+     <div class="mt-8"><svg class="w-16 h-16 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 600 600"><g fill="#08251a" clip-path="url(#check77)"><path d="M541.104 0H58.895C26.503 0 0 26.503 0 58.896v482.208C0 573.497 26.503 600 58.896 600h482.208C573.497 600 600 573.497 600 541.104V58.896C600 26.503 573.497 0 541.104 0M553 541.104c0 6.448-5.448 11.896-11.896 11.896H58.895C52.448 553 47 547.552 47 541.104V58.896C47 52.448 52.448 47 58.895 47h482.209C547.552 47 553 52.448 553 58.896z"/><path d="M451.284 211.514v-.077a23.6 23.6 0 0 0-1.955-9.424l-.05-.112c-1.303-2.957-3.237-5.682-5.656-8.106l-.079-.079c-2.418-2.415-5.157-4.344-8.13-5.629l.006.002-.007-.003-.007-.003c-2.953-1.285-6.194-1.94-9.462-1.944h-.078l-.277.001h.003l-.017.001c-3.315.031-6.581.696-9.556 1.986l-.006.003-.007.003c-2.983 1.285-5.73 3.211-8.13 5.617l-1.062-1.059 1.06 1.061-160.245 160.244-65.91-66.189.006.006-.023-.023-.009-.009-.012-.012-.018-.018c-2.448-2.449-5.204-4.405-8.197-5.713l-.008-.003c-2.957-1.302-6.205-1.97-9.483-1.974h-.141a23.65 23.65 0 0 0-9.419 1.953l-.108.047c-2.977 1.311-5.72 3.26-8.156 5.699l-.012.012c-2.451 2.449-4.412 5.215-5.727 8.218l-.382-.166.379.171v.002c-1.319 2.989-1.999 6.271-2.015 9.582v.042l-.001.125v.087c.003 3.205.626 6.372 1.85 9.266l.076.176c1.263 2.938 3.158 5.642 5.53 8.011l.001.002.152.151.005.007 81.923 81.923.004.003.034.033.038.038c2.698 2.699 5.745 4.842 9.047 6.267l.013.006c3.269 1.42 6.86 2.143 10.5 2.145h.112c3.641-.002 7.23-.725 10.5-2.145l.005-.002.007-.003c3.291-1.421 6.328-3.554 9.019-6.24l176.377-176.194c2.453-2.45 4.411-5.21 5.721-8.206l.004-.01a23.6 23.6 0 0 0 1.974-9.469l-.001-.074z"/></g><defs><clipPath id="check77"><path fill="#fff" d="M0 0h600v600H0z"/></clipPath></defs></svg></div>
+    </div>
+    <div class="flex-1 panel bg-white p-9 flex items-center"><div class="grid grid-cols-1 gap-x-6 gap-y-2.5"><div class="flex gap-3 items-center"><span class="chk" aria-hidden="true">✓</span><span class="text-fir text-[18px] leading-snug">Rules by role, state, and agency</span></div><div class="flex gap-3 items-center"><span class="chk" aria-hidden="true">✓</span><span class="text-fir text-[18px] leading-snug">How two agents with different roles or agencies see different content</span></div><div class="flex gap-3 items-center"><span class="chk" aria-hidden="true">✓</span><span class="text-fir text-[18px] leading-snug">A business user changing a priority without development work</span></div><div class="flex gap-3 items-center"><span class="chk" aria-hidden="true">✓</span><span class="text-fir text-[18px] leading-snug">Experience preview for each agent audience</span></div><div class="flex gap-3 items-center"><span class="chk" aria-hidden="true">✓</span><span class="text-fir text-[18px] leading-snug">Permission and role separation across author, approve, and publish</span></div><div class="flex gap-3 items-center"><span class="chk" aria-hidden="true">✓</span><span class="text-fir text-[18px] leading-snug">Central content versus channel-specific variation</span></div><div class="flex gap-3 items-center"><span class="chk" aria-hidden="true">✓</span><span class="text-fir text-[18px] leading-snug">Reusable component and design-system governance</span></div><div class="flex gap-3 items-center"><span class="chk" aria-hidden="true">✓</span><span class="text-fir text-[18px] leading-snug">One update distributed to more than one site</span></div><div class="flex gap-3 items-center"><span class="chk" aria-hidden="true">✓</span><span class="text-fir text-[18px] leading-snug">How changes are tested, approved, rolled back, and audited</span></div></div></div>
+   </div>
+  </div>
+  <aside class="notes">Nine-point checklist for the IA Portal scenario.</aside>
+ </section>
+</section>
+</div></div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+<script>
+Reveal.initialize({ width:1280, height:720, margin:0.04, minScale:0.2, maxScale:2, center:false, hash:true,
+  slideNumber:'c/t', controls:true, progress:true, transition:'slide', backgroundTransition:'fade', plugins:[RevealNotes] });
+</script>
+</body>
+</html>
