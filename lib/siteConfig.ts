@@ -1,10 +1,11 @@
 /**
  * Site config — the single place to rebrand the non-colour chrome for a new
  * demo. Colours live in app/globals.css (the `@theme` token block); everything
- * else — site name, logo, nav links, footer columns, legal copy — lives here.
+ * else — site name, nav links, footer columns, legal copy — lives here. The
+ * logo is the inline SVG in app/_components/LibertyLogo.tsx.
  *
- * To stand up a new demo: edit this file, drop a new public/logo.svg, and tweak
- * the hex values in app/globals.css. No component edits required.
+ * Copy matches the Ask Liberty and Independent Agent Portal mockups
+ * (public/use-case-1-ask-liberty.html, public/use-case-2-agent-portal.html).
  */
 
 export type NavLink = { label: string; href: string };
@@ -12,73 +13,68 @@ export type FooterColumn = { heading: string; links: NavLink[] };
 
 export const siteConfig = {
   /** Used for the document <title> fallback and the logo alt text. */
-  name: 'Optimizely',
+  name: 'Liberty Mutual',
   /** Default browser-tab title (per-page titles override via CMS MetaTitle). */
-  title: 'Optimizely | Digital Experience Platform',
+  title: 'Liberty Mutual Insurance',
   /** Default meta description. */
   description:
-    'Optimizely — the digital experience platform that helps teams create, test, and optimize digital experiences at scale.',
+    'Liberty Mutual Insurance — get clear answers about car, home and renters insurance, manage claims, and find a local agent.',
 
-  /** Header logo (place the asset in /public). */
-  logoSrc: '/Optimizely_Primary-Logo_Medium_Green_RGB.png',
-  logoAlt: 'Optimizely',
+  logoAlt: 'Liberty Mutual Insurance',
 
-  /** Top utility bar. */
+  /** Slim utility row above the header (the language switcher sits at its right). */
   topNavLinks: [
-    { label: 'Partners', href: '#' },
-    { label: 'Support', href: '#' },
+    { label: 'Help', href: '#' },
   ] satisfies NavLink[],
 
   /** Primary header navigation. */
   mainNavLinks: [
-    { label: 'Products', href: '#' },
-    { label: 'Solutions', href: '#' },
-    { label: 'Customers', href: '#' },
-    { label: 'Resources', href: '#' },
-    { label: 'Pricing', href: '#' },
+    { label: 'Shop insurance', href: '#' },
+    { label: 'Claims', href: '#' },
+    { label: 'Customer support', href: '#' },
+    { label: 'Find a local agent', href: '#' },
   ] satisfies NavLink[],
-  /** Header call-to-action button. */
-  primaryCta: { label: 'Get started free', href: '#' } satisfies NavLink,
+  /** Header search label. */
+  searchLabel: 'Search',
   /** Account / login button label. */
   accountLabel: 'Log in',
 
   /** Footer. */
-  footerTagline:
-    'Create, test, and optimize digital experiences that turn visitors into loyal customers.',
   footerColumns: [
     {
-      heading: 'Products',
+      heading: 'Get a quote',
       links: [
-        { label: 'Content Management', href: '#' },
-        { label: 'Experimentation', href: '#' },
-        { label: 'Commerce', href: '#' },
-        { label: 'Personalization', href: '#' },
+        { label: 'Get a quote online', href: '#' },
+        { label: 'Find a local agent', href: '#' },
+        { label: '24/7 Roadside Assistance', href: '#' },
       ],
     },
     {
-      heading: 'Solutions',
+      heading: 'About Liberty Mutual',
       links: [
-        { label: 'B2B Commerce', href: '#' },
-        { label: 'B2C Commerce', href: '#' },
-        { label: 'Digital Marketing', href: '#' },
-        { label: 'Customer Journeys', href: '#' },
+        { label: 'About our company', href: '#' },
+        { label: 'Careers at Liberty Mutual', href: '#' },
+        { label: 'Corporate sustainability', href: '#' },
       ],
     },
     {
-      heading: 'Resources',
+      heading: 'Quick links',
       links: [
-        { label: 'Blog', href: '#' },
-        { label: 'Documentation', href: '#' },
-        { label: 'Community', href: '#' },
-        { label: 'Webinars', href: '#' },
+        { label: 'Car insurance', href: '#' },
+        { label: 'Homeowners insurance', href: '#' },
+        { label: 'Renters insurance', href: '#' },
       ],
     },
   ] satisfies FooterColumn[],
-  footerLegal: `© ${2026} Optimizely. All rights reserved.`,
+  footerLegal: `© ${new Date().getFullYear()} Liberty Mutual Insurance, 175 Berkeley Street, Boston, MA 02116.`,
+  footerDisclaimer:
+    'Coverage provided and underwritten by Liberty Mutual Insurance Company or its affiliates. Coverages and features not available in all states. Eligibility is subject to underwriting guidelines.',
   footerLegalLinks: [
     { label: 'Privacy Policy', href: '#' },
-    { label: 'Terms of Service', href: '#' },
-    { label: 'Cookie Settings', href: '#' },
+    { label: 'Security Policy', href: '#' },
+    { label: 'Web Accessibility Policy', href: '#' },
+    { label: 'Terms and Conditions', href: '#' },
+    { label: 'Site Map', href: '#' },
   ] satisfies NavLink[],
 } as const;
 

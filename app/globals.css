@@ -3,58 +3,50 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #343741; /* Liberty body text */
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-body);
-  --font-display: var(--font-display);
+  /* Liberty uses one family (Roboto) for body and headings; headings are set light. */
+  --font-display: var(--font-body);
   --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas,
     "Liberation Mono", "Courier New", monospace;
 
   /*
    * ┌──────────────────────────────────────────────────────────────────────┐
    * │  REBRAND HERE.  This is the whole colour theme for the site.          │
-   * │  The Tailwind `blue-*` scale is remapped, so chrome and blocks that   │
-   * │  use `bg-blue-950`, `text-blue-800`, etc. all reskin when you edit    │
-   * │  these ~11 hex values. Set blue-950 = your darkest brand colour and   │
-   * │  blue-800 = your primary; the rest are tints/shades between.          │
+   * │  Liberty Mutual palette, taken from the Ask Liberty and Independent   │
+   * │  Agent Portal mockups (public/use-case-*.html).                       │
+   * │  The Tailwind `blue-*` scale is also remapped (to the Liberty teal),  │
+   * │  so anything that still uses `bg-blue-800`, `text-blue-900`, etc.     │
+   * │  reskins with the rest of the site.                                   │
    * └──────────────────────────────────────────────────────────────────────┘
-   *
-   * Optimizely brand green ramp.
-   * Anchors: Dark Fir #08251a (darkest), LFGreen #abff44 (signature accent).
    */
-  --color-blue-950: #08251a; /* Dark Fir — footer / hero background */
-  --color-blue-900: #0d3a29; /* Mid Fir — header bg */
-  --color-blue-800: #197050; /* Light Fir — primary green, links */
-  --color-blue-700: #3ab533; /* Good-to-go */
-  --color-blue-600: #4dc844;
-  --color-blue-500: #62d84f;
-  --color-blue-400: #7ddd3d; /* Grass */
-  --color-blue-300: #91dbda; /* Light Blue — teal accent */
-  --color-blue-200: #abff44; /* LFGreen — signature bright green */
-  --color-blue-100: #d8e4cb; /* Neutral 4 */
-  --color-blue-50:  #e4f0da; /* Neutral 3 — light wash */
 
-  /* Named Optimizely brand tokens for direct use in custom components. */
-  --color-lfgreen:    #abff44;
-  --color-grass:      #7ddd3d;
-  --color-good-to-go: #3ab533;
-  --color-dark-fir:   #08251a;
-  --color-mid-fir:    #0d3a29;
-  --color-light-fir:  #197050;
-  --color-light-blue: #91dbda;
-  --color-neutral-2:  #eff6e9;
-  --color-neutral-3:  #e4f0da;
-}
+  /* Named Liberty tokens: bg-navy, text-lmt, border-creamb, … */
+  --color-navy:   #1a1446; /* headings, header text, footer band */
+  --color-lmy:    #ffd000; /* Liberty yellow — brand block, accents, highlights */
+  --color-lmt:    #06748c; /* teal — primary buttons, links */
+  --color-lmtd:   #045a6d; /* teal, darker — hover / pressed */
+  --color-cream:  #fff8db; /* notice / callout background */
+  --color-creamb: #ffe680; /* notice / callout border */
+  --color-mist:   #e6f4f6; /* light teal wash — cards, chips, illustrations */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* `blue-*` scale → Liberty navy + teal ramp. */
+  --color-blue-950: #1a1446; /* navy */
+  --color-blue-900: #045a6d; /* teal, dark (hover) */
+  --color-blue-800: #06748c; /* teal — primary, links */
+  --color-blue-700: #078eab; /* teal, bright (libertymutual.com hover) */
+  --color-blue-600: #3aa5bc;
+  --color-blue-500: #6bbdce;
+  --color-blue-400: #98d1dd;
+  --color-blue-300: #bde1e9;
+  --color-blue-200: #cce8ee;
+  --color-blue-100: #e6f4f6; /* mist */
+  --color-blue-50:  #f2fafb;
 }
 
 body {
@@ -68,3 +60,123 @@ h2,
 h3 {
   font-family: var(--font-display);
 }
+
+/* Rich text (typography plugin) in Liberty colours. */
+.prose {
+  --tw-prose-body: #343741;
+  --tw-prose-headings: #1a1446;
+  --tw-prose-links: #06748c;
+  --tw-prose-bold: #1a1446;
+  --tw-prose-bullets: #06748c;
+  --tw-prose-counters: #06748c;
+  --tw-prose-quote-borders: #ffd000;
+}
+
+/* Small yellow rule used under headings in the mockups. */
+.accent {
+  width: 44px;
+  height: 4px;
+  background: #ffd000;
+  border-radius: 2px;
+}
+
+/* In-text teal link (mockups: a.lk). */
+a.lk,
+button.lk {
+  color: #06748c;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ---- Liberty Mutual FloatingHeader (values from libertymutual.com #FloatingHeader_lmWrapper__Qjvhn; desktop >=480px) ---- */
+.lmig-FloatingHeader {
+  --lmig-FloatingHeader-height: 80px;
+  --lmig-FloatingHeader-margin-top: 16px;
+  --lmig-FloatingHeader-font-color: #343741;
+  --lmig-FloatingHeader-box-shadow: 0 8px 12px -6px rgba(0, 0, 0, 0.04),
+    0 6px 4px -1px rgba(0, 0, 0, 0.04), 0 4px 6px -2px rgba(0, 0, 0, 0.08);
+  --lmig-FloatingHeader-brand-color: #ffd000;
+  --lmig-FloatingHeader-background-color: rgba(255, 255, 255, 0.85);
+  font-family: Roboto, Arial, sans-serif;
+  box-sizing: border-box;
+  max-width: 100%;
+  margin: var(--lmig-FloatingHeader-margin-top) 0 0;
+  position: relative;
+  z-index: 50;
+}
+.lmig-FloatingHeader * { box-sizing: inherit; }
+.lmig-FloatingHeader--isSticky { position: sticky; top: 8px; }
+.lmig-FloatingHeader.jsx-1677250985 { margin-bottom: 1.5rem; }
+.lmig-FloatingHeader-actions,
+.lmig-FloatingHeader-inner,
+.lmig-FloatingHeader-nav { display: flex; flex-direction: row; }
+.lmig-FloatingHeader-inner {
+  background-color: var(--lmig-FloatingHeader-background-color);
+  backdrop-filter: blur(8px);
+  height: var(--lmig-FloatingHeader-height);
+  padding-right: 2rem;
+  border-radius: 24px;
+  box-shadow: var(--lmig-FloatingHeader-box-shadow);
+  position: relative;
+}
+.lmig-FloatingHeader-brand {
+  order: 0;
+  flex: 0 0 221px;
+  display: flex;
+  align-self: stretch;
+  align-items: center;
+  justify-content: center;
+  border-top-left-radius: inherit;
+  border-bottom-left-radius: inherit;
+  background-color: var(--lmig-FloatingHeader-brand-color);
+}
+.lmig-FloatingHeader-brand-logo { flex: 0 0 157px; }
+.lmig-FloatingHeader-nav { order: 1; flex: 1 auto; margin-left: 2rem; align-items: center; }
+.lmig-FloatingHeader-nav-menu { display: flex; gap: 2rem; padding: 0; margin: 0; }
+.lmig-FloatingHeader-nav-menu a { color: #1a1446; }
+.lmig-FloatingHeader-actions { order: 2; flex: 0 0 auto; align-items: center; margin-left: 2rem; gap: 2rem; }
+.lmig-FloatingHeader .lmig-FloatingHeader-actions a,
+.lmig-FloatingHeader .lmig-FloatingHeader-actions button {
+  /* no `display` here: buttons are shown/hidden with Tailwind's hidden/sm:flex/md:hidden */
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #1a1446;
+}
+/* Below 480px the real site shrinks the bar and brand block. */
+@media (max-width: 479px) {
+  .lmig-FloatingHeader { --lmig-FloatingHeader-height: 72px; --lmig-FloatingHeader-margin-top: 8px; }
+  .lmig-FloatingHeader-brand { flex-basis: 110px; }
+  .lmig-FloatingHeader-brand-logo { flex-basis: 72px; }
+  .lmig-FloatingHeader-inner { padding-right: 1rem; }
+}
+
+/* ---- Liberty Mutual logo component (same page) ---- */
+.lmig-Logo {
+  font-family: Roboto, Arial, sans-serif;
+  box-sizing: border-box;
+  --lmig-Logo-medallion-fill-color: #ffffff;
+  --lmig-Logo-medallion-stroke-color: none;
+  --lmig-Logo-medallion-stroke-width: 1.5;
+  --lmig-Logo-path-fill-color: #1a1446;
+  display: block;
+  position: relative;
+  line-height: 0;
+}
+.lmig-Logo * { box-sizing: inherit; }
+.lmig-Logo .lmig-Logo--dark { display: none; }
+.lmig-Logo > svg {
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+  height: 1px;
+  overflow: visible;
+  box-sizing: content-box;
+}
+.lmig-LogoLibertyMutual--blue .lmig-Logo--medallionFill {
+  stroke: var(--lmig-Logo-medallion-stroke-color);
+  stroke-width: var(--lmig-Logo-medallion-stroke-width);
+  fill: var(--lmig-Logo-medallion-fill-color);
+}
+.lmig-LogoLibertyMutual--blue .lmig-Logo--path { fill: var(--lmig-Logo-path-fill-color); }

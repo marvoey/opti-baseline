@@ -1,38 +1,46 @@
 import { siteConfig } from '@/lib/siteConfig';
+import LibertyLogo from './LibertyLogo';
 
+/** Liberty Mutual footer — light grey link panel over a navy legal band (as in the mockups). */
 const Footer = () => (
-  <footer className="bg-blue-950 text-white pt-16 pb-8" data-cms-group="Footer">
-    <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-      <div>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={siteConfig.logoSrc} alt={siteConfig.logoAlt} className="h-10 w-auto mb-6" />
-        <p className="text-white/50 text-sm leading-relaxed">{siteConfig.footerTagline}</p>
-      </div>
-      {siteConfig.footerColumns.map((col) => (
-        <div key={col.heading}>
-          <h4 className="text-blue-200 uppercase tracking-widest text-xs font-bold mb-5">
-            {col.heading}
-          </h4>
-          <ul className="space-y-3 text-sm">
-            {col.links.map((link) => (
-              <li key={link.label}>
-                <a href={link.href} className="text-white/60 hover:text-white transition-colors">
+  <footer className="mt-16" data-cms-group="Footer">
+    <div className="mx-auto max-w-6xl px-6">
+      <div className="grid gap-8 rounded-t-3xl bg-[#F5F5F5] px-10 py-10 text-sm md:grid-cols-4">
+        <div>
+          <div
+            className="flex overflow-hidden rounded-xl"
+            style={{ height: 76, width: 221, backgroundColor: 'var(--lmig-FloatingHeader-brand-color, #FFD000)' }}
+          >
+            <div className="flex flex-1 items-center justify-center">
+              <LibertyLogo className="lmig-FloatingHeader-brand-logo" />
+            </div>
+          </div>
+        </div>
+        {siteConfig.footerColumns.map((col) => (
+          <div key={col.heading}>
+            <div className="font-medium text-navy">{col.heading}</div>
+            <div className="mt-3 space-y-2">
+              {col.links.map((link) => (
+                <a key={link.label} href={link.href} className="lk block">
                   {link.label}
                 </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
-    </div>
-    <div className="container mx-auto px-4 pt-8 border-t border-white/10 text-white/40 text-xs flex flex-wrap justify-between gap-4">
-      <p>{siteConfig.footerLegal}</p>
-      <div className="flex gap-6">
-        {siteConfig.footerLegalLinks.map((link) => (
-          <a key={link.label} href={link.href} className="hover:text-white transition-colors">
-            {link.label}
-          </a>
+              ))}
+            </div>
+          </div>
         ))}
+      </div>
+    </div>
+    <div className="bg-navy text-xs text-white/80">
+      <div className="mx-auto max-w-6xl space-y-2 px-6 py-6">
+        <div className="flex flex-wrap gap-x-5 gap-y-1">
+          {siteConfig.footerLegalLinks.map((link) => (
+            <a key={link.label} href={link.href} className="underline">
+              {link.label}
+            </a>
+          ))}
+        </div>
+        <p>{siteConfig.footerLegal}</p>
+        <p>{siteConfig.footerDisclaimer}</p>
       </div>
     </div>
   </footer>
