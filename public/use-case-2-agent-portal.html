@@ -53,19 +53,50 @@ ins{text-decoration:none}
 .upd{animation:updPulse 1.4s ease 1}
 @keyframes updPulse{0%{box-shadow:0 0 0 0 rgba(6,116,140,0)}30%{box-shadow:0 0 0 6px rgba(6,116,140,.28)}100%{box-shadow:0 0 0 0 rgba(6,116,140,0)}}
 /* ---- Liberty Mutual FloatingHeader (values from libertymutual.com #FloatingHeader_lmWrapper__Qjvhn) ---- */
-.lmig-FloatingHeader{--lmig-FloatingHeader-height:80px;--lmig-FloatingHeader-margin-top:32px;--lmig-FloatingHeader-font-color:#343741;--lmig-FloatingHeader-box-shadow:0 8px 12px -6px rgba(0,0,0,0.04),0 6px 4px -1px rgba(0,0,0,0.04),0 4px 6px -2px rgba(0,0,0,0.08);--lmig-FloatingHeader-brand-color:#FFD000;--lmig-FloatingHeader-background-color:rgba(255,255,255,0.85);font-family:Roboto,Arial,sans-serif;box-sizing:border-box;max-width:100%;margin:var(--lmig-FloatingHeader-margin-top) 0 0;position:relative;z-index:30}
+.lmig-FloatingHeader{--lmig-FloatingHeader-height:56px;--lmig-FloatingHeader-margin-top:12px;--lmig-FloatingHeader-font-color:#343741;--lmig-FloatingHeader-box-shadow:0 8px 12px -6px rgba(0,0,0,0.04),0 6px 4px -1px rgba(0,0,0,0.04),0 4px 6px -2px rgba(0,0,0,0.08);--lmig-FloatingHeader-brand-color:#FFD000;--lmig-FloatingHeader-background-color:rgba(255,255,255,0.85);font-family:Roboto,Arial,sans-serif;box-sizing:border-box;max-width:100%;margin:var(--lmig-FloatingHeader-margin-top) 0 0;position:relative;z-index:30}
 .lmig-FloatingHeader *{box-sizing:inherit}
 
 .lmig-FloatingHeader.jsx-1677250985{margin-bottom:1.5rem}
-.lmig-FloatingHeader-actions,.lmig-FloatingHeader-inner,.lmig-FloatingHeader-nav{display:flex;flex-direction:row}
-.lmig-FloatingHeader-inner{background-color:var(--lmig-FloatingHeader-background-color);backdrop-filter:blur(8px);height:var(--lmig-FloatingHeader-height);padding-right:2rem;border-radius:24px;box-shadow:var(--lmig-FloatingHeader-box-shadow);position:relative}
-.lmig-FloatingHeader-brand{order:0;flex:0 0 221px;display:flex;align-self:stretch;align-items:center;justify-content:center;border-top-left-radius:inherit;border-bottom-left-radius:inherit;background-color:var(--lmig-FloatingHeader-brand-color)}
-.lmig-FloatingHeader-brand-logo{flex:0 0 157px}
-.lmig-FloatingHeader-nav{order:1;flex:1 auto;margin-left:2rem;align-items:center}
-.lmig-FloatingHeader-nav-menu{display:flex;gap:2rem;padding:0;margin:0}
+.lmig-FloatingHeader-actions,.lmig-FloatingHeader-inner{display:flex;flex-direction:row}
+.lmig-FloatingHeader-inner{background-color:var(--lmig-FloatingHeader-background-color);backdrop-filter:blur(8px);height:var(--lmig-FloatingHeader-height);padding-right:.5rem;border-radius:16px;box-shadow:var(--lmig-FloatingHeader-box-shadow);position:relative}
+.lmig-FloatingHeader-brand{order:0;flex:0 0 116px;display:flex;align-self:stretch;align-items:center;justify-content:center;border-top-left-radius:inherit;border-bottom-left-radius:inherit;background-color:var(--lmig-FloatingHeader-brand-color)}
+.lmig-FloatingHeader-brand-logo{flex:0 0 88px}
+.lmig-FloatingHeader-nav{display:none;flex-direction:row;order:1;flex:1 auto;margin-left:1rem;align-items:center}
+.lmig-FloatingHeader-nav-menu{display:flex;gap:1.25rem;padding:0;margin:0}
 .lmig-FloatingHeader-nav-menu a{color:#1A1446}
-.lmig-FloatingHeader-actions{order:2;flex:0 0 auto;align-items:center;margin-left:2rem;gap:2rem}
-.lmig-FloatingHeader .lmig-FloatingHeader-actions a{display:flex;align-items:center;gap:.5rem;font-size:.875rem;font-weight:700;color:#1A1446}
+.lmig-FloatingHeader-actions{order:2;flex:0 0 auto;align-items:center;margin-left:.25rem;gap:.25rem}
+.lmig-FloatingHeader .lmig-FloatingHeader-actions a{display:flex;align-items:center;gap:.5rem;font-size:.875rem;font-weight:700;color:#1A1446;justify-content:center;min-width:40px;min-height:40px}
+/* ---- mobile-first header: base = phones; full nav + large brand from lg (1024px) ---- */
+.lm-lbl{display:none}
+.lm-sm-up{display:none!important}
+.lm-menu-btn{order:3;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;width:44px;height:44px;border-radius:9999px;color:#1A1446;background:transparent;border:0;cursor:pointer}
+.lm-menu-btn:hover{background:rgba(26,20,70,.06)}
+.lm-menu-btn .lm-ic-close,.lm-menu-btn[aria-expanded="true"] .lm-ic-open{display:none}
+.lm-menu-btn[aria-expanded="true"] .lm-ic-close{display:block}
+.lm-menu-btn:focus-visible,.lmig-FloatingHeader a:focus-visible{outline:2px solid #06748C;outline-offset:2px}
+.lm-panel{display:none;position:absolute;left:0;right:0;top:calc(100% + 8px);padding:.5rem;background:#fff;border-radius:16px;box-shadow:0 12px 32px rgba(26,20,70,.18);z-index:50}
+.lm-panel.open{display:flex;flex-direction:column}
+.lm-panel a{display:flex;align-items:center;gap:.5rem;min-height:48px;padding:0 1rem;border-radius:12px;font-size:1rem;font-weight:500;color:#1A1446}
+.lm-panel a:hover{background:#F5F5F5}
+.lm-panel a.is-active{box-shadow:inset 4px 0 0 #FFD000;font-weight:700}
+.lm-footbrand .lmig-FloatingHeader-brand{flex:1 1 100%}
+.lm-footbrand .lmig-FloatingHeader-brand-logo{flex:0 0 157px}
+@media (min-width:640px){
+.lm-lbl{display:inline}
+.lm-sm-up{display:flex!important}
+.lmig-FloatingHeader .lmig-FloatingHeader-actions a{min-width:0;min-height:0;padding:0}
+}
+@media (min-width:1024px){
+.lmig-FloatingHeader{--lmig-FloatingHeader-height:80px;--lmig-FloatingHeader-margin-top:32px}
+.lmig-FloatingHeader-inner{padding-right:2rem;border-radius:24px}
+.lmig-FloatingHeader-brand{flex-basis:221px}
+.lmig-FloatingHeader-brand-logo{flex-basis:157px}
+.lmig-FloatingHeader-nav{display:flex;margin-left:2rem}
+.lmig-FloatingHeader-actions{margin-left:2rem;gap:1.25rem}
+.lm-menu-btn,.lm-panel{display:none!important}
+}
+@media (min-width:1280px){.lmig-FloatingHeader-nav-menu{gap:2rem}}
+
 /* Liberty Mutual logo component */
 .lmig-Logo{font-family:Roboto,Arial,sans-serif;box-sizing:border-box;--lmig-Logo-medallion-fill-color:#FFFFFF;--lmig-Logo-medallion-stroke-color:none;--lmig-Logo-medallion-stroke-width:1.5;--lmig-Logo-path-fill-color:#1A1446;display:block;position:relative;line-height:0}
 .lmig-Logo *{box-sizing:inherit}
@@ -220,25 +251,37 @@ function moreWays(P){const src=S.live;return src.order.p.filter(id=>id!=='homeau
 function whyNot(P){const grp=P.role===SERVICE?'s':'p';return S.live.order[grp].filter(id=>S.live.on[id]&&!eligible(id,P)).map(id=>{const r=PRI[id].rules;let why;if(!r.r.includes(P.role))why='Not for '+ROLE_PL[P.role].toLowerCase();else if(!r.s.includes(ALL)&&!r.s.includes(P.st))why=r.s.join(', ')+' only';else why=shortAg(r.a[0])+' agencies only';return [PRI[id].t,why]})}
 
 /* ================= CHROME ================= */
+/* mobile header menu: static link labels only (no user input is interpolated) */
+let _lmN=0;
+const lmMenu=(items,extra='',prevent='')=>{const id='lmnav'+(++_lmN);
+return {btn:`<button type="button" class="lm-menu-btn" data-lm-menu aria-expanded="false" aria-controls="${id}" aria-label="Menu"><svg class="lm-ic-open w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg><svg class="lm-ic-close w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>`,
+panel:`<nav id="${id}" class="lm-panel" aria-label="Mobile navigation">${items.map(n=>`<a href="#"${prevent}${n.startsWith('*')?' class="is-active" aria-current="page"':''}>${n.replace(/^\*/,'')}</a>`).join('')}${extra}</nav>`}};
+(()=>{const closeAll=(focus)=>{document.querySelectorAll('.lm-panel.open').forEach(p=>{p.classList.remove('open');const b=p.closest('header').querySelector('[data-lm-menu]');if(b){b.setAttribute('aria-expanded','false');if(focus)b.focus()}})};
+document.addEventListener('click',e=>{const b=e.target.closest('[data-lm-menu]');
+if(b){const p=b.closest('header').querySelector('.lm-panel');const open=!p.classList.contains('open');closeAll();p.classList.toggle('open',open);b.setAttribute('aria-expanded',String(open));return}
+closeAll()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAll(true)});
+matchMedia('(min-width:1024px)').addEventListener('change',()=>closeAll())})();
 function hdr(kind,o={}){
  const P=o.persona?PERSONAS[o.persona]:null;
  const nav=kind==='portal'?['Home','Quote','Policies','Claims','Sales & marketing','Resources']:kind==='public'?['Shop insurance','Claims','Customer support','Find a local agent']:[];
  const act=o.active||'Home';
- const navHTML=nav.length?`<nav class="lmig-FloatingHeader-nav ${o.compact?'':'hidden md:flex'}" ${o.compact?'style="display:none"':''} aria-label="Main Navigation"><div class="lmig-FloatingHeader-nav-menu text-[14px]" style="gap:1.4rem">${nav.map(n=>`<a href="#" onclick="return false" class="whitespace-nowrap ${kind==='portal'&&n===act?'border-b-[3px] border-lmy pb-1 font-medium':''}">${n}</a>`).join('')}</div></nav>`:'';
+ const navHTML=nav.length?`<nav class="lmig-FloatingHeader-nav" ${o.compact?'style="display:none"':''} aria-label="Main Navigation"><div class="lmig-FloatingHeader-nav-menu text-[14px]" style="gap:1.4rem">${nav.map(n=>`<a href="#" onclick="return false" class="whitespace-nowrap ${kind==='portal'&&n===act?'border-b-[3px] border-lmy pb-1 font-medium':''}">${n}</a>`).join('')}</div></nav>`:'';
  let actions='';
- if(kind==='portal')actions=`<a href="#" onclick="return false">${I_SEARCH}${o.compact?'':'Search'}</a><a href="#" onclick="return false" class="relative">${I_BELL}<span class="absolute -top-0.5 right-0 w-2.5 h-2.5 rounded-full bg-lmy border-2 border-white"></span></a><span class="flex items-center gap-2"><span class="w-9 h-9 rounded-full bg-navy text-white text-xs font-bold flex items-center justify-center">${P.init}</span><span class="${o.compact?'hidden':'hidden lg:block'} leading-tight"><span class="block text-[13px] font-bold text-navy">${P.name}</span><span class="block text-[11px] font-normal text-gray-500">${P.ag}</span></span></span>`;
- else if(kind==='public')actions=`<a href="#" onclick="return false">${I_SEARCH}Search</a><a href="#" onclick="return false"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>Log in</a>`;
+ if(kind==='portal')actions=`<a href="#" onclick="return false" aria-label="Search" class="lm-sm-up">${I_SEARCH}${o.compact?'':'<span class="lm-lbl">Search</span>'}</a><a href="#" onclick="return false" aria-label="Notifications" class="relative">${I_BELL}<span class="absolute -top-0.5 right-0 w-2.5 h-2.5 rounded-full bg-lmy border-2 border-white"></span></a><span class="flex items-center gap-2"><span class="w-9 h-9 rounded-full bg-navy text-white text-xs font-bold flex items-center justify-center">${P.init}</span><span class="${o.compact?'hidden':'hidden xl:block'} leading-tight"><span class="block text-[13px] font-bold text-navy">${P.name}</span><span class="block text-[11px] font-normal text-gray-500">${P.ag}</span></span></span>`;
+ else if(kind==='public')actions=`<a href="#" onclick="return false" aria-label="Search">${I_SEARCH}<span class="lm-lbl">Search</span></a><a href="#" onclick="return false" aria-label="Log in"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg><span class="lm-lbl">Log in</span></a>`;
  else actions=`<a href="#" onclick="return false">Help</a><a href="#" onclick="return false">Español</a>`;
+ const mm=nav.length&&!o.compact?lmMenu(nav.map(n=>kind==='portal'&&n===act?'*'+n:n),kind==='portal'?`<a href="#" onclick="return false">${I_SEARCH}Search</a>`:'',' onclick="return false"'):{btn:'',panel:''};
  const stick=o.stick!==false;
- return `<div class="${stick?'sticky top-[44px] z-40 pointer-events-none':''}"><div class="max-w-6xl mx-auto px-6 pointer-events-auto"><header class="lmig-FloatingHeader lmig-FloatingHeader--liberty" style="margin-top:10px;margin-bottom:1.5rem"><div class="lmig-FloatingHeader-inner lmig-FloatingHeader-inner--liberty">${BRAND}${navHTML}<div class="lmig-FloatingHeader-actions ml-auto" style="gap:1.25rem">${actions}</div></div></header></div></div>`;
+ return `<div class="${stick?'sticky top-[44px] z-40 pointer-events-none':''}"><div class="max-w-6xl mx-auto px-4 sm:px-6 pointer-events-auto"><header class="lmig-FloatingHeader lmig-FloatingHeader--liberty" style="margin-top:10px;margin-bottom:1.5rem"><div class="lmig-FloatingHeader-inner lmig-FloatingHeader-inner--liberty">${BRAND}${navHTML}<div class="lmig-FloatingHeader-actions ml-auto">${actions}</div>${mm.btn}</div>${mm.panel}</header></div></div>`;
 }
-const utility=()=>`<div class="max-w-6xl mx-auto px-6 pt-3 flex items-center justify-between text-xs text-gray-500"><span class="font-medium tracking-wide text-navy">Independent Agent Portal</span><span class="flex gap-5"><a href="#" onclick="return false">Contact your marketing manager</a><a href="#" onclick="return false">Help center</a></span></div>`;
-function footerP(){return `<footer class="mt-16"><div class="max-w-6xl mx-auto px-6"><div class="bg-[#F5F5F5] rounded-t-3xl px-10 py-10 grid md:grid-cols-4 gap-8 text-sm">
-<div><div class="flex rounded-xl overflow-hidden" style="--lmig-FloatingHeader-brand-color:#FFD000;height:76px;width:221px">${BRAND}</div></div>
-<div><div class="font-medium text-navy">Agent support</div><div class="mt-3 space-y-2"><a class="lk block" href="#" onclick="return false">Contact your marketing manager</a><a class="lk block" href="#" onclick="return false">Underwriting support</a><a class="lk block" href="#" onclick="return false">Technical help</a></div></div>
-<div><div class="font-medium text-navy">Sales and marketing</div><div class="mt-3 space-y-2"><a class="lk block" href="#" onclick="return false">Product guides</a><a class="lk block" href="#" onclick="return false">Bundles</a><a class="lk block" href="#" onclick="return false">Co-branded materials</a></div></div>
-<div><div class="font-medium text-navy">Programs</div><div class="mt-3 space-y-2"><a class="lk block" href="#" onclick="return false">Agency agreement</a><a class="lk block" href="#" onclick="return false">Licensing and appointments</a><a class="lk block" href="#" onclick="return false">Training and events</a></div></div></div></div>
-<div class="bg-navy text-white/80 text-xs"><div class="max-w-6xl mx-auto px-6 py-6 space-y-2"><div class="flex flex-wrap gap-x-5 gap-y-1"><a href="#" class="underline" onclick="return false">Privacy Policy</a><a href="#" class="underline" onclick="return false">Security Policy</a><a href="#" class="underline" onclick="return false">Terms and Conditions</a><a href="#" class="underline" onclick="return false">Producer compensation disclosure</a></div><p>© 2026 Liberty Mutual Insurance, 175 Berkeley Street, Boston, MA 02116. For use by authorized independent agents.</p></div></div></footer>`}
+const utility=()=>`<div class="max-w-6xl mx-auto px-4 sm:px-6 pt-3 flex flex-wrap items-center justify-between gap-x-4 gap-y-1 text-xs text-gray-500"><span class="font-medium tracking-wide text-navy">Independent Agent Portal</span><span class="flex flex-wrap gap-x-5 gap-y-1"><a href="#" onclick="return false">Contact your marketing manager</a><a href="#" onclick="return false">Help center</a></span></div>`;
+function footerP(){return `<footer class="mt-12 md:mt-16"><div class="max-w-6xl mx-auto sm:px-6"><div class="bg-[#F5F5F5] rounded-t-3xl px-6 py-8 md:px-10 md:py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-sm">
+<div><div class="lm-footbrand flex rounded-xl overflow-hidden" style="--lmig-FloatingHeader-brand-color:#FFD000;height:76px;width:221px;max-width:100%">${BRAND}</div></div>
+<div><div class="font-medium text-navy">Agent support</div><div class="mt-2"><a class="lk block py-1.5" href="#" onclick="return false">Contact your marketing manager</a><a class="lk block py-1.5" href="#" onclick="return false">Underwriting support</a><a class="lk block py-1.5" href="#" onclick="return false">Technical help</a></div></div>
+<div><div class="font-medium text-navy">Sales and marketing</div><div class="mt-2"><a class="lk block py-1.5" href="#" onclick="return false">Product guides</a><a class="lk block py-1.5" href="#" onclick="return false">Bundles</a><a class="lk block py-1.5" href="#" onclick="return false">Co-branded materials</a></div></div>
+<div><div class="font-medium text-navy">Programs</div><div class="mt-2"><a class="lk block py-1.5" href="#" onclick="return false">Agency agreement</a><a class="lk block py-1.5" href="#" onclick="return false">Licensing and appointments</a><a class="lk block py-1.5" href="#" onclick="return false">Training and events</a></div></div></div></div>
+<div class="bg-navy text-white/80 text-xs"><div class="max-w-6xl mx-auto px-6 py-6 space-y-3"><div class="flex flex-wrap gap-x-5 gap-y-1"><a href="#" class="underline inline-block py-1" onclick="return false">Privacy Policy</a><a href="#" class="underline inline-block py-1" onclick="return false">Security Policy</a><a href="#" class="underline inline-block py-1" onclick="return false">Terms and Conditions</a><a href="#" class="underline inline-block py-1" onclick="return false">Producer compensation disclosure</a></div><p>© 2026 Liberty Mutual Insurance, 175 Berkeley Street, Boston, MA 02116. For use by authorized independent agents.</p></div></div></footer>`}
 const portalPage=(key,body,active)=>utility()+hdr('portal',{persona:key,active:active||'Home'})+body+footerP();
 
 const NAVI=[['Dashboard','<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>'],['Pages','<path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/>'],['Blocks','<path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 12l8-4.5M12 12v9M12 12L4 7.5"/>'],['Components','<path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4z"/><circle cx="16.5" cy="16.5" r="3.5"/>'],['Priorities','<path d="M12 3l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.2 6.4 20.2l1.1-6.2L3 9.6l6.2-.9z"/>'],['Audiences','<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 3-6 6.5-6s6.5 2.4 6.5 6M16 5a3.5 3.5 0 010 7M18 14c2.4.6 3.5 2.4 3.5 5"/>'],['Workflow','<circle cx="5" cy="6" r="2.5"/><circle cx="19" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M7.5 6h9M6 8.5l5 7M18 8.5l-5 7"/>'],['Audit log','<path d="M5 4h14v16H5zM9 9h6M9 13h6M9 17h3"/>']];
