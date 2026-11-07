@@ -88,68 +88,113 @@ button.lk {
   text-underline-offset: 2px;
 }
 
-/* ---- Liberty Mutual FloatingHeader (values from libertymutual.com #FloatingHeader_lmWrapper__Qjvhn; desktop >=480px) ---- */
-.lmig-FloatingHeader {
-  --lmig-FloatingHeader-height: 80px;
-  --lmig-FloatingHeader-margin-top: 16px;
-  --lmig-FloatingHeader-font-color: #343741;
-  --lmig-FloatingHeader-box-shadow: 0 8px 12px -6px rgba(0, 0, 0, 0.04),
-    0 6px 4px -1px rgba(0, 0, 0, 0.04), 0 4px 6px -2px rgba(0, 0, 0, 0.08);
-  --lmig-FloatingHeader-brand-color: #ffd000;
-  --lmig-FloatingHeader-background-color: rgba(255, 255, 255, 0.85);
-  font-family: Roboto, Arial, sans-serif;
-  box-sizing: border-box;
-  max-width: 100%;
-  margin: var(--lmig-FloatingHeader-margin-top) 0 0;
-  position: relative;
-  z-index: 50;
-}
-.lmig-FloatingHeader * { box-sizing: inherit; }
-.lmig-FloatingHeader--isSticky { position: sticky; top: 8px; }
-.lmig-FloatingHeader.jsx-1677250985 { margin-bottom: 1.5rem; }
-.lmig-FloatingHeader-actions,
-.lmig-FloatingHeader-inner,
-.lmig-FloatingHeader-nav { display: flex; flex-direction: row; }
-.lmig-FloatingHeader-inner {
-  background-color: var(--lmig-FloatingHeader-background-color);
-  backdrop-filter: blur(8px);
-  height: var(--lmig-FloatingHeader-height);
-  padding-right: 2rem;
-  border-radius: 24px;
-  box-shadow: var(--lmig-FloatingHeader-box-shadow);
-  position: relative;
-}
-.lmig-FloatingHeader-brand {
-  order: 0;
-  flex: 0 0 221px;
-  display: flex;
-  align-self: stretch;
-  align-items: center;
-  justify-content: center;
-  border-top-left-radius: inherit;
-  border-bottom-left-radius: inherit;
-  background-color: var(--lmig-FloatingHeader-brand-color);
-}
-.lmig-FloatingHeader-brand-logo { flex: 0 0 157px; }
-.lmig-FloatingHeader-nav { order: 1; flex: 1 auto; margin-left: 2rem; align-items: center; }
-.lmig-FloatingHeader-nav-menu { display: flex; gap: 2rem; padding: 0; margin: 0; }
-.lmig-FloatingHeader-nav-menu a { color: #1a1446; }
-.lmig-FloatingHeader-actions { order: 2; flex: 0 0 auto; align-items: center; margin-left: 2rem; gap: 2rem; }
-.lmig-FloatingHeader .lmig-FloatingHeader-actions a,
-.lmig-FloatingHeader .lmig-FloatingHeader-actions button {
-  /* no `display` here: buttons are shown/hidden with Tailwind's hidden/sm:flex/md:hidden */
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.875rem;
-  font-weight: 700;
-  color: #1a1446;
-}
-/* Below 480px the real site shrinks the bar and brand block. */
-@media (max-width: 479px) {
-  .lmig-FloatingHeader { --lmig-FloatingHeader-height: 72px; --lmig-FloatingHeader-margin-top: 8px; }
-  .lmig-FloatingHeader-brand { flex-basis: 110px; }
-  .lmig-FloatingHeader-brand-logo { flex-basis: 72px; }
-  .lmig-FloatingHeader-inner { padding-right: 1rem; }
+/*
+ * ---- Liberty Mutual FloatingHeader (values from libertymutual.com #FloatingHeader_lmWrapper__Qjvhn) ----
+ *
+ * MOBILE-FIRST: the base rules below are the phone layout; each `min-width`
+ * query only adds what a wider screen gets.
+ *   base     <480px   72px bar, 110px brand block, icon-only actions, hamburger menu
+ *   480px+            80px bar, full 221px brand block
+ *   640px+            action labels (Search / Log in) appear
+ *   1024px+           inline nav replaces the hamburger menu
+ *   1280px+           roomier nav spacing
+ *
+ * Wrapped in `@layer components` so Tailwind utilities (hidden, flex, …) can still
+ * override these rules — unlayered CSS would always beat them in Tailwind v4.
+ */
+@layer components {
+  .lmig-FloatingHeader {
+    --lmig-FloatingHeader-height: 72px;
+    --lmig-FloatingHeader-margin-top: 8px;
+    --lmig-FloatingHeader-font-color: #343741;
+    --lmig-FloatingHeader-box-shadow: 0 8px 12px -6px rgba(0, 0, 0, 0.04),
+      0 6px 4px -1px rgba(0, 0, 0, 0.04), 0 4px 6px -2px rgba(0, 0, 0, 0.08);
+    --lmig-FloatingHeader-brand-color: #ffd000;
+    --lmig-FloatingHeader-background-color: rgba(255, 255, 255, 0.85);
+    font-family: Roboto, Arial, sans-serif;
+    box-sizing: border-box;
+    max-width: 100%;
+    margin: var(--lmig-FloatingHeader-margin-top) 0 0;
+    position: relative;
+    z-index: 50;
+  }
+  .lmig-FloatingHeader * { box-sizing: inherit; }
+  .lmig-FloatingHeader--isSticky { position: sticky; top: 8px; }
+  .lmig-FloatingHeader.jsx-1677250985 { margin-bottom: 1.5rem; }
+  .lmig-FloatingHeader a:focus-visible,
+  .lmig-FloatingHeader button:focus-visible { outline: 2px solid #06748c; outline-offset: 2px; }
+
+  .lmig-FloatingHeader-actions,
+  .lmig-FloatingHeader-inner { display: flex; flex-direction: row; }
+  .lmig-FloatingHeader-inner {
+    background-color: var(--lmig-FloatingHeader-background-color);
+    backdrop-filter: blur(8px);
+    height: var(--lmig-FloatingHeader-height);
+    padding-right: 1rem;
+    border-radius: 24px;
+    box-shadow: var(--lmig-FloatingHeader-box-shadow);
+    position: relative;
+  }
+  .lmig-FloatingHeader-brand {
+    order: 0;
+    flex: 0 0 110px;
+    display: flex;
+    align-self: stretch;
+    align-items: center;
+    justify-content: center;
+    border-top-left-radius: inherit;
+    border-bottom-left-radius: inherit;
+    background-color: var(--lmig-FloatingHeader-brand-color);
+  }
+  .lmig-FloatingHeader-brand-logo { flex: 0 0 72px; }
+
+  /* Inline nav is desktop-only; phones/tablets use <MobileMenu>. */
+  .lmig-FloatingHeader-nav {
+    display: none;
+    flex-direction: row;
+    order: 1;
+    flex: 1 auto;
+    margin-left: 1rem;
+    align-items: center;
+  }
+  .lmig-FloatingHeader-nav-menu { display: flex; gap: 1.25rem; padding: 0; margin: 0; }
+  .lmig-FloatingHeader-nav-menu a { color: #1a1446; }
+
+  .lmig-FloatingHeader-actions { order: 2; flex: 0 0 auto; align-items: center; margin-left: auto; gap: 0.25rem; }
+  .lmig-FloatingHeader .lmig-FloatingHeader-actions a,
+  .lmig-FloatingHeader .lmig-FloatingHeader-actions button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-width: 44px; /* touch target */
+    min-height: 44px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #1a1446;
+  }
+  /* Text labels beside the action icons: hidden on phones, shown from 640px. */
+  .lmig-FloatingHeader-label { display: none; }
+
+  @media (min-width: 480px) {
+    .lmig-FloatingHeader { --lmig-FloatingHeader-height: 80px; --lmig-FloatingHeader-margin-top: 16px; }
+    .lmig-FloatingHeader-inner { padding-right: 2rem; }
+    .lmig-FloatingHeader-brand { flex-basis: 221px; }
+    .lmig-FloatingHeader-brand-logo { flex-basis: 157px; }
+  }
+  @media (min-width: 640px) {
+    .lmig-FloatingHeader-actions { gap: 1rem; }
+    .lmig-FloatingHeader .lmig-FloatingHeader-actions a,
+    .lmig-FloatingHeader .lmig-FloatingHeader-actions button { min-width: 0; padding: 0 0.25rem; }
+    .lmig-FloatingHeader-label { display: inline; }
+  }
+  @media (min-width: 1024px) {
+    .lmig-FloatingHeader-nav { display: flex; margin-left: 2rem; }
+    .lmig-FloatingHeader-actions { gap: 2rem; margin-left: 2rem; }
+  }
+  @media (min-width: 1280px) {
+    .lmig-FloatingHeader-nav-menu { gap: 2rem; }
+  }
 }
 
 /* ---- Liberty Mutual logo component (same page) ---- */
