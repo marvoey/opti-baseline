@@ -18,9 +18,9 @@
 | Step (section 10) | Status |
 |---|---|
 | 1. Branch `libertymutual-mark` | Done |
-| 2. CMS: dedicated API client, results folder, `LibAskResult` type, env vars | **Partly done.** The `LibAskResult` type is pushed and `.env.example` is updated. **Still to do by the project owner:** create the dedicated API client and the folder "Ask Liberty Mark results" (the CMS tools can't create folders), then set the env vars locally and on Vercel. |
-| 3. Server code (client, store, `ask`, tools, registry, parser, stub) | Done. Tested locally with fake CMS credentials: tool route authentication and validation, question route guards, rate limit, a real stream read by the browser-side reader, disconnect clean-up, no question text in logs. **Not yet tested against the live CMS**, so the property value format is still unconfirmed. |
-| 4. Reliability probe | Script written (`scripts/probe-mark-roundtrip.mjs`); **not run**. Needs a Preview deployment, the CMS client and folder, and `ASK_MARK_STUB=on`. |
+| 2. CMS: dedicated API client, results folder, `LibAskResult` type, env vars | **Done locally.** The `LibAskResult` type is pushed, `.env.example` is updated, the dedicated API client is in `.env`, and the folder "Ask Liberty Mark results" exists (key `9eadec1758ce456e912f63aa29478e65`, inside the "Liberty Mutual" assets folder). **Still to do by the project owner:** add `ASK_MARK_RESULTS_FOLDER_KEY` to `.env`, and set the three `ASK_MARK_*` values on Vercel. |
+| 3. Server code (client, store, `ask`, tools, registry, parser, stub) | Done. Tested locally: tool route authentication and validation, question route guards, rate limit, a real stream read by the browser-side reader, disconnect clean-up, no question text in logs. **The reply store is tested against the live CMS** (create, read, delete on read, duplicate ignored, sweep, unknown id), and the property format is confirmed. |
+| 4. Reliability probe | Script written and **run locally against the live CMS** (see "Probe results"). **Delivery passes; the 3 s overhead target is not met reliably.** The run on a Vercel Preview deployment is still to do. |
 | 5. `useAskMark` | Done (reader in `askStream.ts`, tested against the real route) |
 | 6. `AiProgressPanel` controlled mode and the hero's Mark path | Done and compiled, **not yet seen in a browser** |
 | 7. `matchClassification` | Done; 41 checks pass, including the whole section 11 table |
@@ -29,6 +29,36 @@
 | 10. End to end with ngrok, then deploy; Firewall rule | Not started |
 
 Refinements made while building (not in the plan above): the cleanup sweep runs at most once every 2 minutes per server instance, the per-address limit is configurable with `ASK_MARK_RATE_LIMIT` (default 10, only raised for the probe), the stub reports its own delay in `reasoning` so the probe can measure the overhead, and clicking a suggested-question chip still asks Mark (for the card) but always goes to the chip's own page.
+
+**Probe results** (local production build, stand-in for Mark answering after 3 to 5 s, 5 questions at once, live CMS):
+
+| Run | Asks | Delivered | Overhead beyond the stub: median / 95th percentile / worst | Items left | Pass mark |
+|---|---|---|---|---|---|
+| 30 asks, checks every 1 s | 30 | 30 | 1.9 s / 3.3 s / 3.6 s | 0 | Overhead missed |
+| 30 asks, early key lookup added | 30 | 30 | 2.1 s / 5.9 s / 14.9 s | 0 | Overhead missed |
+| 30 asks, same code, repeated | 30 | 30 | 1.1 s / 4.3 s / 5.4 s | 0 | Overhead missed |
+| 30 asks, send before delete, checks every 0.5 s | 30 | 30 | 0.6 to 1.1 s / 4.3 s / 4.6 to 5.4 s (two runs) | 0 | Overhead missed |
+| 30 asks, same code, repeated | 30 | 30 | 1.2 s / 2.7 s / 2.9 s | 0 | **Passed** |
+| 100 asks | 100 | 100 | 0.8 s / 3.8 s / 9.0 s | 2 (two deletes got a 429 and were not retried) | Overhead and cleanliness missed |
+| 100 asks, delete retried on 429, checks every 1 s | 100 | 100 | 1.3 s / 5.2 s / 18.2 s | 0 from this run | Overhead missed |
+
+What this shows:
+- **Delivery is solid:** 100 of 100 in every run, with no lost replies. This is what the CMS store was chosen for.
+- **Cleanup works:** every collected reply was deleted. Two were left once, because a delete got a 429 and was not retried; deletes are now retried when rate limited.
+- **A typical question adds about 1 second** beyond Mark's own time.
+- **The tail is the CMS, not the design.** Creating the reply item is either fast (about 80 ms) or slow (about 1 to 1.2 s), roughly half and half under load. Occasionally a CMS call stalls for many seconds (one create exceeded the 8-second call limit, so that question answered 18 s late). The CMS also answered 429 under sustained load (about 15 calls a second).
+- **So the pass mark of "95% add under 3 s" is not met reliably.** One run in seven met it; most land between 4 and 5 s. Runs vary widely because of the CMS.
+
+Changes made while measuring: the key is looked up in the background when a question starts (makes the later create fast when Mark takes more than about 3 s), the check uses the fast item endpoint, the answer is sent before the item is deleted, a rate-limited delete is retried, slow CMS calls (over 1.5 s) are logged, and the check runs once a second.
+
+**Decision needed from the project owner:** accept the measured behaviour for a demo, add an in-process fast path (when Mark's reply reaches the same server instance as the waiting request, hand it over in memory and skip the CMS; the CMS remains the guarantee for other cases), or change the pass mark.
+
+**Findings from the live CMS** (these changed the code):
+- **Property values must be wrapped** as `{ "value": … }` on create, the same shape the API returns on reads.
+- **A new item cannot be given a status**; it always starts as a draft. The `status` field is refused.
+- **Folder listings carry no names.** Entries only have `key`, `container`, `contentType`, `locales`, `created`, `lastModified` and `createdBy`. The sweep therefore uses `created`, not the item name.
+- **A missing key is slow on the versions endpoint** (about 1.3 s for a 404) but fast on the item endpoint (`GET /content/{key}`, about 80 ms). The waiting request now checks with the item endpoint and reads versions only once the item exists. Warm timings: create about 100 ms, read about 60 ms, delete about 100 ms (one create in twelve took 1.4 s).
+- **The item is readable straight after create** (11 of 12 immediately; the check retries anyway).
 
 **Goal:** make "Sending your question to Mark" real. A visitor's question goes to a Mark workflow agent, Mark classifies it, and the Next.js app routes to the approved CMS answer page. Mark never writes the answer. Today the progress card runs on timers and typed questions are routed by keyword.
 

@@ -159,6 +159,20 @@ if (Object.keys(byStatus).length) console.log('Non-200 responses:', byStatus);
 console.log(`Total time per ask   p50 ${pct(totals, 50)} ms   p95 ${pct(totals, 95)} ms   max ${totals.at(-1) ?? NaN} ms`);
 console.log(`Overhead beyond stub p50 ${pct(overheads, 50)} ms   p95 ${pct(overheads, 95)} ms   max ${overheads.at(-1) ?? NaN} ms`);
 
+// The slowest asks, to show where a tail comes from (wave = which burst, slot = position in it).
+const worst = results
+  .map((r, i) => ({ ...r, wave: Math.floor(i / BURST) + 1, slot: (i % BURST) + 1, overhead: r.totalMs - r.sentMs - r.stubDelayMs }))
+  .filter((r) => r.ok && Number.isFinite(r.overhead))
+  .sort((a, b) => b.overhead - a.overhead)
+  .slice(0, 6);
+if (worst.length) {
+  console.log('Slowest asks (overhead beyond the stub delay):');
+  for (const r of worst) {
+    console.log(`  wave ${String(r.wave).padStart(2)} slot ${r.slot}  overhead ${String(r.overhead).padStart(5)} ms   sent@${r.sentMs} ms   stub delay ${r.stubDelayMs} ms   total ${r.totalMs} ms`);
+  }
+  console.log('');
+}
+
 let left;
 try {
   await new Promise((r) => setTimeout(r, 3000));

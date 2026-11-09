@@ -9,7 +9,9 @@
  *
  * Endpoints (from the API definition shipped with @optimizely/cms-cli):
  *   POST   /v1/content                    create (key may be chosen)
- *   GET    /v1/content/{key}/versions     versions with their properties
+ *   GET    /v1/content/{key}              does it exist? (a missing key answers 404 in ~80 ms)
+ *   GET    /v1/content/{key}/versions     versions with their properties (a missing key is SLOW to
+ *                                         answer, about 1 s, so only call it once the item exists)
  *   DELETE /v1/content/{key}              delete (header cms-permanent-delete: true)
  *   GET    /v1/content/{key}/items        children of a folder
  */
@@ -76,7 +78,17 @@ async function getToken(forceRefresh = false): Promise<string> {
   return tokenInFlight;
 }
 
+/** The first part of an error response, to explain a failure in the server log. */
+async function detailOf(res: Response): Promise<string> {
+  const text = await res.text().catch(() => '');
+  return text ? `: ${text.replace(/\s+/g, ' ').slice(0, 300)}` : '';
+}
+
+/** CMS calls slower than this are logged, so a slow store shows up in the server log. */
+const SLOW_CALL_MS = 1500;
+
 async function cmsFetch(path: string, init: RequestInit = {}): Promise<Response> {
+  const started = Date.now();
   const send = async (token: string) =>
     fetch(`${apiBase()}${path}`, {
       ...init,
@@ -87,9 +99,14 @@ async function cmsFetch(path: string, init: RequestInit = {}): Promise<Response>
 
   let res = await send(await getToken());
   if (res.status === 401) res = await send(await getToken(true)); // token expired early
+  const took = Date.now() - started;
+  if (took >= SLOW_CALL_MS) {
+    // The path holds a key (a random id), never visitor text.
+    console.warn(`[ask-mark] slow CMS call ${init.method ?? 'GET'} ${path.replace(/\/content\/[0-9a-f]{32}/, '/content/<key>')} ${took}ms status=${res.status}`);
+  }
   if (res.status === 429) {
     const seconds = Number(res.headers.get('retry-after'));
-    throw new CmsRateLimitedError(Number.isFinite(seconds) && seconds > 0 ? Math.min(seconds, 10) * 1000 : 2000);
+    throw new CmsRateLimitedError(Number.isFinite(seconds) && seconds > 0 ? Math.min(seconds, 10) * 1000 : 1000);
   }
   return res;
 }
@@ -104,7 +121,7 @@ export type CreateDraftInput = {
   properties: Record<string, unknown>;
 };
 
-/** Create a never-published draft item with a chosen key. Returns false if the key already exists (409). */
+/** Create an item (it starts as a draft and is never published) with a chosen key. Returns false if the key already exists (409). */
 export async function createDraftContent(input: CreateDraftInput): Promise<boolean> {
   const locale = process.env.OPTIMIZELY_DEFAULT_LOCALE?.trim() || 'en';
   const res = await cmsFetch('/content', {
@@ -117,23 +134,35 @@ export async function createDraftContent(input: CreateDraftInput): Promise<boole
       initialVersion: {
         locale,
         displayName: input.displayName,
-        status: 'draft',
+        // No status: a new item always starts as a draft, and the API refuses one being set.
         properties: input.properties,
       },
     }),
   });
   if (res.status === 409) return false;
-  if (!res.ok) throw new CmsApiError(res.status, `CMS create failed (${res.status})`);
+  if (!res.ok) throw new CmsApiError(res.status, `CMS create failed (${res.status})${await detailOf(res)}`);
+  return true;
+}
+
+/**
+ * Does an item with this key exist? This is the call to poll with: a missing key
+ * answers 404 in about 80 ms, where the versions endpoint takes about 1 s.
+ */
+export async function contentExists(key: string): Promise<boolean> {
+  const res = await cmsFetch(`/content/${encodeURIComponent(key)}`);
+  if (res.status === 404) return false;
+  if (!res.ok) throw new CmsApiError(res.status, `CMS check failed (${res.status})${await detailOf(res)}`);
+  await res.body?.cancel();
   return true;
 }
 
 export type CmsVersion = { properties?: Record<string, unknown> };
 
-/** The versions of an item, or undefined if the item does not exist (yet). */
+/** The versions of an item, or undefined if the item does not exist. Slow (about 1 s) for a missing key: check `contentExists` first. */
 export async function getContentVersions(key: string): Promise<CmsVersion[] | undefined> {
   const res = await cmsFetch(`/content/${encodeURIComponent(key)}/versions?pageSize=5`);
   if (res.status === 404) return undefined;
-  if (!res.ok) throw new CmsApiError(res.status, `CMS read failed (${res.status})`);
+  if (!res.ok) throw new CmsApiError(res.status, `CMS read failed (${res.status})${await detailOf(res)}`);
   const page = (await res.json()) as { items?: CmsVersion[] };
   return page.items ?? [];
 }
@@ -145,15 +174,16 @@ export async function deleteContentPermanently(key: string): Promise<void> {
     headers: { 'cms-permanent-delete': 'true' },
   });
   if (res.status === 404) return;
-  if (!res.ok) throw new CmsApiError(res.status, `CMS delete failed (${res.status})`);
+  if (!res.ok) throw new CmsApiError(res.status, `CMS delete failed (${res.status})${await detailOf(res)}`);
 }
 
-export type CmsNode = { key?: string; displayName?: string };
+/** A folder listing entry. Listings carry no display name, only these fields. */
+export type CmsNode = { key?: string; contentType?: string; created?: string; lastModified?: string };
 
 /** Children of a folder (first page only). */
 export async function listChildren(folderKey: string, pageSize = 100): Promise<CmsNode[]> {
   const res = await cmsFetch(`/content/${encodeURIComponent(folderKey)}/items?pageSize=${pageSize}`);
-  if (!res.ok) throw new CmsApiError(res.status, `CMS list failed (${res.status})`);
+  if (!res.ok) throw new CmsApiError(res.status, `CMS list failed (${res.status})${await detailOf(res)}`);
   const page = (await res.json()) as { items?: CmsNode[] };
   return page.items ?? [];
 }

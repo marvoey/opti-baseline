@@ -3,7 +3,7 @@ import { NextRequest, after } from 'next/server';
 import { askRateLimitPerMinute, markReady, webhookConfig } from '@/lib/askMark/config';
 import { clientIp, createLimiter, isSameOrigin, readLimitedText } from '@/lib/askMark/requestGuards';
 import { CmsRateLimitedError } from '@/lib/cms/managementApi';
-import { sweepResults, takeResult } from '../_resultStore';
+import { prepareResult, sweepResults, takeResult } from '../_resultStore';
 
 export const dynamic = 'force-dynamic';
 /** The longest the server will hold one question open. The browser gives up sooner (a CMS setting). */
@@ -15,6 +15,13 @@ const WEBHOOK_TIMEOUT_MS = 8000;
 const HOLD_LIMIT_MS = 60_000;
 /** Mark never replies sooner than this, so the first check waits. */
 const FIRST_CHECK_MS = 1500;
+/**
+ * The check is cheap (~80 ms) but the CMS rate-limits (429) under sustained load,
+ * and a 100-question probe at 500 ms hit it. One check a second for the first 10 s,
+ * then every 1.5 s.
+ */
+const CHECK_EVERY_MS = 1000;
+const SLOW_CHECK_EVERY_MS = 1500;
 const MAX_WAITING = 50;
 
 // Best effort only: this memory is per server instance. The real limit is the Vercel Firewall rule.
@@ -63,6 +70,9 @@ export async function POST(request: NextRequest) {
   const cid = randomUUID().replace(/-/g, '');
   // The question text is never logged (it can contain personal details).
   console.log(`[ask-mark] ask start cid=${cid} chars=${question.length}`);
+
+  // Start the CMS lookup now (not awaited) so storing Mark's reply later is fast.
+  prepareResult(cid);
 
   waiting += 1;
   let aborted = false;
@@ -128,11 +138,12 @@ export async function POST(request: NextRequest) {
           await pause(FIRST_CHECK_MS);
           while (!aborted && Date.now() - sentAt < HOLD_LIMIT_MS) {
             try {
-              const result = await takeResult(cid);
+              const taken = await takeResult(cid);
               errors = 0;
-              if (result) {
+              if (taken) {
                 console.log(`[ask-mark] ask answered cid=${cid} after ${Date.now() - sentAt}ms`);
-                send('result', { payload: result });
+                send('result', { payload: taken.result });
+                await taken.cleanup(); // delete on read, after the reply is on its way
                 return;
               }
             } catch (err) {
@@ -147,7 +158,7 @@ export async function POST(request: NextRequest) {
                 return;
               }
             }
-            await pause(Date.now() - sentAt < 10_000 ? 1000 : 2000);
+            await pause(Date.now() - sentAt < 10_000 ? CHECK_EVERY_MS : SLOW_CHECK_EVERY_MS);
           }
           if (!aborted) {
             console.log(`[ask-mark] ask timed out cid=${cid}`);

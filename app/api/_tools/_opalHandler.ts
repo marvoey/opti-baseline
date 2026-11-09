@@ -26,6 +26,7 @@ export function createOpalHandler(name: string) {
     }
 
     let stored: boolean;
+    const started = Date.now();
     try {
       stored = await putResult(parsed.cid, parsed.result);
     } catch (err) {
@@ -34,7 +35,7 @@ export function createOpalHandler(name: string) {
     }
 
     // Only the correlation id is logged, never the question or the reply.
-    console.log(`[ask-mark] ${name}: reply ${stored ? 'stored' : 'ignored (already stored)'} cid=${parsed.cid}`);
+    console.log(`[ask-mark] ${name}: reply ${stored ? 'stored' : 'ignored (already stored)'} cid=${parsed.cid} in ${Date.now() - started}ms`);
     return { success: true, stored };
   };
 }

@@ -76,11 +76,13 @@ export async function POST(request: NextRequest) {
 
   const host = request.headers.get('x-forwarded-host') ?? request.headers.get('host') ?? '';
   const proto = request.headers.get('x-forwarded-proto') ?? (host.startsWith('localhost') ? 'http' : 'https');
-  const delayMs = 1000 + Math.floor(Math.random() * 2000);
+  // Like a real Mark run (a model call plus a workflow): a few seconds.
+  const delayMs = 3000 + Math.floor(Math.random() * 2000);
 
   // Reply later, over the public URL, the way Mark does.
   after(async () => {
     await new Promise((r) => setTimeout(r, delayMs));
+    const calledAt = Date.now();
     try {
       const res = await fetch(`${proto}://${host}/api/tools/liberty_ask`, {
         method: 'POST',
@@ -93,7 +95,7 @@ export async function POST(request: NextRequest) {
         }),
         signal: AbortSignal.timeout(8000),
       });
-      console.log(`[ask-mark] stub replied cid=${correlationId} status=${res.status}`);
+      console.log(`[ask-mark] stub replied cid=${correlationId} status=${res.status} in ${Date.now() - calledAt}ms`);
     } catch (err) {
       console.error('[ask-mark] stub could not call the tool', err instanceof Error ? err.message : String(err));
     }
