@@ -34,15 +34,15 @@ export default function JhArticleList({ content }: Props) {
   return (
     <section {...pa(block)} className="px-4 sm:px-6 py-8">
       <div className="max-w-6xl mx-auto">
-        <div className="flex items-end justify-between border-b-2 border-jh-red pb-2 mb-5">
-          <h2 {...pa('Title')} className="text-xl sm:text-2xl font-extrabold text-jh-navy">
+        <div className="flex items-end justify-between border-b-2 border-jh-teal pb-2 mb-5">
+          <h2 {...pa('Title')} className="text-xl sm:text-2xl font-extrabold text-jh-purple">
             {content.Title}
           </h2>
           {content.SeeMoreLabel && (
             <a
               {...pa('SeeMoreLabel')}
               href={content.SeeMoreHref || '#'}
-              className="text-sm font-bold text-jh-red hover:underline"
+              className="text-sm font-bold text-jh-blue hover:underline"
             >
               {content.SeeMoreLabel} →
             </a>
@@ -51,7 +51,7 @@ export default function JhArticleList({ content }: Props) {
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {articles.map((a) => (
             <article key={a.n} className="bg-white rounded-xl border border-slate-200 p-5 shadow-sm flex flex-col">
-              <h3 {...pa(`Article${a.n}Title`)} className="font-bold text-jh-navy leading-snug">
+              <h3 {...pa(`Article${a.n}Title`)} className="font-bold text-jh-purple leading-snug">
                 <a href={a.Href || '#'} className="hover:underline">
                   {a.Title}
                 </a>

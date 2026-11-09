@@ -70,7 +70,7 @@ export default function LanguageSwitcher() {
                   href={localizePath(cleanPath, locale.key)}
                   onClick={() => setOpen(false)}
                   className={`block px-4 py-2 text-sm transition-colors hover:bg-slate-50 ${
-                    active ? 'font-bold text-blue-800' : 'text-slate-600'
+                    active ? 'font-bold text-jh-purple' : 'text-slate-600'
                   }`}
                 >
                   {locale.displayName}

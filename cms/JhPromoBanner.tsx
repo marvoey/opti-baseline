@@ -6,7 +6,7 @@ export const JhPromoBannerContentType = contentType({
   baseType: '_component',
   displayName: 'JH Promo Banner',
   description: 'Full-width callout strip (e.g. "Need tax help?", satisfaction promise) with an optional CTA.',
-  compositionBehaviors: ['elementEnabled'],
+  compositionBehaviors: ['elementEnabled', 'sectionEnabled'],
   properties: {
     Heading: { type: 'string', displayName: 'Heading', isLocalized: true, sortOrder: 1 },
     Text: { type: 'string', displayName: 'Text', isLocalized: true, sortOrder: 2 },
@@ -31,7 +31,7 @@ export default function JhPromoBanner({ content }: Props) {
   return (
     <section
       {...pa(block)}
-      className={`px-4 sm:px-6 py-6 ${gold ? 'bg-jh-gold-light border-y border-jh-gold text-jh-navy' : 'bg-jh-navy text-white'}`}
+      className={`px-4 sm:px-6 py-6 ${gold ? 'bg-jh-teal-wash border-y border-jh-teal text-jh-purple' : 'bg-jh-purple text-white'}`}
     >
       <div className="max-w-6xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
@@ -39,7 +39,7 @@ export default function JhPromoBanner({ content }: Props) {
             {content.Heading}
           </h2>
           {content.Text && (
-            <p {...pa('Text')} className={`text-sm mt-1 ${gold ? 'text-slate-700' : 'text-blue-100'}`}>
+            <p {...pa('Text')} className={`text-sm mt-1 ${gold ? 'text-jh-charcoal' : 'text-white/90'}`}>
               {content.Text}
             </p>
           )}
@@ -48,7 +48,7 @@ export default function JhPromoBanner({ content }: Props) {
           <a
             {...pa('CtaLabel')}
             href={content.CtaHref || '#'}
-            className="shrink-0 px-6 py-3 bg-jh-red hover:bg-jh-red-hover text-white font-bold rounded-lg shadow"
+            className={`jh-btn shrink-0 ${gold ? 'jh-btn-purple' : 'jh-btn-teal'}`}
           >
             {content.CtaLabel}
           </a>

@@ -26,55 +26,61 @@ export const siteConfig = {
   /** Customer service line shown in the utility bar. */
   phone: '1-800-234-1040',
 
-  /** Top utility bar. */
+  /** Top utility bar (jacksonhewitt.com: Find an office · Search · Contact Us · Log in). */
   topNavLinks: [
-    { label: 'Office Locator', href: '#' },
+    { label: 'Contact Us', href: '#' },
     { label: 'Tax Tips & Topics', href: '/tax-help/tax-tips-topics/filing-your-taxes' },
     { label: '1-800-234-1040', href: 'tel:18002341040' },
   ] satisfies NavLink[],
 
-  /** Primary header navigation. */
+  /** Primary header navigation (mirrors the three top-level menus on jacksonhewitt.com). */
   mainNavLinks: [
-    { label: 'File with a Tax Pro', href: '/file-taxes-options-products' },
-    { label: 'File Online ($25)', href: '/file-taxes-options-products/file-taxes-online' },
-    { label: 'Walmart Locations', href: '#' },
-    { label: 'Refund Advance', href: '/refund-advance' },
-    { label: 'Tax Tips', href: '/tax-help/tax-tips-topics/filing-your-taxes' },
+    { label: 'File Your Taxes', href: '/file-taxes-options-products' },
+    { label: 'Resolve Tax Issues', href: '#' },
+    { label: 'Tax Resources', href: '/tax-help/tax-tips-topics/filing-your-taxes' },
   ] satisfies NavLink[],
   /** Header call-to-action button. */
   primaryCta: { label: 'Find an Office', href: '#' } satisfies NavLink,
   /** Account / login button label. */
-  accountLabel: 'Sign in to MyJH',
+  accountLabel: 'Log in | Sign up',
 
   /** Footer. */
-  footerTagline:
-    'Tax preparation backed by our Maximum Refund and 100% Accuracy Guarantees. In-store, at Walmart, or online.',
+  footerTagline: 'Get every dollar you deserve®',
   footerColumns: [
     {
-      heading: 'File Your Taxes',
+      heading: 'Tax Services',
       links: [
-        { label: 'File with a Tax Pro', href: '#' },
-        { label: 'File Online ($25)', href: '#' },
+        { label: 'File with a Tax Pro', href: '/file-taxes-options-products' },
+        { label: 'File Online ($25)', href: '/file-taxes-options-products/file-taxes-online' },
         { label: 'Drop Off Your Taxes', href: '#' },
+        { label: 'Refund Advance', href: '/refund-advance' },
+      ],
+    },
+    {
+      heading: 'Tax Resources',
+      links: [
+        { label: 'Tax Tips & Topics', href: '/tax-help/tax-tips-topics/filing-your-taxes' },
+        { label: 'Tax Calculators', href: '#' },
+        { label: 'Standard Deduction', href: '#' },
+        { label: 'Earned Income Tax Credit', href: '#' },
+      ],
+    },
+    {
+      heading: 'Meet Jackson Hewitt',
+      links: [
+        { label: 'About Us', href: '#' },
+        { label: 'Careers', href: '#' },
+        { label: 'Maximum Refund Guarantee', href: '#' },
         { label: 'Walmart Locations', href: '#' },
       ],
     },
     {
-      heading: 'Refunds & Loans',
+      heading: 'Account & Support',
       links: [
-        { label: 'Refund Advance', href: '/refund-advance' },
-        { label: 'Refund Calculator', href: '#' },
+        { label: 'Log in | Sign up', href: '#' },
         { label: 'Where\'s My Refund?', href: '#' },
-        { label: 'Maximum Refund Guarantee', href: '#' },
-      ],
-    },
-    {
-      heading: 'Tax Help',
-      links: [
-        { label: 'Standard Deduction', href: '#' },
-        { label: 'Earned Income Tax Credit', href: '#' },
-        { label: 'Tax Calculators', href: '#' },
-        { label: 'Tax Resolution', href: '#' },
+        { label: 'Contact Us', href: '#' },
+        { label: 'Find an Office', href: '#' },
       ],
     },
   ] satisfies FooterColumn[],

@@ -7,7 +7,7 @@ export const JhPageHeroContentType = contentType({
   baseType: '_component',
   displayName: 'JH Page Hero',
   description: 'Page intro: breadcrumb, headline, intro copy and up to two calls to action.',
-  compositionBehaviors: ['elementEnabled'],
+  compositionBehaviors: ['elementEnabled', 'sectionEnabled'],
   properties: {
     Breadcrumb: { type: 'string', displayName: 'Breadcrumb (e.g. Home > Ways to File)', isLocalized: true, sortOrder: 1 },
     Headline: { type: 'string', displayName: 'Headline', isLocalized: true, sortOrder: 2 },
@@ -27,10 +27,10 @@ export default function JhPageHero({ content }: Props) {
   const link = (href?: string | null) => ctaHref({ text: null, title: null, target: null, url: { default: href ?? null } });
 
   return (
-    <section {...pa(block)} className="bg-gradient-to-br from-jh-navy to-blue-950 text-white px-4 sm:px-6 py-14">
+    <section {...pa(block)} className="bg-gradient-to-b from-jh-purple-light to-jh-purple text-white px-4 sm:px-6 py-14">
       <div className="max-w-6xl mx-auto">
         {content.Breadcrumb && (
-          <p {...pa('Breadcrumb')} className="text-xs text-blue-200 mb-4">
+          <p {...pa('Breadcrumb')} className="text-xs text-white/80 mb-4">
             {content.Breadcrumb}
           </p>
         )}
@@ -38,7 +38,7 @@ export default function JhPageHero({ content }: Props) {
           {content.Headline}
         </h1>
         {content.Intro && (
-          <p {...pa('Intro')} className="mt-4 text-base sm:text-lg text-blue-100 max-w-2xl leading-relaxed">
+          <p {...pa('Intro')} className="mt-4 text-base sm:text-lg text-white/90 max-w-2xl leading-relaxed">
             {content.Intro}
           </p>
         )}
@@ -47,7 +47,7 @@ export default function JhPageHero({ content }: Props) {
             <a
               {...pa('PrimaryCtaLabel')}
               href={link(content.PrimaryCtaHref)}
-              className="px-7 py-3.5 bg-jh-red hover:bg-jh-red-hover text-white font-bold rounded-lg shadow-lg"
+              className="jh-btn jh-btn-teal"
             >
               {content.PrimaryCtaLabel}
             </a>
@@ -56,7 +56,7 @@ export default function JhPageHero({ content }: Props) {
             <a
               {...pa('SecondaryCtaLabel')}
               href={link(content.SecondaryCtaHref)}
-              className="px-7 py-3.5 bg-white/10 hover:bg-white/20 border border-white/30 text-white font-semibold rounded-lg"
+              className="jh-btn jh-btn-ghost"
             >
               {content.SecondaryCtaLabel}
             </a>

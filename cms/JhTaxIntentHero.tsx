@@ -123,7 +123,7 @@ export default function JhTaxIntentHero({ content }: Props) {
   return (
     <section
       {...pa(block)}
-      className="bg-gradient-to-b from-jh-navy via-[#0c2e50] to-jh-navy text-white py-14 px-4 sm:px-6 relative overflow-hidden"
+      className="bg-[radial-gradient(120%_100%_at_50%_-35%,#3c1a51_40%,#1878cc_100%)] text-white py-14 px-4 sm:px-6 relative overflow-hidden"
     >
       <IntentHeroClient variants={variants} />
     </section>

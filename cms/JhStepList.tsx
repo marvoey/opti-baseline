@@ -32,17 +32,17 @@ export default function JhStepList({ content }: Props) {
     <section {...pa(block)} className="bg-jh-surface px-4 sm:px-6 py-12">
       <div className="max-w-6xl mx-auto">
         {content.Title && (
-          <h2 {...pa('Title')} className="text-2xl sm:text-3xl font-extrabold text-jh-navy mb-8">
+          <h2 {...pa('Title')} className="text-2xl sm:text-3xl font-extrabold text-jh-purple mb-8">
             {content.Title}
           </h2>
         )}
         <ol className="grid gap-6 md:grid-cols-3">
           {steps.map((step, i) => (
             <li key={step.n} className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
-              <span className="inline-flex w-9 h-9 items-center justify-center rounded-full bg-jh-red text-white font-black mb-3">
+              <span className="inline-flex w-9 h-9 items-center justify-center rounded-full bg-jh-purple-light text-white font-black mb-3">
                 {i + 1}
               </span>
-              <h3 {...pa(`Step${step.n}Title`)} className="font-bold text-jh-navy">
+              <h3 {...pa(`Step${step.n}Title`)} className="font-bold text-jh-purple">
                 {step.Title}
               </h3>
               <p {...pa(`Step${step.n}Text`)} className="text-sm text-slate-600 mt-1 leading-relaxed">
@@ -55,7 +55,7 @@ export default function JhStepList({ content }: Props) {
           <a
             {...pa('CtaLabel')}
             href={content.CtaHref || '#'}
-            className="inline-block mt-8 px-7 py-3.5 bg-jh-red hover:bg-jh-red-hover text-white font-bold rounded-lg shadow"
+            className="jh-btn jh-btn-purple mt-8"
           >
             {content.CtaLabel}
           </a>

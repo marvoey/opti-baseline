@@ -9,7 +9,7 @@ export const JhCardGridContentType = contentType({
   baseType: '_component',
   displayName: 'JH Card Grid',
   description: 'Titled grid of up to six cards (use cases, guarantees, resources) with optional links.',
-  compositionBehaviors: ['elementEnabled'],
+  compositionBehaviors: ['elementEnabled', 'sectionEnabled'],
   properties: {
     Title: { type: 'string', displayName: 'Title', isLocalized: true, sortOrder: 1 },
     Intro: { type: 'string', displayName: 'Intro', isLocalized: true, sortOrder: 2 },
@@ -33,7 +33,7 @@ export default function JhCardGrid({ content }: Props) {
     <section {...pa(block)} className="px-4 sm:px-6 py-12">
       <div className="max-w-6xl mx-auto">
         {content.Title && (
-          <h2 {...pa('Title')} className="text-2xl sm:text-3xl font-extrabold text-jh-navy">
+          <h2 {...pa('Title')} className="text-2xl sm:text-3xl font-extrabold text-jh-purple">
             {content.Title}
           </h2>
         )}
@@ -48,7 +48,7 @@ export default function JhCardGrid({ content }: Props) {
               key={card.n}
               className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm flex flex-col"
             >
-              <h3 {...pa(`Card${card.n}Title`)} className="text-lg font-bold text-jh-navy">
+              <h3 {...pa(`Card${card.n}Title`)} className="text-lg font-bold text-jh-purple">
                 {card.Title}
               </h3>
               <p {...pa(`Card${card.n}Text`)} className="text-sm text-slate-600 mt-2 leading-relaxed flex-1">
@@ -58,7 +58,7 @@ export default function JhCardGrid({ content }: Props) {
                 <a
                   {...pa(`Card${card.n}LinkLabel`)}
                   href={card.LinkHref || '#'}
-                  className="mt-4 text-sm font-bold text-jh-red hover:underline"
+                  className="mt-4 text-sm font-bold text-jh-blue hover:underline"
                 >
                   {card.LinkLabel} →
                 </a>

@@ -11,7 +11,7 @@ export const JhFeatureListContentType = contentType({
   baseType: '_component',
   displayName: 'JH Feature List',
   description: 'Icon-led list of up to six short feature bullets.',
-  compositionBehaviors: ['elementEnabled'],
+  compositionBehaviors: ['elementEnabled', 'sectionEnabled'],
   properties: {
     Title: { type: 'string', displayName: 'Title', isLocalized: true, sortOrder: 1 },
     ...numberedProperties('Item', 'Feature', COUNT, [
@@ -32,7 +32,7 @@ export default function JhFeatureList({ content }: Props) {
     <section {...pa(block)} className="px-4 sm:px-6 py-12">
       <div className="max-w-6xl mx-auto">
         {content.Title && (
-          <h2 {...pa('Title')} className="text-2xl sm:text-3xl font-extrabold text-jh-navy mb-8">
+          <h2 {...pa('Title')} className="text-2xl sm:text-3xl font-extrabold text-jh-purple mb-8">
             {content.Title}
           </h2>
         )}
@@ -41,11 +41,11 @@ export default function JhFeatureList({ content }: Props) {
             const Icon = ICONS[i % ICONS.length];
             return (
               <li key={i} className="flex gap-4">
-                <span className="shrink-0 w-11 h-11 rounded-xl bg-blue-50 text-jh-navy flex items-center justify-center">
+                <span className="shrink-0 w-11 h-11 rounded-xl bg-blue-50 text-jh-purple flex items-center justify-center">
                   <Icon className="w-5 h-5" />
                 </span>
                 <div>
-                  <h3 {...pa(`Item${item.n}Title`)} className="font-bold text-jh-navy">
+                  <h3 {...pa(`Item${item.n}Title`)} className="font-bold text-jh-purple">
                     {item.Title}
                   </h3>
                   <p {...pa(`Item${item.n}Text`)} className="text-sm text-slate-600 mt-1 leading-relaxed">

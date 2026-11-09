@@ -6,7 +6,7 @@ export const JhDisclosureContentType = contentType({
   baseType: '_component',
   displayName: 'JH Disclosure',
   description: 'Small-print legal or loan disclosure text. Separate paragraphs with a blank line.',
-  compositionBehaviors: ['elementEnabled'],
+  compositionBehaviors: ['elementEnabled', 'sectionEnabled'],
   properties: {
     Title: { type: 'string', displayName: 'Title', isLocalized: true, sortOrder: 1 },
     Body: { type: 'string', displayName: 'Body (blank line between paragraphs)', isLocalized: true, sortOrder: 2 },

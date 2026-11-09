@@ -40,7 +40,7 @@ export default function JhFaqAccordion({ content }: Props) {
     <section {...pa(block)} className="bg-jh-surface px-4 sm:px-6 py-12">
       <div className="max-w-3xl mx-auto">
         {content.Title && (
-          <h2 {...pa('Title')} className="text-2xl sm:text-3xl font-extrabold text-jh-navy mb-6">
+          <h2 {...pa('Title')} className="text-2xl sm:text-3xl font-extrabold text-jh-purple mb-6">
             {content.Title}
           </h2>
         )}
@@ -49,10 +49,10 @@ export default function JhFaqAccordion({ content }: Props) {
             <details key={faq.n} className="group p-5">
               <summary
                 {...pa(`Faq${faq.n}Question`)}
-                className="cursor-pointer list-none font-bold text-jh-navy flex items-center justify-between gap-4"
+                className="cursor-pointer list-none font-bold text-jh-purple flex items-center justify-between gap-4"
               >
                 {faq.Question}
-                <span className="text-jh-red text-xl leading-none transition-transform group-open:rotate-45">+</span>
+                <span className="text-jh-blue text-xl leading-none transition-transform group-open:rotate-45">+</span>
               </summary>
               <p {...pa(`Faq${faq.n}Answer`)} className="mt-3 text-sm text-slate-600 leading-relaxed">
                 {faq.Answer}

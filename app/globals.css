@@ -3,7 +3,7 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #505050;
 }
 
 @theme inline {
@@ -17,41 +17,37 @@
   /*
    * ┌──────────────────────────────────────────────────────────────────────┐
    * │  REBRAND HERE.  This is the whole colour theme for the site.          │
-   * │  The Tailwind `blue-*` scale is remapped, so chrome and blocks that   │
-   * │  use `bg-blue-950`, `text-blue-800`, etc. all reskin when you edit    │
-   * │  these ~11 hex values. Set blue-950 = your darkest brand colour and   │
-   * │  blue-800 = your primary; the rest are tints/shades between.          │
+   * │  Values are taken from jacksonhewitt.com (header, hero, CTA and       │
+   * │  footer stylesheets): deep purple #360060, mid purple #633981, teal   │
+   * │  #4ec5c1 / #71dad6, blue #1878cc / #1263aa, charcoal #505050.         │
+   * │  The Tailwind `blue-*` scale is remapped to the JH blue ramp so       │
+   * │  generic blue-* utilities (error pages, admin) stay on-brand.         │
    * └──────────────────────────────────────────────────────────────────────┘
-   *
-   * Jackson Hewitt navy ramp. Anchors: navy #002D62, red #E31837, gold #FFB81C.
    */
-  --color-blue-950: #001d40; /* Deep navy — footer / top bar */
-  --color-blue-900: #002d62; /* JH navy — header bg */
-  --color-blue-800: #003a70; /* Primary navy, links */
-  --color-blue-700: #1a5490;
-  --color-blue-600: #3a6ea5;
-  --color-blue-500: #5b88b8;
-  --color-blue-400: #86a8cc;
-  --color-blue-300: #aac3dd;
-  --color-blue-200: #ffb81c; /* JH gold — header CTA button accent */
-  --color-blue-100: #dbe6f2;
-  --color-blue-50:  #eef3f9; /* Light wash */
+  --color-blue-950: #0b3a66;
+  --color-blue-900: #104d87;
+  --color-blue-800: #1263aa; /* JH blue (dark end of button gradient) */
+  --color-blue-700: #1878cc; /* JH blue — header bg, links */
+  --color-blue-600: #3a8fd9;
+  --color-blue-500: #5ea6e2;
+  --color-blue-400: #86bde9;
+  --color-blue-300: #b0d3f0;
+  --color-blue-200: #d3e6f7;
+  --color-blue-100: #e8f2fb;
+  --color-blue-50:  #f4f9fd;
 
   /* Named Jackson Hewitt brand tokens for direct use in custom components. */
-  --color-jh-navy:       #002d62;
-  --color-jh-navy-dark:  #001d40;
-  --color-jh-red:        #e31837;
-  --color-jh-red-hover:  #c4122e;
-  --color-jh-gold:       #ffb81c;
-  --color-jh-gold-light: #fff8e7;
-  --color-jh-surface:    #f4f6f9;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-jh-purple:       #360060; /* primary — footer, headings, hero */
+  --color-jh-purple-light: #633981; /* gradient top, secondary surfaces */
+  --color-jh-purple-dark:  #3c1a51; /* hero gradient shade */
+  --color-jh-teal:         #4ec5c1; /* accent on dark backgrounds */
+  --color-jh-teal-light:   #71dad6; /* teal gradient top */
+  --color-jh-teal-wash:    #eaf8f8; /* very light teal tint */
+  --color-jh-blue:         #1878cc; /* header, eyebrows, links */
+  --color-jh-blue-dark:    #1263aa;
+  --color-jh-charcoal:     #505050; /* body copy */
+  --color-jh-ink:          #222222;
+  --color-jh-surface:      #f6f6f6; /* light grey section background */
 }
 
 body {
@@ -64,4 +60,58 @@ h1,
 h2,
 h3 {
   font-family: var(--font-display);
+}
+
+/*
+ * Jackson Hewitt buttons — pill shaped with a vertical gradient, as on
+ * jacksonhewitt.com (.cta--button-purple / -teal / ghostButton).
+ *  - purple: primary CTA on light or blue backgrounds
+ *  - teal:   primary CTA on purple / dark backgrounds
+ *  - ghost:  secondary CTA (white outline on dark, purple outline on light)
+ */
+@layer components {
+  .jh-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    padding: 0.75rem 1.5rem;
+    border: 2px solid transparent;
+    border-radius: 9999px;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1.25rem;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out, filter 0.2s ease-in-out;
+  }
+  .jh-btn:hover { transform: translateY(-1px); filter: brightness(1.08); }
+  .jh-btn:focus-visible { outline: 3px solid var(--color-jh-teal); outline-offset: 2px; }
+  .jh-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; filter: none; }
+
+  .jh-btn-purple {
+    background: linear-gradient(#633981, #360060);
+    color: #fff;
+  }
+  .jh-btn-teal {
+    background: linear-gradient(#71dad6, #4ec5c1);
+    color: #360060;
+  }
+  .jh-btn-blue {
+    background: linear-gradient(#1878cc, #1263aa);
+    color: #fff;
+  }
+  .jh-btn-ghost {
+    background: transparent;
+    border-color: #fff;
+    color: #fff;
+  }
+  .jh-btn-ghost-purple {
+    background: #fff;
+    border-color: #360060;
+    color: #360060;
+  }
+  .jh-btn-sm { min-height: 38px; padding: 0.5rem 1.1rem; font-size: 0.875rem; }
 }

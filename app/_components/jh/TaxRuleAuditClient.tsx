@@ -42,10 +42,10 @@ export default function TaxRuleAuditClient({ title, description, rows, edit }: P
   return (
     <div className="max-w-6xl mx-auto">
       {/* Header & Agent Trigger Demo Bar */}
-      <div className="bg-jh-gold-light border-2 border-dashed border-jh-gold p-6 rounded-2xl mb-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <div className="bg-jh-teal-wash border-2 border-dashed border-jh-teal p-6 rounded-2xl mb-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div>
           <div className="flex flex-wrap items-center gap-2">
-            <span className="bg-jh-navy text-white text-xs font-bold px-2.5 py-1 rounded">
+            <span className="bg-jh-purple text-white text-xs font-bold px-2.5 py-1 rounded">
               🤖 Opal Content Audit Agent
             </span>
             <span className="text-xs font-bold text-amber-900">
@@ -58,7 +58,7 @@ export default function TaxRuleAuditClient({ title, description, rows, edit }: P
                   : 'STATUS: Ready to audit for outdated 2025 parameters'}
             </span>
           </div>
-          <h2 {...edit.title} className="text-xl font-bold text-jh-navy mt-2">
+          <h2 {...edit.title} className="text-xl font-bold text-jh-purple mt-2">
             {title}
           </h2>
           <p {...edit.description} className="text-xs text-slate-600 mt-1 max-w-2xl">
@@ -89,7 +89,7 @@ export default function TaxRuleAuditClient({ title, description, rows, edit }: P
               type="button"
               onClick={runAudit}
               disabled={phase === 'scanning'}
-              className="px-5 py-3 rounded-lg font-bold text-xs uppercase tracking-wider bg-jh-red text-white hover:bg-jh-red-hover disabled:opacity-60 shadow-md"
+              className="px-5 py-3 rounded-lg font-bold text-xs uppercase tracking-wider bg-jh-purple-light text-white hover:bg-jh-purple disabled:opacity-60 shadow-md"
             >
               {phase === 'scanning' ? 'Scanning…' : '⚡ Run Opal 2026 Tax Audit'}
             </button>
@@ -113,7 +113,7 @@ export default function TaxRuleAuditClient({ title, description, rows, edit }: P
               const manual = row.action === 'Manual Review Needed';
               return (
                 <div key={row.block} className="p-4 grid grid-cols-1 lg:grid-cols-12 gap-3 lg:gap-4 items-start">
-                  <div className="lg:col-span-2 text-sm font-bold text-jh-navy">{row.block}</div>
+                  <div className="lg:col-span-2 text-sm font-bold text-jh-purple">{row.block}</div>
                   <p className="lg:col-span-3 text-xs italic text-rose-700 line-through decoration-rose-300">
                     {row.current}
                   </p>
@@ -143,7 +143,7 @@ export default function TaxRuleAuditClient({ title, description, rows, edit }: P
                       <button
                         type="button"
                         onClick={() => approve(i)}
-                        className="text-[11px] font-bold px-3 py-1.5 rounded-lg bg-jh-navy text-white hover:bg-jh-navy-dark"
+                        className="text-[11px] font-bold px-3 py-1.5 rounded-lg bg-jh-purple text-white hover:bg-jh-purple-dark"
                       >
                         Approve &amp; Push to CMS
                       </button>
