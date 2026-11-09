@@ -1,7 +1,7 @@
 # Ask Liberty: Mark round trip (revised plan)
 
 **Replaces:** [Ask Liberty – Plan_ Port the Mark Round Trip from progressive2](./Ask%20Liberty%20–%20Plan_%20Port%20the%20Mark%20Round%20Trip%20from%20progressive2.md). The original stays as written; this plan keeps its goal and applies the review corrections.
-**Status:** planned, nothing built yet.
+**Status:** code built and committed on branch `libertymutual-mark`; waiting on the CMS setup, the Preview probe and the Mark side (see "Build status" below).
 **Feasibility:** confirmed. All files the original names exist on `origin/progressive2` and behave as described, and the CMS API supports everything the shared store needs (section 2).
 
 **Decisions (confirmed by the project owner)**
@@ -12,6 +12,23 @@
 | Landing page for unmatched questions | **A new `/help` page.** |
 | On/off switch | **A checkbox in the CMS** on the Ask Liberty page type. |
 | Keep or delete Mark's stored replies | **Delete on read.** No setting to keep them. |
+
+## Build status
+
+| Step (section 10) | Status |
+|---|---|
+| 1. Branch `libertymutual-mark` | Done |
+| 2. CMS: dedicated API client, results folder, `LibAskResult` type, env vars | **Partly done.** The `LibAskResult` type is pushed and `.env.example` is updated. **Still to do by the project owner:** create the dedicated API client and the folder "Ask Liberty Mark results" (the CMS tools can't create folders), then set the env vars locally and on Vercel. |
+| 3. Server code (client, store, `ask`, tools, registry, parser, stub) | Done. Tested locally with fake CMS credentials: tool route authentication and validation, question route guards, rate limit, a real stream read by the browser-side reader, disconnect clean-up, no question text in logs. **Not yet tested against the live CMS**, so the property value format is still unconfirmed. |
+| 4. Reliability probe | Script written (`scripts/probe-mark-roundtrip.mjs`); **not run**. Needs a Preview deployment, the CMS client and folder, and `ASK_MARK_STUB=on`. |
+| 5. `useAskMark` | Done (reader in `askStream.ts`, tested against the real route) |
+| 6. `AiProgressPanel` controlled mode and the hero's Mark path | Done and compiled, **not yet seen in a browser** |
+| 7. `matchClassification` | Done; 41 checks pass, including the whole section 11 table |
+| 8. CMS properties, questions, `/help`, keyword fix | New properties added and the `/help` page is **published**. The new questions and the `rent` → `rental` fix are saved as a **draft** (version 750) of the home page, to be published after this code is deployed (the live site does not know `HideChip` yet, so publishing earlier would show four extra chips). |
+| 9. Mark agents and tool registration | Not started (needs the Mark workspace) |
+| 10. End to end with ngrok, then deploy; Firewall rule | Not started |
+
+Refinements made while building (not in the plan above): the cleanup sweep runs at most once every 2 minutes per server instance, the per-address limit is configurable with `ASK_MARK_RATE_LIMIT` (default 10, only raised for the probe), the stub reports its own delay in `reasoning` so the probe can measure the overhead, and clicking a suggested-question chip still asks Mark (for the card) but always goes to the chip's own page.
 
 **Goal:** make "Sending your question to Mark" real. A visitor's question goes to a Mark workflow agent, Mark classifies it, and the Next.js app routes to the approved CMS answer page. Mark never writes the answer. Today the progress card runs on timers and typed questions are routed by keyword.
 
