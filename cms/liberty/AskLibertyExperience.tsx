@@ -4,6 +4,7 @@ import AskBar from '@/app/_components_liberty/AskBar';
 import AskLibertyHero, { type AskQuestion } from '@/app/_components_liberty/AskLibertyHero';
 import StagedReveal from '@/app/_components_liberty/StagedReveal';
 import type { ProgressChip } from '@/app/_components_liberty/AiProgressPanel';
+import { markReady } from '@/lib/askMark/config';
 import { ComponentWrapper } from '../wrappers';
 import { resolveHref } from './shared';
 
@@ -86,6 +87,20 @@ export const LibAskQuestionContentType = contentType({
       displayName: 'Needs more detail (warning style)',
       description: 'Finish step 3 with a yellow "!" and flag the last retrieved item.',
       sortOrder: 90,
+    },
+    HideChip: {
+      type: 'boolean',
+      displayName: 'Hide as a suggested-question chip',
+      description:
+        'Questions can still be reached by keywords and by Mark, but are not shown as a chip under the search box.',
+      sortOrder: 100,
+    },
+    IsFallback: {
+      type: 'boolean',
+      displayName: 'Fallback question',
+      description:
+        'Where questions land when nothing else matches or Mark is unsure or says out of scope. Mark at most one.',
+      sortOrder: 110,
     },
   },
 });
@@ -183,6 +198,19 @@ export const AskLibertyExperienceContentType = contentType({
       description: 'Go straight to the answer page without the progress card.',
       sortOrder: 60,
     },
+    UseMark: {
+      type: 'boolean',
+      displayName: 'Send questions to Mark',
+      description:
+        'On: each question is classified by Mark and routed to the matching approved answer. Off: the simulated card and keyword routing. Ignored if the server is not set up for Mark.',
+      sortOrder: 70,
+    },
+    MarkTimeoutSeconds: {
+      type: 'integer',
+      displayName: 'Mark timeout (seconds)',
+      description: 'How long to wait for Mark before using keyword routing. Default 20; allowed 5 to 60.',
+      sortOrder: 80,
+    },
   },
 });
 
@@ -220,7 +248,14 @@ export default function AskLibertyExperience({ content }: Props) {
       warn: !!q!.NeedsDetail,
       retrievingLabel: q!.RetrievingLabel?.trim() || undefined,
       retrievedLabel: q!.RetrievedLabel?.trim() || undefined,
+      hideChip: !!q!.HideChip,
+      isFallback: !!q!.IsFallback,
     }));
+
+  // Mark is used only when the editor ticked the box AND the server has everything
+  // it needs (webhook, tool token, CMS store). Never in preview.
+  const markEnabled = !editing && !!content.UseMark && markReady();
+  const timeoutSeconds = Math.min(60, Math.max(5, Math.round(content.MarkTimeoutSeconds ?? 20)));
 
   const canvas = nodes.length > 0 && (
     <OptimizelyComposition nodes={nodes} ComponentWrapper={ComponentWrapper} />
@@ -260,6 +295,8 @@ export default function AskLibertyExperience({ content }: Props) {
         questions={questions}
         skipAnimation={!!content.SkipAnimation}
         editing={editing}
+        markEnabled={markEnabled}
+        markTimeoutMs={timeoutSeconds * 1000}
         editAttrs={{ title: pa('Heading'), subtitle: pa('Subtitle') }}
       />
       {canvas}

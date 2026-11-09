@@ -52,8 +52,22 @@ export type AiProgressPanelProps = {
    * false, or when the run is cancelled by a replay or unmount.
    */
   onComplete?: () => void;
+  /**
+   * Controlled mode. When set, steps 1 and 2 wait for the app (a real request to
+   * Mark) instead of timers, moving 'sending' → 'classifying' → 'retrieving'.
+   * Steps 3 and 4 then play as usual. Leave unset for the simulated flow.
+   */
+  phase?: 'sending' | 'classifying' | 'retrieving';
+  /** Chips from the live reply, shown instead of `chips` in controlled mode. */
+  liveChips?: ProgressChip[];
+  /** One sentence shown under the chips as "How your question was understood". */
+  reasoning?: string;
+  /** A short status line under the steps, e.g. why the simulated flow took over. */
+  notice?: string;
   className?: string;
 };
+
+const PHASE_ORDER = { sending: 0, classifying: 1, retrieving: 2 } as const;
 
 const DEFAULT_TEXTS: ProgressTexts = {
   sending: 'Sending your question to Mark',
@@ -172,9 +186,15 @@ export default function AiProgressPanel({
   playKey = 0,
   speed = 1,
   onComplete,
+  phase,
+  liveChips,
+  reasoning,
+  notice,
   className,
 }: AiProgressPanelProps) {
   const t: ProgressTexts = { ...DEFAULT_TEXTS, ...texts };
+  // In controlled mode the live reply's chips replace the CMS ones.
+  const shownChips = liveChips ?? chips;
 
   const pending = (): Step[] => stepLabels.map((text) => ({ state: 'pending', text }));
   const finished = (): Step[] => [
@@ -185,17 +205,35 @@ export default function AiProgressPanel({
   ];
 
   const [steps, setSteps] = useState<Step[]>(autoPlay ? pending : finished);
-  const [chipCount, setChipCount] = useState(autoPlay ? 0 : chips.length);
+  const [chipCount, setChipCount] = useState(autoPlay ? 0 : shownChips.length);
   const [itemCount, setItemCount] = useState(autoPlay ? 0 : items.length);
   const [shimmer, setShimmer] = useState(false);
   const [progress, setProgress] = useState(autoPlay ? 0 : 100);
 
   // The run reads the latest props through a ref, so a parent re-render (new
   // array identities) never restarts the animation — only these deps do.
-  const latest = useRef({ t, stepLabels, chips, items, retrievingLabel, retrievedLabel, warn, short, onComplete });
-  useEffect(() => {
-    latest.current = { t, stepLabels, chips, items, retrievingLabel, retrievedLabel, warn, short, onComplete };
+  const latest = useRef({
+    t,
+    stepLabels,
+    chips: shownChips,
+    items,
+    retrievingLabel,
+    retrievedLabel,
+    warn,
+    short,
+    onComplete,
   });
+  useEffect(() => {
+    latest.current = { t, stepLabels, chips: shownChips, items, retrievingLabel, retrievedLabel, warn, short, onComplete };
+  });
+
+  // Controlled mode: the app moves `phase` forward; the run waits on it.
+  const phaseRef = useRef(phase);
+  const phaseWaiters = useRef<Array<() => void>>([]);
+  useEffect(() => {
+    phaseRef.current = phase;
+    phaseWaiters.current.splice(0).forEach((wake) => wake());
+  }, [phase]);
 
   useEffect(() => {
     const c = latest.current;
@@ -207,6 +245,39 @@ export default function AiProgressPanel({
     };
     const setStep = (i: number, state: StepState, text: string) =>
       setSteps((prev) => prev.map((s, idx) => (idx === i ? { state, text } : s)));
+    const controlled = phaseRef.current !== undefined;
+    const reached = (target: keyof typeof PHASE_ORDER) =>
+      PHASE_ORDER[phaseRef.current ?? 'retrieving'] >= PHASE_ORDER[target];
+    const untilPhase = async (target: keyof typeof PHASE_ORDER) => {
+      while (ok() && !reached(target)) {
+        await new Promise<void>((resolve) => phaseWaiters.current.push(resolve));
+      }
+      return ok();
+    };
+    const stopWaiting = () => {
+      cancelled = true;
+      phaseWaiters.current.splice(0).forEach((wake) => wake());
+    };
+
+    // Reduced motion with a real request: skip the animation, but still wait for the reply.
+    if (autoPlay && controlled && prefersReducedMotion()) {
+      (async () => {
+        if (!(await untilPhase('retrieving'))) return;
+        const l = latest.current;
+        setSteps([
+          { state: 'done', text: l.t.sent },
+          { state: 'done', text: l.t.classified },
+          { state: l.warn ? 'warn' : 'done', text: l.retrievedLabel },
+          { state: 'done', text: l.t.ready },
+        ]);
+        setChipCount(l.chips.length);
+        setItemCount(l.items.length);
+        setShimmer(false);
+        setProgress(100);
+        l.onComplete?.();
+      })();
+      return stopWaiting;
+    }
 
     if (!autoPlay || prefersReducedMotion()) {
       setSteps([
@@ -230,7 +301,28 @@ export default function AiProgressPanel({
       setShimmer(false);
       setProgress(0);
 
-      if (c.short) {
+      if (controlled) {
+        // Step 1 stays active until the request reaches Mark; step 2 until the reply arrives.
+        setStep(0, 'active', c.t.sending);
+        setProgress(10);
+        if (!(await wait(700))) return;
+        if (!(await untilPhase('classifying'))) return;
+        setStep(0, 'done', c.t.sent);
+        setProgress(25);
+        if (!(await wait(300))) return;
+        setStep(1, 'active', c.t.classifying);
+        if (!(await untilPhase('retrieving'))) return;
+        // The reply is here: its chips and the matched question's lines are the latest props.
+        const live = latest.current;
+        for (let k = 1; k <= live.chips.length; k++) {
+          setChipCount(k);
+          if (!(await wait(300))) return;
+        }
+        if (!(await wait(250))) return;
+        setStep(1, 'done', live.t.classified);
+        setProgress(55);
+        if (!(await wait(450))) return;
+      } else if (c.short) {
         setStep(0, 'done', c.t.shortSelection);
         setProgress(25);
         if (!(await wait(550))) return;
@@ -262,28 +354,28 @@ export default function AiProgressPanel({
         if (!(await wait(450))) return;
       }
 
-      setStep(2, 'active', c.retrievingLabel);
+      // Read the latest props from here on: in controlled mode the matched question arrives mid-run.
+      const r = latest.current;
+      setStep(2, 'active', r.retrievingLabel);
       setShimmer(true);
       if (!(await wait(1300))) return;
       setShimmer(false);
-      for (let k = 1; k <= c.items.length; k++) {
+      for (let k = 1; k <= r.items.length; k++) {
         setItemCount(k);
         if (!(await wait(240))) return;
       }
       if (!(await wait(200))) return;
-      setStep(2, c.warn ? 'warn' : 'done', c.retrievedLabel);
+      setStep(2, r.warn ? 'warn' : 'done', r.retrievedLabel);
       setProgress(85);
       if (!(await wait(500))) return;
-      setStep(3, 'active', c.t.building);
+      setStep(3, 'active', r.t.building);
       setProgress(100);
       if (!(await wait(750))) return;
-      setStep(3, 'done', c.t.ready);
-      c.onComplete?.();
+      setStep(3, 'done', r.t.ready);
+      latest.current.onComplete?.();
     })();
 
-    return () => {
-      cancelled = true;
-    };
+    return stopWaiting;
   }, [autoPlay, playKey, short, speed]);
 
   return (
@@ -328,7 +420,7 @@ export default function AiProgressPanel({
 
                 {i === 1 && chipCount > 0 && (
                   <div className="mt-3 flex flex-wrap gap-2">
-                    {chips.slice(0, chipCount).map((chip) => (
+                    {shownChips.slice(0, chipCount).map((chip) => (
                       <span
                         key={`${chip.label}-${chip.value}`}
                         className={cx(
@@ -341,6 +433,13 @@ export default function AiProgressPanel({
                       </span>
                     ))}
                   </div>
+                )}
+
+                {i === 1 && reasoning && shownChips.length > 0 && chipCount >= shownChips.length && (
+                  <p className="lib-in mt-3 text-sm text-gray-600">
+                    <span className="font-medium text-navy">How your question was understood: </span>
+                    {reasoning}
+                  </p>
                 )}
 
                 {i === 2 && (shimmer || itemCount > 0) && (
@@ -364,6 +463,12 @@ export default function AiProgressPanel({
             </li>
           ))}
         </ol>
+
+        {notice && (
+          <p role="status" className="px-8 pb-5 -mt-2 text-sm text-gray-600">
+            {notice}
+          </p>
+        )}
 
         <div className="h-1.5 bg-gray-100">
           <div className="lib-bar h-full" style={{ width: `${progress}%` }} />
