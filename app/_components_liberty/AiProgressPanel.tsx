@@ -46,6 +46,12 @@ export type AiProgressPanelProps = {
   playKey?: number;
   /** 1 = the mockup's pace; 2 = twice as fast. */
   speed?: number;
+  /**
+   * Called once when an auto-played run reaches "Your answer is ready" (also
+   * when reduced motion skips the animation). Not called when `autoPlay` is
+   * false, or when the run is cancelled by a replay or unmount.
+   */
+  onComplete?: () => void;
   className?: string;
 };
 
@@ -165,6 +171,7 @@ export default function AiProgressPanel({
   autoPlay = true,
   playKey = 0,
   speed = 1,
+  onComplete,
   className,
 }: AiProgressPanelProps) {
   const t: ProgressTexts = { ...DEFAULT_TEXTS, ...texts };
@@ -185,9 +192,9 @@ export default function AiProgressPanel({
 
   // The run reads the latest props through a ref, so a parent re-render (new
   // array identities) never restarts the animation — only these deps do.
-  const latest = useRef({ t, stepLabels, chips, items, retrievingLabel, retrievedLabel, warn, short });
+  const latest = useRef({ t, stepLabels, chips, items, retrievingLabel, retrievedLabel, warn, short, onComplete });
   useEffect(() => {
-    latest.current = { t, stepLabels, chips, items, retrievingLabel, retrievedLabel, warn, short };
+    latest.current = { t, stepLabels, chips, items, retrievingLabel, retrievedLabel, warn, short, onComplete };
   });
 
   useEffect(() => {
@@ -212,6 +219,7 @@ export default function AiProgressPanel({
       setItemCount(c.items.length);
       setShimmer(false);
       setProgress(100);
+      if (autoPlay) c.onComplete?.(); // reduced motion: finished immediately
       return;
     }
 
@@ -270,6 +278,7 @@ export default function AiProgressPanel({
       setProgress(100);
       if (!(await wait(750))) return;
       setStep(3, 'done', c.t.ready);
+      c.onComplete?.();
     })();
 
     return () => {

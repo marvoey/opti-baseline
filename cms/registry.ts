@@ -12,6 +12,11 @@ import BlankExperience from './BlankExperience';
 import BlankSection from './BlankSection';
 import Page, { PageContentType } from './Page';
 import RichText, { RichTextContentType } from './RichText';
+import AskLibertyExperience, {
+  AskLibertyExperienceContentType,
+  LibAskQuestionContentType,
+} from './liberty/AskLibertyExperience';
+import LibSourcesBlock, { LibSourcesBlockContentType, LibSourceContentType } from './liberty/LibSourcesBlock';
 
 /**
  * Single configuration + registration point for the Optimizely SDK.
@@ -49,6 +54,11 @@ export const registeredContentTypes = [
   PageContentType,
   // Blocks
   RichTextContentType,
+  // Liberty (Ask Liberty) blocks — all section-enabled, keys prefixed `Lib`
+  LibSourceContentType,
+  LibSourcesBlockContentType,
+  LibAskQuestionContentType,
+  AskLibertyExperienceContentType,
 ];
 
 initContentTypeRegistry(registeredContentTypes);
@@ -62,5 +72,7 @@ initReactComponentRegistry({
     Page,
     // Blocks (resolver key === content-type key)
     RichTextBlock: RichText,
+    LibSourcesBlock,
+    AskLibertyExperience,
   },
 });

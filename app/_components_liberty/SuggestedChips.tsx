@@ -5,6 +5,11 @@ export type SuggestedChip = { label: string; href?: string };
 
 export type SuggestedChipsProps = {
   chips?: SuggestedChip[];
+  /**
+   * Render each chip as a button and call this with its index instead of
+   * linking. Only pass this from a client component.
+   */
+  onSelect?: (index: number) => void;
   /** Spacing classes. Replaces the default `mt-5`. */
   className?: string;
 };
@@ -17,10 +22,20 @@ const DEFAULT_CHIPS: SuggestedChip[] = [
 ];
 
 /** C07 — row of outlined pill links offering one-click example questions. */
-export default function SuggestedChips({ chips = DEFAULT_CHIPS, className = 'mt-5' }: SuggestedChipsProps) {
+export default function SuggestedChips({ chips = DEFAULT_CHIPS, onSelect, className = 'mt-5' }: SuggestedChipsProps) {
   return (
     <div className={cx('flex flex-wrap justify-center gap-2 text-sm', className)}>
-      {chips.map((chip, i) => (
+      {chips.map((chip, i) =>
+        onSelect ? (
+          <button
+            key={`${chip.label}-${i}`}
+            type="button"
+            onClick={() => onSelect(i)}
+            className="border border-gray-300 rounded-full px-4 py-2 hover:border-lmt hover:text-lmt"
+          >
+            {chip.label}
+          </button>
+        ) : (
         <Anchor
           key={`${chip.label}-${i}`}
           href={chip.href}
@@ -28,7 +43,8 @@ export default function SuggestedChips({ chips = DEFAULT_CHIPS, className = 'mt-
         >
           {chip.label}
         </Anchor>
-      ))}
+        ),
+      )}
     </div>
   );
 }
