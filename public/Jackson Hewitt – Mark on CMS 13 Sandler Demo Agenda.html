@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Jackson Hewitt – Mark on CMS 13: Sandler Demo Agenda</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@600;900&family=Roboto+Mono:wght@400&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          lf: '#ABFF44', grass: '#7DDD3D', go: '#3AB533',
+          n1: '#FFFFFF', n3: '#E4F0DA', lblue: '#91DBDA', fir: '#08251A',
+          e1: '#ABFF44', e2: '#3AB533', e3: '#40A142', e4: '#2E8C45',
+          e5: '#227D47', e6: '#166E49', e7: '#116344', e8: '#0D593E'
+        },
+        fontFamily: {
+          head: ['"Roboto Condensed"', 'sans-serif'],
+          body: ['Roboto', 'sans-serif'],
+          mono: ['"Roboto Mono"', 'monospace']
+        },
+        borderRadius: { card: '32px', inner: '16px' }
+      }
+    }
+  }
+</script>
+<style>
+  body { font-family: Roboto, sans-serif; line-height: 1.25; color: #08251A; background: #E4F0DA; }
+  h1 { font-family: "Roboto Condensed", sans-serif; font-weight: 900; line-height: 1; letter-spacing: -0.03em; }
+  h2 { font-family: "Roboto Condensed", sans-serif; font-weight: 900; line-height: 1; letter-spacing: -0.02em; }
+  h3 { font-family: "Roboto Condensed", sans-serif; font-weight: 600; line-height: 1; letter-spacing: -0.02em; }
+  .eyebrow { font-family: Roboto, sans-serif; font-weight: 700; line-height: 1.1; }
+  .caption { font-family: "Roboto Mono", monospace; letter-spacing: 0.03em; line-height: 1.25; }
+  .card { background: #FFFFFF; border: 1.5px solid #08251A; border-radius: 32px; }
+  .btn { font-family: "Roboto Condensed", sans-serif; font-weight: 600; letter-spacing: -0.02em; border-radius: 16px; border: 1.5px solid #08251A; }
+  table.brand { width: 100%; border-collapse: separate; border-spacing: 0; overflow: hidden; border: 1.5px solid #08251A; border-radius: 16px; }
+  table.brand th { background: #ABFF44; text-align: left; font-weight: 700; padding: 10px 14px; border-bottom: 1.5px solid #08251A; }
+  table.brand td { padding: 10px 14px; vertical-align: top; }
+  table.brand tbody tr:nth-child(even) td { background: #E4F0DA; }
+  .quote { background: #E4F0DA; border-radius: 16px; padding: 18px 22px; }
+  .quote p + p { margin-top: 10px; }
+  .callout-blue { background: #91DBDA; border-radius: 16px; padding: 14px 18px; }
+  .callout-green { background: #ABFF44; border-radius: 16px; padding: 14px 18px; }
+  .chip { display: inline-block; border: 1.5px solid #08251A; border-radius: 16px; padding: 3px 10px; font-family: "Roboto Mono", monospace; font-size: 12px; letter-spacing: 0.03em; background: #FFFFFF; }
+  .step { width: 56px; height: 56px; border-radius: 16px; border: 1.5px solid #08251A; background: #ABFF44; display: flex; align-items: center; justify-content: center; font-family: "Roboto Condensed", sans-serif; font-weight: 900; font-size: 26px; flex-shrink: 0; }
+  ol.num { list-style: decimal; padding-left: 1.4rem; }
+  ul.dot { list-style: disc; padding-left: 1.4rem; }
+  ol.num li, ul.dot li { margin-top: 6px; line-height: 1.3; }
+  .seg { transition: flex-grow .5s ease; }
+  .check { width: 22px; height: 22px; border: 1.5px solid #08251A; border-radius: 6px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: #FFFFFF; cursor: pointer; }
+  .check.on { background: #ABFF44; }
+  .check.on::after { content: "✓"; font-weight: 700; font-size: 14px; }
+  nav a:hover { background: #ABFF44; }
+  html { scroll-behavior: smooth; }
+</style>
+</head>
+<body class="font-body">
+<div class="max-w-6xl mx-auto px-5 md:px-10 py-8 md:py-12">
+
+  <!-- HEADER -->
+  <header class="card p-8 md:p-12">
+    <div class="flex flex-wrap items-start justify-between gap-6">
+      <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iT3B0aW1pemVseV9QcmltYXJ5X0xvZ29fTWVkaXVtIiBkYXRhLW5hbWU9Ik9wdGltaXplbHkgUHJpbWFyeSBMb2dvIE1lZGl1bSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgNzQwIDI1NCI+CiAgPGRlZnM+CiAgICA8c3R5bGU+CiAgICAgIC5jbHMtMSB7CiAgICAgICAgZmlsbDogI2FiZmY0NDsKICAgICAgfQoKICAgICAgLmNscy0yIHsKICAgICAgICBmaWxsOiAjMGQzYTI5OwogICAgICB9CiAgICA8L3N0eWxlPgogIDwvZGVmcz4KICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0yNjcuNjUzLDYyLjA1ODNoLTI3LjA5OTJ2MTguOTIxMWgtOS41MjIydjE5LjY1MzZoOS41MjIydjM4Ljk0MDdjMCwxNC4yODE1LDYuMTAzMSwyMC4xNDE4LDIwLjE0MTcsMjAuMTQxOGgxNy41Nzg0di0xOS42NTM2aC03LjU2OTFjLTIuMDc1MiwwLTMuMDUxOC0uNzMyNC0zLjA1MTgtMi44MDc1di0zNi42MjE1aDEwLjYyMDh2LTE5LjY1MzZoLTEwLjYyMDh2LTE4LjkyMTFaIi8+CiAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMzk2LjA3MjYsNzkuNjM2N2MtNy4yMDI5LDAtMTQuMDM4NiwyLjgwNzYtMTkuNzc1NSw4LjY2NjUtMi42ODY2LTYuMjI1MS03LjkzNTQtOC42NjY1LTE1LjYyNTQtOC42NjY1LTYuNTkyOCwwLTEyLjgxNzksMi44MDc2LTE4LjMxMDgsOC42NjY1di03LjMyMzdoLTI1Ljc1NjZ2NzguNzM2MWgyNy4wOTkydi01Ny44NjE5Yy44NTQ1LTEuMjIwNiwyLjQ0MTMtMS45NTMsNC4zOTQzLTEuOTUzLDIuNjg1NCwwLDMuOTA2MSwxLjA5ODUsMy45MDYxLDMuOTA2djU1LjkwODloMjcuMTAwNnYtNTcuODYxOWMuODU0NC0xLjIyMDYsMi40NDEyLTEuOTUzLDQuMzk0My0xLjk1MywyLjY4NTMsMCwzLjkwNiwxLjA5ODUsMy45MDYsMy45MDZ2NTUuOTA4OWgyNy4wOTk0di01OS44MTQ5YzAtMTMuNTUwMy02LjQ2OTQtMjAuMjYzOS0xOC40MzE2LTIwLjI2MzlaIi8+CiAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMzAwLjQ5MDYsNTQuNzM0NmgtNi4yMjY0Yy02LjIyNTIsMC0xMC44NjM2LDQuODgyNi0xMC44NjM2LDEwLjk4NTYsMCw1Ljk4MTIsNC42Mzg0LDEwLjk4NzEsMTAuODYzNiwxMC45ODcxaDYuMjI2NGM2LjIyNTMsMCwxMC44NjM4LTUuMDA1OSwxMC44NjM4LTEwLjk4NzEsMC02LjEwMy00LjYzODQtMTAuOTg1Ni0xMC44NjM4LTEwLjk4NTZaIi8+CiAgPHJlY3QgY2xhc3M9ImNscy0xIiB4PSIyODMuODg4OCIgeT0iODAuOTc5NSIgd2lkdGg9IjI3LjA5OTQiIGhlaWdodD0iNzguNzM2Ii8+CiAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMjAyLjcxMTYsNzkuNTE0NmMtNi44MzU3LDAtMTIuMzI5NywzLjE3MzctMTYuMjM1OCw4Ljc4ODYtLjEyMjEtMi42ODUzLS4zNjYxLTUuMTI2Ni0uNjEwMi03LjMyMzdoLTI2LjQ4OTFjLjI0NDEsNi4xMDMxLjM2NjIsMTIuMDg0Mi4zNjYyLDE4LjE4ODd2ODUuMzI3NGgyNy4wOTk0di0yOS45MDY3YzQuMDI4MSw0LjE1MDEsOS4xNTYsNi4zNDcyLDE1LjI1OTMsNi4zNDcyLDE3LjMzNDIsMCwyNy4wOTk0LTE0Ljc3MDgsMjcuMDk5NC00MC4yODM0LDAtMjUuODc4Ny05LjUyMS00MS4xMzc5LTI2LjQ4OS00MS4xMzc5Wk0xOTMuNzk5NywxNDEuNTI2N2MtNC44ODI2LS4xMjE5LTcuNTY4MS03LjgxMzQtNy41NjgxLTIwLjYzLDAtMTIuOTM5OSwyLjY4NTUtMjEuNDg0NCw3LjU2ODEtMjEuNDg0NCw1LjAwNTctLjEyMjEsNy44MTMyLDguNDIyNCw3LjgxMzIsMjEuNDg0NCwwLDEyLjY5NDctMi44MDc1LDIwLjUwODEtNy44MTMyLDIwLjYzWiIvPgogIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTExMi4wMTIxLDYwLjIyNzRjLTI1Ljg3ODgsMC00Mi42MDI4LDE5LjQwOTMtNDIuNjAyOCw1MC4wNDg2LDAsMzEuMTI4OCwxNi43MjQsNTAuNzgyMSw0Mi42MDI4LDUwLjc4MjEsMjUuNzU3OCwwLDQyLjQ4MDUtMTkuNjUzMyw0Mi40ODA1LTUwLjc4MjEsMC0zMC42MzkzLTE2LjcyMjctNTAuMDQ4Ni00Mi40ODA1LTUwLjA0ODZaTTExMS44OSwxMzguMjMxMWMtNy42OTAxLDAtMTIuODE2Ny0xMC43NDI4LTEyLjgxNjctMjcuOTU1MSwwLTE2LjcyNCw1LjEyNjYtMjcuMjIxNCwxMi44MTY3LTI3LjIyMTQsNy41NjkxLDAsMTIuODE3OSwxMC40OTc0LDEyLjgxNzksMjcuMjIxNCwwLDE3LjIxMjMtNS4yNDg4LDI3Ljk1NTEtMTIuODE3OSwyNy45NTUxWiIvPgogIDxyZWN0IGNsYXNzPSJjbHMtMSIgeD0iNDIwLjEyMDUiIHk9IjgwLjk3OTUiIHdpZHRoPSIyNy4wOTk0IiBoZWlnaHQ9Ijc4LjczNiIvPgogIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTY1NC43NDA0LDEwMy41NjI1bC0yLjgwNzQsMjEuNjA2NC0zLjI5NTktMjEuMjQwMi00Ljg4MjYtMjIuOTQ5MmgtMjcuNTg3NmwyMi4yMTY4LDc4LjQ5MTktLjczMjIsMy4xNzM2Yy0uMjQ0MSwxLjM0MjgtMS4yMjA3LDIuMDc1MS0yLjQ0MTQsMi4wNzUxaC0xNC44OTI4djE5Ljc3NTVoMTkuMjg3MWMxMy40MjcsMCwyMC4xNDE4LTUuODU5LDIzLjQzNzUtMTguNTU0OWwyMi4wOTQ3LTg0Ljk2MTJoLTI2LjM2NjlsLTQuMDI5MywyMi41ODNaIi8+CiAgPHJlY3QgY2xhc3M9ImNscy0xIiB4PSI1ODMuOTM5NyIgeT0iNjIuMDU4MyIgd2lkdGg9IjI3LjA5OTQiIGhlaWdodD0iOTcuNjU3MSIvPgogIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTU0NC42MzI3LDc5LjUxNDZjLTIxLjg1MDYsMC0zNi4zNzc0LDE2LjExMzgtMzYuMzc3NCw0MC43NzE3LDAsMjUuMTQ2NSwxNC4wMzg2LDQwLjc3MTcsMzYuMjU1NCw0MC43NzE3LDE4LjU1NDksMCwzMS43MzktMTIuMzI5NiwzMy45MzYzLTI5LjkwOGgtMjYuODU2NGMtLjk3NjYsNi44MzY4LTQuMTUwMywxMC44NjQ5LTcuODEyMywxMC44NjQ5LTUuMDA0NSwwLTcuODEyLTYuMTAzMS04LjMwMDMtMTYuODQ2MWg0My4yMTNjMy4wNTE2LTI2LjYxMTEtMTEuMTA5LTQ1LjY1NDMtMzQuMDU4Mi00NS42NTQzWk01MzUuNDc3OSwxMTAuNTIwMWMxLjM0MjgtNy41NjgsNC41MTY0LTEyLjA4NDQsOC41NDQ0LTEyLjA4NDRzNi45NTc4LDQuMzk0Myw4LjE3ODMsMTIuMDg0NGgtMTYuNzIyOFoiLz4KICA8cG9seWdvbiBjbGFzcz0iY2xzLTEiIHBvaW50cz0iNTA1LjY5MiA5OS45MDA2IDUwNS42OTIgODAuOTc5NSA0NTIuODM0NyA4MC45Nzk1IDQ1Mi44MzQ3IDEwMC42MzMxIDQ3NS45MDcyIDEwMC42MzMxIDQ1Mi44MzQ3IDE0MS42NDg4IDQ1Mi44MzQ3IDE1OS43MTU2IDUwNi4xODAyIDE1OS43MTU2IDUwNi4xODAyIDE0MC4wNjIgNDgzLjEwOSAxNDAuMDYyIDUwNS42OTIgOTkuOTAwNiIvPgogIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTQzNi43MjIzLDU0LjczNDZoLTYuMjI2NGMtNi4yMjUyLDAtMTAuODYzNiw0Ljg4MjYtMTAuODYzNiwxMC45ODU2LDAsNS45ODEyLDQuNjM4NCwxMC45ODcxLDEwLjg2MzYsMTAuOTg3MWg2LjIyNjRjNi4yMjUzLDAsMTAuODYzNi01LjAwNTksMTAuODYzNi0xMC45ODcxLDAtNi4xMDMtNC42MzgzLTEwLjk4NTYtMTAuODYzNi0xMC45ODU2WiIvPgogIDxwYXRoIGNsYXNzPSJjbHMtMiIgZD0iTTY4NS4xMzY2LDc2LjM0MTFoLTI2LjM2NjljLTEuNzA4NywwLTIuNTYzMi40ODgzLTMuNDE3NywxLjM0MjhsLTYuMTA0NSw2LjM0NzItLjg1NDUtNC4wMjgxYy0uNjEwNC0yLjQ0MTItMi4xOTctMy42NjE5LTQuNjM4NC0zLjY2MTloLTI4LjA3NTl2LTE0LjI4MjdjMC0yLjY4NTMtMi4zMjAzLTQuNzYwNS00LjYzOTUtNC43NjA1aC0yNy4wOTk0Yy0xLjQ2NDcsMC0yLjQ0MTMuNjEwNC0zLjI5NTgsMS40NjQ4bC0xNC43NzA5LDE0Ljc2OThjLS43MzIzLjczMzUtMS4zNDI3LDEuOTU0MS0xLjM0MjcsMy4yOTY5djMuMjk1N2MtNS4yNDg4LTMuMjk1Ny0xMi4yMDc2LTUuMzcwOC0xOS44OTc3LTUuMzcwOC0xMS44NDEzLDAtMjMuOTI1NywzLjkwNjEtMzMuNDQ3OCwxNi43MjI5bC0uNzMyNC45NzY0di0xMS40NzRjMC0yLjMxOTItMi4wNzUyLTQuNjM4NC00Ljc2MDUtNC42Mzg0aC01Ny40OTU3YzIuNjg1NC0zLjE3NDgsMy45MDYxLTYuNDcwNiwzLjkwNjEtMTAuNjIwOCwwLTguOTEwNi02Ljk1NzgtMTUuNjI1Mi0xNS45OTA1LTE1LjYyNTJoLTUuMTI3OWMtNC43NjA0LDAtOC42NjY1LDEuODMwOC0xMS45NjIyLDUuMTI3OWwtMTUuODY5NSwxNS44NjgyYy0xLjIyMDYsMS4yMjA3LTIuMTk3MSwyLjU2MzQtMi45Mjk2LDQuMDI5My0xLjIyMDctLjEyMjEtMi42ODUzLS4yNDQxLTQuMTUwMS0uMjQ0MS02LjQ3MDYsMC0xMy4wNjIsMi4wNzUyLTE4LjY3Nyw2LjU5MTYtMy45MDcyLTQuNzYwNS05LjAzMzktNi41OTE2LTE1Ljg2OTQtNi41OTE2LTUuNDkyOSwwLTEwLjg2NSwxLjU4NjktMTUuNTAzNCw1LjM3MDgtLjI0NDEtMi44MDc0LTEuNDY0Ny0zLjkwNi00LjAyODEtMy45MDZoLTMwLjAzMDJjMi42ODU0LTMuMTc0OCwzLjkwNzMtNi40NzA2LDMuOTA3My0xMC42MjA4LDAtOC45MTA2LTYuOTU5LTE1LjYyNTItMTUuOTkxNy0xNS42MjUyaC01LjEyNzhjLTQuNzYwNSwwLTguNjY2NiwxLjgzMDgtMTEuOTYyMyw1LjEyNzlsLTEwLjM3NjYsMTAuMjUzM3YtMy40MTc4YzAtMi40NDEyLTIuMDc1MS00LjYzODQtNC43NjA2LTQuNjM4NGgtMjcuMDk5MmMtMS40NjQ3LDAtMi41NjM0LjYxMDQtMy4yOTU4LDEuNDY0OGwtMTQuNzcwOSwxNC42NDc3Yy0uNDg4My40ODk0LTEuMzQyNywxLjk1NDEtMS4zNDI3LDMuMjk2OXY1LjAwNDZjLTUuMTI2Ny00Ljc2MDUtMTEuMTA5MS03LjA3OTgtMTguMDY2Ny03LjA3OTgtNC41MTY1LDAtMTAuMDEwNSwxLjQ2NDgtMTMuOTE2NSw1LjM3MDgtLjQ4ODMtMy4xNzM2LTEuNTg2OS0zLjc4MzktMy42NjItMy43ODM5aC0yNi4xMjI5Yy0xLjM0MjcsMC0yLjQ0MTIuNDg4My0zLjI5NTcsMS4zNDI4bC0zLjA1MjcsMy4wNTE1Yy03LjgxMjEtMTYuMTEzNi0yMi41ODMtMjUuMjY4NC00MS4wMTU5LTI1LjI2ODQtMTIuODE2OCwwLTI0LjE2OTksNC4yNzIzLTM2LjAxLDE1Ljk5MDRsLTkuNzY2NCw5Ljc2NjRjLTEwLjg2MzgsMTAuODYzNi0xNi4yMzU3LDI2LjEyMjgtMTYuMjM1Nyw0My44MjMyLDAsMzMuNDQ4LDE4LjU1NDksNTUuNTQyNyw0Ny4yNDIzLDU1LjU0MjcsMTIuODE2NywwLDI0LjE2OTktNC43NjA1LDMyLjk1ODUtMTMuNTUwM2wxMC4xMzI0LTEwLjI1MzR2NDIuMzU4NmMwLDIuNjg1MywyLjA3NTEsNC43NjA1LDQuNzYwNSw0Ljc2MDVoMjYuOTc3M2MxLjU4NjgsMCwyLjY4NTQtLjYxMDQsMy40MTkxLTEuMzQyOGwxNC42NDc2LTE0Ljc3MDljLjk3NjQtLjk3NjYsMS40NjQ3LTIuMDc1MSwxLjQ2NDctMy4yOTU4di00LjM5NDNjNi41OTI4LS44NTQ1LDExLjk2MzUtMy41Mzk4LDE2LjM1NzgtOC4xNzk0bDEzLjMwNjMtMTMuMzA0OWMxLjU4NjcsMTMuNzkzMiwxMC40OTczLDIwLjUwNzgsMjYuNzMzMiwyMC41MDc4aDI0My40MDk3YzEuNzA4OSwwLDIuNjg1My0uNjEwMiwzLjQxNzctMS4zNDI3bDcuNDQ3My03LjU2OTJjNy4zMjM3LDYuOTU5LDE2Ljg0NTksMTAuMzc2NywyNy41ODc0LDEwLjM3NjcsMTAuODY1LDAsMjAuNzUyMi00LjE1MDEsMjcuNTg5LTEwLjk4NjlsNy4wNzk3LTcuMjAxOHYxMi4wODU0YzAsMi41NjM1LDIuMDc1MSw0LjYzODQsNC42Mzg0LDQuNjM4NGgzMy4wODE3djIwLjAxOThjMCwyLjY4NTMsMi4wNzUxLDQuNzYwNSw0Ljc2MDUsNC43NjA1aDE3Ljk0NDVjOC41NDQ0LDAsMTUuNzQ3Ni0yLjY4NTQsMjAuMjYzOS03LjIwMThsMTQuNTI2OS0xNC41MjY3YzMuNDE3Ny0zLjUzOTksNi4yMjUzLTguNTQ1OCw3LjkzNDEtMTQuODkzMWwyMi4wOTQ3LTg1LjA4MzNjLjg1NDUtMy4yOTU4LS43MzI0LTUuODU5MS00LjYzODQtNS44NTkxWk0xMTIuMDEyMSwxNjEuMDU4MWMtMjUuODc4OCwwLTQyLjYwMjgtMTkuNjUzMy00Mi42MDI4LTUwLjc4MjEsMC0zMC42MzkzLDE2LjcyNC01MC4wNDg2LDQyLjYwMjgtNTAuMDQ4NiwyNS43NTc4LDAsNDIuNDgwNSwxOS40MDkzLDQyLjQ4MDUsNTAuMDQ4NiwwLDMxLjEyODgtMTYuNzIyNyw1MC43ODIxLTQyLjQ4MDUsNTAuNzgyMVpNMjAyLjEwMTIsMTYwLjkzNmMtNi4xMDMzLDAtMTEuMjMxMi0yLjE5Ny0xNS4yNTkzLTYuMzQ3MnYyOS45MDY3aC0yNy4wOTk0di04NS4zMjc0YzAtNi4xMDQ1LS4xMjIxLTEyLjA4NTYtLjM2NjItMTguMTg4N2gyNi40ODkxYy4yNDQxLDIuMTk3MS40ODgyLDQuNjM4NC42MTAyLDcuMzIzNywzLjkwNjEtNS42MTQ5LDkuNDAwMS04Ljc4ODYsMTYuMjM1OC04Ljc4ODYsMTYuOTY4LDAsMjYuNDg5LDE1LjI1OTMsMjYuNDg5LDQxLjEzNzksMCwyNS41MTI3LTkuNzY1MSw0MC4yODM0LTI3LjA5OTQsNDAuMjgzNFpNMjc4LjI3MzgsMTAwLjYzMzFoLTEwLjYyMDh2MzYuNjIxNWMwLDIuMDc1MS45NzY2LDIuODA3NSwzLjA1MTgsMi44MDc1aDcuNTY5MXYxOS42NTM2aC0xNy41Nzg0Yy0xNC4wMzg2LDAtMjAuMTQxNy01Ljg2MDQtMjAuMTQxNy0yMC4xNDE4di0zOC45NDA3aC05LjUyMjJ2LTE5LjY1MzZoOS41MjIydi0xOC45MjExaDI3LjA5OTJ2MTguOTIxMWgxMC42MjA4djE5LjY1MzZaTTMxMC45ODgyLDE1OS43MTU1aC0yNy4wOTk0di03OC43MzZoMjcuMDk5NHY3OC43MzZaTTMwMC40OTA2LDc2LjcwNzNoLTYuMjI2NGMtNi4yMjUyLDAtMTAuODYzNi01LjAwNTktMTAuODYzNi0xMC45ODcxLDAtNi4xMDMsNC42Mzg0LTEwLjk4NTYsMTAuODYzNi0xMC45ODU2aDYuMjI2NGM2LjIyNTMsMCwxMC44NjM4LDQuODgyNiwxMC44NjM4LDEwLjk4NTYsMCw1Ljk4MTItNC42Mzg0LDEwLjk4NzEtMTAuODYzOCwxMC45ODcxWk00MTQuNTA0MywxNTkuNzE1NmgtMjcuMDk5NHYtNTUuOTA4OWMwLTIuODA3NS0xLjIyMDctMy45MDYtMy45MDYtMy45MDYtMS45NTMxLDAtMy41Mzk5LjczMjQtNC4zOTQzLDEuOTUzdjU3Ljg2MTloLTI3LjEwMDZ2LTU1LjkwODljMC0yLjgwNzUtMS4yMjA3LTMuOTA2LTMuOTA2MS0zLjkwNi0xLjk1MywwLTMuNTM5OC43MzI0LTQuMzk0MywxLjk1M3Y1Ny44NjE5aC0yNy4wOTkydi03OC43MzYxaDI1Ljc1NjZ2Ny4zMjM3YzUuNDkyOS01Ljg1ODksMTEuNzE4LTguNjY2NSwxOC4zMTA4LTguNjY2NSw3LjY4OTksMCwxMi45Mzg3LDIuNDQxNCwxNS42MjU0LDguNjY2NSw1LjczNjktNS44NTg5LDEyLjU3MjYtOC42NjY1LDE5Ljc3NTUtOC42NjY1LDExLjk2MjMsMCwxOC40MzE2LDYuNzEzNiwxOC40MzE2LDIwLjI2Mzl2NTkuODE0OVpNNDQ3LjIxOTksMTU5LjcxNTVoLTI3LjA5OTR2LTc4LjczNmgyNy4wOTk0djc4LjczNlpNNDM2LjcyMjMsNzYuNzA3M2gtNi4yMjY0Yy02LjIyNTIsMC0xMC44NjM2LTUuMDA1OS0xMC44NjM2LTEwLjk4NzEsMC02LjEwMyw0LjYzODQtMTAuOTg1NiwxMC44NjM2LTEwLjk4NTZoNi4yMjY0YzYuMjI1MywwLDEwLjg2MzYsNC44ODI2LDEwLjg2MzYsMTAuOTg1NiwwLDUuOTgxMi00LjYzODMsMTAuOTg3MS0xMC44NjM2LDEwLjk4NzFaTTUwNi4xODAyLDE1OS43MTU2aC01My4zNDU1di0xOC4wNjY4bDIzLjA3MjUtNDEuMDE1N2gtMjMuMDcyNXYtMTkuNjUzNmg1Mi44NTczdjE4LjkyMTFsLTIyLjU4Myw0MC4xNjE0aDIzLjA3MTJ2MTkuNjUzNlpNNTc4LjY5MDksMTI1LjE2ODloLTQzLjIxM2MuNDg4MywxMC43NDI5LDMuMjk1OCwxNi44NDYxLDguMzAwMywxNi44NDYxLDMuNjYyLDAsNi44MzU3LTQuMDI4MSw3LjgxMjMtMTAuODY0OWgyNi44NTY0Yy0yLjE5NzMsMTcuNTc4NC0xNS4zODEzLDI5LjkwOC0zMy45MzYzLDI5LjkwOC0yMi4yMTY4LDAtMzYuMjU1NC0xNS42MjUyLTM2LjI1NTQtNDAuNzcxNywwLTI0LjY1OCwxNC41MjY5LTQwLjc3MTcsMzYuMzc3NC00MC43NzE3LDIyLjk0OTIsMCwzNy4xMDk5LDE5LjA0MzIsMzQuMDU4Miw0NS42NTQzWk02MTEuMDM5MSwxNTkuNzE1NWgtMjcuMDk5NFY2Mi4wNTgzaDI3LjA5OTR2OTcuNjU3MVpNNjYzLjA0MTksMTY1Ljk0MDdjLTMuMjk1NywxMi42OTU5LTEwLjAxMDUsMTguNTU0OS0yMy40Mzc1LDE4LjU1NDloLTE5LjI4NzF2LTE5Ljc3NTVoMTQuODkyOGMxLjIyMDcsMCwyLjE5NzMtLjczMjMsMi40NDE0LTIuMDc1MWwuNzMyMi0zLjE3MzYtMjIuMjE2OC03OC40OTE5aDI3LjU4NzZsNC44ODI2LDIyLjk0OTIsMy4yOTU5LDIxLjI0MDIsMi44MDc0LTIxLjYwNjQsNC4wMjkzLTIyLjU4M2gyNi4zNjY5bC0yMi4wOTQ3LDg0Ljk2MTJaIi8+CiAgPHBhdGggY2xhc3M9ImNscy0yIiBkPSJNNTQ0LjAyMjMsOTguNDM1OGMtNC4wMjgxLDAtNy4yMDE3LDQuNTE2NC04LjU0NDQsMTIuMDg0NGgxNi43MjI4Yy0xLjIyMDYtNy42OTAxLTQuMTUwMy0xMi4wODQ0LTguMTc4My0xMi4wODQ0WiIvPgogIDxwYXRoIGNsYXNzPSJjbHMtMiIgZD0iTTE5My43OTk3LDk5LjQxMjRjLTQuODgyNiwwLTcuNTY4MSw4LjU0NDQtNy41NjgxLDIxLjQ4NDQsMCwxMi44MTY3LDIuNjg1NSwyMC41MDgxLDcuNTY4MSwyMC42Myw1LjAwNTctLjEyMTksNy44MTMyLTcuOTM1Myw3LjgxMzItMjAuNjMsMC0xMy4wNjItMi44MDc1LTIxLjYwNjQtNy44MTMyLTIxLjQ4NDRaIi8+CiAgPHBhdGggY2xhc3M9ImNscy0yIiBkPSJNMTExLjg5LDgzLjA1NDZjLTcuNjkwMSwwLTEyLjgxNjcsMTAuNDk3NC0xMi44MTY3LDI3LjIyMTQsMCwxNy4yMTIzLDUuMTI2NiwyNy45NTUxLDEyLjgxNjcsMjcuOTU1MSw3LjU2OTEsMCwxMi44MTc5LTEwLjc0MjgsMTIuODE3OS0yNy45NTUxLDAtMTYuNzI0LTUuMjQ4OC0yNy4yMjE0LTEyLjgxNzktMjcuMjIxNFoiLz4KPC9zdmc+" alt="Optimizely" style="width:260px; height:auto;" />
+      <span class="chip">INTERNAL · SALES PREP · NOV 2026</span>
+    </div>
+    <p class="eyebrow text-lg mt-10">Jackson Hewitt · Follow-up demo</p>
+    <h1 class="text-5xl md:text-7xl mt-3">Mark on CMS 13:<br/>Sandler demo agenda</h1>
+    <p class="text-lg md:text-xl mt-6 max-w-3xl" style="line-height:1.3">“Here’s what your team’s year looks like once you’re on CMS 13 with Mark.” Mark only. No platform re-architecture pitch.</p>
+
+    <div class="grid md:grid-cols-3 gap-4 mt-8">
+      <div class="quote"><p class="caption text-xs">SESSION</p><p class="mt-2 font-medium">Mark capabilities demo · 60 min (45-min version in Appendix C)</p></div>
+      <div class="quote"><p class="caption text-xs">OWNERS</p><p class="mt-2 font-medium">Cat Ryan (AE) · Marvin Oey (SA)</p></div>
+      <div class="quote"><p class="caption text-xs">SOURCES</p><p class="mt-2 font-medium">JH CMS workflows doc (Dana) · Teams deal chat (10/26, 10/28, 11/3) · CMS 13 + Mark docs</p></div>
+    </div>
+  </header>
+
+  <!-- NAV -->
+  <nav class="flex flex-wrap gap-2 mt-6">
+    <a href="#s0" class="btn bg-white px-4 py-2 text-sm">0 · Going in</a>
+    <a href="#s1" class="btn bg-white px-4 py-2 text-sm">1 · Up-front contract</a>
+    <a href="#s2" class="btn bg-white px-4 py-2 text-sm">2 · Pain</a>
+    <a href="#s3" class="btn bg-white px-4 py-2 text-sm">3 · Demo</a>
+    <a href="#s4" class="btn bg-white px-4 py-2 text-sm">4 · Budget</a>
+    <a href="#s5" class="btn bg-white px-4 py-2 text-sm">5 · Decision</a>
+    <a href="#s6" class="btn bg-white px-4 py-2 text-sm">6 · Post-sell</a>
+    <a href="#appx" class="btn bg-white px-4 py-2 text-sm">Appendices</a>
+  </nav>
+
+  <!-- RUN OF SHOW -->
+  <section class="card p-8 md:p-10 mt-6">
+    <div class="flex flex-wrap items-end justify-between gap-4">
+      <div>
+        <p class="eyebrow">Run of show</p>
+        <h2 class="text-3xl md:text-4xl mt-2">The hour at a glance</h2>
+      </div>
+      <div class="flex gap-2" role="group" aria-label="Session length">
+        <button id="b60" class="btn px-4 py-2 bg-lf" onclick="setLen(60)">60 min</button>
+        <button id="b45" class="btn px-4 py-2 bg-white" onclick="setLen(45)">45 min</button>
+      </div>
+    </div>
+    <div class="flex mt-8 gap-1 overflow-hidden" style="border-radius:16px; border:1.5px solid #08251A;">
+      <div class="seg bg-e1 p-3 min-w-0" data-a="5" data-b="3"><p class="caption text-xs">1</p><p class="font-bold text-sm truncate">Contract</p><p class="caption text-xs mt-1"><span class="m">5</span>m</p></div>
+      <div class="seg bg-e2 p-3 min-w-0" data-a="10" data-b="7"><p class="caption text-xs">2</p><p class="font-bold text-sm truncate">Pain</p><p class="caption text-xs mt-1"><span class="m">10</span>m</p></div>
+      <div class="seg bg-e3 p-3 min-w-0" data-a="30" data-b="22"><p class="caption text-xs">3</p><p class="font-bold text-sm truncate">Live Mark demo</p><p class="caption text-xs mt-1"><span class="m">30</span>m</p></div>
+      <div class="seg bg-e6 text-white p-3 min-w-0" data-a="5" data-b="5"><p class="caption text-xs">4</p><p class="font-bold text-sm truncate">Budget</p><p class="caption text-xs mt-1"><span class="m">5</span>m</p></div>
+      <div class="seg bg-e7 text-white p-3 min-w-0" data-a="5" data-b="4"><p class="caption text-xs">5</p><p class="font-bold text-sm truncate">Decision</p><p class="caption text-xs mt-1"><span class="m">5</span>m</p></div>
+      <div class="seg bg-e8 text-white p-3 min-w-0" data-a="5" data-b="4"><p class="caption text-xs">6</p><p class="font-bold text-sm truncate">Post-sell</p><p class="caption text-xs mt-1"><span class="m">5</span>m</p></div>
+    </div>
+    <p id="lennote" class="caption text-xs mt-4">60-MIN PLAN · DEMO RUNS SEGMENTS A–E IN THE ORDER DANA RANKS THEM</p>
+  </section>
+
+  <!-- 0 -->
+  <section id="s0" class="card p-8 md:p-10 mt-6">
+    <div class="flex items-center gap-4"><div class="step">0</div><div><p class="eyebrow">Before the call</p><h2 class="text-3xl md:text-4xl mt-1">What we know going in</h2></div></div>
+    <div class="overflow-x-auto mt-6">
+      <table class="brand text-sm">
+        <thead><tr><th>Signal</th><th>Source</th><th>What it means for the demo</th></tr></thead>
+        <tbody>
+          <tr><td>Main pain: keeping lots of tax content current without making every edit a manual research + CPA review job</td><td class="caption text-xs">Cat, 11/3</td><td>Lead with this. Sharon does a final check; she doesn’t research each edit.</td></tr>
+          <tr><td>150+ article updates/yr, seasonal tax-law and date changes, backlog of IRS-form updates</td><td class="caption text-xs">Workflows doc, 10/22 notes</td><td>Volume story; feeds credit scoping</td></tr>
+          <tr><td>Find-and-replace (stats, phrases, ®/™), swapping images/blocks, removing stale links after 404 crawls, archiving each season</td><td class="caption text-xs">Workflows doc</td><td>“CMS hygiene” segment</td></tr>
+          <tr><td>Categorizing articles and linking hubs by hand; using Copilot outside the CMS, then re-keying</td><td class="caption text-xs">Workflows doc, Cat 11/3</td><td>Key difference: Mark works <em>inside</em> the CMS</td></tr>
+          <tr><td>Test plans should use <em>their</em> metrics and past tests; CMS content and A/B variations are built separately</td><td class="caption text-xs">Cat 11/3</td><td>Experimentation segment</td></tr>
+          <tr><td>Want to see how visitor groups, Content Recs and A/B testing fit together in CMS 13; might drop Content Recs</td><td class="caption text-xs">Cat 10/26 and 11/3</td><td>Personalization segment; possible offset against the Mark cost</td></tr>
+          <tr><td>Prefers Mark <strong>Enhanced</strong>; autonomous workflows later</td><td class="caption text-xs">Cat 10/26</td><td>Show interactive flows first; position autonomous as phase 2</td></tr>
+          <tr><td>Comparing Mark vs. Copilot</td><td class="caption text-xs">Cat 10/26</td><td>Use a negative-reverse moment (see §3)</td></tr>
+          <tr><td>Not yet clear whether the site’s main KPI is digital revenue, self-serve filings or office lead gen; web traffic matters if AEO is a priority</td><td class="caption text-xs">Deal chat, 10/28</td><td>Ask in the Budget step (§4)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 1 -->
+  <section id="s1" class="card p-8 md:p-10 mt-6">
+    <div class="flex flex-wrap items-center gap-4"><div class="step">1</div><div class="flex-1"><p class="eyebrow">Bonding &amp; rapport + up-front contract</p><h2 class="text-3xl md:text-4xl mt-1">Set the rules of the hour</h2></div><span class="chip">0:00–0:05 · CAT OPENS, MARVIN CONFIRMS</span></div>
+    <div class="quote mt-6 text-base" style="line-height:1.3">
+      <p>“Thanks for the full hour. Last time you walked us through where your team’s time goes. Today we’d like to show Mark running against those exact workflows, the way it would work once you’re on CMS 13.</p>
+      <p>Here’s what we’re thinking. First, ten minutes to check that we got your priorities right, because that decides what we show. Then about 30 minutes of live demo, stopping after each piece to see if it fits. We’ll save the last 15 minutes for what this means for packaging, the leadership conversation, and next steps.</p>
+      <p>Is there anything you need to get out of today that we haven’t covered?</p>
+      <p>At the end, one of three things happens: it’s a fit and we line up a business-case follow-up for your leadership conversation, it isn’t a fit and you tell us so, or we agree on a specific next step. Is that fair?”</p>
+    </div>
+    <div class="callout-green mt-4"><p class="eyebrow text-sm">Get these before moving on</p><p class="mt-1">Who’s in the room (Dana? Sharon? Matthew?), their goal for the hour, and agreement on the three possible outcomes.</p></div>
+  </section>
+
+  <!-- 2 -->
+  <section id="s2" class="card p-8 md:p-10 mt-6">
+    <div class="flex flex-wrap items-center gap-4"><div class="step">2</div><div class="flex-1"><p class="eyebrow">Pain re-confirmation</p><h2 class="text-3xl md:text-4xl mt-1">Let them rank the pain</h2></div><span class="chip">0:05–0:15 · MARVIN LEADS</span></div>
+    <p class="mt-6 text-base" style="line-height:1.3"><strong>Goal:</strong> have <em>them</em> rank the pains so the demo only shows what they’ve confirmed. Sandler rule: no fulfillment without confirmed pain.</p>
+    <div class="grid md:grid-cols-2 gap-4 mt-5">
+      <div>
+        <p class="eyebrow text-sm">Opener · dummy curve (stay curious, don’t assume)</p>
+        <div class="quote mt-2" style="line-height:1.3"><p>“From the doc you shared, we pulled out five areas: seasonal tax updates, find-and-replace, categorizing and hub linking, test planning, and personalization. If you could only fix two before next tax season, which two?”</p></div>
+        <div class="callout-green mt-4"><p class="eyebrow text-sm">Get these numbers</p><p class="mt-1">Pages touched per season · hours per update cycle · number of reviewers · error/compliance risk</p></div>
+        <div class="callout-blue mt-4"><p>Run the segments in <strong>their</strong> ranked order. Drop any segment they don’t rank.</p></div>
+      </div>
+      <div>
+        <p class="eyebrow text-sm">Pain funnel · used on their #1 pick</p>
+        <ol class="num mt-2">
+          <li>“Walk me through the last time that happened. What triggered it?”</li>
+          <li>“Who does the work: Sharon, editors, or both? How long does it take?”</li>
+          <li>“What have you tried? Where does Copilot help, and where does it fall short?”</li>
+          <li>“What happens if an outdated 2025 figure is live in January?”</li>
+          <li>“What has that cost you, in hours, risk, or delayed optimizations?”</li>
+          <li>“How does the team feel about doing it again next season?”</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section id="s3" class="card p-8 md:p-10 mt-6">
+    <div class="flex flex-wrap items-center gap-4"><div class="step">3</div><div class="flex-1"><p class="eyebrow">Fulfillment</p><h2 class="text-3xl md:text-4xl mt-1">Live Mark demo on CMS 13</h2></div><span class="chip">0:15–0:45 · MARVIN DRIVES</span></div>
+    <div class="grid md:grid-cols-2 gap-4 mt-6">
+      <div class="quote"><p class="caption text-xs">EVERY SEGMENT</p><p class="mt-2 font-medium">Their words → Mark on screen → temperature check</p></div>
+      <div class="callout-green"><p class="caption text-xs">TEMPERATURE CHECK</p><p class="mt-2">“On a scale of 1–10, how close is that to what your team needs? What would make it a 10?”</p></div>
+    </div>
+
+    <!-- A -->
+    <div class="mt-8 p-6 md:p-8" style="border:1.5px solid #08251A; border-radius:32px;">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <h3 class="text-2xl md:text-3xl">A · Seasonal tax refresh with human approval</h3>
+        <span class="chip">~10 MIN · ANCHOR PAIN</span>
+      </div>
+      <p class="mt-3"><strong>Their words:</strong> “Flag and suggest changes so Sharon can do a final check instead of researching every edit.”</p>
+      <p class="eyebrow text-sm mt-4">On screen</p>
+      <ol class="num">
+        <li>Give Mark JH’s 2026 figures as the source of truth (for example, a short IRS-changes brief that JH supplies).</li>
+        <li>Ask Mark to search CMS content (through Graph) for articles that reference 2025 thresholds, deadlines and form names. Show the list: page, the outdated text, and the proposed change.</li>
+        <li>Mark creates <strong>drafts</strong> in CMS 13. It doesn’t publish. Show the draft going into an <strong>approval sequence</strong> for Sharon.</li>
+        <li>Bonus, for the “Optimizations” bucket: run Mark’s <strong>SEO analysis</strong> and <strong>GEO/AI-discoverability audit</strong> on one article and apply the recommendations.</li>
+      </ol>
+      <div class="callout-blue mt-4"><p class="eyebrow text-sm">Say it plainly</p><p class="mt-1">Mark works within each user’s CMS permissions. It drafts from the figures JH gives it, so CPA judgment stays with Sharon. This is the human approval step they said they need.</p></div>
+      <p class="mt-4"><strong>After the temperature check:</strong> “If your team didn’t have to start from a blank page each time, how would those hours be spent instead?”</p>
+    </div>
+
+    <!-- B -->
+    <div class="mt-5 p-6 md:p-8" style="border:1.5px solid #08251A; border-radius:32px;">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <h3 class="text-2xl md:text-3xl">B · CMS hygiene at scale</h3>
+        <span class="chip">~7 MIN</span>
+      </div>
+      <p class="mt-3"><strong>Their words:</strong> find-and-replace, ®/™ marks, replacing images and blocks, 404 cleanup, seasonal archiving.</p>
+      <p class="eyebrow text-sm mt-4">On screen</p>
+      <ol class="num">
+        <li>“Find every article that mentions [old stat/phrase] and propose the replacement.” Show the list, then property updates saved as drafts.</li>
+        <li>“Add ® to [brand term] on first use.” Same pattern.</li>
+        <li>Upload a crawl export (CSV of 404s). Mark finds the content that links to those URLs and drafts fixes.</li>
+        <li><em>(Tell only)</em> Scheduling this to run on its own every season = the autonomous workflow path (phase 2, beyond Enhanced).</li>
+      </ol>
+    </div>
+
+    <!-- C -->
+    <div class="mt-5 p-6 md:p-8" style="border:1.5px solid #08251A; border-radius:32px;">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <h3 class="text-2xl md:text-3xl">C · Categorize, link hubs, possibly replace Content Recs</h3>
+        <span class="chip">~7 MIN</span>
+      </div>
+      <p class="mt-3"><strong>Their words:</strong> “We use Copilot outside the CMS, then update the CMS by hand.”</p>
+      <p class="eyebrow text-sm mt-4">On screen</p>
+      <ol class="num">
+        <li>Mark reads a new article, suggests a category from JH’s existing taxonomy, and sets the category property right in CMS 13.</li>
+        <li>Mark adds the link to the matching hub page as a draft.</li>
+        <li>Show (or mock) the “Related articles” block: 3 articles from the same category, pulled through a Graph query.</li>
+      </ol>
+      <div class="callout-blue mt-4"><p class="eyebrow text-sm">Say it plainly</p><p class="mt-1">The related-articles block is a small CMS 13 build (a block that queries Graph by category). Mark keeps the categories accurate, and that’s what makes the block work. This is the realistic route to dropping Content Recs.</p></div>
+      <p class="eyebrow text-sm mt-4">Negative reverse · Copilot comparison</p>
+      <div class="quote mt-2"><p>“Honestly, if your team is happy copying from Copilot and pasting into the CMS, that might be good enough for now. What’s the downside of keeping it that way?”</p></div>
+    </div>
+
+    <!-- D -->
+    <div class="mt-5 p-6 md:p-8" style="border:1.5px solid #08251A; border-radius:32px;">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <h3 class="text-2xl md:text-3xl">D · Experimentation that knows your data</h3>
+        <span class="chip">~6 MIN</span>
+      </div>
+      <p class="mt-3"><strong>Their words:</strong> “Copilot suggests metrics we don’t even track.” “CMS content and test variations are built separately.”</p>
+      <p class="eyebrow text-sm mt-4">On screen</p>
+      <ol class="num">
+        <li>Mark pulls JH’s <strong>real</strong> experiments and metrics, then drafts a test plan for a high-traffic page (Refund Advance or online filing) using metrics JH actually tracks.</li>
+        <li>Mark writes 2–3 variations as <strong>CMS 13 Content Variations</strong> of that page. The test content and the CMS content are now the same item.</li>
+        <li>Show how the variation flows to an A/B test, and point out that Mark can pick the winning variant automatically.</li>
+      </ol>
+      <div class="callout-blue mt-4"><p class="eyebrow text-sm">Check before the call</p><p class="mt-1">CMS 13 content-variation A/B testing is documented with <strong>Feature Experimentation</strong>. Confirm what JH licenses today (the October notes say Web Experimentation) and adjust the story to match.</p></div>
+    </div>
+
+    <!-- E -->
+    <div class="mt-5 p-6 md:p-8" style="border:1.5px solid #08251A; border-radius:32px;">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <h3 class="text-2xl md:text-3xl">E · How personalization fits in CMS 13</h3>
+        <span class="chip">~5 MIN · MOSTLY WHITEBOARD</span>
+      </div>
+      <p class="mt-3">Draw one simple map. Avoid a feature tour.</p>
+      <div class="overflow-x-auto mt-4">
+        <table class="brand text-sm">
+          <thead><tr><th>Piece</th><th>What it’s for</th><th>Where Mark helps</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Audiences</strong> (CMS 13’s name for visitor groups)</td><td>Rule-based targeting of blocks (their 3–4 cross-promo groups)</td><td>Drafts one cross-promo block per audience</td></tr>
+            <tr><td><strong>Content Variations</strong></td><td>Multiple published versions of one item for A/B tests, personalization, seasonal content</td><td>Writes the variations; can pick the winner</td></tr>
+            <tr><td><strong>Content Recommendations</strong></td><td>Behavior-based related content (today)</td><td>Possibly replaced by category + Graph “related” block (Segment C)</td></tr>
+            <tr><td><strong>Limitless 1:1 Personalization</strong></td><td>Mark generates and updates a <strong>landing page per segment</strong> (from a CDP or similar). Real crawlable pages, not real-time per-visitor swaps</td><td>Candidates: Retail/Walmart walk-in, DIY online, Refund Advance seekers</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout-blue mt-4"><p class="eyebrow text-sm">Be candid</p><p class="mt-1">Limitless creates pages per segment and runs alongside the site. It doesn’t do real-time per-visitor personalization.</p></div>
+    </div>
+  </section>
+
+  <!-- 4 / 5 -->
+  <div class="grid md:grid-cols-2 gap-6 mt-6">
+    <section id="s4" class="card p-8 md:p-10">
+      <div class="flex flex-wrap items-center gap-4"><div class="step">4</div><div class="flex-1"><p class="eyebrow">Budget</p><h2 class="text-3xl mt-1">Scope it right</h2></div></div>
+      <span class="chip mt-4">0:45–0:50 · CAT LEADS</span>
+      <div class="quote mt-5"><p>“You mentioned starting with Enhanced. To make sure we don’t over- or under-scope, I’d like to ask a few questions.”</p></div>
+      <ul class="dot mt-4">
+        <li>“Which of today’s segments would you want in place for the 2027 season? Which can wait?” <span class="caption text-xs">→ Enhanced vs. autonomous later</span></li>
+        <li>“If we found a solid way to replace Content Recs, would that budget move over, or does it go back to the pot?”</li>
+        <li>“Is there a range leadership has in mind, or is this meeting meant to help set one?”</li>
+      </ul>
+      <div class="callout-green mt-5">
+        <p class="eyebrow text-sm">Business-impact questions for the leadership case</p>
+        <ul class="dot mt-1">
+          <li>“When leadership looks at the website, what’s the number they care about: self-serve online filings, appointments and leads for offices, or something else?”</li>
+          <li>“Do you track digital revenue?”</li>
+          <li>“Is showing up in AI search answers (AEO) a priority? If so, can you share traffic data?”</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="s5" class="card p-8 md:p-10">
+      <div class="flex flex-wrap items-center gap-4"><div class="step">5</div><div class="flex-1"><p class="eyebrow">Decision process</p><h2 class="text-3xl mt-1">Map the yes</h2></div></div>
+      <span class="chip mt-4">0:50–0:55</span>
+      <ul class="dot mt-5">
+        <li>“Besides you, who needs to say yes? Leadership, IT (Matthew), procurement, legal or compliance for AI on tax content?”</li>
+        <li>“What would leadership need to see? An ROI case, a pilot, references?”</li>
+        <li>“How does this decision fit around the CMS 13 upgrade and the August 2027 renewal? Is there a budget-planning date we need to hit before then?”</li>
+        <li>“Last time you looked at a tool like this, how did the decision get made?”</li>
+      </ul>
+    </section>
+  </div>
+
+  <!-- 6 -->
+  <section id="s6" class="card p-8 md:p-10 mt-6">
+    <div class="flex flex-wrap items-center gap-4"><div class="step">6</div><div class="flex-1"><p class="eyebrow">Post-sell &amp; next steps</p><h2 class="text-3xl md:text-4xl mt-1">Lock the next move</h2></div><span class="chip">0:55–1:00</span></div>
+    <div class="grid md:grid-cols-2 gap-4 mt-6">
+      <div>
+        <p class="eyebrow text-sm">Prevent buyer’s remorse</p>
+        <div class="quote mt-2"><p>“Between now and when you bring this to leadership, what could slow it down or stop it?”</p></div>
+        <p class="eyebrow text-sm mt-4">Close the loop on the contract</p>
+        <div class="quote mt-2"><p>“We said we’d end with yes, no, or a clear next step. Where are we?”</p></div>
+      </div>
+      <div>
+        <p class="eyebrow text-sm">Agree on specific next steps (date + owner)</p>
+        <ol class="num mt-2">
+          <li><strong>Business-case follow-up</strong> (Cat + Dana): KPI and traffic numbers Dana can take to leadership</li>
+          <li><strong>Preliminary Enhanced pricing + credit estimate</strong> (Cat), based on the volumes in Appendix A</li>
+          <li><em>(Optional)</em> Short follow-up with Matthew on Mark/Graph prerequisites in CMS 13 (Opti ID, Graph)</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPENDICES -->
+  <section id="appx" class="card p-8 md:p-10 mt-6">
+    <p class="eyebrow">Appendix A</p>
+    <h2 class="text-3xl md:text-4xl mt-1">Volumes for credit scoping</h2>
+    <p class="caption text-xs mt-2">FROM DANA’S CMS WORKFLOWS DOC</p>
+    <div class="overflow-x-auto mt-5">
+      <table class="brand text-sm">
+        <thead><tr><th>Workflow</th><th>Annual volume</th><th>Mark segment</th></tr></thead>
+        <tbody>
+          <tr><td>New articles</td><td>~30</td><td>C (categorize/link)</td></tr>
+          <tr><td>New landing pages</td><td>~10</td><td>E (Limitless candidates)</td></tr>
+          <tr><td>New cross-promo blocks</td><td>~25–50</td><td>E</td></tr>
+          <tr><td>New forms</td><td>~5–10</td><td>Out of scope for demo</td></tr>
+          <tr><td>Article updates (seasonal + optimization)</td><td>150+</td><td>A</td></tr>
+          <tr><td>Landing page updates</td><td>~30</td><td>A / D</td></tr>
+          <tr><td>Cross-promo block updates (3–4 visitor groups)</td><td>~10–20</td><td>E</td></tr>
+          <tr><td>Form updates</td><td>~5</td><td>Out of scope</td></tr>
+          <tr><td>Find &amp; replace / ® / images / blocks / archive</td><td>Ongoing, seasonal spikes</td><td>B</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="grid md:grid-cols-2 gap-6 mt-6">
+    <section class="card p-8 md:p-10">
+      <p class="eyebrow">Appendix B</p>
+      <h2 class="text-3xl mt-1">Prep checklist</h2>
+      <p class="caption text-xs mt-2">FOR THE INTERNAL SYNC · CLICK TO TICK OFF</p>
+      <div class="mt-5 space-y-3" id="checklist">
+        <div class="flex gap-3"><div class="check" role="checkbox" aria-checked="false" tabindex="0"></div><p><strong>Roles:</strong> Cat handles up-front contract, budget and decision. Marvin runs the pain funnel, the demo and the Content Recs / audiences conversation. Cat also listens for KPI and business-impact answers.</p></div>
+        <div class="flex gap-3"><div class="check" role="checkbox" aria-checked="false" tabindex="0"></div><p><strong>Demo environment:</strong> CMS 13 instance with Graph + Opti ID, seeded with ~15 JH-style tax articles containing 2025 figures, 3–4 audiences, a category taxonomy and a hub page.</p></div>
+        <div class="flex gap-3"><div class="check" role="checkbox" aria-checked="false" tabindex="0"></div><p><strong>Backup outputs</strong> saved for every segment in case live runs are slow.</p></div>
+        <div class="flex gap-3"><div class="check" role="checkbox" aria-checked="false" tabindex="0"></div><p><strong>Confirm:</strong> Web Experimentation vs. Feature Experimentation license (Segment D).</p></div>
+        <div class="flex gap-3"><div class="check" role="checkbox" aria-checked="false" tabindex="0"></div><p><strong>Confirm with Cat:</strong> tier mapping (what’s in Enhanced vs. autonomous/scheduled) before promising anything in Segment B.</p></div>
+        <div class="flex gap-3"><div class="check" role="checkbox" aria-checked="false" tabindex="0"></div><p><strong>Decide with Cat:</strong> target deal size (~$70k Enhanced vs. $200k+), so the package and credit estimate are scoped to the right level.</p></div>
+        <div class="flex gap-3"><div class="check" role="checkbox" aria-checked="false" tabindex="0"></div><p><strong>Decide:</strong> the October playbook’s CMS SaaS pivot is <strong>off the table</strong> for this session. Mark-on-CMS-13 only.</p></div>
+      </div>
+      <p class="caption text-xs mt-5"><span id="done">0</span> / 7 DONE</p>
+    </section>
+
+    <section class="card p-8 md:p-10">
+      <p class="eyebrow">Appendix C</p>
+      <h2 class="text-3xl mt-1">45-minute version</h2>
+      <p class="caption text-xs mt-2">IF THE SLOT GETS CUT</p>
+      <div class="overflow-x-auto mt-5">
+        <table class="brand text-sm">
+          <thead><tr><th>Block</th><th>60 min</th><th>45 min</th></tr></thead>
+          <tbody>
+            <tr><td>Rapport + up-front contract</td><td>5</td><td>3</td></tr>
+            <tr><td>Pain re-confirmation</td><td>10</td><td>7</td></tr>
+            <tr><td>Demo</td><td>30 (A–E)</td><td>22 (A + their #2 pick + 3-min Segment E map)</td></tr>
+            <tr><td>Budget</td><td>5</td><td>5</td></tr>
+            <tr><td>Decision</td><td>5</td><td>4</td></tr>
+            <tr><td>Post-sell / next steps</td><td>5</td><td>4</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <footer class="mt-8 pb-4 flex flex-wrap justify-between gap-3">
+    <p class="caption text-xs">OPTIMIZELY · INTERNAL USE ONLY · JACKSON HEWITT OPPORTUNITY</p>
+    <p class="caption text-xs">PREPARED BY MARVIN OEY (SA)</p>
+  </footer>
+</div>
+
+<script>
+  function setLen(n) {
+    const key = n === 60 ? 'a' : 'b';
+    document.querySelectorAll('.seg').forEach(s => {
+      const v = parseInt(s.dataset[key], 10);
+      s.style.flexGrow = v;
+      s.querySelector('.m').textContent = v;
+    });
+    document.getElementById('b60').className = 'btn px-4 py-2 ' + (n === 60 ? 'bg-lf' : 'bg-white');
+    document.getElementById('b45').className = 'btn px-4 py-2 ' + (n === 45 ? 'bg-lf' : 'bg-white');
+    document.getElementById('lennote').textContent = n === 60
+      ? '60-MIN PLAN · DEMO RUNS SEGMENTS A–E IN THE ORDER DANA RANKS THEM'
+      : '45-MIN PLAN · DEMO = SEGMENT A + THEIR #2 PICK + 3-MIN SEGMENT E MAP';
+  }
+  setLen(60);
+
+  const boxes = document.querySelectorAll('#checklist .check');
+  function refresh() { document.getElementById('done').textContent = document.querySelectorAll('#checklist .check.on').length; }
+  boxes.forEach(b => {
+    const toggle = () => { b.classList.toggle('on'); b.setAttribute('aria-checked', b.classList.contains('on')); refresh(); };
+    b.addEventListener('click', toggle);
+    b.addEventListener('keydown', e => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); toggle(); } });
+  });
+</script>
+</body>
+</html>
