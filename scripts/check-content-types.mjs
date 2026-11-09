@@ -2,7 +2,8 @@
  * Check which content types defined in code already exist in the CMS.
  *
  * Scans:
- *   - cms/*.tsx  — any contentType({ key: '...' }) call
+ *   - every .tsx under cms/ and its subfolders (e.g. cms/liberty) — any
+ *     contentType({ key: '...' }) call
  *   - cms/registry.ts — SDK-native types imported from @optimizely/cms-sdk
  *     (BlankExperienceContentType, BlankSectionContentType)
  *
@@ -51,16 +52,17 @@ const { OPTIMIZELY_CMS_CLIENT_ID, OPTIMIZELY_CMS_CLIENT_SECRET } = process.env;
  * source file. Handles both single- and double-quoted keys.
  */
 function extractContentTypeKeys(source) {
+  // Find each `contentType({` and read the first `key: '...'` that follows within
+  // a short window. A window (not a balanced-paren match) is deliberate: property
+  // text such as `str('Submit to (URL)', ...)` contains parentheses and would
+  // break a paren-matching pattern. By convention `key` is the first property.
   const keys = [];
-  // Match contentType({ ... key: 'Foo' ... }) — key must appear as a property
-  // name inside a contentType() call.  We look for the pattern
-  //   contentType({  [anything, including newlines]  key: '<value>'
-  const callRe = /contentType\s*\(\s*\{([^)]*(?:\([^)]*\)[^)]*)*)\}/gs;
+  const callRe = /contentType\s*\(\s*\{/g;
+  const keyRe = /\bkey\s*:\s*['"]([^'"]+)['"]/;
   let callMatch;
   while ((callMatch = callRe.exec(source)) !== null) {
-    const body = callMatch[1];
-    const keyRe = /\bkey\s*:\s*['"]([^'"]+)['"]/;
-    const keyMatch = keyRe.exec(body);
+    const window = source.slice(callMatch.index, callMatch.index + 240);
+    const keyMatch = keyRe.exec(window);
     if (keyMatch) keys.push(keyMatch[1]);
   }
   return keys;
@@ -96,9 +98,22 @@ function extractSdkNativeKeys(registrySource) {
   return keys;
 }
 
+/** Every .tsx file under cms/ (including subfolders such as cms/liberty), as paths relative to cms/. */
+async function listTsxFiles(dir = CMS_DIR, prefix = '') {
+  const entries = await readdir(dir, { withFileTypes: true });
+  const files = [];
+  for (const entry of entries) {
+    if (entry.isDirectory()) {
+      files.push(...(await listTsxFiles(join(dir, entry.name), `${prefix}${entry.name}/`)));
+    } else if (entry.name.endsWith('.tsx') && entry.name !== 'wrappers.tsx') {
+      files.push(`${prefix}${entry.name}`);
+    }
+  }
+  return files;
+}
+
 async function collectCodeKeys() {
-  const files = await readdir(CMS_DIR);
-  const tsxFiles = files.filter((f) => f.endsWith('.tsx') && f !== 'wrappers.tsx');
+  const tsxFiles = await listTsxFiles();
 
   const keyMap = {}; // key → source file
 

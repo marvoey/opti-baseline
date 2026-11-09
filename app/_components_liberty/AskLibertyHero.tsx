@@ -114,6 +114,23 @@ export default function AskLibertyHero({
     [editing, skipAnimation, go],
   );
 
+  // An answer page's ask bar sends visitors here as `/?q=<question>`: run that
+  // question through the same flow as if it had been typed in the search box.
+  useEffect(() => {
+    if (editing) return;
+    // Deferred so the state update is not made synchronously inside the effect;
+    // the cleanup cancels it, so React's double-run in development stays safe.
+    const t = setTimeout(() => {
+      const url = new URL(window.location.href);
+      const q = url.searchParams.get('q')?.trim().slice(0, 300);
+      if (!q) return;
+      url.searchParams.delete('q');
+      window.history.replaceState(null, '', url.pathname + url.search + url.hash);
+      ask(routeQuestion(q, questions), q);
+    }, 0);
+    return () => clearTimeout(t);
+  }, [ask, editing, questions]);
+
   const onComplete = useCallback(() => {
     if (!run) return;
     clearTimeout(timer.current);

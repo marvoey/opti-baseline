@@ -16,6 +16,9 @@ import AskLibertyExperience, {
   AskLibertyExperienceContentType,
   LibAskQuestionContentType,
 } from './liberty/AskLibertyExperience';
+import { libShellTypes, libShellRenderers } from './liberty/LibShell';
+import { libAnswerTypes, libAnswerRenderers } from './liberty/LibAnswer';
+import { libTaskTypes, libTaskRenderers } from './liberty/LibTask';
 import LibSourcesBlock, { LibSourcesBlockContentType, LibSourceContentType } from './liberty/LibSourcesBlock';
 
 /**
@@ -59,6 +62,9 @@ export const registeredContentTypes = [
   LibSourcesBlockContentType,
   LibAskQuestionContentType,
   AskLibertyExperienceContentType,
+  ...libShellTypes,
+  ...libAnswerTypes,
+  ...libTaskTypes,
 ];
 
 initContentTypeRegistry(registeredContentTypes);
@@ -74,5 +80,8 @@ initReactComponentRegistry({
     RichTextBlock: RichText,
     LibSourcesBlock,
     AskLibertyExperience,
+    ...libShellRenderers,
+    ...libAnswerRenderers,
+    ...libTaskRenderers,
   },
 });

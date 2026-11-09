@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import { getPreviewUtils } from '@optimizely/cms-sdk/react/server';
 import { cx } from '@/app/_components_liberty/utils';
-import { spacingClass } from './shared';
+import { spacingClass, type BlockSpacingValue } from './shared';
 
 type Props = {
   /** The block's content, as delivered by the SDK (carries the preview context). */
@@ -10,6 +10,8 @@ type Props = {
   children: ReactNode;
   /** Skip the centred max-w-5xl container (for full-width gray bands). */
   fullBleed?: boolean;
+  /** Spacing used when the editor has not chosen one. Default: medium. */
+  defaultSpacing?: BlockSpacingValue;
   /** Extra classes on the outer element. */
   className?: string;
 };
@@ -27,10 +29,16 @@ type Props = {
  * ComponentWrapper already does this and `__composition` is absent, so it is a
  * no-op there.
  */
-export default function LibertyBlock({ content, children, fullBleed = false, className }: Props) {
+export default function LibertyBlock({
+  content,
+  children,
+  fullBleed = false,
+  defaultSpacing,
+  className,
+}: Props) {
   const { pa } = getPreviewUtils(content);
   const block = (content as { __composition?: { key: string } }).__composition;
-  const spacing = spacingClass(content.BlockSpacing);
+  const spacing = spacingClass(content.BlockSpacing || defaultSpacing);
 
   if (fullBleed) {
     return (

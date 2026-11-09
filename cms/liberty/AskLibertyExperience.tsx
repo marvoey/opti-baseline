@@ -1,6 +1,8 @@
 import { contentType, type ContentProps } from '@optimizely/cms-sdk';
 import { OptimizelyComposition, getPreviewUtils } from '@optimizely/cms-sdk/react/server';
+import AskBar from '@/app/_components_liberty/AskBar';
 import AskLibertyHero, { type AskQuestion } from '@/app/_components_liberty/AskLibertyHero';
+import StagedReveal from '@/app/_components_liberty/StagedReveal';
 import type { ProgressChip } from '@/app/_components_liberty/AiProgressPanel';
 import { ComponentWrapper } from '../wrappers';
 import { resolveHref } from './shared';
@@ -115,6 +117,32 @@ export const AskLibertyExperienceContentType = contentType({
       isLocalized: true,
       sortOrder: 6,
     },
+    PageLayout: {
+      type: 'string',
+      format: 'selectOne',
+      displayName: 'Page layout',
+      description:
+        'Home: hero with search box and suggested questions. Answer: ask bar at the top and the answer builds in. Default: Home.',
+      sortOrder: 8,
+      enum: [
+        { value: 'home', displayName: 'Home (hero)' },
+        { value: 'answer', displayName: 'Answer (ask bar)' },
+      ],
+    },
+    AskBarQuestion: {
+      type: 'string',
+      displayName: 'Answer layout: question',
+      description: 'Pre-filled in the ask bar at the top of an answer page.',
+      isLocalized: true,
+      sortOrder: 9,
+    },
+    AskPageUrl: {
+      type: 'string',
+      displayName: 'Answer layout: ask page URL',
+      description:
+        'Where a new question from the ask bar is sent, as ?q=... The Ask Liberty home page then plays the animation and opens the right answer. Default: /',
+      sortOrder: 9,
+    },
     Heading: {
       type: 'string',
       displayName: 'Heading',
@@ -194,6 +222,33 @@ export default function AskLibertyExperience({ content }: Props) {
       retrievedLabel: q!.RetrievedLabel?.trim() || undefined,
     }));
 
+  const canvas = nodes.length > 0 && (
+    <OptimizelyComposition nodes={nodes} ComponentWrapper={ComponentWrapper} />
+  );
+
+  // Answer layout: ask bar, then the canvas builds in piece by piece (off in
+  // preview and when the animation is skipped).
+  if (content.PageLayout === 'answer') {
+    const reveal = !editing && !content.SkipAnimation;
+    return (
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      <main {...pa(content as any)} className="bg-white">
+        {/* In preview the form is disabled so a submit cannot navigate the editor frame away. */}
+        <fieldset disabled={editing} className="contents">
+          <div {...pa('AskBarQuestion')}>
+            <AskBar
+              question={content.AskBarQuestion ?? ''}
+              buttonLabel={content.ButtonLabel || undefined}
+              placeholder={content.Placeholder || undefined}
+              action={content.AskPageUrl?.trim() || '/'}
+            />
+          </div>
+        </fieldset>
+        {reveal ? <StagedReveal>{canvas}</StagedReveal> : canvas}
+      </main>
+    );
+  }
+
   return (
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     <main {...pa(content as any)} className="bg-white">
@@ -207,7 +262,7 @@ export default function AskLibertyExperience({ content }: Props) {
         editing={editing}
         editAttrs={{ title: pa('Heading'), subtitle: pa('Subtitle') }}
       />
-      {nodes.length > 0 && <OptimizelyComposition nodes={nodes} ComponentWrapper={ComponentWrapper} />}
+      {canvas}
     </main>
   );
 }
