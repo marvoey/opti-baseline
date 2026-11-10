@@ -11,13 +11,17 @@ import { resolveHref } from './shared';
 /**
  * One question on the Ask Liberty home: the chip text, where it leads, and the
  * "simulated retrieval" shown while the answer is "found". Embedded in
- * `AskLibertyExperience`, never placed on its own.
+ * `AskLibertyExperience`, and also available as a shared block (a standalone
+ * item in the "Ask Liberty Questions" folder). `elementEnabled` matches the
+ * type as it is now in the CMS, so it can be dropped onto a canvas; see
+ * `LibAskQuestionBlock.tsx` for what that renders.
  */
 export const LibAskQuestionContentType = contentType({
   key: 'LibAskQuestion',
   baseType: '_component',
   displayName: 'Liberty Ask Question',
   description: 'A suggested question and the retrieval steps shown while it is answered.',
+  compositionBehaviors: ['elementEnabled'],
   properties: {
     Question: {
       type: 'string',
@@ -186,11 +190,14 @@ export const AskLibertyExperienceContentType = contentType({
       type: 'array',
       displayName: 'Suggested questions',
       description:
-        'One Liberty Ask Question per suggested question. Order matters: it is the chip order and the priority when matching a typed question.',
-      isLocalized: true,
+        'One Liberty Ask Question per suggested question, added as shared blocks from the "Ask Liberty Questions" folder or created here. Order matters: it is the chip order and the priority when matching a typed question.',
       sortOrder: 50,
       maxItems: 12,
-      items: { type: 'component', contentType: LibAskQuestionContentType },
+      items: {
+        type: 'content',
+        allowedTypes: ['_component', LibAskQuestionContentType],
+        restrictedTypes: [],
+      },
     },
     SkipAnimation: {
       type: 'boolean',
@@ -215,6 +222,7 @@ export const AskLibertyExperienceContentType = contentType({
 });
 
 type Props = { content: ContentProps<typeof AskLibertyExperienceContentType> };
+type QuestionItem = ContentProps<typeof LibAskQuestionContentType>;
 
 /** "Label | Value" or "Label | Value | warn" → a classification chip. */
 function parseChip(line: string | null | undefined): ProgressChip | null {
@@ -237,19 +245,26 @@ export default function AskLibertyExperience({ content }: Props) {
   const editing = !!(ctx?.edit || ctx?.preview_token);
   const nodes = content.composition?.nodes ?? [];
 
-  const questions: AskQuestion[] = (content.Questions ?? [])
-    .filter((q) => q?.Question?.trim())
+  // Suggested questions are a content area: each entry is a Liberty Ask Question
+  // (a shared block or one created on the page). The area also allows any other
+  // component, so keep only the questions that have text.
+  const questions: AskQuestion[] = ((content.Questions ?? []) as unknown[])
+    .filter(
+      (q): q is QuestionItem =>
+        (q as { __typename?: string } | null)?.__typename === 'LibAskQuestion' &&
+        !!(q as QuestionItem).Question?.trim(),
+    )
     .map((q) => ({
-      question: q!.Question!.trim(),
-      href: resolveHref(q!.LinkUrl, q!.Link) === '#' ? undefined : resolveHref(q!.LinkUrl, q!.Link),
-      keywords: (q!.Keywords ?? '').split(',').map((k) => k.trim()).filter(Boolean),
-      chips: (q!.Classification ?? []).map(parseChip).filter((c): c is ProgressChip => !!c),
-      items: clean(q!.RetrievedItems),
-      warn: !!q!.NeedsDetail,
-      retrievingLabel: q!.RetrievingLabel?.trim() || undefined,
-      retrievedLabel: q!.RetrievedLabel?.trim() || undefined,
-      hideChip: !!q!.HideChip,
-      isFallback: !!q!.IsFallback,
+      question: q.Question!.trim(),
+      href: resolveHref(q.LinkUrl, q.Link) === '#' ? undefined : resolveHref(q.LinkUrl, q.Link),
+      keywords: (q.Keywords ?? '').split(',').map((k) => k.trim()).filter(Boolean),
+      chips: (q.Classification ?? []).map(parseChip).filter((c): c is ProgressChip => !!c),
+      items: clean(q.RetrievedItems),
+      warn: !!q.NeedsDetail,
+      retrievingLabel: q.RetrievingLabel?.trim() || undefined,
+      retrievedLabel: q.RetrievedLabel?.trim() || undefined,
+      hideChip: !!q.HideChip,
+      isFallback: !!q.IsFallback,
     }));
 
   // Mark is used only when the editor ticked the box AND the server has everything

@@ -16,6 +16,7 @@ import AskLibertyExperience, {
   AskLibertyExperienceContentType,
   LibAskQuestionContentType,
 } from './liberty/AskLibertyExperience';
+import LibAskQuestionBlock from './liberty/LibAskQuestionBlock';
 import { libShellTypes, libShellRenderers } from './liberty/LibShell';
 import { libAnswerTypes, libAnswerRenderers } from './liberty/LibAnswer';
 import { libTaskTypes, libTaskRenderers } from './liberty/LibTask';
@@ -79,6 +80,7 @@ initReactComponentRegistry({
     // Blocks (resolver key === content-type key)
     RichTextBlock: RichText,
     LibSourcesBlock,
+    LibAskQuestion: LibAskQuestionBlock,
     AskLibertyExperience,
     ...libShellRenderers,
     ...libAnswerRenderers,

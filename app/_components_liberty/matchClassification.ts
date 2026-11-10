@@ -25,7 +25,7 @@ export function shouldUseFallback(p: MarkResult): boolean {
 /**
  * Match Mark's classification to one of the CMS questions, deterministically.
  * Order: same topic and state; same topic and product; same topic; same intent
- * among questions with no topic (claims, legal). Comparison is exact and
+ * among questions with no topic (today only legal; claims has the topic Claim status). Comparison is exact and
  * case-insensitive. The fallback question never matches by rule. Returns
  * undefined when nothing matches.
  */
