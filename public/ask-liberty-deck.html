@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ask Liberty – Trusted Answers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@600;700;900&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css">
+<style>
+:root{
+  --fir:#08251A; --midfir:#0D3A29; --lightfir:#197050; --lf:#ABFF44; --gtg:#3AB533;
+  --n2:#EFF6E9; --n3:#E4F0DA; --n4:#D8E4CB; --aqua:#91DBDA;
+  --r-background-color:#FFFFFF; --r-main-font:Roboto,Arial,sans-serif; --r-main-font-size:26px; --r-main-color:#08251A;
+  --r-heading-font:"Roboto Condensed","Arial Narrow",Roboto,Arial,sans-serif; --r-heading-color:#08251A; --r-heading-text-transform:none;
+  --r-heading-font-weight:900; --r-heading-letter-spacing:-0.03em; --r-heading-line-height:1.02;
+  --r-link-color:#08251A; --r-link-color-hover:#197050;
+}
+.reveal .slides{ text-align:left; }
+.reveal .slides section{ height:100%; box-sizing:border-box; padding:50px 64px 60px; }
+.reveal .slides section.stack{ padding:0; }
+.reveal h1,.reveal h2,.reveal h3{ margin:0; }
+.reveal h1{ font-size:70px; } .reveal h2{ font-size:44px; } .reveal h3{ font-size:27px; font-weight:700; letter-spacing:-0.02em; line-height:1.1; }
+.reveal p{ margin:0; line-height:1.35; }
+.reveal ul{ margin:0; padding:0; list-style:none; }
+.reveal ul:not(.stack-v){ display:block; }
+.reveal ul.stack-v{ display:flex; flex-direction:column; }
+.reveal li{ margin:0; }
+.reveal b{ font-weight:700; }
+
+/* layout helpers */
+.fill{ height:100%; display:flex; flex-direction:column; }
+.between{ justify-content:space-between; }
+.row{ display:flex; align-items:center; } .wrap{ flex-wrap:wrap; } .top{ align-items:flex-start; }
+.stack-v{ display:flex; flex-direction:column; }
+.g1{ gap:8px; } .g2{ gap:14px; } .g3{ gap:22px; } .g4{ gap:32px; }
+.reveal .mt1{ margin-top:8px; } .reveal .mt2{ margin-top:14px; } .reveal .mt3{ margin-top:22px; } .reveal .mt4{ margin-top:32px; } .reveal .mt5{ margin-top:44px; }
+.cols2{ display:grid; grid-template-columns:1fr 1fr; gap:22px; }
+.cols3{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+.split{ display:grid; grid-template-columns:1fr 1.1fr; gap:34px; align-items:start; }
+.split-r{ display:grid; grid-template-columns:1.1fr 1fr; gap:34px; align-items:start; }
+.self-start{ align-self:flex-start; } .reveal .push{ margin-top:auto; }
+
+/* type */
+.eyebrow{ font:700 16px/1.2 Roboto,Arial,sans-serif; letter-spacing:.04em; text-transform:uppercase; }
+.lead{ font-size:31px; line-height:1.3; max-width:900px; }
+.t{ font-size:23px; line-height:1.35; } .t-sm{ font-size:19.5px; line-height:1.35; }
+.cap{ font:500 15.5px/1.4 "Roboto Mono",monospace; letter-spacing:.01em; }
+.q{ font:700 28px/1.2 "Roboto Condensed","Arial Narrow",Arial,sans-serif; letter-spacing:-.015em; }
+.lime{ color:var(--lf); }
+
+/* components */
+.card{ border:1.5px solid var(--fir); border-radius:28px; background:#fff; }
+.pad{ padding:28px 30px; } .pad-sm{ padding:20px 24px; }
+.tint{ background:var(--n2); } .tint-lime{ background:var(--lf); }
+.badge{ display:inline-flex; align-items:center; border:1.5px solid var(--fir); border-radius:9999px; padding:3px 14px; font:700 14px/1.3 Roboto,Arial,sans-serif; letter-spacing:.05em; text-transform:uppercase; color:var(--fir); white-space:nowrap; }
+.b-live{ background:var(--lf); } .b-cms{ background:var(--aqua); } .b-arch{ background:var(--n3); }
+.btn{ display:inline-flex; align-items:center; gap:6px; border:1.5px solid var(--fir); border-radius:9999px; padding:9px 19px; font:600 18px/1.1 "Roboto Condensed","Arial Narrow",Arial,sans-serif; letter-spacing:-.01em; color:var(--fir)!important; text-decoration:none!important; background:#fff; cursor:pointer; white-space:nowrap; }
+button.btn{ appearance:none; -webkit-appearance:none; }
+.btn:hover{ filter:brightness(.94); } .btn:focus-visible,.acard:focus-visible,.goto:focus-visible{ outline:3px solid var(--lightfir); outline-offset:2px; }
+.btn-live{ background:var(--lf); } .btn-cms{ background:var(--aqua); } .btn-ghost{ background:#fff; }
+.btn-lg{ font-size:21px; padding:12px 25px; }
+.chip{ display:inline-flex; align-items:center; gap:6px; border:1.5px solid var(--fir); border-radius:9999px; padding:4px 14px; font:400 16.5px/1.3 Roboto,Arial,sans-serif; background:#fff; white-space:nowrap; }
+.chip b{ font-weight:700; }
+.chip.warn{ background:var(--n3); border-style:dashed; }
+.chip.warn::before{ content:"!"; display:inline-grid; place-items:center; width:18px; height:18px; border-radius:9999px; background:var(--fir); color:var(--lf); font:900 12px/1 Roboto,Arial,sans-serif; }
+.num{ flex:0 0 auto; display:inline-grid; place-items:center; width:38px; height:38px; border-radius:9999px; background:var(--fir); color:var(--lf); font:900 19px/1 "Roboto Condensed","Arial Narrow",Arial,sans-serif; }
+.step{ display:flex; gap:14px; align-items:flex-start; }
+.logo{ height:42px; width:auto; display:block; align-self:flex-start; }
+.ico{ width:72px; height:72px; display:block; }
+.bignum{ font:900 76px/1 "Roboto Condensed","Arial Narrow",Arial,sans-serif; letter-spacing:-.03em; }
+
+/* tables */
+.reveal .tbl{ width:100%; border-collapse:separate; border-spacing:0; font-size:18.5px; margin:0; }
+.reveal .tbl th{ text-align:left; font:700 16px/1.3 Roboto,Arial,sans-serif; padding:9px 14px; border-bottom:1.5px solid var(--fir); letter-spacing:.02em; }
+.reveal .tbl td{ padding:11px 14px; border-bottom:1px solid #C3CEAF; vertical-align:middle; line-height:1.3; text-align:left; }
+.reveal .tbl tr:last-child td{ border-bottom:none; }
+.reveal .tbl.dense td{ padding:6px 14px; } .reveal .tbl.dense th{ padding:7px 14px; }
+.goto{ cursor:pointer; } .goto:hover td{ background:var(--n2); }
+
+/* agenda cards */
+.agenda{ display:grid; grid-template-columns:1fr 1fr; gap:14px 22px; }
+.acard{ display:flex; align-items:center; gap:16px; text-align:left; border:1.5px solid var(--fir); border-radius:24px; background:#fff; padding:14px 20px; font:inherit; color:var(--fir); cursor:pointer; appearance:none; -webkit-appearance:none; }
+.acard:hover{ background:var(--n2); }
+.acard .at{ flex:1; min-width:0; } .acard b{ display:block; font:700 25px/1.15 "Roboto Condensed","Arial Narrow",Arial,sans-serif; letter-spacing:-.015em; }
+.acard small{ display:block; font:400 16.5px/1.3 Roboto,Arial,sans-serif; margin-top:3px; }
+
+/* dark slides */
+.dark{ color:#fff; } .reveal .dark h1,.reveal .dark h2,.reveal .dark h3{ color:#fff; }
+.dark .cap{ color:var(--n4); }
+
+/* flow */
+.flow{ display:flex; align-items:stretch; gap:10px; }
+.node{ flex:1; border:1.5px solid var(--fir); border-radius:22px; padding:14px 16px; background:#fff; font:400 17.5px/1.3 Roboto,Arial,sans-serif; min-width:0; }
+.node b{ display:block; font:700 23px/1.15 "Roboto Condensed","Arial Narrow",Arial,sans-serif; letter-spacing:-.01em; margin-bottom:3px; }
+.arrow{ align-self:center; font:900 24px/1 "Roboto Condensed",Arial,sans-serif; }
+
+/* code */
+.reveal pre.code{ width:100%; margin:0; box-shadow:none; background:var(--fir); color:var(--n3); border-radius:22px; padding:16px 22px; font:500 15px/1.55 "Roboto Mono",monospace; white-space:pre; overflow:hidden; box-sizing:border-box; }
+.code .k{ color:var(--lf); } .code .s{ color:var(--aqua); } .code .n{ color:#fff; }
+
+/* chrome outside the slides */
+#dock{ position:fixed; top:12px; right:14px; z-index:40; display:flex; gap:6px; opacity:.4; transition:opacity .2s; }
+#dock:hover,#dock:focus-within{ opacity:1; }
+#dock .btn{ font-size:15px; padding:6px 14px; }
+#toast{ position:fixed; left:50%; bottom:30px; transform:translateX(-50%); background:var(--fir); color:var(--lf); font:500 14px "Roboto Mono",monospace; padding:8px 16px; border-radius:9999px; opacity:0; transition:opacity .25s; z-index:60; pointer-events:none; max-width:90vw; }
+#toast.show{ opacity:1; }
+.reveal .controls{ color:var(--fir); } .reveal .progress{ color:var(--gtg); height:4px; }
+.reveal .slide-number{ background:var(--fir); color:var(--lf); font:500 13px "Roboto Mono",monospace; border-radius:9999px; padding:4px 10px; right:16px; bottom:14px; }
+@media print{ #dock,#toast{ display:none!important; } }
+@media (prefers-reduced-motion:reduce){ .reveal .slides section{ transition:none!important; } }
+</style>
+</head>
+<body>
+
+<nav id="dock" aria-label="Quick links">
+  <a class="btn btn-live" data-live="/" title="Open the live site in a new tab">Live App ↗</a>
+  <a class="btn btn-cms" data-cms="startPage">CMS Editor ↗</a>
+  <button class="btn btn-ghost" data-goto="agenda" type="button">Contents</button>
+</nav>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<div class="reveal"><div class="slides">
+
+<!-- 1 · TITLE -->
+<section id="title" data-background-color="#08251A">
+  <div class="fill between dark">
+    <img class="logo" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iT3B0aW1pemVseV9QcmltYXJ5X0xvZ29fTWVkaXVtIiBkYXRhLW5hbWU9Ik9wdGltaXplbHkgUHJpbWFyeSBMb2dvIE1lZGl1bSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgNzQwIDI1NCI+CiAgPGRlZnM+CiAgICA8c3R5bGU+CiAgICAgIC5jbHMtMSB7CiAgICAgICAgZmlsbDogI2FiZmY0NDsKICAgICAgfQoKICAgICAgLmNscy0yIHsKICAgICAgICBmaWxsOiAjMGQzYTI5OwogICAgICB9CiAgICA8L3N0eWxlPgogIDwvZGVmcz4KICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0yNjcuNjUzLDYyLjA1ODNoLTI3LjA5OTJ2MTguOTIxMWgtOS41MjIydjE5LjY1MzZoOS41MjIydjM4Ljk0MDdjMCwxNC4yODE1LDYuMTAzMSwyMC4xNDE4LDIwLjE0MTcsMjAuMTQxOGgxNy41Nzg0di0xOS42NTM2aC03LjU2OTFjLTIuMDc1MiwwLTMuMDUxOC0uNzMyNC0zLjA1MTgtMi44MDc1di0zNi42MjE1aDEwLjYyMDh2LTE5LjY1MzZoLTEwLjYyMDh2LTE4LjkyMTFaIi8+CiAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMzk2LjA3MjYsNzkuNjM2N2MtNy4yMDI5LDAtMTQuMDM4NiwyLjgwNzYtMTkuNzc1NSw4LjY2NjUtMi42ODY2LTYuMjI1MS03LjkzNTQtOC42NjY1LTE1LjYyNTQtOC42NjY1LTYuNTkyOCwwLTEyLjgxNzksMi44MDc2LTE4LjMxMDgsOC42NjY1di03LjMyMzdoLTI1Ljc1NjZ2NzguNzM2MWgyNy4wOTkydi01Ny44NjE5Yy44NTQ1LTEuMjIwNiwyLjQ0MTMtMS45NTMsNC4zOTQzLTEuOTUzLDIuNjg1NCwwLDMuOTA2MSwxLjA5ODUsMy45MDYxLDMuOTA2djU1LjkwODloMjcuMTAwNnYtNTcuODYxOWMuODU0NC0xLjIyMDYsMi40NDEyLTEuOTUzLDQuMzk0My0xLjk1MywyLjY4NTMsMCwzLjkwNiwxLjA5ODUsMy45MDYsMy45MDZ2NTUuOTA4OWgyNy4wOTk0di01OS44MTQ5YzAtMTMuNTUwMy02LjQ2OTQtMjAuMjYzOS0xOC40MzE2LTIwLjI2MzlaIi8+CiAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMzAwLjQ5MDYsNTQuNzM0NmgtNi4yMjY0Yy02LjIyNTIsMC0xMC44NjM2LDQuODgyNi0xMC44NjM2LDEwLjk4NTYsMCw1Ljk4MTIsNC42Mzg0LDEwLjk4NzEsMTAuODYzNiwxMC45ODcxaDYuMjI2NGM2LjIyNTMsMCwxMC44NjM4LTUuMDA1OSwxMC44NjM4LTEwLjk4NzEsMC02LjEwMy00LjYzODQtMTAuOTg1Ni0xMC44NjM4LTEwLjk4NTZaIi8+CiAgPHJlY3QgY2xhc3M9ImNscy0xIiB4PSIyODMuODg4OCIgeT0iODAuOTc5NSIgd2lkdGg9IjI3LjA5OTQiIGhlaWdodD0iNzguNzM2Ii8+CiAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMjAyLjcxMTYsNzkuNTE0NmMtNi44MzU3LDAtMTIuMzI5NywzLjE3MzctMTYuMjM1OCw4Ljc4ODYtLjEyMjEtMi42ODUzLS4zNjYxLTUuMTI2Ni0uNjEwMi03LjMyMzdoLTI2LjQ4OTFjLjI0NDEsNi4xMDMxLjM2NjIsMTIuMDg0Mi4zNjYyLDE4LjE4ODd2ODUuMzI3NGgyNy4wOTk0di0yOS45MDY3YzQuMDI4MSw0LjE1MDEsOS4xNTYsNi4zNDcyLDE1LjI1OTMsNi4zNDcyLDE3LjMzNDIsMCwyNy4wOTk0LTE0Ljc3MDgsMjcuMDk5NC00MC4yODM0LDAtMjUuODc4Ny05LjUyMS00MS4xMzc5LTI2LjQ4OS00MS4xMzc5Wk0xOTMuNzk5NywxNDEuNTI2N2MtNC44ODI2LS4xMjE5LTcuNTY4MS03LjgxMzQtNy41NjgxLTIwLjYzLDAtMTIuOTM5OSwyLjY4NTUtMjEuNDg0NCw3LjU2ODEtMjEuNDg0NCw1LjAwNTctLjEyMjEsNy44MTMyLDguNDIyNCw3LjgxMzIsMjEuNDg0NCwwLDEyLjY5NDctMi44MDc1LDIwLjUwODEtNy44MTMyLDIwLjYzWiIvPgogIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTExMi4wMTIxLDYwLjIyNzRjLTI1Ljg3ODgsMC00Mi42MDI4LDE5LjQwOTMtNDIuNjAyOCw1MC4wNDg2LDAsMzEuMTI4OCwxNi43MjQsNTAuNzgyMSw0Mi42MDI4LDUwLjc4MjEsMjUuNzU3OCwwLDQyLjQ4MDUtMTkuNjUzMyw0Mi40ODA1LTUwLjc4MjEsMC0zMC42MzkzLTE2LjcyMjctNTAuMDQ4Ni00Mi40ODA1LTUwLjA0ODZaTTExMS44OSwxMzguMjMxMWMtNy42OTAxLDAtMTIuODE2Ny0xMC43NDI4LTEyLjgxNjctMjcuOTU1MSwwLTE2LjcyNCw1LjEyNjYtMjcuMjIxNCwxMi44MTY3LTI3LjIyMTQsNy41NjkxLDAsMTIuODE3OSwxMC40OTc0LDEyLjgxNzksMjcuMjIxNCwwLDE3LjIxMjMtNS4yNDg4LDI3Ljk1NTEtMTIuODE3OSwyNy45NTUxWiIvPgogIDxyZWN0IGNsYXNzPSJjbHMtMSIgeD0iNDIwLjEyMDUiIHk9IjgwLjk3OTUiIHdpZHRoPSIyNy4wOTk0IiBoZWlnaHQ9Ijc4LjczNiIvPgogIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTY1NC43NDA0LDEwMy41NjI1bC0yLjgwNzQsMjEuNjA2NC0zLjI5NTktMjEuMjQwMi00Ljg4MjYtMjIuOTQ5MmgtMjcuNTg3NmwyMi4yMTY4LDc4LjQ5MTktLjczMjIsMy4xNzM2Yy0uMjQ0MSwxLjM0MjgtMS4yMjA3LDIuMDc1MS0yLjQ0MTQsMi4wNzUxaC0xNC44OTI4djE5Ljc3NTVoMTkuMjg3MWMxMy40MjcsMCwyMC4xNDE4LTUuODU5LDIzLjQzNzUtMTguNTU0OWwyMi4wOTQ3LTg0Ljk2MTJoLTI2LjM2NjlsLTQuMDI5MywyMi41ODNaIi8+CiAgPHJlY3QgY2xhc3M9ImNscy0xIiB4PSI1ODMuOTM5NyIgeT0iNjIuMDU4MyIgd2lkdGg9IjI3LjA5OTQiIGhlaWdodD0iOTcuNjU3MSIvPgogIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTU0NC42MzI3LDc5LjUxNDZjLTIxLjg1MDYsMC0zNi4zNzc0LDE2LjExMzgtMzYuMzc3NCw0MC43NzE3LDAsMjUuMTQ2NSwxNC4wMzg2LDQwLjc3MTcsMzYuMjU1NCw0MC43NzE3LDE4LjU1NDksMCwzMS43MzktMTIuMzI5NiwzMy45MzYzLTI5LjkwOGgtMjYuODU2NGMtLjk3NjYsNi44MzY4LTQuMTUwMywxMC44NjQ5LTcuODEyMywxMC44NjQ5LTUuMDA0NSwwLTcuODEyLTYuMTAzMS04LjMwMDMtMTYuODQ2MWg0My4yMTNjMy4wNTE2LTI2LjYxMTEtMTEuMTA5LTQ1LjY1NDMtMzQuMDU4Mi00NS42NTQzWk01MzUuNDc3OSwxMTAuNTIwMWMxLjM0MjgtNy41NjgsNC41MTY0LTEyLjA4NDQsOC41NDQ0LTEyLjA4NDRzNi45NTc4LDQuMzk0Myw4LjE3ODMsMTIuMDg0NGgtMTYuNzIyOFoiLz4KICA8cG9seWdvbiBjbGFzcz0iY2xzLTEiIHBvaW50cz0iNTA1LjY5MiA5OS45MDA2IDUwNS42OTIgODAuOTc5NSA0NTIuODM0NyA4MC45Nzk1IDQ1Mi44MzQ3IDEwMC42MzMxIDQ3NS45MDcyIDEwMC42MzMxIDQ1Mi44MzQ3IDE0MS42NDg4IDQ1Mi44MzQ3IDE1OS43MTU2IDUwNi4xODAyIDE1OS43MTU2IDUwNi4xODAyIDE0MC4wNjIgNDgzLjEwOSAxNDAuMDYyIDUwNS42OTIgOTkuOTAwNiIvPgogIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTQzNi43MjIzLDU0LjczNDZoLTYuMjI2NGMtNi4yMjUyLDAtMTAuODYzNiw0Ljg4MjYtMTAuODYzNiwxMC45ODU2LDAsNS45ODEyLDQuNjM4NCwxMC45ODcxLDEwLjg2MzYsMTAuOTg3MWg2LjIyNjRjNi4yMjUzLDAsMTAuODYzNi01LjAwNTksMTAuODYzNi0xMC45ODcxLDAtNi4xMDMtNC42MzgzLTEwLjk4NTYtMTAuODYzNi0xMC45ODU2WiIvPgogIDxwYXRoIGNsYXNzPSJjbHMtMiIgZD0iTTY4NS4xMzY2LDc2LjM0MTFoLTI2LjM2NjljLTEuNzA4NywwLTIuNTYzMi40ODgzLTMuNDE3NywxLjM0MjhsLTYuMTA0NSw2LjM0NzItLjg1NDUtNC4wMjgxYy0uNjEwNC0yLjQ0MTItMi4xOTctMy42NjE5LTQuNjM4NC0zLjY2MTloLTI4LjA3NTl2LTE0LjI4MjdjMC0yLjY4NTMtMi4zMjAzLTQuNzYwNS00LjYzOTUtNC43NjA1aC0yNy4wOTk0Yy0xLjQ2NDcsMC0yLjQ0MTMuNjEwNC0zLjI5NTgsMS40NjQ4bC0xNC43NzA5LDE0Ljc2OThjLS43MzIzLjczMzUtMS4zNDI3LDEuOTU0MS0xLjM0MjcsMy4yOTY5djMuMjk1N2MtNS4yNDg4LTMuMjk1Ny0xMi4yMDc2LTUuMzcwOC0xOS44OTc3LTUuMzcwOC0xMS44NDEzLDAtMjMuOTI1NywzLjkwNjEtMzMuNDQ3OCwxNi43MjI5bC0uNzMyNC45NzY0di0xMS40NzRjMC0yLjMxOTItMi4wNzUyLTQuNjM4NC00Ljc2MDUtNC42Mzg0aC01Ny40OTU3YzIuNjg1NC0zLjE3NDgsMy45MDYxLTYuNDcwNiwzLjkwNjEtMTAuNjIwOCwwLTguOTEwNi02Ljk1NzgtMTUuNjI1Mi0xNS45OTA1LTE1LjYyNTJoLTUuMTI3OWMtNC43NjA0LDAtOC42NjY1LDEuODMwOC0xMS45NjIyLDUuMTI3OWwtMTUuODY5NSwxNS44NjgyYy0xLjIyMDYsMS4yMjA3LTIuMTk3MSwyLjU2MzQtMi45Mjk2LDQuMDI5My0xLjIyMDctLjEyMjEtMi42ODUzLS4yNDQxLTQuMTUwMS0uMjQ0MS02LjQ3MDYsMC0xMy4wNjIsMi4wNzUyLTE4LjY3Nyw2LjU5MTYtMy45MDcyLTQuNzYwNS05LjAzMzktNi41OTE2LTE1Ljg2OTQtNi41OTE2LTUuNDkyOSwwLTEwLjg2NSwxLjU4NjktMTUuNTAzNCw1LjM3MDgtLjI0NDEtMi44MDc0LTEuNDY0Ny0zLjkwNi00LjAyODEtMy45MDZoLTMwLjAzMDJjMi42ODU0LTMuMTc0OCwzLjkwNzMtNi40NzA2LDMuOTA3My0xMC42MjA4LDAtOC45MTA2LTYuOTU5LTE1LjYyNTItMTUuOTkxNy0xNS42MjUyaC01LjEyNzhjLTQuNzYwNSwwLTguNjY2NiwxLjgzMDgtMTEuOTYyMyw1LjEyNzlsLTEwLjM3NjYsMTAuMjUzM3YtMy40MTc4YzAtMi40NDEyLTIuMDc1MS00LjYzODQtNC43NjA2LTQuNjM4NGgtMjcuMDk5MmMtMS40NjQ3LDAtMi41NjM0LjYxMDQtMy4yOTU4LDEuNDY0OGwtMTQuNzcwOSwxNC42NDc3Yy0uNDg4My40ODk0LTEuMzQyNywxLjk1NDEtMS4zNDI3LDMuMjk2OXY1LjAwNDZjLTUuMTI2Ny00Ljc2MDUtMTEuMTA5MS03LjA3OTgtMTguMDY2Ny03LjA3OTgtNC41MTY1LDAtMTAuMDEwNSwxLjQ2NDgtMTMuOTE2NSw1LjM3MDgtLjQ4ODMtMy4xNzM2LTEuNTg2OS0zLjc4MzktMy42NjItMy43ODM5aC0yNi4xMjI5Yy0xLjM0MjcsMC0yLjQ0MTIuNDg4My0zLjI5NTcsMS4zNDI4bC0zLjA1MjcsMy4wNTE1Yy03LjgxMjEtMTYuMTEzNi0yMi41ODMtMjUuMjY4NC00MS4wMTU5LTI1LjI2ODQtMTIuODE2OCwwLTI0LjE2OTksNC4yNzIzLTM2LjAxLDE1Ljk5MDRsLTkuNzY2NCw5Ljc2NjRjLTEwLjg2MzgsMTAuODYzNi0xNi4yMzU3LDI2LjEyMjgtMTYuMjM1Nyw0My44MjMyLDAsMzMuNDQ4LDE4LjU1NDksNTUuNTQyNyw0Ny4yNDIzLDU1LjU0MjcsMTIuODE2NywwLDI0LjE2OTktNC43NjA1LDMyLjk1ODUtMTMuNTUwM2wxMC4xMzI0LTEwLjI1MzR2NDIuMzU4NmMwLDIuNjg1MywyLjA3NTEsNC43NjA1LDQuNzYwNSw0Ljc2MDVoMjYuOTc3M2MxLjU4NjgsMCwyLjY4NTQtLjYxMDQsMy40MTkxLTEuMzQyOGwxNC42NDc2LTE0Ljc3MDljLjk3NjQtLjk3NjYsMS40NjQ3LTIuMDc1MSwxLjQ2NDctMy4yOTU4di00LjM5NDNjNi41OTI4LS44NTQ1LDExLjk2MzUtMy41Mzk4LDE2LjM1NzgtOC4xNzk0bDEzLjMwNjMtMTMuMzA0OWMxLjU4NjcsMTMuNzkzMiwxMC40OTczLDIwLjUwNzgsMjYuNzMzMiwyMC41MDc4aDI0My40MDk3YzEuNzA4OSwwLDIuNjg1My0uNjEwMiwzLjQxNzctMS4zNDI3bDcuNDQ3My03LjU2OTJjNy4zMjM3LDYuOTU5LDE2Ljg0NTksMTAuMzc2NywyNy41ODc0LDEwLjM3NjcsMTAuODY1LDAsMjAuNzUyMi00LjE1MDEsMjcuNTg5LTEwLjk4NjlsNy4wNzk3LTcuMjAxOHYxMi4wODU0YzAsMi41NjM1LDIuMDc1MSw0LjYzODQsNC42Mzg0LDQuNjM4NGgzMy4wODE3djIwLjAxOThjMCwyLjY4NTMsMi4wNzUxLDQuNzYwNSw0Ljc2MDUsNC43NjA1aDE3Ljk0NDVjOC41NDQ0LDAsMTUuNzQ3Ni0yLjY4NTQsMjAuMjYzOS03LjIwMThsMTQuNTI2OS0xNC41MjY3YzMuNDE3Ny0zLjUzOTksNi4yMjUzLTguNTQ1OCw3LjkzNDEtMTQuODkzMWwyMi4wOTQ3LTg1LjA4MzNjLjg1NDUtMy4yOTU4LS43MzI0LTUuODU5MS00LjYzODQtNS44NTkxWk0xMTIuMDEyMSwxNjEuMDU4MWMtMjUuODc4OCwwLTQyLjYwMjgtMTkuNjUzMy00Mi42MDI4LTUwLjc4MjEsMC0zMC42MzkzLDE2LjcyNC01MC4wNDg2LDQyLjYwMjgtNTAuMDQ4NiwyNS43NTc4LDAsNDIuNDgwNSwxOS40MDkzLDQyLjQ4MDUsNTAuMDQ4NiwwLDMxLjEyODgtMTYuNzIyNyw1MC43ODIxLTQyLjQ4MDUsNTAuNzgyMVpNMjAyLjEwMTIsMTYwLjkzNmMtNi4xMDMzLDAtMTEuMjMxMi0yLjE5Ny0xNS4yNTkzLTYuMzQ3MnYyOS45MDY3aC0yNy4wOTk0di04NS4zMjc0YzAtNi4xMDQ1LS4xMjIxLTEyLjA4NTYtLjM2NjItMTguMTg4N2gyNi40ODkxYy4yNDQxLDIuMTk3MS40ODgyLDQuNjM4NC42MTAyLDcuMzIzNywzLjkwNjEtNS42MTQ5LDkuNDAwMS04Ljc4ODYsMTYuMjM1OC04Ljc4ODYsMTYuOTY4LDAsMjYuNDg5LDE1LjI1OTMsMjYuNDg5LDQxLjEzNzksMCwyNS41MTI3LTkuNzY1MSw0MC4yODM0LTI3LjA5OTQsNDAuMjgzNFpNMjc4LjI3MzgsMTAwLjYzMzFoLTEwLjYyMDh2MzYuNjIxNWMwLDIuMDc1MS45NzY2LDIuODA3NSwzLjA1MTgsMi44MDc1aDcuNTY5MXYxOS42NTM2aC0xNy41Nzg0Yy0xNC4wMzg2LDAtMjAuMTQxNy01Ljg2MDQtMjAuMTQxNy0yMC4xNDE4di0zOC45NDA3aC05LjUyMjJ2LTE5LjY1MzZoOS41MjIydi0xOC45MjExaDI3LjA5OTJ2MTguOTIxMWgxMC42MjA4djE5LjY1MzZaTTMxMC45ODgyLDE1OS43MTU1aC0yNy4wOTk0di03OC43MzZoMjcuMDk5NHY3OC43MzZaTTMwMC40OTA2LDc2LjcwNzNoLTYuMjI2NGMtNi4yMjUyLDAtMTAuODYzNi01LjAwNTktMTAuODYzNi0xMC45ODcxLDAtNi4xMDMsNC42Mzg0LTEwLjk4NTYsMTAuODYzNi0xMC45ODU2aDYuMjI2NGM2LjIyNTMsMCwxMC44NjM4LDQuODgyNiwxMC44NjM4LDEwLjk4NTYsMCw1Ljk4MTItNC42Mzg0LDEwLjk4NzEtMTAuODYzOCwxMC45ODcxWk00MTQuNTA0MywxNTkuNzE1NmgtMjcuMDk5NHYtNTUuOTA4OWMwLTIuODA3NS0xLjIyMDctMy45MDYtMy45MDYtMy45MDYtMS45NTMxLDAtMy41Mzk5LjczMjQtNC4zOTQzLDEuOTUzdjU3Ljg2MTloLTI3LjEwMDZ2LTU1LjkwODljMC0yLjgwNzUtMS4yMjA3LTMuOTA2LTMuOTA2MS0zLjkwNi0xLjk1MywwLTMuNTM5OC43MzI0LTQuMzk0MywxLjk1M3Y1Ny44NjE5aC0yNy4wOTkydi03OC43MzYxaDI1Ljc1NjZ2Ny4zMjM3YzUuNDkyOS01Ljg1ODksMTEuNzE4LTguNjY2NSwxOC4zMTA4LTguNjY2NSw3LjY4OTksMCwxMi45Mzg3LDIuNDQxNCwxNS42MjU0LDguNjY2NSw1LjczNjktNS44NTg5LDEyLjU3MjYtOC42NjY1LDE5Ljc3NTUtOC42NjY1LDExLjk2MjMsMCwxOC40MzE2LDYuNzEzNiwxOC40MzE2LDIwLjI2Mzl2NTkuODE0OVpNNDQ3LjIxOTksMTU5LjcxNTVoLTI3LjA5OTR2LTc4LjczNmgyNy4wOTk0djc4LjczNlpNNDM2LjcyMjMsNzYuNzA3M2gtNi4yMjY0Yy02LjIyNTIsMC0xMC44NjM2LTUuMDA1OS0xMC44NjM2LTEwLjk4NzEsMC02LjEwMyw0LjYzODQtMTAuOTg1NiwxMC44NjM2LTEwLjk4NTZoNi4yMjY0YzYuMjI1MywwLDEwLjg2MzYsNC44ODI2LDEwLjg2MzYsMTAuOTg1NiwwLDUuOTgxMi00LjYzODMsMTAuOTg3MS0xMC44NjM2LDEwLjk4NzFaTTUwNi4xODAyLDE1OS43MTU2aC01My4zNDU1di0xOC4wNjY4bDIzLjA3MjUtNDEuMDE1N2gtMjMuMDcyNXYtMTkuNjUzNmg1Mi44NTczdjE4LjkyMTFsLTIyLjU4Myw0MC4xNjE0aDIzLjA3MTJ2MTkuNjUzNlpNNTc4LjY5MDksMTI1LjE2ODloLTQzLjIxM2MuNDg4MywxMC43NDI5LDMuMjk1OCwxNi44NDYxLDguMzAwMywxNi44NDYxLDMuNjYyLDAsNi44MzU3LTQuMDI4MSw3LjgxMjMtMTAuODY0OWgyNi44NTY0Yy0yLjE5NzMsMTcuNTc4NC0xNS4zODEzLDI5LjkwOC0zMy45MzYzLDI5LjkwOC0yMi4yMTY4LDAtMzYuMjU1NC0xNS42MjUyLTM2LjI1NTQtNDAuNzcxNywwLTI0LjY1OCwxNC41MjY5LTQwLjc3MTcsMzYuMzc3NC00MC43NzE3LDIyLjk0OTIsMCwzNy4xMDk5LDE5LjA0MzIsMzQuMDU4Miw0NS42NTQzWk02MTEuMDM5MSwxNTkuNzE1NWgtMjcuMDk5NFY2Mi4wNTgzaDI3LjA5OTR2OTcuNjU3MVpNNjYzLjA0MTksMTY1Ljk0MDdjLTMuMjk1NywxMi42OTU5LTEwLjAxMDUsMTguNTU0OS0yMy40Mzc1LDE4LjU1NDloLTE5LjI4NzF2LTE5Ljc3NTVoMTQuODkyOGMxLjIyMDcsMCwyLjE5NzMtLjczMjMsMi40NDE0LTIuMDc1MWwuNzMyMi0zLjE3MzYtMjIuMjE2OC03OC40OTE5aDI3LjU4NzZsNC44ODI2LDIyLjk0OTIsMy4yOTU5LDIxLjI0MDIsMi44MDc0LTIxLjYwNjQsNC4wMjkzLTIyLjU4M2gyNi4zNjY5bC0yMi4wOTQ3LDg0Ljk2MTJaIi8+CiAgPHBhdGggY2xhc3M9ImNscy0yIiBkPSJNNTQ0LjAyMjMsOTguNDM1OGMtNC4wMjgxLDAtNy4yMDE3LDQuNTE2NC04LjU0NDQsMTIuMDg0NGgxNi43MjI4Yy0xLjIyMDYtNy42OTAxLTQuMTUwMy0xMi4wODQ0LTguMTc4My0xMi4wODQ0WiIvPgogIDxwYXRoIGNsYXNzPSJjbHMtMiIgZD0iTTE5My43OTk3LDk5LjQxMjRjLTQuODgyNiwwLTcuNTY4MSw4LjU0NDQtNy41NjgxLDIxLjQ4NDQsMCwxMi44MTY3LDIuNjg1NSwyMC41MDgxLDcuNTY4MSwyMC42Myw1LjAwNTctLjEyMTksNy44MTMyLTcuOTM1Myw3LjgxMzItMjAuNjMsMC0xMy4wNjItMi44MDc1LTIxLjYwNjQtNy44MTMyLTIxLjQ4NDRaIi8+CiAgPHBhdGggY2xhc3M9ImNscy0yIiBkPSJNMTExLjg5LDgzLjA1NDZjLTcuNjkwMSwwLTEyLjgxNjcsMTAuNDk3NC0xMi44MTY3LDI3LjIyMTQsMCwxNy4yMTIzLDUuMTI2NiwyNy45NTUxLDEyLjgxNjcsMjcuOTU1MSw3LjU2OTEsMCwxMi44MTc5LTEwLjc0MjgsMTIuODE3OS0yNy45NTUxLDAtMTYuNzI0LTUuMjQ4OC0yNy4yMjE0LTEyLjgxNzktMjcuMjIxNFoiLz4KPC9zdmc+" alt="Optimizely">
+    <div>
+      <div class="eyebrow lime">Use case 1 · LibertyMutual.com “Trusted Answers”</div>
+      <h1 class="mt2">Ask Liberty:<br>answers you can trust</h1>
+      <p class="lead mt3">Mark understands the question. Approved Liberty Mutual content answers it.</p>
+    </div>
+    <div class="cap">Optimizely CMS (SaaS) · Visual Builder · Optimizely Graph · Mark · Prepared for Liberty Mutual</div>
+  </div>
+
+  <aside class="notes"><p><b>Before you share (5 min)</b></p>
+<p>1. Open the Live App home and the CMS Editor start page in their own tabs, signed in. Share this deck's window, not your whole screen, and keep speaker view (press S) on your other display. Esc shows an overview, and every slide is customer-safe.</p>
+<p>2. Run each question in the Question bank once with Mark on. The Mark workflow should answer in under about 10 seconds.</p>
+<p>3. Check “Send questions to Mark” on the start page: ticked for the real round trip, unticked for keyword routing.</p>
+<p>4. Pick one small, reversible edit for section 5, for example the last checklist item on the Rental car page.</p>
+<p><b>Run of show (45 min + 5 min Q&amp;A):</b> frame 3 · a trusted answer 6 · in your own words 6 · one more detail 4 · guardrails 7 · CMS Editor 11 · Architecture Argument 6 · close 2.</p>
+<p><b>If something goes wrong:</b> if Mark is slow or down, the card says “Mark is taking longer than usual, using approved keyword routing” and the visitor still lands on an approved page. Present it as resilience. If it keeps happening, untick “Send questions to Mark” on the start page (no redeploy). If the Live App is down, the static mockup at libertymutual.optimoey.com/use-case-1-ask-liberty.html is the last-resort backup (press S there for its controller).</p>
+<p><b>Known quirks, keep off screen:</b> the home tile “What should I do after a car accident?” opens the legal page. Every state in the state picker opens Texas.</p>
+<p><b>CMS buttons:</b> the start page opens directly. The other CMS buttons open the CMS Editor home, so use the content tree (hover a button for where the item lives).</p></aside>
+</section>
+
+<!-- 4 · AGENDA -->
+<section id="agenda" data-background-color="#FFFFFF">
+  <div class="eyebrow">Contents</div>
+  <h2 class="mt1 mb-0">What you will see</h2>
+  <div class="agenda mt4">
+    <button class="acard" data-goto="s1" type="button"><span class="num">1</span><span class="at"><b>A trusted answer</b><small>Click a question and watch the answer build from approved content</small></span><span class="badge b-live">Live App</span></button>
+    <button class="acard" data-goto="s2" type="button"><span class="num">2</span><span class="at"><b>In your own words</b><small>Mark classifies the question, a rule picks the page</small></span><span class="badge b-live">Live App</span></button>
+    <button class="acard" data-goto="s3" type="button"><span class="num">3</span><span class="at"><b>When one more detail is needed</b><small>Ask for the state instead of guessing</small></span><span class="badge b-live">Live App</span></button>
+    <button class="acard" data-goto="s4" type="button"><span class="num">4</span><span class="at"><b>Built-in guardrails</b><small>Privacy, legal and off-topic questions</small></span><span class="badge b-live">Live App</span></button>
+    <button class="acard" data-goto="s5" type="button"><span class="num">5</span><span class="at"><b>How your teams run it</b><small>Questions, routing, the AI switch, publishing and reuse</small></span><span class="badge b-cms">CMS Editor</span></button>
+    <button class="acard" data-goto="s6" type="button"><span class="num">6</span><span class="at"><b>How it works</b><small>The round trip, matching rules, security and what could come next</small></span><span class="badge b-arch">Architecture</span></button>
+    <button class="acard" data-goto="summary" type="button"><span class="num">7</span><span class="at"><b>Summary</b><small>Trusted, governed, safe by design</small></span><span class="badge b-arch">Recap</span></button>
+    <button class="acard" data-goto="tryit" type="button"><span class="num">8</span><span class="at"><b>Your questions</b><small>Ask the Live App anything, or use our question bank</small></span><span class="badge b-live">Live App</span></button>
+  </div>
+
+  <aside class="notes"><p>Use this as a map. Each card jumps to its section. If you run long, shorten 5d (suppression) first, then section 6.</p></aside>
+</section>
+
+<!-- 5 · WHAT YOU ASKED FOR -->
+<section id="asked" data-background-color="#E4F0DA">
+  <div class="eyebrow">Your requirements</div>
+  <h2 class="mt1">What you asked to see, and where</h2>
+  <div class="card pad-sm mt3">
+    <table class="tbl">
+      <thead><tr><th>You asked for</th><th>Where you will see it</th><th>Section</th></tr></thead>
+      <tbody>
+        <tr class="goto" data-goto="s1" tabindex="0" role="link"><td><b>UI walkthrough</b></td><td>The live site: home, progress card, answer builds in</td><td>1–4</td></tr>
+        <tr class="goto" data-goto="s5" tabindex="0" role="link"><td><b>Underlying configuration</b></td><td>CMS Editor: start page, question blocks, answer blocks</td><td>5</td></tr>
+        <tr class="goto" data-goto="s6d" tabindex="0" role="link"><td><b>Current vs future AI</b></td><td>Today: classify and route. Next: directions to explore together</td><td>6</td></tr>
+        <tr class="goto" data-goto="s4" tabindex="0" role="link"><td><b>User choice &amp; suppression</b></td><td>AI on/off switch, hidden questions, fallback page, confidence floor</td><td>4, 5</td></tr>
+        <tr class="goto" data-goto="s5b" tabindex="0" role="link"><td><b>Time to publish</b></td><td>Edit, publish, refresh the live site</td><td>5</td></tr>
+        <tr class="goto" data-goto="s5d" tabindex="0" role="link"><td><b>Changes without engineering</b></td><td>New question, hidden chip or fallback, all made in the CMS</td><td>5</td></tr>
+        <tr class="goto" data-goto="s5c" tabindex="0" role="link"><td><b>Content reuse rate</b></td><td>One shared block used on six answer pages</td><td>5</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="cap mt2">“User choice &amp; suppression” is shown as we understand it today. We would like to refine it with you.</p>
+
+  <aside class="notes"><p>This is Liberty's Demo Guide mapped to what we show: UI walkthrough, underlying configuration, current vs future AI, and user choice &amp; suppression.</p>
+<p>“User choice &amp; suppression” is still undefined on Liberty's side. Offer our reading: editors choose what the AI may do (the Mark switch, hidden questions, the fallback), and visitors are never shown an improvised answer. Invite them to refine it.</p>
+<p>Tie the last three rows to their metrics: time to publish, % of changes without engineering, content reuse rate.</p></aside>
+</section>
+
+<!-- 6 · THE IDEA -->
+<section id="idea" data-background-color="#08251A">
+  <div class="fill between dark">
+    <div class="eyebrow lime">The idea</div>
+    <h2 style="font-size:56px;max-width:1040px">Customers ask in plain language. For a regulated insurer, the risk is not a poor answer. It is an answer nobody approved.</h2>
+    <div class="cols2">
+      <div class="card pad fragment fade-up" style="background:var(--lf);color:var(--fir)">
+        <div class="eyebrow">Mark</div><h3 class="mt1" style="color:var(--fir);font-size:34px">Understands</h3>
+        <p class="t-sm mt1">Classifies intent, product, topic and state, using only values from closed lists.</p>
+      </div>
+      <div class="card pad fragment fade-up" style="background:var(--aqua);color:var(--fir)">
+        <div class="eyebrow">The CMS</div><h3 class="mt1" style="color:var(--fir);font-size:34px">Answers</h3>
+        <p class="t-sm mt1">A rule picks a page your editors approved. Nothing is generated.</p>
+      </div>
+    </div>
+  </div>
+
+  <aside class="notes"><p><b>Frame (3 min).</b> Start on familiar ground: customers ask “does my insurance cover a rental?”, not in policy terms.</p>
+<p>For a regulated insurer the risk is not a poor AI answer. It is an answer nobody approved. So the work is split: Mark understands, the CMS answers. If anything is unclear, out of scope or slow, the visitor still lands on an approved page.</p></aside>
+</section>
+
+<!-- 7 · PRINCIPLES -->
+<section id="principles" data-background-color="#FFFFFF">
+  <div class="eyebrow">Three things to remember</div>
+  <h2 class="mt1">Trusted. Governed. Safe by design.</h2>
+  <div class="cols3 mt4">
+    <div class="card pad fragment fade-up"><img class="ico" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCA2MDAgNjAwIj48cGF0aCBmaWxsPSIjMDgyNTFhIiBkPSJNNDg3Ljc3NyAwSDExMi43MjhDNzYuOTggMCA0OCAyOC45OCA0OCA2NC43Mjh2NDcwLjU0NEM0OCA1NzEuMDIgNzYuOTggNjAwIDExMi43MjggNjAwaDM3NS4wNDljMzUuNzQ5IDAgNjQuNzI5LTI4Ljk4IDY0LjcyOS02NC43MjhWNjQuNzI4QzU1Mi41MDYgMjguOTggNTIzLjUyNiAwIDQ4Ny43NzcgMG0xNy43MjkgNTM1LjI3MmMwIDkuNzc1LTcuOTUzIDE3LjcyOC0xNy43MjkgMTcuNzI4SDExMi43MjhDMTAyLjk1MyA1NTMgOTUgNTQ1LjA0NyA5NSA1MzUuMjcyVjY0LjcyOEM5NSA1NC45NTMgMTAyLjk1MyA0NyAxMTIuNzI4IDQ3aDM3NS4wNDljOS43NzYgMCAxNy43MjkgNy45NTMgMTcuNzI5IDE3LjcyOHoiLz48cGF0aCBmaWxsPSIjMDgyNTFhIiBkPSJNMzk2LjQ1OSAxMjUuMDgxaC05NS4wMDFxLS42MDYgMC0xLjIwNS4wMy0uNTk5LS4wMy0xLjIwNi0uMDNoLTk1Yy0xMi45NzkgMC0yMy41IDEwLjUyMS0yMy41IDIzLjVzMTAuNTIxIDIzLjUgMjMuNSAyMy41aDk1cS42MDcgMCAxLjIwNi0uMDMxLjU5OS4wMyAxLjIwNS4wMzFoOTUuMDAxYzEyLjk3OSAwIDIzLjUtMTAuNTIyIDIzLjUtMjMuNXMtMTAuNTIxLTIzLjUtMjMuNS0yMy41bTAgNzQuMzk1aC05NS4wMDFxLS42MDYgMC0xLjIwNS4wMy0uNTk5LS4wMy0xLjIwNi0uMDNoLTk1Yy0xMi45NzkgMC0yMy41IDEwLjUyMS0yMy41IDIzLjVzMTAuNTIxIDIzLjUgMjMuNSAyMy41aDk1cS42MDcgMCAxLjIwNi0uMDMxLjU5OS4wMyAxLjIwNS4wMzFoOTUuMDAxYzEyLjk3OSAwIDIzLjUtMTAuNTIyIDIzLjUtMjMuNXMtMTAuNTIxLTIzLjUtMjMuNS0yMy41bS01My4xMzYgMTA0LjQ2OWE3Ni44IDc2LjggMCAwIDAtMjAuMTgxLTkuNjk5IDc3IDc3IDAgMCAwLTIyLjg4OS0zLjQ2NiA3Ni45IDc2LjkgMCAwIDAtMjkuOTgxIDYuMDYxIDc3LjIgNzcuMiAwIDAgMC0zMy44NTggMjcuODczIDc2LjggNzYuOCAwIDAgMC05LjY5OSAyMC4xOCA3NyA3NyAwIDAgMC0zLjQ2NiAyMi44OSA3Ni45IDc2LjkgMCAwIDAgNi4wNjEgMjkuOTggNzcuMiA3Ny4yIDAgMCAwIDI3Ljg3MyAzMy44NThjLjUxNi4zNDkgMS4wNDIuNjgyIDEuNTY3IDEuMDE4djU4LjY5NmMwIDcuNDM5IDguMzg2IDExLjc4NyAxNC40NjYgNy41MDJsMjEuNzQ5LTE1LjMzYTkuMTggOS4xOCAwIDAgMSAxMC41NzYgMGwyMS43NDggMTUuMzNjNi4wODEgNC4yODUgMTQuNDY3LS4wNjMgMTQuNDY3LTcuNTAyVjQzMi42NGE3Ny4zIDc3LjMgMCAwIDAgMjIuMzM1LTIxLjc4NyA3Ni44IDc2LjggMCAwIDAgOS43LTIwLjE4IDc3IDc3IDAgMCAwIDMuNDY1LTIyLjg4OSA3Ni44IDc2LjggMCAwIDAtNi4wNjEtMjkuOTgxIDc3LjIgNzcuMiAwIDAgMC0yNy44NzItMzMuODU4Ii8+PC9zdmc+" alt=""><h3 class="mt2">Trusted</h3><p class="t-sm mt1">Every line on screen is a CMS block, with its sources and a disclosure.</p></div>
+    <div class="card pad fragment fade-up"><img class="ico" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCA2MDAgNjAwIj48cGF0aCBmaWxsPSIjMDgyNTFhIiBkPSJtNTkyLjA1MSA1NTIuNDkxLTI1Ny4wNC0yNTYuOTcgNTcuMzQtNTcuNC4wOC4wOGguMDFsMTkuNTYtMTkuNTVjMTIuODktMTIuODkgMTkuMzQtMjguODQgMTkuMzQtNDcuODdzLTYuNDUtMzQuOTgtMTkuMzQtNDcuODdsLTEwMy4xMi0xMDMuMDljLTEyLjg5LTEyLjktMjguNy0xOS41LTQ3LjQxLTE5LjgxLTE4LjczLS4zMS0zNC42NiA1Ljk4LTQ3Ljc4IDE4Ljg3bC0xNy4xMiAxNi44cS0xLjAwNS42Ni0xLjg5IDEuNTNMMzUuOTcxIDE5Ni4wOWMtLjM3LjM3LS43Ljc2LTEuMDEgMS4xNmwtMTYuMDggMTYuMzhRLS40NTQgMjMzLjMyNi4wMSAyNjEuMzkxdDE5LjggNDcuNGwxMDMuMTIgMTAzLjA5YzEyLjg5IDEyLjg5IDI4Ljg1IDE5LjM0IDQ3Ljg5IDE5LjM0czM0Ljk5LTYuNDUgNDcuODktMTkuMzRsMTIuMzQtMTIuMzNjLjI3LS4yMy41My0uNDcuNzgtLjczbDYzLjgxLTYzLjg4IDI1Ny4wMSAyNTYuOTRjNS40MiA1LjQxIDExLjk5IDguMTIgMTkuNyA4LjEyczE0LjI4LTIuNyAxOS43LTguMTJjNS40MS01LjQyIDguMDYtMTIuMDQgNy45NC0xOS44Ny0uMTItNy44NC0yLjc3LTE0LjM1LTcuOTQtMTkuNTJtLTIzOS4xNi0zNTQuMi01Ny41MyA1Ny41OS0xMjAuMDEtMTE5Ljk3IDU4LjA5LTU4LjE1IDExOS40NCAxMjAuNTR6bS0xNTQuNDQgMTU0LjYxTDc3Ljg4IDIzMy40OTFsNTguMS01OC4xNiAxMjAuMDEgMTE5Ljk3LTU3LjUzIDU3LjU5eiIvPjwvc3ZnPg==" alt=""><h3 class="mt2">Governed</h3><p class="t-sm mt1">Business users control the questions, the routing, the AI switch and what is hidden. No engineering ticket.</p></div>
+    <div class="card pad fragment fade-up"><img class="ico" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCA2MDAgNjAwIj48cGF0aCBmaWxsPSIjMDgyNTFhIiBkPSJNMTI4LjE3OCA2MDBxLTI0LjEyMyAwLTQwLjY0Ny0xNi40OTNRNzEgNTY3LjAwNyA3MSA1NDIuOTI4VjI1OS4xOTZxMC0yNC4yMjIgMTYuNTMtNDAuNjQzIDE2LjUyNS0xNi40MyA0MC42NDgtMTYuNDI5aDMzLjE0MXYtNjIuNzUxcTAtNTguMzkzIDQwLjM0Ny05OC44ODdRMjQyLjAxMy4wMDEgMzAwIDBxNTcuOTggMCA5OC4zMzQgNDAuNDg2IDQwLjM0NyA0MC40OTQgNDAuMzQ3IDk4Ljg4N3Y2Mi43NTFoMzMuMTQxcTI0LjEyMyAwIDQwLjY0NyAxNi40MjlRNTI5IDIzNC45NzMgNTI5IDI1OS4xOTZ2MjgzLjczMnEwIDI0LjA3OC0xNi41MzEgNDAuNTc5UTQ5NS45NDUgNjAwIDQ3MS44MjIgNjAwem0wLTQ4LjI3OWgzNDMuNjQ0cTMuODU3IDAgNi4zMzMtMi40NzIgMi40NzYtMi40NyAyLjQ3Ni02LjMyMVYyNTkuMTk2cTAtMy44NS0yLjQ3Ni02LjMyMi0yLjQ3Ni0yLjQ3LTYuMzMzLTIuNDcxSDEyOC4xNzhxLTMuODU2IDAtNi4zMzMgMi40NzEtMi40NzYgMi40NzItMi40NzYgNi4zMjJ2MjgzLjczMnEwIDMuODUgMi40NzYgNi4zMjEgMi40NzcgMi40NzIgNi4zMzMgMi40NzJtMjExLjMwMy0xMTAuMjQ0cTE2LjIzLTE2LjE0MyAxNi4yMy0zOC45NTEgMC0yMi4zNjUtMTYuMzg3LTM5LjIzNi0xNi4zODktMTYuODc5LTM5LjQ4MS0xNi44NzktMjMuMDk0IDAtMzkuMzI0IDE2Ljk1LTE2LjIzIDE2Ljk1OC0xNi4yMyAzOS41NTEgMCAyMi42IDE2LjM4NyAzOC42NSAxNi4zODkgMTYuMDU4IDM5LjQ4MSAxNi4wNTggMjMuMDk0IDAgMzkuMzI0LTE2LjE0M20tMTI5LjgtMjM5LjM1M2gxODAuNjM4di02Mi43NTFxMC0zNy44OC0yNi4yNDktNjQuNDg2LTI2LjI1LTI2LjYxNS02NC4wODQtMjYuNjE1LTM3Ljg0MiAwLTY0LjA3IDI2LjYxNS0yNi4yMzUgMjYuNjA3LTI2LjIzNSA2NC40ODZ6Ii8+PC9zdmc+" alt=""><h3 class="mt2">Safe by design</h3><p class="t-sm mt1">Account, legal and off-topic questions go to safe pages. The site never stores the question text.</p></div>
+  </div>
+
+  <aside class="notes"><p>Say these three words once and move on. They come back on the closing slide: trusted, governed, safe by design.</p></aside>
+</section>
+
+<!-- 8 · SECTION 1 -->
+<section>
+<section id="s1" data-background-color="#FFFFFF">
+  <div class="row g2"><span class="badge b-live">1 · Live App</span><span class="eyebrow">A trusted answer</span></div>
+  <div class="split mt3">
+    <div>
+      <h2>Start with a suggested question</h2>
+      <p class="t mt2">The visitor clicks a suggested question:</p>
+      <p class="q mt1">“Does my car insurance cover a rental car?”</p>
+      <div class="row wrap g1 mt3">
+        <a class="btn btn-live" data-live="/">Open the Live App ↗</a>
+        <a class="btn btn-ghost" data-live="/rental-car">Backup: the answer page ↗</a>
+        <a class="btn btn-cms" data-cms="qRental">Question block in the CMS ↗</a>
+      </div>
+      <p class="cap mt3">A clicked question always opens its own answer page. Mark still classifies it, so the progress card is live.</p>
+    </div>
+    <div class="card pad stack-v g3">
+      <div class="step fragment fade-up"><span class="num">1</span><div><h3>Send the question to Mark</h3><p class="t-sm mt1">The question leaves the page as a request.</p></div></div>
+      <div class="step fragment fade-up"><span class="num">2</span><div><h3>Classify it</h3>
+        <div class="row wrap g1 mt1"><span class="chip"><b>Intent</b> Learn about coverage</span><span class="chip"><b>Product</b> Auto</span><span class="chip"><b>Topic</b> Rental cars</span><span class="chip"><b>Coverage</b> Collision &amp; comprehensive</span></div></div></div>
+      <div class="step fragment fade-up"><span class="num">3</span><div><h3>Retrieve approved content</h3><p class="t-sm mt1">Answer · 5 coverages · 2 approved sources · next step · disclosure</p></div></div>
+      <div class="step fragment fade-up"><span class="num">4</span><div><h3>Build the answer</h3><p class="t-sm mt1">“Your answer is ready”, then the page builds in.</p></div></div>
+    </div>
+  </div>
+
+  <aside class="notes"><p><b>Section 1 · A trusted answer (6 min).</b> Click Open the Live App, then click the first chip, “Does my car insurance cover a rental car?”</p>
+<p>Narrate the four steps as the card plays: the question is sent to Mark; Mark classifies it (Intent, Product, Topic and Coverage chips are Mark's own); approved content is retrieved (the lines come from the CMS question block); then “Your answer is ready” and the page builds in.</p>
+<p>A clicked chip always opens its own page, but Mark still classifies it, so the card is live. If the site is slow, use Backup: the answer page.</p></aside>
+</section>
+<section id="s1b" data-background-color="#FFFFFF">
+  <div class="row g2"><span class="badge b-live">1 · Live App</span><span class="eyebrow">On the rental car page</span></div>
+  <h2 class="mt3">Nothing on this page was generated</h2>
+  <div class="split-r mt4">
+    <ul class="t stack-v g3">
+      <li class="step fragment fade-up"><span class="num">✓</span><span>The lead sentence streams in word by word</span></li>
+      <li class="step fragment fade-up"><span class="num">✓</span><span>A “Before you pick up the keys” checklist</span></li>
+      <li class="step fragment fade-up"><span class="num">✓</span><span>A five-row table of how each coverage applies</span></li>
+      <li class="step fragment fade-up"><span class="num">✓</span><span><b>Sources for this answer</b>, with excerpts</span></li>
+      <li class="step fragment fade-up"><span class="num">✓</span><span>Disclosure, related questions and “Was this answer helpful?”</span></li>
+    </ul>
+    <div class="card pad tint">
+      <div class="eyebrow">Open</div>
+      <div class="stack-v g1 mt2 self-start" style="align-items:flex-start">
+        <a class="btn btn-live" data-live="/rental-car">The rental car page ↗</a>
+        <a class="btn btn-cms" data-cms="rentalCarPage">Rental car page in the CMS ↗</a>
+        <a class="btn btn-cms" data-cms="sourcesRental">Its Sources block in the CMS ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <aside class="notes"><p>On /rental-car. Say: nothing here was generated. The lead sentence streams in word by word. Point to the checklist, the five-row coverage table, then <b>Sources for this answer</b> with quoted excerpts, the disclosure, related questions and “Was this answer helpful?”.</p>
+<p>Keep CMS detail for section 5. If asked about the content: the answer text and source excerpts are sample content built from libertymutual.com for this demo, not approved policy language, because there was no sandbox or API access.</p></aside>
+</section>
+</section>
+
+<!-- 9 · SECTION 2 -->
+<section id="s2" data-background-color="#FFFFFF">
+  <div class="row g2"><span class="badge b-live">2 · Live App</span><span class="eyebrow">In your own words</span></div>
+  <h2 class="mt2">Different words, same approved page</h2>
+  <div class="split-r mt3">
+    <div class="stack-v g3">
+      <div class="card pad">
+        <div class="eyebrow">The visitor types a question</div>
+        <p class="q mt1">What’s the minimum car insurance in Texas?</p>
+        <div class="row g1 mt2"><a class="btn btn-live" data-ask="What's the minimum car insurance in Texas?">Ask live ↗</a><button class="btn btn-ghost" data-copy="What's the minimum car insurance in Texas?" type="button">Copy</button></div>
+      </div>
+      <div class="card pad-sm">
+        <div class="eyebrow">A different wording, same destination</div>
+        <p class="q mt1" style="font-size:24px">Do I need rental coverage when I rent a car?</p>
+        <div class="row g1 mt2"><a class="btn btn-live" data-ask="Do I need rental coverage when I rent a car?">Ask live ↗</a><button class="btn btn-ghost" data-copy="Do I need rental coverage when I rent a car?" type="button">Copy</button><span class="cap">→ the rental car answer</span></div>
+      </div>
+    </div>
+    <div class="stack-v g3">
+      <div>
+        <div class="eyebrow">Mark returns, for example at 0.87 confidence</div>
+        <div class="row wrap g1 mt2"><span class="chip"><b>Intent</b> Learn about requirements</span><span class="chip"><b>Product</b> Auto</span><span class="chip"><b>Topic</b> State minimums</span><span class="chip"><b>State</b> Texas</span></div>
+      </div>
+      <div class="step"><span class="num">1</span><p class="t-sm"><b>Rule 1: topic and state</b> match, so the visitor lands on the Texas page.</p></div>
+      <div class="card pad-sm tint">
+        <p class="t-sm">The progress card shows Mark’s one-line reasoning. The Texas page then shows the <b>30/60/25</b> minimums, Texas-specific notes, the Texas Department of Insurance source and nearby-state comparisons.</p>
+        <div class="row wrap g1 mt2"><a class="btn btn-ghost" data-live="/required-coverage/texas">The Texas page ↗</a><a class="btn btn-cms" data-cms="qTexas">Texas question in the CMS ↗</a></div>
+      </div>
+    </div>
+  </div>
+
+  <aside class="notes"><p><b>Section 2 · In your own words (6 min).</b> Type the Texas question on the home page yourself, since it is more convincing. “Ask live” opens the home page with the question already running (the site's ?q= handoff) and is the fallback.</p>
+<p>Expected: Intent Learn about requirements, Product Auto, Topic State minimums, State Texas, which matches rule 1 (topic and state) and opens the Texas page. Point out Mark's one-line reasoning on the card, then the 30/60/25 minimums, the Texas Department of Insurance source and the nearby-state comparison.</p>
+<p>Say: Mark mapped their words to your taxonomy, and the site picked the page with a rule, not a guess. Optional: the second wording lands on rental car.</p></aside>
+</section>
+
+<!-- 10 · SECTION 3 -->
+<section id="s3" data-background-color="#FFFFFF">
+  <div class="row g2"><span class="badge b-live">3 · Live App</span><span class="eyebrow">When one more detail is needed</span></div>
+  <h2 class="mt2">Rather than guess, it asks</h2>
+  <div class="split-r mt3">
+    <div class="stack-v g3">
+      <div class="card pad">
+        <div class="eyebrow">The visitor types</div>
+        <p class="q mt1">What car insurance am I required to have?</p>
+        <div class="row g1 mt2"><a class="btn btn-live" data-ask="What car insurance am I required to have?">Ask live ↗</a><button class="btn btn-ghost" data-copy="What car insurance am I required to have?" type="button">Copy</button></div>
+      </div>
+      <div class="card pad-sm tint-lime">
+        <p class="t-sm"><b>The visitor then picks their state.</b> Texas is the worked example.</p>
+      </div>
+    </div>
+    <div class="stack-v g3">
+      <div>
+        <div class="eyebrow">On the progress card</div>
+        <div class="row wrap g1 mt2"><span class="chip"><b>Intent</b> Learn about requirements</span><span class="chip"><b>Topic</b> State minimums</span><span class="chip warn"><b>State</b> Needed</span></div>
+        <p class="t-sm mt2">Step 3 ends with “One detail needed: your state”, and the page asks “Where is your car registered?”</p>
+      </div>
+      <div class="card pad-sm tint">
+        <p class="t-sm">This behavior is a checkbox on the question (<b>Needs more detail</b>), not code.</p>
+        <div class="row wrap g1 mt2"><a class="btn btn-ghost" data-live="/required-coverage">The required coverage page ↗</a><a class="btn btn-cms" data-cms="qRequired">This question in the CMS ↗</a></div>
+      </div>
+    </div>
+  </div>
+
+  <aside class="notes"><p><b>Section 3 · One more detail (4 min).</b> Type “What car insurance am I required to have?”</p>
+<p>Mark gives no state, so rule 2 (topic and product) picks the generic page. The yellow “State · Needed” chip comes from the CMS question (the Needs more detail checkbox), not from Mark. The page asks “Where is your car registered?” Choose Texas only: every state opens the Texas page.</p>
+<p>Say: rather than guess, it asks.</p></aside>
+</section>
+
+<!-- 11 · SECTION 4 -->
+<section>
+<section id="s4" data-background-color="#FFFFFF">
+  <div class="row g2"><span class="badge b-live">4 · Live App</span><span class="eyebrow">Built-in guardrails</span></div>
+  <h2 class="mt2">The questions a regulated business worries about</h2>
+  <div class="cols3 mt3">
+    <div class="card pad-sm stack-v g2">
+      <div class="eyebrow">Privacy</div>
+      <p class="q" style="font-size:25px">My claim hasn’t been paid yet, where is it?</p>
+      <div class="row wrap g1"><span class="chip"><b>Topic</b> Claim status</span><span class="chip warn"><b>Handling</b> Personal account info</span></div>
+      <p class="t-sm">No account data is shown without verification. Visitors can <b>log in</b> or <b>look up a claim</b>.</p>
+      <div class="row wrap g1 push"><a class="btn btn-live" data-ask="My claim hasn't been paid yet, where is it?">Ask live ↗</a><button class="btn btn-ghost" data-copy="My claim hasn't been paid yet, where is it?" type="button">Copy</button></div>
+      <div class="row wrap g1"><a class="btn btn-ghost" data-live="/claim-status">The page ↗</a><a class="btn btn-cms" data-cms="qClaim">In the CMS ↗</a></div>
+    </div>
+    <div class="card pad-sm stack-v g2">
+      <div class="eyebrow">Legal</div>
+      <p class="q" style="font-size:25px">Should I sue the other driver?</p>
+      <div class="row wrap g1"><span class="chip"><b>Intent</b> Legal advice</span><span class="chip warn"><b>Handling</b> Outside what we can answer</span></div>
+      <p class="t-sm">“We can’t give legal advice”, then <b>start a claim</b> or <b>talk to an agent</b>.</p>
+      <div class="row wrap g1 push"><a class="btn btn-live" data-ask="Should I sue the other driver?">Ask live ↗</a><button class="btn btn-ghost" data-copy="Should I sue the other driver?" type="button">Copy</button></div>
+      <div class="row wrap g1"><a class="btn btn-ghost" data-live="/legal-question">The page ↗</a><a class="btn btn-cms" data-cms="qLegal">In the CMS ↗</a></div>
+    </div>
+    <div class="card pad-sm stack-v g2">
+      <div class="eyebrow">Off-topic</div>
+      <p class="q" style="font-size:25px">What’s the best pizza in Boston?</p>
+      <div class="row wrap g1"><span class="chip"><b>Intent</b> Out of scope</span><span class="chip"><b>Confidence</b> low</span></div>
+      <p class="t-sm">An approved help page, never an improvised reply.</p>
+      <div class="row wrap g1 push"><a class="btn btn-live" data-ask="What's the best pizza in Boston?">Ask live ↗</a><button class="btn btn-ghost" data-copy="What's the best pizza in Boston?" type="button">Copy</button></div>
+      <div class="row wrap g1"><a class="btn btn-ghost" data-live="/help">The page ↗</a><a class="btn btn-cms" data-cms="qFallback">In the CMS ↗</a></div>
+    </div>
+  </div>
+
+  <aside class="notes"><p><b>Section 4 · Guardrails (7 min).</b> Type each question rather than clicking: these three are hidden as suggested chips but still answerable.</p>
+<p>1. Claim status: no account data without verification, only log in or look up a claim. 2. Legal: “We can't give legal advice”, then start a claim or talk to an agent. 3. Off-topic: an approved help page, never an improvised reply.</p>
+<p>Avoid the home tile “What should I do after a car accident?”, which opens the legal page. If Mark is slow, show the keyword-routing notice as resilience.</p></aside>
+</section>
+<section id="s4b" data-background-color="#E4F0DA">
+  <div class="row g2"><span class="badge b-live">4 · Live App</span><span class="eyebrow">The rules behind the guardrails</span></div>
+  <h2 class="mt2">Three rules, enforced by the site</h2>
+  <div class="cols3 mt4">
+    <div class="card pad fragment fade-up"><div class="bignum">0.6</div><h3 class="mt2">Confidence floor</h3><p class="t-sm mt1">Below 0.6, or marked “Out of scope”, a question skips matching and goes to the fallback page.</p></div>
+    <div class="card pad fragment fade-up"><div class="bignum">7</div><h3 class="mt2">Fields, from closed lists</h3><p class="t-sm mt1">Mark picks from closed lists. Only seven classification fields pass validation, and everything else is dropped.</p></div>
+    <div class="card pad fragment fade-up"><div class="bignum">0</div><h3 class="mt2">Questions stored</h3><p class="t-sm mt1">The site never stores the question text. Only the classification is held briefly, in a draft that is deleted when read.</p></div>
+  </div>
+  <p class="cap mt3">If Mark is slow or unavailable, the card says so and approved keyword routing takes over. The visitor always lands on an approved page.</p>
+
+  <aside class="notes"><p>Three rules enforced by the site, not by the model. The confidence floor is 0.6: below it, or “Out of scope”, a question goes to the fallback page, and a missing confidence counts as 0. Mark picks from closed lists, and only seven fields pass validation. The question text is never stored; only the classification is held briefly in a draft that is never published and is deleted when read.</p>
+<p>This is the guardrail side of “user choice &amp; suppression”.</p></aside>
+</section>
+</section>
+
+<!-- 12 · SECTION 5 -->
+<section>
+<section id="s5" data-background-color="#FFFFFF">
+  <div class="row g2"><span class="badge b-cms">5 · CMS Editor</span><span class="eyebrow">How your teams run it</span></div>
+  <div class="split mt2" style="grid-template-columns:1fr 1.2fr">
+    <div class="stack-v g3">
+      <h2>The start page is the control panel</h2>
+      <ul class="t-sm stack-v g2">
+        <li class="step"><span class="num">1</span><span>Edit the heading and subtitle on the page. Preview turns the ask flow off so editors can work safely.</span></li>
+        <li class="step"><span class="num">2</span><span><b>Suggested questions</b> are shared blocks. Their order is the chip order and the matching priority.</span></li>
+        <li class="step"><span class="num">3</span><span><b>Send questions to Mark</b> and <b>Mark timeout</b> are editor settings. Switching the AI on or off needs no redeploy.</span></li>
+      </ul>
+      <div class="row wrap g1"><a class="btn btn-cms" data-cms="startPage">The start page ↗</a><a class="btn btn-ghost" data-live="/">The live home page ↗</a></div>
+    </div>
+    <div class="card pad-sm">
+      <div class="eyebrow" style="padding:0 14px">Inside a question block</div>
+      <table class="tbl dense" style="margin-top:4px">
+        <thead><tr><th>Field</th><th>What it does for the business</th></tr></thead>
+        <tbody>
+          <tr><td>Question</td><td>The chip text, repeated on the card</td></tr>
+          <tr><td>Answer page</td><td>Where the visitor lands</td></tr>
+          <tr><td><b>Classification chips</b></td><td>The routing contract Mark is matched against</td></tr>
+          <tr><td>Keywords</td><td>Backup routing if Mark is off or slow</td></tr>
+          <tr><td>Retrieved items</td><td>What the progress card says it found</td></tr>
+          <tr><td>Needs more detail</td><td>The “ask for the state” behavior</td></tr>
+          <tr><td><b>Hide as a chip</b></td><td>Hidden from the page, still answerable</td></tr>
+          <tr><td><b>Fallback question</b></td><td>Where unsafe or unmatched questions land</td></tr>
+        </tbody>
+      </table>
+      <div class="row wrap g1" style="padding:8px 14px 4px"><a class="btn btn-cms" data-cms="qRental">Open an example question block ↗</a></div>
+    </div>
+  </div>
+
+  <aside class="notes"><p><b>Section 5 · CMS Editor (11 min: 4 + 4 + 2 + 1).</b> Click the start page button. Edit the heading inline, then show Suggested questions (shared blocks; the order is the chip order and the matching priority), then “Send questions to Mark” and “Mark timeout”.</p>
+<p>Open the Rental car question block and walk the fields table: the classification chips are the routing contract, keywords are the backup, Needs more detail, Hide as a chip, Fallback question. Preview turns the ask flow off so editors can work safely.</p>
+<p>Today, 4 of the 8 questions are hidden chips: Texas, claim status, legal and the fallback.</p></aside>
+</section>
+<section id="s5b" data-background-color="#FFFFFF">
+  <div class="row g2"><span class="badge b-cms">5 · CMS Editor</span><span class="eyebrow">Time to publish</span></div>
+  <h2 class="mt2">Edit, publish, refresh</h2>
+  <p class="t mt2" style="max-width:1000px">Every section of an answer page is one of 25 Liberty blocks (title, coverage table, sources, related questions and more), placed straight onto the Visual Builder canvas.</p>
+  <div class="cols3 mt4">
+    <div class="card pad stack-v fragment fade-up"><span class="num">1</span><h3 class="mt2">Edit</h3><p class="t-sm mt1">Change a checklist item or a coverage-table row on the rental car page.</p><a class="btn btn-cms push self-start" data-cms="rentalCarPage">Rental car page in the CMS ↗</a></div>
+    <div class="card pad stack-v fragment fade-up"><span class="num">2</span><h3 class="mt2">Publish</h3><p class="t-sm mt1">Click Publish. The change is delivered through Optimizely Graph.</p></div>
+    <div class="card pad stack-v fragment fade-up"><span class="num">3</span><h3 class="mt2">Refresh</h3><p class="t-sm mt1">Reload the live page and the change is there.</p><a class="btn btn-live push self-start" data-live="/rental-car">The live rental car page ↗</a></div>
+  </div>
+
+  <aside class="notes"><p>Make the small, reversible edit now (for example the last checklist item). Publish, start a timer, then refresh /rental-car on the Live App. That is “time to publish”. Undo the edit afterwards.</p>
+<p>Every section of an answer page is one of 25 section-enabled blocks in Visual Builder.</p></aside>
+</section>
+<section id="s5c" data-background-color="#FFFFFF">
+  <div class="row g2"><span class="badge b-cms">5 · CMS Editor</span><span class="eyebrow">Content reuse</span></div>
+  <h2 class="mt2">Change it once, update it everywhere</h2>
+  <div class="split-r mt4">
+    <div class="card pad stack-v g2">
+      <h3>Shared block: “Was this answer helpful?”</h3>
+      <p class="t-sm">One block, used on six answer pages. Change the “Last reviewed” text once, publish, and every page updates.</p>
+      <a class="btn btn-cms self-start" data-cms="sharedHelpful">The shared block in the CMS ↗</a>
+    </div>
+    <div>
+      <div class="eyebrow">See it on the live site</div>
+      <div class="stack-v g1 mt2" style="align-items:flex-start">
+        <a class="btn btn-live" data-live="/rental-car">/rental-car ↗</a>
+        <a class="btn btn-live" data-live="/burst-pipe">/burst-pipe ↗</a>
+        <a class="btn btn-live" data-live="/bundling">/bundling ↗</a>
+        <a class="btn btn-live" data-live="/required-coverage/texas">/required-coverage/texas ↗</a>
+      </div>
+      <p class="cap mt3">The suggested questions are shared blocks too: one block per question, reused by the start page.</p>
+    </div>
+  </div>
+
+  <aside class="notes"><p>Open the shared Helpful row. It is used on six answer pages. Change “Last reviewed” once, publish, and check two pages. That is the content reuse metric. The question blocks are shared too.</p></aside>
+</section>
+<section id="s5d" data-background-color="#E4F0DA">
+  <div class="row g2"><span class="badge b-cms">5 · CMS Editor</span><span class="eyebrow">Suppression and fallback</span></div>
+  <h2 class="mt2">Hidden from the page, still answerable</h2>
+  <div class="split-r mt4">
+    <ul class="t stack-v g3">
+      <li class="step"><span class="num">1</span><span>Tick <b>Hide as a suggested-question chip</b> on a question.</span></li>
+      <li class="step"><span class="num">2</span><span>Publish. The chip disappears from the home page.</span></li>
+      <li class="step"><span class="num">3</span><span>Type the question anyway. It still routes correctly.</span></li>
+    </ul>
+    <div class="card pad">
+      <div class="eyebrow">Already hidden in this demonstration</div>
+      <div class="stack-v g1 mt2" style="align-items:flex-start">
+        <a class="btn btn-cms" data-cms="qTexas">Texas question ↗</a>
+        <a class="btn btn-cms" data-cms="qClaim">Claim status question ↗</a>
+        <a class="btn btn-cms" data-cms="qLegal">Legal question ↗</a>
+        <a class="btn btn-cms" data-cms="qFallback">Fallback question ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <aside class="notes"><p><b>Optional (1 min).</b> Tick “Hide as a suggested-question chip”, publish, show the chip gone, then type the question anyway. If short on time, skip the live tick and point to the four questions that are already hidden but still answerable (used in section 4).</p></aside>
+</section>
+<section id="s5e" data-background-color="#FFFFFF">
+  <div class="row g2"><span class="badge b-cms">5 · CMS Editor</span><span class="eyebrow">Where things live</span></div>
+  <h2 class="mt2">A map of the CMS</h2>
+  <div class="cols3 mt3">
+    <div class="card pad-sm"><h3>Pages</h3><p class="cap mt1">All children of the start page</p>
+      <ul class="t-sm stack-v g1 mt2"><li><b>Liberty Mutual</b> (the start page)</li><li>Rental car</li><li>Required coverage › Texas</li><li>Burst pipe</li><li>Bundling</li><li>Claim status</li><li>Legal question</li></ul></div>
+    <div class="card pad-sm"><h3>Question blocks</h3><p class="cap mt1">Ask Liberty Questions folder</p>
+      <ul class="t-sm stack-v g1 mt2"><li>Rental car · Burst pipe</li><li>Required coverage · Texas</li><li>Bundling</li><li>Claim status · Legal</li><li>Fallback (“We couldn’t find an approved answer”)</li></ul></div>
+    <div class="card pad-sm"><h3>Shared blocks</h3><p class="cap mt1">Shared assets folder (For All Applications)</p>
+      <ul class="t-sm stack-v g1 mt2"><li>Ask Liberty: Helpful row (shared)</li><li>Ask Liberty: Sources – Rental car</li></ul>
+      <div class="row wrap g1 mt3"><a class="btn btn-cms" data-cms="startPage">Open the start page ↗</a></div></div>
+  </div>
+
+  <aside class="notes"><p>Only if asked where things live. All answer pages are children of the start page. The question blocks are in the Ask Liberty Questions folder. The shared blocks are in the shared assets folder.</p></aside>
+</section>
+</section>
+
+<!-- 13 · SECTION 6 -->
+<section>
+<section id="s6" data-background-color="#FFFFFF">
+  <div class="row g2"><span class="badge b-arch">6 · Architecture Argument</span><span class="eyebrow">The round trip</span></div>
+  <h2 class="mt2">One question in, one classification back</h2>
+  <div class="flow mt4">
+    <div class="node fragment fade-up" data-fragment-index="0"><b>Visitor</b>asks in their own words</div><span class="arrow fragment fade-up" data-fragment-index="1">→</span>
+    <div class="node fragment fade-up" data-fragment-index="1"><b>Website</b>adds a one-time ID and sends the question</div><span class="arrow fragment fade-up" data-fragment-index="2">→</span>
+    <div class="node fragment fade-up" data-fragment-index="2" style="background:var(--lf)"><b>Mark workflow</b>receives it by webhook</div><span class="arrow fragment fade-up" data-fragment-index="3">→</span>
+    <div class="node fragment fade-up" data-fragment-index="3" style="background:var(--lf)"><b>Classifier</b>answers from closed lists only</div>
+  </div>
+  <div class="flow mt2" style="flex-direction:row-reverse">
+    <div class="node fragment fade-up" data-fragment-index="4" style="background:var(--lf)"><b>Tool call</b>Mark returns the classification to the website</div><span class="arrow fragment fade-up" data-fragment-index="5">←</span>
+    <div class="node fragment fade-up" data-fragment-index="5" style="background:var(--aqua)"><b>CMS draft</b>holds the reply briefly; never published</div><span class="arrow fragment fade-up" data-fragment-index="6">←</span>
+    <div class="node fragment fade-up" data-fragment-index="6"><b>Deterministic match</b>to a CMS question</div><span class="arrow fragment fade-up" data-fragment-index="7">←</span>
+    <div class="node fragment fade-up" data-fragment-index="7" style="background:var(--aqua)"><b>Approved page</b>the visitor lands here</div>
+  </div>
+  <p class="cap mt3">The CMS holds the reply for a few seconds because Mark’s call and the visitor’s request can reach different server instances. No extra service is needed.</p>
+
+  <aside class="notes"><p><b>Section 6 · Architecture Argument (6 min).</b> Keep it simple: a question goes in and a classification comes back.</p>
+<p>The CMS holds the reply for a few seconds because Mark's tool call and the visitor's request can reach different server instances, so no extra service is needed. This is also the integration point for Liberty's AI backbone (LibertyAir): their model could do the classifying at the same point.</p></aside>
+</section>
+<section id="s6b" data-background-color="#FFFFFF">
+  <div class="row g2"><span class="badge b-arch">6 · Architecture Argument</span><span class="eyebrow">Deterministic matching</span></div>
+  <h2 class="mt2">A rule picks the page, not a model</h2>
+  <div class="split mt3" style="grid-template-columns:1fr 1fr">
+    <div class="stack-v g2 t-sm">
+      <div class="step fragment fade-up"><span class="num">0</span><span><b>Safety check:</b> out of scope, or confidence below 0.6, goes to the fallback page</span></div>
+      <div class="step fragment fade-up"><span class="num">1</span><span><b>Topic and state</b>, for example State minimums and Texas</span></div>
+      <div class="step fragment fade-up"><span class="num">2</span><span><b>Topic and product</b></span></div>
+      <div class="step fragment fade-up"><span class="num">3</span><span><b>Topic</b></span></div>
+      <div class="step fragment fade-up"><span class="num">4</span><span><b>Intent</b>, for questions with no topic (legal)</span></div>
+      <div class="step fragment fade-up"><span class="num">↓</span><span>No match: keyword routing, then the fallback page</span></div>
+    </div>
+    <div>
+      <div class="eyebrow mb-1">What Mark sends back</div>
+<pre class="code mt1"><span class="n">{</span>
+  <span class="k">"payload"</span><span class="n">: {</span>
+    <span class="k">"correlationId"</span><span class="n">:</span> <span class="s">"3f2a9c1e8b7d4a6f9e0c5d2b1a8f7e63"</span><span class="n">,</span>
+    <span class="k">"intent"</span><span class="n">:</span> <span class="s">"Learn about requirements"</span><span class="n">,</span>
+    <span class="k">"product"</span><span class="n">:</span> <span class="s">"Auto"</span><span class="n">,</span>
+    <span class="k">"topic"</span><span class="n">:</span> <span class="s">"State minimums"</span><span class="n">,</span>
+    <span class="k">"state"</span><span class="n">:</span> <span class="s">"Texas"</span><span class="n">,</span>
+    <span class="k">"confidence"</span><span class="n">:</span> <span class="n">0.87</span><span class="n">,</span>
+    <span class="k">"reasoning"</span><span class="n">:</span> <span class="s">"Asks for car insurance minimums in Texas."</span>
+  <span class="n">}</span>
+<span class="n">}</span></pre>
+      <p class="cap mt2">Matching ignores capital letters and is otherwise exact, so the classifier’s lists and the CMS chips must use the same values.</p>
+    </div>
+  </div>
+
+  <aside class="notes"><p>Matching ignores capital letters but is otherwise exact: “Rental car” and “Rental cars” are different values. That is why the classifier's lists and the CMS chips must match.</p>
+<p>If asked how they stay in sync: today the chips and the classifier's instructions are kept in step by hand; a tool that gives Mark live values from Graph is on the next slide as a direction to explore.</p></aside>
+</section>
+<section id="s6c" data-background-color="#E4F0DA">
+  <div class="row g2"><span class="badge b-arch">6 · Architecture Argument</span><span class="eyebrow">Security and resilience</span></div>
+  <h2 class="mt2">No dead ends, nothing to leak</h2>
+  <div class="cols2 mt3">
+    <div class="card pad"><h3>Resilient</h3>
+      <ul class="t-sm stack-v g2 mt2"><li>If Mark is slow or down, approved keyword routing takes over and the card says so.</li><li>Editors set the timeout: 5 to 60 seconds, 20 by default.</li><li>The AI switch is a CMS setting, so there is no redeploy.</li></ul></div>
+    <div class="card pad"><h3>Locked down</h3>
+      <ul class="t-sm stack-v g2 mt2"><li>The tool endpoint needs a bearer token, compared in constant time. It refuses everything if no token is set.</li><li>The browser route accepts same-origin requests only, with size limits and rate limiting.</li><li>Only seven classification fields pass validation. Text is trimmed and length-capped.</li><li>Reply drafts are never published and are deleted as soon as they are read.</li></ul></div>
+  </div>
+  <div class="card pad-sm mt3"><p class="t-sm"><b>An open contract.</b> A question goes in and a classification comes back. The same integration point could use your own AI backbone (LibertyAir).</p></div>
+
+  <aside class="notes"><p>Only go deep if architects or security reviewers are in the room. The tool endpoint needs a bearer token compared in constant time and refuses everything if none is set. The browser route is same-origin only, with request size limits and rate limiting. Seven classification fields are allowed, and reply drafts are never published and are deleted when read.</p></aside>
+</section>
+<section id="s6d" data-background-color="#FFFFFF">
+  <div class="row g2"><span class="badge b-arch">6 · Architecture Argument</span><span class="eyebrow">Current vs future AI</span></div>
+  <h2 class="mt2">Live today, and directions we could explore</h2>
+  <div class="card pad-sm mt3">
+    <table class="tbl" style="font-size:20px">
+      <thead><tr><th>Today (live in this demonstration)</th><th>Directions to explore (illustrative)</th></tr></thead>
+      <tbody>
+        <tr><td>Mark classifies, and the site routes to approved pages.</td><td>Mark helps assemble answers from approved blocks.</td></tr>
+        <tr><td>The taxonomy is kept in the CMS chips and in the classifier’s instructions.</td><td>A tool gives Mark the live taxonomy from Optimizely Graph, so the two cannot drift apart.</td></tr>
+        <tr><td>One state has its own page (Texas).</td><td>A page, or a lookup, for every state.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="cap mt2">The right-hand column is for discussion. It is not a commitment or part of the live demonstration.</p>
+
+  <aside class="notes"><p>Label the right-hand column as illustrative. Liberty asked for a two-year roadmap, so this slide is the bridge into that section. Today: Mark classifies and the site routes. To explore together: assembling answers from approved blocks, a live taxonomy from Graph, and a page or lookup for every state.</p></aside>
+</section>
+</section>
+
+<!-- 14 · SUMMARY -->
+<section id="summary" data-background-color="#08251A">
+  <div class="fill between dark">
+    <div class="eyebrow lime">Summary</div>
+    <h2 style="font-size:60px">Trusted. Governed. Safe by design.</h2>
+    <div class="cols3">
+      <div class="card pad-sm fragment fade-up" style="background:var(--lf);color:var(--fir)"><div class="eyebrow">Time to publish</div><p class="t-sm mt1">Edit, publish and refresh on the live site (section 5).</p></div>
+      <div class="card pad-sm fragment fade-up" style="background:var(--aqua);color:var(--fir)"><div class="eyebrow">Changes without engineering</div><p class="t-sm mt1">Questions, routing, the AI switch and suppression, all in the CMS.</p></div>
+      <div class="card pad-sm fragment fade-up" style="background:var(--n3);color:var(--fir)"><div class="eyebrow">Content reuse</div><p class="t-sm mt1">Shared blocks used across answer pages.</p></div>
+    </div>
+    <div class="row wrap g2">
+      <a class="btn btn-live btn-lg" data-live="/">Open the Live App ↗</a>
+      <button class="btn btn-ghost btn-lg" data-goto="tryit" type="button">Question bank →</button>
+    </div>
+  </div>
+
+  <aside class="notes"><p><b>Close (2 min).</b> Recap the three proofs and tie each to Liberty's metrics: time to publish (edit, publish, refresh), changes without engineering (questions, routing, the AI switch, suppression), content reuse (shared blocks). Then move to Q&amp;A; the question bank is one click away.</p></aside>
+</section>
+
+<!-- 15 · APPENDIX -->
+<section>
+<section id="tryit" data-background-color="#E4F0DA">
+  <div class="row g2"><span class="badge b-live">Q&amp;A</span><span class="eyebrow">Ask live, or copy and type</span></div>
+  <h2 class="mt2">Questions and where they land</h2>
+  <div class="card pad-sm mt3"><table class="tbl dense" style="font-size:16px"><thead><tr><th>Question</th><th>Lands on</th><th>Why</th><th></th></tr></thead><tbody id="qbankBody"></tbody></table></div>
+
+  <aside class="notes"><p>Q&amp;A backup. “Ask live” runs the question on the home page exactly as if it had been typed. Typed questions use Mark's classification; clicked chips always go to their own page.</p></aside>
+</section>
+<section id="launch" data-background-color="#FFFFFF">
+  <div class="row g2"><span class="badge b-live">Launchpad</span><span class="eyebrow">Every live page</span></div>
+  <h2 class="mt2">One click to any page</h2>
+  <div id="liveGrid" class="cols3 mt3" style="row-gap:20px"></div>
+
+  <aside class="notes"><p>Every live page one click away. Use it during Q&amp;A to jump to any page.</p></aside>
+</section>
+</section>
+
+</div></div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+<script>
+(function(){
+  'use strict';
+  var LIVE = 'https://libertymutual.optimoey.com';
+  var CMS_BASE = 'https://app-epsamoey0012f6ygp001.cms.optimizely.com';
+
+  /* CMS items. `id` is the number at the end of the editor address, for example
+     .../ui/cms#context=epi.cms.contentdata:///451  ->  id 451.
+     While id is null, the button opens the CMS Editor and the tooltip says where to find the item. */
+  var CMS = {
+    startPage:     { id: 451,  name: 'Ask Liberty start page',           where: 'the Liberty Mutual start page' },
+    rentalCarPage: { id: null, name: 'Rental car page',                  where: 'a child of the start page: Rental car' },
+    sourcesRental: { id: null, name: 'Sources – Rental car block',       where: 'shared assets (For All Applications): Ask Liberty: Sources – Rental car' },
+    sharedHelpful: { id: null, name: 'Helpful row (shared) block',       where: 'shared assets (For All Applications): Ask Liberty: Helpful row (shared)' },
+    qRental:       { id: null, name: 'Rental car question block',        where: 'Ask Liberty Questions folder: Does my car insurance cover a rental car?' },
+    qTexas:        { id: null, name: 'Texas question block',             where: 'Ask Liberty Questions folder: What car insurance do I need in Texas?' },
+    qRequired:     { id: null, name: 'Required coverage question block', where: 'Ask Liberty Questions folder: What car insurance am I required to have?' },
+    qClaim:        { id: null, name: 'Claim status question block',      where: 'Ask Liberty Questions folder: My claim hasn’t been paid yet, where is it?' },
+    qLegal:        { id: null, name: 'Legal question block',             where: 'Ask Liberty Questions folder: Should I sue the other driver?' },
+    qFallback:     { id: null, name: 'Fallback question block',          where: 'Ask Liberty Questions folder: We couldn’t find an approved answer' }
+  };
+
+  var LIVE_PAGES = [
+    ['/', 'Ask Liberty home', 'Search box, suggested questions, tiles'],
+    ['/rental-car', 'Rental car', 'A standard answer'],
+    ['/required-coverage', 'Required coverage', 'Asks for the state'],
+    ['/required-coverage/texas', 'Texas', 'The follow-up answer'],
+    ['/burst-pipe', 'Burst pipe', 'A standard answer'],
+    ['/bundling', 'Bundling', 'A standard answer'],
+    ['/claim-status', 'Claim status', 'Safe handoff for account questions'],
+    ['/legal-question', 'Legal question', 'Out of scope: legal advice'],
+    ['/help', 'Help (fallback)', 'Unmatched or low confidence']
+  ];
+  var QBANK = [
+    ['Does my car insurance cover a rental car?', '/rental-car', 'A suggested question'],
+    ['Do I need rental coverage when I rent a car?', '/rental-car', 'Topic: rental cars'],
+    ["What's the minimum car insurance in Texas?", '/required-coverage/texas', 'Topic and state'],
+    ['What car insurance do I need by law?', '/required-coverage', 'Topic, with the state still needed'],
+    ['Is a burst pipe covered by home insurance?', '/burst-pipe', 'Topic: water damage'],
+    ['Can I bundle home and auto?', '/bundling', 'Topic: bundling'],
+    ['Where is my claim payment?', '/claim-status', 'Account service: secure options'],
+    ['Should I sue the other driver?', '/legal-question', 'Legal advice: out of scope'],
+    ["What's the best pizza in Boston?", '/help', 'Out of scope or low confidence']
+  ];
+
+  function esc(s){ return String(s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+
+  document.getElementById('liveGrid').innerHTML = LIVE_PAGES.map(function(p){
+    return '<div class="stack-v g1" style="align-items:flex-start"><a class="btn btn-live" data-live="'+esc(p[0])+'">'+esc(p[1])+' ↗</a><span class="cap">'+esc(p[0])+' · '+esc(p[2])+'</span></div>';
+  }).join('');
+
+  document.getElementById('qbankBody').innerHTML = QBANK.map(function(q){
+    return '<tr><td class="q" style="font-size:19px">'+esc(q[0])+'</td>' +
+      '<td><a class="btn btn-ghost" style="font-size:14px;padding:5px 12px" data-live="'+esc(q[1])+'">'+esc(q[1])+' ↗</a></td>' +
+      '<td style="font-size:15.5px">'+esc(q[2])+'</td>' +
+      '<td style="white-space:nowrap"><a class="btn btn-live" style="font-size:14px;padding:5px 12px" data-ask="'+esc(q[0])+'">Ask live ↗</a> <button class="btn btn-ghost" style="font-size:14px;padding:5px 12px" data-copy="'+esc(q[0])+'" type="button">Copy</button></td></tr>';
+  }).join('');
+
+  function cmsUrl(name){
+    var it = CMS[name];
+    if (it && it.id) return CMS_BASE + '/ui/cms#context=epi.cms.contentdata:///' + encodeURIComponent(it.id);
+    return CMS_BASE + '/ui/cms';
+  }
+  function out(a){ a.target = '_blank'; a.rel = 'noopener noreferrer'; }
+  document.querySelectorAll('[data-live]').forEach(function(a){ a.href = LIVE + a.getAttribute('data-live'); out(a); });
+  document.querySelectorAll('[data-ask]').forEach(function(a){ a.href = LIVE + '/?q=' + encodeURIComponent(a.getAttribute('data-ask')); out(a); a.title = 'Opens the home page and runs this question'; });
+  document.querySelectorAll('[data-cms]').forEach(function(a){
+    var it = CMS[a.getAttribute('data-cms')];
+    a.href = cmsUrl(a.getAttribute('data-cms')); out(a);
+    a.title = it ? (it.id ? 'Open “' + it.name + '” in the CMS Editor' : 'Opens the CMS Editor. Find it: ' + it.where) : 'Opens the CMS Editor';
+  });
+
+  var toastT;
+  function toast(msg){ var t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toastT); toastT = setTimeout(function(){ t.classList.remove('show'); }, 1700); }
+  function copyText(text){
+    function fallback(){
+      var ta = document.createElement('textarea'); ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      var ok = false; try { ok = document.execCommand('copy'); } catch(e) {}
+      document.body.removeChild(ta);
+      toast(ok ? 'Copied: ' + text : 'Copy was blocked. Select the text and copy it instead.');
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(text).then(function(){ toast('Copied: ' + text); }, fallback); }
+    else { fallback(); }
+  }
+  function jump(id){
+    var el = document.getElementById(id);
+    if (el && window.Reveal) { var i = Reveal.getIndices(el); Reveal.slide(i.h, i.v || 0); }
+  }
+  document.addEventListener('click', function(e){
+    var cp = e.target.closest('[data-copy]');
+    if (cp) { e.preventDefault(); copyText(cp.getAttribute('data-copy')); return; }
+    var go = e.target.closest('[data-goto]');
+    if (go) { e.preventDefault(); jump(go.getAttribute('data-goto')); }
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key !== 'Enter') return;
+    var go = e.target.closest && e.target.closest('tr[data-goto]');
+    if (go) { e.preventDefault(); jump(go.getAttribute('data-goto')); }
+  });
+
+  if (window.Reveal) {
+    Reveal.initialize({
+      hash: true, width: 1280, height: 720, margin: 0.04, minScale: 0.2, maxScale: 2.0,
+      center: false, controls: true, progress: true, slideNumber: 'c/t', transition: 'slide', backgroundTransition: 'fade',
+      plugins: window.RevealNotes ? [RevealNotes] : []
+    });
+  }
+})();
+</script>
+<script src="/dev-quick-links.js" defer></script>
+</body>
+</html>

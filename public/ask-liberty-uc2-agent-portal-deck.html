@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ask Liberty – One relevant Liberty experience (Independent Agent Portal)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@600;700;900&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css">
+<style>
+:root{
+  --fir:#08251A; --midfir:#0D3A29; --lightfir:#197050; --lf:#ABFF44; --gtg:#3AB533;
+  --n2:#EFF6E9; --n3:#E4F0DA; --n4:#D8E4CB; --aqua:#91DBDA;
+  --r-background-color:#FFFFFF; --r-main-font:Roboto,Arial,sans-serif; --r-main-font-size:26px; --r-main-color:#08251A;
+  --r-heading-font:"Roboto Condensed","Arial Narrow",Roboto,Arial,sans-serif; --r-heading-color:#08251A; --r-heading-text-transform:none;
+  --r-heading-font-weight:900; --r-heading-letter-spacing:-0.03em; --r-heading-line-height:1.02;
+  --r-link-color:#08251A; --r-link-color-hover:#197050;
+}
+.reveal .slides{ text-align:left; }
+.reveal .slides section{ height:100%; box-sizing:border-box; padding:50px 64px 60px; }
+.reveal .slides section.stack{ padding:0; }
+.reveal h1,.reveal h2,.reveal h3{ margin:0; }
+.reveal h1{ font-size:70px; } .reveal h2{ font-size:44px; } .reveal h3{ font-size:27px; font-weight:700; letter-spacing:-0.02em; line-height:1.1; }
+.reveal p{ margin:0; line-height:1.35; }
+.reveal ul{ margin:0; padding:0; list-style:none; }
+.reveal ul:not(.stack-v){ display:block; }
+.reveal ul.stack-v{ display:flex; flex-direction:column; }
+.reveal li{ margin:0; }
+.reveal b{ font-weight:700; }
+
+/* layout helpers */
+.fill{ height:100%; display:flex; flex-direction:column; }
+.between{ justify-content:space-between; }
+.row{ display:flex; align-items:center; } .wrap{ flex-wrap:wrap; } .top{ align-items:flex-start; }
+.stack-v{ display:flex; flex-direction:column; }
+.g1{ gap:8px; } .g2{ gap:14px; } .g3{ gap:22px; } .g4{ gap:32px; }
+.reveal .mt1{ margin-top:8px; } .reveal .mt2{ margin-top:14px; } .reveal .mt3{ margin-top:22px; } .reveal .mt4{ margin-top:32px; } .reveal .mt5{ margin-top:44px; }
+.cols2{ display:grid; grid-template-columns:1fr 1fr; gap:22px; }
+.cols3{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+.split{ display:grid; grid-template-columns:1fr 1.1fr; gap:34px; align-items:start; }
+.split-r{ display:grid; grid-template-columns:1.1fr 1fr; gap:34px; align-items:start; }
+.self-start{ align-self:flex-start; } .reveal .push{ margin-top:auto; }
+
+/* type */
+.eyebrow{ font:700 16px/1.2 Roboto,Arial,sans-serif; letter-spacing:.04em; text-transform:uppercase; }
+.lead{ font-size:31px; line-height:1.3; max-width:900px; }
+.t{ font-size:23px; line-height:1.35; } .t-sm{ font-size:19.5px; line-height:1.35; }
+.cap{ font:500 15.5px/1.4 "Roboto Mono",monospace; letter-spacing:.01em; }
+.q{ font:700 28px/1.2 "Roboto Condensed","Arial Narrow",Arial,sans-serif; letter-spacing:-.015em; }
+.lime{ color:var(--lf); }
+
+/* components */
+.card{ border:1.5px solid var(--fir); border-radius:28px; background:#fff; }
+.pad{ padding:28px 30px; } .pad-sm{ padding:20px 24px; }
+.tint{ background:var(--n2); } .tint-lime{ background:var(--lf); }
+.badge{ display:inline-flex; align-items:center; border:1.5px solid var(--fir); border-radius:9999px; padding:3px 14px; font:700 14px/1.3 Roboto,Arial,sans-serif; letter-spacing:.05em; text-transform:uppercase; color:var(--fir); white-space:nowrap; }
+.b-live{ background:var(--lf); } .b-cms{ background:var(--aqua); } .b-arch{ background:var(--n3); }
+.btn{ display:inline-flex; align-items:center; gap:6px; border:1.5px solid var(--fir); border-radius:9999px; padding:9px 19px; font:600 18px/1.1 "Roboto Condensed","Arial Narrow",Arial,sans-serif; letter-spacing:-.01em; color:var(--fir)!important; text-decoration:none!important; background:#fff; cursor:pointer; white-space:nowrap; }
+button.btn{ appearance:none; -webkit-appearance:none; }
+.btn:hover{ filter:brightness(.94); } .btn:focus-visible,.acard:focus-visible,.goto:focus-visible{ outline:3px solid var(--lightfir); outline-offset:2px; }
+.btn-live{ background:var(--lf); } .btn-cms{ background:var(--aqua); } .btn-ghost{ background:#fff; }
+.btn-lg{ font-size:21px; padding:12px 25px; }
+.chip{ display:inline-flex; align-items:center; gap:6px; border:1.5px solid var(--fir); border-radius:9999px; padding:4px 14px; font:400 16.5px/1.3 Roboto,Arial,sans-serif; background:#fff; white-space:nowrap; }
+.chip b{ font-weight:700; }
+.chip.warn{ background:var(--n3); border-style:dashed; }
+.chip.warn::before{ content:"!"; display:inline-grid; place-items:center; width:18px; height:18px; border-radius:9999px; background:var(--fir); color:var(--lf); font:900 12px/1 Roboto,Arial,sans-serif; }
+.num{ flex:0 0 auto; display:inline-grid; place-items:center; width:38px; height:38px; border-radius:9999px; background:var(--fir); color:var(--lf); font:900 19px/1 "Roboto Condensed","Arial Narrow",Arial,sans-serif; }
+.step{ display:flex; gap:14px; align-items:flex-start; }
+.logo{ height:42px; width:auto; display:block; align-self:flex-start; }
+.ico{ width:72px; height:72px; display:block; }
+.bignum{ font:900 76px/1 "Roboto Condensed","Arial Narrow",Arial,sans-serif; letter-spacing:-.03em; }
+
+/* tables */
+.reveal .tbl{ width:100%; border-collapse:separate; border-spacing:0; font-size:18.5px; margin:0; }
+.reveal .tbl th{ text-align:left; font:700 16px/1.3 Roboto,Arial,sans-serif; padding:9px 14px; border-bottom:1.5px solid var(--fir); letter-spacing:.02em; }
+.reveal .tbl td{ padding:11px 14px; border-bottom:1px solid #C3CEAF; vertical-align:middle; line-height:1.3; text-align:left; }
+.reveal .tbl tr:last-child td{ border-bottom:none; }
+.reveal .tbl.dense td{ padding:6px 14px; } .reveal .tbl.dense th{ padding:7px 14px; }
+.goto{ cursor:pointer; } .goto:hover td{ background:var(--n2); }
+
+/* agenda cards */
+.agenda{ display:grid; grid-template-columns:1fr 1fr; gap:14px 22px; }
+.acard{ display:flex; align-items:center; gap:16px; text-align:left; border:1.5px solid var(--fir); border-radius:24px; background:#fff; padding:14px 20px; font:inherit; color:var(--fir); cursor:pointer; appearance:none; -webkit-appearance:none; }
+.acard:hover{ background:var(--n2); }
+.acard .at{ flex:1; min-width:0; } .acard b{ display:block; font:700 25px/1.15 "Roboto Condensed","Arial Narrow",Arial,sans-serif; letter-spacing:-.015em; }
+.acard small{ display:block; font:400 16.5px/1.3 Roboto,Arial,sans-serif; margin-top:3px; }
+
+/* dark slides */
+.dark{ color:#fff; } .reveal .dark h1,.reveal .dark h2,.reveal .dark h3{ color:#fff; }
+.dark .cap{ color:var(--n4); }
+
+/* flow */
+.flow{ display:flex; align-items:stretch; gap:10px; }
+.node{ flex:1; border:1.5px solid var(--fir); border-radius:22px; padding:14px 16px; background:#fff; font:400 17.5px/1.3 Roboto,Arial,sans-serif; min-width:0; }
+.node b{ display:block; font:700 23px/1.15 "Roboto Condensed","Arial Narrow",Arial,sans-serif; letter-spacing:-.01em; margin-bottom:3px; }
+.arrow{ align-self:center; font:900 24px/1 "Roboto Condensed",Arial,sans-serif; }
+
+/* code */
+.reveal pre.code{ width:100%; margin:0; box-shadow:none; background:var(--fir); color:var(--n3); border-radius:22px; padding:16px 22px; font:500 15px/1.55 "Roboto Mono",monospace; white-space:pre; overflow:hidden; box-sizing:border-box; }
+.code .k{ color:var(--lf); } .code .s{ color:var(--aqua); } .code .n{ color:#fff; }
+
+/* chrome outside the slides */
+#dock{ position:fixed; top:12px; right:14px; z-index:40; display:flex; gap:6px; opacity:.4; transition:opacity .2s; }
+#dock:hover,#dock:focus-within{ opacity:1; }
+#dock .btn{ font-size:15px; padding:6px 14px; }
+#toast{ position:fixed; left:50%; bottom:30px; transform:translateX(-50%); background:var(--fir); color:var(--lf); font:500 14px "Roboto Mono",monospace; padding:8px 16px; border-radius:9999px; opacity:0; transition:opacity .25s; z-index:60; pointer-events:none; max-width:90vw; }
+#toast.show{ opacity:1; }
+.reveal .controls{ color:var(--fir); } .reveal .progress{ color:var(--gtg); height:4px; }
+.reveal .slide-number{ background:var(--fir); color:var(--lf); font:500 13px "Roboto Mono",monospace; border-radius:9999px; padding:4px 10px; right:16px; bottom:14px; }
+@media print{ #dock,#toast{ display:none!important; } }
+@media (prefers-reduced-motion:reduce){ .reveal .slides section{ transition:none!important; } }
+
+.b-proto{ background:#fff; border-style:dashed; }
+.agenda.compact{ gap:10px 22px; }
+.agenda.compact .acard{ padding:10px 18px; gap:14px; }
+.agenda.compact .acard b{ font-size:23px; }
+.agenda.compact .acard small{ font-size:15.5px; margin-top:2px; }
+.chip.hl{ background:var(--lf); }
+.legend{ border:1.5px dashed var(--fir); border-radius:24px; padding:12px 20px; font:400 15.5px/1.35 Roboto,Arial,sans-serif; display:flex; flex-direction:column; justify-content:center; gap:4px; }
+.reveal .tbl.dense td{ padding:7px 12px; } .reveal .tbl.dense th{ padding:8px 12px; }
+.vchip{ display:inline-flex; align-items:center; border:1.5px solid var(--fir); border-radius:14px; padding:4px 14px; font:900 28px/1 "Roboto Condensed","Arial Narrow",Arial,sans-serif; letter-spacing:-.02em; background:#fff; }
+.vchip.new{ background:var(--lf); }
+.reveal .center-text{ text-align:center; }
+</style>
+</head>
+<body>
+
+<nav id="dock" aria-label="Quick links">
+  <a class="btn btn-live" data-live="/use-case-2-agent-portal.html" title="Open the portal prototype in a new tab">Portal prototype ↗</a>
+  <a class="btn btn-cms" data-cms="startPage">CMS Editor ↗</a>
+  <button class="btn btn-ghost" data-goto="agenda" type="button">Contents</button>
+</nav>
+
+<div class="reveal"><div class="slides">
+
+<section id="title" data-background-color="#08251A">
+  <div class="fill between dark">
+    <img class="logo" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iT3B0aW1pemVseV9QcmltYXJ5X0xvZ29fTWVkaXVtIiBkYXRhLW5hbWU9Ik9wdGltaXplbHkgUHJpbWFyeSBMb2dvIE1lZGl1bSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgNzQwIDI1NCI+CiAgPGRlZnM+CiAgICA8c3R5bGU+CiAgICAgIC5jbHMtMSB7CiAgICAgICAgZmlsbDogI2FiZmY0NDsKICAgICAgfQoKICAgICAgLmNscy0yIHsKICAgICAgICBmaWxsOiAjMGQzYTI5OwogICAgICB9CiAgICA8L3N0eWxlPgogIDwvZGVmcz4KICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0yNjcuNjUzLDYyLjA1ODNoLTI3LjA5OTJ2MTguOTIxMWgtOS41MjIydjE5LjY1MzZoOS41MjIydjM4Ljk0MDdjMCwxNC4yODE1LDYuMTAzMSwyMC4xNDE4LDIwLjE0MTcsMjAuMTQxOGgxNy41Nzg0di0xOS42NTM2aC03LjU2OTFjLTIuMDc1MiwwLTMuMDUxOC0uNzMyNC0zLjA1MTgtMi44MDc1di0zNi42MjE1aDEwLjYyMDh2LTE5LjY1MzZoLTEwLjYyMDh2LTE4LjkyMTFaIi8+CiAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMzk2LjA3MjYsNzkuNjM2N2MtNy4yMDI5LDAtMTQuMDM4NiwyLjgwNzYtMTkuNzc1NSw4LjY2NjUtMi42ODY2LTYuMjI1MS03LjkzNTQtOC42NjY1LTE1LjYyNTQtOC42NjY1LTYuNTkyOCwwLTEyLjgxNzksMi44MDc2LTE4LjMxMDgsOC42NjY1di03LjMyMzdoLTI1Ljc1NjZ2NzguNzM2MWgyNy4wOTkydi01Ny44NjE5Yy44NTQ1LTEuMjIwNiwyLjQ0MTMtMS45NTMsNC4zOTQzLTEuOTUzLDIuNjg1NCwwLDMuOTA2MSwxLjA5ODUsMy45MDYxLDMuOTA2djU1LjkwODloMjcuMTAwNnYtNTcuODYxOWMuODU0NC0xLjIyMDYsMi40NDEyLTEuOTUzLDQuMzk0My0xLjk1MywyLjY4NTMsMCwzLjkwNiwxLjA5ODUsMy45MDYsMy45MDZ2NTUuOTA4OWgyNy4wOTk0di01OS44MTQ5YzAtMTMuNTUwMy02LjQ2OTQtMjAuMjYzOS0xOC40MzE2LTIwLjI2MzlaIi8+CiAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMzAwLjQ5MDYsNTQuNzM0NmgtNi4yMjY0Yy02LjIyNTIsMC0xMC44NjM2LDQuODgyNi0xMC44NjM2LDEwLjk4NTYsMCw1Ljk4MTIsNC42Mzg0LDEwLjk4NzEsMTAuODYzNiwxMC45ODcxaDYuMjI2NGM2LjIyNTMsMCwxMC44NjM4LTUuMDA1OSwxMC44NjM4LTEwLjk4NzEsMC02LjEwMy00LjYzODQtMTAuOTg1Ni0xMC44NjM4LTEwLjk4NTZaIi8+CiAgPHJlY3QgY2xhc3M9ImNscy0xIiB4PSIyODMuODg4OCIgeT0iODAuOTc5NSIgd2lkdGg9IjI3LjA5OTQiIGhlaWdodD0iNzguNzM2Ii8+CiAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMjAyLjcxMTYsNzkuNTE0NmMtNi44MzU3LDAtMTIuMzI5NywzLjE3MzctMTYuMjM1OCw4Ljc4ODYtLjEyMjEtMi42ODUzLS4zNjYxLTUuMTI2Ni0uNjEwMi03LjMyMzdoLTI2LjQ4OTFjLjI0NDEsNi4xMDMxLjM2NjIsMTIuMDg0Mi4zNjYyLDE4LjE4ODd2ODUuMzI3NGgyNy4wOTk0di0yOS45MDY3YzQuMDI4MSw0LjE1MDEsOS4xNTYsNi4zNDcyLDE1LjI1OTMsNi4zNDcyLDE3LjMzNDIsMCwyNy4wOTk0LTE0Ljc3MDgsMjcuMDk5NC00MC4yODM0LDAtMjUuODc4Ny05LjUyMS00MS4xMzc5LTI2LjQ4OS00MS4xMzc5Wk0xOTMuNzk5NywxNDEuNTI2N2MtNC44ODI2LS4xMjE5LTcuNTY4MS03LjgxMzQtNy41NjgxLTIwLjYzLDAtMTIuOTM5OSwyLjY4NTUtMjEuNDg0NCw3LjU2ODEtMjEuNDg0NCw1LjAwNTctLjEyMjEsNy44MTMyLDguNDIyNCw3LjgxMzIsMjEuNDg0NCwwLDEyLjY5NDctMi44MDc1LDIwLjUwODEtNy44MTMyLDIwLjYzWiIvPgogIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTExMi4wMTIxLDYwLjIyNzRjLTI1Ljg3ODgsMC00Mi42MDI4LDE5LjQwOTMtNDIuNjAyOCw1MC4wNDg2LDAsMzEuMTI4OCwxNi43MjQsNTAuNzgyMSw0Mi42MDI4LDUwLjc4MjEsMjUuNzU3OCwwLDQyLjQ4MDUtMTkuNjUzMyw0Mi40ODA1LTUwLjc4MjEsMC0zMC42MzkzLTE2LjcyMjctNTAuMDQ4Ni00Mi40ODA1LTUwLjA0ODZaTTExMS44OSwxMzguMjMxMWMtNy42OTAxLDAtMTIuODE2Ny0xMC43NDI4LTEyLjgxNjctMjcuOTU1MSwwLTE2LjcyNCw1LjEyNjYtMjcuMjIxNCwxMi44MTY3LTI3LjIyMTQsNy41NjkxLDAsMTIuODE3OSwxMC40OTc0LDEyLjgxNzksMjcuMjIxNCwwLDE3LjIxMjMtNS4yNDg4LDI3Ljk1NTEtMTIuODE3OSwyNy45NTUxWiIvPgogIDxyZWN0IGNsYXNzPSJjbHMtMSIgeD0iNDIwLjEyMDUiIHk9IjgwLjk3OTUiIHdpZHRoPSIyNy4wOTk0IiBoZWlnaHQ9Ijc4LjczNiIvPgogIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTY1NC43NDA0LDEwMy41NjI1bC0yLjgwNzQsMjEuNjA2NC0zLjI5NTktMjEuMjQwMi00Ljg4MjYtMjIuOTQ5MmgtMjcuNTg3NmwyMi4yMTY4LDc4LjQ5MTktLjczMjIsMy4xNzM2Yy0uMjQ0MSwxLjM0MjgtMS4yMjA3LDIuMDc1MS0yLjQ0MTQsMi4wNzUxaC0xNC44OTI4djE5Ljc3NTVoMTkuMjg3MWMxMy40MjcsMCwyMC4xNDE4LTUuODU5LDIzLjQzNzUtMTguNTU0OWwyMi4wOTQ3LTg0Ljk2MTJoLTI2LjM2NjlsLTQuMDI5MywyMi41ODNaIi8+CiAgPHJlY3QgY2xhc3M9ImNscy0xIiB4PSI1ODMuOTM5NyIgeT0iNjIuMDU4MyIgd2lkdGg9IjI3LjA5OTQiIGhlaWdodD0iOTcuNjU3MSIvPgogIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTU0NC42MzI3LDc5LjUxNDZjLTIxLjg1MDYsMC0zNi4zNzc0LDE2LjExMzgtMzYuMzc3NCw0MC43NzE3LDAsMjUuMTQ2NSwxNC4wMzg2LDQwLjc3MTcsMzYuMjU1NCw0MC43NzE3LDE4LjU1NDksMCwzMS43MzktMTIuMzI5NiwzMy45MzYzLTI5LjkwOGgtMjYuODU2NGMtLjk3NjYsNi44MzY4LTQuMTUwMywxMC44NjQ5LTcuODEyMywxMC44NjQ5LTUuMDA0NSwwLTcuODEyLTYuMTAzMS04LjMwMDMtMTYuODQ2MWg0My4yMTNjMy4wNTE2LTI2LjYxMTEtMTEuMTA5LTQ1LjY1NDMtMzQuMDU4Mi00NS42NTQzWk01MzUuNDc3OSwxMTAuNTIwMWMxLjM0MjgtNy41NjgsNC41MTY0LTEyLjA4NDQsOC41NDQ0LTEyLjA4NDRzNi45NTc4LDQuMzk0Myw4LjE3ODMsMTIuMDg0NGgtMTYuNzIyOFoiLz4KICA8cG9seWdvbiBjbGFzcz0iY2xzLTEiIHBvaW50cz0iNTA1LjY5MiA5OS45MDA2IDUwNS42OTIgODAuOTc5NSA0NTIuODM0NyA4MC45Nzk1IDQ1Mi44MzQ3IDEwMC42MzMxIDQ3NS45MDcyIDEwMC42MzMxIDQ1Mi44MzQ3IDE0MS42NDg4IDQ1Mi44MzQ3IDE1OS43MTU2IDUwNi4xODAyIDE1OS43MTU2IDUwNi4xODAyIDE0MC4wNjIgNDgzLjEwOSAxNDAuMDYyIDUwNS42OTIgOTkuOTAwNiIvPgogIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTQzNi43MjIzLDU0LjczNDZoLTYuMjI2NGMtNi4yMjUyLDAtMTAuODYzNiw0Ljg4MjYtMTAuODYzNiwxMC45ODU2LDAsNS45ODEyLDQuNjM4NCwxMC45ODcxLDEwLjg2MzYsMTAuOTg3MWg2LjIyNjRjNi4yMjUzLDAsMTAuODYzNi01LjAwNTksMTAuODYzNi0xMC45ODcxLDAtNi4xMDMtNC42MzgzLTEwLjk4NTYtMTAuODYzNi0xMC45ODU2WiIvPgogIDxwYXRoIGNsYXNzPSJjbHMtMiIgZD0iTTY4NS4xMzY2LDc2LjM0MTFoLTI2LjM2NjljLTEuNzA4NywwLTIuNTYzMi40ODgzLTMuNDE3NywxLjM0MjhsLTYuMTA0NSw2LjM0NzItLjg1NDUtNC4wMjgxYy0uNjEwNC0yLjQ0MTItMi4xOTctMy42NjE5LTQuNjM4NC0zLjY2MTloLTI4LjA3NTl2LTE0LjI4MjdjMC0yLjY4NTMtMi4zMjAzLTQuNzYwNS00LjYzOTUtNC43NjA1aC0yNy4wOTk0Yy0xLjQ2NDcsMC0yLjQ0MTMuNjEwNC0zLjI5NTgsMS40NjQ4bC0xNC43NzA5LDE0Ljc2OThjLS43MzIzLjczMzUtMS4zNDI3LDEuOTU0MS0xLjM0MjcsMy4yOTY5djMuMjk1N2MtNS4yNDg4LTMuMjk1Ny0xMi4yMDc2LTUuMzcwOC0xOS44OTc3LTUuMzcwOC0xMS44NDEzLDAtMjMuOTI1NywzLjkwNjEtMzMuNDQ3OCwxNi43MjI5bC0uNzMyNC45NzY0di0xMS40NzRjMC0yLjMxOTItMi4wNzUyLTQuNjM4NC00Ljc2MDUtNC42Mzg0aC01Ny40OTU3YzIuNjg1NC0zLjE3NDgsMy45MDYxLTYuNDcwNiwzLjkwNjEtMTAuNjIwOCwwLTguOTEwNi02Ljk1NzgtMTUuNjI1Mi0xNS45OTA1LTE1LjYyNTJoLTUuMTI3OWMtNC43NjA0LDAtOC42NjY1LDEuODMwOC0xMS45NjIyLDUuMTI3OWwtMTUuODY5NSwxNS44NjgyYy0xLjIyMDYsMS4yMjA3LTIuMTk3MSwyLjU2MzQtMi45Mjk2LDQuMDI5My0xLjIyMDctLjEyMjEtMi42ODUzLS4yNDQxLTQuMTUwMS0uMjQ0MS02LjQ3MDYsMC0xMy4wNjIsMi4wNzUyLTE4LjY3Nyw2LjU5MTYtMy45MDcyLTQuNzYwNS05LjAzMzktNi41OTE2LTE1Ljg2OTQtNi41OTE2LTUuNDkyOSwwLTEwLjg2NSwxLjU4NjktMTUuNTAzNCw1LjM3MDgtLjI0NDEtMi44MDc0LTEuNDY0Ny0zLjkwNi00LjAyODEtMy45MDZoLTMwLjAzMDJjMi42ODU0LTMuMTc0OCwzLjkwNzMtNi40NzA2LDMuOTA3My0xMC42MjA4LDAtOC45MTA2LTYuOTU5LTE1LjYyNTItMTUuOTkxNy0xNS42MjUyaC01LjEyNzhjLTQuNzYwNSwwLTguNjY2NiwxLjgzMDgtMTEuOTYyMyw1LjEyNzlsLTEwLjM3NjYsMTAuMjUzM3YtMy40MTc4YzAtMi40NDEyLTIuMDc1MS00LjYzODQtNC43NjA2LTQuNjM4NGgtMjcuMDk5MmMtMS40NjQ3LDAtMi41NjM0LjYxMDQtMy4yOTU4LDEuNDY0OGwtMTQuNzcwOSwxNC42NDc3Yy0uNDg4My40ODk0LTEuMzQyNywxLjk1NDEtMS4zNDI3LDMuMjk2OXY1LjAwNDZjLTUuMTI2Ny00Ljc2MDUtMTEuMTA5MS03LjA3OTgtMTguMDY2Ny03LjA3OTgtNC41MTY1LDAtMTAuMDEwNSwxLjQ2NDgtMTMuOTE2NSw1LjM3MDgtLjQ4ODMtMy4xNzM2LTEuNTg2OS0zLjc4MzktMy42NjItMy43ODM5aC0yNi4xMjI5Yy0xLjM0MjcsMC0yLjQ0MTIuNDg4My0zLjI5NTcsMS4zNDI4bC0zLjA1MjcsMy4wNTE1Yy03LjgxMjEtMTYuMTEzNi0yMi41ODMtMjUuMjY4NC00MS4wMTU5LTI1LjI2ODQtMTIuODE2OCwwLTI0LjE2OTksNC4yNzIzLTM2LjAxLDE1Ljk5MDRsLTkuNzY2NCw5Ljc2NjRjLTEwLjg2MzgsMTAuODYzNi0xNi4yMzU3LDI2LjEyMjgtMTYuMjM1Nyw0My44MjMyLDAsMzMuNDQ4LDE4LjU1NDksNTUuNTQyNyw0Ny4yNDIzLDU1LjU0MjcsMTIuODE2NywwLDI0LjE2OTktNC43NjA1LDMyLjk1ODUtMTMuNTUwM2wxMC4xMzI0LTEwLjI1MzR2NDIuMzU4NmMwLDIuNjg1MywyLjA3NTEsNC43NjA1LDQuNzYwNSw0Ljc2MDVoMjYuOTc3M2MxLjU4NjgsMCwyLjY4NTQtLjYxMDQsMy40MTkxLTEuMzQyOGwxNC42NDc2LTE0Ljc3MDljLjk3NjQtLjk3NjYsMS40NjQ3LTIuMDc1MSwxLjQ2NDctMy4yOTU4di00LjM5NDNjNi41OTI4LS44NTQ1LDExLjk2MzUtMy41Mzk4LDE2LjM1NzgtOC4xNzk0bDEzLjMwNjMtMTMuMzA0OWMxLjU4NjcsMTMuNzkzMiwxMC40OTczLDIwLjUwNzgsMjYuNzMzMiwyMC41MDc4aDI0My40MDk3YzEuNzA4OSwwLDIuNjg1My0uNjEwMiwzLjQxNzctMS4zNDI3bDcuNDQ3My03LjU2OTJjNy4zMjM3LDYuOTU5LDE2Ljg0NTksMTAuMzc2NywyNy41ODc0LDEwLjM3NjcsMTAuODY1LDAsMjAuNzUyMi00LjE1MDEsMjcuNTg5LTEwLjk4NjlsNy4wNzk3LTcuMjAxOHYxMi4wODU0YzAsMi41NjM1LDIuMDc1MSw0LjYzODQsNC42Mzg0LDQuNjM4NGgzMy4wODE3djIwLjAxOThjMCwyLjY4NTMsMi4wNzUxLDQuNzYwNSw0Ljc2MDUsNC43NjA1aDE3Ljk0NDVjOC41NDQ0LDAsMTUuNzQ3Ni0yLjY4NTQsMjAuMjYzOS03LjIwMThsMTQuNTI2OS0xNC41MjY3YzMuNDE3Ny0zLjUzOTksNi4yMjUzLTguNTQ1OCw3LjkzNDEtMTQuODkzMWwyMi4wOTQ3LTg1LjA4MzNjLjg1NDUtMy4yOTU4LS43MzI0LTUuODU5MS00LjYzODQtNS44NTkxWk0xMTIuMDEyMSwxNjEuMDU4MWMtMjUuODc4OCwwLTQyLjYwMjgtMTkuNjUzMy00Mi42MDI4LTUwLjc4MjEsMC0zMC42MzkzLDE2LjcyNC01MC4wNDg2LDQyLjYwMjgtNTAuMDQ4NiwyNS43NTc4LDAsNDIuNDgwNSwxOS40MDkzLDQyLjQ4MDUsNTAuMDQ4NiwwLDMxLjEyODgtMTYuNzIyNyw1MC43ODIxLTQyLjQ4MDUsNTAuNzgyMVpNMjAyLjEwMTIsMTYwLjkzNmMtNi4xMDMzLDAtMTEuMjMxMi0yLjE5Ny0xNS4yNTkzLTYuMzQ3MnYyOS45MDY3aC0yNy4wOTk0di04NS4zMjc0YzAtNi4xMDQ1LS4xMjIxLTEyLjA4NTYtLjM2NjItMTguMTg4N2gyNi40ODkxYy4yNDQxLDIuMTk3MS40ODgyLDQuNjM4NC42MTAyLDcuMzIzNywzLjkwNjEtNS42MTQ5LDkuNDAwMS04Ljc4ODYsMTYuMjM1OC04Ljc4ODYsMTYuOTY4LDAsMjYuNDg5LDE1LjI1OTMsMjYuNDg5LDQxLjEzNzksMCwyNS41MTI3LTkuNzY1MSw0MC4yODM0LTI3LjA5OTQsNDAuMjgzNFpNMjc4LjI3MzgsMTAwLjYzMzFoLTEwLjYyMDh2MzYuNjIxNWMwLDIuMDc1MS45NzY2LDIuODA3NSwzLjA1MTgsMi44MDc1aDcuNTY5MXYxOS42NTM2aC0xNy41Nzg0Yy0xNC4wMzg2LDAtMjAuMTQxNy01Ljg2MDQtMjAuMTQxNy0yMC4xNDE4di0zOC45NDA3aC05LjUyMjJ2LTE5LjY1MzZoOS41MjIydi0xOC45MjExaDI3LjA5OTJ2MTguOTIxMWgxMC42MjA4djE5LjY1MzZaTTMxMC45ODgyLDE1OS43MTU1aC0yNy4wOTk0di03OC43MzZoMjcuMDk5NHY3OC43MzZaTTMwMC40OTA2LDc2LjcwNzNoLTYuMjI2NGMtNi4yMjUyLDAtMTAuODYzNi01LjAwNTktMTAuODYzNi0xMC45ODcxLDAtNi4xMDMsNC42Mzg0LTEwLjk4NTYsMTAuODYzNi0xMC45ODU2aDYuMjI2NGM2LjIyNTMsMCwxMC44NjM4LDQuODgyNiwxMC44NjM4LDEwLjk4NTYsMCw1Ljk4MTItNC42Mzg0LDEwLjk4NzEtMTAuODYzOCwxMC45ODcxWk00MTQuNTA0MywxNTkuNzE1NmgtMjcuMDk5NHYtNTUuOTA4OWMwLTIuODA3NS0xLjIyMDctMy45MDYtMy45MDYtMy45MDYtMS45NTMxLDAtMy41Mzk5LjczMjQtNC4zOTQzLDEuOTUzdjU3Ljg2MTloLTI3LjEwMDZ2LTU1LjkwODljMC0yLjgwNzUtMS4yMjA3LTMuOTA2LTMuOTA2MS0zLjkwNi0xLjk1MywwLTMuNTM5OC43MzI0LTQuMzk0MywxLjk1M3Y1Ny44NjE5aC0yNy4wOTkydi03OC43MzYxaDI1Ljc1NjZ2Ny4zMjM3YzUuNDkyOS01Ljg1ODksMTEuNzE4LTguNjY2NSwxOC4zMTA4LTguNjY2NSw3LjY4OTksMCwxMi45Mzg3LDIuNDQxNCwxNS42MjU0LDguNjY2NSw1LjczNjktNS44NTg5LDEyLjU3MjYtOC42NjY1LDE5Ljc3NTUtOC42NjY1LDExLjk2MjMsMCwxOC40MzE2LDYuNzEzNiwxOC40MzE2LDIwLjI2Mzl2NTkuODE0OVpNNDQ3LjIxOTksMTU5LjcxNTVoLTI3LjA5OTR2LTc4LjczNmgyNy4wOTk0djc4LjczNlpNNDM2LjcyMjMsNzYuNzA3M2gtNi4yMjY0Yy02LjIyNTIsMC0xMC44NjM2LTUuMDA1OS0xMC44NjM2LTEwLjk4NzEsMC02LjEwMyw0LjYzODQtMTAuOTg1NiwxMC44NjM2LTEwLjk4NTZoNi4yMjY0YzYuMjI1MywwLDEwLjg2MzYsNC44ODI2LDEwLjg2MzYsMTAuOTg1NiwwLDUuOTgxMi00LjYzODMsMTAuOTg3MS0xMC44NjM2LDEwLjk4NzFaTTUwNi4xODAyLDE1OS43MTU2aC01My4zNDU1di0xOC4wNjY4bDIzLjA3MjUtNDEuMDE1N2gtMjMuMDcyNXYtMTkuNjUzNmg1Mi44NTczdjE4LjkyMTFsLTIyLjU4Myw0MC4xNjE0aDIzLjA3MTJ2MTkuNjUzNlpNNTc4LjY5MDksMTI1LjE2ODloLTQzLjIxM2MuNDg4MywxMC43NDI5LDMuMjk1OCwxNi44NDYxLDguMzAwMywxNi44NDYxLDMuNjYyLDAsNi44MzU3LTQuMDI4MSw3LjgxMjMtMTAuODY0OWgyNi44NTY0Yy0yLjE5NzMsMTcuNTc4NC0xNS4zODEzLDI5LjkwOC0zMy45MzYzLDI5LjkwOC0yMi4yMTY4LDAtMzYuMjU1NC0xNS42MjUyLTM2LjI1NTQtNDAuNzcxNywwLTI0LjY1OCwxNC41MjY5LTQwLjc3MTcsMzYuMzc3NC00MC43NzE3LDIyLjk0OTIsMCwzNy4xMDk5LDE5LjA0MzIsMzQuMDU4Miw0NS42NTQzWk02MTEuMDM5MSwxNTkuNzE1NWgtMjcuMDk5NFY2Mi4wNTgzaDI3LjA5OTR2OTcuNjU3MVpNNjYzLjA0MTksMTY1Ljk0MDdjLTMuMjk1NywxMi42OTU5LTEwLjAxMDUsMTguNTU0OS0yMy40Mzc1LDE4LjU1NDloLTE5LjI4NzF2LTE5Ljc3NTVoMTQuODkyOGMxLjIyMDcsMCwyLjE5NzMtLjczMjMsMi40NDE0LTIuMDc1MWwuNzMyMi0zLjE3MzYtMjIuMjE2OC03OC40OTE5aDI3LjU4NzZsNC44ODI2LDIyLjk0OTIsMy4yOTU5LDIxLjI0MDIsMi44MDc0LTIxLjYwNjQsNC4wMjkzLTIyLjU4M2gyNi4zNjY5bC0yMi4wOTQ3LDg0Ljk2MTJaIi8+CiAgPHBhdGggY2xhc3M9ImNscy0yIiBkPSJNNTQ0LjAyMjMsOTguNDM1OGMtNC4wMjgxLDAtNy4yMDE3LDQuNTE2NC04LjU0NDQsMTIuMDg0NGgxNi43MjI4Yy0xLjIyMDYtNy42OTAxLTQuMTUwMy0xMi4wODQ0LTguMTc4My0xMi4wODQ0WiIvPgogIDxwYXRoIGNsYXNzPSJjbHMtMiIgZD0iTTE5My43OTk3LDk5LjQxMjRjLTQuODgyNiwwLTcuNTY4MSw4LjU0NDQtNy41NjgxLDIxLjQ4NDQsMCwxMi44MTY3LDIuNjg1NSwyMC41MDgxLDcuNTY4MSwyMC42Myw1LjAwNTctLjEyMTksNy44MTMyLTcuOTM1Myw3LjgxMzItMjAuNjMsMC0xMy4wNjItMi44MDc1LTIxLjYwNjQtNy44MTMyLTIxLjQ4NDRaIi8+CiAgPHBhdGggY2xhc3M9ImNscy0yIiBkPSJNMTExLjg5LDgzLjA1NDZjLTcuNjkwMSwwLTEyLjgxNjcsMTAuNDk3NC0xMi44MTY3LDI3LjIyMTQsMCwxNy4yMTIzLDUuMTI2NiwyNy45NTUxLDEyLjgxNjcsMjcuOTU1MSw3LjU2OTEsMCwxMi44MTc5LTEwLjc0MjgsMTIuODE3OS0yNy45NTUxLDAtMTYuNzI0LTUuMjQ4OC0yNy4yMjE0LTEyLjgxNzktMjcuMjIxNFoiLz4KPC9zdmc+" alt="Optimizely">
+    <div>
+      <div class="eyebrow lime">Use case 2 · Independent Agent Portal</div>
+      <h1 class="mt2">One relevant<br>Liberty experience</h1>
+      <p class="lead mt3">Agents see what fits their role, state and agency. Marketing runs it. Approved content is managed once.</p>
+    </div>
+    <div class="cap">Optimizely CMS (SaaS) · Visual Builder · Optimizely Graph · Prepared for Liberty Mutual</div>
+  </div>
+
+  <aside class="notes"><p><b>Before you share (5 min)</b></p>
+<p>1. Open the portal prototype (libertymutual.optimoey.com/use-case-2-agent-portal.html) in its own window and allow pop-ups. Press <b>S</b> to open the controller and move it to your second screen. Press <b>H</b> for the guide's step buttons. Share only the prototype window and this deck's window, not your whole screen.</p>
+<p>2. Press Reset in the controller (reloading the page also resets everything).</p>
+<p>3. CMS Editor tab signed in on the Ask Liberty start page and the shared “Helpful row”. Pick a reversible edit for section 7 (the “Last reviewed” text). Live App tab open on /rental-car.</p>
+<p>4. Rehearse section 5's user switching: <b>Roll back only works as Sam, after v4 is published.</b></p>
+<p><b>Run of show, 30 min (20-min cut in brackets):</b> frame 2 [1] · Dana signs in 4 [3] · different agents 3 [2] · marketer changes a priority 4 [3] · design system 3 [skip] · disclosure 5 [4] · audit trail 1 [skip] · prove it in the CMS 4 [4] · architecture 3 [2] · close 1 [1].</p>
+<p><b>Be clear about what is live.</b> Sections 1 to 6 are a clickable prototype with no backend: the four agents, the rules, the authoring screens, the disclosure workflow and the audit log are simulated. Section 7 is the real CMS. If asked “is this live?”, answer plainly: a clickable prototype of the agent experience, with the mechanism proven in the CMS Editor.</p>
+<p><b>Keep off screen.</b> The authoring screens (“Content Studio”) are an illustration, not the Optimizely UI, so say so the first time one appears. Names, dates and disclosure wording are placeholders. CMS buttons: the start page opens directly; the others open the CMS Editor home, so use the content tree (hover a button for where the item lives).</p>
+<p><b>If you have time to close gaps:</b> a real shared disclosure block placed on two Ask Liberty pages, and Opti ID roles plus an approval sequence with self-approval blocked.</p></aside>
+</section>
+
+<section id="agenda" data-background-color="#FFFFFF">
+  <div class="eyebrow">Contents</div>
+  <h2 class="mt1">What you will see</h2>
+  <div class="agenda compact mt3">
+    <button class="acard" data-goto="s1" type="button"><span class="num">1</span><span class="at"><b>Dana signs in</b><small>Her focus products, and why</small></span><span class="badge b-proto">Prototype</span></button>
+    <button class="acard" data-goto="s2" type="button"><span class="num">2</span><span class="at"><b>Same portal, different agents</b><small>Role, state and agency decide</small></span><span class="badge b-proto">Prototype</span></button>
+    <button class="acard" data-goto="s3" type="button"><span class="num">3</span><span class="at"><b>Marketing changes a priority</b><small>Preview as two agents, then publish</small></span><span class="badge b-proto">Prototype</span></button>
+    <button class="acard" data-goto="s4" type="button"><span class="num">4</span><span class="at"><b>One design system</b><small>A component change, 24 pages</small></span><span class="badge b-proto">Prototype</span></button>
+    <button class="acard" data-goto="s5" type="button"><span class="num">5</span><span class="at"><b>One disclosure, two sites</b><small>Submit, approve, publish, roll back</small></span><span class="badge b-proto">Prototype</span></button>
+    <button class="acard" data-goto="s6" type="button"><span class="num">6</span><span class="at"><b>Audit trail</b><small>Who changed what, and undo</small></span><span class="badge b-proto">Prototype</span></button>
+    <button class="acard" data-goto="s7" type="button"><span class="num">7</span><span class="at"><b>The same mechanism in the CMS</b><small>Shared block, rules, versions</small></span><span class="badge b-cms">CMS Editor</span></button>
+    <button class="acard" data-goto="s8" type="button"><span class="num">8</span><span class="at"><b>How it works</b><small>Ping, Graph and CMS SaaS</small></span><span class="badge b-arch">Architecture</span></button>
+    <button class="acard" data-goto="summary" type="button"><span class="num">9</span><span class="at"><b>Summary and questions</b><small>Relevant, run by the business, governed once</small></span><span class="badge b-arch">Recap</span></button>
+    <div class="legend"><span><b>Prototype</b> is a clickable prototype of the agent experience, with sample data.</span><span><b>CMS Editor</b> is the real Optimizely CMS.</span></div>
+  </div>
+
+  <aside class="notes"><p>Use this as a map. Sections 4 and 6 are skipped in the 20-minute cut. Liberty's three lenses: agent experience (sections 1 and 2), Liberty business experience (sections 3 and 4), shared-content foundation (sections 5 to 7).</p></aside>
+</section>
+
+<section id="asked" data-background-color="#E4F0DA">
+  <div class="eyebrow">Your checklist</div>
+  <h2 class="mt1">What you asked to see, and where</h2>
+  <div class="card pad-sm mt3">
+    <table class="tbl dense" style="font-size:16.5px">
+      <thead><tr><th>You asked for</th><th>Where you will see it</th><th>Section</th></tr></thead>
+      <tbody>
+        <tr class="goto" data-goto="s1" tabindex="0" role="link"><td><b>Rules by role, state, and agency</b></td><td>Why am I seeing these? shows the rule behind every card</td><td>1, 2, 7</td></tr>
+        <tr class="goto" data-goto="s2" tabindex="0" role="link"><td><b>How two agents with different roles or agencies see different content</b></td><td>Dana and Tyler: same role and state, different agency</td><td>2</td></tr>
+        <tr class="goto" data-goto="s3" tabindex="0" role="link"><td><b>A business user changing a priority without development work</b></td><td>Priorities: reorder, preview, publish</td><td>3</td></tr>
+        <tr class="goto" data-goto="s3" tabindex="0" role="link"><td><b>Experience preview for each agent audience</b></td><td>Preview as: two agents side by side, before publishing</td><td>3</td></tr>
+        <tr class="goto" data-goto="s5" tabindex="0" role="link"><td><b>Permission and role separation across author, approve, and publish</b></td><td>Jordan submits, Maria approves, Sam publishes</td><td>5, 7</td></tr>
+        <tr class="goto" data-goto="s5b" tabindex="0" role="link"><td><b>Central content versus channel-specific variation</b></td><td>One shared disclosure, with separate channel notes</td><td>5</td></tr>
+        <tr class="goto" data-goto="s4" tabindex="0" role="link"><td><b>Reusable component and design-system governance</b></td><td>One Product card, 24 pages, four checks</td><td>4, 7</td></tr>
+        <tr class="goto" data-goto="s5" tabindex="0" role="link"><td><b>One update distributed to more than one site</b></td><td>The disclosure goes to the IA Portal and LibertyMutual.com</td><td>5</td></tr>
+        <tr class="goto" data-goto="s6" tabindex="0" role="link"><td><b>How changes are tested, approved, rolled back, and audited</b></td><td>Checks, approvals, roll back, audit log, Change Log</td><td>4–7</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="cap mt2">Sections 1 to 6 use a clickable prototype with sample data. Section 7 shows the real CMS.</p>
+
+  <aside class="notes"><p>Liberty's checklist, quoted. Tie the last rows to their metrics: <b>time to publish</b> (section 3), <b>% of changes without engineering</b> (sections 3 to 5), <b>content reuse rate</b> (sections 5 and 7).</p>
+<p>Be ready to be honest on two rows. <b>Preview for each audience:</b> the prototype shows it; in the CMS, audience-specific preview of portal priorities is not built. <b>Permission and role separation:</b> the prototype shows it; real Opti ID roles and an approval sequence need to be configured in the instance first.</p></aside>
+</section>
+
+<section id="idea" data-background-color="#08251A">
+  <div class="fill between dark">
+    <div class="eyebrow lime">The idea</div>
+    <h2 style="font-size:54px;max-width:1080px">Every agent portal can show products. The real question is which three, for this agent, this quarter, and who decides.</h2>
+    <div class="cols3">
+      <div class="card pad-sm fragment fade-up" style="background:var(--lf);color:var(--fir)"><div class="eyebrow">Relevant</div><p class="t-sm mt1">Rules by role, state and agency decide what each agent sees.</p></div>
+      <div class="card pad-sm fragment fade-up" style="background:var(--aqua);color:var(--fir)"><div class="eyebrow">Run by the business</div><p class="t-sm mt1">Marketing reorders priorities, previews and publishes. No release.</p></div>
+      <div class="card pad-sm fragment fade-up" style="background:var(--n3);color:var(--fir)"><div class="eyebrow">Governed once</div><p class="t-sm mt1">Shared content is approved once, reaches every site, and can be audited and rolled back.</p></div>
+    </div>
+  </div>
+
+  <aside class="notes"><p><b>Frame (2 min).</b> Start on familiar ground: every agent portal can show products. The real question is which three, for this agent, this quarter, and who decides.</p><p>Then name what you are proving: relevant (rules by role, state and agency), run by the business (no release), governed once (approved once, reaches every site, audited and reversible).</p></aside>
+</section>
+
+<section id="relevance" data-background-color="#FFFFFF">
+  <div class="eyebrow">Why it works</div>
+  <h2 class="mt1">Relevance without tracking</h2>
+  <p class="t mt2" style="max-width:1000px">The sign-in already tells us who the agent is, so the rules can use what Liberty already has.</p>
+  <div class="flow mt4">
+    <div class="node fragment fade-up" data-fragment-index="0"><b>Ping sign-in</b>knows who the agent is</div>
+    <span class="arrow fragment fade-up" data-fragment-index="1">→</span>
+    <div class="node fragment fade-up" data-fragment-index="1"><b>Role · State · Agency</b>passed to the portal as claims</div>
+    <span class="arrow fragment fade-up" data-fragment-index="2">→</span>
+    <div class="node fragment fade-up" data-fragment-index="2" style="background:var(--lf)"><b>Business rules</b>kept by marketing, stored as content</div>
+    <span class="arrow fragment fade-up" data-fragment-index="3">→</span>
+    <div class="node fragment fade-up" data-fragment-index="3" style="background:var(--lf)"><b>Top 3 for this agent</b>in the marketer’s priority order</div>
+    </div>
+  <div class="cols3 mt4">
+    <div class="card pad-sm tint"><h3>Rules decide who qualifies</h3><p class="t-sm mt1">By role, state and agency.</p></div>
+    <div class="card pad-sm tint"><h3>Order decides what is emphasized</h3><p class="t-sm mt1">The top three, in the order marketing sets.</p></div>
+    <div class="card pad-sm tint-lime"><h3>Marketing owns both</h3><p class="t-sm mt1">No tracking, no CDP, and no agent users to manage on the platform.</p></div>
+  </div>
+
+  <aside class="notes"><p>Relevance does not need tracking. Ping already knows the agent's role, state and agency at sign-in, so the rules use what Liberty already has. This matches Liberty's Q&amp;A: Ping handles authentication, the platform does no user management, and there is no CDP.</p><p>Rules decide who qualifies. Order decides what is emphasized. Marketing owns both.</p></aside>
+</section>
+
+<section>
+<section id="s1" data-background-color="#FFFFFF">
+  <div class="row g2"><span class="badge b-proto">1 · Prototype</span><span class="eyebrow">Dana signs in</span></div>
+  <div class="split mt3">
+    <div>
+      <h2>Dana signs in and lands on her focus products</h2>
+      <p class="t mt2">In production, Ping signs the agent in and passes her role, state and agency. The platform does not manage agent users.</p>
+      <div class="row wrap g1 mt3"><a class="btn btn-live" data-live="/use-case-2-agent-portal.html">Open the portal prototype ↗</a></div>
+    </div>
+    <div class="card pad stack-v g3">
+      <div class="step fragment fade-up"><span class="num">1</span><div><h3>Sign in as Dana</h3><p class="t mt1">Dana Whitfield, an independent agent.</p></div></div>
+      <div class="step fragment fade-up"><span class="num">2</span><div><h3>Confirm access</h3>
+        <div class="row wrap g1 mt1"><span class="chip"><b>Role</b> Producer</span><span class="chip"><b>State</b> Texas</span><span class="chip"><b>Agency</b> Harbor Light Insurance Group</span></div></div></div>
+      <div class="step fragment fade-up"><span class="num">3</span><div><h3>Match priorities</h3><p class="t mt1">Three of Liberty’s current priorities match her.</p></div></div>
+    </div>
+  </div>
+
+  <aside class="notes"><p><b>Section 1 · Dana signs in (4 min).</b> In the controller choose <b>Agent: Dana</b>, then <b>Sign in</b>.</p>
+<p>The progress card confirms access with chips (Role Producer, State Texas, Agency Harbor Light Insurance Group), then matches 3 priorities.</p>
+<p><b>Say:</b> “In production, Ping signs the agent in and passes role, state and agency. We don't manage agent users.”</p></aside>
+</section>
+<section id="s1b" data-background-color="#FFFFFF">
+  <div class="row g2"><span class="badge b-proto">1 · Prototype</span><span class="eyebrow">What Dana sees</span></div>
+  <h2 class="mt2">Three focus products, and the reason for each</h2>
+  <div class="split-r mt3">
+    <div class="stack-v g2">
+      <div class="card pad-sm fragment fade-up"><div class="row g2"><span class="num">1</span><h3>Home + Auto bundle</h3></div></div>
+      <div class="card pad-sm fragment fade-up"><div class="row g2"><span class="num">2</span><h3>Renters + Auto</h3></div></div>
+      <div class="card pad-sm fragment fade-up"><div class="row g2"><span class="num">3</span><h3>Personal umbrella</h3></div></div>
+    </div>
+    <div class="card pad tint fragment fade-up">
+      <div class="eyebrow">Why am I seeing these?</div>
+      <p class="t mt2">Each card shows the rule that matched: her role, her state and her agency.</p>
+      <div class="eyebrow mt3">Not matched for her</div>
+      <div class="row wrap g1 mt1"><span class="chip warn"><b>Condo + Auto bundle</b> Florida only</span></div>
+      <p class="cap mt3">Open Home + Auto bundle to see the Important information at the bottom. It returns in section 5.</p>
+    </div>
+  </div>
+
+  <aside class="notes"><p>On the Dashboard the focus products are Home + Auto bundle, Renters + Auto and Personal umbrella. Open <b>Why am I seeing these?</b>: it shows the rule chips per card and “Not matched for you: Condo + Auto bundle · Florida only.”</p><p>Open Home + Auto bundle and point to <b>Important information</b> at the bottom. It comes back in section 5.</p></aside>
+</section>
+</section>
+
+<section>
+<section id="s2" data-background-color="#FFFFFF">
+  <div class="row g2"><span class="badge b-proto">2 · Prototype</span><span class="eyebrow">Same portal, different agents</span></div>
+  <h2 class="mt2">Same role, same state, different agency</h2>
+  <div class="cols2 mt3">
+    <div class="card pad fragment fade-up">
+      <h3>Dana Whitfield</h3>
+      <div class="row wrap g1 mt1"><span class="chip"><b>Role</b> Producer</span><span class="chip"><b>State</b> Texas</span><span class="chip"><b>Agency</b> Harbor Light</span></div>
+      <div class="eyebrow mt3">Her top three</div>
+      <div class="row wrap g1 mt1"><span class="chip">Home + Auto bundle</span><span class="chip hl">Renters + Auto</span><span class="chip">Personal umbrella</span></div>
+    </div>
+    <div class="card pad fragment fade-up">
+      <h3>Tyler Brooks</h3>
+      <div class="row wrap g1 mt1"><span class="chip"><b>Role</b> Producer</span><span class="chip"><b>State</b> Texas</span><span class="chip"><b>Agency</b> Lone Star</span></div>
+      <div class="eyebrow mt3">His top three</div>
+      <div class="row wrap g1 mt1"><span class="chip">Home + Auto bundle</span><span class="chip">Personal umbrella</span><span class="chip hl">Motorcycle add-on</span></div>
+    </div>
+  </div>
+  <div class="card pad-sm tint-lime mt3 fragment fade-up"><p class="t-sm"><b>Renters + Auto is for Harbor Light agencies only.</b> That is the agency rule at work, using what the sign-in already provides.</p></div>
+
+  <aside class="notes"><p><b>Section 2 · Same portal, different agents (3 min).</b> Change the controller's Agent menu to Tyler; the dashboard re-renders.</p><p><b>Key moment:</b> Dana and Tyler have the same role and state but different agencies, so only Dana sees Renters + Auto. That is the agency rule at work. Then press down for all four agents.</p></aside>
+</section>
+<section id="s2b" data-background-color="#FFFFFF">
+  <div class="row g2"><span class="badge b-proto">2 · Prototype</span><span class="eyebrow">Four agents</span></div>
+  <h2 class="mt2">The rules do the work for every agent</h2>
+  <div class="card pad-sm mt3">
+    <table class="tbl dense" style="font-size:16.5px">
+      <thead><tr><th>Agent</th><th>Role · State · Agency</th><th>Top three</th><th>Not matched</th></tr></thead>
+      <tbody>
+        <tr><td><b>Dana</b></td><td>Producer · TX · Harbor Light</td><td>Home + Auto, Renters + Auto, Personal umbrella</td><td>Condo + Auto (Florida only)</td></tr>
+        <tr><td><b>Tyler</b></td><td>Producer · TX · Lone Star</td><td>Home + Auto, Personal umbrella, Motorcycle add-on</td><td>Condo + Auto (Florida only); Renters + Auto (Harbor Light agencies only)</td></tr>
+        <tr><td><b>Marcus</b></td><td>Principal · FL · Sunrise Coast</td><td>Condo + Auto, Home + Auto, Personal umbrella</td><td>Renters + Auto (not for principals)</td></tr>
+        <tr><td><b>Elena</b></td><td>Service rep · OH · Buckeye</td><td>Make a policy change, Billing and payments, Report a claim for a client</td><td>–</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="cap mt2">Marcus also gets an agency management toolkit, Elena gets service tasks, and state updates and resources follow each agent’s state.</p>
+
+  <aside class="notes"><p>Switch to Marcus and Elena to show how the dashboard follows the persona. Marcus gets an agency management toolkit, Elena gets service tasks, and the state updates and resources follow the agent's state.</p></aside>
+</section>
+</section>
+
+<section id="s3" data-background-color="#FFFFFF">
+  <div class="row g2"><span class="badge b-proto">3 · Prototype</span><span class="eyebrow">Marketing changes a priority</span></div>
+  <div class="split mt2">
+    <div class="stack-v g3">
+      <h2>Reorder, preview, publish</h2>
+      <p class="t">Priya Raman, Marketing Manager, opens Priorities. Each row shows its rule: roles, states and agency.</p>
+      <ul class="t stack-v g2">
+        <li class="step fragment fade-up"><span class="num">1</span><span><b>Move Personal umbrella to the top.</b> “1 unpublished change” appears, and the agent view still shows what is live.</span></li>
+        <li class="step fragment fade-up"><span class="num">2</span><span><b>Preview as two agents.</b> View A is Dana and View B is Tyler. Umbrella is first for both.</span></li>
+        <li class="step fragment fade-up"><span class="num">3</span><span><b>Publish changes.</b> “Dana’s dashboard updated with no code or release.”</span></li>
+      </ul>
+    </div>
+    <div class="stack-v g3">
+      <div class="cols2">
+        <div class="card pad-sm fragment fade-up"><div class="eyebrow">View A · Dana</div><p class="q mt1" style="font-size:24px">Personal umbrella</p><p class="cap mt1">now first</p></div>
+        <div class="card pad-sm fragment fade-up"><div class="eyebrow">View B · Tyler</div><p class="q mt1" style="font-size:24px">Personal umbrella</p><p class="cap mt1">now first</p></div>
+      </div>
+      <div class="card pad-sm tint-lime fragment fade-up"><p class="t"><b>Rules decide who qualifies. Order decides what is emphasized.</b> Marketing owns both.</p></div>
+      <p class="cap">The authoring screens in the prototype are an illustration. Section 7 shows the real editor.</p>
+    </div>
+  </div>
+
+  <aside class="notes"><p><b>Section 3 · Marketer changes a priority (4 min).</b> Open <b>Priorities</b> (Priya Raman, Marketing Manager).</p>
+<p>Move Personal umbrella to the top with the arrows. “1 unpublished change” appears and the agent view on the right still shows what is live. Set <b>Preview as</b>: View A Dana, View B Tyler. The banner reads “Previewing 1 unpublished change”. Press <b>Publish changes</b>: the toast says “Dana's dashboard updated with no code or release”, and changed cards are highlighted.</p>
+<p><b>Say:</b> “Rules decide who qualifies. Order decides what's emphasized. Marketing owns both.” The first time an authoring screen appears, say it is an illustration of the authoring tool, not the Optimizely UI.</p></aside>
+</section>
+
+<section id="s4" data-background-color="#FFFFFF">
+  <div class="row g2"><span class="badge b-proto">4 · Prototype</span><span class="eyebrow">One design system</span></div>
+  <h2 class="mt2">One component change, 24 pages</h2>
+  <div class="split-r mt3">
+    <div class="stack-v g3">
+      <p class="t">Devon Park, Design System Owner, opens Components. The Product card is used on <b>24 pages across 2 templates</b>.</p>
+      <ul class="t stack-v g2">
+        <li class="step fragment fade-up"><span class="num">1</span><span><b>Set the button label to “Get a quote”.</b> Only approved labels are offered. Colors, fonts and spacing are locked.</span></li>
+        <li class="step fragment fade-up"><span class="num">2</span><span><b>Test and publish.</b> Four checks run before anything goes live.</span></li>
+        <li class="step fragment fade-up"><span class="num">3</span><span><b>The dashboard and the product-page template both update.</b></span></li>
+      </ul>
+    </div>
+    <div class="stack-v g3">
+      <div class="row g2 fragment fade-up"><span class="vchip">v7</span><span class="arrow" style="font-size:30px">→</span><span class="vchip new">v8</span></div>
+      <div class="card pad-sm fragment fade-up"><div class="eyebrow">Four checks</div>
+        <div class="row wrap g1 mt2"><span class="chip">Brand tokens</span><span class="chip">Accessibility</span><span class="chip">Layout on 24 pages</span><span class="chip">Brand governance approval</span></div></div>
+    </div>
+  </div>
+
+  <aside class="notes"><p><b>Section 4 · One design system (3 min; skip in the 20-minute cut).</b> Open <b>Components</b> (Devon Park, Design System Owner). The Product card is v7 and used on 24 pages across 2 templates.</p><p>Set Button label to “Get a quote” (only approved labels are offered). Press <b>Test and publish</b>: brand tokens, accessibility, layout on 24 pages, brand governance approval. The card goes to v8, and both the dashboard and the product-page template update.</p></aside>
+</section>
+
+<section>
+<section id="s5" data-background-color="#FFFFFF">
+  <div class="row g2"><span class="badge b-proto">5 · Prototype</span><span class="eyebrow">One disclosure, two sites</span></div>
+  <h2 class="mt2">Approved once, published to both sites</h2>
+  <p class="t mt1">The Bundle savings disclosure is shared content. Author, approve and publish are separate roles.</p>
+  <div class="flow mt3">
+    <div class="node fragment fade-up" data-fragment-index="0"><b>Jordan Blake</b>Content Administrator<br>Submits for legal review. Cannot approve.</div>
+    <span class="arrow fragment fade-up" data-fragment-index="1">→</span>
+    <div class="node fragment fade-up" data-fragment-index="1"><b>Maria Alvarez</b>Compliance Approver<br>Approves, or requests changes.</div>
+    <span class="arrow fragment fade-up" data-fragment-index="2">→</span>
+    <div class="node fragment fade-up" data-fragment-index="2" style="background:var(--lf)"><b>Sam Patel</b>Publisher<br>Publishes to 2 sites.</div>
+    </div>
+  <div class="card pad-sm tint mt3 fragment fade-up"><div class="row wrap g3"><span class="chip"><b>IA Portal</b> 14 pages</span><span class="chip"><b>LibertyMutual.com</b> 9 pages</span><span class="chip hl"><b>23 pages</b> from one publish</span></div>
+  <p class="cap mt2">“Show changes from v3” shows the redline before anyone approves.</p></div>
+
+  <aside class="notes"><p><b>Section 5 · Disclosure (5 min).</b> Open <b>Disclosure</b> (Bundle savings disclosure, shared content). Tick <b>Show changes from v3</b> for the redline.</p>
+<p>1. <b>Jordan Blake</b> (Content Administrator) clicks Submit for legal review. Jordan cannot approve. 2. <b>Maria Alvarez</b> (Compliance Approver) clicks Approve (or Request changes to show the loop). 3. <b>Sam Patel</b> (Publisher) clicks <b>Publish to 2 sites</b>: IA Portal (14 pages) and LibertyMutual.com (9 pages), 23 in total.</p></aside>
+</section>
+<section id="s5b" data-background-color="#FFFFFF">
+  <div class="row g2"><span class="badge b-proto">5 · Prototype</span><span class="eyebrow">Central text, channel notes, rollback</span></div>
+  <h2 class="mt2">One core text, separate channel notes</h2>
+  <div class="cols2 mt3">
+    <div class="card pad fragment fade-up"><h3>Shared core text</h3><p class="t mt1">Changed once. Both sites show v4, with the new wording highlighted.</p></div>
+    <div class="card pad fragment fade-up"><h3>Channel notes stay separate</h3>
+      <p class="t mt1"><b>IA Portal:</b> “For use by licensed independent agents…”</p>
+      <p class="t mt1"><b>LibertyMutual.com:</b> “Questions about your coverage?…”</p></div>
+  </div>
+  <div class="card pad-sm tint-lime mt3 fragment fade-up"><p class="t"><b>Roll back to v3.</b> Sam clicks Roll back, and v3 is restored as <b>v5</b> on both sites.</p></div>
+
+  <aside class="notes"><p>Point out the channel-specific notes: the IA Portal's “For use by licensed independent agents…” and LM.com's “Questions about your coverage?…” stay separate; changing the core text does not touch them. Click <b>See both sites</b> (Two sites): both pages show v4 with the new wording highlighted.</p><p>As Sam, click <b>Roll back to v3</b>. It is restored as v5 on both sites. The button is only enabled as Sam, after v4 is published.</p></aside>
+</section>
+</section>
+
+<section id="s6" data-background-color="#FFFFFF">
+  <div class="row g2"><span class="badge b-proto">6 · Prototype</span><span class="eyebrow">Audit trail</span></div>
+  <h2 class="mt2">Every change, who made it, and how to undo it</h2>
+  <div class="cols3 mt4">
+    <div class="card pad fragment fade-up"><h3>Filter</h3><p class="t mt1">By Priorities, Components or Disclosure.</p></div>
+    <div class="card pad fragment fade-up"><h3>Who, role, approval</h3><p class="t mt1">Each entry shows who acted, their role and the approval status. The actions from sections 3 to 5 are listed.</p></div>
+    <div class="card pad fragment fade-up"><h3>Revert</h3><p class="t mt1">Undo the latest priority or component change from the log.</p></div>
+  </div>
+
+  <aside class="notes"><p><b>Section 6 · Audit trail (1 min; skip in the 20-minute cut).</b> Open <b>Audit log</b>. Filter by Priorities, Components or Disclosure. Your own actions from sections 3 to 5 are listed with who, role and approval status. Revert undoes only the latest priority or component change.</p></aside>
+</section>
+
+<section>
+<section id="s7" data-background-color="#FFFFFF">
+  <div class="row g2"><span class="badge b-cms">7 · CMS Editor</span><span class="eyebrow">The same mechanism in Optimizely CMS today</span></div>
+  <h2 class="mt2">That was the agent story. Here is the mechanism.</h2>
+  <div class="cols2 mt3">
+    <div class="card pad-sm stack-v g1 fragment fade-up"><h3>Change once, update everywhere</h3><p class="t">One shared block, used on 6 answer pages.</p><div class="row wrap g1 mt1"><button class="btn btn-ghost" data-goto="s7b" type="button">Show it →</button></div></div>
+    <div class="card pad-sm stack-v g1 fragment fade-up"><h3>Governed components</h3><p class="t">25 approved blocks that editors place in Visual Builder. Styling lives in code.</p><div class="row wrap g1 mt1"><a class="btn btn-cms" data-cms="startPage">Open the start page ↗</a></div></div>
+    <div class="card pad-sm stack-v g1 fragment fade-up"><h3>Rules as content</h3><p class="t">Routing rules that business users manage as content fields.</p><div class="row wrap g1 mt1"><button class="btn btn-ghost" data-goto="s7c" type="button">Show it →</button></div></div>
+    <div class="card pad-sm stack-v g1 fragment fade-up"><h3>Approved, auditable, reversible</h3><p class="t">Versions, compare and restore, Change Log, approvals and roles.</p><div class="row wrap g1 mt1"><button class="btn btn-ghost" data-goto="s7d" type="button">Show it →</button></div></div>
+  </div>
+
+  <aside class="notes"><p><b>Section 7 · Prove it in the real CMS (4 min).</b> <b>Say:</b> “That was the agent story as a prototype. Here is the same mechanism in Optimizely CMS today.”</p>
+<p>Four proofs: change once and update everywhere; governed components (editors only place approved, section-enabled blocks in Visual Builder, and styling lives in code); rules as content; approved, auditable, reversible.</p></aside>
+</section>
+<section id="s7b" data-background-color="#FFFFFF">
+  <div class="row g2"><span class="badge b-cms">7 · CMS Editor</span><span class="eyebrow">Change once, update everywhere</span></div>
+  <h2 class="mt2">One shared block, six answer pages</h2>
+  <div class="cols3 mt3">
+    <div class="card pad stack-v fragment fade-up"><span class="num">1</span><h3 class="mt2">Edit</h3><p class="t mt1">Change “Last reviewed” on the shared “Helpful row” block.</p><a class="btn btn-cms push self-start" data-cms="sharedHelpful">The shared block ↗</a></div>
+    <div class="card pad stack-v fragment fade-up"><span class="num">2</span><h3 class="mt2">Publish</h3><p class="t mt1">One publish. The change goes out through Optimizely Graph.</p></div>
+    <div class="card pad stack-v fragment fade-up"><span class="num">3</span><h3 class="mt2">Refresh</h3><p class="t mt1">Check two pages that use the block.</p><div class="row wrap g1 push"><a class="btn btn-live" data-live="/rental-car">/rental-car ↗</a><a class="btn btn-live" data-live="/burst-pipe">/burst-pipe ↗</a></div></div>
+  </div>
+
+  <aside class="notes"><p>Open the shared block <b>Ask Liberty: Helpful row (shared)</b>, used on 6 answer pages. Change “Last reviewed October 2026”, publish, then refresh /rental-car and /burst-pipe. This ties to the content reuse metric. Undo the edit afterwards.</p></aside>
+</section>
+<section id="s7c" data-background-color="#FFFFFF">
+  <div class="row g2"><span class="badge b-cms">7 · CMS Editor</span><span class="eyebrow">Rules as content</span></div>
+  <h2 class="mt2">The routing rule lives in content fields</h2>
+  <div class="card pad-sm mt3">
+    <table class="tbl dense" style="font-size:17.5px">
+      <thead><tr><th>Ask Liberty question block (in the CMS today)</th><th>Portal priority (how we would model it)</th></tr></thead>
+      <tbody>
+        <tr><td>Classification chips</td><td>Role, state and agency values, or “All”</td></tr>
+        <tr><td>Order in the list</td><td>The marketer’s priority order</td></tr>
+        <tr><td>Hide as a suggested chip</td><td>Do not emphasize this item</td></tr>
+        <tr><td>Fallback question</td><td>The default when no rule matches</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="row wrap g1 mt3"><a class="btn btn-cms" data-cms="qRental">Open an example question block ↗</a><a class="btn btn-cms" data-cms="startPage">Open the start page ↗</a></div>
+  <p class="cap mt2">The right-hand column is a design for discussion. It is not built today.</p>
+
+  <aside class="notes"><p>Open a question block. Its classification chips, keywords, <b>Hide as a chip</b> and <b>Fallback</b> are business-managed routing rules. A portal priority would work the same way, with role, state and agency fields. Be clear this is how we would model it, not something built today.</p></aside>
+</section>
+<section id="s7d" data-background-color="#E4F0DA">
+  <div class="row g2"><span class="badge b-cms">7 · CMS Editor</span><span class="eyebrow">Approved, auditable, reversible</span></div>
+  <h2 class="mt2">What governs a change in Optimizely CMS</h2>
+  <div class="cols2 mt3">
+    <div class="card pad-sm"><h3>Versions</h3><p class="t mt1">Compare two versions side by side. Restore creates a new draft, so nothing is silently overwritten.</p></div>
+    <div class="card pad-sm"><h3>Change Log</h3><p class="t mt1">Settings › Tools › Change Log. Filter by user, category and action.</p></div>
+    <div class="card pad-sm"><h3>Approvals</h3><p class="t mt1">Sequences with any number of steps. Administrators can stop people approving their own changes.</p></div>
+    <div class="card pad-sm"><h3>Roles and access rights</h3><p class="t mt1">Opti ID roles map to Read, Create, Change, Delete, Publish and Administer.</p></div>
+  </div>
+  <p class="cap mt2">Approval sequences and roles are configured per instance.</p>
+
+  <aside class="notes"><p><b>Compare</b> two versions and <b>Restore</b>: restore creates a new draft, not a silent overwrite. Open <b>Settings › Tools › Change Log</b> and filter by user or action.</p>
+<p>If configured, show the <b>approval sequence</b> with “prevent self-approval” (four-eyes). With approvals on, republishing an older version needs <b>New Draft from Here</b> plus approval, so even rollback is governed. Opti ID roles map to CMS access rights: Read, Create, Change, Delete, Publish, Administer. If these are not yet set up in the instance, describe them rather than demonstrate.</p>
+<p>Docs: docs.optimizely.com/cms-saas (Approve content, Compare versions of content, View the change log, Set access rights).</p></aside>
+</section>
+</section>
+
+<section>
+<section id="s8" data-background-color="#FFFFFF">
+  <div class="row g2"><span class="badge b-arch">8 · Architecture</span><span class="eyebrow">How it works</span></div>
+  <h2 class="mt2">Ping signs in. Graph filters. The CMS governs.</h2>
+  <div class="flow mt3">
+    <div class="node fragment fade-up" data-fragment-index="0"><b>Agent signs in</b>with Ping</div>
+    <span class="arrow fragment fade-up" data-fragment-index="1">→</span>
+    <div class="node fragment fade-up" data-fragment-index="1"><b>IA Portal front end</b>Liberty keeps hosting it. Claims: role, state, agency.</div>
+    <span class="arrow fragment fade-up" data-fragment-index="2">→</span>
+    <div class="node fragment fade-up" data-fragment-index="2" style="background:var(--lf)"><b>Optimizely Graph query</b>Priority items where role, state and agency match (or “All”), in priority order, top 3.</div>
+    <span class="arrow fragment fade-up" data-fragment-index="3">→</span>
+    <div class="node fragment fade-up" data-fragment-index="3" style="background:var(--aqua)"><b>CMS SaaS</b>Governed blocks, rules and approvals.</div>
+    </div>
+  <div class="eyebrow mt4 fragment fade-up" data-fragment-index="4">One shared disclosure serves</div>
+  <div class="cols3 mt2">
+    <div class="node fragment fade-up" data-fragment-index="4"><b>IA Portal</b>Liberty keeps hosting the front end</div>
+    <div class="node fragment fade-up" data-fragment-index="4"><b>LibertyMutual.com</b>Reads the same approved disclosure</div>
+    <div class="node fragment fade-up" data-fragment-index="4"><b>Search and other channels</b>Through the API (an integration pattern)</div>
+  </div>
+
+  <aside class="notes"><p><b>Section 8 · Architecture Argument (3 min).</b> Keep it simple: Ping signs the agent in and passes role, state and agency. The portal queries Optimizely Graph for priority items where those match (or “All”), ordered by the marketer's priority, top three. Liberty keeps hosting the IA Portal front end.</p>
+<p>One shared disclosure can serve the IA Portal, LibertyMutual.com and, through the API, search and other channels (an integration pattern).</p></aside>
+</section>
+<section id="s8b" data-background-color="#FFFFFF">
+  <div class="row g2"><span class="badge b-arch">8 · Architecture</span><span class="eyebrow">Design choices</span></div>
+  <h2 class="mt2">Rules travel as content</h2>
+  <div class="cols3 mt3">
+    <div class="card pad fragment fade-up"><h3>Fields and Graph filters</h3><p class="t mt1">We recommend this over built-in visitor groups, because the portal is a headless front end that Liberty hosts and identity comes from Ping.</p></div>
+    <div class="card pad fragment fade-up"><h3>A permitted layer</h3><p class="t mt1">Graph role-based access keeps agent-only content out of public LibertyMutual.com queries.</p></div>
+    <div class="card pad fragment fade-up"><h3>What you told us</h3><p class="t mt1">No change to the IA Portal front end. No user management on the platform. No CDP required.</p></div>
+  </div>
+
+  <aside class="notes"><p>Rules travel as content fields and Graph filters. We recommend this over built-in visitor groups because the portal is a headless front end Liberty hosts and identity comes from Ping. Graph role-based access (<b>cg-roles</b>) keeps agent-only content out of public LM.com queries. This respects the Q&amp;A: no change to the IA Portal front end, no user management, no CDP.</p></aside>
+</section>
+<section id="s8c" data-background-color="#FFFFFF">
+  <div class="row g2"><span class="badge b-arch">8 · Architecture</span><span class="eyebrow">Today and next</span></div>
+  <h2 class="mt2">Shown today, and directions we could explore</h2>
+  <div class="card pad-sm mt3">
+    <table class="tbl" style="font-size:19px">
+      <thead><tr><th>Shown today</th><th>Directions to explore (illustrative)</th></tr></thead>
+      <tbody>
+        <tr><td>A prototype of the agent experience, with sample data.</td><td>A live agent portal page reading the same disclosure from a second site in the same instance.</td></tr>
+        <tr><td>Shared blocks, governed components, rules as content, versions and Change Log in the CMS.</td><td>Testing priority framing with Feature Experimentation and CMS content variations.</td></tr>
+        <tr><td>One shared disclosure pattern.</td><td>Search and other channels reading the same approved content.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="cap mt2">The right-hand column is for discussion. It is not a commitment or part of the demonstration.</p>
+
+  <aside class="notes"><p>Label the right-hand column as illustrative. Feature Experimentation with CMS content variations could test priority framing. A live portal page on a second site in the same instance would be a true two-site proof (Liberty runs a single instance with multiple sites). Liberty asked for a two-year roadmap, so this is the bridge into that section.</p></aside>
+</section>
+</section>
+
+<section id="summary" data-background-color="#08251A">
+  <div class="fill between dark">
+    <div class="eyebrow lime">Summary</div>
+    <h2 style="font-size:50px">Relevant. Run by the business. Governed once.</h2>
+    <div class="cols3">
+      <div class="card pad-sm fragment fade-up" style="background:var(--lf);color:var(--fir)"><div class="eyebrow">Time to publish</div><p class="t-sm mt1">A priority change, from edit to live, with no release (section 3).</p></div>
+      <div class="card pad-sm fragment fade-up" style="background:var(--aqua);color:var(--fir)"><div class="eyebrow">Changes without engineering</div><p class="t-sm mt1">Priorities, components and disclosures (sections 3 to 5).</p></div>
+      <div class="card pad-sm fragment fade-up" style="background:var(--n3);color:var(--fir)"><div class="eyebrow">Content reuse</div><p class="t-sm mt1">One disclosure on two sites, and shared blocks in the CMS (sections 5 and 7).</p></div>
+    </div>
+    <div class="row wrap g2">
+      <a class="btn btn-live btn-lg" data-live="/use-case-2-agent-portal.html">Open the portal prototype ↗</a>
+      <button class="btn btn-ghost btn-lg" data-goto="launch" type="button">Questions: jump to anything →</button>
+    </div>
+  </div>
+
+  <aside class="notes"><p><b>Close (1 min).</b> Relevant, run by the business, governed once. Tie each to Liberty's metrics: time to publish (section 3), % of changes without engineering (sections 3 to 5), content reuse rate (sections 5 and 7). Then move to questions; the launchpad is one click away.</p></aside>
+</section>
+
+<section id="cast" data-background-color="#E4F0DA">
+  <div class="eyebrow">Reference</div>
+  <h2 class="mt1">Who you met</h2>
+  <div class="cols3 mt3">
+    <div class="card pad-sm"><div class="eyebrow">Agent experience</div>
+      <ul class="t-sm stack-v g1 mt2"><li><b>Dana Whitfield</b> · Producer</li><li><b>Tyler Brooks</b> · Producer</li><li><b>Marcus Chen</b> · Principal</li><li><b>Elena Ruiz</b> · Service rep</li></ul></div>
+    <div class="card pad-sm"><div class="eyebrow">Liberty business</div>
+      <ul class="t-sm stack-v g1 mt2"><li><b>Priya Raman</b> · Marketing Manager</li><li><b>Devon Park</b> · Design System Owner</li></ul></div>
+    <div class="card pad-sm"><div class="eyebrow">Shared content</div>
+      <ul class="t-sm stack-v g1 mt2"><li><b>Jordan Blake</b> · Content Administrator</li><li><b>Maria Alvarez</b> · Compliance Approver</li><li><b>Sam Patel</b> · Publisher</li></ul></div>
+  </div>
+  <p class="cap mt3">Names, dates and disclosure wording in the prototype are placeholders.</p>
+
+  <aside class="notes"><p>Reference for questions. The prototype's names, dates and disclosure wording are placeholders, not approved language.</p></aside>
+</section>
+
+<section id="launch" data-background-color="#FFFFFF">
+  <div class="row g2"><span class="badge b-live">Questions</span><span class="eyebrow">Jump to anything</span></div>
+  <h2 class="mt2">One click to any view</h2>
+  <div class="cols2 mt3">
+    <div class="card pad-sm"><div class="eyebrow">Prototype and live site</div>
+      <div class="stack-v g1 mt2" style="align-items:flex-start">
+        <a class="btn btn-live" data-live="/use-case-2-agent-portal.html">Agent portal prototype ↗</a>
+        <a class="btn btn-live" data-live="/">Ask Liberty home ↗</a>
+        <div class="row wrap g1"><a class="btn btn-live" data-live="/rental-car">/rental-car ↗</a><a class="btn btn-live" data-live="/burst-pipe">/burst-pipe ↗</a><a class="btn btn-live" data-live="/bundling">/bundling ↗</a></div>
+      </div></div>
+    <div class="card pad-sm"><div class="eyebrow">CMS Editor</div>
+      <div class="stack-v g1 mt2" style="align-items:flex-start">
+        <a class="btn btn-cms" data-cms="startPage">Ask Liberty start page ↗</a>
+        <a class="btn btn-cms" data-cms="sharedHelpful">Shared Helpful row ↗</a>
+        <a class="btn btn-cms" data-cms="qRental">Rental car question block ↗</a>
+      </div></div>
+  </div>
+  <div class="row wrap g1 mt3"><button class="btn btn-ghost" data-goto="s2b" type="button">Four agents</button><button class="btn btn-ghost" data-goto="asked" type="button">Your checklist</button><button class="btn btn-ghost" data-goto="s8" type="button">Architecture</button><button class="btn btn-ghost" data-goto="cast" type="button">Who you met</button></div>
+
+  <aside class="notes"><p>Use during questions to jump to any view. The four-agent table, the checklist and the architecture slides are one click away.</p></aside>
+</section>
+</div></div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+<script>
+(function(){
+  'use strict';
+  var LIVE = 'https://libertymutual.optimoey.com';
+  var CMS_BASE = 'https://app-epsamoey0012f6ygp001.cms.optimizely.com';
+  /* CMS items. `id` is the number at the end of the editor address, for example
+     .../ui/cms#context=epi.cms.contentdata:///451  ->  id 451.
+     While id is null the button opens the CMS Editor and the tooltip says where to find the item. */
+  var CMS = {
+    startPage:     { id: 451,  name: 'Ask Liberty start page',        where: 'the Liberty Mutual start page' },
+    sharedHelpful: { id: null, name: 'Helpful row (shared) block',    where: 'shared assets (For All Applications): Ask Liberty: Helpful row (shared)' },
+    qRental:       { id: null, name: 'Rental car question block',     where: 'Ask Liberty Questions folder: Does my car insurance cover a rental car?' }
+  };
+  function cmsUrl(name){
+    var it = CMS[name];
+    if (it && it.id) return CMS_BASE + '/ui/cms#context=epi.cms.contentdata:///' + encodeURIComponent(it.id);
+    return CMS_BASE + '/ui/cms';
+  }
+  function out(a){ a.target = '_blank'; a.rel = 'noopener noreferrer'; }
+  document.querySelectorAll('[data-live]').forEach(function(a){ a.href = LIVE + a.getAttribute('data-live'); out(a); });
+  document.querySelectorAll('[data-cms]').forEach(function(a){
+    var key = a.getAttribute('data-cms'), it = CMS[key];
+    a.href = cmsUrl(key); out(a);
+    a.title = it ? (it.id ? 'Open “' + it.name + '” in the CMS Editor' : 'Opens the CMS Editor. Find it: ' + it.where) : 'Opens the CMS Editor';
+  });
+  function jump(id){
+    var el = document.getElementById(id);
+    if (el && window.Reveal) { var i = Reveal.getIndices(el); Reveal.slide(i.h, i.v || 0); }
+  }
+  document.addEventListener('click', function(e){
+    var go = e.target.closest('[data-goto]');
+    if (go) { e.preventDefault(); jump(go.getAttribute('data-goto')); }
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key !== 'Enter') return;
+    var go = e.target.closest && e.target.closest('tr[data-goto]');
+    if (go) { e.preventDefault(); jump(go.getAttribute('data-goto')); }
+  });
+  if (window.Reveal) {
+    Reveal.initialize({
+      hash: true, width: 1280, height: 720, margin: 0.04, minScale: 0.2, maxScale: 2.0,
+      center: false, controls: true, progress: true, slideNumber: 'c/t', transition: 'slide', backgroundTransition: 'fade',
+      plugins: window.RevealNotes ? [RevealNotes] : []
+    });
+  }
+})();
+</script>
+<script src="/dev-quick-links.js" defer></script>
+</body>
+</html>
