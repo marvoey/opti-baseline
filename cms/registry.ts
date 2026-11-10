@@ -21,6 +21,14 @@ import { libShellTypes, libShellRenderers } from './liberty/LibShell';
 import { libAnswerTypes, libAnswerRenderers } from './liberty/LibAnswer';
 import { libTaskTypes, libTaskRenderers } from './liberty/LibTask';
 import LibSourcesBlock, { LibSourcesBlockContentType, LibSourceContentType } from './liberty/LibSourcesBlock';
+import AgentPriorityBlock, { AgentPriorityContentType } from './agent/AgentPriority';
+import AgentPriorities, { AgentPrioritiesContentType } from './agent/AgentPriorities';
+import AgentDashboardExperience, { AgentDashboardExperienceContentType } from './agent/AgentDashboardExperience';
+import AgentPriorityCards, { AgentPriorityCardsContentType } from './agent/AgentPriorityCards';
+import AgentPortal, { AgentPortalContentType } from './agent/AgentPortal';
+import AgentProductExperience, { AgentProductExperienceContentType } from './agent/AgentProductExperience';
+import { agentBlockTypes, agentBlockRenderers } from './agent/AgentBlocks';
+import AgentDisclosure, { AgentDisclosureContentType, AgentDisclosureChannelTemplate } from './agent/AgentDisclosure';
 
 /**
  * Single configuration + registration point for the Optimizely SDK.
@@ -66,11 +74,20 @@ export const registeredContentTypes = [
   ...libShellTypes,
   ...libAnswerTypes,
   ...libTaskTypes,
+  // Independent Agent Portal (use case 2) — keys prefixed `Agent`
+  AgentPriorityContentType,
+  AgentPrioritiesContentType,
+  AgentDashboardExperienceContentType,
+  AgentPriorityCardsContentType,
+  AgentPortalContentType,
+  AgentProductExperienceContentType,
+  AgentDisclosureContentType,
+  ...agentBlockTypes,
 ];
 
 initContentTypeRegistry(registeredContentTypes);
 
-initDisplayTemplateRegistry([]);
+initDisplayTemplateRegistry([AgentDisclosureChannelTemplate]);
 
 initReactComponentRegistry({
   resolver: {
@@ -82,6 +99,14 @@ initReactComponentRegistry({
     LibSourcesBlock,
     LibAskQuestion: LibAskQuestionBlock,
     AskLibertyExperience,
+    AgentPriority: AgentPriorityBlock,
+    AgentPriorities,
+    AgentDashboardExperience,
+    AgentPriorityCards,
+    AgentPortal,
+    AgentProductExperience,
+    AgentDisclosure,
+    ...agentBlockRenderers,
     ...libShellRenderers,
     ...libAnswerRenderers,
     ...libTaskRenderers,

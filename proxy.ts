@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { LOCALE_SEGMENTS } from '@/lib/locales';
+import { AGENT_HEADER, agentKeyFromPath, isAgentKey } from '@/lib/agent/personas';
 
 /**
  * Next.js 16 Proxy (the replacement for Middleware) — locale clean-URLs for the
@@ -27,9 +28,26 @@ function firstSegment(pathname: string): string {
   return pathname.split('/')[1] ?? '';
 }
 
+/**
+ * Request headers forwarded to the page. Used for the portal's `?agent=dana`
+ * override and for the per-agent dashboards (/agent/dana): this request only,
+ * never stored; lib/agent/getAgent.ts reads it. `?agent=` wins over the path.
+ * Any `x-agent` header the client sent itself is dropped first, and only one of
+ * the four known agent keys is ever passed on.
+ */
+function forwardedHeaders(request: NextRequest): Headers {
+  const headers = new Headers(request.headers);
+  headers.delete(AGENT_HEADER);
+  const fromQuery = request.nextUrl.searchParams.get('agent');
+  const agent = isAgentKey(fromQuery) ? fromQuery : agentKeyFromPath(request.nextUrl.pathname);
+  if (agent) headers.set(AGENT_HEADER, agent);
+  return headers;
+}
+
 export function proxy(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
   const seg = firstSegment(pathname);
+  const forwarded = { request: { headers: forwardedHeaders(request) } };
 
   // Default-locale prefix is visible → redirect to the clean path (canonical/SEO).
   //   /en/vb-demo → /vb-demo
@@ -41,13 +59,13 @@ export function proxy(request: NextRequest) {
 
   // A non-default known locale is already present → leave it; [locale] is populated.
   if (KNOWN_LOCALE_SEGMENTS.includes(seg)) {
-    return NextResponse.next();
+    return NextResponse.next(forwarded);
   }
 
   // Clean CMS path with no locale → rewrite into the default locale so [locale] is set.
   //   /vb-demo → /en/vb-demo
   const rewritten = `/${DEFAULT_LOCALE}${pathname}`;
-  return NextResponse.rewrite(new URL(rewritten + search, request.url));
+  return NextResponse.rewrite(new URL(rewritten + search, request.url), forwarded);
 }
 
 export const config = {
