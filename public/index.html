@@ -116,7 +116,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 20px 40px;color:var(--mut);font-
 </head>
 <body>
 <header class="top"><div class="top-in">
-  <a class="brand" href="#/"><span style="font-size:26px">🐄</span><span id="siteName">The Coop<small id="restName"></small></span></a>
+  <a class="brand" href="#/"><span style="font-size:26px">🐄</span><span id="siteName"><span id="siteNameText">The Coop</span><small id="restName"></small></span></a>
   <nav class="main" id="nav"></nav>
   <div class="search"><input id="q" placeholder="Search people, news, documents..." autocomplete="off"><div class="results" id="results"></div></div>
 </div></header>
@@ -135,6 +135,13 @@ footer{max-width:1180px;margin:0 auto;padding:0 20px 40px;color:var(--mut);font-
    same shape (open the page with ?src=<url>). Otherwise this snapshot is used.
    ============================================================ */
 const CONFIG = { contentUrl: new URLSearchParams(location.search).get('src') || (location.protocol.indexOf('http') === 0 ? '/api/content' : '') };
+
+/* CMS preview mode: /preview?key=&ver=&loc=&ctx=edit|preview&preview_token=  (opened in an iframe by the CMS UI).
+   The token lives only in memory + the request header; it is removed from the address bar on load. */
+const PV = location.pathname.replace(/\/+$/, '') === '/preview'
+  ? (() => { const q = new URLSearchParams(location.search); return { key: q.get('key') || '', ver: q.get('ver') || '', loc: q.get('loc') || '', ctx: q.get('ctx') || 'preview', token: q.get('preview_token') || '' }; })()
+  : null;
+let EDITING = false; // true only in ctx=edit while showing the item being previewed
 
 const SNAPSHOT = {
   source: 'CMS snapshot: The Coop (draft v212-217)',
@@ -195,6 +202,9 @@ const un = v => (v && typeof v==='object' && 'value' in v) ? v.value : v;
 const props = o => { const out={}; for (const k in (o.properties||{})) out[k]=un(o.properties[k]); return out; };
 const rich = v => (v && typeof v==='object' && v.html) ? v.html : (v ? `<p>${esc(v)}</p>` : '');
 const esc = s => String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+/* On-page editing hooks (CMS communication script). Rendered only in ctx=edit. Names are fixed strings from the renderers, never user input. */
+const ed = name => EDITING ? ` data-epi-edit="${name}"` : '';
+const tagBlock = (html, n) => (EDITING && n.id) ? html.replace(/^(\s*)<([a-z][a-z0-9]*)/i, (m, s, t) => `${s}<${t} data-epi-block-id="${esc(n.id)}"`) : html;
 const initials = n => n.split(' ').map(x=>x[0]).slice(0,2).join('').toUpperCase();
 const DEPT = {'front-counter':'Front Counter','kitchen':'Kitchen','drive-thru':'Drive-Thru','leadership':'Leadership','support-center':'Support Center'};
 const RTYPE = {policy:'Policy',training:'Training',safety:'Safety',hr:'HR and Benefits',brand:'Brand'};
@@ -219,22 +229,22 @@ const R={};
 R.CfaHeroBanner=(p,ctx)=>{
   const h=new Date().getHours(), g=h<12?'Good morning':h<17?'Good afternoon':'Good evening';
   const head=p.ShowTimeOfDayGreeting?`${g}, Jon`:p.Headline;
-  return `<div class="hero"><h2>${esc(head)}</h2><p>${esc(p.Subheadline)}</p>
+  return `<div class="hero"><h2${p.ShowTimeOfDayGreeting?'':ed('Headline')}>${esc(head)}</h2><p${ed('Subheadline')}>${esc(p.Subheadline)}</p>
    <div class="meta"><span class="pill">📍 ${esc(ctx.home.RestaurantName)}</span><span class="pill">⏰ ${esc(ctx.home.ShiftInfo)}</span></div>
-   ${p.CtaLabel?`<a class="btn light" href="#/events" >${esc(p.CtaLabel)}</a>`:''}
+   ${p.CtaLabel?`<a class="btn light" href="#/events"${ed('CtaLabel')}>${esc(p.CtaLabel)}</a>`:''}
    <div style="margin-top:14px;font-size:13px;opacity:.9">${esc(ctx.home.Tagline)}</div></div>`;
 };
 const QL_ROUTE={'Request Time Off':'#/time-off','Team Directory':'#/directory','Training':'#/resources?type=training','Benefits':'#/resources?type=hr'};
-R.CfaQuickLinksSection=p=>`<section class="blk"><h3>${esc(p.Heading)}</h3><div class="grid g4">${(p.Links||[]).map(l=>{const q=props(l);return `<a class="tile" style="text-decoration:none;color:inherit" href="${esc((q.Target&&q.Target.href)||QL_ROUTE[q.Label]||'#/')}"><span class="ic">${esc(q.IconEmoji)}</span>${esc(q.Label)}</a>`}).join('')}</div></section>`;
+R.CfaQuickLinksSection=p=>`<section class="blk"><h3${ed('Heading')}>${esc(p.Heading)}</h3><div class="grid g4">${(p.Links||[]).map(l=>{const q=props(l);return `<a class="tile" style="text-decoration:none;color:inherit" href="${esc((q.Target&&q.Target.href)||QL_ROUTE[q.Label]||'#/')}"><span class="ic">${esc(q.IconEmoji)}</span>${esc(q.Label)}</a>`}).join('')}</div></section>`;
 
 R.CfaNewsListSection=(p)=>{
   const arts=(p.Articles||[]).map(props), max=p.MaxItems||arts.length;
   const cats=[...new Set(arts.map(a=>a.Category))];
   const chips=p.ShowCategoryFilter?`<div class="chips"><span class="chip ${S.newsFilter==='all'?'on':''}" data-act="newsf" data-v="all">All</span>${cats.map(c=>`<span class="chip ${S.newsFilter===c?'on':''}" data-act="newsf" data-v="${c}">${CAT[c]||c}</span>`).join('')}</div>`:'';
   const list=arts.filter(a=>!p.ShowCategoryFilter||S.newsFilter==='all'||a.Category===S.newsFilter).slice(0,max);
-  return `<section class="blk"><h3>${esc(p.Heading)}</h3>${chips}<div class="grid g3">${list.map(a=>`<div class="card click" data-act="news" data-v="${REG.news.indexOf(REG.news.find(n=>n.Headline===a.Headline))}"><span class="tag ${a.Category}">${esc(CAT[a.Category]||a.Category)}</span><h4>${esc(a.Headline)}</h4><p>${esc(a.Summary)}</p></div>`).join('')||'<div class="empty">No articles in this category.</div>'}</div></section>`;
+  return `<section class="blk"><h3${ed('Heading')}>${esc(p.Heading)}</h3>${chips}<div class="grid g3">${list.map(a=>`<div class="card click" data-act="news" data-v="${REG.news.indexOf(REG.news.find(n=>n.Headline===a.Headline))}"><span class="tag ${a.Category}">${esc(CAT[a.Category]||a.Category)}</span><h4>${esc(a.Headline)}</h4><p>${esc(a.Summary)}</p></div>`).join('')||'<div class="empty">No articles in this category.</div>'}</div></section>`;
 };
-R.CfaRecognitionSection=p=>`<section class="blk"><h3>${esc(p.Heading)}</h3>
+R.CfaRecognitionSection=p=>`<section class="blk"><h3${ed('Heading')}>${esc(p.Heading)}</h3>
  ${p.FeaturedQuote?`<div class="quote">"${esc(p.FeaturedQuote)}"<b>${esc(p.FeaturedQuoteAttribution)}</b></div>`:''}
  <div class="card"><div id="shouts">${shoutsHtml()}</div>
  ${p.AllowPosting?`<div style="margin-top:14px"><button class="btn sm" data-act="shoutform">+ Recognize a teammate</button></div>`:''}</div></section>`;
@@ -247,8 +257,8 @@ R.CfaEventsSection=(p)=>{
   const list=p.ShowCalendarGrid?sorted:sorted.filter(e=>new Date(e.StartDate).getTime()>=now);
   const rows=list.map(e=>{const i=REG.events.findIndex(x=>x.Title===e.Title&&x.StartDate===e.StartDate);const past=new Date(e.StartDate).getTime()<now;
     return `<div class="evrow ${past?'past':''}" data-act="event" data-v="${i}"><div class="date"><small>${fmtDate(e.StartDate,{month:'short'})}</small><b>${fmtDate(e.StartDate,{day:'numeric'})}</b></div><div style="flex:1"><b>${esc(e.Title)}</b><div style="color:var(--mut);font-size:13px">${fmtTime(e.StartDate)} · ${esc(e.EventLocation)}${past?' · Past':''}</div></div><span class="tag ${e.EventType}">${esc(ETYPE[e.EventType]||e.EventType)}</span></div>`}).join('')||'<div class="empty">No upcoming events.</div>';
-  if(!p.ShowCalendarGrid) return `<section class="blk"><h3>${esc(p.Heading)}</h3><div class="card">${rows}<div style="margin-top:12px"><a class="btn ghost sm" href="#/events">View full calendar</a></div></div></section>`;
-  return `<section class="blk"><h3>${esc(p.Heading)}</h3><div class="row2"><div class="card" id="calwrap">${calHtml(evs)}</div><div class="card"><b>All events</b><div style="margin-top:6px">${rows}</div><div style="margin-top:14px"><button class="btn sm" data-act="addevent">+ Add event</button></div></div></div></section>`;
+  if(!p.ShowCalendarGrid) return `<section class="blk"><h3${ed('Heading')}>${esc(p.Heading)}</h3><div class="card">${rows}<div style="margin-top:12px"><a class="btn ghost sm" href="#/events">View full calendar</a></div></div></section>`;
+  return `<section class="blk"><h3${ed('Heading')}>${esc(p.Heading)}</h3><div class="row2"><div class="card" id="calwrap">${calHtml(evs)}</div><div class="card"><b>All events</b><div style="margin-top:6px">${rows}</div><div style="margin-top:14px"><button class="btn sm" data-act="addevent">+ Add event</button></div></div></div></section>`;
 };
 function calHtml(evs){
   if(!S.cal){const n=new Date();S.cal=new Date(Date.UTC(n.getFullYear(),n.getMonth(),1));}
@@ -262,7 +272,7 @@ function calHtml(evs){
 }
 
 R.CfaDirectorySection=p=>{
-  return `<section class="blk"><h3>${esc(p.Heading)}</h3><div class="bar">
+  return `<section class="blk"><h3${ed('Heading')}>${esc(p.Heading)}</h3><div class="bar">
    ${p.ShowSearch?`<input id="dirq" placeholder="Search by name, role or location..." value="${esc(S.dirQ)}">`:''}
    ${p.ShowDepartmentFilter?`<select id="dird"><option value="all">All departments</option>${Object.entries(DEPT).map(([k,v])=>`<option value="${k}" ${S.dirDept===k?'selected':''}>${v}</option>`).join('')}</select>`:''}
    </div><div class="grid g3" id="dirgrid">${dirGrid()}</div></section>`;
@@ -276,7 +286,7 @@ function dirGrid(){
 R.CfaResourceLibrarySection=p=>{
   const tr=REG.docs.filter(d=>d.DurationMinutes);
   const avg=tr.length?Math.round(tr.reduce((a,d)=>a+(S.progress[d.Title]||0),0)/tr.length):0;
-  return `<section class="blk"><h3>${esc(p.Heading)}</h3>
+  return `<section class="blk"><h3${ed('Heading')}>${esc(p.Heading)}</h3>
   ${p.ShowTrainingProgress?`<div class="card" style="margin-bottom:14px" id="trainsum">${trainSum(avg,tr)}</div>`:''}
   <div class="bar"><input id="resq" placeholder="Search documents..." value="${esc(S.resQ)}"><select id="rest"><option value="all">All types</option>${Object.entries(RTYPE).map(([k,v])=>`<option value="${k}" ${S.resType===k?'selected':''}>${v}</option>`).join('')}</select></div>
   <div class="grid g3" id="resgrid">${resGrid()}</div></section>`;
@@ -292,7 +302,7 @@ function resGrid(){
 
 R.CfaTimeOffSection=p=>{
   if(S.hours===null)S.hours=p.DefaultHoursAvailable||0;
-  return `<section class="blk"><div class="row2"><div class="card"><h3 style="margin-top:0">${esc(p.Heading)}</h3>${rich(p.IntroText)}
+  return `<section class="blk"><div class="row2"><div class="card"><h3 style="margin-top:0"${ed('Heading')}>${esc(p.Heading)}</h3>${rich(p.IntroText)}
   <form class="f" id="toform" data-block="${p.BlockSundays?1:0}" novalidate>
    <label>Type<select id="to_type"><option>Vacation</option><option>Sick</option><option>Personal</option></select></label>
    <div class="two"><label>Start date<input type="date" id="to_s"></label><label>End date<input type="date" id="to_e"></label></div>
@@ -326,13 +336,18 @@ function route(){
   const app=$('#app');
   if(!pg){app.innerHTML='<div class="empty">Page not found. <a href="#/">Back home</a></div>';return;}
   const hp=props(SITE.home); const ctx={home:hp};
+  // On-page editing only applies to the exact item being previewed (not other pages reached via the nav).
+  EDITING=!!(PV&&PV.ctx==='edit'&&SITE.preview&&pg.key===SITE.preview.key);
+  const sn=$('#siteNameText'),rn=$('#restName');
+  if(EDITING&&isHome){sn.setAttribute('data-epi-edit','SiteName');rn.setAttribute('data-epi-edit','RestaurantName');}
+  else{sn.removeAttribute('data-epi-edit');rn.removeAttribute('data-epi-edit');}
   let html='';
-  if(!isHome){const pp=props(pg);html+=`<div class="page-title"><h1>${esc(pp.PageIcon||'')} ${esc(pg.displayName)}</h1><p>${esc(pp.PageIntro||'')}</p></div>`;}
+  if(!isHome){const pp=props(pg);html+=`<div class="page-title"><h1>${esc(pp.PageIcon||'')} ${esc(pg.displayName)}</h1><p${ed('PageIntro')}>${esc(pp.PageIntro||'')}</p></div>`;}
   const nodes=pg.nodes||[];
   if(isHome){ // home: two column layout for news + recognition/events
-    const get=t=>nodes.filter(n=>n.contentType===t).map(n=>R[t](props(n),ctx)).join('');
+    const get=t=>nodes.filter(n=>n.contentType===t).map(n=>tagBlock(R[t](props(n),ctx),n)).join('');
     html+=get('CfaHeroBanner')+get('CfaQuickLinksSection')+`<div class="row2"><div>${get('CfaNewsListSection')}</div><div>${get('CfaEventsSection')}</div></div>`+get('CfaRecognitionSection');
-  } else html+=nodes.map(n=>R[n.contentType]?R[n.contentType](props(n),ctx):`<div class="empty">No renderer for ${esc(n.contentType)}</div>`).join('');
+  } else html+=nodes.map(n=>R[n.contentType]?tagBlock(R[n.contentType](props(n),ctx),n):`<div class="empty">No renderer for ${esc(n.contentType)}</div>`).join('');
   app.innerHTML=html; window.scrollTo(0,0);
 }
 
@@ -408,7 +423,41 @@ window.addEventListener('hashchange',route);
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
 
 /* ---------- boot ---------- */
+async function loadPreview(token){
+  const q=new URLSearchParams({key:PV.key,ver:PV.ver,loc:PV.loc,ctx:PV.ctx});
+  const r=await fetch('/api/preview?'+q,{headers:Object.assign({Accept:'application/json'},token?{Authorization:'Bearer '+token}:{})});
+  const j=await r.json().catch(()=>null);
+  if(!r.ok||!j||!j.home) throw new Error((j&&j.error)||('HTTP '+r.status));
+  return j;
+}
+function setHeader(){const hp=props(SITE.home);$('#siteNameText').textContent=hp.SiteName||'The Coop';$('#restName').textContent=hp.RestaurantName||'';}
+function previewBadge(){const p=SITE.preview;$('#srcBadge').textContent=`Preview: ${p.kind==='home'?'home':p.routeSegment} · version ${p.ver}${p.loc?' · '+p.loc:''} · ${p.ctx}`;}
+function previewError(msg){$('#nav').innerHTML='';$('#app').innerHTML=`<div class="empty">Preview unavailable: ${esc(msg)}</div>`;$('#srcBadge').textContent='Preview error';}
+async function bootPreview(){
+  // keep the short-lived token out of the address bar / history (it stays in memory for refreshes)
+  const u=new URLSearchParams(location.search); u.delete('preview_token');
+  history.replaceState(null,'',location.pathname+(u.toString()?'?'+u:'')+location.hash);
+  try{ SITE=await loadPreview(PV.token); }
+  catch(err){ previewError(err.message); return; } // never fall back to the snapshot: it would show the wrong content
+  const p=SITE.preview;
+  history.replaceState(null,'',location.pathname+location.search+(p.kind==='home'?'#/':'#/'+p.routeSegment));
+  // On-page editing: load the CMS communication script from the CMS origin the server was configured with.
+  if(PV.ctx==='edit'&&p.cmsOrigin&&/^https:\/\/[a-z0-9.-]+(:\d+)?$/i.test(p.cmsOrigin)){
+    const s=document.createElement('script'); s.src=p.cmsOrigin+'/util/javascript/communicationinjector.js'; document.head.appendChild(s);
+  }
+  // After each save the CMS sends a NEW version and a fresh 5-minute token: re-read and re-render.
+  window.addEventListener('optimizely:cms:contentSaved',async e=>{
+    const d=(e&&e.detail)||{}; let token=d.previewToken, ver=PV.ver;
+    try{ const pu=new URL(d.previewUrl,location.href); token=token||pu.searchParams.get('preview_token'); ver=pu.searchParams.get('ver')||ver; }catch{}
+    if(!token) return;
+    try{ const prev=PV.ver; PV.ver=ver; PV.token=token; try{ SITE=await loadPreview(token); }catch(err){ PV.ver=prev; throw err; }
+      setHeader(); buildRegistry(); route(); previewBadge(); }
+    catch(err){ toast('Preview refresh failed: '+err.message); }
+  });
+  setHeader(); previewBadge(); buildRegistry(); route();
+}
 async function boot(){
+  if(PV) return bootPreview();
   SITE=SNAPSHOT; let note='';
   if(CONFIG.contentUrl){
     try{
@@ -419,7 +468,7 @@ async function boot(){
     }catch(err){console.warn('Live content unavailable, using snapshot:',err);note=' (live content unavailable: '+err.message+')';SITE=SNAPSHOT;}
   }
   const hp=props(SITE.home);
-  $('#siteName').firstChild.textContent=hp.SiteName||'The Coop';$('#restName').textContent=hp.RestaurantName||'';
+  $('#siteNameText').textContent=hp.SiteName||'The Coop';$('#restName').textContent=hp.RestaurantName||'';
   $('#srcBadge').textContent='Content source: '+(SITE.source||'live')+note;
   buildRegistry();route();
 }

@@ -13,12 +13,26 @@ No npm dependencies. Node 22+ (tested on Node 24).
 ## Run locally
 
 ```bash
-npm test                 # 10 unit/integration tests, no network needed
+npm test                 # unit/integration tests, no network needed
 npm run dev:mock         # http://localhost:3000 - fake Graph serving a real captured response, no keys needed
 
 cp .env.example .env     # then fill in keys
-npm start                # http://localhost:3000 - real Graph
+npm start                # http://localhost:$PORT (default 3000) - real Graph
 ```
+
+## CMS preview and on-page editing (`/preview`)
+
+`GET {host}/preview?key={key}&ver={version}&loc={locale}&ctx={edit|preview}` renders one specific version of one CMS item (usually a draft) so the CMS UI can show it in its preview pane.
+
+**Set it up in the CMS:** add a preview application whose URL is `{host}/preview?key={key}&ver={version}&loc={locale}&ctx={context}` and turn on **Use Preview Tokens**. The CMS then appends a `preview_token` (valid 5 minutes).
+
+How it works:
+- The page calls `GET /api/preview` with the token as `Authorization: Bearer <token>`; the server forwards it to Optimizely Graph. **No admin key is used and none is needed.** Without a token it answers 401 and never calls Graph.
+- `key` must be a content GUID, `ver` a number, `loc` a locale such as `en` (optional), `ctx` `edit` or `preview`. Anything else is a 400.
+- `ctx=edit` also loads the CMS communication script (`{OPTIMIZELY_CMS_URL origin}/util/javascript/communicationinjector.js`), marks sections with `data-epi-block-id` and properties with `data-epi-edit`, and re-reads the content (with the new token and version) on the CMS `optimizely:cms:contentSaved` event. Editing applies to the previewed item only, and currently to page-level properties and each section's scalar properties (headings, hero text, page intro, site name). Items inside lists (articles, events, people) are not yet editable in place.
+- Responses are `no-store`. `/preview` sends `Content-Security-Policy: frame-ancestors 'self' <CMS origin>` so only the CMS can embed it, and `Referrer-Policy: no-referrer` because the URL carries the token. If the preview fails the page shows the error; it never falls back to the demo snapshot.
+
+Requires `OPTIMIZELY_CMS_URL` (the https URL of your CMS instance) so the app knows which origin may embed it and where the script comes from.
 
 The footer of every page shows the content source. If `/api/content` fails (no keys, 401, nothing published) the page falls back to a built-in snapshot and the footer says why.
 
@@ -40,6 +54,8 @@ Create this as its **own** Vercel project. Do not add it to the `omni-custom` pr
 | `OPTIMIZELY_GRAPH_APP_KEY` + `OPTIMIZELY_GRAPH_SECRET` | Admin credentials (HTTP Basic). Intended to return **drafts** too |
 | `GRAPH_AUTH_MODE` | Optional `single` / `basic`. Default: `basic` if app key + secret are set, else `single` |
 | `CONTENT_LOCALE` | Optional, default `en` |
+| `OPTIMIZELY_CMS_URL` | https URL of the CMS instance. Needed for `/preview`: sets which origin may frame the page and where the on-page-editing script is loaded from |
+| `PORT` | Optional, default `3000` (local server) |
 
 Keys are provided when the Graph account is created. See [Authentication](https://docs.optimizely.com/graph/docs/authentication) and [Single key](https://docs.optimizely.com/graph/docs/single-key).
 
@@ -55,6 +71,7 @@ Keys are provided when the Graph account is created. See [Authentication](https:
 |---|---|
 | `public/index.html` | The whole front end (hash-routed). One renderer per CMS section type, e.g. `R.CfaNewsListSection` |
 | `api/content.js` | Vercel function. Also used by `server.js` locally |
+| `api/preview.js`, `api/preview-page.js` | CMS preview: data (`/api/preview`) and the embeddable page (`/preview`, rewritten in `vercel.json`) |
 | `lib/graph.js` | The GraphQL query, auth selection, and the Graph -> front-end transform |
 | `server.js` | Local dev server (static + `/api/content`, tiny `.env` loader) |
 | `scripts/mock-graph.js` | Fake Graph for offline dev |

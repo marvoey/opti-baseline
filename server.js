@@ -1,5 +1,5 @@
 'use strict';
-/** Local dev server: serves ./public and /api/content. `npm start` -> http://localhost:3000 */
+/** Local dev server: serves ./public, /api/content, /preview and /api/preview. `npm start` -> http://localhost:$PORT (default 3000) */
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
@@ -16,6 +16,8 @@ for (const name of ['.env.omni', '.env']) {
 }
 
 const content = require('./api/content');
+const preview = require('./api/preview');
+const previewPage = require('./api/preview-page');
 const PUBLIC = path.join(__dirname, 'public');
 const TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png', '.ico': 'image/x-icon' };
 
@@ -23,6 +25,8 @@ function start(port = process.env.PORT || 3000) {
   const server = http.createServer((req, res) => {
     const url = new URL(req.url, 'http://localhost');
     if (url.pathname === '/api/content') return content(req, res);
+    if (url.pathname === '/api/preview') return preview(req, res);
+    if (url.pathname === '/preview') return previewPage(req, res);
     const rel = url.pathname === '/' ? '/index.html' : url.pathname;
     const file = path.normalize(path.join(PUBLIC, rel));
     if (!file.startsWith(PUBLIC)) { res.statusCode = 403; return res.end('Forbidden'); }

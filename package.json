@@ -9,6 +9,6 @@
   "scripts": {
     "start": "node server.js",
     "dev:mock": "node scripts/mock-graph.js",
-    "test": "node --test test/graph.test.js"
+    "test": "node --test test/graph.test.js test/preview.test.js"
   }
 }
