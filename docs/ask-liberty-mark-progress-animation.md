@@ -94,12 +94,12 @@ Notes:
 
 This is where "which step-3 content is shown and where the visitor lands" is decided (`app/_components_liberty/matchClassification.ts`).
 
-1. **Fallback check first** (`shouldUseFallback`, line 21): intent `Out of scope`, or confidence below **0.6**, goes straight to the question marked **Is fallback** (`/help`).
+1. **Fallback check first** (`shouldUseFallback`, line 21): intent `Out of scope`, or confidence below **0.6**, goes straight to the question marked **Fallback question** (`/help`).
 2. Otherwise `matchClassification` (line 32) tries, in order, with exact case-insensitive comparison:
    1. same **topic and state** (the Texas page);
    2. among questions that are not state-specific: same **topic and product**;
    3. same **topic**;
-   4. same **intent**, among questions that have **no topic** (claims and legal).
+   4. same **intent**, among questions that have **no topic** (today only the legal question; the claims question has the topic Claim status, so it matches by topic).
 3. Nothing matched: keyword routing on the typed text, then the fallback question, then the first question (`resolveMarkQuestion`, line 67).
 
 The matched question supplies steps 3 and 4 and the destination. The chips and reasoning stay Mark's.

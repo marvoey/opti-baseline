@@ -258,10 +258,10 @@ Comparison is exact and case-insensitive. The first rule that finds a question w
 1. If Mark gave **topic and state**: a question with that topic and that state (for example State minimums + Texas).
 2. Among questions that are **not state-specific**: same **topic and product**.
 3. Same **topic**.
-4. Same **intent**, among questions that have **no topic** (claims and legal).
+4. Same **intent**, among questions that have **no topic** (today only the legal question; the claims question has the topic Claim status, so it matches by topic).
 5. Nothing matched: keyword routing on the typed text, then the fallback question, then the first question.
 
-**Fallback:** if `intent` is `Out of scope`, or `confidence` is below **0.6**, the visitor goes to the question marked **Is fallback** in the CMS (`/help`) without running the rules.
+**Fallback:** if `intent` is `Out of scope`, or `confidence` is below **0.6**, the visitor goes to the question marked **Fallback question** in the CMS (`/help`) without running the rules.
 
 State-specific questions (a State chip that is a real state) only match when Mark names that state. "Needed" and "Not needed" in a State chip are treated as no state.
 

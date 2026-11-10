@@ -224,7 +224,7 @@ No new content model for matching. Each question in the Ask Liberty home page's 
 2. If `state` is set: a question with the same `Topic` and the same `State` chip (this is the Texas question).
 3. Same `Topic` and same `Product`.
 4. Same `Topic` only.
-5. Same `Intent`, among questions that have no `Topic` chip (claims, legal).
+5. Same `Intent`, among questions that have no `Topic` chip (today only the legal question; the claims question has the topic Claim status).
 6. **Fallback chain:** the existing keyword match, then the question marked **Fallback**, then the first question only if none is marked.
 
 Questions whose `State` chip is a real state (not `Needed` or `Not needed`) match only when Mark's `state` equals it. Comparison is case-insensitive and exact. Anything that fails validation counts as "no match".
