@@ -51,6 +51,24 @@
   --color-mint:     #ecfbf8;
 }
 
+/*
+ * Creatio (Freedom UI) look for /demo/crm. Neutral greys + Creatio blue; used as `cr-*` utilities.
+ * Same 50-950 scale as the blue ramp above so the CRM classes map 1:1.
+ */
+@theme {
+  --color-cr-950: #1a2233; /* headings */
+  --color-cr-900: #263146;
+  --color-cr-800: #364255; /* body text */
+  --color-cr-700: #566176; /* secondary text */
+  --color-cr-600: #0058ef; /* primary */
+  --color-cr-500: #2f7bff; /* accent / bars */
+  --color-cr-400: #5b9bff;
+  --color-cr-300: #a9c8ff;
+  --color-cr-200: #cfe0ff;
+  --color-cr-100: #dfe3ea; /* borders */
+  --color-cr-50:  #f3f5f8; /* canvas */
+}
+
 body {
   background: var(--background);
   color: var(--foreground);

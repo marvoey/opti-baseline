@@ -3,6 +3,7 @@
 
 import React, { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { siteConfig } from "@/lib/siteConfig";
+import { Home, Building2, Users, Target, Megaphone, BarChart3, Search, Plus, Bell, Settings, HelpCircle, ChevronDown, PanelLeftClose, PanelLeftOpen, LayoutGrid } from "lucide-react";
 import {
   TODAY, STAGES, STAGE_COLOR, STAGE_PROB, ACCOUNTS, OPPS, DETAILS, ALL_CONTACTS, RECENT_FEED,
   OWNER_NAMES, INDUSTRIES, COUNTIES, PRODUCT_LINES, ACTIVITY_LABELS, hasNewSignals, kFmt,
@@ -18,15 +19,28 @@ import {
    ========================================================= */
 
 const CRM_NAV = [
-  { id: "Home", icon: "⌂" },
-  { id: "Accounts", icon: "▣" },
-  { id: "Contacts", icon: "☺" },
-  { id: "Opportunities", icon: "◈" },
-  { id: "Campaigns", icon: "➤" },
-  { id: "Reports", icon: "▤" },
+  { id: "Home", icon: Home },
+  { id: "Accounts", icon: Building2 },
+  { id: "Contacts", icon: Users },
+  { id: "Opportunities", icon: Target },
+  { id: "Campaigns", icon: Megaphone },
+  { id: "Reports", icon: BarChart3 },
 ];
 
 const ACCOUNT_IDS = new Set(ACCOUNTS.map((a) => a.id));
+
+// Live microsites are served from this base URL regardless of the origin the API reports.
+const LIVE_SITE_BASE_URL = "http://localhost:3026";
+
+function liveSiteUrl(url) {
+  if (!url) return null;
+  try {
+    const { pathname, search, hash } = new URL(url, LIVE_SITE_BASE_URL);
+    return `${LIVE_SITE_BASE_URL}${pathname}${search}${hash}`;
+  } catch {
+    return url;
+  }
+}
 const ALL = "All";
 
 /** Turn a status-route response into a badge label. versionNote looks like "v2 · updated: new CFO". */
@@ -79,26 +93,26 @@ const micrositeKind = (abmPages, liveStatus, a) => {
 
 function Badge({ children, color = "slate" }) {
   const map = {
-    slate: "bg-blue-100/50 text-blue-700",
+    slate: "bg-cr-100/50 text-cr-700",
     green: "bg-emerald-100 text-emerald-700",
     amber: "bg-amber-100 text-amber-800",
-    blue: "bg-blue-100 text-blue-700",
-    violet: "bg-blue-300/40 text-blue-800",
+    blue: "bg-cr-100 text-cr-700",
+    violet: "bg-cr-300/40 text-cr-800",
     rose: "bg-rose-100 text-rose-700",
   };
-  return <span className={`inline-flex items-center gap-1 whitespace-nowrap rounded-full px-2 py-0.5 text-xs font-medium ${map[color] || map.slate}`}>{children}</span>;
+  return <span className={`inline-flex items-center gap-1 whitespace-nowrap rounded px-2 py-0.5 text-xs font-medium ${map[color] || map.slate}`}>{children}</span>;
 }
 
 function Card({ title, right, children, className = "" }) {
   return (
-    <div className={`rounded-xl border border-blue-100 bg-white p-4 shadow-sm ${className}`}>
+    <div className={`rounded border border-cr-100 bg-white ${className}`}>
       {title && (
-        <div className="mb-3 flex items-center justify-between gap-2">
-          <h3 className="text-sm font-semibold text-blue-950">{title}</h3>
+        <div className="flex items-center justify-between gap-2 border-b border-cr-100 px-4 py-2.5">
+          <h3 className="text-sm font-semibold text-cr-950">{title}</h3>
           {right}
         </div>
       )}
-      {children}
+      <div className="p-4">{children}</div>
     </div>
   );
 }
@@ -120,13 +134,13 @@ function IntentBadge({ meta }) {
 function ActivityList({ items, limit }) {
   const list = limit ? items.slice(0, limit) : items;
   return (
-    <ul className="space-y-2 text-sm text-blue-700">
+    <ul className="space-y-2 text-sm text-cr-700">
       {list.map((it, i) => (
-        <li key={i} className="flex items-start gap-2.5 border-l-2 border-blue-300 pl-3">
-          <span className="mt-0.5 w-4 shrink-0 text-center text-blue-500" title={ACTIVITY_LABELS[it.type]}>{ACTIVITY_ICON[it.type]}</span>
+        <li key={i} className="flex items-start gap-2.5 border-l-2 border-cr-300 pl-3">
+          <span className="mt-0.5 w-4 shrink-0 text-center text-cr-500" title={ACTIVITY_LABELS[it.type]}>{ACTIVITY_ICON[it.type]}</span>
           <div className="min-w-0 flex-1">
             <div className="leading-snug">{it.text}</div>
-            <div className="text-xs text-blue-700/50">{it.date} · {agoLabel(it.ago)} · {it.by}</div>
+            <div className="text-xs text-cr-700/50">{it.date} · {agoLabel(it.ago)} · {it.by}</div>
           </div>
         </li>
       ))}
@@ -144,14 +158,14 @@ function EnrichmentCards({ d, className = "mt-6" }) {
         right={<div className="flex items-center gap-2">{m && <IntentBadge meta={m} />}<Badge color="green">Optimizely Data Platform</Badge></div>}
       >
         {m && d.odp.length > 0 && (
-          <div className="mb-3 flex flex-wrap gap-1.5 text-xs text-blue-700">
-            <span className="rounded-md bg-blue-50 px-2 py-1">{m.sessions} sessions · 30d</span>
-            <span className="rounded-md bg-blue-50 px-2 py-1">Last seen {m.lastSeenDays === 0 ? "today" : `${m.lastSeenDays}d ago`}</span>
-            <span className="rounded-md bg-blue-50 px-2 py-1">{m.source}</span>
+          <div className="mb-3 flex flex-wrap gap-1.5 text-xs text-cr-700">
+            <span className="rounded-md bg-cr-50 px-2 py-1">{m.sessions} sessions · 30d</span>
+            <span className="rounded-md bg-cr-50 px-2 py-1">Last seen {m.lastSeenDays === 0 ? "today" : `${m.lastSeenDays}d ago`}</span>
+            <span className="rounded-md bg-cr-50 px-2 py-1">{m.source}</span>
           </div>
         )}
         {d?.odp && d.odp.length > 0 ? (
-          <ul className="space-y-2 text-sm text-blue-700">
+          <ul className="space-y-2 text-sm text-cr-700">
             {d.odp.map((item, idx) => (
               <li key={idx} className="flex items-start gap-2.5">
                 <span className="mt-0.5 text-xs font-bold text-emerald-600">✦</span>
@@ -160,25 +174,25 @@ function EnrichmentCards({ d, className = "mt-6" }) {
             ))}
           </ul>
         ) : (
-          <div className="text-sm text-blue-700/70">No recent digital intent sessions captured in ODP.</div>
+          <div className="text-sm text-cr-700/70">No recent digital intent sessions captured in ODP.</div>
         )}
       </Card>
 
       <Card title="Web research & market signals" right={<Badge color="blue">External Intelligence</Badge>}>
         {d?.signals && d.signals.length > 0 ? (
-          <ul className="space-y-2.5 text-sm text-blue-700">
+          <ul className="space-y-2.5 text-sm text-cr-700">
             {d.signals.map((sig, idx) => (
-              <li key={idx} className="flex items-start justify-between gap-3 border-l-2 border-blue-400 pl-3">
+              <li key={idx} className="flex items-start justify-between gap-3 border-l-2 border-cr-400 pl-3">
                 <div>
-                  <div className="font-medium leading-snug text-blue-800">{sig.text}</div>
-                  <div className="mt-0.5 text-xs text-blue-700/50">{sig.date}</div>
+                  <div className="font-medium leading-snug text-cr-800">{sig.text}</div>
+                  <div className="mt-0.5 text-xs text-cr-700/50">{sig.date}</div>
                 </div>
                 <Badge color={SIGNAL_COLOR[sig.type] || "slate"}>{sig.type.replace(/_/g, " ")}</Badge>
               </li>
             ))}
           </ul>
         ) : (
-          <div className="text-sm text-blue-700/70">No external intelligence signals logged.</div>
+          <div className="text-sm text-cr-700/70">No external intelligence signals logged.</div>
         )}
       </Card>
     </div>
@@ -189,9 +203,9 @@ function PageHeader({ eyebrow, title, sub, actions }) {
   return (
     <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
       <div>
-        <div className="text-xs uppercase tracking-wide text-blue-700/70">{eyebrow}</div>
-        <h1 className="text-2xl font-bold text-blue-950">
-          {title} {sub && <span className="text-base font-normal text-blue-700/70">· {sub}</span>}
+        <div className="text-xs text-cr-700/70">{eyebrow}</div>
+        <h1 className="text-xl font-semibold text-cr-950">
+          {title} {sub && <span className="text-sm font-normal text-cr-700/70">· {sub}</span>}
         </h1>
       </div>
       <div className="flex items-center gap-2">{actions}</div>
@@ -199,35 +213,35 @@ function PageHeader({ eyebrow, title, sub, actions }) {
   );
 }
 
-function Stat({ label, value, note, tone = "text-blue-700/70" }) {
+function Stat({ label, value, note, tone = "text-cr-700/70" }) {
   return (
-    <div className="rounded-xl border border-blue-100 bg-white p-4 shadow-sm">
-      <div className="text-xs uppercase tracking-wide text-blue-700/70">{label}</div>
-      <div className="mt-1 text-2xl font-bold text-blue-950">{value}</div>
+    <div className="rounded border border-cr-100 border-l-4 border-l-cr-600 bg-white p-4">
+      <div className="text-xs text-cr-700/80">{label}</div>
+      <div className="mt-1 text-2xl font-semibold text-cr-950">{value}</div>
       <div className={`mt-0.5 text-xs ${tone}`}>{note}</div>
     </div>
   );
 }
 
 function Avatar({ name, size = "h-8 w-8 text-xs" }) {
-  return <div className={`flex shrink-0 items-center justify-center rounded-full bg-blue-100 font-semibold text-blue-700 ${size}`}>{initialsOf(name)}</div>;
+  return <div className={`flex shrink-0 items-center justify-center rounded-full bg-cr-100 font-semibold text-cr-700 ${size}`}>{initialsOf(name)}</div>;
 }
 
 /** Heads are strings or { label, key } (sortable). */
 function DataTable({ heads, children, sort, onSort }) {
   return (
-    <div className="overflow-x-auto rounded-xl border border-blue-100 bg-white shadow-sm">
+    <div className="overflow-x-auto rounded border border-cr-100 bg-white">
       <table className="w-full text-sm">
-        <thead className="bg-blue-50 text-left text-xs uppercase tracking-wide text-blue-700/70">
+        <thead className="border-b border-cr-100 bg-cr-50 text-left text-xs font-semibold text-cr-700">
           <tr>
             {heads.map((h) => {
               const label = typeof h === "string" ? h : h.label;
               const key = typeof h === "string" ? null : h.key;
               const active = key && sort?.key === key;
               return (
-                <th key={label} className="whitespace-nowrap px-4 py-3 font-medium">
+                <th key={label} className="whitespace-nowrap px-4 py-2.5 font-semibold">
                   {key && onSort ? (
-                    <button onClick={() => onSort(key)} className={`inline-flex items-center gap-1 uppercase tracking-wide hover:text-blue-950 ${active ? "text-blue-950" : ""}`}>
+                    <button onClick={() => onSort(key)} className={`inline-flex items-center gap-1 hover:text-cr-950 ${active ? "text-cr-950" : ""}`}>
                       {label}<span className="text-[10px]">{active ? (sort.dir === "asc" ? "▲" : "▼") : "↕"}</span>
                     </button>
                   ) : label}
@@ -286,13 +300,13 @@ function Pager({ view }) {
   if (view.total === 0) return null;
   const from = view.page * view.size + 1;
   const to = Math.min(view.total, (view.page + 1) * view.size);
-  const btn = "rounded-lg border border-blue-100 bg-white px-3 py-1.5 text-sm text-blue-700 hover:bg-blue-50 disabled:cursor-not-allowed disabled:opacity-40";
+  const btn = "rounded border border-cr-100 bg-white px-3 py-1.5 text-sm text-cr-700 hover:bg-cr-50 disabled:cursor-not-allowed disabled:opacity-40";
   return (
-    <div className="mt-3 flex flex-wrap items-center justify-between gap-3 text-sm text-blue-700/80">
+    <div className="mt-3 flex flex-wrap items-center justify-between gap-3 text-sm text-cr-700/80">
       <div>Showing {from}–{to} of {view.total}</div>
       <div className="flex items-center gap-2">
         <label className="flex items-center gap-1.5">Rows
-          <select value={view.size} onChange={(e) => view.setSize(Number(e.target.value))} className="rounded-lg border border-blue-100 bg-white px-2 py-1.5 text-sm text-blue-700">
+          <select value={view.size} onChange={(e) => view.setSize(Number(e.target.value))} className="rounded border border-cr-100 bg-white px-2 py-1.5 text-sm text-cr-700">
             {[25, 50, 100].map((n) => <option key={n} value={n}>{n}</option>)}
           </select>
         </label>
@@ -308,9 +322,9 @@ function Pager({ view }) {
 
 function FilterSelect({ label, value, onChange, options }) {
   return (
-    <label className="flex flex-col gap-1 text-[11px] font-medium uppercase tracking-wide text-blue-700/70">
+    <label className="flex flex-col gap-1 text-[11px] font-medium uppercase tracking-wide text-cr-700/70">
       {label}
-      <select value={value} onChange={(e) => onChange(e.target.value)} className={`rounded-lg border bg-white px-2.5 py-1.5 text-sm normal-case tracking-normal text-blue-700 focus:border-blue-400 focus:outline-none ${value === options[0] ? "border-blue-100" : "border-blue-400 bg-blue-50"}`}>
+      <select value={value} onChange={(e) => onChange(e.target.value)} className={`rounded border bg-white px-2.5 py-1.5 text-sm normal-case tracking-normal text-cr-700 focus:border-cr-400 focus:outline-none ${value === options[0] ? "border-cr-100" : "border-cr-400 bg-cr-50"}`}>
         {options.map((o) => <option key={o}>{o}</option>)}
       </select>
     </label>
@@ -319,11 +333,11 @@ function FilterSelect({ label, value, onChange, options }) {
 
 function FilterBar({ fl, count, total, children, noun = "results" }) {
   return (
-    <div className="mb-4 flex flex-wrap items-end gap-3 rounded-xl border border-blue-100 bg-white p-3 shadow-sm">
+    <div className="mb-4 flex flex-wrap items-end gap-3 rounded-md border border-cr-100 bg-white p-3">
       {children}
-      <div className="ml-auto flex items-center gap-3 pb-1 text-sm text-blue-700/80">
+      <div className="ml-auto flex items-center gap-3 pb-1 text-sm text-cr-700/80">
         <span>{count} of {total} {noun}</span>
-        <button onClick={fl.clear} disabled={fl.active === 0} className="rounded-lg border border-blue-100 px-3 py-1.5 text-blue-700 hover:bg-blue-50 disabled:cursor-not-allowed disabled:opacity-40">
+        <button onClick={fl.clear} disabled={fl.active === 0} className="rounded border border-cr-100 px-3 py-1.5 text-cr-700 hover:bg-cr-50 disabled:cursor-not-allowed disabled:opacity-40">
           {fl.active > 0 ? `Clear filters (${fl.active})` : "No filters"}
         </button>
       </div>
@@ -337,19 +351,19 @@ function SearchBox({ value, onChange, placeholder }) {
       value={value}
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
-      className="w-56 rounded-lg border border-blue-100 bg-white px-3 py-2 text-sm text-blue-700 placeholder-blue-700/50 focus:border-blue-400 focus:outline-none"
+      className="w-56 rounded border border-cr-100 bg-white px-3 py-2 text-sm text-cr-700 placeholder-cr-700/50 focus:border-cr-400 focus:outline-none"
     />
   );
 }
 
-function BarRow({ label, value, max, text, color = "bg-blue-500" }) {
+function BarRow({ label, value, max, text, color = "bg-cr-500" }) {
   return (
     <div className="flex items-center gap-3 text-sm">
-      <div className="w-28 shrink-0 text-blue-700/80">{label}</div>
-      <div className="h-5 flex-1 overflow-hidden rounded bg-blue-100/50">
+      <div className="w-28 shrink-0 text-cr-700/80">{label}</div>
+      <div className="h-5 flex-1 overflow-hidden rounded bg-cr-100/50">
         <div className={`h-full rounded ${color}`} style={{ width: `${max ? Math.max(4, (value / max) * 100) : 0}%` }} />
       </div>
-      <div className="w-16 shrink-0 text-right font-medium text-blue-700">{text}</div>
+      <div className="w-16 shrink-0 text-right font-medium text-cr-700">{text}</div>
     </div>
   );
 }
@@ -378,10 +392,10 @@ function CRMHome({ liveMicrosites, go, setSelectedId }) {
         sub="here is your pipeline today"
         actions={
           <>
-            <div className="flex overflow-hidden rounded-lg border border-blue-100 bg-white text-sm">
-              {["My book", "All accounts"].map((v) => <button key={v} onClick={() => setScope(v)} className={`px-3 py-2 ${scope === v ? "bg-blue-600 text-white" : "text-blue-700/80 hover:bg-blue-50"}`}>{v}</button>)}
+            <div className="flex overflow-hidden rounded border border-cr-100 bg-white text-sm">
+              {["My book", "All accounts"].map((v) => <button key={v} onClick={() => setScope(v)} className={`px-3 py-2 ${scope === v ? "bg-cr-600 text-white" : "text-cr-700/80 hover:bg-cr-50"}`}>{v}</button>)}
             </div>
-            <button onClick={() => go("Campaigns")} className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700">View Q4 Business Growth ABM</button>
+            <button onClick={() => go("Campaigns")} className="rounded bg-cr-600 px-4 py-2 text-sm font-semibold text-white hover:bg-cr-700">View Q4 Business Growth ABM</button>
           </>
         }
       />
@@ -389,17 +403,17 @@ function CRMHome({ liveMicrosites, go, setSelectedId }) {
         <Stat label="Open pipeline" value={kFmt(sumK(open))} note={`${open.length} open opportunities · ${accts.length} accounts`} />
         <Stat label="Weighted forecast" value={kFmt(weightedK(open))} note="Probability-adjusted" tone="text-emerald-600" />
         <Stat label="Funded (QTD)" value={kFmt(sumK(funded))} note={`${funded.length} deals`} />
-        <Stat label="ABM microsites live" value={`${liveCount} of ${accts.length}`} note="Q4 Business Growth ABM" tone="text-blue-600" />
+        <Stat label="ABM microsites live" value={`${liveCount} of ${accts.length}`} note="Q4 Business Growth ABM" tone="text-cr-600" />
       </div>
       <div className="grid gap-4 lg:grid-cols-3">
-        <Card title="My tasks" className="lg:col-span-1" right={<span className="text-xs text-blue-700/70">{tasks.filter((t) => !t.done).length} open</span>}>
+        <Card title="My tasks" className="lg:col-span-1" right={<span className="text-xs text-cr-700/70">{tasks.filter((t) => !t.done).length} open</span>}>
           <ul className="space-y-2.5 text-sm">
             {tasks.map((t) => (
               <li key={t.id} className="flex items-start gap-2.5">
                 <input type="checkbox" checked={t.done} onChange={() => setTasks((prev) => prev.map((x) => (x.id === t.id ? { ...x, done: !x.done } : x)))} className="mt-1" />
                 <div className="flex-1">
-                  <div className={t.done ? "text-blue-700/50 line-through" : "text-blue-800"}>{t.text}</div>
-                  <div className="text-xs text-blue-700/70">Due {t.due}</div>
+                  <div className={t.done ? "text-cr-700/50 line-through" : "text-cr-800"}>{t.text}</div>
+                  <div className="text-xs text-cr-700/70">Due {t.due}</div>
                 </div>
               </li>
             ))}
@@ -410,19 +424,19 @@ function CRMHome({ liveMicrosites, go, setSelectedId }) {
             {stageTotals.map((x) => <BarRow key={x.s} label={x.s} value={x.v} max={maxStage} text={kFmt(x.v)} />)}
           </div>
         </Card>
-        <Card title="Recent activity" className="lg:col-span-1" right={<span className="text-xs text-blue-700/70">{mine ? "My book" : "All accounts"}</span>}>
+        <Card title="Recent activity" className="lg:col-span-1" right={<span className="text-xs text-cr-700/70">{mine ? "My book" : "All accounts"}</span>}>
           <ul className="space-y-3 text-sm">
             {feed.map((f, i) => (
               <li key={i} className="flex gap-3">
-                <span className="w-16 shrink-0 text-xs text-blue-700/50">{agoLabel(f.ago)}</span>
-                <span className="text-blue-700">
-                  <span className="mr-1 text-blue-500">{ACTIVITY_ICON[f.type]}</span>
-                  <span className="font-medium text-blue-950">{f.account}</span> · {f.text}
-                  {" "}<button onClick={() => { setSelectedId(f.acct); go("Accounts"); }} className="text-blue-700 hover:underline">View</button>
+                <span className="w-16 shrink-0 text-xs text-cr-700/50">{agoLabel(f.ago)}</span>
+                <span className="text-cr-700">
+                  <span className="mr-1 text-cr-500">{ACTIVITY_ICON[f.type]}</span>
+                  <span className="font-medium text-cr-950">{f.account}</span> · {f.text}
+                  {" "}<button onClick={() => { setSelectedId(f.acct); go("Accounts"); }} className="text-cr-700 hover:underline">View</button>
                 </span>
               </li>
             ))}
-            {feed.length === 0 && <li className="text-blue-700/70">No recent activity.</li>}
+            {feed.length === 0 && <li className="text-cr-700/70">No recent activity.</li>}
           </ul>
         </Card>
       </div>
@@ -459,7 +473,7 @@ function AccountFilters({ fl, count }) {
   const { f, set } = fl;
   return (
     <FilterBar fl={fl} count={count} total={ACCOUNTS.length} noun="accounts">
-      <label className="flex flex-col gap-1 text-[11px] font-medium uppercase tracking-wide text-blue-700/70">Search
+      <label className="flex flex-col gap-1 text-[11px] font-medium uppercase tracking-wide text-cr-700/70">Search
         <SearchBox value={f.q} onChange={(v) => set("q", v)} placeholder="Account, town or contact" />
       </label>
       <FilterSelect label="Owner" value={f.owner} onChange={(v) => set("owner", v)} options={[ALL, ...OWNER_NAMES]} />
@@ -494,21 +508,21 @@ function CRMAccounts({ selectedId, setSelectedId, liveStatus, go, triggerOpal, i
 
     return (
       <>
-        <div className="mb-3 text-sm text-blue-700/70"><button onClick={() => setOpenId(null)} className="text-blue-700 hover:underline">Accounts</button> / {acc.name}</div>
+        <div className="mb-3 text-sm text-cr-700/70"><button onClick={() => setOpenId(null)} className="text-cr-700 hover:underline">Accounts</button> / {acc.name}</div>
         <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-4">
-            <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-blue-900 text-lg font-bold text-white">{initialsOf(acc.name)}</div>
+            <div className="flex h-14 w-14 items-center justify-center rounded-md bg-cr-900 text-lg font-bold text-white">{initialsOf(acc.name)}</div>
             <div>
-              <h1 className="text-2xl font-bold text-blue-950">{acc.name}</h1>
-              <div className="mt-1 flex flex-wrap items-center gap-2 text-sm text-blue-700/70">{acc.industry} · {acc.hq} <Badge color={STAGE_COLOR[acc.stage]}>{acc.stage}</Badge><Badge color="slate">Tier {acc.tier}</Badge><Badge color={statusColor}>Microsite: {statusText}</Badge></div>
+              <h1 className="text-2xl font-bold text-cr-950">{acc.name}</h1>
+              <div className="mt-1 flex flex-wrap items-center gap-2 text-sm text-cr-700/70">{acc.industry} · {acc.hq} <Badge color={STAGE_COLOR[acc.stage]}>{acc.stage}</Badge><Badge color="slate">Tier {acc.tier}</Badge><Badge color={statusColor}>Microsite: {statusText}</Badge></div>
             </div>
           </div>
           <div className="flex gap-2">
-            <button className="rounded-lg border border-blue-100 bg-white px-4 py-2 text-sm text-blue-700 hover:bg-blue-50">Log activity</button>
+            <button className="rounded border border-cr-100 bg-white px-4 py-2 text-sm text-cr-700 hover:bg-cr-50">Log activity</button>
             <button
               onClick={() => triggerOpal(acc)}
               disabled={isSyncing[acc.id]}
-              className={`rounded-lg px-4 py-2 text-sm font-semibold text-white ${isSyncing[acc.id] ? "bg-blue-400 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700"}`}
+              className={`rounded px-4 py-2 text-sm font-semibold text-white ${isSyncing[acc.id] ? "bg-cr-400 cursor-not-allowed" : "bg-cr-600 hover:bg-cr-700"}`}
             >
               {isSyncing[acc.id] ? "✦ Sending to Limitless..." : "✦ Run Limitless Agent"}
             </button>
@@ -517,12 +531,12 @@ function CRMAccounts({ selectedId, setSelectedId, liveStatus, go, triggerOpal, i
         <div className="grid gap-4 lg:grid-cols-3">
           <Card title="Account details">
             <dl className="grid grid-cols-2 gap-y-2 text-sm">
-              <dt className="text-blue-700/70">Industry</dt><dd>{acc.industry}</dd>
-              <dt className="text-blue-700/70">HQ</dt><dd>{acc.hq} ({acc.county} Co.)</dd>
-              <dt className="text-blue-700/70">Employees</dt><dd>{acc.employees}</dd>
-              <dt className="text-blue-700/70">Annual revenue</dt><dd>{acc.revenue}</dd>
-              <dt className="text-blue-700/70">Owner</dt><dd>{acc.owner}</dd>
-              <dt className="text-blue-700/70">Campaign</dt><dd>Q4 Business Growth ABM · Tier {acc.tier}</dd>
+              <dt className="text-cr-700/70">Industry</dt><dd>{acc.industry}</dd>
+              <dt className="text-cr-700/70">HQ</dt><dd>{acc.hq} ({acc.county} Co.)</dd>
+              <dt className="text-cr-700/70">Employees</dt><dd>{acc.employees}</dd>
+              <dt className="text-cr-700/70">Annual revenue</dt><dd>{acc.revenue}</dd>
+              <dt className="text-cr-700/70">Owner</dt><dd>{acc.owner}</dd>
+              <dt className="text-cr-700/70">Campaign</dt><dd>Q4 Business Growth ABM · Tier {acc.tier}</dd>
             </dl>
           </Card>
           <Card title={`Contacts (${contacts.length})`}>
@@ -533,7 +547,7 @@ function CRMAccounts({ selectedId, setSelectedId, liveStatus, go, triggerOpal, i
                     <Avatar name={c.name} />
                     <div>
                       <div className="text-sm font-medium">{c.name} {c.isNew && <Badge color="amber">New</Badge>}</div>
-                      <div className="text-xs text-blue-700/70">{c.title}</div>
+                      <div className="text-xs text-cr-700/70">{c.title}</div>
                     </div>
                   </div>
                   <Badge color="violet">{c.role}</Badge>
@@ -544,9 +558,9 @@ function CRMAccounts({ selectedId, setSelectedId, liveStatus, go, triggerOpal, i
           <Card title="Opportunities">
             <div className="space-y-2">
               {opps.map((o) => (
-                <div key={o.id} className="rounded-lg border border-blue-100/50 p-3 text-sm">
-                  <div className="font-medium text-blue-950">{o.name}</div>
-                  <div className="mt-1 flex items-center justify-between text-blue-700/80"><span>{kFmt(o.amount)} · close {o.close}</span><Badge color={STAGE_COLOR[o.stage]}>{o.stage}</Badge></div>
+                <div key={o.id} className="rounded border border-cr-100/50 p-3 text-sm">
+                  <div className="font-medium text-cr-950">{o.name}</div>
+                  <div className="mt-1 flex items-center justify-between text-cr-700/80"><span>{kFmt(o.amount)} · close {o.close}</span><Badge color={STAGE_COLOR[o.stage]}>{o.stage}</Badge></div>
                 </div>
               ))}
             </div>
@@ -554,14 +568,14 @@ function CRMAccounts({ selectedId, setSelectedId, liveStatus, go, triggerOpal, i
         </div>
         <EnrichmentCards d={d} className="mt-4" />
         <div className="mt-4 grid gap-4 lg:grid-cols-3">
-          <Card title="Recent activity" className="lg:col-span-2" right={<span className="text-xs text-blue-700/50">{d.activityItems.length} entries</span>}>
+          <Card title="Recent activity" className="lg:col-span-2" right={<span className="text-xs text-cr-700/50">{d.activityItems.length} entries</span>}>
             <ActivityList items={d.activityItems} />
           </Card>
           <Card title="Limitless 1:1 microsite" right={<Badge color={statusColor}>{statusText}</Badge>}>
-            <p className="text-sm text-blue-700/80">
+            <p className="text-sm text-cr-700/80">
               {isLive ? (
                 <>Personalized page live at{" "}
-                  <a href={liveStatus[acc.id].url || "#"} target="_blank" rel="noopener noreferrer" className="font-medium text-blue-700 hover:underline">{liveStatus[acc.id].url}</a>
+                  <a href={liveSiteUrl(liveStatus[acc.id].url) || "#"} target="_blank" rel="noopener noreferrer" className="font-medium text-cr-700 hover:underline">{liveSiteUrl(liveStatus[acc.id].url)}</a>
                 </>
               ) : "No published page yet. Run the Limitless workflow to research and generate a draft, then approve it in CMS."}
             </p>
@@ -571,13 +585,13 @@ function CRMAccounts({ selectedId, setSelectedId, liveStatus, go, triggerOpal, i
                   href={pageInCms.cmsEditUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 rounded-lg border border-blue-200 bg-blue-50 px-3 py-1.5 text-xs font-semibold text-blue-700 transition-colors hover:bg-blue-100"
+                  className="inline-flex items-center gap-1.5 rounded border border-cr-200 bg-cr-50 px-3 py-1.5 text-xs font-semibold text-cr-700 transition-colors hover:bg-cr-100"
                 >
                   Review in CMS Visual Builder ↗
                 </a>
               </div>
             )}
-            <button onClick={() => { setSelectedId(acc.id); go("Campaigns"); }} className="mt-3 block text-sm font-medium text-blue-700 hover:underline">See in campaign list</button>
+            <button onClick={() => { setSelectedId(acc.id); go("Campaigns"); }} className="mt-3 block text-sm font-medium text-cr-700 hover:underline">See in campaign list</button>
           </Card>
         </div>
       </>
@@ -586,7 +600,7 @@ function CRMAccounts({ selectedId, setSelectedId, liveStatus, go, triggerOpal, i
 
   return (
     <>
-      <PageHeader eyebrow="All accounts" title="Accounts" sub={`${filtered.length} of ${ACCOUNTS.length}`} actions={<button className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700">+ New account</button>} />
+      <PageHeader eyebrow="All accounts" title="Accounts" sub={`${filtered.length} of ${ACCOUNTS.length}`} actions={<button className="rounded bg-cr-600 px-4 py-2 text-sm font-semibold text-white hover:bg-cr-700">+ New account</button>} />
       <AccountFilters fl={fl} count={filtered.length} />
       <DataTable
         heads={[{ label: "Account", key: "name" }, { label: "Industry", key: "industry" }, { label: "HQ", key: "hq" }, { label: "Employees", key: "employeesN" }, { label: "Owner", key: "owner" }, { label: "Tier", key: "tier" }, { label: "ODP intent", key: "intent" }, { label: "Last activity", key: "lastActivityAgo" }, { label: "Open opportunity", key: "pipelineK" }]}
@@ -596,21 +610,21 @@ function CRMAccounts({ selectedId, setSelectedId, liveStatus, go, triggerOpal, i
         {view.slice.map((a) => {
           const meta = DETAILS[a.id].odpMeta;
           return (
-            <tr key={a.id} onClick={() => { setSelectedId(a.id); setOpenId(a.id); }} className={`cursor-pointer border-t border-blue-100/50 ${a.id === selectedId ? "bg-blue-50" : "hover:bg-blue-50"}`}>
-              <td className="px-4 py-3"><div className="flex items-center gap-3"><div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-blue-900 text-xs font-semibold text-white">{initialsOf(a.name)}</div><span className="font-medium text-blue-700">{a.name}</span></div></td>
-              <td className="px-4 py-3 text-blue-700/80">{a.industry}</td>
-              <td className="px-4 py-3 text-blue-700/80">{a.hq}</td>
-              <td className="px-4 py-3 text-blue-700/80">{a.employees}</td>
-              <td className="px-4 py-3 text-blue-700/80">{a.owner}</td>
-              <td className="px-4 py-3 text-blue-700/80">{a.tier}</td>
+            <tr key={a.id} onClick={() => { setSelectedId(a.id); setOpenId(a.id); }} className={`cursor-pointer border-t border-cr-100/50 ${a.id === selectedId ? "bg-cr-50" : "hover:bg-cr-50"}`}>
+              <td className="px-4 py-3"><div className="flex items-center gap-3"><div className="flex h-8 w-8 shrink-0 items-center justify-center rounded bg-cr-900 text-xs font-semibold text-white">{initialsOf(a.name)}</div><span className="font-medium text-cr-700">{a.name}</span></div></td>
+              <td className="px-4 py-3 text-cr-700/80">{a.industry}</td>
+              <td className="px-4 py-3 text-cr-700/80">{a.hq}</td>
+              <td className="px-4 py-3 text-cr-700/80">{a.employees}</td>
+              <td className="px-4 py-3 text-cr-700/80">{a.owner}</td>
+              <td className="px-4 py-3 text-cr-700/80">{a.tier}</td>
               <td className="px-4 py-3"><IntentBadge meta={meta} /></td>
-              <td className="px-4 py-3 text-blue-700/70">{a.lastActivity}</td>
-              <td className="px-4 py-3"><span className="text-blue-700">{a.pipeline}</span> <Badge color={STAGE_COLOR[a.stage]}>{a.stage}</Badge></td>
+              <td className="px-4 py-3 text-cr-700/70">{a.lastActivity}</td>
+              <td className="px-4 py-3"><span className="text-cr-700">{a.pipeline}</span> <Badge color={STAGE_COLOR[a.stage]}>{a.stage}</Badge></td>
             </tr>
           );
         })}
       </DataTable>
-      {filtered.length === 0 && <div className="mt-6 text-center text-sm text-blue-700/70">No accounts match your filters.</div>}
+      {filtered.length === 0 && <div className="mt-6 text-center text-sm text-cr-700/70">No accounts match your filters.</div>}
       <Pager view={view} />
     </>
   );
@@ -639,9 +653,9 @@ function CRMContacts({ setSelectedId, go }) {
   const view = useTableView(filtered, { name: (c) => c.name.toLowerCase() }, { key: null, dir: "asc" }, fl.sig);
   return (
     <>
-      <PageHeader eyebrow="All contacts" title="Contacts" sub={`${filtered.length} of ${ALL_CONTACTS.length}`} actions={<button className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700">+ New contact</button>} />
+      <PageHeader eyebrow="All contacts" title="Contacts" sub={`${filtered.length} of ${ALL_CONTACTS.length}`} actions={<button className="rounded bg-cr-600 px-4 py-2 text-sm font-semibold text-white hover:bg-cr-700">+ New contact</button>} />
       <FilterBar fl={fl} count={filtered.length} total={ALL_CONTACTS.length} noun="contacts">
-        <label className="flex flex-col gap-1 text-[11px] font-medium uppercase tracking-wide text-blue-700/70">Search
+        <label className="flex flex-col gap-1 text-[11px] font-medium uppercase tracking-wide text-cr-700/70">Search
           <SearchBox value={fl.f.q} onChange={(v) => fl.set("q", v)} placeholder="Name, account, title or email" />
         </label>
         <FilterSelect label="Buying role" value={fl.f.role} onChange={(v) => fl.set("role", v)} options={[ALL, "Economic Buyer", "Technical Evaluator", "Champion"]} />
@@ -656,18 +670,18 @@ function CRMContacts({ setSelectedId, go }) {
         onSort={view.onSort}
       >
         {view.slice.map((c) => (
-          <tr key={`${c.accountId}-${c.email}`} className="border-t border-blue-100/50 hover:bg-blue-50">
-            <td className="px-4 py-3"><div className="flex items-center gap-3"><Avatar name={c.name} /><span className="font-medium text-blue-950">{c.name}</span>{c.isNew && <Badge color="amber">New</Badge>}</div></td>
-            <td className="px-4 py-3 text-blue-700/80">{c.title}</td>
-            <td className="px-4 py-3"><button onClick={() => { setSelectedId(c.accountId); go("Accounts"); }} className="text-left text-blue-700 hover:underline">{c.account}</button></td>
+          <tr key={`${c.accountId}-${c.email}`} className="border-t border-cr-100/50 hover:bg-cr-50">
+            <td className="px-4 py-3"><div className="flex items-center gap-3"><Avatar name={c.name} /><span className="font-medium text-cr-950">{c.name}</span>{c.isNew && <Badge color="amber">New</Badge>}</div></td>
+            <td className="px-4 py-3 text-cr-700/80">{c.title}</td>
+            <td className="px-4 py-3"><button onClick={() => { setSelectedId(c.accountId); go("Accounts"); }} className="text-left text-cr-700 hover:underline">{c.account}</button></td>
             <td className="px-4 py-3"><Badge color="violet">{c.role}</Badge></td>
-            <td className="px-4 py-3 text-blue-700/70">{c.email}</td>
-            <td className="px-4 py-3 text-blue-700/70">{c.engaged}</td>
-            <td className="px-4 py-3 text-blue-700/80">{c.owner}</td>
+            <td className="px-4 py-3 text-cr-700/70">{c.email}</td>
+            <td className="px-4 py-3 text-cr-700/70">{c.engaged}</td>
+            <td className="px-4 py-3 text-cr-700/80">{c.owner}</td>
           </tr>
         ))}
       </DataTable>
-      {filtered.length === 0 && <div className="mt-6 text-center text-sm text-blue-700/70">No contacts match your filters.</div>}
+      {filtered.length === 0 && <div className="mt-6 text-center text-sm text-cr-700/70">No contacts match your filters.</div>}
       <Pager view={view} />
     </>
   );
@@ -702,10 +716,10 @@ function CRMOpportunities({ setSelectedId, go }) {
         eyebrow="Sales pipeline"
         title="Opportunities"
         sub={`${kFmt(sumK(openFiltered))} open · ${openFiltered.length} deals`}
-        actions={<><div className="flex overflow-hidden rounded-lg border border-blue-100 bg-white text-sm">{["Board", "List"].map((v) => <button key={v} onClick={() => setBoardView(v)} className={`px-3 py-2 ${boardView === v ? "bg-blue-600 text-white" : "text-blue-700/80 hover:bg-blue-50"}`}>{v}</button>)}</div><button className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700">+ New opportunity</button></>}
+        actions={<><div className="flex overflow-hidden rounded border border-cr-100 bg-white text-sm">{["Board", "List"].map((v) => <button key={v} onClick={() => setBoardView(v)} className={`px-3 py-2 ${boardView === v ? "bg-cr-600 text-white" : "text-cr-700/80 hover:bg-cr-50"}`}>{v}</button>)}</div><button className="rounded bg-cr-600 px-4 py-2 text-sm font-semibold text-white hover:bg-cr-700">+ New opportunity</button></>}
       />
       <FilterBar fl={fl} count={filtered.length} total={OPPS.length} noun="opportunities">
-        <label className="flex flex-col gap-1 text-[11px] font-medium uppercase tracking-wide text-blue-700/70">Search
+        <label className="flex flex-col gap-1 text-[11px] font-medium uppercase tracking-wide text-cr-700/70">Search
           <SearchBox value={fl.f.q} onChange={(v) => fl.set("q", v)} placeholder="Opportunity or account" />
         </label>
         <FilterSelect label="Stage" value={fl.f.stage} onChange={(v) => fl.set("stage", v)} options={[ALL, ...STAGES]} />
@@ -720,20 +734,20 @@ function CRMOpportunities({ setSelectedId, go }) {
             const list = filtered.filter((o) => o.stage === s).sort((a, b) => b.amount - a.amount);
             const shown = expanded[s] ? list : list.slice(0, BOARD_LIMIT);
             return (
-              <div key={s} className="rounded-xl bg-blue-100/50 p-2">
-                <div className="mb-2 flex items-center justify-between px-1 text-xs font-semibold uppercase tracking-wide text-blue-700/80"><span>{s} · {list.length}</span><span>{kFmt(sumK(list))}</span></div>
+              <div key={s} className="rounded-md bg-cr-100/50 p-2">
+                <div className="mb-2 flex items-center justify-between px-1 text-xs font-semibold uppercase tracking-wide text-cr-700/80"><span>{s} · {list.length}</span><span>{kFmt(sumK(list))}</span></div>
                 <div className="space-y-2">
                   {shown.map((o) => (
-                    <div key={o.id} onClick={() => open(o)} className={`rounded-lg border border-blue-100 bg-white p-3 text-sm shadow-sm ${o.acct ? "cursor-pointer hover:border-blue-300" : ""}`}>
-                      <div className="font-medium text-blue-950">{o.name}</div>
-                      <div className="text-xs text-blue-700/70">{o.account}</div>
-                      <div className="mt-2 flex items-center justify-between text-xs"><span className="font-semibold text-blue-800">{kFmt(o.amount)}</span><span className="text-blue-700/70">{o.close}</span></div>
-                      <div className="mt-2 flex items-center gap-2 text-xs text-blue-700/70"><Avatar name={o.owner} size="h-5 w-5 text-xs" />{o.owner}</div>
+                    <div key={o.id} onClick={() => open(o)} className={`rounded border border-cr-100 bg-white p-3 text-sm ${o.acct ? "cursor-pointer hover:border-cr-300" : ""}`}>
+                      <div className="font-medium text-cr-950">{o.name}</div>
+                      <div className="text-xs text-cr-700/70">{o.account}</div>
+                      <div className="mt-2 flex items-center justify-between text-xs"><span className="font-semibold text-cr-800">{kFmt(o.amount)}</span><span className="text-cr-700/70">{o.close}</span></div>
+                      <div className="mt-2 flex items-center gap-2 text-xs text-cr-700/70"><Avatar name={o.owner} size="h-5 w-5 text-xs" />{o.owner}</div>
                     </div>
                   ))}
-                  {list.length === 0 && <div className="px-1 py-3 text-xs text-blue-700/50">No deals</div>}
+                  {list.length === 0 && <div className="px-1 py-3 text-xs text-cr-700/50">No deals</div>}
                   {list.length > BOARD_LIMIT && (
-                    <button onClick={() => setExpanded((e) => ({ ...e, [s]: !e[s] }))} className="w-full rounded-lg py-1.5 text-xs font-medium text-blue-700 hover:bg-blue-100">
+                    <button onClick={() => setExpanded((e) => ({ ...e, [s]: !e[s] }))} className="w-full rounded py-1.5 text-xs font-medium text-cr-700 hover:bg-cr-100">
                       {expanded[s] ? "Show less" : `Show all ${list.length}`}
                     </button>
                   )}
@@ -750,28 +764,28 @@ function CRMOpportunities({ setSelectedId, go }) {
             onSort={view.onSort}
           >
             {view.slice.map((o) => (
-              <tr key={o.id} onClick={() => open(o)} className={`border-t border-blue-100/50 hover:bg-blue-50 ${o.acct ? "cursor-pointer" : ""}`}>
-                <td className="px-4 py-3 font-medium text-blue-700">{o.name}</td>
-                <td className="px-4 py-3 text-blue-700/80">{o.account}</td>
-                <td className="px-4 py-3 text-blue-700/80">{o.product}</td>
+              <tr key={o.id} onClick={() => open(o)} className={`border-t border-cr-100/50 hover:bg-cr-50 ${o.acct ? "cursor-pointer" : ""}`}>
+                <td className="px-4 py-3 font-medium text-cr-700">{o.name}</td>
+                <td className="px-4 py-3 text-cr-700/80">{o.account}</td>
+                <td className="px-4 py-3 text-cr-700/80">{o.product}</td>
                 <td className="px-4 py-3"><Badge color={STAGE_COLOR[o.stage]}>{o.stage}</Badge></td>
-                <td className="px-4 py-3 text-blue-700">{kFmt(o.amount)}</td>
-                <td className="px-4 py-3 text-blue-700/80">{STAGE_PROB[o.stage]}%</td>
-                <td className="px-4 py-3 text-blue-700/70">{o.close}</td>
-                <td className="px-4 py-3 text-blue-700/80">{o.owner}</td>
+                <td className="px-4 py-3 text-cr-700">{kFmt(o.amount)}</td>
+                <td className="px-4 py-3 text-cr-700/80">{STAGE_PROB[o.stage]}%</td>
+                <td className="px-4 py-3 text-cr-700/70">{o.close}</td>
+                <td className="px-4 py-3 text-cr-700/80">{o.owner}</td>
               </tr>
             ))}
           </DataTable>
-          {filtered.length === 0 && <div className="mt-6 text-center text-sm text-blue-700/70">No opportunities match your filters.</div>}
+          {filtered.length === 0 && <div className="mt-6 text-center text-sm text-cr-700/70">No opportunities match your filters.</div>}
           <Pager view={view} />
         </>
       )}
-      {boardView === "Board" && filtered.length === 0 && <div className="mt-6 text-center text-sm text-blue-700/70">No opportunities match your filters.</div>}
+      {boardView === "Board" && filtered.length === 0 && <div className="mt-6 text-center text-sm text-cr-700/70">No opportunities match your filters.</div>}
     </>
   );
 }
 
-const LOG_COLOR = { info: "text-blue-300", step: "text-blue-300 font-semibold", tool: "text-blue-300", ok: "text-emerald-400", warn: "text-amber-300", error: "text-rose-400" };
+const LOG_COLOR = { info: "text-cr-300", step: "text-cr-300 font-semibold", tool: "text-cr-300", ok: "text-emerald-400", warn: "text-amber-300", error: "text-rose-400" };
 
 /** Live log of a Limitless run: CRM trigger events plus CMS changes picked up by polling. */
 function LimitlessConsole({ logs, onClear, runActive }) {
@@ -785,17 +799,17 @@ function LimitlessConsole({ logs, onClear, runActive }) {
       right={
         <div className="flex items-center gap-3">
           {runActive && <Badge color="violet">Watching {runActive.name}…</Badge>}
-          <button onClick={onClear} className="text-xs font-medium text-blue-700/70 hover:text-blue-800">Clear</button>
+          <button onClick={onClear} className="text-xs font-medium text-cr-700/70 hover:text-cr-800">Clear</button>
         </div>
       }
     >
-      <div ref={ref} className="h-60 overflow-auto rounded-lg bg-blue-950 p-3 font-mono text-xs leading-relaxed">
+      <div ref={ref} className="h-60 overflow-auto rounded bg-cr-950 p-3 font-mono text-xs leading-relaxed">
         {logs.length === 0 ? (
-          <div className="text-blue-700/70">Run Limitless on an account to see progress here.</div>
+          <div className="text-cr-700/70">Run Limitless on an account to see progress here.</div>
         ) : (
           logs.map((l, i) => (
             <div key={i} className={LOG_COLOR[l.level] || LOG_COLOR.info}>
-              <span className="text-blue-700/70">{l.ts}</span> {l.text}
+              <span className="text-cr-700/70">{l.ts}</span> {l.text}
             </div>
           ))
         )}
@@ -814,18 +828,18 @@ function AbmPagesCard({ pages, onRefresh, refreshing, lastUpdated, acc, isSyncin
           <button
             onClick={() => triggerOpal(acc)}
             disabled={isSyncing[acc.id]}
-            className={`rounded-lg px-3 py-1.5 text-xs font-semibold text-white shadow-sm ${isSyncing[acc.id] ? "bg-blue-400 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700"}`}
+            className={`rounded px-3 py-1.5 text-xs font-semibold text-white ${isSyncing[acc.id] ? "bg-cr-400 cursor-not-allowed" : "bg-cr-600 hover:bg-cr-700"}`}
           >
             {isSyncing[acc.id] ? `✦ Sending ${acc.name} to Opal…` : `✦ Run Limitless · ${acc.name}`}
           </button>
-          {lastUpdated && <span className="text-xs text-blue-700/50">Updated {lastUpdated.toLocaleTimeString()}</span>}
+          {lastUpdated && <span className="text-xs text-cr-700/50">Updated {lastUpdated.toLocaleTimeString()}</span>}
           <Badge color="slate">{pages.length}</Badge>
           <button
             onClick={onRefresh}
             disabled={refreshing}
             title="Refresh from the CMS"
             aria-label="Refresh ABM landing pages"
-            className="rounded-md p-1 text-blue-700/70 hover:bg-blue-100/50 hover:text-blue-800 disabled:cursor-not-allowed disabled:opacity-60"
+            className="rounded-md p-1 text-cr-700/70 hover:bg-cr-100/50 hover:text-cr-800 disabled:cursor-not-allowed disabled:opacity-60"
           >
             {/* rotate-cw: the standard "refresh" glyph */}
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={refreshing ? "animate-spin" : ""} aria-hidden="true">
@@ -837,16 +851,16 @@ function AbmPagesCard({ pages, onRefresh, refreshing, lastUpdated, acc, isSyncin
       }
     >
       {pages.length === 0 ? (
-        <div className="text-sm text-blue-700/70">No landing pages created yet.</div>
+        <div className="text-sm text-cr-700/70">No landing pages created yet.</div>
       ) : (
-        <ul className="divide-y divide-blue-100/50 text-sm">
+        <ul className="divide-y divide-cr-100/50 text-sm">
           {pages.map((p) => {
             const badge = pageLabel(p);
             return (
               <li key={p.key} className="flex items-center justify-between gap-3 py-2">
                 <div className="min-w-0">
-                  <div className="truncate font-medium text-blue-800">{p.accountName}</div>
-                  <div className="truncate text-xs text-blue-700/70">{p.versionNote || `v${p.version}`}</div>
+                  <div className="truncate font-medium text-cr-800">{p.accountName}</div>
+                  <div className="truncate text-xs text-cr-700/70">{p.versionNote || `v${p.version}`}</div>
                 </div>
                 <div className="flex shrink-0 items-center gap-3">
                   <Badge color={badge.color}>{badge.text}</Badge>
@@ -863,7 +877,7 @@ function AbmPagesCard({ pages, onRefresh, refreshing, lastUpdated, acc, isSyncin
                       href={p.cmsEditUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 rounded-md bg-blue-50 px-2 py-1 text-xs font-semibold text-blue-700 transition-colors hover:bg-blue-100"
+                      className="inline-flex items-center gap-1 rounded-md bg-cr-50 px-2 py-1 text-xs font-semibold text-cr-700 transition-colors hover:bg-cr-100"
                       title="Open page in Optimizely CMS editor for review"
                     >
                       Review in CMS ↗
@@ -871,16 +885,16 @@ function AbmPagesCard({ pages, onRefresh, refreshing, lastUpdated, acc, isSyncin
                   )}
                   {p.url ? (
                     <a
-                      href={p.url}
+                      href={liveSiteUrl(p.url)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 rounded-md bg-blue-50 px-2 py-1 text-xs font-semibold text-blue-700 transition-colors hover:bg-blue-100/50 hover:text-blue-700"
+                      className="inline-flex items-center gap-1 rounded-md bg-cr-50 px-2 py-1 text-xs font-semibold text-cr-700 transition-colors hover:bg-cr-100/50 hover:text-cr-700"
                       title="Open live public microsite"
                     >
                       Live site ↗
                     </a>
                   ) : !p.cmsEditUrl ? (
-                    <span className="text-xs text-blue-700/50">Publish in CMS</span>
+                    <span className="text-xs text-cr-700/50">Publish in CMS</span>
                   ) : null}
                 </div>
               </li>
@@ -918,29 +932,29 @@ function CRMCampaigns({ selectedId, setSelectedId, liveStatus, triggerOpal, isSy
         {view.slice.map((a) => {
           const ls = micrositeLabel(abmPages, liveStatus, a);
           return (
-            <tr key={a.id} onClick={() => setSelectedId(a.id)} className={`cursor-pointer border-t border-blue-100/50 ${a.id === selectedId ? "bg-blue-50" : "hover:bg-blue-50"}`}>
-              <td className="px-4 py-3 font-medium text-blue-700">{a.name}</td>
-              <td className="px-4 py-3 text-blue-700/80">{a.industry}</td>
+            <tr key={a.id} onClick={() => setSelectedId(a.id)} className={`cursor-pointer border-t border-cr-100/50 ${a.id === selectedId ? "bg-cr-50" : "hover:bg-cr-50"}`}>
+              <td className="px-4 py-3 font-medium text-cr-700">{a.name}</td>
+              <td className="px-4 py-3 text-cr-700/80">{a.industry}</td>
               <td className="px-4 py-3"><Badge color={STAGE_COLOR[a.stage]}>{a.stage}</Badge></td>
               <td className="px-4 py-3"><IntentBadge meta={DETAILS[a.id].odpMeta} /></td>
-              <td className="px-4 py-3 text-blue-700">{a.pipeline}</td>
-              <td className="px-4 py-3 text-blue-700/80">{a.owner}</td>
-              <td className="px-4 py-3 text-blue-700/70">{a.lastActivity}</td>
+              <td className="px-4 py-3 text-cr-700">{a.pipeline}</td>
+              <td className="px-4 py-3 text-cr-700/80">{a.owner}</td>
+              <td className="px-4 py-3 text-cr-700/70">{a.lastActivity}</td>
               <td className="px-4 py-3"><Badge color={ls.color}>{ls.short}</Badge></td>
             </tr>
           );
         })}
       </DataTable>
-      {filtered.length === 0 && <div className="mt-6 text-center text-sm text-blue-700/70">No accounts match your filters.</div>}
+      {filtered.length === 0 && <div className="mt-6 text-center text-sm text-cr-700/70">No accounts match your filters.</div>}
       <Pager view={view} />
       <div className="mt-6 grid gap-4 lg:grid-cols-3">
         <Card title={acc.name} right={<Badge color={statusColor}>Microsite: {statusText}</Badge>}>
           <dl className="grid grid-cols-2 gap-y-2 text-sm">
-            <dt className="text-blue-700/70">Industry</dt><dd>{acc.industry}</dd>
-            <dt className="text-blue-700/70">HQ</dt><dd>{acc.hq}</dd>
-            <dt className="text-blue-700/70">Employees</dt><dd>{acc.employees}</dd>
-            <dt className="text-blue-700/70">Revenue</dt><dd>{acc.revenue}</dd>
-            <dt className="text-blue-700/70">Opportunity</dt><dd>{acc.pipeline} · {acc.stage}</dd>
+            <dt className="text-cr-700/70">Industry</dt><dd>{acc.industry}</dd>
+            <dt className="text-cr-700/70">HQ</dt><dd>{acc.hq}</dd>
+            <dt className="text-cr-700/70">Employees</dt><dd>{acc.employees}</dd>
+            <dt className="text-cr-700/70">Revenue</dt><dd>{acc.revenue}</dd>
+            <dt className="text-cr-700/70">Opportunity</dt><dd>{acc.pipeline} · {acc.stage}</dd>
           </dl>
         </Card>
         <Card title="Buying committee (known contacts)">
@@ -951,7 +965,7 @@ function CRMCampaigns({ selectedId, setSelectedId, liveStatus, triggerOpal, isSy
                   <Avatar name={c.name} />
                   <div>
                     <div className="text-sm font-medium">{c.name} {c.isNew && <Badge color="amber">New</Badge>}</div>
-                    <div className="text-xs text-blue-700/70">{c.title}</div>
+                    <div className="text-xs text-cr-700/70">{c.title}</div>
                   </div>
                 </div>
                 <Badge color="violet">{c.role}</Badge>
@@ -994,11 +1008,11 @@ function CRMReports({ liveMicrosites }) {
   const meetings = tier1.reduce((s, a) => s + DETAILS[a.id].activityItems.filter((i) => i.type === "meeting" && i.ago <= 30).length, 0);
   const avgIntent = accts.length ? Math.round(accts.reduce((s, a) => s + DETAILS[a.id].odpMeta.intentScore, 0) / accts.length) : 0;
   const saved = ["Pipeline by stage", "Pipeline by industry", "ABM account engagement", "Forecast vs quota", "Stale opportunities (30+ days)"];
-  const sel = "rounded-lg border border-blue-100 bg-white px-3 py-2 text-sm text-blue-700";
+  const sel = "rounded border border-cr-100 bg-white px-3 py-2 text-sm text-cr-700";
 
   return (
     <>
-      <PageHeader eyebrow="Analytics" title="Reports" sub="Sales and ABM performance" actions={<><select value={range} onChange={(e) => setRange(e.target.value)} className={sel}>{["This month", "This quarter", "This year"].map((r) => <option key={r}>{r}</option>)}</select><button className="rounded-lg border border-blue-100 bg-white px-4 py-2 text-sm text-blue-700 hover:bg-blue-50">Export CSV</button></>} />
+      <PageHeader eyebrow="Analytics" title="Reports" sub="Sales and ABM performance" actions={<><select value={range} onChange={(e) => setRange(e.target.value)} className={sel}>{["This month", "This quarter", "This year"].map((r) => <option key={r}>{r}</option>)}</select><button className="rounded border border-cr-100 bg-white px-4 py-2 text-sm text-cr-700 hover:bg-cr-50">Export CSV</button></>} />
       <FilterBar fl={fl} count={accts.length} total={ACCOUNTS.length} noun="accounts">
         <FilterSelect label="Owner" value={owner} onChange={(v) => fl.set("owner", v)} options={[ALL, ...OWNER_NAMES]} />
         <FilterSelect label="Industry" value={industry} onChange={(v) => fl.set("industry", v)} options={[ALL, ...INDUSTRIES]} />
@@ -1017,18 +1031,18 @@ function CRMReports({ liveMicrosites }) {
           </div>
         </Card>
         <Card title="Open pipeline by owner">
-          <div className="space-y-2.5">{owners.map((x) => <BarRow key={x.n} label={x.n} value={x.v} max={maxOwner} text={kFmt(x.v)} color="bg-blue-500" />)}</div>
+          <div className="space-y-2.5">{owners.map((x) => <BarRow key={x.n} label={x.n} value={x.v} max={maxOwner} text={kFmt(x.v)} color="bg-cr-500" />)}</div>
         </Card>
       </div>
       <div className="mt-4 grid gap-4 lg:grid-cols-2">
         <Card title="Open pipeline by industry">
-          <div className="space-y-2.5">{byIndustry.map((x) => <BarRow key={x.n} label={x.n} value={x.v} max={maxIndustry} text={kFmt(x.v)} color="bg-blue-400" />)}</div>
+          <div className="space-y-2.5">{byIndustry.map((x) => <BarRow key={x.n} label={x.n} value={x.v} max={maxIndustry} text={kFmt(x.v)} color="bg-cr-400" />)}</div>
         </Card>
         <Card title="Campaign performance: Q4 Business Growth ABM (Tier 1)">
           <table className="w-full text-sm">
-            <tbody className="divide-y divide-blue-100/50">
+            <tbody className="divide-y divide-cr-100/50">
               {[["Target accounts", `${tier1.length}`], ["Personalized microsites live", `${liveCount} of ${tier1.length}`], ["Accounts engaged (30 days)", `${engaged} of ${tier1.length}`], ["Meetings booked (30 days)", `${meetings}`], ["Pipeline influenced", kFmt(sumK(open.filter((o) => o.acct && tier1.some((a) => a.id === o.acct))))]].map((r) => (
-                <tr key={r[0]}><td className="py-2 text-blue-700/80">{r[0]}</td><td className="py-2 text-right font-medium text-blue-950">{r[1]}</td></tr>
+                <tr key={r[0]}><td className="py-2 text-cr-700/80">{r[0]}</td><td className="py-2 text-right font-medium text-cr-950">{r[1]}</td></tr>
               ))}
             </tbody>
           </table>
@@ -1036,7 +1050,7 @@ function CRMReports({ liveMicrosites }) {
       </div>
       <div className="mt-4">
         <Card title="Saved reports">
-          <ul className="grid gap-2 text-sm sm:grid-cols-2 lg:grid-cols-3">{saved.map((s) => <li key={s} className="flex items-center justify-between rounded-lg border border-blue-100/50 px-3 py-2 text-blue-700 hover:bg-blue-50"><span>{s}</span><span className="text-blue-700/50">›</span></li>)}</ul>
+          <ul className="grid gap-2 text-sm sm:grid-cols-2 lg:grid-cols-3">{saved.map((s) => <li key={s} className="flex items-center justify-between rounded border border-cr-100/50 px-3 py-2 text-cr-700 hover:bg-cr-50"><span>{s}</span><span className="text-cr-700/50">›</span></li>)}</ul>
         </Card>
       </div>
     </>
@@ -1185,6 +1199,8 @@ function buildOrchestratorTrace(acc, d, contacts, existingPage) {
 
 export default function CRMApplication() {
   const [page, setPage] = useState("Campaigns");
+  const [navOpen, setNavOpen] = useState(true);
+  const [navQuery, setNavQuery] = useState("");
   const [selectedId, setSelectedId] = useState("lakeshore");
   const [isSyncing, setIsSyncing] = useState({});
   const [liveStatus, setLiveStatus] = useState({}); // { [accountId]: { live, url, versionNote, mode, lastRefreshed } }
@@ -1434,25 +1450,50 @@ export default function CRMApplication() {
   };
 
   return (
-    <div className="flex h-screen w-full font-sans text-blue-800">
-      <aside className="flex w-52 shrink-0 flex-col bg-blue-950 p-4 text-blue-100">
-        <div className="mb-6">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={siteConfig.logoInvertedSrc} alt={siteConfig.logoAlt} width={83} height={50} className="h-[50px] w-[83px]" />
+    <div className="flex h-screen w-full flex-col bg-cr-50 pb-10 font-sans text-cr-800">
+      {/* Top bar: global search, quick add, notifications, designer, user */}
+      <header className="flex h-12 shrink-0 items-center gap-3 border-b border-cr-100 bg-white px-3">
+        <button onClick={() => setNavOpen((v) => !v)} className="rounded p-1.5 text-cr-700 hover:bg-cr-50" aria-label="Toggle navigation">
+          {navOpen ? <PanelLeftClose size={18} /> : <PanelLeftOpen size={18} />}
+        </button>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={siteConfig.logoSrc} alt={siteConfig.logoAlt} className="h-6 w-auto" />
+        <div className="relative ml-4 w-full max-w-md">
+          <Search size={15} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-cr-700/60" />
+          <input placeholder="Search accounts, contacts, opportunities…" className="w-full rounded border border-cr-100 bg-cr-50 py-1.5 pl-8 pr-3 text-sm placeholder-cr-700/50 focus:border-cr-500 focus:bg-white focus:outline-none" />
         </div>
-        <nav className="flex-1 space-y-1">
-          {CRM_NAV.map((n) => (
-            <button key={n.id} onClick={() => go(n.id)} className={`flex w-full items-center gap-3 rounded-md px-3 py-2 text-left text-sm ${n.id === page ? "bg-blue-800 text-white" : "text-blue-200 hover:bg-blue-900"}`}>
-              <span className="w-4 text-center opacity-80">{n.icon}</span>{n.id}
-            </button>
-          ))}
+        <div className="ml-auto flex items-center gap-1 text-cr-700">
+          <button className="flex items-center gap-1 rounded bg-cr-600 px-2.5 py-1.5 text-sm font-medium text-white hover:bg-cr-500"><Plus size={15} />New</button>
+          <button className="rounded p-1.5 hover:bg-cr-50" aria-label="Notifications"><Bell size={18} /></button>
+          <button className="rounded p-1.5 hover:bg-cr-50" aria-label="Help"><HelpCircle size={18} /></button>
+          <button className="rounded p-1.5 hover:bg-cr-50" aria-label="System designer"><Settings size={18} /></button>
+          <div className="ml-2 flex h-8 w-8 items-center justify-center rounded-full bg-cr-600 text-xs font-semibold text-white" title="Jordan Hayes · Business development lead">JH</div>
+        </div>
+      </header>
+      <div className="flex min-h-0 flex-1">
+      {/* Left navigation panel: workplace switcher, section search, sections */}
+      <aside className={`flex shrink-0 flex-col border-r border-cr-100 bg-white py-3 transition-[width] ${navOpen ? "w-56 px-3" : "w-14 px-2"}`}>
+        {navOpen && (
+          <button className="mb-2 flex w-full items-center justify-between rounded border border-cr-100 px-2.5 py-1.5 text-sm font-medium text-cr-950 hover:bg-cr-50">
+            <span className="flex items-center gap-2"><LayoutGrid size={15} className="text-cr-600" />ESL Sales</span><ChevronDown size={14} />
+          </button>
+        )}
+        {navOpen && (
+          <input value={navQuery} onChange={(e) => setNavQuery(e.target.value)} placeholder="Search sections" className="mb-2 w-full rounded border border-cr-100 px-2.5 py-1.5 text-sm placeholder-cr-700/50 focus:border-cr-500 focus:outline-none" />
+        )}
+        <nav className="flex-1 space-y-0.5">
+          {CRM_NAV.filter((n) => n.id.toLowerCase().includes(navQuery.toLowerCase())).map((n) => {
+            const Icon = n.icon;
+            const active = n.id === page;
+            return (
+              <button key={n.id} onClick={() => go(n.id)} title={n.id} className={`flex w-full items-center gap-3 rounded px-2.5 py-2 text-left text-sm ${active ? "bg-cr-200/60 font-semibold text-cr-600" : "text-cr-800 hover:bg-cr-50"} ${navOpen ? "" : "justify-center"}`}>
+                <Icon size={18} className="shrink-0" />{navOpen && n.id}
+              </button>
+            );
+          })}
         </nav>
-        <div className="flex items-center gap-2 border-t border-blue-900 pt-3 text-xs text-blue-300">
-          <div className="flex h-7 w-7 items-center justify-center rounded-full bg-blue-700 font-semibold text-white">JH</div>
-          <div><div className="text-blue-100">Jordan Hayes</div><div>Business development lead</div></div>
-        </div>
       </aside>
-      <main className="flex-1 overflow-auto bg-blue-50 p-6">
+      <main className="flex-1 overflow-auto p-5">
         {page === "Home" && <CRMHome liveMicrosites={liveMicrosites} go={go} setSelectedId={setSelectedId} />}
         {page === "Accounts" && <CRMAccounts key={selectedId} selectedId={selectedId} setSelectedId={setSelectedId} liveStatus={liveStatus} go={go} triggerOpal={triggerOpal} isSyncing={isSyncing} abmPages={abmPages} />}
         {page === "Contacts" && <CRMContacts setSelectedId={setSelectedId} go={go} />}
@@ -1460,8 +1501,9 @@ export default function CRMApplication() {
         {page === "Campaigns" && <CRMCampaigns selectedId={selectedId} setSelectedId={setSelectedId} liveStatus={liveStatus} triggerOpal={triggerOpal} isSyncing={isSyncing} logs={logs} clearLogs={() => { clearSimTimers(); setLogs([]); }} runActive={runActive} abmPages={abmPages} refreshPages={() => fetchPagesRef.current?.()} refreshing={refreshing} lastUpdated={lastUpdated} onDelete={deletePage} deletingKey={deletingKey} />}
         {page === "Reports" && <CRMReports liveMicrosites={liveMicrosites} />}
       </main>
+      </div>
       {notice && (
-        <div className={`fixed bottom-4 right-4 z-50 max-w-sm rounded-lg px-4 py-3 text-sm text-white shadow-lg ${notice.tone === "ok" ? "bg-emerald-600" : "bg-rose-600"}`}>
+        <div className={`fixed bottom-4 right-4 z-50 max-w-sm rounded px-4 py-3 text-sm text-white shadow-lg ${notice.tone === "ok" ? "bg-emerald-600" : "bg-rose-600"}`}>
           {notice.text}
         </div>
       )}
