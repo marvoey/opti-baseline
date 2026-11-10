@@ -143,6 +143,17 @@ const PV = location.pathname.replace(/\/+$/, '') === '/preview'
   : null;
 let EDITING = false; // true only in ctx=edit while showing the item being previewed
 
+/* Routing. Live site: real paths (/news/). Hash links (#/news) are kept only for /preview (its URL carries the
+   preview params) and when the page is opened from disk (file://), where paths cannot work. */
+const HASH_MODE = !!PV || location.protocol === 'file:';
+/* "#/news?x=1" (the form the CMS data and renderers use) -> "/news/?x=1" on the live site; unchanged otherwise */
+const L = h => {
+  if (HASH_MODE || typeof h !== 'string' || !h.startsWith('#/')) return h;
+  const [p, q] = h.slice(1).split('?');
+  const s = p.replace(/^\/+|\/+$/g, '');
+  return (s ? '/' + s + '/' : '/') + (q ? '?' + q : '');
+};
+
 const SNAPSHOT = {
   source: 'CMS snapshot: The Coop (draft v212-217)',
   home: { key:'4f68aa9ece444ea887ec63bf28c558b1', contentType:'CfaIntranetHome', routeSegment:'the-coop',
@@ -231,11 +242,11 @@ R.CfaHeroBanner=(p,ctx)=>{
   const head=p.ShowTimeOfDayGreeting?`${g}, Jon`:p.Headline;
   return `<div class="hero"><h2${p.ShowTimeOfDayGreeting?'':ed('Headline')}>${esc(head)}</h2><p${ed('Subheadline')}>${esc(p.Subheadline)}</p>
    <div class="meta"><span class="pill">📍 ${esc(ctx.home.RestaurantName)}</span><span class="pill">⏰ ${esc(ctx.home.ShiftInfo)}</span></div>
-   ${p.CtaLabel?`<a class="btn light" href="#/events"${ed('CtaLabel')}>${esc(p.CtaLabel)}</a>`:''}
+   ${p.CtaLabel?`<a class="btn light" href="${L('#/events')}"${ed('CtaLabel')}>${esc(p.CtaLabel)}</a>`:''}
    <div style="margin-top:14px;font-size:13px;opacity:.9">${esc(ctx.home.Tagline)}</div></div>`;
 };
 const QL_ROUTE={'Request Time Off':'#/time-off','Team Directory':'#/directory','Training':'#/resources?type=training','Benefits':'#/resources?type=hr'};
-R.CfaQuickLinksSection=p=>`<section class="blk"><h3${ed('Heading')}>${esc(p.Heading)}</h3><div class="grid g4">${(p.Links||[]).map(l=>{const q=props(l);return `<a class="tile" style="text-decoration:none;color:inherit" href="${esc((q.Target&&q.Target.href)||QL_ROUTE[q.Label]||'#/')}"><span class="ic">${esc(q.IconEmoji)}</span>${esc(q.Label)}</a>`}).join('')}</div></section>`;
+R.CfaQuickLinksSection=p=>`<section class="blk"><h3${ed('Heading')}>${esc(p.Heading)}</h3><div class="grid g4">${(p.Links||[]).map(l=>{const q=props(l);return `<a class="tile" style="text-decoration:none;color:inherit" href="${esc(L((q.Target&&q.Target.href)||QL_ROUTE[q.Label]||'#/'))}"><span class="ic">${esc(q.IconEmoji)}</span>${esc(q.Label)}</a>`}).join('')}</div></section>`;
 
 R.CfaNewsListSection=(p)=>{
   const arts=(p.Articles||[]).map(props), max=p.MaxItems||arts.length;
@@ -257,7 +268,7 @@ R.CfaEventsSection=(p)=>{
   const list=p.ShowCalendarGrid?sorted:sorted.filter(e=>new Date(e.StartDate).getTime()>=now);
   const rows=list.map(e=>{const i=REG.events.findIndex(x=>x.Title===e.Title&&x.StartDate===e.StartDate);const past=new Date(e.StartDate).getTime()<now;
     return `<div class="evrow ${past?'past':''}" data-act="event" data-v="${i}"><div class="date"><small>${fmtDate(e.StartDate,{month:'short'})}</small><b>${fmtDate(e.StartDate,{day:'numeric'})}</b></div><div style="flex:1"><b>${esc(e.Title)}</b><div style="color:var(--mut);font-size:13px">${fmtTime(e.StartDate)} · ${esc(e.EventLocation)}${past?' · Past':''}</div></div><span class="tag ${e.EventType}">${esc(ETYPE[e.EventType]||e.EventType)}</span></div>`}).join('')||'<div class="empty">No upcoming events.</div>';
-  if(!p.ShowCalendarGrid) return `<section class="blk"><h3${ed('Heading')}>${esc(p.Heading)}</h3><div class="card">${rows}<div style="margin-top:12px"><a class="btn ghost sm" href="#/events">View full calendar</a></div></div></section>`;
+  if(!p.ShowCalendarGrid) return `<section class="blk"><h3${ed('Heading')}>${esc(p.Heading)}</h3><div class="card">${rows}<div style="margin-top:12px"><a class="btn ghost sm" href="${L('#/events')}">View full calendar</a></div></div></section>`;
   return `<section class="blk"><h3${ed('Heading')}>${esc(p.Heading)}</h3><div class="row2"><div class="card" id="calwrap">${calHtml(evs)}</div><div class="card"><b>All events</b><div style="margin-top:6px">${rows}</div><div style="margin-top:14px"><button class="btn sm" data-act="addevent">+ Add event</button></div></div></div></section>`;
 };
 function calHtml(evs){
@@ -327,14 +338,20 @@ function buildRegistry(){
 
 /* ---------- router ---------- */
 function route(){
-  const raw=location.hash.replace(/^#\/?/,''); const [path,qs]=raw.split('?'); const seg=path||'';
+  let seg,qs;
+  if(HASH_MODE){
+    const raw=location.hash.replace(/^#\/?/,''); const parts=raw.split('?'); seg=parts[0]||''; qs=parts[1];
+    // /preview shows the previewed item with no "#" in the URL; a hash only appears once someone navigates.
+    if(PV&&SITE.preview&&!location.hash&&SITE.preview.kind==='page')seg=SITE.preview.routeSegment;
+  } else { seg=location.pathname.replace(/^\/+|\/+$/g,''); qs=location.search.slice(1); }
+  $('.brand').setAttribute('href',L('#/'));
   if(qs){const u=new URLSearchParams(qs); if(u.get('type'))S.resType=u.get('type');}
   const isHome=seg==='';
   const pg=isHome?SITE.home:SITE.pages.find(p=>p.routeSegment===seg);
   const nav=[...SITE.pages].filter(p=>props(p).ShowInNavigation!==false).sort((a,b)=>props(a).NavOrder-props(b).NavOrder);
-  $('#nav').innerHTML=`<a href="#/" class="${isHome?'active':''}">Home</a>`+nav.map(p=>`<a href="#/${p.routeSegment}" class="${p.routeSegment===seg?'active':''}">${esc(props(p).PageIcon||'')} ${esc(p.displayName)}</a>`).join('');
+  $('#nav').innerHTML=`<a href="${L('#/')}" class="${isHome?'active':''}">Home</a>`+nav.map(p=>`<a href="${L('#/'+p.routeSegment)}" class="${p.routeSegment===seg?'active':''}">${esc(props(p).PageIcon||'')} ${esc(p.displayName)}</a>`).join('');
   const app=$('#app');
-  if(!pg){app.innerHTML='<div class="empty">Page not found. <a href="#/">Back home</a></div>';return;}
+  if(!pg){app.innerHTML=`<div class="empty">Page not found. <a href="${L('#/')}">Back home</a></div>`;return;}
   const hp=props(SITE.home); const ctx={home:hp};
   // On-page editing only applies to the exact item being previewed (not other pages reached via the nav).
   EDITING=!!(PV&&PV.ctx==='edit'&&SITE.preview&&pg.key===SITE.preview.key);
@@ -420,6 +437,15 @@ document.addEventListener('submit',e=>{
   $('#hrs').textContent=S.hours;$('#tohist').innerHTML=histHtml();e.target.reset();toast('Request submitted to your operator');
 });
 window.addEventListener('hashchange',route);
+window.addEventListener('popstate',route);
+/* Live site: navigate between pages without a full reload, using real URLs (/news/). */
+document.addEventListener('click',e=>{
+  if(HASH_MODE||e.defaultPrevented||e.button||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
+  const a=e.target.closest&&e.target.closest('a[href]'); if(!a||a.target||a.hasAttribute('download'))return;
+  const u=new URL(a.href,location.href);
+  if(u.origin!==location.origin||u.pathname.startsWith('/api/')||u.pathname.startsWith('/preview'))return;
+  e.preventDefault(); history.pushState(null,'',u.pathname+u.search); route();
+});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
 
 /* ---------- boot ---------- */
@@ -440,7 +466,6 @@ async function bootPreview(){
   try{ SITE=await loadPreview(PV.token); }
   catch(err){ previewError(err.message); return; } // never fall back to the snapshot: it would show the wrong content
   const p=SITE.preview;
-  history.replaceState(null,'',location.pathname+location.search+(p.kind==='home'?'#/':'#/'+p.routeSegment));
   // On-page editing: load the CMS communication script from the CMS origin the server was configured with.
   if(PV.ctx==='edit'&&p.cmsOrigin&&/^https:\/\/[a-z0-9.-]+(:\d+)?$/i.test(p.cmsOrigin)){
     const s=document.createElement('script'); s.src=p.cmsOrigin+'/util/javascript/communicationinjector.js'; document.head.appendChild(s);
@@ -458,6 +483,8 @@ async function bootPreview(){
 }
 async function boot(){
   if(PV) return bootPreview();
+  // old bookmarks like /#/news -> /news/
+  if(!HASH_MODE&&location.hash.startsWith('#/')) history.replaceState(null,'',L(location.hash));
   SITE=SNAPSHOT; let note='';
   if(CONFIG.contentUrl){
     try{

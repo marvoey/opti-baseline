@@ -4,5 +4,8 @@
   "buildCommand": null,
   "outputDirectory": "public",
   "functions": { "api/*.js": { "maxDuration": 15, "includeFiles": "public/index.html" } },
-  "rewrites": [{ "source": "/preview", "destination": "/api/preview-page" }]
+  "rewrites": [
+    { "source": "/preview", "destination": "/api/preview-page" },
+    { "source": "/((?!api/).*)", "destination": "/index.html" }
+  ]
 }
