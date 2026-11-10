@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Coop | Team Intranet</title>
+<style>
+:root{--red:#e51636;--red-d:#b80f2a;--ink:#1d1d1f;--mut:#6b6b73;--line:#e6e6ea;--bg:#f6f4f1;--card:#fff;--cream:#fff8ef;--ok:#1a8a4a;--warn:#c77700;--r:14px}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
+a{color:var(--red)}
+header.top{background:var(--red);color:#fff;position:sticky;top:0;z-index:20;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.top-in{max-width:1180px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.brand{font-weight:800;font-size:22px;letter-spacing:-.5px;cursor:pointer;display:flex;align-items:center;gap:8px;text-decoration:none;color:#fff}
+.brand small{font-weight:500;font-size:12px;opacity:.85;display:block;line-height:1}
+nav.main{display:flex;gap:4px;flex-wrap:wrap}
+nav.main a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:999px;font-size:14px;font-weight:600;opacity:.92}
+nav.main a:hover{background:rgba(255,255,255,.18)}
+nav.main a.active{background:#fff;color:var(--red);opacity:1}
+.search{margin-left:auto;position:relative}
+.search input{border:0;border-radius:999px;padding:9px 16px;width:250px;font-size:14px;outline:none}
+.results{position:absolute;right:0;top:44px;background:#fff;color:var(--ink);width:380px;max-height:420px;overflow:auto;border-radius:12px;box-shadow:0 12px 40px rgba(0,0,0,.25);display:none}
+.results.show{display:block}
+.results h6{margin:0;padding:10px 14px 4px;font-size:11px;text-transform:uppercase;color:var(--mut);letter-spacing:.6px}
+.results div.it{padding:9px 14px;cursor:pointer;font-size:14px;border-bottom:1px solid var(--line)}
+.results div.it:hover{background:var(--cream)}
+.results div.it small{color:var(--mut);display:block}
+main{max-width:1180px;margin:0 auto;padding:24px 20px 60px}
+.page-title h1{margin:4px 0 2px;font-size:30px;letter-spacing:-.5px}
+.page-title p{margin:0 0 20px;color:var(--mut)}
+.hero{background:linear-gradient(120deg,var(--red),#ff4d67);color:#fff;border-radius:20px;padding:34px 36px;margin-bottom:22px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;right:-60px;top:-60px;width:260px;height:260px;border-radius:50%;background:rgba(255,255,255,.12)}
+.hero h2{margin:0 0 6px;font-size:32px;letter-spacing:-.5px}
+.hero p{margin:0 0 14px;max-width:620px;opacity:.95}
+.hero .meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+.pill{background:rgba(255,255,255,.2);padding:5px 12px;border-radius:999px;font-size:13px;font-weight:600}
+.btn{display:inline-block;border:0;cursor:pointer;background:var(--red);color:#fff;padding:10px 18px;border-radius:999px;font-weight:700;font-size:14px;text-decoration:none}
+.btn:hover{background:var(--red-d)}
+.btn.light{background:#fff;color:var(--red)}
+.btn.ghost{background:transparent;color:var(--red);border:2px solid var(--red)}
+.btn.sm{padding:6px 12px;font-size:12px}
+.btn[disabled]{opacity:.5;cursor:default}
+section.blk{margin-bottom:28px}
+section.blk>h3{font-size:20px;margin:0 0 12px;letter-spacing:-.3px}
+.grid{display:grid;gap:14px}
+.g4{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.g3{grid-template-columns:repeat(auto-fill,minmax(310px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px}
+.card.click{cursor:pointer;transition:.15s}
+.card.click:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(0,0,0,.08)}
+.tile{display:flex;align-items:center;gap:12px;font-weight:700;cursor:pointer;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px;transition:.15s}
+.tile:hover{border-color:var(--red);transform:translateY(-2px)}
+.tile .ic{font-size:26px;background:var(--cream);width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center}
+.tag{display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:3px 9px;border-radius:999px;background:#fde8ec;color:var(--red)}
+.tag.menu{background:#fff1d6;color:#9a5b00}.tag.people{background:#e8f0ff;color:#2a56c6}.tag.operations{background:#e6f6ec;color:var(--ok)}.tag.community{background:#f1e8ff;color:#6a3bc4}.tag.company{background:#fde8ec;color:var(--red)}
+.tag.training{background:#e8f0ff;color:#2a56c6}.tag.safety{background:#fde8ec;color:var(--red)}.tag.policy{background:#eee;color:#444}.tag.hr{background:#fff1d6;color:#9a5b00}.tag.brand{background:#e6f6ec;color:var(--ok)}
+.tag.celebration{background:#fff1d6;color:#9a5b00}
+.card h4{margin:10px 0 6px;font-size:17px;line-height:1.3}
+.card p{margin:0;color:var(--mut);font-size:14px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 14px;font-size:13px;font-weight:600;cursor:pointer}
+.chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.bar input,.bar select,.f input,.f select,.f textarea{padding:10px 12px;border:1px solid #cfcfd6;border-radius:10px;font-size:14px;font-family:inherit;background:#fff}
+.bar input{flex:1;min-width:220px}
+.person{display:flex;gap:14px;align-items:center}
+.av{width:52px;height:52px;border-radius:50%;background:var(--red);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none}
+.av.big{width:84px;height:84px;font-size:28px}
+.person b{display:block}.person small{color:var(--mut)}
+.row2{display:grid;grid-template-columns:2fr 1fr;gap:22px}
+@media(max-width:900px){.row2{grid-template-columns:1fr}.search input{width:180px}}
+.quote{background:var(--cream);border-left:5px solid var(--red);padding:16px 20px;border-radius:10px;margin-bottom:14px;font-style:italic}
+.quote b{display:block;font-style:normal;margin-top:6px;color:var(--mut);font-size:13px}
+.shout{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.shout:last-child{border:0}
+.shout .av{width:40px;height:40px;font-size:14px}
+.shout small{color:var(--mut)}
+.f{display:grid;gap:12px}
+.f label{font-size:13px;font-weight:700;display:grid;gap:5px}
+.f .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.err{color:var(--red);font-size:13px;font-weight:600;min-height:18px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line)}
+th{font-size:12px;text-transform:uppercase;color:var(--mut);letter-spacing:.5px}
+.st{font-weight:700;font-size:12px;padding:3px 10px;border-radius:999px}
+.st.Pending{background:#fff1d6;color:var(--warn)}.st.Approved{background:#e6f6ec;color:var(--ok)}
+.stat{font-size:34px;font-weight:800;letter-spacing:-1px}
+.prog{height:8px;background:#ececf0;border-radius:99px;overflow:hidden;margin:8px 0}
+.prog i{display:block;height:100%;background:var(--ok);transition:width .4s}
+.cal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.cal .dh{background:#fafafa;text-align:center;font-size:12px;font-weight:700;color:var(--mut);padding:8px 0}
+.cal .d{background:#fff;min-height:92px;padding:5px;font-size:12px}
+.cal .d.out{background:#fafafa;color:#b5b5bd}
+.cal .d.sun{background:#fbf5f5}
+.cal .d.today .n{background:var(--red);color:#fff;border-radius:50%;width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center}
+.cal .d small{display:block;color:#c9a0a8;font-size:10px}
+.ev{display:block;font-size:11px;font-weight:700;padding:3px 6px;border-radius:6px;margin-top:3px;cursor:pointer;background:#fde8ec;color:var(--red);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ev.training{background:#e8f0ff;color:#2a56c6}.ev.community{background:#f1e8ff;color:#6a3bc4}.ev.celebration{background:#fff1d6;color:#9a5b00}
+.cal-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.cal-h h4{margin:0;font-size:18px}
+.evrow{display:flex;gap:14px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line);cursor:pointer}
+.evrow:last-child{border:0}
+.date{background:var(--cream);border-radius:12px;width:56px;text-align:center;padding:6px 0;flex:none}
+.date b{display:block;font-size:20px;line-height:1.1}.date small{font-size:11px;text-transform:uppercase;color:var(--red);font-weight:700}
+.past{opacity:.55}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:50;padding:20px}
+.overlay.show{display:flex}
+.modal{background:#fff;border-radius:18px;max-width:560px;width:100%;max-height:88vh;overflow:auto;padding:28px;position:relative}
+.modal .x{position:absolute;right:14px;top:10px;border:0;background:none;font-size:26px;cursor:pointer;color:var(--mut)}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--ink);color:#fff;padding:12px 22px;border-radius:999px;font-weight:600;font-size:14px;z-index:60;transition:.3s;opacity:0}
+.toast.show{transform:translateX(-50%);opacity:1}
+footer{max-width:1180px;margin:0 auto;padding:0 20px 40px;color:var(--mut);font-size:12px}
+.srcbadge{display:inline-block;background:#fff;border:1px dashed #bbb;border-radius:8px;padding:4px 10px;margin-bottom:6px}
+.empty{color:var(--mut);padding:20px;text-align:center}
+</style>
+</head>
+<body>
+<header class="top"><div class="top-in">
+  <a class="brand" href="#/"><span style="font-size:26px">🐄</span><span id="siteName">The Coop<small id="restName"></small></span></a>
+  <nav class="main" id="nav"></nav>
+  <div class="search"><input id="q" placeholder="Search people, news, documents..." autocomplete="off"><div class="results" id="results"></div></div>
+</div></header>
+<main id="app"></main>
+<footer><div class="srcbadge" id="srcBadge"></div><div>Unofficial concept for demonstration purposes only. Not affiliated with or endorsed by Chick-fil-A, Inc. All people, dates and figures are fictional.</div></footer>
+<div class="overlay" id="ov"><div class="modal" id="modal"></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============================================================
+   CONTENT SOURCE
+   The page tree below mirrors what the Optimizely SaaS CMS returns
+   for the CFA content types (draft versions 212-217). Properties may be
+   plain values or { value: ... } wrappers; rich text may be { html }.
+   To use live content, set contentUrl to any endpoint that returns the
+   same shape (open the page with ?src=<url>). Otherwise this snapshot is used.
+   ============================================================ */
+const CONFIG = { contentUrl: new URLSearchParams(location.search).get('src') || (location.protocol.indexOf('http') === 0 ? '/api/content' : '') };
+
+const SNAPSHOT = {
+  source: 'CMS snapshot: The Coop (draft v212-217)',
+  home: { key:'4f68aa9ece444ea887ec63bf28c558b1', contentType:'CfaIntranetHome', routeSegment:'the-coop',
+    properties:{ SiteName:'The Coop', Tagline:'Eat Mor Chikin. Serve Mor People. Your team hub for news, people, resources and more.', RestaurantName:'Chick-fil-A Peachtree Corners', ShiftInfo:'Next shift: Thu 10:30 AM - 6:00 PM, Front Counter' },
+    nodes:[
+      {contentType:'CfaHeroBanner',properties:{Headline:'Welcome back to The Coop',Subheadline:'Second-mile service starts with you. Here is what is happening at your restaurant today.',CtaLabel:'View my schedule',ShowTimeOfDayGreeting:true}},
+      {contentType:'CfaQuickLinksSection',properties:{Heading:'Quick links',Links:[
+        {properties:{Label:'Request Time Off',IconEmoji:'🗓️'}},{properties:{Label:'Team Directory',IconEmoji:'👥'}},{properties:{Label:'Training',IconEmoji:'🎓'}},{properties:{Label:'Benefits',IconEmoji:'💛'}}]}},
+      {contentType:'CfaNewsListSection',properties:{Heading:'Top announcements',ShowCategoryFilter:false,MaxItems:3,Articles:[
+        {properties:{Headline:'Spring menu preview: what is new this season',Category:'menu',Summary:'A first look at the seasonal items arriving in restaurants next month, plus prep tips for your station.',IsPinned:true}},
+        {properties:{Headline:"Remarkable Futures: congratulations to this year's scholarship recipients",Category:'people',Summary:'Meet the team members who earned Chick-fil-A scholarships and hear what it means to them.',IsPinned:true}},
+        {properties:{Headline:'Drive-thru safety refresh: new cone and signal procedures',Category:'operations',Summary:'Updated guidance for outdoor order takers. Review the short module before your next shift.',IsPinned:true}}]}},
+      {contentType:'CfaRecognitionSection',properties:{Heading:'Shout-outs',AllowPosting:true,FeaturedQuote:"We should be about more than just selling chicken. We should be a part of our customers' lives and the communities in which we serve.",FeaturedQuoteAttribution:'S. Truett Cathy'}},
+      {contentType:'CfaEventsSection',properties:{Heading:'Upcoming events',ShowCalendarGrid:false,Events:[
+        {properties:{Title:'Cow Appreciation Day',EventType:'celebration',StartDate:'2026-07-14T10:30:00+00:00',EventLocation:'All restaurants',RsvpEnabled:false}},
+        {properties:{Title:'Shared Table volunteer day',EventType:'community',StartDate:'2026-11-21T09:00:00+00:00',EventLocation:'Community kitchen',RsvpEnabled:true}}]}}
+    ]},
+  pages:[
+    {key:'7f7135def4fe49caa92823106e6c96fe',displayName:'News',routeSegment:'news',properties:{PageIcon:'📰',ShowInNavigation:true,NavOrder:10,PageIntro:'Stories, announcements and updates from across the Chick-fil-A family.'},nodes:[
+      {contentType:'CfaNewsListSection',properties:{Heading:'News and announcements',ShowCategoryFilter:true,MaxItems:12,Articles:[
+        {properties:{Headline:'Spring menu preview: what is new this season',Category:'menu',Summary:'A first look at the seasonal items arriving in restaurants next month, plus prep tips for your station.',Body:{html:'<p>Seasonal items arrive next month. Review prep guides in Resources before your next shift.</p>'}}},
+        {properties:{Headline:"Remarkable Futures: congratulations to this year's scholarship recipients",Category:'people',Summary:'Meet the team members who earned Chick-fil-A scholarships.',Body:{html:'<p>Hundreds of team members earned scholarships this year. Read their stories.</p>'}}},
+        {properties:{Headline:'Drive-thru safety refresh: new cone and signal procedures',Category:'operations',Summary:'Updated guidance for outdoor order takers.',Body:{html:'<p>Complete the short safety module before your next shift.</p>'}}},
+        {properties:{Headline:'Shared Table: restaurants donated over a million meals this quarter',Category:'community',Summary:'Thank you to every team that boxed up surplus food for neighbors in need.',Body:{html:'<p>Shared Table connects restaurants with local hunger relief partners.</p>'}}},
+        {properties:{Headline:'Mobile order pickup: what is changing at the counter',Category:'operations',Summary:'A new pickup flow rolls out next week. Here is what front counter teams need to know.',Body:{html:'<p>Training video available in Resources.</p>'}}},
+        {properties:{Headline:'Operator spotlight: 20 years of second-mile service',Category:'company',Summary:'One operator shares what has kept the team close for two decades.',Body:{html:'<p>A conversation about leadership, hospitality and growing people.</p>'}}}]}}]},
+    {key:'2a96cf767d054520b21cbb75e79cdcd1',displayName:'Directory',routeSegment:'directory',properties:{PageIcon:'👥',ShowInNavigation:true,NavOrder:20,PageIntro:'Find teammates, operators and Support Center colleagues.'},nodes:[
+      {contentType:'CfaDirectorySection',properties:{Heading:'Team directory',ShowSearch:true,ShowDepartmentFilter:true,People:[
+        {properties:{FullName:'Maria Santos',JobTitle:'Operator',Department:'leadership',Location:'Peachtree Corners',Email:'maria.santos@example.com',Phone:'(555) 010-1001',Bio:'Operator for 12 years. Loves developing future leaders.'}},
+        {properties:{FullName:'James Carter',JobTitle:'Front Counter Lead',Department:'front-counter',Location:'Peachtree Corners',Email:'james.carter@example.com',Phone:'(555) 010-1002',Bio:'Keeps the lobby running smoothly and the welcomes warm.'}},
+        {properties:{FullName:'Aaliyah Brooks',JobTitle:'Kitchen Trainer',Department:'kitchen',Location:'Peachtree Corners',Email:'aaliyah.brooks@example.com',Phone:'(555) 010-1003',Bio:'Food safety champion and new-hire trainer.'}},
+        {properties:{FullName:'Devon Reyes',JobTitle:'Drive-Thru Team Leader',Department:'drive-thru',Location:'Alpharetta',Email:'devon.reyes@example.com',Phone:'(555) 010-1004',Bio:'Speed and accuracy with a smile. Cone-and-signal expert.'}},
+        {properties:{FullName:'Priya Nair',JobTitle:'Learning and Development Partner',Department:'support-center',Location:'Support Center, Atlanta',Email:'priya.nair@example.com',Phone:'(555) 010-1005',Bio:'Designs training that helps team members grow.'}},
+        {properties:{FullName:'Tom Whitfield',JobTitle:'Director of Operations',Department:'leadership',Location:'Alpharetta',Email:'tom.whitfield@example.com',Phone:'(555) 010-1006',Bio:'Supports operators across the metro market.'}}]}}]},
+    {key:'a19fa18937d54a2aae8d2e7e3f75e0fa',displayName:'Resources',routeSegment:'resources',properties:{PageIcon:'📚',ShowInNavigation:true,NavOrder:30,PageIntro:'Policies, training and safety materials, all in one place.'},nodes:[
+      {contentType:'CfaResourceLibrarySection',properties:{Heading:'Resource library',ShowTrainingProgress:true,Documents:[
+        {properties:{Title:'Food Safety Handbook',ResourceType:'safety',Description:'Temperatures, handwashing, allergen handling and cleaning schedules.'}},
+        {properties:{Title:'New Team Member Orientation',ResourceType:'training',Description:'Everything you need for your first week.',DurationMinutes:45}},
+        {properties:{Title:'Second Mile Service training',ResourceType:'training',Description:"Practice the 'My pleasure' standard in real scenarios.",DurationMinutes:30}},
+        {properties:{Title:'Drive-Thru Safety Module',ResourceType:'safety',Description:'Cone placement, signals and weather procedures.',DurationMinutes:20}},
+        {properties:{Title:'Benefits Guide',ResourceType:'hr',Description:'Health, scholarships, and Remarkable Futures programs.'}},
+        {properties:{Title:'Uniform and Appearance Policy',ResourceType:'policy',Description:'Standards for uniforms, grooming and name tags.'}}]}}]},
+    {key:'3a691edf87324865b353a6f149060651',displayName:'Time Off',routeSegment:'time-off',properties:{PageIcon:'🗓️',ShowInNavigation:true,NavOrder:40,PageIntro:'Request time off and track your balance. Remember, we are closed on Sundays.'},nodes:[
+      {contentType:'CfaTimeOffSection',properties:{Heading:'Request time off',IntroText:{html:'<p>Submit your request at least two weeks ahead when possible. Restaurants are closed on Sundays, so those dates cannot be requested.</p>'},BlockSundays:true,DefaultHoursAvailable:64}}]},
+    {key:'f7fd27f59ce9462abca0433062093296',displayName:'Events',routeSegment:'events',properties:{PageIcon:'🎉',ShowInNavigation:true,NavOrder:50,PageIntro:'Team celebrations, trainings and community days.'},nodes:[
+      {contentType:'CfaEventsSection',properties:{Heading:'Events calendar',ShowCalendarGrid:true,Events:[
+        {properties:{Title:'Cow Appreciation Day',EventType:'celebration',StartDate:'2026-07-14T10:30:00+00:00',EventLocation:'All restaurants',Details:{html:"<p>Dress up as a cow and enjoy a free entree. Team members get the day's special treat.</p>"},RsvpEnabled:false}},
+        {properties:{Title:'Shared Table volunteer day',EventType:'community',StartDate:'2026-11-21T09:00:00+00:00',EventLocation:'Community kitchen',Details:{html:'<p>Help box and deliver surplus food to local partners.</p>'},RsvpEnabled:true}},
+        {properties:{Title:'Team Leader training workshop',EventType:'training',StartDate:'2026-11-18T13:00:00+00:00',EventLocation:'Support Center, Atlanta',Details:{html:'<p>Half-day workshop for aspiring and current team leaders.</p>'},RsvpEnabled:true}},
+        {properties:{Title:'Holiday team celebration',EventType:'celebration',StartDate:'2026-12-15T18:00:00+00:00',EventLocation:'Restaurant dining room',Details:{html:'<p>Dinner and recognition for the whole team.</p>'},RsvpEnabled:true}}]}}]}
+  ]
+};
+
+/* ---------- helpers ---------- */
+const $ = s => document.querySelector(s);
+const un = v => (v && typeof v==='object' && 'value' in v) ? v.value : v;
+const props = o => { const out={}; for (const k in (o.properties||{})) out[k]=un(o.properties[k]); return out; };
+const rich = v => (v && typeof v==='object' && v.html) ? v.html : (v ? `<p>${esc(v)}</p>` : '');
+const esc = s => String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const initials = n => n.split(' ').map(x=>x[0]).slice(0,2).join('').toUpperCase();
+const DEPT = {'front-counter':'Front Counter','kitchen':'Kitchen','drive-thru':'Drive-Thru','leadership':'Leadership','support-center':'Support Center'};
+const RTYPE = {policy:'Policy',training:'Training',safety:'Safety',hr:'HR and Benefits',brand:'Brand'};
+const CAT = {company:'Company',operations:'Operations',menu:'Menu',community:'Community',people:'People'};
+const ETYPE = {company:'Company',training:'Training',community:'Community',celebration:'Celebration'};
+const fmtDate = (iso,o) => new Date(iso).toLocaleDateString('en-US',Object.assign({timeZone:'UTC'},o||{month:'short',day:'numeric',year:'numeric'}));
+const fmtTime = iso => new Date(iso).toLocaleTimeString('en-US',{timeZone:'UTC',hour:'numeric',minute:'2-digit'});
+const todayUTC = () => { const n=new Date(); return Date.UTC(n.getFullYear(),n.getMonth(),n.getDate()); };
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('show'),2600);}
+function modal(html){$('#modal').innerHTML=`<button class="x" data-act="close">&times;</button>${html}`;$('#ov').classList.add('show');}
+function closeModal(){$('#ov').classList.remove('show');}
+
+/* ---------- state ---------- */
+let SITE=null;
+const S={newsFilter:'all',dirQ:'',dirDept:'all',resQ:'',resType:'all',cal:null,rsvp:new Set(),progress:{'New Team Member Orientation':100,'Second Mile Service training':40},
+  shouts:[{to:'Aaliyah Brooks',from:'Maria Santos',msg:'Trained three new hires this week and every one passed food safety on the first try. My pleasure to have you on the team!',when:'2h ago'},{to:'Devon Reyes',from:'James Carter',msg:'Handled the lunch rush at the drive-thru with a smile the whole way. Second-mile service!',when:'Yesterday'}],
+  hours:null,history:[{type:'Vacation',range:'Aug 4 - Aug 8, 2026',hours:32,status:'Approved'},{type:'Personal',range:'Sep 14, 2026',hours:8,status:'Approved'}]};
+let REG={news:[],people:[],docs:[],events:[]};
+
+/* ---------- section renderers (keyed by CMS content type) ---------- */
+const R={};
+R.CfaHeroBanner=(p,ctx)=>{
+  const h=new Date().getHours(), g=h<12?'Good morning':h<17?'Good afternoon':'Good evening';
+  const head=p.ShowTimeOfDayGreeting?`${g}, Jon`:p.Headline;
+  return `<div class="hero"><h2>${esc(head)}</h2><p>${esc(p.Subheadline)}</p>
+   <div class="meta"><span class="pill">📍 ${esc(ctx.home.RestaurantName)}</span><span class="pill">⏰ ${esc(ctx.home.ShiftInfo)}</span></div>
+   ${p.CtaLabel?`<a class="btn light" href="#/events" >${esc(p.CtaLabel)}</a>`:''}
+   <div style="margin-top:14px;font-size:13px;opacity:.9">${esc(ctx.home.Tagline)}</div></div>`;
+};
+const QL_ROUTE={'Request Time Off':'#/time-off','Team Directory':'#/directory','Training':'#/resources?type=training','Benefits':'#/resources?type=hr'};
+R.CfaQuickLinksSection=p=>`<section class="blk"><h3>${esc(p.Heading)}</h3><div class="grid g4">${(p.Links||[]).map(l=>{const q=props(l);return `<a class="tile" style="text-decoration:none;color:inherit" href="${esc((q.Target&&q.Target.href)||QL_ROUTE[q.Label]||'#/')}"><span class="ic">${esc(q.IconEmoji)}</span>${esc(q.Label)}</a>`}).join('')}</div></section>`;
+
+R.CfaNewsListSection=(p)=>{
+  const arts=(p.Articles||[]).map(props), max=p.MaxItems||arts.length;
+  const cats=[...new Set(arts.map(a=>a.Category))];
+  const chips=p.ShowCategoryFilter?`<div class="chips"><span class="chip ${S.newsFilter==='all'?'on':''}" data-act="newsf" data-v="all">All</span>${cats.map(c=>`<span class="chip ${S.newsFilter===c?'on':''}" data-act="newsf" data-v="${c}">${CAT[c]||c}</span>`).join('')}</div>`:'';
+  const list=arts.filter(a=>!p.ShowCategoryFilter||S.newsFilter==='all'||a.Category===S.newsFilter).slice(0,max);
+  return `<section class="blk"><h3>${esc(p.Heading)}</h3>${chips}<div class="grid g3">${list.map(a=>`<div class="card click" data-act="news" data-v="${REG.news.indexOf(REG.news.find(n=>n.Headline===a.Headline))}"><span class="tag ${a.Category}">${esc(CAT[a.Category]||a.Category)}</span><h4>${esc(a.Headline)}</h4><p>${esc(a.Summary)}</p></div>`).join('')||'<div class="empty">No articles in this category.</div>'}</div></section>`;
+};
+R.CfaRecognitionSection=p=>`<section class="blk"><h3>${esc(p.Heading)}</h3>
+ ${p.FeaturedQuote?`<div class="quote">"${esc(p.FeaturedQuote)}"<b>${esc(p.FeaturedQuoteAttribution)}</b></div>`:''}
+ <div class="card"><div id="shouts">${shoutsHtml()}</div>
+ ${p.AllowPosting?`<div style="margin-top:14px"><button class="btn sm" data-act="shoutform">+ Recognize a teammate</button></div>`:''}</div></section>`;
+function shoutsHtml(){return S.shouts.map(s=>`<div class="shout"><div class="av">${initials(s.to)}</div><div><b>${esc(s.to)}</b> <small>from ${esc(s.from)} · ${esc(s.when)}</small><div>${esc(s.msg)}</div></div></div>`).join('');}
+
+R.CfaEventsSection=(p)=>{
+  const evs=(p.Events||[]).map(props);
+  const now=todayUTC();
+  const sorted=[...evs].sort((a,b)=>new Date(a.StartDate)-new Date(b.StartDate));
+  const list=p.ShowCalendarGrid?sorted:sorted.filter(e=>new Date(e.StartDate).getTime()>=now);
+  const rows=list.map(e=>{const i=REG.events.findIndex(x=>x.Title===e.Title&&x.StartDate===e.StartDate);const past=new Date(e.StartDate).getTime()<now;
+    return `<div class="evrow ${past?'past':''}" data-act="event" data-v="${i}"><div class="date"><small>${fmtDate(e.StartDate,{month:'short'})}</small><b>${fmtDate(e.StartDate,{day:'numeric'})}</b></div><div style="flex:1"><b>${esc(e.Title)}</b><div style="color:var(--mut);font-size:13px">${fmtTime(e.StartDate)} · ${esc(e.EventLocation)}${past?' · Past':''}</div></div><span class="tag ${e.EventType}">${esc(ETYPE[e.EventType]||e.EventType)}</span></div>`}).join('')||'<div class="empty">No upcoming events.</div>';
+  if(!p.ShowCalendarGrid) return `<section class="blk"><h3>${esc(p.Heading)}</h3><div class="card">${rows}<div style="margin-top:12px"><a class="btn ghost sm" href="#/events">View full calendar</a></div></div></section>`;
+  return `<section class="blk"><h3>${esc(p.Heading)}</h3><div class="row2"><div class="card" id="calwrap">${calHtml(evs)}</div><div class="card"><b>All events</b><div style="margin-top:6px">${rows}</div><div style="margin-top:14px"><button class="btn sm" data-act="addevent">+ Add event</button></div></div></div></section>`;
+};
+function calHtml(evs){
+  if(!S.cal){const n=new Date();S.cal=new Date(Date.UTC(n.getFullYear(),n.getMonth(),1));}
+  const y=S.cal.getUTCFullYear(),m=S.cal.getUTCMonth(),first=new Date(Date.UTC(y,m,1)).getUTCDay(),dim=new Date(Date.UTC(y,m+1,0)).getUTCDate(),now=todayUTC();
+  let cells=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].map(d=>`<div class="dh">${d}</div>`).join('');
+  for(let i=0;i<first;i++)cells+='<div class="d out"></div>';
+  for(let d=1;d<=dim;d++){const t=Date.UTC(y,m,d),dow=new Date(t).getUTCDay();
+    const es=evs.filter(e=>{const x=new Date(e.StartDate);return x.getUTCFullYear()===y&&x.getUTCMonth()===m&&x.getUTCDate()===d});
+    cells+=`<div class="d ${dow===0?'sun':''} ${t===now?'today':''}"><span class="n">${d}</span>${dow===0?'<small>Closed</small>':''}${es.map(e=>`<span class="ev ${e.EventType}" data-act="event" data-v="${REG.events.findIndex(x=>x.Title===e.Title&&x.StartDate===e.StartDate)}">${esc(e.Title)}</span>`).join('')}</div>`;}
+  return `<div class="cal-h"><button class="btn ghost sm" data-act="calprev">&larr;</button><h4>${S.cal.toLocaleDateString('en-US',{month:'long',year:'numeric',timeZone:'UTC'})}</h4><button class="btn ghost sm" data-act="calnext">&rarr;</button></div><div class="cal">${cells}</div>`;
+}
+
+R.CfaDirectorySection=p=>{
+  return `<section class="blk"><h3>${esc(p.Heading)}</h3><div class="bar">
+   ${p.ShowSearch?`<input id="dirq" placeholder="Search by name, role or location..." value="${esc(S.dirQ)}">`:''}
+   ${p.ShowDepartmentFilter?`<select id="dird"><option value="all">All departments</option>${Object.entries(DEPT).map(([k,v])=>`<option value="${k}" ${S.dirDept===k?'selected':''}>${v}</option>`).join('')}</select>`:''}
+   </div><div class="grid g3" id="dirgrid">${dirGrid()}</div></section>`;
+};
+function dirGrid(){
+  const q=S.dirQ.toLowerCase();
+  const l=REG.people.filter(x=>(S.dirDept==='all'||x.Department===S.dirDept)&&(!q||[x.FullName,x.JobTitle,x.Location].join(' ').toLowerCase().includes(q)));
+  return l.map(x=>`<div class="card click person" data-act="person" data-v="${REG.people.indexOf(x)}"><div class="av">${initials(x.FullName)}</div><div><b>${esc(x.FullName)}</b><small>${esc(x.JobTitle)}</small><br><small>${esc(x.Location)} · ${esc(DEPT[x.Department]||x.Department)}</small></div></div>`).join('')||'<div class="empty">No people match your search.</div>';
+}
+
+R.CfaResourceLibrarySection=p=>{
+  const tr=REG.docs.filter(d=>d.DurationMinutes);
+  const avg=tr.length?Math.round(tr.reduce((a,d)=>a+(S.progress[d.Title]||0),0)/tr.length):0;
+  return `<section class="blk"><h3>${esc(p.Heading)}</h3>
+  ${p.ShowTrainingProgress?`<div class="card" style="margin-bottom:14px" id="trainsum">${trainSum(avg,tr)}</div>`:''}
+  <div class="bar"><input id="resq" placeholder="Search documents..." value="${esc(S.resQ)}"><select id="rest"><option value="all">All types</option>${Object.entries(RTYPE).map(([k,v])=>`<option value="${k}" ${S.resType===k?'selected':''}>${v}</option>`).join('')}</select></div>
+  <div class="grid g3" id="resgrid">${resGrid()}</div></section>`;
+};
+function trainSum(avg,tr){return `<b>Your training progress</b><div class="stat">${avg}%</div><div class="prog"><i style="width:${avg}%"></i></div><small style="color:var(--mut)">${tr.filter(d=>(S.progress[d.Title]||0)>=100).length} of ${tr.length} modules complete</small>`;}
+function resGrid(){
+  const q=S.resQ.toLowerCase();
+  const l=REG.docs.filter(d=>(S.resType==='all'||d.ResourceType===S.resType)&&(!q||(d.Title+' '+d.Description).toLowerCase().includes(q)));
+  return l.map(d=>{const pr=S.progress[d.Title]||0,i=REG.docs.indexOf(d);
+    return `<div class="card"><span class="tag ${d.ResourceType}">${esc(RTYPE[d.ResourceType]||d.ResourceType)}</span><h4>${esc(d.Title)}</h4><p>${esc(d.Description)}</p>
+    ${d.DurationMinutes?`<div class="prog"><i style="width:${pr}%"></i></div><small style="color:var(--mut)">${d.DurationMinutes} min · ${pr}%</small><div style="margin-top:10px"><button class="btn sm" data-act="train" data-v="${i}" ${pr>=100?'disabled':''}>${pr>=100?'Completed ✓':pr>0?'Continue':'Start'}</button></div>`:`<div style="margin-top:12px"><button class="btn ghost sm" data-act="opendoc" data-v="${i}">Open document</button></div>`}</div>`}).join('')||'<div class="empty">No documents found.</div>';
+}
+
+R.CfaTimeOffSection=p=>{
+  if(S.hours===null)S.hours=p.DefaultHoursAvailable||0;
+  return `<section class="blk"><div class="row2"><div class="card"><h3 style="margin-top:0">${esc(p.Heading)}</h3>${rich(p.IntroText)}
+  <form class="f" id="toform" data-block="${p.BlockSundays?1:0}" novalidate>
+   <label>Type<select id="to_type"><option>Vacation</option><option>Sick</option><option>Personal</option></select></label>
+   <div class="two"><label>Start date<input type="date" id="to_s"></label><label>End date<input type="date" id="to_e"></label></div>
+   <label>Reason (optional)<textarea id="to_r" rows="2"></textarea></label>
+   <div class="err" id="to_err"></div><div><button class="btn" type="submit">Submit request</button></div></form></div>
+  <div><div class="card" style="margin-bottom:16px"><b>Hours available</b><div class="stat" id="hrs">${S.hours}</div><small style="color:var(--mut)">Counts 8 hours per working day. Sundays are not counted.</small></div>
+  <div class="card"><b>My requests</b><table style="margin-top:8px"><thead><tr><th>Type</th><th>Dates</th><th>Hrs</th><th>Status</th></tr></thead><tbody id="tohist">${histHtml()}</tbody></table></div></div></div></section>`;
+};
+function histHtml(){return S.history.map(h=>`<tr><td>${esc(h.type)}</td><td>${esc(h.range)}</td><td>${h.hours}</td><td><span class="st ${h.status}">${h.status}</span></td></tr>`).join('');}
+
+/* ---------- registry (for search, modals) ---------- */
+function buildRegistry(){
+  REG={news:[],people:[],docs:[],events:[]};
+  const all=[SITE.home,...SITE.pages];
+  all.forEach(pg=>(pg.nodes||[]).forEach(n=>{const p=props(n);
+    (p.Articles||[]).map(props).forEach(a=>{if(!REG.news.find(x=>x.Headline===a.Headline))REG.news.push(a)});
+    (p.People||[]).map(props).forEach(a=>{if(!REG.people.find(x=>x.FullName===a.FullName))REG.people.push(a)});
+    (p.Documents||[]).map(props).forEach(a=>{if(!REG.docs.find(x=>x.Title===a.Title))REG.docs.push(a)});
+    (p.Events||[]).map(props).forEach(a=>{if(!REG.events.find(x=>x.Title===a.Title&&x.StartDate===a.StartDate))REG.events.push(a)});
+  }));
+}
+
+/* ---------- router ---------- */
+function route(){
+  const raw=location.hash.replace(/^#\/?/,''); const [path,qs]=raw.split('?'); const seg=path||'';
+  if(qs){const u=new URLSearchParams(qs); if(u.get('type'))S.resType=u.get('type');}
+  const isHome=seg==='';
+  const pg=isHome?SITE.home:SITE.pages.find(p=>p.routeSegment===seg);
+  const nav=[...SITE.pages].filter(p=>props(p).ShowInNavigation!==false).sort((a,b)=>props(a).NavOrder-props(b).NavOrder);
+  $('#nav').innerHTML=`<a href="#/" class="${isHome?'active':''}">Home</a>`+nav.map(p=>`<a href="#/${p.routeSegment}" class="${p.routeSegment===seg?'active':''}">${esc(props(p).PageIcon||'')} ${esc(p.displayName)}</a>`).join('');
+  const app=$('#app');
+  if(!pg){app.innerHTML='<div class="empty">Page not found. <a href="#/">Back home</a></div>';return;}
+  const hp=props(SITE.home); const ctx={home:hp};
+  let html='';
+  if(!isHome){const pp=props(pg);html+=`<div class="page-title"><h1>${esc(pp.PageIcon||'')} ${esc(pg.displayName)}</h1><p>${esc(pp.PageIntro||'')}</p></div>`;}
+  const nodes=pg.nodes||[];
+  if(isHome){ // home: two column layout for news + recognition/events
+    const get=t=>nodes.filter(n=>n.contentType===t).map(n=>R[t](props(n),ctx)).join('');
+    html+=get('CfaHeroBanner')+get('CfaQuickLinksSection')+`<div class="row2"><div>${get('CfaNewsListSection')}</div><div>${get('CfaEventsSection')}</div></div>`+get('CfaRecognitionSection');
+  } else html+=nodes.map(n=>R[n.contentType]?R[n.contentType](props(n),ctx):`<div class="empty">No renderer for ${esc(n.contentType)}</div>`).join('');
+  app.innerHTML=html; window.scrollTo(0,0);
+}
+
+/* ---------- search ---------- */
+function runSearch(q){
+  const box=$('#results'); q=q.trim().toLowerCase(); if(!q){box.classList.remove('show');return;}
+  const m=(a)=>a.join(' ').toLowerCase().includes(q);
+  const n=REG.news.map((x,i)=>[x,i]).filter(([x])=>m([x.Headline,x.Summary,x.Category]));
+  const p=REG.people.map((x,i)=>[x,i]).filter(([x])=>m([x.FullName,x.JobTitle,x.Location,x.Bio]));
+  const d=REG.docs.map((x,i)=>[x,i]).filter(([x])=>m([x.Title,x.Description]));
+  const e=REG.events.map((x,i)=>[x,i]).filter(([x])=>m([x.Title,x.EventLocation]));
+  let h='';
+  if(n.length)h+='<h6>News</h6>'+n.map(([x,i])=>`<div class="it" data-act="news" data-v="${i}">${esc(x.Headline)}<small>${esc(CAT[x.Category])}</small></div>`).join('');
+  if(p.length)h+='<h6>People</h6>'+p.map(([x,i])=>`<div class="it" data-act="person" data-v="${i}">${esc(x.FullName)}<small>${esc(x.JobTitle)} · ${esc(x.Location)}</small></div>`).join('');
+  if(d.length)h+='<h6>Documents</h6>'+d.map(([x,i])=>`<div class="it" data-act="opendoc" data-v="${i}">${esc(x.Title)}<small>${esc(RTYPE[x.ResourceType])}</small></div>`).join('');
+  if(e.length)h+='<h6>Events</h6>'+e.map(([x,i])=>`<div class="it" data-act="event" data-v="${i}">${esc(x.Title)}<small>${fmtDate(x.StartDate)}</small></div>`).join('');
+  box.innerHTML=h||'<div class="it">No results</div>'; box.classList.add('show');
+}
+
+/* ---------- actions ---------- */
+function eventModal(i){const e=REG.events[i];const going=S.rsvp.has(e.Title);
+  modal(`<span class="tag ${e.EventType}">${esc(ETYPE[e.EventType]||e.EventType)}</span><h2 style="margin:10px 0 4px">${esc(e.Title)}</h2><p style="color:var(--mut);margin:0 0 12px">${fmtDate(e.StartDate,{weekday:'long',month:'long',day:'numeric',year:'numeric'})} · ${fmtTime(e.StartDate)}<br>📍 ${esc(e.EventLocation)}</p>${rich(e.Details)}
+  ${e.RsvpEnabled?`<button class="btn" data-act="rsvp" data-v="${i}">${going?'Cancel RSVP':'RSVP - I will be there'}</button>`:'<p style="color:var(--mut)">No RSVP required.</p>'}`);}
+function closeNeed(t){return !!t.closest('[data-act]');}
+document.addEventListener('click',e=>{
+  const t=e.target.closest('[data-act]'); if(!e.target.closest('.search'))$('#results').classList.remove('show');
+  if(e.target.id==='ov'){closeModal();return;} if(!t)return;
+  const a=t.dataset.act,v=t.dataset.v; $('#results').classList.remove('show');
+  if(a==='close')closeModal();
+  else if(a==='newsf'){S.newsFilter=v;route();}
+  else if(a==='news'){const x=REG.news[+v];modal(`<span class="tag ${x.Category}">${esc(CAT[x.Category])}</span><h2 style="margin:10px 0">${esc(x.Headline)}</h2><p style="color:var(--mut)">${esc(x.Summary)}</p>${rich(x.Body)||''}`);}
+  else if(a==='person'){const x=REG.people[+v];modal(`<div class="person" style="margin-bottom:14px"><div class="av big">${initials(x.FullName)}</div><div><h2 style="margin:0">${esc(x.FullName)}</h2><div>${esc(x.JobTitle)}</div><small style="color:var(--mut)">${esc(x.Location)} · ${esc(DEPT[x.Department])}</small></div></div><p>${esc(x.Bio)}</p><p>✉️ ${esc(x.Email)}<br>📞 ${esc(x.Phone)}</p><button class="btn" data-act="msg" data-v="${v}">Message</button> <button class="btn ghost" data-act="shoutform" data-v="${v}">Recognize</button>`);}
+  else if(a==='msg'){closeModal();toast(`Message sent to ${REG.people[+v].FullName}`);}
+  else if(a==='shoutform'){const pre=v!==undefined?REG.people[+v].FullName:'';modal(`<h2 style="margin-top:0">Recognize a teammate</h2><div class="f"><label>Who?<select id="sh_to">${REG.people.map(p=>`<option ${p.FullName===pre?'selected':''}>${esc(p.FullName)}</option>`).join('')}</select></label><label>What did they do?<textarea id="sh_m" rows="3" placeholder="They went the second mile when..."></textarea></label><div class="err" id="sh_err"></div><div><button class="btn" data-act="shoutpost">Post shout-out</button></div></div>`);}
+  else if(a==='shoutpost'){const m=$('#sh_m').value.trim();if(m.length<5){$('#sh_err').textContent='Please write a short message.';return;}S.shouts.unshift({to:$('#sh_to').value,from:'Jon Kee',msg:m,when:'Just now'});closeModal();const el=$('#shouts');if(el)el.innerHTML=shoutsHtml();toast('Shout-out posted. My pleasure!');}
+  else if(a==='event')eventModal(+v);
+  else if(a==='rsvp'){const ev=REG.events[+v];if(S.rsvp.has(ev.Title)){S.rsvp.delete(ev.Title);toast('RSVP cancelled');}else{S.rsvp.add(ev.Title);toast(`You're going to ${ev.Title}`);}eventModal(+v);}
+  else if(a==='calprev'||a==='calnext'){S.cal=new Date(Date.UTC(S.cal.getUTCFullYear(),S.cal.getUTCMonth()+(a==='calnext'?1:-1),1));$('#calwrap').innerHTML=calHtml(REG.events);}
+  else if(a==='addevent'){modal(`<h2 style="margin-top:0">Add event</h2><div class="f"><label>Title<input id="ae_t"></label><div class="two"><label>Date<input type="date" id="ae_d"></label><label>Time<input type="time" id="ae_h" value="10:00"></label></div><label>Location<input id="ae_l"></label><label>Type<select id="ae_y"><option value="company">Company</option><option value="training">Training</option><option value="community">Community</option><option value="celebration">Celebration</option></select></label><div class="err" id="ae_err"></div><div><button class="btn" data-act="saveevent">Add to calendar</button></div></div>`);}
+  else if(a==='saveevent'){const ti=$('#ae_t').value.trim(),d=$('#ae_d').value;if(!ti||!d){$('#ae_err').textContent='Title and date are required.';return;}
+    REG.events.push({Title:ti,EventType:$('#ae_y').value,StartDate:`${d}T${$('#ae_h').value||'10:00'}:00+00:00`,EventLocation:$('#ae_l').value||'TBD',Details:{html:'<p>Added by you for this demo.</p>'},RsvpEnabled:true});
+    const pg=SITE.pages.find(p=>p.routeSegment==='events');pg.nodes[0].properties.Events.value=pg.nodes[0].properties.Events.value||pg.nodes[0].properties.Events;
+    const arr=un(pg.nodes[0].properties.Events);arr.push({properties:REG.events[REG.events.length-1]});closeModal();route();toast('Event added');}
+  else if(a==='train'){const d=REG.docs[+v];S.progress[d.Title]=Math.min(100,(S.progress[d.Title]||0)+35);route();toast(S.progress[d.Title]>=100?`${d.Title} complete! 🎉`:'Progress saved');}
+  else if(a==='opendoc'){const d=REG.docs[+v];modal(`<span class="tag ${d.ResourceType}">${esc(RTYPE[d.ResourceType])}</span><h2 style="margin:10px 0">${esc(d.Title)}</h2><p>${esc(d.Description)}</p><p style="color:var(--mut)">Demo placeholder. In production this opens the media file linked in the CMS.</p>`);}
+});
+document.addEventListener('input',e=>{
+  if(e.target.id==='q')runSearch(e.target.value);
+  else if(e.target.id==='dirq'){S.dirQ=e.target.value;$('#dirgrid').innerHTML=dirGrid();}
+  else if(e.target.id==='resq'){S.resQ=e.target.value;$('#resgrid').innerHTML=resGrid();}
+});
+document.addEventListener('change',e=>{
+  if(e.target.id==='dird'){S.dirDept=e.target.value;$('#dirgrid').innerHTML=dirGrid();}
+  else if(e.target.id==='rest'){S.resType=e.target.value;$('#resgrid').innerHTML=resGrid();}
+});
+document.addEventListener('submit',e=>{
+  if(e.target.id!=='toform')return; e.preventDefault();
+  const s=$('#to_s').value,en=$('#to_e').value,err=$('#to_err'),block=e.target.dataset.block==='1';
+  const P=v=>{const [y,m,d]=v.split('-').map(Number);return new Date(y,m-1,d);};
+  if(!s||!en){err.textContent='Please choose a start and end date.';return;}
+  const a=P(s),b=P(en),today=new Date();today.setHours(0,0,0,0);
+  if(a<today){err.textContent='Start date cannot be in the past.';return;}
+  if(b<a){err.textContent='End date must be on or after the start date.';return;}
+  if(block&&(a.getDay()===0||b.getDay()===0)){err.textContent='We are closed on Sundays. Please choose a different start or end date.';return;}
+  let days=0;for(let d=new Date(a);d<=b;d.setDate(d.getDate()+1))if(d.getDay()!==0)days++;
+  const hrs=days*8; if(hrs>S.hours){err.textContent=`This request needs ${hrs} hours but you only have ${S.hours} available.`;return;}
+  err.textContent=''; S.hours-=hrs;
+  const f=d=>d.toLocaleDateString('en-US',{month:'short',day:'numeric'});
+  S.history.unshift({type:$('#to_type').value,range:s===en?`${f(a)}, ${a.getFullYear()}`:`${f(a)} - ${f(b)}, ${b.getFullYear()}`,hours:hrs,status:'Pending'});
+  $('#hrs').textContent=S.hours;$('#tohist').innerHTML=histHtml();e.target.reset();toast('Request submitted to your operator');
+});
+window.addEventListener('hashchange',route);
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+
+/* ---------- boot ---------- */
+async function boot(){
+  SITE=SNAPSHOT; let note='';
+  if(CONFIG.contentUrl){
+    try{
+      const r=await fetch(CONFIG.contentUrl,{headers:{Accept:'application/json'}});
+      const j=await r.json().catch(()=>null);
+      if(!r.ok||!j||!j.home) throw new Error((j&&j.error)||('HTTP '+r.status));
+      SITE=j;
+    }catch(err){console.warn('Live content unavailable, using snapshot:',err);note=' (live content unavailable: '+err.message+')';SITE=SNAPSHOT;}
+  }
+  const hp=props(SITE.home);
+  $('#siteName').firstChild.textContent=hp.SiteName||'The Coop';$('#restName').textContent=hp.RestaurantName||'';
+  $('#srcBadge').textContent='Content source: '+(SITE.source||'live')+note;
+  buildRegistry();route();
+}
+boot();
+</script>
+</body>
+</html>

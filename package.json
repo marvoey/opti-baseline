@@ -1,42 +1,14 @@
 {
-  "name": "nextjs-banner",
-  "version": "0.1.0",
+  "name": "the-coop-intranet",
+  "version": "1.0.0",
   "private": true,
+  "description": "Demo Chick-fil-A intranet (The Coop). Static front end + one serverless function that reads Optimizely CMS (SaaS) content from Optimizely Graph.",
   "engines": {
     "node": "22.x"
   },
   "scripts": {
-    "dev": "node scripts/run-next.mjs dev --webpack",
-    "predev": "npm run gen:locales",
-    "build": "next build",
-    "prebuild": "npm run gen:locales",
-    "start": "node scripts/run-next.mjs start",
-    "lint": "eslint",
-    "gen:locales": "node scripts/generate-locales.mjs",
-    "cms:push": "node --env-file=.env scripts/cms-push.mjs",
-    "cms:push:all": "node --env-file=.env scripts/cms-push.mjs --all",
-    "schema:pull": "node scripts/fetch-openapi.mjs",
-    "seed:hero": "node scripts/seed-atomic-hero.mjs",
-    "cms:check": "node --env-file=.env scripts/check-content-types.mjs"
-  },
-  "dependencies": {
-    "@optimizely/cms-cli": "^2.0.0",
-    "@optimizely/cms-sdk": "^2.0.0",
-    "@tailwindcss/typography": "^0.5.20",
-    "lucide-react": "^1.18.0",
-    "next": "16.4.2",
-    "react": "19.3.0",
-    "react-dom": "19.3.0",
-    "shiki": "^4.3.0"
-  },
-  "devDependencies": {
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "16.4.2",
-    "tailwindcss": "^4",
-    "typescript": "^5"
+    "start": "node server.js",
+    "dev:mock": "node scripts/mock-graph.js",
+    "test": "node --test test/graph.test.js"
   }
 }

@@ -1,0 +1,608 @@
+{
+ "data": {
+  "CfaIntranetHome": {
+   "items": [
+    {
+     "_metadata": {
+      "key": "4f68aa9ece444ea887ec63bf28c558b1",
+      "displayName": "The Coop - Chick-fil-A Intranet",
+      "locale": "en",
+      "status": "Draft",
+      "version": "212",
+      "url": {
+       "hierarchical": "/"
+      }
+     },
+     "SiteName": "The Coop",
+     "Tagline": "Eat Mor Chikin. Serve Mor People. Your team hub for news, people, resources and more.",
+     "RestaurantName": "Chick-fil-A Peachtree Corners",
+     "ShiftInfo": "Next shift: Thu 10:30 AM - 6:00 PM, Front Counter",
+     "composition": {
+      "nodes": [
+       {
+        "nodeType": "component",
+        "component": {
+         "_metadata": {
+          "types": [
+           "CfaHeroBanner",
+           "_Component",
+           "_Content",
+           "_ChangesetItem",
+           "_Item"
+          ]
+         },
+         "Headline": "Welcome back to The Coop",
+         "Subheadline": "Second-mile service starts with you. Here is what is happening at your restaurant today.",
+         "CtaLabel": "View my schedule",
+         "ShowTimeOfDayGreeting": true
+        }
+       },
+       {
+        "nodeType": "component",
+        "component": {
+         "_metadata": {
+          "types": [
+           "CfaQuickLinksSection",
+           "_Component",
+           "_Content",
+           "_ChangesetItem",
+           "_Item"
+          ]
+         },
+         "Heading": "Quick links",
+         "Links": [
+          {
+           "Label": "Request Time Off",
+           "IconEmoji": "\ud83d\uddd3\ufe0f",
+           "Target": {
+            "url": {
+             "default": null
+            },
+            "text": null
+           }
+          },
+          {
+           "Label": "Team Directory",
+           "IconEmoji": "\ud83d\udc65",
+           "Target": {
+            "url": {
+             "default": null
+            },
+            "text": null
+           }
+          },
+          {
+           "Label": "Training",
+           "IconEmoji": "\ud83c\udf93",
+           "Target": {
+            "url": {
+             "default": null
+            },
+            "text": null
+           }
+          },
+          {
+           "Label": "Benefits",
+           "IconEmoji": "\ud83d\udc9b",
+           "Target": {
+            "url": {
+             "default": null
+            },
+            "text": null
+           }
+          }
+         ]
+        }
+       },
+       {
+        "nodeType": "component",
+        "component": {
+         "_metadata": {
+          "types": [
+           "CfaNewsListSection",
+           "_Component",
+           "_Content",
+           "_ChangesetItem",
+           "_Item"
+          ]
+         },
+         "Heading": "Top announcements",
+         "ShowCategoryFilter": false,
+         "MaxItems": 3,
+         "Articles": [
+          {
+           "Headline": "Spring menu preview: what is new this season",
+           "Category": "menu",
+           "Summary": "A first look at the seasonal items arriving in restaurants next month, plus prep tips for your station.",
+           "IsPinned": true,
+           "PublishDate": null,
+           "Body": {
+            "html": null
+           }
+          },
+          {
+           "Headline": "Remarkable Futures: congratulations to this year's scholarship recipients",
+           "Category": "people",
+           "Summary": "Meet the team members who earned Chick-fil-A scholarships and hear what it means to them.",
+           "IsPinned": true,
+           "PublishDate": null,
+           "Body": {
+            "html": null
+           }
+          },
+          {
+           "Headline": "Drive-thru safety refresh: new cone and signal procedures",
+           "Category": "operations",
+           "Summary": "Updated guidance for outdoor order takers. Review the short module before your next shift.",
+           "IsPinned": true,
+           "PublishDate": null,
+           "Body": {
+            "html": null
+           }
+          }
+         ]
+        }
+       },
+       {
+        "nodeType": "component",
+        "component": {
+         "_metadata": {
+          "types": [
+           "CfaRecognitionSection",
+           "_Component",
+           "_Content",
+           "_ChangesetItem",
+           "_Item"
+          ]
+         },
+         "Heading": "Shout-outs",
+         "AllowPosting": true,
+         "FeaturedQuote": "We should be about more than just selling chicken. We should be a part of our customers' lives and the communities in which we serve.",
+         "FeaturedQuoteAttribution": "S. Truett Cathy"
+        }
+       },
+       {
+        "nodeType": "component",
+        "component": {
+         "_metadata": {
+          "types": [
+           "CfaEventsSection",
+           "_Component",
+           "_Content",
+           "_ChangesetItem",
+           "_Item"
+          ]
+         },
+         "Heading": "Upcoming events",
+         "ShowCalendarGrid": false,
+         "Events": [
+          {
+           "Title": "Cow Appreciation Day",
+           "EventType": "celebration",
+           "StartDate": "2026-07-14T10:30:00.000Z",
+           "EndDate": null,
+           "EventLocation": "All restaurants",
+           "RsvpEnabled": false,
+           "Details": {
+            "html": null
+           }
+          },
+          {
+           "Title": "Shared Table volunteer day",
+           "EventType": "community",
+           "StartDate": "2026-11-21T09:00:00.000Z",
+           "EndDate": null,
+           "EventLocation": "Community kitchen",
+           "RsvpEnabled": true,
+           "Details": {
+            "html": null
+           }
+          }
+         ]
+        }
+       }
+      ]
+     }
+    }
+   ]
+  },
+  "CfaIntranetPage": {
+   "items": [
+    {
+     "_metadata": {
+      "key": "2a96cf767d054520b21cbb75e79cdcd1",
+      "displayName": "Directory",
+      "locale": "en",
+      "status": "Draft",
+      "version": "214",
+      "url": {
+       "hierarchical": "/directory/"
+      }
+     },
+     "PageIcon": "\ud83d\udc65",
+     "ShowInNavigation": true,
+     "NavOrder": 20,
+     "PageIntro": "Find teammates, operators and Support Center colleagues.",
+     "composition": {
+      "nodes": [
+       {
+        "nodeType": "component",
+        "component": {
+         "_metadata": {
+          "types": [
+           "CfaDirectorySection",
+           "_Component",
+           "_Content",
+           "_ChangesetItem",
+           "_Item"
+          ]
+         },
+         "Heading": "Team directory",
+         "ShowSearch": true,
+         "ShowDepartmentFilter": true,
+         "People": [
+          {
+           "FullName": "Maria Santos",
+           "JobTitle": "Operator",
+           "Department": "leadership",
+           "Location": "Peachtree Corners",
+           "Email": "maria.santos@example.com",
+           "Phone": "(555) 010-1001",
+           "Bio": "Operator for 12 years. Loves developing future leaders."
+          },
+          {
+           "FullName": "James Carter",
+           "JobTitle": "Front Counter Lead",
+           "Department": "front-counter",
+           "Location": "Peachtree Corners",
+           "Email": "james.carter@example.com",
+           "Phone": "(555) 010-1002",
+           "Bio": "Keeps the lobby running smoothly and the welcomes warm."
+          },
+          {
+           "FullName": "Aaliyah Brooks",
+           "JobTitle": "Kitchen Trainer",
+           "Department": "kitchen",
+           "Location": "Peachtree Corners",
+           "Email": "aaliyah.brooks@example.com",
+           "Phone": "(555) 010-1003",
+           "Bio": "Food safety champion and new-hire trainer."
+          },
+          {
+           "FullName": "Devon Reyes",
+           "JobTitle": "Drive-Thru Team Leader",
+           "Department": "drive-thru",
+           "Location": "Alpharetta",
+           "Email": "devon.reyes@example.com",
+           "Phone": "(555) 010-1004",
+           "Bio": "Speed and accuracy with a smile. Cone-and-signal expert."
+          },
+          {
+           "FullName": "Priya Nair",
+           "JobTitle": "Learning and Development Partner",
+           "Department": "support-center",
+           "Location": "Support Center, Atlanta",
+           "Email": "priya.nair@example.com",
+           "Phone": "(555) 010-1005",
+           "Bio": "Designs training that helps team members grow."
+          },
+          {
+           "FullName": "Tom Whitfield",
+           "JobTitle": "Director of Operations",
+           "Department": "leadership",
+           "Location": "Alpharetta",
+           "Email": "tom.whitfield@example.com",
+           "Phone": "(555) 010-1006",
+           "Bio": "Supports operators across the metro market."
+          }
+         ]
+        }
+       }
+      ]
+     }
+    },
+    {
+     "_metadata": {
+      "key": "3a691edf87324865b353a6f149060651",
+      "displayName": "Time Off",
+      "locale": "en",
+      "status": "Draft",
+      "version": "216",
+      "url": {
+       "hierarchical": "/time-off/"
+      }
+     },
+     "PageIcon": "\ud83d\uddd3\ufe0f",
+     "ShowInNavigation": true,
+     "NavOrder": 40,
+     "PageIntro": "Request time off and track your balance. Remember, we are closed on Sundays.",
+     "composition": {
+      "nodes": [
+       {
+        "nodeType": "component",
+        "component": {
+         "_metadata": {
+          "types": [
+           "CfaTimeOffSection",
+           "_Component",
+           "_Content",
+           "_ChangesetItem",
+           "_Item"
+          ]
+         },
+         "Heading": "Request time off",
+         "IntroText": {
+          "html": "<p>Submit your request at least two weeks ahead when possible. Restaurants are closed on Sundays, so those dates cannot be requested.</p>"
+         },
+         "BlockSundays": true,
+         "DefaultHoursAvailable": 64
+        }
+       }
+      ]
+     }
+    },
+    {
+     "_metadata": {
+      "key": "7f7135def4fe49caa92823106e6c96fe",
+      "displayName": "News",
+      "locale": "en",
+      "status": "Draft",
+      "version": "213",
+      "url": {
+       "hierarchical": "/news/"
+      }
+     },
+     "PageIcon": "\ud83d\udcf0",
+     "ShowInNavigation": true,
+     "NavOrder": 10,
+     "PageIntro": "Stories, announcements and updates from across the Chick-fil-A family.",
+     "composition": {
+      "nodes": [
+       {
+        "nodeType": "component",
+        "component": {
+         "_metadata": {
+          "types": [
+           "CfaNewsListSection",
+           "_Component",
+           "_Content",
+           "_ChangesetItem",
+           "_Item"
+          ]
+         },
+         "Heading": "News and announcements",
+         "ShowCategoryFilter": true,
+         "MaxItems": 12,
+         "Articles": [
+          {
+           "Headline": "Spring menu preview: what is new this season",
+           "Category": "menu",
+           "Summary": "A first look at the seasonal items arriving in restaurants next month, plus prep tips for your station.",
+           "IsPinned": null,
+           "PublishDate": null,
+           "Body": {
+            "html": "<p>Seasonal items arrive next month. Review prep guides in Resources before your next shift.</p>"
+           }
+          },
+          {
+           "Headline": "Remarkable Futures: congratulations to this year's scholarship recipients",
+           "Category": "people",
+           "Summary": "Meet the team members who earned Chick-fil-A scholarships.",
+           "IsPinned": null,
+           "PublishDate": null,
+           "Body": {
+            "html": "<p>Hundreds of team members earned scholarships this year. Read their stories.</p>"
+           }
+          },
+          {
+           "Headline": "Drive-thru safety refresh: new cone and signal procedures",
+           "Category": "operations",
+           "Summary": "Updated guidance for outdoor order takers.",
+           "IsPinned": null,
+           "PublishDate": null,
+           "Body": {
+            "html": "<p>Complete the short safety module before your next shift.</p>"
+           }
+          },
+          {
+           "Headline": "Shared Table: restaurants donated over a million meals this quarter",
+           "Category": "community",
+           "Summary": "Thank you to every team that boxed up surplus food for neighbors in need.",
+           "IsPinned": null,
+           "PublishDate": null,
+           "Body": {
+            "html": "<p>Shared Table connects restaurants with local hunger relief partners.</p>"
+           }
+          },
+          {
+           "Headline": "Mobile order pickup: what is changing at the counter",
+           "Category": "operations",
+           "Summary": "A new pickup flow rolls out next week. Here is what front counter teams need to know.",
+           "IsPinned": null,
+           "PublishDate": null,
+           "Body": {
+            "html": "<p>Training video available in Resources.</p>"
+           }
+          },
+          {
+           "Headline": "Operator spotlight: 20 years of second-mile service",
+           "Category": "company",
+           "Summary": "One operator shares what has kept the team close for two decades.",
+           "IsPinned": null,
+           "PublishDate": null,
+           "Body": {
+            "html": "<p>A conversation about leadership, hospitality and growing people.</p>"
+           }
+          }
+         ]
+        }
+       }
+      ]
+     }
+    },
+    {
+     "_metadata": {
+      "key": "a19fa18937d54a2aae8d2e7e3f75e0fa",
+      "displayName": "Resources",
+      "locale": "en",
+      "status": "Draft",
+      "version": "215",
+      "url": {
+       "hierarchical": "/resources/"
+      }
+     },
+     "PageIcon": "\ud83d\udcda",
+     "ShowInNavigation": true,
+     "NavOrder": 30,
+     "PageIntro": "Policies, training and safety materials, all in one place.",
+     "composition": {
+      "nodes": [
+       {
+        "nodeType": "component",
+        "component": {
+         "_metadata": {
+          "types": [
+           "CfaResourceLibrarySection",
+           "_Component",
+           "_Content",
+           "_ChangesetItem",
+           "_Item"
+          ]
+         },
+         "Heading": "Resource library",
+         "ShowTrainingProgress": true,
+         "Documents": [
+          {
+           "Title": "Food Safety Handbook",
+           "ResourceType": "safety",
+           "Description": "Temperatures, handwashing, allergen handling and cleaning schedules.",
+           "DurationMinutes": null,
+           "LastUpdated": null
+          },
+          {
+           "Title": "New Team Member Orientation",
+           "ResourceType": "training",
+           "Description": "Everything you need for your first week.",
+           "DurationMinutes": 45,
+           "LastUpdated": null
+          },
+          {
+           "Title": "Second Mile Service training",
+           "ResourceType": "training",
+           "Description": "Practice the 'My pleasure' standard in real scenarios.",
+           "DurationMinutes": 30,
+           "LastUpdated": null
+          },
+          {
+           "Title": "Drive-Thru Safety Module",
+           "ResourceType": "safety",
+           "Description": "Cone placement, signals and weather procedures.",
+           "DurationMinutes": 20,
+           "LastUpdated": null
+          },
+          {
+           "Title": "Benefits Guide",
+           "ResourceType": "hr",
+           "Description": "Health, scholarships, and Remarkable Futures programs.",
+           "DurationMinutes": null,
+           "LastUpdated": null
+          },
+          {
+           "Title": "Uniform and Appearance Policy",
+           "ResourceType": "policy",
+           "Description": "Standards for uniforms, grooming and name tags.",
+           "DurationMinutes": null,
+           "LastUpdated": null
+          }
+         ]
+        }
+       }
+      ]
+     }
+    },
+    {
+     "_metadata": {
+      "key": "f7fd27f59ce9462abca0433062093296",
+      "displayName": "Events",
+      "locale": "en",
+      "status": "Draft",
+      "version": "217",
+      "url": {
+       "hierarchical": "/events/"
+      }
+     },
+     "PageIcon": "\ud83c\udf89",
+     "ShowInNavigation": true,
+     "NavOrder": 50,
+     "PageIntro": "Team celebrations, trainings and community days.",
+     "composition": {
+      "nodes": [
+       {
+        "nodeType": "component",
+        "component": {
+         "_metadata": {
+          "types": [
+           "CfaEventsSection",
+           "_Component",
+           "_Content",
+           "_ChangesetItem",
+           "_Item"
+          ]
+         },
+         "Heading": "Events calendar",
+         "ShowCalendarGrid": true,
+         "Events": [
+          {
+           "Title": "Cow Appreciation Day",
+           "EventType": "celebration",
+           "StartDate": "2026-07-14T10:30:00.000Z",
+           "EndDate": null,
+           "EventLocation": "All restaurants",
+           "RsvpEnabled": false,
+           "Details": {
+            "html": "<p>Dress up as a cow and enjoy a free entree. Team members get the day's special treat.</p>"
+           }
+          },
+          {
+           "Title": "Shared Table volunteer day",
+           "EventType": "community",
+           "StartDate": "2026-11-21T09:00:00.000Z",
+           "EndDate": null,
+           "EventLocation": "Community kitchen",
+           "RsvpEnabled": true,
+           "Details": {
+            "html": "<p>Help box and deliver surplus food to local partners.</p>"
+           }
+          },
+          {
+           "Title": "Team Leader training workshop",
+           "EventType": "training",
+           "StartDate": "2026-11-18T13:00:00.000Z",
+           "EndDate": null,
+           "EventLocation": "Support Center, Atlanta",
+           "RsvpEnabled": true,
+           "Details": {
+            "html": "<p>Half-day workshop for aspiring and current team leaders.</p>"
+           }
+          },
+          {
+           "Title": "Holiday team celebration",
+           "EventType": "celebration",
+           "StartDate": "2026-12-15T18:00:00.000Z",
+           "EndDate": null,
+           "EventLocation": "Restaurant dining room",
+           "RsvpEnabled": true,
+           "Details": {
+            "html": "<p>Dinner and recognition for the whole team.</p>"
+           }
+          }
+         ]
+        }
+       }
+      ]
+     }
+    }
+   ]
+  }
+ }
+}
