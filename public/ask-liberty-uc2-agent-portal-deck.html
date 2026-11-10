@@ -112,7 +112,6 @@ button.btn{ appearance:none; -webkit-appearance:none; }
 @media print{ #dock,#toast{ display:none!important; } }
 @media (prefers-reduced-motion:reduce){ .reveal .slides section{ transition:none!important; } }
 
-.b-proto{ background:#fff; border-style:dashed; }
 .agenda.compact{ gap:10px 22px; }
 .agenda.compact .acard{ padding:10px 18px; gap:14px; }
 .agenda.compact .acard b{ font-size:23px; }
@@ -120,16 +119,14 @@ button.btn{ appearance:none; -webkit-appearance:none; }
 .chip.hl{ background:var(--lf); }
 .legend{ border:1.5px dashed var(--fir); border-radius:24px; padding:12px 20px; font:400 15.5px/1.35 Roboto,Arial,sans-serif; display:flex; flex-direction:column; justify-content:center; gap:4px; }
 .reveal .tbl.dense td{ padding:7px 12px; } .reveal .tbl.dense th{ padding:8px 12px; }
-.vchip{ display:inline-flex; align-items:center; border:1.5px solid var(--fir); border-radius:14px; padding:4px 14px; font:900 28px/1 "Roboto Condensed","Arial Narrow",Arial,sans-serif; letter-spacing:-.02em; background:#fff; }
-.vchip.new{ background:var(--lf); }
-.reveal .center-text{ text-align:center; }
+.strike{ text-decoration:line-through; opacity:.55; }
 </style>
 </head>
 <body>
 
 <nav id="dock" aria-label="Quick links">
-  <a class="btn btn-live" data-live="/use-case-2-agent-portal.html" title="Open the portal prototype in a new tab">Portal prototype ↗</a>
-  <a class="btn btn-cms" data-cms="startPage">CMS Editor ↗</a>
+  <a class="btn btn-live" data-live="/agent" title="Open the agent portal in a new tab">Live App ↗</a>
+  <a class="btn btn-cms" data-cms="priorities">CMS Editor ↗</a>
   <button class="btn btn-ghost" data-goto="agenda" type="button">Contents</button>
 </nav>
 
@@ -147,33 +144,32 @@ button.btn{ appearance:none; -webkit-appearance:none; }
   </div>
 
   <aside class="notes"><p><b>Before you share (5 min)</b></p>
-<p>1. Open the portal prototype (libertymutual.optimoey.com/use-case-2-agent-portal.html) in its own window and allow pop-ups. Press <b>S</b> to open the controller and move it to your second screen. Press <b>H</b> for the guide's step buttons. Share only the prototype window and this deck's window, not your whole screen.</p>
-<p>2. Press Reset in the controller (reloading the page also resets everything).</p>
-<p>3. CMS Editor tab signed in on the Ask Liberty start page and the shared “Helpful row”. Pick a reversible edit for section 7 (the “Last reviewed” text). Live App tab open on /rental-car.</p>
-<p>4. Rehearse section 5's user switching: <b>Roll back only works as Sam, after v4 is published.</b></p>
-<p><b>Run of show, 30 min (20-min cut in brackets):</b> frame 2 [1] · Dana signs in 4 [3] · different agents 3 [2] · marketer changes a priority 4 [3] · design system 3 [skip] · disclosure 5 [4] · audit trail 1 [skip] · prove it in the CMS 4 [4] · architecture 3 [2] · close 1 [1].</p>
-<p><b>Be clear about what is live.</b> Sections 1 to 6 are a clickable prototype with no backend: the four agents, the rules, the authoring screens, the disclosure workflow and the audit log are simulated. Section 7 is the real CMS. If asked “is this live?”, answer plainly: a clickable prototype of the agent experience, with the mechanism proven in the CMS Editor.</p>
-<p><b>Keep off screen.</b> The authoring screens (“Content Studio”) are an illustration, not the Optimizely UI, so say so the first time one appears. Names, dates and disclosure wording are placeholders. CMS buttons: the start page opens directly; the others open the CMS Editor home, so use the content tree (hover a button for where the item lives).</p>
-<p><b>If you have time to close gaps:</b> a real shared disclosure block placed on two Ask Liberty pages, and Opti ID roles plus an approval sequence with self-approval blocked.</p></aside>
+<p>1. Open tabs: the Live App sign-in (libertymutual.optimoey.com/agent), /agent/priorities, /agent/home-auto-bundle and /bundling. In the CMS Editor, signed in: Agent Priorities and the shared block “Agent Disclosure: Bundle savings”. Share only the browser window and this deck, not your whole screen.</p>
+<p>2. <b>Check governance is configured</b> in this instance: an approval sequence on the disclosure (self-approval blocked) and roles for author, approver and publisher. If not, describe them in section 7 rather than demonstrate.</p>
+<p>3. Plan two reversible changes: move Personal umbrella above Home + Auto (move it back after), and a small disclosure edit (restore after).</p>
+<p><b>Run of show, 30 min (20-min cut in brackets):</b> frame 2 [1] · Dana signs in 4 [3] · different agents 3 [2] · priority change 4 [4] · preview 2 [1] · design system 3 [skip] · disclosure 5 [4] · governance 3 [3] · architecture 3 [2] · close 1 [1].</p>
+<p><b>What is real and what is not.</b> All pages, priorities, rules and the disclosure are published CMS content. The sign-in is a demo picker: it sets a cookie for one of four fixed agents; no password is checked or stored. The logo on a dashboard returns to sign-in, which is how you switch agent. If asked “is this live?”: yes, these are real CMS pages; only the identity is simulated.</p>
+<p><b>Recovery:</b> if sign-in misbehaves, open /agent/dana (or tyler, marcus, elena) directly. If the side-by-side preview does not update, it shows published pages only: publish, then reload.</p>
+<p><b>Not built (by decision):</b> component versioning (card settings live on Agent Priorities instead), an audit screen in the site (use the CMS Change Log), and two-column layouts (blocks stack).</p></aside>
 </section>
 
 <section id="agenda" data-background-color="#FFFFFF">
   <div class="eyebrow">Contents</div>
   <h2 class="mt1">What you will see</h2>
   <div class="agenda compact mt3">
-    <button class="acard" data-goto="s1" type="button"><span class="num">1</span><span class="at"><b>Dana signs in</b><small>Her focus products, and why</small></span><span class="badge b-proto">Prototype</span></button>
-    <button class="acard" data-goto="s2" type="button"><span class="num">2</span><span class="at"><b>Same portal, different agents</b><small>Role, state and agency decide</small></span><span class="badge b-proto">Prototype</span></button>
-    <button class="acard" data-goto="s3" type="button"><span class="num">3</span><span class="at"><b>Marketing changes a priority</b><small>Preview as two agents, then publish</small></span><span class="badge b-proto">Prototype</span></button>
-    <button class="acard" data-goto="s4" type="button"><span class="num">4</span><span class="at"><b>One design system</b><small>A component change, 24 pages</small></span><span class="badge b-proto">Prototype</span></button>
-    <button class="acard" data-goto="s5" type="button"><span class="num">5</span><span class="at"><b>One disclosure, two sites</b><small>Submit, approve, publish, roll back</small></span><span class="badge b-proto">Prototype</span></button>
-    <button class="acard" data-goto="s6" type="button"><span class="num">6</span><span class="at"><b>Audit trail</b><small>Who changed what, and undo</small></span><span class="badge b-proto">Prototype</span></button>
-    <button class="acard" data-goto="s7" type="button"><span class="num">7</span><span class="at"><b>The same mechanism in the CMS</b><small>Shared block, rules, versions</small></span><span class="badge b-cms">CMS Editor</span></button>
-    <button class="acard" data-goto="s8" type="button"><span class="num">8</span><span class="at"><b>How it works</b><small>Ping, Graph and CMS SaaS</small></span><span class="badge b-arch">Architecture</span></button>
+    <button class="acard" data-goto="s1" type="button"><span class="num">1</span><span class="at"><b>Dana signs in</b><small>Her focus products, and why</small></span><span class="badge b-live">Live App</span></button>
+    <button class="acard" data-goto="s2" type="button"><span class="num">2</span><span class="at"><b>Same portal, different agents</b><small>Role, state and agency decide</small></span><span class="badge b-live">Live App</span></button>
+    <button class="acard" data-goto="s3" type="button"><span class="num">3</span><span class="at"><b>Marketing changes a priority</b><small>Reorder in the CMS, publish, reload</small></span><span class="badge b-cms">CMS Editor</span></button>
+    <button class="acard" data-goto="s4" type="button"><span class="num">4</span><span class="at"><b>Preview by agent audience</b><small>Two agents side by side</small></span><span class="badge b-live">Live App</span></button>
+    <button class="acard" data-goto="s5" type="button"><span class="num">5</span><span class="at"><b>One design system</b><small>Governed blocks, settings in one place</small></span><span class="badge b-cms">CMS Editor</span></button>
+    <button class="acard" data-goto="s6" type="button"><span class="num">6</span><span class="at"><b>One disclosure, two channels</b><small>Portal and LibertyMutual.com</small></span><span class="badge b-live">Live App</span></button>
+    <button class="acard" data-goto="s7" type="button"><span class="num">7</span><span class="at"><b>Approved, auditable, reversible</b><small>Approvals, versions, Change Log</small></span><span class="badge b-cms">CMS Editor</span></button>
+    <button class="acard" data-goto="s8" type="button"><span class="num">8</span><span class="at"><b>How it works</b><small>Identity, rules and delivery</small></span><span class="badge b-arch">Architecture</span></button>
     <button class="acard" data-goto="summary" type="button"><span class="num">9</span><span class="at"><b>Summary and questions</b><small>Relevant, run by the business, governed once</small></span><span class="badge b-arch">Recap</span></button>
-    <div class="legend"><span><b>Prototype</b> is a clickable prototype of the agent experience, with sample data.</span><span><b>CMS Editor</b> is the real Optimizely CMS.</span></div>
+    <div class="legend"><span>Everything you will see is <b>real CMS content</b> on the live site.</span><span>Sign-in is a demo picker. In production, single sign-on provides the agent.</span></div>
   </div>
 
-  <aside class="notes"><p>Use this as a map. Sections 4 and 6 are skipped in the 20-minute cut. Liberty's three lenses: agent experience (sections 1 and 2), Liberty business experience (sections 3 and 4), shared-content foundation (sections 5 to 7).</p></aside>
+  <aside class="notes"><p>Use this as a map. Section 5 is skipped in the 20-minute cut. Liberty's three lenses: agent experience (sections 1 and 2), Liberty business experience (sections 3 to 5), shared-content foundation (sections 6 and 7).</p></aside>
 </section>
 
 <section id="asked" data-background-color="#E4F0DA">
@@ -183,22 +179,21 @@ button.btn{ appearance:none; -webkit-appearance:none; }
     <table class="tbl dense" style="font-size:16.5px">
       <thead><tr><th>You asked for</th><th>Where you will see it</th><th>Section</th></tr></thead>
       <tbody>
-        <tr class="goto" data-goto="s1" tabindex="0" role="link"><td><b>Rules by role, state, and agency</b></td><td>Why am I seeing these? shows the rule behind every card</td><td>1, 2, 7</td></tr>
+        <tr class="goto" data-goto="s1" tabindex="0" role="link"><td><b>Rules by role, state, and agency</b></td><td>“Why am I seeing these?” shows the rule behind every card</td><td>1, 2</td></tr>
         <tr class="goto" data-goto="s2" tabindex="0" role="link"><td><b>How two agents with different roles or agencies see different content</b></td><td>Dana and Tyler: same role and state, different agency</td><td>2</td></tr>
-        <tr class="goto" data-goto="s3" tabindex="0" role="link"><td><b>A business user changing a priority without development work</b></td><td>Priorities: reorder, preview, publish</td><td>3</td></tr>
-        <tr class="goto" data-goto="s3" tabindex="0" role="link"><td><b>Experience preview for each agent audience</b></td><td>Preview as: two agents side by side, before publishing</td><td>3</td></tr>
-        <tr class="goto" data-goto="s5" tabindex="0" role="link"><td><b>Permission and role separation across author, approve, and publish</b></td><td>Jordan submits, Maria approves, Sam publishes</td><td>5, 7</td></tr>
-        <tr class="goto" data-goto="s5b" tabindex="0" role="link"><td><b>Central content versus channel-specific variation</b></td><td>One shared disclosure, with separate channel notes</td><td>5</td></tr>
-        <tr class="goto" data-goto="s4" tabindex="0" role="link"><td><b>Reusable component and design-system governance</b></td><td>One Product card, 24 pages, four checks</td><td>4, 7</td></tr>
-        <tr class="goto" data-goto="s5" tabindex="0" role="link"><td><b>One update distributed to more than one site</b></td><td>The disclosure goes to the IA Portal and LibertyMutual.com</td><td>5</td></tr>
-        <tr class="goto" data-goto="s6" tabindex="0" role="link"><td><b>How changes are tested, approved, rolled back, and audited</b></td><td>Checks, approvals, roll back, audit log, Change Log</td><td>4–7</td></tr>
+        <tr class="goto" data-goto="s3" tabindex="0" role="link"><td><b>A business user changing a priority without development work</b></td><td>Reorder or turn off a priority in the CMS, publish, reload</td><td>3</td></tr>
+        <tr class="goto" data-goto="s4" tabindex="0" role="link"><td><b>Experience preview for each agent audience</b></td><td>Preview by agent audience, plus CMS preview</td><td>4</td></tr>
+        <tr class="goto" data-goto="s7" tabindex="0" role="link"><td><b>Permission and role separation across author, approve, and publish</b></td><td>CMS roles and approval sequences</td><td>7</td></tr>
+        <tr class="goto" data-goto="s6" tabindex="0" role="link"><td><b>Central content versus channel-specific variation</b></td><td>One shared disclosure, one note per channel</td><td>6</td></tr>
+        <tr class="goto" data-goto="s5" tabindex="0" role="link"><td><b>Reusable component and design-system governance</b></td><td>Governed blocks, card settings in one place</td><td>5</td></tr>
+        <tr class="goto" data-goto="s6" tabindex="0" role="link"><td><b>One update distributed to more than one site</b></td><td>One disclosure on the portal and on LibertyMutual.com</td><td>6</td></tr>
+        <tr class="goto" data-goto="s7" tabindex="0" role="link"><td><b>How changes are tested, approved, rolled back, and audited</b></td><td>Preview, approvals, versions and restore, Change Log</td><td>4, 6, 7</td></tr>
       </tbody>
     </table>
   </div>
-  <p class="cap mt2">Sections 1 to 6 use a clickable prototype with sample data. Section 7 shows the real CMS.</p>
 
-  <aside class="notes"><p>Liberty's checklist, quoted. Tie the last rows to their metrics: <b>time to publish</b> (section 3), <b>% of changes without engineering</b> (sections 3 to 5), <b>content reuse rate</b> (sections 5 and 7).</p>
-<p>Be ready to be honest on two rows. <b>Preview for each audience:</b> the prototype shows it; in the CMS, audience-specific preview of portal priorities is not built. <b>Permission and role separation:</b> the prototype shows it; real Opti ID roles and an approval sequence need to be configured in the instance first.</p></aside>
+  <aside class="notes"><p>Liberty's checklist, quoted. Tie the outcomes to their metrics: <b>time to publish</b> (section 3), <b>% of changes without engineering</b> (sections 3, 5 and 6), <b>content reuse rate</b> (sections 3 and 6).</p>
+<p>Be ready on two rows. <b>Permission and role separation</b> depends on roles and an approval sequence being configured in the instance. <b>One update to more than one site</b>: in this demo the portal and LM.com pages are served from one site with different headers; Liberty's setup would be separate sites in one instance, with the same shared block.</p></aside>
 </section>
 
 <section id="idea" data-background-color="#08251A">
@@ -207,326 +202,282 @@ button.btn{ appearance:none; -webkit-appearance:none; }
     <h2 style="font-size:54px;max-width:1080px">Every agent portal can show products. The real question is which three, for this agent, this quarter, and who decides.</h2>
     <div class="cols3">
       <div class="card pad-sm fragment fade-up" style="background:var(--lf);color:var(--fir)"><div class="eyebrow">Relevant</div><p class="t-sm mt1">Rules by role, state and agency decide what each agent sees.</p></div>
-      <div class="card pad-sm fragment fade-up" style="background:var(--aqua);color:var(--fir)"><div class="eyebrow">Run by the business</div><p class="t-sm mt1">Marketing reorders priorities, previews and publishes. No release.</p></div>
-      <div class="card pad-sm fragment fade-up" style="background:var(--n3);color:var(--fir)"><div class="eyebrow">Governed once</div><p class="t-sm mt1">Shared content is approved once, reaches every site, and can be audited and rolled back.</p></div>
+      <div class="card pad-sm fragment fade-up" style="background:var(--aqua);color:var(--fir)"><div class="eyebrow">Run by the business</div><p class="t-sm mt1">Marketing reorders priorities in the CMS and publishes. No release.</p></div>
+      <div class="card pad-sm fragment fade-up" style="background:var(--n3);color:var(--fir)"><div class="eyebrow">Governed once</div><p class="t-sm mt1">Shared content is approved once, reaches every channel, and can be audited and restored.</p></div>
     </div>
   </div>
 
-  <aside class="notes"><p><b>Frame (2 min).</b> Start on familiar ground: every agent portal can show products. The real question is which three, for this agent, this quarter, and who decides.</p><p>Then name what you are proving: relevant (rules by role, state and agency), run by the business (no release), governed once (approved once, reaches every site, audited and reversible).</p></aside>
+  <aside class="notes"><p><b>Frame (2 min).</b> Every agent portal can show products. The question is which three, for this agent, this quarter, and who decides. Then name what you will prove: relevant, run by the business, governed once.</p></aside>
 </section>
 
 <section id="relevance" data-background-color="#FFFFFF">
   <div class="eyebrow">Why it works</div>
   <h2 class="mt1">Relevance without tracking</h2>
-  <p class="t mt2" style="max-width:1000px">The sign-in already tells us who the agent is, so the rules can use what Liberty already has.</p>
+  <p class="t mt2" style="max-width:1000px">The sign-in already tells us who the agent is, so the rules use what Liberty already has.</p>
   <div class="flow mt4">
-    <div class="node fragment fade-up" data-fragment-index="0"><b>Ping sign-in</b>knows who the agent is</div>
+    <div class="node fragment fade-up" data-fragment-index="0"><b>Agent signs in</b>role, state and agency</div>
     <span class="arrow fragment fade-up" data-fragment-index="1">→</span>
-    <div class="node fragment fade-up" data-fragment-index="1"><b>Role · State · Agency</b>passed to the portal as claims</div>
+    <div class="node fragment fade-up" data-fragment-index="1" style="background:var(--aqua)"><b>Agent Priorities</b>one ordered list, kept by marketing in the CMS</div>
     <span class="arrow fragment fade-up" data-fragment-index="2">→</span>
-    <div class="node fragment fade-up" data-fragment-index="2" style="background:var(--lf)"><b>Business rules</b>kept by marketing, stored as content</div>
+    <div class="node fragment fade-up" data-fragment-index="2" style="background:var(--lf)"><b>Rules on each priority</b>roles · only these states · only these agencies</div>
     <span class="arrow fragment fade-up" data-fragment-index="3">→</span>
-    <div class="node fragment fade-up" data-fragment-index="3" style="background:var(--lf)"><b>Top 3 for this agent</b>in the marketer’s priority order</div>
+    <div class="node fragment fade-up" data-fragment-index="3" style="background:var(--lf)"><b>Top 3 for this agent</b>on the dashboard and product page</div>
     </div>
   <div class="cols3 mt4">
-    <div class="card pad-sm tint"><h3>Rules decide who qualifies</h3><p class="t-sm mt1">By role, state and agency.</p></div>
-    <div class="card pad-sm tint"><h3>Order decides what is emphasized</h3><p class="t-sm mt1">The top three, in the order marketing sets.</p></div>
-    <div class="card pad-sm tint-lime"><h3>Marketing owns both</h3><p class="t-sm mt1">No tracking, no CDP, and no agent users to manage on the platform.</p></div>
+    <div class="card pad-sm tint"><h3>Rules decide who qualifies</h3><p class="t-sm mt1">Role, state and agency, stored on each priority.</p></div>
+    <div class="card pad-sm tint"><h3>Order decides what is emphasized</h3><p class="t-sm mt1">The first three that match, in marketing’s order.</p></div>
+    <div class="card pad-sm tint-lime"><h3>Marketing owns both</h3><p class="t-sm mt1">No tracking, no CDP, no agent users managed on the platform.</p></div>
   </div>
 
-  <aside class="notes"><p>Relevance does not need tracking. Ping already knows the agent's role, state and agency at sign-in, so the rules use what Liberty already has. This matches Liberty's Q&amp;A: Ping handles authentication, the platform does no user management, and there is no CDP.</p><p>Rules decide who qualifies. Order decides what is emphasized. Marketing owns both.</p></aside>
+  <aside class="notes"><p>Relevance does not need tracking. In production Ping already knows the agent's role, state and agency at sign-in, so the rules use what Liberty already has. This matches Liberty's Q&amp;A: Ping handles authentication, no user management on the platform, no CDP.</p><p>Each priority stores its rules: three role checkboxes (none ticked means every role), only these states, only these agencies. The cards show the first three that match, in marketing's order.</p></aside>
 </section>
 
 <section>
 <section id="s1" data-background-color="#FFFFFF">
-  <div class="row g2"><span class="badge b-proto">1 · Prototype</span><span class="eyebrow">Dana signs in</span></div>
+  <div class="row g2"><span class="badge b-live">1 · Live App</span><span class="eyebrow">Dana signs in</span></div>
   <div class="split mt3">
     <div>
-      <h2>Dana signs in and lands on her focus products</h2>
-      <p class="t mt2">In production, Ping signs the agent in and passes her role, state and agency. The platform does not manage agent users.</p>
-      <div class="row wrap g1 mt3"><a class="btn btn-live" data-live="/use-case-2-agent-portal.html">Open the portal prototype ↗</a></div>
+      <h2>Dana signs in and lands on her dashboard</h2>
+      <p class="t mt2">The sign-in page, the dashboard and every card on it are CMS content.</p>
+      <div class="row wrap g1 mt3"><a class="btn btn-live" data-live="/agent">Open the sign-in page ↗</a><a class="btn btn-ghost" data-live="/agent/dana">Backup: Dana’s dashboard ↗</a></div>
+      <p class="cap mt3">Demo sign-in: choose an agent. No password is checked or stored. In production, single sign-on provides the agent.</p>
     </div>
     <div class="card pad stack-v g3">
-      <div class="step fragment fade-up"><span class="num">1</span><div><h3>Sign in as Dana</h3><p class="t mt1">Dana Whitfield, an independent agent.</p></div></div>
-      <div class="step fragment fade-up"><span class="num">2</span><div><h3>Confirm access</h3>
-        <div class="row wrap g1 mt1"><span class="chip"><b>Role</b> Producer</span><span class="chip"><b>State</b> Texas</span><span class="chip"><b>Agency</b> Harbor Light Insurance Group</span></div></div></div>
-      <div class="step fragment fade-up"><span class="num">3</span><div><h3>Match priorities</h3><p class="t mt1">Three of Liberty’s current priorities match her.</p></div></div>
+      <div class="step fragment fade-up"><span class="num">1</span><div><h3>Sign in as Dana</h3><p class="t-sm mt1">Dana Whitfield opens at /agent/dana.</p></div></div>
+      <div class="step fragment fade-up"><span class="num">2</span><div><h3>Greeting for her</h3>
+        <div class="row wrap g1 mt1"><span class="chip"><b>Role</b> Producer</span><span class="chip"><b>State</b> Texas</span><span class="chip"><b>Agency</b> Harbor Light</span></div></div></div>
+      <div class="step fragment fade-up"><span class="num">3</span><div><h3>Her blocks</h3><p class="t-sm mt1">Focus products, bundle opportunities, updates for Texas, her toolkit and resources.</p></div></div>
     </div>
   </div>
 
-  <aside class="notes"><p><b>Section 1 · Dana signs in (4 min).</b> In the controller choose <b>Agent: Dana</b>, then <b>Sign in</b>.</p>
-<p>The progress card confirms access with chips (Role Producer, State Texas, Agency Harbor Light Insurance Group), then matches 3 priorities.</p>
-<p><b>Say:</b> “In production, Ping signs the agent in and passes role, state and agency. We don't manage agent users.”</p></aside>
+  <aside class="notes"><p><b>Section 1 · Dana signs in (4 min).</b> Open the sign-in page. Choose Dana in “Sign in as (demo)” and press Sign in: /agent/dana opens.</p>
+<p>Point out the greeting with her role, state and agency, and that the header shows her initials, name and agency. <b>Say:</b> “This page and every block on it is CMS content. In production, Ping provides who she is; here a demo picker does.”</p></aside>
 </section>
 <section id="s1b" data-background-color="#FFFFFF">
-  <div class="row g2"><span class="badge b-proto">1 · Prototype</span><span class="eyebrow">What Dana sees</span></div>
+  <div class="row g2"><span class="badge b-live">1 · Live App</span><span class="eyebrow">Focus products this quarter</span></div>
   <h2 class="mt2">Three focus products, and the reason for each</h2>
   <div class="split-r mt3">
     <div class="stack-v g2">
-      <div class="card pad-sm fragment fade-up"><div class="row g2"><span class="num">1</span><h3>Home + Auto bundle</h3></div></div>
-      <div class="card pad-sm fragment fade-up"><div class="row g2"><span class="num">2</span><h3>Renters + Auto</h3></div></div>
-      <div class="card pad-sm fragment fade-up"><div class="row g2"><span class="num">3</span><h3>Personal umbrella</h3></div></div>
+      <div class="card pad-sm fragment fade-up"><div class="row g2"><span class="num">1</span><h3>Home + Auto bundle</h3></div><p class="cap mt1">Producer · any state · any agency</p></div>
+      <div class="card pad-sm fragment fade-up"><div class="row g2"><span class="num">2</span><h3>Renters + Auto</h3></div><p class="cap mt1">Producer · Texas · Harbor Light only</p></div>
+      <div class="card pad-sm fragment fade-up"><div class="row g2"><span class="num">3</span><h3>Personal umbrella</h3></div><p class="cap mt1">Producer · any state · any agency</p></div>
     </div>
     <div class="card pad tint fragment fade-up">
       <div class="eyebrow">Why am I seeing these?</div>
-      <p class="t mt2">Each card shows the rule that matched: her role, her state and her agency.</p>
-      <div class="eyebrow mt3">Not matched for her</div>
+      <p class="t-sm mt2">The panel shows each card’s rule: role, state and agency.</p>
+      <div class="eyebrow mt3">Not matched for you</div>
       <div class="row wrap g1 mt1"><span class="chip warn"><b>Condo + Auto bundle</b> Florida only</span></div>
-      <p class="cap mt3">Open Home + Auto bundle to see the Important information at the bottom. It returns in section 5.</p>
+      <div class="row wrap g1 mt3"><a class="btn btn-live" data-live="/agent/dana">Dana’s dashboard ↗</a><a class="btn btn-ghost" data-live="/agent/home-auto-bundle">Home + Auto bundle page ↗</a></div>
     </div>
   </div>
 
-  <aside class="notes"><p>On the Dashboard the focus products are Home + Auto bundle, Renters + Auto and Personal umbrella. Open <b>Why am I seeing these?</b>: it shows the rule chips per card and “Not matched for you: Condo + Auto bundle · Florida only.”</p><p>Open Home + Auto bundle and point to <b>Important information</b> at the bottom. It comes back in section 5.</p></aside>
+  <aside class="notes"><p>Open <b>Why am I seeing these?</b> under Focus products. It lists each card's rule and “Not matched for you: Condo + Auto bundle · Florida only.” Open the Home + Auto bundle card: the product page follows her state too (“What can be bundled in Texas”). Its Important information returns in section 6.</p></aside>
 </section>
 </section>
 
 <section>
 <section id="s2" data-background-color="#FFFFFF">
-  <div class="row g2"><span class="badge b-proto">2 · Prototype</span><span class="eyebrow">Same portal, different agents</span></div>
+  <div class="row g2"><span class="badge b-live">2 · Live App</span><span class="eyebrow">Same portal, different agents</span></div>
   <h2 class="mt2">Same role, same state, different agency</h2>
   <div class="cols2 mt3">
     <div class="card pad fragment fade-up">
       <h3>Dana Whitfield</h3>
       <div class="row wrap g1 mt1"><span class="chip"><b>Role</b> Producer</span><span class="chip"><b>State</b> Texas</span><span class="chip"><b>Agency</b> Harbor Light</span></div>
-      <div class="eyebrow mt3">Her top three</div>
+      <div class="eyebrow mt3">Focus products</div>
       <div class="row wrap g1 mt1"><span class="chip">Home + Auto bundle</span><span class="chip hl">Renters + Auto</span><span class="chip">Personal umbrella</span></div>
+      <div class="row wrap g1 mt3"><a class="btn btn-live" data-live="/agent/dana">/agent/dana ↗</a></div>
     </div>
     <div class="card pad fragment fade-up">
       <h3>Tyler Brooks</h3>
       <div class="row wrap g1 mt1"><span class="chip"><b>Role</b> Producer</span><span class="chip"><b>State</b> Texas</span><span class="chip"><b>Agency</b> Lone Star</span></div>
-      <div class="eyebrow mt3">His top three</div>
+      <div class="eyebrow mt3">Focus products</div>
       <div class="row wrap g1 mt1"><span class="chip">Home + Auto bundle</span><span class="chip">Personal umbrella</span><span class="chip hl">Motorcycle add-on</span></div>
+      <div class="row wrap g1 mt3"><a class="btn btn-live" data-live="/agent/tyler">/agent/tyler ↗</a></div>
     </div>
   </div>
-  <div class="card pad-sm tint-lime mt3 fragment fade-up"><p class="t-sm"><b>Renters + Auto is for Harbor Light agencies only.</b> That is the agency rule at work, using what the sign-in already provides.</p></div>
+  <div class="card pad-sm tint-lime mt3 fragment fade-up"><p class="t-sm"><b>Renters + Auto is for Harbor Light only.</b> Tyler’s “Not matched” list says so. That is the agency rule, using what sign-in already provides.</p></div>
 
-  <aside class="notes"><p><b>Section 2 · Same portal, different agents (3 min).</b> Change the controller's Agent menu to Tyler; the dashboard re-renders.</p><p><b>Key moment:</b> Dana and Tyler have the same role and state but different agencies, so only Dana sees Renters + Auto. That is the agency rule at work. Then press down for all four agents.</p></aside>
+  <aside class="notes"><p><b>Section 2 · Different agents (3 min).</b> Click the logo to return to sign-in, sign in as Tyler (or open /agent/tyler).</p><p><b>Key moment:</b> Dana and Tyler have the same role and state but a different agency, so only Dana gets Renters + Auto. Tyler's “Not matched” list says “Renters + Auto · Harbor Light agencies only”.</p></aside>
 </section>
 <section id="s2b" data-background-color="#FFFFFF">
-  <div class="row g2"><span class="badge b-proto">2 · Prototype</span><span class="eyebrow">Four agents</span></div>
+  <div class="row g2"><span class="badge b-live">2 · Live App</span><span class="eyebrow">Four agents</span></div>
   <h2 class="mt2">The rules do the work for every agent</h2>
   <div class="card pad-sm mt3">
     <table class="tbl dense" style="font-size:16.5px">
-      <thead><tr><th>Agent</th><th>Role · State · Agency</th><th>Top three</th><th>Not matched</th></tr></thead>
+      <thead><tr><th>Agent</th><th>Role · State · Agency</th><th>Focus cards</th><th>Not matched</th><th></th></tr></thead>
       <tbody>
-        <tr><td><b>Dana</b></td><td>Producer · TX · Harbor Light</td><td>Home + Auto, Renters + Auto, Personal umbrella</td><td>Condo + Auto (Florida only)</td></tr>
-        <tr><td><b>Tyler</b></td><td>Producer · TX · Lone Star</td><td>Home + Auto, Personal umbrella, Motorcycle add-on</td><td>Condo + Auto (Florida only); Renters + Auto (Harbor Light agencies only)</td></tr>
-        <tr><td><b>Marcus</b></td><td>Principal · FL · Sunrise Coast</td><td>Condo + Auto, Home + Auto, Personal umbrella</td><td>Renters + Auto (not for principals)</td></tr>
-        <tr><td><b>Elena</b></td><td>Service rep · OH · Buckeye</td><td>Make a policy change, Billing and payments, Report a claim for a client</td><td>–</td></tr>
+        <tr><td><b>Dana</b></td><td>Producer · TX · Harbor Light</td><td>Home + Auto, Renters + Auto, Personal umbrella</td><td>Condo + Auto (Florida only)</td><td><a class="btn btn-live" style="font-size:14px;padding:5px 12px" data-live="/agent/dana">Open ↗</a></td></tr>
+        <tr><td><b>Tyler</b></td><td>Producer · TX · Lone Star</td><td>Home + Auto, Personal umbrella, Motorcycle add-on</td><td>Condo + Auto (Florida only); Renters + Auto (Harbor Light only)</td><td><a class="btn btn-live" style="font-size:14px;padding:5px 12px" data-live="/agent/tyler">Open ↗</a></td></tr>
+        <tr><td><b>Marcus</b></td><td>Agency Principal · FL · Sunrise Coast</td><td>Condo + Auto, Home + Auto, Personal umbrella</td><td>Renters + Auto (not for principals)</td><td><a class="btn btn-live" style="font-size:14px;padding:5px 12px" data-live="/agent/marcus">Open ↗</a></td></tr>
+        <tr><td><b>Elena</b></td><td>Service Rep · OH · Buckeye</td><td>Make a policy change, Billing and payments, Report a claim for a client</td><td>–</td><td><a class="btn btn-live" style="font-size:14px;padding:5px 12px" data-live="/agent/elena">Open ↗</a></td></tr>
       </tbody>
     </table>
   </div>
-  <p class="cap mt2">Marcus also gets an agency management toolkit, Elena gets service tasks, and state updates and resources follow each agent’s state.</p>
+  <p class="cap mt2">Each dashboard also follows the agent: updates and resources for their state, and a toolkit for their role.</p>
 
-  <aside class="notes"><p>Switch to Marcus and Elena to show how the dashboard follows the persona. Marcus gets an agency management toolkit, Elena gets service tasks, and the state updates and resources follow the agent's state.</p></aside>
+  <aside class="notes"><p>Show Marcus (Florida principal): Condo + Auto is first, and Renters + Auto is not for principals. Show Elena (Ohio service rep): service tasks instead of products. Updates, resources and toolkit follow each agent's state and role.</p></aside>
 </section>
 </section>
 
 <section id="s3" data-background-color="#FFFFFF">
-  <div class="row g2"><span class="badge b-proto">3 · Prototype</span><span class="eyebrow">Marketing changes a priority</span></div>
+  <div class="row g2"><span class="badge b-cms">3 · CMS Editor</span><span class="eyebrow">Marketing changes a priority</span></div>
   <div class="split mt2">
     <div class="stack-v g3">
-      <h2>Reorder, preview, publish</h2>
-      <p class="t">Priya Raman, Marketing Manager, opens Priorities. Each row shows its rule: roles, states and agency.</p>
-      <ul class="t stack-v g2">
-        <li class="step fragment fade-up"><span class="num">1</span><span><b>Move Personal umbrella to the top.</b> “1 unpublished change” appears, and the agent view still shows what is live.</span></li>
-        <li class="step fragment fade-up"><span class="num">2</span><span><b>Preview as two agents.</b> View A is Dana and View B is Tyler. Umbrella is first for both.</span></li>
-        <li class="step fragment fade-up"><span class="num">3</span><span><b>Publish changes.</b> “Dana’s dashboard updated with no code or release.”</span></li>
+      <h2>Reorder, publish, reload</h2>
+      <p class="t-sm">Agent Priorities is one CMS page holding two ordered lists of shared priority blocks: products and service tasks.</p>
+      <ul class="t-sm stack-v g2">
+        <li class="step fragment fade-up"><span class="num">1</span><span><b>Move Personal umbrella above Home + Auto</b>, or turn a priority off without deleting it.</span></li>
+        <li class="step fragment fade-up"><span class="num">2</span><span><b>Publish.</b> No code, no release.</span></li>
+        <li class="step fragment fade-up"><span class="num">3</span><span><b>Reload Dana’s dashboard.</b> Her cards follow the new order.</span></li>
       </ul>
+      <div class="row wrap g1"><a class="btn btn-cms" data-cms="priorities">Agent Priorities in the CMS ↗</a><a class="btn btn-live" data-live="/agent/dana">Dana’s dashboard ↗</a></div>
     </div>
     <div class="stack-v g3">
       <div class="cols2">
-        <div class="card pad-sm fragment fade-up"><div class="eyebrow">View A · Dana</div><p class="q mt1" style="font-size:24px">Personal umbrella</p><p class="cap mt1">now first</p></div>
-        <div class="card pad-sm fragment fade-up"><div class="eyebrow">View B · Tyler</div><p class="q mt1" style="font-size:24px">Personal umbrella</p><p class="cap mt1">now first</p></div>
+        <div class="card pad-sm fragment fade-up"><div class="eyebrow">Dana, before</div><ol class="t-sm mt1" style="margin:6px 0 0 20px;padding:0"><li>Home + Auto bundle</li><li>Renters + Auto</li><li>Personal umbrella</li></ol></div>
+        <div class="card pad-sm tint fragment fade-up"><div class="eyebrow">Dana, after</div><ol class="t-sm mt1" style="margin:6px 0 0 20px;padding:0"><li><b>Personal umbrella</b></li><li>Home + Auto bundle</li><li>Renters + Auto</li></ol></div>
       </div>
-      <div class="card pad-sm tint-lime fragment fade-up"><p class="t"><b>Rules decide who qualifies. Order decides what is emphasized.</b> Marketing owns both.</p></div>
-      <p class="cap">The authoring screens in the prototype are an illustration. Section 7 shows the real editor.</p>
+      <div class="card pad-sm tint-lime fragment fade-up"><p class="t-sm"><b>Rules decide who qualifies. Order decides what is emphasized.</b> Marketing owns both, and the change is made once for every agent.</p></div>
     </div>
   </div>
 
-  <aside class="notes"><p><b>Section 3 · Marketer changes a priority (4 min).</b> Open <b>Priorities</b> (Priya Raman, Marketing Manager).</p>
-<p>Move Personal umbrella to the top with the arrows. “1 unpublished change” appears and the agent view on the right still shows what is live. Set <b>Preview as</b>: View A Dana, View B Tyler. The banner reads “Previewing 1 unpublished change”. Press <b>Publish changes</b>: the toast says “Dana's dashboard updated with no code or release”, and changed cards are highlighted.</p>
-<p><b>Say:</b> “Rules decide who qualifies. Order decides what's emphasized. Marketing owns both.” The first time an authoring screen appears, say it is an illustration of the authoring tool, not the Optimizely UI.</p></aside>
+  <aside class="notes"><p><b>Section 3 · Marketing changes a priority (4 min).</b> In the CMS open <b>Agent Priorities</b>. Products and bundles is one ordered list of shared priority blocks: Condo + Auto, Home + Auto, Renters + Auto, Personal umbrella, Motorcycle add-on.</p>
+<p>Move Personal umbrella above Home + Auto and publish. Reload /agent/dana: umbrella is first. Tyler also gets it first; Marcus keeps Condo + Auto first. Alternative: turn a priority off (it stays in the CMS) and show it disappear.</p>
+<p><b>Say:</b> “Rules decide who qualifies. Order decides what's emphasized. Marketing owns both, and it's one change for every agent.” Move it back afterwards.</p></aside>
 </section>
 
 <section id="s4" data-background-color="#FFFFFF">
-  <div class="row g2"><span class="badge b-proto">4 · Prototype</span><span class="eyebrow">One design system</span></div>
-  <h2 class="mt2">One component change, 24 pages</h2>
+  <div class="row g2"><span class="badge b-live">4 · Live App</span><span class="eyebrow">Preview by agent audience</span></div>
+  <h2 class="mt2">See any two agents side by side</h2>
   <div class="split-r mt3">
     <div class="stack-v g3">
-      <p class="t">Devon Park, Design System Owner, opens Components. The Product card is used on <b>24 pages across 2 templates</b>.</p>
-      <ul class="t stack-v g2">
-        <li class="step fragment fade-up"><span class="num">1</span><span><b>Set the button label to “Get a quote”.</b> Only approved labels are offered. Colors, fonts and spacing are locked.</span></li>
-        <li class="step fragment fade-up"><span class="num">2</span><span><b>Test and publish.</b> Four checks run before anything goes live.</span></li>
-        <li class="step fragment fade-up"><span class="num">3</span><span><b>The dashboard and the product-page template both update.</b></span></li>
+      <p class="t-sm">The Agent Priorities page shows marketing’s two lists with each priority’s rule chips, then a side-by-side view of two agents’ dashboards.</p>
+      <ul class="t-sm stack-v g2">
+        <li class="step fragment fade-up"><span class="num">1</span><span><b>View A is Dana, View B is Marcus.</b> A Texas producer next to a Florida principal.</span></li>
+        <li class="step fragment fade-up"><span class="num">2</span><span><b>Change either picker</b> to any of the four agents.</span></li>
+        <li class="step fragment fade-up"><span class="num">3</span><span><b>Drafts preview in the CMS</b> before anything is published.</span></li>
       </ul>
+      <div class="row wrap g1"><a class="btn btn-live" data-live="/agent/priorities">Open Agent Priorities ↗</a></div>
     </div>
     <div class="stack-v g3">
-      <div class="row g2 fragment fade-up"><span class="vchip">v7</span><span class="arrow" style="font-size:30px">→</span><span class="vchip new">v8</span></div>
-      <div class="card pad-sm fragment fade-up"><div class="eyebrow">Four checks</div>
-        <div class="row wrap g1 mt2"><span class="chip">Brand tokens</span><span class="chip">Accessibility</span><span class="chip">Layout on 24 pages</span><span class="chip">Brand governance approval</span></div></div>
+      <div class="cols2">
+        <div class="card pad-sm fragment fade-up"><div class="eyebrow">View A · Dana</div><p class="cap mt1">Producer · Texas</p><p class="q mt1" style="font-size:20px">Home + Auto bundle</p></div>
+        <div class="card pad-sm fragment fade-up"><div class="eyebrow">View B · Marcus</div><p class="cap mt1">Agency Principal · Florida</p><p class="q mt1" style="font-size:20px">Condo + Auto bundle</p></div>
+      </div>
+      <p class="cap">The side-by-side view shows the published dashboards. Publish and reload to see a change.</p>
     </div>
   </div>
 
-  <aside class="notes"><p><b>Section 4 · One design system (3 min; skip in the 20-minute cut).</b> Open <b>Components</b> (Devon Park, Design System Owner). The Product card is v7 and used on 24 pages across 2 templates.</p><p>Set Button label to “Get a quote” (only approved labels are offered). Press <b>Test and publish</b>: brand tokens, accessibility, layout on 24 pages, brand governance approval. The card goes to v8, and both the dashboard and the product-page template update.</p></aside>
+  <aside class="notes"><p><b>Section 4 · Preview by audience (2 min).</b> Open /agent/priorities. Point to the rule chips on each priority, then scroll to <b>Preview by agent audience</b>: Dana and Marcus side by side. Change a picker to Tyler to show the agency rule again.</p><p>The frames show published pages. For drafts, use the CMS preview before publishing.</p></aside>
 </section>
 
-<section>
 <section id="s5" data-background-color="#FFFFFF">
-  <div class="row g2"><span class="badge b-proto">5 · Prototype</span><span class="eyebrow">One disclosure, two sites</span></div>
-  <h2 class="mt2">Approved once, published to both sites</h2>
-  <p class="t mt1">The Bundle savings disclosure is shared content. Author, approve and publish are separate roles.</p>
-  <div class="flow mt3">
-    <div class="node fragment fade-up" data-fragment-index="0"><b>Jordan Blake</b>Content Administrator<br>Submits for legal review. Cannot approve.</div>
-    <span class="arrow fragment fade-up" data-fragment-index="1">→</span>
-    <div class="node fragment fade-up" data-fragment-index="1"><b>Maria Alvarez</b>Compliance Approver<br>Approves, or requests changes.</div>
-    <span class="arrow fragment fade-up" data-fragment-index="2">→</span>
-    <div class="node fragment fade-up" data-fragment-index="2" style="background:var(--lf)"><b>Sam Patel</b>Publisher<br>Publishes to 2 sites.</div>
-    </div>
-  <div class="card pad-sm tint mt3 fragment fade-up"><div class="row wrap g3"><span class="chip"><b>IA Portal</b> 14 pages</span><span class="chip"><b>LibertyMutual.com</b> 9 pages</span><span class="chip hl"><b>23 pages</b> from one publish</span></div>
-  <p class="cap mt2">“Show changes from v3” shows the redline before anyone approves.</p></div>
-
-  <aside class="notes"><p><b>Section 5 · Disclosure (5 min).</b> Open <b>Disclosure</b> (Bundle savings disclosure, shared content). Tick <b>Show changes from v3</b> for the redline.</p>
-<p>1. <b>Jordan Blake</b> (Content Administrator) clicks Submit for legal review. Jordan cannot approve. 2. <b>Maria Alvarez</b> (Compliance Approver) clicks Approve (or Request changes to show the loop). 3. <b>Sam Patel</b> (Publisher) clicks <b>Publish to 2 sites</b>: IA Portal (14 pages) and LibertyMutual.com (9 pages), 23 in total.</p></aside>
-</section>
-<section id="s5b" data-background-color="#FFFFFF">
-  <div class="row g2"><span class="badge b-proto">5 · Prototype</span><span class="eyebrow">Central text, channel notes, rollback</span></div>
-  <h2 class="mt2">One core text, separate channel notes</h2>
-  <div class="cols2 mt3">
-    <div class="card pad fragment fade-up"><h3>Shared core text</h3><p class="t mt1">Changed once. Both sites show v4, with the new wording highlighted.</p></div>
-    <div class="card pad fragment fade-up"><h3>Channel notes stay separate</h3>
-      <p class="t mt1"><b>IA Portal:</b> “For use by licensed independent agents…”</p>
-      <p class="t mt1"><b>LibertyMutual.com:</b> “Questions about your coverage?…”</p></div>
+  <div class="row g2"><span class="badge b-cms">5 · CMS Editor</span><span class="eyebrow">One design system</span></div>
+  <h2 class="mt2">Pages built only from governed blocks</h2>
+  <div class="cols3 mt3">
+    <div class="card pad fragment fade-up"><h3>Approved blocks</h3><p class="t mt1">Dashboards and the product page are built from the same blocks: priority cards, tables, updates, toolkits, resources and the disclosure.</p></div>
+    <div class="card pad fragment fade-up"><h3>Styling lives in code</h3><p class="t mt1">Editors choose content and order. Colors, fonts and layout come from the design system.</p></div>
+    <div class="card pad fragment fade-up"><h3>Settings in one place</h3><p class="t mt1">The card button text, “Start a quote”, is set once on Agent Priorities. Every card changes.</p></div>
   </div>
-  <div class="card pad-sm tint-lime mt3 fragment fade-up"><p class="t"><b>Roll back to v3.</b> Sam clicks Roll back, and v3 is restored as <b>v5</b> on both sites.</p></div>
+  <div class="row wrap g1 mt3"><a class="btn btn-cms" data-cms="priorities">Agent Priorities in the CMS ↗</a><a class="btn btn-live" data-live="/agent/dana">A dashboard ↗</a><a class="btn btn-live" data-live="/agent/home-auto-bundle">The product page ↗</a></div>
 
-  <aside class="notes"><p>Point out the channel-specific notes: the IA Portal's “For use by licensed independent agents…” and LM.com's “Questions about your coverage?…” stay separate; changing the core text does not touch them. Click <b>See both sites</b> (Two sites): both pages show v4 with the new wording highlighted.</p><p>As Sam, click <b>Roll back to v3</b>. It is restored as v5 on both sites. The button is only enabled as Sam, after v4 is published.</p></aside>
-</section>
-</section>
-
-<section id="s6" data-background-color="#FFFFFF">
-  <div class="row g2"><span class="badge b-proto">6 · Prototype</span><span class="eyebrow">Audit trail</span></div>
-  <h2 class="mt2">Every change, who made it, and how to undo it</h2>
-  <div class="cols3 mt4">
-    <div class="card pad fragment fade-up"><h3>Filter</h3><p class="t mt1">By Priorities, Components or Disclosure.</p></div>
-    <div class="card pad fragment fade-up"><h3>Who, role, approval</h3><p class="t mt1">Each entry shows who acted, their role and the approval status. The actions from sections 3 to 5 are listed.</p></div>
-    <div class="card pad fragment fade-up"><h3>Revert</h3><p class="t mt1">Undo the latest priority or component change from the log.</p></div>
-  </div>
-
-  <aside class="notes"><p><b>Section 6 · Audit trail (1 min; skip in the 20-minute cut).</b> Open <b>Audit log</b>. Filter by Priorities, Components or Disclosure. Your own actions from sections 3 to 5 are listed with who, role and approval status. Revert undoes only the latest priority or component change.</p></aside>
+  <aside class="notes"><p><b>Section 5 · One design system (3 min; skip in the 20-minute cut).</b> Open a dashboard and the product page: same header, same blocks. Editors place approved blocks and set content and order; styling is in code. On Agent Priorities, the card button text (“Start a quote”) is set once and every card reads it.</p><p>Be honest if asked about component versions: this is governed settings in one place, not a versioned component library screen.</p></aside>
 </section>
 
 <section>
-<section id="s7" data-background-color="#FFFFFF">
-  <div class="row g2"><span class="badge b-cms">7 · CMS Editor</span><span class="eyebrow">The same mechanism in Optimizely CMS today</span></div>
-  <h2 class="mt2">That was the agent story. Here is the mechanism.</h2>
+<section id="s6" data-background-color="#FFFFFF">
+  <div class="row g2"><span class="badge b-live">6 · Live App</span><span class="eyebrow">One disclosure, two channels</span></div>
+  <h2 class="mt2">One approved text, a note for each channel</h2>
+  <p class="t-sm mt1">“Agent Disclosure: Bundle savings” is one shared block. Where it is placed, the editor picks the channel.</p>
   <div class="cols2 mt3">
-    <div class="card pad-sm stack-v g1 fragment fade-up"><h3>Change once, update everywhere</h3><p class="t">One shared block, used on 6 answer pages.</p><div class="row wrap g1 mt1"><button class="btn btn-ghost" data-goto="s7b" type="button">Show it →</button></div></div>
-    <div class="card pad-sm stack-v g1 fragment fade-up"><h3>Governed components</h3><p class="t">25 approved blocks that editors place in Visual Builder. Styling lives in code.</p><div class="row wrap g1 mt1"><a class="btn btn-cms" data-cms="startPage">Open the start page ↗</a></div></div>
-    <div class="card pad-sm stack-v g1 fragment fade-up"><h3>Rules as content</h3><p class="t">Routing rules that business users manage as content fields.</p><div class="row wrap g1 mt1"><button class="btn btn-ghost" data-goto="s7c" type="button">Show it →</button></div></div>
-    <div class="card pad-sm stack-v g1 fragment fade-up"><h3>Approved, auditable, reversible</h3><p class="t">Versions, compare and restore, Change Log, approvals and roles.</p><div class="row wrap g1 mt1"><button class="btn btn-ghost" data-goto="s7d" type="button">Show it →</button></div></div>
+    <div class="card pad fragment fade-up"><div class="eyebrow">Agent portal</div><p class="cap mt1">/agent/home-auto-bundle</p>
+      <p class="t-sm mt2">Same core text, plus: “For use by licensed independent agents. Not for distribution to customers or prospects.”</p>
+      <div class="row wrap g1 mt2"><a class="btn btn-live" data-live="/agent/home-auto-bundle">Open ↗</a></div></div>
+    <div class="card pad fragment fade-up"><div class="eyebrow">LibertyMutual.com</div><p class="cap mt1">/bundling</p>
+      <p class="t-sm mt2">Same core text, plus: “Questions about your coverage? Talk to a local agent or call us 24/7.”</p>
+      <div class="row wrap g1 mt2"><a class="btn btn-live" data-live="/bundling">Open ↗</a></div></div>
   </div>
+  <div class="card pad-sm tint mt3 fragment fade-up"><p class="t-sm">Both show <b>“Updated”</b> with the block’s publish date, so a change is visible on both at once.</p></div>
 
-  <aside class="notes"><p><b>Section 7 · Prove it in the real CMS (4 min).</b> <b>Say:</b> “That was the agent story as a prototype. Here is the same mechanism in Optimizely CMS today.”</p>
-<p>Four proofs: change once and update everywhere; governed components (editors only place approved, section-enabled blocks in Visual Builder, and styling lives in code); rules as content; approved, auditable, reversible.</p></aside>
+  <aside class="notes"><p><b>Section 6 · One disclosure, two channels (5 min).</b> Open /agent/home-auto-bundle and /bundling. Both show “Important information” with the same core text, “Updated” with the publish date, and their own channel note. It is one shared block placed twice, with the Channel display template chosen on each placement.</p></aside>
 </section>
-<section id="s7b" data-background-color="#FFFFFF">
-  <div class="row g2"><span class="badge b-cms">7 · CMS Editor</span><span class="eyebrow">Change once, update everywhere</span></div>
-  <h2 class="mt2">One shared block, six answer pages</h2>
+<section id="s6b" data-background-color="#FFFFFF">
+  <div class="row g2"><span class="badge b-cms">6 · CMS Editor</span><span class="eyebrow">Update once, restore if needed</span></div>
+  <h2 class="mt2">Edit once, both channels change</h2>
   <div class="cols3 mt3">
-    <div class="card pad stack-v fragment fade-up"><span class="num">1</span><h3 class="mt2">Edit</h3><p class="t mt1">Change “Last reviewed” on the shared “Helpful row” block.</p><a class="btn btn-cms push self-start" data-cms="sharedHelpful">The shared block ↗</a></div>
-    <div class="card pad stack-v fragment fade-up"><span class="num">2</span><h3 class="mt2">Publish</h3><p class="t mt1">One publish. The change goes out through Optimizely Graph.</p></div>
-    <div class="card pad stack-v fragment fade-up"><span class="num">3</span><h3 class="mt2">Refresh</h3><p class="t mt1">Check two pages that use the block.</p><div class="row wrap g1 push"><a class="btn btn-live" data-live="/rental-car">/rental-car ↗</a><a class="btn btn-live" data-live="/burst-pipe">/burst-pipe ↗</a></div></div>
+    <div class="card pad stack-v fragment fade-up"><span class="num">1</span><h3 class="mt2">Edit the shared block</h3><p class="t-sm mt1">Change the core text. The channel notes stay as they are.</p><a class="btn btn-cms push self-start" data-cms="disclosure">The disclosure block ↗</a></div>
+    <div class="card pad stack-v fragment fade-up"><span class="num">2</span><h3 class="mt2">Review and publish</h3><p class="t-sm mt1">It goes through the approval sequence, then one publish updates both pages.</p><div class="row wrap g1 push"><a class="btn btn-live" data-live="/agent/home-auto-bundle">Portal ↗</a><a class="btn btn-live" data-live="/bundling">LM.com ↗</a></div></div>
+    <div class="card pad stack-v fragment fade-up"><span class="num">3</span><h3 class="mt2">Restore</h3><p class="t-sm mt1">Compare versions and restore the previous one. It comes back as a new draft to publish.</p></div>
   </div>
 
-  <aside class="notes"><p>Open the shared block <b>Ask Liberty: Helpful row (shared)</b>, used on 6 answer pages. Change “Last reviewed October 2026”, publish, then refresh /rental-car and /burst-pipe. This ties to the content reuse metric. Undo the edit afterwards.</p></aside>
+  <aside class="notes"><p>In the CMS, open <b>Agent Disclosure: Bundle savings</b>. Make a small edit to the core text, take it through review and approval if configured, and publish. Reload both pages: both change and “Updated” moves.</p><p>Then open versions, compare, and restore the previous version. It returns as a new draft; publish it. With an approval sequence, republishing an older version needs “New Draft from Here” plus approval, so even rollback is governed.</p></aside>
 </section>
-<section id="s7c" data-background-color="#FFFFFF">
-  <div class="row g2"><span class="badge b-cms">7 · CMS Editor</span><span class="eyebrow">Rules as content</span></div>
-  <h2 class="mt2">The routing rule lives in content fields</h2>
-  <div class="card pad-sm mt3">
-    <table class="tbl dense" style="font-size:17.5px">
-      <thead><tr><th>Ask Liberty question block (in the CMS today)</th><th>Portal priority (how we would model it)</th></tr></thead>
-      <tbody>
-        <tr><td>Classification chips</td><td>Role, state and agency values, or “All”</td></tr>
-        <tr><td>Order in the list</td><td>The marketer’s priority order</td></tr>
-        <tr><td>Hide as a suggested chip</td><td>Do not emphasize this item</td></tr>
-        <tr><td>Fallback question</td><td>The default when no rule matches</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="row wrap g1 mt3"><a class="btn btn-cms" data-cms="qRental">Open an example question block ↗</a><a class="btn btn-cms" data-cms="startPage">Open the start page ↗</a></div>
-  <p class="cap mt2">The right-hand column is a design for discussion. It is not built today.</p>
+</section>
 
-  <aside class="notes"><p>Open a question block. Its classification chips, keywords, <b>Hide as a chip</b> and <b>Fallback</b> are business-managed routing rules. A portal priority would work the same way, with role, state and agency fields. Be clear this is how we would model it, not something built today.</p></aside>
-</section>
-<section id="s7d" data-background-color="#E4F0DA">
+<section id="s7" data-background-color="#E4F0DA">
   <div class="row g2"><span class="badge b-cms">7 · CMS Editor</span><span class="eyebrow">Approved, auditable, reversible</span></div>
   <h2 class="mt2">What governs a change in Optimizely CMS</h2>
   <div class="cols2 mt3">
-    <div class="card pad-sm"><h3>Versions</h3><p class="t mt1">Compare two versions side by side. Restore creates a new draft, so nothing is silently overwritten.</p></div>
-    <div class="card pad-sm"><h3>Change Log</h3><p class="t mt1">Settings › Tools › Change Log. Filter by user, category and action.</p></div>
-    <div class="card pad-sm"><h3>Approvals</h3><p class="t mt1">Sequences with any number of steps. Administrators can stop people approving their own changes.</p></div>
-    <div class="card pad-sm"><h3>Roles and access rights</h3><p class="t mt1">Opti ID roles map to Read, Create, Change, Delete, Publish and Administer.</p></div>
+    <div class="card pad-sm fragment fade-up"><h3>Roles and access rights</h3><p class="t mt1">Opti ID roles map to Read, Create, Change, Delete, Publish and Administer, per part of the content tree.</p></div>
+    <div class="card pad-sm fragment fade-up"><h3>Approvals</h3><p class="t mt1">Sequences with any number of steps. Administrators can stop people approving their own changes.</p></div>
+    <div class="card pad-sm fragment fade-up"><h3>Versions</h3><p class="t mt1">Compare two versions side by side. Restore creates a new draft, so nothing is silently overwritten.</p></div>
+    <div class="card pad-sm fragment fade-up"><h3>Change Log</h3><p class="t mt1">Settings › Tools › Change Log. Filter by user, category and action.</p></div>
   </div>
-  <p class="cap mt2">Approval sequences and roles are configured per instance.</p>
+  <div class="row wrap g1 mt3"><a class="btn btn-cms" data-cms="disclosure">Open the disclosure block ↗</a></div>
 
-  <aside class="notes"><p><b>Compare</b> two versions and <b>Restore</b>: restore creates a new draft, not a silent overwrite. Open <b>Settings › Tools › Change Log</b> and filter by user or action.</p>
-<p>If configured, show the <b>approval sequence</b> with “prevent self-approval” (four-eyes). With approvals on, republishing an older version needs <b>New Draft from Here</b> plus approval, so even rollback is governed. Opti ID roles map to CMS access rights: Read, Create, Change, Delete, Publish, Administer. If these are not yet set up in the instance, describe them rather than demonstrate.</p>
-<p>Docs: docs.optimizely.com/cms-saas (Approve content, Compare versions of content, View the change log, Set access rights).</p></aside>
-</section>
+  <aside class="notes"><p><b>Section 7 · Governance (3 min).</b> Show in the CMS: access rights by Opti ID role on the portal branch, the approval sequence on the disclosure (with self-approval prevented), versions with compare and restore, and Settings › Tools › Change Log filtered to the disclosure.</p>
+<p>If roles or approvals are not configured in this instance, describe them rather than demonstrate. Docs: docs.optimizely.com/cms-saas (Set access rights, Approve content, Compare versions of content, View the change log).</p></aside>
 </section>
 
 <section>
 <section id="s8" data-background-color="#FFFFFF">
   <div class="row g2"><span class="badge b-arch">8 · Architecture</span><span class="eyebrow">How it works</span></div>
-  <h2 class="mt2">Ping signs in. Graph filters. The CMS governs.</h2>
+  <h2 class="mt2">Identity in, rules applied, content delivered</h2>
   <div class="flow mt3">
-    <div class="node fragment fade-up" data-fragment-index="0"><b>Agent signs in</b>with Ping</div>
+    <div class="node fragment fade-up" data-fragment-index="0"><b>Agent signs in</b>role, state and agency (demo picker today)</div>
     <span class="arrow fragment fade-up" data-fragment-index="1">→</span>
-    <div class="node fragment fade-up" data-fragment-index="1"><b>IA Portal front end</b>Liberty keeps hosting it. Claims: role, state, agency.</div>
+    <div class="node fragment fade-up" data-fragment-index="1"><b>Portal front end</b>reads the agent’s page and the priorities</div>
     <span class="arrow fragment fade-up" data-fragment-index="2">→</span>
-    <div class="node fragment fade-up" data-fragment-index="2" style="background:var(--lf)"><b>Optimizely Graph query</b>Priority items where role, state and agency match (or “All”), in priority order, top 3.</div>
+    <div class="node fragment fade-up" data-fragment-index="2" style="background:var(--lf)"><b>Optimizely Graph</b>delivers published content and shared blocks</div>
     <span class="arrow fragment fade-up" data-fragment-index="3">→</span>
-    <div class="node fragment fade-up" data-fragment-index="3" style="background:var(--aqua)"><b>CMS SaaS</b>Governed blocks, rules and approvals.</div>
+    <div class="node fragment fade-up" data-fragment-index="3" style="background:var(--aqua)"><b>CMS SaaS</b>priorities, rules, governed blocks and approvals</div>
     </div>
   <div class="eyebrow mt4 fragment fade-up" data-fragment-index="4">One shared disclosure serves</div>
   <div class="cols3 mt2">
-    <div class="node fragment fade-up" data-fragment-index="4"><b>IA Portal</b>Liberty keeps hosting the front end</div>
-    <div class="node fragment fade-up" data-fragment-index="4"><b>LibertyMutual.com</b>Reads the same approved disclosure</div>
-    <div class="node fragment fade-up" data-fragment-index="4"><b>Search and other channels</b>Through the API (an integration pattern)</div>
+    <div class="node fragment fade-up" data-fragment-index="4"><b>Agent portal</b>Channel note for agents</div>
+    <div class="node fragment fade-up" data-fragment-index="4"><b>LibertyMutual.com</b>Channel note for customers</div>
+    <div class="node fragment fade-up" data-fragment-index="4"><b>Other channels</b>Through the same API (an integration pattern)</div>
   </div>
 
-  <aside class="notes"><p><b>Section 8 · Architecture Argument (3 min).</b> Keep it simple: Ping signs the agent in and passes role, state and agency. The portal queries Optimizely Graph for priority items where those match (or “All”), ordered by the marketer's priority, top three. Liberty keeps hosting the IA Portal front end.</p>
-<p>One shared disclosure can serve the IA Portal, LibertyMutual.com and, through the API, search and other channels (an integration pattern).</p></aside>
+  <aside class="notes"><p><b>Section 8 · Architecture Argument (3 min).</b> The agent's role, state and agency come in at sign-in (a demo picker today, Ping in production). The portal front end reads the agent's dashboard and the Agent Priorities list from Optimizely Graph, applies the rules with one function, and shows the first three that match. Shared blocks such as the disclosure are delivered the same way to every channel.</p></aside>
 </section>
 <section id="s8b" data-background-color="#FFFFFF">
   <div class="row g2"><span class="badge b-arch">8 · Architecture</span><span class="eyebrow">Design choices</span></div>
-  <h2 class="mt2">Rules travel as content</h2>
+  <h2 class="mt2">Rules travel with the content</h2>
   <div class="cols3 mt3">
-    <div class="card pad fragment fade-up"><h3>Fields and Graph filters</h3><p class="t mt1">We recommend this over built-in visitor groups, because the portal is a headless front end that Liberty hosts and identity comes from Ping.</p></div>
-    <div class="card pad fragment fade-up"><h3>A permitted layer</h3><p class="t mt1">Graph role-based access keeps agent-only content out of public LibertyMutual.com queries.</p></div>
-    <div class="card pad fragment fade-up"><h3>What you told us</h3><p class="t mt1">No change to the IA Portal front end. No user management on the platform. No CDP required.</p></div>
+    <div class="card pad fragment fade-up"><h3>Rules on the content</h3><p class="t mt1">Each priority carries its roles, states and agencies, so marketing sees and changes them in the CMS. One function applies them everywhere.</p></div>
+    <div class="card pad fragment fade-up"><h3>Identity from sign-on</h3><p class="t mt1">Today a demo picker chooses the agent. In production, Ping provides role, state and agency.</p></div>
+    <div class="card pad fragment fade-up"><h3>What you told us</h3><p class="t mt1">You keep hosting your front ends. No user management on the platform. No CDP required.</p></div>
   </div>
 
-  <aside class="notes"><p>Rules travel as content fields and Graph filters. We recommend this over built-in visitor groups because the portal is a headless front end Liberty hosts and identity comes from Ping. Graph role-based access (<b>cg-roles</b>) keeps agent-only content out of public LM.com queries. This respects the Q&amp;A: no change to the IA Portal front end, no user management, no CDP.</p></aside>
+  <aside class="notes"><p>Rules live on the content, so marketing sees and changes them in the CMS, and one function applies them everywhere so a card and a table never disagree. Optimizely audiences could later replace that function without changing the content model. This respects Liberty's Q&amp;A: no change to their hosting model, no user management, no CDP.</p></aside>
 </section>
 <section id="s8c" data-background-color="#FFFFFF">
   <div class="row g2"><span class="badge b-arch">8 · Architecture</span><span class="eyebrow">Today and next</span></div>
-  <h2 class="mt2">Shown today, and directions we could explore</h2>
+  <h2 class="mt2">Built today, and directions we could explore</h2>
   <div class="card pad-sm mt3">
     <table class="tbl" style="font-size:19px">
-      <thead><tr><th>Shown today</th><th>Directions to explore (illustrative)</th></tr></thead>
+      <thead><tr><th>Built in this demonstration</th><th>Directions to explore (illustrative)</th></tr></thead>
       <tbody>
-        <tr><td>A prototype of the agent experience, with sample data.</td><td>A live agent portal page reading the same disclosure from a second site in the same instance.</td></tr>
-        <tr><td>Shared blocks, governed components, rules as content, versions and Change Log in the CMS.</td><td>Testing priority framing with Feature Experimentation and CMS content variations.</td></tr>
-        <tr><td>One shared disclosure pattern.</td><td>Search and other channels reading the same approved content.</td></tr>
+        <tr><td>Sign-in, four agent dashboards and a product page, all CMS content.</td><td>Agent identity from Ping instead of the demo picker.</td></tr>
+        <tr><td>One priorities list with rules by role, state and agency, and a side-by-side preview.</td><td>Start and end dates on priorities, and Optimizely audiences as the rule engine.</td></tr>
+        <tr><td>One shared disclosure on the portal and on LibertyMutual.com.</td><td>Testing priority order and framing with Feature Experimentation.</td></tr>
       </tbody>
     </table>
   </div>
   <p class="cap mt2">The right-hand column is for discussion. It is not a commitment or part of the demonstration.</p>
 
-  <aside class="notes"><p>Label the right-hand column as illustrative. Feature Experimentation with CMS content variations could test priority framing. A live portal page on a second site in the same instance would be a true two-site proof (Liberty runs a single instance with multiple sites). Liberty asked for a two-year roadmap, so this is the bridge into that section.</p></aside>
+  <aside class="notes"><p>Label the right-hand column as illustrative. Liberty asked for a two-year roadmap, so this is the bridge into that section.</p></aside>
 </section>
 </section>
 
@@ -536,54 +487,38 @@ button.btn{ appearance:none; -webkit-appearance:none; }
     <h2 style="font-size:50px">Relevant. Run by the business. Governed once.</h2>
     <div class="cols3">
       <div class="card pad-sm fragment fade-up" style="background:var(--lf);color:var(--fir)"><div class="eyebrow">Time to publish</div><p class="t-sm mt1">A priority change, from edit to live, with no release (section 3).</p></div>
-      <div class="card pad-sm fragment fade-up" style="background:var(--aqua);color:var(--fir)"><div class="eyebrow">Changes without engineering</div><p class="t-sm mt1">Priorities, components and disclosures (sections 3 to 5).</p></div>
-      <div class="card pad-sm fragment fade-up" style="background:var(--n3);color:var(--fir)"><div class="eyebrow">Content reuse</div><p class="t-sm mt1">One disclosure on two sites, and shared blocks in the CMS (sections 5 and 7).</p></div>
+      <div class="card pad-sm fragment fade-up" style="background:var(--aqua);color:var(--fir)"><div class="eyebrow">Changes without engineering</div><p class="t-sm mt1">Priorities, card settings and disclosures, all in the CMS (sections 3, 5 and 6).</p></div>
+      <div class="card pad-sm fragment fade-up" style="background:var(--n3);color:var(--fir)"><div class="eyebrow">Content reuse</div><p class="t-sm mt1">One priorities list for every agent, one disclosure for two channels (sections 3 and 6).</p></div>
     </div>
     <div class="row wrap g2">
-      <a class="btn btn-live btn-lg" data-live="/use-case-2-agent-portal.html">Open the portal prototype ↗</a>
+      <a class="btn btn-live btn-lg" data-live="/agent">Open the agent portal ↗</a>
       <button class="btn btn-ghost btn-lg" data-goto="launch" type="button">Questions: jump to anything →</button>
     </div>
   </div>
 
-  <aside class="notes"><p><b>Close (1 min).</b> Relevant, run by the business, governed once. Tie each to Liberty's metrics: time to publish (section 3), % of changes without engineering (sections 3 to 5), content reuse rate (sections 5 and 7). Then move to questions; the launchpad is one click away.</p></aside>
-</section>
-
-<section id="cast" data-background-color="#E4F0DA">
-  <div class="eyebrow">Reference</div>
-  <h2 class="mt1">Who you met</h2>
-  <div class="cols3 mt3">
-    <div class="card pad-sm"><div class="eyebrow">Agent experience</div>
-      <ul class="t-sm stack-v g1 mt2"><li><b>Dana Whitfield</b> · Producer</li><li><b>Tyler Brooks</b> · Producer</li><li><b>Marcus Chen</b> · Principal</li><li><b>Elena Ruiz</b> · Service rep</li></ul></div>
-    <div class="card pad-sm"><div class="eyebrow">Liberty business</div>
-      <ul class="t-sm stack-v g1 mt2"><li><b>Priya Raman</b> · Marketing Manager</li><li><b>Devon Park</b> · Design System Owner</li></ul></div>
-    <div class="card pad-sm"><div class="eyebrow">Shared content</div>
-      <ul class="t-sm stack-v g1 mt2"><li><b>Jordan Blake</b> · Content Administrator</li><li><b>Maria Alvarez</b> · Compliance Approver</li><li><b>Sam Patel</b> · Publisher</li></ul></div>
-  </div>
-  <p class="cap mt3">Names, dates and disclosure wording in the prototype are placeholders.</p>
-
-  <aside class="notes"><p>Reference for questions. The prototype's names, dates and disclosure wording are placeholders, not approved language.</p></aside>
+  <aside class="notes"><p><b>Close (1 min).</b> Relevant, run by the business, governed once. Tie each to Liberty's metrics, then move to questions; the launchpad is one click away.</p></aside>
 </section>
 
 <section id="launch" data-background-color="#FFFFFF">
   <div class="row g2"><span class="badge b-live">Questions</span><span class="eyebrow">Jump to anything</span></div>
-  <h2 class="mt2">One click to any view</h2>
+  <h2 class="mt2">One click to any page</h2>
   <div class="cols2 mt3">
-    <div class="card pad-sm"><div class="eyebrow">Prototype and live site</div>
+    <div class="card pad-sm"><div class="eyebrow">Live App</div>
       <div class="stack-v g1 mt2" style="align-items:flex-start">
-        <a class="btn btn-live" data-live="/use-case-2-agent-portal.html">Agent portal prototype ↗</a>
-        <a class="btn btn-live" data-live="/">Ask Liberty home ↗</a>
-        <div class="row wrap g1"><a class="btn btn-live" data-live="/rental-car">/rental-car ↗</a><a class="btn btn-live" data-live="/burst-pipe">/burst-pipe ↗</a><a class="btn btn-live" data-live="/bundling">/bundling ↗</a></div>
+        <div class="row wrap g1"><a class="btn btn-live" data-live="/agent">Sign in ↗</a><a class="btn btn-live" data-live="/agent/priorities">Agent Priorities ↗</a></div>
+        <div class="row wrap g1"><a class="btn btn-live" data-live="/agent/dana">Dana ↗</a><a class="btn btn-live" data-live="/agent/tyler">Tyler ↗</a><a class="btn btn-live" data-live="/agent/marcus">Marcus ↗</a><a class="btn btn-live" data-live="/agent/elena">Elena ↗</a></div>
+        <div class="row wrap g1"><a class="btn btn-live" data-live="/agent/home-auto-bundle">Home + Auto bundle ↗</a><a class="btn btn-live" data-live="/bundling">LM.com /bundling ↗</a></div>
       </div></div>
     <div class="card pad-sm"><div class="eyebrow">CMS Editor</div>
       <div class="stack-v g1 mt2" style="align-items:flex-start">
-        <a class="btn btn-cms" data-cms="startPage">Ask Liberty start page ↗</a>
-        <a class="btn btn-cms" data-cms="sharedHelpful">Shared Helpful row ↗</a>
-        <a class="btn btn-cms" data-cms="qRental">Rental car question block ↗</a>
+        <a class="btn btn-cms" data-cms="portal">Independent Agent Portal ↗</a>
+        <a class="btn btn-cms" data-cms="priorities">Agent Priorities ↗</a>
+        <a class="btn btn-cms" data-cms="disclosure">Agent Disclosure: Bundle savings ↗</a>
       </div></div>
   </div>
-  <div class="row wrap g1 mt3"><button class="btn btn-ghost" data-goto="s2b" type="button">Four agents</button><button class="btn btn-ghost" data-goto="asked" type="button">Your checklist</button><button class="btn btn-ghost" data-goto="s8" type="button">Architecture</button><button class="btn btn-ghost" data-goto="cast" type="button">Who you met</button></div>
+  <div class="row wrap g1 mt3"><button class="btn btn-ghost" data-goto="s2b" type="button">Four agents</button><button class="btn btn-ghost" data-goto="asked" type="button">Your checklist</button><button class="btn btn-ghost" data-goto="s8" type="button">Architecture</button><button class="btn btn-ghost" data-goto="s7" type="button">Governance</button></div>
 
-  <aside class="notes"><p>Use during questions to jump to any view. The four-agent table, the checklist and the architecture slides are one click away.</p></aside>
+  <aside class="notes"><p>Use during questions to jump to any page. The four-agent table, the checklist, governance and architecture are one click away.</p></aside>
 </section>
 </div></div>
 
@@ -598,9 +533,9 @@ button.btn{ appearance:none; -webkit-appearance:none; }
      .../ui/cms#context=epi.cms.contentdata:///451  ->  id 451.
      While id is null the button opens the CMS Editor and the tooltip says where to find the item. */
   var CMS = {
-    startPage:     { id: 451,  name: 'Ask Liberty start page',        where: 'the Liberty Mutual start page' },
-    sharedHelpful: { id: null, name: 'Helpful row (shared) block',    where: 'shared assets (For All Applications): Ask Liberty: Helpful row (shared)' },
-    qRental:       { id: null, name: 'Rental car question block',     where: 'Ask Liberty Questions folder: Does my car insurance cover a rental car?' }
+    portal:     { id: null, name: 'Independent Agent Portal',        where: 'Liberty Mutual › Independent Agent Portal' },
+    priorities: { id: null, name: 'Agent Priorities',                where: 'Liberty Mutual › Independent Agent Portal › Agent Priorities' },
+    disclosure: { id: null, name: 'Agent Disclosure: Bundle savings', where: 'Shared blocks, Liberty Mutual folder: Agent Disclosure: Bundle savings' }
   };
   function cmsUrl(name){
     var it = CMS[name];
@@ -636,6 +571,5 @@ button.btn{ appearance:none; -webkit-appearance:none; }
   }
 })();
 </script>
-<script src="/dev-quick-links.js" defer></script>
 </body>
 </html>
