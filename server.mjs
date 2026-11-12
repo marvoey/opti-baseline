@@ -18,6 +18,7 @@
 import http from 'node:http';
 import { readFile } from 'node:fs/promises';
 import { createHash, createHmac, timingSafeEqual } from 'node:crypto';
+import { pathToFileURL } from 'node:url';
 
 const PORT = Number(process.env.PORT || 4001);
 const SITE = process.env.SITE === 'lmcom' ? 'lmcom' : 'agenthub';
@@ -27,8 +28,15 @@ const DISCLOSURE_KEY = process.env.DISCLOSURE_KEY || '917dbb01b0df49f889ddd4d725
 const IMAGE_NAME = process.env.IMAGE_NAME || 'agent-texas-clients.jpg';
 const CLIENT_ID = process.env.LM_OAUTH_CLIENT_ID || 'lm-demo-portal';
 const CLIENT_SECRET = process.env.LM_OAUTH_CLIENT_SECRET || '';
-const LM_API = `http://127.0.0.1:${PORT}/mock-lm`; // the app calls its own mock API (loopback only)
+// The app calls its own mock LM API in-process (see mockLm below), so it works on Vercel, where
+// there is no listening port to call back. LM_API is only the address shown in the call inspector.
+const ON_VERCEL = !!process.env.VERCEL;
+const LM_API = ON_VERCEL ? `https://${process.env.VERCEL_URL}/mock-lm` : `http://127.0.0.1:${PORT}/mock-lm`;
 const LM_TIMEOUT_MS = 1500;
+const withTimeout = (p, ms) => new Promise((resolve, reject) => {
+  const t = setTimeout(() => reject(Object.assign(new Error('timeout'), { name: 'TimeoutError' })), ms);
+  p.then(resolve, reject).finally(() => clearTimeout(t));
+});
 
 const SITES = {
   agenthub: { name: 'Agent Hub', tagline: 'Independent Agent Portal', noteField: 'NoteIaPortal' },
@@ -81,15 +89,15 @@ async function graph(log, label, query, variables = {}) {
 // ---------- LM API (OAuth 2.0 client credentials) ----------
 async function lmToken(log) {
   const t0 = performance.now();
-  const body = new URLSearchParams({ grant_type: 'client_credentials', client_id: CLIENT_ID, client_secret: CLIENT_SECRET });
+  const form = new URLSearchParams({ grant_type: 'client_credentials', client_id: CLIENT_ID, client_secret: CLIENT_SECRET });
   const entry = {
     service: 'LM API', label: 'OAuth 2.0 token (client credentials)', method: 'POST', url: `${LM_API}/oauth/token`,
     auth: 'client_id + client_secret (server-side only)', cache: 'Not cached. Tokens are short-lived.', cacheable: false,
     request: `grant_type=client_credentials&client_id=${CLIENT_ID}&client_secret=••••••••`,
   };
   try {
-    const res = await fetch(entry.url, { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body, signal: AbortSignal.timeout(LM_TIMEOUT_MS) });
-    const json = await res.json();
+    const res = await withTimeout(mockLm({ method: 'POST', path: '/oauth/token', form }), LM_TIMEOUT_MS);
+    const json = res.body;
     Object.assign(entry, { status: res.status, ms: Math.round(performance.now() - t0), response: { ...json, access_token: json.access_token ? '••••••••' : undefined } });
     log.push(entry);
     if (!res.ok || !json.access_token) throw new Error(`token ${res.status}`);
@@ -108,8 +116,8 @@ async function lmRenewals(log, token, agentKey) {
     request: `GET /renewals?agent=${agentKey}`,
   };
   try {
-    const res = await fetch(entry.url, { headers: { Authorization: `Bearer ${token}` }, signal: AbortSignal.timeout(LM_TIMEOUT_MS) });
-    const json = await res.json();
+    const res = await withTimeout(mockLm({ method: 'GET', path: '/renewals', bearer: token, agent: agentKey }), LM_TIMEOUT_MS);
+    const json = res.body;
     Object.assign(entry, { status: res.status, ms: Math.round(performance.now() - t0), response: json });
     log.push(entry);
     if (!res.ok) throw new Error(String(res.status));
@@ -185,7 +193,7 @@ function layout({ title, body, log = [], error = '' }) {
 <header class="top"><div class="wrap top-in">
   <a class="brand" href="/"><span class="mark" aria-hidden="true"></span><span><strong>Liberty Mutual</strong> <span class="brand-sub">${h(s.name)}</span></span></a>
   <nav>${SITE === 'agenthub' ? '<a href="/agent/dana">Dashboard</a>' : ''}<a href="/disclosure">Disclosure</a><a href="/notes">Coverage notes</a></nav>
-  <span class="app-badge" title="This is a separate app reading the same Optimizely Graph content">Demo app · port ${PORT}</span>
+  <span class="app-badge" title="This is a separate app reading the same Optimizely Graph content">Demo app${ON_VERCEL ? '' : ` · port ${PORT}`}</span>
 </div></header>
 <main class="wrap">
 ${error ? `<div class="alert"><strong>Something needs attention.</strong> ${h(error)}</div>` : ''}
@@ -384,29 +392,44 @@ async function readBody(req) {
 }
 const json = (res, status, obj) => { res.writeHead(status, { 'Content-Type': 'application/json' }); res.end(JSON.stringify(obj)); };
 
+// The mock LM API as a plain function: the HTTP routes below and the app itself both use it.
+async function mockLm({ method, path, form, bearer, agent }) {
+  if (method === 'POST' && path === '/oauth/token') {
+    // Evaluate every check (no short-circuit) so timing does not reveal which one failed.
+    const idOk = safeEqual(form.get('client_id') ?? '', CLIENT_ID);
+    const secretOk = !!CLIENT_SECRET && safeEqual(form.get('client_secret') ?? '', CLIENT_SECRET);
+    const ok = form.get('grant_type') === 'client_credentials' && idOk && secretOk;
+    return ok ? { status: 200, ok, body: { access_token: issueToken(), token_type: 'Bearer', expires_in: 300 } } : { status: 401, ok, body: { error: 'invalid_client' } };
+  }
+  if (method === 'GET' && path === '/renewals') {
+    if (!verifyToken(bearer)) return { status: 401, ok: false, body: { error: 'unauthorized' } };
+    if (agent === 'tyler') await new Promise((r) => setTimeout(r, 3000)); // slow upstream: the card gives up at 1.5 s
+    return { status: 200, ok: true, body: { items: Object.hasOwn(RENEWALS, agent) ? RENEWALS[agent] : [] } };
+  }
+  return { status: 404, ok: false, body: { error: 'not found' } };
+}
+
 // ---------- server ----------
-const server = http.createServer(async (req, res) => {
+// Exported so a Vercel function can use it (api/index.mjs). Run directly, it also listens on a local port.
+export default async function handler(req, res) {
   // The pages are per agent and show call details: never cache, never sniff, no referrer.
   res.setHeader('Cache-Control', 'no-store');
   res.setHeader('X-Content-Type-Options', 'nosniff');
   res.setHeader('Referrer-Policy', 'no-referrer');
+  // Only fonts from Google Fonts and https images (CMS assets) are allowed; no scripts at all.
+  res.setHeader('Content-Security-Policy', "default-src 'none'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https:; base-uri 'none'; form-action 'none'; frame-ancestors 'none'");
   try {
     // Inside the try: a malformed request line must give an error, not crash the server.
-    const url = new URL(req.url, `http://127.0.0.1:${PORT}`);
+    const url = new URL(req.url, 'http://localhost');
     const path = url.pathname.replace(/\/+$/, '') || '/';
+    const bearer = (req.headers.authorization || '').replace(/^Bearer\s+/i, '');
     if (req.method === 'POST' && path === '/mock-lm/oauth/token') {
-      const f = new URLSearchParams(await readBody(req));
-      // Evaluate every check (no short-circuit) so timing does not reveal which one failed.
-      const idOk = safeEqual(f.get('client_id') ?? '', CLIENT_ID);
-      const secretOk = !!CLIENT_SECRET && safeEqual(f.get('client_secret') ?? '', CLIENT_SECRET);
-      const ok = f.get('grant_type') === 'client_credentials' && idOk && secretOk;
-      return ok ? json(res, 200, { access_token: issueToken(), token_type: 'Bearer', expires_in: 300 }) : json(res, 401, { error: 'invalid_client' });
+      const r = await mockLm({ method: 'POST', path: '/oauth/token', form: new URLSearchParams(await readBody(req)) });
+      return json(res, r.status, r.body);
     }
     if (req.method === 'GET' && path === '/mock-lm/renewals') {
-      if (!verifyToken((req.headers.authorization || '').replace(/^Bearer\s+/i, ''))) return json(res, 401, { error: 'unauthorized' });
-      const agent = url.searchParams.get('agent') || '';
-      if (agent === 'tyler') await new Promise((r) => setTimeout(r, 3000)); // slow upstream: the card gives up at 1.5 s
-      return json(res, 200, { items: Object.hasOwn(RENEWALS, agent) ? RENEWALS[agent] : [] });
+      const r = await mockLm({ method: 'GET', path: '/renewals', bearer, agent: url.searchParams.get('agent') || '' });
+      return json(res, r.status, r.body);
     }
     if (req.method !== 'GET') return json(res, 405, { error: 'method not allowed' });
     if (path === '/styles.css') {
@@ -424,11 +447,15 @@ const server = http.createServer(async (req, res) => {
   } catch (e) {
     console.error('[demo app] request failed:', e.message);
     if (!res.headersSent) res.writeHead(500, { 'Content-Type': 'text/plain' });
-    res.end('Something went wrong. See the terminal running the app.');
+    res.end('Something went wrong. Check the app logs.');
   }
-});
+}
 
-if (!GRAPH_KEY) console.warn('GRAPH_SINGLE_KEY is not set. Graph calls will fail. Add it to .env.');
+if (!GRAPH_KEY) console.warn('GRAPH_SINGLE_KEY is not set. Graph calls will fail. Add it to .env (local) or the Vercel project settings.');
 if (!CLIENT_SECRET) console.warn('LM_OAUTH_CLIENT_SECRET is not set. The renewals card will show its error text.');
-// Loopback only: the app uses the Graph key and serves a mock API, so it must not be reachable from the network.
-server.listen(PORT, '127.0.0.1', () => console.log(`${SITES[SITE].name} demo app on http://localhost:${PORT}`));
+
+// Local run only (node server.mjs). On Vercel the file is imported, so nothing listens here.
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  // Loopback only: the app uses the Graph key and serves a mock API, so it must not be reachable from the network.
+  http.createServer(handler).listen(PORT, '127.0.0.1', () => console.log(`${SITES[SITE].name} demo app on http://localhost:${PORT}`));
+}

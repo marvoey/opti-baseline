@@ -2,7 +2,7 @@
   "name": "lm-graph-demo",
   "private": true,
   "type": "module",
-  "engines": { "node": ">=20.6" },
+  "engines": { "node": "22.x" },
   "scripts": {
     "agenthub": "SITE=agenthub PORT=4001 node --env-file=.env server.mjs",
     "lmcom": "SITE=lmcom PORT=4002 node --env-file=.env server.mjs"
