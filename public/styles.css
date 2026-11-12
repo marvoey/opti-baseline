@@ -1,0 +1,94 @@
+/* Liberty Mutual demo app. Brand colours: Liberty Yellow, Liberty Blue, Liberty Teal. */
+:root {
+  --yellow: #FFD000; --blue: #1A1446; --teal: #78E1E1; --dteal: #06748C;
+  --atmo: #F5F5F5; --gray: #343741; --muted: #707070; --line: #E6E6E6;
+  --head-bg: #fff; --head-fg: var(--blue); --accent: var(--yellow);
+}
+.site-agenthub { --head-bg: var(--blue); --head-fg: #fff; --accent: var(--teal); }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: Roboto, Arial, sans-serif; color: var(--gray); background: #fff; line-height: 1.5; }
+a { color: var(--dteal); }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+.muted { color: var(--muted); }
+.small { font-size: 13px; }
+
+/* header */
+.top { background: var(--head-bg); color: var(--head-fg); border-bottom: 4px solid var(--accent); }
+.site-lmcom .top { border-bottom-color: var(--yellow); }
+.top-in { display: flex; align-items: center; gap: 24px; min-height: 64px; flex-wrap: wrap; }
+.brand { display: flex; align-items: center; gap: 10px; color: inherit; text-decoration: none; }
+.mark { width: 28px; height: 28px; border-radius: 50%; background: var(--yellow); box-shadow: inset 0 0 0 6px var(--blue); }
+.site-agenthub .mark { box-shadow: inset 0 0 0 6px #fff; }
+.brand-sub { font-weight: 300; }
+.top nav { display: flex; gap: 18px; margin-left: auto; }
+.top nav a { color: inherit; text-decoration: none; font-weight: 500; font-size: 15px; }
+.top nav a:hover { text-decoration: underline; }
+.app-badge { font-size: 12px; padding: 3px 10px; border-radius: 999px; background: var(--atmo); color: var(--blue); }
+
+/* common */
+main.wrap { padding: 32px 24px 48px; }
+h1 { color: var(--blue); font-weight: 300; font-size: 34px; line-height: 1.2; margin: 8px 0; }
+h1 strong { font-weight: 700; }
+h2 { color: var(--blue); font-weight: 500; font-size: 20px; margin: 0 0 4px; }
+h3 { color: var(--blue); font-weight: 500; font-size: 17px; margin: 0; }
+.eyebrow { text-transform: uppercase; letter-spacing: .06em; font-size: 12px; font-weight: 700; color: var(--dteal); margin: 0; }
+.lead { font-size: 17px; max-width: 720px; }
+.hero { margin-bottom: 24px; }
+.alert { background: #FFEAA9; border-left: 4px solid var(--yellow); padding: 12px 16px; border-radius: 8px; margin-bottom: 20px; color: var(--blue); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; }
+.chips span { background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 2px 12px; font-size: 13px; font-weight: 500; color: var(--blue); }
+.go { color: var(--dteal); font-weight: 500; font-size: 14px; }
+
+/* home */
+.grid3 { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+.tile { display: flex; flex-direction: column; gap: 6px; padding: 20px; border: 1px solid var(--line); border-radius: 16px; text-decoration: none; color: var(--gray); }
+.tile:hover { border-color: var(--blue); }
+.tile strong { color: var(--blue); font-size: 18px; }
+
+/* dashboard */
+.greet { background: #F2FCFC; border-radius: 24px; padding: 28px 32px; margin-bottom: 24px; }
+.site-lmcom .greet { background: var(--atmo); }
+.demo-id { font-size: 13px; color: var(--muted); margin: 8px 0 0; }
+.demo-id a[aria-current] { font-weight: 700; color: var(--blue); text-decoration: none; }
+.dash { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
+@media (max-width: 860px) { .dash { grid-template-columns: 1fr; } }
+.panel { border: 1px solid var(--line); border-radius: 16px; padding: 20px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 14px; margin-top: 14px; }
+.pcard { border: 1px solid var(--line); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 8px; }
+.pcard.first { border-top: 4px solid var(--yellow); }
+.pcard p { margin: 0; font-size: 14px; }
+.pcard .rule { font-size: 12px; color: var(--muted); }
+.renewals { list-style: none; padding: 0; margin: 12px 0 0; }
+.renewals li { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-top: 1px solid var(--line); font-size: 14px; color: var(--blue); }
+.feature { display: grid; grid-template-columns: 320px 1fr; gap: 24px; align-items: center; margin: 24px 0; }
+.feature img { width: 100%; border-radius: 16px; display: block; }
+@media (max-width: 760px) { .feature { grid-template-columns: 1fr; } }
+
+/* disclosure + notes */
+.disclosure, .note-card { background: var(--atmo); border-radius: 16px; padding: 22px 26px; margin-top: 20px; font-size: 14px; }
+.note-card { background: #fff; border: 1px solid var(--line); }
+.note-card .chips { margin: 10px 0; }
+.disc-head { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline; }
+.note { border-top: 1px solid var(--line); padding-top: 12px; margin-top: 12px; }
+.hero a[aria-current] { font-weight: 700; color: var(--blue); text-decoration: none; }
+
+/* "What this page called" */
+.inspector { background: var(--blue); color: #fff; padding: 28px 0 36px; margin-top: 24px; }
+.inspector h2 { color: #fff; }
+.inspector .sum { color: #C9F3F4; margin: 4px 0 16px; }
+.call { background: #29254F; border-radius: 12px; margin-bottom: 10px; }
+.call summary { display: grid; grid-template-columns: 28px 140px 1fr 80px 70px 90px; gap: 10px; align-items: center; padding: 12px 16px; cursor: pointer; font-size: 14px; }
+@media (max-width: 760px) { .call summary { grid-template-columns: 24px 1fr 70px; } .call .lbl, .call .cache { display: none; } }
+.call .n { width: 24px; height: 24px; border-radius: 50%; background: var(--yellow); color: var(--blue); font-weight: 700; display: grid; place-items: center; font-size: 12px; }
+.svc { font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: 999px; text-align: center; }
+.svc-graph { background: var(--teal); color: var(--blue); }
+.svc-lm { background: #fff; color: var(--blue); }
+.st.ok { color: #9BE3B0; } .st.bad { color: #FFB199; }
+.cache.yes { color: var(--teal); } .cache.no { color: #FFE280; }
+.call-body { padding: 0 16px 16px; font-size: 13px; }
+.call-body code { color: var(--teal); }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 860px) { .cols { grid-template-columns: 1fr; } }
+.cap { margin: 8px 0 4px; font-weight: 700; color: var(--teal); }
+.call pre { background: #0F0B33; color: #fff; padding: 12px; border-radius: 8px; overflow: auto; max-height: 420px; font: 12px/1.5 "Roboto Mono", ui-monospace, monospace; margin: 0; white-space: pre; }
+.foot { font-size: 12px; color: var(--muted); padding: 20px 24px 32px; }
