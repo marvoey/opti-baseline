@@ -81,4 +81,4 @@ matcher: ['/((?!api|_next/static|_next/image|preview|favicon.ico|.*\\..*).*)']
 
 Runs on everything **except** API routes, Next.js internals (`_next/static`,
 `_next/image`), the `preview` route, `favicon.ico`, and any path containing a dot
-(static assets like `/logo.svg`).
+(static assets like `/corel-wordmark.svg`).
