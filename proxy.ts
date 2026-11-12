@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { LOCALE_SEGMENTS } from '@/lib/locales';
 import { AGENT_HEADER, agentKeyFromPath, isAgentKey } from '@/lib/agent/personas';
+import { LM_MODE_HEADER, modeAllowed, parseMode } from '@/lib/mockLm';
 
 /**
  * Next.js 16 Proxy (the replacement for Middleware) — locale clean-URLs for the
@@ -41,6 +42,12 @@ function forwardedHeaders(request: NextRequest): Headers {
   const fromQuery = request.nextUrl.searchParams.get('agent');
   const agent = isAgentKey(fromQuery) ? fromQuery : agentKeyFromPath(request.nextUrl.pathname);
   if (agent) headers.set(AGENT_HEADER, agent);
+
+  // Rehearsal switch for the mock LM API (?mode=empty|error|slow), same rules:
+  // a client-sent header is dropped, only a known mode is passed on, and never on Production.
+  headers.delete(LM_MODE_HEADER);
+  const mode = parseMode(request.nextUrl.searchParams.get('mode'));
+  if (mode && modeAllowed()) headers.set(LM_MODE_HEADER, mode);
   return headers;
 }
 

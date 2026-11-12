@@ -14,10 +14,10 @@ import AgentBlockFrame from './AgentBlockFrame';
  * line each ("A | B | URL"), except table rows, which are small embedded items.
  */
 
-const Heading = ({ children }: { children: string }) =>
+export const Heading = ({ children }: { children: string }) =>
   children ? <h2 className="text-[26px] font-light text-navy md:text-[28px]">{children}</h2> : null;
 
-const AccentRule = () => <div className="mt-3 h-1 w-12 rounded bg-lmy" aria-hidden="true" />;
+export const AccentRule = () => <div className="mt-3 h-1 w-12 rounded bg-lmy" aria-hidden="true" />;
 
 /* ---------------------------------------------------------------- Table */
 

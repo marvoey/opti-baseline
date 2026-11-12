@@ -29,6 +29,7 @@ import AgentPortal, { AgentPortalContentType } from './agent/AgentPortal';
 import AgentProductExperience, { AgentProductExperienceContentType } from './agent/AgentProductExperience';
 import { agentBlockTypes, agentBlockRenderers } from './agent/AgentBlocks';
 import AgentDisclosure, { AgentDisclosureContentType, AgentDisclosureChannelTemplate } from './agent/AgentDisclosure';
+import AgentRenewalsCard, { AgentRenewalsCardContentType } from './agent/AgentRenewalsCard';
 
 /**
  * Single configuration + registration point for the Optimizely SDK.
@@ -82,6 +83,7 @@ export const registeredContentTypes = [
   AgentPortalContentType,
   AgentProductExperienceContentType,
   AgentDisclosureContentType,
+  AgentRenewalsCardContentType,
   ...agentBlockTypes,
 ];
 
@@ -106,6 +108,7 @@ initReactComponentRegistry({
     AgentPortal,
     AgentProductExperience,
     AgentDisclosure,
+    AgentRenewalsCard,
     ...agentBlockRenderers,
     ...libShellRenderers,
     ...libAnswerRenderers,
