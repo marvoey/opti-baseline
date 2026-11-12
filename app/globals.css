@@ -1,58 +1,44 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+/* Light-only, matching the CorelDRAW base-site recreation (app/demo/mock). */
 :root {
   --background: #ffffff;
-  --foreground: #212529;
+  --foreground: #111827; /* gray-900 */
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  /* corel.com uses a plain system sans stack (Bootstrap default). */
-  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
-    Arial, "Noto Sans", sans-serif;
+
+  /* Inter first, then the native UI stack (no webfont is loaded). */
+  --font-sans: Inter, "Segoe UI", system-ui, -apple-system, sans-serif;
   --font-display: var(--font-sans);
   --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas,
     "Liberation Mono", "Courier New", monospace;
 
   /*
    * ┌──────────────────────────────────────────────────────────────────────┐
-   * │  REBRAND HERE.  This is the whole colour theme for the site.          │
-   * │  The Tailwind `blue-*` scale is remapped, so chrome that uses         │
-   * │  `bg-blue-700`, `text-blue-800`, etc. reskins when you edit these     │
-   * │  ~11 hex values. blue-700 = primary, blue-800 = its hover/link shade. │
+   * │  REBRAND HERE.  The whole colour theme is these four tokens. Each     │
+   * │  becomes a Tailwind colour: bg-brand, hover:bg-brand-dark,            │
+   * │  text-brand-accent, bg-ink, border-brand, …                           │
+   * │  Everything else uses Tailwind's default gray / emerald / rose scales.│
    * └──────────────────────────────────────────────────────────────────────┘
-   *
-   * Corel brand blue ramp, anchored on corel.com's primary button colour
-   * #0067CB (hover #0052A3).
    */
-  --color-blue-950: #001a35; /* deep navy — dark section backgrounds */
-  --color-blue-900: #003466;
-  --color-blue-800: #0052a3; /* hover / link shade (AA on white) */
-  --color-blue-700: #0067cb; /* Corel primary blue — buttons */
-  --color-blue-600: #1a7ad6;
-  --color-blue-500: #3d8fe0;
-  --color-blue-400: #6aaaea;
-  --color-blue-300: #99c4f1;
-  --color-blue-200: #c2dcf7;
-  --color-blue-100: #dceafa;
-  --color-blue-50:  #eef5fd;
-
-  /* Named Corel brand tokens for direct use in custom components. */
-  --color-corel-blue:    #0067cb;
-  --color-corel-blue-dk: #0052a3;
-  --color-corel-purple:  #4911d7; /* logo icon */
-  --color-corel-magenta: #da00b6; /* accent */
-  --color-corel-black:   #000000; /* footer */
-  --color-corel-grey:    #f4f4f4; /* light wash */
+  --color-brand: #00a94f; /* primary — buttons, links, active states */
+  --color-brand-dark: #008c41; /* hover / pressed */
+  --color-brand-accent: #3ddc84; /* highlights on dark backgrounds */
+  --color-ink: #0d0f12; /* footer / dark section background */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Page container: max-w-7xl, with the mock's responsive gutters. */
+@utility site-container {
+  @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+}
+
+/* Primary pill button. Add size classes at the call site (px-*, py-*, text-*). */
+@utility btn-brand {
+  @apply inline-flex items-center justify-center rounded-full border border-brand bg-brand font-semibold text-white transition hover:border-brand-dark hover:bg-brand-dark;
 }
 
 body {
@@ -65,5 +51,5 @@ h1,
 h2,
 h3 {
   font-family: var(--font-display);
-  font-weight: 400; /* Corel headings are light-weight */
+  font-weight: 700;
 }

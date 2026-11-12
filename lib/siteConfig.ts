@@ -1,97 +1,256 @@
 /**
- * Site config — the single place to rebrand the non-colour chrome for a new
- * demo. Colours live in app/globals.css (the `@theme` token block); everything
- * else — site name, logo, nav links, footer columns, legal copy — lives here.
+ * Site config — the single place to rebrand the non-colour chrome. Colours live
+ * in app/globals.css (the `@theme` block); everything else — site name, logos,
+ * promo bar, mega-menu navigation, footer columns, legal copy — lives here.
  *
- * To stand up a new demo: edit this file, drop a new logo in /public, and tweak
- * the hex values in app/globals.css. No component edits required.
+ * The header/footer structure mirrors the CorelDRAW base-site recreation in
+ * app/demo/mock/page.tsx. All hrefs are static, developer-authored values:
+ * absolute http(s) URLs open in a new tab (see ChromeLink), anything else is an
+ * in-app route.
  */
 
 export type NavLink = { label: string; href: string };
+export type NavGroup = { title: string; links: NavLink[] };
+export type MegaMenu = {
+  columns: { groups: NavGroup[] }[];
+  /** Optional highlighted tile + quick links shown to the right of the columns. */
+  feature?: { title: string; href: string; links: NavLink[] };
+};
+/** A header item is either a plain link or a mega-menu trigger. */
+export type NavItem = { label: string; href: string } | { label: string; menu: MegaMenu };
 export type FooterColumn = { heading: string; links: NavLink[] };
+export type SocialLink = { label: string; href: string; glyph: string };
+export type PromoBarConfig = { text: string; highlight: string; cta: string; href: string };
 
-export const siteConfig = {
+export type SiteConfig = {
+  name: string;
+  title: string;
+  description: string;
+  logoSrc: string;
+  footerLogoSrc: string;
+  logoAlt: string;
+  /** Dismissible announcement strip above the header. Omit to hide it. */
+  promoBar?: PromoBarConfig;
+  mainNav: NavItem[];
+  signInLabel: string;
+  signInLinks: NavLink[];
+  primaryCta: NavLink;
+  footerColumns: FooterColumn[];
+  social: SocialLink[];
+  footerLegal: string;
+};
+
+const CD = 'https://www.coreldraw.com';
+/** Absolute coreldraw.com URL for a site-relative path. */
+const cd = (path: string) => `${CD}${path}`;
+const link = (label: string, href: string): NavLink => ({ label, href });
+
+export const siteConfig: SiteConfig = {
   /** Used for the document <title> fallback and the logo alt text. */
-  name: 'Corel',
+  name: 'CorelDRAW',
   /** Default browser-tab title (per-page titles override via CMS MetaTitle). */
-  title: 'Corel | Professional graphics software for designers',
+  title: 'CorelDRAW Graphics Suite | Professional graphic design software',
   /** Default meta description. */
   description:
-    'Your all-in-one vector illustration, layout, and photo editing toolbox for endless creativity with no time wasted.',
+    'Powerful tools for vector illustration, layout, photo editing, and typography.',
 
-  /** Header logo — colour wordmark for light backgrounds (asset lives in /public). */
-  logoSrc: '/corel-wordmark.svg',
-  /** Footer logo — white-text variant for the black footer. */
-  footerLogoSrc: '/corel-wordmark-white.svg',
-  logoAlt: 'Corel',
+  /** Header logo — colour wordmark for the white header (assets live in /public). */
+  logoSrc: '/coreldraw-wordmark-color.png',
+  /** Footer logo — white wordmark for the dark footer. */
+  footerLogoSrc: '/coreldraw-wordmark-white.png',
+  logoAlt: 'CorelDRAW',
 
-  /** Top utility bar. */
-  topNavLinks: [
-    { label: 'About', href: 'https://www.corel.com/en/about/' },
-    { label: 'Contact', href: 'https://www.corel.com/en/about/contact/' },
-  ] satisfies NavLink[],
+  promoBar: {
+    text: 'Black Friday starts early -',
+    highlight: 'up to 30% off',
+    cta: 'See offers',
+    href: cd('/en/special-offers/'),
+  },
 
   /** Primary header navigation. */
-  mainNavLinks: [
-    { label: 'Products', href: 'https://www.corel.com/en/all-products/' },
-    { label: 'Free trials', href: 'https://www.corel.com/en/free-trials/' },
-    { label: 'Special offers', href: 'https://www.corel.com/en/special-offers/' },
-    { label: 'Partners', href: 'https://www.corel.com/en/partner-program/' },
-    { label: 'Support', href: 'https://www.corel.com/en/support/' },
-  ] satisfies NavLink[],
+  mainNav: [
+    {
+      label: 'Products',
+      menu: {
+        columns: [
+          {
+            groups: [
+              {
+                title: 'For individuals',
+                links: [
+                  link('CorelDRAW Graphics Suite', cd('/en/product/coreldraw/')),
+                  link('CorelDRAW Standard', cd('/en/product/coreldraw/standard/')),
+                  link('CorelDRAW Essentials', cd('/en/product/coreldraw/essentials/')),
+                  link('CorelDRAW Go', cd('/en/product/go/')),
+                ],
+              },
+              {
+                title: 'Other products',
+                links: [
+                  link('AI credit packs', cd('/en/product/credit-packs/')),
+                  link('CorelDRAW VectorPass', 'https://vectorpass.coreldraw.com/'),
+                ],
+              },
+            ],
+          },
+          {
+            groups: [
+              {
+                title: 'For business',
+                links: [
+                  link('CorelDRAW Graphics Suite – Business', cd('/en/licensing/business/')),
+                  link('CorelDRAW Technical Suite', cd('/en/product/technical-suite/')),
+                ],
+              },
+              {
+                title: 'For education',
+                links: [
+                  link('CorelDRAW Graphics Suite – Education', cd('/en/licensing/education/')),
+                  link('CorelDRAW Technical Suite – Education', cd('/en/product/technical-suite-education/')),
+                  link('View all products', cd('/en/all-products/')),
+                ],
+              },
+            ],
+          },
+        ],
+        feature: {
+          title: 'Try CorelDRAW for free',
+          href: cd('/en/free-trials/'),
+          links: [
+            link('Compare CorelDRAW', cd('/en/product/family/')),
+            link('Partner Program', 'https://www.corel.com/en/partner-program/'),
+            link('Get a quote', cd('/en/licensing/talk-to-a-specialist/')),
+          ],
+        },
+      },
+    },
+    { label: 'Special offers', href: cd('/en/special-offers/') },
+    { label: 'Free trials', href: cd('/en/free-trials/') },
+    {
+      label: 'Resources',
+      menu: {
+        columns: [
+          {
+            groups: [
+              {
+                title: 'Resources',
+                links: [
+                  link('Learning center', cd('/en/learn/')),
+                  link('Events', cd('/en/events/')),
+                  link('Webinars and e-books', cd('/en/learn/webinars/')),
+                  link('Blog', cd('/en/blog/')),
+                  link('CorelDRAW Community', 'https://community.coreldraw.com/'),
+                  link('CorelDRAW Go Community', 'https://community.go.corel.com/'),
+                  link('Submit product feedback', 'https://coreldraw.ideas.aha.io/'),
+                ],
+              },
+            ],
+          },
+          {
+            groups: [
+              {
+                title: 'Guides',
+                links: [
+                  link('Guide to vector design', cd('/en/learn/guide-to-vector-design/')),
+                  link('Guide to AI design', cd('/en/learn/guide-to-ai-design/')),
+                  link('How-to guides', cd('/en/learn/how-to/')),
+                  link('Tutorials', cd('/en/learn/tutorials/')),
+                ],
+              },
+            ],
+          },
+          {
+            groups: [
+              {
+                title: 'Customer stories',
+                links: [
+                  link('Creating specialized sign-making tools', cd('/en/pages/customer-stories/yellotools/')),
+                  link('Designing custom vinyl graphics', cd('/en/pages/customer-stories/rage-designs/')),
+                  link('Illustrating for technical documentation', cd('/en/pages/customer-stories/hauni/')),
+                  link('Designing metal cut signs', cd('/en/pages/customer-stories/joe-diaz-barn-quilts/')),
+                  link('View all customer stories →', cd('/en/pages/customer-stories/')),
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    },
+    { label: 'Support', href: cd('/en/support/') },
+  ],
+
+  /** Sign-in dropdown (desktop) and button (mobile). */
+  signInLabel: 'Sign in',
+  signInLinks: [
+    link('My account', 'https://myaccount.corel.com'),
+    link('CorelDRAW Web', 'https://web.coreldraw.com/'),
+    link('CorelDRAW Go', 'https://go.coreldraw.com/'),
+  ],
   /** Header call-to-action button. */
-  primaryCta: {
-    label: 'Try free',
-    href: 'https://www.corel.com/en/free-trials/',
-  } satisfies NavLink,
-  /** Account / login button. */
-  accountLabel: 'Sign in',
-  accountHref: 'https://myaccount.corel.com?sso-brandId=corel&sso-locale=en_US',
+  primaryCta: link('Launch CorelDRAW Web', 'https://web.coreldraw.com/'),
 
   /** Footer. */
-  footerTagline:
-    'Professional graphics software for designers — vector illustration, layout, and photo editing for endless creativity.',
   footerColumns: [
     {
       heading: 'Products',
       links: [
-        { label: 'All products', href: 'https://www.corel.com/en/all-products/' },
-        { label: 'Special offers', href: 'https://www.corel.com/en/special-offers/' },
-        { label: 'Free trials', href: 'https://www.corel.com/en/free-trials/' },
+        link('CorelDRAW Graphics Suite', cd('/en/product/coreldraw/')),
+        link('CorelDRAW Standard', cd('/en/product/coreldraw/standard/')),
+        link('CorelDRAW Essentials', cd('/en/product/coreldraw/essentials/')),
+        link('CorelDRAW Go', cd('/en/product/go/')),
+        link('CorelDRAW Technical Suite', cd('/en/product/technical-suite/')),
+        link('AI credit packs', cd('/en/product/credit-packs/')),
+        link('CorelDRAW VectorPass', 'https://vectorpass.coreldraw.com/'),
+        link('Special offers', cd('/en/special-offers/')),
+        link('All products', cd('/en/all-products/')),
       ],
     },
     {
       heading: 'Quick links',
       links: [
-        { label: 'Support', href: 'https://www.corel.com/en/support/' },
-        { label: 'Partners', href: 'https://www.corel.com/en/partner-program/' },
-        { label: 'Find a partner', href: 'https://www.corel.com/en/partner-locator/' },
-        { label: 'My account', href: 'https://myaccount.corel.com?sso-brandId=corel&sso-locale=en_US' },
-        { label: 'About', href: 'https://www.corel.com/en/about/' },
-        { label: 'Contact', href: 'https://www.corel.com/en/about/contact/' },
-        { label: 'News', href: 'https://www.corel.com/en/newsroom/' },
-        { label: 'Careers', href: 'https://www.corel.com/en/careers/' },
+        link('Business', cd('/en/licensing/business/')),
+        link('Free trials', cd('/en/free-trials/')),
+        link('Blog', cd('/en/blog/')),
+        link('Learning', cd('/en/learn/')),
+        link('Guide to vector design', cd('/en/learn/guide-to-vector-design/')),
+        link('Beta programs', 'https://www.corel.com/beta/'),
+        link('News', 'https://www.corel.com/en/newsroom/'),
+        link('Sitemap', cd('/en/sitemap/')),
+      ],
+    },
+    {
+      heading: 'Support',
+      links: [
+        link('Register your product', 'https://account.corel.com/accounts/user/registerProduct'),
+        link('Patches & updates', cd('/en/support/updates/')),
+        link('Returns & refunds', 'https://www.corel.com/en/support/orders/'),
+        link('Knowledgebase', 'https://support.corel.com/hc/en-us/sections/360003017033-CorelDRAW'),
+        link('Uninstall instructions', 'https://support.corel.com/hc/en-us/articles/215822078'),
+        link('Contact', 'https://www.corel.com/contact/'),
+        link('CorelDRAW Community', 'https://community.coreldraw.com/'),
+        link('Leadership', 'https://www.corel.com/leadership/'),
+        link('Careers', 'https://www.corel.com/careers/'),
       ],
     },
     {
       heading: 'Legal',
       links: [
-        { label: 'Terms of use', href: 'https://www.corel.com/en/terms-of-use/' },
-        { label: 'Privacy', href: 'https://www.corel.com/en/privacy/' },
-        { label: 'Cookies', href: 'https://www.corel.com/en/cookies/' },
-        { label: 'EULA', href: 'https://www.corel.com/en/eula/' },
-        { label: 'Legal', href: 'https://www.corel.com/en/legal-information/' },
-        { label: 'Imprint', href: 'https://www.corel.com/en/imprint/' },
+        link('Terms of use', 'https://www.corel.com/terms/'),
+        link('Privacy', 'https://www.corel.com/privacy/'),
+        link('Cookies', 'https://www.corel.com/cookies/'),
+        link('EULA', 'https://www.corel.com/eula/'),
+        link('Legal', 'https://www.corel.com/legal/'),
+        link('Do not sell/share my information', 'https://www.corel.com/privacy/form/'),
+        link('Imprint', 'https://www.corel.com/en/imprint/'),
       ],
     },
-  ] satisfies FooterColumn[],
-  footerLegal: 'Copyright © Corel Corporation. All rights reserved.',
-  footerLegalLinks: [
-    { label: 'Privacy', href: 'https://www.corel.com/en/privacy/' },
-    { label: 'Terms of use', href: 'https://www.corel.com/en/terms-of-use/' },
-    { label: 'Do not sell/share my information', href: 'https://www.corel.com/en/privacy/form/' },
-    { label: 'Manage my cookies', href: 'https://www.corel.com/en/cookies/' },
-  ] satisfies NavLink[],
-} as const;
-
-export type SiteConfig = typeof siteConfig;
+  ],
+  social: [
+    { label: 'Facebook', href: 'https://www.facebook.com/coreldrawgraphicssuite', glyph: 'f' },
+    { label: 'X', href: 'https://x.com/coreldraw', glyph: '𝕏' },
+    { label: 'YouTube', href: 'https://www.youtube.com/user/CorelDRAWchannel', glyph: '▶' },
+    { label: 'Instagram', href: 'https://www.instagram.com/coreldrawgraphicssuite/', glyph: '◎' },
+    { label: 'Community', href: 'https://community.coreldraw.com/', glyph: '✦' },
+  ],
+  footerLegal: 'Copyright © 2026 Corel Corporation. All rights reserved.',
+};

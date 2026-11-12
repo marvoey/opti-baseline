@@ -12,7 +12,7 @@ import { LOCALES, localizePath, stripLocale, findLocale } from '@/lib/locales';
  * other locale, keeping the user on their current path. Renders nothing when
  * only one locale is enabled.
  *
- * Opens on click and stays open until you pick a locale, click outside, or press
+ * Lives in the footer language bar and opens upward. Opens on click and stays open until you pick a locale, click outside, or press
  * Escape — deliberately NOT hover-based, which closed too eagerly on small mouse
  * movements / when crossing the gap to the menu.
  */
@@ -50,17 +50,17 @@ export default function LanguageSwitcher() {
         aria-haspopup="listbox"
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
-        className="flex items-center gap-1 text-neutral-600 hover:text-blue-700"
+        className="flex items-center gap-2 text-sm text-gray-300 hover:text-white"
       >
-        <Globe size={14} />
+        <Globe size={16} />
         <span>{current.displayName}</span>
-        <ChevronDown size={14} className={open ? 'rotate-180 transition-transform' : 'transition-transform'} />
+        <ChevronDown size={16} className={open ? 'rotate-180 transition-transform' : 'transition-transform'} />
       </button>
 
       {open ? (
         <ul
           role="listbox"
-          className="absolute right-0 z-[60] mt-1 min-w-[10rem] overflow-hidden rounded-lg border border-slate-200 bg-white py-1 shadow-lg"
+          className="absolute bottom-full left-0 z-[60] mb-2 min-w-[12rem] rounded-xl bg-white p-3 text-sm text-gray-800 shadow-xl"
         >
           {LOCALES.map((locale) => {
             const active = locale.key === current.key;
@@ -69,9 +69,7 @@ export default function LanguageSwitcher() {
                 <Link
                   href={localizePath(cleanPath, locale.key)}
                   onClick={() => setOpen(false)}
-                  className={`block px-4 py-2 text-sm transition-colors hover:bg-slate-50 ${
-                    active ? 'font-bold text-blue-800' : 'text-slate-600'
-                  }`}
+                  className={`block py-1 hover:text-brand ${active ? 'font-bold text-brand' : ''}`}
                 >
                   {locale.displayName}
                 </Link>
