@@ -1,7 +1,10 @@
 /**
  * Site config — the single place to rebrand the non-colour chrome. Colours live
  * in app/globals.css (the `@theme` block); everything else — site name, logos,
- * promo bar, mega-menu navigation, footer columns, legal copy — lives here.
+ * promo bar, sign-in links, footer columns, legal copy — lives here.
+ *
+ * The MAIN NAV is not configured here: it is built from the CMS (the published child
+ * pages of the home page) — see lib/cms/navigation.ts.
  *
  * The header/footer structure mirrors the CorelDRAW base-site recreation in
  * app/demo/mock/page.tsx. All hrefs are static, developer-authored values:
@@ -10,14 +13,6 @@
  */
 
 export type NavLink = { label: string; href: string };
-export type NavGroup = { title: string; links: NavLink[] };
-export type MegaMenu = {
-  columns: { groups: NavGroup[] }[];
-  /** Optional highlighted tile + quick links shown to the right of the columns. */
-  feature?: { title: string; href: string; links: NavLink[] };
-};
-/** A header item is either a plain link or a mega-menu trigger. */
-export type NavItem = { label: string; href: string } | { label: string; menu: MegaMenu };
 export type FooterColumn = { heading: string; links: NavLink[] };
 export type SocialLink = { label: string; href: string; glyph: string };
 export type PromoBarConfig = { text: string; highlight: string; cta: string; href: string };
@@ -31,7 +26,6 @@ export type SiteConfig = {
   logoAlt: string;
   /** Dismissible announcement strip above the header. Omit to hide it. */
   promoBar?: PromoBarConfig;
-  mainNav: NavItem[];
   signInLabel: string;
   signInLinks: NavLink[];
   primaryCta: NavLink;
@@ -66,118 +60,6 @@ export const siteConfig: SiteConfig = {
     cta: 'See offers',
     href: cd('/en/special-offers/'),
   },
-
-  /** Primary header navigation. */
-  mainNav: [
-    {
-      label: 'Products',
-      menu: {
-        columns: [
-          {
-            groups: [
-              {
-                title: 'For individuals',
-                links: [
-                  link('CorelDRAW Graphics Suite', cd('/en/product/coreldraw/')),
-                  link('CorelDRAW Standard', cd('/en/product/coreldraw/standard/')),
-                  link('CorelDRAW Essentials', cd('/en/product/coreldraw/essentials/')),
-                  link('CorelDRAW Go', cd('/en/product/go/')),
-                ],
-              },
-              {
-                title: 'Other products',
-                links: [
-                  link('AI credit packs', cd('/en/product/credit-packs/')),
-                  link('CorelDRAW VectorPass', 'https://vectorpass.coreldraw.com/'),
-                ],
-              },
-            ],
-          },
-          {
-            groups: [
-              {
-                title: 'For business',
-                links: [
-                  link('CorelDRAW Graphics Suite – Business', cd('/en/licensing/business/')),
-                  link('CorelDRAW Technical Suite', cd('/en/product/technical-suite/')),
-                ],
-              },
-              {
-                title: 'For education',
-                links: [
-                  link('CorelDRAW Graphics Suite – Education', cd('/en/licensing/education/')),
-                  link('CorelDRAW Technical Suite – Education', cd('/en/product/technical-suite-education/')),
-                  link('View all products', cd('/en/all-products/')),
-                ],
-              },
-            ],
-          },
-        ],
-        feature: {
-          title: 'Try CorelDRAW for free',
-          href: cd('/en/free-trials/'),
-          links: [
-            link('Compare CorelDRAW', cd('/en/product/family/')),
-            link('Partner Program', 'https://www.corel.com/en/partner-program/'),
-            link('Get a quote', cd('/en/licensing/talk-to-a-specialist/')),
-          ],
-        },
-      },
-    },
-    { label: 'Special offers', href: cd('/en/special-offers/') },
-    { label: 'Free trials', href: cd('/en/free-trials/') },
-    {
-      label: 'Resources',
-      menu: {
-        columns: [
-          {
-            groups: [
-              {
-                title: 'Resources',
-                links: [
-                  link('Learning center', cd('/en/learn/')),
-                  link('Events', cd('/en/events/')),
-                  link('Webinars and e-books', cd('/en/learn/webinars/')),
-                  link('Blog', cd('/en/blog/')),
-                  link('CorelDRAW Community', 'https://community.coreldraw.com/'),
-                  link('CorelDRAW Go Community', 'https://community.go.corel.com/'),
-                  link('Submit product feedback', 'https://coreldraw.ideas.aha.io/'),
-                ],
-              },
-            ],
-          },
-          {
-            groups: [
-              {
-                title: 'Guides',
-                links: [
-                  link('Guide to vector design', cd('/en/learn/guide-to-vector-design/')),
-                  link('Guide to AI design', cd('/en/learn/guide-to-ai-design/')),
-                  link('How-to guides', cd('/en/learn/how-to/')),
-                  link('Tutorials', cd('/en/learn/tutorials/')),
-                ],
-              },
-            ],
-          },
-          {
-            groups: [
-              {
-                title: 'Customer stories',
-                links: [
-                  link('Creating specialized sign-making tools', cd('/en/pages/customer-stories/yellotools/')),
-                  link('Designing custom vinyl graphics', cd('/en/pages/customer-stories/rage-designs/')),
-                  link('Illustrating for technical documentation', cd('/en/pages/customer-stories/hauni/')),
-                  link('Designing metal cut signs', cd('/en/pages/customer-stories/joe-diaz-barn-quilts/')),
-                  link('View all customer stories →', cd('/en/pages/customer-stories/')),
-                ],
-              },
-            ],
-          },
-        ],
-      },
-    },
-    { label: 'Support', href: cd('/en/support/') },
-  ],
 
   /** Sign-in dropdown (desktop) and button (mobile). */
   signInLabel: 'Sign in',

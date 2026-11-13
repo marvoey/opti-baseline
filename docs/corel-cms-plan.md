@@ -99,6 +99,13 @@ Conclusion: new types are needed. Everything is prefixed so it is distinguishabl
 - **Support**: PageBanner (search) → IconLinkCards (overlap, 5 cols) →
   Announcements → ContactOptions
 
+## 3b. Main nav
+
+The header nav is **not** configured in code: it is the published child pages of the Corel home
+page (`HOME_PAGE_CONTENT_ID`), loaded from Graph by `lib/cms/navigation.ts` and rendered by
+`MainNav`. Order = CMS tree order (`sortOrder`, ties by creation time) — drag pages in the CMS tree
+to reorder; the CMS API cannot. Non-default locales fall back to the default-locale page.
+
 ## 4. Out of scope / follow-ups
 
 - **Content seeding** — creating the six experiences and their blocks in the CMS.
