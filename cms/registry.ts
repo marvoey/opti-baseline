@@ -39,13 +39,31 @@ config({
 });
 
 /**
+ * The SDK's built-in BlankExperience declares no properties, so the SDK never asks Graph
+ * for them — `generateMetadata` in the catch-all then can't see `MetaTitle` and falls back
+ * to the page's display name (the Corel home page, a BlankExperience, showed "corel |
+ * CorelDRAW" in the tab). The CMS already defines these fields on BlankExperience, so
+ * declaring them here only makes the app request them.
+ *
+ * Runtime registry only: this file is `.ts`, so it is not scanned by `cms:push` and the
+ * CMS definition of BlankExperience is left untouched.
+ */
+const BlankExperienceWithSeo = {
+  ...BlankExperienceContentType,
+  properties: {
+    MetaTitle: { type: 'string' as const, displayName: 'Meta Title', isLocalized: true },
+    MetaDescription: { type: 'string' as const, displayName: 'Meta Description', isLocalized: true },
+  },
+};
+
+/**
  * The content types this app defines and pushes to the CMS. Exported so other
  * surfaces (e.g. the /admin inspector) can read the same source of truth that's
  * registered with the SDK below.
  */
 export const registeredContentTypes = [
   // SDK-native types the CMS can send (e.g. during preview).
-  BlankExperienceContentType,
+  BlankExperienceWithSeo,
   BlankSectionContentType,
   PageContentType,
   // Blocks
