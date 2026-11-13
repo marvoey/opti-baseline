@@ -12,6 +12,7 @@ import BlankExperience from './BlankExperience';
 import BlankSection from './BlankSection';
 import Page, { PageContentType } from './Page';
 import RichText, { RichTextContentType } from './RichText';
+import { corelContentTypes, corelResolver } from './corel';
 
 /**
  * Single configuration + registration point for the Optimizely SDK.
@@ -49,6 +50,9 @@ export const registeredContentTypes = [
   PageContentType,
   // Blocks
   RichTextContentType,
+  // Corel (cms/corel) — every key is prefixed `Corel` so it is distinguishable
+  // from other demos' types in the shared CMS.
+  ...corelContentTypes,
 ];
 
 initContentTypeRegistry(registeredContentTypes);
@@ -62,5 +66,7 @@ initReactComponentRegistry({
     Page,
     // Blocks (resolver key === content-type key)
     RichTextBlock: RichText,
+    // Corel pages + blocks
+    ...corelResolver,
   },
 });
