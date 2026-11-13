@@ -100,9 +100,26 @@ export const ASSET_BASE_FOLDER_ID = requireId('ASSET_BASE_FOLDER_ID');
 ```
 
 - Pass the id as the `container` of the create request to the Content Management API
-  (the parent content key — the same thing the MCP tools call `Container`). If unsure
-  of the exact request shape, pull the spec with `npm run schema:pull` and check it
-  rather than guessing.
+  (the parent content key — the same thing the MCP tools call `Container`).
+- **Reference implementation:** `scripts/seed-corel-pages.mjs` (client in
+  `scripts/corel-seed/cms.mjs`, content in `scripts/corel-seed/data.mjs`) — copy its
+  patterns instead of re-deriving the API. Verified REST details (`/v1`):
+  - `POST /content` body: `{ contentType, container, initialVersion: { displayName, locale, routeSegment?, properties, composition? } }`.
+    It answers **201 with an empty body**; the new key is in the `Location` header.
+    Read the version back **by key** (`GET /content/{key}/versions`) — container
+    listings can lag a moment behind a create, so don't rely on them straight away.
+  - **Every property value is wrapped**: `properties: { Title: { value: "…" } }`. Array
+    items and embedded components are `{ properties: { … } }`; rich text is
+    `{ value: { html: "<p>…</p>" } }`; links are `{ value: { url, text, title, target } }`
+    (relative urls like `/product/` are accepted); images are `{ value: "cms://content/<key>" }`.
+    (The MCP tools take a *flat* shape instead — don't mix the two.)
+  - Media: multipart `POST /content` (`content` JSON + `file`), content type `ImageMedia`
+    (accepts png/svg/…). Media is locale-neutral — don't filter its versions by locale.
+  - Publish: `POST /content/{key}/versions/{version}:publish`. A shared block goes into an
+    experience as a composition node
+    `{ id, nodeType: "component", component: { reference: "cms://content/<key>" } }`.
+  - Look up existing items by display name (list the container, then read versions) so a
+    re-run resumes instead of duplicating.
 - Don't log the ids alongside credentials, and never log `OPTIMIZELY_CMS_CLIENT_SECRET`
   or `OPTIMIZELY_GRAPH_SINGLE_KEY`.
 - Batch/seed scripts must check the ids **before** creating anything, so a bad
