@@ -20,6 +20,7 @@ import LibAskQuestionBlock from './liberty/LibAskQuestionBlock';
 import { libShellTypes, libShellRenderers } from './liberty/LibShell';
 import { libAnswerTypes, libAnswerRenderers } from './liberty/LibAnswer';
 import { libTaskTypes, libTaskRenderers } from './liberty/LibTask';
+import LibPulseRingsHero, { LibPulseRingsHeroContentType } from './liberty/LibPulseRingsHero';
 import LibSourcesBlock, { LibSourcesBlockContentType, LibSourceContentType } from './liberty/LibSourcesBlock';
 import AgentPriorityBlock, { AgentPriorityContentType } from './agent/AgentPriority';
 import AgentPriorities, { AgentPrioritiesContentType } from './agent/AgentPriorities';
@@ -70,6 +71,7 @@ export const registeredContentTypes = [
   // Liberty (Ask Liberty) blocks — all section-enabled, keys prefixed `Lib`
   LibSourceContentType,
   LibSourcesBlockContentType,
+  LibPulseRingsHeroContentType,
   LibAskQuestionContentType,
   AskLibertyExperienceContentType,
   ...libShellTypes,
@@ -99,6 +101,7 @@ initReactComponentRegistry({
     // Blocks (resolver key === content-type key)
     RichTextBlock: RichText,
     LibSourcesBlock,
+    LibPulseRingsHero,
     LibAskQuestion: LibAskQuestionBlock,
     AskLibertyExperience,
     AgentPriority: AgentPriorityBlock,
