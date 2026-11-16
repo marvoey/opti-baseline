@@ -3,6 +3,7 @@ import type { NextRequest } from 'next/server';
 import { LOCALE_SEGMENTS } from '@/lib/locales';
 import { AGENT_HEADER, agentKeyFromPath, isAgentKey } from '@/lib/agent/personas';
 import { LM_MODE_HEADER, modeAllowed, parseMode } from '@/lib/mockLm';
+import { adminGate } from '@/lib/adminAuth';
 
 /**
  * Next.js 16 Proxy (the replacement for Middleware) — locale clean-URLs for the
@@ -24,6 +25,9 @@ const DEFAULT_LOCALE = process.env.OPTIMIZELY_DEFAULT_LOCALE || 'en';
 // lib/locales.generated.ts (refreshed by `npm run gen:locales`). The default
 // locale serves clean URLs, so it has no segment here.
 const KNOWN_LOCALE_SEGMENTS = LOCALE_SEGMENTS;
+
+// Same test lib/devQuickLinks.ts uses to list the static pages.
+const STATIC_HTML = /\.html?$/i;
 
 function firstSegment(pathname: string): string {
   return pathname.split('/')[1] ?? '';
@@ -51,9 +55,17 @@ function forwardedHeaders(request: NextRequest): Headers {
   return headers;
 }
 
-export function proxy(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
   const seg = firstSegment(pathname);
+
+  // /admin and the static .html pages in public/ (the "Static pages" in the dev quick
+  // links) sit behind a password (ADMIN_PASSWORD, HTTP Basic auth). Neither belongs to
+  // [locale], so once past the gate they are served as is: no locale rewrite.
+  if (pathname === '/admin' || pathname.startsWith('/admin/') || STATIC_HTML.test(pathname)) {
+    return (await adminGate(request)) ?? NextResponse.next();
+  }
+
   const forwarded = { request: { headers: forwardedHeaders(request) } };
 
   // Default-locale prefix is visible → redirect to the clean path (canonical/SEO).
@@ -78,7 +90,12 @@ export function proxy(request: NextRequest) {
 export const config = {
   // Run on everything EXCEPT API, Next internals, the preview/admin/styleguide
   // routes, and any path containing a dot (static assets like /logo.svg). The
-  // preview, admin and styleguide routes live outside [locale] and must not be
-  // rewritten into a locale.
-  matcher: ['/((?!api|_next/static|_next/image|preview|admin|styleguide|applications|demo|favicon.ico|.*\\..*).*)'],
+  // preview and styleguide routes live outside [locale] and must not be rewritten
+  // into a locale. /admin is matched (so it can be password-checked) and then
+  // passed through untouched by proxy() above. The second entry matches the static
+  // .html pages in public/ (the first skips every path with a dot) for the same reason.
+  matcher: [
+    '/((?!api|_next/static|_next/image|preview|styleguide|applications|demo|favicon.ico|.*\\..*).*)',
+    '/(.+\\.[hH][tT][mM][lL]?)',
+  ],
 };
