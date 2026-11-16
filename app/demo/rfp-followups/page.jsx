@@ -246,7 +246,11 @@ const Chev = () => (
    App
    ===================================================================== */
 export default function App() {
-  const [settings, setSettings] = useState(() => ({ ...DEFAULT_SETTINGS, ...readJSON(STORE_SETTINGS, {}) }));
+  // Opens in the secure proxy. A mode saved earlier is honoured only when "Remember on this device" was ticked.
+  const [settings, setSettings] = useState(() => {
+    const stored = readJSON(STORE_SETTINGS, {});
+    return { ...DEFAULT_SETTINGS, ...stored, ...(stored.remember ? {} : { mode: DEFAULT_SETTINGS.mode }) };
+  });
   const [draft, setDraft] = useState(settings);
   const [data, setData] = useState(() => normalize(SAMPLE.main, SAMPLE.refs));
   const [source, setSource] = useState({ mode: 'sample', loadedAt: null });
@@ -379,7 +383,8 @@ export default function App() {
   );
 
   useEffect(() => {
-    if (settings.mode !== 'sample' && settings.remember) load(settings);
+    // Load automatically from the secure proxy; other modes only when remembered.
+    if (settings.mode === 'proxy' || (settings.mode !== 'sample' && settings.remember)) load(settings);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
