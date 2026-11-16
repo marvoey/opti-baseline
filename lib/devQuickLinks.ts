@@ -73,8 +73,17 @@ function collectStaticHtml(dir: string, segments: string[]): QuickLink[] {
   return links;
 }
 
-/** Every page the quick-links menu lists: app routes plus static .html files in public/. */
+/** True on a Vercel deployment (preview or production), where the menu is hidden. `vercel dev` runs locally, so it keeps it. */
+const onVercel = (): boolean => !!process.env.VERCEL && process.env.VERCEL_ENV !== 'development';
+
+/**
+ * Every page the quick-links menu lists: app routes plus static .html files in public/.
+ * Empty when deployed to Vercel, which hides the menu everywhere it is used: the React
+ * menu (app/layout.tsx) and the script on the static pages (via /api/dev-links) both
+ * render nothing for an empty list.
+ */
 export function getDevQuickLinks(): QuickLink[] {
+  if (onVercel()) return [];
   return [
     ...ROUTE_ROOTS.flatMap((root) =>
       collectLinks(path.join(process.cwd(), 'app', root), root, []),
