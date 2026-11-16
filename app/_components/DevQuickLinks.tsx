@@ -42,9 +42,11 @@ function collectLinks(dir: string, root: string, segments: string[]): QuickLink[
 }
 
 export default function DevQuickLinks() {
-  const links = ROUTE_ROOTS.flatMap((root) =>
-    collectLinks(path.join(process.cwd(), 'app', root), root, []),
-  );
-  if (links.length === 0) return null;
+  const links: QuickLink[] = [
+    { label: 'Home', href: '/' },
+    ...ROUTE_ROOTS.flatMap((root) =>
+      collectLinks(path.join(process.cwd(), 'app', root), root, []),
+    ),
+  ];
   return <DevQuickLinksMenu links={links} />;
 }
