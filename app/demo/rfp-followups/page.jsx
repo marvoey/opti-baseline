@@ -22,7 +22,7 @@ const FORMATS = {
 };
 const TAB_REFS = { 'OP-14 Data Flow': 'flow', 'OP-14 ERD': 'erd', 'OP-16 Sample Query': 'query' };
 const CONFIRM_SRC = '\\[CONFIRM[^\\]]*\\]';
-const TOKEN_SRC = '(OP-14 Data Flow|OP-14 ERD|OP-16 Sample Query)|(OP-\\d{2})|(' + CONFIRM_SRC + ')|(`[^`]+`)';
+const TOKEN_SRC = '(OP-14 Data Flow|OP-14 ERD|OP-16 Sample Query)|(OP-\\d{2})|(' + CONFIRM_SRC + ')|(`[^`]+`)|\\[([^\\]\\n]+)\\]\\(((?:https?:\\/\\/|\\/)[^\\s)]+)\\)';
 const countConfirms = (t) => (String(t || '').match(new RegExp(CONFIRM_SRC, 'g')) || []).length;
 const confirmTexts = (t) => String(t || '').match(new RegExp(CONFIRM_SRC, 'g')) || [];
 
@@ -512,7 +512,7 @@ export default function App() {
     let k = 0;
     while ((m = re.exec(s))) {
       if (m.index > last) out.push(s.slice(last, m.index));
-      const [tok, tabName, op, cf, code] = m;
+      const [tok, tabName, op, cf, code, mdText, mdUrl] = m;
       if (tabName) {
         out.push(
           <button type="button" key={`t${k++}`} className="xref" onClick={() => showTab(TAB_REFS[tabName])}>
@@ -542,6 +542,18 @@ export default function App() {
           <code key={`k${k++}`} className="ic">
             {code.slice(1, -1)}
           </code>
+        );
+      } else if (mdUrl) {
+        out.push(
+          <a
+            key={`l${k++}`}
+            className="text-[#06748C] font-medium underline underline-offset-2 hover:text-[#1A1446]"
+            href={mdUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {mdText}
+          </a>
         );
       }
       last = m.index + tok.length;
