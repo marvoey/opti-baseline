@@ -2,8 +2,8 @@
 @plugin "@tailwindcss/typography";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f8f8f5; /* warm white */
+  --foreground: #262626; /* ink */
 }
 
 @theme inline {
@@ -23,37 +23,41 @@
    * │  blue-800 = your primary; the rest are tints/shades between.          │
    * └──────────────────────────────────────────────────────────────────────┘
    *
-   * Optimizely brand green ramp.
-   * Anchors: Dark Fir #08251a (darkest), LFGreen #abff44 (signature accent).
+   * H&R Block brand green ramp.
+   * Anchors: Dark Green #003512 (darkest), Brand Green #005d1f (primary),
+   * Neon #00e95c (signature accent), Logo Green #14aa40.
+   * Anchors (green, dark green, sand, warm white, neon, lime) were sampled
+   * from a screenshot of hrblock.com; the in-between steps of the ramp are
+   * interpolated.
    */
-  --color-blue-950: #08251a; /* Dark Fir — footer / hero background */
-  --color-blue-900: #0d3a29; /* Mid Fir — header bg */
-  --color-blue-800: #197050; /* Light Fir — primary green, links */
-  --color-blue-700: #3ab533; /* Good-to-go */
-  --color-blue-600: #4dc844;
-  --color-blue-500: #62d84f;
-  --color-blue-400: #7ddd3d; /* Grass */
-  --color-blue-300: #91dbda; /* Light Blue — teal accent */
-  --color-blue-200: #abff44; /* LFGreen — signature bright green */
-  --color-blue-100: #d8e4cb; /* Neutral 4 */
-  --color-blue-50:  #e4f0da; /* Neutral 3 — light wash */
+  --color-blue-950: #003512; /* Dark Green — footer / hero background */
+  --color-blue-900: #00481a; /* header bg */
+  --color-blue-800: #005d1f; /* Brand Green — primary, links, buttons */
+  --color-blue-700: #0b7a2e;
+  --color-blue-600: #14aa40; /* Logo Green */
+  --color-blue-500: #2fc058;
+  --color-blue-400: #00e95c; /* Neon — signature bright accent */
+  --color-blue-300: #7bf0a3;
+  --color-blue-200: #bdeacb;
+  --color-blue-100: #e3f1e7; /* light green wash */
+  --color-blue-50:  #f1f8f3;
 
-  /* Named Optimizely brand tokens for direct use in custom components. */
-  --color-lfgreen:    #abff44;
-  --color-grass:      #7ddd3d;
-  --color-good-to-go: #3ab533;
-  --color-dark-fir:   #08251a;
-  --color-mid-fir:    #0d3a29;
-  --color-light-fir:  #197050;
-  --color-light-blue: #91dbda;
-  --color-neutral-2:  #eff6e9;
-  --color-neutral-3:  #e4f0da;
+  /* Named H&R Block brand tokens for direct use in custom components. */
+  --color-hrb-green:      #005d1f;
+  --color-hrb-dark-green: #003512;
+  --color-hrb-logo-green: #14aa40;
+  --color-hrb-neon:       #00e95c;
+  --color-hrb-lime:       #d2fa52; /* highlight / promo accent */
+  --color-hrb-sand:       #f6f4e9;
+  --color-hrb-warm-white: #f8f8f5;
+  --color-hrb-ink:        #262626;
+  --color-hrb-border:     #e3e1d6;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #003512;
+    --foreground: #f8f8f5;
   }
 }
 
