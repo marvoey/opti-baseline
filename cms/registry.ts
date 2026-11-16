@@ -31,6 +31,7 @@ import AgentProductExperience, { AgentProductExperienceContentType } from './age
 import { agentBlockTypes, agentBlockRenderers } from './agent/AgentBlocks';
 import AgentDisclosure, { AgentDisclosureContentType, AgentDisclosureChannelTemplate } from './agent/AgentDisclosure';
 import AgentRenewalsCard, { AgentRenewalsCardContentType } from './agent/AgentRenewalsCard';
+import { lmRfpTypes, lmRfpRenderers } from './rfp/LmRfp';
 
 /**
  * Single configuration + registration point for the Optimizely SDK.
@@ -87,6 +88,8 @@ export const registeredContentTypes = [
   AgentDisclosureContentType,
   AgentRenewalsCardContentType,
   ...agentBlockTypes,
+  // RFP follow-ups viewer content (app/demo/rfp-followups) — keys prefixed `LmRfp`
+  ...lmRfpTypes,
 ];
 
 initContentTypeRegistry(registeredContentTypes);
@@ -113,6 +116,7 @@ initReactComponentRegistry({
     AgentDisclosure,
     AgentRenewalsCard,
     ...agentBlockRenderers,
+    ...lmRfpRenderers,
     ...libShellRenderers,
     ...libAnswerRenderers,
     ...libTaskRenderers,
