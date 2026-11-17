@@ -1,9 +1,19 @@
-import React, { useState, useEffect } from 'react';
+'use client';
+
+import React, { useState, useEffect, useRef } from 'react';
+import { siteConfig } from '@/lib/siteConfig';
+import { SCENES, TIMELINE } from './_scenes';
+import { openChannel, PRESENTER_URL, PRESENTER_WINDOW } from './_sync';
 
 /* =====================================================================
    H&R Block · "Tuesday of Week 11" · clickable demo prototype
    Simulates every scene in the demo script (Section 11). All content,
    offices, audiences and results are SYNTHETIC.
+
+   This window is the one you screen-share, so it shows only what the audience
+   should see. Presenter notes, scene list, status tags, reset and the visitor's
+   typed answer live in the presenter window (_presenter.jsx), opened with S.
+   Scene script data: _scenes.js. Window link: _sync.js.
    ===================================================================== */
 
 const BRAND = 'H&R Block';
@@ -40,104 +50,11 @@ const OFFICES0 = [
 ];
 
 const ASSETS = [
-  { id: 'a1', name: 'TS27 late-season hero (wide)', tags: ['late season', 'hero', 'assisted'], img: 'hrb-image-client-and-tax-pro-shaking-hands-at-desk-906x484', rights: 'Perpetual (stock)', lang: 'EN' },
-  { id: 'a2', name: 'DIY hero: laptop at home', tags: ['diy', 'hero'], img: 'hrb-image-diy-client-on-laptop-in-living-room-906x484', rights: 'Through Dec 2027', lang: 'EN' },
-  { id: 'a3', name: 'Tax pro with client (talent)', tags: ['assisted', 'hero', 'talent'], img: 'hrb-image-sang-v-tax-pro-action-card-310x400', rights: 'Talent rights expire Apr 30, 2027', expiring: true, lang: 'EN' },
-  { id: 'a4', name: 'Late-season hero (Español)', tags: ['late season', 'hero', 'spanish'], img: 'hrb-image-client-and-tax-pro-shaking-hands-at-desk-906x484', rights: 'Perpetual (stock)', lang: 'ES', variantOf: 'a1' },
+  { id: 'a1', name: 'TS27 late-season hero (wide)', tags: ['late season', 'hero', 'assisted'], img: 'hrb-image-client-and-tax-pro-shaking-hands-at-desk-906x484', w: 906, h: 484, rights: 'Perpetual (stock)', lang: 'EN' },
+  { id: 'a2', name: 'DIY hero: laptop at home', tags: ['diy', 'hero'], img: 'hrb-image-diy-client-on-laptop-in-living-room-906x484', w: 906, h: 484, rights: 'Through Dec 2027', lang: 'EN' },
+  { id: 'a3', name: 'Tax pro with client (talent)', tags: ['assisted', 'hero', 'talent'], img: 'hrb-image-sang-v-tax-pro-action-card-310x400', w: 310, h: 400, rights: 'Talent rights expire Apr 30, 2027', expiring: true, lang: 'EN' },
+  { id: 'a4', name: 'Late-season hero (Español)', tags: ['late season', 'hero', 'spanish'], img: 'hrb-image-client-and-tax-pro-shaking-hands-at-desk-906x484', w: 906, h: 484, rights: 'Perpetual (stock)', lang: 'ES', variantOf: 'a1' },
 ];
-
-const TIMELINE = [
-  ['req', 'Tue 9:02', 'Request submitted'],
-  ['brief', 'Tue 9:06', 'Brief drafted by Mark'],
-  ['legal', 'Tue 9:15', 'Legal approved'],
-  ['assets', 'Tue 9:20', 'Assets chosen'],
-  ['phoenix', 'Tue 9:30', 'Phoenix page live'],
-  ['office', 'Tue 9:32', 'Connected-content pattern shown'],
-  ['perso', 'Tue 9:40', 'Personalized page live'],
-  ['test', 'Tue 9:45', 'Test launched'],
-  ['ship', 'Next Tue 10:15', 'Winner live for everyone'],
-  ['impact', 'Next Tue 10:30', 'Impact on completed returns confirmed'],
-  ['digest', 'Fri 8:00', 'Weekly digest sent'],
-];
-
-const SCENES = [
-  { n: 1, short: 'Opening', title: 'Opening: every day in April counts', time: '00:00–05:00', act: 'Open', rfp: 'Sets up 5.14, 5.17',
-    prep: ['Slides 1–3 ready (slide 1 quotes the RFP deck)', 'Say “your RFP describes”, not “you run”: we have not confirmed whether 150+ is today’s volume or a target', 'Pen ready for their “Test 47” answer'],
-    tell: 'Your RFP’s operating-scale slide describes 150+ tests in a 16-week tax season and the capacity to immediately publish the winning version. That is roughly nine or ten tests a week, and every winner has to reach clients while the season is still running. We read this RFP as being about speed, not data: one week of lag is about 6% of the season.',
-    show: ['Slide 1: read the two RFP quotes, then the weekly-pace line (our arithmetic)', 'Slide 2: let the reframe sit', 'Slide 3: ask the Test 47 question and type their answer'],
-    back: 'Watch for three things: the winner live in seconds with no dev ticket; a marketer launches a test in minutes; it plugs into what you already have.' },
-  { n: 2, short: 'The site clients see', title: 'The site your clients see', time: '05:00–08:00', act: 'Baseline', rfp: '4.33, 4.36, 4.39',
-    prep: ['Visitor window on the Original hero', 'Spanish page loaded'],
-    tell: 'Before anything clever, the basics: a fast, accessible, bilingual site your team runs itself.',
-    show: ['Scroll: hero → offer cards → office cards → disclosure', 'Point at the shared Legal disclosure', 'Switch to Español'],
-    back: 'Everything here is built from governed blocks marketers assemble. That covers 4.33 and 4.39.' },
-  { n: 3, short: 'Request to brief', title: 'Act 1: from request to brief', time: '08:00–13:00', act: 'Act 1 · Plan and produce', rfp: '4.17–4.19', stamp: 'brief',
-    prep: ['CMP request form blank', 'Clip C1 (request) and C2 (brief prompt) ready'],
-    tell: 'In April requests come from everywhere. The first time sink is intake. Watch what happens when the request arrives structured.',
-    show: ['Paste C1 and submit', 'Routing assigns it to Seasonal Campaigns; Maya accepts', 'Mark drafts the brief, flagging Legal claims'],
-    back: 'Request to brief in about four minutes, routed and on the record: 4.17 and 4.18.' },
-  { n: 4, short: 'Compliance and capacity', title: 'Act 1: compliance and capacity', time: '13:00–17:00', act: 'Act 1 · Plan and produce', rfp: '4.20–4.22, 4.24', stamp: 'legal',
-    prep: ['Task at the Legal review step (Jordan, due Wed 12:00)', 'Clip C3 ready', 'Workload heatmap seeded'],
-    tell: 'Every claim on a tax site needs approval. The risk isn’t that Legal says no; it’s that nobody knows where the request is.',
-    show: ['Point at the mandatory Legal step', 'Paste C3 and approve; next owner notified', 'Workload: reassign a step from the overloaded copywriter'],
-    back: 'Approvals that can’t be skipped, status nobody chases, capacity you can see: 4.20–4.22.' },
-  { n: 5, short: 'Assets with rights', title: 'Act 1: assets with rights attached', time: '17:00–20:00', act: 'Act 1 · Plan and produce', rfp: '4.25–4.31', stamp: 'assets',
-    prep: ['DAM folder “TS27 Late Season”', 'One asset with expiring talent rights'],
-    tell: 'Talent images, seasonal offers, Spanish versions, and usage rights that expire mid-season.',
-    show: ['Search “late season hero”', 'Open the asset whose rights expire', 'Show the Spanish variant; use the hero in the campaign'],
-    back: 'One library with rights governance built in, and the CMS uses these assets directly: 4.25–4.31.' },
-  { n: 6, short: 'Build a page, no dev', title: 'Act 2: build a local page without a developer', time: '20:00–25:00', act: 'Act 2 · Build and personalize', rfp: '4.34, 4.38, 4.40, 5.19', stamp: 'phoenix',
-    prep: ['CMS Editor at Home; blueprint saved', 'Clip C4 (Phoenix page) ready', '“Phoenix (backup)” draft exists'],
-    tell: 'Your RFP asks what skill administration needs (4.40) and what business users can do (5.19). Maya builds a Phoenix version, live.',
-    show: ['New from blueprint', 'Paste headline; replace image from the DAM', 'Approved style options; locked Legal disclosure', 'Fill in the Phoenix office card by hand; publish'],
-    back: 'No developer, no ticket, nothing off-brand: 4.34, 4.38, 4.40.' },
-  { n: 7, short: 'Office data (pattern)', title: 'Act 2: office data stays in the office system (pattern)', time: '25:00–27:00', act: 'Act 2 · Build and personalize', rfp: '4.19, 5.13–5.14', stamp: 'office',
-    prep: ['Connected Content docs page open next to slide 5', 'If asked whether it is live: not in this demo; we would connect one of their real systems in the proof of concept', 'Optional scene: skip it if you are behind'],
-    tell: 'Office hours and availability live in your office systems. We don’t copy them. We connect them. I’ll show how it works and be clear that it is not running live today.',
-    show: ['Docs page: external system → Graph → bound card', 'Slide 5: point at the flow', 'Say: the office cards on this page are ordinary CMS content'],
-    back: 'The site follows the source, with no CMS edit or publish. In the proof of concept we connect one of your real systems.' },
-  { n: 8, short: 'Personalize for Dana', title: 'Act 2: personalize for Dana in real time', time: '27:00–30:00', act: 'Act 2 · Build and personalize', rfp: '4.9, 4.12, 4.35', stamp: 'perso',
-    prep: ['Variations menu visible (Original, UrgencyB, DiyAbandoner)', 'Audience HRB DIY Abandoner open in Feature Experimentation', 'Visitor window on Original, no segment set; the two segment URLs (C10) in your notes'],
-    tell: 'Your most valuable late-season visitor may be a DIY filer who stalled. As publicly reported, assisted NAC was $282.89 vs $85.80 for DIY online paid in FY26.',
-    show: ['Compare Original and DiyAbandoner variations', 'Show the audience: hrb_segment equals diy_abandoner', 'Become Dana with the URL; then clear it'],
-    back: 'Decided on the server before render: no flicker. In this demo a URL sets the attribute; in production your CDP or ODP would. Audiences use on-site behavior only, consent-aware by design: 4.9, 4.12.' },
-  { n: 9, short: 'Launch a test in minutes', title: 'Act 3: from idea to running test in under five minutes', time: '30:00–37:00', act: 'Act 3 · Test and ship', rfp: '4.10, 4.11, 4.13, 4.14', stamp: 'test',
-    prep: ['Stopwatch at 00:00', 'Clip C6 (test ideation) and C7 (rule) ready', 'Flag hrb_landing_sandbox in Development with no rules (the site never reads it)'],
-    tell: 'How quickly can non-technical users launch experiments (4.11)? I’m starting a timer. I’m building on a practice flag, so it can’t touch the live page.',
-    show: ['Mark @test_ideation → pick the deadline idea', 'Create the A/B rule on the sandbox flag (paste C7)', 'Exclusion group only if you created one; pre-launch review; save and start'],
-    back: 'Under five minutes, no developer, on a practice flag so nothing customer-facing changed: 4.10, 4.11, 4.14.' },
-  { n: 10, short: 'Read it, ship it', title: 'Act 3: read the result, ship the winner', time: '37:00–45:00', act: 'Act 3 · Test and ship', rfp: '4.10, 4.15, 4.16', stamp: 'ship',
-    prep: ['Seeded A/B on hrb_landing_hero_test in Development (simulated traffic)', 'Visitor window on Original, no segment set', 'Ship step rehearsed on the rehearsal flag; their Scene 1 answer noted'],
-    tell: 'Every test has to answer two questions: is the result real, and how fast can we act on it?',
-    show: ['Stats Engine: UrgencyB +20%, significant (simulated, Development)', 'Summarize Results', 'Conclude and deploy UrgencyB; refresh the Live App'],
-    back: 'Winner live with no dev ticket. Quote their Scene 1 answer: that difference is the gap we close.' },
-  { n: 11, short: 'Prove business impact', title: 'Act 4: prove the impact on completed returns', time: '45:00–50:00', act: 'Act 4 · Prove', rfp: '4.15, 4.49–4.55', stamp: 'impact',
-    prep: ['Optimizely Analytics exploration on the synthetic warehouse dataset'],
-    tell: 'Analytics runs on your warehouse, so the test is measured against outcomes finance already trusts.',
-    show: ['Lift on completed returns and revenue per visitor', 'Change the segment filter live'],
-    back: 'From clicks to completed returns: 4.15, 4.49–4.55. Causal results can calibrate your MMM.' },
-  { n: 12, short: 'Weekly digest and recap', title: 'Close: the weekly decision digest and the recap', time: '50:00–53:00', act: 'Close', rfp: '5.17, 5.19, 4.22', stamp: 'digest',
-    prep: ['Mark with clip C9 ready; saved report as fallback', 'Recap timeline slide'],
-    tell: 'Your RFP describes 16 in-season decision cycles, and every week someone has to turn results into a readout for leadership.',
-    show: ['Run the Program Overview agent', 'Replay Maya’s week on the timeline'],
-    back: 'Winner live in seconds. A test in minutes. It plugs into what you have. Expert-led, technology-enabled: the technology getting out of the experts’ way.' },
-  { n: 13, short: 'Architecture and next step', title: 'Architecture, trust and the next step', time: '53:00–60:00', act: 'Architecture · Q and A', rfp: '5.12–5.14, 8.x',
-    prep: ['Architecture, trust and next-step slides'],
-    tell: 'You’ve invested in AEP, Journey Optimizer, Salesforce Marketing Cloud and your warehouse. We’re not asking you to rip that out.',
-    show: ['Walk the coexistence diagram', 'Trust: only confirmed statements', 'Propose the scoped PoC'],
-    back: 'Next step: one landing page, one CMS-driven experiment, one CMP workflow, measured against time from decision to live.' },
-];
-
-/* What is real and what is not (checked 16 Nov 2026). LIVE runs on hrblock.optimoey.com and in the
-   Feature Experimentation project "Marvin Demo" (Development). This prototype only mirrors it. */
-const STATUS = {
-  live: { label: 'LIVE', cls: 'bg-green-100 text-green-800', hint: 'Runs on the real site and in Feature Experimentation (Development)' },
-  sim: { label: 'SIMULATED', cls: 'bg-amber-100 text-amber-800', hint: 'A pattern only. Not running in the demo' },
-  nv: { label: 'NOT VERIFIED', cls: 'bg-slate-200 text-slate-700', hint: 'A product demo outside the repo build. Rehearse it' },
-  slides: { label: 'SLIDES', cls: 'bg-blue-100 text-blue-800', hint: 'Slides, not software' },
-};
-const STATUS_BY_SCENE = { 1: 'slides', 2: 'live', 3: 'nv', 4: 'nv', 5: 'nv', 6: 'nv', 7: 'sim', 8: 'live', 9: 'live', 10: 'live', 11: 'nv', 12: 'nv', 13: 'slides' };
-const STATUS_NOTE = { 9: 'sandbox flag', 10: 'seeded results' };
 
 /* ---------------------------- helpers ---------------------------- */
 function useTypewriter(text, run, step = 4, speed = 12) {
@@ -190,30 +107,30 @@ function Spinner() {
 }
 
 /* ---------------------------- Live App ---------------------------- */
+/* Shows the whole image at its own aspect ratio: never cropped. Width is requested no larger than the
+   native file (w x h from the asset), so nothing is upscaled. Tall images in the small slots are letterboxed. */
 function HeroImage({ asset, small }) {
   const a = asset || ASSETS[0];
   const [err, setErr] = useState(false);
   useEffect(() => setErr(false), [a.id]);
+  const ratio = `${a.w} / ${a.h}`;
+  const maxH = small ? '16rem' : '28rem';
   return (
-    <div className={`relative overflow-hidden rounded-2xl hrb-sand ${small ? 'h-20' : 'h-56'}`}>
+    <div className="relative overflow-hidden rounded-2xl hrb-sand">
       {a.img && !err ? (
-        <img src={IMG(a.img, small ? 400 : 960)} alt={a.name} onError={() => setErr(true)} className="h-full w-full object-cover" />
+        <img src={IMG(a.img, Math.min(a.w, small ? 400 : 960))} alt={a.name} onError={() => setErr(true)} className="block w-full object-contain" style={{ aspectRatio: ratio, maxHeight: maxH }} />
       ) : (
-        <div className="flex h-full w-full items-end p-3 text-xs font-semibold" style={{ color: HRB.green }}>{small ? '' : a.name}</div>
+        <div className="flex w-full items-end p-3 text-xs font-semibold" style={{ color: HRB.green, aspectRatio: ratio, maxHeight: maxH }}>{small ? '' : a.name}</div>
       )}
       {!small && <span className="absolute bottom-0 left-0 h-6 w-6" style={{ background: HRB.neon }} />}
     </div>
   );
 }
 
-/* Simplified mark for the demo (green square + wordmark). Swap in the official logo file from the brand portal. */
-function HrbLogo({ dark }) {
-  return (
-    <span className="flex items-center gap-2">
-      <span className="h-5 w-5" style={{ background: HRB.logo }} />
-      <span className="text-base font-bold tracking-tight" style={{ color: dark ? '#fff' : HRB.black }}>{BRAND}</span>
-    </span>
-  );
+/* The real logo, the same asset and size the app's global layout uses (MainNav: siteConfig.logoSrc). */
+function HrbLogo() {
+  // eslint-disable-next-line @next/next/no-img-element
+  return <img src={siteConfig.logoSrc} alt={siteConfig.logoAlt} className="h-8 w-auto" />;
 }
 
 function Accent({ text, accent, onDark }) {
@@ -324,7 +241,7 @@ function LiveApp({ variant = 'Original', lang = 'en', offices = OFFICES0.slice(0
 }
 
 /* ---------------------------- Scene 1 ---------------------------- */
-function S1({ answer, setAnswer }) {
+function S1() {
   const [slide, setSlide] = useState(0);
   return (
     <div className="space-y-4">
@@ -367,8 +284,6 @@ function S1({ answer, setAnswer }) {
             <div>
               <div className="text-sm uppercase tracking-widest text-green-200">One question before we start</div>
               <h2 className="mt-2 text-2xl font-bold">When Test 47 wins on a Tuesday, when is it live on hrblock.com, and who has to touch it?</h2>
-              <textarea value={answer} onChange={(e) => setAnswer(e.target.value)} placeholder="Type their answer word for word (it comes back in Scene 10)…"
-                className="mt-3 w-full rounded-lg border-0 bg-white/95 p-3 text-sm text-slate-900 placeholder-slate-400" rows={2} />
             </div>
             <div className="rounded-xl bg-white/10 p-4">
               <div className="text-xs font-bold uppercase tracking-wider text-green-200">The story we will follow</div>
@@ -712,9 +627,7 @@ function S7({ stamp }) {
   );
   return (
     <div className="space-y-4">
-      <div className="rounded-xl border border-amber-300 bg-amber-50 p-4 text-sm text-amber-900">
-        <b>SIMULATED · a pattern, not running today.</b> This demo has no live office source, and the office cards on the page are ordinary CMS content. If anyone asks to see it live, say we would connect one of their real systems in the proof of concept.
-      </div>
+      <div><Pill cls="bg-amber-100 text-amber-800">Illustrative pattern · not running live in this demo</Pill></div>
       <div className="grid gap-4 xl:grid-cols-2">
         <Frame url="docs.optimizely.com/cms-saas/docs/integrate-external-resources" label="Docs · Connected Content" accent="bg-sky-50">
           <div className="space-y-3 p-4 text-sm">
@@ -745,11 +658,10 @@ function S7({ stamp }) {
 }
 
 /* ---------------------------- Scene 8 ---------------------------- */
-function S8({ stamp }) {
+function S8({ stamp, overlay }) {
   const [preview, setPreview] = useState('DiyAbandoner');
   const [seg, setSeg] = useState('');          // the hrb_segment cookie, set by the URL switch
   const [lastUrl, setLastUrl] = useState('');  // '' | 'become' | 'clear'
-  const [badge, setBadge] = useState(true);
   const isDana = seg === 'diy_abandoner';
   const variant = isDana ? 'DiyAbandoner' : 'Original';
   const become = () => { setSeg('diy_abandoner'); setLastUrl('become'); stamp('perso'); };
@@ -781,13 +693,12 @@ function S8({ stamp }) {
           <span className="text-sm text-slate-600">Visitor window:</span>
           <Btn kind={isDana ? 'primary' : 'ghost'} onClick={become}>Become Dana (?hrb_segment=diy_abandoner)</Btn>
           <Btn kind="ghost" onClick={clear}>Clear segment (?hrb_segment=)</Btn>
-          <label className="ml-auto flex items-center gap-1 text-xs text-slate-600"><input type="checkbox" checked={badge} onChange={(e) => setBadge(e.target.checked)} /> decision overlay (prototype only)</label>
         </div>
         <div className="relative">
           <Frame url={`hrblock.optimoey.com/still-time-to-file${query}`} label={isDana ? 'Live App (visitor: Dana)' : 'Live App (visitor window)'}>
             <LiveApp variant={variant} />
           </Frame>
-          {badge && (
+          {overlay && (
             <div className="absolute bottom-3 left-3 rounded-lg bg-black/80 px-3 py-2 font-mono text-xs text-white shadow-lg">
               <div><b>Variation:</b> {variant}</div>
               <div><b>Flag / rule:</b> {isDana ? 'hrb_landing_personalization / hrb_diy_abandoner_delivery' : 'hrb_landing_hero_test / hrb_hero_urgency_test'}</div>
@@ -912,13 +823,12 @@ function S10({ answer, shipped, setShipped, stamp }) {
             {sum && <div className="rounded-lg border border-indigo-100 bg-indigo-50 p-3 text-sm">{text}{text.length < SUMMARY.length && <span className="animate-pulse">▍</span>}</div>}
             <Btn onClick={() => setCount(5)} disabled={shipped || count !== null}>{shipped ? '✓ UrgencyB live for everyone' : 'Conclude and deploy UrgencyB to everyone'}</Btn>
             {count !== null && <div className="text-sm text-slate-600"><Spinner /> Live App picks up the change on its next poll (30 s once the interval is changed, plus time to reach the CDN; sped up here): {count}s</div>}
-            {!shipped && <div className="text-xs text-slate-500">A concluded rule cannot be restarted. Rehearse this step on the rehearsal flag.</div>}
           </div>
         </Frame>
         {shipped && (
           <div className="rounded-xl border border-green-200 bg-green-50 p-4 text-sm">
             <div className="font-bold text-green-900">Winner live in seconds, with no dev ticket.</div>
-            <div className="mt-1 text-green-900">Earlier you said: <i>“{answer || 'their Scene 1 answer goes here'}”</i>. That difference is the gap we close.</div>
+            {answer.trim() && <div className="mt-1 text-green-900">Earlier you said: <i>“{answer}”</i>. That difference is the gap we close.</div>}
           </div>
         )}
       </div>
@@ -1071,29 +981,6 @@ function S13() {
   );
 }
 
-/* ---------------------------- presenter notes ---------------------------- */
-function Notes({ s, stamps }) {
-  const clock = s.stamp ? TIMELINE.find((t) => t[0] === s.stamp) : null;
-  return (
-    <aside className="w-80 shrink-0 space-y-3 overflow-y-auto border-r border-slate-200 bg-slate-50 p-4 text-sm">
-      <div className="text-xs font-bold uppercase tracking-wider text-slate-500">Presenter notes · Scene {s.n}</div>
-      <div className="flex flex-wrap gap-1"><Pill>{s.time}</Pill><Pill>{s.act}</Pill><Pill cls="bg-blue-50 text-blue-700">RFP {s.rfp}</Pill></div>
-      <div className="rounded-lg border-l-4 border-slate-400 bg-slate-100 p-3">
-        <div className="mb-1 text-xs font-bold uppercase text-slate-600">Prep</div>
-        <ul className="list-disc space-y-1 pl-4 text-slate-700">{s.prep.map((p) => <li key={p}>{p}</li>)}</ul>
-      </div>
-      <div><Pill cls="bg-blue-100 text-blue-800">TELL</Pill><p className="mt-1 text-slate-800">“{s.tell}”</p></div>
-      <div><Pill cls="bg-green-100 text-green-800">SHOW</Pill><ol className="mt-1 list-decimal space-y-1 pl-5 text-slate-800">{s.show.map((x) => <li key={x}>{x}</li>)}</ol></div>
-      <div><Pill cls="bg-violet-100 text-violet-800">TELL BACK</Pill><p className="mt-1 text-slate-800">“{s.back}”</p></div>
-      {clock && (
-        <div className={`rounded-lg p-2 text-xs ${stamps[s.stamp] ? 'bg-green-100 text-green-800' : 'bg-slate-200 text-slate-600'}`}>
-          ⏱ {clock[1]} · {clock[2]} {stamps[s.stamp] ? '✓' : '(complete the scene to stamp)'}
-        </div>
-      )}
-    </aside>
-  );
-}
-
 /* ---------------------------- brand theme ---------------------------- */
 const BRAND_CSS = `
   .hrb-app, .font-sans { font-family: Graphik, "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif !important; }
@@ -1123,48 +1010,92 @@ const BRAND_CSS = `
 function BrandStyles() { return <style>{BRAND_CSS}</style>; }
 
 /* ---------------------------- app ---------------------------- */
+const clampIdx = (i) => Math.max(0, Math.min(SCENES.length - 1, Number(i) || 0));
+
 export default function App() {
   const [idx, setIdx] = useState(0);
-  const [notes, setNotes] = useState(true);
   const [stamps, setStamps] = useState({});
   const [answer, setAnswer] = useState('');
   const [lang, setLang] = useState('en');
   const [asset, setAsset] = useState(ASSETS[0]);
   const [shipped, setShipped] = useState(false);
   const [phoenix, setPhoenix] = useState(null);
+  const [overlay, setOverlay] = useState(true);
   const [resetKey, setResetKey] = useState(0);
+  const presenterWin = useRef(null);
+  const chan = useRef(null);
+  const latest = useRef('');
+  const onCommand = useRef(() => {});
 
   const stamp = React.useCallback((k) => setStamps((st) => (st[k] ? st : { ...st, [k]: true })), []);
 
+  const resetAll = () => {
+    setStamps({}); setAnswer(''); setLang('en'); setAsset(ASSETS[0]);
+    setShipped(false); setPhoenix(null); setOverlay(true); setIdx(0); setResetKey((k) => k + 1);
+  };
+
+  /* S opens (or focuses) the presenter window. */
+  const openPresenter = () => {
+    const w = presenterWin.current;
+    if (w && !w.closed) { w.focus(); return; }
+    presenterWin.current = window.open(PRESENTER_URL, PRESENTER_WINDOW, 'popup=yes,width=560,height=940');
+  };
+
   useEffect(() => {
     const onKey = (e) => {
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
       const tag = (e.target && e.target.tagName) || '';
-      if (['INPUT', 'TEXTAREA', 'SELECT'].includes(tag)) return;
+      if (['INPUT', 'TEXTAREA', 'SELECT'].includes(tag) || (e.target && e.target.isContentEditable)) return;
       if (e.key === 'ArrowRight') setIdx((i) => Math.min(SCENES.length - 1, i + 1));
       if (e.key === 'ArrowLeft') setIdx((i) => Math.max(0, i - 1));
+      if (e.key === 's' || e.key === 'S') { e.preventDefault(); openPresenter(); }
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, []);
 
-  const resetAll = () => {
-    setStamps({}); setAnswer(''); setLang('en'); setAsset(ASSETS[0]);
-    setShipped(false); setPhoenix(null); setIdx(0); setResetKey((k) => k + 1);
-  };
+  /* Commands from the presenter window. Reassigned every render so it always sees fresh handlers. */
+  useEffect(() => {
+    onCommand.current = (m) => {
+      if (m.type === 'step') setIdx((i) => clampIdx(i + Number(m.delta || 0)));
+      else if (m.type === 'goto') setIdx(clampIdx(m.idx));
+      else if (m.type === 'answer') setAnswer(String(m.value ?? ''));
+      else if (m.type === 'overlay') setOverlay(!!m.value);
+      else if (m.type === 'reset') resetAll();
+    };
+  });
+
+  /* Channel to the presenter window (declared before the state broadcast so it exists on first run). */
+  useEffect(() => {
+    const ch = openChannel();
+    if (!ch) return undefined;
+    chan.current = ch;
+    ch.onmessage = (e) => {
+      const m = e.data || {};
+      if (m.type === 'hello') { if (latest.current) ch.postMessage({ type: 'state', payload: latest.current }); }
+      else onCommand.current(m);
+    };
+    return () => { ch.close(); chan.current = null; };
+  }, []);
+
+  const payload = JSON.stringify({ idx, stamps, answer, overlay, resetKey });
+  useEffect(() => {
+    latest.current = payload;
+    chan.current?.postMessage({ type: 'state', payload });
+  }, [payload]);
 
   const s = SCENES[idx];
-  const last = [...TIMELINE].reverse().find(([k]) => stamps[k]);
 
   const stage = () => {
     switch (s.n) {
-      case 1: return <S1 answer={answer} setAnswer={setAnswer} />;
+      case 1: return <S1 />;
       case 2: return <S2 lang={lang} setLang={setLang} />;
       case 3: return <S3 stamp={stamp} />;
       case 4: return <S4 stamp={stamp} />;
       case 5: return <S5 asset={asset} setAsset={setAsset} stamp={stamp} />;
       case 6: return <S6 asset={asset} stamp={stamp} phoenix={phoenix} setPhoenix={setPhoenix} />;
       case 7: return <S7 stamp={stamp} />;
-      case 8: return <S8 stamp={stamp} />;
+      case 8: return <S8 stamp={stamp} overlay={overlay} />;
       case 9: return <S9 stamp={stamp} />;
       case 10: return <S10 answer={answer} shipped={shipped} setShipped={setShipped} stamp={stamp} />;
       case 11: return <S11 stamp={stamp} />;
@@ -1176,49 +1107,19 @@ export default function App() {
   return (
     <div className="hrb-app flex h-screen flex-col bg-slate-100 font-sans text-slate-900">
       <BrandStyles />
-      <header className="flex flex-wrap items-center gap-3 hrb-dark px-5 py-3 text-white">
-        <div>
-          <div className="text-xs uppercase tracking-widest text-green-200">{BRAND} · Optimizely demo prototype</div>
-          <div className="text-lg font-bold">Tuesday of Week 11</div>
-        </div>
-        <span className="rounded-full bg-amber-300 px-2.5 py-0.5 text-xs font-bold text-amber-900">Synthetic data</span>
-        <div className="ml-auto flex flex-wrap items-center gap-2">
-          <span className="rounded-lg bg-black/30 px-3 py-1 font-mono text-sm">⏱ {last ? `${last[1]} · ${last[2]}` : 'Tue 9:00 · not started'}</span>
-          <button onClick={() => setNotes(!notes)} className="rounded-lg bg-white/15 px-3 py-1.5 text-sm font-semibold hover:bg-white/25">{notes ? 'Hide' : 'Show'} presenter notes</button>
-          <button onClick={resetAll} className="rounded-lg bg-white/15 px-3 py-1.5 text-sm font-semibold hover:bg-white/25">Reset demo</button>
-        </div>
+      <header className="hrb-dark px-5 py-3 text-white">
+        <div className="text-xs uppercase tracking-widest text-green-200">{BRAND} · Optimizely demo</div>
       </header>
-      <div className="h-1 bg-slate-300"><div className="h-1 bg-green-500 transition-all" style={{ width: `${((idx + 1) / SCENES.length) * 100}%` }} /></div>
 
-      <div className="flex min-h-0 flex-1">
-        <nav className="w-56 shrink-0 overflow-y-auto border-r border-slate-200 bg-white p-2">
-          {SCENES.map((sc, i) => (
-            <button key={sc.n} onClick={() => setIdx(i)} className={`mb-1 flex w-full items-start gap-2 rounded-lg px-2 py-2 text-left text-sm ${i === idx ? 'bg-green-50 font-semibold text-green-900' : 'text-slate-700 hover:bg-slate-50'}`}>
-              <span className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-xs ${sc.stamp && stamps[sc.stamp] ? 'bg-green-600 text-white' : i === idx ? 'bg-green-700 text-white' : 'bg-slate-200 text-slate-600'}`}>{sc.stamp && stamps[sc.stamp] ? '✓' : sc.n}</span>
-              <span className="flex-1"><span className="block leading-tight">{sc.short}</span><span className="text-xs font-normal text-slate-400">{sc.time} · {STATUS[STATUS_BY_SCENE[sc.n]].label.toLowerCase()}</span></span>
-            </button>
-          ))}
-        </nav>
-
-        {notes && <Notes s={s} stamps={stamps} />}
-
-        <main className="flex min-w-0 flex-1 flex-col">
-          <div className="flex items-center justify-between border-b border-slate-200 bg-white px-5 py-3">
-            <div>
-              <div className="text-xs text-slate-500">Scene {s.n} of {SCENES.length} · {s.act}</div>
-              <div className="flex flex-wrap items-center gap-2"><div className="text-lg font-bold">{s.title}</div><span title={STATUS[STATUS_BY_SCENE[s.n]].hint}><Pill cls={STATUS[STATUS_BY_SCENE[s.n]].cls}>{STATUS[STATUS_BY_SCENE[s.n]].label}{STATUS_NOTE[s.n] ? ` · ${STATUS_NOTE[s.n]}` : ''}</Pill></span></div>
-            </div>
-            <div className="flex gap-2">
-              <Btn kind="ghost" onClick={() => setIdx(Math.max(0, idx - 1))} disabled={idx === 0}>‹ Prev</Btn>
-              <Btn kind="dark" onClick={() => setIdx(Math.min(SCENES.length - 1, idx + 1))} disabled={idx === SCENES.length - 1}>Next ›</Btn>
-            </div>
-          </div>
-          <div className="flex-1 overflow-y-auto p-5" key={`${idx}-${resetKey}`}>
-            {stage()}
-            <div className="mt-6 text-center text-xs text-slate-400">Prototype only: every screen here is a simulation, including the scenes tagged LIVE, which mirror what runs on hrblock.optimoey.com. LIVE = built and running (Feature Experimentation, Development) · SIMULATED = a pattern only · NOT VERIFIED = a product demo that has not been checked. Site copy is from hrblock.com as of November 2026; offices, audiences and results are synthetic. Arrow keys move between scenes.</div>
-          </div>
-        </main>
-      </div>
+      <main className="flex min-w-0 flex-1 flex-col">
+        <div className="border-b border-slate-200 bg-white px-5 py-3">
+          <div className="text-xs text-slate-500">{s.act}</div>
+          <div className="text-lg font-bold">{s.title}</div>
+        </div>
+        <div className="flex-1 overflow-y-auto p-5" key={`${idx}-${resetKey}`}>
+          {stage()}
+        </div>
+      </main>
     </div>
   );
 }
