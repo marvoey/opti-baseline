@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import { Space_Grotesk, Inter } from "next/font/google";
 import Script from "next/script";
 import OptimizelyActivation from "./_components/OptimizelyActivation";
-import { QuickLinks } from "./_components/QuickLinks";
+// import { QuickLinks } from "./_components/QuickLinks";
 import DevQuickLinks from "./_components/DevQuickLinks";
 import { siteConfig } from "@/lib/siteConfig";
 import "./globals.css";
 import "@/cms/registry";
+import ClickTracker from "./_components/ClickTracker";
 
 // VC Nudge (Optimizely's display face) is a licensed face; Space Grotesk is the
 // closest free substitute — chunky, geometric grotesque with strong personality.
@@ -60,6 +61,7 @@ export default function RootLayout({
         */}
         {/* <QuickLinks /> */}
         <DevQuickLinks />
+        <ClickTracker />
         {WEB_SNIPPET_ID && (
           <>
             <Script

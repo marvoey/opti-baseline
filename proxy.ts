@@ -2,26 +2,12 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { LOCALE_SEGMENTS } from '@/lib/locales';
 
-/**
- * Next.js 16 Proxy (the replacement for Middleware) — locale clean-URLs for the
- * Optimizely CMS routes.
- *
- * Optimizely Graph resolves content by a locale-prefixed path (e.g. /en/vb-demo/).
- * We want clean public URLs (/vb-demo) but still route internally to
- * app/[locale]/[[...slug]] so the [locale] param is populated and Graph queries
- * stay consistent.
- *
- * Routing only — NO data fetching here (Next docs explicitly discourage it).
- *
- * CMS-first routing: every path flows to the CMS catch-all. Adding a new CMS
- * page therefore needs no change here.
- */
-
 const DEFAULT_LOCALE = process.env.OPTIMIZELY_DEFAULT_LOCALE || 'en';
-// Route segments of the non-default locales enabled in the CMS, sourced from
-// lib/locales.generated.ts (refreshed by `npm run gen:locales`). The default
-// locale serves clean URLs, so it has no segment here.
 const KNOWN_LOCALE_SEGMENTS = LOCALE_SEGMENTS;
+
+const VISITOR_COOKIE = 'hrb_vid';
+const SEGMENT_COOKIE = 'hrb_segment';
+const ONE_YEAR = 60 * 60 * 24 * 365;
 
 function firstSegment(pathname: string): string {
   return pathname.split('/')[1] ?? '';
@@ -31,29 +17,44 @@ export function proxy(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
   const seg = firstSegment(pathname);
 
-  // Default-locale prefix is visible → redirect to the clean path (canonical/SEO).
-  //   /en/vb-demo → /vb-demo
+  // Default-locale prefix is visible: redirect to the clean path (unchanged).
   if (seg === DEFAULT_LOCALE) {
     const stripped =
       pathname.replace(new RegExp(`^/${DEFAULT_LOCALE}(?=/|$)`), '') || '/';
     return NextResponse.redirect(new URL(stripped + search, request.url));
   }
 
-  // A non-default known locale is already present → leave it; [locale] is populated.
-  if (KNOWN_LOCALE_SEGMENTS.includes(seg)) {
-    return NextResponse.next();
+  // Visitor identity. A brand-new cookie is not in request.cookies yet,
+  // so the ID is also passed to the page as a request header.
+  const existingId = request.cookies.get(VISITOR_COOKIE)?.value;
+  const visitorId = existingId ?? crypto.randomUUID();
+
+  // Demo switch. ?hrb_segment=diy_abandoner sets it. ?hrb_segment= clears it.
+  const segmentParam = request.nextUrl.searchParams.get(SEGMENT_COOKIE); // null = absent
+  const segment =
+    segmentParam !== null ? segmentParam : request.cookies.get(SEGMENT_COOKIE)?.value ?? '';
+
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set('x-hrb-visitor', visitorId); // always overwritten, never trusted from the client
+  requestHeaders.set('x-hrb-segment', segment);
+
+  const response = KNOWN_LOCALE_SEGMENTS.includes(seg)
+    ? NextResponse.next({ request: { headers: requestHeaders } })
+    : NextResponse.rewrite(new URL(`/${DEFAULT_LOCALE}${pathname}${search}`, request.url), {
+        request: { headers: requestHeaders },
+      });
+
+  const cookie = { path: '/', maxAge: ONE_YEAR, sameSite: 'lax' as const, httpOnly: true };
+  if (!existingId) response.cookies.set(VISITOR_COOKIE, visitorId, cookie);
+  if (segmentParam !== null) {
+    if (segmentParam) response.cookies.set(SEGMENT_COOKIE, segmentParam, cookie);
+    else response.cookies.delete(SEGMENT_COOKIE);
   }
 
-  // Clean CMS path with no locale → rewrite into the default locale so [locale] is set.
-  //   /vb-demo → /en/vb-demo
-  const rewritten = `/${DEFAULT_LOCALE}${pathname}`;
-  return NextResponse.rewrite(new URL(rewritten + search, request.url));
+  return response;
 }
 
 export const config = {
-  // Run on everything EXCEPT API, Next internals, the preview/admin/styleguide
-  // routes, and any path containing a dot (static assets like /logo.svg). The
-  // preview, admin and styleguide routes live outside [locale] and must not be
-  // rewritten into a locale.
+  // Unchanged: keep your existing matcher exactly as it is.
   matcher: ['/((?!api|_next/static|_next/image|preview|admin|styleguide|applications|demo|favicon.ico|.*\\..*).*)'],
 };

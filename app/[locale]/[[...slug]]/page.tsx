@@ -7,6 +7,10 @@ import { DEFAULT_LOCALE } from '@/lib/locales';
 import { siteOrigin } from '@/lib/siteHost';
 import { siteConfig } from '@/lib/siteConfig';
 import HomePageFallback from '@/app/_components/HomePageFallback';
+import { headers } from 'next/headers';
+import { decideVariation } from '@/lib/experimentation';
+
+export const dynamic = 'force-dynamic';
 
 type Props = {
   params: Promise<{ locale: string; slug?: string[] }>;
@@ -26,23 +30,38 @@ const loadContent = cache(async (locale: string, slug: string[]) => {
   const cleanPath = slug.length ? `/${slug.join('/')}/` : '/';
   const isDefault = locale === DEFAULT_LOCALE;
   const prefixedPath = `/${locale}${cleanPath}`;
-  const path = isDefault ? cleanPath : prefixedPath;
+  let path = isDefault ? cleanPath : prefixedPath;
 
   const client = getClient();
-  // Scope to this site's hostname so a shared root path ("/") resolves to THIS
-  // site's page rather than another site indexed at the same path.
   const host = await siteOrigin();
   let content = await client.getContentByPath(path, { host });
 
   if (!content?.[0]) {
-    // Default locale: content under the site start page is indexed clean
-    // ("/vb-demo/"), but content elsewhere keeps the locale prefix
-    // ("/en/vb-demo/") — try the prefixed form before giving up.
-    // Non-default locale: fall back to the default-locale version when this page
-    // hasn't been translated/published yet (so it renders instead of 404ing).
-    content = await client.getContentByPath(isDefault ? prefixedPath : cleanPath, { host });
+    path = isDefault ? prefixedPath : cleanPath;
+    content = await client.getContentByPath(path, { host });
   }
-  return content?.[0];
+  const original = content?.[0];
+  if (!original) return undefined;
+
+  // Experimentation applies to campaign pages only.
+  if ((original as { PageType?: string }).PageType !== 'campaign') return original;
+
+  const h = await headers();
+  const visitorId = h.get('x-hrb-visitor');
+  if (!visitorId) return original; // for example preview: never personalize
+
+  const decision = await decideVariation({
+    id: visitorId,
+    segment: h.get('x-hrb-segment') || null,
+  });
+  console.log('[fx] decision', decision); // remove after testing
+  if (decision.variation === 'Original') return original;
+
+  const variant = await client.getContentByPath(path, {
+    host,
+    variation: { include: 'SOME', value: [decision.variation], includeOriginal: false },
+  });
+  return variant?.[0] ?? original; // fall back if the variation isn't published yet
 });
 
 /** Per-page <title> from the CMS, falling back to the site name. */
