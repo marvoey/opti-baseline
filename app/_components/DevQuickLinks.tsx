@@ -47,7 +47,13 @@ function collectLinks(dir: string, root: string, segments: string[]): QuickLink[
 
 export default function DevQuickLinks() {
   const groups: QuickLinkGroup[] = [
-    { title: 'Site', links: [{ label: 'Home', href: '/', depth: 0 }] },
+    {
+      title: 'Site',
+      links: [
+        { label: 'Home', href: '/', depth: 0 },
+        { label: 'Newsletter', href: '/newsletter', depth: 0 },
+      ],
+    },
     ...ROUTE_ROOTS.map((root) => ({
       title: toLabel(root),
       links: collectLinks(path.join(process.cwd(), 'app', root), root, []),
