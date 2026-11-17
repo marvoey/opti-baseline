@@ -17,6 +17,33 @@ type Props = {
 };
 
 /**
+ * A variation has its own route segment in the CMS, so Graph serves it at its
+ * own URL (e.g. /diy-abandoner/), not at the base page's URL. Look that URL up
+ * by content key so the app doesn't depend on how editors name the segment.
+ */
+async function getVariationPath(
+  client: ReturnType<typeof getClient>,
+  key: string,
+  variation: string,
+): Promise<string | undefined> {
+  // The value comes from the FX datafile; only allow plain variation names.
+  if (!/^[A-Za-z0-9_-]+$/.test(variation)) return undefined;
+
+  const query = /* GraphQL */ `
+    query VariationUrl($key: String!) {
+      _Content(
+        where: { _metadata: { key: { eq: $key }, status: { eq: "Published" } } }
+        variation: { include: SOME, value: ["${variation}"], includeOriginal: false }
+      ) {
+        items { _metadata { url { default } } }
+      }
+    }
+  `;
+  const data = await client.request(query, { key });
+  return data?._Content?.items?.[0]?._metadata?.url?.default as string | undefined;
+}
+
+/**
  * Resolve a CMS page for the given locale + slug, scoped to this site's host.
  * Wrapped in React.cache so generateMetadata and the page body share ONE Graph
  * round-trip per request instead of fetching twice.
@@ -57,11 +84,17 @@ const loadContent = cache(async (locale: string, slug: string[]) => {
   console.log('[fx] decision', decision); // remove after testing
   if (decision.variation === 'Original') return original;
 
-  const variant = await client.getContentByPath(path, {
+  const key = (original as { _metadata?: { key?: string } })._metadata?.key;
+  if (!key) return original;
+
+  const variationPath = await getVariationPath(client, key, decision.variation);
+  if (!variationPath) return original; // variation isn't published
+
+  const variant = await client.getContentByPath(variationPath, {
     host,
     variation: { include: 'SOME', value: [decision.variation], includeOriginal: false },
   });
-  return variant?.[0] ?? original; // fall back if the variation isn't published yet
+  return variant?.[0] ?? original;
 });
 
 /** Per-page <title> from the CMS, falling back to the site name. */
