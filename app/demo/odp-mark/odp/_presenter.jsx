@@ -70,6 +70,9 @@ export default function Presenter() {
   const idx = Math.min(SCENES.length - 1, Math.max(0, st.idx));
   const s = SCENES[idx];
   const status = STATUS[STATUS_BY_SCENE[s.n]];
+  const build = Math.min(s.builds - 1, Math.max(0, st.build || 0));
+  const first = idx === 0 && build === 0;
+  const last = idx === SCENES.length - 1 && build === s.builds - 1;
   const reset = () => { if (window.confirm('Reset the demo window to Scene 1 and restore the default generator settings?')) send({ type: 'reset' }); };
 
   return (
@@ -81,11 +84,11 @@ export default function Presenter() {
         </div>
         <div className="h-1 rounded bg-slate-200"><div className="h-1 rounded bg-emerald-600 transition-all" style={{ width: `${((idx + 1) / SCENES.length) * 100}%` }} /></div>
         <div className="flex items-center gap-2">
-          <Btn onClick={() => send({ type: 'step', delta: -1 })} disabled={idx === 0}>‹ Prev</Btn>
+          <Btn onClick={() => send({ type: 'step', delta: -1 })} disabled={first}>‹ Prev</Btn>
           <select value={idx} onChange={(e) => send({ type: 'goto', idx: Number(e.target.value) })} className="min-w-0 flex-1 rounded-lg border border-slate-300 bg-white px-2 py-1.5 text-sm">
             {SCENES.map((sc, i) => <option key={sc.n} value={i}>{`${sc.n} · ${sc.short} · ${sc.time}`}</option>)}
           </select>
-          <Btn kind="dark" onClick={() => send({ type: 'step', delta: 1 })} disabled={idx === SCENES.length - 1}>Next ›</Btn>
+          <Btn kind="dark" onClick={() => send({ type: 'step', delta: 1 })} disabled={last}>Next ›</Btn>
         </div>
       </header>
 
@@ -97,7 +100,9 @@ export default function Presenter() {
             <span title={status.hint}><Pill cls={status.cls}>{status.label}{STATUS_NOTE[s.n] ? ` · ${STATUS_NOTE[s.n]}` : ''}</Pill></span>
             <Pill>{s.time}</Pill>
             <Pill cls="bg-blue-50 text-blue-700">RFP capability {s.rfp}</Pill>
+            {s.builds > 1 && <Pill cls="bg-emerald-100 text-emerald-800">Step {build + 1} of {s.builds}</Pill>}
           </div>
+          {s.buildHint && <div className="mt-1 text-xs text-slate-500">Steps: {s.buildHint}</div>}
         </div>
 
         {s.warn && <div className="rounded-lg border border-amber-300 bg-amber-50 p-3 text-amber-900">{s.warn}</div>}
@@ -117,7 +122,7 @@ export default function Presenter() {
       </main>
 
       <footer className="border-t border-slate-200 bg-white px-4 py-2 text-[11px] leading-snug text-slate-500">
-        Everything in the demo window is simulated with generated data (no ODP or Web Experimentation connection, no API keys). The 44.5M, 25M and 5,000 events/sec figures are from the RFP slide, not measured. Arrow keys move between scenes.
+        Everything in the demo window is simulated with generated data (no ODP or Web Experimentation connection, no API keys). Site copy variations are illustrative and need legal review before use. The 44.5M, 25M and 5,000 events/sec figures are from the RFP slide, not measured. Next/Prev (or the arrow keys) step through a slide before moving to the next one.
       </footer>
     </div>
   );

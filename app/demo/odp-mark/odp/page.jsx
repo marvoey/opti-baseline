@@ -410,21 +410,18 @@ function FlowBox({ n, title, sub, tone }) {
     </div>
   );
 }
-function Lead({ eyebrow, children }) {
-  return (
-    <div className="mb-5">
-      <Eyebrow>{eyebrow}</Eyebrow>
-      <p className="mt-1 max-w-3xl text-base hb-tx-muted">{children}</p>
-    </div>
-  );
+function Slide({ children }) {
+  return <div className="mx-auto max-w-6xl px-4 py-3 md:px-8">{children}</div>;
 }
 const FlowArrow = () => <div className="hidden items-center justify-center hb-tx-green text-2xl lg:flex" aria-hidden="true">{'\u2192'}</div>;
 
-function Overview({ go }) {
+function Overview({ go, build }) {
   return (
     <div>
-      <section className="hb-bg-dark hb-dark-zone">
-        <div className="mx-auto max-w-6xl px-4 py-10 md:px-8 md:py-14">
+      {build === 0 ? (
+<div className="hb-fade">
+<section className="hb-bg-dark hb-dark-zone">
+        <div className="mx-auto max-w-6xl px-4 py-6 md:px-8 md:py-8">
           <Eyebrow light>Demo for the RFP capability slide</Eyebrow>
           <h1 className="mt-2 max-w-3xl text-3xl leading-tight hb-tx-white md:text-5xl">From the first click to the right experience, in real time.</h1>
           <p className="mt-4 max-w-3xl text-base hb-tx-sand md:text-lg">
@@ -444,8 +441,12 @@ function Overview({ go }) {
           </p>
         </div>
       </section>
+</div>
+) : null}
 
-      <section className="mx-auto max-w-6xl px-4 py-10 md:px-8">
+      {build === 1 ? (
+<div className="hb-fade">
+<section className="mx-auto max-w-6xl px-4 py-10 md:px-8">
         <SectionTitle eyebrow="How it fits together" title="One loop: capture, resolve, segment, personalize, measure">
           The two capabilities are one pipeline. Identity resolution decides who the visitor is, real-time audiences decide what they have shown interest in, and Web Experimentation turns that into a different page.
         </SectionTitle>
@@ -462,8 +463,12 @@ function Overview({ go }) {
         </div>
         <p className="mt-3 text-sm hb-tx-muted">The hero CTA clicks do double duty: they are ODP events that build audiences, and Web Experimentation metrics that judge the experiences.</p>
       </section>
+</div>
+) : null}
 
-      <section className="hb-bg-sand">
+      {build === 2 ? (
+<div className="hb-fade">
+<section className="hb-bg-sand">
         <div className="mx-auto max-w-6xl px-4 py-10 md:px-8">
           <SectionTitle eyebrow="The two capabilities" title="What the slide asks for, and how it is done" />
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
@@ -497,6 +502,8 @@ function Overview({ go }) {
           </div>
         </div>
       </section>
+</div>
+) : null}
 
       
 
@@ -516,59 +523,60 @@ function ProfileCard({ p, step }) {
   const attrs = deriveAttributes(odpEvs, 'live');
   const audiences = EVENT_AUDIENCES.filter((a) => inAudience(a.groups, { attributes: attrs, events: odpEvs }, SCN_NOW));
   const known = !!p.email;
+  const tiles = [['preference', attrs.hrb_filing_preference], ['appointment clicks', attrs.hrb_appointment_cta_clicks], ['DIY clicks', attrs.hrb_diy_start_clicks], ['pages viewed', attrs.hrb_pages_viewed]];
   return (
-    <div className="hb-card p-4" style={{ borderColor: known ? '#005D1F' : '#E4E0CC', borderWidth: 2 }}>
+    <div className="hb-card p-3" style={{ borderColor: known ? '#005D1F' : '#E4E0CC', borderWidth: 2 }}>
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div className="text-sm font-bold hb-mono hb-tx-dark">zaius_id {p.zid}</div>
         <Chip tone={known ? 'green' : 'sand'}>{known ? 'Known customer' : 'Anonymous'}</Chip>
       </div>
-      <div className="mt-3 space-y-1 text-sm">
+      <div className="mt-2 space-y-1 text-sm">
         <div className="flex flex-wrap items-center gap-2">
-          <span className="hb-tx-muted w-14">email</span>
+          <span className="hb-tx-muted w-12">email</span>
           {p.email ? <><span className="hb-mono break-all">{p.email}</span><Chip tone="neon" title="High-confidence identifier; messaging enabled by default">high confidence</Chip></> : <span className="hb-tx-muted">not known yet, so no messaging</span>}
         </div>
-        {p.vuids.map((v) => (
-          <div key={v} className="flex flex-wrap items-center gap-2">
-            <span className="hb-tx-muted w-14">vuid</span>
-            <span className="hb-mono" title={v}>{short(v)}</span>
-            <Chip title="Cookie ID set by the ODP JavaScript tag; low-confidence identifier">low confidence</Chip>
-            <span className="text-xs hb-tx-muted">{v === V_LAP ? 'laptop browser' : 'phone browser'}</span>
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+          <span className="hb-tx-muted w-12">vuid</span>
+          {p.vuids.map((v) => (
+            <span key={v} className="inline-flex flex-wrap items-center gap-2">
+              <span className="hb-mono" title={v}>{short(v)}</span>
+              <Chip title="Cookie ID set by the ODP JavaScript tag; low-confidence identifier">low confidence</Chip>
+              <span className="text-xs hb-tx-muted">{v === V_LAP ? 'laptop' : 'phone'}</span>
+            </span>
+          ))}
+        </div>
+      </div>
+      <div className="mt-2 flex flex-wrap items-center gap-1">
+        <span className="mr-1 text-xs font-semibold uppercase tracking-wider hb-tx-muted">Audiences</span>
+        {audiences.length ? audiences.map((a) => <Chip key={a.id} tone="green">{a.name}</Chip>) : <span className="text-sm hb-tx-muted">none yet</span>}
+      </div>
+      <div className="mt-2 grid gap-2" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(110px, 1fr))' }}>
+        {tiles.map(([k, v]) => (
+          <div key={k} className="rounded-lg px-2 py-1" style={{ background: '#F8F8F5' }}>
+            <div className="text-xs hb-tx-muted">{k}</div>
+            <div className="hb-mono text-sm font-semibold">{v}</div>
           </div>
         ))}
       </div>
-      <div className="mt-3">
-        <div className="text-xs font-semibold uppercase tracking-wider hb-tx-muted">Real-time audiences it qualifies for</div>
-        <div className="mt-1 flex flex-wrap gap-1">
-          {audiences.length ? audiences.map((a) => <Chip key={a.id} tone="green">{a.name}</Chip>) : <span className="text-sm hb-tx-muted">none yet</span>}
-        </div>
-      </div>
-      <div className="mt-3 text-sm">
-        <div className="text-xs font-semibold uppercase tracking-wider hb-tx-muted">Attributes your script would derive</div>
-        <AttrRows rows={[['hrb_filing_preference', attrs.hrb_filing_preference], ['hrb_appointment_cta_clicks', attrs.hrb_appointment_cta_clicks], ['hrb_diy_start_clicks', attrs.hrb_diy_start_clicks], ['hrb_pages_viewed', attrs.hrb_pages_viewed]]} />
-      </div>
-      <div className="mt-3">
-        <div className="text-xs font-semibold uppercase tracking-wider hb-tx-muted">Timeline ({evs.length} events)</div>
-        <ul className="hb-scroll mt-1 space-y-1 overflow-y-auto pr-1" style={{ maxHeight: 220 }}>
-          {evs.map((e) => {
-            const isNew = step.newIds.includes(e.id);
-            return (
-              <li key={e.id} className="flex flex-wrap items-center gap-2 rounded-lg px-2 py-1 text-sm" style={{ background: isNew ? '#E9FBEF' : '#F8F8F5', borderLeft: isNew ? '4px solid #00E95C' : '4px solid transparent' }}>
-                <span className="w-20 text-xs hb-tx-muted">{e.when}</span>
-                <Chip tone={DEVICE_TONE[e.device]}>{e.device}</Chip>
-                <span className="hb-mono text-xs">{e.type}/{e.action}</span>
-                <span className="text-xs hb-tx-muted">{e.page}</span>
-                {isNew ? <Chip tone="dark">new</Chip> : null}
-              </li>
-            );
-          })}
-        </ul>
-      </div>
+      <div className="mt-2 text-xs font-semibold uppercase tracking-wider hb-tx-muted">Timeline ({evs.length} events)</div>
+      <ul className="hb-scroll mt-1 space-y-1 overflow-y-auto pr-1" style={{ maxHeight: 84 }}>
+        {evs.map((e) => {
+          const isNew = step.newIds.includes(e.id);
+          return (
+            <li key={e.id} className="flex flex-wrap items-center gap-2 rounded-lg px-2 py-0.5 text-sm" style={{ background: isNew ? '#E9FBEF' : '#F8F8F5', borderLeft: isNew ? '4px solid #00E95C' : '4px solid transparent' }}>
+              <span className="w-16 text-xs hb-tx-muted">{e.when}</span>
+              <Chip tone={DEVICE_TONE[e.device]}>{e.device}</Chip>
+              <span className="hb-mono text-xs">{e.type}/{e.action}</span>
+              {isNew ? <Chip tone="dark">new</Chip> : null}
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 }
 
-function IdentityScenario({ from = 0, to = SCN_STEPS.length - 1 }) {
-  const [si, setSi] = useState(from);
+function IdentityScenario({ from = 0, to = SCN_STEPS.length - 1, si, setSi }) {
   const step = SCN_STEPS[si];
   const raw = step.profiles.length;
   const people = step.unique;
@@ -576,6 +584,12 @@ function IdentityScenario({ from = 0, to = SCN_STEPS.length - 1 }) {
   const messageable = step.profiles.filter((p) => p.email).length;
   const payload = JSON.stringify(step.newIds.map((id) => scnToOdp(scnEvent(id))), null, 2);
   const short6 = ['Anonymous visit', 'Second device', 'Sign in: phone', 'Sign in: laptop', 'Server import', 'Shared laptop'];
+  const tile = (value, label, style) => (
+    <div className="hb-card p-2 text-center">
+      <div className={'text-2xl font-bold ' + (style ? '' : 'hb-tx-green')} style={style}>{value}</div>
+      <div className="text-xs hb-tx-muted">{label}</div>
+    </div>
+  );
   return (
     <div>
       <div className="flex flex-wrap gap-2" role="group" aria-label="Scenario steps">
@@ -586,33 +600,35 @@ function IdentityScenario({ from = 0, to = SCN_STEPS.length - 1 }) {
         )))}
       </div>
 
-      <div className="mt-5 grid grid-cols-1 gap-5 lg:grid-cols-5">
-        <div className="lg:col-span-2 space-y-4">
-          <div className="hb-card p-5">
+      <div className="mt-3 grid grid-cols-1 gap-4 lg:grid-cols-5">
+        <div className="lg:col-span-2 space-y-3">
+          <div className="hb-card p-4">
             <Eyebrow>{'Step ' + (si + 1) + ' of ' + SCN_STEPS.length + (step.edge ? ' \u00b7 edge case' : '')}</Eyebrow>
             <h3 className="mt-1 text-lg hb-tx-dark">{step.title}</h3>
-            <p className="mt-2 text-sm">{step.text}</p>
-            <p className="mt-3 text-xs hb-tx-muted">{step.docs}</p>
-            <div className="mt-4 flex gap-2">
-              <button type="button" className="hb-btn hb-btn-outline hb-btn-sm" disabled={si === from} onClick={() => setSi(si - 1)}>Back</button>
-              <button type="button" className="hb-btn hb-btn-primary hb-btn-sm" disabled={si === to} onClick={() => setSi(si + 1)}>Next step</button>
-              <button type="button" className="hb-btn hb-btn-outline hb-btn-sm" onClick={() => setSi(from)}>Restart</button>
+            <p className="mt-1 text-sm">{step.text}</p>
+            <p className="mt-2 text-xs hb-tx-muted">{step.docs}</p>
+          </div>
+          <div className="grid grid-cols-4 gap-2">
+            {tile(raw, 'profiles in ODP')}
+            {tile(people, 'real people')}
+            {tile(dup, 'duplicates', dup ? { color: '#262626', textDecoration: 'underline' } : undefined)}
+            {tile(messageable, 'messageable')}
+          </div>
+          <details className="hb-card p-3 text-sm">
+            <summary className="cursor-pointer font-semibold hb-tx-dark">Events ODP receives in this step</summary>
+            <div className="mt-2 space-y-2">
+              <Code label="POST /v3/events" code={payload} maxH={200} />
+              <p className="text-xs hb-tx-muted">Browser events come from the ODP JavaScript tag and carry the vuid; the server-side event carries only an email.</p>
             </div>
-          </div>
-          <div className="grid grid-cols-2 gap-3">
-            <div className="hb-card p-3"><Stat value={raw} label="profiles in ODP" /></div>
-            <div className="hb-card p-3"><Stat value={people} label="real people" /></div>
-            <div className="hb-card p-3"><div className={'text-3xl font-bold md:text-4xl ' + (dup ? '' : 'hb-tx-green')} style={dup ? { color: '#262626', textDecoration: 'underline' } : undefined}>{dup}</div><div className="mt-1 text-sm hb-tx-muted">double-counted</div></div>
-            <div className="hb-card p-3"><Stat value={messageable} label="messageable (email known)" /></div>
-          </div>
-          <Code label="Events ODP receives in this step" code={payload} maxH={260} />
-          <p className="text-xs hb-tx-muted">Same shape as the events in your import script (POST /v3/events). Browser events come from the ODP JavaScript tag and carry the vuid; the server-side event carries only an email.</p>
+          </details>
         </div>
-        <div className="lg:col-span-3 space-y-4">
-          {step.merged ? <Callout dark title="Merged">The anonymous laptop profile (z_1a7c04) folded into the known profile. Its events now sit on one timeline with the phone events, and one client counts once.</Callout> : null}
-          {si === 3 ? <Callout title="Why this changes segmentation">Before the merge, the laptop profile looked like a pro seeker and the phone profile like a DIY starter. Merged, the same person is comparing options. The audiences below are re-evaluated on the unified profile.</Callout> : null}
-          {si === 4 ? <Callout title="The audience flips">The imported appointment click makes two appointment clicks against one DIY click. The profile moves to High-intent pro and still counts as Comparing options.</Callout> : null}
-          <div className="grid grid-cols-1 gap-4">
+        <div className="lg:col-span-3 space-y-3">
+          <div className={'grid gap-3 ' + (si === 3 ? 'md:grid-cols-2' : '')}>
+          {step.merged ? <Callout compact dark title="Merged">The anonymous laptop profile (z_1a7c04) folded into the known profile. Its events now sit on one timeline with the phone events, and one client counts once.</Callout> : null}
+          {si === 3 ? <Callout compact title="Why this changes segmentation">Before the merge, the laptop profile looked like a pro seeker and the phone profile like a DIY starter. Merged, the same person is comparing options. The audiences below are re-evaluated on the unified profile.</Callout> : null}
+          {si === 4 ? <Callout compact title="The audience flips">The imported appointment click makes two appointment clicks against one DIY click. The profile moves to High-intent pro and still counts as Comparing options.</Callout> : null}
+          </div>
+          <div className={'grid gap-3 ' + (step.profiles.length > 1 ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1')}>
             {step.profiles.map((p) => <ProfileCard key={p.key + si} p={p} step={step} />)}
           </div>
         </div>
@@ -621,70 +637,76 @@ function IdentityScenario({ from = 0, to = SCN_STEPS.length - 1 }) {
   );
 }
 
-function PopulationPanel({ population, params, setParams, now }) {
-  const [q, setQ] = useState('');
-  const [limit, setLimit] = useState(10);
-  const [open, setOpen] = useState(null);
+function PopulationSummary({ population, params, setParams }) {
   const { profiles, eventCount, runId } = population;
   const mix = useMemo(() => {
     const m = { tax_pro: 0, diy: 0, undecided: 0, researching: 0 };
     profiles.forEach((p) => { m[p.attributes.hrb_filing_preference] += 1; });
     return m;
   }, [profiles]);
+  return (
+    <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+      <div className="hb-card p-4 lg:col-span-1">
+        <h3 className="text-lg hb-tx-dark">Generator settings</h3>
+        <p className="mt-1 text-sm hb-tx-muted">Same flags as the import script. The same seed and count always give the same emails, so re-running upserts instead of duplicating.</p>
+          <div className="mt-3 space-y-3 text-sm">
+          <label className="block">
+            <span className="font-semibold">--count: {params.count} profiles</span>
+            <input className="mt-1 w-full" type="range" min="20" max="500" step="10" value={params.count} onChange={(e) => setParams({ ...params, count: parseInt(e.target.value, 10) })} />
+          </label>
+          <label className="block">
+            <span className="font-semibold">--days: spread events over {params.days} days</span>
+            <input className="mt-1 w-full" type="range" min="1" max="28" step="1" value={params.days} onChange={(e) => setParams({ ...params, days: parseInt(e.target.value, 10) })} />
+          </label>
+          <label className="block">
+            <span className="font-semibold">--seed</span>
+            <input className="hb-input mt-1 block w-32" type="number" value={params.seed} onChange={(e) => setParams({ ...params, seed: parseInt(e.target.value, 10) || 0 })} />
+          </label>
+          <button type="button" className="hb-btn hb-btn-outline hb-btn-sm" onClick={() => setParams({ count: 200, days: 14, seed: 42 })}>Reset to script defaults</button>
+        </div>
+      </div>
+      <div className="hb-card p-4 lg:col-span-2">
+        <div className="grid grid-cols-3 gap-3">
+          <Stat value={profiles.length.toLocaleString()} label="profiles" />
+          <Stat value={eventCount.toLocaleString()} label="events" />
+          <Stat value={(eventCount / profiles.length).toFixed(1)} label="events per profile" />
+        </div>
+          <div className="mt-4 text-sm font-semibold">Derived hrb_filing_preference</div>
+        <div className="mt-2"><StackedBar segments={Object.keys(mix).map((k) => ({ label: k, value: mix[k], color: PREF_COLORS[k] }))} /></div>
+        <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm">
+          {Object.keys(mix).map((k) => (
+            <span key={k} className="inline-flex items-center gap-2">
+              <span style={{ width: 12, height: 12, borderRadius: 3, background: PREF_COLORS[k], display: 'inline-block', border: '1px solid #262626' }} />
+              <span className="hb-mono text-xs">{k}</span> <strong>{mix[k]}</strong> <span className="hb-tx-muted">({pctOf(mix[k], profiles.length)}%)</span>
+            </span>
+          ))}
+        </div>
+        <p className="mt-3 text-xs hb-tx-muted">Import batch id: <span className="hb-mono">{runId}</span>. Emails use example.com, a reserved domain, so nothing here can reach a real person.</p>
+      </div>
+    </div>
+  );
+}
+
+function PopulationBrowser({ population, now }) {
+  const [q, setQ] = useState('');
+  const [limit, setLimit] = useState(6);
+  const [open, setOpen] = useState(null);
+  const { profiles } = population;
   const filtered = useMemo(() => profiles.filter((p) => p.attributes.email.includes(q.trim().toLowerCase())), [profiles, q]);
   const shown = filtered.slice(0, limit);
   const sample = open ? profiles.find((p) => p.attributes.email === open) : null;
   return (
-    <div>
-      <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
-        <div className="hb-card p-5 lg:col-span-1">
-          <h3 className="text-lg hb-tx-dark">Generator settings</h3>
-          <p className="mt-1 text-sm hb-tx-muted">Same flags as the import script. The same seed and count always give the same emails, so re-running upserts profiles instead of duplicating them.</p>
-          <div className="mt-4 space-y-4 text-sm">
-            <label className="block">
-              <span className="font-semibold">--count: {params.count} profiles</span>
-              <input className="mt-1 w-full" type="range" min="20" max="500" step="10" value={params.count} onChange={(e) => setParams({ ...params, count: parseInt(e.target.value, 10) })} />
-            </label>
-            <label className="block">
-              <span className="font-semibold">--days: spread events over {params.days} days</span>
-              <input className="mt-1 w-full" type="range" min="1" max="28" step="1" value={params.days} onChange={(e) => setParams({ ...params, days: parseInt(e.target.value, 10) })} />
-            </label>
-            <label className="block">
-              <span className="font-semibold">--seed</span>
-              <input className="hb-input mt-1 block w-32" type="number" value={params.seed} onChange={(e) => setParams({ ...params, seed: parseInt(e.target.value, 10) || 0 })} />
-            </label>
-            <button type="button" className="hb-btn hb-btn-outline hb-btn-sm" onClick={() => setParams({ count: 200, days: 14, seed: 42 })}>Reset to script defaults</button>
-          </div>
-        </div>
-        <div className="hb-card p-5 lg:col-span-2">
-          <div className="grid grid-cols-3 gap-3">
-            <Stat value={profiles.length.toLocaleString()} label="profiles" />
-            <Stat value={eventCount.toLocaleString()} label="events" />
-            <Stat value={(eventCount / profiles.length).toFixed(1)} label="events per profile" />
-          </div>
-          <div className="mt-5 text-sm font-semibold">Derived hrb_filing_preference</div>
-          <div className="mt-2"><StackedBar segments={Object.keys(mix).map((k) => ({ label: k, value: mix[k], color: PREF_COLORS[k] }))} /></div>
-          <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm">
-            {Object.keys(mix).map((k) => (
-              <span key={k} className="inline-flex items-center gap-2">
-                <span style={{ width: 12, height: 12, borderRadius: 3, background: PREF_COLORS[k], display: 'inline-block', border: '1px solid #262626' }} />
-                <span className="hb-mono text-xs">{k}</span> <strong>{mix[k]}</strong> <span className="hb-tx-muted">({pctOf(mix[k], profiles.length)}%)</span>
-              </span>
-            ))}
-          </div>
-          <p className="mt-4 text-xs hb-tx-muted">Import batch id: <span className="hb-mono">{runId}</span>. Emails use example.com, a reserved domain, so nothing here can reach a real person. All profiles are identified by email only, which is why live browsers need a sign-in to be linked to them.</p>
-        </div>
+    <div className="hb-card p-4">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <h3 className="text-lg hb-tx-dark">Browse the profiles <span className="text-sm font-normal hb-tx-muted">(click a row for its events and the record ODP receives)</span></h3>
+        <label className="text-sm"><span className="sr-only">Filter by email</span>
+          <input className="hb-input w-56" placeholder="Filter by email" value={q} onChange={(e) => { setQ(e.target.value); setLimit(6); }} />
+        </label>
       </div>
-
-      <div className="hb-card mt-5 p-5">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <h3 className="text-lg hb-tx-dark">Browse the profiles</h3>
-          <label className="text-sm"><span className="sr-only">Filter by email</span>
-            <input className="hb-input w-64" placeholder="Filter by email" value={q} onChange={(e) => { setQ(e.target.value); setLimit(10); }} />
-          </label>
-        </div>
-        <div className="mt-3 overflow-x-auto">
-          <table className="w-full" style={{ minWidth: 640 }}>
+      <div className={'mt-2 grid gap-4 ' + (sample ? 'lg:grid-cols-5' : 'grid-cols-1')}>
+        <div className={sample ? 'lg:col-span-3' : ''}>
+        <div className="overflow-x-auto">
+          <table className="w-full" style={{ minWidth: 560 }}>
             <thead><tr><TH>Email</TH><TH>Preference</TH><TH>Appointment clicks</TH><TH>DIY clicks</TH><TH>Pages</TH><TH>Last event</TH></tr></thead>
             <tbody>
               {shown.map((p) => {
@@ -701,21 +723,21 @@ function PopulationPanel({ population, params, setParams, now }) {
             </tbody>
           </table>
         </div>
-        <div className="mt-3 flex flex-wrap items-center gap-3 text-sm">
-          <span className="hb-tx-muted">Showing {shown.length} of {filtered.length}</span>
-          {shown.length < filtered.length ? <button type="button" className="hb-btn hb-btn-outline hb-btn-sm" onClick={() => setLimit(limit + 10)}>Show 10 more</button> : null}
+          <div className="mt-2 flex flex-wrap items-center gap-3 text-sm">
+            <span className="hb-tx-muted">Showing {shown.length} of {filtered.length}</span>
+            {shown.length < filtered.length ? <button type="button" className="hb-btn hb-btn-outline hb-btn-sm" onClick={() => setLimit(limit + 6)}>Show 6 more</button> : null}
+          </div>
         </div>
         {sample ? (
-          <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
-            <Code label="POST /v3/profiles (one record)" code={JSON.stringify({ attributes: sample.attributes }, null, 2)} maxH={300} />
+          <div className="lg:col-span-2 space-y-2">
+            <Code label="POST /v3/profiles (one record)" code={JSON.stringify({ attributes: sample.attributes }, null, 2)} maxH={170} />
             <div>
               <div className="mb-1 text-xs font-semibold uppercase tracking-wider hb-tx-muted">Events for this profile</div>
-              <ul className="space-y-1 text-sm">
+              <ul className="hb-scroll space-y-1 overflow-y-auto text-sm" style={{ maxHeight: 130 }}>
                 {sample.events.map((e, i) => (
-                  <li key={i} className="flex flex-wrap items-center gap-2 rounded-lg px-2 py-1" style={{ background: '#F8F8F5' }}>
-                    <span className="w-20 text-xs hb-tx-muted">{fmtAgo(e.data.ts, now)}</span>
+                  <li key={i} className="flex flex-wrap items-center gap-2 rounded-lg px-2 py-0.5" style={{ background: '#F8F8F5' }}>
+                    <span className="w-16 text-xs hb-tx-muted">{fmtAgo(e.data.ts, now)}</span>
                     <span className="hb-mono text-xs">{e.type}/{e.action}</span>
-                    <span className="text-xs hb-tx-muted">{e.data.page}</span>
                     {e.data.value ? <Chip>{e.data.value}</Chip> : null}
                   </li>
                 ))}
@@ -728,19 +750,18 @@ function PopulationPanel({ population, params, setParams, now }) {
   );
 }
 
-function IdentityStepsScene({ from, to, lead }) {
+function IdentityStepsScene({ from, to, build, setBuild }) {
   return (
-    <div className="mx-auto max-w-6xl px-4 py-10 md:px-8">
-      <Lead eyebrow={'Capability 1 \u00b7 Identity resolution'}>{lead}</Lead>
-      <IdentityScenario from={from} to={to} />
-    </div>
+    <Slide>
+      <IdentityScenario from={from} to={to} si={from + build} setSi={(i) => setBuild(i - from)} />
+    </Slide>
   );
 }
-const TwoDevicesScene = () => <IdentityStepsScene from={0} to={1} lead="Follow one client, Maria. She visits on her laptop, then on her phone. Each browser gets its own cookie, so ODP sees two anonymous visitors. Click through the two steps and watch the count of profiles against the count of real people." />;
-const SignInMergeScene = () => <IdentityStepsScene from={2} to={3} lead="Maria signs in on her phone, then on her laptop. The email is a high-confidence identifier, so ODP attaches it to the phone profile and later folds the anonymous laptop profile into it. Watch the profiles, the timeline and the audiences change." />;
-const ImportSharedScene = () => <IdentityStepsScene from={4} to={5} lead="Signals from your own systems join the same profile by email, with no cookie involved. Then a family member signs in on the shared laptop: the edge case to plan for when you decide on identifiers." />;
+const TwoDevicesScene = (props) => <IdentityStepsScene {...props} from={0} to={1} />;
+const SignInMergeScene = (props) => <IdentityStepsScene {...props} from={2} to={3} />;
+const ImportSharedScene = (props) => <IdentityStepsScene {...props} from={4} to={5} />;
 
-function IdentifiersScene({ population, params, setParams, now }) {
+function IdentifiersScene({ population, params, setParams, now, build }) {
   const idRows = [
     ['email', 'High', 'Yes', 'The person-level key. Used by your import script. Directly links events to an existing profile or creates one.'],
     ['vuid', 'Low', 'No', 'Cookie/device ID set by the ODP JavaScript tag, lasts 2 years. Only used to link when no high-confidence identifier is present, and can move between profiles.'],
@@ -748,33 +769,21 @@ function IdentifiersScene({ population, params, setParams, now }) {
     ['Custom (for example MyBlock account ID)', 'Set by configuration', 'Configurable', 'Custom identifiers are considered when merging. They are created with the ODP Customer Success team, so plan the identifier list early.'],
   ];
   return (
-    <div className="mx-auto max-w-6xl px-4 py-10 md:px-8">
-      <Lead eyebrow={'Capability 1 \u00b7 the unified view'}>Underneath the story are two things: the rules ODP uses to decide who is who, and the population of profiles that your import script builds.</Lead>
-
-      <div>
-        <SectionTitle title="Identifiers at a glance">The confidence level decides how much weight an identifier carries when ODP decides whether two events belong to the same person.</SectionTitle>
-        <div className="hb-card overflow-x-auto">
-          <table className="w-full" style={{ minWidth: 640 }}>
-            <thead><tr><TH>Identifier</TH><TH>Confidence</TH><TH>Messaging</TH><TH>How it behaves</TH></tr></thead>
-            <tbody>{idRows.map((r) => (<tr key={r[0]}><TD className="font-semibold hb-mono text-xs">{r[0]}</TD><TD>{r[1]}</TD><TD>{r[2]}</TD><TD className="hb-tx-muted">{r[3]}</TD></tr>))}</tbody>
-          </table>
+    <Slide>
+      {build === 0 ? (
+        <div className="hb-fade">
+          <div className="hb-card overflow-x-auto">
+            <table className="w-full" style={{ minWidth: 640 }}>
+              <thead><tr><TH>Identifier</TH><TH>Confidence</TH><TH>Messaging</TH><TH>How it behaves</TH></tr></thead>
+              <tbody>{idRows.map((r) => (<tr key={r[0]}><TD className="font-semibold hb-mono text-xs">{r[0]}</TD><TD>{r[1]}</TD><TD>{r[2]}</TD><TD className="hb-tx-muted">{r[3]}</TD></tr>))}</tbody>
+            </table>
+          </div>
+          <p className="mt-3 text-sm hb-tx-muted">Sources: <DocLink href="https://docs.optimizely.com/data-platform/docs/overview-of-customer-identity-and-resolution">Overview of customer identity and resolution</DocLink>{' \u00b7 '}<DocLink href="https://docs.optimizely.com/data-platform/docs/thebasics-identifiers">Identifiers</DocLink>{' \u00b7 '}<DocLink href="https://docs.optimizely.com/data-platform/docs/track-customers-in-odp">Track customers in ODP</DocLink></p>
         </div>
-        <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
-          <Callout title="Sources">
-            <DocLink href="https://docs.optimizely.com/data-platform/docs/overview-of-customer-identity-and-resolution">Overview of customer identity and resolution</DocLink>{' \u00b7 '}
-            <DocLink href="https://docs.optimizely.com/data-platform/docs/thebasics-identifiers">Identifiers</DocLink>{' \u00b7 '}
-            <DocLink href="https://docs.optimizely.com/data-platform/docs/track-customers-in-odp">Track customers in ODP</DocLink>
-          </Callout>
-        </div>
-      </div>
-
-      <div className="mt-12">
-        <SectionTitle eyebrow="Your import script, in the browser" title="The seeded population">
-          Every attribute is derived from that profile&rsquo;s events, exactly as in the script. Move the sliders to see how the volume and the 28-day audience window react.
-        </SectionTitle>
-        <PopulationPanel population={population} params={params} setParams={setParams} now={now} />
-      </div>
-    </div>
+      ) : null}
+      {build === 1 ? <div className="hb-fade"><PopulationSummary population={population} params={params} setParams={setParams} /></div> : null}
+      {build === 2 ? <div className="hb-fade"><PopulationBrowser population={population} now={now} /></div> : null}
+    </Slide>
   );
 }
 
@@ -853,7 +862,7 @@ function GroupEditor({ group, index, onGroup, onCond, onAddCond, onRemoveCond, o
   );
 }
 
-function AudienceBuilderScene({ population, now }) {
+function AudienceBuilderScene({ population, now, build }) {
   const [selId, setSelId] = useState('hrb_high_intent_pro');
   const preset = AUDIENCES.find((a) => a.id === selId);
   const [draft, setDraft] = useState(() => cloneGroups(AUDIENCES[0].groups));
@@ -879,40 +888,35 @@ function AudienceBuilderScene({ population, now }) {
   const addGroup = (type) => setDraft([...draft, type === 'attribute' ? atGroup('include', 'all', [atCond('hrb_filing_preference', 'is', 'tax_pro')]) : evGroup('include', 'all', [evCond('appointment_cta_click', 1, 28)])]);
 
   const renderPick = (a) => (
-    <button key={a.id} type="button" className="hb-pick" aria-pressed={a.id === selId} onClick={() => pickAud(a.id)}>
+    <button key={a.id} type="button" className="hb-pick" style={{ padding: '7px 10px' }} aria-pressed={a.id === selId} onClick={() => pickAud(a.id)}>
       <div className="flex items-center justify-between gap-2">
         <span className="text-sm font-bold hb-tx-dark">{a.name}</span>
         <Chip tone={a.family === 'events' ? 'green' : 'sand'}>{sizes[a.id]}</Chip>
       </div>
-      <div className="hb-mono mt-1 text-xs hb-tx-muted">{a.id}</div>
     </button>
   );
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-10 md:px-8">
-      <Lead eyebrow={'Capability 2 \u00b7 step 1: Optimizely Data Platform'}>
-        This is the real-time audience builder, running against the {total} seeded profiles. Pick an audience, change its conditions, and watch the membership update. Event conditions look back at most 28 days, so the lookback you set here is the one that counts.
-      </Lead>
-
-      <div className="grid grid-cols-1 gap-5 lg:grid-cols-12">
-        <div className="lg:col-span-3 space-y-2">
-          <div className="text-xs font-semibold uppercase tracking-wider hb-tx-muted">Event-based (used for activation)</div>
+    <Slide>
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-12">
+        <div className="lg:col-span-3 space-y-1.5">
+          <div className="text-xs font-semibold uppercase tracking-wider hb-tx-muted">Event-based (activation)</div>
           {AUDIENCES.filter((a) => a.family === 'events').map(renderPick)}
-          <div className="pt-2 text-xs font-semibold uppercase tracking-wider hb-tx-muted">Attribute-based (your hrb_* fields)</div>
+          <div className="pt-1 text-xs font-semibold uppercase tracking-wider hb-tx-muted">Attribute-based (hrb_* fields)</div>
           {AUDIENCES.filter((a) => a.family === 'attributes').map(renderPick)}
         </div>
 
-        <div className="lg:col-span-9 space-y-4">
-          <div className="hb-card p-5">
-            <div className="flex flex-wrap items-center gap-2">
-              <h3 className="text-xl hb-tx-dark">{preset.name}</h3>
-              <span className="hb-mono text-xs hb-tx-muted">{preset.id}</span>
-              {modified ? <Chip tone="neon">edited, not saved</Chip> : null}
-              {modified ? <button type="button" className="hb-btn hb-btn-outline hb-btn-sm" onClick={() => pickAud(selId)}>Undo edits</button> : null}
-            </div>
-            <p className="mt-1 text-sm hb-tx-muted">{preset.desc}</p>
-
-            <div className="mt-4 space-y-3">
+        <div className="lg:col-span-9 space-y-3">
+          {build === 0 ? (
+            <div className="hb-card hb-fade p-4">
+              <div className="flex flex-wrap items-center gap-2">
+                <h3 className="text-xl hb-tx-dark">{preset.name}</h3>
+                <span className="hb-mono text-xs hb-tx-muted">{preset.id}</span>
+                {modified ? <Chip tone="neon">edited, not saved</Chip> : null}
+                {modified ? <button type="button" className="hb-btn hb-btn-outline hb-btn-sm" onClick={() => pickAud(selId)}>Undo edits</button> : null}
+              </div>
+              <p className="mt-1 text-sm hb-tx-muted">{preset.desc}</p>
+              <div className="mt-3 space-y-2">
               {draft.map((g, gi) => (
                 <GroupEditor key={gi} group={g} index={gi}
                   onGroup={(patch) => setGroup(gi, patch)}
@@ -921,23 +925,28 @@ function AudienceBuilderScene({ population, now }) {
                   onRemoveCond={(ci) => removeCond(gi, ci)}
                   onRemoveGroup={() => removeGroup(gi)} />
               ))}
-              <div className="flex flex-wrap gap-2">
-                <button type="button" className="hb-btn hb-btn-outline hb-btn-sm" onClick={() => addGroup('event')}>Add event group</button>
-                <button type="button" className="hb-btn hb-btn-outline hb-btn-sm" onClick={() => addGroup('attribute')}>Add attribute group</button>
+                <div className="flex flex-wrap gap-2">
+                  <button type="button" className="hb-btn hb-btn-outline hb-btn-sm" onClick={() => addGroup('event')}>Add event group</button>
+                  <button type="button" className="hb-btn hb-btn-outline hb-btn-sm" onClick={() => addGroup('attribute')}>Add attribute group</button>
+                </div>
               </div>
-              <p className="text-xs hb-tx-muted">A group holds one type of condition, either attributes or events. All groups must pass for someone to be in the audience.</p>
+            </div>
+          ) : null}
+
+          <div className="hb-card flex flex-wrap items-center gap-x-6 gap-y-2 p-4">
+            <div>
+              <div className="text-xs font-semibold uppercase tracking-wider hb-tx-muted">Audience size</div>
+              <div className="flex items-end gap-2"><span className="text-4xl font-bold hb-tx-green">{members.length}</span><span className="pb-1 text-sm hb-tx-muted">of {total} profiles ({pctOf(members.length, total)}%)</span></div>
+            </div>
+            <div className="min-w-[180px] flex-1">
+              <div className="hb-bar"><div style={{ width: pctOf(members.length, total) + '%', background: '#005D1F' }} /></div>
+              <div className="mt-1 text-xs hb-tx-muted">Evaluated live in your browser. Event conditions look back at most 28 days.</div>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-5">
-            <div className="hb-card p-5 md:col-span-2">
-              <div className="text-xs font-semibold uppercase tracking-wider hb-tx-muted">Audience size</div>
-              <div className="mt-1 flex items-end gap-2"><span className="text-5xl font-bold hb-tx-green">{members.length}</span><span className="pb-2 text-sm hb-tx-muted">of {total} profiles ({pctOf(members.length, total)}%)</span></div>
-              <div className="mt-3 hb-bar"><div style={{ width: pctOf(members.length, total) + '%', background: '#005D1F' }} /></div>
-              <div className="mt-4 text-sm hb-tx-muted">Evaluated live in your browser from the events and attributes your import script generates.</div>
-            </div>
-            <div className="hb-card p-5 md:col-span-3">
-              <div className="text-xs font-semibold uppercase tracking-wider hb-tx-muted">First members</div>
+          {build === 1 ? (
+            <div className="hb-card hb-fade p-4">
+              <div className="text-xs font-semibold uppercase tracking-wider hb-tx-muted">First members of {preset.name}</div>
               <div className="mt-2 overflow-x-auto">
                 <table className="w-full" style={{ minWidth: 420 }}>
                   <thead><tr><TH>Email</TH><TH>Appt</TH><TH>DIY</TH><TH>Preference</TH></tr></thead>
@@ -950,21 +959,20 @@ function AudienceBuilderScene({ population, now }) {
                 </table>
               </div>
             </div>
-          </div>
+          ) : null}
         </div>
       </div>
-
-    </div>
+    </Slide>
   );
 }
 
-function AudienceKindsScene({ population, now }) {
+function AudienceKindsScene({ population, now, build }) {
   const sizes = useMemo(() => AUDIENCES.map((a) => ({ a, n: population.profiles.filter((q) => inAudience(a.groups, q, now)).length })), [population, now]);
   const total = population.profiles.length;
   return (
-    <div className="mx-auto max-w-6xl px-4 py-10 md:px-8">
-      <Lead eyebrow={'Capability 2 \u00b7 step 1: Optimizely Data Platform'}>The same segmentation question can be answered from events or from profile attributes. They behave differently once the season is under way, so it is worth choosing deliberately. Sizes are against the {total} seeded profiles.</Lead>
-      <div className="mb-6 hb-card overflow-x-auto">
+    <Slide>
+      {build === 0 ? (
+      <div className="hb-card hb-fade overflow-x-auto">
         <table className="w-full" style={{ minWidth: 520 }}>
           <thead><tr><TH>Audience</TH><TH>Based on</TH><TH>Members</TH><TH>Share</TH></tr></thead>
           <tbody>
@@ -974,10 +982,12 @@ function AudienceKindsScene({ population, now }) {
           </tbody>
         </table>
       </div>
-      <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+      ) : null}
+      {build === 1 ? (
+      <div className="hb-fade grid grid-cols-1 gap-5 md:grid-cols-2">
         <div className="hb-card p-5">
           <h3 className="text-lg hb-tx-dark">Event-based or attribute-based?</h3>
-          <p className="mt-2 text-sm">Your import script writes hrb_filing_preference once, when it imports. A live click on the site never updates it. The event-based audiences read the events directly, so they react to live behaviour and still match the seeded data. Compare the sizes in the table above.</p>
+          <p className="mt-2 text-sm">Your import script writes hrb_filing_preference once, when it imports. A live click on the site never updates it. The event-based audiences read the events directly, so they react to live behaviour and still match the seeded data. Compare the sizes on the previous step.</p>
           <ul className="mt-3 list-disc pl-5 text-sm space-y-1">
             <li><strong>Events:</strong> real-time, but limited to the last 28 days.</li>
             <li><strong>Attributes:</strong> stay on the profile as long as you keep them, but need something to write them back.</li>
@@ -995,14 +1005,15 @@ function AudienceKindsScene({ population, now }) {
           <p className="mt-3 text-sm"><DocLink href="https://docs.optimizely.com/data-platform/docs/build-real-time-audiences-in-odp">Build real-time audiences in ODP</DocLink></p>
         </div>
       </div>
-    </div>
+      ) : null}
+    </Slide>
   );
 }
 
 /* =====================================================================
    ACTIVATION (Web Experimentation)
    ===================================================================== */
-function HomePreview({ copy, highlight, onCta }) {
+function HomePreview({ copy, highlight, onCta, compact }) {
   const diff = (k) => highlight && copy[k] !== ORIGINAL_COPY[k];
   const cls = (flag) => (flag ? 'hb-changed' : '');
   const apptPrimary = copy.emphasis === 'appt';
@@ -1018,7 +1029,7 @@ function HomePreview({ copy, highlight, onCta }) {
         <strong className="hb-tx-dark">H&amp;R Block{'\u00ae'}</strong>
         <span className="hb-tx-muted">Still time to file {'\u00b7'} File online {'\u00b7'} File with a tax pro {'\u00b7'} Find an office</span>
       </div>
-      <div className="hb-bg-dark px-5 py-7 hb-dark-zone">
+      <div className={'hb-bg-dark px-5 hb-dark-zone ' + (compact ? 'py-4' : 'py-7')}>
         <div className={'text-xs font-semibold uppercase tracking-widest hb-tx-neon ' + cls(diff('eyebrow'))} style={{ display: 'inline-block' }}>{copy.eyebrow}</div>
         <h3 className={'mt-2 text-2xl hb-tx-white md:text-3xl ' + cls(diff('h1'))} style={{ display: 'block' }}>{copy.h1}</h3>
         <p className={'mt-3 max-w-xl text-sm hb-tx-sand ' + cls(diff('body'))}>{copy.body}</p>
@@ -1026,12 +1037,15 @@ function HomePreview({ copy, highlight, onCta }) {
           <button type="button" data-event-key="appointment_cta_click" onClick={() => onCta('appointment_cta_click', copy.appt)} className={'hb-btn ' + (apptPrimary ? 'hb-btn-neon' : 'hb-btn-outline-light') + ' ' + cls(diff('appt') || (highlight && copy.emphasis !== ORIGINAL_COPY.emphasis))}>{copy.appt}</button>
           <button type="button" data-event-key="diy_start_click" onClick={() => onCta('diy_start_click', copy.diy)} className={'hb-btn ' + (!apptPrimary ? 'hb-btn-neon' : 'hb-btn-outline-light') + ' ' + cls(diff('diy') || (highlight && copy.emphasis !== ORIGINAL_COPY.emphasis))}>{copy.diy}</button>
         </div>
+        {!compact ? (
         <ul className="mt-5 grid grid-cols-1 gap-2 text-sm hb-tx-sand md:grid-cols-3">
           <li>{'\u2713'} Get a second set of expert eyes before you file</li>
           <li>{'\u2713'} Meet in person or online, whichever works for you</li>
           <li>{'\u2713'} Backed by our 100% Accuracy guarantee</li>
         </ul>
+        ) : null}
       </div>
+      {!compact ? (
       <div className="grid grid-cols-1 gap-3 p-4 hb-bg-warm md:grid-cols-3">
         {cards.map((c) => (
           <div key={c.id} className="hb-card p-3 text-sm" style={copy.badge === c.id ? { borderColor: '#005D1F', borderWidth: 2 } : undefined}>
@@ -1045,6 +1059,7 @@ function HomePreview({ copy, highlight, onCta }) {
           </div>
         ))}
       </div>
+      ) : null}
     </div>
   );
 }
@@ -1060,7 +1075,7 @@ const STAGE_TEXT = [
 
 const DEFAULT_HOLDBACK = 5; // Personalization default
 
-function ActivationVisitorScene({ population }) {
+function ActivationVisitorScene({ population, build }) {
   const [visitor, setVisitor] = useState(() => ({ vuid: newVuid(), email: null, live: [], views: 0 }));
   const [applied, setApplied] = useState({ status: 'idle', winner: null, holdback: false, memberships: [] });
   const [stage, setStage] = useState(0);
@@ -1142,15 +1157,21 @@ function ActivationVisitorScene({ population }) {
   const recent = [...visitor.live].reverse().slice(0, 6);
   const storedPref = seeded ? seeded.attributes.hrb_filing_preference : null;
 
+  const actions = (
+    <div className="mb-3 flex flex-wrap items-center gap-2">
+      <span className="text-xs font-semibold uppercase tracking-wider hb-tx-muted">Play the visitor</span>
+      <button type="button" className="hb-btn hb-btn-primary hb-btn-sm" onClick={() => onCta('appointment_cta_click', 'Work with a pro')}>Click {'\u201c'}Work with a pro{'\u201d'}</button>
+      <button type="button" className="hb-btn hb-btn-primary hb-btn-sm" onClick={() => onCta('diy_start_click', 'Keep filing on my own')}>Click {'\u201c'}Keep filing on my own{'\u201d'}</button>
+      <button type="button" className="hb-btn hb-btn-neon hb-btn-sm" onClick={pageView}>Next page view</button>
+      <Chip tone={visitor.email ? 'green' : 'sand'}>{visitor.email ? 'Known' : 'Anonymous'}</Chip>
+    </div>
+  );
   return (
-    <div className="mx-auto max-w-6xl px-4 py-10 md:px-8">
-      <Lead eyebrow={'Capability 2 \u00b7 step 2: Web Experimentation'}>
-        Play the visitor. Click the hero buttons, sign in as a seeded profile, then load the next page view. ODP updates as you click; the page changes when Web Experimentation next asks ODP who this is.
-      </Lead>
-
-      <div className="grid grid-cols-1 gap-5 lg:grid-cols-5">
-        <div className="lg:col-span-2 space-y-4">
-          <div className="hb-card p-5">
+    <Slide>
+      {build === 0 ? (
+        <div className="hb-fade grid grid-cols-1 gap-4 lg:grid-cols-5">
+          <div className="lg:col-span-2 space-y-3">
+          <div className="hb-card p-4">
             <div className="flex items-center justify-between gap-2">
               <h3 className="text-lg hb-tx-dark">Visitor</h3>
               <Chip tone={visitor.email ? 'green' : 'sand'}>{visitor.email ? 'Known' : 'Anonymous'}</Chip>
@@ -1180,37 +1201,8 @@ function ActivationVisitorScene({ population }) {
             </div>
             {stale ? <div className="mt-3"><Callout dark title="ODP has newer information than the page">This visitor now qualifies for {liveDecision.winner ? '"' + liveDecision.winner.name + '"' : 'the original experience'}. Load the next page view to see it.</Callout></div> : null}
           </div>
-
-          <div className="hb-card p-5">
-            <h3 className="text-lg hb-tx-dark">ODP profile right now</h3>
-            <div className="mt-2 text-xs font-semibold uppercase tracking-wider hb-tx-muted">Real-time audiences</div>
-            <div className="mt-1 flex flex-wrap gap-1">
-              {liveDecision.memberships.length ? liveDecision.memberships.map((m) => <Chip key={m} tone="green">{m}</Chip>) : <span className="text-sm hb-tx-muted">none yet</span>}
-            </div>
-            <div className="mt-3 text-sm">
-              <div className="text-xs font-semibold uppercase tracking-wider hb-tx-muted">Derived from events now</div>
-              <AttrRows rows={[['hrb_filing_preference', derived.hrb_filing_preference], ['hrb_appointment_cta_clicks', derived.hrb_appointment_cta_clicks], ['hrb_diy_start_clicks', derived.hrb_diy_start_clicks]]} />
-            </div>
-            {storedPref ? (
-              <div className="mt-3 text-sm">
-                <span className="hb-tx-muted">Stored on the profile by the import: </span><strong className="hb-mono">{storedPref}</strong>{' '}
-                {storedPref !== derived.hrb_filing_preference ? <Chip tone="neon">stale: nothing writes live clicks back</Chip> : <Chip>in sync</Chip>}
-              </div>
-            ) : null}
-            <div className="mt-3 text-xs font-semibold uppercase tracking-wider hb-tx-muted">Latest events</div>
-            <ul className="mt-1 space-y-1">
-              {recent.map((e, i) => (
-                <li key={i} className="flex flex-wrap items-center gap-2 rounded-lg px-2 py-1 text-xs" style={{ background: '#F8F8F5' }}>
-                  <span className="hb-mono">{e.type}/{e.action}</span>
-                  {e.data.value ? <Chip>{e.data.value}</Chip> : null}
-                  <span className="hb-tx-muted">{fmtAgo(e.data.ts, nowSec())}</span>
-                </li>
-              ))}
-            </ul>
           </div>
-        </div>
-
-        <div className="lg:col-span-3 space-y-4">
+          <div className="lg:col-span-3 space-y-3">
           <div className="hb-card-dark p-4">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <div>
@@ -1222,14 +1214,52 @@ function ActivationVisitorScene({ population }) {
               </label>
             </div>
           </div>
-          <HomePreview copy={shownCopy} highlight={highlight} onCta={onCta} />
-          <p className="text-xs hb-tx-muted">The two hero buttons keep their data-event-key in every experience; only text and emphasis change. That keeps ODP events and campaign metrics comparable. Copy is illustrative and needs legal review before use.</p>
+          <HomePreview copy={shownCopy} highlight={highlight} onCta={onCta} compact />
+          </div>
         </div>
-      </div>
+      ) : null}
 
-      <div className="mt-10">
-        <SectionTitle title="What happens, step by step">Click a hero button to run steps 1 to 3 at once. Steps 4 to 6 only run on the next page view.</SectionTitle>
-        <div className="grid grid-cols-1 gap-3 md:grid-cols-3 xl:grid-cols-6">
+      {build === 1 ? (
+        <div className="hb-fade">
+          {actions}
+          <div className="hb-card p-4">
+            <h3 className="text-lg hb-tx-dark">ODP profile right now</h3>
+            <div className="mt-2 grid grid-cols-1 gap-5 md:grid-cols-2">
+              <div>
+                <div className="text-xs font-semibold uppercase tracking-wider hb-tx-muted">Real-time audiences</div>
+                <div className="mt-1 flex flex-wrap gap-1">
+                  {liveDecision.memberships.length ? liveDecision.memberships.map((m) => <Chip key={m} tone="green">{m}</Chip>) : <span className="text-sm hb-tx-muted">none yet</span>}
+                </div>
+                <div className="mt-3 text-xs font-semibold uppercase tracking-wider hb-tx-muted">Derived from events now</div>
+                <AttrRows rows={[['hrb_filing_preference', derived.hrb_filing_preference], ['hrb_appointment_cta_clicks', derived.hrb_appointment_cta_clicks], ['hrb_diy_start_clicks', derived.hrb_diy_start_clicks]]} />
+                {storedPref ? (
+                  <div className="mt-3 text-sm">
+                    <span className="hb-tx-muted">Stored by the import: </span><strong className="hb-mono">{storedPref}</strong>{' '}
+                    {storedPref !== derived.hrb_filing_preference ? <Chip tone="neon">stale: nothing writes live clicks back</Chip> : <Chip>in sync</Chip>}
+                  </div>
+                ) : null}
+              </div>
+              <div>
+                <div className="text-xs font-semibold uppercase tracking-wider hb-tx-muted">Latest events</div>
+                <ul className="mt-1 space-y-1">
+                  {recent.slice(0, 5).map((e, i) => (
+                    <li key={i} className="flex flex-wrap items-center gap-2 rounded-lg px-2 py-1 text-xs" style={{ background: '#F8F8F5' }}>
+                      <span className="hb-mono">{e.type}/{e.action}</span>
+                      {e.data.value ? <Chip>{e.data.value}</Chip> : null}
+                      <span className="hb-tx-muted">{fmtAgo(e.data.ts, nowSec())}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : null}
+
+      {build === 2 ? (
+        <div className="hb-fade">
+          {actions}
+        <div className="grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-6">
           {STAGE_TEXT.map((s, i) => (
             <div key={s[0]} className="hb-stage" data-on={stage >= i + 1 ? 'true' : 'false'}>
               <div className="flex items-center gap-2"><span className="hb-num">{i + 1}</span><strong className="text-sm hb-tx-dark">{s[0]}</strong></div>
@@ -1237,17 +1267,17 @@ function ActivationVisitorScene({ population }) {
             </div>
           ))}
         </div>
-        <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
+          <div className="mt-3 grid grid-cols-1 gap-3 md:grid-cols-2">
           <Code label="Browser console check (simulated output)" code={'> window["optimizely"].get("visitor")["vendor.odp"]["audiences"]\n' + JSON.stringify(applied.status === 'ok' ? applied.memberships : [])} />
           <Callout title="Why the page does not change on the click">Web Experimentation evaluates audiences when a page activates. The click reaches ODP and its audiences within seconds, and the next page view (or single-page-app navigation) picks it up. Make sure dynamic website support is on for this single-page app.</Callout>
+          </div>
         </div>
-      </div>
-
-    </div>
+      ) : null}
+    </Slide>
   );
 }
 
-function CampaignScene({ population, now }) {
+function CampaignScene({ population, now, build }) {
   const [holdbackPct, setHoldbackPct] = useState(DEFAULT_HOLDBACK);
   const alloc = useMemo(() => {
     const counts = { original: 0, holdback: 0 };
@@ -1268,10 +1298,9 @@ function CampaignScene({ population, now }) {
   ];
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-10 md:px-8">
-      <Lead eyebrow={'Capability 2 \u00b7 step 2: Web Experimentation'}>Behind the page you just saw is one personalization campaign: an experience per audience, in priority order, with a holdback. Move the holdback and see who would see what across the seeded profiles.</Lead>
-      <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
-        <div className="hb-card p-5">
+    <Slide>
+      {build === 0 ? (
+        <div className="hb-card hb-fade p-4">
           <h3 className="text-lg hb-tx-dark">The campaign in Web Experimentation</h3>
           <ul className="mt-2 list-disc pl-5 text-sm space-y-1">
             <li><strong>Type:</strong> personalization campaign on the home page.</li>
@@ -1291,8 +1320,9 @@ function CampaignScene({ population, now }) {
           </div>
           <p className="mt-3 text-sm"><DocLink href="https://docs.optimizely.com/personalization/docs/create-a-campaign-in-optimizely-personalization">Create a personalization campaign</DocLink>{' \u00b7 '}<DocLink href="https://docs.optimizely.com/web-experimentation/docs/configure-real-time-segments-for-web-experimentation">Real-Time Segments for Web Experimentation</DocLink></p>
         </div>
-
-        <div className="hb-card p-5">
+      ) : null}
+      {build === 1 ? (
+        <div className="hb-card hb-fade p-4">
           <h3 className="text-lg hb-tx-dark">Who sees what across the seeded profiles</h3>
           <label className="mt-2 block text-sm">
             <span className="font-semibold">Holdback: {holdbackPct}%</span>
@@ -1315,25 +1345,29 @@ function CampaignScene({ population, now }) {
           </div>
           <p className="mt-3 text-xs hb-tx-muted">Approximation: the holdback here is a stable hash of each email. Web Experimentation buckets visitors itself.</p>
         </div>
-      </div>
-    </div>
+      ) : null}
+    </Slide>
   );
 }
 
 /* =====================================================================
-   APP SHELL
-   Audience window: only what the audience should see, one scene at a time (arrow keys,
-   or the buttons inside the Overview), as a nine-scene story. Speaker notes, scene list and reference material
-   (RFP figures to confirm, traceability, setup checklist, gaps) live in the presenter
-   window (_presenter.jsx), opened with S. Scene script: _scenes.js. Window link: _sync.js.
+   APP SHELL: an interactive presentation
+   One slide per scene (SCENES in _scenes.js). → / Space advances inside a slide ("builds")
+   before moving on, ← goes back, Home/End jump, O opens the slide overview, F toggles
+   fullscreen, S opens the presenter window. Speaker notes and reference material live in
+   the presenter window (_presenter.jsx); the link is _sync.js. The slides themselves are
+   interactive: click, edit and play inside them.
    ===================================================================== */
 const clampIdx = (i) => Math.max(0, Math.min(SCENES.length - 1, Number(i) || 0));
 const DEFAULT_PARAMS = { count: 200, days: 14, seed: 42 };
+const LAST = SCENES.length - 1;
 
 export default function App() {
-  const [idx, setIdx] = useState(0);
+  const [pos, setPos] = useState({ idx: 0, build: 0 });
+  const { idx, build } = pos;
   const [params, setParams] = useState(DEFAULT_PARAMS);
   const [resetKey, setResetKey] = useState(0);
+  const [overview, setOverview] = useState(false);
   const [now] = useState(() => nowSec());
   const population = useMemo(() => buildDataset({ ...params, now }), [params, now]);
   const presenterWin = useRef(null);
@@ -1342,40 +1376,61 @@ export default function App() {
   const onCommand = useRef(() => {});
   const stageRef = useRef(null);
 
-  const go = (id) => {
-    const i = SCENES.findIndex((sc) => sc.id === id);
-    if (i >= 0) setIdx(i);
-  };
-  const resetAll = () => { setIdx(0); setParams(DEFAULT_PARAMS); setResetKey((k) => k + 1); };
+  /* Forward: next build, else next slide. Back: previous build, else the last build of the previous slide. */
+  const advance = React.useCallback((d) => setPos((p) => {
+    const n = SCENES[p.idx].builds;
+    if (d > 0) {
+      if (p.build < n - 1) return { idx: p.idx, build: p.build + 1 };
+      return p.idx < LAST ? { idx: p.idx + 1, build: 0 } : p;
+    }
+    if (p.build > 0) return { idx: p.idx, build: p.build - 1 };
+    return p.idx > 0 ? { idx: p.idx - 1, build: SCENES[p.idx - 1].builds - 1 } : p;
+  }), []);
+  const goto = React.useCallback((i) => setPos({ idx: clampIdx(i), build: 0 }), []);
+  const setBuild = React.useCallback((b) => setPos((p) => ({ idx: p.idx, build: Math.max(0, Math.min(SCENES[p.idx].builds - 1, b)) })), []);
+  const go = (id) => { const i = SCENES.findIndex((sc) => sc.id === id); if (i >= 0) goto(i); };
+  const resetAll = () => { setPos({ idx: 0, build: 0 }); setParams(DEFAULT_PARAMS); setResetKey((k) => k + 1); setOverview(false); };
 
-  /* New scene starts at the top of the stage. */
+  /* New slide starts at the top of the stage. */
   useEffect(() => { if (stageRef.current) stageRef.current.scrollTop = 0; }, [idx]);
 
-  /* S opens (or focuses) the presenter window. */
-  const openPresenter = () => {
+  const openPresenter = React.useCallback(() => {
     const w = presenterWin.current;
     if (w && !w.closed) { w.focus(); return; }
     presenterWin.current = window.open(PRESENTER_URL, PRESENTER_WINDOW, 'popup=yes,width=820,height=940');
-  };
+  }, []);
+  const toggleFullscreen = React.useCallback(() => {
+    if (document.fullscreenElement) document.exitFullscreen?.().catch(() => {});
+    else document.documentElement.requestFullscreen?.().catch(() => {});
+  }, []);
 
   useEffect(() => {
     const onKey = (e) => {
       if (e.metaKey || e.ctrlKey || e.altKey) return;
       const tag = (e.target && e.target.tagName) || '';
       if (['INPUT', 'TEXTAREA', 'SELECT'].includes(tag) || (e.target && e.target.isContentEditable)) return;
-      if (e.key === 'ArrowRight') setIdx((i) => Math.min(SCENES.length - 1, i + 1));
-      if (e.key === 'ArrowLeft') setIdx((i) => Math.max(0, i - 1));
-      if (e.key === 's' || e.key === 'S') { e.preventDefault(); openPresenter(); }
+      switch (e.key) {
+        case 'ArrowRight': advance(1); break;
+        case 'ArrowLeft': advance(-1); break;
+        case ' ': if (tag === 'BUTTON' || tag === 'A') return; e.preventDefault(); advance(1); break;
+        case 'Home': e.preventDefault(); goto(0); break;
+        case 'End': e.preventDefault(); goto(LAST); break;
+        case 'Escape': setOverview(false); break;
+        case 'o': case 'O': setOverview((v) => !v); break;
+        case 'f': case 'F': toggleFullscreen(); break;
+        case 's': case 'S': e.preventDefault(); openPresenter(); break;
+        default:
+      }
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, []);
+  }, [advance, goto, openPresenter, toggleFullscreen]);
 
   /* Commands from the presenter window. Reassigned every render so it always sees fresh handlers. */
   useEffect(() => {
     onCommand.current = (m) => {
-      if (m.type === 'step') setIdx((i) => clampIdx(i + Number(m.delta || 0)));
-      else if (m.type === 'goto') setIdx(clampIdx(m.idx));
+      if (m.type === 'step') advance(Number(m.delta) >= 0 ? 1 : -1);
+      else if (m.type === 'goto') goto(m.idx);
       else if (m.type === 'reset') resetAll();
     };
   });
@@ -1394,7 +1449,7 @@ export default function App() {
   }, []);
 
   const eventCount = population.eventCount;
-  const payload = JSON.stringify({ idx, resetKey, eventCount });
+  const payload = JSON.stringify({ idx, build, resetKey, eventCount });
   useEffect(() => {
     latest.current = payload;
     chan.current?.postMessage({ type: 'state', payload });
@@ -1403,41 +1458,92 @@ export default function App() {
   const s = SCENES[idx];
   const stage = () => {
     switch (s.id) {
-      case 'overview': return <Overview go={go} />;
-      case 'devices': return <TwoDevicesScene />;
-      case 'merge': return <SignInMergeScene />;
-      case 'import': return <ImportSharedScene />;
-      case 'identifiers': return <IdentifiersScene population={population} params={params} setParams={setParams} now={now} />;
-      case 'audience': return <AudienceBuilderScene population={population} now={now} />;
-      case 'kinds': return <AudienceKindsScene population={population} now={now} />;
-      case 'visitor': return <ActivationVisitorScene population={population} />;
-      default: return <CampaignScene population={population} now={now} />;
+      case 'overview': return <Overview go={go} build={build} />;
+      case 'devices': return <TwoDevicesScene build={build} setBuild={setBuild} />;
+      case 'merge': return <SignInMergeScene build={build} setBuild={setBuild} />;
+      case 'import': return <ImportSharedScene build={build} setBuild={setBuild} />;
+      case 'identifiers': return <IdentifiersScene population={population} params={params} setParams={setParams} now={now} build={build} />;
+      case 'audience': return <AudienceBuilderScene population={population} now={now} build={build} />;
+      case 'kinds': return <AudienceKindsScene population={population} now={now} build={build} />;
+      case 'visitor': return <ActivationVisitorScene population={population} build={build} />;
+      default: return <CampaignScene population={population} now={now} build={build} />;
     }
   };
+  const first = idx === 0 && build === 0;
+  const last = idx === LAST && build === s.builds - 1;
+  const caption = s.subs ? (s.subs[build] || s.subs[0]) : '';
 
   return (
     <div className="hb-root flex h-screen flex-col">
       <style>{CSS}</style>
+
       <header className="hb-bg-green hb-dark-zone shrink-0">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-2 px-4 py-3 md:px-8">
-          <div className="text-sm font-bold hb-tx-white">H&amp;R Block{'®'} <span className="font-normal hb-tx-sand">Integrated Marketing Ecosystem</span></div>
-          <Chip tone="neon">Simulated data. No live ODP connection.</Chip>
+        <div className="mx-auto flex max-w-6xl items-center gap-4 px-4 py-2 md:px-8">
+          <div className="shrink-0 text-sm font-bold hb-tx-white">H&amp;R Block{'\u00ae'}<span className="hidden font-normal hb-tx-sand md:inline"> Integrated Marketing Ecosystem</span></div>
+          <nav className="flex flex-1 gap-1.5" aria-label="Slides">
+            {SCENES.map((sc, i) => (
+              <button key={sc.id} type="button" className="hb-seg" title={sc.n + '. ' + sc.title} aria-label={'Slide ' + sc.n + ': ' + sc.title} aria-current={i === idx ? 'true' : undefined} data-done={i < idx ? 'true' : 'false'} onClick={() => goto(i)} />
+            ))}
+          </nav>
+          <Chip tone="neon">Simulated data</Chip>
         </div>
       </header>
-      <div className="hb-bg-white hb-btop shrink-0 border-b hb-rule px-4 py-3 md:px-8">
-        <div className="mx-auto max-w-6xl">
-          <div className="text-xs hb-tx-muted">{s.act}</div>
-          <div className="text-lg font-bold hb-tx-dark">{s.title}</div>
+
+      <div className="hb-bg-dark hb-dark-zone shrink-0">
+        <div className="mx-auto flex max-w-6xl items-end justify-between gap-4 px-4 py-3 md:px-8">
+          <div className="min-w-0">
+            <div className="text-xs font-semibold uppercase tracking-widest hb-tx-neon">{s.act}</div>
+            <h1 className="mt-0.5 text-xl hb-tx-white md:text-3xl">{s.title}</h1>
+            {caption ? <p className="mt-1 text-sm hb-tx-sand md:text-base">{caption}</p> : null}
+          </div>
+          {s.builds > 1 ? (
+            <div className="flex shrink-0 gap-1.5 pb-1" role="img" aria-label={'Step ' + (build + 1) + ' of ' + s.builds}>
+              {Array.from({ length: s.builds }, (_, i) => <span key={i} className="hb-dot" data-on={i <= build ? 'true' : 'false'} />)}
+            </div>
+          ) : null}
         </div>
       </div>
-      <main ref={stageRef} className="min-h-0 flex-1 overflow-y-auto" key={`${idx}-${resetKey}`}>
+
+      <main ref={stageRef} className="hb-slide-in min-h-0 flex-1 overflow-y-auto" key={`${idx}-${resetKey}`}>
         {stage()}
-        <footer className="hb-bg-dark hb-dark-zone">
-          <div className="mx-auto max-w-6xl px-4 py-6 text-xs hb-tx-sand md:px-8">
-            Built from the H&amp;R Block Integrated Marketing Scale &amp; Requirements slide (HRB - Business Use) and the hrblock.optimoey.com import scripts. All profiles, events and experiences are simulated. Site copy variations are illustrative and need legal review before use.
-          </div>
-        </footer>
       </main>
+
+      <footer className="hb-bg-dark hb-dark-zone shrink-0">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-2 md:px-8">
+          <div className="flex items-center gap-2">
+            <button type="button" className="hb-btn hb-btn-outline-light hb-btn-sm" onClick={() => advance(-1)} disabled={first}>{'‹'} Back</button>
+            <button type="button" className="hb-btn hb-btn-neon hb-btn-sm" onClick={() => advance(1)} disabled={last}>{s.builds > 1 && build < s.builds - 1 ? 'Next step' : 'Next slide'} {'›'}</button>
+          </div>
+          <div className="text-xs hb-tx-sand">
+            Slide {s.n} of {SCENES.length}{s.builds > 1 ? ' · step ' + (build + 1) + ' of ' + s.builds : ''}
+          </div>
+          <div className="flex items-center gap-2 text-xs hb-tx-sand">
+            <span className="hidden md:inline">{'← →'} or Space</span>
+            <button type="button" className="hb-btn hb-btn-outline-light hb-btn-sm" onClick={() => setOverview(true)}>Overview (O)</button>
+            <button type="button" className="hb-btn hb-btn-outline-light hb-btn-sm" onClick={toggleFullscreen}>Fullscreen (F)</button>
+            <button type="button" className="hb-btn hb-btn-outline-light hb-btn-sm" onClick={openPresenter}>Speaker (S)</button>
+          </div>
+        </div>
+      </footer>
+
+      {overview ? (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: 'rgba(0,53,18,.85)' }} role="dialog" aria-modal="true" aria-label="Slide overview" onClick={() => setOverview(false)}>
+          <div className="hb-card max-h-full w-full max-w-4xl overflow-y-auto p-5" onClick={(e) => e.stopPropagation()}>
+            <div className="mb-3 flex items-center justify-between">
+              <h2 className="text-xl hb-tx-dark">Slides</h2>
+              <button type="button" className="hb-btn hb-btn-outline hb-btn-sm" onClick={() => setOverview(false)}>Close (Esc)</button>
+            </div>
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3">
+              {SCENES.map((sc, i) => (
+                <button key={sc.id} type="button" className="hb-pick" aria-pressed={i === idx} onClick={() => { goto(i); setOverview(false); }}>
+                  <div className="text-xs font-semibold uppercase tracking-wider hb-tx-muted">{sc.n} {'·'} {sc.act}</div>
+                  <div className="mt-1 text-sm font-bold hb-tx-dark">{sc.title}</div>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }

@@ -66,7 +66,18 @@ export const CSS = `
 .hb-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:9999px;font-size:13px;font-weight:700;background:#EDE9D6;color:#003512;flex-shrink:0}
 .hb-stage[data-on="true"] .hb-num{background:#005D1F;color:#fff}
 .hb-scroll{scrollbar-width:thin}
-@media (prefers-reduced-motion: reduce){.hb-btn{transition:none}}
+@keyframes hb-in{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:none}}
+@keyframes hb-fadeup{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.hb-slide-in{animation:hb-in .35s ease-out both}
+.hb-fade{animation:hb-fadeup .4s ease-out both}
+.hb-seg{flex:1;height:6px;padding:0;border:0;border-radius:9999px;background:rgba(246,244,233,.28);cursor:pointer}
+.hb-seg:hover{background:rgba(246,244,233,.55)}
+.hb-seg[data-done="true"]{background:#00E95C}
+.hb-seg[aria-current="true"]{background:#fff}
+.hb-seg:focus-visible{outline:3px solid #00E95C;outline-offset:2px}
+.hb-dot{width:10px;height:10px;border-radius:9999px;background:rgba(246,244,233,.3)}
+.hb-dot[data-on="true"]{background:#00E95C}
+@media (prefers-reduced-motion: reduce){.hb-btn{transition:none}.hb-slide-in,.hb-fade{animation:none}}
 `;
 
 export function Chip({ children, tone = 'sand', title }) {
@@ -88,9 +99,9 @@ export function SectionTitle({ eyebrow, title, children, light }) {
 export function DocLink({ href, children }) {
   return <a href={href} target="_blank" rel="noopener noreferrer" className="font-semibold underline hb-tx-green">{children} {'\u2197'}</a>;
 }
-export function Callout({ title, children, dark }) {
+export function Callout({ title, children, dark, compact }) {
   return (
-    <div className={(dark ? 'hb-card-dark' : 'hb-card-sand') + ' p-4'}>
+    <div className={(dark ? 'hb-card-dark' : 'hb-card-sand') + (compact ? ' p-3' : ' p-4')}>
       {title ? <div className={'text-sm font-bold ' + (dark ? 'hb-tx-neon' : 'hb-tx-dark')}>{title}</div> : null}
       <div className={'text-sm ' + (title ? 'mt-1 ' : '') + (dark ? 'hb-tx-sand' : 'hb-tx-ink')}>{children}</div>
     </div>
