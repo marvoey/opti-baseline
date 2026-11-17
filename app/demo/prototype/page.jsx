@@ -1,5 +1,3 @@
-'use client';
-
 import React, { useState, useEffect } from 'react';
 
 /* =====================================================================
@@ -25,12 +23,12 @@ const HRB = {
 const IMG = (name, w) => `https://hrbent.scene7.com/is/image/hrblock/${name}?fmt=webp-alpha&wid=${w}&bfc=on`;
 
 /* ---------------------------- data ---------------------------- */
+/* Hero copy follows Build Plan 5.4: campaign copy only from claims that appear on hrblock.com.
+   ev = the Feature Experimentation event key on [primary, secondary] button ('none' = no event). */
 const HERO = {
-  Original: { accent: 'Still time to file.', eyebrow: 'Tax season 2027 · Final weeks', headline: 'Still time to file. Get it done with an expert.', sub: 'Book a tax pro today, or finish online. Either way, we have you covered.', cta: 'Book an appointment', cta2: 'File online' },
-  UrgencyB: { accent: 'today', eyebrow: 'Only days left', headline: 'Only a few days left. Book a tax pro today.', sub: 'Appointments are filling up. Lock in your time with an expert now.', cta: 'Book today', cta2: 'File online', countdown: true },
-  DiyAbandoner: { accent: 'finish it for you', eyebrow: 'Welcome back', headline: 'Started online? A tax pro can finish it for you.', sub: 'Bring your return to an expert. We pick up right where you left off.', cta: 'Get expert help finishing', cta2: 'Continue online' },
-  ReturningAssisted: { accent: 'one click', eyebrow: 'Good to see you again', headline: 'Welcome back. Book with a tax pro in one click.', sub: 'Same office, same expert service. Pick a time that works for you.', cta: 'Book my appointment', cta2: 'Find another office' },
-  LateFiler: { accent: 'fastest way', eyebrow: 'Deadline approaching', headline: "The deadline is close. Here's the fastest way to file.", sub: 'File online in as little as an hour, or walk in to an office today.', cta: 'File now', cta2: 'Find an office' },
+  Original: { accent: 'tax help', eyebrow: 'Still time to file', headline: 'No one offers more ways to get tax help than H&R Block.', sub: 'Work with your pro however is most convenient, in person or online.', cta: 'File with a tax pro', cta2: 'File online', ev: ['appointment_cta_click', 'none'] },
+  UrgencyB: { accent: 'April 15', eyebrow: 'Still time to file', headline: 'April 15 is close. Let a trusted tax pro handle it all.', sub: 'Choose your pro or get matched, and file in as little as one hour.', cta: 'Start with a tax pro', cta2: 'File online', ev: ['appointment_cta_click', 'none'] },
+  DiyAbandoner: { accent: 'expert help', eyebrow: 'Welcome back', headline: 'File your own taxes with expert help.', sub: 'Live support from tax pros and AI Tax Assist included from the start.', cta: 'Start with expert help', cta2: 'File with a tax pro', ev: ['diy_start_click', 'appointment_cta_click'] },
 };
 const HERO_ES = { accent: 'Todavía hay tiempo', eyebrow: 'Temporada de impuestos 2027 · Últimas semanas', headline: 'Todavía hay tiempo para declarar. Hágalo con un experto.', sub: 'Reserve una cita con un profesional de impuestos hoy, o termine en línea.', cta: 'Reservar una cita', cta2: 'Declarar en línea' };
 
@@ -54,7 +52,7 @@ const TIMELINE = [
   ['legal', 'Tue 9:15', 'Legal approved'],
   ['assets', 'Tue 9:20', 'Assets chosen'],
   ['phoenix', 'Tue 9:30', 'Phoenix page live'],
-  ['office', 'Tue 9:32', 'Office data current'],
+  ['office', 'Tue 9:32', 'Connected-content pattern shown'],
   ['perso', 'Tue 9:40', 'Personalized page live'],
   ['test', 'Tue 9:45', 'Test launched'],
   ['ship', 'Next Tue 10:15', 'Winner live for everyone'],
@@ -91,28 +89,28 @@ const SCENES = [
   { n: 6, short: 'Build a page, no dev', title: 'Act 2: build a local page without a developer', time: '20:00–25:00', act: 'Act 2 · Build and personalize', rfp: '4.34, 4.38, 4.40, 5.19', stamp: 'phoenix',
     prep: ['CMS Editor at Home; blueprint saved', 'Clip C4 (Phoenix page) ready', '“Phoenix (backup)” draft exists'],
     tell: 'Your RFP asks what skill administration needs (4.40) and what business users can do (5.19). Maya builds a Phoenix version, live.',
-    show: ['New from blueprint', 'Paste headline; replace image from the DAM', 'Approved style options; locked Legal disclosure', 'Connect the Camelback Center office; publish'],
+    show: ['New from blueprint', 'Paste headline; replace image from the DAM', 'Approved style options; locked Legal disclosure', 'Fill in the Phoenix office card by hand; publish'],
     back: 'No developer, no ticket, nothing off-brand: 4.34, 4.38, 4.40.' },
-  { n: 7, short: 'Office data, connected', title: 'Act 2: office data stays in the office system', time: '25:00–27:00', act: 'Act 2 · Build and personalize', rfp: '4.19, 5.13–5.14', stamp: 'office',
-    prep: ['Westside Plaza card bound to HRB-0412', 'Terminal: yarn seed:offices --open 9 typed', 'Live App shows “Fully booked today”'],
-    tell: 'Office hours and availability live in your office systems. We don’t copy them. We connect them.',
-    show: ['Link badge; mapped fields read-only; promo editable', 'Run the command (you play the office system)', 'Refresh the Live App: 9 appointments open'],
-    back: 'The site followed the source, with no CMS edit or publish. It plugs into what you already have.' },
-  { n: 8, short: 'Personalize in real time', title: 'Act 2: personalize for Dana and Robert in real time', time: '27:00–30:00', act: 'Act 2 · Build and personalize', rfp: '4.9, 4.12, 4.35, 4.43', stamp: 'perso',
-    prep: ['Variations menu visible', 'ODP audience hrb_diy_abandoner open', 'Visitor window on Original'],
+  { n: 7, short: 'Office data (pattern)', title: 'Act 2: office data stays in the office system (pattern)', time: '25:00–27:00', act: 'Act 2 · Build and personalize', rfp: '4.19, 5.13–5.14', stamp: 'office',
+    prep: ['Connected Content docs page open next to slide 5', 'If asked whether it is live: not in this demo; we would connect one of their real systems in the proof of concept', 'Optional scene: skip it if you are behind'],
+    tell: 'Office hours and availability live in your office systems. We don’t copy them. We connect them. I’ll show how it works and be clear that it is not running live today.',
+    show: ['Docs page: external system → Graph → bound card', 'Slide 5: point at the flow', 'Say: the office cards on this page are ordinary CMS content'],
+    back: 'The site follows the source, with no CMS edit or publish. In the proof of concept we connect one of your real systems.' },
+  { n: 8, short: 'Personalize for Dana', title: 'Act 2: personalize for Dana in real time', time: '27:00–30:00', act: 'Act 2 · Build and personalize', rfp: '4.9, 4.12, 4.35', stamp: 'perso',
+    prep: ['Variations menu visible (Original, UrgencyB, DiyAbandoner)', 'Audience HRB DIY Abandoner open in Feature Experimentation', 'Visitor window on Original, no segment set; the two segment URLs (C10) in your notes'],
     tell: 'Your most valuable late-season visitor may be a DIY filer who stalled. As publicly reported, assisted NAC was $282.89 vs $85.80 for DIY online paid in FY26.',
-    show: ['Compare Original and DiyAbandoner variations', 'Walk through the ODP real-time audience', 'Become Dana; then Robert'],
-    back: 'Decided on the server before render: no flicker. Audiences use on-site behavior only, consent-aware by design: 4.9, 4.12, 4.43.' },
+    show: ['Compare Original and DiyAbandoner variations', 'Show the audience: hrb_segment equals diy_abandoner', 'Become Dana with the URL; then clear it'],
+    back: 'Decided on the server before render: no flicker. In this demo a URL sets the attribute; in production your CDP or ODP would. Audiences use on-site behavior only, consent-aware by design: 4.9, 4.12.' },
   { n: 9, short: 'Launch a test in minutes', title: 'Act 3: from idea to running test in under five minutes', time: '30:00–37:00', act: 'Act 3 · Test and ship', rfp: '4.10, 4.11, 4.13, 4.14', stamp: 'test',
-    prep: ['Stopwatch at 00:00', 'Clip C6 (test ideation) and C7 (rule) ready', 'Feature Experimentation in Development'],
-    tell: 'How quickly can non-technical users launch experiments (4.11)? I’m starting a timer.',
-    show: ['Mark @test_ideation → pick “deadline urgency”', 'Create the A/B rule on CMS variations (paste C7)', 'Exclusion group; pre-launch review; save and start'],
-    back: 'Under five minutes, no developer, and in Development so nothing customer-facing changed: 4.10, 4.11, 4.14.' },
+    prep: ['Stopwatch at 00:00', 'Clip C6 (test ideation) and C7 (rule) ready', 'Flag hrb_landing_sandbox in Development with no rules (the site never reads it)'],
+    tell: 'How quickly can non-technical users launch experiments (4.11)? I’m starting a timer. I’m building on a practice flag, so it can’t touch the live page.',
+    show: ['Mark @test_ideation → pick the deadline idea', 'Create the A/B rule on the sandbox flag (paste C7)', 'Exclusion group only if you created one; pre-launch review; save and start'],
+    back: 'Under five minutes, no developer, on a practice flag so nothing customer-facing changed: 4.10, 4.11, 4.14.' },
   { n: 10, short: 'Read it, ship it', title: 'Act 3: read the result, ship the winner', time: '37:00–45:00', act: 'Act 3 · Test and ship', rfp: '4.10, 4.15, 4.16', stamp: 'ship',
-    prep: ['Pre-run Production experiment (simulated traffic)', 'Visitor window on Original', 'Their Scene 1 answer noted'],
+    prep: ['Seeded A/B on hrb_landing_hero_test in Development (simulated traffic)', 'Visitor window on Original, no segment set', 'Ship step rehearsed on the rehearsal flag; their Scene 1 answer noted'],
     tell: 'Every test has to answer two questions: is the result real, and how fast can we act on it?',
-    show: ['Stats Engine: UrgencyB +20%, significant', 'Summarize Results', 'Roll out the winner; refresh the Live App'],
-    back: 'Winner live in seconds, with no dev ticket. Quote their Scene 1 answer: that difference is the gap we close.' },
+    show: ['Stats Engine: UrgencyB +20%, significant (simulated, Development)', 'Summarize Results', 'Conclude and deploy UrgencyB; refresh the Live App'],
+    back: 'Winner live with no dev ticket. Quote their Scene 1 answer: that difference is the gap we close.' },
   { n: 11, short: 'Prove business impact', title: 'Act 4: prove the impact on completed returns', time: '45:00–50:00', act: 'Act 4 · Prove', rfp: '4.15, 4.49–4.55', stamp: 'impact',
     prep: ['Optimizely Analytics exploration on the synthetic warehouse dataset'],
     tell: 'Analytics runs on your warehouse, so the test is measured against outcomes finance already trusts.',
@@ -129,6 +127,17 @@ const SCENES = [
     show: ['Walk the coexistence diagram', 'Trust: only confirmed statements', 'Propose the scoped PoC'],
     back: 'Next step: one landing page, one CMS-driven experiment, one CMP workflow, measured against time from decision to live.' },
 ];
+
+/* What is real and what is not (checked 16 Nov 2026). LIVE runs on hrblock.optimoey.com and in the
+   Feature Experimentation project "Marvin Demo" (Development). This prototype only mirrors it. */
+const STATUS = {
+  live: { label: 'LIVE', cls: 'bg-green-100 text-green-800', hint: 'Runs on the real site and in Feature Experimentation (Development)' },
+  sim: { label: 'SIMULATED', cls: 'bg-amber-100 text-amber-800', hint: 'A pattern only. Not running in the demo' },
+  nv: { label: 'NOT VERIFIED', cls: 'bg-slate-200 text-slate-700', hint: 'A product demo outside the repo build. Rehearse it' },
+  slides: { label: 'SLIDES', cls: 'bg-blue-100 text-blue-800', hint: 'Slides, not software' },
+};
+const STATUS_BY_SCENE = { 1: 'slides', 2: 'live', 3: 'nv', 4: 'nv', 5: 'nv', 6: 'nv', 7: 'sim', 8: 'live', 9: 'live', 10: 'live', 11: 'nv', 12: 'nv', 13: 'slides' };
+const STATUS_NOTE = { 9: 'sandbox flag', 10: 'seeded results' };
 
 /* ---------------------------- helpers ---------------------------- */
 function useTypewriter(text, run, step = 4, speed = 12) {
@@ -419,7 +428,7 @@ Key message
 There's still time, and an expert can help you finish.
 
 Deliverables
-Landing page hero (EN + ES), 3 persona variations, appointment CTA,
+Landing page hero (EN + ES), 2 hero variations, appointment CTA,
 office cards, approved disclosure TS27-LATE-01.
 
 ⚠ Needs Legal review
@@ -486,7 +495,7 @@ function S3({ stamp }) {
       <Frame url="mark.optimizely.com" label="Mark" accent="bg-indigo-50">
         <div className="space-y-3 p-4">
           <div className="rounded-lg bg-slate-100 p-3 font-mono text-xs text-slate-700">
-            @campaign_brief_generation Campaign type – Late-season conversion… Target Audience – DIY abandoners, returning assisted, late filers, Spanish-preferred… Objective – appointments before the deadline… Assets – hero EN+ES, 3 variations, office cards, disclosure. Flag Legal claims.
+            @campaign_brief_generation Campaign type – Late-season conversion… Target Audience – DIY abandoners, returning assisted, late filers, Spanish-preferred… Objective – appointments before the deadline… Assets – hero EN+ES, 2 hero variations, office cards, disclosure. Flag Legal claims.
           </div>
           <Btn kind="mark" onClick={() => setRun(true)} disabled={phase !== 'accepted' || run}>{'Paste C2 & send'}</Btn>
           {phase !== 'accepted' && <div className="text-xs text-slate-500">Accept the request first.</div>}
@@ -659,11 +668,11 @@ function S6({ asset, stamp, phoenix, setPhoenix }) {
             <div className="rounded-lg bg-slate-50 p-2 text-xs text-slate-600">🔒 Compliance Disclosure TS27-LATE-01 · shared block owned by Legal (not editable here)</div>
             <div>
               <div className="text-xs font-semibold text-slate-600">[HRB] Office Card</div>
-              {office ? <div className="mt-1"><Pill cls="bg-indigo-100 text-indigo-700">🔗 {office.name} ({office.id})</Pill></div>
-                : <Btn kind="ghost" className="mt-1" onClick={() => setPicker(picker === 'office' ? null : 'office')}>More (…) › Connect content</Btn>}
+              {office ? <div className="mt-1"><Pill cls="bg-slate-100 text-slate-700">{office.name} · typed in by hand</Pill></div>
+                : <Btn kind="ghost" className="mt-1" onClick={() => setPicker(picker === 'office' ? null : 'office')}>Type the Phoenix office details</Btn>}
               {picker === 'office' && (
                 <div className="mt-2 space-y-1 rounded-lg border border-slate-200 p-2">
-                  <div className="text-xs text-slate-500">Content Manager · HRB Offices (demo)</div>
+                  <div className="text-xs text-slate-500">Office details (typed in; there is no connected source)</div>
                   {OFFICES0.map((o) => <button key={o.id} onClick={() => { setOffice(o); setPicker(null); }} className="block w-full rounded px-2 py-1 text-left text-xs hover:bg-green-50">{o.name} · {o.city} · {o.id}</button>)}
                 </div>
               )}
@@ -679,7 +688,7 @@ function S6({ asset, stamp, phoenix, setPhoenix }) {
       </div>
       <div className="xl:col-span-3">
         <Frame url="hrblock.optimoey.com/still-time-to-file-phoenix" label={phase === 'published' ? 'Live App' : 'Preview'}>
-          <LiveApp heroOverride={{ ...HERO.Original, headline }} asset={img} bg={bg} offices={office ? [office] : []} promo={promo} officeBadge={phase !== 'published'} />
+          <LiveApp heroOverride={{ ...HERO.Original, headline }} asset={img} bg={bg} offices={office ? [office] : []} promo={promo} officeBadge={false} />
         </Frame>
       </div>
     </div>
@@ -687,71 +696,65 @@ function S6({ asset, stamp, phoenix, setPhoenix }) {
 }
 
 /* ---------------------------- Scene 7 ---------------------------- */
-function S7({ offices, setOffices, stamp }) {
-  const [lines, setLines] = useState([]);
-  const [busy, setBusy] = useState(false);
-  const [flash, setFlash] = useState(null);
-  const west = offices[0];
-  const run = (n) => {
-    setBusy(true);
-    setLines((l) => [...l, `$ yarn seed:offices --open ${n}`]);
-    setTimeout(() => setLines((l) => [...l, 'Indexing offices… (Graph source hrbx)']), 500);
-    setTimeout(() => setLines((l) => [...l, '{"status":"ok","indexed":6}']), 1200);
-    setTimeout(() => {
-      setOffices((os) => os.map((o) => (o.id === 'HRB-0412' ? { ...o, slots: n } : o)));
-      setFlash('HRB-0412'); setBusy(false);
-      if (n > 0) stamp('office');
-      setTimeout(() => setFlash(null), 2500);
-    }, 2400);
-  };
+const PATTERN = [
+  ['1 · The system keeps its data', 'Office hours and availability stay in the office system. Nothing is copied into the CMS.'],
+  ['2 · It is indexed into Graph', 'The source indexes its records into an Optimizely Graph custom source. The CMS sees them as connected content.'],
+  ['3 · A card is bound to a record', 'In Visual Builder an Office Card is connected to one record. A link badge shows it is bound, mapped fields are read-only, and the promo line stays editable.'],
+  ['4 · The site follows the source', 'When the source changes, the card changes. No CMS edit and no publish.'],
+];
+function S7({ stamp }) {
+  const [step, setStep] = useState(0);
+  const next = () => { const n = Math.min(PATTERN.length - 1, step + 1); setStep(n); if (n === PATTERN.length - 1) stamp('office'); };
+  const box = (i, t, d) => (
+    <div className={`rounded-xl border p-4 text-sm transition ${step >= i ? 'border-green-500 bg-green-50' : 'border-slate-200 bg-white opacity-60'}`}>
+      <div className="font-bold">{t}</div><div className="text-xs text-slate-600">{d}</div>
+    </div>
+  );
   return (
-    <div className="grid gap-4 xl:grid-cols-2">
-      <div className="space-y-4">
-        <Frame url="app.cms.optimizely.com/visual-builder/still-time-to-file" label="Visual Builder · Office Card" accent="bg-sky-50">
-          <div className="space-y-2 p-4 text-sm">
-            <div className="flex flex-wrap items-center gap-2 font-bold">[HRB] Office Card <Pill cls="bg-indigo-100 text-indigo-700">🔗 Bound to HRB Offices · HRB-0412</Pill></div>
-            {[['Office name', west.name], ['City', west.city], ['Hours', west.hours], ['Open appointments today', String(west.slots)]].map(([k, v]) => (
-              <div key={k} className="grid grid-cols-3 items-center gap-2"><span className="text-xs text-slate-500">{k}</span><input readOnly value={v} className="col-span-2 rounded border border-slate-200 bg-slate-100 px-2 py-1 text-slate-500" /></div>
+    <div className="space-y-4">
+      <div className="rounded-xl border border-amber-300 bg-amber-50 p-4 text-sm text-amber-900">
+        <b>SIMULATED · a pattern, not running today.</b> This demo has no live office source, and the office cards on the page are ordinary CMS content. If anyone asks to see it live, say we would connect one of their real systems in the proof of concept.
+      </div>
+      <div className="grid gap-4 xl:grid-cols-2">
+        <Frame url="docs.optimizely.com/cms-saas/docs/integrate-external-resources" label="Docs · Connected Content" accent="bg-sky-50">
+          <div className="space-y-3 p-4 text-sm">
+            {PATTERN.map(([t, d], i) => (
+              <div key={t} className={`rounded-lg border p-3 ${i === step ? 'border-green-600 bg-green-50' : i < step ? 'border-slate-200 bg-white' : 'border-slate-100 bg-slate-50 text-slate-400'}`}>
+                <div className="font-semibold">{t}</div>{i <= step && <div className="text-xs text-slate-600">{d}</div>}
+              </div>
             ))}
-            <div className="grid grid-cols-3 items-center gap-2"><span className="text-xs text-slate-500">Local promo</span><input defaultValue="Saturday hours through April 15." className="col-span-2 rounded border border-slate-300 px-2 py-1" /></div>
-            <div className="text-xs text-slate-500">Grey fields are mapped from the office system (read-only). Marketing owns the promo line.</div>
+            <div className="flex items-center gap-3">
+              <Btn onClick={next} disabled={step === PATTERN.length - 1}>{step === PATTERN.length - 1 ? '✓ Pattern shown' : 'Next step ›'}</Btn>
+              <a href="https://docs.optimizely.com/cms-saas/docs/integrate-external-resources" target="_blank" rel="noopener noreferrer" className="text-xs font-semibold text-green-800 underline">Open the docs page</a>
+            </div>
           </div>
         </Frame>
-        <div className="overflow-hidden rounded-xl border border-slate-800 bg-slate-950 shadow-sm">
-          <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 px-3 py-2 text-xs text-slate-400"><span>terminal · hrb-demo (you are the office system)</span>
-            <div className="flex gap-2"><Btn kind="primary" onClick={() => run(9)} disabled={busy || west.slots === 9}>Run --open 9</Btn><Btn kind="ghost" onClick={() => run(0)} disabled={busy || west.slots === 0}>Reset --open 0</Btn></div></div>
-          <pre className="h-36 overflow-auto p-3 font-mono text-xs text-green-300">{lines.length ? lines.join('\n') : '$ yarn seed:offices --open 9   (typed, not run)'}{busy && '\n…'}</pre>
-        </div>
+        <Frame url="slide 5 · coexistence" label="Pattern" accent="bg-slate-100">
+          <div className="grid items-center gap-3 p-5 md:grid-cols-5">
+            <div className="md:col-span-1">{box(0, 'Office system', 'owns the data')}</div>
+            <div className="text-center text-2xl text-slate-400">→</div>
+            <div className="md:col-span-1">{box(1, 'Graph source', 'indexed records')}</div>
+            <div className="text-center text-2xl text-slate-400">→</div>
+            <div className="md:col-span-1">{box(2, 'Office Card', 'bound in the CMS')}</div>
+          </div>
+          <div className={`px-5 pb-5 text-sm transition ${step >= 3 ? 'text-green-800' : 'text-slate-300'}`}>When the source changes, the card follows. No CMS edit, no publish.</div>
+        </Frame>
       </div>
-      <Frame url="hrblock.optimoey.com/still-time-to-file" label="Live App (visitor)">
-        <div className="bg-green-50 p-5">
-          <div className="mb-3 text-sm font-bold">Offices near you · availability today</div>
-          <div className="grid gap-3 md:grid-cols-2">{offices.slice(0, 3).map((o) => <OfficeCard key={o.id} o={o} flash={flash === o.id} />)}</div>
-          <div className="mt-3 text-xs text-slate-500">No CMS edit. No publish. The card follows the source.</div>
-        </div>
-      </Frame>
     </div>
   );
 }
 
 /* ---------------------------- Scene 8 ---------------------------- */
-const PERSONAS = {
-  diy_abandoner: { name: 'Dana', desc: 'started a DIY return, didn’t finish', seg: 'hrb_diy_abandoner', variant: 'DiyAbandoner' },
-  returning_assisted: { name: 'Robert', desc: 'filed in an office last year', seg: 'hrb_returning_assisted', variant: 'ReturningAssisted' },
-  late_filer: { name: 'Kim', desc: 'late filer, deadline worry', seg: 'hrb_late_filer', variant: 'LateFiler' },
-};
 function S8({ stamp }) {
   const [preview, setPreview] = useState('DiyAbandoner');
-  const [persona, setPersona] = useState(null);
-  const [pending, setPending] = useState(null);
+  const [seg, setSeg] = useState('');          // the hrb_segment cookie, set by the URL switch
+  const [lastUrl, setLastUrl] = useState('');  // '' | 'become' | 'clear'
   const [badge, setBadge] = useState(true);
-  const choose = (key) => {
-    if (key === 'reset') { setPersona(null); setPending(null); return; }
-    setPending(key);
-    setTimeout(() => { setPersona(key); setPending(null); stamp('perso'); }, 1800);
-  };
-  const p = persona ? PERSONAS[persona] : null;
-  const variant = p ? p.variant : 'Original';
+  const isDana = seg === 'diy_abandoner';
+  const variant = isDana ? 'DiyAbandoner' : 'Original';
+  const become = () => { setSeg('diy_abandoner'); setLastUrl('become'); stamp('perso'); };
+  const clear = () => { setSeg(''); setLastUrl('clear'); };
+  const query = lastUrl === 'become' ? '?hrb_segment=diy_abandoner' : lastUrl === 'clear' ? '?hrb_segment=' : '';
   return (
     <div className="grid gap-4 xl:grid-cols-5">
       <div className="space-y-4 xl:col-span-2">
@@ -760,36 +763,36 @@ function S8({ stamp }) {
             <select value={preview} onChange={(e) => setPreview(e.target.value)} className="w-full rounded-md border border-slate-300 px-2 py-1.5">
               {Object.keys(HERO).map((k) => <option key={k} value={k}>{k}</option>)}
             </select>
-            <div className="rounded-lg bg-green-800 p-4 text-white"><div className="text-xs opacity-80">{HERO[preview].eyebrow}</div><div className="text-lg font-bold">{HERO[preview].headline}</div></div>
-            <div className="text-xs text-slate-500">Only the hero changes; the rest of the page is identical. Copied from Original in about 30 seconds.</div>
+            <div className="rounded-lg bg-green-800 p-4 text-white"><div className="text-xs uppercase opacity-80">{HERO[preview].eyebrow}</div><div className="text-lg font-bold">{HERO[preview].headline}</div></div>
+            <div className="text-xs text-slate-500">Only the hero changes; the rest of the page is identical. Copied from Original, then the hero edited.</div>
           </div>
         </Frame>
-        <Frame url="odp.optimizely.com/audiences/hrb_diy_abandoner" label="ODP · Real-time audience" accent="bg-teal-50">
+        <Frame url="app.optimizely.com/audiences/HRB DIY Abandoner" label="Feature Experimentation · Audience" accent="bg-blue-50">
           <div className="space-y-2 p-4 text-sm">
-            <div className="font-bold">hrb_diy_abandoner</div>
-            <div className="rounded border border-green-200 bg-green-50 p-2"><b>Include</b> people who did <code>hrb_demo / diy_return_started</code> in the last 7 days</div>
-            <div className="rounded border border-red-200 bg-red-50 p-2"><b>Exclude</b> people who did <code>hrb_demo / diy_return_completed</code> in the last 7 days</div>
-            <div className="text-xs text-slate-500">Real time, not a nightly batch. On-site behavior only (consent-aware, IRC 7216).</div>
+            <div className="font-bold">HRB DIY Abandoner</div>
+            <div className="rounded border border-green-200 bg-green-50 p-2">Custom attribute <code>hrb_segment</code> · equals · <code>diy_abandoner</code></div>
+            <div className="rounded border border-slate-200 p-2 text-xs">Rule <code>hrb_diy_abandoner_delivery</code> on <code>hrb_landing_personalization</code> serves <b>DiyAbandoner</b> to this audience (100%).</div>
+            <div className="text-xs text-slate-500">In this demo a link sets the attribute. In production it would come from your CDP, ODP or the Adobe stack. On-site behavior only (consent-aware, IRC 7216).</div>
           </div>
         </Frame>
       </div>
       <div className="space-y-2 xl:col-span-3">
         <div className="flex flex-wrap items-center gap-2">
-          <span className="text-sm text-slate-600">Become:</span>
-          {Object.entries(PERSONAS).map(([k, v]) => <Btn key={k} kind={persona === k ? 'primary' : 'ghost'} onClick={() => choose(k)} disabled={!!pending}>{v.name}</Btn>)}
-          <Btn kind="ghost" onClick={() => choose('reset')}>Reset visitor</Btn>
-          <label className="ml-auto flex items-center gap-1 text-xs text-slate-600"><input type="checkbox" checked={badge} onChange={(e) => setBadge(e.target.checked)} /> decision badge</label>
+          <span className="text-sm text-slate-600">Visitor window:</span>
+          <Btn kind={isDana ? 'primary' : 'ghost'} onClick={become}>Become Dana (?hrb_segment=diy_abandoner)</Btn>
+          <Btn kind="ghost" onClick={clear}>Clear segment (?hrb_segment=)</Btn>
+          <label className="ml-auto flex items-center gap-1 text-xs text-slate-600"><input type="checkbox" checked={badge} onChange={(e) => setBadge(e.target.checked)} /> decision overlay (prototype only)</label>
         </div>
-        {pending && <div className="rounded-lg bg-teal-50 p-2 text-sm text-teal-800"><Spinner /> ODP is qualifying {PERSONAS[pending].name} ({PERSONAS[pending].desc})…</div>}
         <div className="relative">
-          <Frame url={`hrblock.optimoey.com/still-time-to-file${p ? `  ·  visitor: ${p.name}` : ''}`} label="Live App (visitor window)">
+          <Frame url={`hrblock.optimoey.com/still-time-to-file${query}`} label={isDana ? 'Live App (visitor: Dana)' : 'Live App (visitor window)'}>
             <LiveApp variant={variant} />
           </Frame>
           {badge && (
             <div className="absolute bottom-3 left-3 rounded-lg bg-black/80 px-3 py-2 font-mono text-xs text-white shadow-lg">
               <div><b>Variation:</b> {variant}</div>
-              <div><b>Flag / rule:</b> {p ? 'hrb_landing_personalization / ' + p.seg : 'hrb_landing_hero_test / ab_test'}</div>
-              <div><b>ODP audiences:</b> {p ? p.seg : 'none'}</div>
+              <div><b>Flag / rule:</b> {isDana ? 'hrb_landing_personalization / hrb_diy_abandoner_delivery' : 'hrb_landing_hero_test / hrb_hero_urgency_test'}</div>
+              <div><b>Audience:</b> {isDana ? 'HRB DIY Abandoner (hrb_segment=diy_abandoner)' : 'none · visitor bucketed into Original (sticky cookie hrb_vid)'}</div>
+              <div><b>Button events:</b> {HERO[variant].ev.map((e) => (e === 'none' ? 'none' : e)).join(' · ')}</div>
               <div className="text-green-300">decided server-side · no flicker</div>
             </div>
           )}
@@ -801,9 +804,9 @@ function S8({ stamp }) {
 
 /* ---------------------------- Scene 9 ---------------------------- */
 const IDEAS = [
-  { t: 'Add deadline urgency to the hero (“Only a few days left”)', s: 92 },
+  { t: 'Point the hero at a tax pro with the April 15 deadline (“April 15 is close. Let a trusted tax pro handle it all.”)', s: 92 },
   { t: 'Show live appointment availability next to the CTA', s: 84 },
-  { t: 'Lead with “expert review included” for DIY abandoners', s: 77 },
+  { t: 'Lead with “live support from tax pros included” for DIY starters', s: 77 },
   { t: 'Shorten the hero subhead to one line on mobile', s: 61 },
 ];
 function S9({ stamp }) {
@@ -821,8 +824,8 @@ function S9({ stamp }) {
     return () => clearInterval(id);
   }, [running]);
   const mmss = `${String(Math.floor(secs / 60)).padStart(2, '0')}:${String(secs % 60).padStart(2, '0')}`;
-  const pasteRule = () => setRule({ ...rule, name: 'Still time hero - deadline urgency (live)', vars: 'Original | UrgencyB (50/50)', metric: 'appointment_cta_click' });
-  const ready = rule.name && rule.vars && rule.metric && rule.excl;
+  const pasteRule = () => setRule({ ...rule, name: 'Hero test: Original vs UrgencyB (live build)', vars: 'Original | UrgencyB (50/50)', metric: 'appointment_cta_click' });
+  const ready = rule.name && rule.vars && rule.metric; // the exclusion group is optional
   const start = () => { setStarted(true); setRunning(false); stamp('test'); };
   const resetAll = () => { setRunning(false); setSecs(0); setStarted(false); setIdeas('idle'); setIdea(null); setReview(false); setRule(emptyRule); };
   return (
@@ -836,7 +839,7 @@ function S9({ stamp }) {
       <div className="grid gap-4 xl:grid-cols-2">
         <Frame url="mark.optimizely.com" label="Mark · @test_ideation" accent="bg-indigo-50">
           <div className="space-y-3 p-4 text-sm">
-            <div className="rounded-lg bg-slate-100 p-2 font-mono text-xs">@test_ideation https://hrblock.optimoey.com/still-time-to-file · Goal: increase appointment_cta_click from late-season visitors</div>
+            <div className="rounded-lg bg-slate-100 p-2 font-mono text-xs">@test_ideation https://hrblock.optimoey.com/still-time-to-file · Goal: increase appointment_cta_click from visitors who are not in a personalized segment</div>
             <Btn kind="mark" onClick={() => { setIdeas('loading'); setTimeout(() => setIdeas('done'), 1300); }} disabled={ideas !== 'idle'}>{'Paste C6 & send'}</Btn>
             {ideas === 'loading' && <div><Spinner /> Analyzing the page and past results…</div>}
             {ideas === 'done' && IDEAS.map((i, k) => (
@@ -846,26 +849,26 @@ function S9({ stamp }) {
             ))}
           </div>
         </Frame>
-        <Frame url="app.optimizely.com/flags/hrb_landing_hero_test" label="Feature Experimentation" accent="bg-blue-50">
+        <Frame url="app.optimizely.com/flags/hrb_landing_sandbox" label="Feature Experimentation" accent="bg-blue-50">
           <div className="space-y-3 p-4 text-sm">
-            <div className="flex items-center justify-between"><div className="font-bold">hrb_landing_hero_test · Add rule › A/B Test</div><Pill cls="bg-amber-100 text-amber-800">Development</Pill></div>
+            <div className="flex items-center justify-between"><div className="font-bold">hrb_landing_sandbox · Add rule › A/B Test</div><div className="flex gap-1"><Pill cls="bg-amber-100 text-amber-800">Development</Pill><Pill cls="bg-slate-100 text-slate-600">Sandbox · not read by the site</Pill></div></div>
             <div className="flex justify-end"><Btn kind="paste" onClick={pasteRule} disabled={idea === null}>Paste C7</Btn></div>
             {[['name', 'Rule name'], ['vars', 'Variations (cms-saas-content-variation)'], ['metric', 'Primary metric']].map(([k, l]) => (
               <label key={k} className="block text-xs font-semibold text-slate-600">{l}<input value={rule[k]} onChange={(e) => setRule({ ...rule, [k]: e.target.value })} className="mt-1 w-full rounded-md border border-slate-300 px-2 py-1.5 font-normal text-slate-900" /></label>
             ))}
             <label className="block text-xs font-semibold text-slate-600">Exclusion group
-              <select value={rule.excl} onChange={(e) => setRule({ ...rule, excl: e.target.value })} className="mt-1 w-full rounded-md border border-slate-300 px-2 py-1.5 font-normal text-slate-900"><option value="">None</option><option value="HRB landing tests (dev)">HRB landing tests (dev)</option></select>
+              <select value={rule.excl} onChange={(e) => setRule({ ...rule, excl: e.target.value })} className="mt-1 w-full rounded-md border border-slate-300 px-2 py-1.5 font-normal text-slate-900"><option value="">None (skip; optional)</option><option value="HRB landing tests">HRB landing tests (only if you created one)</option></select>
             </label>
             <div className="text-xs text-slate-500">Audience: Everyone · Traffic 100% · Secondary metric: diy_start_click</div>
             <Btn kind="mark" onClick={() => setReview(true)} disabled={!ready || review}>Pre-launch review (Mark)</Btn>
             {review && (
               <div className="space-y-1 rounded-lg border border-indigo-100 bg-indigo-50 p-2 text-xs">
                 <div>✅ Primary metric matches the hypothesis</div>
-                <div>✅ Exclusion group prevents overlap with the pricing-banner test</div>
+                <div>{rule.excl ? '✅ Exclusion group prevents overlap with other landing-page tests' : 'ℹ No exclusion group chosen: add this test to one if you run several landing-page tests'}</div>
                 <div>💡 Keep diy_start_click as a guardrail (already set)</div>
               </div>
             )}
-            <Btn onClick={start} disabled={!review || started}>{started ? '✓ Running in Development' : 'Save and start'}</Btn>
+            <Btn onClick={start} disabled={!review || started}>{started ? '✓ Running on the sandbox flag (Development)' : 'Save and start'}</Btn>
           </div>
         </Frame>
       </div>
@@ -898,7 +901,7 @@ function S10({ answer, shipped, setShipped, stamp }) {
       <div className="space-y-4">
         <Frame url="app.optimizely.com/flags/hrb_landing_hero_test/results" label="Feature Experimentation · Results" accent="bg-blue-50">
           <div className="space-y-4 p-4 text-sm">
-            <div className="flex flex-wrap items-center gap-2"><b>Still time hero – deadline urgency</b><Pill cls="bg-blue-100 text-blue-800">Production · 7 days</Pill><Pill cls="bg-slate-100 text-slate-600">Simulated traffic</Pill></div>
+            <div className="flex flex-wrap items-center gap-2"><b>Hero test: Original vs UrgencyB</b><Pill cls="bg-amber-100 text-amber-800">Development · seeded</Pill><Pill cls="bg-slate-100 text-slate-600">Simulated traffic</Pill></div>
             <div className="text-xs font-bold text-slate-500">PRIMARY · appointment_cta_click</div>
             <ResultBar label="Original" pct={6.0} n="14,012" />
             <ResultBar label="UrgencyB" pct={7.2} n="13,988" win />
@@ -907,8 +910,9 @@ function S10({ answer, shipped, setShipped, stamp }) {
             <div className="rounded border border-slate-200 p-2 text-xs"><b>Secondary · diy_start_click:</b> 9.1% vs 9.0%, no significant change</div>
             <Btn kind="mark" onClick={() => setSum(true)} disabled={sum}>Summarize Results</Btn>
             {sum && <div className="rounded-lg border border-indigo-100 bg-indigo-50 p-3 text-sm">{text}{text.length < SUMMARY.length && <span className="animate-pulse">▍</span>}</div>}
-            <Btn onClick={() => setCount(5)} disabled={shipped || count !== null}>{shipped ? '✓ UrgencyB live for everyone' : 'Conclude and roll out UrgencyB to everyone'}</Btn>
-            {count !== null && <div className="text-sm text-slate-600"><Spinner /> Live App picks up flag changes on its next poll (about 30 s; sped up here): {count}s</div>}
+            <Btn onClick={() => setCount(5)} disabled={shipped || count !== null}>{shipped ? '✓ UrgencyB live for everyone' : 'Conclude and deploy UrgencyB to everyone'}</Btn>
+            {count !== null && <div className="text-sm text-slate-600"><Spinner /> Live App picks up the change on its next poll (30 s once the interval is changed, plus time to reach the CDN; sped up here): {count}s</div>}
+            {!shipped && <div className="text-xs text-slate-500">A concluded rule cannot be restarted. Rehearse this step on the rehearsal flag.</div>}
           </div>
         </Frame>
         {shipped && (
@@ -975,7 +979,7 @@ function S12({ stamps, stamp }) {
     <div className="grid gap-4 xl:grid-cols-2">
       <Frame url="mark.optimizely.com" label="Mark · Experimentation Program Overview" accent="bg-indigo-50">
         <div className="space-y-3 p-4 text-sm">
-          <div className="rounded-lg bg-slate-100 p-2 font-mono text-xs">@experimentation_program_overview · Project: HRB Demo · last 7 days vs previous 7 · email report</div>
+          <div className="rounded-lg bg-slate-100 p-2 font-mono text-xs">@experimentation_program_overview · Project: Marvin Demo · last 7 days vs previous 7 · email report</div>
           <Btn kind="mark" onClick={run} disabled={state !== 'idle'}>{'Paste C9 & send'}</Btn>
           {state === 'loading' && <div><Spinner /> Compiling velocity, win rate and learnings…</div>}
           {state === 'done' && (
@@ -1039,7 +1043,7 @@ function S13() {
           <div className="text-center text-3xl text-slate-400">⇄</div>
           <div className="space-y-2 lg:col-span-2">
             <div className="text-xs font-bold text-green-700">OPTIMIZELY ADDS</div>
-            {[['CMS SaaS + Graph', 'governed content, connected sources'], ['Feature Experimentation', 'server-side decisions and tests'], ['ODP', 'real-time audiences'], ['CMP + DAM', 'intake, approvals, assets'], ['Analytics · Mark', 'warehouse-native insight, agents']].map(([t, d]) => <ArchBox key={t} t={t} d={d} cls="border-green-300 bg-green-50 text-green-900" />)}
+            {[['CMS SaaS + Graph', 'governed content, connected sources'], ['Feature Experimentation', 'server-side decisions and tests'], ['Your CDP or ODP', 'audiences (a URL attribute stands in today)'], ['CMP + DAM', 'intake, approvals, assets'], ['Analytics · Mark', 'warehouse-native insight, agents']].map(([t, d]) => <ArchBox key={t} t={t} d={d} cls="border-green-300 bg-green-50 text-green-900" />)}
           </div>
           <div className="text-center text-3xl text-slate-400">→</div>
           <div className="space-y-2">
@@ -1126,7 +1130,6 @@ export default function App() {
   const [answer, setAnswer] = useState('');
   const [lang, setLang] = useState('en');
   const [asset, setAsset] = useState(ASSETS[0]);
-  const [offices, setOffices] = useState(OFFICES0);
   const [shipped, setShipped] = useState(false);
   const [phoenix, setPhoenix] = useState(null);
   const [resetKey, setResetKey] = useState(0);
@@ -1145,7 +1148,7 @@ export default function App() {
   }, []);
 
   const resetAll = () => {
-    setStamps({}); setAnswer(''); setLang('en'); setAsset(ASSETS[0]); setOffices(OFFICES0);
+    setStamps({}); setAnswer(''); setLang('en'); setAsset(ASSETS[0]);
     setShipped(false); setPhoenix(null); setIdx(0); setResetKey((k) => k + 1);
   };
 
@@ -1160,7 +1163,7 @@ export default function App() {
       case 4: return <S4 stamp={stamp} />;
       case 5: return <S5 asset={asset} setAsset={setAsset} stamp={stamp} />;
       case 6: return <S6 asset={asset} stamp={stamp} phoenix={phoenix} setPhoenix={setPhoenix} />;
-      case 7: return <S7 offices={offices} setOffices={setOffices} stamp={stamp} />;
+      case 7: return <S7 stamp={stamp} />;
       case 8: return <S8 stamp={stamp} />;
       case 9: return <S9 stamp={stamp} />;
       case 10: return <S10 answer={answer} shipped={shipped} setShipped={setShipped} stamp={stamp} />;
@@ -1192,7 +1195,7 @@ export default function App() {
           {SCENES.map((sc, i) => (
             <button key={sc.n} onClick={() => setIdx(i)} className={`mb-1 flex w-full items-start gap-2 rounded-lg px-2 py-2 text-left text-sm ${i === idx ? 'bg-green-50 font-semibold text-green-900' : 'text-slate-700 hover:bg-slate-50'}`}>
               <span className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-xs ${sc.stamp && stamps[sc.stamp] ? 'bg-green-600 text-white' : i === idx ? 'bg-green-700 text-white' : 'bg-slate-200 text-slate-600'}`}>{sc.stamp && stamps[sc.stamp] ? '✓' : sc.n}</span>
-              <span className="flex-1"><span className="block leading-tight">{sc.short}</span><span className="text-xs font-normal text-slate-400">{sc.time}</span></span>
+              <span className="flex-1"><span className="block leading-tight">{sc.short}</span><span className="text-xs font-normal text-slate-400">{sc.time} · {STATUS[STATUS_BY_SCENE[sc.n]].label.toLowerCase()}</span></span>
             </button>
           ))}
         </nav>
@@ -1203,7 +1206,7 @@ export default function App() {
           <div className="flex items-center justify-between border-b border-slate-200 bg-white px-5 py-3">
             <div>
               <div className="text-xs text-slate-500">Scene {s.n} of {SCENES.length} · {s.act}</div>
-              <div className="text-lg font-bold">{s.title}</div>
+              <div className="flex flex-wrap items-center gap-2"><div className="text-lg font-bold">{s.title}</div><span title={STATUS[STATUS_BY_SCENE[s.n]].hint}><Pill cls={STATUS[STATUS_BY_SCENE[s.n]].cls}>{STATUS[STATUS_BY_SCENE[s.n]].label}{STATUS_NOTE[s.n] ? ` · ${STATUS_NOTE[s.n]}` : ''}</Pill></span></div>
             </div>
             <div className="flex gap-2">
               <Btn kind="ghost" onClick={() => setIdx(Math.max(0, idx - 1))} disabled={idx === 0}>‹ Prev</Btn>
@@ -1212,7 +1215,7 @@ export default function App() {
           </div>
           <div className="flex-1 overflow-y-auto p-5" key={`${idx}-${resetKey}`}>
             {stage()}
-            <div className="mt-6 text-center text-xs text-slate-400">Prototype only. Every screen is simulated; all content, offices, audiences and results are synthetic. Use the arrow keys to move between scenes.</div>
+            <div className="mt-6 text-center text-xs text-slate-400">Prototype only: every screen here is a simulation, including the scenes tagged LIVE, which mirror what runs on hrblock.optimoey.com. LIVE = built and running (Feature Experimentation, Development) · SIMULATED = a pattern only · NOT VERIFIED = a product demo that has not been checked. Site copy is from hrblock.com as of November 2026; offices, audiences and results are synthetic. Arrow keys move between scenes.</div>
           </div>
         </main>
       </div>
