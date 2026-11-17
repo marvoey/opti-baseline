@@ -60,13 +60,17 @@ function getFxClient(): Promise<FxClient | null> {
 
   clientPromise = client
     .onReady({ timeout: 5000 })
+    // onReady() is typed Promise<unknown> and, in practice, can resolve to undefined
+    // when the config loaded. Only an explicit { success: false } means "not ready".
     .then((result) => {
-      if (result.success) return client;
-      console.warn('[fx] SDK not ready:', result.reason);
+      const r = result as { success?: boolean; reason?: string } | undefined;
+      if (r?.success !== false) return client;
+      console.warn('[fx] SDK not ready:', r.reason);
       clientPromise = undefined; // try again on the next request
       return null;
     })
-    .catch(() => {
+    .catch((err) => {
+      console.warn('[fx] SDK failed to initialise:', err);
       clientPromise = undefined;
       return null;
     });

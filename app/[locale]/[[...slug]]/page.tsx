@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { getClient } from '@optimizely/cms-sdk';
 import { OptimizelyComponent, withAppContext } from '@optimizely/cms-sdk/react/server';
 import { notFound } from 'next/navigation';
-import { DEFAULT_LOCALE } from '@/lib/locales';
+import { DEFAULT_LOCALE, findLocale } from '@/lib/locales';
 import { siteOrigin } from '@/lib/siteHost';
 import { siteConfig } from '@/lib/siteConfig';
 import HomePageFallback from '@/app/_components/HomePageFallback';
@@ -67,6 +67,7 @@ const loadContent = cache(async (locale: string, slug: string[]) => {
 /** Per-page <title> from the CMS, falling back to the site name. */
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug = [] } = await params;
+  if (!findLocale(locale)) return { title: siteConfig.title };
   const content = await loadContent(locale, slug);
   const item = content as { MetaTitle?: string; _metadata?: { displayName?: string } } | undefined;
   const pageTitle = item?.MetaTitle || item?._metadata?.displayName;
@@ -82,6 +83,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
  */
 async function Page({ params }: Props) {
   const { locale, slug = [] } = await params;
+  // Paths with a dot (e.g. /util/login.aspx) skip the proxy, so `locale` can be any
+  // first segment. Only CMS locales are valid.
+  if (!findLocale(locale)) notFound();
   const content = await loadContent(locale, slug);
 
   if (!content) {

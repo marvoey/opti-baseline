@@ -9,7 +9,7 @@
  * renders empty.
  */
 import { getClient } from '@optimizely/cms-sdk';
-import { DEFAULT_LOCALE, localizePath } from './locales';
+import { DEFAULT_LOCALE, findLocale, localizePath } from './locales';
 import { siteConfig, type NavLink } from './siteConfig';
 
 type ChildMeta = {
@@ -72,7 +72,9 @@ async function fetchLinks(locale: string): Promise<NavLink[]> {
 }
 
 /** Main-nav links for a CMS locale key (defaults to the default locale). */
-export async function getMainNavLinks(locale: string = DEFAULT_LOCALE): Promise<NavLink[]> {
+export async function getMainNavLinks(requested: string = DEFAULT_LOCALE): Promise<NavLink[]> {
+  // Never send an unknown locale to Graph: it rejects values outside its Locales enum.
+  const locale = findLocale(requested) ? requested : DEFAULT_LOCALE;
   const hit = memo.get(locale);
   if (hit && Date.now() - hit.at < TTL_MS) return hit.links;
 
