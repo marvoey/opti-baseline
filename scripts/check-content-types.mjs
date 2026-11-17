@@ -97,7 +97,8 @@ function extractSdkNativeKeys(registrySource) {
 }
 
 async function collectCodeKeys() {
-  const files = await readdir(CMS_DIR);
+  // Recursive, like the `./cms/**/*.tsx` push glob (paths are relative to cms/).
+  const files = await readdir(CMS_DIR, { recursive: true });
   const tsxFiles = files.filter((f) => f.endsWith('.tsx') && f !== 'wrappers.tsx');
 
   const keyMap = {}; // key → source file

@@ -12,6 +12,26 @@ import BlankExperience from './BlankExperience';
 import BlankSection from './BlankSection';
 import Page, { PageContentType } from './Page';
 import RichText, { RichTextContentType } from './RichText';
+import HrbArticleCard, { HrbArticleCardContentType } from './hrb/ArticleCard';
+import HrbArticleList, { HrbArticleListContentType } from './hrb/ArticleList';
+import HrbCallout, { HrbCalloutContentType } from './hrb/Callout';
+import HrbCategoryNav, { HrbCategoryNavContentType } from './hrb/CategoryNav';
+import HrbComplianceDisclosure, { HrbComplianceDisclosureContentType } from './hrb/ComplianceDisclosure';
+import HrbCtaBanner, { HrbCtaBannerContentType, HrbCtaBannerDisplayTemplate } from './hrb/CtaBanner';
+import HrbGuaranteeItem, { HrbGuaranteeItemContentType } from './hrb/GuaranteeItem';
+import HrbGuarantees, { HrbGuaranteesContentType } from './hrb/Guarantees';
+import HrbHero, { HrbHeroContentType, HrbHeroDisplayTemplate } from './hrb/Hero';
+import HrbLandingExperience, { HrbLandingExperienceContentType } from './hrb/LandingExperience';
+import HrbLinkItem, { HrbLinkItemContentType } from './hrb/LinkItem';
+import HrbOfferCard, { HrbOfferCardContentType, HrbOfferCardDisplayTemplate } from './hrb/OfferCard';
+import HrbOfficeCard, { HrbOfficeCardContentType } from './hrb/OfficeCard';
+import HrbOfficeFinder, { HrbOfficeFinderContentType } from './hrb/OfficeFinder';
+import HrbQuickLinks, { HrbQuickLinksContentType } from './hrb/QuickLinks';
+import HrbSection, { HrbSectionContentType, HrbSectionDisplayTemplate } from './hrb/Section';
+import HrbSectionHeading, { HrbSectionHeadingContentType } from './hrb/SectionHeading';
+import HrbStatItem, { HrbStatItemContentType } from './hrb/StatItem';
+import HrbTaxCenterCategoryPage, { HrbTaxCenterCategoryPageContentType } from './hrb/TaxCenterCategoryPage';
+import HrbTrustBar, { HrbTrustBarContentType } from './hrb/TrustBar';
 
 /**
  * Single configuration + registration point for the Optimizely SDK.
@@ -49,11 +69,37 @@ export const registeredContentTypes = [
   PageContentType,
   // Blocks
   RichTextContentType,
+  // [HRB] — H&R Block demo types (keys HRB_*)
+  HrbArticleCardContentType,
+  HrbArticleListContentType,
+  HrbCalloutContentType,
+  HrbCategoryNavContentType,
+  HrbComplianceDisclosureContentType,
+  HrbCtaBannerContentType,
+  HrbGuaranteeItemContentType,
+  HrbGuaranteesContentType,
+  HrbHeroContentType,
+  HrbLandingExperienceContentType,
+  HrbLinkItemContentType,
+  HrbOfferCardContentType,
+  HrbOfficeCardContentType,
+  HrbOfficeFinderContentType,
+  HrbQuickLinksContentType,
+  HrbSectionContentType,
+  HrbSectionHeadingContentType,
+  HrbStatItemContentType,
+  HrbTaxCenterCategoryPageContentType,
+  HrbTrustBarContentType,
 ];
 
 initContentTypeRegistry(registeredContentTypes);
 
-initDisplayTemplateRegistry([]);
+initDisplayTemplateRegistry([
+  HrbCtaBannerDisplayTemplate,
+  HrbHeroDisplayTemplate,
+  HrbOfferCardDisplayTemplate,
+  HrbSectionDisplayTemplate,
+]);
 
 initReactComponentRegistry({
   resolver: {
@@ -62,5 +108,26 @@ initReactComponentRegistry({
     Page,
     // Blocks (resolver key === content-type key)
     RichTextBlock: RichText,
+    // [HRB] (resolver key === content-type key)
+    HRB_ArticleCard: HrbArticleCard,
+    HRB_ArticleList: HrbArticleList,
+    HRB_Callout: HrbCallout,
+    HRB_CategoryNav: HrbCategoryNav,
+    HRB_ComplianceDisclosure: HrbComplianceDisclosure,
+    HRB_CtaBanner: HrbCtaBanner,
+    HRB_GuaranteeItem: HrbGuaranteeItem,
+    HRB_Guarantees: HrbGuarantees,
+    HRB_Hero: HrbHero,
+    HRB_LandingExperience: HrbLandingExperience,
+    HRB_LinkItem: HrbLinkItem,
+    HRB_OfferCard: HrbOfferCard,
+    HRB_OfficeCard: HrbOfficeCard,
+    HRB_OfficeFinder: HrbOfficeFinder,
+    HRB_QuickLinks: HrbQuickLinks,
+    HRB_Section: HrbSection,
+    HRB_SectionHeading: HrbSectionHeading,
+    HRB_StatItem: HrbStatItem,
+    HRB_TaxCenterCategoryPage: HrbTaxCenterCategoryPage,
+    HRB_TrustBar: HrbTrustBar,
   },
 });
