@@ -1,5 +1,6 @@
 import { Building2, Headset, Music2, Search } from 'lucide-react';
 import { siteConfig } from '@/lib/siteConfig';
+import { getTranslator } from '@/lib/chromeText';
 
 const SUPPORT_ICONS = { headset: Headset, office: Building2, search: Search } as const;
 
@@ -41,18 +42,20 @@ function SocialIcon({ label }: { label: string }) {
   }
 }
 
-const Footer = () => (
+const Footer = ({ locale }: { locale?: string }) => {
+  const t = getTranslator(locale);
+  return (
   <footer className="bg-blue-800 text-white pt-12 pb-8" data-cms-group="Footer">
     <div className="container mx-auto px-4">
       {/* Need support? row */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 items-center mb-14 text-lg font-bold">
-        <h3 className="font-display">{siteConfig.footerSupportHeading}</h3>
+        <h3 className="font-display">{t(siteConfig.footerSupportHeading)}</h3>
         {siteConfig.footerSupportLinks.map((link) => {
           const Icon = SUPPORT_ICONS[link.icon];
           return (
             <a key={link.label} href={link.href} className="flex items-center gap-3 hover:underline">
               <Icon size={14} aria-hidden />
-              <span className="font-display">{link.label}</span>
+              <span className="font-display">{t(link.label)}</span>
             </a>
           );
         })}
@@ -64,12 +67,12 @@ const Footer = () => (
           <div key={i} className="space-y-10">
             {sections.map((section) => (
               <div key={section.heading}>
-                <h4 className="font-display text-sm font-bold mb-5">{section.heading}</h4>
+                <h4 className="font-display text-sm font-bold mb-5">{t(section.heading)}</h4>
                 <ul className="space-y-3 text-xs">
                   {section.links.map((link) => (
                     <li key={link.label}>
                       <a href={link.href} className="text-white/90 hover:text-white hover:underline">
-                        {link.label}
+                        {t(link.label)}
                       </a>
                     </li>
                   ))}
@@ -83,9 +86,9 @@ const Footer = () => (
       {/* Bottom bar: legal / social / privacy choices */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center text-[10px] text-white/80">
         <div className="space-y-3">
-          <p>{siteConfig.footerLegal}</p>
+          <p>{t(siteConfig.footerLegal)}</p>
           <a href={siteConfig.footerPrivacyChoices.href} className="inline-block underline hover:text-white">
-            {siteConfig.footerPrivacyChoices.label}
+            {t(siteConfig.footerPrivacyChoices.label)}
           </a>
         </div>
         <div className="flex justify-center gap-3">
@@ -103,6 +106,7 @@ const Footer = () => (
       </div>
     </div>
   </footer>
-);
+  );
+};
 
 export default Footer;

@@ -31,7 +31,10 @@ export const siteConfig = {
     { label: 'Spruce', href: '#' },
   ] satisfies NavLink[],
 
-  /** Primary header navigation. */
+  /**
+   * Primary header navigation — FALLBACK ONLY. The live links are the direct child
+   * pages of the container page (HOME_PAGE_CONTENT_ID), see lib/mainNav.ts.
+   */
   mainNavLinks: [
     { label: 'Taxes', href: '#' },
     { label: 'Financial products', href: '#' },
