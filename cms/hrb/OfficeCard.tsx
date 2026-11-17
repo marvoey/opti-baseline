@@ -30,7 +30,7 @@ export default function OfficeCard({ content }: Props) {
   return (
     <article
       {...pa(block)}
-      className="h-full rounded-2xl border border-hrb-border bg-white p-5 text-hrb-ink"
+      className="flex h-full flex-col rounded-2xl border border-hrb-border bg-white p-5 text-hrb-ink"
     >
       <div {...pa('OfficeName')} className="font-semibold">{content.OfficeName}</div>
       {place && <div className="mt-1 text-sm opacity-75">{place}</div>}
@@ -38,10 +38,19 @@ export default function OfficeCard({ content }: Props) {
         <div className="mt-3 text-sm font-semibold text-blue-800">{content.Availability}</div>
       )}
       {content.Bilingual && (
-        <span className="mt-3 inline-flex rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-semibold text-blue-800">
+        <span className="mt-3 inline-flex self-start rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-semibold text-blue-800">
           Bilingual pros
         </span>
       )}
+      {/* Placeholder action: deliberately not a link yet. */}
+      <div className="mt-auto pt-4">
+        <button
+          type="button"
+          className="inline-flex items-center rounded-full bg-blue-800 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-blue-950"
+        >
+          Book at this office
+        </button>
+      </div>
     </article>
   );
 }

@@ -92,7 +92,7 @@ export default function Section({ content, displaySettings }: Props) {
 
   function Column({ node, children }: StructureContainerProps) {
     return (
-      <div {...pa(node)} className="min-w-0 flex-1">
+      <div {...pa(node)} className="flex min-w-0 flex-1 flex-col [&>*:only-child]:flex-1">
         {children}
       </div>
     );
