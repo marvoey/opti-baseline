@@ -45,6 +45,31 @@ async function gql<T>(query: string): Promise<T> {
   return json.data;
 }
 
+/* ----------------------------- event upload ----------------------------- */
+/** One event as accepted by POST /v3/events (same shape the import script sends). */
+export type OdpEvent = {
+  type: string;
+  action: string;
+  identifiers: Record<string, string>;
+  data: Record<string, unknown>;
+};
+
+/** Sending site events to ODP (page views, clicks, A/B test and personalization exposures) is on whenever the ODP
+ *  key is set. ODP_EVENTS_ENABLED=false is the kill switch, for example for local development. */
+export const odpEventsEnabled = () => process.env.ODP_EVENTS_ENABLED !== 'false';
+/** With ODP_EVENTS_DRY_RUN=true the events are logged instead of sent, to check the payloads first. */
+export const odpEventsDryRun = () => process.env.ODP_EVENTS_DRY_RUN === 'true';
+
+/** Sends a batch of events in one request. Throws on failure; callers decide whether that matters. */
+export async function postOdpEvents(events: OdpEvent[]): Promise<void> {
+  if (!events.length) return;
+  if (odpEventsDryRun()) {
+    console.log('[odp] dry run, not sent:', JSON.stringify(events));
+    return;
+  }
+  await odpFetch('/v3/events', events);
+}
+
 /* ----------------------------- mapping ----------------------------- */
 type Node = Record<string, unknown>;
 const str = (v: unknown) => (typeof v === 'string' ? v : '');

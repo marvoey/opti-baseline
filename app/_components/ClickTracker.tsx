@@ -12,7 +12,11 @@ export default function ClickTracker() {
       fetch('/api/track', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ eventKey }),
+        body: JSON.stringify({
+          eventKey,
+          page: location.pathname,
+          label: el.textContent?.trim().slice(0, 80),
+        }),
         keepalive: true,
       }).catch(() => {});
     };
