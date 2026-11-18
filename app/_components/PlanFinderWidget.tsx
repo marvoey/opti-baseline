@@ -5,6 +5,25 @@ import type { PlanFinderWidgetProps } from '@/cms/planFinderFields';
 import type { PlanTypeKey } from '@/cms/planTypes';
 
 /**
+ * Reports a conversion to Optimizely Feature Experimentation through the
+ * server route (the SDK runs server-side, keyed to the visitor's cookie).
+ * Fire-and-forget: `keepalive` lets it finish while the browser navigates away,
+ * and a failure never blocks the visitor.
+ */
+function trackFx(event: 'plan_finder_submit' | 'agent_call_click') {
+  try {
+    void fetch('/api/fx/track', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ event }),
+      keepalive: true,
+    }).catch(() => {});
+  } catch {
+    // tracking is best-effort
+  }
+}
+
+/**
  * eHealth plan finder: plan-type tiles, a ZIP code field, an orange "Compare
  * … plans" pill and the licensed-agent phone line. Used by the EhHero and
  * EhPlanFinder CMS blocks; all copy comes from CMS via props.
@@ -39,6 +58,7 @@ export default function PlanFinderWidget({
       return;
     }
     setError(null);
+    trackFx('plan_finder_submit');
     const params = new URLSearchParams({ zip, type: plan.value });
     window.location.href = `${plan.href}?${params.toString()}`;
   }
@@ -131,6 +151,7 @@ export default function PlanFinderWidget({
         </p>
         <a
           href={phoneHref}
+          onClick={() => trackFx('agent_call_click')}
           {...editAttrs.PhoneNumber}
           className="mt-1 inline-block font-display text-2xl font-bold text-blue-950 hover:text-blue-800 sm:text-3xl"
         >

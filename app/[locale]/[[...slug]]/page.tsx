@@ -1,5 +1,6 @@
 import { cache } from 'react';
 import type { Metadata } from 'next';
+import { headers } from 'next/headers';
 import { getClient } from '@optimizely/cms-sdk';
 import { OptimizelyComponent, withAppContext } from '@optimizely/cms-sdk/react/server';
 import { notFound } from 'next/navigation';
@@ -7,11 +8,53 @@ import { DEFAULT_LOCALE } from '@/lib/locales';
 import { siteOrigin } from '@/lib/siteHost';
 import { getPageMeta } from '@/lib/pageMeta';
 import { siteConfig } from '@/lib/siteConfig';
+import { HOME_HERO_FLAG, decideCmsVariation, isLikelyBot } from '@/lib/fx';
+import { CAMPAIGN_HEADER, VID_HEADER, parseCampaign, parseVid } from '@/lib/visitor';
 import HomePageFallback from '@/app/_components/HomePageFallback';
 
 type Props = {
   params: Promise<{ locale: string; slug?: string[] }>;
 };
+
+/**
+ * Which CMS (SaaS) content variation of the home page this visitor should see.
+ *
+ * Feature Experimentation decides (flag `ehealth_home_hero`): campaign audiences
+ * first (?utm_campaign=aca -> AcaOep, =t65 -> Turning65), everyone else is split
+ * 50/50 between the original and AepSwitcher. The flag variable
+ * `cms-saas-content-variation` carries the CMS variation key. Returns null for
+ * "default content": no visitor id, a crawler, FX not configured/ready, or the
+ * flag serving "Original". React.cache => one decision (and one impression) per
+ * request, shared by generateMetadata and the page body.
+ */
+const resolveHomeVariation = cache(async (): Promise<string | null> => {
+  const h = await headers();
+  const visitorId = parseVid(h.get(VID_HEADER));
+  if (!visitorId || isLikelyBot(h.get('user-agent'))) return null;
+  return decideCmsVariation(HOME_HERO_FLAG, {
+    id: visitorId,
+    campaign: parseCampaign(h.get(CAMPAIGN_HEADER)),
+  });
+});
+
+/**
+ * Graph returns the original AND the requested variation when
+ * `includeOriginal` is set. Pick the variation when it came back, otherwise
+ * the original, so a missing/unpublished variation never breaks the page.
+ * Without a variation request Graph only returns originals (items[0]).
+ */
+function pickItem<T extends { _metadata?: { variation?: string | null } }>(
+  items: T[] | undefined,
+  variation: string | null,
+): T | undefined {
+  if (!items?.length) return undefined;
+  if (!variation) return items[0];
+  return (
+    items.find((item) => item._metadata?.variation === variation) ??
+    items.find((item) => !item._metadata?.variation) ??
+    items[0]
+  );
+}
 
 /**
  * Resolve a CMS page for the given locale + slug, scoped to this site's host.
@@ -22,6 +65,10 @@ type Props = {
  * configured, e.g. "/vb-demo/". Non-default locales keep their route segment in
  * `url.default` (e.g. "/fr/vb-demo/"), so we fold it back into the Graph path
  * and fall back across the prefixed/clean forms.
+ *
+ * Only the default-locale home page is personalised (see resolveHomeVariation).
+ * Graph does NOT return content variations unless asked, so every other page
+ * behaves exactly as before.
  */
 const loadContent = cache(async (locale: string, slug: string[]) => {
   const cleanPath = slug.length ? `/${slug.join('/')}/` : '/';
@@ -33,17 +80,30 @@ const loadContent = cache(async (locale: string, slug: string[]) => {
   // Scope to this site's hostname so a shared root path ("/") resolves to THIS
   // site's page rather than another site indexed at the same path.
   const host = await siteOrigin();
-  let content = await client.getContentByPath(path, { host });
+  const variation = slug.length === 0 && isDefault ? await resolveHomeVariation() : null;
 
-  if (!content?.[0]) {
+  const fetchByPath = async (p: string) =>
+    pickItem(
+      await client.getContentByPath(p, {
+        host,
+        ...(variation
+          ? { variation: { include: 'SOME' as const, value: [variation], includeOriginal: true } }
+          : {}),
+      }),
+      variation,
+    );
+
+  let content = await fetchByPath(path);
+
+  if (!content) {
     // Default locale: content under the site start page is indexed clean
     // ("/vb-demo/"), but content elsewhere keeps the locale prefix
     // ("/en/vb-demo/") — try the prefixed form before giving up.
     // Non-default locale: fall back to the default-locale version when this page
     // hasn't been translated/published yet (so it renders instead of 404ing).
-    content = await client.getContentByPath(isDefault ? prefixedPath : cleanPath, { host });
+    content = await fetchByPath(isDefault ? prefixedPath : cleanPath);
   }
-  return content?.[0];
+  return content;
 });
 
 /**
