@@ -3,7 +3,12 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #1b2a1d;
+  /* Headings are dark green, not black (eHealth look). Plain hex so base-layer
+     rules below don't depend on Tailwind emitting the theme variable. */
+  --heading: #0e3b12;
+  /* eHealth is a light-only brand: no prefers-color-scheme dark override. */
+  color-scheme: light;
 }
 
 @theme inline {
@@ -15,56 +20,48 @@
     "Liberation Mono", "Courier New", monospace;
 
   /*
-   * ┌──────────────────────────────────────────────────────────────────────┐
-   * │  REBRAND HERE.  This is the whole colour theme for the site.          │
-   * │  The Tailwind `blue-*` scale is remapped, so chrome and blocks that   │
-   * │  use `bg-blue-950`, `text-blue-800`, etc. all reskin when you edit    │
-   * │  these ~11 hex values. Set blue-950 = your darkest brand colour and   │
-   * │  blue-800 = your primary; the rest are tints/shades between.          │
-   * └──────────────────────────────────────────────────────────────────────┘
+   * REBRAND HERE. This is the whole colour theme for the site.
+   * The Tailwind `blue-*` scale is remapped, so chrome and blocks that use
+   * `bg-blue-950`, `text-blue-800`, etc. all reskin when you edit these hex
+   * values. blue-950 = darkest brand colour, blue-800 = primary.
    *
-   * Optimizely brand green ramp.
-   * Anchors: Dark Fir #08251a (darkest), LFGreen #abff44 (signature accent).
+   * eHealth green ramp, sampled from the eHealth.com homepage screenshot.
+   * Anchors: Forest #0e3b12 (footer, headings), Kelly #0d6f1e (primary,
+   * links, icons), Lime #4ccb2a (logo "e", top rule, accents).
    */
-  --color-blue-950: #08251a; /* Dark Fir — footer / hero background */
-  --color-blue-900: #0d3a29; /* Mid Fir — header bg */
-  --color-blue-800: #197050; /* Light Fir — primary green, links */
-  --color-blue-700: #3ab533; /* Good-to-go */
-  --color-blue-600: #4dc844;
-  --color-blue-500: #62d84f;
-  --color-blue-400: #7ddd3d; /* Grass */
-  --color-blue-300: #91dbda; /* Light Blue — teal accent */
-  --color-blue-200: #abff44; /* LFGreen — signature bright green */
-  --color-blue-100: #d8e4cb; /* Neutral 4 */
-  --color-blue-50:  #e4f0da; /* Neutral 3 — light wash */
+  --color-blue-950: #0e3b12; /* Forest - footer, headings */
+  --color-blue-900: #124a18; /* Deep green - hover on dark */
+  --color-blue-800: #0d6f1e; /* Kelly - primary green, links */
+  --color-blue-700: #178a2a;
+  --color-blue-600: #2fa23a;
+  --color-blue-500: #3db534;
+  --color-blue-400: #4ccb2a; /* Lime - logo "e", top rule, accents */
+  --color-blue-300: #97e083; /* Soft lime */
+  --color-blue-200: #c4ebb9;
+  --color-blue-100: #dcefd8;
+  --color-blue-50:  #e9f0ea; /* Mint wash - alternating section background */
 
-  /* Named Optimizely brand tokens for direct use in custom components. */
-  --color-lfgreen:    #abff44;
-  --color-grass:      #7ddd3d;
-  --color-good-to-go: #3ab533;
-  --color-dark-fir:   #08251a;
-  --color-mid-fir:    #0d3a29;
-  --color-light-fir:  #197050;
-  --color-light-blue: #91dbda;
-  --color-neutral-2:  #eff6e9;
-  --color-neutral-3:  #e4f0da;
+  /* Named eHealth tokens for direct use in custom components. */
+  --color-cta:       #f95c00; /* Orange pill buttons */
+  --color-cta-hover: #d94e00;
+  --color-promo:     #d91a8d; /* Magenta promo strip under the header */
+  --color-mint:      #e9f0ea; /* Mint section background */
+  --color-surface:   #f0f0f0; /* Light-grey hero / plan-finder background */
+  --color-lime:      #4ccb2a;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans);
-}
-
-h1,
-h2,
-h3 {
-  font-family: var(--font-display);
+  /* In the base layer so utilities (e.g. `text-white` on a dark hero) still win. */
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    color: var(--heading);
+  }
 }

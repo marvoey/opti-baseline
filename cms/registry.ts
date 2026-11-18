@@ -9,9 +9,11 @@ import { initReactComponentRegistry } from '@optimizely/cms-sdk/react/server';
 import { requireEnv } from '@/lib/env';
 
 import BlankExperience from './BlankExperience';
-import BlankSection from './BlankSection';
+import BlankSection, { EhSectionStyle } from './BlankSection';
 import Page, { PageContentType } from './Page';
 import RichText, { RichTextContentType } from './RichText';
+import EhHero, { EhHeroContentType } from './EhHero';
+import EhPlanFinder, { EhPlanFinderContentType } from './EhPlanFinder';
 
 /**
  * Single configuration + registration point for the Optimizely SDK.
@@ -49,11 +51,14 @@ export const registeredContentTypes = [
   PageContentType,
   // Blocks
   RichTextContentType,
+  // eHealth blocks
+  EhHeroContentType,
+  EhPlanFinderContentType,
 ];
 
 initContentTypeRegistry(registeredContentTypes);
 
-initDisplayTemplateRegistry([]);
+initDisplayTemplateRegistry([EhSectionStyle]);
 
 initReactComponentRegistry({
   resolver: {
@@ -62,5 +67,7 @@ initReactComponentRegistry({
     Page,
     // Blocks (resolver key === content-type key)
     RichTextBlock: RichText,
+    EhHero,
+    EhPlanFinder,
   },
 });

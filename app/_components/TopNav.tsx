@@ -1,19 +1,22 @@
-import LanguageSwitcher from './LanguageSwitcher';
+import { CalendarCheck } from 'lucide-react';
 import { siteConfig } from '@/lib/siteConfig';
 
+/**
+ * Magenta promo strip rendered directly under the header (see SiteChrome).
+ * Kept as TopNav.tsx so existing imports and the `Navigation` CMS group still
+ * resolve; copy comes from siteConfig.promoBanner.
+ */
 const TopNav = () => (
-  <div className="bg-blue-950 py-2 hidden md:block" data-cms-group="Navigation">
-    <div className="container mx-auto px-4 flex justify-between items-center text-sm text-white/60 font-medium">
-      <div className="flex gap-6">
-        {siteConfig.topNavLinks.map((link) => (
-          <a key={link.label} href={link.href} className="hover:text-white transition-colors">
-            {link.label}
-          </a>
-        ))}
-      </div>
-      <div className="flex gap-4 items-center">
-        <LanguageSwitcher />
-      </div>
+  <div className="bg-promo text-white" data-cms-group="Navigation">
+    <div className="container mx-auto flex flex-wrap items-center justify-center gap-x-2 gap-y-0.5 px-4 py-1.5 text-center font-display text-xs font-semibold">
+      <CalendarCheck size={14} aria-hidden="true" />
+      <span>{siteConfig.promoBanner.message}</span>
+      <a
+        href={siteConfig.promoBanner.href}
+        className="font-normal underline underline-offset-2 hover:no-underline"
+      >
+        {siteConfig.promoBanner.linkLabel}
+      </a>
     </div>
   </div>
 );

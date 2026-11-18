@@ -51,7 +51,7 @@ export default function RichText({ content }: Props) {
 
   return (
     <section {...pa(block)} className="w-full px-6 py-12">
-      <div {...pa('Body')} className="prose mx-auto max-w-3xl">
+      <div {...pa('Body')} className="prose mx-auto max-w-3xl prose-headings:font-display prose-headings:font-semibold prose-headings:text-blue-950 prose-p:text-foreground prose-li:text-foreground prose-li:marker:text-blue-700 prose-strong:text-blue-950 prose-a:font-semibold prose-a:text-blue-800">
         <RichTextRenderer content={content.Body?.json} />
       </div>
     </section>

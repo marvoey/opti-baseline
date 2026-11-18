@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Inter } from "next/font/google";
+import { Poppins, Roboto } from "next/font/google";
 import Script from "next/script";
 import OptimizelyActivation from "./_components/OptimizelyActivation";
 import DevQuickLinks from "./_components/DevQuickLinks";
@@ -7,18 +7,18 @@ import { siteConfig } from "@/lib/siteConfig";
 import "./globals.css";
 import "@/cms/registry";
 
-// VC Nudge (Optimizely's display face) is a licensed face; Space Grotesk is the
-// closest free substitute — chunky, geometric grotesque with strong personality.
-const displayFont = Space_Grotesk({
+// eHealth look: Poppins (rounded geometric sans) for headings, nav and buttons;
+// Roboto for body copy. Closest free matches to the eHealth.com typography.
+const displayFont = Poppins({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["500", "600", "700"],
 });
 
-// Die Grotesk B (the brand body face) → Inter as the closest neutral grotesque.
-const bodyFont = Inter({
+const bodyFont = Roboto({
   variable: "--font-body",
   subsets: ["latin"],
+  weight: ["400", "500", "700"],
 });
 
 export const metadata: Metadata = {

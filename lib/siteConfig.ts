@@ -1,84 +1,102 @@
 /**
- * Site config — the single place to rebrand the non-colour chrome for a new
+ * Site config - the single place to rebrand the non-colour chrome for a new
  * demo. Colours live in app/globals.css (the `@theme` token block); everything
- * else — site name, logo, nav links, footer columns, legal copy — lives here.
+ * else - site name, logo, nav links, promo strip, footer columns, legal copy -
+ * lives here.
  *
- * To stand up a new demo: edit this file, drop a new public/logo.svg, and tweak
- * the hex values in app/globals.css. No component edits required.
+ * To stand up a new demo: edit this file, set `logoSrc` to a file in /public
+ * (or leave it null to render the text wordmark), and tweak the hex values in
+ * app/globals.css. Fonts are set in app/layout.tsx.
  */
 
-export type NavLink = { label: string; href: string };
+export type NavLink = {
+  label: string;
+  href: string;
+  /** Shows a dropdown chevron next to the label (header nav only). */
+  menu?: boolean;
+};
 export type FooterColumn = { heading: string; links: NavLink[] };
 
 export const siteConfig = {
   /** Used for the document <title> fallback and the logo alt text. */
-  name: 'Optimizely',
+  name: 'eHealth',
   /** Default browser-tab title (per-page titles override via CMS MetaTitle). */
-  title: 'Optimizely | Digital Experience Platform',
+  title: 'eHealth | Compare Medicare & Health Insurance Plans',
   /** Default meta description. */
   description:
-    'Optimizely — the digital experience platform that helps teams create, test, and optimize digital experiences at scale.',
+    'Compare Medicare, individual & family, small business, dental, vision and short-term health insurance plans from top carriers, then enroll online or with a licensed agent.',
 
-  /** Header logo (place the asset in /public). */
-  logoSrc: '/Optimizely_Primary-Logo_Medium_Green_RGB.png',
-  logoAlt: 'Optimizely',
+  /**
+   * Header logo image (place the asset in /public). Null renders the built-in
+   * text wordmark (see app/_components/SiteLogo.tsx) - swap in the official
+   * eHealth logo file here when you have it.
+   */
+  logoSrc: null as string | null,
+  logoAlt: 'eHealth',
 
-  /** Top utility bar. */
-  topNavLinks: [
-    { label: 'Partners', href: '#' },
-    { label: 'Support', href: '#' },
-  ] satisfies NavLink[],
+  /** Magenta promo strip under the header. */
+  promoBanner: {
+    message: 'Medicare Annual Enrollment is here!',
+    linkLabel: 'Compare 2027 Medicare plans below',
+    href: '#',
+  },
 
   /** Primary header navigation. */
   mainNavLinks: [
-    { label: 'Products', href: '#' },
-    { label: 'Solutions', href: '#' },
-    { label: 'Customers', href: '#' },
-    { label: 'Resources', href: '#' },
-    { label: 'Pricing', href: '#' },
+    { label: 'Find Health Insurance', href: '#', menu: true },
+    { label: 'Learn', href: '#', menu: true },
   ] satisfies NavLink[],
-  /** Header call-to-action button. */
-  primaryCta: { label: 'Get started free', href: '#' } satisfies NavLink,
+  /** Phone number shown in the header. */
+  phone: { label: '(877) 378-1318', href: 'tel:+18773781318' },
   /** Account / login button label. */
-  accountLabel: 'Log in',
+  accountLabel: 'Sign in',
 
-  /** Footer. */
-  footerTagline:
-    'Create, test, and optimize digital experiences that turn visitors into loyal customers.',
+  /** Footer (placeholder links - confirm against the live site). */
   footerColumns: [
     {
       heading: 'Products',
       links: [
-        { label: 'Content Management', href: '#' },
-        { label: 'Experimentation', href: '#' },
-        { label: 'Commerce', href: '#' },
-        { label: 'Personalization', href: '#' },
+        { label: 'Medicare', href: '#' },
+        { label: 'Medicare Advantage', href: '#' },
+        { label: 'Individual & Family', href: '#' },
+        { label: 'Small Business', href: '#' },
+        { label: 'Dental', href: '#' },
+        { label: 'Vision', href: '#' },
+        { label: 'Short-Term Medical', href: '#' },
       ],
     },
     {
-      heading: 'Solutions',
+      heading: 'Services',
       links: [
-        { label: 'B2B Commerce', href: '#' },
-        { label: 'B2C Commerce', href: '#' },
-        { label: 'Digital Marketing', href: '#' },
-        { label: 'Customer Journeys', href: '#' },
+        { label: 'MatchFinder', href: '#' },
+        { label: 'Live Advise', href: '#' },
+        { label: 'Compare Carriers', href: '#' },
+        { label: 'Speak with an Agent', href: '#' },
       ],
     },
     {
-      heading: 'Resources',
+      heading: 'Company',
       links: [
-        { label: 'Blog', href: '#' },
-        { label: 'Documentation', href: '#' },
-        { label: 'Community', href: '#' },
-        { label: 'Webinars', href: '#' },
+        { label: 'About Us', href: '#' },
+        { label: 'Careers', href: '#' },
+        { label: 'Investor Relations', href: '#' },
+        { label: 'Press', href: '#' },
+      ],
+    },
+    {
+      heading: 'Connect',
+      links: [
+        { label: 'Facebook', href: '#' },
+        { label: 'Instagram', href: '#' },
+        { label: 'YouTube', href: '#' },
       ],
     },
   ] satisfies FooterColumn[],
-  footerLegal: `© ${2026} Optimizely. All rights reserved.`,
+  footerLegal: `© ${2026} eHealthInsurance Services, Inc.`,
   footerLegalLinks: [
     { label: 'Privacy Policy', href: '#' },
-    { label: 'Terms of Service', href: '#' },
-    { label: 'Cookie Settings', href: '#' },
+    { label: 'Terms of Use', href: '#' },
+    { label: 'Site Map', href: '#' },
   ] satisfies NavLink[],
 } as const;
 
