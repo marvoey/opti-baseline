@@ -33,6 +33,9 @@ export type FxEvent = (typeof FX_EVENTS)[number];
 /** Custom attribute the "ACA" / "Turning 65" audiences evaluate. */
 const CAMPAIGN_ATTRIBUTE = 'ehealth_campaign';
 
+/** Attribute value for visitors who arrived without a campaign (see userContext). */
+const NO_CAMPAIGN = 'none';
+
 /** The value the flag variable defaults to: serve the unmodified page. */
 const ORIGINAL = 'Original';
 
@@ -56,7 +59,7 @@ function getClient(): FxClient | null {
     projectConfigManager: createPollingProjectConfigManager({
       sdkKey,
       autoUpdate: true,
-      updateInterval: 60_000,
+      updateInterval: 10_000,
     }),
     // batchSize 1 sends each impression/conversion right away; a batching
     // interval could be lost when a serverless instance is frozen after the
@@ -84,10 +87,13 @@ async function readyClient(): Promise<FxClient | null> {
 }
 
 function userContext(client: FxClient, visitor: Visitor) {
-  return client.createUserContext(
-    visitor.id,
-    visitor.campaign ? { [CAMPAIGN_ATTRIBUTE]: visitor.campaign } : {},
-  );
+  // Always send the attribute. The A/B rule's audience is NOT(aca OR t65). When
+  // the attribute is missing the SDK evaluates those audiences as "unknown",
+  // NOT(unknown) is still unknown, and the rule never matches - so visitors
+  // without a campaign would silently skip the A/B test.
+  return client.createUserContext(visitor.id, {
+    [CAMPAIGN_ATTRIBUTE]: visitor.campaign ?? NO_CAMPAIGN,
+  });
 }
 
 /**
