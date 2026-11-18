@@ -5,6 +5,7 @@ import { OptimizelyComponent, withAppContext } from '@optimizely/cms-sdk/react/s
 import { notFound } from 'next/navigation';
 import { DEFAULT_LOCALE } from '@/lib/locales';
 import { siteOrigin } from '@/lib/siteHost';
+import { getOgImageUrl } from '@/lib/ogImage';
 import { siteConfig } from '@/lib/siteConfig';
 import HomePageFallback from '@/app/_components/HomePageFallback';
 
@@ -45,15 +46,31 @@ const loadContent = cache(async (locale: string, slug: string[]) => {
   return content?.[0];
 });
 
-/** Per-page <title> from the CMS, falling back to the site name. */
+/**
+ * Per-page <title> and og:image from the CMS, falling back to the site defaults:
+ * the site name for the title and app/opengraph-image.png for the image.
+ */
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug = [] } = await params;
   const content = await loadContent(locale, slug);
-  const item = content as { MetaTitle?: string; _metadata?: { displayName?: string } } | undefined;
+  const item = content as
+    | { MetaTitle?: string; _metadata?: { key?: string; locale?: string; displayName?: string } }
+    | undefined;
   const pageTitle = item?.MetaTitle || item?._metadata?.displayName;
-  return {
+  const metadata: Metadata = {
     title: pageTitle ? `${pageTitle} | ${siteConfig.name}` : siteConfig.title,
   };
+
+  // The editor's image comes from the page's `ogimage` property (see lib/ogImage.ts).
+  // With none set, `images` must stay OFF the metadata entirely: Next.js lets any
+  // page-level `images` value (even [] or undefined) override the default file.
+  const ogImage = await getOgImageUrl(item?._metadata?.key, item?._metadata?.locale);
+  if (ogImage) {
+    const images = [{ url: ogImage, alt: pageTitle }];
+    metadata.openGraph = { images };
+    metadata.twitter = { card: 'summary_large_image', images };
+  }
+  return metadata;
 }
 
 /**

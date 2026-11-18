@@ -4,6 +4,7 @@ import Script from "next/script";
 import OptimizelyActivation from "./_components/OptimizelyActivation";
 import DevQuickLinks from "./_components/DevQuickLinks";
 import { siteConfig } from "@/lib/siteConfig";
+import { requestOrigin } from "@/lib/siteHost";
 import "./globals.css";
 import "@/cms/registry";
 
@@ -21,10 +22,19 @@ const bodyFont = Roboto({
   weight: ["400", "500", "700"],
 });
 
-export const metadata: Metadata = {
-  title: siteConfig.title,
-  description: siteConfig.description,
-};
+/**
+ * Site-wide metadata defaults. `metadataBase` turns the relative default Open Graph
+ * image (app/opengraph-image.png) into an absolute URL on the domain being served;
+ * crawlers need an absolute og:image. Without it Next.js guesses from the Vercel
+ * deployment URL (or localhost), which isn't the public domain.
+ */
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: siteConfig.title,
+    description: siteConfig.description,
+    metadataBase: await requestOrigin(),
+  };
+}
 
 // Optimizely Web Experimentation / Personalization project id. Public by design
 // (it ends up in a client-side script URL), so it uses the NEXT_PUBLIC_ prefix.

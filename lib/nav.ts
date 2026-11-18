@@ -11,10 +11,10 @@
  * for every child of those items. Cached for REVALIDATE_SECONDS and tagged
  * `nav`, so `revalidateTag('nav')` (e.g. from a publish webhook) refreshes it.
  *
- * Plain `fetch` rather than the SDK client: the SDK only exposes typed content
- * lookups, and this is a metadata-only tree query.
+ * Uses the shared Graph helper (lib/graph.ts) rather than the SDK client: the SDK
+ * only exposes typed content lookups, and this is a metadata-only tree query.
  */
-import { requireEnv } from '@/lib/env';
+import { graphQuery } from '@/lib/graph';
 import { DEFAULT_LOCALE, LOCALES } from '@/lib/locales';
 import { siteConfig } from '@/lib/siteConfig';
 
@@ -37,7 +37,6 @@ type PageRow = {
 
 type PagesResult = { _Page: { items: PageRow[] } };
 
-const DEFAULT_GATEWAY = 'https://cg.optimizely.com/content/v2';
 const REVALIDATE_SECONDS = 60;
 /** Graph's maximum page size. */
 const GRAPH_MAX_LIMIT = 100;
@@ -64,22 +63,9 @@ const SUB_QUERY = `
     ) { items { ${FIELDS} } }
   }`;
 
-async function graph<T>(query: string, variables: Record<string, unknown>): Promise<T> {
-  const env = requireEnv();
-  const base = env.OPTIMIZELY_GRAPH_GATEWAY?.trim() || DEFAULT_GATEWAY;
-  const res = await fetch(`${base}?auth=${encodeURIComponent(env.OPTIMIZELY_GRAPH_SINGLE_KEY)}`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ query, variables }),
-    next: { revalidate: REVALIDATE_SECONDS, tags: ['nav'] },
-  });
-  if (!res.ok) throw new Error(`Graph responded ${res.status}`);
-
-  const json = (await res.json()) as { data?: T; errors?: { message: string }[] };
-  if (json.errors?.length) throw new Error(json.errors.map((e) => e.message).join('; '));
-  if (!json.data) throw new Error('Graph returned no data');
-  return json.data;
-}
+/** Nav queries share one cache policy: 60s, tagged `nav` for on-demand revalidation. */
+const graph = <T>(query: string, variables: Record<string, unknown>) =>
+  graphQuery<T>(query, variables, { revalidate: REVALIDATE_SECONDS, tags: ['nav'] });
 
 /** Site-relative path without a trailing slash ("/medicare/" -> "/medicare"). */
 function toHref(url: string | null | undefined): string {
