@@ -14,6 +14,16 @@ import Page, { PageContentType } from './Page';
 import RichText, { RichTextContentType } from './RichText';
 import EhHero, { EhHeroContentType } from './EhHero';
 import EhPlanFinder, { EhPlanFinderContentType } from './EhPlanFinder';
+import EhCarrierLogos, { EhCarrierLogosContentType } from './EhCarrierLogos';
+import EhFeatureRow, { EhFeatureRowContentType } from './EhFeatureRow';
+import EhTestimonial, { EhTestimonialContentType } from './EhTestimonial';
+import EhTestimonials, { EhTestimonialsContentType } from './EhTestimonials';
+import EhCoverageCard, { EhCoverageCardContentType } from './EhCoverageCard';
+import EhCoverageGrid, { EhCoverageGridContentType } from './EhCoverageGrid';
+import EhSavingsBand, { EhSavingsBandContentType } from './EhSavingsBand';
+import EhLiveAdvise, { EhLiveAdviseContentType } from './EhLiveAdvise';
+import EhStepsBand, { EhStepsBandContentType } from './EhStepsBand';
+import EhReviews, { EhReviewsContentType } from './EhReviews';
 
 /**
  * Single configuration + registration point for the Optimizely SDK.
@@ -54,6 +64,16 @@ export const registeredContentTypes = [
   // eHealth blocks
   EhHeroContentType,
   EhPlanFinderContentType,
+  EhCarrierLogosContentType,
+  EhFeatureRowContentType,
+  EhTestimonialContentType,
+  EhTestimonialsContentType,
+  EhCoverageCardContentType,
+  EhCoverageGridContentType,
+  EhSavingsBandContentType,
+  EhLiveAdviseContentType,
+  EhStepsBandContentType,
+  EhReviewsContentType,
 ];
 
 initContentTypeRegistry(registeredContentTypes);
@@ -69,5 +89,15 @@ initReactComponentRegistry({
     RichTextBlock: RichText,
     EhHero,
     EhPlanFinder,
+    EhCarrierLogos,
+    EhFeatureRow,
+    EhTestimonial,
+    EhTestimonials,
+    EhCoverageCard,
+    EhCoverageGrid,
+    EhSavingsBand,
+    EhLiveAdvise,
+    EhStepsBand,
+    EhReviews,
   },
 });

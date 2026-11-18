@@ -14,3 +14,15 @@ export type OptiLink = {
 export function ctaHref(link: OptiLink): string {
   return link?.url?.default ?? '#';
 }
+
+/** Resolve an href from a `url` property (string or `{ default }`); '#' when empty. */
+export function urlHref(value: unknown): string {
+  if (typeof value === 'string') return value || '#';
+  const d = (value as { default?: string | null } | null | undefined)?.default;
+  return d || '#';
+}
+
+/** Resolve an image URL from a content reference (`{ url: { default } }`). */
+export function imageSrc(ref: unknown): string | null {
+  return (ref as { url?: { default?: string | null } | null } | null | undefined)?.url?.default ?? null;
+}

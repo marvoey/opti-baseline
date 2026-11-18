@@ -46,6 +46,22 @@ export const siteConfig = {
     { label: 'Find Health Insurance', href: '#', menu: true },
     { label: 'Learn', href: '#', menu: true },
   ] satisfies NavLink[],
+  /**
+   * Dynamic header navigation, built from the CMS content tree (see lib/nav.ts).
+   * Direct children of `rootKey` become the menu items and their children become
+   * the dropdown. `mainNavLinks` above is only the fallback when the tree is
+   * empty or Graph can't be reached.
+   */
+  nav: {
+    /** Content key (no dashes) of the container whose children form the menu: "eHealth Home". */
+    rootKey: '055218e17aa84576a1d733c08ebf7b02',
+    /** Cap on top-level menu items. */
+    maxItems: 8,
+    /** Cap on dropdown items per menu item. */
+    maxChildren: 12,
+    /** Content keys (no dashes) of pages to keep out of the menu. */
+    excludeKeys: [] as string[],
+  },
   /** Phone number shown in the header. */
   phone: { label: '(877) 378-1318', href: 'tel:+18773781318' },
   /** Account / login button label. */
@@ -56,13 +72,13 @@ export const siteConfig = {
     {
       heading: 'Products',
       links: [
-        { label: 'Medicare', href: '#' },
+        { label: 'Medicare', href: '/medicare' },
         { label: 'Medicare Advantage', href: '#' },
-        { label: 'Individual & Family', href: '#' },
-        { label: 'Small Business', href: '#' },
-        { label: 'Dental', href: '#' },
-        { label: 'Vision', href: '#' },
-        { label: 'Short-Term Medical', href: '#' },
+        { label: 'Individual & Family', href: '/individual-and-family' },
+        { label: 'Small Business', href: '/small-business' },
+        { label: 'Dental', href: '/dental-and-vision/dental' },
+        { label: 'Vision', href: '/dental-and-vision/vision' },
+        { label: 'Short-Term Medical', href: '/short-term' },
       ],
     },
     {

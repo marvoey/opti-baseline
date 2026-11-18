@@ -12,10 +12,17 @@ import Footer from './Footer';
  * Order matches eHealth.com: sticky white header first, then the magenta promo
  * strip (TopNav) scrolls away beneath it.
  */
-export default function SiteChrome({ children }: { children: React.ReactNode }) {
+export default function SiteChrome({
+  children,
+  locale,
+}: {
+  children: React.ReactNode;
+  /** Active locale (route param); drives the content-tree menu. Defaults to the default locale. */
+  locale?: string;
+}) {
   return (
     <>
-      <MainNav />
+      <MainNav locale={locale} />
       <TopNav />
       <div className="flex-1">{children}</div>
       <Footer />

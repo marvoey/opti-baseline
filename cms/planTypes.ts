@@ -23,6 +23,8 @@ export const PLAN_TYPES: PlanType[] = [
   { value: 'medicare', label: 'Medicare Plans', ctaNoun: 'Medicare', href: '/medicare' },
   { value: 'individual', label: 'Individual & Family', ctaNoun: 'health insurance', href: '/individual-and-family' },
   { value: 'employers', label: 'Employers', ctaNoun: 'small business', href: '/small-business' },
+  // Dental & Vision share one tile; it lands on the "Dental & Vision" parent page,
+  // which has the Dental plans and Vision plans pages nested beneath it.
   { value: 'dental', label: 'Dental & Vision', ctaNoun: 'dental & vision', href: '/dental-and-vision' },
   { value: 'shortterm', label: 'Short Term Medical', ctaNoun: 'short-term', href: '/short-term' },
 ];
