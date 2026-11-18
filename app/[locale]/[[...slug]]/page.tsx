@@ -5,7 +5,7 @@ import { OptimizelyComponent, withAppContext } from '@optimizely/cms-sdk/react/s
 import { notFound } from 'next/navigation';
 import { DEFAULT_LOCALE } from '@/lib/locales';
 import { siteOrigin } from '@/lib/siteHost';
-import { getOgImageUrl } from '@/lib/ogImage';
+import { getPageMeta } from '@/lib/pageMeta';
 import { siteConfig } from '@/lib/siteConfig';
 import HomePageFallback from '@/app/_components/HomePageFallback';
 
@@ -47,28 +47,58 @@ const loadContent = cache(async (locale: string, slug: string[]) => {
 });
 
 /**
- * Per-page <title> and og:image from the CMS, falling back to the site defaults:
- * the site name for the title and app/opengraph-image.png for the image.
+ * Per-page <title>, description and og:image, falling back to the site defaults:
+ * the site title/description from app/layout.tsx, and app/opengraph-image.png.
+ *
+ * The fields come from the page's own Meta Title, Meta Description and `ogimage`
+ * properties (read in lib/pageMeta.ts, since the SDK doesn't return them for
+ * BlankExperience). A `Page (v1)` carries MetaTitle/MetaDescription in the SDK
+ * result itself, so those are used when the lookup has nothing.
  */
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug = [] } = await params;
   const content = await loadContent(locale, slug);
   const item = content as
-    | { MetaTitle?: string; _metadata?: { key?: string; locale?: string; displayName?: string } }
+    | {
+        MetaTitle?: string;
+        MetaDescription?: string;
+        _metadata?: { key?: string; locale?: string; displayName?: string };
+      }
     | undefined;
-  const pageTitle = item?.MetaTitle || item?._metadata?.displayName;
-  const metadata: Metadata = {
-    title: pageTitle ? `${pageTitle} | ${siteConfig.name}` : siteConfig.title,
-  };
 
-  // The editor's image comes from the page's `ogimage` property (see lib/ogImage.ts).
-  // With none set, `images` must stay OFF the metadata entirely: Next.js lets any
-  // page-level `images` value (even [] or undefined) override the default file.
-  const ogImage = await getOgImageUrl(item?._metadata?.key, item?._metadata?.locale);
-  if (ogImage) {
-    const images = [{ url: ogImage, alt: pageTitle }];
-    metadata.openGraph = { images };
-    metadata.twitter = { card: 'summary_large_image', images };
+  const meta = await getPageMeta(item?._metadata?.key, item?._metadata?.locale);
+
+  // Meta Title is the editor's FULL title (it already carries the brand, e.g.
+  // "Dental Insurance Plans | eHealth"), so it is used as-is. Without one, the
+  // page name gets the site name appended, and with no page at all the site title.
+  const displayName = item?._metadata?.displayName;
+  const title =
+    meta.title ||
+    item?.MetaTitle?.trim() ||
+    (displayName ? `${displayName} | ${siteConfig.name}` : siteConfig.title);
+  const description = meta.description || item?.MetaDescription?.trim() || undefined;
+
+  // The description keys are only added when there is a value: an explicit
+  // `description: undefined` could blank the site-wide default from the root
+  // layout instead of inheriting it.
+  const metadata: Metadata = {
+    title,
+    openGraph: { type: 'website', siteName: siteConfig.name, title },
+    twitter: { card: 'summary_large_image', title },
+  };
+  if (description) {
+    metadata.description = description;
+    metadata.openGraph = { ...metadata.openGraph, description };
+    metadata.twitter = { ...metadata.twitter, description };
+  }
+
+  // With no image, `images` must stay OFF the metadata entirely: Next.js lets any
+  // page-level `images` value (even [] or undefined) override the default file,
+  // app/opengraph-image.png. Everything else above doesn't affect that fallback.
+  if (meta.ogImage) {
+    const images = [{ url: meta.ogImage, alt: title }];
+    metadata.openGraph = { ...metadata.openGraph, images };
+    metadata.twitter = { ...metadata.twitter, images };
   }
   return metadata;
 }
