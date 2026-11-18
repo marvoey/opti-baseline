@@ -73,14 +73,12 @@ async function readyClient(): Promise<FxClient | null> {
   const client = getClient();
   if (!client) return null;
   try {
-    const { success, reason } = await client.onReady({ timeout: READY_TIMEOUT_MS });
-    if (!success) {
-      console.warn('[fx] SDK not ready; serving default content.', reason);
-      return null;
-    }
+    // v6: resolves (with no value) once the datafile is loaded, rejects on
+    // timeout or failure.
+    await client.onReady({ timeout: READY_TIMEOUT_MS });
     return client;
   } catch (error) {
-    console.error('[fx] SDK failed to initialise; serving default content.', error);
+    console.warn('[fx] SDK not ready; serving default content.', error);
     return null;
   }
 }
