@@ -30,10 +30,9 @@ export const siteConfig = {
 
   /**
    * Header logo image (place the asset in /public). Null renders the built-in
-   * text wordmark (see app/_components/SiteLogo.tsx) - swap in the official
-   * eHealth logo file here when you have it.
+   * text wordmark (see app/_components/SiteLogo.tsx).
    */
-  logoSrc: null as string | null,
+  logoSrc: '/ehealth-logo.svg' as string | null,
   logoAlt: 'eHealth',
 
   /** Magenta promo strip under the header. */
