@@ -36,13 +36,15 @@ export const siteConfig = {
     href: '#',
   },
 
-  /** Primary header navigation (hasMenu renders a dropdown chevron). */
-  mainNavLinks: [
-    { label: 'Overview', href: '/' },
-    { label: 'GTA Online', href: '/gta-online', hasMenu: true },
-    { label: 'Story', href: '#', hasMenu: true },
-    { label: 'GTA+', href: '#' },
-    { label: 'Community', href: '#', hasMenu: true },
+  /**
+   * Primary header navigation is built from the CMS content tree (lib/navTree.ts):
+   * the start page, then its child pages, with grandchildren in a dropdown. These
+   * two settings are the only static parts.
+   */
+  /** Label for the start page, which the CMS names after the site, not "Overview". */
+  homeNavLabel: 'Overview',
+  /** Links that aren't CMS pages (external sites, etc.), appended after the tree. */
+  mainNavExtraLinks: [
     { label: 'Support', href: '#', external: true },
   ] satisfies NavLink[],
 
