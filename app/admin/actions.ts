@@ -1,11 +1,17 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
+import { headers } from 'next/headers';
+import { isAdminAuthorized } from '@/lib/adminAuth';
 import { deleteCmsContentType } from '@/lib/cms/contentTypes';
 
 export async function deleteContentTypesAction(
   keys: string[],
 ): Promise<{ ok: boolean; failedKeys: string[]; message?: string }> {
+  // Defence in depth: proxy.ts already gates /admin, but this deletes CMS content.
+  if (!isAdminAuthorized((await headers()).get('authorization'))) {
+    return { ok: false, failedKeys: keys, message: 'Not authorized.' };
+  }
   if (keys.length === 0) return { ok: true, failedKeys: [] };
 
   const results = await Promise.all(

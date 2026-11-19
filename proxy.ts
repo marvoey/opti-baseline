@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { LOCALE_SEGMENTS } from '@/lib/locales';
+import { isAdminAuthorized, isAdminConfigured } from '@/lib/adminAuth';
 
 /**
  * Next.js 16 Proxy (the replacement for Middleware) — locale clean-URLs for the
@@ -27,8 +28,21 @@ function firstSegment(pathname: string): string {
   return pathname.split('/')[1] ?? '';
 }
 
+/** Password gate for /admin (HTTP Basic). Also covers its server actions. */
+function guardAdmin(request: NextRequest) {
+  if (!isAdminConfigured()) {
+    return new NextResponse('Admin is disabled: set ADMIN_PASSWORD to enable it.', { status: 503 });
+  }
+  if (isAdminAuthorized(request.headers.get('authorization'))) return NextResponse.next();
+  return new NextResponse('Authentication required.', {
+    status: 401,
+    headers: { 'WWW-Authenticate': 'Basic realm="Admin", charset="UTF-8"' },
+  });
+}
+
 export function proxy(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
+  if (pathname === '/admin' || pathname.startsWith('/admin/')) return guardAdmin(request);
   const seg = firstSegment(pathname);
 
   // Default-locale prefix is visible → redirect to the clean path (canonical/SEO).
@@ -54,6 +68,9 @@ export const config = {
   // Run on everything EXCEPT API, Next internals, the preview/admin/styleguide
   // routes, and any path containing a dot (static assets like /logo.svg). The
   // preview, admin and styleguide routes live outside [locale] and must not be
-  // rewritten into a locale.
-  matcher: ['/((?!api|_next/static|_next/image|preview|admin|styleguide|applications|demo|favicon.ico|.*\\..*).*)'],
+  // rewritten into a locale. /admin is matched separately, for the password gate only.
+  matcher: [
+    '/admin/:path*',
+    '/((?!api|_next/static|_next/image|preview|admin|styleguide|applications|demo|favicon.ico|.*\\..*).*)',
+  ],
 };

@@ -39,7 +39,7 @@ export const siteConfig = {
   /** Primary header navigation (hasMenu renders a dropdown chevron). */
   mainNavLinks: [
     { label: 'Overview', href: '/' },
-    { label: 'GTA Online', href: '#', hasMenu: true },
+    { label: 'GTA Online', href: '/gta-online', hasMenu: true },
     { label: 'Story', href: '#', hasMenu: true },
     { label: 'GTA+', href: '#' },
     { label: 'Community', href: '#', hasMenu: true },
@@ -49,14 +49,15 @@ export const siteConfig = {
   /** Secondary in-page navigation bar under the header. */
   subNavLinks: [
     { label: 'Overview', href: '/' },
-    { label: 'GTA Online', href: '#' },
+    { label: 'GTA Online', href: '/gta-online' },
+    { label: 'Career Progress', href: '/gta-online/career-progress' },
     { label: 'GTA+', href: '#' },
     { label: 'Guides', href: '#' },
     { label: 'Support', href: '#', external: true },
   ] satisfies NavLink[],
 
   /** Header call-to-action button. */
-  primaryCta: { label: 'Buy Now', href: '#' } satisfies NavLink,
+  primaryCta: { label: 'Buy Now', href: 'https://www.rockstargames.com/gta-v?info=order' } satisfies NavLink,
   /** Accessible labels for the icon buttons in the header. */
   searchLabel: 'Open Search',
   accountLabel: 'Open Player Menu',
