@@ -20,6 +20,8 @@ export type FooterColumn = { heading: string; links: NavLink[] };
 export const siteConfig = {
   /** Used for the document <title> fallback and the logo alt text. */
   name: 'eHealth',
+  /** Registered company name, used in the Organization structured data (JSON-LD). */
+  legalName: 'eHealthInsurance Services, Inc.',
   /** Default browser-tab title (per-page titles override via CMS MetaTitle). */
   title: 'eHealth | Compare Medicare & Health Insurance Plans',
   /** Default meta description. */

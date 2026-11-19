@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { Poppins, Roboto } from "next/font/google";
+import { headers } from "next/headers";
 import Script from "next/script";
 import OptimizelyActivation from "./_components/OptimizelyActivation";
 import DevQuickLinks from "./_components/DevQuickLinks";
 import { siteConfig } from "@/lib/siteConfig";
 import { requestOrigin } from "@/lib/siteHost";
+import { DEFAULT_LOCALE, LOCALE_HEADER } from "@/lib/locales";
 import "./globals.css";
 import "@/cms/registry";
 
@@ -41,14 +43,18 @@ export async function generateMetadata(): Promise<Metadata> {
 // When unset, the snippet is simply not loaded — the app runs without it.
 const WEB_SNIPPET_ID = process.env.NEXT_PUBLIC_OPTIMIZELY_WEB_SNIPPET_ID;
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // proxy.ts tags each request with its locale so /es pages say lang="es" (a screen reader and
+  // a search engine both use it). Routes the proxy skips (preview, admin, demo) get the default.
+  const lang = (await headers()).get(LOCALE_HEADER) ?? DEFAULT_LOCALE;
+
   return (
     <html
-      lang="en"
+      lang={lang}
       className={`${displayFont.variable} ${bodyFont.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">

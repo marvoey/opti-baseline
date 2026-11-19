@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { LOCALE_SEGMENTS } from '@/lib/locales';
+import { LOCALE_HEADER, LOCALE_SEGMENTS, stripLocale } from '@/lib/locales';
 import { CHROME_HEADER, LANDING_CHROME, isLandingPath } from '@/lib/landing';
 import {
   CAMPAIGN_COOKIE,
@@ -80,10 +80,12 @@ function identify(request: NextRequest): Visitor {
 /**
  * Request headers the page reads. Always overwritten so a client can't spoof them.
  * CHROME_HEADER marks paid landing paths (/lp/...) so the layout renders the minimal chrome.
+ * LOCALE_HEADER carries the locale key so the root layout can set <html lang> correctly.
  */
 function forwardedHeaders(request: NextRequest, visitor: Visitor): Headers {
   const headers = new Headers(request.headers);
   headers.set(VID_HEADER, visitor.id);
+  headers.set(LOCALE_HEADER, stripLocale(request.nextUrl.pathname).localeKey);
   if (visitor.campaign) headers.set(CAMPAIGN_HEADER, visitor.campaign);
   else headers.delete(CAMPAIGN_HEADER);
   headers.delete(CHROME_HEADER);

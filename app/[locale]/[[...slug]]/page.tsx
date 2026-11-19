@@ -4,13 +4,16 @@ import { headers } from 'next/headers';
 import { getClient } from '@optimizely/cms-sdk';
 import { OptimizelyComponent, withAppContext } from '@optimizely/cms-sdk/react/server';
 import { notFound } from 'next/navigation';
-import { DEFAULT_LOCALE } from '@/lib/locales';
-import { siteOrigin } from '@/lib/siteHost';
-import { getPageMeta } from '@/lib/pageMeta';
+import { DEFAULT_LOCALE, publicPath } from '@/lib/locales';
+import { requestOrigin, siteOrigin } from '@/lib/siteHost';
+import { getPageMeta, type PageMeta } from '@/lib/pageMeta';
+import { resolveLocale } from '@/lib/nav';
+import { buildPageJsonLd } from '@/lib/jsonLd';
 import { siteConfig } from '@/lib/siteConfig';
 import { HOME_HERO_FLAG, decideCmsVariation, isLikelyBot } from '@/lib/fx';
 import { CAMPAIGN_HEADER, VID_HEADER, parseCampaign, parseVid } from '@/lib/visitor';
 import HomePageFallback from '@/app/_components/HomePageFallback';
+import JsonLd from '@/app/_components/JsonLd';
 
 type Props = {
   params: Promise<{ locale: string; slug?: string[] }>;
@@ -106,36 +109,45 @@ const loadContent = cache(async (locale: string, slug: string[]) => {
   return content;
 });
 
+/** The slice of a CMS page the head and the JSON-LD need (both read it from the SDK result). */
+type PageItem = {
+  MetaTitle?: string;
+  MetaDescription?: string;
+  _metadata?: { key?: string; locale?: string; displayName?: string };
+};
+
 /**
- * Per-page <title>, description, og:image and robots, falling back to the site defaults:
- * the site title/description from app/layout.tsx, and app/opengraph-image.png.
+ * Meta Title is the editor's FULL title (it already carries the brand, e.g.
+ * "Dental Insurance Plans | eHealth"), so it is used as-is. Without one, the
+ * page name gets the site name appended, and with no page at all the site title.
+ */
+function pageTitle(item: PageItem | undefined, meta: PageMeta): string {
+  const displayName = item?._metadata?.displayName;
+  return (
+    meta.title ||
+    item?.MetaTitle?.trim() ||
+    (displayName ? `${displayName} | ${siteConfig.name}` : siteConfig.title)
+  );
+}
+
+/**
+ * Per-page <title>, description, og:image, robots, canonical link and hreflang alternates,
+ * falling back to the site defaults: the site title/description from app/layout.tsx, and
+ * app/opengraph-image.png.
  *
- * The fields come from the page's own Meta Title, Meta Description and `ogimage`
- * properties (read in lib/pageMeta.ts, since the SDK doesn't return them for
- * BlankExperience). A `Page (v1)` carries MetaTitle/MetaDescription in the SDK
- * result itself, so those are used when the lookup has nothing.
+ * The fields come from the page's own Meta Title, Meta Description, Robots Directives,
+ * Canonical URL, Keywords and `ogimage` properties (read in lib/pageMeta.ts, since the SDK
+ * doesn't return them for BlankExperience). A `Page (v1)` carries MetaTitle/MetaDescription
+ * in the SDK result itself, so those are used when the lookup has nothing.
  */
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug = [] } = await params;
   const content = await loadContent(locale, slug);
-  const item = content as
-    | {
-        MetaTitle?: string;
-        MetaDescription?: string;
-        _metadata?: { key?: string; locale?: string; displayName?: string };
-      }
-    | undefined;
+  const item = content as PageItem | undefined;
 
   const meta = await getPageMeta(item?._metadata?.key, item?._metadata?.locale);
 
-  // Meta Title is the editor's FULL title (it already carries the brand, e.g.
-  // "Dental Insurance Plans | eHealth"), so it is used as-is. Without one, the
-  // page name gets the site name appended, and with no page at all the site title.
-  const displayName = item?._metadata?.displayName;
-  const title =
-    meta.title ||
-    item?.MetaTitle?.trim() ||
-    (displayName ? `${displayName} | ${siteConfig.name}` : siteConfig.title);
+  const title = pageTitle(item, meta);
   const description = meta.description || item?.MetaDescription?.trim() || undefined;
 
   // The description keys are only added when there is a value: an explicit
@@ -146,6 +158,28 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: { type: 'website', siteName: siteConfig.name, title },
     twitter: { card: 'summary_large_image', title },
   };
+
+  // Canonical link, hreflang alternates, og:url and the Keywords field. Only for a page that
+  // exists, so a 404 never advertises a canonical URL. The canonical is the page's own
+  // public path (no query string, no trailing slash) unless the editor set a Canonical URL.
+  // Relative values resolve against `metadataBase` from the root layout.
+  if (item) {
+    const localeKey = resolveLocale(locale);
+    const ownPath = meta.path ?? publicPath(slug.length ? `/${slug.join('/')}/` : '/', localeKey);
+    const canonical = meta.canonical ?? ownPath;
+    const alternates: NonNullable<Metadata['alternates']> = { canonical };
+    if (meta.languages.length > 1) {
+      const languages: Record<string, string> = Object.fromEntries(
+        meta.languages.map((l) => [l.locale, l.path]),
+      );
+      const fallback = meta.languages.find((l) => l.locale === DEFAULT_LOCALE);
+      if (fallback) languages['x-default'] = fallback.path;
+      alternates.languages = languages;
+    }
+    metadata.alternates = alternates;
+    metadata.openGraph = { ...metadata.openGraph, url: canonical };
+    if (meta.keywords) metadata.keywords = meta.keywords;
+  }
   if (description) {
     metadata.description = description;
     metadata.openGraph = { ...metadata.openGraph, description };
@@ -181,7 +215,32 @@ async function Page({ params }: Props) {
     notFound();
   }
 
-  return <OptimizelyComponent content={content} />;
+  // Structured data for the page (Organization, WebSite, WebPage, breadcrumbs). Skipped for
+  // pages set to noindex (the paid landing pages) and when the origin is unknown.
+  const item = content as PageItem;
+  const meta = await getPageMeta(item._metadata?.key, item._metadata?.locale);
+  const origin = await requestOrigin();
+  const localeKey = resolveLocale(locale);
+  const jsonLd =
+    origin && meta.robots?.index !== false
+      ? await buildPageJsonLd({
+          origin: origin.origin,
+          localeKey,
+          path: meta.path ?? publicPath(slug.length ? `/${slug.join('/')}/` : '/', localeKey),
+          title: pageTitle(item, meta),
+          description: meta.description || item.MetaDescription?.trim() || null,
+          ogImage: meta.ogImage,
+          lastModified: meta.lastModified,
+          displayName: item._metadata?.displayName ?? null,
+        })
+      : null;
+
+  return (
+    <>
+      {jsonLd && <JsonLd data={jsonLd} />}
+      <OptimizelyComponent content={content} />
+    </>
+  );
 }
 
 export default withAppContext(Page);

@@ -10,6 +10,12 @@ export type { Locale };
 /** Route segments of all non-default locales (e.g. ["fr", "sv", "ko", ...]). */
 export const LOCALE_SEGMENTS: string[] = LOCALES.map((l) => l.routeSegment).filter(Boolean);
 
+/**
+ * Request header that proxy.ts sets to the locale key of the current request, so the root
+ * layout (which cannot see the [locale] route param) can write the right `<html lang>`.
+ */
+export const LOCALE_HEADER = 'x-eh-locale';
+
 /** Find a locale by its key. */
 export function findLocale(key: string): Locale | undefined {
   return LOCALES.find((l) => l.key === key);
@@ -50,4 +56,21 @@ export function stripLocale(pathname: string): { localeKey: string; cleanPath: s
   if (!match) return { localeKey: DEFAULT_LOCALE, cleanPath: pathname };
   const cleanPath = pathname.slice(`/${first}`.length) || '/';
   return { localeKey: match.key, cleanPath };
+}
+
+/**
+ * The public, canonical path for a CMS URL: no default-locale prefix, no trailing slash, and
+ * the locale's route segment in front of non-default locales. This is the form the site
+ * actually serves (the proxy redirects /en/x to /x), so it is what canonical links, hreflang
+ * and the sitemap should use.
+ *   publicPath('/medicare/', 'en')    -> '/medicare'
+ *   publicPath('/en/medicare/', 'en') -> '/medicare'
+ *   publicPath('/es/', 'es')          -> '/es'
+ *   publicPath('/', 'en')             -> '/'
+ */
+export function publicPath(url: string, localeKey: string): string {
+  const withSlash = url.startsWith('/') ? url : `/${url}`;
+  const unprefixed = withSlash.replace(new RegExp(`^/${DEFAULT_LOCALE}(?=/|$)`), '') || '/';
+  const full = localizePath(stripLocale(unprefixed).cleanPath, localeKey);
+  return full.length > 1 ? full.replace(/\/+$/, '') : full;
 }

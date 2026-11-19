@@ -25,6 +25,7 @@ import EhLiveAdvise, { EhLiveAdviseContentType } from './EhLiveAdvise';
 import EhStepsBand, { EhStepsBandContentType } from './EhStepsBand';
 import EhReviews, { EhReviewsContentType } from './EhReviews';
 import EhSiteSettings, { EhSiteSettingsContentType } from './EhSiteSettings';
+import EhFaq, { EhFaqContentType } from './EhFaq';
 
 /**
  * Single configuration + registration point for the Optimizely SDK.
@@ -75,6 +76,7 @@ export const registeredContentTypes = [
   EhLiveAdviseContentType,
   EhStepsBandContentType,
   EhReviewsContentType,
+  EhFaqContentType,
   // Site-wide settings item (banner, phone, legal line). The site chrome reads it through
   // lib/siteSettings.ts; the component only renders it when previewed in the CMS.
   EhSiteSettingsContentType,
@@ -103,6 +105,7 @@ initReactComponentRegistry({
     EhLiveAdvise,
     EhStepsBand,
     EhReviews,
+    EhFaq,
     EhSiteSettings,
   },
 });
