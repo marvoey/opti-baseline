@@ -96,8 +96,7 @@ export default function DemoFlow() {
           <span className="act-num">4</span>
           <span className="act-title">SEO parity with Yoast, then AEO</span>
           <span className="chip c-n">9 min</span>
-          <span className="chip c-green">BUILT</span>
-          <span className="chip c-warn">ON DEPLOY</span>
+          <span className="chip c-green">READY</span>
           <span className="chip c-n">RFI 6.1–6.39</span>
         </div>
         <div className="open">
@@ -107,14 +106,14 @@ export default function DemoFlow() {
           <a className="pill pill-cms" href="https://app-epsamoey0012f6ygp001.cms.optimizely.com/ui/cms" target="_blank" rel="noopener noreferrer">CMS editor <span aria-hidden="true">↗</span></a>
           <a className="pill" href="https://ehealth.optimoey.com/robots.txt" target="_blank" rel="noopener noreferrer">/robots.txt <span aria-hidden="true">↗</span></a>
           <a className="pill" href="https://ehealth.optimoey.com/sitemap.xml" target="_blank" rel="noopener noreferrer">/sitemap.xml <span aria-hidden="true">↗</span></a>
-          <a className="pill pill-todo" href="https://ehealth.optimoey.com/llms.txt" target="_blank" rel="noopener noreferrer">/llms.txt <span aria-hidden="true">↗</span> <small>after deploy</small></a>
+          <a className="pill" href="https://ehealth.optimoey.com/llms.txt" target="_blank" rel="noopener noreferrer">/llms.txt <span aria-hidden="true">↗</span></a>
           <a className="pill" href="https://docs.optimizely.com/agent-platform/docs/seo-metadata-implementation-agent" target="_blank" rel="noopener noreferrer">SEO agent doc <span aria-hidden="true">↗</span></a>
         </div>
         <ul className="dots">
           <li><strong>Ready:</strong> Meta Title, Meta Description and OG image on each page, with the site-wide fallback, Open Graph and Twitter tags.</li>
           <li><strong>Ready:</strong> run the Mark <em>SEO Metadata</em> agent on <span className="mono">/small-business</span>. It produces an audit and writes the changes back as a CMS draft for approval.</li>
-          <li><strong>Built (live after the deploy):</strong> <span className="mono">/sitemap.xml</span>, <span className="mono">/robots.txt</span> and <span className="mono">/llms.txt</span> are generated from the CMS tree. The robots rules allow search and answer-engine crawlers and block AI training crawlers. Pages carry canonical and hreflang links and JSON-LD (Organization, WebSite, WebPage, BreadcrumbList). View the source live. Today those three URLs return the homepage HTML.</li>
-          <li><strong>AEO:</strong> <span className="mono">/medicare</span> and <span className="mono">/individual-and-family</span> have an FAQ block that publishes FAQPage schema (show it in View Source). Run a GEO audit and show <span className="mono">/llms.txt</span>. The FAQ appears after the deploy.</li>
+          <li><strong>Live:</strong> <span className="mono">/sitemap.xml</span>, <span className="mono">/robots.txt</span> and <span className="mono">/llms.txt</span> are generated from the CMS tree. The robots rules allow search and answer-engine crawlers and block AI training crawlers. Pages carry canonical and hreflang links and JSON-LD (Organization, WebSite, WebPage, BreadcrumbList). View the source live: View Page Source on <span className="mono">/medicare</span>, then search for <span className="mono">canonical</span> and <span className="mono">ld+json</span>.</li>
+          <li><strong>AEO:</strong> <span className="mono">/medicare</span> and <span className="mono">/individual-and-family</span> have an FAQ block that publishes FAQPage schema (show it in View Source). Run a GEO audit and show <span className="mono">/llms.txt</span>.</li>
         </ul>
         <div className="say">&quot;Yoast scores a draft. This gives you the fields, the governance and an AI coach, and your front end produces clean, server-rendered markup that answer engines can cite.&quot;</div>
       </div>
@@ -158,7 +157,7 @@ export default function DemoFlow() {
         </div>
         <ul className="dots">
           <li><strong>Accessibility:</strong> ask Mark to generate alt text for the 6 coverage-card images, which are empty today. It&apos;s a real fix to a real gap, done live.</li>
-          <li><strong>Spanish:</strong> eHealth Home is already translated (<span className="mono">/es</span>). Translate <span className="mono">/medicare</span> into Spanish with Mark live, then show <span className="mono">/es/medicare</span> with fallback to English for anything untranslated. <em>The <span className="mono">es</span> locale is on. Check the translated title first: it says eSalud instead of eHealth.</em></li>
+          <li><strong>Spanish:</strong> eHealth Home is already translated (<span className="mono">/es</span>). Translate <span className="mono">/medicare</span> into Spanish with Mark live, then show <span className="mono">/es/medicare</span> with fallback to English for anything untranslated. <em>The <span className="mono">es</span> locale is on. Check the translated title first: it says eSalud instead of eHealth.</em> Until /medicare is translated, /es/medicare shows the English page (its canonical link points to /medicare), so translating it live is the Mark moment.</li>
           <li><strong>Human in the loop:</strong> AI output lands as a draft, goes through the approval step and has an audit trail. Mention that generative AI can be turned off in the Opti ID admin.</li>
         </ul>
       </div>

@@ -18,11 +18,11 @@ export default function Checklist() {
           <h4>Thursday (today)</h4>
           <ul className="dots text-sm">
             <li><span className="chip c-green">DONE</span> G1 personalization: live and verified on 19 Nov</li>
-            <li><span className="chip c-warn">ON DEPLOY</span> G4 sitemap, robots, llms.txt, canonical, hreflang and JSON-LD: built and tested locally</li>
+            <li><span className="chip c-green">DONE</span> G4 sitemap, robots, llms.txt, canonical, hreflang and JSON-LD: live and verified on 19 Nov</li>
             <li><span className="chip c-green">DONE</span> G5 <span className="mono">es</span> locale and Spanish Home. Fix the &quot;eSalud&quot; page title first. Leave the alt text empty for the live Mark moment</li>
             <li><span className="chip c-green">DONE</span> G6 taxonomy, paid landing page and query view (live)</li>
-            <li><span className="chip c-warn">ON DEPLOY</span> G7 FAQ block and fuller product pages: published in the CMS, the FAQ shows after the deploy</li>
-            <li><strong>Commit and deploy</strong> the G4 and G7 code (new routes, <span className="mono">lib/seo.ts</span>, <span className="mono">lib/jsonLd.ts</span>, <span className="mono">cms/EhFaq.tsx</span>, and the <span className="mono">proxy.ts</span> and layout changes). Then check <span className="mono">/robots.txt</span>, <span className="mono">/sitemap.xml</span>, <span className="mono">/llms.txt</span>, View Source on <span className="mono">/medicare</span> (canonical, JSON-LD, FAQ) and on <span className="mono">/es</span> (lang, hreflang)</li>
+            <li><span className="chip c-green">DONE</span> G7 FAQ block and fuller product pages: live and verified on 19 Nov</li>
+            <li><span className="chip c-green">DONE</span> G4 and G7 code deployed (19 Nov) and rechecked on the live site: <span className="mono">/robots.txt</span>, <span className="mono">/sitemap.xml</span> and <span className="mono">/llms.txt</span> are real files, <span className="mono">/medicare</span> has a canonical link, JSON-LD and the FAQ, and <span className="mono">/es</span> says <span className="mono">lang=&quot;es&quot;</span> with language links</li>
             <li><span className="chip c-green">DONE</span> G2 and G6 code deployed (19 Nov) and rechecked on the live site: <span className="mono">/lp/aca-2027</span> is noindex with the minimal header, the menu has no Landing pages item, and the <span className="mono">/demo</span> pages load</li>
           </ul>
         </div>

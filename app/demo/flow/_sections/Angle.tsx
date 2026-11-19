@@ -14,8 +14,8 @@ export default function Angle() {
           <div className="stat-lbl">CMS sections on the homepage</div>
         </div>
         <div className="stat">
-          <div className="stat-num">16</div>
-          <div className="stat-lbl">Content types (12 are eHealth blocks)</div>
+          <div className="stat-num">18</div>
+          <div className="stat-lbl">Content types (14 are eHealth blocks)</div>
         </div>
         <div className="stat">
           <div className="stat-num">7</div>

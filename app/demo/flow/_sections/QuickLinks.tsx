@@ -5,7 +5,7 @@ export default function QuickLinks() {
   return (
     <section id="links" className="card">
       <h2 className="h2">Quick links</h2>
-      <p className="text-sm">Every link opens in a new tab. Dashed pills point to pages that only exist after the related gap is built.</p>
+      <p className="text-sm">Every link opens in a new tab.</p>
       <div className="ql-grid">
         <div className="box">
           <h4>Live site</h4>
@@ -32,19 +32,19 @@ export default function QuickLinks() {
           <p className="text-xs mt-2 opacity-80">The CMS link opens the editor. Use the content keys below to find each item.</p>
         </div>
         <div className="box">
-          <h4>Show the gap live (until the deploy)</h4>
+          <h4>SEO files (live)</h4>
           <div className="open">
             <a className="pill" href="https://ehealth.optimoey.com/robots.txt" target="_blank" rel="noopener noreferrer">/robots.txt <span aria-hidden="true">↗</span></a>
             <a className="pill" href="https://ehealth.optimoey.com/sitemap.xml" target="_blank" rel="noopener noreferrer">/sitemap.xml <span aria-hidden="true">↗</span></a>
           </div>
-          <p className="text-xs mt-2 opacity-80">Until the G4 deploy both return the homepage HTML. After it, they are generated from the CMS.</p>
+          <p className="text-xs mt-2 opacity-80">Generated from the CMS tree, so there is nothing to maintain by hand.</p>
         </div>
         <div className="box">
-          <h4>After the builds</h4>
+          <h4>Built for this demo</h4>
           <div className="open">
             <a className="pill" href="https://ehealth.optimoey.com/?utm_campaign=aca" target="_blank" rel="noopener noreferrer">?utm_campaign=aca <span aria-hidden="true">↗</span></a>
             <a className="pill" href="https://ehealth.optimoey.com/?utm_campaign=t65" target="_blank" rel="noopener noreferrer">?utm_campaign=t65 <span aria-hidden="true">↗</span></a>
-            <a className="pill pill-todo" href="https://ehealth.optimoey.com/llms.txt" target="_blank" rel="noopener noreferrer">/llms.txt <span aria-hidden="true">↗</span> <small>after deploy</small></a>
+            <a className="pill" href="https://ehealth.optimoey.com/llms.txt" target="_blank" rel="noopener noreferrer">/llms.txt <span aria-hidden="true">↗</span></a>
             <a className="pill" href="https://ehealth.optimoey.com/es" target="_blank" rel="noopener noreferrer">/es <span aria-hidden="true">↗</span></a>
             <a className="pill" href="https://ehealth.optimoey.com/lp/aca-2027" target="_blank" rel="noopener noreferrer">/lp/aca-2027 <span aria-hidden="true">↗</span></a>
             <a className="pill" href="https://ehealth.optimoey.com/demo/groups" target="_blank" rel="noopener noreferrer">/demo/groups <span aria-hidden="true">↗</span></a>

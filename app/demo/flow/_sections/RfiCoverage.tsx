@@ -23,12 +23,12 @@ export default function RfiCoverage() {
             <tr>
               <td>§6a–d SEO / Yoast parity</td>
               <td>Act 4, G4</td>
-              <td>Strong once the G4 deploy is live: sitemap, robots, canonical, hreflang and JSON-LD are built</td>
+              <td>Strong. Sitemap, robots, canonical, hreflang and JSON-LD are live</td>
             </tr>
             <tr>
               <td>§6e AEO</td>
               <td>Act 4, G4, G7</td>
-              <td>A differentiator once the deploy is live: FAQ schema on /medicare and /individual-and-family, plus llms.txt</td>
+              <td>A differentiator. FAQ schema on /medicare and /individual-and-family, plus llms.txt, are live</td>
             </tr>
             <tr>
               <td>§7 Content velocity</td>

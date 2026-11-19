@@ -14,7 +14,7 @@ import './flow.css';
 /**
  * /demo/flow - eHealth Friday demo flow and gap plan.
  *
- * GENERATED from the ehealth_friday_demo_flow.html canvas (version 12, 19 Nov
+ * GENERATED from the ehealth_friday_demo_flow.html canvas (version 14, 19 Nov
  * 2026) by converting its <body> markup to JSX: this file holds the header and
  * contents nav, and ./_sections holds one component per section. Visible text
  * and all 101 links were checked identical to the canvas. The canvas's only

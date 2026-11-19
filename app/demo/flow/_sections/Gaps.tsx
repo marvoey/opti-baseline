@@ -52,11 +52,11 @@ export default function Gaps() {
             <tr>
               <td>G4</td>
               <td><strong>Technical SEO:</strong> <span className="mono">/sitemap.xml</span>, <span className="mono">/robots.txt</span> (AI-crawler rules), canonical and hreflang links, JSON-LD, <span className="mono">/llms.txt</span> and the right <span className="mono">html lang</span> on Spanish pages</td>
-              <td>Yoast parity and AEO are 39 of the RFI&apos;s line items. Until the deploy, <a className="link" href="https://ehealth.optimoey.com/sitemap.xml" target="_blank" rel="noopener noreferrer">sitemap.xml</a>, <a className="link" href="https://ehealth.optimoey.com/robots.txt" target="_blank" rel="noopener noreferrer">robots.txt</a> and <a className="link" href="https://ehealth.optimoey.com/llms.txt" target="_blank" rel="noopener noreferrer">llms.txt</a> all return the homepage, and /es says <span className="mono">lang=&quot;en&quot;</span>. The editor fields already exist on <span className="mono">BlankExperience</span> (Canonical URL, Robots Directives, Keywords, FAQ and HowTo items), so no CMS change was needed.</td>
-              <td>Code: <span className="mono">app/sitemap.ts</span>, <span className="mono">app/robots.ts</span>, <span className="mono">app/llms.txt/route.ts</span>, <span className="mono">lib/seo.ts</span>, <span className="mono">lib/jsonLd.ts</span>, canonical and hreflang in <span className="mono">generateMetadata</span>, and the locale header in <span className="mono">proxy.ts</span>. All generated from the CMS tree, so there is nothing to maintain by hand. AI-crawler policy: answer-engine crawlers allowed, training crawlers blocked, one switch (<span className="mono">ALLOW_AI_TRAINING</span>) in <span className="mono">lib/seo.ts</span>. Tested locally against live Graph data. <strong>Not yet deployed.</strong></td>
+              <td>Yoast parity and AEO are 39 of the RFI&apos;s line items. Before this build, <a className="link" href="https://ehealth.optimoey.com/sitemap.xml" target="_blank" rel="noopener noreferrer">sitemap.xml</a>, <a className="link" href="https://ehealth.optimoey.com/robots.txt" target="_blank" rel="noopener noreferrer">robots.txt</a> and <a className="link" href="https://ehealth.optimoey.com/llms.txt" target="_blank" rel="noopener noreferrer">llms.txt</a> all returned the homepage, and /es said <span className="mono">lang=&quot;en&quot;</span>. Now all three are generated from the CMS and the Spanish pages are labelled correctly. The editor fields already exist on <span className="mono">BlankExperience</span> (Canonical URL, Robots Directives, Keywords, FAQ and HowTo items), so no CMS change was needed.</td>
+              <td>Code: <span className="mono">app/sitemap.ts</span>, <span className="mono">app/robots.ts</span>, <span className="mono">app/llms.txt/route.ts</span>, <span className="mono">lib/seo.ts</span>, <span className="mono">lib/jsonLd.ts</span>, canonical and hreflang in <span className="mono">generateMetadata</span>, and the locale header in <span className="mono">proxy.ts</span>. All generated from the CMS tree, so there is nothing to maintain by hand. AI-crawler policy: answer-engine crawlers allowed, training crawlers blocked, one switch (<span className="mono">ALLOW_AI_TRAINING</span>) in <span className="mono">lib/seo.ts</span>. <strong>Deployed and verified live on 19 Nov</strong>: the sitemap lists 9 pages, every page has a canonical link and structured data, and Home and /es carry the English and Spanish links.</td>
               <td>½ day</td>
               <td>
-                <span className="chip c-warn">ON DEPLOY</span>
+                <span className="chip c-green">DONE</span>
               </td>
             </tr>
             <tr>
@@ -83,10 +83,10 @@ export default function Gaps() {
               <td>G7</td>
               <td><strong>FAQ block</strong> (accordion that renders FAQPage JSON-LD) and fuller product pages</td>
               <td>AEO proof point. Product pages were thin, and adding How it works, Live Advise, Coverage and FAQ blocks shows reuse across pages.</td>
-              <td>Code: <span className="mono">cms/EhFaq.tsx</span> (registered, and the type is pushed to the CMS). CMS: <span className="mono">/medicare</span> and <span className="mono">/individual-and-family</span> now have six sections each, including a six-question FAQ, published. <strong>The FAQ appears after the code deploy</strong>; until then the pages show the other three new sections. The wording is demo copy: eHealth compliance should review it.</td>
+              <td>Code: <span className="mono">cms/EhFaq.tsx</span> (registered, and the type is pushed to the CMS). CMS: <span className="mono">/medicare</span> and <span className="mono">/individual-and-family</span> now have six sections each, including a six-question FAQ, published. <strong>Deployed and verified live on 19 Nov</strong>: both pages show all six sections, and the FAQ is in the page source as FAQPage structured data. The wording is demo copy: eHealth compliance should review it.</td>
               <td>2–3 hrs</td>
               <td>
-                <span className="chip c-warn">ON DEPLOY</span>
+                <span className="chip c-green">DONE</span>
               </td>
             </tr>
             <tr>
