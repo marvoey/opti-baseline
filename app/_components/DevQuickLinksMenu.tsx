@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import Link from 'next/link';
 
-export type QuickLink = { label: string; href: string };
+/** `document`: a route handler, opened with a plain link instead of client-side navigation. */
+export type QuickLink = { label: string; href: string; document?: boolean };
 
 export default function DevQuickLinksMenu({ links }: { links: QuickLink[] }) {
   const [open, setOpen] = useState(false);
@@ -12,16 +13,19 @@ export default function DevQuickLinksMenu({ links }: { links: QuickLink[] }) {
     <div className="fixed bottom-3 left-16 z-[9998] flex flex-col items-start">
       {open && (
         <div className="mb-2 flex flex-col gap-0.5 rounded-lg border border-gray-200 bg-white shadow-xl p-1.5 min-w-[148px]">
-          {links.map(({ label, href }) => (
-            <Link
-              key={href}
-              href={href}
-              onClick={() => setOpen(false)}
-              className="block rounded-md px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-100 transition-colors"
-            >
-              {label}
-            </Link>
-          ))}
+          {links.map(({ label, href, document }) => {
+            const className =
+              'block rounded-md px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-100 transition-colors';
+            return document ? (
+              <a key={href} href={href} className={className}>
+                {label}
+              </a>
+            ) : (
+              <Link key={href} href={href} onClick={() => setOpen(false)} className={className}>
+                {label}
+              </Link>
+            );
+          })}
         </div>
       )}
       <button
