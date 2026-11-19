@@ -37,7 +37,7 @@ const MainNav = async ({ locale }: { locale?: string }) => {
           </Link>
         </div>
 
-        <div className="flex items-center gap-5 font-display text-[13px] font-semibold text-blue-950 lg:gap-7">
+        <div className="ml-6 flex items-center gap-5 font-display text-[13px] font-semibold text-blue-950 lg:gap-7">
           <NavMenu items={items} />
 
           <a
