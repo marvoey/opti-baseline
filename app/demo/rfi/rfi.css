@@ -1,0 +1,122 @@
+/*
+ * Styles for /demo/rfi, ported from the ehealth_rfi.html canvas.
+ *
+ * Everything is scoped under .rfi-doc so these generic class names (.card,
+ * .chip, .link...) never leak into the CMS-rendered site. Deliberately NOT in a
+ * Tailwind @layer: unlayered rules must beat the base-layer heading colour/font
+ * and list resets from globals.css. They don't overlap the utilities used in
+ * page.tsx, and `p-4!` (important) still wins where it's used on .card.
+ */
+.rfi-doc {
+  --fir: #08251a;
+  --lf: #abff44;
+  --n3: #e4f0da;
+  --n2: #eff6e9;
+  --blue: #91dbda;
+  --lfir: #197050;
+  --rfi-condensed: var(--font-rfi-condensed), 'Roboto Condensed', sans-serif;
+  --rfi-mono: var(--font-rfi-mono), 'Roboto Mono', monospace;
+
+  flex: 1;
+  background: var(--n3);
+  color: var(--fir);
+  font-family: var(--font-body), Roboto, system-ui, sans-serif;
+  line-height: 1.55;
+}
+
+/* Override the site's green Poppins headings from globals.css. */
+.rfi-doc h1,
+.rfi-doc h2,
+.rfi-doc h3 { color: inherit; }
+.rfi-doc h1,
+.rfi-doc h2,
+.rfi-doc .stat-num,
+.rfi-doc .flow-title { font-family: var(--rfi-condensed); }
+
+.rfi-doc .card { background: #fff; border: 2px solid var(--fir); border-radius: 24px; padding: 2rem; }
+
+.rfi-doc .chip {
+  display: inline-block;
+  font-family: var(--rfi-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.03em;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  border: 1.5px solid var(--fir);
+  white-space: nowrap;
+}
+.rfi-doc .chip-green { background: var(--lf); }
+.rfi-doc .chip-blue { background: var(--blue); }
+.rfi-doc .chip-neutral { background: var(--n2); }
+
+.rfi-doc .prep-h2 { font-size: 1.9rem; font-weight: 800; margin-bottom: 0.75rem; line-height: 1.06; }
+.rfi-doc .doc-h1 { font-size: 2.3rem; font-weight: 800; line-height: 1.06; margin-bottom: 1.5rem; }
+.rfi-doc .doc-h2 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin: 2.5rem 0 0.75rem;
+  padding-top: 1rem;
+  border-top: 2px solid var(--fir);
+  scroll-margin-top: 1rem;
+}
+.rfi-doc .doc-h3 { font-family: var(--font-body), Roboto, sans-serif; font-weight: 700; font-size: 1.08rem; margin: 1.5rem 0 0.5rem; }
+.rfi-doc .doc-p { margin: 0.5rem 0; }
+
+.rfi-doc .doc-ul { list-style: disc; padding-left: 1.5rem; margin: 0.5rem 0; }
+.rfi-doc .doc-ol { list-style: decimal; padding-left: 1.5rem; margin: 0.5rem 0; }
+.rfi-doc .doc-ul li,
+.rfi-doc .doc-ol li { margin: 0.3rem 0; }
+.rfi-doc .doc-check { list-style: none; padding-left: 0; margin: 0.5rem 0; }
+.rfi-doc .doc-check li { position: relative; padding-left: 1.9rem; margin: 0.4rem 0; }
+.rfi-doc .doc-check li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.2rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  border: 2px solid var(--fir);
+  border-radius: 6px;
+  background: #fff;
+}
+
+.rfi-doc .link,
+.rfi-doc .rfi-original a { color: var(--lfir); text-decoration: underline; font-weight: 500; }
+
+.rfi-doc .tbl-wrap { overflow-x: auto; border: 2px solid var(--fir); border-radius: 24px; margin: 0.75rem 0 1.25rem; background: #fff; }
+.rfi-doc .doc-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+.rfi-doc .doc-table th {
+  background: var(--lf);
+  text-align: left;
+  padding: 0.65rem 0.8rem;
+  font-weight: 700;
+  border-bottom: 2px solid var(--fir);
+  white-space: nowrap;
+}
+.rfi-doc .doc-table td { padding: 0.6rem 0.8rem; border-top: 1px solid #cfdcc4; vertical-align: top; }
+.rfi-doc .doc-table tbody tr:nth-child(even) td { background: var(--n2); }
+.rfi-doc .doc-table td.col-id { font-family: var(--rfi-mono); font-size: 0.8rem; white-space: nowrap; }
+.rfi-doc .doc-table td.empty { min-width: 5.5rem; }
+
+.rfi-doc .stat { background: var(--n2); border: 2px solid var(--fir); border-radius: 24px; padding: 1rem 1.1rem; }
+.rfi-doc .stat-num { font-size: 2.2rem; font-weight: 800; line-height: 1; }
+.rfi-doc .stat-lbl { font-family: var(--rfi-mono); font-size: 0.72rem; margin-top: 0.35rem; }
+
+.rfi-doc .flow { list-style: none; padding: 0; margin: 1rem 0 0; display: grid; gap: 0.85rem; }
+.rfi-doc .flow > li { background: var(--n2); border: 2px solid var(--fir); border-radius: 24px; padding: 1rem 1.25rem; }
+.rfi-doc .flow-head { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem; margin-bottom: 0.35rem; }
+.rfi-doc .flow-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  background: var(--lf);
+  border: 2px solid var(--fir);
+  font-weight: 700;
+}
+.rfi-doc .flow-title { font-weight: 800; font-size: 1.15rem; flex: 1; }
+
+.rfi-doc .toc-link { display: block; padding: 0.3rem 0.6rem; border-radius: 9999px; font-size: 0.88rem; }
+.rfi-doc .toc-link:hover { background: var(--lf); }

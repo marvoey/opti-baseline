@@ -1,0 +1,170 @@
+/*
+ * Styles for /demo/flow, ported from the ehealth_friday_demo_flow.html canvas.
+ *
+ * Scoped under .dfl so generic class names (.card, .chip, .box, .pill...) and
+ * element rules (p, h3, table...) never leak into the CMS-rendered site.
+ *
+ * In the `components` cascade layer on purpose: that sits above Tailwind's
+ * base layer (so these beat globals.css heading colour/font and the preflight
+ * list/link resets) and below the utilities layer (so utilities in the markup,
+ * such as mt-3 on a paragraph, still win, as they did in the canvas).
+ */
+@layer components {
+  .dfl {
+    --fir: #08251a;
+    --lf: #abff44;
+    --go: #3ab533;
+    --n3: #e4f0da;
+    --n2: #eff6e9;
+    --blue: #91dbda;
+    --lfir: #197050;
+    --warn: #ffe08a;
+    --dfl-condensed: var(--font-dfl-condensed), 'Roboto Condensed', sans-serif;
+    --dfl-mono: var(--font-dfl-mono), 'Roboto Mono', monospace;
+
+    flex: 1;
+    background: var(--n3);
+    color: var(--fir);
+    font-family: var(--font-body), Roboto, system-ui, sans-serif;
+    line-height: 1.55;
+  }
+
+  /* Override the site's green Poppins headings from globals.css. */
+  .dfl h1,
+  .dfl h2,
+  .dfl h3 { color: inherit; }
+  .dfl h1,
+  .dfl h2,
+  .dfl .h2,
+  .dfl .stat-num,
+  .dfl .act-title { font-family: var(--dfl-condensed); }
+
+  .dfl .card { background: #fff; border: 2px solid var(--fir); border-radius: 24px; padding: 2rem; }
+
+  .dfl .chip {
+    display: inline-block;
+    font-family: var(--dfl-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.03em;
+    padding: 0.2rem 0.7rem;
+    border-radius: 9999px;
+    border: 1.5px solid var(--fir);
+    white-space: nowrap;
+  }
+  .dfl .c-green { background: var(--lf); }
+  .dfl .c-blue { background: var(--blue); }
+  .dfl .c-n { background: var(--n2); }
+  .dfl .c-warn { background: var(--warn); }
+
+  .dfl .h2 { font-size: 1.85rem; font-weight: 800; line-height: 1.06; margin-bottom: 0.6rem; scroll-margin-top: 1rem; }
+  .dfl h3 { font-family: inherit; font-weight: 700; font-size: 1.06rem; margin: 1.25rem 0 0.45rem; }
+  .dfl p { margin: 0.45rem 0; }
+
+  .dfl ul.dots { list-style: disc; padding-left: 1.35rem; margin: 0.4rem 0; }
+  .dfl ul.dots li { margin: 0.25rem 0; }
+  .dfl ol.num { list-style: decimal; padding-left: 1.35rem; margin: 0.4rem 0; }
+  .dfl ol.num li { margin: 0.3rem 0; }
+
+  .dfl .link { color: var(--lfir); text-decoration: underline; font-weight: 500; }
+
+  .dfl .tbl { overflow-x: auto; border: 2px solid var(--fir); border-radius: 20px; margin: 0.75rem 0 1rem; background: #fff; }
+  .dfl table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+  .dfl th {
+    background: var(--lf);
+    text-align: left;
+    padding: 0.6rem 0.75rem;
+    font-weight: 700;
+    border-bottom: 2px solid var(--fir);
+    white-space: nowrap;
+  }
+  .dfl td { padding: 0.55rem 0.75rem; border-top: 1px solid #cfdcc4; vertical-align: top; }
+  .dfl tbody tr:nth-child(even) td { background: var(--n2); }
+  .dfl td.mono,
+  .dfl .mono { font-family: var(--dfl-mono); font-size: 0.78rem; }
+
+  .dfl .stat { background: var(--n2); border: 2px solid var(--fir); border-radius: 20px; padding: 1rem; }
+  .dfl .stat-num { font-size: 2rem; font-weight: 800; line-height: 1; }
+  .dfl .stat-lbl { font-family: var(--dfl-mono); font-size: 0.7rem; margin-top: 0.3rem; }
+
+  .dfl .act { background: var(--n2); border: 2px solid var(--fir); border-radius: 24px; padding: 1.25rem 1.4rem; margin-bottom: 1rem; }
+  .dfl .act-head { display: flex; flex-wrap: wrap; align-items: center; gap: 0.55rem; margin-bottom: 0.5rem; }
+  .dfl .act-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.1rem;
+    height: 2.1rem;
+    border-radius: 9999px;
+    background: var(--lf);
+    border: 2px solid var(--fir);
+    font-weight: 700;
+  }
+  .dfl .act-title { font-weight: 800; font-size: 1.2rem; flex: 1; min-width: 14rem; }
+
+  .dfl .say { background: #fff; border-left: 5px solid var(--go); border-radius: 12px; padding: 0.65rem 0.9rem; margin: 0.6rem 0; font-style: italic; }
+
+  .dfl .grid2 { display: grid; gap: 1rem; }
+  .dfl .ql-grid { display: grid; gap: 1rem; }
+  @media (min-width: 900px) {
+    .dfl .grid2,
+    .dfl .ql-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  .dfl .box { background: #fff; border: 1.5px solid var(--fir); border-radius: 16px; padding: 0.9rem 1rem; }
+  .dfl .box h4 {
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-bottom: 0.35rem;
+    font-family: var(--dfl-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .dfl pre {
+    background: var(--fir);
+    color: #e4f0da;
+    border-radius: 16px;
+    padding: 1rem 1.1rem;
+    overflow-x: auto;
+    font-family: var(--dfl-mono);
+    font-size: 0.76rem;
+    line-height: 1.5;
+    margin: 0.6rem 0;
+  }
+
+  .dfl .open { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; margin: 0.15rem 0 0.75rem; }
+  .dfl .open-lbl {
+    font-family: var(--dfl-mono);
+    font-size: 0.66rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    opacity: 0.7;
+    margin-right: 0.15rem;
+  }
+  .dfl .ql-grid .box .open { margin: 0.2rem 0 0; }
+
+  .dfl .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    background: #fff;
+    border: 1.5px solid var(--fir);
+    border-radius: 9999px;
+    padding: 0.16rem 0.7rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--fir);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .dfl .pill:hover { background: var(--lf); }
+  .dfl .pill-cms { background: var(--blue); }
+  .dfl .pill-fx { background: var(--lf); }
+  .dfl .pill-todo { border-style: dashed; background: transparent; }
+  .dfl .pill small { font-family: var(--dfl-mono); font-size: 0.62rem; opacity: 0.8; }
+
+  .dfl details summary { cursor: pointer; font-weight: 600; }
+
+  .dfl .toc a { display: block; padding: 0.28rem 0.6rem; border-radius: 9999px; font-size: 0.86rem; }
+  .dfl .toc a:hover { background: var(--lf); }
+}
