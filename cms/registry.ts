@@ -12,6 +12,13 @@ import BlankExperience from './BlankExperience';
 import BlankSection from './BlankSection';
 import Page, { PageContentType } from './Page';
 import RichText, { RichTextContentType } from './RichText';
+import GtaHero, { GtaHeroContentType } from './GtaHero';
+import GtaPromoBanner, { GtaPromoBannerContentType } from './GtaPromoBanner';
+import GtaCarousel, { GtaCarouselContentType, GtaCarouselSlideContentType } from './GtaCarousel';
+import GtaUpdateShowcase, { GtaUpdateShowcaseContentType, GtaUpdateCardContentType } from './GtaUpdateShowcase';
+import GtaFeatureGrid, { GtaFeatureGridContentType, GtaFeatureItemContentType } from './GtaFeatureGrid';
+import GtaCareerGrid, { GtaCareerGridContentType, GtaCareerCardContentType } from './GtaCareerGrid';
+import GtaBuyPanel, { GtaBuyPanelContentType } from './GtaBuyPanel';
 
 /**
  * Single configuration + registration point for the Optimizely SDK.
@@ -49,6 +56,19 @@ export const registeredContentTypes = [
   PageContentType,
   // Blocks
   RichTextContentType,
+  GtaHeroContentType,
+  GtaPromoBannerContentType,
+  GtaCarouselContentType,
+  GtaUpdateShowcaseContentType,
+  GtaFeatureGridContentType,
+  GtaCareerGridContentType,
+  GtaBuyPanelContentType,
+  // Embedded items (used as array properties inside the blocks above).
+  // They must be registered too: the Graph query builder resolves them by key.
+  GtaCarouselSlideContentType,
+  GtaUpdateCardContentType,
+  GtaFeatureItemContentType,
+  GtaCareerCardContentType,
 ];
 
 initContentTypeRegistry(registeredContentTypes);
@@ -62,5 +82,12 @@ initReactComponentRegistry({
     Page,
     // Blocks (resolver key === content-type key)
     RichTextBlock: RichText,
+    GtaHeroBlock: GtaHero,
+    GtaPromoBannerBlock: GtaPromoBanner,
+    GtaCarouselBlock: GtaCarousel,
+    GtaUpdateShowcaseBlock: GtaUpdateShowcase,
+    GtaFeatureGridBlock: GtaFeatureGrid,
+    GtaCareerGridBlock: GtaCareerGrid,
+    GtaBuyPanelBlock: GtaBuyPanel,
   },
 });

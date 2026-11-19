@@ -2,6 +2,13 @@ import { contentType, type ContentProps } from '@optimizely/cms-sdk';
 import { OptimizelyComponent, getPreviewUtils } from '@optimizely/cms-sdk/react/server';
 
 import { RichTextContentType } from './RichText';
+import { GtaHeroContentType } from './GtaHero';
+import { GtaPromoBannerContentType } from './GtaPromoBanner';
+import { GtaCarouselContentType } from './GtaCarousel';
+import { GtaUpdateShowcaseContentType } from './GtaUpdateShowcase';
+import { GtaFeatureGridContentType } from './GtaFeatureGrid';
+import { GtaCareerGridContentType } from './GtaCareerGrid';
+import { GtaBuyPanelContentType } from './GtaBuyPanel';
 
 /**
  * Page — a fixed-layout Page (`_page`). The body is a `Content` area: an ordered
@@ -112,7 +119,16 @@ export const PageContentType = contentType({
       isLocalized: true,
       items: {
         type: 'content',
-        allowedTypes: [RichTextContentType],
+        allowedTypes: [
+          RichTextContentType,
+          GtaHeroContentType,
+          GtaPromoBannerContentType,
+          GtaCarouselContentType,
+          GtaUpdateShowcaseContentType,
+          GtaFeatureGridContentType,
+          GtaCareerGridContentType,
+          GtaBuyPanelContentType,
+        ],
         restrictedTypes: [],
       },
     },

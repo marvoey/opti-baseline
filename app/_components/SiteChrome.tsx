@@ -1,21 +1,26 @@
 import TopNav from './TopNav';
 import MainNav from './MainNav';
+import SubNav from './SubNav';
 import Footer from './Footer';
 
 /**
- * Shared static site chrome — header (TopNav + MainNav) and Footer — wrapped
- * around a page body. Used by BOTH the published CMS route (app/[locale]/layout)
- * and the /preview experience shell so the Visual Builder preview matches the
- * published page. `flex-1` lets the body grow so the footer sits at the bottom
- * (the root <body> is `min-h-full flex flex-col`).
+ * Shared static site chrome - announcement bar (TopNav), header (MainNav),
+ * secondary nav (SubNav) and Footer - wrapped around a page body. Used by BOTH
+ * the published CMS route (app/[locale]/layout) and the /preview experience
+ * shell so the Visual Builder preview matches the published page.
+ *
+ * The `.rs-site` wrapper scopes the dark brand theme (see app/globals.css) to
+ * the public site, leaving /admin on its own light UI. `flex-1` lets the body
+ * grow so the footer sits at the bottom (root <body> is `min-h-full flex flex-col`).
  */
 export default function SiteChrome({ children }: { children: React.ReactNode }) {
   return (
-    <>
+    <div className="rs-site flex min-h-full flex-1 flex-col">
       <TopNav />
       <MainNav />
+      <SubNav />
       <div className="flex-1">{children}</div>
       <Footer />
-    </>
+    </div>
   );
 }

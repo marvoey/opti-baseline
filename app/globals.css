@@ -15,39 +15,43 @@
     "Liberation Mono", "Courier New", monospace;
 
   /*
-   * ┌──────────────────────────────────────────────────────────────────────┐
-   * │  REBRAND HERE.  This is the whole colour theme for the site.          │
-   * │  The Tailwind `blue-*` scale is remapped, so chrome and blocks that   │
-   * │  use `bg-blue-950`, `text-blue-800`, etc. all reskin when you edit    │
-   * │  these ~11 hex values. Set blue-950 = your darkest brand colour and   │
-   * │  blue-800 = your primary; the rest are tints/shades between.          │
-   * └──────────────────────────────────────────────────────────────────────┘
+   * REBRAND HERE. This is the whole colour theme for the site.
    *
-   * Optimizely brand green ramp.
-   * Anchors: Dark Fir #08251a (darkest), LFGreen #abff44 (signature accent).
+   * Theme: "GTA / Rockstar-style" dark brand. Pure-black canvas, white type,
+   * a single signature yellow accent.
+   *
+   * The Tailwind `blue-*` scale is remapped so existing chrome and blocks that
+   * use `bg-blue-950`, `text-blue-800`, etc. reskin automatically:
+   *   - blue-950 / blue-900  -> black / near-black surfaces (footer, header)
+   *   - blue-800 / blue-200  -> signature yellow (primary links, CTAs)
+   *   - blue-700..300        -> yellow shades / tints (hover states)
+   *   - blue-100 / blue-50   -> DARK raised surfaces (cards, washes). Inverted
+   *                             on purpose: this is a dark-first brand, so a
+   *                             "light wash" section becomes a charcoal panel.
    */
-  --color-blue-950: #08251a; /* Dark Fir — footer / hero background */
-  --color-blue-900: #0d3a29; /* Mid Fir — header bg */
-  --color-blue-800: #197050; /* Light Fir — primary green, links */
-  --color-blue-700: #3ab533; /* Good-to-go */
-  --color-blue-600: #4dc844;
-  --color-blue-500: #62d84f;
-  --color-blue-400: #7ddd3d; /* Grass */
-  --color-blue-300: #91dbda; /* Light Blue — teal accent */
-  --color-blue-200: #abff44; /* LFGreen — signature bright green */
-  --color-blue-100: #d8e4cb; /* Neutral 4 */
-  --color-blue-50:  #e4f0da; /* Neutral 3 — light wash */
+  --color-blue-950: #000000; /* Black - page / footer background */
+  --color-blue-900: #0b0b0b; /* Ink - sticky header */
+  --color-blue-800: #fcaf17; /* Signature yellow - primary, links */
+  --color-blue-700: #e39a0b; /* Yellow pressed */
+  --color-blue-600: #f0a40f;
+  --color-blue-500: #fdba35;
+  --color-blue-400: #fdc65a; /* Yellow hover */
+  --color-blue-300: #fed588;
+  --color-blue-200: #fcaf17; /* Signature yellow - CTA fill */
+  --color-blue-100: #1f1f1f; /* Raised card */
+  --color-blue-50:  #141414; /* Panel wash */
 
-  /* Named Optimizely brand tokens for direct use in custom components. */
-  --color-lfgreen:    #abff44;
-  --color-grass:      #7ddd3d;
-  --color-good-to-go: #3ab533;
-  --color-dark-fir:   #08251a;
-  --color-mid-fir:    #0d3a29;
-  --color-light-fir:  #197050;
-  --color-light-blue: #91dbda;
-  --color-neutral-2:  #eff6e9;
-  --color-neutral-3:  #e4f0da;
+  /* Named brand tokens for direct use in custom components (bg-rs-yellow etc). */
+  --color-rs-yellow:      #fcaf17;
+  --color-rs-yellow-soft: #fdc65a;
+  --color-rs-black:       #000000;
+  --color-rs-ink:         #0b0b0b;
+  --color-rs-panel:       #141414;
+  --color-rs-card:        #1f1f1f;
+  --color-rs-line:        #2b2b2b;
+  --color-rs-muted:       #a3a3a3;
+  --color-rs-green:       #2fb34a; /* "Bonus / 2X" highlight */
+  --color-rs-red:         #e5383b; /* Alerts / limited-time */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -67,4 +71,65 @@ h1,
 h2,
 h3 {
   font-family: var(--font-display);
+}
+
+/*
+ * Brand chrome scope. SiteChrome wraps CMS pages + preview in `.rs-site`, so
+ * the dark theme applies to the public site only (the /admin tooling keeps its
+ * own light UI).
+ */
+.rs-site {
+  background: var(--color-rs-black);
+  color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* In @layer base so Tailwind utilities (font-black, leading-*, tracking-*) can override. */
+@layer base {
+  .rs-site h1,
+  .rs-site h2,
+  .rs-site h3 {
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+}
+
+.rs-site ::selection {
+  background: var(--color-rs-yellow);
+  color: #000000;
+}
+
+/* Hide the native disclosure marker on the mobile menu <summary>. */
+.rs-site summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Slide / card entrance used by the carousel block. */
+@keyframes rs-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.rs-fade-in {
+  animation: rs-fade-in 0.45s ease-out both;
+}
+
+/* Infinite thumbnail marquee (Update Showcase, marquee variant).
+   The track holds the row twice, so -50% is a seamless loop. */
+@keyframes rs-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.rs-marquee-track {
+  animation: rs-marquee 45s linear infinite;
+}
+.rs-marquee:hover .rs-marquee-track,
+.rs-marquee:focus-within .rs-marquee-track {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .rs-marquee-track,
+  .rs-fade-in {
+    animation: none;
+  }
 }

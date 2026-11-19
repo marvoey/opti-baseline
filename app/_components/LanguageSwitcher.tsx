@@ -60,7 +60,7 @@ export default function LanguageSwitcher() {
       {open ? (
         <ul
           role="listbox"
-          className="absolute right-0 z-[60] mt-1 min-w-[10rem] overflow-hidden rounded-lg border border-slate-200 bg-white py-1 shadow-lg"
+          className="absolute right-0 z-[60] mt-1 min-w-[10rem] overflow-hidden rounded-xl border border-rs-line bg-rs-panel py-1 shadow-2xl"
         >
           {LOCALES.map((locale) => {
             const active = locale.key === current.key;
@@ -69,8 +69,8 @@ export default function LanguageSwitcher() {
                 <Link
                   href={localizePath(cleanPath, locale.key)}
                   onClick={() => setOpen(false)}
-                  className={`block px-4 py-2 text-sm transition-colors hover:bg-slate-50 ${
-                    active ? 'font-bold text-blue-800' : 'text-slate-600'
+                  className={`block px-4 py-2 text-sm transition-colors hover:bg-white/10 ${
+                    active ? 'font-bold text-rs-yellow' : 'text-white/75 hover:text-white'
                   }`}
                 >
                   {locale.displayName}

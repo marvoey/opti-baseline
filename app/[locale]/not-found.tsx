@@ -3,20 +3,20 @@ import Link from 'next/link';
 /**
  * Branded 404 for the CMS catch-all (triggered by notFound() when no content
  * resolves). The site chrome (header + footer) comes from app/[locale]/layout,
- * which already wraps this component — do NOT add SiteChrome here or it renders
+ * which already wraps this component - do NOT add SiteChrome here or it renders
  * twice.
  */
 export default function NotFound() {
   return (
-    <main className="mx-auto flex min-h-[50vh] max-w-2xl flex-col items-center justify-center px-6 py-24 text-center">
-      <p className="text-6xl font-bold text-blue-800">404</p>
-      <h1 className="mt-4 text-2xl font-bold text-slate-900">Page not found</h1>
-      <p className="mt-3 text-slate-600">
-        The page you’re looking for doesn’t exist or may have moved.
+    <main className="mx-auto flex min-h-[60vh] max-w-2xl flex-col items-center justify-center px-6 py-24 text-center">
+      <p className="text-8xl font-black tracking-tighter text-rs-yellow">404</p>
+      <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-white">Wasted.</h1>
+      <p className="mt-3 text-rs-muted">
+        The page you&apos;re looking for doesn&apos;t exist or may have moved.
       </p>
       <Link
         href="/"
-        className="mt-8 rounded-full bg-blue-800 px-6 py-3 font-bold text-white transition-colors hover:bg-blue-900"
+        className="mt-8 rounded-full bg-rs-yellow px-7 py-3 font-extrabold text-black transition-colors hover:bg-rs-yellow-soft"
       >
         Back to home
       </Link>

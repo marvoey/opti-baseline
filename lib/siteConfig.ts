@@ -1,85 +1,100 @@
 /**
- * Site config — the single place to rebrand the non-colour chrome for a new
+ * Site config - the single place to rebrand the non-colour chrome for a new
  * demo. Colours live in app/globals.css (the `@theme` token block); everything
- * else — site name, logo, nav links, footer columns, legal copy — lives here.
+ * else - site name, logo, nav links, footer, legal copy - lives here.
  *
- * To stand up a new demo: edit this file, drop a new public/logo.svg, and tweak
- * the hex values in app/globals.css. No component edits required.
+ * Current brand: GTA / Rockstar-style dark theme (black, white, signature
+ * yellow), mirroring the "Rockstar GTA Pages Recreation" canvas prototype.
+ *
+ * NOTE: public/brand-wordmark.svg is a neutral typographic placeholder, not an
+ * official logo. Swap in licensed brand assets before any external use.
  */
 
-export type NavLink = { label: string; href: string };
-export type FooterColumn = { heading: string; links: NavLink[] };
+export type NavLink = { label: string; href: string; hasMenu?: boolean; external?: boolean };
 
 export const siteConfig = {
   /** Used for the document <title> fallback and the logo alt text. */
-  name: 'Optimizely',
+  name: 'GTA Online',
   /** Default browser-tab title (per-page titles override via CMS MetaTitle). */
-  title: 'Optimizely | Digital Experience Platform',
+  title: 'GTA Online | Rockstar Games',
   /** Default meta description. */
   description:
-    'Optimizely — the digital experience platform that helps teams create, test, and optimize digital experiences at scale.',
+    'An ever-evolving online world for up to 30 players. Heists, businesses, races and weekly events, solo or with friends.',
 
   /** Header logo (place the asset in /public). */
-  logoSrc: '/Optimizely_Primary-Logo_Medium_Green_RGB.png',
-  logoAlt: 'Optimizely',
+  logoSrc: '/brand-wordmark.svg',
+  logoAlt: 'GTA Online',
 
-  /** Top utility bar. */
-  topNavLinks: [
-    { label: 'Partners', href: '#' },
-    { label: 'Support', href: '#' },
-  ] satisfies NavLink[],
+  /** Yellow announcement strip above the header. */
+  announcement: {
+    label: 'Grand Theft Auto VI',
+    highlight: 'Out Now',
+    href: '#',
+  },
 
-  /** Primary header navigation. */
+  /** Primary header navigation (hasMenu renders a dropdown chevron). */
   mainNavLinks: [
-    { label: 'Products', href: '#' },
-    { label: 'Solutions', href: '#' },
-    { label: 'Customers', href: '#' },
-    { label: 'Resources', href: '#' },
-    { label: 'Pricing', href: '#' },
+    { label: 'Overview', href: '/' },
+    { label: 'GTA Online', href: '#', hasMenu: true },
+    { label: 'Story', href: '#', hasMenu: true },
+    { label: 'GTA+', href: '#' },
+    { label: 'Community', href: '#', hasMenu: true },
+    { label: 'Support', href: '#', external: true },
   ] satisfies NavLink[],
+
+  /** Secondary in-page navigation bar under the header. */
+  subNavLinks: [
+    { label: 'Overview', href: '/' },
+    { label: 'GTA Online', href: '#' },
+    { label: 'GTA+', href: '#' },
+    { label: 'Guides', href: '#' },
+    { label: 'Support', href: '#', external: true },
+  ] satisfies NavLink[],
+
   /** Header call-to-action button. */
-  primaryCta: { label: 'Get started free', href: '#' } satisfies NavLink,
-  /** Account / login button label. */
-  accountLabel: 'Log in',
+  primaryCta: { label: 'Buy Now', href: '#' } satisfies NavLink,
+  /** Accessible labels for the icon buttons in the header. */
+  searchLabel: 'Open Search',
+  accountLabel: 'Open Player Menu',
+
+  /** Newsletter band rendered above the footer. */
+  newsletter: {
+    heading: 'Subscribe to the email list',
+    body: 'Get game announcements, update details, special events and offers delivered to your inbox.',
+    cta: { label: 'Subscribe Now', href: '#' } satisfies NavLink,
+  },
 
   /** Footer. */
-  footerTagline:
-    'Create, test, and optimize digital experiences that turn visitors into loyal customers.',
-  footerColumns: [
-    {
-      heading: 'Products',
-      links: [
-        { label: 'Content Management', href: '#' },
-        { label: 'Experimentation', href: '#' },
-        { label: 'Commerce', href: '#' },
-        { label: 'Personalization', href: '#' },
-      ],
-    },
-    {
-      heading: 'Solutions',
-      links: [
-        { label: 'B2B Commerce', href: '#' },
-        { label: 'B2C Commerce', href: '#' },
-        { label: 'Digital Marketing', href: '#' },
-        { label: 'Customer Journeys', href: '#' },
-      ],
-    },
-    {
-      heading: 'Resources',
-      links: [
-        { label: 'Blog', href: '#' },
-        { label: 'Documentation', href: '#' },
-        { label: 'Community', href: '#' },
-        { label: 'Webinars', href: '#' },
-      ],
-    },
-  ] satisfies FooterColumn[],
-  footerLegal: `© ${2026} Optimizely. All rights reserved.`,
-  footerLegalLinks: [
-    { label: 'Privacy Policy', href: '#' },
-    { label: 'Terms of Service', href: '#' },
-    { label: 'Cookie Settings', href: '#' },
+  footerTopLinks: [
+    { label: 'Contact', href: '#' },
+    { label: 'Careers', href: '#' },
+    { label: 'Community Resources', href: '#' },
+    { label: 'Subscribe', href: '#' },
   ] satisfies NavLink[],
+  socialLinks: [
+    { label: 'Instagram', href: '#', external: true },
+    { label: 'X', href: '#', external: true },
+    { label: 'YouTube', href: '#', external: true },
+    { label: 'Facebook', href: '#', external: true },
+    { label: 'TikTok', href: '#', external: true },
+    { label: 'Discord', href: '#', external: true },
+    { label: 'Twitch', href: '#', external: true },
+  ] satisfies NavLink[],
+  footerLegalLinks: [
+    { label: 'Corporate', href: '#' },
+    { label: 'Privacy', href: '#' },
+    { label: 'Cookie Settings', href: '#' },
+    { label: 'Cookie Policy', href: '#' },
+    { label: 'Legal', href: '#' },
+    { label: 'Do Not Sell or Share My Personal Information', href: '#' },
+  ] satisfies NavLink[],
+  /** Studio sign-off block in the footer. */
+  footerStudio: {
+    wordmark: 'Rockstar Games',
+    cities: ['New York', 'London', 'Paris', 'Bogot\u00e1'],
+    established: 'MCMXCVIII',
+  },
+  footerLegal: `\u00a9 ${new Date().getFullYear()} Demo build for internal presentation purposes.`,
 } as const;
 
 export type SiteConfig = typeof siteConfig;
