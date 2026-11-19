@@ -14,10 +14,10 @@ import './flow.css';
 /**
  * /demo/flow - eHealth Friday demo flow and gap plan.
  *
- * GENERATED from the ehealth_friday_demo_flow.html canvas (version 8, 18 Nov
+ * GENERATED from the ehealth_friday_demo_flow.html canvas (version 10, 19 Nov
  * 2026) by converting its <body> markup to JSX: this file holds the header and
  * contents nav, and ./_sections holds one component per section. Visible text
- * and all 99 links were checked identical to the canvas. The canvas's only
+ * and all 101 links were checked identical to the canvas. The canvas's only
  * script (forcing target="_blank" on external links) is dropped: every link
  * already has it. One deliberate difference from the canvas: its four "RFI summary
  * canvas" links point at /demo/rfi instead of the Mark canvas. If the canvas changes,
@@ -53,7 +53,7 @@ export default function DemoFlowPage() {
         <div className="flex flex-wrap gap-2">
           <span className="chip c-green">eHealth · Friday 20 Nov 2026</span>
           <span className="chip c-blue">Demo flow + gap plan</span>
-          <span className="chip c-n">Built from live site, CMS and source on 18 Nov</span>
+          <span className="chip c-n">Built from live site, CMS and source on 18–19 Nov</span>
         </div>
         <h1 className="text-4xl md:text-5xl font-extrabold mt-4 leading-tight">&quot;Ship it during enrollment, without a ticket&quot;</h1>
         <p className="mt-3 max-w-3xl">A 60-minute demo built around <a className="link" href="https://ehealth.optimoey.com" target="_blank" rel="noopener noreferrer">ehealth.optimoey.com</a>, which already runs on Optimizely CMS SaaS. It&apos;s mapped to eHealth&apos;s RFI, and each step says whether it&apos;s <strong>ready today</strong>, <strong>needs a build before Friday</strong>, or is <strong>talk track only</strong>.</p>

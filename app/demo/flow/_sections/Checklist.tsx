@@ -7,20 +7,22 @@ export default function Checklist() {
       <h2 className="h2">8. Pre-call checklist</h2>
       <div className="grid2">
         <div className="box">
-          <h4>Wednesday (today)</h4>
+          <h4>Wednesday</h4>
           <ul className="dots text-sm">
             <li>G3 cleanup in the CMS: testimonials, links, hide Reviews</li>
-            <li>G2 banner and settings in the CMS</li>
+            <li><span className="chip c-green">DONE</span> G2 banner, phone and legal line in the CMS (live)</li>
             <li>G11 decide about the Web Experimentation snippet</li>
           </ul>
         </div>
         <div className="box">
-          <h4>Thursday</h4>
+          <h4>Thursday (today)</h4>
           <ul className="dots text-sm">
-            <li>G1 personalization: FX flag and 3 CMS variations are done and the code is written. Still to do: <span className="mono">yarn install</span>, set the SDK key, deploy, then enable the rules and test</li>
+            <li><span className="chip c-green">DONE</span> G1 personalization: live and verified on 19 Nov</li>
             <li>G4 sitemap, robots, canonical and JSON-LD</li>
             <li>G5 <span className="mono">es</span> locale. Leave the alt text empty for the live Mark moment</li>
-            <li>If time allows: G6 taxonomy and paid landing page, G7 FAQ block</li>
+            <li><span className="chip c-green">DONE</span> G6 taxonomy, paid landing page and query view (live)</li>
+            <li>If time allows: G7 FAQ block</li>
+            <li><span className="chip c-green">DONE</span> G2 and G6 code deployed (19 Nov) and rechecked on the live site: <span className="mono">/lp/aca-2027</span> is noindex with the minimal header, the menu has no Landing pages item, and the <span className="mono">/demo</span> pages load</li>
           </ul>
         </div>
         <div className="box">

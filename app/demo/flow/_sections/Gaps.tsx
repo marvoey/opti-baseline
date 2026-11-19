@@ -23,20 +23,20 @@ export default function Gaps() {
               <td>G1</td>
               <td><strong>Personalization and A/B with Feature Experimentation and CMS content variations</strong> (hero variants: Turning65, AepSwitcher, AcaOep)</td>
               <td>RFI §8 is their biggest experimentation ask. Overlapping AEP and OEP make &quot;different hero by audience&quot; an obvious need. It also shows the point where Adobe Target would plug in.</td>
-              <td>Code (written, needs deploy): <span className="mono">lib/fx.ts</span>, <span className="mono">proxy.ts</span> (visitor cookie), the catch-all page, <span className="mono">app/api/fx/track</span>. CMS: <strong>3 variations published</strong>. FX: <strong>built in Marvin Demo (rules draft)</strong></td>
+              <td>Code (<strong>deployed</strong>): <span className="mono">lib/fx.ts</span>, <span className="mono">proxy.ts</span> (visitor cookie), the catch-all page, <span className="mono">app/api/fx/track</span>. CMS: <strong>3 variations published</strong>. FX: <strong>3 rules running in Development</strong>. Verified live on 19 Nov.</td>
               <td>½ day</td>
               <td>
-                <span className="chip c-warn">MUST</span>
+                <span className="chip c-green">DONE</span>
               </td>
             </tr>
             <tr>
               <td>G2</td>
               <td><strong>Move the promo banner, phone number and footer into the CMS</strong> (a site settings item, schedulable and per app)</td>
               <td>Today a marketer can&apos;t change &quot;Medicare Annual Enrollment is here!&quot; without a code deploy, which is exactly the RFI&apos;s pain point. Fixing it also covers per-group configuration (5.6).</td>
-              <td>Code: new <span className="mono">EhSiteSettings</span> type, then read it in <span className="mono">SiteChrome</span>. CMS: one settings item</td>
+              <td>Built as option B: banner, header phone and footer legal line. Code: <span className="mono">EhSiteSettings</span> type and <span className="mono">lib/siteSettings.ts</span>, read by the header, banner and footer. CMS: one &quot;Site settings&quot; item (live). Footer link columns stay in <span className="mono">siteConfig</span>. <strong>Deployed and live.</strong></td>
               <td>2–3 hrs</td>
               <td>
-                <span className="chip c-warn">MUST</span>
+                <span className="chip c-green">DONE</span>
               </td>
             </tr>
             <tr>
@@ -72,11 +72,11 @@ export default function Gaps() {
             <tr>
               <td>G6</td>
               <td><strong>Product-line and channel taxonomy</strong> (Medicare, IFP, Small Business, Dental &amp; Vision, Short-term, plus Paid and Organic) and one paid landing page</td>
-              <td>This answers RFI 5.2–5.4 and 5.10 head-on. The current categories are left over from another demo (Product line → Auto, Home, Home + Auto).</td>
-              <td>CMS: replace categories, tag pages, build <span className="mono">/lp/aca-2027</span>. Code: an optional Graph query view</td>
+              <td>This answers RFI 5.2–5.4 and 5.10 head-on. The leftover Auto and Home categories from another demo are gone.</td>
+              <td>CMS: categories replaced, 7 product pages tagged, <span className="mono">/lp/aca-2027</span> built (live). Code: the <span className="mono">/demo/groups</span> Graph query view and the minimal landing header. <strong>Deployed and live.</strong></td>
               <td>2 hrs</td>
               <td>
-                <span className="chip c-blue">HIGH</span>
+                <span className="chip c-green">DONE</span>
               </td>
             </tr>
             <tr>

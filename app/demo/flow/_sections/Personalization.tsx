@@ -23,7 +23,7 @@ export default function Personalization() {
           </ul>
         </div>
       </div>
-      <h3>Status: FX built in &quot;Marvin Demo&quot;, CMS variations published, code written (18 Nov)</h3>
+      <h3>Status: live and verified on ehealth.optimoey.com (19 Nov)</h3>
       <div className="open">
         <span className="open-lbl">Open</span>
         <a className="pill pill-fx" href="https://app.optimizely.com/v2/projects/6229025884995584/flags/manage/ehealth_home_hero" target="_blank" rel="noopener noreferrer">Flag <span aria-hidden="true">↗</span></a>
@@ -101,8 +101,15 @@ export default function Personalization() {
               </td>
             </tr>
             <tr>
+              <td>Live check, 19 Nov</td>
+              <td>ACA link: the ACA hero, with the Individual &amp; Family tile selected. T65 link: &quot;Turning 65? Find the Medicare plan that fits you&quot;. Plain visitors: 55 fresh test visitors split 30 AepSwitcher and 25 Original. Googlebot gets the original. All 10 content sections render on every variant. The tracking route is deployed (a fake event is rejected with a 400); a real conversion event was not fired. The test visits count as visitors in the A/B rule&apos;s results.</td>
+              <td>
+                <span className="chip c-green">VERIFIED</span>
+              </td>
+            </tr>
+            <tr>
               <td>Production</td>
-              <td>No rules yet. Development only.</td>
+              <td>No rules yet. Development only. The live site evaluates the Development rules, so it uses the Development SDK key.</td>
               <td>
                 <span className="chip c-warn">EMPTY</span>
               </td>
@@ -110,7 +117,7 @@ export default function Personalization() {
           </tbody>
         </table>
       </div>
-      <p className="text-sm"><strong>CMS side is done and the front-end code is written, but not deployed.</strong> Before the rules can go live you need to refresh the lockfile, set the SDK key and deploy. Then start the flag and rules in Development.</p>
+      <p className="text-sm"><strong>Done and live.</strong> The code is deployed, the lockfile is committed and the three rules are running in Development. The A/B rule excludes the campaign audiences, and every visitor carries <span className="mono">ehealth_campaign</span> (<span className="mono">none</span> when there is no campaign), so plain visitors reach the 50/50 test.</p>
       <h3>What was built in the code</h3>
       <div className="tbl">
         <table>
@@ -144,12 +151,12 @@ export default function Personalization() {
           </tbody>
         </table>
       </div>
-      <h3>Go-live checklist</h3>
+      <h3>Go-live checklist (done 18–19 Nov)</h3>
       <ol className="num">
-        <li>Run <span className="mono">yarn install</span> locally. <span className="mono">@optimizely/optimizely-sdk@^6.7.0</span> is in package.json but <span className="mono">yarn.lock</span> couldn&apos;t be updated from here. Commit both files.</li>
-        <li>Set <span className="mono">OPTIMIZELY_FX_SDK_KEY=2nWxD5CBih1TpNEwHGmBn</span> (the <strong>Development</strong> environment key, since the rules live there) in Vercel and in your local <span className="mono">.env</span>. Server only, never <span className="mono">NEXT_PUBLIC_</span>.</li>
-        <li>Deploy, then start the flag and the three rules in Development. Ask Mark to do it once the deploy is up.</li>
-        <li>Test in a fresh incognito window: <span className="mono">/?utm_campaign=aca</span>, <span className="mono">/?utm_campaign=t65</span> and plain <span className="mono">/</span> (50/50 original or AEP hero). Add <span className="mono">?fx_reset=1</span> to re-roll the A/B bucket.</li>
+        <li><span className="chip c-green">DONE</span> <span className="mono">yarn.lock</span> includes <span className="mono">@optimizely/optimizely-sdk</span> 6.7 and is committed.</li>
+        <li><span className="chip c-green">DONE</span> <span className="mono">OPTIMIZELY_FX_SDK_KEY</span> is set to the <strong>Development</strong> environment key, since the rules live there (confirmed by the live behaviour).</li>
+        <li><span className="chip c-green">DONE</span> Deployed, with the flag and all three rules running in Development.</li>
+        <li><span className="chip c-green">DONE</span> Tested on the live site. To repeat it, use a fresh incognito window: <span className="mono">/?utm_campaign=aca</span>, <span className="mono">/?utm_campaign=t65</span> and plain <span className="mono">/</span> (50/50). Add <span className="mono">?fx_reset=1</span> to re-roll the A/B bucket.</li>
       </ol>
       <ul className="dots text-sm">
         <li><strong>Keep the variations in sync:</strong> because each variation holds its own copy of the blocks, an edit to a block on the default eHealth Home (a testimonial, a carrier, a CTA) does not reach the variations. Repeat it in each one, or ask Mark to re-copy the default page into them. Avoid editing the default page the day before the call without re-syncing.</li>

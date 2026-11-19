@@ -48,7 +48,6 @@ export default function DemoFlow() {
           <span className="act-title">Marketer self-service in Visual Builder</span>
           <span className="chip c-n">12 min</span>
           <span className="chip c-green">READY</span>
-          <span className="chip c-warn">+ banner BUILD</span>
           <span className="chip c-n">RFI 7.1–7.10, 11.1–11.3, 5.5</span>
         </div>
         <div className="open">
@@ -62,7 +61,7 @@ export default function DemoFlow() {
           <li><strong>Compose:</strong> drag the Savings band above Testimonials. Add a new section from the eHealth block library, then remove it.</li>
           <li><strong>Edit once, update everywhere:</strong> edit one shared Coverage Card (&quot;Medicare plans&quot;) and show it change on the homepage grid. Then make the point that the same item can feed every app.</li>
           <li><strong>Govern:</strong> schedule the publish, send it through approval, open version history (v1658 shows how many iterations have happened), compare versions and roll back.</li>
-          <li><strong>The banner moment</strong> <span className="chip c-warn">BUILD</span>: change &quot;Medicare Annual Enrollment is here!&quot; and schedule an &quot;AEP ends Dec 7&quot; variant. <em>Today this banner is hard-coded in <span className="mono">lib/siteConfig.ts</span>,</em> so move it into the CMS before Friday (gap G2).</li>
+          <li><strong>The banner moment</strong> <span className="chip c-green">DONE (G2)</span>: open the <strong>Site settings</strong> item (shared-blocks folder, key <span className="mono">b55f002785614cd0b37e535b48c45c3b</span>), change &quot;Medicare Annual Enrollment is here!&quot; and publish. It reaches the site within about a minute. The same item controls the header phone number and the footer legal line. Clearing the message hides the whole strip. The link URL is empty today, so the banner link still goes to #; set it first. Schedule an &quot;AEP ends Dec 7&quot; version in the editor (scheduling not tested from here).</li>
         </ol>
       </div>
       <div className="act">
@@ -70,7 +69,7 @@ export default function DemoFlow() {
           <span className="act-num">3</span>
           <span className="act-title">Personalize and test, keeping Adobe Target</span>
           <span className="chip c-n">10 min</span>
-          <span className="chip c-warn">BUILD</span>
+          <span className="chip c-green">READY</span>
           <span className="chip c-n">RFI 8.1–8.11</span>
         </div>
         <div className="open">
@@ -79,13 +78,13 @@ export default function DemoFlow() {
           <a className="pill pill-fx" href="https://app.optimizely.com/v2/projects/6229025884995584/flags/manage/ehealth_home_hero" target="_blank" rel="noopener noreferrer">FX flag <span aria-hidden="true">↗</span></a>
           <a className="pill pill-fx" href="https://app.optimizely.com/v2/projects/6229025884995584/flags/manage/ehealth_home_hero/rules/development" target="_blank" rel="noopener noreferrer">FX rules (Dev) <span aria-hidden="true">↗</span></a>
           <a className="pill pill-fx" href="https://app.optimizely.com/v2/projects/6229025884995584/flags/manage/ehealth_home_hero/rules/development/edit/ehealth_aep_hero_test" target="_blank" rel="noopener noreferrer">A/B rule <span aria-hidden="true">↗</span></a>
-          <a className="pill pill-todo" href="https://ehealth.optimoey.com/?utm_campaign=aca" target="_blank" rel="noopener noreferrer">?utm_campaign=aca <span aria-hidden="true">↗</span> <small>after deploy</small></a>
-          <a className="pill pill-todo" href="https://ehealth.optimoey.com/?utm_campaign=t65" target="_blank" rel="noopener noreferrer">?utm_campaign=t65 <span aria-hidden="true">↗</span> <small>after deploy</small></a>
+          <a className="pill" href="https://ehealth.optimoey.com/?utm_campaign=aca" target="_blank" rel="noopener noreferrer">?utm_campaign=aca <span aria-hidden="true">↗</span></a>
+          <a className="pill" href="https://ehealth.optimoey.com/?utm_campaign=t65" target="_blank" rel="noopener noreferrer">?utm_campaign=t65 <span aria-hidden="true">↗</span></a>
           <a className="pill" href="https://docs.optimizely.com/feature-experimentation/docs/configure-optimizely-cms-saas" target="_blank" rel="noopener noreferrer">Integration doc <span aria-hidden="true">↗</span></a>
         </div>
         <ol className="num">
           <li>In Visual Builder, open the <strong>content variations</strong> of eHealth Home: <span className="mono">Turning65</span>, <span className="mono">AepSwitcher</span> and <span className="mono">AcaOep</span>. Each differs from the default only in the hero text; the other 11 blocks are identical copies of the default page.</li>
-          <li>Load <span className="mono">/?utm_campaign=aca</span> to get the Individual &amp; Family hero with the finder defaulted to Individual. Load <span className="mono">/?utm_campaign=t65</span> to get &quot;New to Medicare? Start here&quot;. Both are rendered server-side, so there&apos;s no flicker and SEO stays intact.</li>
+          <li>Load <span className="mono">/?utm_campaign=aca</span> to get the Individual &amp; Family hero with the finder defaulted to Individual. Load <span className="mono">/?utm_campaign=t65</span> to get the Turning 65 hero (eyebrow &quot;New to Medicare?&quot;, headline &quot;Turning 65? Find the Medicare plan that fits you&quot;). Both are rendered server-side, so there&apos;s no flicker and SEO stays intact.</li>
           <li>In Feature Experimentation, show the <a className="link" href="https://app.optimizely.com/v2/projects/6229025884995584/flags/manage/ehealth_home_hero" target="_blank" rel="noopener noreferrer">ehealth_home_hero</a> flag: two <a className="link" href="https://app.optimizely.com/v2/projects/6229025884995584/flags/manage/ehealth_home_hero/rules/development" target="_blank" rel="noopener noreferrer">targeted delivery rules</a> for the ACA and Turning 65 audiences, then an A/B rule on the AEP hero for everyone else (it excludes the campaign audiences, since A/B tests are evaluated first). The variable <span className="mono">cms-saas-content-variation</span> carries the CMS variation key.</li>
           <li><strong>The Adobe Target point</strong> <span className="chip c-n">TALK</span>: show <span className="mono">lib/fx.ts</span>, the one place the variation key is chosen. Swap Feature Experimentation for Target&apos;s server-side delivery returning the same key, and the CMS and editors don&apos;t change.</li>
         </ol>
@@ -124,18 +123,20 @@ export default function DemoFlow() {
           <span className="act-num">5</span>
           <span className="act-title">One content hub, grouped by product line and channel</span>
           <span className="chip c-n">7 min</span>
-          <span className="chip c-warn">BUILD (light)</span>
+          <span className="chip c-green">DONE (G6)</span>
           <span className="chip c-n">RFI 5.1–5.11, 14.4–14.5</span>
         </div>
         <div className="open">
           <span className="open-lbl">Open</span>
           <a className="pill pill-cms" href="https://app-epsamoey0012f6ygp001.cms.optimizely.com/ui/cms" target="_blank" rel="noopener noreferrer">CMS editor <span aria-hidden="true">↗</span></a>
-          <a className="pill pill-todo" href="https://ehealth.optimoey.com/lp/aca-2027" target="_blank" rel="noopener noreferrer">/lp/aca-2027 <span aria-hidden="true">↗</span> <small>after G6</small></a>
+          <a className="pill" href="https://ehealth.optimoey.com/lp/aca-2027" target="_blank" rel="noopener noreferrer">/lp/aca-2027 <span aria-hidden="true">↗</span></a>
+          <a className="pill" href="https://ehealth.optimoey.com/demo/groups" target="_blank" rel="noopener noreferrer">/demo/groups <span aria-hidden="true">↗</span></a>
           <a className="pill" href="https://docs.optimizely.com/cms-saas/docs/applications" target="_blank" rel="noopener noreferrer">Applications doc <span aria-hidden="true">↗</span></a>
         </div>
         <ul className="dots">
-          <li>Show the Graph query behind the site, which is scoped by host. Then answer the RFI&apos;s real question, which is grouping that isn&apos;t tied to a domain: run <em>&quot;all organic Medicare pages&quot;</em> and <em>&quot;all paid ACA landing pages&quot;</em> by filtering on a taxonomy.</li>
-          <li>Open a paid landing page (<span className="mono">/lp/aca-2027</span>) built from the <em>same</em> shared blocks, set to noindex and with minimal nav. It&apos;s the same content in a different app context.</li>
+          <li>Open the Graph query view at <span className="mono">/demo/groups</span>. It answers the RFI&apos;s real question, which is grouping that isn&apos;t tied to a domain. Use the presets <em>&quot;All organic Medicare pages&quot;</em> and <em>&quot;All paid ACA landing pages&quot;</em>, then pick Dental &amp; Vision to show a parent category returning its children. The page shows the exact GraphQL, scoped to the host and to the content tree under eHealth Home.</li>
+          <li>The categories are in the CMS: <strong>Product line</strong> (Medicare, Individual &amp; Family, Small Business, Dental &amp; Vision with Dental and Vision inside it, Short-term) and <strong>Channel</strong> (Paid, Organic). The seven product pages are tagged Organic plus their product line.</li>
+          <li>Open a paid landing page (<span className="mono">/lp/aca-2027</span>) built from the <em>same</em> blocks as the home page (hero, Why eHealth, Live Advise, Steps) and two shared testimonials, tagged Individual &amp; Family and Paid and set to noindex. It&apos;s the same content in a different app context.</li>
           <li>Per-app preview: Applications in the CMS, each with its own host and preview URL.</li>
         </ul>
       </div>

@@ -23,7 +23,7 @@ export default function Angle() {
         </div>
         <div className="stat">
           <div className="stat-num">3</div>
-          <div className="stat-lbl">CMS hero variations published; FX rules still off until deploy</div>
+          <div className="stat-lbl">CMS hero variations, live and chosen by FX rules</div>
         </div>
       </div>
       <h3>Three things they should leave believing</h3>

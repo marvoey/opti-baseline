@@ -42,11 +42,12 @@ export default function QuickLinks() {
         <div className="box">
           <h4>After the builds</h4>
           <div className="open">
-            <a className="pill pill-todo" href="https://ehealth.optimoey.com/?utm_campaign=aca" target="_blank" rel="noopener noreferrer">?utm_campaign=aca <span aria-hidden="true">↗</span> <small>after deploy</small></a>
-            <a className="pill pill-todo" href="https://ehealth.optimoey.com/?utm_campaign=t65" target="_blank" rel="noopener noreferrer">?utm_campaign=t65 <span aria-hidden="true">↗</span> <small>after deploy</small></a>
+            <a className="pill" href="https://ehealth.optimoey.com/?utm_campaign=aca" target="_blank" rel="noopener noreferrer">?utm_campaign=aca <span aria-hidden="true">↗</span></a>
+            <a className="pill" href="https://ehealth.optimoey.com/?utm_campaign=t65" target="_blank" rel="noopener noreferrer">?utm_campaign=t65 <span aria-hidden="true">↗</span></a>
             <a className="pill pill-todo" href="https://ehealth.optimoey.com/llms.txt" target="_blank" rel="noopener noreferrer">/llms.txt <span aria-hidden="true">↗</span> <small>after G4</small></a>
             <a className="pill pill-todo" href="https://ehealth.optimoey.com/es/medicare" target="_blank" rel="noopener noreferrer">/es/medicare <span aria-hidden="true">↗</span> <small>after G5</small></a>
-            <a className="pill pill-todo" href="https://ehealth.optimoey.com/lp/aca-2027" target="_blank" rel="noopener noreferrer">/lp/aca-2027 <span aria-hidden="true">↗</span> <small>after G6</small></a>
+            <a className="pill" href="https://ehealth.optimoey.com/lp/aca-2027" target="_blank" rel="noopener noreferrer">/lp/aca-2027 <span aria-hidden="true">↗</span></a>
+            <a className="pill" href="https://ehealth.optimoey.com/demo/groups" target="_blank" rel="noopener noreferrer">/demo/groups <span aria-hidden="true">↗</span></a>
           </div>
         </div>
         <div className="box">

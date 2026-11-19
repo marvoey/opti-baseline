@@ -18,7 +18,7 @@ export default function RfiCoverage() {
             <tr>
               <td>§5 Multi-app delivery and grouping</td>
               <td>Acts 1 and 5, G6</td>
-              <td>Medium. Strong once the taxonomy and paid landing page exist</td>
+              <td>Strong. The taxonomy, paid landing page and Graph query view are built and live</td>
             </tr>
             <tr>
               <td>§6a–d SEO / Yoast parity</td>
@@ -38,7 +38,7 @@ export default function RfiCoverage() {
             <tr>
               <td>§8 Experimentation (Adobe Target)</td>
               <td>Act 3, G1</td>
-              <td>Strong once G1 is built. Be candid that Target is an integration</td>
+              <td>Strong. G1 is live. Be candid that Target is an integration</td>
             </tr>
             <tr>
               <td>§9 AI readiness</td>
