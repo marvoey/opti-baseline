@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { ChevronDown, Phone } from 'lucide-react';
 import { siteConfig } from '@/lib/siteConfig';
 import { getNavTree, type NavItem } from '@/lib/nav';
+import { getSiteSettings } from '@/lib/siteSettings';
 import SiteLogo from './SiteLogo';
 import LanguageSwitcher from './LanguageSwitcher';
 import NavMenu from './NavMenu';
@@ -20,10 +21,11 @@ const fallbackItems: NavItem[] = siteConfig.mainNavLinks.map((link) => ({
  * left, small bold dark-green nav + phone + sign-in on the right.
  *
  * The menu is built from the CMS content tree (lib/nav.ts): children of the
- * container are the menu items, their children the dropdown.
+ * container are the menu items, their children the dropdown. The phone number comes
+ * from the CMS "Site settings" item (lib/siteSettings.ts).
  */
 const MainNav = async ({ locale }: { locale?: string }) => {
-  const tree = await getNavTree(locale);
+  const [tree, { phone }] = await Promise.all([getNavTree(locale), getSiteSettings(locale)]);
   const items = tree.length > 0 ? tree : fallbackItems;
 
   return (
@@ -39,11 +41,11 @@ const MainNav = async ({ locale }: { locale?: string }) => {
           <NavMenu items={items} />
 
           <a
-            href={siteConfig.phone.href}
+            href={phone.href}
             className="hidden items-center gap-1.5 transition-colors hover:text-blue-700 sm:inline-flex"
           >
             <Phone size={14} aria-hidden="true" />
-            <span>{siteConfig.phone.label}</span>
+            <span>{phone.label}</span>
           </a>
 
           <LanguageSwitcher />
@@ -56,7 +58,7 @@ const MainNav = async ({ locale }: { locale?: string }) => {
             <ChevronDown size={14} aria-hidden="true" />
           </button>
 
-          <MobileMenu items={items} phone={siteConfig.phone} />
+          <MobileMenu items={items} phone={phone} />
         </div>
       </div>
     </header>

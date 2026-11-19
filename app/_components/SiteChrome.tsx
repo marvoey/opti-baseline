@@ -17,15 +17,15 @@ export default function SiteChrome({
   locale,
 }: {
   children: React.ReactNode;
-  /** Active locale (route param); drives the content-tree menu. Defaults to the default locale. */
+  /** Active locale (route param); drives the content-tree menu and the CMS site settings. Defaults to the default locale. */
   locale?: string;
 }) {
   return (
     <>
       <MainNav locale={locale} />
-      <TopNav />
+      <TopNav locale={locale} />
       <div className="flex-1">{children}</div>
-      <Footer />
+      <Footer locale={locale} />
     </>
   );
 }

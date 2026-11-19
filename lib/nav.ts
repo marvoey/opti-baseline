@@ -82,7 +82,7 @@ function toItem(row: PageRow): NavItem | null {
 }
 
 /** The route param can be a locale key or a route segment; Graph wants the key. */
-function resolveLocale(param?: string): string {
+export function resolveLocale(param?: string): string {
   if (!param) return DEFAULT_LOCALE;
   return LOCALES.find((l) => l.key === param || l.routeSegment === param)?.key ?? DEFAULT_LOCALE;
 }
