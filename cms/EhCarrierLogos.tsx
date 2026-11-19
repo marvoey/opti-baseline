@@ -1,5 +1,6 @@
 import { contentType, type ContentProps } from '@optimizely/cms-sdk';
 import { getPreviewUtils } from '@optimizely/cms-sdk/react/server';
+import { urlHrefOr } from './shared';
 
 /**
  * eHealth carrier strip: a row of carrier logos with an optional
@@ -65,8 +66,7 @@ export default function EhCarrierLogos({ content }: Props) {
   const logos = ((content.Logos ?? []) as ImageRef[])
     .map((l, i) => ({ src: l?.url?.default ?? null, alt: names[i] ?? '' }))
     .filter((l): l is { src: string; alt: string } => !!l.src);
-  const linkUrl = (content.LinkUrl as { default?: string | null } | string | null | undefined);
-  const href = (typeof linkUrl === 'string' ? linkUrl : linkUrl?.default) || '#';
+  const href = urlHrefOr(content.LinkUrl);
 
   return (
     <div {...pa(block)} className="w-full px-6 py-8 md:py-10">

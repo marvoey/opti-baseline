@@ -99,6 +99,17 @@ function parseReviews(lines: Array<string | null> | null | undefined): Review[] 
     .filter((r) => r.title || r.body);
 }
 
+/**
+ * Seed content ("Placeholder review text. Replace with a real, attributable customer
+ * review.") must never reach a visitor: a made-up review or rating is a compliance risk
+ * for an insurance brand. While any review (or the disclaimer) still says "placeholder",
+ * the block renders nothing. Replace the copy with real, sourced reviews and it appears.
+ */
+function isPlaceholder(content: Props['content']): boolean {
+  const texts = [content.Disclaimer, ...((content.Reviews ?? []) as Array<string | null>)];
+  return texts.some((t) => typeof t === 'string' && /placeholder/i.test(t));
+}
+
 function Stars({ count, className }: { count: number; className?: string }) {
   return (
     <span className={`inline-flex gap-0.5 ${className ?? ''}`} role="img" aria-label={`${count} out of 5 stars`}>
@@ -118,6 +129,8 @@ function Stars({ count, className }: { count: number; className?: string }) {
 }
 
 export default function EhReviews({ content }: Props) {
+  if (isPlaceholder(content)) return null;
+
   const { pa } = getPreviewUtils(content);
   const block = (content as { __composition?: { key: string } }).__composition;
 

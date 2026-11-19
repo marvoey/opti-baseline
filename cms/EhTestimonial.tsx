@@ -1,6 +1,6 @@
 import { contentType, type ContentProps } from '@optimizely/cms-sdk';
 import { getPreviewUtils } from '@optimizely/cms-sdk/react/server';
-import { imageSrc, urlHref } from './shared';
+import { hasUrl, imageSrc, urlHref } from './shared';
 
 /**
  * One customer testimonial ("Linda & Michael J."). Created as a SHARED block
@@ -82,14 +82,17 @@ export function TestimonialCard({
         <blockquote {...attrs('Quote')} className="mt-2 flex-1 text-sm leading-relaxed text-foreground">
           &ldquo;{content.Quote as string}&rdquo;
         </blockquote>
-        <a
-          {...attrs('StoryLabel')}
-          href={urlHref(content.StoryUrl)}
-          className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-blue-800 hover:text-blue-950"
-        >
-          {(content.StoryLabel as string | null) || 'Read Their Story'}
-          <span aria-hidden>&rsaquo;</span>
-        </a>
+        {/* Only link out when a story URL exists: a "Read Their Story" pointing at '#' is a dead end. */}
+        {hasUrl(content.StoryUrl) && (
+          <a
+            {...attrs('StoryLabel')}
+            href={urlHref(content.StoryUrl)}
+            className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-blue-800 hover:text-blue-950"
+          >
+            {(content.StoryLabel as string | null) || 'Read Their Story'}
+            <span aria-hidden>&rsaquo;</span>
+          </a>
+        )}
       </div>
     </article>
   );

@@ -1,6 +1,6 @@
 import { contentType, type ContentProps } from '@optimizely/cms-sdk';
 import { getPreviewUtils } from '@optimizely/cms-sdk/react/server';
-import { imageSrc, urlHref } from './shared';
+import { imageSrc, urlHrefOr } from './shared';
 
 /**
  * Dark-green "enroll in 3 easy steps" band: white heading, numbered steps
@@ -123,7 +123,7 @@ export default function EhStepsBand({ content }: Props) {
           <div className="mt-8 text-center">
             <a
               {...pa('CtaLabel')}
-              href={urlHref(content.CtaUrl)}
+              href={urlHrefOr(content.CtaUrl)}
               className="inline-block rounded-full bg-cta px-8 py-3 text-base font-semibold text-white shadow-sm transition hover:bg-cta-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-blue-950"
             >
               {content.CtaLabel}

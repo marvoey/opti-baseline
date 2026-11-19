@@ -38,10 +38,20 @@ export default async function EhTestimonials({ content }: Props) {
   const { pa } = getPreviewUtils(content);
   const block = (content as { __composition?: { key: string } }).__composition;
 
-  const items = await expandReferences<Record<string, unknown>>(
+  const expanded = await expandReferences<Record<string, unknown>>(
     content.Items as Array<{ key?: string | null }> | null,
     previewContextOf(content),
   );
+
+  // The same story can end up referenced twice (e.g. a copied card). Show each person's
+  // quote once, whichever page or variation references it.
+  const seen = new Set<string>();
+  const items = expanded.filter((item) => {
+    const key = [item.Name, item.Quote].map((v) => String(v ?? '').trim().toLowerCase()).join('|');
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
 
   return (
     <div {...pa(block)} className="w-full px-6 py-10 md:py-14">

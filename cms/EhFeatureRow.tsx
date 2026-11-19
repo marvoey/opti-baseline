@@ -1,5 +1,6 @@
 import { contentType, type ContentProps } from '@optimizely/cms-sdk';
 import { getPreviewUtils } from '@optimizely/cms-sdk/react/server';
+import { urlHrefOr } from './shared';
 
 /**
  * eHealth "Why eHealth?" feature row: a centred heading, up to four icon +
@@ -68,8 +69,7 @@ export default function EhFeatureRow({ content }: Props) {
   const block = (content as { __composition?: { key: string } }).__composition;
 
   const features = parseFeatures(content.Items as Array<string | null> | null);
-  const ctaUrl = content.CtaUrl as { default?: string | null } | string | null | undefined;
-  const ctaHref = (typeof ctaUrl === 'string' ? ctaUrl : ctaUrl?.default) || '#';
+  const ctaHref = urlHrefOr(content.CtaUrl);
 
   return (
     <div {...pa(block)} className="w-full px-6 py-10 md:py-14">

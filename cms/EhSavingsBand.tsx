@@ -1,6 +1,6 @@
 import { contentType, type ContentProps } from '@optimizely/cms-sdk';
 import { getPreviewUtils } from '@optimizely/cms-sdk/react/server';
-import { urlHref } from './shared';
+import { urlHrefOr } from './shared';
 
 /**
  * "Switch and you could save" band: a white stat card on the left (big number
@@ -126,7 +126,7 @@ export default function EhSavingsBand({ content }: Props) {
             {content.CtaLabel && (
               <a
                 {...pa('CtaLabel')}
-                href={urlHref(content.CtaUrl)}
+                href={urlHrefOr(content.CtaUrl)}
                 className="mt-5 inline-block rounded-full bg-cta px-8 py-3 text-base font-semibold text-white shadow-sm transition hover:bg-cta-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-cta focus-visible:ring-offset-2"
               >
                 {content.CtaLabel}
