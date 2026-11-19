@@ -11,10 +11,15 @@ import { siteConfig } from '@/lib/siteConfig';
 const MainNav = () => (
   <header className="sticky top-0 z-50 border-b border-rs-line bg-rs-ink/95 backdrop-blur">
     <div className="container mx-auto flex h-16 items-center justify-between gap-6 px-4">
-      <div className="navbar-brand flex items-center" data-cms-field="brand_logo">
+      <div className="navbar-brand flex items-center gap-4" data-cms-field="brand_logo">
+        <a href={siteConfig.starHref} title={siteConfig.starAlt} className="flex items-center">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={siteConfig.starSrc} alt={siteConfig.starAlt} className="h-8 w-8" />
+        </a>
+        <span aria-hidden className="h-6 w-px bg-white/25" />
         <Link href="/" title="Go to home page" className="flex items-center">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={siteConfig.logoSrc} alt={siteConfig.logoAlt} className="h-9 w-auto" />
+          <img src={siteConfig.logoSrc} alt={siteConfig.logoAlt} className="h-7 w-auto" />
         </Link>
       </div>
 

@@ -6,8 +6,9 @@
  * Current brand: GTA / Rockstar-style dark theme (black, white, signature
  * yellow), mirroring the "Rockstar GTA Pages Recreation" canvas prototype.
  *
- * NOTE: public/brand-wordmark.svg is a neutral typographic placeholder, not an
- * official logo. Swap in licensed brand assets before any external use.
+ * NOTE: the header logos (public/rockstar-star.svg, public/gta-v-logo.svg) are
+ * Rockstar Games trademarks used for this demo only. Swap in licensed brand
+ * assets before any external use.
  */
 
 export type NavLink = { label: string; href: string; hasMenu?: boolean; external?: boolean };
@@ -21,9 +22,12 @@ export const siteConfig = {
   description:
     'An ever-evolving online world for up to 30 players. Heists, businesses, races and weekly events, solo or with friends.',
 
-  /** Header logo (place the asset in /public). */
-  logoSrc: '/brand-wordmark.svg',
-  logoAlt: 'GTA Online',
+  /** Header logos (place assets in /public): Rockstar star icon + title logo. */
+  starSrc: '/rockstar-star.svg',
+  starAlt: 'Rockstar Games',
+  starHref: 'https://www.rockstargames.com',
+  logoSrc: '/gta-v-logo.svg',
+  logoAlt: 'Grand Theft Auto V',
 
   /** Yellow announcement strip above the header. */
   announcement: {
