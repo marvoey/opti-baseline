@@ -60,7 +60,10 @@ export const siteConfig = {
     /** Cap on dropdown items per menu item. */
     maxChildren: 12,
     /** Content keys (no dashes) of pages to keep out of the menu. */
-    excludeKeys: [] as string[],
+    excludeKeys: [
+      // "Landing pages" (/lp): the container of paid landing pages, not a menu item.
+      '3de36fcf6337480a88dbdb2276023d7b',
+    ] as string[],
   },
   /** Phone number shown in the header. */
   phone: { label: '(877) 378-1318', href: 'tel:+18773781318' },

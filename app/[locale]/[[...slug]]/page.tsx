@@ -107,7 +107,7 @@ const loadContent = cache(async (locale: string, slug: string[]) => {
 });
 
 /**
- * Per-page <title>, description and og:image, falling back to the site defaults:
+ * Per-page <title>, description, og:image and robots, falling back to the site defaults:
  * the site title/description from app/layout.tsx, and app/opengraph-image.png.
  *
  * The fields come from the page's own Meta Title, Meta Description and `ogimage`
@@ -151,6 +151,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     metadata.openGraph = { ...metadata.openGraph, description };
     metadata.twitter = { ...metadata.twitter, description };
   }
+
+  // The page's Robots Directives field (for example "noindex, nofollow") is honoured,
+  // so paid landing pages stay out of search results. Pages that set none are unchanged.
+  if (meta.robots) metadata.robots = meta.robots;
 
   // With no image, `images` must stay OFF the metadata entirely: Next.js lets any
   // page-level `images` value (even [] or undefined) override the default file,
