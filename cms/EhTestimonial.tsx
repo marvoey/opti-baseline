@@ -1,6 +1,7 @@
 import { contentType, type ContentProps } from '@optimizely/cms-sdk';
 import { getPreviewUtils } from '@optimizely/cms-sdk/react/server';
 import { hasUrl, imageSrc, urlHref } from './shared';
+import CmsImage from '@/app/_components/CmsImage';
 
 /**
  * One customer testimonial ("Linda & Michael J."). Created as a SHARED block
@@ -69,8 +70,14 @@ export function TestimonialCard({
     <article className="flex h-full w-[min(86vw,22rem)] shrink-0 snap-start flex-col overflow-hidden rounded-xl bg-white shadow-md">
       <div {...attrs('Photo')} className="aspect-[16/10] w-full bg-surface">
         {photo ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={photo} alt={name} className="h-full w-full object-cover" />
+          <CmsImage
+            src={photo}
+            alt={name}
+            width={1280}
+            height={800}
+            sizes="(min-width: 410px) 352px, 86vw"
+            className="h-full w-full object-cover"
+          />
         ) : (
           <div className="flex h-full items-center justify-center text-sm text-gray-400">Add a photo</div>
         )}

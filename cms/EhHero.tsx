@@ -1,6 +1,7 @@
 import { contentType, type ContentProps } from '@optimizely/cms-sdk';
 import { getPreviewUtils } from '@optimizely/cms-sdk/react/server';
 import PlanFinderWidget from '@/app/_components/PlanFinderWidget';
+import CmsImage from '@/app/_components/CmsImage';
 import { planFinderProperties, planFinderPropsFrom } from './planFinderFields';
 
 /**
@@ -110,10 +111,13 @@ export default function EhHero({ content }: Props) {
         {hasImageColumn && (
           <div {...pa('Image')} className="hidden self-end md:flex md:justify-center">
             {imageUrl ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
+              <CmsImage
                 src={imageUrl}
                 alt={content.ImageAlt ?? ''}
+                width={360}
+                height={640}
+                sizes="(min-width: 768px) 360px, 100vw"
+                eager
                 className="max-h-[480px] w-auto object-contain object-bottom"
               />
             ) : (

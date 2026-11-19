@@ -1,6 +1,7 @@
 import { contentType, type ContentProps } from '@optimizely/cms-sdk';
 import { getPreviewUtils } from '@optimizely/cms-sdk/react/server';
 import { urlHrefOr } from './shared';
+import CmsImage from '@/app/_components/CmsImage';
 
 /**
  * eHealth carrier strip: a row of carrier logos with an optional
@@ -84,8 +85,14 @@ export default function EhCarrierLogos({ content }: Props) {
           {logos.length > 0
             ? logos.map((l, i) => (
                 <li key={i}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={l.src} alt={l.alt} className="h-9 w-auto max-w-[9rem] object-contain" />
+                  <CmsImage
+                    src={l.src}
+                    alt={l.alt}
+                    width={144}
+                    height={36}
+                    sizes="144px"
+                    className="h-9 w-auto max-w-[9rem] object-contain"
+                  />
                 </li>
               ))
             : names.map((n) => (

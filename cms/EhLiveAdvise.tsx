@@ -1,6 +1,7 @@
 import { contentType, type ContentProps } from '@optimizely/cms-sdk';
 import { getPreviewUtils } from '@optimizely/cms-sdk/react/server';
 import { imageSrc } from './shared';
+import CmsImage from '@/app/_components/CmsImage';
 
 /**
  * "Try eHealth Live Advise" block: a screenshot/video still on the left and a
@@ -111,8 +112,14 @@ export default function EhLiveAdvise({ content }: Props) {
           {(image || isEditing) && (
             <div {...pa('Image')} className="overflow-hidden rounded-xl bg-surface shadow-md">
               {image ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img src={image} alt={content.ImageAlt ?? ''} className="h-auto w-full object-cover" />
+                <CmsImage
+                  src={image}
+                  alt={content.ImageAlt ?? ''}
+                  width={1376}
+                  height={768}
+                  sizes="(min-width: 1200px) 560px, (min-width: 768px) 50vw, 100vw"
+                  className="h-auto w-full object-cover"
+                />
               ) : (
                 <div className="flex aspect-video items-center justify-center text-sm text-gray-500">
                   Add a product image

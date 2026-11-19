@@ -1,5 +1,6 @@
 import { contentType, type ContentProps } from '@optimizely/cms-sdk';
 import { getPreviewUtils } from '@optimizely/cms-sdk/react/server';
+import CmsImage from '@/app/_components/CmsImage';
 import { imageSrc, urlHref } from './shared';
 
 /**
@@ -72,8 +73,14 @@ export function CoverageCard({
     <article className="flex h-full flex-col overflow-hidden rounded-xl bg-white shadow-md">
       <div {...attrs('Image')} className="aspect-[16/9] w-full bg-surface">
         {image ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={image} alt="" className="h-full w-full object-cover" />
+          <CmsImage
+            src={image}
+            alt=""
+            width={1280}
+            height={720}
+            sizes="(min-width: 1024px) 480px, (min-width: 768px) 50vw, 100vw"
+            className="h-full w-full object-cover"
+          />
         ) : (
           <div className="flex h-full items-center justify-center text-sm text-gray-400">Add an image</div>
         )}

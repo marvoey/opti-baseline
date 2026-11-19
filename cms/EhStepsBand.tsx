@@ -1,6 +1,7 @@
 import { contentType, type ContentProps } from '@optimizely/cms-sdk';
 import { getPreviewUtils } from '@optimizely/cms-sdk/react/server';
 import { imageSrc, urlHrefOr } from './shared';
+import CmsImage from '@/app/_components/CmsImage';
 
 /**
  * Dark-green "enroll in 3 easy steps" band: white heading, numbered steps
@@ -99,8 +100,14 @@ export default function EhStepsBand({ content }: Props) {
         <div className={image ? 'mt-8 grid items-center gap-8 md:grid-cols-2 md:gap-12' : 'mt-8'}>
           {image && (
             <div {...pa('Image')} className="overflow-hidden rounded-xl shadow-lg">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={image} alt={content.ImageAlt ?? ''} className="h-auto w-full object-cover" />
+              <CmsImage
+                src={image}
+                alt={content.ImageAlt ?? ''}
+                width={1200}
+                height={896}
+                sizes="(min-width: 1200px) 560px, (min-width: 768px) 50vw, 100vw"
+                className="h-auto w-full object-cover"
+              />
             </div>
           )}
 
