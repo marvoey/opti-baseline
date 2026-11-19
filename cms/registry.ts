@@ -26,6 +26,7 @@ import EhStepsBand, { EhStepsBandContentType } from './EhStepsBand';
 import EhReviews, { EhReviewsContentType } from './EhReviews';
 import EhSiteSettings, { EhSiteSettingsContentType } from './EhSiteSettings';
 import EhFaq, { EhFaqContentType } from './EhFaq';
+import EhPromoBanner, { EhPromoBannerContentType } from './EhPromoBanner';
 
 /**
  * Single configuration + registration point for the Optimizely SDK.
@@ -77,6 +78,9 @@ export const registeredContentTypes = [
   EhStepsBandContentType,
   EhReviewsContentType,
   EhFaqContentType,
+  // Promo strip as a droppable block. The site-wide strip under the header still comes
+  // from the Site Settings item below.
+  EhPromoBannerContentType,
   // Site-wide settings item (banner, phone, legal line). The site chrome reads it through
   // lib/siteSettings.ts; the component only renders it when previewed in the CMS.
   EhSiteSettingsContentType,
@@ -106,6 +110,7 @@ initReactComponentRegistry({
     EhStepsBand,
     EhReviews,
     EhFaq,
+    EhPromoBanner,
     EhSiteSettings,
   },
 });
