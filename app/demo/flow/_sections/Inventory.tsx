@@ -5,7 +5,7 @@ export default function Inventory() {
   return (
     <section id="inventory" className="card">
       <h2 className="h2">2. What&apos;s on the site today</h2>
-      <p><strong>eHealth Home</strong> is a <span className="mono">BlankExperience</span> (published v1658) served at <a className="link" href="https://ehealth.optimoey.com/" target="_blank" rel="noopener noreferrer">/</a>. Edit it in the <a className="link" href="https://app-epsamoey0012f6ygp001.cms.optimizely.com/ui/cms" target="_blank" rel="noopener noreferrer">CMS editor</a>. Each section uses the <span className="mono">EhSectionStyle</span> display template, which offers grey, mint and white backgrounds and none, compact, standard and roomy spacing.</p>
+      <p><strong>eHealth Home</strong> is a <span className="mono">BlankExperience</span> (default published v1695, variations v1676 to v1678) served at <a className="link" href="https://ehealth.optimoey.com/" target="_blank" rel="noopener noreferrer">/</a>. Edit it in the <a className="link" href="https://app-epsamoey0012f6ygp001.cms.optimizely.com/ui/cms" target="_blank" rel="noopener noreferrer">CMS editor</a>. Each section uses the <span className="mono">EhSectionStyle</span> display template, which offers grey, mint and white backgrounds and none, compact, standard and roomy spacing.</p>
       <div className="tbl">
         <table>
           <thead>
@@ -31,27 +31,27 @@ export default function Inventory() {
               <td>2</td>
               <td>Carriers (White)</td>
               <td className="mono">EhCarrierLogos</td>
-              <td>Carrier names are text only (no logos), and &quot;View all&quot; links to #</td>
+              <td>Carrier names are text only (no logos). &quot;View all&quot; now goes to /medicare</td>
               <td>
-                <span className="chip c-warn">FIX LINK</span>
+                <span className="chip c-green">FIXED</span>
               </td>
             </tr>
             <tr>
               <td>3</td>
               <td>MatchFinder (Mint)</td>
               <td className="mono">RichTextBlock</td>
-              <td>Already tagged Intent=evaluate, Audience=medicare-shoppers, Domain, Geo. <strong>Use for the grouping story</strong></td>
+              <td>Already tagged Intent=evaluate, Audience=medicare-shoppers, Domain, Geo. <strong>Use for the grouping story</strong>. &quot;Get plans&quot; now goes to /medicare</td>
               <td>
-                <span className="chip c-warn">FIX LINK</span>
+                <span className="chip c-green">FIXED</span>
               </td>
             </tr>
             <tr>
               <td>4</td>
               <td>Testimonials (Grey)</td>
               <td className="mono">EhTestimonials</td>
-              <td>5 shared references. <strong>Cards 4 and 5 render as copies of &quot;Wilma I.&quot;</strong></td>
+              <td>3 shared references on the default page: the two duplicate &quot;Wilma I.&quot; cards are removed. The variations still hold 5 references in the CMS, but the site shows each story once (verified live on all four variants)</td>
               <td>
-                <span className="chip c-warn">FIX</span>
+                <span className="chip c-green">FIXED</span>
               </td>
             </tr>
             <tr>
@@ -94,9 +94,9 @@ export default function Inventory() {
               <td>9</td>
               <td>Reviews (Mint)</td>
               <td className="mono">EhReviews</td>
-              <td>Placeholder reviews (&quot;Customer name&quot;) with a placeholder disclaimer</td>
+              <td>Placeholder reviews (&quot;Customer name&quot;) with a placeholder disclaimer. The block stays in the CMS (the API can&apos;t delete a section), and the renderer hides it while any review still says &quot;placeholder&quot;. Verified live: not shown on any variant</td>
               <td>
-                <span className="chip c-warn">HIDE</span>
+                <span className="chip c-green">HIDDEN</span>
               </td>
             </tr>
             <tr>
@@ -121,22 +121,23 @@ export default function Inventory() {
               <td>12</td>
               <td>Steps (Dark green band)</td>
               <td className="mono">EhStepsBand</td>
-              <td>3-step enrollment; &quot;See how it works&quot; links to #</td>
+              <td>3-step enrollment; &quot;See how it works&quot; now goes to /medicare</td>
               <td>
-                <span className="chip c-warn">FIX LINK</span>
+                <span className="chip c-green">FIXED</span>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
+      <p className="text-sm"><strong>G3 status:</strong> done and verified live on all four variants on 19 Nov (3 testimonials, no # links in the page content, no Reviews section). The CMS content of the three variations is unchanged (the API can&apos;t edit variations), so a small renderer safety net does the work. Clean them in Visual Builder if you want tidy data in the editor.</p>
       <div className="grid2">
         <div className="box">
           <h4>Product pages</h4>
-          <p className="text-sm">These are <a className="link" href="https://ehealth.optimoey.com/medicare" target="_blank" rel="noopener noreferrer">/medicare</a>, <a className="link" href="https://ehealth.optimoey.com/individual-and-family" target="_blank" rel="noopener noreferrer">/individual-and-family</a>, <a className="link" href="https://ehealth.optimoey.com/small-business" target="_blank" rel="noopener noreferrer">/small-business</a>, <a className="link" href="https://ehealth.optimoey.com/short-term" target="_blank" rel="noopener noreferrer">/short-term</a>, <a className="link" href="https://ehealth.optimoey.com/dental-and-vision" target="_blank" rel="noopener noreferrer">/dental-and-vision</a>, <a className="link" href="https://ehealth.optimoey.com/dental-and-vision/dental" target="_blank" rel="noopener noreferrer">/dental-and-vision/dental</a> and <a className="link" href="https://ehealth.optimoey.com/dental-and-vision/vision" target="_blank" rel="noopener noreferrer">/dental-and-vision/vision</a>. Each has its own Meta Title and Description, for example &quot;Compare Medicare Plans | eHealth&quot;, which is good for SEO. Each is thin, though: a hero with the plan finder plus one feature section, and no images.</p>
+          <p className="text-sm">These are <a className="link" href="https://ehealth.optimoey.com/medicare" target="_blank" rel="noopener noreferrer">/medicare</a>, <a className="link" href="https://ehealth.optimoey.com/individual-and-family" target="_blank" rel="noopener noreferrer">/individual-and-family</a>, <a className="link" href="https://ehealth.optimoey.com/small-business" target="_blank" rel="noopener noreferrer">/small-business</a>, <a className="link" href="https://ehealth.optimoey.com/short-term" target="_blank" rel="noopener noreferrer">/short-term</a>, <a className="link" href="https://ehealth.optimoey.com/dental-and-vision" target="_blank" rel="noopener noreferrer">/dental-and-vision</a>, <a className="link" href="https://ehealth.optimoey.com/dental-and-vision/dental" target="_blank" rel="noopener noreferrer">/dental-and-vision/dental</a> and <a className="link" href="https://ehealth.optimoey.com/dental-and-vision/vision" target="_blank" rel="noopener noreferrer">/dental-and-vision/vision</a>. Each has its own Meta Title and Description, for example &quot;Compare Medicare Plans | eHealth&quot;, which is good for SEO. /medicare and /individual-and-family now have six sections each (hero, overview, how it works, Live Advise, other coverage and a FAQ, which shows after the G7 deploy). The other five are still thin: a hero with the plan finder plus one overview section, and no images.</p>
         </div>
         <div className="box">
           <h4>Platform signals</h4>
-          <p className="text-sm">The header nav is built from the CMS tree under eHealth Home. Graph lookups are scoped by host (<span className="mono">lib/siteHost.ts</span>). Visual Builder preview runs through <span className="mono">/preview</span>. A default OG card is set. The <strong>Optimizely Web Experimentation snippet is already loaded</strong> (client-side and after hydration, so some flicker). Hosting is on Vercel.</p>
+          <p className="text-sm">The header nav is built from the CMS tree under eHealth Home. Graph lookups are scoped by host (<span className="mono">lib/siteHost.ts</span>). Visual Builder preview runs through <span className="mono">/preview</span>. A default OG card is set. The <strong>Optimizely Web Experimentation snippet is still loaded</strong> on the live site, but it is not part of this demo (G11: remove the environment variable). Hosting is on Vercel.</p>
         </div>
       </div>
     </section>

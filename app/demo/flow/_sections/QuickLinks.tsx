@@ -32,20 +32,20 @@ export default function QuickLinks() {
           <p className="text-xs mt-2 opacity-80">The CMS link opens the editor. Use the content keys below to find each item.</p>
         </div>
         <div className="box">
-          <h4>Show the gap live (broken today)</h4>
+          <h4>Show the gap live (until the deploy)</h4>
           <div className="open">
             <a className="pill" href="https://ehealth.optimoey.com/robots.txt" target="_blank" rel="noopener noreferrer">/robots.txt <span aria-hidden="true">↗</span></a>
             <a className="pill" href="https://ehealth.optimoey.com/sitemap.xml" target="_blank" rel="noopener noreferrer">/sitemap.xml <span aria-hidden="true">↗</span></a>
           </div>
-          <p className="text-xs mt-2 opacity-80">Both currently return the homepage HTML (G4).</p>
+          <p className="text-xs mt-2 opacity-80">Until the G4 deploy both return the homepage HTML. After it, they are generated from the CMS.</p>
         </div>
         <div className="box">
           <h4>After the builds</h4>
           <div className="open">
             <a className="pill" href="https://ehealth.optimoey.com/?utm_campaign=aca" target="_blank" rel="noopener noreferrer">?utm_campaign=aca <span aria-hidden="true">↗</span></a>
             <a className="pill" href="https://ehealth.optimoey.com/?utm_campaign=t65" target="_blank" rel="noopener noreferrer">?utm_campaign=t65 <span aria-hidden="true">↗</span></a>
-            <a className="pill pill-todo" href="https://ehealth.optimoey.com/llms.txt" target="_blank" rel="noopener noreferrer">/llms.txt <span aria-hidden="true">↗</span> <small>after G4</small></a>
-            <a className="pill pill-todo" href="https://ehealth.optimoey.com/es/medicare" target="_blank" rel="noopener noreferrer">/es/medicare <span aria-hidden="true">↗</span> <small>after G5</small></a>
+            <a className="pill pill-todo" href="https://ehealth.optimoey.com/llms.txt" target="_blank" rel="noopener noreferrer">/llms.txt <span aria-hidden="true">↗</span> <small>after deploy</small></a>
+            <a className="pill" href="https://ehealth.optimoey.com/es" target="_blank" rel="noopener noreferrer">/es <span aria-hidden="true">↗</span></a>
             <a className="pill" href="https://ehealth.optimoey.com/lp/aca-2027" target="_blank" rel="noopener noreferrer">/lp/aca-2027 <span aria-hidden="true">↗</span></a>
             <a className="pill" href="https://ehealth.optimoey.com/demo/groups" target="_blank" rel="noopener noreferrer">/demo/groups <span aria-hidden="true">↗</span></a>
           </div>
@@ -88,12 +88,12 @@ export default function QuickLinks() {
             <tr>
               <td>Testimonial card 4 (renders as &quot;Wilma I.&quot;)</td>
               <td className="mono">7b66c13549024d02b6c971418a83d893</td>
-              <td>G3 cleanup</td>
+              <td>G3 cleanup (removed from the default; the variations still reference it)</td>
             </tr>
             <tr>
               <td>Testimonial card 5 (renders as &quot;Wilma I.&quot;)</td>
               <td className="mono">165d7bf4ab344e48bc8b5d05476fffbe</td>
-              <td>G3 cleanup</td>
+              <td>G3 cleanup (removed from the default; the variations still reference it)</td>
             </tr>
           </tbody>
         </table>

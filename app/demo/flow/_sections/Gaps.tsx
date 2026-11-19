@@ -42,31 +42,31 @@ export default function Gaps() {
             <tr>
               <td>G3</td>
               <td><strong>Demo cleanup:</strong> duplicate Wilma testimonials (cards 4 and 5), placeholder reviews, # links (banner, MatchFinder, savings, carriers, steps, footer) and empty alt text on coverage images</td>
-              <td>A healthcare buyer will notice fake reviews and dead links. Hide the Reviews section rather than inventing reviews, which is a compliance risk. Save the alt text for Act 6.</td>
-              <td>CMS only</td>
+              <td>A healthcare buyer will notice fake reviews and dead links. Hide the Reviews section rather than inventing reviews, which is a compliance risk. Save the alt text for Act 6. The footer links (About, Careers, Press, social, Privacy, Terms and a few more, about 15) still point to #: hide those columns or say so on the call.</td>
+              <td>CMS: default homepage fixed and published (v1695). Code for the variations: <span className="mono">cms/shared.ts</span>, <span className="mono">EhTestimonials</span>, <span className="mono">EhReviews</span>, the CTA blocks. <strong>Deployed and verified live on all four variants on 19 Nov</strong>: 3 testimonials, no # links in the page content, no Reviews section.</td>
               <td>45 min</td>
               <td>
-                <span className="chip c-warn">MUST</span>
+                <span className="chip c-green">DONE</span>
               </td>
             </tr>
             <tr>
               <td>G4</td>
-              <td><strong>Technical SEO:</strong> <span className="mono">app/sitemap.ts</span>, <span className="mono">app/robots.ts</span> (AI-crawler rules), canonical and robots meta, JSON-LD, <span className="mono">/llms.txt</span></td>
-              <td>Yoast parity and AEO are 39 of the RFI&apos;s line items. Today <a className="link" href="https://ehealth.optimoey.com/sitemap.xml" target="_blank" rel="noopener noreferrer">sitemap.xml</a> and <a className="link" href="https://ehealth.optimoey.com/robots.txt" target="_blank" rel="noopener noreferrer">robots.txt</a> return the homepage. The SEO and AEO fields exist only on <span className="mono">Page (v1)</span>, not on the <span className="mono">BlankExperience</span> the site actually uses.</td>
-              <td>Code: 3 new routes plus <span className="mono">generateMetadata</span>. CMS: add Canonical, Robots and FAQ fields to BlankExperience (or a shared SEO group)</td>
+              <td><strong>Technical SEO:</strong> <span className="mono">/sitemap.xml</span>, <span className="mono">/robots.txt</span> (AI-crawler rules), canonical and hreflang links, JSON-LD, <span className="mono">/llms.txt</span> and the right <span className="mono">html lang</span> on Spanish pages</td>
+              <td>Yoast parity and AEO are 39 of the RFI&apos;s line items. Until the deploy, <a className="link" href="https://ehealth.optimoey.com/sitemap.xml" target="_blank" rel="noopener noreferrer">sitemap.xml</a>, <a className="link" href="https://ehealth.optimoey.com/robots.txt" target="_blank" rel="noopener noreferrer">robots.txt</a> and <a className="link" href="https://ehealth.optimoey.com/llms.txt" target="_blank" rel="noopener noreferrer">llms.txt</a> all return the homepage, and /es says <span className="mono">lang=&quot;en&quot;</span>. The editor fields already exist on <span className="mono">BlankExperience</span> (Canonical URL, Robots Directives, Keywords, FAQ and HowTo items), so no CMS change was needed.</td>
+              <td>Code: <span className="mono">app/sitemap.ts</span>, <span className="mono">app/robots.ts</span>, <span className="mono">app/llms.txt/route.ts</span>, <span className="mono">lib/seo.ts</span>, <span className="mono">lib/jsonLd.ts</span>, canonical and hreflang in <span className="mono">generateMetadata</span>, and the locale header in <span className="mono">proxy.ts</span>. All generated from the CMS tree, so there is nothing to maintain by hand. AI-crawler policy: answer-engine crawlers allowed, training crawlers blocked, one switch (<span className="mono">ALLOW_AI_TRAINING</span>) in <span className="mono">lib/seo.ts</span>. Tested locally against live Graph data. <strong>Not yet deployed.</strong></td>
               <td>½ day</td>
               <td>
-                <span className="chip c-warn">MUST</span>
+                <span className="chip c-warn">ON DEPLOY</span>
               </td>
             </tr>
             <tr>
               <td>G5</td>
               <td><strong>Spanish (<span className="mono">es</span>) locale</strong>, then translate Home and /medicare with Mark</td>
               <td>Spanish is likely important to their audience (confirm in discovery). It brings RFI §10 to life. The existing locales (fr, sv, ko, cy, zh) don&apos;t fit eHealth.</td>
-              <td>CMS: add es. Code: <span className="mono">npm run gen:locales</span></td>
+              <td>CMS: <span className="mono">es</span> enabled, and eHealth Home is translated and published at <a className="link" href="https://ehealth.optimoey.com/es" target="_blank" rel="noopener noreferrer">/es</a>. Code: locales regenerated and committed. <strong>/medicare is not translated yet</strong>, which leaves a live Mark moment (Act 6). Fix before the call: Mark turned the brand into &quot;eSalud&quot; in the Spanish page title and CMS name (check the body too).</td>
               <td>1–2 hrs</td>
               <td>
-                <span className="chip c-blue">HIGH</span>
+                <span className="chip c-green">DONE</span>
               </td>
             </tr>
             <tr>
@@ -82,11 +82,11 @@ export default function Gaps() {
             <tr>
               <td>G7</td>
               <td><strong>FAQ block</strong> (accordion that renders FAQPage JSON-LD) and fuller product pages</td>
-              <td>AEO proof point. Product pages are thin, and adding Coverage, Live Advise and FAQ blocks shows reuse across pages.</td>
-              <td>Code: <span className="mono">cms/EhFaq.tsx</span>. CMS: add to /medicare and /individual-and-family</td>
+              <td>AEO proof point. Product pages were thin, and adding How it works, Live Advise, Coverage and FAQ blocks shows reuse across pages.</td>
+              <td>Code: <span className="mono">cms/EhFaq.tsx</span> (registered, and the type is pushed to the CMS). CMS: <span className="mono">/medicare</span> and <span className="mono">/individual-and-family</span> now have six sections each, including a six-question FAQ, published. <strong>The FAQ appears after the code deploy</strong>; until then the pages show the other three new sections. The wording is demo copy: eHealth compliance should review it.</td>
               <td>2–3 hrs</td>
               <td>
-                <span className="chip c-blue">HIGH</span>
+                <span className="chip c-warn">ON DEPLOY</span>
               </td>
             </tr>
             <tr>
@@ -121,12 +121,12 @@ export default function Gaps() {
             </tr>
             <tr>
               <td>G11</td>
-              <td><strong>Decide about the Web Experimentation snippet:</strong> turn it off for the demo, or keep it only as the flicker contrast</td>
+              <td><strong>Web Experimentation snippet:</strong> decided not to use Web Experimentation in this demo. Feature Experimentation does the personalization and the A/B test</td>
               <td>Avoids a &quot;why are you running two testing tools?&quot; detour when they&apos;ve already said Adobe Target.</td>
-              <td>Env: <span className="mono">NEXT_PUBLIC_OPTIMIZELY_WEB_SNIPPET_ID</span></td>
+              <td>Env: <span className="mono">NEXT_PUBLIC_OPTIMIZELY_WEB_SNIPPET_ID</span> is still set in Vercel, so the snippet loads on every page (checked 19 Nov). Remove it and redeploy.</td>
               <td>5 min</td>
               <td>
-                <span className="chip c-n">DECIDE</span>
+                <span className="chip c-warn">TO DO</span>
               </td>
             </tr>
             <tr>

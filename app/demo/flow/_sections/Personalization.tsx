@@ -95,7 +95,7 @@ export default function Personalization() {
             </tr>
             <tr>
               <td>CMS variations</td>
-              <td><span className="mono">AcaOep</span> (v1677), <span className="mono">Turning65</span> (v1676) and <span className="mono">AepSwitcher</span> (v1678) on eHealth Home, published 18 Nov. Each is a full copy of the default page&apos;s 12 blocks (checked identical to v1658) with only the hero eyebrow, headline, highlight, subcopy and default plan overridden. The hero image is reused. Verified live: the Turning 65 and ACA pages render all 10 content sections.</td>
+              <td><span className="mono">AcaOep</span> (v1677), <span className="mono">Turning65</span> (v1676) and <span className="mono">AepSwitcher</span> (v1678) on eHealth Home, published 18 Nov. Each is a full copy of the default page&apos;s 12 blocks (identical to v1658 when created; G3 then changed the default to v1695) with only the hero eyebrow, headline, highlight, subcopy and default plan overridden. The hero image is reused. Verified live: the Turning 65 and ACA pages render all 10 content sections.</td>
               <td>
                 <span className="chip c-green">PUBLISHED</span>
               </td>
@@ -159,7 +159,7 @@ export default function Personalization() {
         <li><span className="chip c-green">DONE</span> Tested on the live site. To repeat it, use a fresh incognito window: <span className="mono">/?utm_campaign=aca</span>, <span className="mono">/?utm_campaign=t65</span> and plain <span className="mono">/</span> (50/50). Add <span className="mono">?fx_reset=1</span> to re-roll the A/B bucket.</li>
       </ol>
       <ul className="dots text-sm">
-        <li><strong>Keep the variations in sync:</strong> because each variation holds its own copy of the blocks, an edit to a block on the default eHealth Home (a testimonial, a carrier, a CTA) does not reach the variations. Repeat it in each one, or ask Mark to re-copy the default page into them. Avoid editing the default page the day before the call without re-syncing.</li>
+        <li><strong>Keep the variations in sync:</strong> because each variation holds its own copy of the blocks, an edit to a block on the default eHealth Home (a testimonial, a carrier, a CTA) does not reach the variations. Repeat it in each one, or ask Mark to re-copy the default page into them. Avoid editing the default page the day before the call without re-syncing. G3 is the live example: the default was cleaned up in v1695, but the variations still hold the old content, so the cleanup reaches them through code (<span className="mono">cms/shared.ts</span>, <span className="mono">EhTestimonials</span>, <span className="mono">EhReviews</span>) until they are edited in Visual Builder.</li>
         <li>The SDK polls the datafile every 10 seconds (<span className="mono">updateInterval</span> in <span className="mono">lib/fx.ts</span>), but Optimizely&apos;s CDN caches the datafile too (the environment shows a cache TTL of 120), so allow up to a couple of minutes after changing a rule.</li>
         <li>The personalized home page is dynamic per request, which is fine for the demo. For production, cover edge caching per variation in the Akamai conversation, and cookie consent for the visitor id.</li>
       </ul>

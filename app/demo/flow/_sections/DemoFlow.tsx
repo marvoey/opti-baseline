@@ -60,8 +60,8 @@ export default function DemoFlow() {
           <li><strong>Guardrails, not a blank canvas:</strong> change a section from grey to mint using <span className="mono">EhSectionStyle</span>. Marketers pick from approved options only and never touch CSS.</li>
           <li><strong>Compose:</strong> drag the Savings band above Testimonials. Add a new section from the eHealth block library, then remove it.</li>
           <li><strong>Edit once, update everywhere:</strong> edit one shared Coverage Card (&quot;Medicare plans&quot;) and show it change on the homepage grid. Then make the point that the same item can feed every app.</li>
-          <li><strong>Govern:</strong> schedule the publish, send it through approval, open version history (v1658 shows how many iterations have happened), compare versions and roll back.</li>
-          <li><strong>The banner moment</strong> <span className="chip c-green">DONE (G2)</span>: open the <strong>Site settings</strong> item (shared-blocks folder, key <span className="mono">b55f002785614cd0b37e535b48c45c3b</span>), change &quot;Medicare Annual Enrollment is here!&quot; and publish. It reaches the site within about a minute. The same item controls the header phone number and the footer legal line. Clearing the message hides the whole strip. The link URL is empty today, so the banner link still goes to #; set it first. Schedule an &quot;AEP ends Dec 7&quot; version in the editor (scheduling not tested from here).</li>
+          <li><strong>Govern:</strong> schedule the publish, send it through approval, open version history (v1695 on the default page shows how many iterations have happened), compare versions and roll back.</li>
+          <li><strong>The banner moment</strong> <span className="chip c-green">DONE (G2)</span>: open the <strong>Site settings</strong> item (shared-blocks folder, key <span className="mono">b55f002785614cd0b37e535b48c45c3b</span>), change &quot;Medicare Annual Enrollment is here!&quot; and publish. It reaches the site within about a minute. The same item controls the header phone number and the footer legal line. Clearing the message hides the whole strip. The banner link goes to /medicare/; change the label and URL together. Schedule an &quot;AEP ends Dec 7&quot; version in the editor (scheduling not tested from here).</li>
         </ol>
       </div>
       <div className="act">
@@ -83,21 +83,21 @@ export default function DemoFlow() {
           <a className="pill" href="https://docs.optimizely.com/feature-experimentation/docs/configure-optimizely-cms-saas" target="_blank" rel="noopener noreferrer">Integration doc <span aria-hidden="true">↗</span></a>
         </div>
         <ol className="num">
-          <li>In Visual Builder, open the <strong>content variations</strong> of eHealth Home: <span className="mono">Turning65</span>, <span className="mono">AepSwitcher</span> and <span className="mono">AcaOep</span>. Each differs from the default only in the hero text; the other 11 blocks are identical copies of the default page.</li>
+          <li>In Visual Builder, open the <strong>content variations</strong> of eHealth Home: <span className="mono">Turning65</span>, <span className="mono">AepSwitcher</span> and <span className="mono">AcaOep</span>. Each carries a full copy of the default page&apos;s 12 blocks and overrides only the hero text. The copies date from 18 Nov, so the G3 cleanup (3 testimonials, working links) reaches them through code rather than through their own content.</li>
           <li>Load <span className="mono">/?utm_campaign=aca</span> to get the Individual &amp; Family hero with the finder defaulted to Individual. Load <span className="mono">/?utm_campaign=t65</span> to get the Turning 65 hero (eyebrow &quot;New to Medicare?&quot;, headline &quot;Turning 65? Find the Medicare plan that fits you&quot;). Both are rendered server-side, so there&apos;s no flicker and SEO stays intact.</li>
           <li>In Feature Experimentation, show the <a className="link" href="https://app.optimizely.com/v2/projects/6229025884995584/flags/manage/ehealth_home_hero" target="_blank" rel="noopener noreferrer">ehealth_home_hero</a> flag: two <a className="link" href="https://app.optimizely.com/v2/projects/6229025884995584/flags/manage/ehealth_home_hero/rules/development" target="_blank" rel="noopener noreferrer">targeted delivery rules</a> for the ACA and Turning 65 audiences, then an A/B rule on the AEP hero for everyone else (it excludes the campaign audiences, since A/B tests are evaluated first). The variable <span className="mono">cms-saas-content-variation</span> carries the CMS variation key.</li>
           <li><strong>The Adobe Target point</strong> <span className="chip c-n">TALK</span>: show <span className="mono">lib/fx.ts</span>, the one place the variation key is chosen. Swap Feature Experimentation for Target&apos;s server-side delivery returning the same key, and the CMS and editors don&apos;t change.</li>
         </ol>
         <div className="say">&quot;Your marketers author the variants here. Adobe Target, or anything else, decides who sees which one. You don&apos;t have to rip anything out to get self-service.&quot;</div>
-        <p className="text-sm"><strong>Be candid:</strong> I found no packaged Adobe Target connector for CMS SaaS in the docs, so this is a code-level integration point (&quot;I&quot; in RFI terms). The client-side Web Experimentation snippet already on the site is a useful contrast: it flickers because it changes the page after load.</p>
+        <p className="text-sm"><strong>Be candid:</strong> I found no packaged Adobe Target connector for CMS SaaS in the docs, so this is a code-level integration point (&quot;I&quot; in RFI terms). Personalization here is server-side Feature Experimentation only. Client-side Web Experimentation is deliberately not part of this demo.</p>
       </div>
       <div className="act">
         <div className="act-head">
           <span className="act-num">4</span>
           <span className="act-title">SEO parity with Yoast, then AEO</span>
           <span className="chip c-n">9 min</span>
-          <span className="chip c-green">PARTLY READY</span>
-          <span className="chip c-warn">+ BUILD</span>
+          <span className="chip c-green">BUILT</span>
+          <span className="chip c-warn">ON DEPLOY</span>
           <span className="chip c-n">RFI 6.1–6.39</span>
         </div>
         <div className="open">
@@ -107,14 +107,14 @@ export default function DemoFlow() {
           <a className="pill pill-cms" href="https://app-epsamoey0012f6ygp001.cms.optimizely.com/ui/cms" target="_blank" rel="noopener noreferrer">CMS editor <span aria-hidden="true">↗</span></a>
           <a className="pill" href="https://ehealth.optimoey.com/robots.txt" target="_blank" rel="noopener noreferrer">/robots.txt <span aria-hidden="true">↗</span></a>
           <a className="pill" href="https://ehealth.optimoey.com/sitemap.xml" target="_blank" rel="noopener noreferrer">/sitemap.xml <span aria-hidden="true">↗</span></a>
-          <a className="pill pill-todo" href="https://ehealth.optimoey.com/llms.txt" target="_blank" rel="noopener noreferrer">/llms.txt <span aria-hidden="true">↗</span> <small>after G4</small></a>
+          <a className="pill pill-todo" href="https://ehealth.optimoey.com/llms.txt" target="_blank" rel="noopener noreferrer">/llms.txt <span aria-hidden="true">↗</span> <small>after deploy</small></a>
           <a className="pill" href="https://docs.optimizely.com/agent-platform/docs/seo-metadata-implementation-agent" target="_blank" rel="noopener noreferrer">SEO agent doc <span aria-hidden="true">↗</span></a>
         </div>
         <ul className="dots">
           <li><strong>Ready:</strong> Meta Title, Meta Description and OG image on each page, with the site-wide fallback, Open Graph and Twitter tags.</li>
           <li><strong>Ready:</strong> run the Mark <em>SEO Metadata</em> agent on <span className="mono">/small-business</span>. It produces an audit and writes the changes back as a CMS draft for approval.</li>
-          <li><strong>Build:</strong> <span className="mono">/sitemap.xml</span> and <span className="mono">/robots.txt</span> currently return the homepage HTML. Add both (with AI-crawler rules for GPTBot, PerplexityBot and Google-Extended), plus canonical and robots meta and JSON-LD (Organization, WebSite, BreadcrumbList, FAQPage). Then view the source live.</li>
-          <li><strong>AEO:</strong> add an FAQ block to <span className="mono">/medicare</span> that renders FAQPage schema, run a GEO audit, and show <span className="mono">/llms.txt</span>.</li>
+          <li><strong>Built (live after the deploy):</strong> <span className="mono">/sitemap.xml</span>, <span className="mono">/robots.txt</span> and <span className="mono">/llms.txt</span> are generated from the CMS tree. The robots rules allow search and answer-engine crawlers and block AI training crawlers. Pages carry canonical and hreflang links and JSON-LD (Organization, WebSite, WebPage, BreadcrumbList). View the source live. Today those three URLs return the homepage HTML.</li>
+          <li><strong>AEO:</strong> <span className="mono">/medicare</span> and <span className="mono">/individual-and-family</span> have an FAQ block that publishes FAQPage schema (show it in View Source). Run a GEO audit and show <span className="mono">/llms.txt</span>. The FAQ appears after the deploy.</li>
         </ul>
         <div className="say">&quot;Yoast scores a draft. This gives you the fields, the governance and an AI coach, and your front end produces clean, server-rendered markup that answer engines can cite.&quot;</div>
       </div>
@@ -146,7 +146,7 @@ export default function DemoFlow() {
           <span className="act-title">AI in the editor&apos;s workflow</span>
           <span className="chip c-n">6 min</span>
           <span className="chip c-green">READY</span>
-          <span className="chip c-warn">+ es locale</span>
+          <span className="chip c-green">es locale on</span>
           <span className="chip c-n">RFI 9.1–9.8, 10.1–10.6, 7.5, 11.6</span>
         </div>
         <div className="open">
@@ -154,11 +154,11 @@ export default function DemoFlow() {
           <a className="pill pill-cms" href="https://app-epsamoey0012f6ygp001.cms.optimizely.com/ui/cms" target="_blank" rel="noopener noreferrer">CMS editor <span aria-hidden="true">↗</span></a>
           <a className="pill" href="https://mark.optimizely.com" target="_blank" rel="noopener noreferrer">Mark <span aria-hidden="true">↗</span></a>
           <a className="pill" href="https://ehealth.optimoey.com/medicare" target="_blank" rel="noopener noreferrer">/medicare <span aria-hidden="true">↗</span></a>
-          <a className="pill pill-todo" href="https://ehealth.optimoey.com/es/medicare" target="_blank" rel="noopener noreferrer">/es/medicare <span aria-hidden="true">↗</span> <small>after G5</small></a>
+          <a className="pill" href="https://ehealth.optimoey.com/es" target="_blank" rel="noopener noreferrer">/es <span aria-hidden="true">↗</span></a>
         </div>
         <ul className="dots">
           <li><strong>Accessibility:</strong> ask Mark to generate alt text for the 6 coverage-card images, which are empty today. It&apos;s a real fix to a real gap, done live.</li>
-          <li><strong>Spanish:</strong> translate eHealth Home and <span className="mono">/medicare</span> into Spanish with Mark, then show <span className="mono">/es/medicare</span> with fallback to English for anything untranslated. <em>This needs an <span className="mono">es</span> locale; the CMS currently has en, fr, sv, ko, ko-KR, cy and zh.</em></li>
+          <li><strong>Spanish:</strong> eHealth Home is already translated (<span className="mono">/es</span>). Translate <span className="mono">/medicare</span> into Spanish with Mark live, then show <span className="mono">/es/medicare</span> with fallback to English for anything untranslated. <em>The <span className="mono">es</span> locale is on. Check the translated title first: it says eSalud instead of eHealth.</em></li>
           <li><strong>Human in the loop:</strong> AI output lands as a draft, goes through the approval step and has an audit trail. Mention that generative AI can be turned off in the Opti ID admin.</li>
         </ul>
       </div>

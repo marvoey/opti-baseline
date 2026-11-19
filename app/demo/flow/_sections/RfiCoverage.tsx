@@ -23,12 +23,12 @@ export default function RfiCoverage() {
             <tr>
               <td>§6a–d SEO / Yoast parity</td>
               <td>Act 4, G4</td>
-              <td>Medium. Strong once sitemap, robots, canonical and JSON-LD ship</td>
+              <td>Strong once the G4 deploy is live: sitemap, robots, canonical, hreflang and JSON-LD are built</td>
             </tr>
             <tr>
               <td>§6e AEO</td>
               <td>Act 4, G4, G7</td>
-              <td>A differentiator if FAQ schema and llms.txt are live</td>
+              <td>A differentiator once the deploy is live: FAQ schema on /medicare and /individual-and-family, plus llms.txt</td>
             </tr>
             <tr>
               <td>§7 Content velocity</td>
@@ -48,7 +48,7 @@ export default function RfiCoverage() {
             <tr>
               <td>§10 Localization</td>
               <td>Act 6, G5</td>
-              <td>Weak until <span className="mono">es</span> is added</td>
+              <td>Good: <span className="mono">es</span> is on and Home is translated. Translate /medicare live</td>
             </tr>
             <tr>
               <td>§11 Workflow and governance</td>
