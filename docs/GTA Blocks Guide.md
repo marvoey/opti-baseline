@@ -14,12 +14,18 @@ Visual Builder blocks that recreate the three canvas pages (GTA V Overview, GTA 
 | `[GTA] Feature Carousel` (`GtaCarouselBlock`) | "New This Week", 1 of N slides | **Outline only** | `[GTA] Carousel Slide` |
 | `[GTA] Update Showcase` (`GtaUpdateShowcaseBlock`) | Layered update cards (Slider) or scrolling thumbnails (Marquee) | **Outline only** | `[GTA] Update Card` |
 | `[GTA] Feature Grid` (`GtaFeatureGridBlock`) | Feature cards, tech highlights, 2 to 4 columns | **Outline only** | `[GTA] Feature Item` |
-| `[GTA] Career Grid` (`GtaCareerGridBlock`) | Career cards with sticky filter tabs | **Outline only** | `[GTA] Career Card` |
+| `[GTA] Career Grid` (`GtaCareerGridBlock`) | Career cards with sticky filter tabs | **Outline only** | `[GTA] Career Card` **shared blocks** (see below) |
 
 - **Outline** means the experience's top-level list of sections (add the block directly, no section/row/column needed). All 7 blocks can also be added in the **Content** area of a `Page`.
 - **Why four blocks are outline-only:** they hold lists of inline items (an array of components), and the CMS does not allow element-enabled blocks to have component properties. So they are section-enabled only and cannot be dropped into a section column. All four are full-width page sections anyway.
 - **Embedded items** are added inside their parent block's list property (Slides, Updates, Items, Cards). They are not placed on a page on their own.
 
+## Career Cards are shared blocks
+
+- The Career Grid's **Cards** list is a `content` list, so it holds **shared blocks** (and inline cards if needed). The other blocks' lists are still inline-only.
+- The 30 Career Progress cards are shared blocks in **Assets > eHealth > GTA Career Cards** (the eHealth folder is `ASSET_BASE_FOLDER_ID` in `.env`). Edit a card there and every grid that uses it updates when the card is published.
+- To add a card: create a `[GTA] Career Card` in that folder, publish it, then drag it into the grid's Cards list.
+- Graph returns shared cards with all their fields, so the component needs no extra fetch.
 ## Keeping code and CMS in sync
 
 ```bash

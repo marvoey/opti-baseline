@@ -13,7 +13,10 @@ const CATEGORIES = [
   { value: 'special-interests', displayName: 'Special Interests' },
 ];
 
-/** One career card. Embedded inside the Career Grid block, not placed on its own. */
+/**
+ * One career card. Created as a shared block (in the assets folder) and referenced from the Career Grid,
+ * so the same card can be reused and edited in one place. Inline cards are still allowed.
+ */
 export const GtaCareerCardContentType = contentType({
   key: 'GtaCareerCard',
   baseType: '_component',
@@ -81,22 +84,30 @@ export const GtaCareerGridContentType = contentType({
     Cards: {
       type: 'array',
       displayName: 'Cards',
+      description: 'Career Card shared blocks from the assets folder (drag them in), or inline cards.',
       isLocalized: true,
       sortOrder: 40,
       items: {
-        type: 'component',
-        contentType: GtaCareerCardContentType,
+        // 'content' (not 'component') so items can be shared blocks as well as inline cards.
+        // Graph returns referenced shared blocks with their properties, so no extra fetch is needed.
+        type: 'content',
+        allowedTypes: [GtaCareerCardContentType],
       },
     },
   },
 });
 
 type Props = { content: ContentProps<typeof GtaCareerGridContentType> };
+/** A card as delivered by Graph. The SDK types 'content' items loosely, so the card shape is stated here. */
+type CardData = ContentProps<typeof GtaCareerCardContentType>;
 
 export default function GtaCareerGrid({ content }: Props) {
   const { pa } = getPreviewUtils(content);
   const block = (content as { __composition?: { key: string } }).__composition;
-  const source = content.Cards ?? [];
+  // Shared and inline cards arrive in the same shape; drop anything that isn't a Career Card.
+  const source = ((content.Cards ?? []) as unknown as CardData[]).filter(
+    (c) => !!c && (!c.__typename || c.__typename === 'GtaCareerCard'),
+  );
 
   const cards: CareerCard[] = source.map((card) => {
     const href = card.Destination?.url?.default || '#';
@@ -138,7 +149,7 @@ export default function GtaCareerGrid({ content }: Props) {
           {cards.length > 0 ? (
             <CareerGridClient tabs={tabs} cards={cards} progressNote={content.ProgressNote} />
           ) : (
-            <EmptyBlock title="This grid has no cards yet" hint="Add Career Card items to the Cards property." />
+            <EmptyBlock title="This grid has no cards yet" hint="Add Career Card shared blocks to the Cards property." />
           )}
         </div>
       </div>
