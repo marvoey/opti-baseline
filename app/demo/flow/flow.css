@@ -158,6 +158,23 @@
     white-space: nowrap;
   }
   .dfl .pill:hover { background: var(--lf); }
+  .dfl .pill-wrap { display: inline-flex; align-items: center; gap: 0.2rem; white-space: nowrap; }
+  .dfl .copy-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0;
+    background: transparent;
+    border: 1.5px solid transparent;
+    border-radius: 9999px;
+    color: var(--fir);
+    opacity: 0.65;
+    cursor: pointer;
+  }
+  .dfl .copy-btn:hover, .dfl .copy-btn:focus-visible { opacity: 1; background: var(--lf); border-color: var(--fir); }
+  .dfl .copy-btn.is-copied { opacity: 1; }
   .dfl .pill-cms { background: var(--blue); }
   .dfl .pill-fx { background: var(--lf); }
   .dfl .pill-todo { border-style: dashed; background: transparent; }

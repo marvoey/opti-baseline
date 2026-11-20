@@ -4,6 +4,7 @@
 // verbatim (see app/demo/rfi/rfiDocument.ts). See ../page.tsx before regenerating from the canvas.
 
 import type { ReactNode } from 'react';
+import CopyUrlButton from './CopyUrlButton';
 
 const SITE = 'https://ehealth.optimoey.com';
 const CMS = 'https://app-epsamoey0012f6ygp001.cms.optimizely.com/ui/cms';
@@ -22,15 +23,19 @@ function Step({ kind, children }: { kind: Kind; children: ReactNode }) {
 }
 
 function Pill({ href, tone, children }: { href: string; tone?: 'cms' | 'fx'; children: ReactNode }) {
+  const label = typeof children === 'string' ? children : href;
   return (
-    <a
-      className={`pill${tone ? ` pill-${tone}` : ''}`}
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      {children} <span aria-hidden="true">↗</span>
-    </a>
+    <span className="pill-wrap">
+      <a
+        className={`pill${tone ? ` pill-${tone}` : ''}`}
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {children} <span aria-hidden="true">↗</span>
+      </a>
+      <CopyUrlButton href={href} label={label} />
+    </span>
   );
 }
 
