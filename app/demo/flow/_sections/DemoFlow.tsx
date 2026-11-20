@@ -74,7 +74,7 @@ export default function DemoFlow() {
         </Head>
         <ol className="steps">
           <Step kind="open">
-            <Pill href="/demo/rfi">RFI summary canvas</Pill> and scroll to <strong>1. Introduction and Purpose</strong>, then the <strong>Business Context</strong> list.
+            <Pill href="/demo/rfi-overview#heard">RFI overview</Pill>, which opens at <strong>What we heard</strong>, their Business Context played back in their own words.
           </Step>
           <Step kind="say">
             Intro, then read the bullets below one at a time, pausing after each for a nod. They are word for word from their RFI.
