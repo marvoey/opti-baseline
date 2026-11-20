@@ -4,6 +4,7 @@ import { headers } from "next/headers";
 import Script from "next/script";
 import OptimizelyActivation from "./_components/OptimizelyActivation";
 import DevQuickLinks from "./_components/DevQuickLinks";
+import FlowWindowShortcut from "./_components/FlowWindowShortcut";
 import { siteConfig } from "@/lib/siteConfig";
 import { requestOrigin } from "@/lib/siteHost";
 import { DEFAULT_LOCALE, LOCALE_HEADER } from "@/lib/locales";
@@ -75,6 +76,7 @@ export default async function RootLayout({
         */}
         {/* <QuickLinks /> */}
         <DevQuickLinks />
+        <FlowWindowShortcut />
         {WEB_SNIPPET_ID && (
           <>
             <Script

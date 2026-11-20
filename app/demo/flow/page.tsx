@@ -10,6 +10,7 @@ import RfiCoverage from './_sections/RfiCoverage';
 import DiscoveryQuestions from './_sections/DiscoveryQuestions';
 import Checklist from './_sections/Checklist';
 import Glossary from './_sections/Glossary';
+import OpenerLinks from './_sections/OpenerLinks';
 import './flow.css';
 
 /**
@@ -53,6 +54,7 @@ export const metadata: Metadata = {
 export default function DemoFlowPage() {
   return (
     <div className={`dfl ${condensed.variable} ${mono.variable}`}>
+      <OpenerLinks />
       <header className="max-w-6xl mx-auto px-5 pt-10 pb-6">
         <div className="flex flex-wrap gap-2">
           <span className="chip c-green">eHealth · Friday 20 Nov 2026</span>
