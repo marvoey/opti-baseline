@@ -1,0 +1,387 @@
+{
+  "folder": {
+    "name": "GTA Career Cards",
+    "parent": "22b85a7e8c334952b261a5090231e36b",
+    "key": "72665ef29ae14f22b740173c96840c43"
+  },
+  "contentType": "GtaCareerCard",
+  "locale": "en",
+  "publish": true,
+  "items": [
+    {
+      "key": "09c4d61ef39b8bf22887ee69f9bf7413",
+      "displayName": "A Safehouse in the Hills",
+      "properties": {
+        "Title": "A Safehouse in the Hills",
+        "Category": "contact-missions",
+        "ImageUrl": "https://media-rockstargames-com.akamaized.net/tina-uploads/tina-modules/ko784/63c28c4a82324c08a3cb1cfb8646344341010ab3.jpg",
+        "Destination": {
+          "url": "https://www.rockstargames.com/gta-online/contact-missions/a-safehouse-in-the-hills",
+          "text": "A Safehouse in the Hills"
+        }
+      }
+    },
+    {
+      "key": "3bbf248dd38405e59e33c07b5b344fc8",
+      "displayName": "A Superyacht Life",
+      "properties": {
+        "Title": "A Superyacht Life",
+        "Category": "contact-missions",
+        "Destination": {
+          "url": "https://www.rockstargames.com/gta-online/contact-missions/superyacht-life",
+          "text": "A Superyacht Life"
+        }
+      }
+    },
+    {
+      "key": "cdf5288e512c0693f4fb5162a3a7bbca",
+      "displayName": "After Hours",
+      "properties": {
+        "Title": "After Hours",
+        "Category": "businesses",
+        "Destination": {
+          "url": "https://www.rockstargames.com/gta-online/businesses/after-hours",
+          "text": "After Hours"
+        }
+      }
+    },
+    {
+      "key": "adba49a19977ff5d4a1732e02544aed5",
+      "displayName": "Agents of Sabotage",
+      "properties": {
+        "Title": "Agents of Sabotage",
+        "Category": "businesses",
+        "ImageUrl": "https://media-rockstargames-com.akamaized.net/tina-uploads/tina-modules/87k57/9cd4d59d0e82aeafbfdb01934ac4d4e98dd9ea08.jpg",
+        "Destination": {
+          "url": "https://www.rockstargames.com/gta-online/businesses/agents-of-sabotage",
+          "text": "Agents of Sabotage"
+        }
+      }
+    },
+    {
+      "key": "f5543e05a738dda29ae82db13d4b14d2",
+      "displayName": "Arena War",
+      "properties": {
+        "Title": "Arena War",
+        "Category": "series-modes",
+        "Destination": {
+          "url": "https://www.rockstargames.com/gta-online/series-modes/arena-war",
+          "text": "Arena War"
+        }
+      }
+    },
+    {
+      "key": "ae74278cca214b9215f3df499573929f",
+      "displayName": "Bikers",
+      "properties": {
+        "Title": "Bikers",
+        "Category": "businesses",
+        "Destination": {
+          "url": "https://www.rockstargames.com/gta-online/businesses/bikers",
+          "text": "Bikers"
+        }
+      }
+    },
+    {
+      "key": "bfa8318d6493a0a2dd6f08e431cb174c",
+      "displayName": "Bottom Dollar Bounties",
+      "properties": {
+        "Title": "Bottom Dollar Bounties",
+        "Category": "businesses",
+        "ImageUrl": "https://media-rockstargames-com.akamaized.net/tina-uploads/tina-modules/2k1ka/4d612da70ac6ba65a0d3bd5990985cb5fb3c003e.jpg",
+        "Destination": {
+          "url": "https://www.rockstargames.com/gta-online/businesses/bottom-dollar-bounties",
+          "text": "Bottom Dollar Bounties"
+        }
+      }
+    },
+    {
+      "key": "3f331a8a181ba634444e529a209a1405",
+      "displayName": "Diamond Casino and Resort",
+      "properties": {
+        "Title": "Diamond Casino and Resort",
+        "Category": "recreation",
+        "ImageUrl": "https://media-rockstargames-com.akamaized.net/tina-uploads/tina-modules/a19a/6f2273bb92e0fd35ef7636575651e0cff17ac869.jpg",
+        "Destination": {
+          "url": "https://www.rockstargames.com/gta-online/recreation/diamond-casino-resort",
+          "text": "Diamond Casino and Resort"
+        }
+      }
+    },
+    {
+      "key": "96a366380c86ee1cedb75d61504ea808",
+      "displayName": "Further Adventures in Finance and Felony",
+      "properties": {
+        "Title": "Further Adventures in Finance and Felony",
+        "Category": "businesses",
+        "Destination": {
+          "url": "https://www.rockstargames.com/gta-online/businesses/finance-and-felony",
+          "text": "Further Adventures in Finance and Felony"
+        }
+      }
+    },
+    {
+      "key": "f2b941eea7b35953c96593d927cf0e31",
+      "displayName": "Gerald's Last Play",
+      "properties": {
+        "Title": "Gerald's Last Play",
+        "Category": "contact-missions",
+        "Destination": {
+          "url": "https://www.rockstargames.com/gta-online/contact-missions/last-play",
+          "text": "Gerald's Last Play"
+        }
+      }
+    },
+    {
+      "key": "7bb0bad1b9bf368dee67dd154a186fef",
+      "displayName": "Gunrunning",
+      "properties": {
+        "Title": "Gunrunning",
+        "Category": "businesses",
+        "Destination": {
+          "url": "https://www.rockstargames.com/gta-online/businesses/gunrunning",
+          "text": "Gunrunning"
+        }
+      }
+    },
+    {
+      "key": "e8966ba436c5d9f8ab4c23e9498fb3d1",
+      "displayName": "Import/Export",
+      "properties": {
+        "Title": "Import/Export",
+        "Category": "businesses",
+        "Destination": {
+          "url": "https://www.rockstargames.com/gta-online/businesses/import-export",
+          "text": "Import/Export"
+        }
+      }
+    },
+    {
+      "key": "fcd72f150a1f88d73c94a77a535aae13",
+      "displayName": "Los Santos Drug Wars",
+      "properties": {
+        "Title": "Los Santos Drug Wars",
+        "Category": "businesses",
+        "ImageUrl": "https://media-rockstargames-com.akamaized.net/tina-uploads/tina-modules/k95o9/e8da74b0d4907d9fcb519463c4f6f38978cd2756.jpg",
+        "Destination": {
+          "url": "https://www.rockstargames.com/gta-online/businesses/drug-wars",
+          "text": "Los Santos Drug Wars"
+        }
+      }
+    },
+    {
+      "key": "b652255adc532d8a3f2bb1010ff68d4b",
+      "displayName": "Los Santos Tuners",
+      "properties": {
+        "Title": "Los Santos Tuners",
+        "Category": "recreation",
+        "ImageUrl": "https://media-rockstargames-com.akamaized.net/tina-uploads/tina-modules/3841/ea6bfdeb8147a4a83510ae012e8878dfd35db766.jpg",
+        "Destination": {
+          "url": "https://www.rockstargames.com/gta-online/recreation/los-santos-tuners",
+          "text": "Los Santos Tuners"
+        }
+      }
+    },
+    {
+      "key": "e3d647b521d434a023c11cf75c5000f8",
+      "displayName": "Lowriders",
+      "properties": {
+        "Title": "Lowriders",
+        "Category": "contact-missions",
+        "Destination": {
+          "url": "https://www.rockstargames.com/gta-online/contact-missions/lowriders",
+          "text": "Lowriders"
+        }
+      }
+    },
+    {
+      "key": "6bf343bacb2ae49d633eb76c0a7c2cea",
+      "displayName": "Madrazo Dispatch Services",
+      "properties": {
+        "Title": "Madrazo Dispatch Services",
+        "Category": "contact-missions",
+        "Destination": {
+          "url": "https://www.rockstargames.com/gta-online/contact-missions/dispatch-services",
+          "text": "Madrazo Dispatch Services"
+        }
+      }
+    },
+    {
+      "key": "9e80dc76db942142dadc7f778396b604",
+      "displayName": "Money Fronts",
+      "properties": {
+        "Title": "Money Fronts",
+        "Category": "businesses",
+        "ImageUrl": "https://media-rockstargames-com.akamaized.net/tina-uploads/tina-modules/a55a8/f3bbcd285daaaecbddfaf211ede7fdd86df36d08.jpg",
+        "Destination": {
+          "url": "https://www.rockstargames.com/gta-online/businesses/money-fronts",
+          "text": "Money Fronts"
+        }
+      }
+    },
+    {
+      "key": "cd41ce75c6c58fa36058d04bfe2b9364",
+      "displayName": "Operation Paper Trail",
+      "properties": {
+        "Title": "Operation Paper Trail",
+        "Category": "contact-missions",
+        "ImageUrl": "https://media-rockstargames-com.akamaized.net/tina-uploads/tina-modules/7o9o4/dea323f18ee608e2fdf882721be27323db0be258.jpg",
+        "Destination": {
+          "url": "https://www.rockstargames.com/gta-online/contact-missions/operation-paper-trail",
+          "text": "Operation Paper Trail"
+        }
+      }
+    },
+    {
+      "key": "cb4bf6ae11fdf253b4d53d9b73164f11",
+      "displayName": "Original Heists",
+      "properties": {
+        "Title": "Original Heists",
+        "Category": "heists",
+        "Destination": {
+          "url": "https://www.rockstargames.com/gta-online/heists/original-heists",
+          "text": "Original Heists"
+        }
+      }
+    },
+    {
+      "key": "1b520771e8999ceda9e9d73c4a40a0a1",
+      "displayName": "Oscar Guzman Flies Again",
+      "properties": {
+        "Title": "Oscar Guzman Flies Again",
+        "Category": "contact-missions",
+        "ImageUrl": "https://media-rockstargames-com.akamaized.net/tina-uploads/tina-modules/9575k/f4fb777486c3082958e4815900af2ffa23a6f2fc.jpg",
+        "Destination": {
+          "url": "https://www.rockstargames.com/gta-online/contact-missions/oscar-guzman-flies-again",
+          "text": "Oscar Guzman Flies Again"
+        }
+      }
+    },
+    {
+      "key": "16a6f05c5d0ff37ea56260b15a6bdc77",
+      "displayName": "Premium Deluxe Repo",
+      "properties": {
+        "Title": "Premium Deluxe Repo",
+        "Category": "contact-missions",
+        "Destination": {
+          "url": "https://www.rockstargames.com/gta-online/contact-missions/premium-deluxe-repo",
+          "text": "Premium Deluxe Repo"
+        }
+      }
+    },
+    {
+      "key": "206a95b0b59e4150267a4ebc01c56fbc",
+      "displayName": "San Andreas Mercenaries",
+      "properties": {
+        "Title": "San Andreas Mercenaries",
+        "Category": "contact-missions",
+        "ImageUrl": "https://media-rockstargames-com.akamaized.net/tina-uploads/tina-modules/o488o/fc3a0ec038fd328ef71472d4e3ce0e34033452f7.jpg",
+        "Destination": {
+          "url": "https://www.rockstargames.com/gta-online/contact-missions/san-andreas-mercenaries",
+          "text": "San Andreas Mercenaries"
+        }
+      }
+    },
+    {
+      "key": "c4073a31d115a0224f1575a9b5910617",
+      "displayName": "Smuggler's Run",
+      "properties": {
+        "Title": "Smuggler's Run",
+        "Category": "businesses",
+        "Destination": {
+          "url": "https://www.rockstargames.com/gta-online/businesses/smugglers-run",
+          "text": "Smuggler's Run"
+        }
+      }
+    },
+    {
+      "key": "6f490cc0caec98ec8eeca03546ad984d",
+      "displayName": "The Cayo Perico Heist",
+      "properties": {
+        "Title": "The Cayo Perico Heist",
+        "Category": "heists",
+        "ImageUrl": "https://media-rockstargames-com.akamaized.net/tina-uploads/tina-modules/k995/37f1bba624c46fb876090b7b2f1f96ad16835e8a.jpg",
+        "Destination": {
+          "url": "https://www.rockstargames.com/gta-online/heists/cayo-perico-heist",
+          "text": "The Cayo Perico Heist"
+        }
+      }
+    },
+    {
+      "key": "bf773fb00bb686ad07d35711ce63048e",
+      "displayName": "The Chop Shop",
+      "properties": {
+        "Title": "The Chop Shop",
+        "Category": "businesses",
+        "ImageUrl": "https://media-rockstargames-com.akamaized.net/tina-uploads/tina-modules/2a1k4/4efde3b3ce13f6254f61e546d69d445815994b9d.jpg",
+        "Destination": {
+          "url": "https://www.rockstargames.com/gta-online/businesses/chop-shop",
+          "text": "The Chop Shop"
+        }
+      }
+    },
+    {
+      "key": "68eef943128d279ad3d1b58c9c402836",
+      "displayName": "The Cluckin’ Bell Farm Raid",
+      "properties": {
+        "Title": "The Cluckin’ Bell Farm Raid",
+        "Category": "contact-missions",
+        "ImageUrl": "https://media-rockstargames-com.akamaized.net/tina-uploads/tina-modules/97535/7ee3c83d7780fca7bd8dc94cea58664222162890.jpg",
+        "Destination": {
+          "url": "https://www.rockstargames.com/gta-online/contact-missions/cluckin-bell-farm-raid",
+          "text": "The Cluckin’ Bell Farm Raid"
+        }
+      }
+    },
+    {
+      "key": "39ab68792bf69472c0995da52918079a",
+      "displayName": "The Contract",
+      "properties": {
+        "Title": "The Contract",
+        "Category": "businesses",
+        "ImageUrl": "https://media-rockstargames-com.akamaized.net/tina-uploads/tina-modules/6937/ea43b744d1bf067278257c9bd5066f505e133128.jpg",
+        "Destination": {
+          "url": "https://www.rockstargames.com/gta-online/businesses/the-contract",
+          "text": "The Contract"
+        }
+      }
+    },
+    {
+      "key": "6765c14fe8f9047236aba7a3d49d2ee9",
+      "displayName": "The Diamond Casino Heist",
+      "properties": {
+        "Title": "The Diamond Casino Heist",
+        "Category": "heists",
+        "Destination": {
+          "url": "https://www.rockstargames.com/gta-online/heists/diamond-casino-heist",
+          "text": "The Diamond Casino Heist"
+        }
+      }
+    },
+    {
+      "key": "79907ff29fa25a3d986bd04428c3c55d",
+      "displayName": "The Doomsday Heist",
+      "properties": {
+        "Title": "The Doomsday Heist",
+        "Category": "heists",
+        "Destination": {
+          "url": "https://www.rockstargames.com/gta-online/heists/doomsday-heist",
+          "text": "The Doomsday Heist"
+        }
+      }
+    },
+    {
+      "key": "bb0baa12fa7842cbbc0040ac4479ffa6",
+      "displayName": "The Kortz Center Heist",
+      "properties": {
+        "Title": "The Kortz Center Heist",
+        "Category": "heists",
+        "ImageUrl": "https://media-rockstargames-com.akamaized.net/tina-uploads/tina-modules/1511o/2b320273150935756db1f92e94aebd617970aad5.jpg",
+        "Destination": {
+          "url": "https://www.rockstargames.com/gta-online/heists/the-kortz-center-heist",
+          "text": "The Kortz Center Heist"
+        }
+      }
+    }
+  ]
+}
