@@ -13,7 +13,7 @@
  * Usage
  *   node --env-file=.env scripts/cms-bulk.mjs --spec scripts/specs/<file>.json [--dry] [options]
  *   node --env-file=.env scripts/cms-bulk.mjs --export <folderKey> --out scripts/specs/<file>.json
- *   npm run cms:bulk -- --spec scripts/specs/gta-career-cards.json --dry
+ *   npm run cms:bulk -- --spec scripts/specs/product-cards.json --dry
  *
  * Options
  *   --dry               plan only; make NO writes (strongly recommended first)
@@ -25,14 +25,14 @@
  *
  * Spec format (property values are PLAIN values; the script wraps them as {"value": ...})
  *   {
- *     "folder": { "name": "GTA Career Cards",            // created when missing
+ *     "folder": { "name": "Product Cards",               // created when missing
  *                 "parent": "env:ASSET_BASE_FOLDER_ID",   // key, or env:VAR (default shown)
  *                 "key": "optional explicit folder key" },
- *     "contentType": "GtaCareerCard",                      // default for items (or set per item)
+ *     "contentType": "AcmeProductCard",                    // default for items (or set per item)
  *     "locale": "en",
  *     "publish": true,
  *     "items": [
- *       { "displayName": "A Safehouse in the Hills", "key": "optional 32-hex key",
+ *       { "displayName": "Widget Pro", "key": "optional 32-hex key",
  *         "properties": { "Title": "…", "Destination": { "url": "…", "text": "…" } } }
  *     ]
  *   }

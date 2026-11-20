@@ -10,6 +10,9 @@
  *             breaking-change flag on the update)
  *   REMOTE+  properties that exist in the CMS but not in code (informational:
  *            `cms:push` never removes properties)
+ *   CMS+     allowedTypes / mayContainTypes in the CMS that are a superset of the code
+ *            (informational: all demo branches share one CMS, so baseline types such as
+ *             Page also allow other sites' blocks; never narrow them)
  *   LINT     preflight rules learned the hard way:
  *     L1  array-of-component property + elementEnabled behavior  (CMS rejects it)
  *     L2  `content` property/items without allowedTypes          (shared-block refs)
@@ -89,7 +92,20 @@ function compareType(local, remote) {
     }
   }
   const remoteOnly = Object.keys(remoteProps).filter((n) => !(n in localProps));
-  return { diffs, remoteOnly };
+
+  // Every demo branch shares ONE CMS. Baseline types such as Page collect allowed types from
+  // every branch that pushed to it, so a CMS list that is a SUPERSET of the code list is
+  // expected, not drift (and must never be "fixed" by narrowing it: other sites depend on it).
+  const extraAllowed = [];
+  const kept = diffs.filter((d) => {
+    if (!/(^|\.)(allowedTypes|mayContainTypes)$/.test(d.path) || !Array.isArray(d.want) || !Array.isArray(d.have)) return true;
+    const want = new Set(d.want.map(String));
+    const have = new Set(d.have.map(String));
+    if (![...want].every((w) => have.has(w))) return true;
+    extraAllowed.push({ path: d.path, extra: [...have].filter((h) => !want.has(h)) });
+    return false;
+  });
+  return { diffs: kept, remoteOnly, extraAllowed };
 }
 
 // ── Lint ────────────────────────────────────────────────────────────────────
@@ -214,9 +230,9 @@ async function main() {
 
   const results = localTypes.map((local) => {
     const remote = remoteByKey.get(local.key);
-    if (!remote) return { key: local.key, status: 'missing', diffs: [], remoteOnly: [] };
-    const { diffs, remoteOnly } = compareType(local, remote);
-    return { key: local.key, status: diffs.length ? 'drift' : 'in-sync', diffs, remoteOnly };
+    if (!remote) return { key: local.key, status: 'missing', diffs: [], remoteOnly: [], extraAllowed: [] };
+    const { diffs, remoteOnly, extraAllowed } = compareType(local, remote);
+    return { key: local.key, status: diffs.length ? 'drift' : 'in-sync', diffs, remoteOnly, extraAllowed };
   });
 
   const lint = args['no-lint'] ? [] : [...(await lintSources()), ...lintTypes(localTypes, knownKeys)];
@@ -246,6 +262,9 @@ async function main() {
       }
       if (r.remoteOnly.length) {
         log(c.dim(`        REMOTE+ ${r.remoteOnly.join(', ')} exist only in the CMS (cms:push will not remove them)`));
+      }
+      for (const e of r.extraAllowed ?? []) {
+        log(c.dim(`        CMS+    ${e.path} also allows ${e.extra.join(', ')} (added by other branches sharing this CMS; never narrow it)`));
       }
     }
 

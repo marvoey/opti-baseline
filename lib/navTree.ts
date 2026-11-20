@@ -9,7 +9,7 @@ import { siteOrigin } from '@/lib/siteHost';
  *
  * Reads every published page of this site (scoped by host, like the catch-all
  * route) from Optimizely Graph and rebuilds the hierarchy from the pages' URLs:
- * `/gta-online/career-progress/` is a child of `/gta-online/`. Order follows the
+ * `/products/widgets/` is a child of `/products/`. Order follows the
  * CMS sort order (the order pages are arranged in the content tree), then name.
  * Labels are the page display names.
  *

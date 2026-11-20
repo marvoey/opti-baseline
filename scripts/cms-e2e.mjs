@@ -20,7 +20,7 @@
  *   npm run cms:e2e -- --wait 120
  *
  * Options
- *   --paths /,/gta-online/        pages to check (default: every _Page/_Experience on DEPLOYED_URL)
+ *   --paths /,/products/          pages to check (default: every _Page/_Experience on DEPLOYED_URL)
  *   --wait <seconds>              poll Graph this long for indexing to catch up (default 0)
  *   --base <url> | --local        where to render-check (default: auto = local if up, else DEPLOYED_URL)
  *   --min-coverage <0..1>         share of expected strings that must appear in HTML (default 0.8)
@@ -47,7 +47,7 @@ import { findMetaData, readFromPath } from '@optimizely/cms-cli/dist/service/uti
 import { ROOT, c, createCms, fatal, finish, graphQuery, normKey, parseArgs, pool, requireVars, sleep } from './lib/cms-api.mjs';
 
 // Optional project config: scripts/cms-e2e.config.json
-//   { "clientRenderedTypes": ["GtaCarouselBlock"], "minCoverage": 0.8 }
+//   { "clientRenderedTypes": ["AcmeCarouselBlock"], "minCoverage": 0.8 }
 // clientRenderedTypes = components that only put their FIRST array item in the server HTML
 // (carousels/tabs that show one item at a time) — later items are not expected in the markup.
 function loadProjectConfig() {
