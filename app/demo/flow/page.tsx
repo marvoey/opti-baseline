@@ -24,7 +24,8 @@ import './flow.css';
  * canvas" links point at /demo/rfi instead of the Mark canvas. If the canvas changes,
  * regenerate rather than hand-merge, then re-apply that change. A second
  * difference: the sidebar Glossary (./_sections/Glossary.tsx, glossaryData.ts)
- * is hand-written and not in the canvas.
+ * is hand-written and not in the canvas. A third: section 3 (DemoFlow.tsx) was rewritten
+ * as an explicit OPEN / SAY / DO / ASK script, so do not regenerate it over the top.
  *
  * Lives outside app/[locale]: proxy.ts already excludes /demo from the locale
  * rewrite, so this is a plain static route, not CMS content. It holds internal

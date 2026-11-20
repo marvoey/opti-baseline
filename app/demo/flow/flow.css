@@ -168,6 +168,45 @@
   .dfl .toc a { display: block; padding: 0.28rem 0.6rem; border-radius: 9999px; font-size: 0.86rem; }
   .dfl .toc a:hover { background: var(--lf); }
 
+  /* Step-by-step script in section 3 (not in the canvas): numbered steps with an OPEN / SAY / DO / ASK tag. */
+  .dfl ol.steps { list-style: none; counter-reset: step; padding: 0; margin: 0.5rem 0 0; }
+  .dfl ol.steps > li { counter-increment: step; display: flex; align-items: flex-start; gap: 0.55rem; margin: 0.6rem 0; }
+  .dfl ol.steps > li::before {
+    content: counter(step);
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-top: 0.05rem;
+    border-radius: 9999px;
+    background: var(--fir);
+    color: #fff;
+    font-family: var(--dfl-mono);
+    font-size: 0.7rem;
+  }
+  .dfl .sk {
+    flex: none;
+    display: inline-block;
+    min-width: 3.4rem;
+    text-align: center;
+    font-family: var(--dfl-mono);
+    font-size: 0.66rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border: 1.5px solid var(--fir);
+    border-radius: 9999px;
+    padding: 0.1rem 0.5rem;
+    margin-top: 0.1rem;
+  }
+  .dfl .sk-open { background: var(--blue); }
+  .dfl .sk-say { background: var(--lf); }
+  .dfl .sk-do { background: #fff; }
+  .dfl .sk-ask { background: var(--warn); }
+  .dfl .step-body { flex: 1; min-width: 0; }
+  .dfl .step-body .say { margin: 0.3rem 0; font-style: normal; }
+  .dfl .step-body .say strong { font-weight: 600; }
+
   /* Sidebar glossary (not in the canvas): scrolls inside the sticky sidebar. */
   .dfl .gloss-search {
     width: 100%;

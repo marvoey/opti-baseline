@@ -155,7 +155,7 @@ export const GLOSSARY: GlossaryGroup[] = [
       { term: 'Act 0 to 8', meaning: 'The steps of the 60-minute demo in section 3.' },
       { term: 'G1 to G12', meaning: 'Gaps: build tasks listed in section 4. G1 personalization, G2 site settings, G3 cleanup, G4 SEO files, G5 Spanish, G6 taxonomy.' },
       { term: 'RFI / RFI 5.12', meaning: 'Request for Information: eHealth’s written requirements. Numbers like 5.12 or §8 are requirement IDs.' },
-      { term: 'POC', meaning: 'Proof of concept: the small scoped build proposed at the end (Act 8).' },
+      { term: 'POC', meaning: 'Proof of concept: a small trial build. Don\u2019t raise it yourself; only talk about it if they do.' },
       { term: 'READY / BUILD / TALK', meaning: 'Works today / needs a build before the call / slide or narrative only. DONE, FIXED and LIVE mean it’s finished.' },
     ],
   },
