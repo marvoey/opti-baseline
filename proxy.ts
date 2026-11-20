@@ -115,13 +115,15 @@ function withVisitorCookies(response: NextResponse, visitor: Visitor): NextRespo
  * Password gates for internal pages. HTTP Basic auth: the browser asks once per
  * session; the username is ignored. Each gate fails closed: with its env var unset,
  * nobody gets in.
- *  - /demo/rfi (internal RFI prep, account-team notes): RFI_PAGE_PASSWORD.
+ *  - /demo/rfi (internal RFI prep, account-team notes) and /demo/flow (the Friday
+ *    demo script and gap plan): RFI_PAGE_PASSWORD, one shared internal-prep password.
  *    /demo/rfi-overview is the customer-facing version and stays open.
  *  - /admin (content-type inspector, can delete CMS content types): ADMIN_PASSWORD.
  *    The delete server action re-checks it (app/admin/actions.ts).
  */
 const GATES = [
   { path: '/demo/rfi', passwordEnv: 'RFI_PAGE_PASSWORD', realm: 'RFI notes' },
+  { path: '/demo/flow', passwordEnv: 'RFI_PAGE_PASSWORD', realm: 'Demo flow' },
   { path: '/admin', passwordEnv: 'ADMIN_PASSWORD', realm: 'Admin' },
 ] as const;
 
@@ -190,6 +192,7 @@ export const config = {
     '/((?!api|_next/static|_next/image|preview|admin|styleguide|applications|demo|favicon.ico|.*\\..*).*)',
     // Password-gated paths (see GATES above).
     '/demo/rfi/:path*',
+    '/demo/flow/:path*',
     '/admin/:path*',
   ],
 };
