@@ -19,6 +19,7 @@
     "seed:hero": "node scripts/seed-atomic-hero.mjs",
     "cms:check": "node --env-file=.env scripts/check-content-types.mjs",
     "mark-tools:token": "node -e \"console.log(require('node:crypto').randomBytes(32).toString('base64url'))\"",
+    "test:basic-auth": "node --experimental-strip-types --disable-warning=ExperimentalWarning --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test \"lib/__tests__/basicAuth.test.ts\"",
     "test:mark-tools": "node --experimental-strip-types --disable-warning=ExperimentalWarning --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test \"lib/mark-tools/__tests__/*.test.ts\""
   },
   "dependencies": {

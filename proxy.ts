@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { checkBasicAuth } from '@/lib/basicAuth';
 import { LOCALE_HEADER, LOCALE_SEGMENTS, stripLocale } from '@/lib/locales';
 import { CHROME_HEADER, LANDING_CHROME, isLandingPath } from '@/lib/landing';
 import {
@@ -110,8 +111,48 @@ function withVisitorCookies(response: NextResponse, visitor: Visitor): NextRespo
   return response;
 }
 
+/**
+ * Password gates for internal pages. HTTP Basic auth: the browser asks once per
+ * session; the username is ignored. Each gate fails closed: with its env var unset,
+ * nobody gets in.
+ *  - /demo/rfi (internal RFI prep, account-team notes): RFI_PAGE_PASSWORD.
+ *    /demo/rfi-overview is the customer-facing version and stays open.
+ *  - /admin (content-type inspector, can delete CMS content types): ADMIN_PASSWORD.
+ *    The delete server action re-checks it (app/admin/actions.ts).
+ */
+const GATES = [
+  { path: '/demo/rfi', passwordEnv: 'RFI_PAGE_PASSWORD', realm: 'RFI notes' },
+  { path: '/admin', passwordEnv: 'ADMIN_PASSWORD', realm: 'Admin' },
+] as const;
+
+const findGate = (pathname: string) =>
+  GATES.find(({ path }) => pathname === path || pathname.startsWith(`${path}/`));
+
+function gateRequest(request: NextRequest, gate: (typeof GATES)[number]): NextResponse {
+  const password = process.env[gate.passwordEnv] ?? '';
+  const noStore = { 'Cache-Control': 'private, no-store' };
+
+  if (!password) {
+    return new NextResponse(`This page is locked. Set ${gate.passwordEnv} to unlock it.`, {
+      status: 503,
+      headers: noStore,
+    });
+  }
+  if (!checkBasicAuth(request.headers.get('authorization'), password)) {
+    return new NextResponse('Password required.', {
+      status: 401,
+      headers: { ...noStore, 'WWW-Authenticate': `Basic realm="${gate.realm}", charset="UTF-8"` },
+    });
+  }
+  const response = NextResponse.next();
+  response.headers.set('Cache-Control', noStore['Cache-Control']);
+  return response;
+}
+
 export function proxy(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
+  const gate = findGate(pathname);
+  if (gate) return gateRequest(request, gate);
   const seg = firstSegment(pathname);
   const visitor = identify(request);
 
@@ -140,9 +181,15 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  // Run on everything EXCEPT API, Next internals, the preview/admin/styleguide
-  // routes, and any path containing a dot (static assets like /logo.svg). The
+  // Locale routing runs on everything EXCEPT API, Next internals, the preview/admin/
+  // styleguide routes, and any path containing a dot (static assets like /logo.svg). The
   // preview, admin and styleguide routes live outside [locale] and must not be
-  // rewritten into a locale.
-  matcher: ['/((?!api|_next/static|_next/image|preview|admin|styleguide|applications|demo|favicon.ico|.*\\..*).*)'],
+  // rewritten into a locale. The extra entries below are the password gates only: for
+  // those paths the proxy checks the password and never rewrites.
+  matcher: [
+    '/((?!api|_next/static|_next/image|preview|admin|styleguide|applications|demo|favicon.ico|.*\\..*).*)',
+    // Password-gated paths (see GATES above).
+    '/demo/rfi/:path*',
+    '/admin/:path*',
+  ],
 };
