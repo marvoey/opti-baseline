@@ -1,0 +1,91 @@
+/*
+ * Extra styles for /demo/rfi-overview. Builds on ../rfi/rfi.css (which defines
+ * .card, .chip, .doc-table, .stat, .flow...) and stays scoped under
+ * .rfi-doc.rfi-overview so nothing leaks into the CMS-rendered site.
+ */
+
+.rfi-doc.rfi-overview .lede { font-size: 1.12rem; }
+
+.rfi-doc.rfi-overview .eyebrow {
+  font-family: var(--rfi-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+/* Header buttons */
+.rfi-doc.rfi-overview .pill-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem 1.2rem;
+  border: 2px solid var(--fir);
+  border-radius: 9999px;
+  background: var(--lf);
+  font-weight: 500;
+  transition: transform 120ms ease;
+}
+.rfi-doc.rfi-overview .pill-link:hover { transform: translateY(-1px); }
+.rfi-doc.rfi-overview .pill-link-ghost { background: #fff; }
+
+/* "What we heard" cards */
+.rfi-doc.rfi-overview .heard {
+  background: var(--n2);
+  border: 2px solid var(--fir);
+  border-radius: 24px;
+  padding: 1.1rem 1.25rem;
+}
+.rfi-doc.rfi-overview .heard-title {
+  font-family: var(--rfi-condensed);
+  font-weight: 800;
+  font-size: 1.2rem;
+  line-height: 1.1;
+  margin-bottom: 0.35rem;
+}
+
+/* Hypothesis callout */
+.rfi-doc.rfi-overview .callout {
+  background: var(--blue);
+  border: 2px solid var(--fir);
+  border-radius: 24px;
+  padding: 1.1rem 1.25rem;
+}
+.rfi-doc.rfi-overview .callout-title { font-weight: 700; margin-bottom: 0.35rem; }
+
+.rfi-doc.rfi-overview .note {
+  background: var(--n2);
+  border-radius: 16px;
+  padding: 0.75rem 1rem;
+  margin-top: 1rem;
+}
+
+/* Next-step card */
+.rfi-doc.rfi-overview .card-accent { background: var(--lf); }
+
+/* Collapsible original RFI */
+.rfi-doc.rfi-overview details > summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  list-style: none;
+}
+.rfi-doc.rfi-overview details > summary::-webkit-details-marker { display: none; }
+.rfi-doc.rfi-overview .summary-title {
+  font-family: var(--rfi-condensed);
+  font-weight: 800;
+  font-size: 1.5rem;
+  flex: 1;
+}
+.rfi-doc.rfi-overview .summary-hint {
+  font-family: var(--rfi-mono);
+  font-size: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  border: 1.5px solid var(--fir);
+  border-radius: 9999px;
+}
+.rfi-doc.rfi-overview details[open] .summary-hint { background: var(--lf); }
+.rfi-doc.rfi-overview .summary-hint::after { content: 'Show questionnaire'; }
+.rfi-doc.rfi-overview details[open] .summary-hint::after { content: 'Hide questionnaire'; }
