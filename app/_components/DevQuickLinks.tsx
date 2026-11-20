@@ -8,7 +8,10 @@ const PAGE_FILE = /^page\.(tsx|ts|jsx|js|mdx)$/;
 // Route handlers (for example /demo/fx-guide, a self-contained HTML document) are listed too.
 const ROUTE_FILE = /^route\.(ts|js)$/;
 
-const toLabel = (segment: string) =>
+// Always listed first.
+const HOME_LINK: QuickLink = { label: 'Home', href: '/' };
+
+const toLabel =(segment: string) =>
   segment
     .replace(/[-_]+/g, ' ')
     .replace(/\b\w/g, (c) => c.toUpperCase());
@@ -53,5 +56,5 @@ export default function DevQuickLinks() {
     collectLinks(path.join(process.cwd(), 'app', root), root, []),
   );
   if (links.length === 0) return null;
-  return <DevQuickLinksMenu links={links} />;
+  return <DevQuickLinksMenu links={[HOME_LINK, ...links]} />;
 }
