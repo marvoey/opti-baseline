@@ -9,6 +9,7 @@ import Personalization from './_sections/Personalization';
 import RfiCoverage from './_sections/RfiCoverage';
 import DiscoveryQuestions from './_sections/DiscoveryQuestions';
 import Checklist from './_sections/Checklist';
+import Glossary from './_sections/Glossary';
 import './flow.css';
 
 /**
@@ -21,7 +22,9 @@ import './flow.css';
  * script (forcing target="_blank" on external links) is dropped: every link
  * already has it. One deliberate difference from the canvas: its four "RFI summary
  * canvas" links point at /demo/rfi instead of the Mark canvas. If the canvas changes,
- * regenerate rather than hand-merge, then re-apply that change.
+ * regenerate rather than hand-merge, then re-apply that change. A second
+ * difference: the sidebar Glossary (./_sections/Glossary.tsx, glossaryData.ts)
+ * is hand-written and not in the canvas.
  *
  * Lives outside app/[locale]: proxy.ts already excludes /demo from the locale
  * rewrite, so this is a plain static route, not CMS content. It holds internal
@@ -65,7 +68,9 @@ export default function DemoFlowPage() {
       </header>
       <main className="max-w-6xl mx-auto px-5 pb-16 grid grid-cols-1 lg:grid-cols-[220px_1fr] gap-8">
         <aside className="hidden lg:block">
-          <nav className="card p-4! sticky top-4 toc">
+          {/* Sticky as one unit: contents on top, glossary below, which scrolls inside the leftover height. */}
+          <div className="sticky top-4 flex max-h-[calc(100vh-2rem)] flex-col gap-3">
+          <nav className="card p-4! toc shrink-0">
             <div className="chip c-n mb-3">Contents</div>
             <a href="#links">★ Quick links</a>
             <a href="#angle">1. The angle</a>
@@ -77,6 +82,8 @@ export default function DemoFlowPage() {
             <a href="#questions">7. Discovery questions</a>
             <a href="#checklist">8. Pre-call checklist</a>
           </nav>
+          <Glossary />
+          </div>
         </aside>
         <div className="space-y-8">
           {/* QUICK LINKS */}
