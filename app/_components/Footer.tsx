@@ -1,23 +1,27 @@
 import { siteConfig } from '@/lib/siteConfig';
 
+/** Light footer (Neutral 3 with Dark Fir text and rule), per the brand's text-colour rule. */
 const Footer = () => (
-  <footer className="bg-blue-950 text-white pt-16 pb-8" data-cms-group="Footer">
-    <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+  <footer className="border-t-2 border-dark-fir bg-neutral-3 pb-8 pt-14 text-dark-fir" data-cms-group="Footer">
+    <div className="container mx-auto mb-12 grid grid-cols-1 gap-10 px-4 md:grid-cols-2 lg:grid-cols-4">
       <div>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={siteConfig.logoSrc} alt={siteConfig.logoAlt} className="h-10 w-auto mb-6" />
-        <p className="text-white/50 text-sm leading-relaxed">{siteConfig.footerTagline}</p>
+        <img src={siteConfig.logoSrc} alt={siteConfig.logoAlt} width={105} height={36} className="mb-5 h-9 w-auto" />
+        <p className="text-sm leading-relaxed">{siteConfig.footerTagline}</p>
       </div>
       {siteConfig.footerColumns.map((col) => (
         <div key={col.heading}>
-          <h4 className="text-blue-200 uppercase tracking-widest text-xs font-bold mb-5">
-            {col.heading}
-          </h4>
-          <ul className="space-y-3 text-sm">
+          <h2 className="mb-4 font-sans text-sm font-bold">{col.heading}</h2>
+          <ul className="space-y-2.5 text-sm">
             {col.links.map((link) => (
               <li key={link.label}>
-                <a href={link.href} className="text-white/60 hover:text-white transition-colors">
+                <a
+                  href={link.href}
+                  {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                  className="underline decoration-dark-fir/30 underline-offset-4 hover:decoration-dark-fir"
+                >
                   {link.label}
+                  {link.external ? <span className="sr-only"> (opens in a new tab)</span> : null}
                 </a>
               </li>
             ))}
@@ -25,15 +29,17 @@ const Footer = () => (
         </div>
       ))}
     </div>
-    <div className="container mx-auto px-4 pt-8 border-t border-white/10 text-white/40 text-xs flex flex-wrap justify-between gap-4">
+    <div className="container mx-auto flex flex-wrap justify-between gap-4 border-t border-dark-fir/20 px-4 pt-6 text-xs">
       <p>{siteConfig.footerLegal}</p>
-      <div className="flex gap-6">
-        {siteConfig.footerLegalLinks.map((link) => (
-          <a key={link.label} href={link.href} className="hover:text-white transition-colors">
-            {link.label}
-          </a>
-        ))}
-      </div>
+      {siteConfig.footerLegalLinks.length > 0 && (
+        <div className="flex gap-6">
+          {siteConfig.footerLegalLinks.map((link) => (
+            <a key={link.label} href={link.href} className="hover:underline">
+              {link.label}
+            </a>
+          ))}
+        </div>
+      )}
     </div>
   </footer>
 );

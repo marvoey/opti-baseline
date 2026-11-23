@@ -1,87 +1,77 @@
 /**
- * Site config — the single place to rebrand the non-colour chrome for a new
- * demo. Colours live in app/globals.css (the `@theme` token block); everything
- * else — site name, logo, header links, footer columns, legal copy — lives here.
- * The primary nav itself comes from the CMS content tree (lib/navTree.ts).
+ * Site config: the single place for the non-colour chrome of this site. Colours live in
+ * app/globals.css (the `@theme` token block). The primary nav comes from the CMS content tree
+ * (lib/navTree.ts).
  *
- * To stand up a new demo: edit this file, drop a new public/logo.svg, and tweak
- * the hex values in app/globals.css. No component edits required.
+ * This worktree is the dedicated setup guide site (branch setup-guide, prefix Guide): a public
+ * homepage that explains the guide, plus the signed-in guide itself at /setup-guide.
  */
 
 export type NavLink = { label: string; href: string; external?: boolean };
 export type FooterColumn = { heading: string; links: NavLink[] };
 
 export const siteConfig = {
-  /** Used for the document <title> fallback and the logo alt text. */
-  name: 'Optimizely',
+  /** Used for the document <title> suffix ("<page> | opti-baseline"). */
+  name: 'opti-baseline',
   /** Default browser-tab title (per-page titles override via CMS MetaTitle). */
-  title: 'Optimizely | Digital Experience Platform',
+  title: 'Setup guide | opti-baseline',
   /** Default meta description. */
   description:
-    'Optimizely — the digital experience platform that helps teams create, test, and optimize digital experiences at scale.',
+    'A step-by-step guide that gets you from a brand-new laptop to a working Optimizely CMS demo site. No coding experience needed.',
 
-  /** Header logo (place the asset in /public). */
-  logoSrc: '/Optimizely_Primary-Logo_Medium_Green_RGB.png',
+  /** Header logo (place the asset in /public). The SVG stays sharp at every size. */
+  logoSrc: '/logo.svg',
   logoAlt: 'Optimizely',
+  /** Small label next to the logo, so people know which site they are on. */
+  siteLabel: 'Setup guide',
 
-  /** Top utility bar. */
-  topNavLinks: [
-    { label: 'Partners', href: '#' },
-    { label: 'Support', href: '#' },
-  ] satisfies NavLink[],
+  /** Top utility bar. Empty: the bar is not shown. */
+  topNavLinks: [] as NavLink[],
 
   /**
    * Primary header navigation is built from the CMS content tree (lib/navTree.ts):
    * the start page, then its child pages, with deeper pages in a dropdown.
-   * These two settings are the only static parts.
    */
   /** Label for the start page (the CMS names it after the site). */
   homeNavLabel: 'Home',
-  /** Links that are not CMS pages (external sites, etc.), appended after the tree. */
-  mainNavExtraLinks: [] as NavLink[],
+  /** Links that are not CMS pages, appended after the tree. */
+  mainNavExtraLinks: [{ label: 'The guide', href: '/setup-guide' }] as NavLink[],
   /** Header call-to-action button. */
-  primaryCta: { label: 'Get started free', href: '#' } satisfies NavLink,
-  /** Account / login button label. */
-  accountLabel: 'Log in',
+  primaryCta: { label: 'Create your account', href: '/setup-guide/signup' } satisfies NavLink,
+  /** Account / sign-in link. */
+  accountLabel: 'Sign in',
+  accountHref: '/setup-guide/login',
 
   /** Footer. */
   footerTagline:
-    'Create, test, and optimize digital experiences that turn visitors into loyal customers.',
+    'Step-by-step setup for building Optimizely CMS demo sites with opti-baseline. No coding experience needed.',
   footerColumns: [
     {
-      heading: 'Products',
+      heading: 'The guide',
       links: [
-        { label: 'Content Management', href: '#' },
-        { label: 'Experimentation', href: '#' },
-        { label: 'Commerce', href: '#' },
-        { label: 'Personalization', href: '#' },
+        { label: 'Create your account', href: '/setup-guide/signup' },
+        { label: 'Sign in', href: '/setup-guide/login' },
+        { label: 'Open the guide', href: '/setup-guide' },
       ],
     },
     {
-      heading: 'Solutions',
+      heading: 'Tools you’ll install',
       links: [
-        { label: 'B2B Commerce', href: '#' },
-        { label: 'B2C Commerce', href: '#' },
-        { label: 'Digital Marketing', href: '#' },
-        { label: 'Customer Journeys', href: '#' },
+        { label: 'VS Code', href: 'https://code.visualstudio.com/download', external: true },
+        { label: 'Node.js', href: 'https://nodejs.org/en/download', external: true },
+        { label: 'Git', href: 'https://git-scm.com/downloads', external: true },
       ],
     },
     {
-      heading: 'Resources',
+      heading: 'Learn more',
       links: [
-        { label: 'Blog', href: '#' },
-        { label: 'Documentation', href: '#' },
-        { label: 'Community', href: '#' },
-        { label: 'Webinars', href: '#' },
+        { label: 'Optimizely CMS (SaaS) docs', href: 'https://docs.optimizely.com/content-management-system/', external: true },
+        { label: 'Optimizely Graph docs', href: 'https://docs.optimizely.com/graph/', external: true },
       ],
     },
-  ] satisfies FooterColumn[],
-  footerLegal: `© ${2026} Optimizely. All rights reserved.`,
-  footerLegalLinks: [
-    { label: 'Privacy Policy', href: '#' },
-    { label: 'Terms of Service', href: '#' },
-    { label: 'Cookie Settings', href: '#' },
-  ] satisfies NavLink[],
+  ] as FooterColumn[],
+  footerLegal: `© ${2026} Optimizely. For internal use. Built with opti-baseline on Optimizely CMS.`,
+  footerLegalLinks: [] as NavLink[],
 } as const;
 
 export type SiteConfig = typeof siteConfig;

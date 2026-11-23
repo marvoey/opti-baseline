@@ -13,6 +13,14 @@ import BlankSection from './BlankSection';
 import Page, { PageContentType } from './Page';
 import RichText, { RichTextContentType } from './RichText';
 import GuideUser, { GuideUserContentType } from './GuideUser';
+import GuideHero, { GuideHeroContentType } from './GuideHero';
+import GuideFeatureGrid, { GuideFeatureGridContentType } from './GuideFeatureGrid';
+import GuideSteps, { GuideStepsContentType } from './GuideSteps';
+import GuideFaq, { GuideFaqContentType } from './GuideFaq';
+import GuideCtaBanner, { GuideCtaBannerContentType } from './GuideCtaBanner';
+import { GuideFeatureItemContentType } from './GuideFeatureItem';
+import { GuideStepItemContentType } from './GuideStepItem';
+import { GuideFaqItemContentType } from './GuideFaqItem';
 
 /**
  * Single configuration + registration point for the Optimizely SDK.
@@ -52,6 +60,15 @@ export const registeredContentTypes = [
   RichTextContentType,
   // Site data: setup guide accounts (never rendered, never in Graph)
   GuideUserContentType,
+  // Setup guide homepage blocks, and the items they contain (rendered by their parent block)
+  GuideHeroContentType,
+  GuideFeatureGridContentType,
+  GuideStepsContentType,
+  GuideFaqContentType,
+  GuideCtaBannerContentType,
+  GuideFeatureItemContentType,
+  GuideStepItemContentType,
+  GuideFaqItemContentType,
 ];
 
 initContentTypeRegistry(registeredContentTypes);
@@ -66,5 +83,10 @@ initReactComponentRegistry({
     // Blocks (resolver key === content-type key)
     RichTextBlock: RichText,
     GuideUser,
+    GuideHero,
+    GuideFeatureGrid,
+    GuideSteps,
+    GuideFaq,
+    GuideCtaBanner,
   },
 });

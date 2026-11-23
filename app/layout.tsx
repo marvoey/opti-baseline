@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Inter } from "next/font/google";
+import { Roboto, Roboto_Condensed } from "next/font/google";
 import Script from "next/script";
 import OptimizelyActivation from "./_components/OptimizelyActivation";
 import DevQuickLinks from "./_components/DevQuickLinks";
@@ -7,18 +7,18 @@ import { siteConfig } from "@/lib/siteConfig";
 import "./globals.css";
 import "@/cms/registry";
 
-// VC Nudge (Optimizely's display face) is a licensed face; Space Grotesk is the
-// closest free substitute — chunky, geometric grotesque with strong personality.
-const displayFont = Space_Grotesk({
+// VC Nudge (headlines) and Die Grotesk B (body) are licensed faces. The Optimizely Brand Pack
+// names Roboto Condensed and Roboto as their fallbacks, the same pair /setup-guide uses.
+const displayFont = Roboto_Condensed({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["700", "800"],
 });
 
-// Die Grotesk B (the brand body face) → Inter as the closest neutral grotesque.
-const bodyFont = Inter({
+const bodyFont = Roboto({
   variable: "--font-body",
   subsets: ["latin"],
+  weight: ["400", "500", "700"],
 });
 
 export const metadata: Metadata = {

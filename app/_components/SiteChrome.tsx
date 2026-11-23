@@ -22,7 +22,7 @@ export default function SiteChrome({
     <>
       <TopNav />
       <MainNav locale={locale} />
-      <div className="flex-1">{children}</div>
+      <div className="flex-1 bg-white text-dark-fir">{children}</div>
       <Footer />
     </>
   );
