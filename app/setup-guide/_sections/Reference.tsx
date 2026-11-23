@@ -535,32 +535,23 @@ export function Troubleshooting() {
   );
 }
 
-const ENV_ROWS: [setting: string, purpose: React.ReactNode, who: string][] = [
-  ['PORT', 'Which address number the site uses on your laptop. The main copy uses 3034.', 'Facilitator / site:new'],
-  ['OPTIMIZELY_DEFAULT_LOCALE', 'The site’s default language.', 'Facilitator'],
-  ['OPTIMIZELY_CMS_URL', 'The address of the CMS.', 'Facilitator'],
-  [
-    'OPTIMIZELY_CMS_CLIENT_ID / _SECRET',
-    'A username and password that let the tools read and update the CMS setup.',
-    'Facilitator',
-  ],
+const ENV_ROWS: [setting: string, purpose: React.ReactNode][] = [
+  ['PORT', 'Which address number the site uses on your laptop. The main copy uses 3034.'],
+  ['OPTIMIZELY_DEFAULT_LOCALE', 'The site’s default language.'],
+  ['OPTIMIZELY_CMS_URL', 'The address of the CMS.'],
+  ['OPTIMIZELY_CMS_CLIENT_ID / _SECRET', 'A username and password that let the tools read and update the CMS setup.'],
   [
     'OPTIMIZELY_GRAPH_SINGLE_KEY',
     <>
       <b>Required.</b> The key for reading published content. The site won’t start without it.
     </>,
-    'Facilitator',
   ],
-  ['OPTIMIZELY_GRAPH_GATEWAY', 'The address for reading content. Optional.', 'Facilitator'],
-  ['DEPLOYED_URL', 'The site’s public web address. Used to find the right site’s content.', 'Facilitator / site:new'],
-  ['SITE_BRANCH / SITE_PREFIX / SITE_NAME', 'Which demo site this folder belongs to. Used by safety checks.', 'site:new'],
-  [
-    'HOME_PAGE_CONTENT_ID / ASSET_BASE_FOLDER_ID',
-    'Where the site’s pages and shared content live in the CMS.',
-    'Facilitator / site:new',
-  ],
-  ['NEXT_PUBLIC_OPTIMIZELY_WEB_SNIPPET_ID', 'Optional. Turns on Optimizely Web Experimentation.', 'Optional'],
-  ['MARK_TOOLS_*', 'Optional. Lets Mark agents read and edit the project’s files.', 'Optional'],
+  ['OPTIMIZELY_GRAPH_GATEWAY', 'The address for reading content. Optional.'],
+  ['DEPLOYED_URL', 'The site’s public web address. Used to find the right site’s content.'],
+  ['SITE_BRANCH / SITE_PREFIX / SITE_NAME', 'Which demo site this folder belongs to. Used by safety checks.'],
+  ['HOME_PAGE_CONTENT_ID / ASSET_BASE_FOLDER_ID', 'Where the site’s pages and shared content live in the CMS.'],
+  ['NEXT_PUBLIC_OPTIMIZELY_WEB_SNIPPET_ID', 'Optional. Turns on Optimizely Web Experimentation.'],
+  ['MARK_TOOLS_*', 'Optional. Lets Mark agents read and edit the project’s files.'],
 ];
 
 export function EnvReference() {
@@ -576,17 +567,15 @@ export function EnvReference() {
           <tr>
             <th>Setting</th>
             <th>What it’s for</th>
-            <th>Who fills it in</th>
           </tr>
         </thead>
         <tbody>
-          {ENV_ROWS.map(([setting, purpose, who]) => (
+          {ENV_ROWS.map(([setting, purpose]) => (
             <tr key={setting}>
               <td>
                 <code>{setting}</code>
               </td>
               <td>{purpose}</td>
-              <td>{who}</td>
             </tr>
           ))}
         </tbody>
