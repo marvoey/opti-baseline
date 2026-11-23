@@ -33,20 +33,27 @@ export const CHECKS = {
   'mac-s3': 'git --version shows a version number',
   'native-s3': 'git --version shows a version number',
   'wsl-s3': 'git --version shows a version number',
-  // Steps 4 to 11 (same for everyone)
+  // Steps 4 to 8 (same for everyone; Step 8 is the last one people do on their own)
   s4: 'node -v shows v22.x.x',
   s4b: 'node -v still shows v22 in a new terminal',
   s5: 'yarn --version shows 4.14.1',
   s6: 'All five lines look right',
   s7: 'The project is open in VS Code, and the terminal prompt includes opti-baseline-main',
-  s8: 'A .env file is saved next to package.json',
-  s9: 'yarn install finished with “Done”',
+  's8-install': 'yarn install finished with “Done”',
+  // Steps 9 to 11: together in the live session
+  's9-env': 'A .env file is saved next to package.json',
   s10a: 'yarn cms:align showed a list (no 401/403 error)',
   s10b: 'http://localhost:3034 loads in the browser',
   s11: 'Folder attached in Mark Desktop (or skipped)',
 } as const;
 
 export type CheckId = keyof typeof CHECKS;
+
+/**
+ * The last step people do on their own. Everything after it is done together in the live session.
+ * The progress bar, the "Stop here" card and the facilitator view all follow this number.
+ */
+export const HOMEWORK_LAST_STEP = 8;
 export type Os = 'mac' | 'win';
 export type Shell = 'zsh' | 'bash';
 /** Windows only: PowerShell (default) or WSL (advanced). */
@@ -73,9 +80,15 @@ export function stepOf(id: CheckId): number {
   return m ? Number(m[1]) : 0;
 }
 
-export function computeProgress(checked: Iterable<string>, os: Os, winMode: WinMode = 'native') {
+/** Which part of the guide to count: the prep (Steps 0–8), the live session (Steps 9–11) or everything. */
+export type ProgressPart = 'all' | 'prep' | 'session';
+
+const inPart = (id: CheckId, part: ProgressPart) =>
+  part === 'all' || (part === 'prep' ? stepOf(id) <= HOMEWORK_LAST_STEP : stepOf(id) > HOMEWORK_LAST_STEP);
+
+export function computeProgress(checked: Iterable<string>, os: Os, winMode: WinMode = 'native', part: ProgressPart = 'all') {
   const done = new Set(checked);
-  const relevant = CHECK_IDS.filter((id) => appliesTo(id, os, winMode));
+  const relevant = CHECK_IDS.filter((id) => appliesTo(id, os, winMode) && inPart(id, part));
   const ticked = relevant.filter((id) => done.has(id));
   const next = relevant.find((id) => !done.has(id));
   return {
@@ -87,7 +100,7 @@ export function computeProgress(checked: Iterable<string>, os: Os, winMode: WinM
   };
 }
 
-/** Windows tick boxes saved before PowerShell existed were all for WSL; they now carry the wsl- prefix. */
+/** Tick box ids from older versions of the guide, and the id each one is now called. */
 const LEGACY_WSL_IDS: Record<string, CheckId> = {
   'win-s1a': 'wsl-s1a',
   'win-s1b': 'wsl-s1b',
@@ -95,6 +108,10 @@ const LEGACY_WSL_IDS: Record<string, CheckId> = {
   'win-s2b': 'wsl-s2b',
   'win-s2-shell': 'wsl-s2-shell',
   'win-s3': 'wsl-s3',
+  // Steps 8 and 9 swapped places: "Add your .env file" is now Step 9, "Install packages" is Step 8.
+  // Safe to apply on every read because the new ids are not keys here.
+  s8: 's9-env',
+  s9: 's8-install',
 };
 
 type SavedProgress = { checks: string[]; os?: Os; shell?: Shell; winMode?: WinMode; updatedAt?: string };

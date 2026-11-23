@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import s from '../setup-guide.module.css';
-import { computeProgress, isCheckId } from '../_lib/checks';
+import { HOMEWORK_LAST_STEP, computeProgress, isCheckId } from '../_lib/checks';
 import { isFacilitator, requireUser } from '@/lib/guide/session';
 import { isLocked, listUsers, type GuideUser } from '@/lib/guide/users';
 
@@ -31,7 +31,7 @@ function computerLabel(os: 'mac' | 'win', winMode: 'native' | 'wsl', shell?: str
 function row(u: GuideUser) {
   const os = u.progress.os ?? 'mac';
   const p = computeProgress(u.progress.checks.filter(isCheckId), os, u.progress.winMode ?? 'native');
-  const status = u.disabled ? 'Disabled' : isLocked(u) ? 'Locked' : p.currentStep === null ? 'Done' : p.currentStep <= 6 ? 'Homework' : 'Session';
+  const status = u.disabled ? 'Disabled' : isLocked(u) ? 'Locked' : p.currentStep === null ? 'Done' : p.currentStep <= HOMEWORK_LAST_STEP ? 'Homework' : 'Session';
   const current = p.currentStep === null ? 'All done' : p.currentStep === 0 ? 'Terminal basics' : `Step ${p.currentStep}`;
   return { u, p, os, status, current };
 }
@@ -43,7 +43,7 @@ export default async function FacilitatorPage() {
   const users = await listUsers();
   const rows = users.map(row);
   const now = renderedAt();
-  const homeworkDone = rows.filter((r) => r.p.currentStep === null || r.p.currentStep > 6).length;
+  const homeworkDone = rows.filter((r) => r.p.currentStep === null || r.p.currentStep > HOMEWORK_LAST_STEP).length;
 
   return (
     <div className={s.page}>
@@ -57,7 +57,7 @@ export default async function FacilitatorPage() {
             <b>{rows.length}</b>accounts
           </div>
           <div>
-            <b>{homeworkDone}</b>finished Steps 1–6
+            <b>{homeworkDone}</b>finished the prep (Steps 1–{HOMEWORK_LAST_STEP})
           </div>
           <div>
             <b>{rows.filter((r) => r.p.currentStep === null).length}</b>completely done

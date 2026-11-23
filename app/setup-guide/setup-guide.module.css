@@ -524,3 +524,31 @@
   .page[data-win] .wsl,
   .page[data-os] .unix { display: revert !important; }
 }
+
+/* ---------- Live session card (Steps 9–11 start here) ---------- */
+.session { background: var(--n2); border: 2px dashed var(--fir); }
+
+/* ---------- Screenshots ---------- */
+.figure { margin: 14px 0 22px; }
+.figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 2px solid var(--fir);
+  border-radius: var(--r-sm);
+  background: var(--n2);
+}
+.figureSmall { max-width: 640px; }
+.figure figcaption { font-size: 0.9rem; margin-top: 8px; }
+.credit { display: block; font-size: 0.78rem; opacity: 0.8; margin-top: 2px; }
+.osTag {
+  display: inline-block;
+  border: 2px solid var(--fir);
+  border-radius: 999px;
+  padding: 0 10px;
+  margin-right: 6px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  background: var(--lf);
+  vertical-align: 1px;
+}

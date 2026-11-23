@@ -23,7 +23,10 @@ type GuideState = {
   shell: Shell;
   winMode: WinMode;
   checks: ReadonlySet<CheckId>;
+  /** Percent of the prep (everything up to HOMEWORK_LAST_STEP). */
   percent: number;
+  /** Percent of the live-session steps (after HOMEWORK_LAST_STEP). */
+  sessionPercent: number;
   saveStatus: SaveStatus;
   setOs: (os: Os) => void;
   setShell: (shell: Shell) => void;
@@ -133,7 +136,8 @@ export function GuideProvider({ initial, children }: { initial: Initial; childre
       shell,
       winMode,
       checks,
-      percent: computeProgress(checks, os, winMode).percent,
+      percent: computeProgress(checks, os, winMode, 'prep').percent,
+      sessionPercent: computeProgress(checks, os, winMode, 'session').percent,
       saveStatus,
       setOs: (next) => {
         setOsState(next);

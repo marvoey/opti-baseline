@@ -89,15 +89,18 @@ export function ShellControl() {
   );
 }
 
+/** Prep progress until Steps 1–8 are ticked, then progress through the live session. */
 export function Progress() {
-  const { percent } = useGuide();
+  const { percent, sessionPercent } = useGuide();
+  const prepDone = percent === 100;
+  const shown = prepDone ? sessionPercent : percent;
   return (
     <div className={s.progress}>
       <span role="status" aria-live="polite">
-        {percent}% done
+        {prepDone ? `Prep done ✓ · Session ${sessionPercent}%` : `Prep ${percent}% done`}
       </span>
       <div className={s.bar}>
-        <div className={s.barFill} style={{ width: `${percent}%` }} />
+        <div className={s.barFill} style={{ width: `${shown}%` }} />
       </div>
     </div>
   );

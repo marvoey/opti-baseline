@@ -1,119 +1,43 @@
+import s from '../setup-guide.module.css';
 import { Check } from '../_components/controls';
-import { Callout, Cmd, Cmds, Example, ModKey, Only, Step, StopKey } from '../_components/ui';
+import { Callout, Card, Cmd, Example, ModKey, Only, Step, StopKey } from '../_components/ui';
 
-/** Steps 7–11: done together in the session. */
+/** Steps 9–11: done together in the live session. People stop after Step 8 (see HOMEWORK_LAST_STEP). */
 
 const N = { os: 'win', mode: 'native' } as const; // PowerShell (default)
-const W = { os: 'win', mode: 'wsl' } as const; // WSL (advanced)
+const LIVE = 'Live session · ';
 
-function Step7() {
+function StopHere() {
   return (
-    <Step n={7} title="Download the project" meta="About 2 min · together in the session">
+    <Card id="session" className={s.session}>
+      <div className={s.eyebrow}>Live session</div>
+      <h2>Stop here. We’ll do Steps 9–11 together.</h2>
       <p>
-        Now download the project from GitHub. Developers call this <i>cloning</i>. The folder names matter, because the
-        tools later create each demo site in a folder next to this one, so copy them exactly. Run these four commands in
-        VS Code’s terminal, in order:
+        If you’ve ticked everything up to Step 8, you’re finished for now. <b>Please don’t start these steps on your
+        own.</b> They need a private settings file that your facilitator gives you in the session, and they’re quicker
+        when we do them together.
       </p>
-      <Only unix>
-        <Cmds
-          items={[
-            {
-              c: 'mkdir -p ~/Opps/000-0-opti-baseline',
-              what: (
-                <>
-                  Creates the folders (<code>~</code> means your home folder). It prints nothing.
-                </>
-              ),
-            },
-            {
-              c: 'cd ~/Opps/000-0-opti-baseline',
-              what: 'Moves the terminal into that folder, like double-clicking it. It prints nothing, but the prompt now shows the folder name.',
-            },
-            {
-              c: 'git clone https://github.com/marvoey/opti-baseline.git opti-baseline-main',
-              what: (
-                <>
-                  Downloads the project into a new folder called <code>opti-baseline-main</code>. It takes under a minute
-                  and ends with a line like <code>Resolving deltas: 100%… done</code>. No GitHub login is needed.
-                </>
-              ),
-            },
-            { c: 'code opti-baseline-main', what: 'Opens the project in a new VS Code window.' },
-          ]}
-        />
-      </Only>
-      <Only {...N}>
-        <Cmds
-          items={[
-            {
-              c: 'mkdir -Force $HOME\\Opps\\000-0-opti-baseline',
-              what: (
-                <>
-                  Creates the folders inside your user folder (<code>$HOME</code>, for example{' '}
-                  <code>C:\Users\jsmith</code>). It prints a small table with the folder’s name. That’s normal.
-                </>
-              ),
-            },
-            {
-              c: 'cd $HOME\\Opps\\000-0-opti-baseline',
-              what: 'Moves the terminal into that folder, like double-clicking it. It prints nothing, but the prompt now shows the folder name.',
-            },
-            {
-              c: 'git clone https://github.com/marvoey/opti-baseline.git opti-baseline-main',
-              what: (
-                <>
-                  Downloads the project into a new folder called <code>opti-baseline-main</code>. It takes under a minute
-                  and ends with a line like <code>Resolving deltas: 100%… done</code>. No GitHub login is needed.
-                </>
-              ),
-            },
-            { c: 'code opti-baseline-main', what: 'Opens the project in a new VS Code window.' },
-          ]}
-        />
-      </Only>
-      <ol>
-        <li>
-          A new VS Code window opens with the project’s files listed on the left. If it asks{' '}
-          <i>“Do you trust the authors of the files in this folder?”</i>, click <b>Yes, I trust the authors</b>.
-        </li>
-        <li>You can close the old VS Code window. Use the new one from now on.</li>
-        <li>
-          In the new window, open the terminal: <b>Terminal → New Terminal</b>. The prompt should include{' '}
-          <code>opti-baseline-main</code>.
-        </li>
+      <h3>In the session we’ll</h3>
+      <ol start={9}>
+        <li>add the settings file that connects your site to the CMS</li>
+        <li>check the connection and start the website on your laptop</li>
+        <li>connect the folder to Mark Desktop (optional)</li>
       </ol>
-      <Only os="mac">
-        <Callout kind="tip" title="Seeing “code: command not found”?">
-          Redo the “Shell Command” part of Step 2, then try the last command again.
-        </Callout>
-      </Only>
-      <Only {...N}>
-        <Callout kind="warn" title="Keep it out of OneDrive">
-          Don’t move this folder into <b>Documents</b>, <b>Desktop</b> or anywhere OneDrive syncs. The project has
-          thousands of small files and syncing them makes everything slow. <code>C:\Users\you\Opps</code> is the right
-          place.
-        </Callout>
-        <Callout kind="tip" title="Seeing “code is not recognized”?">
-          Close VS Code completely (<b>File → Exit</b>), open it again from the Start menu and open a new terminal. Then
-          run the last command again.
-        </Callout>
-      </Only>
-      <Only {...W}>
-        <Callout kind="warn" title="Check the bottom-left corner">
-          It should still say <b>WSL: Ubuntu</b>. This keeps the project inside Ubuntu, where it runs fast.
-        </Callout>
-      </Only>
-      <Check id="s7" />
-    </Step>
+      <Callout kind="tip" title="Before the session">
+        Join from the laptop you set up. Make sure it’s charged and on a normal internet connection. That’s all. The
+        steps are below so you can follow along on the day and look back at them later.
+      </Callout>
+    </Card>
   );
 }
+const W = { os: 'win', mode: 'wsl' } as const; // WSL (advanced)
 
-function Step8() {
+function Step9() {
   return (
-    <Step n={8} title="Add your .env file" meta="About 3 min">
+    <Step n={9} title="Add your .env file" meta={`${LIVE}About 3 min`}>
       <p>
         The <code>.env</code> file holds the passwords that connect your site to Optimizely CMS. Your facilitator sends
-        you its contents.
+        you its contents during the session.
       </p>
       <ol>
         <li>
@@ -172,44 +96,14 @@ function Step8() {
         Don’t paste its contents into chat, email or screenshots. Also leave the file called <code>.env.example</code>{' '}
         alone. It’s the blank template.
       </Callout>
-      <Check id="s8" />
-    </Step>
-  );
-}
-
-function Step9() {
-  return (
-    <Step n={9} title="Install the project’s packages" meta="2–5 min">
-      <Cmd
-        c="yarn install"
-        what="Downloads all the building blocks the website needs. It takes 2–5 minutes and prints a lot of text. Leave it alone until it finishes."
-      />
-      <Example lines={['➤ YN0000: · Yarn 4.14.1', '…', '➤ YN0000: · Done with warnings in 1m 12s']} />
-      <ul>
-        <li>
-          <b>You’re done</b> when the last line says <i>Done</i> (with or without “with warnings”) and the prompt comes
-          back.
-        </li>
-        <li>
-          <b>Yellow lines and warnings are normal.</b> Red lines that say <i>error</i> are not, so check{' '}
-          <a href="#help">Troubleshooting</a>.
-        </li>
-        <li>
-          A new folder called <code>node_modules</code> appears in the Explorer. Don’t open or change it.
-        </li>
-        <Only {...N} as="li">
-          <b>On some Windows laptops it takes longer</b>, for example when antivirus software checks each new file. Be
-          patient and wait for the last line.
-        </Only>
-      </ul>
-      <Check id="s9" />
+      <Check id="s9-env" />
     </Step>
   );
 }
 
 function Step10() {
   return (
-    <Step n={10} title="Check it works" meta="About 5 min">
+    <Step n={10} title="Check it works" meta={`${LIVE}About 5 min`}>
       <h3>a. Check the connection to the CMS</h3>
       <Cmd c="yarn cms:align" what="Compares the project with the live CMS. It only reads, and changes nothing." />
       <Example
@@ -273,7 +167,7 @@ function Step10() {
 
 function Step11() {
   return (
-    <Step n={11} title="Connect the folder to Mark Desktop" meta="Optional · 2 min">
+    <Step n={11} title="Connect the folder to Mark Desktop" meta={`${LIVE}Optional · 2 min`}>
       <p>
         If you use the Mark Desktop app, attach your project folder so Mark can read and work on it. First, get the
         folder’s full location (its <i>path</i>):
@@ -332,8 +226,7 @@ function Step11() {
 export default function SessionSteps() {
   return (
     <>
-      <Step7 />
-      <Step8 />
+      <StopHere />
       <Step9 />
       <Step10 />
       <Step11 />

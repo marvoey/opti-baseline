@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 360" role="img" aria-labelledby="t d">
+  <title id="t">The macOS menu bar with VS Code's Terminal menu open</title>
+  <desc id="d">Simplified drawing. The menu bar runs along the very top of the Mac screen, above the VS Code window. Next to the Apple logo it says Code, then File, Edit, Selection, View, Go, Run, Terminal, Window and Help. Terminal is open and New Terminal is the first item.</desc>
+  <style>
+    text { font-family: -apple-system, 'SF Pro Text', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; fill: #1d1d1f; }
+    .menu { font-size: 15px; }
+    .bold { font-weight: 700; }
+    .item { font-size: 14px; }
+    .key { font-size: 13px; fill: #6e6e73; }
+    .on { fill: #ffffff; }
+    .note { font-size: 14px; font-weight: 700; fill: #08251a; }
+  </style>
+
+  <!-- desktop -->
+  <rect width="760" height="360" fill="#dfe7ee"/>
+
+  <!-- VS Code window (below the menu bar) -->
+  <rect x="40" y="70" width="680" height="270" rx="12" fill="#1f1f1f"/>
+  <circle cx="62" cy="88" r="6" fill="#ff5f57"/>
+  <circle cx="82" cy="88" r="6" fill="#febc2e"/>
+  <circle cx="102" cy="88" r="6" fill="#28c840"/>
+  <text x="380" y="93" text-anchor="middle" style="font-size:13px;fill:#9d9d9d">opti-baseline-main</text>
+  <rect x="40" y="106" width="44" height="234" fill="#181818"/>
+  <rect x="84" y="260" width="636" height="80" fill="#181818"/>
+  <text x="100" y="282" style="font-size:12px;fill:#cccccc;font-weight:700;letter-spacing:.06em">TERMINAL</text>
+  <text x="100" y="310" style="font-size:13px;fill:#cccccc;font-family:Menlo,Consolas,monospace">jsmith@MacBook-Pro opti-baseline-main %</text>
+
+  <!-- macOS menu bar (top of the screen) -->
+  <rect width="760" height="34" fill="#f4f4f6"/>
+  <line x1="0" y1="34" x2="760" y2="34" stroke="#c9c9cf"/>
+  <path d="M27 11c1.6-.1 3-1.3 3.4-3-1.6.1-3 1.3-3.4 3zm6.4 5.6c0-2.2 1.8-3.2 1.9-3.3-1-1.5-2.6-1.7-3.2-1.7-1.4-.1-2.6.8-3.3.8-.7 0-1.7-.8-2.9-.8-1.5 0-2.8.9-3.6 2.2-1.5 2.7-.4 6.6 1.1 8.8.7 1.1 1.6 2.2 2.7 2.2 1.1 0 1.5-.7 2.8-.7s1.7.7 2.9.7c1.2 0 1.9-1.1 2.6-2.1.8-1.2 1.2-2.4 1.2-2.4s-2.2-.9-2.2-3.7z" fill="#1d1d1f"/>
+  <text class="menu bold" x="52" y="22">Code</text>
+  <text class="menu" x="104" y="22">File</text>
+  <text class="menu" x="146" y="22">Edit</text>
+  <text class="menu" x="190" y="22">Selection</text>
+  <text class="menu" x="268" y="22">View</text>
+  <text class="menu" x="316" y="22">Go</text>
+  <text class="menu" x="350" y="22">Run</text>
+  <rect x="388" y="5" width="78" height="24" rx="5" fill="#2f6fe0"/>
+  <text class="menu on" x="396" y="22">Terminal</text>
+  <text class="menu" x="480" y="22">Window</text>
+  <text class="menu" x="546" y="22">Help</text>
+
+  <!-- Terminal menu, open -->
+  <rect x="388" y="36" width="262" height="146" rx="8" fill="#f6f6f8" stroke="#c9c9cf"/>
+  <rect x="394" y="42" width="250" height="26" rx="5" fill="#2f6fe0"/>
+  <text class="item on" x="406" y="60">New Terminal</text>
+  <text class="key on" x="632" y="60" text-anchor="end">⌃⇧`</text>
+  <text class="item" x="406" y="90">Split Terminal</text>
+  <text class="key" x="632" y="90" text-anchor="end">⌘\</text>
+  <line x1="400" y1="102" x2="638" y2="102" stroke="#d6d6db"/>
+  <text class="item" x="406" y="124">Run Task…</text>
+  <text class="item" x="406" y="148">Run Build Task…</text>
+  <text class="key" x="632" y="148" text-anchor="end">⇧⌘B</text>
+  <text class="item" x="406" y="172" style="fill:#8e8e93">…</text>
+
+  <!-- annotation: label + arrow pointing up at the menu bar -->
+  <rect x="64" y="150" width="340" height="56" rx="12" fill="#abff44" stroke="#08251a" stroke-width="2"/>
+  <text class="note" x="80" y="174">This bar is at the very top of your</text>
+  <text class="note" x="80" y="194">screen, not inside the VS Code window.</text>
+  <path d="M214 150 L 214 44" fill="none" stroke="#08251a" stroke-width="3"/>
+  <path d="M204 56 L 214 40 L 224 56 Z" fill="#08251a"/>
+</svg>

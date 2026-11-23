@@ -36,10 +36,12 @@ export function BeforeYouStart() {
       <h3>What you’ll do</h3>
       <ol>
         <li>
-          <b>Install four free tools</b> (Steps 1–6). Do these on your own before the session.
+          <b>Install four free tools, download the project and install its packages</b> (Steps 1–8). Do these on your own before the
+          session.
         </li>
         <li>
-          <b>Download the project and connect it to the CMS</b> (Steps 7–11). We’ll do these together.
+          <b>Connect the project to the CMS and run it</b> (Steps 9–11). We’ll do these together in a live session,
+          so <b>stop after Step 8</b>.
         </li>
       </ol>
 
@@ -65,10 +67,8 @@ export function BeforeYouStart() {
           <Only os="mac" as="span">One Apple download in Step 3 can take a while.</Only>
         </li>
         <li>
-          <b>
-            A <code>.env</code> file from your facilitator.
-          </b>{' '}
-          It’s a small text file with the passwords that connect your site to the CMS. You’ll add it in Step 8.
+          <b>Nothing for the CMS yet.</b> The small <code>.env</code> file with the passwords that connect your site to
+          the CMS comes from your facilitator in the live session.
         </li>
         <li>
           Optional: the <b>Mark Desktop</b> app.
@@ -102,7 +102,7 @@ export function BeforeYouStart() {
           <b>Tick each box as you go.</b> Your ticks are saved to your account, so you can stop and come back later.
         </li>
         <li>
-          <b>You can’t break anything in Steps 1–6.</b> If a step goes wrong, run it again or check{' '}
+          <b>You can’t break anything in Steps 1–8.</b> If a step goes wrong, run it again or check{' '}
           <a href="#help">Troubleshooting</a>.
         </li>
       </ul>

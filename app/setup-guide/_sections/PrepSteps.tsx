@@ -2,7 +2,7 @@ import s from '../setup-guide.module.css';
 import { Check, ShellSwitch, WinModeSwitch } from '../_components/controls';
 import { Callout, Cmd, Cmds, Example, Only, Step } from '../_components/ui';
 
-/** Steps 1–6: installs the reader does on their own before the session. */
+/** Steps 1–8: installs, the project download and its packages, done on their own before the session. */
 
 // Shorthand for the two Windows variants.
 const N = { os: 'win', mode: 'native' } as const; // PowerShell (default)
@@ -308,8 +308,9 @@ function Step2() {
             You’re done when you see <i>“Shell command ‘code’ successfully installed in PATH.”</i>
           </li>
           <li>
-            Open VS Code’s terminal: in the menu bar at the top of the screen, click <b>Terminal → New Terminal</b>. A
-            panel opens at the bottom of the window. That’s your terminal from now on.
+            Open VS Code’s terminal: in the menu bar at the very top of the screen, click{' '}
+            <b>Terminal → New Terminal</b>. A panel opens at the bottom of the window. That’s your terminal from now on.
+            (Pictures: <a href="#vscode">Getting to the terminal in VS Code</a>.)
           </li>
         </ol>
         <Check id="mac-s2a" />
@@ -358,8 +359,9 @@ function Step2() {
             tab.
           </li>
           <li>
-            Open the terminal: in the menu at the top, click <b>Terminal → New Terminal</b>. A panel opens at the bottom
-            with a line like <code>PS C:\Users\jsmith&gt;</code>. That’s your terminal from now on.
+            Open the terminal: in the menu at the top-left of the VS Code window, click <b>Terminal → New Terminal</b>.
+            A panel opens at the bottom with a line like <code>PS C:\Users\jsmith&gt;</code>. That’s your terminal from
+            now on. (Pictures: <a href="#vscode">Getting to the terminal in VS Code</a>.)
           </li>
         </ol>
         <Callout kind="tip" title="Does the terminal say cmd or Git Bash instead of PowerShell?">
@@ -399,7 +401,7 @@ function Step2() {
         />
         <Callout kind="ok" title="How to tell it worked">
           The bottom-left corner of VS Code shows <b>WSL: Ubuntu</b>. Now open VS Code’s terminal: in the menu at the
-          top, click <b>Terminal → New Terminal</b>. A panel opens at the bottom of the window. That’s your terminal from
+          top, click <b>Terminal → New Terminal</b> (<a href="#vscode">pictures</a>). A panel opens at the bottom of the window. That’s your terminal from
           now on. You can close the Ubuntu window.
         </Callout>
         <Callout kind="warn" title="Always check the bottom-left corner">
@@ -767,7 +769,7 @@ function Step5() {
 
 function Step6() {
   return (
-    <Step n={6} title="Final check" meta="1 min · the last step before the session">
+    <Step n={6} title="Final check" meta="1 min">
       <p>
         Open a fresh terminal (the <b>+</b> at the top right of the terminal panel), then run this one command. It
         checks everything at once.
@@ -884,9 +886,147 @@ function Step6() {
         <Check id="s6" label="All four lines look right" />
       </Only>
 
-      <Callout kind="ok" title="That’s the homework done">
-        Your laptop is ready for the session. Bring your <code>.env</code> file, or know where to find it. We’ll do the
-        rest together.
+      <p>
+        All the tools are installed. <b>One more step:</b> download the project.
+      </p>
+    </Step>
+  );
+}
+
+function Step7() {
+  return (
+    <Step n={7} title="Download the project" meta="About 2 min">
+      <p>
+        Now download the project from GitHub. Developers call this <i>cloning</i>. The folder names matter, because the
+        tools later create each demo site in a folder next to this one, so copy them exactly. Run these four commands in
+        VS Code’s terminal, in order:
+      </p>
+      <Only unix>
+        <Cmds
+          items={[
+            {
+              c: 'mkdir -p ~/Opps/000-0-opti-baseline',
+              what: (
+                <>
+                  Creates the folders (<code>~</code> means your home folder). It prints nothing.
+                </>
+              ),
+            },
+            {
+              c: 'cd ~/Opps/000-0-opti-baseline',
+              what: 'Moves the terminal into that folder, like double-clicking it. It prints nothing, but the prompt now shows the folder name.',
+            },
+            {
+              c: 'git clone https://github.com/marvoey/opti-baseline.git opti-baseline-main',
+              what: (
+                <>
+                  Downloads the project into a new folder called <code>opti-baseline-main</code>. It takes under a minute
+                  and ends with a line like <code>Resolving deltas: 100%… done</code>. No GitHub login is needed.
+                </>
+              ),
+            },
+            { c: 'code opti-baseline-main', what: 'Opens the project in a new VS Code window.' },
+          ]}
+        />
+      </Only>
+      <Only {...N}>
+        <Cmds
+          items={[
+            {
+              c: 'mkdir -Force $HOME\\Opps\\000-0-opti-baseline',
+              what: (
+                <>
+                  Creates the folders inside your user folder (<code>$HOME</code>, for example{' '}
+                  <code>C:\Users\jsmith</code>). It prints a small table with the folder’s name. That’s normal.
+                </>
+              ),
+            },
+            {
+              c: 'cd $HOME\\Opps\\000-0-opti-baseline',
+              what: 'Moves the terminal into that folder, like double-clicking it. It prints nothing, but the prompt now shows the folder name.',
+            },
+            {
+              c: 'git clone https://github.com/marvoey/opti-baseline.git opti-baseline-main',
+              what: (
+                <>
+                  Downloads the project into a new folder called <code>opti-baseline-main</code>. It takes under a minute
+                  and ends with a line like <code>Resolving deltas: 100%… done</code>. No GitHub login is needed.
+                </>
+              ),
+            },
+            { c: 'code opti-baseline-main', what: 'Opens the project in a new VS Code window.' },
+          ]}
+        />
+      </Only>
+      <ol>
+        <li>
+          A new VS Code window opens with the project’s files listed on the left. If it asks{' '}
+          <i>“Do you trust the authors of the files in this folder?”</i>, click <b>Yes, I trust the authors</b>.
+        </li>
+        <li>You can close the old VS Code window. Use the new one from now on.</li>
+        <li>
+          In the new window, open the terminal: <b>Terminal → New Terminal</b> (
+          <a href="#vscode">where is that?</a>). The prompt should include <code>opti-baseline-main</code>.
+        </li>
+      </ol>
+      <Only os="mac">
+        <Callout kind="tip" title="Seeing “code: command not found”?">
+          Redo the “Shell Command” part of Step 2, then try the last command again.
+        </Callout>
+      </Only>
+      <Only {...N}>
+        <Callout kind="warn" title="Keep it out of OneDrive">
+          Don’t move this folder into <b>Documents</b>, <b>Desktop</b> or anywhere OneDrive syncs. The project has
+          thousands of small files and syncing them makes everything slow. <code>C:\Users\you\Opps</code> is the right
+          place.
+        </Callout>
+        <Callout kind="tip" title="Seeing “code is not recognized”?">
+          Close VS Code completely (<b>File → Exit</b>), open it again from the Start menu and open a new terminal. Then
+          run the last command again.
+        </Callout>
+      </Only>
+      <Only {...W}>
+        <Callout kind="warn" title="Check the bottom-left corner">
+          It should still say <b>WSL: Ubuntu</b>. This keeps the project inside Ubuntu, where it runs fast.
+        </Callout>
+      </Only>
+      <Check id="s7" />
+    </Step>
+  );
+}
+
+function Step8() {
+  return (
+    <Step n={8} title="Install the project’s packages" meta="2–5 min · the last step before the session">
+      <p>
+        In VS Code’s terminal (the prompt should include <code>opti-baseline-main</code>), run:
+      </p>
+      <Cmd
+        c="yarn install"
+        what="Downloads all the building blocks the website needs. It takes 2–5 minutes and prints a lot of text. Leave it alone until it finishes."
+      />
+      <Example lines={['➤ YN0000: · Yarn 4.14.1', '…', '➤ YN0000: · Done with warnings in 1m 12s']} />
+      <ul>
+        <li>
+          <b>You’re done</b> when the last line says <i>Done</i> (with or without “with warnings”) and the prompt comes
+          back.
+        </li>
+        <li>
+          <b>Yellow lines and warnings are normal.</b> Red lines that say <i>error</i> are not, so check{' '}
+          <a href="#help">Troubleshooting</a>.
+        </li>
+        <li>
+          A new folder called <code>node_modules</code> appears in the Explorer. Don’t open or change it.
+        </li>
+        <Only {...N} as="li">
+          <b>On some Windows laptops it takes longer</b>, for example when antivirus software checks each new file. Be
+          patient and wait for the last line.
+        </Only>
+      </ul>
+      <Check id="s8-install" />
+      <Callout kind="ok" title="That’s the prep done. Stop here.">
+        Your laptop is ready. <b>Don’t go on to Step 9.</b> We’ll do Steps 9–11 together in the live session, where your
+        facilitator gives you the private settings file for the CMS. You can close VS Code until then.
       </Callout>
     </Step>
   );
@@ -901,6 +1041,8 @@ export default function PrepSteps() {
       <Step4 />
       <Step5 />
       <Step6 />
+      <Step7 />
+      <Step8 />
     </>
   );
 }
