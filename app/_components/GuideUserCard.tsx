@@ -41,9 +41,16 @@ export default async function GuideUserCard({ content }: Props) {
   }
 
   const os = user.progress.os ?? 'mac';
+  const winMode = user.progress.winMode ?? 'native';
   const ticked = new Set(user.progress.checks.filter(isCheckId));
-  const progress = computeProgress(ticked, os);
-  const steps = CHECK_IDS.filter((id) => appliesTo(id, os));
+  const progress = computeProgress(ticked, os, winMode);
+  const steps = CHECK_IDS.filter((id) => appliesTo(id, os, winMode));
+  const computer =
+    os === 'mac'
+      ? `macOS${user.progress.shell ? ` · ${user.progress.shell}` : ''}`
+      : winMode === 'wsl'
+        ? `Windows · WSL${user.progress.shell ? ` · ${user.progress.shell}` : ''}`
+        : 'Windows · PowerShell';
   const current =
     progress.currentStep === null ? 'All done' : progress.currentStep === 0 ? 'Terminal basics' : `Step ${progress.currentStep}`;
 
@@ -77,8 +84,7 @@ export default async function GuideUserCard({ content }: Props) {
         <b className="w-12 text-right text-sm">{progress.percent}%</b>
       </div>
       <p className="mt-2 text-sm text-gray-600">
-        {progress.done} of {progress.total} boxes ticked · {current} · {os === 'mac' ? 'macOS' : 'Windows'}
-        {user.progress.shell ? ` · ${user.progress.shell}` : ''}
+        {progress.done} of {progress.total} boxes ticked · {current} · {computer}
       </p>
 
       <ul className="mt-4 space-y-1.5 text-sm">
