@@ -40,6 +40,7 @@ export default async function SetupGuidePage() {
     os: user.progress.os ?? guessedOs,
     shell: user.progress.shell,
     winMode: user.progress.winMode ?? ('native' as const),
+    folders: user.progress.folders,
   };
 
   return (

@@ -3,10 +3,18 @@
 import { useRouter } from 'next/navigation';
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { computeProgress, type CheckId, type Os, type Shell, type WinMode } from '../_lib/checks';
+import {
+  DEFAULT_FOLDERS,
+  finishedFolderName,
+  isDefaultFolders,
+  resolveFolders,
+  typedFolderName,
+  type Folders,
+} from '../_lib/folders';
 
 /**
  * Guide state for the signed-in colleague: chosen computer, Windows terminal (PowerShell or WSL),
- * shell, ticked boxes, and saving.
+ * shell, the two folder names from Step 7, ticked boxes, and saving.
  *
  * The server renders the page with the progress stored in the CMS (and, for a first visit, a
  * computer guessed from the browser), so the first paint already shows the person's own ticks.
@@ -16,13 +24,17 @@ import { computeProgress, type CheckId, type Os, type Shell, type WinMode } from
 
 export type SaveStatus = 'idle' | 'saving' | 'saved' | 'error';
 
-type Initial = { checks: CheckId[]; os: Os; shell?: Shell; winMode: WinMode };
+type Initial = { checks: CheckId[]; os: Os; shell?: Shell; winMode: WinMode; folders?: Folders };
 
 type GuideState = {
   os: Os;
   shell: Shell;
   winMode: WinMode;
   checks: ReadonlySet<CheckId>;
+  /** The folder names the commands use (what was typed, or the suggested name where nothing usable was typed). */
+  folders: Folders;
+  /** What is in the two input boxes right now. */
+  typedFolders: Folders;
   /** Percent of the prep (everything up to HOMEWORK_LAST_STEP). */
   percent: number;
   /** Percent of the live-session steps (after HOMEWORK_LAST_STEP). */
@@ -32,6 +44,10 @@ type GuideState = {
   setShell: (shell: Shell) => void;
   setWinMode: (mode: WinMode) => void;
   setChecked: (id: CheckId, on: boolean) => void;
+  /** Typing in a folder box: lower case, dashes and numbers only. */
+  setFolder: (which: keyof Folders, raw: string) => void;
+  /** Leaving a folder box: tidy the name (no trailing dash, empty goes back to the suggested name). */
+  finishFolder: (which: keyof Folders) => void;
 };
 
 const GuideContext = createContext<GuideState | null>(null);
@@ -53,6 +69,7 @@ export function GuideProvider({ initial, children }: { initial: Initial; childre
   // Until the person picks a shell it follows the computer: macOS uses zsh, Ubuntu (WSL) uses bash.
   const [chosenShell, setChosenShell] = useState<Shell | undefined>(initial.shell);
   const [checks, setChecks] = useState<ReadonlySet<CheckId>>(() => new Set(initial.checks));
+  const [typedFolders, setTypedFolders] = useState<Folders>(initial.folders ?? DEFAULT_FOLDERS);
   const [saveStatus, setSaveStatus] = useState<SaveStatus>('idle');
   // Bumped on every change / failed save; the effects below turn them into timed saves.
   const [changes, setChanges] = useState(0);
@@ -61,23 +78,25 @@ export function GuideProvider({ initial, children }: { initial: Initial; childre
   const shell: Shell = chosenShell ?? (os === 'mac' ? 'zsh' : 'bash');
   const dirty = useRef(false);
   const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
-  const latest = useRef({ os, winMode, chosenShell, checks });
+  const folders = useMemo(() => resolveFolders(typedFolders), [typedFolders]);
+  const latest = useRef({ os, winMode, chosenShell, checks, folders });
   useEffect(() => {
-    latest.current = { os, winMode, chosenShell, checks };
-  }, [os, winMode, chosenShell, checks]);
+    latest.current = { os, winMode, chosenShell, checks, folders };
+  }, [os, winMode, chosenShell, checks, folders]);
 
   const save = useCallback(
     async () => {
       clearTimeout(timer.current);
       if (!dirty.current) return;
       dirty.current = false;
-      const { os: o, winMode: w, chosenShell: s, checks: c } = latest.current;
+      const { os: o, winMode: w, chosenShell: s, checks: c, folders: f } = latest.current;
       setSaveStatus('saving');
       try {
         const res = await fetch(SAVE_URL, {
           method: 'POST',
           headers: { 'content-type': 'application/json' },
-          body: JSON.stringify({ checks: [...c], os: o, shell: s, winMode: w }),
+          // Folder names are only sent once they differ from the suggested ones, so a later change to the suggestions still reaches people who never chose their own.
+          body: JSON.stringify({ checks: [...c], os: o, shell: s, winMode: w, folders: isDefaultFolders(f) ? undefined : f }),
           // keepalive: a save that is still in flight when the person reloads or closes the tab is not cancelled
           // (the body is a few hundred bytes, far below the 64 KB limit).
           keepalive: true,
@@ -136,6 +155,8 @@ export function GuideProvider({ initial, children }: { initial: Initial; childre
       shell,
       winMode,
       checks,
+      folders,
+      typedFolders,
       percent: computeProgress(checks, os, winMode, 'prep').percent,
       sessionPercent: computeProgress(checks, os, winMode, 'session').percent,
       saveStatus,
@@ -151,6 +172,13 @@ export function GuideProvider({ initial, children }: { initial: Initial; childre
         setWinModeState(next);
         changed();
       },
+      setFolder: (which, raw) => {
+        setTypedFolders((prev) => ({ ...prev, [which]: typedFolderName(raw) }));
+        changed();
+      },
+      finishFolder: (which) => {
+        setTypedFolders((prev) => ({ ...prev, [which]: finishedFolderName(prev[which]) || DEFAULT_FOLDERS[which] }));
+      },
       setChecked: (id, on) => {
         setChecks((prev) => {
           const copy = new Set(prev);
@@ -161,7 +189,7 @@ export function GuideProvider({ initial, children }: { initial: Initial; childre
         changed();
       },
     };
-  }, [os, shell, winMode, checks, saveStatus]);
+  }, [os, shell, winMode, checks, folders, typedFolders, saveStatus]);
 
   return <GuideContext.Provider value={value}>{children}</GuideContext.Provider>;
 }

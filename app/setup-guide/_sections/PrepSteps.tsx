@@ -1,5 +1,6 @@
 import s from '../setup-guide.module.css';
 import { Check, ShellSwitch, WinModeSwitch } from '../_components/controls';
+import { FolderInputs, FolderName, FolderTree, CloneCommands } from '../_components/FolderSetup';
 import { Callout, Cmd, Cmds, Example, Only, Step } from '../_components/ui';
 
 /** Steps 1–8: installs, the project download and its packages, done on their own before the session. */
@@ -897,67 +898,35 @@ function Step7() {
   return (
     <Step n={7} title="Download the project" meta="About 2 min">
       <p>
-        Now download the project from GitHub. Developers call this <i>cloning</i>. The folder names matter, because the
-        tools later create each demo site in a folder next to this one, so copy them exactly. Run these four commands in
-        VS Code’s terminal, in order:
+        Now download the project from GitHub. Developers call this <i>cloning</i>. First, choose two folder names. The
+        tools you’ll use later rely on this layout, so it’s worth a minute.
       </p>
-      <Only unix>
-        <Cmds
-          items={[
-            {
-              c: 'mkdir -p ~/Opps/000-0-opti-baseline',
-              what: (
-                <>
-                  Creates the folders (<code>~</code> means your home folder). It prints nothing.
-                </>
-              ),
-            },
-            {
-              c: 'cd ~/Opps/000-0-opti-baseline',
-              what: 'Moves the terminal into that folder, like double-clicking it. It prints nothing, but the prompt now shows the folder name.',
-            },
-            {
-              c: 'git clone https://github.com/marvoey/opti-baseline.git opti-baseline-main',
-              what: (
-                <>
-                  Downloads the project into a new folder called <code>opti-baseline-main</code>. It takes under a minute
-                  and ends with a line like <code>Resolving deltas: 100%… done</code>. No GitHub login is needed.
-                </>
-              ),
-            },
-            { c: 'code opti-baseline-main', what: 'Opens the project in a new VS Code window.' },
-          ]}
-        />
-      </Only>
-      <Only {...N}>
-        <Cmds
-          items={[
-            {
-              c: 'mkdir -Force $HOME\\Opps\\000-0-opti-baseline',
-              what: (
-                <>
-                  Creates the folders inside your user folder (<code>$HOME</code>, for example{' '}
-                  <code>C:\Users\jsmith</code>). It prints a small table with the folder’s name. That’s normal.
-                </>
-              ),
-            },
-            {
-              c: 'cd $HOME\\Opps\\000-0-opti-baseline',
-              what: 'Moves the terminal into that folder, like double-clicking it. It prints nothing, but the prompt now shows the folder name.',
-            },
-            {
-              c: 'git clone https://github.com/marvoey/opti-baseline.git opti-baseline-main',
-              what: (
-                <>
-                  Downloads the project into a new folder called <code>opti-baseline-main</code>. It takes under a minute
-                  and ends with a line like <code>Resolving deltas: 100%… done</code>. No GitHub login is needed.
-                </>
-              ),
-            },
-            { c: 'code opti-baseline-main', what: 'Opens the project in a new VS Code window.' },
-          ]}
-        />
-      </Only>
+      <FolderInputs />
+      <FolderTree />
+      <ul>
+        <li>
+          <b>
+            <code>
+              <FolderName which="container" />
+            </code>
+          </b>{' '}
+          is the one folder that holds everything. The main project goes in it now. Later, every demo site you create gets
+          its own folder in it too.
+        </li>
+        <li>
+          <b>
+            <code>
+              <FolderName which="main" />
+            </code>
+          </b>{' '}
+          is the folder for the main project. Pick a name you won’t use for a customer, because demo sites are created{' '}
+          <b>next to this one</b>, not inside it.
+        </li>
+      </ul>
+      <p>
+        The commands below use your names. Run these four commands in VS Code’s terminal, in order:
+      </p>
+      <CloneCommands />
       <ol>
         <li>
           A new VS Code window opens with the project’s files listed on the left. If it asks{' '}
@@ -977,7 +946,10 @@ function Step7() {
       <Only {...N}>
         <Callout kind="warn" title="Keep it out of OneDrive">
           Don’t move this folder into <b>Documents</b>, <b>Desktop</b> or anywhere OneDrive syncs. The project has
-          thousands of small files and syncing them makes everything slow. <code>C:\Users\you\Opps</code> is the right
+          thousands of small files and syncing them makes everything slow. <code>
+            C:\Users\you\
+            <FolderName which="container" />
+          </code> is the right
           place.
         </Callout>
         <Callout kind="tip" title="Seeing “code is not recognized”?">

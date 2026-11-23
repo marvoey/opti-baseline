@@ -1,5 +1,6 @@
 import s from '../setup-guide.module.css';
 import { Check } from '../_components/controls';
+import { ProjectPath } from '../_components/FolderSetup';
 import { Callout, Card, Cmd, Example, ModKey, Only, Step, StopKey } from '../_components/ui';
 
 /** Steps 9–11: done together in the live session. People stop after Step 8 (see HOMEWORK_LAST_STEP). */
@@ -182,7 +183,7 @@ function Step11() {
             </>
           }
         />
-        <Example lines={['/Users/jsmith/Opps/000-0-opti-baseline/opti-baseline-main']} />
+        <ProjectPath kind="mac" />
         <p>
           Select the line it prints, copy it (<kbd>Cmd ⌘</kbd> <kbd>C</kbd>), then attach that folder in Mark Desktop by
           pasting the path when asked.
@@ -198,7 +199,7 @@ function Step11() {
             </>
           }
         />
-        <Example lines={['C:\\Users\\jsmith\\Opps\\000-0-opti-baseline\\opti-baseline-main']} />
+        <ProjectPath kind="native" />
         <p>
           Select the line it prints, copy it (<kbd>Ctrl</kbd> <kbd>C</kbd>), then attach that folder in Mark Desktop by
           pasting the path when asked.
@@ -215,7 +216,7 @@ function Step11() {
           }
         />
         <p>Click the address bar at the top of File Explorer and copy the path. It looks like this:</p>
-        <Example lines={['\\\\wsl.localhost\\Ubuntu\\home\\jsmith\\Opps\\000-0-opti-baseline\\opti-baseline-main']} />
+        <ProjectPath kind="wsl" />
         <p>Then attach that folder in Mark Desktop by pasting the path when asked.</p>
       </Only>
       <Check id="s11" />

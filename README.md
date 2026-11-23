@@ -26,8 +26,8 @@ yarn site:new acme --prefix Acme --name "Acme Corp" --opp Acme
 | `acme` | Branch name, lowercase with hyphens. Must not exist locally or on `origin`. |
 | `--prefix Acme` | PascalCase prefix for this site's content types (`AcmeHeroBlock`, `[ACME] Hero Banner`). Must be unused in the CMS. |
 | `--name "Acme Corp"` | Display name for the start page, CMS application and asset folder. |
-| `--opp Acme` | The opportunity folder under your `Opps` root. The site is created at `Opps/Acme/opti-baseline-acme` (the folder is created if missing). Without it, a folder named like the branch is used. |
-| `--host`, `--port`, `--dir`, `--from` | Optional overrides. Defaults: `<branch>.<your domain>`, lowest free port from 3035 that no other checkout under `Opps` uses, `Opps/<opp>/opti-baseline-<branch>`, `main`. `--dir <absolute path>` replaces `--opp`. |
+| `--opp Acme` | The opportunity folder under your `demo-sites` root. The site is created at `demo-sites/Acme/opti-baseline-acme` (the folder is created if missing). Without it, a folder named like the branch is used. |
+| `--host`, `--port`, `--dir`, `--from` | Optional overrides. Defaults: `<branch>.<your domain>`, lowest free port from 3035 that no other checkout under `demo-sites` uses, `demo-sites/<opp>/opti-baseline-<branch>`, `main`. `--dir <absolute path>` replaces `--opp`. |
 
 `site:new` creates, in order:
 
@@ -48,7 +48,7 @@ It does **not** set up DNS or hosting for the hostname, deploy, or commit.
 Then, in the new worktree:
 
 ```bash
-cd ~/Opps/Acme/opti-baseline-acme
+cd ~/demo-sites/Acme/opti-baseline-acme
 yarn dev          # http://localhost:<PORT>
 yarn cms:align    # baseline types in sync
 ```
@@ -58,8 +58,8 @@ Attach that folder in Mark Desktop. `site:new` prints the Windows path to use.
 ## Folder layout
 
 ```
-Opps/
-  000-0-opti-baseline/           permanent hub (sorts first)
+demo-sites/
+  opti-baseline-hub/             permanent hub (any name you like)
     opti-baseline-main/          the main checkout: branch main, port 3034, shared credentials
   Acme/                          one folder per opportunity
     opti-baseline-acme/          a git worktree of the hub, branch acme, its own .env and port
@@ -75,9 +75,11 @@ cloning it again. Each branch can be checked out in only one folder at a time.
 - **Remove a site cleanly** with `git worktree remove <folder>` from the hub, not by deleting the folder
   (`git worktree prune` cleans up if you already did). Then delete its CMS application, start page and
   asset folder.
-- **The Opps root** is two levels above the hub checkout; set `OPPS_ROOT` if yours is elsewhere.
+- **The demo-sites root** is two levels above the hub checkout and can have any name (the setup guide suggests
+  `demo-sites`). It must be a folder of its own, not your home folder or above. Set `OPPS_ROOT` to its path if
+  your checkout is laid out differently.
 - **Ports** come from each site's `.env`. `site:new` avoids ports used by running servers, by CMS preview
-  hosts, and by every `Opps/<opportunity>/<folder>/.env`.
+  hosts, and by every `demo-sites/<opportunity>/<folder>/.env`.
 
 ## Building the replica
 

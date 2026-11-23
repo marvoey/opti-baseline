@@ -1,11 +1,13 @@
 import { currentUser } from '@/lib/guide/session';
 import { updateUser } from '@/lib/guide/users';
 import { CHECK_IDS, computeProgress, isCheckId, isOs, isShell, isWinMode } from '../../_lib/checks';
+import { isFolders, sameFolders } from '../../_lib/folders';
 
 /**
  * POST /setup-guide/api/progress — saves the signed-in colleague's ticks and computer/terminal/shell
  * choices to their GuideUser record. Called in batches by GuideProvider (also with keepalive on tab close).
- * Body: { checks: string[], os: "mac" | "win", shell?: "zsh" | "bash", winMode?: "native" | "wsl" }
+ * Body: { checks: string[], os: "mac" | "win", shell?: "zsh" | "bash", winMode?: "native" | "wsl",
+ *         folders?: { container: string, main: string } }  (kebab-case names; omitted for the suggested ones)
  */
 
 const MAX_BODY = 8_000;
@@ -31,7 +33,7 @@ export async function POST(request: Request) {
 
   const text = await request.text();
   if (text.length > MAX_BODY) return Response.json({ error: 'Too large' }, { status: 413 });
-  let body: { checks?: unknown; os?: unknown; shell?: unknown; winMode?: unknown };
+  let body: { checks?: unknown; os?: unknown; shell?: unknown; winMode?: unknown; folders?: unknown };
   try {
     body = JSON.parse(text);
   } catch {
@@ -41,7 +43,8 @@ export async function POST(request: Request) {
     !Array.isArray(body.checks) ||
     !isOs(body.os) ||
     (body.shell !== undefined && !isShell(body.shell)) ||
-    (body.winMode !== undefined && !isWinMode(body.winMode))
+    (body.winMode !== undefined && !isWinMode(body.winMode)) ||
+    (body.folders !== undefined && !isFolders(body.folders))
   ) {
     return Response.json({ error: 'Invalid progress' }, { status: 400 });
   }
@@ -51,19 +54,21 @@ export async function POST(request: Request) {
   const os = body.os;
   const shell = body.shell;
   const winMode = body.winMode;
+  const folders = body.folders; // undefined, or validated kebab-case names
 
   const stored = user.progress;
   const unchanged =
     stored.os === os &&
     stored.shell === shell &&
     stored.winMode === winMode &&
+    sameFolders(stored.folders, folders) &&
     stored.checks.length === checks.length &&
     checks.every((c, i) => stored.checks[i] === c);
   if (unchanged) return Response.json({ ok: true, changed: false });
 
   const now = new Date().toISOString();
   await updateUser(user, {
-    Progress: JSON.stringify({ checks, os, shell, winMode, updatedAt: now }),
+    Progress: JSON.stringify({ checks, os, shell, winMode, folders, updatedAt: now }),
     ProgressPercent: computeProgress(checks, os, winMode).percent,
     LastSeenAt: now,
   });

@@ -26,8 +26,8 @@
  *   --name "<Name>"        site display name (required): start page, application and asset folder
  *   --host <host>          public hostname (default: <branch>.<domain of this checkout's DEPLOYED_URL>)
  *   --port <n>             local dev port (default: lowest free port >= 3035)
- *   --opp <Folder>         opportunity folder under the Opps root. The site is created at
- *                          <Opps>/<Folder>/opti-baseline-<branch> (folder created when missing).
+ *   --opp <Folder>         opportunity folder under the demo-sites root. The site is created at
+ *                          <demo-sites>/<Folder>/opti-baseline-<branch> (folder created when missing).
  *                          Default: a folder named like the branch.
  *   --dir <path>           exact worktree folder, absolute path (use instead of --opp)
  *   --from <ref>           branch to cut from (default: main)
@@ -43,17 +43,20 @@
  * HOME_PAGE_CONTENT_ID / ASSET_BASE_FOLDER_ID at the SaaS root containers. The `main` application is
  * the CMS default; new site applications never are.
  *
- * Folder layout: the main checkout is the permanent hub (<Opps>/<hub folder>/<checkout>); every site
- * is a git worktree of it, placed next to your other opportunities: <Opps>/<opportunity>/opti-baseline-<site>.
- * The Opps root is two levels above this checkout (override with the OPPS_ROOT environment variable).
- * Port choice also reads the .env of every <Opps>/<opportunity>/<folder> checkout, so a new site never
+ * Folder layout: the main checkout is the permanent hub (<demo-sites>/<hub folder>/<checkout>); every site
+ * is a git worktree of it, placed next to your other opportunities: <demo-sites>/<opportunity>/opti-baseline-<site>.
+ * The demo-sites root is two levels above this checkout and can have any name (the setup guide suggests
+ * demo-sites). It must be a folder of its own, not your home folder or a folder above it. Set the OPPS_ROOT
+ * environment variable to its path if your checkout is laid out differently.
+ * Port choice also reads the .env of every <demo-sites>/<opportunity>/<folder> checkout, so a new site never
  * reuses a port that one of your older clones already claims.
  */
 
 import { randomBytes } from 'node:crypto';
 import { execFileSync, spawnSync } from 'node:child_process';
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
-import { basename, dirname, isAbsolute, join, resolve } from 'node:path';
+import { homedir } from 'node:os';
+import { basename, dirname, isAbsolute, join, parse, resolve, sep } from 'node:path';
 
 import {
   BASE_BRANCH,
@@ -75,6 +78,10 @@ const args = parseArgs();
 const DRY = Boolean(args.dry);
 const LOCALE = process.env.OPTIMIZELY_DEFAULT_LOCALE || 'en';
 const MIN_PORT = 3035;
+// The folder that holds the hub and every site can have any name, but it must be a folder of its own: never the
+// filesystem root, your home folder, or a folder above it (that is what two levels up gives when the checkout is
+// not inside <demo-sites>/<folder>/).
+const isDemoSitesRoot = (dir) => dir !== parse(dir).root && dir !== homedir() && !homedir().startsWith(dir + sep);
 const DEFAULT_PREVIEW_FORMATS = { any: '{host}/preview?key={key}&ver={version}&loc={locale}&ctx={context}' };
 
 // Keys that belong to ONE site and are never copied from this checkout's .env.
@@ -217,8 +224,8 @@ async function main() {
   } else {
     oppFolder = typeof args.opp === 'string' ? args.opp.trim() : branch;
     dir = join(oppsRoot, oppFolder, 'opti-baseline-' + branch);
-    if (!process.env.OPPS_ROOT && basename(oppsRoot) !== 'Opps') {
-      problems.push('could not locate your Opps folder (expected this checkout at <Opps>/<folder>/<checkout>, but the root would be ' + oppsRoot + '). Set OPPS_ROOT, or pass --dir <absolute path>');
+    if (!process.env.OPPS_ROOT && !isDemoSitesRoot(oppsRoot)) {
+      problems.push('could not locate your demo-sites folder (expected this checkout at <demo-sites>/<folder>/<checkout>, but the root would be ' + oppsRoot + ', which is your home folder or above it). Set OPPS_ROOT, or pass --dir <absolute path>');
     }
     if (oppFolder === hubName) {
       problems.push('"' + oppFolder + '" is the folder that holds this main checkout; choose the opportunity folder for the new site with --opp');
@@ -307,7 +314,7 @@ async function main() {
   const hostOwner = apps.find((a) => a.key !== appKey && (a.hosts ?? []).some((h) => h.authority.toLowerCase() === host));
   if (hostOwner) problems.push(`hostname ${host} is already used by application "${hostOwner.key}" (${hostOwner.displayName})`);
 
-  const other = (process.env.OPPS_ROOT || basename(oppsRoot) === 'Opps') ? otherCheckoutPorts(oppsRoot) : { ports: new Map(), scanned: 0 };
+  const other = (process.env.OPPS_ROOT || isDemoSitesRoot(oppsRoot)) ? otherCheckoutPorts(oppsRoot) : { ports: new Map(), scanned: 0 };
   const usedPorts = new Set([...listeningPorts(), ...worktreePorts(), ...other.ports.keys()]);
   for (const a of apps) for (const h of a.hosts ?? []) {
     const m = /^localhost:(\d+)$/.exec(h.authority);

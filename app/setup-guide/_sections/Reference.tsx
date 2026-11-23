@@ -1,4 +1,5 @@
 import s from '../setup-guide.module.css';
+import { FolderName } from '../_components/FolderSetup';
 import { Card, Cmd, Cmds, Example, Help, ModKey, Only, StopKey } from '../_components/ui';
 import { SHELL_FILES } from './PrepSteps';
 
@@ -235,8 +236,11 @@ export function Troubleshooting() {
           <p>
             Something is holding a file open, often antivirus software or another window using the project. Stop the
             website if it’s running (<StopKey /> <kbd>C</kbd>), close other VS Code windows for this project, then run{' '}
-            <code>yarn install</code> again. If it keeps happening, ask IT to exclude the <code>Opps</code> folder from
-            real-time scanning.
+            <code>yarn install</code> again. If it keeps happening, ask IT to exclude your container folder (
+            <code>
+              <FolderName which="container" />
+            </code>
+            ) from real-time scanning.
           </p>
         </Help>
 

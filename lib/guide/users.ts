@@ -3,6 +3,7 @@ import { createHash } from 'node:crypto';
 import { cmsRequest, CmsError } from './cms';
 import { guideConfig } from './config';
 import { normalizeProgress } from '@/app/setup-guide/_lib/checks';
+import { isFolders, type Folders } from '@/app/setup-guide/_lib/folders';
 
 /**
  * Guide accounts stored in the CMS as GuideUser items (see cms/GuideUser.tsx).
@@ -22,6 +23,8 @@ export type StoredProgress = {
   shell?: 'zsh' | 'bash';
   /** Windows only: PowerShell or WSL. */
   winMode?: 'native' | 'wsl';
+  /** The container and main folder names chosen in Step 7. Absent for the suggested names. */
+  folders?: Folders;
   updatedAt?: string;
 };
 
@@ -78,6 +81,7 @@ function parseProgress(raw: unknown): StoredProgress {
       os: p.os === 'mac' || p.os === 'win' ? p.os : undefined,
       shell: p.shell === 'zsh' || p.shell === 'bash' ? p.shell : undefined,
       winMode: p.winMode === 'native' || p.winMode === 'wsl' ? p.winMode : undefined,
+      folders: isFolders(p.folders) ? p.folders : undefined,
       updatedAt: typeof p.updatedAt === 'string' ? p.updatedAt : undefined,
     });
   } catch {
