@@ -23,6 +23,10 @@ export function Ready() {
         own folder, settings and pages in the CMS. Because it changes the shared CMS,{' '}
         <b>please wait until we run it together</b>.
       </p>
+      <p>
+        It starts from the <code>.env</code> you add in Step 9. That file decides where your new site is created in the CMS
+        and which address it gets. <a href="#mainenv">Here is how</a>.
+      </p>
     </Card>
   );
 }
@@ -539,23 +543,44 @@ export function Troubleshooting() {
   );
 }
 
-const ENV_ROWS: [setting: string, purpose: React.ReactNode][] = [
-  ['PORT', 'Which address number the site uses on your laptop. The main copy uses 3034.'],
-  ['OPTIMIZELY_DEFAULT_LOCALE', 'The site’s default language.'],
-  ['OPTIMIZELY_CMS_URL', 'The address of the CMS.'],
-  ['OPTIMIZELY_CMS_CLIENT_ID / _SECRET', 'A username and password that let the tools read and update the CMS setup.'],
+const ENV_ROWS: [setting: string, purpose: React.ReactNode, newSite: React.ReactNode][] = [
+  ['PORT', 'Which address number the site uses on your laptop. The main copy uses 3034.', 'A new number: the first free one from 3035.'],
+  ['OPTIMIZELY_DEFAULT_LOCALE', 'The site’s default language.', 'Copied.'],
+  ['OPTIMIZELY_CMS_URL', 'The address of the CMS.', 'Copied.'],
+  [
+    'OPTIMIZELY_CMS_CLIENT_ID / _SECRET',
+    'A username and password that let the tools read and update the CMS setup.',
+    'Copied. Also used by site:new to sign in to the CMS.',
+  ],
   [
     'OPTIMIZELY_GRAPH_SINGLE_KEY',
     <>
       <b>Required.</b> The key for reading published content. The site won’t start without it.
     </>,
+    'Copied.',
   ],
-  ['OPTIMIZELY_GRAPH_GATEWAY', 'The address for reading content. Optional.'],
-  ['DEPLOYED_URL', 'The site’s public web address. Used to find the right site’s content.'],
-  ['SITE_BRANCH / SITE_PREFIX / SITE_NAME', 'Which demo site this folder belongs to. Used by safety checks.'],
-  ['HOME_PAGE_CONTENT_ID / ASSET_BASE_FOLDER_ID', 'Where the site’s pages and shared content live in the CMS.'],
-  ['NEXT_PUBLIC_OPTIMIZELY_WEB_SNIPPET_ID', 'Optional. Turns on Optimizely Web Experimentation.'],
-  ['MARK_TOOLS_*', 'Optional. Lets Mark agents read and edit the project’s files.'],
+  ['OPTIMIZELY_GRAPH_GATEWAY', 'The address for reading content. Optional.', 'Copied.'],
+  [
+    'DEPLOYED_URL',
+    'The site’s public web address. Used to find the right site’s content.',
+    'A new address, built from the main one.',
+  ],
+  [
+    'SITE_BRANCH / SITE_PREFIX / SITE_NAME',
+    'Which demo site this folder belongs to. Used by safety checks.',
+    'Set from what you type into the command.',
+  ],
+  [
+    'HOME_PAGE_CONTENT_ID / ASSET_BASE_FOLDER_ID',
+    'Where the site’s pages and shared content live in the CMS.',
+    'Point at the new site’s own start page and asset folder. In the main .env they point at the top of the CMS.',
+  ],
+  ['NEXT_PUBLIC_OPTIMIZELY_WEB_SNIPPET_ID', 'Optional. Turns on Optimizely Web Experimentation.', 'Copied.'],
+  [
+    'MARK_TOOLS_*',
+    'Optional. Lets Mark agents read and edit the project’s files.',
+    'The name and token are new for each site. Any other lines are copied.',
+  ],
 ];
 
 export function EnvReference() {
@@ -564,22 +589,25 @@ export function EnvReference() {
       <h2>.env reference (optional reading)</h2>
       <p>
         You don’t need to edit any of these. Your facilitator provides the file, and the <code>site:new</code> command
-        writes each new site’s file. This table just explains what’s inside.
+        writes each new site’s file from it. This table explains what’s inside, and what <code>site:new</code> does with
+        each line. The full story is in <a href="#mainenv">Why the main .env matters</a>.
       </p>
       <table>
         <thead>
           <tr>
             <th>Setting</th>
             <th>What it’s for</th>
+            <th>In a new site’s .env</th>
           </tr>
         </thead>
         <tbody>
-          {ENV_ROWS.map(([setting, purpose]) => (
+          {ENV_ROWS.map(([setting, purpose, newSite]) => (
             <tr key={setting}>
               <td>
                 <code>{setting}</code>
               </td>
               <td>{purpose}</td>
+              <td>{newSite}</td>
             </tr>
           ))}
         </tbody>

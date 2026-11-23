@@ -2,6 +2,7 @@ import s from '../setup-guide.module.css';
 import { Check } from '../_components/controls';
 import { ProjectPath } from '../_components/FolderSetup';
 import { Callout, Card, Cmd, Example, ModKey, Only, Step, StopKey } from '../_components/ui';
+import MainEnv from './MainEnv';
 
 /** Steps 9–11: done together in the live session. People stop after Step 8 (see HOMEWORK_LAST_STEP). */
 
@@ -40,6 +41,10 @@ function Step9() {
         The <code>.env</code> file holds the passwords that connect your site to Optimizely CMS. Your facilitator sends
         you its contents during the session.
       </p>
+      <Callout kind="tip" title="This file is the parent of your future sites">
+        Later, <code>yarn site:new</code> reads this file to create each of your demo sites in the CMS and to write their
+        own <code>.env</code> files. <a href="#mainenv">Read why it matters</a> before you paste.
+      </Callout>
       <ol>
         <li>
           In VS Code, look at the file list on the left (called the <b>Explorer</b>). Click once on an empty space{' '}
@@ -228,6 +233,7 @@ export default function SessionSteps() {
   return (
     <>
       <StopHere />
+      <MainEnv />
       <Step9 />
       <Step10 />
       <Step11 />

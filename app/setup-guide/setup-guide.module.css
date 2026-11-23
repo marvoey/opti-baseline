@@ -563,3 +563,27 @@
   background: var(--lf);
   vertical-align: 1px;
 }
+
+/* ---------- "Main .env -> site:new -> CMS + laptop" diagram (MainEnv section) ---------- */
+.flow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1.2fr);
+  gap: 10px;
+  align-items: center;
+  margin: 18px 0 10px;
+}
+.flowBox {
+  background: var(--n2);
+  border: 2px solid var(--fir);
+  border-radius: var(--r-sm);
+  padding: 12px 14px;
+  font-size: 0.93rem;
+}
+.flowBox b { display: block; margin-bottom: 2px; }
+.flowStart { background: var(--lf); }
+.flowOut { display: grid; gap: 10px; }
+.flowArrow { font-family: var(--display); font-weight: 800; font-size: 1.7rem; line-height: 1; text-align: center; }
+@media (max-width: 1100px) {
+  .flow { grid-template-columns: minmax(0, 1fr); }
+  .flowArrow { transform: rotate(90deg); }
+}
