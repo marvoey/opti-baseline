@@ -80,7 +80,7 @@ const DEFAULT_PREVIEW_FORMATS = { any: '{host}/preview?key={key}&ver={version}&l
 // Keys that belong to ONE site and are never copied from this checkout's .env.
 const SITE_SPECIFIC_KEYS = new Set([
   'SITE_BRANCH', 'SITE_PREFIX', 'SITE_NAME', 'PORT', 'DEPLOYED_URL', 'HOME_PAGE_CONTENT_ID',
-  'ASSET_BASE_FOLDER_ID', 'MARK_TOOLS_NAME_PREFIX', 'MARK_TOOLS_TOKEN', 'ADMIN_PASSWORD', 'BASE_URL', 'DEV_HOSTS',
+  'ASSET_BASE_FOLDER_ID', 'MARK_TOOLS_NAME_PREFIX', 'MARK_TOOLS_TOKEN', 'BASE_URL', 'DEV_HOSTS',
 ]);
 
 const step = (s) => console.log(`\n${c.bold(s)}`);
@@ -454,7 +454,6 @@ async function main() {
       ['ASSET_BASE_FOLDER_ID', assetKey],
       ['MARK_TOOLS_NAME_PREFIX', branch],
       ['MARK_TOOLS_TOKEN', randomBytes(32).toString('base64url')],
-      ['ADMIN_PASSWORD', randomBytes(18).toString('base64url')],
     ]);
     const example = existsSync(join(dir, '.env.example')) ? readFileSync(join(dir, '.env.example'), 'utf8') : '';
     const written = new Set();
@@ -479,7 +478,7 @@ async function main() {
     const missingSite = [...site.keys()].filter((k) => !written.has(k) && !['SITE_BRANCH', 'SITE_PREFIX', 'SITE_NAME'].includes(k));
     const siteTail = missingSite.length ? ['', '# --- Site values ---', ...missingSite.map((k) => `${k}=${site.get(k)}`)] : [];
     writeFileSync(envFile, [...header, ...body, ...tail, ...siteTail].join('\n').replace(/\n*$/, '\n'));
-    console.log(`  ${ok(`wrote ${envFile}`)} ${c.dim('(new ADMIN_PASSWORD and MARK_TOOLS_TOKEN generated; not printed)')}`);
+    console.log(`  ${ok(`wrote ${envFile}`)} ${c.dim('(new MARK_TOOLS_TOKEN generated; not printed)')}`);
   }
 
   // ── 7. install ──

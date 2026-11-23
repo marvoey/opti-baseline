@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { LOCALE_SEGMENTS } from '@/lib/locales';
-import { isAdminAuthorized, isAdminConfigured } from '@/lib/adminAuth';
 
 /**
  * Next.js 16 Proxy (the replacement for Middleware) — locale clean-URLs for the
@@ -28,21 +27,8 @@ function firstSegment(pathname: string): string {
   return pathname.split('/')[1] ?? '';
 }
 
-/** Password gate for /admin (HTTP Basic). Also covers its server actions. */
-function guardAdmin(request: NextRequest) {
-  if (!isAdminConfigured()) {
-    return new NextResponse('Admin is disabled: set ADMIN_PASSWORD to enable it.', { status: 503 });
-  }
-  if (isAdminAuthorized(request.headers.get('authorization'))) return NextResponse.next();
-  return new NextResponse('Authentication required.', {
-    status: 401,
-    headers: { 'WWW-Authenticate': 'Basic realm="Admin", charset="UTF-8"' },
-  });
-}
-
 export function proxy(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
-  if (pathname === '/admin' || pathname.startsWith('/admin/')) return guardAdmin(request);
   const seg = firstSegment(pathname);
 
   // Default-locale prefix is visible → redirect to the clean path (canonical/SEO).
@@ -65,15 +51,14 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  // Run on everything EXCEPT API, Next internals, the preview/admin/styleguide
+  // Run on everything EXCEPT API, Next internals, the preview/styleguide
   // routes, and any path containing a dot (static assets like /logo.svg). The
-  // preview, admin and styleguide routes live outside [locale] and must not be
-  // rewritten into a locale. /admin is matched separately, for the password gate only.
+  // preview and styleguide routes live outside [locale] and must not be
+  // rewritten into a locale.
   // `setup-guide$` and `setup-guide/` are the colleague setup guide (app/setup-guide: the page,
   // sign-in, sign-up, team progress and its progress API), which also lives outside [locale].
   // Matching only the exact segment keeps CMS pages like /setup-guide-2 routed to the CMS.
   matcher: [
-    '/admin/:path*',
-    '/((?!api|_next/static|_next/image|preview|admin|styleguide|applications|demo|setup-guide$|setup-guide/|favicon.ico|.*\\..*).*)',
+    '/((?!api|_next/static|_next/image|preview|styleguide|applications|demo|setup-guide$|setup-guide/|favicon.ico|.*\\..*).*)',
   ],
 };

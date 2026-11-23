@@ -8,7 +8,6 @@ shared CMS instance.
 - Content types are code: `cms/*.tsx` (definition + React component), registered in `cms/registry.ts`.
 - The main nav is built from the CMS content tree (`lib/navTree.ts`); the rest of the chrome comes
   from `lib/siteConfig.ts`, colours from `app/globals.css`.
-- `/admin` is a content type inspector behind HTTP Basic auth (`ADMIN_PASSWORD`).
 
 ## Spin up a new demo
 
@@ -40,7 +39,7 @@ yarn site:new acme --prefix Acme --name "Acme Corp" --opp Acme
 5. the git worktree on the new branch (no commit),
 6. the worktree's `.env`: shared credentials copied from this checkout, site values filled in
    (`SITE_BRANCH`, `SITE_PREFIX`, `PORT`, `DEPLOYED_URL`, `HOME_PAGE_CONTENT_ID`,
-   `ASSET_BASE_FOLDER_ID`) and a fresh `ADMIN_PASSWORD` and `MARK_TOOLS_TOKEN`,
+   `ASSET_BASE_FOLDER_ID`) and a fresh `MARK_TOOLS_TOKEN`,
 7. `yarn install` (skip with `--no-install`).
 
 Every step is idempotent: if a run fails part-way, fix the cause and re-run with `--resume`.

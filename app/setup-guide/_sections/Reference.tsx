@@ -420,13 +420,6 @@ const ENV_ROWS: [setting: string, purpose: React.ReactNode, who: string][] = [
   ],
   ['OPTIMIZELY_GRAPH_GATEWAY', 'The address for reading content. Optional.', 'Facilitator'],
   ['DEPLOYED_URL', 'The site’s public web address. Used to find the right site’s content.', 'Facilitator / site:new'],
-  [
-    'ADMIN_PASSWORD',
-    <>
-      The password for the site’s <code>/admin</code> page.
-    </>,
-    'Facilitator / site:new',
-  ],
   ['SITE_BRANCH / SITE_PREFIX / SITE_NAME', 'Which demo site this folder belongs to. Used by safety checks.', 'site:new'],
   [
     'HOME_PAGE_CONTENT_ID / ASSET_BASE_FOLDER_ID',
