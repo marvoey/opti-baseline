@@ -102,13 +102,27 @@ function readEnvFile(file) {
 }
 
 // ── Port helpers ────────────────────────────────────────────────────────────
+/** TCP ports something is already listening on (best effort: an empty set when the platform tool is missing). */
 function listeningPorts() {
-  try {
-    const outp = execFileSync('ss', ['-ltnH'], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] });
-    return new Set([...outp.matchAll(/:(\d{2,5})\s/g)].map((m) => Number(m[1])));
-  } catch {
-    return new Set();
+  const run = (cmd, cmdArgs) => {
+    try {
+      return execFileSync(cmd, cmdArgs, { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] });
+    } catch {
+      return '';
+    }
+  };
+  let ports = [];
+  if (process.platform === 'win32') {
+    // "  TCP    0.0.0.0:3034    0.0.0.0:0    LISTENING    1234". A listening socket always has foreign port 0,
+    // which also works on non-English Windows, where the word LISTENING is translated.
+    ports = [...run('netstat', ['-ano', '-p', 'TCP']).matchAll(/^\s*TCP\s+\S+:(\d{2,5})\s+\S+:0\s/gim)].map((m) => Number(m[1]));
+  } else if (process.platform === 'darwin') {
+    // "node  1234 you  23u  IPv6 ...  TCP *:3034 (LISTEN)"
+    ports = [...run('lsof', ['-nP', '-iTCP', '-sTCP:LISTEN']).matchAll(/:(\d{2,5})\s+\(LISTEN\)/g)].map((m) => Number(m[1]));
+  } else {
+    ports = [...run('ss', ['-ltnH']).matchAll(/:(\d{2,5})\s/g)].map((m) => Number(m[1]));
   }
+  return new Set(ports);
 }
 
 function worktreePorts() {
@@ -214,7 +228,9 @@ async function main() {
     }
   }
   const worktrees = (git(['worktree', 'list', '--porcelain']) ?? '').split('\n\n');
-  const existingWt = worktrees.find((w) => w.startsWith(`worktree ${dir}\n`));
+  // git prints worktree paths with forward slashes (and any drive-letter case) on Windows.
+  const norm = (p) => (process.platform === 'win32' ? p.replace(/\\/g, '/').toLowerCase() : p);
+  const existingWt = worktrees.find((w) => norm(w.split('\n')[0].replace(/^worktree /, '')) === norm(dir));
   const wtOnBranch = existingWt?.includes(`branch refs/heads/${branch}`);
   if ((localBranch || remoteBranch) && !(args.resume && localBranch && wtOnBranch)) {
     problems.push(
@@ -485,7 +501,8 @@ async function main() {
   step('7/7 dependencies');
   if (args['no-install']) console.log(c.dim('  skipped (--no-install). Run: yarn install'));
   else {
-    const r = spawnSync('yarn', ['install'], { cwd: dir, stdio: 'inherit' });
+    // On Windows yarn is yarn.cmd, which Node only starts through a shell (arguments here are fixed).
+    const r = spawnSync('yarn', ['install'], { cwd: dir, stdio: 'inherit', shell: process.platform === 'win32' });
     if (r.status !== 0) console.log(`  ${warn('yarn install failed; run it manually in the worktree')}`);
   }
 

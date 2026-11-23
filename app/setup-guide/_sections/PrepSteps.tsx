@@ -1,8 +1,12 @@
 import s from '../setup-guide.module.css';
-import { Check, ShellSwitch } from '../_components/controls';
+import { Check, ShellSwitch, WinModeSwitch } from '../_components/controls';
 import { Callout, Cmd, Cmds, Example, Only, Step } from '../_components/ui';
 
 /** Steps 1–6: installs the reader does on their own before the session. */
+
+// Shorthand for the two Windows variants.
+const N = { os: 'win', mode: 'native' } as const; // PowerShell (default)
+const W = { os: 'win', mode: 'wsl' } as const; // WSL (advanced)
 
 const NVM_URL = 'https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh';
 
@@ -10,15 +14,15 @@ const NVM_URL = 'https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh
 export const SHELL_FILES = [
   { os: 'mac', shell: 'zsh', file: '.zshrc', label: 'macOS' },
   { os: 'mac', shell: 'bash', file: '.bash_profile', label: 'macOS' },
-  { os: 'win', shell: 'bash', file: '.bashrc', label: 'Windows (Ubuntu)' },
-  { os: 'win', shell: 'zsh', file: '.zshrc', label: 'Windows (Ubuntu)' },
+  { os: 'win', shell: 'bash', file: '.bashrc', label: 'Windows (WSL)' },
+  { os: 'win', shell: 'zsh', file: '.zshrc', label: 'Windows (WSL)' },
 ] as const;
 
 export function NvmCommands() {
   return (
     <>
       {SHELL_FILES.map(({ os, shell, file }) => (
-        <Only key={`${os}-${shell}`} os={os} shell={shell}>
+        <Only key={`${os}-${shell}`} os={os} shell={shell} {...(os === 'win' ? { mode: 'wsl' as const } : {})}>
           <Cmds
             items={[
               {
@@ -50,6 +54,8 @@ export function NvmCommands() {
   );
 }
 
+const WINGET_FLAGS = '-e --source winget --accept-package-agreements --accept-source-agreements';
+
 function Step1() {
   return (
     <Step
@@ -57,13 +63,15 @@ function Step1() {
       title={
         <>
           <Only os="mac" as="span">Open Terminal and check your shell</Only>
-          <Only os="win" as="span">Install Ubuntu (WSL)</Only>
+          <Only {...N} as="span">Set up PowerShell</Only>
+          <Only {...W} as="span">Install Ubuntu (WSL)</Only>
         </>
       }
       meta={
         <>
           <Only os="mac" as="span">Nothing to install · 2 min</Only>
-          <Only os="win" as="span">About 15 min, plus a restart</Only>
+          <Only {...N} as="span">About 5 min · no restart</Only>
+          <Only {...W} as="span">About 15 min, plus a restart</Only>
         </>
       }
     >
@@ -129,10 +137,69 @@ function Step1() {
         <Check id="mac-s1-shell" />
       </Only>
 
-      <Only os="win">
+      <Only {...N}>
         <p>
-          The project’s tools are made for Mac and Linux. Windows can run Linux using a free Microsoft feature called{' '}
-          <b>WSL</b>. This step installs it, together with <b>Ubuntu</b>, the version of Linux we use.
+          Windows has a built-in terminal called <b>PowerShell</b>. You’ll use it now to install the tools. (Later you’ll
+          use the terminal inside VS Code, which is PowerShell too.) Nothing here needs a restart.
+        </p>
+        <ol>
+          <li>
+            Click <b>Start</b>, type <b>PowerShell</b> and click <b>Windows PowerShell</b>. A normal window is fine for
+            this step.
+          </li>
+          <li>
+            A blue (or black) window opens with a line like <code>PS C:\Users\jsmith&gt;</code> and a blinking cursor.
+            Click inside it, paste this command and press <kbd>Enter</kbd>:
+          </li>
+        </ol>
+        <Cmd c="winget --version" what="Checks that winget, Windows’s built-in app installer, is there. It prints a version number." where="PowerShell" />
+        <Example lines={['v1.9.25200']} />
+        <Callout kind="tip" title="Says “winget is not recognized”?">
+          Open the <b>Microsoft Store</b>, search for <b>App Installer</b> and click <b>Update</b> (or <b>Get</b>). Then
+          open a new PowerShell window and try again.
+        </Callout>
+        <p>
+          Next, allow PowerShell to run scripts. Windows blocks them by default, and Yarn (which you’ll install soon)
+          needs them. This only changes your own account and doesn’t need an administrator.
+        </p>
+        <Cmds
+          where="PowerShell"
+          items={[
+            {
+              c: 'Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned -Force',
+              what: 'Lets PowerShell run scripts that are already on your laptop. It prints nothing.',
+            },
+            { c: 'Get-ExecutionPolicy -Scope CurrentUser', what: 'Shows the setting you just made.' },
+          ]}
+        />
+        <Example lines={['RemoteSigned']} />
+        <Callout kind="warn" title="An error that mentions “overridden by a policy”?">
+          Your company controls this setting. Ask IT to allow <code>RemoteSigned</code> for PowerShell, then try again.
+        </Callout>
+        <Check id="native-s1a" />
+        <Check id="native-s1b" />
+        <details>
+          <summary>Advanced: want Linux (WSL) instead? (optional)</summary>
+          <div className={s.detailsBody}>
+            <p>
+              WSL runs a Linux system inside Windows. Some developers prefer it, but it adds a restart, a second set of
+              folders and more steps. Only pick it if you already use WSL, or want to learn it. Everything else in this
+              guide works the same either way.
+            </p>
+            <WinModeSwitch inline />
+          </div>
+        </details>
+      </Only>
+
+      <Only {...W}>
+        <Callout kind="tip" title="You chose the advanced WSL setup">
+          WSL runs Linux inside Windows. It works well, but it has a restart and more steps. If you’re new to terminals,
+          the simpler way is PowerShell, which is already on your laptop. Switch back any time:
+          <WinModeSwitch inline />
+        </Callout>
+        <p>
+          The project’s tools are made for Mac and Linux. WSL is a free Microsoft feature that runs Linux inside
+          Windows. This step installs it, together with <b>Ubuntu</b>, the version of Linux we use.
         </p>
         <ol>
           <li>
@@ -179,15 +246,15 @@ function Step1() {
         <Cmd c="wsl -l -v" what="Lists the Linux systems installed on your computer." where="PowerShell" />
         <Example lines={['  NAME      STATE           VERSION', '* Ubuntu    Running         2']} />
         <p>
-          You should see <b>Ubuntu</b> with a <b>2</b> under VERSION. Your STATE might say <i>Stopped</i>, which is
-          also fine.
+          You should see <b>Ubuntu</b> with a <b>2</b> under VERSION. Your STATE might say <i>Stopped</i>, which is also
+          fine.
         </p>
         <Callout kind="tip" title="Error mentioning “virtualization” or 0x80370102?">
           Your laptop has a setting turned off that WSL needs. Ask IT to turn on <b>virtualization</b> for WSL, then try
           again.
         </Callout>
-        <Check id="win-s1a" />
-        <Check id="win-s1b" />
+        <Check id="wsl-s1a" />
+        <Check id="wsl-s1b" />
       </Only>
     </Step>
   );
@@ -195,8 +262,24 @@ function Step1() {
 
 function Step2() {
   return (
-    <Step n={2} title="Install VS Code" meta="About 10 min">
-      <p>VS Code is the app where you’ll see the project’s files and type commands. It’s free and made by Microsoft.</p>
+    <Step
+      n={2}
+      title={
+        <>
+          <Only unix as="span">Install VS Code</Only>
+          <Only {...N} as="span">Install VS Code, Git and Node.js</Only>
+        </>
+      }
+      meta={
+        <>
+          <Only unix as="span">About 10 min</Only>
+          <Only {...N} as="span">About 10 min · three commands</Only>
+        </>
+      }
+    >
+      <Only unix>
+        <p>VS Code is the app where you’ll see the project’s files and type commands. It’s free and made by Microsoft.</p>
+      </Only>
 
       <Only os="mac">
         <ol>
@@ -233,7 +316,60 @@ function Step2() {
         <Check id="mac-s2b" />
       </Only>
 
-      <Only os="win">
+      <Only {...N}>
+        <p>
+          You’ll install three free tools, one command each, in the PowerShell window from Step 1 (open a new one if you
+          closed it). Run them one at a time and wait for each to finish. Don’t open VS Code yet.
+        </p>
+        <Callout kind="warn" title="Windows will ask for permission">
+          Git and Node.js each open a window asking{' '}
+          <i>“Do you want to allow this app to make changes to your device?”</i> Click <b>Yes</b>. If you can’t, your
+          laptop needs an administrator: ask IT.
+        </Callout>
+        <Cmds
+          where="PowerShell"
+          items={[
+            {
+              c: `winget install --id Microsoft.VisualStudioCode ${WINGET_FLAGS}`,
+              what: 'Installs VS Code, the app where you’ll work. It downloads for a minute or two and ends with “Successfully installed”.',
+            },
+            {
+              c: `winget install --id Git.Git ${WINGET_FLAGS}`,
+              what: 'Installs Git, the tool that downloads the project. Click Yes when Windows asks. It takes a few minutes.',
+            },
+            {
+              c: `winget install --id OpenJS.NodeJS.22 ${WINGET_FLAGS}`,
+              what: 'Installs Node.js 22, the engine that runs the website. Click Yes when Windows asks.',
+            },
+          ]}
+        />
+        <Example lines={['Found Node.js 22 [OpenJS.NodeJS.22] Version 22.23.5', 'Downloading https://nodejs.org/dist/…', 'Successfully installed']} />
+        <Callout kind="tip" title="Already have Node.js on this laptop?">
+          The project needs version 22. If the Node.js command says a newer version is already installed, open{' '}
+          <b>Settings → Apps → Installed apps</b>, uninstall <b>Node.js</b>, then run that command again.
+        </Callout>
+        <p>When all three say “Successfully installed”:</p>
+        <ol>
+          <li>
+            <b>Close the PowerShell window.</b> This matters: apps you open afterwards can find the new tools.
+          </li>
+          <li>
+            Click <b>Start</b>, type <b>Visual Studio Code</b> and open it. If it shows a welcome page, you can close that
+            tab.
+          </li>
+          <li>
+            Open the terminal: in the menu at the top, click <b>Terminal → New Terminal</b>. A panel opens at the bottom
+            with a line like <code>PS C:\Users\jsmith&gt;</code>. That’s your terminal from now on.
+          </li>
+        </ol>
+        <Callout kind="tip" title="Does the terminal say cmd or Git Bash instead of PowerShell?">
+          That’s fine to fix: see <a href="#help">Troubleshooting</a>, “VS Code’s terminal isn’t PowerShell”.
+        </Callout>
+        <Check id="native-s2a" />
+        <Check id="native-s2b" />
+      </Only>
+
+      <Only {...W}>
         <ol>
           <li>
             Go to{' '}
@@ -263,15 +399,15 @@ function Step2() {
         />
         <Callout kind="ok" title="How to tell it worked">
           The bottom-left corner of VS Code shows <b>WSL: Ubuntu</b>. Now open VS Code’s terminal: in the menu at the
-          top, click <b>Terminal → New Terminal</b>. A panel opens at the bottom of the window. That’s your terminal
-          from now on. You can close the Ubuntu window.
+          top, click <b>Terminal → New Terminal</b>. A panel opens at the bottom of the window. That’s your terminal from
+          now on. You can close the Ubuntu window.
         </Callout>
         <Callout kind="warn" title="Always check the bottom-left corner">
           Run commands only when it shows <b>WSL: Ubuntu</b>. If it doesn’t, click the coloured <b>&gt;&lt;</b> button
           in the bottom-left corner and choose <b>Connect to WSL</b>.
         </Callout>
-        <Check id="win-s2a" />
-        <Check id="win-s2b" />
+        <Check id="wsl-s2a" />
+        <Check id="wsl-s2b" />
       </Only>
 
       <Only os="mac">
@@ -289,7 +425,7 @@ function Step2() {
         <Check id="mac-s2-shell" />
       </Only>
 
-      <Only os="win">
+      <Only {...W}>
         <h3>Check which shell you have</h3>
         <p>
           There are two common kinds of shell, <b>bash</b> and <b>zsh</b>. Ubuntu normally uses <b>bash</b>, but check
@@ -340,7 +476,7 @@ function Step2() {
           Then you’re in Windows PowerShell, not Ubuntu, and the commands in this guide won’t work. Check the bottom-left
           corner says <b>WSL: Ubuntu</b> (see above), then open a new terminal.
         </Callout>
-        <Check id="win-s2-shell" />
+        <Check id="wsl-s2-shell" />
       </Only>
     </Step>
   );
@@ -350,11 +486,17 @@ function Step3() {
   return (
     <Step
       n={3}
-      title="Install Git"
+      title={
+        <>
+          <Only unix as="span">Install Git</Only>
+          <Only {...N} as="span">Check Git</Only>
+        </>
+      }
       meta={
         <>
           <Only os="mac" as="span">5–30 min, mostly waiting</Only>
-          <Only os="win" as="span">About 5 min</Only>
+          <Only {...W} as="span">About 5 min</Only>
+          <Only {...N} as="span">About 1 min</Only>
         </>
       }
     >
@@ -378,7 +520,23 @@ function Step3() {
         </p>
         <Check id="mac-s3" />
       </Only>
-      <Only os="win">
+
+      <Only {...N}>
+        <p>You installed it in Step 2, so now just check it’s there. Click inside VS Code’s terminal and run:</p>
+        <Cmd c="git --version" what="Shows which version of Git is installed." />
+        <Example lines={['git version 2.56.1.windows.1']} />
+        <p>
+          Any line starting with <code>git version</code> is fine.
+        </p>
+        <Callout kind="tip" title="Says “git is not recognized”?">
+          Close VS Code completely (<b>File → Exit</b>), open it again from the Start menu, then open a new terminal.
+          Windows only shows new tools to apps that start after the install. Still stuck? See{' '}
+          <a href="#help">Troubleshooting</a>.
+        </Callout>
+        <Check id="native-s3" />
+      </Only>
+
+      <Only {...W}>
         <p>Ubuntu usually has Git already. This makes sure it, and a download tool called curl, are installed and up to date.</p>
         <Cmd
           c="sudo apt update && sudo apt install -y git curl"
@@ -396,7 +554,7 @@ function Step3() {
         <p>
           Any line starting with <code>git version</code> is fine.
         </p>
-        <Check id="win-s3" />
+        <Check id="wsl-s3" />
       </Only>
     </Step>
   );
@@ -404,81 +562,119 @@ function Step3() {
 
 function Step4() {
   return (
-    <Step n={4} title="Install Node.js 22" meta="About 5 min">
-      <p>
-        <b>Node.js</b> is the engine that runs the website on your laptop. The project needs version 22. You’ll install
-        it with a free helper called <b>nvm</b>, which{' '}
-        <a href="https://nodejs.org/en/download" target="_blank" rel="noopener noreferrer">
-          nodejs.org
-        </a>{' '}
-        recommends. You don’t need an admin password.
-      </p>
-      <Callout kind="warn" title="Check the switches at the top first">
-        The commands below are for{' '}
-        <b>
-          <Only os="mac" as="span">macOS</Only>
-          <Only os="win" as="span">Windows (Ubuntu)</Only> with <Only shell="zsh" as="span">zsh</Only>
-          <Only shell="bash" as="span">bash</Only>
-        </b>
-        . If that’s wrong, change the switches at the top of the page before you start. The commands change to match.
-      </Callout>
+    <Step
+      n={4}
+      title={
+        <>
+          <Only unix as="span">Install Node.js 22</Only>
+          <Only {...N} as="span">Check Node.js 22</Only>
+        </>
+      }
+      meta={
+        <>
+          <Only unix as="span">About 5 min</Only>
+          <Only {...N} as="span">About 1 min</Only>
+        </>
+      }
+    >
+      <Only unix>
+        <p>
+          <b>Node.js</b> is the engine that runs the website on your laptop. The project needs version 22. You’ll install
+          it with a free helper called <b>nvm</b>, which{' '}
+          <a href="https://nodejs.org/en/download" target="_blank" rel="noopener noreferrer">
+            nodejs.org
+          </a>{' '}
+          recommends. You don’t need an admin password.
+        </p>
+        <Callout kind="warn" title="Check the switches at the top first">
+          The commands below are for{' '}
+          <b>
+            <Only os="mac" as="span">macOS</Only>
+            <Only {...W} as="span">Windows (WSL)</Only> with <Only shell="zsh" as="span">zsh</Only>
+            <Only shell="bash" as="span">bash</Only>
+          </b>
+          . If that’s wrong, change the switches at the top of the page before you start. The commands change to match.
+        </Callout>
 
-      <h3>a. Install nvm</h3>
-      <NvmCommands />
-      <details>
-        <summary>Curious why the commands look like this? (optional)</summary>
-        <div className={s.detailsBody}>
-          <p>
-            nvm adds a few lines to a hidden settings file that your shell reads every time a terminal opens. That’s how
-            Node keeps working in new terminals. Your file is{' '}
-            {SHELL_FILES.map(({ os, shell, file }) => (
-              <Only key={`${os}-${shell}`} os={os} shell={shell} as="span">
-                <code>~/{file}</code>
-              </Only>
-            ))}
-            . The <code>PROFILE=</code> part tells nvm which file to use, so it doesn’t guess wrong.
-          </p>
-          <Only shell="zsh" as="p">
-            The command ends with “bash” even though you use zsh because the nvm installer itself is written for bash.
-            That’s expected.
-          </Only>
-        </div>
-      </details>
+        <h3>a. Install nvm</h3>
+        <NvmCommands />
+        <details>
+          <summary>Curious why the commands look like this? (optional)</summary>
+          <div className={s.detailsBody}>
+            <p>
+              nvm adds a few lines to a hidden settings file that your shell reads every time a terminal opens. That’s how
+              Node keeps working in new terminals. Your file is{' '}
+              {SHELL_FILES.map(({ os, shell, file }) => (
+                <Only key={`${os}-${shell}`} os={os} shell={shell} {...(os === 'win' ? { mode: 'wsl' as const } : {})} as="span">
+                  <code>~/{file}</code>
+                </Only>
+              ))}
+              . The <code>PROFILE=</code> part tells nvm which file to use, so it doesn’t guess wrong.
+            </p>
+            <Only shell="zsh" as="p">
+              The command ends with “bash” even though you use zsh because the nvm installer itself is written for bash.
+              That’s expected.
+            </Only>
+          </div>
+        </details>
 
-      <h3>b. Install Node 22</h3>
-      <Cmds
-        items={[
-          {
-            c: 'nvm install 22',
-            what: (
-              <>
-                Downloads and installs Node 22. It takes about a minute and ends with a line like{' '}
-                <code>Now using node v22.21.1</code>.
-              </>
-            ),
-          },
-          {
-            c: 'nvm alias default 22',
-            what: (
-              <>
-                Makes Node 22 the default in every new terminal. It prints a line starting with{' '}
-                <code>{'default -> 22'}</code>.
-              </>
-            ),
-          },
-          { c: 'node -v', what: 'Shows your Node version.' },
-        ]}
-      />
-      <Example lines={['v22.21.1']} />
-      <p>
-        Any number starting with <code>v22.</code> is fine.
-      </p>
+        <h3>b. Install Node 22</h3>
+        <Cmds
+          items={[
+            {
+              c: 'nvm install 22',
+              what: (
+                <>
+                  Downloads and installs Node 22. It takes about a minute and ends with a line like{' '}
+                  <code>Now using node v22.21.1</code>.
+                </>
+              ),
+            },
+            {
+              c: 'nvm alias default 22',
+              what: (
+                <>
+                  Makes Node 22 the default in every new terminal. It prints a line starting with{' '}
+                  <code>{'default -> 22'}</code>.
+                </>
+              ),
+            },
+            { c: 'node -v', what: 'Shows your Node version.' },
+          ]}
+        />
+        <Example lines={['v22.21.1']} />
+        <p>
+          Any number starting with <code>v22.</code> is fine.
+        </p>
+      </Only>
 
-      <h3>c. Make sure it sticks</h3>
+      <Only {...N}>
+        <p>
+          <b>Node.js</b> is the engine that runs the website on your laptop. The project needs version 22, which you
+          installed in Step 2. Click inside VS Code’s terminal and run:
+        </p>
+        <Cmd c="node -v" what="Shows your Node version." />
+        <Example lines={['v22.23.5']} />
+        <p>
+          Any number starting with <code>v22.</code> is fine.
+        </p>
+        <Callout kind="tip" title="Shows v20, v24 or another number, or “node is not recognized”?">
+          <b>Another number:</b> a different Node.js on your laptop is taking priority. Open{' '}
+          <b>Settings → Apps → Installed apps</b>, uninstall every <b>Node.js</b>, then run the Node command from Step 2
+          again and open a new VS Code window. <b>Not recognized:</b> close VS Code completely (<b>File → Exit</b>) and open
+          it again. More help is in <a href="#help">Troubleshooting</a>.
+        </Callout>
+      </Only>
+
+      <h3>
+        <Only unix as="span">c. </Only>Make sure it sticks
+      </h3>
       <p>
         Open a fresh terminal: click the <b>+</b> at the top right of the terminal panel. In the new terminal, run{' '}
-        <code>node -v</code> again. If it still shows <code>v22…</code>, you’re all set. If it says{' '}
-        <i>command not found</i>, see the first item in <a href="#help">Troubleshooting</a>.
+        <code>node -v</code> again. If it still shows <code>v22…</code>, you’re all set.{' '}
+        <Only unix as="span">
+          If it says <i>command not found</i>, see the first item in <a href="#help">Troubleshooting</a>.
+        </Only>
       </p>
       <Check id="s4" />
       <Check id="s4b" />
@@ -488,28 +684,79 @@ function Step4() {
 
 function Step5() {
   return (
-    <Step n={5} title="Install Yarn 4" meta="About 2 min">
+    <Step n={5} title="Install Yarn 4" meta={<><Only unix as="span">About 2 min</Only><Only {...N} as="span">About 3 min</Only></>}>
       <p>
         <b>Yarn</b> downloads the building blocks (called <i>packages</i>) that the website needs. It comes with Node, so
-        these commands just switch it on and set it up the way this project expects. Run all four, in order.
+        these commands just switch it on and set it up the way this project expects.
+        <Only {...N} as="span">
+          {' '}
+          One step needs an administrator window. Then you’re back in VS Code.
+        </Only>
       </p>
-      <Cmds
-        items={[
-          { c: 'corepack enable', what: 'Switches Yarn on. It prints nothing.' },
-          { c: 'corepack install --global yarn@4.14.1', what: 'Downloads the exact Yarn version this project uses.' },
-          {
-            c: 'yarn config set --home nodeLinker node-modules',
-            what: (
-              <>
-                Sets Yarn up the way this project needs. <b>Don’t skip this one.</b> It prints a short confirmation that
-                mentions <code>nodeLinker</code>.
-              </>
-            ),
-          },
-          { c: 'yarn --version', what: 'Shows your Yarn version.' },
-        ]}
-      />
-      <Example lines={['4.14.1']} />
+
+      <Only unix>
+        <p>Run all four commands, in order.</p>
+        <Cmds
+          items={[
+            { c: 'corepack enable', what: 'Switches Yarn on. It prints nothing.' },
+            { c: 'corepack install --global yarn@4.14.1', what: 'Downloads the exact Yarn version this project uses.' },
+            {
+              c: 'yarn config set --home nodeLinker node-modules',
+              what: (
+                <>
+                  Sets Yarn up the way this project needs. <b>Don’t skip this one.</b> It prints a short confirmation
+                  that mentions <code>nodeLinker</code>.
+                </>
+              ),
+            },
+            { c: 'yarn --version', what: 'Shows your Yarn version.' },
+          ]}
+        />
+        <Example lines={['4.14.1']} />
+      </Only>
+
+      <Only {...N}>
+        <h3>a. Switch Yarn on (in an administrator window)</h3>
+        <ol>
+          <li>
+            Click <b>Start</b> and type <b>PowerShell</b>. Right-click <b>Windows PowerShell</b>, choose{' '}
+            <b>Run as administrator</b> and click <b>Yes</b>.
+          </li>
+          <li>Paste this command and press <kbd>Enter</kbd>:</li>
+        </ol>
+        <Cmd
+          c="corepack enable"
+          what="Switches Yarn on for this laptop. It prints nothing. It needs administrator rights because Node.js is installed in Program Files."
+          where="PowerShell (as administrator)"
+        />
+        <ol start={3}>
+          <li>
+            Close the administrator window. <b>From now on, use VS Code’s terminal again.</b>
+          </li>
+        </ol>
+        <h3>b. Set Yarn up (in VS Code’s terminal)</h3>
+        <Cmds
+          items={[
+            { c: 'corepack install --global yarn@4.14.1', what: 'Downloads the exact Yarn version this project uses.' },
+            {
+              c: 'yarn config set --home nodeLinker node-modules',
+              what: (
+                <>
+                  Sets Yarn up the way this project needs. <b>Don’t skip this one.</b> It prints a short confirmation
+                  that mentions <code>nodeLinker</code>.
+                </>
+              ),
+            },
+            { c: 'yarn --version', what: 'Shows your Yarn version.' },
+          ]}
+        />
+        <Example lines={['4.14.1']} />
+        <Callout kind="tip" title="Says “yarn is not recognized” or “running scripts is disabled”?">
+          “Not recognized” means the administrator step (a) didn’t run: do it again. “Running scripts is disabled” means
+          the script setting from Step 1 is missing: see <a href="#help">Troubleshooting</a>.
+        </Callout>
+      </Only>
+
       <Callout kind="tip" title="Asked “Corepack is about to download… Do you want to continue? [Y/n]”?">
         Type <kbd>Y</kbd> and press <kbd>Enter</kbd>.
       </Callout>
@@ -525,65 +772,118 @@ function Step6() {
         Open a fresh terminal (the <b>+</b> at the top right of the terminal panel), then run this one command. It
         checks everything at once.
       </p>
-      <Cmd
-        c="echo $0; git --version; node -v; yarn --version; yarn config get nodeLinker"
-        what="Prints five lines, one for each thing you set up."
-      />
-      <Only os="mac">
-        <Example lines={['/bin/zsh', 'git version 2.39.5 (Apple Git-154)', 'v22.21.1', '4.14.1', 'node-modules']} />
+      <Only unix>
+        <Cmd
+          c="echo $0; git --version; node -v; yarn --version; yarn config get nodeLinker"
+          what="Prints five lines, one for each thing you set up."
+        />
+        <Only os="mac">
+          <Example lines={['/bin/zsh', 'git version 2.39.5 (Apple Git-154)', 'v22.21.1', '4.14.1', 'node-modules']} />
+        </Only>
+        <Only {...W}>
+          <Example lines={['/bin/bash', 'git version 2.43.0', 'v22.21.1', '4.14.1', 'node-modules']} />
+        </Only>
+        <table>
+          <thead>
+            <tr>
+              <th>Line</th>
+              <th>Should look like</th>
+              <th>If it doesn’t</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1 · Your shell</td>
+              <td>
+                Contains <code>zsh</code> or <code>bash</code>, matching the switch at the top
+              </td>
+              <td>Change the switch, then redo Step 4a</td>
+            </tr>
+            <tr>
+              <td>2 · Git</td>
+              <td>
+                Starts with <code>git version</code>
+              </td>
+              <td>Redo Step 3</td>
+            </tr>
+            <tr>
+              <td>3 · Node</td>
+              <td>
+                Starts with <code>v22.</code>
+              </td>
+              <td>
+                Redo Step 4, or see <a href="#help">Troubleshooting</a>
+              </td>
+            </tr>
+            <tr>
+              <td>4 · Yarn</td>
+              <td>
+                Exactly <code>4.14.1</code>
+              </td>
+              <td>Redo Step 5</td>
+            </tr>
+            <tr>
+              <td>5 · Yarn setting</td>
+              <td>
+                Exactly <code>node-modules</code>
+              </td>
+              <td>Run the third command from Step 5 again</td>
+            </tr>
+          </tbody>
+        </table>
+        <Check id="s6" />
       </Only>
-      <Only os="win">
-        <Example lines={['/bin/bash', 'git version 2.43.0', 'v22.21.1', '4.14.1', 'node-modules']} />
+
+      <Only {...N}>
+        <Cmd
+          c="git --version; node -v; yarn --version; yarn config get nodeLinker"
+          what="Prints four lines, one for each thing you set up."
+        />
+        <Example lines={['git version 2.56.1.windows.1', 'v22.23.5', '4.14.1', 'node-modules']} />
+        <table>
+          <thead>
+            <tr>
+              <th>Line</th>
+              <th>Should look like</th>
+              <th>If it doesn’t</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1 · Git</td>
+              <td>
+                Starts with <code>git version</code>
+              </td>
+              <td>Redo Step 2 (the Git command), then close and reopen VS Code</td>
+            </tr>
+            <tr>
+              <td>2 · Node</td>
+              <td>
+                Starts with <code>v22.</code>
+              </td>
+              <td>
+                Redo Step 2 (the Node.js command), or see <a href="#help">Troubleshooting</a>
+              </td>
+            </tr>
+            <tr>
+              <td>3 · Yarn</td>
+              <td>
+                Exactly <code>4.14.1</code>
+              </td>
+              <td>Redo Step 5</td>
+            </tr>
+            <tr>
+              <td>4 · Yarn setting</td>
+              <td>
+                Exactly <code>node-modules</code>
+              </td>
+              <td>Run the second command from Step 5b again</td>
+            </tr>
+          </tbody>
+        </table>
+        <Check id="s6" label="All four lines look right" />
       </Only>
-      <table>
-        <thead>
-          <tr>
-            <th>Line</th>
-            <th>Should look like</th>
-            <th>If it doesn’t</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1 · Your shell</td>
-            <td>
-              Contains <code>zsh</code> or <code>bash</code>, matching the switch at the top
-            </td>
-            <td>Change the switch, then redo Step 4a</td>
-          </tr>
-          <tr>
-            <td>2 · Git</td>
-            <td>
-              Starts with <code>git version</code>
-            </td>
-            <td>Redo Step 3</td>
-          </tr>
-          <tr>
-            <td>3 · Node</td>
-            <td>
-              Starts with <code>v22.</code>
-            </td>
-            <td>
-              Redo Step 4, or see <a href="#help">Troubleshooting</a>
-            </td>
-          </tr>
-          <tr>
-            <td>4 · Yarn</td>
-            <td>
-              Exactly <code>4.14.1</code>
-            </td>
-            <td>Redo Step 5</td>
-          </tr>
-          <tr>
-            <td>5 · Yarn setting</td>
-            <td>
-              Exactly <code>node-modules</code>
-            </td>
-            <td>Run the third command from Step 5 again</td>
-          </tr>
-        </tbody>
-      </table>
-      <Check id="s6" />
+
       <Callout kind="ok" title="That’s the homework done">
         Your laptop is ready for the session. Bring your <code>.env</code> file, or know where to find it. We’ll do the
         rest together.

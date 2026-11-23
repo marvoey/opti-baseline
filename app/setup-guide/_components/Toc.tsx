@@ -2,22 +2,22 @@ import type { ReactNode } from 'react';
 import s from '../setup-guide.module.css';
 import { Only } from './ui';
 
+/** A label that differs by computer / Windows terminal. */
+const by = (mac: ReactNode, native: ReactNode, wsl: ReactNode = mac) => (
+  <>
+    <Only os="mac" as="span">{mac}</Only>
+    <Only os="win" mode="native" as="span">{native}</Only>
+    <Only os="win" mode="wsl" as="span">{wsl}</Only>
+  </>
+);
+
 const ITEMS: { href: string; n?: number; label: ReactNode }[] = [
   { href: '#start', label: 'Before you start' },
   { href: '#basics', label: 'Terminal basics' },
-  {
-    href: '#s1',
-    n: 1,
-    label: (
-      <>
-        <Only os="mac" as="span">Check your shell</Only>
-        <Only os="win" as="span">Install Ubuntu (WSL)</Only>
-      </>
-    ),
-  },
-  { href: '#s2', n: 2, label: 'Install VS Code' },
-  { href: '#s3', n: 3, label: 'Install Git' },
-  { href: '#s4', n: 4, label: 'Install Node.js' },
+  { href: '#s1', n: 1, label: by('Check your shell', 'Set up PowerShell', 'Install Ubuntu (WSL)') },
+  { href: '#s2', n: 2, label: by('Install VS Code', 'Install the tools', 'Install VS Code') },
+  { href: '#s3', n: 3, label: by('Install Git', 'Check Git', 'Install Git') },
+  { href: '#s4', n: 4, label: by('Install Node.js', 'Check Node.js', 'Install Node.js') },
   { href: '#s5', n: 5, label: 'Install Yarn' },
   { href: '#s6', n: 6, label: 'Final check' },
   { href: '#s7', n: 7, label: 'Download the project' },

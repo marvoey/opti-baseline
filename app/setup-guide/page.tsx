@@ -37,6 +37,7 @@ export default async function SetupGuidePage() {
     checks: user.progress.checks.filter(isCheckId),
     os: user.progress.os ?? guessedOs,
     shell: user.progress.shell,
+    winMode: user.progress.winMode ?? ('native' as const),
   };
 
   return (

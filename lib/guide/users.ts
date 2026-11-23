@@ -2,6 +2,7 @@ import 'server-only';
 import { createHash } from 'node:crypto';
 import { cmsRequest, CmsError } from './cms';
 import { guideConfig } from './config';
+import { normalizeProgress } from '@/app/setup-guide/_lib/checks';
 
 /**
  * Guide accounts stored in the CMS as GuideUser items (see cms/GuideUser.tsx).
@@ -15,7 +16,14 @@ import { guideConfig } from './config';
 
 export const CONTENT_TYPE = 'GuideUser';
 
-export type StoredProgress = { checks: string[]; os?: 'mac' | 'win'; shell?: 'zsh' | 'bash'; updatedAt?: string };
+export type StoredProgress = {
+  checks: string[];
+  os?: 'mac' | 'win';
+  shell?: 'zsh' | 'bash';
+  /** Windows only: PowerShell or WSL. */
+  winMode?: 'native' | 'wsl';
+  updatedAt?: string;
+};
 
 export type GuideUser = {
   key: string;
@@ -65,12 +73,13 @@ const int = (v: unknown) => (typeof v === 'number' && Number.isFinite(v) ? Math.
 function parseProgress(raw: unknown): StoredProgress {
   try {
     const p = JSON.parse(str(raw) || '{}') as Partial<StoredProgress>;
-    return {
+    return normalizeProgress({
       checks: Array.isArray(p.checks) ? p.checks.filter((c): c is string => typeof c === 'string') : [],
       os: p.os === 'mac' || p.os === 'win' ? p.os : undefined,
       shell: p.shell === 'zsh' || p.shell === 'bash' ? p.shell : undefined,
+      winMode: p.winMode === 'native' || p.winMode === 'wsl' ? p.winMode : undefined,
       updatedAt: typeof p.updatedAt === 'string' ? p.updatedAt : undefined,
-    };
+    });
   } catch {
     return { checks: [] };
   }

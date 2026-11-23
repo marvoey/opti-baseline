@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import s from '../setup-guide.module.css';
 import { logout } from '../actions';
-import { OsSwitch, Progress, SaveStatus, ShellSwitch } from './controls';
+import { OsSwitch, Progress, SaveStatus, ShellControl, TerminalControl } from './controls';
 
 export default function TopBar({ name, facilitator }: { name: string; facilitator: boolean }) {
   return (
@@ -13,8 +13,8 @@ export default function TopBar({ name, facilitator }: { name: string; facilitato
         <div className={s.spacer} />
         <span className={s.segLabel}>Computer</span>
         <OsSwitch />
-        <span className={s.segLabel}>Shell</span>
-        <ShellSwitch />
+        <TerminalControl />
+        <ShellControl />
         <Progress />
       </div>
       <div className={s.userBar}>

@@ -2,6 +2,9 @@ import s from '../setup-guide.module.css';
 import { Card, Cmd, Cmds, Example, Help, ModKey, Only, StopKey } from '../_components/ui';
 import { SHELL_FILES } from './PrepSteps';
 
+const N = { os: 'win', mode: 'native' } as const; // PowerShell (default)
+const W = { os: 'win', mode: 'wsl' } as const; // WSL (advanced)
+
 export function Ready() {
   return (
     <Card id="ready" className={s.ready}>
@@ -32,7 +35,7 @@ export function ComingBack() {
         <li>
           Open VS Code. Click <b>File → Open Recent</b> and choose your project folder.
         </li>
-        <Only os="win" as="li">
+        <Only {...W} as="li">
           Check that the bottom-left corner says <b>WSL: Ubuntu</b>.
         </Only>
         <li>
@@ -150,49 +153,155 @@ export function Troubleshooting() {
         </p>
       </Help>
 
-      <Help
-        q={
-          <>
-            <code>nvm: command not found</code>, or Node disappears in a new terminal
-          </>
-        }
-      >
-        <p>
-          nvm saved its settings in a file your shell doesn’t read. This usually means the Shell switch at the top
-          doesn’t match your real shell. Run <code>echo $0</code>, set the switch to match, then go back and run{' '}
-          <a href="#s4">Step 4a</a> again. The commands there change to match the switch.
-        </p>
-        <p>
-          Then run <code>nvm alias default 22</code> and open a new terminal. For reference, the settings file for each
-          combination is:
-        </p>
-        <ShellFileTable />
-      </Help>
+      {/* ───────── Windows with PowerShell ───────── */}
+      <Only {...N}>
+        <Help
+          q={
+            <>
+              <code>winget</code> is not recognized
+            </>
+          }
+        >
+          <p>
+            Open the <b>Microsoft Store</b>, search for <b>App Installer</b> and click <b>Update</b> (or <b>Get</b>). Then
+            open a new PowerShell window and run <code>winget --version</code> again. On a work laptop, IT may have removed
+            it: ask them to install <b>App Installer</b>, or download VS Code, Git and Node.js 22 from their websites
+            instead.
+          </p>
+        </Help>
 
-      <Help
-        q={
-          <>
-            <code>node -v</code> doesn’t show v22
-          </>
-        }
-      >
-        <Cmds items={[{ c: 'nvm use 22' }, { c: 'nvm alias default 22' }]} />
-        <p>
-          Open a new terminal and run <code>node -v</code> again. If it still isn’t v22, another copy of Node on your
-          laptop is getting in the way. Ask your facilitator for help.
-        </p>
-      </Help>
+        <Help
+          q={
+            <>
+              <code>yarn : File … cannot be loaded because running scripts is disabled on this system</code>
+            </>
+          }
+        >
+          <p>PowerShell is blocking Yarn’s helper script. Allow scripts for your account, then open a new terminal:</p>
+          <Cmd c="Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned -Force" />
+          <p>
+            If you get an error that mentions <i>“overridden by a policy”</i>, your company controls this setting. Ask IT
+            to allow <code>RemoteSigned</code> for PowerShell.
+          </p>
+        </Help>
 
-      <Help
-        q={
-          <>
-            <code>yarn: command not found</code>
-          </>
-        }
-      >
-        <p>Run this, then open a new terminal:</p>
-        <Cmd c="corepack enable" />
-      </Help>
+        <Help
+          q={
+            <>
+              <code>git</code>, <code>node</code>, <code>yarn</code> or <code>code</code> “is not recognized”
+            </>
+          }
+        >
+          <p>
+            Windows shows new tools only to apps that start <i>after</i> they were installed. Close VS Code completely (
+            <b>File → Exit</b>), open it again from the Start menu and open a new terminal. Still not found? Restart
+            Windows, then try again.
+          </p>
+          <p>
+            For <code>yarn</code> only: it also needs the administrator step in <a href="#s5">Step 5a</a>.
+          </p>
+        </Help>
+
+        <Help q="The Node.js command says a newer version is already installed, or node -v shows v20 or v24">
+          <p>
+            Another Node.js on your laptop is in the way. Open <b>Settings → Apps → Installed apps</b>, uninstall every{' '}
+            <b>Node.js</b> entry, then run the Node.js command from <a href="#s2">Step 2</a> again. Close VS Code
+            completely, open it again, and check with <code>node -v</code>.
+          </p>
+        </Help>
+
+        <Help q="Windows asks for an administrator password, or I can’t click Yes">
+          <p>
+            Installing Git and Node.js needs administrator rights on your laptop. Ask IT to give you temporary access, or
+            to run the install commands for you from <a href="#s2">Step 2</a>.
+          </p>
+        </Help>
+
+        <Help q="VS Code’s terminal isn’t PowerShell (it says cmd or Git Bash)">
+          <p>
+            Press <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>P</kbd>, type <b>Terminal: Select Default Profile</b> and click{' '}
+            <b>PowerShell</b>. Then click the bin icon on the terminal panel and open a new terminal with{' '}
+            <b>Terminal → New Terminal</b>. The line should start with <code>PS</code>.
+          </p>
+        </Help>
+
+        <Help
+          q={
+            <>
+              <code>EPERM</code>, <i>operation not permitted</i> or <i>file in use</i> during <code>yarn install</code>
+            </>
+          }
+        >
+          <p>
+            Something is holding a file open, often antivirus software or another window using the project. Stop the
+            website if it’s running (<StopKey /> <kbd>C</kbd>), close other VS Code windows for this project, then run{' '}
+            <code>yarn install</code> again. If it keeps happening, ask IT to exclude the <code>Opps</code> folder from
+            real-time scanning.
+          </p>
+        </Help>
+
+        <Help q="An error about a path or file name being too long">
+          <p>
+            Windows limits file paths to 260 characters unless you turn that off. Open an <b>administrator</b> PowerShell
+            (<b>Start</b>, type PowerShell, right-click, <b>Run as administrator</b>) and run these two commands, one at a
+            time. Then run the command that failed again.
+          </p>
+          <Cmds
+            where="PowerShell (as administrator)"
+            items={[
+              { c: "Set-ItemProperty -Path 'HKLM:\\SYSTEM\\CurrentControlSet\\Control\\FileSystem' -Name LongPathsEnabled -Value 1" },
+              { c: 'git config --global core.longpaths true' },
+            ]}
+          />
+        </Help>
+      </Only>
+
+      {/* ───────── macOS and WSL (shell-based) ───────── */}
+      <Only unix>
+        <Help
+          q={
+            <>
+              <code>nvm: command not found</code>, or Node disappears in a new terminal
+            </>
+          }
+        >
+          <p>
+            nvm saved its settings in a file your shell doesn’t read. This usually means the Shell switch at the top
+            doesn’t match your real shell. Run <code>echo $0</code>, set the switch to match, then go back and run{' '}
+            <a href="#s4">Step 4a</a> again. The commands there change to match the switch.
+          </p>
+          <p>
+            Then run <code>nvm alias default 22</code> and open a new terminal. For reference, the settings file for each
+            combination is:
+          </p>
+          <ShellFileTable />
+        </Help>
+
+        <Help
+          q={
+            <>
+              <code>node -v</code> doesn’t show v22
+            </>
+          }
+        >
+          <Cmds items={[{ c: 'nvm use 22' }, { c: 'nvm alias default 22' }]} />
+          <p>
+            Open a new terminal and run <code>node -v</code> again. If it still isn’t v22, another copy of Node on your
+            laptop is getting in the way. Ask your facilitator for help.
+          </p>
+        </Help>
+
+        <Help
+          q={
+            <>
+              <code>yarn: command not found</code>
+            </>
+          }
+        >
+          <p>Run this, then open a new terminal:</p>
+          <Cmd c="corepack enable" />
+        </Help>
+      </Only>
 
       <Help
         q={
@@ -220,18 +329,20 @@ export function Troubleshooting() {
         </p>
       </Help>
 
-      <Help
-        q={
-          <>
-            <code>EACCES</code> or <i>permission denied</i>
-          </>
-        }
-      >
-        <p>
-          Don’t add <code>sudo</code> to <code>yarn</code> or <code>npm</code> commands. That makes things worse. Ask
-          your facilitator for help.
-        </p>
-      </Help>
+      <Only unix>
+        <Help
+          q={
+            <>
+              <code>EACCES</code> or <i>permission denied</i>
+            </>
+          }
+        >
+          <p>
+            Don’t add <code>sudo</code> to <code>yarn</code> or <code>npm</code> commands. That makes things worse. Ask
+            your facilitator for help.
+          </p>
+        </Help>
+      </Only>
 
       <Help
         q={
@@ -243,7 +354,14 @@ export function Troubleshooting() {
         <p>
           The site can’t find your <code>.env</code> file. Check it’s named exactly <code>.env</code>, not{' '}
           <code>env</code> or <code>.env.txt</code>. It must sit next to <code>package.json</code>, not inside another
-          folder. Run <code>ls -a</code> to check.
+          folder. Run{' '}
+          <Only unix as="span">
+            <code>ls -a</code>
+          </Only>
+          <Only {...N} as="span">
+            <code>Get-ChildItem -Force</code>
+          </Only>{' '}
+          to check.
         </p>
       </Help>
 
@@ -298,66 +416,81 @@ export function Troubleshooting() {
         </p>
       </Help>
 
-      <Help q="VS Code shows a different shell from the switch, or I want to change it">
-        <p>
-          Press <ModKey /> <kbd>Shift</kbd> <kbd>P</kbd>, type <b>Terminal: Select Default Profile</b> and click{' '}
-          <b>zsh</b> or <b>bash</b>. Open a new terminal with <b>+</b>, run <code>echo $0</code>, and set the Shell
-          switch at the top to match.
-        </p>
-        <p>If you change shells after Step 4, redo Step 4a. You don’t need to reinstall Node.</p>
-      </Help>
+      <Only unix>
+        <Help q="VS Code shows a different shell from the switch, or I want to change it">
+          <p>
+            Press <ModKey /> <kbd>Shift</kbd> <kbd>P</kbd>, type <b>Terminal: Select Default Profile</b> and click{' '}
+            <b>zsh</b> or <b>bash</b>. Open a new terminal with <b>+</b>, run <code>echo $0</code>, and set the Shell
+            switch at the top to match.
+          </p>
+          <p>If you change shells after Step 4, redo Step 4a. You don’t need to reinstall Node.</p>
+        </Help>
 
-      <Help
-        q={
-          <>
-            <code>echo $0</code> shows something other than zsh or bash
-          </>
-        }
-      >
-        <p>
-          This guide covers zsh and bash only. Use the item above to switch VS Code to one of them. You don’t need to
-          change anything else on your computer.
-        </p>
-      </Help>
+        <Help
+          q={
+            <>
+              <code>echo $0</code> shows something other than zsh or bash
+            </>
+          }
+        >
+          <p>
+            This guide covers zsh and bash only. Use the item above to switch VS Code to one of them. You don’t need to
+            change anything else on your computer.
+          </p>
+        </Help>
 
-      <Help
-        q={
-          <>
-            <code>code: command not found</code>
-          </>
-        }
-      >
-        <Only os="mac" as="p">
-          In VS Code, press <kbd>Cmd ⌘</kbd> <kbd>Shift</kbd> <kbd>P</kbd>, type <b>shell command</b> and click{' '}
-          <b>Shell Command: Install ‘code’ command in PATH</b>. Then open a new terminal and try again.
-        </Only>
-        <Only os="win" as="p">
-          Reinstall VS Code with <b>Add to PATH</b> ticked, then restart Windows. Or, in VS Code, press <kbd>F1</kbd> and
-          choose <b>WSL: Connect to WSL</b>.
-        </Only>
-      </Help>
+        <Help
+          q={
+            <>
+              <code>code: command not found</code>
+            </>
+          }
+        >
+          <Only os="mac" as="p">
+            In VS Code, press <kbd>Cmd ⌘</kbd> <kbd>Shift</kbd> <kbd>P</kbd>, type <b>shell command</b> and click{' '}
+            <b>Shell Command: Install ‘code’ command in PATH</b>. Then open a new terminal and try again.
+          </Only>
+          <Only {...W} as="p">
+            Reinstall VS Code with <b>Add to PATH</b> ticked, then restart Windows. Or, in VS Code, press <kbd>F1</kbd> and
+            choose <b>WSL: Connect to WSL</b>.
+          </Only>
+        </Help>
+      </Only>
 
-      <Help q={<>Mac: <i>The default interactive shell is now zsh</i></>} className={s.mac}>
-        <p>This message means your shell is <b>bash</b>. It’s harmless, and this guide works with bash. To hide the message, run:</p>
-        <Cmd c="echo 'export BASH_SILENCE_DEPRECATION_WARNING=1' >> ~/.bash_profile" />
-      </Help>
+      <Only os="mac">
+        <Help
+          q={
+            <>
+              Mac: <i>The default interactive shell is now zsh</i>
+            </>
+          }
+        >
+          <p>
+            This message means your shell is <b>bash</b>. It’s harmless, and this guide works with bash. To hide the
+            message, run:
+          </p>
+          <Cmd c="echo 'export BASH_SILENCE_DEPRECATION_WARNING=1' >> ~/.bash_profile" />
+        </Help>
+      </Only>
 
-      <Help
-        q={
-          <>
-            <code>zsh: no matches found</code>
-          </>
-        }
-        className={s.zsh}
-      >
-        <p>
-          zsh treats <code>*</code> and <code>?</code> as special characters. Put quotes around the word that contains
-          them and run the command again, or ask your facilitator.
-        </p>
-      </Help>
+      <Only unix shell="zsh">
+        <Help
+          q={
+            <>
+              <code>zsh: no matches found</code>
+            </>
+          }
+        >
+          <p>
+            zsh treats <code>*</code> and <code>?</code> as special characters. Put quotes around the word that contains
+            them and run the command again, or ask your facilitator.
+          </p>
+        </Help>
+      </Only>
 
-      <Only os="win">
-        <h3>Windows only</h3>
+      {/* ───────── WSL only ───────── */}
+      <Only {...W}>
+        <h3>WSL (advanced) only</h3>
         <Help
           q={
             <>

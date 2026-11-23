@@ -2,10 +2,11 @@
 
 import { useRouter } from 'next/navigation';
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
-import { computeProgress, type CheckId, type Os, type Shell } from '../_lib/checks';
+import { computeProgress, type CheckId, type Os, type Shell, type WinMode } from '../_lib/checks';
 
 /**
- * Guide state for the signed-in colleague: chosen computer and shell, ticked boxes, and saving.
+ * Guide state for the signed-in colleague: chosen computer, Windows terminal (PowerShell or WSL),
+ * shell, ticked boxes, and saving.
  *
  * The server renders the page with the progress stored in the CMS (and, for a first visit, a
  * computer guessed from the browser), so the first paint already shows the person's own ticks.
@@ -15,16 +16,18 @@ import { computeProgress, type CheckId, type Os, type Shell } from '../_lib/chec
 
 export type SaveStatus = 'idle' | 'saving' | 'saved' | 'error';
 
-type Initial = { checks: CheckId[]; os: Os; shell?: Shell };
+type Initial = { checks: CheckId[]; os: Os; shell?: Shell; winMode: WinMode };
 
 type GuideState = {
   os: Os;
   shell: Shell;
+  winMode: WinMode;
   checks: ReadonlySet<CheckId>;
   percent: number;
   saveStatus: SaveStatus;
   setOs: (os: Os) => void;
   setShell: (shell: Shell) => void;
+  setWinMode: (mode: WinMode) => void;
   setChecked: (id: CheckId, on: boolean) => void;
 };
 
@@ -43,7 +46,8 @@ const RETRY_MS = 5000;
 export function GuideProvider({ initial, children }: { initial: Initial; children: ReactNode }) {
   const router = useRouter();
   const [os, setOsState] = useState<Os>(initial.os);
-  // Until the person picks a shell it follows the computer: macOS uses zsh, Ubuntu uses bash.
+  const [winMode, setWinModeState] = useState<WinMode>(initial.winMode);
+  // Until the person picks a shell it follows the computer: macOS uses zsh, Ubuntu (WSL) uses bash.
   const [chosenShell, setChosenShell] = useState<Shell | undefined>(initial.shell);
   const [checks, setChecks] = useState<ReadonlySet<CheckId>>(() => new Set(initial.checks));
   const [saveStatus, setSaveStatus] = useState<SaveStatus>('idle');
@@ -54,24 +58,26 @@ export function GuideProvider({ initial, children }: { initial: Initial; childre
   const shell: Shell = chosenShell ?? (os === 'mac' ? 'zsh' : 'bash');
   const dirty = useRef(false);
   const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
-  const latest = useRef({ os, chosenShell, checks });
+  const latest = useRef({ os, winMode, chosenShell, checks });
   useEffect(() => {
-    latest.current = { os, chosenShell, checks };
-  }, [os, chosenShell, checks]);
+    latest.current = { os, winMode, chosenShell, checks };
+  }, [os, winMode, chosenShell, checks]);
 
   const save = useCallback(
-    async (keepalive = false) => {
+    async () => {
       clearTimeout(timer.current);
       if (!dirty.current) return;
       dirty.current = false;
-      const { os: o, chosenShell: s, checks: c } = latest.current;
+      const { os: o, winMode: w, chosenShell: s, checks: c } = latest.current;
       setSaveStatus('saving');
       try {
         const res = await fetch(SAVE_URL, {
           method: 'POST',
           headers: { 'content-type': 'application/json' },
-          body: JSON.stringify({ checks: [...c], os: o, shell: s }),
-          keepalive,
+          body: JSON.stringify({ checks: [...c], os: o, shell: s, winMode: w }),
+          // keepalive: a save that is still in flight when the person reloads or closes the tab is not cancelled
+          // (the body is a few hundred bytes, far below the 64 KB limit).
+          keepalive: true,
           credentials: 'same-origin',
         });
         if (res.status === 401) {
@@ -108,7 +114,7 @@ export function GuideProvider({ initial, children }: { initial: Initial; childre
   // Flush pending changes when the tab is hidden or closed.
   useEffect(() => {
     const flush = () => {
-      if (dirty.current) void save(true);
+      if (dirty.current) void save();
     };
     const onVisibility = () => document.visibilityState === 'hidden' && flush();
     document.addEventListener('visibilitychange', onVisibility);
@@ -125,8 +131,9 @@ export function GuideProvider({ initial, children }: { initial: Initial; childre
     return {
       os,
       shell,
+      winMode,
       checks,
-      percent: computeProgress(checks, os).percent,
+      percent: computeProgress(checks, os, winMode).percent,
       saveStatus,
       setOs: (next) => {
         setOsState(next);
@@ -134,6 +141,10 @@ export function GuideProvider({ initial, children }: { initial: Initial; childre
       },
       setShell: (next) => {
         setChosenShell(next);
+        changed();
+      },
+      setWinMode: (next) => {
+        setWinModeState(next);
         changed();
       },
       setChecked: (id, on) => {
@@ -146,7 +157,7 @@ export function GuideProvider({ initial, children }: { initial: Initial; childre
         changed();
       },
     };
-  }, [os, shell, checks, saveStatus]);
+  }, [os, shell, winMode, checks, saveStatus]);
 
   return <GuideContext.Provider value={value}>{children}</GuideContext.Provider>;
 }

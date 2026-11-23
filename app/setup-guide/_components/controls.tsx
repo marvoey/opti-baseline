@@ -2,14 +2,14 @@
 
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import s from '../setup-guide.module.css';
-import { CHECKS, type CheckId, type Os, type Shell } from '../_lib/checks';
+import { CHECKS, type CheckId, type Os, type Shell, type WinMode } from '../_lib/checks';
 import { useGuide } from './GuideProvider';
 
-/** Wraps the page and tells the CSS which computer and shell to show. */
+/** Wraps the page and tells the CSS which computer, Windows terminal and shell to show. */
 export function GuideRoot({ children }: { children: ReactNode }) {
-  const { os, shell } = useGuide();
+  const { os, shell, winMode } = useGuide();
   return (
-    <div className={s.page} data-os={os} data-shell={shell}>
+    <div className={s.page} data-os={os} data-shell={shell} data-win={winMode}>
       {children}
     </div>
   );
@@ -20,6 +20,10 @@ const OS_OPTIONS: { value: Os; label: string }[] = [
   { value: 'win', label: 'Windows' },
 ];
 const SHELL_OPTIONS: Shell[] = ['zsh', 'bash'];
+const WIN_OPTIONS: { value: WinMode; label: string }[] = [
+  { value: 'native', label: 'PowerShell' },
+  { value: 'wsl', label: 'WSL (advanced)' },
+];
 
 export function OsSwitch() {
   const { os, setOs } = useGuide();
@@ -27,6 +31,20 @@ export function OsSwitch() {
     <div className={s.seg} role="group" aria-label="Choose your computer">
       {OS_OPTIONS.map(({ value, label }) => (
         <button key={value} type="button" aria-pressed={os === value} onClick={() => setOs(value)}>
+          {label}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+/** PowerShell (default) or WSL. Only meaningful on Windows. */
+export function WinModeSwitch({ inline = false }: { inline?: boolean }) {
+  const { winMode, setWinMode } = useGuide();
+  return (
+    <div className={inline ? `${s.seg} ${s.segInline}` : s.seg} role="group" aria-label="Choose your Windows terminal">
+      {WIN_OPTIONS.map(({ value, label }) => (
+        <button key={value} type="button" aria-pressed={winMode === value} onClick={() => setWinMode(value)}>
           {label}
         </button>
       ))}
@@ -44,6 +62,30 @@ export function ShellSwitch({ inline = false }: { inline?: boolean }) {
         </button>
       ))}
     </div>
+  );
+}
+
+/** Top-bar control, shown only on Windows. */
+export function TerminalControl() {
+  const { os } = useGuide();
+  if (os !== 'win') return null;
+  return (
+    <>
+      <span className={s.segLabel}>Windows terminal</span>
+      <WinModeSwitch />
+    </>
+  );
+}
+
+/** Top-bar control, shown on macOS and in WSL. PowerShell has no zsh/bash choice. */
+export function ShellControl() {
+  const { os, winMode } = useGuide();
+  if (os === 'win' && winMode === 'native') return null;
+  return (
+    <>
+      <span className={s.segLabel}>Shell</span>
+      <ShellSwitch />
+    </>
   );
 }
 
@@ -77,12 +119,13 @@ export function SaveStatus() {
   );
 }
 
-export function Check({ id }: { id: CheckId }) {
+/** A tick box. `label` overrides the default text for this id (for wording that differs by computer). */
+export function Check({ id, label }: { id: CheckId; label?: string }) {
   const { checks, setChecked } = useGuide();
   return (
     <label className={s.checkRow}>
       <input type="checkbox" checked={checks.has(id)} onChange={(e) => setChecked(id, e.target.checked)} />
-      <span>{CHECKS[id]}</span>
+      <span>{label ?? CHECKS[id]}</span>
     </label>
   );
 }

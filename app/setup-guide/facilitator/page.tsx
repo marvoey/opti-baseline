@@ -23,9 +23,14 @@ function ago(iso: string | null, now: number): string {
   return `${Math.round(hours / 24)} days ago`;
 }
 
+function computerLabel(os: 'mac' | 'win', winMode: 'native' | 'wsl', shell?: string) {
+  if (os === 'mac') return `macOS${shell ? ` · ${shell}` : ''}`;
+  return winMode === 'wsl' ? `Windows · WSL${shell ? ` · ${shell}` : ''}` : 'Windows · PowerShell';
+}
+
 function row(u: GuideUser) {
   const os = u.progress.os ?? 'mac';
-  const p = computeProgress(u.progress.checks.filter(isCheckId), os);
+  const p = computeProgress(u.progress.checks.filter(isCheckId), os, u.progress.winMode ?? 'native');
   const status = u.disabled ? 'Disabled' : isLocked(u) ? 'Locked' : p.currentStep === null ? 'Done' : p.currentStep <= 6 ? 'Homework' : 'Session';
   const current = p.currentStep === null ? 'All done' : p.currentStep === 0 ? 'Terminal basics' : `Step ${p.currentStep}`;
   return { u, p, os, status, current };
@@ -99,8 +104,7 @@ export default async function FacilitatorPage() {
                     </td>
                     <td>{current}</td>
                     <td>
-                      {os === 'mac' ? 'macOS' : 'Windows'}
-                      {u.progress.shell ? ` · ${u.progress.shell}` : ''}
+                      {computerLabel(os, u.progress.winMode ?? 'native', u.progress.shell)}
                     </td>
                     <td title={u.lastSeenAt ?? undefined}>{ago(u.lastSeenAt, now)}</td>
                     <td>{u.visits}</td>

@@ -1,11 +1,11 @@
 import { currentUser } from '@/lib/guide/session';
 import { updateUser } from '@/lib/guide/users';
-import { CHECK_IDS, computeProgress, isCheckId, isOs, isShell } from '../../_lib/checks';
+import { CHECK_IDS, computeProgress, isCheckId, isOs, isShell, isWinMode } from '../../_lib/checks';
 
 /**
- * POST /setup-guide/api/progress — saves the signed-in colleague's ticks and computer/shell choice
- * to their GuideUser record. Called in batches by GuideProvider (also with keepalive on tab close).
- * Body: { checks: string[], os: "mac" | "win", shell?: "zsh" | "bash" }
+ * POST /setup-guide/api/progress — saves the signed-in colleague's ticks and computer/terminal/shell
+ * choices to their GuideUser record. Called in batches by GuideProvider (also with keepalive on tab close).
+ * Body: { checks: string[], os: "mac" | "win", shell?: "zsh" | "bash", winMode?: "native" | "wsl" }
  */
 
 const MAX_BODY = 8_000;
@@ -31,13 +31,18 @@ export async function POST(request: Request) {
 
   const text = await request.text();
   if (text.length > MAX_BODY) return Response.json({ error: 'Too large' }, { status: 413 });
-  let body: { checks?: unknown; os?: unknown; shell?: unknown };
+  let body: { checks?: unknown; os?: unknown; shell?: unknown; winMode?: unknown };
   try {
     body = JSON.parse(text);
   } catch {
     return Response.json({ error: 'Invalid JSON' }, { status: 400 });
   }
-  if (!Array.isArray(body.checks) || !isOs(body.os) || (body.shell !== undefined && !isShell(body.shell))) {
+  if (
+    !Array.isArray(body.checks) ||
+    !isOs(body.os) ||
+    (body.shell !== undefined && !isShell(body.shell)) ||
+    (body.winMode !== undefined && !isWinMode(body.winMode))
+  ) {
     return Response.json({ error: 'Invalid progress' }, { status: 400 });
   }
 
@@ -45,16 +50,21 @@ export async function POST(request: Request) {
   const checks = CHECK_IDS.filter((id) => ticked.has(id)); // page order, no duplicates
   const os = body.os;
   const shell = body.shell;
+  const winMode = body.winMode;
 
   const stored = user.progress;
   const unchanged =
-    stored.os === os && stored.shell === shell && stored.checks.length === checks.length && checks.every((c, i) => stored.checks[i] === c);
+    stored.os === os &&
+    stored.shell === shell &&
+    stored.winMode === winMode &&
+    stored.checks.length === checks.length &&
+    checks.every((c, i) => stored.checks[i] === c);
   if (unchanged) return Response.json({ ok: true, changed: false });
 
   const now = new Date().toISOString();
   await updateUser(user, {
-    Progress: JSON.stringify({ checks, os, shell, updatedAt: now }),
-    ProgressPercent: computeProgress(checks, os).percent,
+    Progress: JSON.stringify({ checks, os, shell, winMode, updatedAt: now }),
+    ProgressPercent: computeProgress(checks, os, winMode).percent,
     LastSeenAt: now,
   });
   return Response.json({ ok: true, changed: true });

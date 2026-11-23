@@ -11,6 +11,7 @@
 //   npm run dev -- -H 0.0.0.0
 
 import { spawn } from 'node:child_process';
+import { createRequire } from 'node:module';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -42,9 +43,13 @@ if (!/^\d+$/.test(port)) {
 
 console.log(`[run-next] Starting "next ${command}" on port ${port}`);
 
+// Run Next.js with the same Node that is running this script, through Next's own entry file. A bare
+// `next` command only exists as a .cmd shim on Windows, which Node cannot start (spawn next ENOENT).
+const nextBin = createRequire(import.meta.url).resolve('next/dist/bin/next');
+
 const child = spawn(
-  'next',
-  [command, '-p', port, ...forwarded],
+  process.execPath,
+  [nextBin, command, '-p', port, ...forwarded],
   { cwd: ROOT, stdio: 'inherit', shell: false },
 );
 

@@ -3,6 +3,9 @@ import { Callout, Cmd, Cmds, Example, ModKey, Only, Step, StopKey } from '../_co
 
 /** Steps 7–11: done together in the session. */
 
+const N = { os: 'win', mode: 'native' } as const; // PowerShell (default)
+const W = { os: 'win', mode: 'wsl' } as const; // WSL (advanced)
+
 function Step7() {
   return (
     <Step n={7} title="Download the project" meta="About 2 min · together in the session">
@@ -11,32 +14,63 @@ function Step7() {
         tools later create each demo site in a folder next to this one, so copy them exactly. Run these four commands in
         VS Code’s terminal, in order:
       </p>
-      <Cmds
-        items={[
-          {
-            c: 'mkdir -p ~/Opps/000-0-opti-baseline',
-            what: (
-              <>
-                Creates the folders (<code>~</code> means your home folder). It prints nothing.
-              </>
-            ),
-          },
-          {
-            c: 'cd ~/Opps/000-0-opti-baseline',
-            what: 'Moves the terminal into that folder, like double-clicking it. It prints nothing, but the prompt now shows the folder name.',
-          },
-          {
-            c: 'git clone https://github.com/marvoey/opti-baseline.git opti-baseline-main',
-            what: (
-              <>
-                Downloads the project into a new folder called <code>opti-baseline-main</code>. It takes under a minute
-                and ends with a line like <code>Resolving deltas: 100%… done</code>. No GitHub login is needed.
-              </>
-            ),
-          },
-          { c: 'code opti-baseline-main', what: 'Opens the project in a new VS Code window.' },
-        ]}
-      />
+      <Only unix>
+        <Cmds
+          items={[
+            {
+              c: 'mkdir -p ~/Opps/000-0-opti-baseline',
+              what: (
+                <>
+                  Creates the folders (<code>~</code> means your home folder). It prints nothing.
+                </>
+              ),
+            },
+            {
+              c: 'cd ~/Opps/000-0-opti-baseline',
+              what: 'Moves the terminal into that folder, like double-clicking it. It prints nothing, but the prompt now shows the folder name.',
+            },
+            {
+              c: 'git clone https://github.com/marvoey/opti-baseline.git opti-baseline-main',
+              what: (
+                <>
+                  Downloads the project into a new folder called <code>opti-baseline-main</code>. It takes under a minute
+                  and ends with a line like <code>Resolving deltas: 100%… done</code>. No GitHub login is needed.
+                </>
+              ),
+            },
+            { c: 'code opti-baseline-main', what: 'Opens the project in a new VS Code window.' },
+          ]}
+        />
+      </Only>
+      <Only {...N}>
+        <Cmds
+          items={[
+            {
+              c: 'mkdir -Force $HOME\\Opps\\000-0-opti-baseline',
+              what: (
+                <>
+                  Creates the folders inside your user folder (<code>$HOME</code>, for example{' '}
+                  <code>C:\Users\jsmith</code>). It prints a small table with the folder’s name. That’s normal.
+                </>
+              ),
+            },
+            {
+              c: 'cd $HOME\\Opps\\000-0-opti-baseline',
+              what: 'Moves the terminal into that folder, like double-clicking it. It prints nothing, but the prompt now shows the folder name.',
+            },
+            {
+              c: 'git clone https://github.com/marvoey/opti-baseline.git opti-baseline-main',
+              what: (
+                <>
+                  Downloads the project into a new folder called <code>opti-baseline-main</code>. It takes under a minute
+                  and ends with a line like <code>Resolving deltas: 100%… done</code>. No GitHub login is needed.
+                </>
+              ),
+            },
+            { c: 'code opti-baseline-main', what: 'Opens the project in a new VS Code window.' },
+          ]}
+        />
+      </Only>
       <ol>
         <li>
           A new VS Code window opens with the project’s files listed on the left. If it asks{' '}
@@ -53,7 +87,18 @@ function Step7() {
           Redo the “Shell Command” part of Step 2, then try the last command again.
         </Callout>
       </Only>
-      <Only os="win">
+      <Only {...N}>
+        <Callout kind="warn" title="Keep it out of OneDrive">
+          Don’t move this folder into <b>Documents</b>, <b>Desktop</b> or anywhere OneDrive syncs. The project has
+          thousands of small files and syncing them makes everything slow. <code>C:\Users\you\Opps</code> is the right
+          place.
+        </Callout>
+        <Callout kind="tip" title="Seeing “code is not recognized”?">
+          Close VS Code completely (<b>File → Exit</b>), open it again from the Start menu and open a new terminal. Then
+          run the last command again.
+        </Callout>
+      </Only>
+      <Only {...W}>
         <Callout kind="warn" title="Check the bottom-left corner">
           It should still say <b>WSL: Ubuntu</b>. This keeps the project inside Ubuntu, where it runs fast.
         </Callout>
@@ -96,15 +141,28 @@ function Step8() {
         Its name shows in grey, which is expected: it means the file stays private on your laptop.
       </p>
       <p>To double-check, run:</p>
-      <Cmd
-        c="ls -a"
-        what={
-          <>
-            Lists every file in the project folder, including hidden ones whose names start with a dot. Look for{' '}
-            <code>.env</code> in the list.
-          </>
-        }
-      />
+      <Only unix>
+        <Cmd
+          c="ls -a"
+          what={
+            <>
+              Lists every file in the project folder, including hidden ones whose names start with a dot. Look for{' '}
+              <code>.env</code> in the list.
+            </>
+          }
+        />
+      </Only>
+      <Only {...N}>
+        <Cmd
+          c="Get-ChildItem -Force"
+          what={
+            <>
+              Lists every file in the project folder, including hidden ones. Look for <code>.env</code> in the Name
+              column.
+            </>
+          }
+        />
+      </Only>
       <Only os="mac">
         <Callout kind="tip" title="Can’t see it in Finder?">
           That’s normal. Finder hides files whose names start with a dot. VS Code shows them.
@@ -139,6 +197,10 @@ function Step9() {
         <li>
           A new folder called <code>node_modules</code> appears in the Explorer. Don’t open or change it.
         </li>
+        <Only {...N} as="li">
+          <b>On some Windows laptops it takes longer</b>, for example when antivirus software checks each new file. Be
+          patient and wait for the last line.
+        </Only>
       </ul>
       <Check id="s9" />
     </Step>
@@ -189,6 +251,12 @@ function Step10() {
           <i>“This site can’t be reached”</i>, means it doesn’t.
         </li>
       </ol>
+      <Only {...N}>
+        <Callout kind="tip" title="A Windows Firewall window pops up?">
+          The first time, Windows may ask whether to let <b>Node.js</b> use the network. The website only needs your own
+          laptop, so you can click <b>Cancel</b> or <b>Allow access</b>. Either way it works.
+        </Callout>
+      </Only>
       <Callout kind="warn" title="This terminal is now busy">
         While the website runs, this terminal won’t show a prompt or accept new commands. That’s normal. Leave it
         running. To run other commands, open a second terminal with the <b>+</b> at the top right of the terminal panel.
@@ -226,7 +294,23 @@ function Step11() {
           pasting the path when asked.
         </p>
       </Only>
-      <Only os="win">
+      <Only {...N}>
+        <Cmd
+          c="(Get-Location).Path"
+          what={
+            <>
+              Prints the full path of the folder the terminal is in. Run it in a terminal whose prompt includes{' '}
+              <code>opti-baseline-main</code>.
+            </>
+          }
+        />
+        <Example lines={['C:\\Users\\jsmith\\Opps\\000-0-opti-baseline\\opti-baseline-main']} />
+        <p>
+          Select the line it prints, copy it (<kbd>Ctrl</kbd> <kbd>C</kbd>), then attach that folder in Mark Desktop by
+          pasting the path when asked.
+        </p>
+      </Only>
+      <Only {...W}>
         <Cmd
           c="explorer.exe ."
           what={

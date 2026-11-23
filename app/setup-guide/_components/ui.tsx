@@ -8,22 +8,30 @@ export const cx = (...names: (string | false | null | undefined)[]) => names.fil
 
 type Os = 'mac' | 'win';
 type Shell = 'zsh' | 'bash';
+type Mode = 'native' | 'wsl';
 
-/** Content that only shows for one computer and/or shell (hidden with CSS, so it prints too). */
+/**
+ * Content that only shows for one computer, Windows terminal (`mode`) and/or shell. `unix` means
+ * macOS or WSL (everything except PowerShell). Hidden with CSS, so all variants still print.
+ */
 export function Only({
   os,
   shell,
+  mode,
+  unix,
   as: Tag = 'div',
   className,
   children,
 }: {
   os?: Os;
   shell?: Shell;
+  mode?: Mode;
+  unix?: boolean;
   as?: ElementType;
   className?: string;
   children: ReactNode;
 }) {
-  return <Tag className={cx(os && s[os], shell && s[shell], className)}>{children}</Tag>;
+  return <Tag className={cx(os && s[os], shell && s[shell], mode && s[mode], unix && s.unix, className)}>{children}</Tag>;
 }
 
 /** Cmd on a Mac, Ctrl on Windows. */

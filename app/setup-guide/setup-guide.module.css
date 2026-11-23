@@ -371,6 +371,10 @@
 .page[data-os='win'] .mac { display: none !important; }
 .page[data-shell='zsh'] .bash { display: none !important; }
 .page[data-shell='bash'] .zsh { display: none !important; }
+.page[data-win='native'] .wsl { display: none !important; }
+.page[data-win='wsl'] .native { display: none !important; }
+/* macOS or WSL: hidden only for Windows with PowerShell */
+.page[data-os='win'][data-win='native'] .unix { display: none !important; }
 
 /* ---------- Small screens ---------- */
 @media (max-width: 900px) {
@@ -514,3 +518,9 @@
   .userBar { display: none !important; }
 }
 .badgeFacilitator { margin-left: 8px; background: var(--lf); vertical-align: 1px; }
+
+@media print {
+  .page[data-win] .native,
+  .page[data-win] .wsl,
+  .page[data-os] .unix { display: revert !important; }
+}
