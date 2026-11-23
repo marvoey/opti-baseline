@@ -9,7 +9,7 @@ export default function AuthShell({ title, intro, children }: { title: string; i
       <main className={s.authWrap}>
         <div className={s.authCard}>
           <Image className={s.logo} src="/logo.svg" alt="Optimizely" width={105} height={36} loading="eager" />
-          <p className={s.eyebrow}>opti-baseline · Setup guide</p>
+          <p className={s.eyebrow}>Mark AI · Custom Demo · Setup guide</p>
           <h1>{title}</h1>
           <div className={s.authIntro}>{intro}</div>
           {children}
