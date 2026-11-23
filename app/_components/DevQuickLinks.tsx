@@ -5,6 +5,8 @@ import DevQuickLinksMenu, { type QuickLink } from './DevQuickLinksMenu';
 // Top-level folders under app/ that are never listed (api, preview) ("[locale]" and other
 // dynamic / private / parallel folders are skipped by the walker itself).
 const EXCLUDED_ROOTS = new Set(['api', 'preview']);
+// Shown in the menu only to signed-in facilitators (the page itself 404s for everyone else).
+const FACILITATOR_HREF = '/setup-guide/facilitator';
 const HOME_LINK: QuickLink = { label: 'Home', href: '/' };
 const PAGE_FILE = /^page\.(tsx|ts|jsx|js|mdx)$/;
 
@@ -30,6 +32,7 @@ function collectLinks(dir: string, segments: string[]): QuickLink[] {
     links.push({
       label: toLabel(segments[segments.length - 1]),
       href: '/' + segments.join('/'),
+      ...(('/' + segments.join('/')) === FACILITATOR_HREF && { facilitatorOnly: true }),
     });
   }
 
