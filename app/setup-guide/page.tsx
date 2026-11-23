@@ -41,6 +41,7 @@ export default async function SetupGuidePage() {
     shell: user.progress.shell,
     winMode: user.progress.winMode ?? ('native' as const),
     folders: user.progress.folders,
+    site: user.progress.site,
   };
 
   return (

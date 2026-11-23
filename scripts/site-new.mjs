@@ -22,7 +22,8 @@
  * it resolve: DNS / hosting for <host> is a separate, manual step.
  *
  * Options
- *   --prefix <Prefix>      PascalCase content type prefix, e.g. Acme (required; must be unused in the CMS)
+ *   --prefix <Prefix>      content type prefix, e.g. Acme or acme (required; must be unused in the CMS). The first
+ *                          letter is capitalised, because type keys are PascalCase: acme -> AcmeHeroBlock.
  *   --name "<Name>"        site display name (required): start page, application and asset folder
  *   --host <host>          public hostname (default: <branch>.<domain of this checkout's DEPLOYED_URL>)
  *   --port <n>             local dev port (default: lowest free port >= 3035)
@@ -182,8 +183,8 @@ function validateInputs() {
   } else if (branch === BASE_BRANCH) problems.push(`the branch cannot be the baseline "${BASE_BRANCH}"`);
 
   const prefix = typeof args.prefix === 'string' ? args.prefix : null;
-  if (!prefix) problems.push('missing --prefix (PascalCase content type prefix, e.g. --prefix Acme)');
-  else if (!/^[A-Z][A-Za-z0-9]{1,11}$/.test(prefix)) problems.push(`--prefix "${prefix}" must be PascalCase, 2-12 letters/digits, e.g. Acme`);
+  if (!prefix) problems.push('missing --prefix (content type prefix, e.g. --prefix acme)');
+  else if (!/^[A-Za-z][A-Za-z0-9]{1,11}$/.test(prefix)) problems.push(`--prefix "${prefix}" must be 2-12 letters/digits starting with a letter, e.g. acme or Acme`);
 
   const name = typeof args.name === 'string' ? args.name.trim() : null;
   if (!name) problems.push('missing --name (site display name, e.g. --name "Acme Corp")');
@@ -197,7 +198,8 @@ function validateInputs() {
     }
   }
   if (problems.length) throw new Error(`Invalid input:\n  - ${problems.join('\n  - ')}`);
-  return { branch, prefix, name };
+  // Type keys are PascalCase (AcmeHeroBlock), so "acme" becomes "Acme". Anything after the first letter is kept as typed.
+  return { branch, prefix: prefix && prefix[0].toUpperCase() + prefix.slice(1), name };
 }
 
 async function main() {

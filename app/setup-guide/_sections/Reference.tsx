@@ -1,6 +1,7 @@
 import s from '../setup-guide.module.css';
 import { FolderName } from '../_components/FolderSetup';
-import { Card, Cmd, Cmds, Example, Help, ModKey, Only, StopKey } from '../_components/ui';
+import { SiteCommands, SiteInputs } from '../_components/SiteSetup';
+import { Callout, Card, Cmd, Cmds, Help, ModKey, Only, StopKey } from '../_components/ui';
 import { SHELL_FILES } from './PrepSteps';
 
 const N = { os: 'win', mode: 'native' } as const; // PowerShell (default)
@@ -12,17 +13,14 @@ export function Ready() {
       <h2>You’re ready. You’re free to build.</h2>
       <p>
         When every box above is ticked, your laptop is set up. In the session, we’ll create <b>your</b> demo site with
-        one command. This is a preview, so you’ll recognise it:
+        one command. Tell us about your site and your commands appear below, ready to copy.
       </p>
-      <Example
-        lines={['yarn site:new <site-name> --prefix <Prefix> --name "<Site Name>" --opp <Opportunity> --dry']}
-        label="Preview only. Don’t run this yet."
-      />
-      <p>
-        The words in <code>{'< >'}</code> are placeholders that we’ll fill in together. The command creates your site’s
-        own folder, settings and pages in the CMS. Because it changes the shared CMS,{' '}
-        <b>please wait until we run it together</b>.
-      </p>
+      <SiteInputs />
+      <SiteCommands />
+      <Callout kind="warn" title="Wait for the session">
+        The preview needs the <code>.env</code> from Step 9 and changes nothing. The second command creates your site’s
+        own folder, settings and pages in the shared CMS, so <b>please wait until we run it together</b>.
+      </Callout>
       <p>
         It starts from the <code>.env</code> you add in Step 9. That file decides where your new site is created in the CMS
         and which address it gets. <a href="#mainenv">Here is how</a>.

@@ -4,6 +4,7 @@ import { cmsRequest, CmsError } from './cms';
 import { guideConfig } from './config';
 import { normalizeProgress } from '@/app/setup-guide/_lib/checks';
 import { isFolders, type Folders } from '@/app/setup-guide/_lib/folders';
+import { parseSite, type SiteInput } from '@/app/setup-guide/_lib/site';
 
 /**
  * Guide accounts stored in the CMS as GuideUser items (see cms/GuideUser.tsx).
@@ -25,6 +26,8 @@ export type StoredProgress = {
   winMode?: 'native' | 'wsl';
   /** The container and main folder names chosen in Step 7. Absent for the suggested names. */
   folders?: Folders;
+  /** What was typed in "You're ready": site name, opportunity and the optional short name and prefix. Absent while empty. */
+  site?: SiteInput;
   updatedAt?: string;
 };
 
@@ -82,6 +85,7 @@ function parseProgress(raw: unknown): StoredProgress {
       shell: p.shell === 'zsh' || p.shell === 'bash' ? p.shell : undefined,
       winMode: p.winMode === 'native' || p.winMode === 'wsl' ? p.winMode : undefined,
       folders: isFolders(p.folders) ? p.folders : undefined,
+      site: parseSite(p.site) ?? undefined,
       updatedAt: typeof p.updatedAt === 'string' ? p.updatedAt : undefined,
     });
   } catch {

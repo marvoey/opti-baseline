@@ -24,7 +24,7 @@ yarn site:new acme --prefix Acme --name "Acme Corp" --opp Acme
 | Argument | Meaning |
 |---|---|
 | `acme` | Branch name, lowercase with hyphens. Must not exist locally or on `origin`. |
-| `--prefix Acme` | PascalCase prefix for this site's content types (`AcmeHeroBlock`, `[ACME] Hero Banner`). Must be unused in the CMS. |
+| `--prefix Acme` | Prefix for this site's content types (`AcmeHeroBlock`, `[ACME] Hero Banner`). Must be unused in the CMS. The first letter is capitalised for you, so `--prefix acme` works too (the setup guide uses three lower-case letters, `acm`). |
 | `--name "Acme Corp"` | Display name for the start page, CMS application and asset folder. |
 | `--opp Acme` | The opportunity folder under your `demo-sites` root. The site is created at `demo-sites/Acme/opti-baseline-acme` (the folder is created if missing). Without it, a folder named like the branch is used. |
 | `--host`, `--port`, `--dir`, `--from` | Optional overrides. Defaults: `<branch>.<your domain>`, lowest free port from 3035 that no other checkout under `demo-sites` uses, `demo-sites/<opp>/opti-baseline-<branch>`, `main`. `--dir <absolute path>` replaces `--opp`. |
