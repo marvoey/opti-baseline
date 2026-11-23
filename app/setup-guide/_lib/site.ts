@@ -1,5 +1,5 @@
 /**
- * What a reader types in "You're ready" to get their `yarn site:new` commands:
+ * What a reader types in "You're ready" to get their `yarn site:new:local` commands:
  *   name         the site's display name, e.g. "Acme Corp"          (--name "Acme Corp")
  *   opportunity  the customer or deal, kept as a folder name        (--opp acme)
  *   shortName    optional: replaces the short site name worked out from the name (acme-corp)
@@ -206,8 +206,8 @@ export function resolveSite(site: SiteInput, mainFolder: string): SiteResult {
   return { ok: true, name, opportunity, shortName, prefix, auto };
 }
 
-/** The command to copy. `dry` adds --dry: check everything and print the plan, change nothing. */
+/** The command to copy (site:new:local: the site's only address is http://localhost:<port>). `dry` adds --dry: check everything and print the plan, change nothing. */
 export function siteCommand(r: Extract<SiteResult, { ok: true }>, dry: boolean): string {
-  const base = `yarn site:new ${r.shortName} --prefix ${r.prefix} --name "${r.name}" --opp ${r.opportunity}`;
+  const base = `yarn site:new:local ${r.shortName} --prefix ${r.prefix} --name "${r.name}" --opp ${r.opportunity}`;
   return dry ? `${base} --dry` : base;
 }

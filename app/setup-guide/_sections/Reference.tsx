@@ -22,8 +22,8 @@ export function Ready() {
         own folder, settings and pages in the shared CMS, so <b>please wait until we run it together</b>.
       </Callout>
       <p>
-        It starts from the <code>.env</code> you add in Step 9. That file decides where your new site is created in the CMS
-        and which address it gets. <a href="#mainenv">Here is how</a>.
+        It starts from the <code>.env</code> you add in Step 9. That file decides where your new site is created in the CMS.
+        Your site runs on your own laptop, at a <code>http://localhost:…</code> address. <a href="#mainenv">Here is how</a>.
       </p>
     </Card>
   );

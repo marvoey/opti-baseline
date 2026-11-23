@@ -18,6 +18,11 @@
  *                       values (SITE_BRANCH, SITE_PREFIX, PORT, DEPLOYED_URL, keys) + fresh secrets
  *   7. yarn install     in the worktree (skip with --no-install)
  *
+ * Local variant: `yarn site:new:local <branch> --prefix ... --name ...` takes the same arguments, but the
+ * application gets ONE host, http://localhost:<port> (primary, https disabled), instead of the public
+ * hostname + a preview host, and DEPLOYED_URL becomes http://localhost:<port>. No DNS or hosting is needed.
+ * --host is not accepted in this mode.
+ *
  * Nothing is deployed and nothing is committed. Registering the hostname in the CMS does not make
  * it resolve: DNS / hosting for <host> is a separate, manual step.
  *
@@ -79,6 +84,8 @@ const args = parseArgs();
 const DRY = Boolean(args.dry);
 const LOCALE = process.env.OPTIMIZELY_DEFAULT_LOCALE || 'en';
 const MIN_PORT = 3035;
+// Set by scripts/site-new-local.mjs (yarn site:new:local): localhost:<port> is the primary host, over plain http.
+const LOCAL = process.env.SITE_NEW_LOCAL === '1';
 // The folder that holds the hub and every site can have any name, but it must be a folder of its own: never the
 // filesystem root, your home folder, or a folder above it (that is what two levels up gives when the checkout is
 // not inside <demo-sites>/<folder>/).
@@ -189,6 +196,7 @@ function validateInputs() {
   const name = typeof args.name === 'string' ? args.name.trim() : null;
   if (!name) problems.push('missing --name (site display name, e.g. --name "Acme Corp")');
 
+  if (LOCAL && args.host !== undefined) problems.push('--host cannot be used with site:new:local (the primary host is localhost:<port>); use yarn site:new for a public hostname');
   if (args.port !== undefined && !/^\d{4,5}$/.test(String(args.port))) problems.push('--port must be a number');
   if (args.opp !== undefined) {
     const opp = typeof args.opp === 'string' ? args.opp.trim() : '';
@@ -295,26 +303,10 @@ async function main() {
   const assetKey = deterministicKey('site-assets', branch);
   const entryPoint = `cms://content/${startKey}`;
 
-  const srcHost = (() => {
-    try {
-      return new URL(process.env.DEPLOYED_URL).host;
-    } catch {
-      return null;
-    }
-  })();
-  const host = (typeof args.host === 'string' ? args.host : srcHost ? `${branch}.${srcHost.split('.').slice(1).join('.')}` : null)
-    ?.toLowerCase()
-    .replace(/^https?:\/\//, '')
-    .replace(/\/.*$/, '');
-  if (!host) problems.push('could not derive a hostname (DEPLOYED_URL is not set); pass --host <host>');
-  else if (!/^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)+(:\d+)?$/.test(host)) problems.push(`"${host}" is not a valid hostname`);
-
   const existingApp = apps.find((a) => a.key === appKey);
   if (existingApp && normKey(existingApp.entryPoint.replace('cms://content/', '')) !== startKey) {
     problems.push(`CMS application "${appKey}" already exists for another site (${existingApp.displayName}). Pick another branch name`);
   }
-  const hostOwner = apps.find((a) => a.key !== appKey && (a.hosts ?? []).some((h) => h.authority.toLowerCase() === host));
-  if (hostOwner) problems.push(`hostname ${host} is already used by application "${hostOwner.key}" (${hostOwner.displayName})`);
 
   const other = (process.env.OPPS_ROOT || isDemoSitesRoot(oppsRoot)) ? otherCheckoutPorts(oppsRoot) : { ports: new Map(), scanned: 0 };
   const usedPorts = new Set([...listeningPorts(), ...worktreePorts(), ...other.ports.keys()]);
@@ -331,6 +323,32 @@ async function main() {
   }
   if (!port) for (port = MIN_PORT; usedPorts.has(port); port++);
 
+  // Public mode: https://<host> is the primary host and localhost:<port> a preview host.
+  // Local mode: localhost:<port> is the primary host, over http (https disabled), and there is no other host.
+  const srcHost = (() => {
+    try {
+      return new URL(process.env.DEPLOYED_URL).host;
+    } catch {
+      return null;
+    }
+  })();
+  const host = LOCAL
+    ? `localhost:${port}`
+    : (typeof args.host === 'string' ? args.host : srcHost ? `${branch}.${srcHost.split('.').slice(1).join('.')}` : null)
+        ?.toLowerCase()
+        .replace(/^https?:\/\//, '')
+        .replace(/\/.*$/, '');
+  const scheme = LOCAL ? 'http' : 'https';
+  const siteUrl = `${scheme}://${host}`;
+  if (!host) problems.push('could not derive a hostname (DEPLOYED_URL is not set); pass --host <host>');
+  else if (!LOCAL && !/^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)+(:\d+)?$/.test(host)) problems.push(`"${host}" is not a valid hostname`);
+
+  const hostOwner = apps.find((a) => a.key !== appKey && (a.hosts ?? []).some((h) => h.authority.toLowerCase() === host));
+  if (hostOwner) problems.push(`hostname ${host} is already used by application "${hostOwner.key}" (${hostOwner.displayName})`);
+  if (LOCAL && existingApp && !existingApp.hosts?.some((h) => h.authority === host && h.type === 'primary')) {
+    problems.push(`CMS application "${appKey}" already exists without ${host} as its primary host (an earlier run without site:new:local?). Pick another branch name, or fix the hosts in the CMS`);
+  }
+
   // ── CMS: prefix must be unused ──
   const types = await cms.listAll('/v1/contenttypes');
   const clash = types.filter((t) => t.key.startsWith(prefix));
@@ -343,10 +361,12 @@ async function main() {
   say(`site name     ${name}`);
   say(`prefix        ${prefix}  (types like ${prefix}HeroBlock, display names like [${prefix.toUpperCase()}] Hero Banner)`);
   say('port          ' + port + '  (http://localhost:' + port + c.dim('; also checked ' + other.scanned + ' other .env files under ' + oppsRoot) + ')');
-  say(`DEPLOYED_URL  https://${host}`);
+  say(`DEPLOYED_URL  ${siteUrl}`);
   say(`start page    ${startKey}  BlankExperience "${name}" under ${contentRoot}`);
   say(`asset folder  ${assetKey}  "${name}" under ${assetsRoot}`);
-  say(`application   ${appKey}${existingApp ? c.dim('  exists, resuming') : ''}  hosts https://${host} (primary, ${LOCALE}) + http://localhost:${port} (preview)`);
+  say(`application   ${appKey}${existingApp ? c.dim('  exists, resuming') : ''}  ` + (LOCAL
+    ? `host ${siteUrl} (primary, ${LOCALE}, https disabled)`
+    : `hosts ${siteUrl} (primary, ${LOCALE}) + http://localhost:${port} (preview)`));
   for (const n of notes) console.log(`  ${warn(n)}`);
 
   if (problems.length) {
@@ -399,10 +419,12 @@ async function main() {
       entryPoint,
       isDefault: false, // never take over the instance default
       useApplicationSpecificAssets: false,
-      hosts: [
-        { authority: host, type: 'primary', locale: LOCALE, preferredUrlScheme: 'https' },
-        { authority: `localhost:${port}`, type: 'preview', preferredUrlScheme: 'http' },
-      ],
+      hosts: LOCAL
+        ? [{ authority: host, type: 'primary', locale: LOCALE, preferredUrlScheme: 'http' }]
+        : [
+            { authority: host, type: 'primary', locale: LOCALE, preferredUrlScheme: 'https' },
+            { authority: `localhost:${port}`, type: 'preview', preferredUrlScheme: 'http' },
+          ],
       usePreviewTokens: true,
       previewUrlFormats: source?.previewUrlFormats ?? DEFAULT_PREVIEW_FORMATS,
     });
@@ -451,8 +473,8 @@ async function main() {
     indexed = d?._Content?.items?.[0]?._metadata?.url ?? null;
   }
   if (!indexed) console.log(`  ${warn('Graph has not indexed the start page yet (check again with yarn cms:e2e --wait 120)')}`);
-  else if ((indexed.base || '').replace(/\/$/, '') !== `https://${host}`) {
-    console.log(`  ${warn(`Graph indexed the start page under ${indexed.base}${indexed.default}, not https://${host}. Re-publish the start page in the CMS to refresh it.`)}`);
+  else if ((indexed.base || '').replace(/\/$/, '') !== siteUrl) {
+    console.log(`  ${warn(`Graph indexed the start page under ${indexed.base}${indexed.default}, not ${siteUrl}. Re-publish the start page in the CMS to refresh it.`)}`);
   } else console.log(`  ${ok(`Graph: ${indexed.base}${indexed.default}`)}`);
 
   // ── 5. worktree ──
@@ -474,7 +496,7 @@ async function main() {
       ['SITE_PREFIX', prefix],
       ['SITE_NAME', JSON.stringify(name)],
       ['PORT', String(port)],
-      ['DEPLOYED_URL', `https://${host}`],
+      ['DEPLOYED_URL', siteUrl],
       ['HOME_PAGE_CONTENT_ID', startKey],
       ['ASSET_BASE_FOLDER_ID', assetKey],
       ['MARK_TOOLS_NAME_PREFIX', branch],
@@ -524,13 +546,13 @@ async function main() {
   console.log(`
   Next:
     cd ${quoted(dir)}
-    yarn dev                 # http://localhost:${port}  (CMS preview host is registered for this port)
+    yarn dev                 # http://localhost:${port}  (${LOCAL ? 'registered in the CMS as the primary host' : 'CMS preview host is registered for this port'})
     yarn cms:align           # baseline types in sync; your ${prefix}* blocks will show up here
 
   Then follow the /site-replica playbook from Step 1 (Site Recon) in this worktree.
   In Mark Desktop, attach ${winPath ?? dir} as the working folder for this site.
 
-  Not done for you (on purpose): DNS / hosting for ${host}, deploying, committing.`);
+  Not done for you (on purpose): ${LOCAL ? '' : `DNS / hosting for ${host}, `}deploying, committing.`);
 }
 
 main().catch((err) => fatal('site:new', err));

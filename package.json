@@ -22,6 +22,7 @@
     "cms:e2e": "node --env-file=.env scripts/cms-e2e.mjs",
     "cms:bulk": "node --env-file=.env scripts/cms-bulk.mjs",
     "site:new": "node --env-file=.env scripts/site-new.mjs",
+    "site:new:local": "node --env-file=.env scripts/site-new-local.mjs",
     "guide:setup": "node --env-file=.env scripts/guide-setup.mjs",
     "guide:facilitator": "node --env-file=.env scripts/guide-facilitator.mjs",
     "mark-tools:token": "node -e \"console.log(require('node:crypto').randomBytes(32).toString('base64url'))\"",

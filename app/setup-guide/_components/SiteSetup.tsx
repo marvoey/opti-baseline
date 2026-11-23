@@ -18,7 +18,7 @@ import { Callout, Cmd } from './ui';
 /**
  * "You're ready": the reader types a site name and an opportunity (both required). The short site name
  * and a three-letter prefix are worked out from them, and can be replaced in two optional boxes. The two
- * `yarn site:new` commands (a preview with --dry, and the real one) are built from the result.
+ * `yarn site:new:local` commands (a preview with --dry, and the real one) are built from the result.
  * Rules live in _lib/site.ts.
  */
 
