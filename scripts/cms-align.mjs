@@ -19,9 +19,16 @@
  *     L3  cms/*.tsx imports next/* or lucide-react               (breaks the CLI esbuild bundle)
  *     L4  contentType() export not registered in cms/registry.ts (renders nothing / Graph query gaps)
  *     L5  allowedTypes / contentType pointing at an unknown type (dangling reference)
+ *     L6  with SITE_PREFIX set: a type defined outside the baseline files does not start with it
  *
  * Usage
  *   node --env-file=.env scripts/cms-align.mjs [--only Key1,Key2] [--json] [--no-lint] [--allow-missing]
+ *   node --env-file=.env scripts/cms-align.mjs --fix-allowed [--dry]
+ *
+ * --fix-allowed  For drift that is ONLY "code allows types the CMS does not" (allowedTypes /
+ *                mayContainTypes), PATCH the CMS list to the UNION of both. It never removes a type
+ *                (other sites sharing this CMS rely on them). Typical use: a new site adds its blocks
+ *                to Page > Content. With --dry it only prints the planned union.
  *   npm run cms:align
  *
  * Exit code: 1 when anything is MISSING (unless --allow-missing), has DRIFT, or has an
@@ -35,7 +42,21 @@ import { pathToFileURL } from 'node:url';
 import { findMetaData, readFromPath } from '@optimizely/cms-cli/dist/service/utils.js';
 import { mapContentToManifest } from '@optimizely/cms-cli/dist/mapper/contentToPackage.js';
 
-import { ROOT, c, createCms, fatal, finish, ok, parseArgs, pool, subsetDiff, warn } from './lib/cms-api.mjs';
+import {
+  BASE_BRANCH,
+  ROOT,
+  assertSiteContext,
+  c,
+  createCms,
+  fatal,
+  finish,
+  git,
+  ok,
+  parseArgs,
+  pool,
+  siteBanner,
+  subsetDiff,
+} from './lib/cms-api.mjs';
 
 const args = parseArgs();
 const JSON_MODE = Boolean(args.json);
@@ -49,15 +70,28 @@ const log = (...a) => {
 async function loadLocalTypes() {
   const configFilePath = resolve(ROOT, 'optimizely.config.mjs');
   const { componentPaths } = await readFromPath(pathToFileURL(configFilePath).href);
-  // The CLI prints "Content Type X found in …" for each type; keep stdout clean.
+  // The CLI prints "Content Type X found in ./cms/File.tsx" for each type: keep stdout clean, but
+  // remember which file defines which type (the prefix lint needs it).
   const realLog = console.log;
-  console.log = () => {};
+  console.log = (...parts) => {
+    const m = /Content Type (\S+) found in (\S+)/.exec(parts.join(' '));
+    if (m) FILE_OF_TYPE.set(m[1], m[2].replace(/^\.\//, ''));
+  };
   try {
     const { contentTypes } = await findMetaData(componentPaths, pathToFileURL(dirname(configFilePath)).href);
     return mapContentToManifest(contentTypes);
   } finally {
     console.log = realLog;
   }
+}
+
+/** type key -> file that defines it, e.g. AcmeHeroBlock -> cms/AcmeHero.tsx (filled by loadLocalTypes). */
+const FILE_OF_TYPE = new Map();
+
+/** Files under cms/ on the baseline branch: types defined there are shared baseline types. */
+function baselineFiles() {
+  const out = git(['ls-tree', '--name-only', BASE_BRANCH, 'cms/']);
+  return out ? new Set(out.split('\n').filter(Boolean)) : null;
 }
 
 // ── Compare one type ────────────────────────────────────────────────────────
@@ -154,8 +188,26 @@ async function lintSources() {
   return findings;
 }
 
-function lintTypes(localTypes, knownKeys) {
+function lintTypes(localTypes, knownKeys, sitePrefix) {
   const findings = [];
+  // L6 — every site-owned type carries the site prefix (all sites share one CMS, so an unprefixed
+  // key collides sooner or later). Baseline types (defined in files that exist on main) are exempt.
+  if (sitePrefix) {
+    const base = baselineFiles();
+    const fallback = new Set(['Page', 'RichTextBlock']);
+    for (const t of localTypes) {
+      const file = FILE_OF_TYPE.get(t.key);
+      const isBaseline = base ? Boolean(file && base.has(file)) : fallback.has(t.key);
+      if (!isBaseline && !t.key.startsWith(sitePrefix)) {
+        findings.push({
+          level: 'error',
+          rule: 'L6',
+          key: t.key,
+          message: `key does not start with the site prefix "${sitePrefix}" (SITE_PREFIX)${file ? ` — defined in ${file}` : ''}`,
+        });
+      }
+    }
+  }
   for (const t of localTypes) {
     const behaviors = t.compositionBehaviors ?? [];
     for (const [name, p] of Object.entries(t.properties ?? {})) {
@@ -205,6 +257,8 @@ function lintTypes(localTypes, knownKeys) {
 
 // ── Main ────────────────────────────────────────────────────────────────────
 async function main() {
+  const FIX = Boolean(args['fix-allowed']);
+  const ctx = assertSiteContext({ write: FIX && !args.dry, allowMain: Boolean(args['allow-main']), quiet: JSON_MODE });
   const cms = createCms();
   const all = await loadLocalTypes();
   const localTypes = only ? all.filter((t) => only.has(t.key)) : all;
@@ -235,7 +289,9 @@ async function main() {
     return { key: local.key, status: diffs.length ? 'drift' : 'in-sync', diffs, remoteOnly, extraAllowed };
   });
 
-  const lint = args['no-lint'] ? [] : [...(await lintSources()), ...lintTypes(localTypes, knownKeys)];
+  const lint = args['no-lint'] ? [] : [...(await lintSources()), ...lintTypes(localTypes, knownKeys, ctx.sitePrefix)];
+
+  if (FIX) await fixAllowed(cms, results, remoteByKey);
 
   const missing = results.filter((r) => r.status === 'missing');
   const drift = results.filter((r) => r.status === 'drift');
@@ -247,7 +303,8 @@ async function main() {
   if (JSON_MODE) {
     console.log(JSON.stringify({ missing, drift, inSync: inSync.map((r) => r.key), lint, remoteOnly: remotePlus }, null, 2));
   } else {
-    log(c.bold(`\ncms:align — ${localTypes.length} local type(s) vs ${cms.base}\n`));
+    log(c.bold(`\ncms:align — ${localTypes.length} local type(s) vs ${cms.base}`));
+    log(siteBanner(ctx) + '\n');
     for (const r of results) {
       if (r.status === 'in-sync') {
         log(`  ${ok(r.key.padEnd(30))} ${c.dim('in sync')}`);
@@ -292,6 +349,56 @@ async function main() {
   const failures = (args['allow-missing'] ? 0 : missing.length) + drift.length + lintErrors.length;
   if (!JSON_MODE) finish('cms:align', { failures, warnings: lintWarns.length });
   else if (failures) process.exitCode = 1;
+}
+
+// ── --fix-allowed: additive union PATCH ─────────────────────────────────────
+const LIST_PATH = /(^|\.)(allowedTypes|mayContainTypes)$/;
+
+/** Set a value at a dotted path like "properties.Content.items.allowedTypes" inside obj. */
+function setPath(obj, path, value) {
+  const parts = path.split('.');
+  let cur = obj;
+  for (const p of parts.slice(0, -1)) cur = cur[p] ??= {};
+  cur[parts.at(-1)] = value;
+}
+
+async function fixAllowed(cms, results, remoteByKey) {
+  const DRY = Boolean(args.dry);
+  for (const r of results.filter((x) => x.status === 'drift')) {
+    const listDiffs = r.diffs.filter((d) => LIST_PATH.test(d.path) && Array.isArray(d.want) && Array.isArray(d.have));
+    if (!listDiffs.length) continue;
+    if (listDiffs.length !== r.diffs.length) {
+      log(c.yellow(`  ! ${r.key}: not auto-fixed — it also has other drift (${r.diffs.filter((d) => !listDiffs.includes(d)).map((d) => d.path).join(', ')})`));
+      continue;
+    }
+    const remote = remoteByKey.get(r.key);
+    // Send every property in full (with only the list changed), so the PATCH is safe whether the API
+    // deep-merges or replaces the properties map.
+    const body = {};
+    const touchesProps = listDiffs.some((d) => d.path.startsWith('properties.'));
+    if (touchesProps) body.properties = JSON.parse(JSON.stringify(remote.properties ?? {}));
+    const plan = [];
+    for (const d of listDiffs) {
+      const union = [...new Set([...d.have.map(String), ...d.want.map(String)])];
+      const added = union.filter((x) => !d.have.map(String).includes(x));
+      plan.push(`${d.path} += ${added.join(', ')}`);
+      setPath(body, d.path, union);
+    }
+    if (DRY) {
+      log(c.cyan(`  ~ ${r.key}: would PATCH (union, nothing removed): ${plan.join('; ')}`));
+      continue;
+    }
+    await cms.patch(`/v1/contenttypes/${encodeURIComponent(r.key)}`, body);
+    const { data: after } = await cms.get(`/v1/contenttypes/${encodeURIComponent(r.key)}`);
+    const still = listDiffs.filter((d) => {
+      const have = d.path.split('.').reduce((o, p) => o?.[p], after) ?? [];
+      return !d.want.every((w) => have.includes(w)) || !d.have.every((h) => have.includes(h));
+    });
+    if (still.length) throw new Error(`${r.key}: PATCH accepted but the read-back does not contain the union at ${still.map((d) => d.path).join(', ')}`);
+    log(c.green(`  ✓ ${r.key}: PATCHed (union, nothing removed): ${plan.join('; ')}`));
+    r.status = 'in-sync';
+    r.diffs = [];
+  }
 }
 
 main().catch((err) => fatal('cms:align', err));

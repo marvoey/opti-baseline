@@ -22,6 +22,7 @@
  *   --only <text>       only items whose key or displayName contains <text>
  *   --no-verify         skip the read-back check after writing
  *   --json              machine-readable report
+ *   --allow-main        allow writes from the baseline branch (normally refused)
  *
  * Spec format (property values are PLAIN values; the script wraps them as {"value": ...})
  *   {
@@ -49,6 +50,7 @@ import { dirname, resolve } from 'node:path';
 
 import {
   ROOT,
+  assertSiteContext,
   c,
   createCms,
   deterministicKey,
@@ -57,6 +59,7 @@ import {
   normKey,
   parseArgs,
   pool,
+  siteBanner,
   slugify,
   sleep,
   subsetDiff,
@@ -319,6 +322,8 @@ async function runExport(cms) {
 
 // ── Main ────────────────────────────────────────────────────────────────────
 async function main() {
+  // --export only reads the CMS; a real (non --dry) spec run writes, so it must match this site.
+  const site = assertSiteContext({ write: !args.export && !DRY, allowMain: Boolean(args['allow-main']), quiet: JSON_MODE });
   const cms = createCms();
   if (args.export) return runExport(cms);
   if (typeof args.spec !== 'string') {
@@ -343,6 +348,7 @@ async function main() {
   }
 
   out(c.bold(`\ncms:bulk — ${items.length} item(s) → folder "${spec.folder.name ?? folder.key}"${DRY ? c.yellow('  [DRY RUN — no writes]') : ''}`));
+  out(siteBanner(site));
   out(c.dim(`  folder ${folder.key} ${folder.created ? (DRY ? '(would be created)' : '(created)') : '(exists)'} · locale ${locale} · ${shouldPublish ? 'publish' : 'leave as draft'} · concurrency ${CONCURRENCY}\n`));
 
   const problems = await preflight(cms, spec, items);

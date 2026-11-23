@@ -13,6 +13,7 @@
  * /scripts. Do NOT import this from app/, cms/ or lib/ (it is tooling only).
  */
 
+import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -325,6 +326,66 @@ export async function graphQuery(query, variables = {}) {
     throw new Error(`Graph query failed: ${msg}`);
   }
   return json.data;
+}
+
+// ── Git + site context guard ─────────────────────────────────────────────────
+/** Run git in the project root; returns trimmed stdout, or null when git fails. */
+export function git(args, { cwd = ROOT } = {}) {
+  try {
+    return execFileSync('git', args, { cwd, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
+  } catch {
+    return null;
+  }
+}
+
+/** The baseline branch every site replica is cut from (override with SITE_BASE_BRANCH). */
+export const BASE_BRANCH = process.env.SITE_BASE_BRANCH?.trim() || 'main';
+
+/**
+ * Who this checkout belongs to. Each site replica is a git worktree on its own branch with its own
+ * .env, and site:new writes SITE_BRANCH / SITE_PREFIX into that .env.
+ */
+export function siteContext() {
+  return {
+    branch: git(['rev-parse', '--abbrev-ref', 'HEAD']),
+    siteBranch: process.env.SITE_BRANCH?.trim() || null,
+    sitePrefix: process.env.SITE_PREFIX?.trim() || null,
+    deployedUrl: (process.env.DEPLOYED_URL || '').replace(/\/$/, '') || null,
+  };
+}
+
+/**
+ * Refuse to run when the .env and the checkout disagree, so one site's scripts can never read or
+ * write another site's CMS tree (all sites share ONE CMS instance).
+ *  - SITE_BRANCH set and different from the checked-out branch -> error (read and write).
+ *  - write on the baseline branch -> error unless allowMain (main holds no site content).
+ *  - SITE_BRANCH unset on a site branch -> warning only (branches created before site:new).
+ * Returns the context so callers can print it.
+ */
+export function assertSiteContext({ write = false, allowMain = false, quiet = false } = {}) {
+  const ctx = siteContext();
+  if (ctx.siteBranch && ctx.branch && ctx.branch !== 'HEAD' && ctx.branch !== ctx.siteBranch) {
+    throw new Error(
+      `This .env belongs to site "${ctx.siteBranch}" (SITE_BRANCH) but the checkout is on branch "${ctx.branch}". ` +
+        'Run the command from that site\'s own worktree, or fix SITE_BRANCH in .env.',
+    );
+  }
+  if (write && ctx.branch === BASE_BRANCH && !allowMain) {
+    throw new Error(
+      `Refusing to write to the CMS from the baseline branch "${BASE_BRANCH}": it holds no site content. ` +
+        'Create a site worktree first (yarn site:new <branch>), or pass --allow-main if you really mean it.',
+    );
+  }
+  if (!quiet && !ctx.siteBranch && ctx.branch && ctx.branch !== BASE_BRANCH) {
+    console.error(c.yellow(`! SITE_BRANCH is not set in .env (branch "${ctx.branch}"). Add SITE_BRANCH=${ctx.branch} to enable the site guard.`));
+  }
+  return ctx;
+}
+
+/** One dim line describing the site context, for script headers. */
+export function siteBanner(ctx = siteContext()) {
+  const who = ctx.siteBranch ? `site ${ctx.siteBranch}` : 'site (SITE_BRANCH unset)';
+  return c.dim(`  ${who} · branch ${ctx.branch ?? '?'} · prefix ${ctx.sitePrefix ?? '—'} · ${ctx.deployedUrl ?? 'no DEPLOYED_URL'}`);
 }
 
 /** Final summary line + exit code helper for scripts. */

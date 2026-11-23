@@ -44,7 +44,21 @@ import {
 } from '@optimizely/cms-sdk';
 import { findMetaData, readFromPath } from '@optimizely/cms-cli/dist/service/utils.js';
 
-import { ROOT, c, createCms, fatal, finish, graphQuery, normKey, parseArgs, pool, requireVars, sleep } from './lib/cms-api.mjs';
+import {
+  ROOT,
+  assertSiteContext,
+  c,
+  createCms,
+  fatal,
+  finish,
+  graphQuery,
+  normKey,
+  parseArgs,
+  pool,
+  requireVars,
+  siteBanner,
+  sleep,
+} from './lib/cms-api.mjs';
 
 // Optional project config: scripts/cms-e2e.config.json
 //   { "clientRenderedTypes": ["AcmeCarouselBlock"], "minCoverage": 0.8 }
@@ -341,15 +355,22 @@ async function checkPage(path, ctx) {
 
 // ── Main ────────────────────────────────────────────────────────────────────
 async function main() {
+  const ctx = assertSiteContext({ write: false, quiet: JSON_MODE });
   requireVars(['OPTIMIZELY_GRAPH_SINGLE_KEY', 'DEPLOYED_URL']);
   const knownTypes = await bootSdk();
   const cms = createCms();
 
-  const paths = typeof args.paths === 'string' ? args.paths.split(',').filter(Boolean).map(normPath) : await discoverPaths();
+  let paths = typeof args.paths === 'string' ? args.paths.split(',').filter(Boolean).map(normPath) : await discoverPaths();
+  // A brand-new site may not be indexed yet: with --wait, keep looking until the deadline.
+  for (const until = Date.now() + WAIT * 1000; !paths.length && typeof args.paths !== 'string' && Date.now() < until; ) {
+    await sleep(5000);
+    paths = await discoverPaths();
+  }
   if (!paths.length) throw new Error(`No pages found in Graph for ${HOST}. Publish a page first or pass --paths.`);
   const base = args['no-render'] ? { url: '', why: 'skipped' } : await pickBase();
 
   out(c.bold(`\ncms:e2e — ${paths.length} page(s) · host ${HOST}`));
+  out(siteBanner(ctx));
   out(c.dim(`  render base: ${base.url || '(skipped)'} — ${base.why} · wait ${WAIT}s · min coverage ${Math.round(MIN_COVERAGE * 100)}%\n`));
 
   const results = [];

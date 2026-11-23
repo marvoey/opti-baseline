@@ -21,6 +21,7 @@
     "cms:align": "node --env-file=.env scripts/cms-align.mjs",
     "cms:e2e": "node --env-file=.env scripts/cms-e2e.mjs",
     "cms:bulk": "node --env-file=.env scripts/cms-bulk.mjs",
+    "site:new": "node --env-file=.env scripts/site-new.mjs",
     "mark-tools:token": "node -e \"console.log(require('node:crypto').randomBytes(32).toString('base64url'))\"",
     "test:mark-tools": "node --experimental-strip-types --disable-warning=ExperimentalWarning --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test \"lib/mark-tools/__tests__/*.test.ts\""
   },

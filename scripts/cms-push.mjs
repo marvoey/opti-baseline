@@ -24,6 +24,7 @@ import {
   readFromPath,
 } from '@optimizely/cms-cli/dist/service/utils.js';
 import { mapContentToManifest } from '@optimizely/cms-cli/dist/mapper/contentToPackage.js';
+import { assertSiteContext, siteBanner } from './lib/cms-api.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const ALL_MODE = process.argv.includes('--all');
@@ -125,6 +126,11 @@ async function main() {
     process.exitCode = 1;
     return;
   }
+
+  // 0. Never push from the wrong checkout: the .env must belong to this branch, and the baseline
+  //    branch holds no site types (override with --allow-main).
+  const ctx = assertSiteContext({ write: !DRY_MODE, allowMain: process.argv.includes('--allow-main') });
+  console.log(siteBanner(ctx));
 
   // 1. Read optimizely.config.mjs and extract content types (same as CLI does)
   const configFilePath = resolve(ROOT, 'optimizely.config.mjs');
