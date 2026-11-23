@@ -58,7 +58,8 @@ export const config = {
   // `setup-guide$` and `setup-guide/` are the colleague setup guide (app/setup-guide: the page,
   // sign-in, sign-up, team progress and its progress API), which also lives outside [locale].
   // Matching only the exact segment keeps CMS pages like /setup-guide-2 routed to the CMS.
+  // `opengraph-image` is the generated link-preview card (app/opengraph-image.tsx).
   matcher: [
-    '/((?!api|_next/static|_next/image|preview|styleguide|applications|demo|setup-guide$|setup-guide/|favicon.ico|.*\\..*).*)',
+    '/((?!api|_next/static|_next/image|preview|styleguide|applications|demo|setup-guide$|setup-guide/|favicon.ico|opengraph-image|.*\\..*).*)',
   ],
 };

@@ -22,8 +22,16 @@ const bodyFont = Roboto({
 });
 
 export const metadata: Metadata = {
+  // Makes og:image / canonical URLs absolute, which link unfurlers (Teams, Slack) require.
+  metadataBase: new URL(process.env.DEPLOYED_URL || `http://localhost:${process.env.PORT || 3009}`),
   title: siteConfig.title,
   description: siteConfig.description,
+  openGraph: {
+    type: 'website',
+    siteName: siteConfig.name,
+    title: siteConfig.title,
+    description: siteConfig.description,
+  },
 };
 
 // Optimizely Web Experimentation / Personalization project id. Public by design
