@@ -513,3 +513,4 @@
 @media print {
   .userBar { display: none !important; }
 }
+.badgeFacilitator { margin-left: 8px; background: var(--lf); vertical-align: 1px; }

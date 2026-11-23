@@ -9,7 +9,7 @@ export default function HomePageFallback() {
     <main className="w-full bg-neutral-3 px-6 py-12 text-dark-fir md:py-16">
       <div className="mx-auto grid max-w-6xl items-center gap-8 rounded-[32px] bg-lfgreen px-8 py-12 md:grid-cols-[1fr_280px] md:px-14">
         <div>
-          <p className="mb-4 text-sm font-bold">opti-baseline · Setup guide</p>
+          <p className="mb-4 text-sm font-bold">Mark AI · Custom Demo · Setup guide</p>
           <h1 className="font-display text-4xl font-extrabold leading-[1.05] md:text-5xl">Your laptop, demo-ready.</h1>
           <p className="mt-5 max-w-xl text-lg leading-relaxed">
             A step-by-step guide that gets you from a brand-new laptop to a working Optimizely CMS demo site. No coding

@@ -6,6 +6,7 @@ import { hashPassword, passwordProblem, verifyPassword } from '@/lib/guide/passw
 import { endSession, LOGIN_PATH, startSession } from '@/lib/guide/session';
 import {
   AccountExistsError,
+  AccountInTrashError,
   createUser,
   failedLoginChanges,
   getUserByEmail,
@@ -52,6 +53,10 @@ export async function signup(_prev: AuthState, form: FormData): Promise<AuthStat
   } catch (err) {
     if (err instanceof AccountExistsError) {
       return { ...keep, error: 'There’s already an account for this email. Sign in instead.' };
+    }
+    if (err instanceof AccountInTrashError) {
+      console.error('[setup-guide] sign-up blocked: an earlier account for this email is in the CMS trash');
+      return { ...keep, error: 'This email can’t be used to sign up right now. Ask your facilitator to remove your old account from the CMS trash.' };
     }
     console.error('[setup-guide] sign-up failed:', err instanceof Error ? err.message : err);
     return { ...keep, error: CMS_DOWN };

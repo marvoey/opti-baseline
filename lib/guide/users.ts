@@ -25,6 +25,8 @@ export type GuideUser = {
   fullName: string;
   passwordHash: string;
   disabled: boolean;
+  /** Can open /setup-guide/facilitator. Set only in the CMS, never by sign-up. */
+  facilitator: boolean;
   progress: StoredProgress;
   progressPercent: number;
   pageViews: number;
@@ -84,6 +86,7 @@ function toUser(key: string, v: Version): GuideUser {
     fullName: str(value(p, 'FullName')),
     passwordHash: str(value(p, 'PasswordHash')),
     disabled: value(p, 'Disabled') === true,
+    facilitator: value(p, 'Facilitator') === true,
     progress: parseProgress(value(p, 'Progress')),
     progressPercent: int(value(p, 'ProgressPercent')),
     pageViews: int(value(p, 'PageViews')),
@@ -117,6 +120,12 @@ export async function getUserByKey(key: string): Promise<GuideUser | null> {
 export const getUserByEmail = (email: string) => getUserByKey(userKeyFor(email));
 
 export class AccountExistsError extends Error {}
+/**
+ * The email's earlier account was deleted in the CMS and is still in the trash: the CMS keeps its
+ * key reserved (403) and the API client cannot restore or purge trashed items. Empty it from the
+ * trash in the CMS, or untick Disabled on a record instead of deleting it next time.
+ */
+export class AccountInTrashError extends Error {}
 
 export async function createUser(input: { email: string; fullName: string; passwordHash: string }): Promise<string> {
   const { usersFolder, locale } = guideConfig();
@@ -140,6 +149,7 @@ export async function createUser(input: { email: string; fullName: string; passw
             FullName: input.fullName,
             PasswordHash: input.passwordHash,
             Disabled: false,
+            Facilitator: false,
             Progress: JSON.stringify({ checks: [] }),
             ProgressPercent: 0,
             PageViews: 0,
@@ -156,6 +166,7 @@ export async function createUser(input: { email: string; fullName: string; passw
       const again = await cmsRequest('GET', `/v1/content/${key}`, { allow: [404] });
       if (again.status !== 404) throw new AccountExistsError();
     }
+    if (err instanceof CmsError && err.status === 403) throw new AccountInTrashError();
     throw err;
   }
   return key;

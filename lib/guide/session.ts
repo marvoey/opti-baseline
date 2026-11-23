@@ -80,6 +80,7 @@ export async function requireUser(): Promise<GuideUser> {
   return user;
 }
 
-export function isFacilitator(user: Pick<GuideUser, 'email'>): boolean {
-  return guideConfig().facilitators.has(user.email.toLowerCase());
+/** True only when the account's Facilitator box is ticked in the CMS. */
+export function isFacilitator(user: Pick<GuideUser, 'facilitator' | 'disabled'>): boolean {
+  return user.facilitator === true && !user.disabled;
 }

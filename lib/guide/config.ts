@@ -9,7 +9,6 @@ export type GuideConfig = {
   sessionSecret: string;
   usersFolder: string;
   allowedDomain: string;
-  facilitators: Set<string>;
   locale: string;
 };
 
@@ -31,12 +30,6 @@ export function guideConfig(): GuideConfig {
     sessionSecret,
     usersFolder,
     allowedDomain: (process.env.GUIDE_ALLOWED_EMAIL_DOMAIN?.trim() || 'optimizely.com').toLowerCase().replace(/^@/, ''),
-    facilitators: new Set(
-      (process.env.GUIDE_FACILITATOR_EMAILS ?? '')
-        .split(',')
-        .map((e) => e.trim().toLowerCase())
-        .filter(Boolean),
-    ),
     locale: process.env.OPTIMIZELY_DEFAULT_LOCALE?.trim() || 'en',
   };
 }

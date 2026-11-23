@@ -23,6 +23,7 @@
     "cms:bulk": "node --env-file=.env scripts/cms-bulk.mjs",
     "site:new": "node --env-file=.env scripts/site-new.mjs",
     "guide:setup": "node --env-file=.env scripts/guide-setup.mjs",
+    "guide:facilitator": "node --env-file=.env scripts/guide-facilitator.mjs",
     "mark-tools:token": "node -e \"console.log(require('node:crypto').randomBytes(32).toString('base64url'))\"",
     "test:mark-tools": "node --experimental-strip-types --disable-warning=ExperimentalWarning --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test \"lib/mark-tools/__tests__/*.test.ts\""
   },

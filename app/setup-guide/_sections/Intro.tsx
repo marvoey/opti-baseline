@@ -9,7 +9,7 @@ export function Hero() {
   return (
     <Card className={s.hero}>
       <div>
-        <div className={s.eyebrow}>opti-baseline · Setup guide</div>
+        <div className={s.eyebrow}>Mark AI · Custom Demo · Setup guide</div>
         <h1>Your setup, sorted.</h1>
         <p className={s.lede}>
           Everything your laptop needs to build a custom Optimizely CMS demo site. <b>No coding experience needed.</b>{' '}

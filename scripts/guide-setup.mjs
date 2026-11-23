@@ -1,13 +1,14 @@
 /**
  * guide:setup — one-time setup for /setup-guide accounts in this site worktree.
  *
- *   yarn guide:setup --facilitator you@optimizely.com [--dry]
+ *   yarn guide:setup [--dry]
  *
  * Idempotent. It:
  *   1. creates the "Guide Users" folder (SysContentFolder) under this site's ASSET_BASE_FOLDER_ID,
  *   2. writes GUIDE_USERS_FOLDER_ID and a fresh GUIDE_SESSION_SECRET into .env when missing
  *      (never prints secrets; never replaces an existing secret, which would sign everyone out),
- *   3. sets GUIDE_FACILITATOR_EMAILS when --facilitator is given (comma-separated for several),
+ *   3. removes the old GUIDE_FACILITATOR_EMAILS key (facilitators are now a tick box on each account:
+ *      `yarn guide:facilitator <email>`),
  *   4. checks the GuideUser content type exists (push it with `yarn cms:push`) and that every
  *      property has indexingType "disabled", so no account data can appear in Optimizely Graph.
  */
@@ -74,12 +75,13 @@ async function main() {
     console.log(`  ${c.green('✓')} GUIDE_SESSION_SECRET already set (kept, so nobody is signed out)`);
   }
   if (!getEnv(lines, 'GUIDE_ALLOWED_EMAIL_DOMAIN')) setEnv(lines, 'GUIDE_ALLOWED_EMAIL_DOMAIN', 'optimizely.com');
-  if (typeof args.facilitator === 'string') {
-    const emails = args.facilitator.split(',').map((e) => e.trim().toLowerCase()).filter(Boolean).join(',');
-    setEnv(lines, 'GUIDE_FACILITATOR_EMAILS', emails);
-    console.log(`  ${c.green('✓')} GUIDE_FACILITATOR_EMAILS=${emails}`);
-  } else if (!getEnv(lines, 'GUIDE_FACILITATOR_EMAILS')) {
-    console.log(c.yellow('  ! no facilitator set: pass --facilitator you@optimizely.com to see the Team progress page'));
+  const oldKey = lines.findIndex((l) => l.startsWith('GUIDE_FACILITATOR_EMAILS='));
+  if (oldKey !== -1) {
+    lines.splice(oldKey, 1);
+    console.log(`  ${c.green('✓')} removed GUIDE_FACILITATOR_EMAILS (no longer used: run \`yarn guide:facilitator <email>\`)`);
+  }
+  if (args.facilitator) {
+    console.log(c.yellow('  ! --facilitator is no longer supported here: run `yarn guide:facilitator <email>` instead'));
     warnings++;
   }
   const after = lines.join('\n');

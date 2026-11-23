@@ -8,7 +8,7 @@ import { isLocked, listUsers, type GuideUser } from '@/lib/guide/users';
 
 export const metadata: Metadata = { title: 'Team progress · Setup guide' };
 
-/** Facilitators only (GUIDE_FACILITATOR_EMAILS). Everyone else gets a 404. */
+/** Facilitators only: accounts with the Facilitator box ticked in the CMS. Everyone else gets a 404. */
 
 /** When this request was rendered (kept out of the component body: render must be pure). */
 const renderedAt = () => Date.now();
@@ -85,6 +85,7 @@ export default async function FacilitatorPage() {
                   <tr key={u.key}>
                     <td>
                       <b>{u.fullName || '(no name)'}</b>
+                      {u.facilitator && <span className={`${s.badge} ${s.badgeFacilitator}`}>Facilitator</span>}
                       <br />
                       <small>{u.email}</small>
                     </td>
@@ -116,7 +117,7 @@ export default async function FacilitatorPage() {
         )}
         <p className={s.facNote}>
           <b>Visits</b> are separate sessions (30 minutes apart). <b>Views</b> count every time the guide is opened or reloaded.
-          To block someone or unlock an account, edit their item in the CMS: Assets → Setup Guide → Guide Users.
+          To give someone access to this page, block someone, or unlock an account, edit their item in the CMS (Assets → Setup Guide → Guide Users) and tick Facilitator or Disabled, or clear Locked until. Don’t delete accounts: a deleted account sits in the CMS trash and stops that email from signing up again until the trash is emptied.
         </p>
       </main>
     </div>

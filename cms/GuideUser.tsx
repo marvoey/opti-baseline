@@ -10,8 +10,13 @@ import { contentType } from '@optimizely/cms-sdk';
  *  - PasswordHash holds a salted scrypt hash (one-way). The password itself is never stored, so
  *    nobody with CMS access can read or recover it. To lock someone out, tick Disabled or clear
  *    PasswordHash: their session ends on their next request.
+ *  - Facilitator is the only way into /setup-guide/facilitator (team progress). Sign-up always
+ *    sets it to false; only a CMS editor (or `yarn guide:facilitator`) can turn it on. Changes
+ *    apply on the person's next request.
  *
- * Never rendered on the site: the component below renders nothing.
+ * Never rendered on the site. In the CMS preview pane it shows a readable summary of the account
+ * (app/_components/GuideUserCard.tsx, wired up in cms/registry.ts: it is not imported here because
+ * cms:push bundles this file and cannot import app or server-only code).
  */
 export const GuideUserContentType = contentType({
   key: 'GuideUser',
@@ -38,6 +43,13 @@ export const GuideUserContentType = contentType({
       description: 'Salted scrypt hash, never the password. Clear it to force the person out.',
       indexingType: 'disabled',
       sortOrder: 3,
+    },
+    Facilitator: {
+      type: 'boolean',
+      displayName: 'Facilitator',
+      description: 'Tick to let this person open Team progress (everyone’s progress and visits). Takes effect on their next request.',
+      indexingType: 'disabled',
+      sortOrder: 5,
     },
     Disabled: {
       type: 'boolean',
@@ -102,8 +114,3 @@ export const GuideUserContentType = contentType({
     },
   },
 });
-
-/** Data-only type: nothing to render. */
-export default function GuideUser() {
-  return null;
-}
