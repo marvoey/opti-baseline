@@ -69,11 +69,11 @@ export const config = {
   // routes, and any path containing a dot (static assets like /logo.svg). The
   // preview, admin and styleguide routes live outside [locale] and must not be
   // rewritten into a locale. /admin is matched separately, for the password gate only.
-  // `setup-guide$` is the colleague setup guide (app/setup-guide), which also lives outside
-  // [locale]. The `$` stops it from also excluding CMS pages whose path merely starts
-  // with "setup-guide" (e.g. /setup-guide-2).
+  // `setup-guide$` and `setup-guide/` are the colleague setup guide (app/setup-guide: the page,
+  // sign-in, sign-up, team progress and its progress API), which also lives outside [locale].
+  // Matching only the exact segment keeps CMS pages like /setup-guide-2 routed to the CMS.
   matcher: [
     '/admin/:path*',
-    '/((?!api|_next/static|_next/image|preview|admin|styleguide|applications|demo|setup-guide$|favicon.ico|.*\\..*).*)',
+    '/((?!api|_next/static|_next/image|preview|admin|styleguide|applications|demo|setup-guide$|setup-guide/|favicon.ico|.*\\..*).*)',
   ],
 };

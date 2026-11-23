@@ -1,8 +1,10 @@
 /**
  * Every tick box in the guide, in page order. The progress bar counts these.
  *
- * Ids starting with "mac-" or "win-" only count for that computer. Keep the ids stable:
- * they are the localStorage keys ("ob-<id>") that remember a reader's ticks.
+ * Ids starting with "mac-" or "win-" only count for that computer. Keep ids stable: saved progress
+ * (the GuideUser "Progress" field in the CMS) refers to them.
+ *
+ * Pure module: used by the browser, the progress API and the facilitator view.
  */
 export const CHECKS = {
   'basics-read': 'I’ve read the terminal basics',
@@ -30,3 +32,38 @@ export const CHECKS = {
 } as const;
 
 export type CheckId = keyof typeof CHECKS;
+export type Os = 'mac' | 'win';
+export type Shell = 'zsh' | 'bash';
+
+export const CHECK_IDS = Object.keys(CHECKS) as CheckId[];
+
+export const isCheckId = (id: unknown): id is CheckId => typeof id === 'string' && id in CHECKS;
+export const isOs = (v: unknown): v is Os => v === 'mac' || v === 'win';
+export const isShell = (v: unknown): v is Shell => v === 'zsh' || v === 'bash';
+
+/** Whether a tick box counts for this computer. */
+export function appliesTo(id: CheckId, os: Os): boolean {
+  if (id.startsWith('mac-')) return os === 'mac';
+  if (id.startsWith('win-')) return os === 'win';
+  return true;
+}
+
+/** Step number a tick box belongs to: 0 for "terminal basics", otherwise 1–11. */
+export function stepOf(id: CheckId): number {
+  const m = /s(\d+)/.exec(id);
+  return m ? Number(m[1]) : 0;
+}
+
+export function computeProgress(checked: Iterable<string>, os: Os) {
+  const done = new Set(checked);
+  const relevant = CHECK_IDS.filter((id) => appliesTo(id, os));
+  const ticked = relevant.filter((id) => done.has(id));
+  const next = relevant.find((id) => !done.has(id));
+  return {
+    percent: relevant.length ? Math.round((ticked.length / relevant.length) * 100) : 0,
+    done: ticked.length,
+    total: relevant.length,
+    /** First step with an unticked box; null when everything is done. */
+    currentStep: next === undefined ? null : stepOf(next),
+  };
+}

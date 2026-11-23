@@ -12,6 +12,7 @@ import BlankExperience from './BlankExperience';
 import BlankSection from './BlankSection';
 import Page, { PageContentType } from './Page';
 import RichText, { RichTextContentType } from './RichText';
+import GuideUser, { GuideUserContentType } from './GuideUser';
 
 /**
  * Single configuration + registration point for the Optimizely SDK.
@@ -49,6 +50,8 @@ export const registeredContentTypes = [
   PageContentType,
   // Blocks
   RichTextContentType,
+  // Site data: setup guide accounts (never rendered, never in Graph)
+  GuideUserContentType,
 ];
 
 initContentTypeRegistry(registeredContentTypes);
@@ -62,5 +65,6 @@ initReactComponentRegistry({
     Page,
     // Blocks (resolver key === content-type key)
     RichTextBlock: RichText,
+    GuideUser,
   },
 });

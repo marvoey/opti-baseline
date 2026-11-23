@@ -1,8 +1,10 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import s from '../setup-guide.module.css';
-import { OsSwitch, Progress, ShellSwitch } from './controls';
+import { logout } from '../actions';
+import { OsSwitch, Progress, SaveStatus, ShellSwitch } from './controls';
 
-export default function TopBar() {
+export default function TopBar({ name, facilitator }: { name: string; facilitator: boolean }) {
   return (
     <header className={s.topbar}>
       <div className={s.topbarIn}>
@@ -14,6 +16,28 @@ export default function TopBar() {
         <span className={s.segLabel}>Shell</span>
         <ShellSwitch />
         <Progress />
+      </div>
+      <div className={s.userBar}>
+        <div className={s.userBarIn}>
+          <span>
+            Signed in as <b>{name}</b>
+          </span>
+          <span className={s.userBarSep} aria-hidden="true">
+            ·
+          </span>
+          <SaveStatus />
+          <div className={s.spacer} />
+          {facilitator && (
+            <Link className={s.linkButton} href="/setup-guide/facilitator">
+              Team progress
+            </Link>
+          )}
+          <form action={logout}>
+            <button type="submit" className={s.linkButton}>
+              Sign out
+            </button>
+          </form>
+        </div>
       </div>
     </header>
   );
