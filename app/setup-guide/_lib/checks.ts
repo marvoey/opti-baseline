@@ -44,9 +44,12 @@ export const CHECKS = {
   's9-env': 'A .env file is saved next to package.json',
   's10-single': 'My Single key is in .env (OPTIMIZELY_GRAPH_SINGLE_KEY)',
   's10-client': 'My Client ID and Secret are in .env, and it is saved',
-  s11a: 'yarn cms:align showed a list (no 401/403 error)',
+  s11a: 'yarn cms:align connected: only Page and RichTextBlock are MISSING (no 401/403 error)',
+  's11-push': 'yarn cms:push added them, and yarn cms:align now says passed',
   s11b: 'http://localhost:3034 loads in the browser',
-  s12: 'Folder attached in Mark Desktop (or skipped)',
+  's12-install': 'Mark Desktop is installed and opens',
+  's12-instance': 'I’m logged in, and my CMS instance is selected at the top right of Mark',
+  s12: 'My project folder is added under Workspaces in Mark Desktop',
 } as const;
 
 export type CheckId = keyof typeof CHECKS;

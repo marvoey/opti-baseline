@@ -71,7 +71,8 @@ export function BeforeYouStart() {
           <code>.env</code> file and get your private keys from the CMS. Your facilitator is there to help.
         </li>
         <li>
-          Optional: the <b>Mark Desktop</b> app.
+          <b>Your Optimizely account.</b> In the live session you’ll install the <b>Mark Desktop</b> app and sign in to it
+          (Step 12). Nothing to install for it before then.
         </li>
       </ul>
 

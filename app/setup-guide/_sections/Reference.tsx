@@ -374,7 +374,7 @@ export function Troubleshooting() {
       <Help
         q={
           <>
-            <code>yarn cms:align</code> shows 401, 403 or <i>unauthorized</i>
+            <code>yarn cms:align</code> or <code>yarn cms:push</code> shows 401, 403 or <i>unauthorized</i>
           </>
         }
       >
@@ -382,6 +382,57 @@ export function Troubleshooting() {
           <code>401</code> usually means the Client ID or Secret in your <code>.env</code> was copied wrongly. Check those
           two lines against <a href="#s10">Step 10</a>: nothing missing, no spaces and no quote marks. <code>403</code>{' '}
           usually means your key hasn’t been given access rights yet. Tell your facilitator.
+        </p>
+      </Help>
+
+      <Help
+        q={
+          <>
+            <code>yarn cms:align</code> ends with <i>failure</i> and says Page and RichTextBlock are <i>MISSING in CMS</i>
+          </>
+        }
+      >
+        <p>
+          That’s expected on a new CMS: it doesn’t have the project’s two content types yet. Add them with part b of{' '}
+          <a href="#s11">Step 11</a> (<code>yarn cms:push --dry</code>, then <code>yarn cms:push --allow-main</code>), then
+          run <code>yarn cms:align</code> again.
+        </p>
+      </Help>
+
+      <Help
+        q={
+          <>
+            <code>yarn cms:push</code> says <i>Refusing to write to the CMS from the baseline branch “main”</i>
+          </>
+        }
+      >
+        <p>
+          That’s a safety lock: the project won’t change a CMS from the main folder unless you ask for it. To add Page and
+          RichTextBlock to your new CMS, run:
+        </p>
+        <Cmd c="yarn cms:push --allow-main" />
+        <p>Nothing was changed by the attempt that was refused.</p>
+      </Help>
+
+      <Help
+        q={
+          <>
+            <code>yarn cms:align</code> shows <i>DRIFT</i> or <i>Lint</i> errors
+          </>
+        }
+      >
+        <p>
+          The CMS already has a type with the same name but different settings, or the project’s code has a problem. Don’t
+          run <code>cms:push</code> to fix it (it never changes existing types). Copy the output and send it to your
+          facilitator.
+        </p>
+      </Help>
+
+      <Help q="Mark can’t find my CMS content, or answers about a different CMS">
+        <p>
+          Check the button in the top-right corner of Mark. It should show your CMS instance (the one from Step 10), not{' '}
+          <b>Select Product Instance</b> or another product. Click it and choose your CMS. See{' '}
+          <a href="#s12">Step 12</a>, part b.
         </p>
       </Help>
 
