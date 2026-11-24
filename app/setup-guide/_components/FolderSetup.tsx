@@ -8,7 +8,7 @@ import { Cmds, Example, Only } from './ui';
 
 /**
  * Step 7's two folder names. The reader types them once; the folder picture, the commands to copy
- * and the example paths in Step 11 all follow what was typed.
+ * and the example paths in Step 12 all follow what was typed.
  */
 
 const N = { os: 'win', mode: 'native' } as const; // PowerShell (default)
@@ -131,7 +131,7 @@ export function CloneCommands() {
   );
 }
 
-/** What the project folder’s full path looks like on this computer (Step 11). */
+/** What the project folder’s full path looks like on this computer (Step 12). */
 export function ProjectPath({ kind }: { kind: 'mac' | 'native' | 'wsl' }) {
   const { container, main } = useGuide().folders;
   const line = {

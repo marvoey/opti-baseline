@@ -40,7 +40,7 @@ export function BeforeYouStart() {
           session.
         </li>
         <li>
-          <b>Connect the project to the CMS and run it</b> (Steps 9–11). We’ll do these together in a live session,
+          <b>Connect the project to the CMS and run it</b> (Steps 9–12). We’ll do these together in a live session,
           so <b>stop after Step 8</b>.
         </li>
       </ol>
@@ -67,8 +67,8 @@ export function BeforeYouStart() {
           <Only os="mac" as="span">One Apple download in Step 3 can take a while.</Only>
         </li>
         <li>
-          <b>Nothing for the CMS yet.</b> The small <code>.env</code> file with the passwords that connect your site to
-          the CMS comes from your facilitator in the live session.
+          <b>Nothing for the CMS yet.</b> In the live session you’ll copy a settings template into your own{' '}
+          <code>.env</code> file and get your private keys from the CMS. Your facilitator is there to help.
         </li>
         <li>
           Optional: the <b>Mark Desktop</b> app.
@@ -136,6 +136,10 @@ export function BeforeYouStart() {
         </div>
         <div>
           <b>.env</b>A private settings file with passwords for the CMS. Never share it.
+        </div>
+        <div>
+          <b>API key</b>A long code that works like a password, so one program can talk to another. Your site uses them
+          to talk to the CMS.
         </div>
         <div>
           <b>localhost</b>Your own laptop acting as a website. Only you can see it.

@@ -2,9 +2,10 @@ import s from '../setup-guide.module.css';
 import { Check } from '../_components/controls';
 import { ProjectPath } from '../_components/FolderSetup';
 import { Callout, Card, Cmd, Example, ModKey, Only, Step, StopKey } from '../_components/ui';
+import ApiKeys from './ApiKeys';
 import MainEnv from './MainEnv';
 
-/** Steps 9–11: done together in the live session. People stop after Step 8 (see HOMEWORK_LAST_STEP). */
+/** Steps 9–12: done together in the live session (Step 10, the API keys, is in ApiKeys.tsx). People stop after Step 8 (see HOMEWORK_LAST_STEP). */
 
 const N = { os: 'win', mode: 'native' } as const; // PowerShell (default)
 const LIVE = 'Live session · ';
@@ -13,21 +14,24 @@ function StopHere() {
   return (
     <Card id="session" className={s.session}>
       <div className={s.eyebrow}>Live session</div>
-      <h2>Stop here. We’ll do Steps 9–11 together.</h2>
+      <h2>Stop here. We’ll do Steps 9–12 together.</h2>
       <p>
         If you’ve ticked everything up to Step 8, you’re finished for now. <b>Please don’t start these steps on your
-        own.</b> They need a private settings file that your facilitator gives you in the session, and they’re quicker
-        when we do them together.
+        own.</b> They need private keys from the CMS and a few values from your facilitator, and they’re quicker when we
+        do them together.
       </p>
       <h3>In the session we’ll</h3>
       <ol start={9}>
-        <li>add the settings file that connects your site to the CMS</li>
+        <li>create the settings file that connects your site to the CMS</li>
+        <li>get your API keys from the CMS and add them to that file</li>
         <li>check the connection and start the website on your laptop</li>
         <li>connect the folder to Mark Desktop (optional)</li>
       </ol>
       <Callout kind="tip" title="Before the session">
-        Join from the laptop you set up. Make sure it’s charged and on a normal internet connection. That’s all. The
-        steps are below so you can follow along on the day and look back at them later.
+        Join from the laptop you set up. Make sure it’s charged and on a normal internet connection. Also check you can
+        sign in to the CMS your facilitator shares with you. Step 10 needs administrator access there, so tell your
+        facilitator beforehand if you don’t have it. The steps are below so you can follow along on the day and look
+        back at them later.
       </Callout>
     </Card>
   );
@@ -38,8 +42,9 @@ function Step9() {
   return (
     <Step n={9} title="Add your .env file" meta={`${LIVE}About 3 min`}>
       <p>
-        The <code>.env</code> file holds the passwords that connect your site to Optimizely CMS. Your facilitator sends
-        you its contents during the session.
+        The <code>.env</code> file holds the passwords that connect your site to Optimizely CMS. The project comes with
+        a blank template called <code>.env.example</code>. You’ll copy it into your own <code>.env</code> file, then fill
+        in its private values in Step 10.
       </p>
       <Callout kind="tip" title="This file is the parent of your future sites">
         Later, <code>yarn site:new</code> reads this file to create each of your demo sites in the CMS and to write their
@@ -59,11 +64,18 @@ function Step9() {
           file opens on the right.
         </li>
         <li>
-          Open what your facilitator sent you. Select all the text (<ModKey /> <kbd>A</kbd>) and copy it.
+          Open the template: in the same file list, click <code>.env.example</code> (it sits close to the{' '}
+          <code>.env</code> you just made). Click inside its text, select all of it (<ModKey /> <kbd>A</kbd>) and copy it
+          (<ModKey /> <kbd>C</kbd>). Don’t type anything in this file.
         </li>
         <li>
-          Click inside the empty <code>.env</code> file, paste, and save with <ModKey /> <kbd>S</kbd>. A white dot on the
-          file’s tab means it isn’t saved yet. The dot disappears once it’s saved.
+          Click the <code>.env</code> tab at the top to go back to your empty file. Click inside it and paste with{' '}
+          <ModKey /> <kbd>V</kbd>. Then save with <ModKey /> <kbd>S</kbd>. A white dot on the file’s tab means it isn’t
+          saved yet. The dot disappears once it’s saved.
+        </li>
+        <li>
+          The template has empty spots for private values. <a href="#s10">Step 10</a> shows you where to get the keys, and
+          your facilitator gives you the other values (such as the web address and the content IDs).
         </li>
       </ol>
       <p>
@@ -98,18 +110,19 @@ function Step9() {
           That’s normal. Finder hides files whose names start with a dot. VS Code shows them.
         </Callout>
       </Only>
-      <Callout kind="warn" title="Treat it like a password">
-        Don’t paste its contents into chat, email or screenshots. Also leave the file called <code>.env.example</code>{' '}
-        alone. It’s the blank template.
+      <Callout kind="warn" title="Treat your .env like a password">
+        Don’t paste its contents into chat, email or screenshots. Only ever type passwords into <code>.env</code>, never
+        into <code>.env.example</code>. The template is part of the project and isn’t private, so leave it exactly as it
+        is.
       </Callout>
       <Check id="s9-env" />
     </Step>
   );
 }
 
-function Step10() {
+function Step11() {
   return (
-    <Step n={10} title="Check it works" meta={`${LIVE}About 5 min`}>
+    <Step n={11} title="Check it works" meta={`${LIVE}About 5 min`}>
       <h3>a. Check the connection to the CMS</h3>
       <Cmd c="yarn cms:align" what="Compares the project with the live CMS. It only reads, and changes nothing." />
       <Example
@@ -165,15 +178,15 @@ function Step10() {
         <b>To stop the website</b>, click inside that terminal and press <StopKey /> <kbd>C</kbd>
         <Only os="mac" as="span"> (Control, not Command)</Only>. The prompt comes back.
       </p>
-      <Check id="s10a" />
-      <Check id="s10b" />
+      <Check id="s11a" />
+      <Check id="s11b" />
     </Step>
   );
 }
 
-function Step11() {
+function Step12() {
   return (
-    <Step n={11} title="Connect the folder to Mark Desktop" meta={`${LIVE}Optional · 2 min`}>
+    <Step n={12} title="Connect the folder to Mark Desktop" meta={`${LIVE}Optional · 2 min`}>
       <p>
         If you use the Mark Desktop app, attach your project folder so Mark can read and work on it. First, get the
         folder’s full location (its <i>path</i>):
@@ -224,7 +237,7 @@ function Step11() {
         <ProjectPath kind="wsl" />
         <p>Then attach that folder in Mark Desktop by pasting the path when asked.</p>
       </Only>
-      <Check id="s11" />
+      <Check id="s12" />
     </Step>
   );
 }
@@ -235,8 +248,9 @@ export default function SessionSteps() {
       <StopHere />
       <MainEnv />
       <Step9 />
-      <Step10 />
+      <ApiKeys />
       <Step11 />
+      <Step12 />
     </>
   );
 }

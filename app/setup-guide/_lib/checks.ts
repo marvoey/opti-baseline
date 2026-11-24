@@ -40,11 +40,13 @@ export const CHECKS = {
   s6: 'All five lines look right',
   s7: 'The project is open in VS Code, and the terminal prompt includes opti-baseline-main',
   's8-install': 'yarn install finished with “Done”',
-  // Steps 9 to 11: together in the live session
+  // Steps 9 to 12: together in the live session
   's9-env': 'A .env file is saved next to package.json',
-  s10a: 'yarn cms:align showed a list (no 401/403 error)',
-  s10b: 'http://localhost:3034 loads in the browser',
-  s11: 'Folder attached in Mark Desktop (or skipped)',
+  's10-single': 'My Single key is in .env (OPTIMIZELY_GRAPH_SINGLE_KEY)',
+  's10-client': 'My Client ID and Secret are in .env, and it is saved',
+  s11a: 'yarn cms:align showed a list (no 401/403 error)',
+  s11b: 'http://localhost:3034 loads in the browser',
+  s12: 'Folder attached in Mark Desktop (or skipped)',
 } as const;
 
 export type CheckId = keyof typeof CHECKS;
@@ -74,13 +76,13 @@ export function appliesTo(id: CheckId, os: Os, winMode: WinMode = 'native'): boo
   return true;
 }
 
-/** Step number a tick box belongs to: 0 for "terminal basics", otherwise 1–11. */
+/** Step number a tick box belongs to: 0 for "terminal basics", otherwise 1–12. */
 export function stepOf(id: CheckId): number {
   const m = /(?:^|-)s(\d+)/.exec(id);
   return m ? Number(m[1]) : 0;
 }
 
-/** Which part of the guide to count: the prep (Steps 0–8), the live session (Steps 9–11) or everything. */
+/** Which part of the guide to count: the prep (Steps 0–8), the live session (Steps 9–12) or everything. */
 export type ProgressPart = 'all' | 'prep' | 'session';
 
 const inPart = (id: CheckId, part: ProgressPart) =>
@@ -112,6 +114,10 @@ const LEGACY_WSL_IDS: Record<string, CheckId> = {
   // Safe to apply on every read because the new ids are not keys here.
   s8: 's9-env',
   s9: 's8-install',
+  // "Get your API keys" became Step 10: "Check it works" (was 10) is now Step 11, "Mark Desktop" (was 11) is Step 12.
+  s10a: 's11a',
+  s10b: 's11b',
+  s11: 's12',
 };
 
 type SavedProgress = { checks: string[]; os?: Os; shell?: Shell; winMode?: WinMode; updatedAt?: string };

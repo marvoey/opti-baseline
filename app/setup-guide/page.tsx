@@ -16,7 +16,7 @@ import { updateUser, viewChanges } from '@/lib/guide/users';
 
 /**
  * /setup-guide — gets a colleague with no development experience from a bare laptop to a
- * running opti-baseline site. Steps 1–8 are done on their own (HOMEWORK_LAST_STEP); Steps 9–11 are done
+ * running opti-baseline site. Steps 1–8 are done on their own (HOMEWORK_LAST_STEP); Steps 9–12 are done
  * together in a live session.
  *
  * Sign-in required. The person's progress comes from their GuideUser record in the CMS, and every

@@ -549,7 +549,7 @@
   .page[data-os] .unix { display: revert !important; }
 }
 
-/* ---------- Live session card (Steps 9–11 start here) ---------- */
+/* ---------- Live session card (Steps 9–12 start here) ---------- */
 .session { background: var(--n2); border: 2px dashed var(--fir); }
 
 /* ---------- Screenshots ---------- */
@@ -599,4 +599,24 @@
 @media (max-width: 1100px) {
   .flow { grid-template-columns: minmax(0, 1fr); }
   .flowArrow { transform: rotate(90deg); }
+}
+
+/* ---------- Screenshot extras: narrow pairs, click-to-enlarge, numbered markers (Figure.tsx) ---------- */
+.figureNarrow { max-width: 345px; }
+.figureRow { display: flex; flex-wrap: wrap; gap: 16px 24px; align-items: flex-start; margin: 14px 0 22px; }
+.figureRow .figure { margin: 0; flex: 1 1 280px; max-width: 345px; min-width: 220px; }
+.page .zoom { display: block; text-decoration: none; cursor: zoom-in; }
+.page .zoom:hover { background: none; }
+.pin {
+  display: inline-grid;
+  place-items: center;
+  width: 1.55em;
+  height: 1.55em;
+  border-radius: 50%;
+  background: var(--lf);
+  border: 2px solid var(--fir);
+  font-weight: 800;
+  font-size: 0.82em;
+  line-height: 1;
+  vertical-align: 0.05em;
 }

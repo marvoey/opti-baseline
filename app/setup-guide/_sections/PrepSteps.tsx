@@ -997,8 +997,8 @@ function Step8() {
       </ul>
       <Check id="s8-install" />
       <Callout kind="ok" title="That’s the prep done. Stop here.">
-        Your laptop is ready. <b>Don’t go on to Step 9.</b> We’ll do Steps 9–11 together in the live session, where your
-        facilitator gives you the private settings file for the CMS. You can close VS Code until then.
+        Your laptop is ready. <b>Don’t go on to Step 9.</b> We’ll do Steps 9–12 together in the live session, where
+        you’ll set up your settings file and get your keys from the CMS. You can close VS Code until then.
       </Callout>
     </Step>
   );

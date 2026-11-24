@@ -18,11 +18,11 @@ export function Ready() {
       <SiteInputs />
       <SiteCommands />
       <Callout kind="warn" title="Wait for the session">
-        The preview needs the <code>.env</code> from Step 9 and changes nothing. The second command creates your site’s
+        The preview needs the <code>.env</code> from Steps 9 and 10 and changes nothing. The second command creates your site’s
         own folder, settings and pages in the shared CMS, so <b>please wait until we run it together</b>.
       </Callout>
       <p>
-        It starts from the <code>.env</code> you add in Step 9. That file decides where your new site is created in the CMS.
+        It starts from the <code>.env</code> you build in Steps 9 and 10. That file decides where your new site is created in the CMS.
         Your site runs on your own laptop, at a <code>http://localhost:…</code> address. <a href="#mainenv">Here is how</a>.
       </p>
     </Card>
@@ -379,8 +379,27 @@ export function Troubleshooting() {
         }
       >
         <p>
-          The passwords in your <code>.env</code> are wrong or out of date. Ask your facilitator for a fresh copy.
+          <code>401</code> usually means the Client ID or Secret in your <code>.env</code> was copied wrongly. Check those
+          two lines against <a href="#s10">Step 10</a>: nothing missing, no spaces and no quote marks. <code>403</code>{' '}
+          usually means your key hasn’t been given access rights yet. Tell your facilitator.
         </p>
+      </Help>
+
+      <Help q="I closed the Save your Secret window before copying the Secret">
+        <p>The CMS can’t show a Secret a second time. Create a new key instead:</p>
+        <ol>
+          <li>
+            In the CMS, go to <b>Settings → API Keys</b> and click <b>Create API Key</b> again.
+          </li>
+          <li>
+            Give it a new name, such as <code>jsmith-setup-guide-2</code>.
+          </li>
+          <li>
+            Paste the new Client ID and Secret into your <code>.env</code> (<a href="#s10">Step 10</a>, part c), replacing
+            the old ones, and save.
+          </li>
+        </ol>
+        <p>Tell your facilitator about the unused key. They can delete it.</p>
       </Help>
 
       <Help
@@ -547,13 +566,13 @@ const ENV_ROWS: [setting: string, purpose: React.ReactNode, newSite: React.React
   ['OPTIMIZELY_CMS_URL', 'The address of the CMS.', 'Copied.'],
   [
     'OPTIMIZELY_CMS_CLIENT_ID / _SECRET',
-    'A username and password that let the tools read and update the CMS setup.',
+    'A username and password that let the tools read and update the CMS setup. Get them in Step 10.',
     'Copied. Also used by site:new to sign in to the CMS.',
   ],
   [
     'OPTIMIZELY_GRAPH_SINGLE_KEY',
     <>
-      <b>Required.</b> The key for reading published content. The site won’t start without it.
+      <b>Required.</b> The key for reading published content. The site won’t start without it. Get it in Step 10.
     </>,
     'Copied.',
   ],
@@ -586,9 +605,9 @@ export function EnvReference() {
     <Card id="envref">
       <h2>.env reference (optional reading)</h2>
       <p>
-        You don’t need to edit any of these. Your facilitator provides the file, and the <code>site:new</code> command
-        writes each new site’s file from it. This table explains what’s inside, and what <code>site:new</code> does with
-        each line. The full story is in <a href="#mainenv">Why the main .env matters</a>.
+        You fill in the main file yourself in Steps 9 and 10 (your facilitator helps with any value that isn’t a key), and
+        the <code>site:new</code> command writes each new site’s file from it. This table explains what’s inside, and what{' '}
+        <code>site:new</code> does with each line. The full story is in <a href="#mainenv">Why the main .env matters</a>.
       </p>
       <table>
         <thead>

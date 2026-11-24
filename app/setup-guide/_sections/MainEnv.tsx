@@ -283,10 +283,10 @@ export default function MainEnv() {
         </table>
       </Help>
 
-      <Callout kind="ok" title="You don’t build this file">
-        Your facilitator creates the main <code>.env</code> once, with the CMS passwords and the two content IDs, and shares
-        it with you. You only paste it in, in Step 9. Please don’t change any of its values. If something looks off, ask
-        first.
+      <Callout kind="ok" title="You build this file in two steps">
+        Step 9 copies the project’s template into your own <code>.env</code>. <a href="#s10">Step 10</a> adds your private
+        keys from the CMS. Your facilitator gives you the other values, such as the web address and the two content IDs.
+        Please don’t change a value you weren’t told to. If something looks off, ask first.
       </Callout>
     </Card>
   );
