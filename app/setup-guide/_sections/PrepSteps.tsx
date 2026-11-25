@@ -3,6 +3,7 @@ import { Check, ShellSwitch, WinModeSwitch } from '../_components/controls';
 import { FolderInputs, FolderName, FolderTree, CloneCommands } from '../_components/FolderSetup';
 import { Callout, Cmd, Cmds, Example, Only, Step } from '../_components/ui';
 import { FACILITATOR } from '../_lib/contact';
+import { REPO_URL, SITE_ACCELERATOR_URL } from '../_lib/repo';
 
 /** Steps 1–8: installs, the project download and its packages. */
 
@@ -899,8 +900,33 @@ function Step7() {
   return (
     <Step n={7} title="Download the project" meta="About 2 min">
       <p>
-        Now download the project from GitHub. Developers call this <i>cloning</i>. First, choose two folder names. The
-        tools you’ll use later rely on this layout, so it’s worth a minute.
+        Now download the project from GitHub. Developers call this <i>cloning</i>.
+      </p>
+      <h3>What you’re downloading</h3>
+      <p>
+        The project is called <b>opti-baseline</b>. It lives in a <b>GitHub repository</b> (a <i>repo</i>): an online
+        folder that stores a project’s files and their full history. This one holds a ready-made website that shows its
+        content from Optimizely CMS. It’s the clean starting point for every demo site you’ll build: each demo site you
+        create later is its own copy of it, with its own folder and settings.
+      </p>
+      <p>
+        You can look at it any time:{' '}
+        <a href={REPO_URL} target="_blank" rel="noopener noreferrer">
+          {REPO_URL.replace('https://', '')}
+        </a>
+        . It’s public, so you don’t need a GitHub account to open it or to download it.
+      </p>
+      <Callout kind="tip" title="Already know Site Accelerator?">
+        Site Accelerator is Optimizely’s demo project, in this repo:{' '}
+        <a href={SITE_ACCELERATOR_URL} target="_blank" rel="noopener noreferrer">
+          {SITE_ACCELERATOR_URL.replace('https://', '')}
+        </a>
+        . The code in opti-baseline is different, but it uses the same Next.js base. Once you’re comfortable with this
+        process, you can apply the same steps to Site Accelerator if you like. For now, just use opti-baseline.
+      </Callout>
+      <h3>Choose your folder names</h3>
+      <p>
+        The tools you’ll use later rely on this folder layout, so it’s worth a minute.
       </p>
       <FolderInputs />
       <FolderTree />

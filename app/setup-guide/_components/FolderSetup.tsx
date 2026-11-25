@@ -5,6 +5,7 @@ import s from '../setup-guide.module.css';
 import { DEFAULT_FOLDERS, MAX_FOLDER_NAME, type Folders } from '../_lib/folders';
 import { useGuide } from './GuideProvider';
 import { Cmds, Example, Only } from './ui';
+import { REPO_CLONE_URL } from '../_lib/repo';
 
 /**
  * Step 7's two folder names. The reader types them once; the folder picture, the commands to copy
@@ -79,7 +80,7 @@ export function FolderTree() {
 export function CloneCommands() {
   const { container, main } = useGuide().folders;
   const clone = {
-    c: 'git clone https://github.com/marvoey/opti-baseline.git opti-baseline-main',
+    c: `git clone ${REPO_CLONE_URL} opti-baseline-main`,
     what: (
       <>
         Downloads the project into a new folder called <code>opti-baseline-main</code>. It takes under a minute and ends

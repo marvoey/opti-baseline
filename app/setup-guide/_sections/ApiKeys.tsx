@@ -226,6 +226,71 @@ export default function ApiKeys() {
         </li>
       </ol>
 
+      <p>
+        <b>Give your new key full access.</b> A new key starts with no access rights, so it can’t do anything yet. Without this part, later steps fail with a{' '}
+        <code>403</code> error. You give the key rights on the <b>Root</b> of the CMS, the very top of everything.
+      </p>
+      <ol start={12}>
+        <li>
+          In the CMS, click the gear icon (Settings) again. In the Settings menu, under <b>ACCESS RIGHTS</b>, click{' '}
+          <b>Set Access Rights</b>. It’s the entry just below <b>API Keys</b>.
+        </li>
+      </ol>
+      <Figure
+        src={`${SHOTS}/cms-set-access-rights.png`}
+        width={345}
+        height={480}
+        narrow
+        alt="The Settings menu. The hand cursor is on Set Access Rights, under the ACCESS RIGHTS heading, just below API Keys."
+      >
+        <b>12.</b> Click <b>Set Access Rights</b>, just below API Keys.
+      </Figure>
+      <ol start={13}>
+        <li>
+          The page is called <b>Set Access Rights for “…”</b>. Make sure the name in the title is <b>Root</b>. If it
+          isn’t, click <b>Root</b> at the top of the tree. It’s the top item, with a folder icon.
+        </li>
+      </ol>
+      <Figure
+        src={`${SHOTS}/cms-access-rights-root.png`}
+        width={1280}
+        height={560}
+        enlarge
+        alt="The Set Access Rights for Root page. Root is highlighted at the top of the tree. The Add User/Group button is at the bottom right. Some site names in the tree are hidden behind green boxes."
+      >
+        <b>13.</b> The title says <b>Root</b>, and <b>Root</b> is highlighted at the top of the tree. The green boxes hide
+        site names here. Your tree shows its own.
+      </Figure>
+      <ol start={14}>
+        <li>
+          Click the <b>Add User/Group</b> button at the right, above the table of rights. A list opens with a search box
+          at the top. Under <b>API KEYS</b> it lists every key by its <b>Client ID</b> (a long string of letters and
+          numbers), not by the name you chose.
+        </li>
+        <li>
+          Find <b>your</b> key: type or paste the start of your Client ID in the search box (it’s on the{' '}
+          <code>OPTIMIZELY_CMS_CLIENT_ID=</code> line of your <code>.env</code>), then click your key in the list. It
+          now appears as a new row in the table.
+        </li>
+        <li>
+          In your key’s row, tick <b>all six boxes</b>: <b>READ</b>, <b>CREATE</b>, <b>CHANGE</b>, <b>DELETE</b>,{' '}
+          <b>PUBLISH</b> and <b>ADMINISTER</b>. Each one should show a green tick. If the page shows a{' '}
+          <b>Save Access Rights</b> button, click it.
+        </li>
+      </ol>
+      <Figure
+        src={`${SHOTS}/cms-access-rights-add-key.png`}
+        width={1310}
+        height={804}
+        enlarge
+        alt="The Set Access Rights for Root page with the Add User/Group list open. Blue arrows point at Root in the tree, at the list of API keys, and at the six column headings READ, CREATE, CHANGE, DELETE, PUBLISH and ADMINISTER. Every box in the rows below is ticked. Key IDs and site names are hidden behind green boxes."
+      >
+        <b>14–16.</b> The blue arrows show the order: <b>Root</b> is selected, <b>Add User/Group</b> opens the list of API
+        keys, and all six columns are ticked in your key’s row. The green boxes hide real Client IDs and site names here.
+        Yours shows them.
+      </Figure>
+      <Check id="s10-access" />
+
       <h3>d. Check your .env</h3>
       <Example
         label="How the three lines should look. The real values replace the words in < >. Don’t type this."
@@ -262,10 +327,9 @@ export default function ApiKeys() {
         Keys page, open the ⋯ menu at the end of the old key’s row.
       </Callout>
       <Callout kind="tip" title="A new key may need permission">
-        A brand-new key might not be allowed to do everything yet. If a later step says <code>403</code> or{' '}
-        <i>forbidden</i>, give your key access rights: in the CMS go to <b>Settings → Set Access Rights</b> (just below API
-        Keys), pick the top of the page tree, click <b>Add User/Group</b>, search for your Client ID, tick every right and
-        click <b>Save Access Rights</b>.
+        A key with no access rights can’t do anything. If a later step says <code>403</code> or <i>forbidden</i>, go back to
+        “Give your new key full access” in part c and check that <b>Root</b> is selected and all six boxes are ticked in
+        your key’s row.
       </Callout>
     </Step>
   );

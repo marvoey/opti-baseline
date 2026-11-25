@@ -383,9 +383,9 @@ export function Troubleshooting() {
         <p>
           <code>401</code> usually means the Client ID or Secret in your <code>.env</code> was copied wrongly. Check those
           two lines against <a href="#s10">Step 10</a>: nothing missing, no spaces and no quote marks. <code>403</code>{' '}
-          usually means your key hasn’t been given access rights yet. In the CMS go to{' '}
-          <b>Settings → Set Access Rights</b>, pick the top of the page tree, click <b>Add User/Group</b>, search for your
-          Client ID, tick every right and click <b>Save Access Rights</b>.
+          usually means your key hasn’t been given access rights yet. Go back to “Give your new key
+          full access” in <a href="#s10">Step 10</a>, part c: with <b>Root</b> selected in <b>Settings → Set Access Rights</b>,
+          add your key and tick all six boxes.
         </p>
       </Help>
 

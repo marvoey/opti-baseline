@@ -44,6 +44,7 @@ export const CHECKS = {
   's9-env': 'A .env file is saved next to package.json',
   's10-single': 'My Single key is in .env (OPTIMIZELY_GRAPH_SINGLE_KEY)',
   's10-client': 'My Client ID and Secret are in .env, and it is saved',
+  's10-access': 'My new key has all six rights (Read to Administer) on Root in Set Access Rights',
   s11a: 'yarn cms:align connected: only Page and RichTextBlock are MISSING (no 401/403 error)',
   's11-push': 'yarn cms:push added them, and yarn cms:align now says passed',
   s11b: 'http://localhost:3034 loads in the browser',
