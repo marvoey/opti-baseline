@@ -448,10 +448,11 @@ export function Troubleshooting() {
         }
       >
         <p>
-          The two ID lines in your main <code>.env</code> don’t match your CMS. Copy them again from{' '}
-          <a href="#s10">Step 10, part e</a>. They’re the same for every CMS. Check there’s no space or quote mark around
-          them, that each name appears only once, and that you saved the file. If it still happens after that, ask{' '}
-          {FACILITATOR}.
+          The two ID lines in your main <code>.env</code> should be exactly as they are in <code>.env.example</code>, where
+          they came from in <a href="#s9">Step 9</a>. They’re the same for every CMS. Open <code>.env.example</code>, copy
+          its <code>HOME_PAGE_CONTENT_ID</code> and <code>ASSET_BASE_FOLDER_ID</code> lines, and paste them over those two
+          lines in <code>.env</code>. Check that each name appears only once and that you saved the file. If it still
+          happens after that, ask {FACILITATOR}.
         </p>
       </Help>
 
@@ -660,7 +661,7 @@ const ENV_ROWS: [setting: string, purpose: React.ReactNode, newSite: React.React
   [
     'HOME_PAGE_CONTENT_ID / ASSET_BASE_FOLDER_ID',
     'Where the site’s pages and shared content live in the CMS.',
-    'Point at the new site’s own start page and asset folder. In the main .env they point at the top of the CMS (fixed values: Step 10, part e).',
+    'Point at the new site’s own start page and asset folder. In the main .env they point at the top of the CMS (the template already has them).',
   ],
   ['NEXT_PUBLIC_OPTIMIZELY_WEB_SNIPPET_ID', 'Optional. Turns on Optimizely Web Experimentation.', 'Copied.'],
   [

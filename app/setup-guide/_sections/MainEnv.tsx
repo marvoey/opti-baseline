@@ -38,9 +38,8 @@ const TAKES: { line: ReactNode; does: ReactNode }[] = [
     does: (
       <>
         Not used to work out your new site’s address. Each site you create gets its own address on your laptop, such as{' '}
-        <code>http://localhost:3035</code>. Keep <code>http://localhost:3034</code> here: it’s the address of the main
-        project. (The other command, <code>yarn site:new</code>, builds a public address from this line. This guide doesn’t
-        use it.)
+        <code>http://localhost:3035</code>. You can leave this line empty, as it is in the template. (The other command,{' '}
+        <code>yarn site:new</code>, builds a public address from this line. This guide doesn’t use it.)
       </>
     ),
   },
@@ -295,9 +294,9 @@ export default function MainEnv() {
       </Help>
 
       <Callout kind="ok" title="You build this file yourself, in two steps">
-        Step 9 copies the project’s template into your own <code>.env</code>. <a href="#s10">Step 10</a> adds your private
-        keys from the CMS and gives you the other lines to type. Every value is on this page or in your own CMS. Please
-        don’t change a line that Step 10 doesn’t mention.
+        Step 9 copies the project’s template into your own <code>.env</code>. The port number and the two content IDs are
+        already filled in. <a href="#s10">Step 10</a> adds your private keys from the CMS. Please don’t change a line that
+        those two steps don’t mention.
       </Callout>
     </Card>
   );

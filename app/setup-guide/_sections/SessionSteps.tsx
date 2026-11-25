@@ -42,8 +42,8 @@ function Step9() {
     <Step n={9} title="Add your .env file" meta="About 3 min">
       <p>
         The <code>.env</code> file holds the passwords that connect your site to Optimizely CMS. The project comes with
-        a blank template called <code>.env.example</code>. You’ll copy it into your own <code>.env</code> file, then fill
-        in its private values in Step 10.
+        a template called <code>.env.example</code>. It already has the port number and the two content IDs filled in.
+        You’ll copy it into your own <code>.env</code> file, then add your private keys in Step 10.
       </p>
       <Callout kind="tip" title="This file is the parent of your future sites">
         Later, <code>yarn site:new</code> reads this file to create each of your demo sites in the CMS and to write their
@@ -73,8 +73,8 @@ function Step9() {
           saved yet. The dot disappears once it’s saved.
         </li>
         <li>
-          The template has empty spots for private values. <a href="#s10">Step 10</a> shows you where to get your keys, and
-          what to type on the other lines (the port number, the web address and the two content IDs).
+          Leave the rest of the template as it is. The port number and the two content IDs are already filled in. You’ll
+          fill in the empty lines for your private keys in <a href="#s10">Step 10</a>.
         </li>
       </ol>
       <p>
