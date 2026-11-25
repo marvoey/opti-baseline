@@ -17,7 +17,7 @@ export const siteConfig = {
   title: 'Setup guide | opti-baseline',
   /** Default meta description. */
   description:
-    'A step-by-step guide that gets you from a brand-new laptop to a working Optimizely CMS demo site. No coding experience needed.',
+    'A step-by-step guide that gets you from a brand-new laptop to a working Optimizely CMS (SaaS) demo site. For Optimizely CMS (SaaS) only. No coding experience needed.',
 
   /** Header logo (place the asset in /public). The SVG stays sharp at every size. */
   logoSrc: '/logo.svg',
@@ -44,7 +44,7 @@ export const siteConfig = {
 
   /** Footer. */
   footerTagline:
-    'Step-by-step setup for building Optimizely CMS demo sites with opti-baseline. No coding experience needed.',
+    'Step-by-step setup for building Optimizely CMS (SaaS) demo sites with opti-baseline. For CMS (SaaS) only, not CMS (PaaS). No coding experience needed.',
   footerColumns: [
     {
       heading: 'The guide',
@@ -70,7 +70,7 @@ export const siteConfig = {
       ],
     },
   ] as FooterColumn[],
-  footerLegal: `© ${2026} Optimizely. For internal use. Built with opti-baseline on Optimizely CMS.`,
+  footerLegal: `© ${2026} Optimizely. For internal use. Built with opti-baseline on Optimizely CMS (SaaS).`,
   footerLegalLinks: [] as NavLink[],
 } as const;
 

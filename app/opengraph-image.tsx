@@ -63,7 +63,7 @@ export default async function Image() {
               <div style={{ display: 'flex' }}>about an hour.</div>
             </div>
             <div style={{ display: 'flex', marginTop: 24, fontSize: 28, lineHeight: 1.3, color: '#d8e4cb' }}>
-              Step-by-step Optimizely CMS demo site setup. No coding needed.
+              Step-by-step Optimizely CMS (SaaS) demo site setup. SaaS only. No coding needed.
             </div>
           </div>
         </div>

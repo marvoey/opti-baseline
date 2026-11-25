@@ -1,9 +1,10 @@
 import Image from 'next/image';
 import s from '../setup-guide.module.css';
+import { FACILITATOR } from '../_lib/contact';
 import { Check } from '../_components/controls';
-import { Card, Only, StopKey } from '../_components/ui';
+import { Callout, Card, Only, StopKey } from '../_components/ui';
 
-const CHIPS = ['VS Code', 'Git', 'Node.js 22', 'Yarn 4', 'About 1 hour'];
+const CHIPS = ['Optimizely CMS (SaaS) only', 'VS Code', 'Git', 'Node.js 22', 'Yarn 4', 'About 1 hour'];
 
 export function Hero() {
   return (
@@ -12,7 +13,7 @@ export function Hero() {
         <div className={s.eyebrow}>Mark AI · Custom Demo · Setup guide</div>
         <h1>Your setup, sorted.</h1>
         <p className={s.lede}>
-          Everything your laptop needs to build a custom Optimizely CMS demo site. <b>No coding experience needed.</b>{' '}
+          Everything your laptop needs to build a custom <b>Optimizely CMS (SaaS)</b> demo site. <b>No coding experience needed.</b>{' '}
           Copy each command, paste it, check the result, tick the box.
         </p>
         <div className={s.chips}>
@@ -32,6 +33,13 @@ export function BeforeYouStart() {
   return (
     <Card id="start">
       <h2>Before you start</h2>
+
+      <Callout kind="warn" title="This guide is for Optimizely CMS (SaaS) only">
+        The project and every step here are built for <b>Optimizely CMS (SaaS)</b>, the cloud-hosted CMS. It does{' '}
+        <b>not</b> work with <b>Optimizely CMS (PaaS)</b>, the older .NET version that is installed and hosted
+        separately. If your CMS is a PaaS one, or you’re not sure which you have, stop here and ask your CMS
+        administrator or {FACILITATOR} before you continue.
+      </Callout>
 
       <h3>What you’ll do</h3>
       <ol>

@@ -19,7 +19,7 @@ const mono = Roboto_Mono({ subsets: ['latin'], weight: ['400', '600'], variable:
 export const metadata: Metadata = {
   title: 'Setup guide · opti-baseline',
   description:
-    'Step-by-step setup for building an Optimizely CMS demo site with opti-baseline, for macOS and Windows. No coding experience needed.',
+    'Step-by-step setup for building an Optimizely CMS (SaaS) demo site with opti-baseline, for macOS and Windows. No coding experience needed.',
   // Internal how-to: keep it out of search engines.
   robots: { index: false, follow: false },
 };

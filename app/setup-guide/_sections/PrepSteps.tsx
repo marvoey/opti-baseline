@@ -906,7 +906,7 @@ function Step7() {
       <p>
         The project is called <b>opti-baseline</b>. It lives in a <b>GitHub repository</b> (a <i>repo</i>): an online
         folder that stores a project’s files and their full history. This one holds a ready-made website that shows its
-        content from Optimizely CMS. It’s the clean starting point for every demo site you’ll build: each demo site you
+        content from Optimizely CMS (SaaS). It’s the clean starting point for every demo site you’ll build: each demo site you
         create later is its own copy of it, with its own folder and settings.
       </p>
       <p>

@@ -12,8 +12,11 @@ export default function HomePageFallback() {
           <p className="mb-4 text-sm font-bold">Mark AI · Custom Demo · Setup guide</p>
           <h1 className="font-display text-4xl font-extrabold leading-[1.05] md:text-5xl">Your laptop, demo-ready.</h1>
           <p className="mt-5 max-w-xl text-lg leading-relaxed">
-            A step-by-step guide that gets you from a brand-new laptop to a working Optimizely CMS demo site. No coding
+            A step-by-step guide that gets you from a brand-new laptop to a working Optimizely CMS (SaaS) demo site. No coding
             experience needed.
+          </p>
+          <p className="mt-4 inline-block rounded-full border-2 border-dark-fir bg-white px-4 py-1 text-sm font-semibold">
+            For Optimizely CMS (SaaS) only. It doesn’t work with CMS (PaaS).
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
