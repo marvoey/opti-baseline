@@ -23,7 +23,7 @@ const ITEMS: { href: string; n?: number; label: ReactNode }[] = [
   { href: '#s6', n: 6, label: 'Final check' },
   { href: '#s7', n: 7, label: 'Download the project' },
   { href: '#s8', n: 8, label: 'Install packages' },
-  { href: '#session', label: 'Live session: stop here' },
+  { href: '#connect', label: 'Next: connect to the CMS' },
   { href: '#mainenv', label: 'Why the main .env matters' },
   { href: '#s9', n: 9, label: 'Add your .env file' },
   { href: '#s10', n: 10, label: 'Get your API keys' },

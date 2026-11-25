@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import type { ReactNode } from 'react';
 import s from '../setup-guide.module.css';
+import ImprovementNotice from './ImprovementNotice';
 
 /** Frame for the sign-in and sign-up pages. */
 export default function AuthShell({ title, intro, children }: { title: string; intro: ReactNode; children: ReactNode }) {
@@ -12,6 +13,7 @@ export default function AuthShell({ title, intro, children }: { title: string; i
           <p className={s.eyebrow}>Mark AI · Custom Demo · Setup guide</p>
           <h1>{title}</h1>
           <div className={s.authIntro}>{intro}</div>
+          <ImprovementNotice />
           {children}
         </div>
         <Image className={s.authArt} src="/setup-guide/backpack.svg" alt="" width={220} height={220} loading="eager" />

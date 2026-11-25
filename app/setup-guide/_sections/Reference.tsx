@@ -3,6 +3,7 @@ import { FolderName } from '../_components/FolderSetup';
 import { SiteCommands, SiteInputs } from '../_components/SiteSetup';
 import { Callout, Card, Cmd, Cmds, Help, ModKey, Only, StopKey } from '../_components/ui';
 import { SHELL_FILES } from './PrepSteps';
+import { FACILITATOR } from '../_lib/contact';
 
 const N = { os: 'win', mode: 'native' } as const; // PowerShell (default)
 const W = { os: 'win', mode: 'wsl' } as const; // WSL (advanced)
@@ -12,14 +13,14 @@ export function Ready() {
     <Card id="ready" className={s.ready}>
       <h2>You’re ready. You’re free to build.</h2>
       <p>
-        When every box above is ticked, your laptop is set up. In the session, we’ll create <b>your</b> demo site with
-        one command. Tell us about your site and your commands appear below, ready to copy.
+        When every box above is ticked, your laptop is set up. You’ll create <b>your</b> demo site with
+        one command. Tell the guide about your site and your commands appear below, ready to copy.
       </p>
       <SiteInputs />
       <SiteCommands />
-      <Callout kind="warn" title="Wait for the session">
+      <Callout kind="warn" title="Check before you create">
         The preview needs the <code>.env</code> from Steps 9 and 10 and changes nothing. The second command creates your site’s
-        own folder, settings and pages in the shared CMS, so <b>please wait until we run it together</b>.
+        own folder, settings and pages in your CMS, so <b>only run it once the preview looks right</b>.
       </Callout>
       <p>
         It starts from the <code>.env</code> you build in Steps 9 and 10. That file decides where your new site is created in the CMS.
@@ -71,7 +72,7 @@ export function GroundRules() {
           <b>
             Keep <code>.env</code> private.
           </b>{' '}
-          It holds the passwords to a CMS your whole team shares.
+          It holds the passwords to your CMS.
         </li>
         <li>
           <b>Ignore the Source Control panel.</b> The branch-shaped icon on VS Code’s left bar may show a number. That’s
@@ -79,7 +80,8 @@ export function GroundRules() {
         </li>
         <li>
           <b>If a command says it “refuses” to run</b>, you’re probably in the wrong folder or VS Code window. That’s a
-          built-in safety check. Ask your facilitator.
+          built-in safety check. Open the right folder with <b>File → Open Recent</b>, open a new terminal, and check the
+          prompt shows that folder’s name.
         </li>
         <li>
           <b>
@@ -124,7 +126,7 @@ export function Troubleshooting() {
       <p>Click a problem to see how to fix it. You can’t damage anything by trying a fix twice.</p>
 
       <Help q="I’m stuck and don’t know what went wrong">
-        <p>No problem. Send your facilitator the error so they can help:</p>
+        <p>No problem. You can send {FACILITATOR} the error so he can help:</p>
         <ol>
           <li>In the terminal, drag your mouse over the error text to select it.</li>
           <li>
@@ -293,7 +295,7 @@ export function Troubleshooting() {
           <Cmds items={[{ c: 'nvm use 22' }, { c: 'nvm alias default 22' }]} />
           <p>
             Open a new terminal and run <code>node -v</code> again. If it still isn’t v22, another copy of Node on your
-            laptop is getting in the way. Ask your facilitator for help.
+            laptop is getting in the way. Ask {FACILITATOR} for help.
           </p>
         </Help>
 
@@ -345,7 +347,7 @@ export function Troubleshooting() {
         >
           <p>
             Don’t add <code>sudo</code> to <code>yarn</code> or <code>npm</code> commands. That makes things worse. Ask
-            your facilitator for help.
+            {FACILITATOR} for help.
           </p>
         </Help>
       </Only>
@@ -381,7 +383,9 @@ export function Troubleshooting() {
         <p>
           <code>401</code> usually means the Client ID or Secret in your <code>.env</code> was copied wrongly. Check those
           two lines against <a href="#s10">Step 10</a>: nothing missing, no spaces and no quote marks. <code>403</code>{' '}
-          usually means your key hasn’t been given access rights yet. Tell your facilitator.
+          usually means your key hasn’t been given access rights yet. In the CMS go to{' '}
+          <b>Settings → Set Access Rights</b>, pick the top of the page tree, click <b>Add User/Group</b>, search for your
+          Client ID, tick every right and click <b>Save Access Rights</b>.
         </p>
       </Help>
 
@@ -423,8 +427,7 @@ export function Troubleshooting() {
       >
         <p>
           The CMS already has a type with the same name but different settings, or the project’s code has a problem. Don’t
-          run <code>cms:push</code> to fix it (it never changes existing types). Copy the output and send it to your
-          facilitator.
+          run <code>cms:push</code> to fix it (it never changes existing types). Copy the output and send it to {FACILITATOR}.
         </p>
       </Help>
 
@@ -433,6 +436,22 @@ export function Troubleshooting() {
           Check the button in the top-right corner of Mark. It should show your CMS instance (the one from Step 10), not{' '}
           <b>Select Product Instance</b> or another product. Click it and choose your CMS. See{' '}
           <a href="#s12">Step 12</a>, part b.
+        </p>
+      </Help>
+
+      <Help
+        q={
+          <>
+            The preview says <i>HOME_PAGE_CONTENT_ID … was not found in the CMS</i> (or the same for{' '}
+            <code>ASSET_BASE_FOLDER_ID</code>)
+          </>
+        }
+      >
+        <p>
+          The two ID lines in your main <code>.env</code> don’t match your CMS. Copy them again from{' '}
+          <a href="#s10">Step 10, part e</a>. They’re the same for every CMS. Check there’s no space or quote mark around
+          them, that each name appears only once, and that you saved the file. If it still happens after that, ask{' '}
+          {FACILITATOR}.
         </p>
       </Help>
 
@@ -450,7 +469,7 @@ export function Troubleshooting() {
             the old ones, and save.
           </li>
         </ol>
-        <p>Tell your facilitator about the unused key. They can delete it.</p>
+        <p>The old key is harmless: nobody has its secret. You can leave it in the list.</p>
       </Help>
 
       <Help
@@ -559,7 +578,7 @@ export function Troubleshooting() {
         >
           <p>
             zsh treats <code>*</code> and <code>?</code> as special characters. Put quotes around the word that contains
-            them and run the command again, or ask your facilitator.
+            them and run the command again, or ask {FACILITATOR}.
           </p>
         </Help>
       </Only>
@@ -631,7 +650,7 @@ const ENV_ROWS: [setting: string, purpose: React.ReactNode, newSite: React.React
   [
     'DEPLOYED_URL',
     'The site’s public web address. Used to find the right site’s content.',
-    'A new address, built from the main one.',
+    'A new address on your laptop, such as http://localhost:3035.',
   ],
   [
     'SITE_BRANCH / SITE_PREFIX / SITE_NAME',
@@ -641,7 +660,7 @@ const ENV_ROWS: [setting: string, purpose: React.ReactNode, newSite: React.React
   [
     'HOME_PAGE_CONTENT_ID / ASSET_BASE_FOLDER_ID',
     'Where the site’s pages and shared content live in the CMS.',
-    'Point at the new site’s own start page and asset folder. In the main .env they point at the top of the CMS.',
+    'Point at the new site’s own start page and asset folder. In the main .env they point at the top of the CMS (fixed values: Step 10, part e).',
   ],
   ['NEXT_PUBLIC_OPTIMIZELY_WEB_SNIPPET_ID', 'Optional. Turns on Optimizely Web Experimentation.', 'Copied.'],
   [
@@ -656,7 +675,7 @@ export function EnvReference() {
     <Card id="envref">
       <h2>.env reference (optional reading)</h2>
       <p>
-        You fill in the main file yourself in Steps 9 and 10 (your facilitator helps with any value that isn’t a key), and
+        You fill in the main file yourself in Steps 9 and 10, and
         the <code>site:new</code> command writes each new site’s file from it. This table explains what’s inside, and what{' '}
         <code>site:new</code> does with each line. The full story is in <a href="#mainenv">Why the main .env matters</a>.
       </p>

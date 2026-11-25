@@ -33,17 +33,18 @@ export const CHECKS = {
   'mac-s3': 'git --version shows a version number',
   'native-s3': 'git --version shows a version number',
   'wsl-s3': 'git --version shows a version number',
-  // Steps 4 to 8 (same for everyone; Step 8 is the last one people do on their own)
+  // Steps 4 to 8 (same for everyone)
   s4: 'node -v shows v22.x.x',
   s4b: 'node -v still shows v22 in a new terminal',
   s5: 'yarn --version shows 4.14.1',
   s6: 'All five lines look right',
   s7: 'The project is open in VS Code, and the terminal prompt includes opti-baseline-main',
   's8-install': 'yarn install finished with “Done”',
-  // Steps 9 to 12: together in the live session
+  // Steps 9 to 12: connect the project to the CMS and run it
   's9-env': 'A .env file is saved next to package.json',
   's10-single': 'My Single key is in .env (OPTIMIZELY_GRAPH_SINGLE_KEY)',
   's10-client': 'My Client ID and Secret are in .env, and it is saved',
+  's10-other': 'The other lines (PORT, DEPLOYED_URL, the two IDs, SITE_BRANCH, my CMS address) are in .env',
   s11a: 'yarn cms:align connected: only Page and RichTextBlock are MISSING (no 401/403 error)',
   's11-push': 'yarn cms:push added them, and yarn cms:align now says passed',
   s11b: 'http://localhost:3034 loads in the browser',
@@ -54,11 +55,6 @@ export const CHECKS = {
 
 export type CheckId = keyof typeof CHECKS;
 
-/**
- * The last step people do on their own. Everything after it is done together in the live session.
- * The progress bar, the "Stop here" card and the facilitator view all follow this number.
- */
-export const HOMEWORK_LAST_STEP = 8;
 export type Os = 'mac' | 'win';
 export type Shell = 'zsh' | 'bash';
 /** Windows only: PowerShell (default) or WSL (advanced). */
@@ -85,15 +81,9 @@ export function stepOf(id: CheckId): number {
   return m ? Number(m[1]) : 0;
 }
 
-/** Which part of the guide to count: the prep (Steps 0–8), the live session (Steps 9–12) or everything. */
-export type ProgressPart = 'all' | 'prep' | 'session';
-
-const inPart = (id: CheckId, part: ProgressPart) =>
-  part === 'all' || (part === 'prep' ? stepOf(id) <= HOMEWORK_LAST_STEP : stepOf(id) > HOMEWORK_LAST_STEP);
-
-export function computeProgress(checked: Iterable<string>, os: Os, winMode: WinMode = 'native', part: ProgressPart = 'all') {
+export function computeProgress(checked: Iterable<string>, os: Os, winMode: WinMode = 'native') {
   const done = new Set(checked);
-  const relevant = CHECK_IDS.filter((id) => appliesTo(id, os, winMode) && inPart(id, part));
+  const relevant = CHECK_IDS.filter((id) => appliesTo(id, os, winMode));
   const ticked = relevant.filter((id) => done.has(id));
   const next = relevant.find((id) => !done.has(id));
   return {

@@ -37,9 +37,10 @@ const TAKES: { line: ReactNode; does: ReactNode }[] = [
     line: <code>DEPLOYED_URL</code>,
     does: (
       <>
-        The main site’s web address, for example <code>https://main.example.com</code>. Your new site gets the same
-        address with its own name at the front, for example <code>https://acme.example.com</code>. That’s the address
-        registered in the CMS.
+        Not used to work out your new site’s address. Each site you create gets its own address on your laptop, such as{' '}
+        <code>http://localhost:3035</code>. Keep <code>http://localhost:3034</code> here: it’s the address of the main
+        project. (The other command, <code>yarn site:new</code>, builds a public address from this line. This guide doesn’t
+        use it.)
       </>
     ),
   },
@@ -81,23 +82,23 @@ const WRONG: { has: ReactNode; happens: ReactNode }[] = [
   {
     has: (
       <>
-        No <code>DEPLOYED_URL</code>
-      </>
-    ),
-    happens: <>It can’t work out your site’s address, and asks for one to be typed in by hand.</>,
-  },
-  {
-    has: (
-      <>
-        A wrong <code>DEPLOYED_URL</code>
+        No <code>PORT</code> line
       </>
     ),
     happens: (
       <>
-        Every new site is registered under the wrong address. The CMS remembers the address a page was published under, so
-        pages stay filed under the wrong address until they’re published again.
+        The main site opens at <code>http://localhost:3009</code> instead of <code>3034</code>, so the links in Step 11 don’t
+        work.
       </>
     ),
+  },
+  {
+    has: (
+      <>
+        A wrong <code>OPTIMIZELY_CMS_URL</code>
+      </>
+    ),
+    happens: <>Your pages still work, but the CMS’s live preview can’t load from your site.</>,
   },
 ];
 
@@ -108,11 +109,16 @@ export default function MainEnv() {
       <h2>Why the main .env matters most</h2>
       <p>
         The <code>.env</code> you add in Step 9 isn’t only for the main project. It’s the{' '}
-        <b>parent of every demo site you create later</b>. When we run <code>yarn site:new</code>, the command reads this
+        <b>parent of every demo site you create later</b>. When you run <code>yarn site:new:local</code>, the command reads this
         file, uses it to set up your new site in the CMS, and then writes your new site’s own <code>.env</code> for you.
       </p>
       <p>
         So if the main <code>.env</code> is right, every new site starts right. If it’s wrong, every new site starts wrong.
+      </p>
+      <p>
+        In this guide you run the local version of the command, <code>yarn site:new:local</code>. It does the same job as{' '}
+        <code>yarn site:new</code>, but your site gets an address on your laptop instead of a public one. Below, “the site
+        command” means that one.
       </p>
 
       <div className={s.flow}>
@@ -124,15 +130,15 @@ export default function MainEnv() {
           →
         </span>
         <div className={s.flowBox}>
-          <b>2 · yarn site:new</b>
-          Reads that file. We always run it from the main folder.
+          <b>2 · yarn site:new:local</b>
+          Reads that file. Always run it from the main folder.
         </div>
         <span className={s.flowArrow} aria-hidden="true">
           →
         </span>
         <div className={s.flowOut}>
           <div className={s.flowBox}>
-            <b>3 · In the CMS</b>A start page, an asset folder and an application with its web addresses.
+            <b>3 · In the CMS</b>A start page, an asset folder and an application with its web address.
           </div>
           <div className={s.flowBox}>
             <b>4 · On your laptop</b>A folder for your site, with its own .env.
@@ -165,7 +171,7 @@ export default function MainEnv() {
       <h3>What it sets up in the CMS</h3>
       <p>
         In the CMS, an <b>application</b> is the record of one website: its name, its web addresses and its start page. For
-        your site, <code>site:new</code> creates three things:
+        your site, the site command creates three things:
       </p>
       <ul>
         <li>
@@ -175,9 +181,9 @@ export default function MainEnv() {
           An <b>asset folder</b> for your site’s shared blocks, inside the assets from <code>ASSET_BASE_FOLDER_ID</code>.
         </li>
         <li>
-          An <b>application</b> with two addresses: the public one built from <code>DEPLOYED_URL</code>, and a{' '}
-          <b>preview</b> address on your own laptop (such as <code>http://localhost:3035</code>), so the CMS can show draft
-          pages from your computer.
+          An <b>application</b> with one address: <code>http://localhost:</code> and your site’s own port number (the first
+          free one from 3035, such as <code>http://localhost:3035</code>). It’s an address on your own laptop, so the CMS
+          can show your pages from your computer.
         </li>
       </ul>
       <p>
@@ -185,13 +191,13 @@ export default function MainEnv() {
         application exists, so the CMS files the page under the right address.
       </p>
       <Callout kind="tip" title="Nothing goes live">
-        Registering an address in the CMS doesn’t create a real website. That address only works once hosting is set up for
-        it, which is a separate step.
+        The only address registered in the CMS is on your own laptop, so nothing is published to the internet. Putting a
+        site online is a separate step that this guide doesn’t cover.
       </Callout>
 
       <h3>What ends up in your new site’s .env</h3>
       <p>
-        The new file is built from three sources. The first line of the new file says so: <i>“Written by yarn site:new”</i>.
+        The new file is built from three sources. The first line of the new file says so: <i>“Written by yarn site:new:local”</i>.
       </p>
       <div className={s.grid}>
         <div>
@@ -200,12 +206,13 @@ export default function MainEnv() {
         </div>
         <div>
           <b>Worked out from the main .env</b>
-          <code>DEPLOYED_URL</code> becomes the new site’s own address. <code>HOME_PAGE_CONTENT_ID</code> and{' '}
+          <code>DEPLOYED_URL</code> becomes the new site’s own address on your laptop. <code>HOME_PAGE_CONTENT_ID</code> and{' '}
           <code>ASSET_BASE_FOLDER_ID</code> now point at the new site’s own start page and asset folder, not at the top.
         </div>
         <div>
           <b>Set by the command</b>
-          <code>SITE_BRANCH</code>, <code>SITE_PREFIX</code> and <code>SITE_NAME</code> come from what we type.{' '}
+          <code>SITE_BRANCH</code>, <code>SITE_PREFIX</code> and <code>SITE_NAME</code> come from what you type in{' '}
+          <a href="#ready">You’re ready</a>.{' '}
           <code>PORT</code> is the first free number from 3035. <code>MARK_TOOLS_TOKEN</code> is a new random value for
           each site.
         </div>
@@ -213,12 +220,12 @@ export default function MainEnv() {
       <Example
         label="Simplified example of a new site’s .env. Don’t type this."
         lines={[
-          '# Written by `yarn site:new`: this file belongs to ONE site replica (gitignored).',
+          '# Written by `yarn site:new:local`: this file belongs to ONE site replica (gitignored).',
           'SITE_BRANCH=acme',
           'SITE_PREFIX=Acme',
           'SITE_NAME="Acme Corp"',
           'PORT=3035',
-          'DEPLOYED_URL=https://acme.example.com',
+          'DEPLOYED_URL=http://localhost:3035',
           'HOME_PAGE_CONTENT_ID=<the new site’s start page>',
           'ASSET_BASE_FOLDER_ID=<the new site’s asset folder>',
           'OPTIMIZELY_CMS_CLIENT_ID=<copied from the main .env>',
@@ -227,10 +234,10 @@ export default function MainEnv() {
         ]}
       />
 
-      <h3>We read the plan before anything is created</h3>
+      <h3>Read the plan before anything is created</h3>
       <p>
         The preview command at the end of this page ends with <code>--dry</code>. A dry run prints a plan and changes
-        nothing, so it’s where we check that the main <code>.env</code> did its job:
+        nothing, so it’s where you check that your main <code>.env</code> did its job:
       </p>
       <Example
         label="Simplified example of a plan. Don’t type this."
@@ -238,30 +245,34 @@ export default function MainEnv() {
           'branch        acme  (from main)',
           'site name     Acme Corp',
           'port          3035  (http://localhost:3035)',
-          'DEPLOYED_URL  https://acme.example.com',
+          'DEPLOYED_URL  http://localhost:3035',
           'start page    …  BlankExperience "Acme Corp" under <HOME_PAGE_CONTENT_ID>',
           'asset folder  …  "Acme Corp" under <ASSET_BASE_FOLDER_ID>',
-          'application   acme  hosts https://acme.example.com (primary, en) + http://localhost:3035 (preview)',
+          'application   acme  host http://localhost:3035 (primary, en, https disabled)',
         ]}
       />
       <ul>
         <li>
-          The <b>DEPLOYED_URL</b> line should show your site’s own address, built from the main one.
+          The <b>DEPLOYED_URL</b> line should show <code>http://localhost:</code> and a port number from 3035 up.
         </li>
         <li>
           The <b>start page</b> and <b>asset folder</b> lines say what they’re created <i>under</i>. Those are the two IDs
           from the main <code>.env</code>.
         </li>
         <li>
-          The <b>application</b> line shows both addresses.
+          The <b>application</b> line shows that same address.
         </li>
       </ul>
-      <p>If any of these look wrong, we stop and fix the main .env first. Nothing has been created yet.</p>
+      <p>
+        If any of these look wrong, stop and fix your main <code>.env</code> first. Nothing has been created yet. If the
+        preview says an ID <i>“was not found in the CMS”</i>, see <a href="#help">Troubleshooting</a>.
+      </p>
 
       <Callout kind="warn" title="It’s a copy, not a link">
         <code>site:new</code> writes the new site’s <code>.env</code> once. If the main <code>.env</code> changes later,
         sites you’ve already created don’t change, and neither do the CMS items already created for them. Fixing the main
-        file only helps the sites you create afterwards. For an existing site, ask your facilitator.
+        file only helps the sites you create afterwards. To change an existing site, edit that site’s own{' '}
+        <code>.env</code> file, and the matching item in the CMS if you need to.
       </Callout>
 
       <Help q="What goes wrong if the main .env is wrong?">
@@ -283,10 +294,10 @@ export default function MainEnv() {
         </table>
       </Help>
 
-      <Callout kind="ok" title="You build this file in two steps">
+      <Callout kind="ok" title="You build this file yourself, in two steps">
         Step 9 copies the project’s template into your own <code>.env</code>. <a href="#s10">Step 10</a> adds your private
-        keys from the CMS. Your facilitator gives you the other values, such as the web address and the two content IDs.
-        Please don’t change a value you weren’t told to. If something looks off, ask first.
+        keys from the CMS and gives you the other lines to type. Every value is on this page or in your own CMS. Please
+        don’t change a line that Step 10 doesn’t mention.
       </Callout>
     </Card>
   );

@@ -15,6 +15,7 @@ import {
   normalizeEmail,
   updateUser,
 } from '@/lib/guide/users';
+import { FACILITATOR } from './_lib/contact';
 
 /** Sign-up, sign-in and sign-out for /setup-guide. Messages are written for non-technical readers. */
 
@@ -56,7 +57,7 @@ export async function signup(_prev: AuthState, form: FormData): Promise<AuthStat
     }
     if (err instanceof AccountInTrashError) {
       console.error('[setup-guide] sign-up blocked: an earlier account for this email is in the CMS trash');
-      return { ...keep, error: 'This email can’t be used to sign up right now. Ask your facilitator to remove your old account from the CMS trash.' };
+      return { ...keep, error: 'This email can’t be used to sign up right now. Ask ' + FACILITATOR + ' to remove your old account from the CMS trash.' };
     }
     console.error('[setup-guide] sign-up failed:', err instanceof Error ? err.message : err);
     return { ...keep, error: CMS_DOWN };

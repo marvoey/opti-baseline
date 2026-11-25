@@ -1,10 +1,12 @@
 import s from '../setup-guide.module.css';
 import { Check } from '../_components/controls';
 import { Figure, FigureRow, Pin } from '../_components/Figure';
-import { Callout, Example, ModKey, Step } from '../_components/ui';
+import { Callout, Cmd, Example, ModKey, Step } from '../_components/ui';
+import { ENV_ASSETS_ROOT, ENV_CONTENT_ROOT, ENV_DEPLOYED_URL, ENV_PORT, ENV_SITE_BRANCH } from '../_lib/envValues';
 
 /**
- * Step 10 (live session): where to get the three private values that go into the main .env, and how.
+ * Step 10: where to get the three private values that go into the main .env, and how. Part e adds the other lines
+ * (fixed values from _lib/envValues.ts, plus the reader's own CMS address), so nobody has to hand anything out.
  *
  *   OPTIMIZELY_GRAPH_SINGLE_KEY      CMS > Settings > API Keys > Delivery Keys > Render Content > Single key
  *   OPTIMIZELY_CMS_CLIENT_ID         CMS > Settings > API Keys > Manage Content > Create API Key
@@ -18,16 +20,16 @@ import { Callout, Example, ModKey, Step } from '../_components/ui';
  * screenshot that shows a real one.
  */
 
-const LIVE = 'Live session · ';
 const SHOTS = '/setup-guide/cms';
 
 export default function ApiKeys() {
   return (
-    <Step n={10} title="Get your API keys from the CMS" meta={`${LIVE}About 10 min`}>
+    <Step n={10} title="Get your API keys from the CMS" meta="About 10 min">
       <p>
         The <code>.env</code> file from Step 9 still has empty spots for the private keys. This step fills them. An{' '}
         <b>API key</b> works like a password: it proves to the CMS that a program (your website, or a command) is allowed
         to talk to it. You need three values from the CMS, and each one goes on its own line in your <code>.env</code>.
+        Part e then adds the few lines that aren’t keys. Everything you need is on this page or in your own CMS.
       </p>
 
       <table>
@@ -89,13 +91,20 @@ export default function ApiKeys() {
         other.
       </Callout>
       <Callout kind="tip" title="Can’t see the gear icon, or API Keys in the menu?">
-        Creating API keys needs administrator access to the CMS. If you can’t find them below, tell your facilitator before
-        you go further.
+        Creating API keys needs administrator access to your CMS. If you can’t find them below, ask the administrator of
+        your CMS to give you that access, then come back to this step.
       </Callout>
 
       <h3>a. Open the API Keys page</h3>
       <ol>
-        <li>Open the CMS in your web browser (your facilitator shares the link) and sign in with your Optimizely account.</li>
+        <li>
+          Open your CMS in your web browser and sign in with your Optimizely account. Its address starts with{' '}
+          <code>https://app-</code> and ends with <code>.cms.optimizely.com</code>. Don’t have it? Sign in at{' '}
+          <a href="https://home.optimizely.com/" target="_blank" rel="noopener noreferrer">
+            home.optimizely.com
+          </a>{' '}
+          and open your Content Management System from there. Keep this tab open: you’ll need its address in part e.
+        </li>
         <li>
           Look at the narrow bar of icons on the far left. Click the <b>gear icon</b> (Settings).
         </li>
@@ -239,9 +248,74 @@ export default function ApiKeys() {
       <Check id="s10-single" />
       <Check id="s10-client" />
 
-      <Callout kind="tip" title="What about the other lines in .env?">
-        The Single key, Client ID and Secret are the only keys. The other lines (for example the web address, the port
-        number and the two content IDs) aren’t on this page. Your facilitator tells you what to type there.
+      <h3>e. Add the other lines to .env</h3>
+      <p>
+        The Single key, Client ID and Secret are the only keys. The other lines your site needs aren’t on the API Keys page.
+        Five of them are fixed values you copy: they’re the same for everyone. The sixth is your CMS’s address. For each
+        one: in your <code>.env</code>, find the line that starts with the same name, select the <b>whole line</b> and
+        paste over it. No such line? Add it on a new line at the bottom.
+      </p>
+      <Callout kind="warn" title="Each name once only">
+        Don’t end up with the same name on two lines, because the project can read the wrong one. Replace a line; don’t add
+        a second.
+      </Callout>
+      <Cmd
+        c={`PORT=${ENV_PORT}`}
+        where="your .env file"
+        what={
+          <>
+            The address number your main site uses on your laptop. Step 11 opens it at{' '}
+            <code>http://localhost:{ENV_PORT}</code>.
+          </>
+        }
+      />
+      <Cmd
+        c={`DEPLOYED_URL=${ENV_DEPLOYED_URL}`}
+        where="your .env file"
+        what="Your main site’s address. It only runs on your laptop, so it’s a localhost address."
+      />
+      <Cmd
+        c={`HOME_PAGE_CONTENT_ID=${ENV_CONTENT_ROOT}`}
+        where="your .env file"
+        what="The top of the CMS’s page tree. It’s the same in every CMS, so just copy it. The sites you create later are made inside it."
+      />
+      <Cmd
+        c={`ASSET_BASE_FOLDER_ID=${ENV_ASSETS_ROOT}`}
+        where="your .env file"
+        what="The top of the CMS’s shared assets (blocks and pictures). Also the same in every CMS."
+      />
+      <Cmd
+        c={`SITE_BRANCH=${ENV_SITE_BRANCH}`}
+        where="your .env file"
+        what="Tells the project’s safety checks that this folder is the main project."
+      />
+      <p>
+        The last line is your CMS’s address. Go to the browser tab with your CMS and look at the address bar. Copy only the
+        first part: it starts with <code>https://app-</code> and ends with <code>.cms.optimizely.com</code>. Leave off
+        everything after that, such as <code>/ui/…</code>. Then paste it right after <code>OPTIMIZELY_CMS_URL=</code>.
+      </p>
+      <Example
+        label="How that line looks. Your own address replaces the x’s. Don’t type this."
+        lines={['OPTIMIZELY_CMS_URL=https://app-xxxxxxxx.cms.optimizely.com']}
+      />
+      <Example
+        label="Your .env now has these nine lines, plus others from the template that you leave alone. Don’t type this."
+        lines={[
+          'OPTIMIZELY_GRAPH_SINGLE_KEY=<your Single key>',
+          'OPTIMIZELY_CMS_CLIENT_ID=<your Client ID>',
+          'OPTIMIZELY_CMS_CLIENT_SECRET=<your Secret>',
+          'OPTIMIZELY_CMS_URL=https://app-xxxxxxxx.cms.optimizely.com',
+          `PORT=${ENV_PORT}`,
+          `DEPLOYED_URL=${ENV_DEPLOYED_URL}`,
+          `HOME_PAGE_CONTENT_ID=${ENV_CONTENT_ROOT}`,
+          `ASSET_BASE_FOLDER_ID=${ENV_ASSETS_ROOT}`,
+          `SITE_BRANCH=${ENV_SITE_BRANCH}`,
+        ]}
+      />
+      <Check id="s10-other" />
+      <Callout kind="tip" title="How you’ll know the two ID lines are right">
+        In <a href="#ready">You’re ready</a>, at the end of this page, the preview command checks that both IDs exist in your
+        CMS before it creates anything.
       </Callout>
       <Callout kind="tip" title="Things on the API Keys page you don’t need">
         The <b>Manage Graph</b> app key and secret, and the <b>Address</b> next to the Single key. Leave the{' '}
@@ -249,13 +323,15 @@ export default function ApiKeys() {
         page isn’t the full address it uses.
       </Callout>
       <Callout kind="warn" title="Treat your keys like passwords">
-        Never paste them into chat or email, and blur them in any screenshot you share. If you share one by accident, tell
-        your facilitator straight away. They can delete that key in the CMS, and you create a new one.
+        Never paste them into chat or email, and blur them in any screenshot you share. If you share one by accident,
+        create a new key (part c), put its Client ID and Secret in <code>.env</code>, then remove the old key: on the API
+        Keys page, open the ⋯ menu at the end of the old key’s row.
       </Callout>
       <Callout kind="tip" title="A new key may need permission">
         A brand-new key might not be allowed to do everything yet. If a later step says <code>403</code> or{' '}
-        <i>forbidden</i>, tell your facilitator. They can give your key access rights in the CMS (Settings → Set Access
-        Rights, just below API Keys).
+        <i>forbidden</i>, give your key access rights: in the CMS go to <b>Settings → Set Access Rights</b> (just below API
+        Keys), pick the top of the page tree, click <b>Add User/Group</b>, search for your Client ID, tick every right and
+        click <b>Save Access Rights</b>.
       </Callout>
     </Step>
   );

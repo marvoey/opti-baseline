@@ -9,6 +9,7 @@ import { BeforeYouStart, Hero, TerminalBasics } from './_sections/Intro';
 import PrepSteps from './_sections/PrepSteps';
 import VsCodeTerminal from './_sections/VsCodeTerminal';
 import SessionSteps from './_sections/SessionSteps';
+import ImprovementNotice from './_components/ImprovementNotice';
 import { ComingBack, EnvReference, GroundRules, Ready, Troubleshooting } from './_sections/Reference';
 import { isCheckId, type Os } from './_lib/checks';
 import { isFacilitator, requireUser } from '@/lib/guide/session';
@@ -16,8 +17,7 @@ import { updateUser, viewChanges } from '@/lib/guide/users';
 
 /**
  * /setup-guide — gets a colleague with no development experience from a bare laptop to a
- * running opti-baseline site. Steps 1–8 are done on their own (HOMEWORK_LAST_STEP); Steps 9–12 are done
- * together in a live session.
+ * running opti-baseline site: Steps 1–8 set up the laptop, Steps 9–12 connect the project to the CMS and run it.
  *
  * Sign-in required. The person's progress comes from their GuideUser record in the CMS, and every
  * page view is recorded on that record after the response has been sent.
@@ -55,6 +55,7 @@ export default async function SetupGuidePage() {
           <Toc />
           <main className={s.main}>
             <Hero />
+            <ImprovementNotice />
             <BeforeYouStart />
             <TerminalBasics />
             <VsCodeTerminal />

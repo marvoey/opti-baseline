@@ -40,10 +40,8 @@ type GuideState = {
   /** The site name, opportunity and optional overrides the reader typed (cleaned, nothing worked out), and what is in the boxes right now. */
   site: SiteInput;
   typedSite: SiteInput;
-  /** Percent of the prep (everything up to HOMEWORK_LAST_STEP). */
+  /** Percent of all tick boxes done (Steps 0–12). */
   percent: number;
-  /** Percent of the live-session steps (after HOMEWORK_LAST_STEP). */
-  sessionPercent: number;
   saveStatus: SaveStatus;
   setOs: (os: Os) => void;
   setShell: (shell: Shell) => void;
@@ -173,8 +171,7 @@ export function GuideProvider({ initial, children }: { initial: Initial; childre
       typedFolders,
       site,
       typedSite,
-      percent: computeProgress(checks, os, winMode, 'prep').percent,
-      sessionPercent: computeProgress(checks, os, winMode, 'session').percent,
+      percent: computeProgress(checks, os, winMode).percent,
       saveStatus,
       setOs: (next) => {
         setOsState(next);

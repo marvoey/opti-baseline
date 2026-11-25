@@ -36,12 +36,10 @@ export function BeforeYouStart() {
       <h3>What you’ll do</h3>
       <ol>
         <li>
-          <b>Install four free tools, download the project and install its packages</b> (Steps 1–8). Do these on your own before the
-          session.
+          <b>Install four free tools, download the project and install its packages</b> (Steps 1–8).
         </li>
         <li>
-          <b>Connect the project to the CMS and run it</b> (Steps 9–12). We’ll do these together in a live session,
-          so <b>stop after Step 8</b>.
+          <b>Connect the project to the CMS and run it</b> (Steps 9–12).
         </li>
       </ol>
 
@@ -67,12 +65,12 @@ export function BeforeYouStart() {
           <Only os="mac" as="span">One Apple download in Step 3 can take a while.</Only>
         </li>
         <li>
-          <b>Nothing for the CMS yet.</b> In the live session you’ll copy a settings template into your own{' '}
-          <code>.env</code> file and get your private keys from the CMS. Your facilitator is there to help.
+          <b>Nothing for the CMS yet.</b> In Steps 9–12 you’ll copy a settings template into your own{' '}
+          <code>.env</code> file and get your private keys from the CMS. That needs administrator access to the CMS.
         </li>
         <li>
-          <b>Your Optimizely account.</b> In the live session you’ll install the <b>Mark Desktop</b> app and sign in to it
-          (Step 12). Nothing to install for it before then.
+          <b>Your Optimizely account.</b> In Step 12 you’ll install the <b>Mark Desktop</b> app and sign in to it.
+          Nothing to install for it before then.
         </li>
       </ul>
 

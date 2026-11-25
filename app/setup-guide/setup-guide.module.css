@@ -309,6 +309,7 @@
 .page th { background: var(--n3); font-weight: 700; }
 /* Long setting names (e.g. NEXT_PUBLIC_OPTIMIZELY_WEB_SNIPPET_ID) must wrap on phones. */
 .page td code { overflow-wrap: anywhere; }
+.page td { overflow-wrap: anywhere; } /* a URL in a plain cell must wrap on phones too */
 .page tr:last-child td { border-bottom: 0; }
 .grid {
   display: grid;
@@ -549,8 +550,8 @@
   .page[data-os] .unix { display: revert !important; }
 }
 
-/* ---------- Live session card (Steps 9–12 start here) ---------- */
-.session { background: var(--n2); border: 2px dashed var(--fir); }
+/* ---------- Steps 9–12 intro card ---------- */
+.connect { background: var(--n2); border: 2px dashed var(--fir); }
 
 /* ---------- Screenshots ---------- */
 .figure { margin: 14px 0 22px; }

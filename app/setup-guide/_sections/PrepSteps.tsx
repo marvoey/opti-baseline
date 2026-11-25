@@ -2,8 +2,9 @@ import s from '../setup-guide.module.css';
 import { Check, ShellSwitch, WinModeSwitch } from '../_components/controls';
 import { FolderInputs, FolderName, FolderTree, CloneCommands } from '../_components/FolderSetup';
 import { Callout, Cmd, Cmds, Example, Only, Step } from '../_components/ui';
+import { FACILITATOR } from '../_lib/contact';
 
-/** Steps 1–8: installs, the project download and its packages, done on their own before the session. */
+/** Steps 1–8: installs, the project download and its packages. */
 
 // Shorthand for the two Windows variants.
 const N = { os: 'win', mode: 'native' } as const; // PowerShell (default)
@@ -120,7 +121,7 @@ function Step1() {
             <tr>
               <td>Anything else</td>
               <td>
-                Ask your facilitator, or see <a href="#help">Troubleshooting</a>
+                Ask {FACILITATOR}, or see <a href="#help">Troubleshooting</a>
               </td>
             </tr>
           </tbody>
@@ -969,7 +970,7 @@ function Step7() {
 
 function Step8() {
   return (
-    <Step n={8} title="Install the project’s packages" meta="2–5 min · the last step before the session">
+    <Step n={8} title="Install the project’s packages" meta="2–5 min">
       <p>
         In VS Code’s terminal (the prompt should include <code>opti-baseline-main</code>), run:
       </p>
@@ -996,9 +997,9 @@ function Step8() {
         </Only>
       </ul>
       <Check id="s8-install" />
-      <Callout kind="ok" title="That’s the prep done. Stop here.">
-        Your laptop is ready. <b>Don’t go on to Step 9.</b> We’ll do Steps 9–12 together in the live session, where
-        you’ll set up your settings file and get your keys from the CMS. You can close VS Code until then.
+      <Callout kind="ok" title="That’s the prep done.">
+        Your laptop is ready. <a href="#connect">Carry on with Step 9</a>, where you’ll set up your settings file and get
+        your keys from the CMS.
       </Callout>
     </Step>
   );

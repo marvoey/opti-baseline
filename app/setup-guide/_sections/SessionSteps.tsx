@@ -5,34 +5,32 @@ import { ProjectPath } from '../_components/FolderSetup';
 import { Callout, Card, Cmd, Example, ModKey, Only, Step, StopKey } from '../_components/ui';
 import ApiKeys from './ApiKeys';
 import MainEnv from './MainEnv';
+import { FACILITATOR } from '../_lib/contact';
 
-/** Steps 9–12: done together in the live session (Step 10, the API keys, is in ApiKeys.tsx). People stop after Step 8 (see HOMEWORK_LAST_STEP). */
+/** Steps 9–12: connect the project to the CMS and run it (Step 10, the API keys, is in ApiKeys.tsx). The live session on Nov 24, 2026 has passed, so everyone now does these on their own. */
 
 const N = { os: 'win', mode: 'native' } as const; // PowerShell (default)
-const LIVE = 'Live session · ';
 
-function StopHere() {
+function ConnectToCms() {
   return (
-    <Card id="session" className={s.session}>
-      <div className={s.eyebrow}>Live session</div>
-      <h2>Stop here. We’ll do Steps 9–12 together.</h2>
+    <Card id="connect" className={s.connect}>
+      <div className={s.eyebrow}>Steps 9–12</div>
+      <h2>Next: connect the project to the CMS</h2>
       <p>
-        If you’ve ticked everything up to Step 8, you’re finished for now. <b>Please don’t start these steps on your
-        own.</b> They need private keys from the CMS and a few values from your facilitator, and they’re quicker when we
-        do them together.
+        If you’ve ticked everything up to Step 8, your laptop is ready and you can carry on with Step 9. These steps need
+        private keys from the CMS, so take your time and don’t share the keys with anyone.
       </p>
-      <h3>In the session we’ll</h3>
+      <h3>In these steps you’ll</h3>
       <ol start={9}>
         <li>create the settings file that connects your site to the CMS</li>
         <li>get your API keys from the CMS and add them to that file</li>
         <li>check the connection, add the project’s two content types to your CMS, and start the website</li>
         <li>install Mark Desktop, choose your CMS instance in it, and give it your project folder</li>
       </ol>
-      <Callout kind="tip" title="Before the session">
-        Join from the laptop you set up. Make sure it’s charged and on a normal internet connection. Also check you can
-        sign in to the CMS your facilitator shares with you. Step 10 needs administrator access there, so tell your
-        facilitator beforehand if you don’t have it. The steps are below so you can follow along on the day and look
-        back at them later.
+      <Callout kind="tip" title="Before you start">
+        Check you can sign in to your CMS with your Optimizely account. Step 10 needs <b>administrator access</b> there,
+        so if you can’t find the API Keys page, ask your CMS administrator to give you that access first. Nothing else is
+        needed from anyone: every value is on this page or in your own CMS.
       </Callout>
     </Card>
   );
@@ -41,7 +39,7 @@ const W = { os: 'win', mode: 'wsl' } as const; // WSL (advanced)
 
 function Step9() {
   return (
-    <Step n={9} title="Add your .env file" meta={`${LIVE}About 3 min`}>
+    <Step n={9} title="Add your .env file" meta="About 3 min">
       <p>
         The <code>.env</code> file holds the passwords that connect your site to Optimizely CMS. The project comes with
         a blank template called <code>.env.example</code>. You’ll copy it into your own <code>.env</code> file, then fill
@@ -75,8 +73,8 @@ function Step9() {
           saved yet. The dot disappears once it’s saved.
         </li>
         <li>
-          The template has empty spots for private values. <a href="#s10">Step 10</a> shows you where to get the keys, and
-          your facilitator gives you the other values (such as the web address and the content IDs).
+          The template has empty spots for private values. <a href="#s10">Step 10</a> shows you where to get your keys, and
+          what to type on the other lines (the port number, the web address and the two content IDs).
         </li>
       </ol>
       <p>
@@ -123,7 +121,7 @@ function Step9() {
 
 function Step11() {
   return (
-    <Step n={11} title="Check it works" meta={`${LIVE}About 10 min`}>
+    <Step n={11} title="Check it works" meta="About 10 min">
       <p>
         Three things happen here. You check that your laptop can talk to your CMS. You add the two building blocks the
         project needs to the CMS. Then you start the website.
@@ -176,8 +174,8 @@ function Step11() {
           <a href="#s10">Step 10</a>, or see <a href="#help">Troubleshooting</a>.
         </li>
         <li>
-          <b>Something else:</b> a red <b>DRIFT</b>, or errors under <b>Lint</b>. Don’t push anything. Tell your
-          facilitator.
+          <b>Something else:</b> a red <b>DRIFT</b>, or errors under <b>Lint</b>. Don’t push anything. Check{' '}
+          <a href="#help">Troubleshooting</a>, or ask {FACILITATOR}.
         </li>
       </ul>
       <Check id="s11a" />
@@ -198,7 +196,7 @@ function Step11() {
       <p>
         You might also see a few lines like <i>Content Type Page found in …</i> above the list. That’s normal. Check that
         the list shows <b>exactly</b> <code>Page</code> and <code>RichTextBlock</code>. If it shows anything else, stop and
-        tell your facilitator.
+        tell {FACILITATOR}.
       </p>
       <p>Now add them for real:</p>
       <Cmd
@@ -291,7 +289,7 @@ const MARK_DOCS = 'https://docs.optimizely.com/agent-platform/docs/mark-desktop-
  */
 function Step12() {
   return (
-    <Step n={12} title="Set up Mark Desktop" meta={`${LIVE}About 10 min`}>
+    <Step n={12} title="Set up Mark Desktop" meta="About 10 min">
       <p>
         <b>Mark Desktop</b> is the Mark app for your computer. Unlike Mark in a web browser, it can work with files on your
         laptop, so Mark can read your project and help build your demo site. In this step you install it, tell it which
@@ -346,8 +344,9 @@ function Step12() {
           you use for the CMS.
         </li>
         <li>
-          Choose your <b>Organization</b> and <b>Instance</b> from the two drop-down lists, then click <b>Go</b>. If you’re
-          not sure which to pick, ask your facilitator.
+          Choose your <b>Organization</b> and <b>Instance</b> from the two drop-down lists, then click <b>Go</b>. Pick the
+          same Organization that’s shown at the top left of your CMS, next to the Optimizely logo. If a list has only one
+          choice, pick that one. You can switch later, so you can’t get this wrong.
         </li>
         <li>
           The Mark chat page opens. Look at its <b>top-right corner</b> for <b>Select Product Instance</b> (marker{' '}
@@ -461,7 +460,7 @@ function Step12() {
 export default function SessionSteps() {
   return (
     <>
-      <StopHere />
+      <ConnectToCms />
       <MainEnv />
       <Step9 />
       <ApiKeys />

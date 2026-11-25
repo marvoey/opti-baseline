@@ -164,8 +164,8 @@ export function SiteCommands() {
         total={2}
         what={
           <>
-            <b>Create your site.</b> The same command without <code>--dry</code>. It changes the shared CMS, so wait until
-            your facilitator says to run it.
+            <b>Create your site.</b> The same command without <code>--dry</code>. It changes your CMS, so only run it
+            once the preview above looks right.
           </>
         }
       />
